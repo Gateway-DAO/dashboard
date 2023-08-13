@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "TODO": "todo"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "eslint.format.enable": true,
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
