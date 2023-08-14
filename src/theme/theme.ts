@@ -1,8 +1,8 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
 
-import typography from './config/typography';
 import { palette } from './config/palette';
+import typography from './config/typography';
 
 export const theme = createTheme({
   palette,

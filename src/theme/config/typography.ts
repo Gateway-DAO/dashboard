@@ -1,5 +1,6 @@
-import { TypographyOptions } from '@mui/material/styles/createTypography';
 import { Plus_Jakarta_Sans } from 'next/font/google'
+
+import { TypographyOptions } from '@mui/material/styles/createTypography';
 
 export const plus_jakarta_sans = Plus_Jakarta_Sans({
     display: 'swap',

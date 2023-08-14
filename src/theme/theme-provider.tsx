@@ -1,12 +1,16 @@
 'use client';
-import createCache from '@emotion/cache';
 import { useServerInsertedHTML } from 'next/navigation';
-import { CacheProvider } from '@emotion/react';
-import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import { PropsWithChildren, useState } from 'react';
-import { theme } from '.';
+
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
+
 import { GlobalStyles } from './global-styles';
+
+import { theme } from '.';
 
 // This implementation is from emotion-js
 // https://github.com/emotion-js/emotion/issues/2928#issuecomment-1319747902
