@@ -1,25 +1,25 @@
 import { NextAuthOptions } from 'next-auth';
 
+import { SessionToken } from '@/types/user';
 import jwt from 'jsonwebtoken';
 
-import { SessionToken } from '../../types/user';
-import { hasuraPublicService } from '../hasura/api';
+import { apiPublic } from '../protocol/api';
 import credentialEmail from './providers/credential-email';
 import credentialWallet from './providers/credential-wallet';
 
 const callRefresh = async (token: SessionToken): Promise<SessionToken> => {
   try {
-    const res = await hasuraPublicService.refresh({
+    const res = await apiPublic.refresh({
       refresh_token: token.refresh_token,
     });
 
     const { error } = (res as any) ?? {};
 
-    if (error || !res.protocol.refreshToken) {
+    if (error || !res.refreshToken) {
       throw error;
     }
 
-    const newToken = res.protocol.refreshToken;
+    const newToken = res.refreshToken;
 
     return newToken;
   } catch (e) {
@@ -44,7 +44,7 @@ export const nextAuthConfig: NextAuthOptions = {
 
       const parsedToken = jwt.decode(token.token, { json: true });
 
-      if (parsedToken.exp < Date.now() / 1000) {
+      if (parsedToken!.exp! < Date.now() / 1000) {
         const refreshedToken = await callRefresh(token);
         return refreshedToken;
       }
