@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, useState } from 'react'
 
-import { queryClientConfig } from '@/service/query-client'
+import { queryClientConfig } from '@/services/query-client'
 import { ThemeProvider } from '@/theme'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 

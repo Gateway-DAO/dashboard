@@ -11,7 +11,7 @@ const glqAnonClient = new GraphQLClient(
   process.env.NEXT_PUBLIC_API_ENDPOINT as string
 );
 
-export const publicService = getSdk(glqAnonClient);
+export const apiPublic = getSdk(glqAnonClient);
 
 export const userHeader = (token: string) => ({
   Authorization: `Bearer ${token}`,

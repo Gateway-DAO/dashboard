@@ -1,0 +1,111 @@
+mutation get_nonce($wallet: String!, $chain: Chain) {
+    createWalletNonce(input: {
+      wallet: $wallet,
+      chain: $chain
+    }) {
+      message
+    }
+}
+
+mutation create_email_nonce($email: String!) {
+  createEmailNonce(input: {
+    email: $email
+  }) {
+    #REMOVELINE
+    code
+    email
+  }
+}
+
+mutation login_wallet($signature: String!, $wallet: String!) {
+  loginWallet(input: {
+    signature: $signature
+    wallet: $wallet
+  }) {
+    token
+    refresh_token
+    hasura_id
+    protocol_id
+  }
+}
+
+mutation login_email($email: String!, $code: Float!) {
+  loginEmail(input: {
+    email: $email
+    code: $code
+  }) {
+    token
+    refresh_token
+    hasura_id
+    protocol_id
+  }
+}
+
+mutation refresh($refresh_token: String!) {
+  refreshToken(input: {
+    refresh_token: $refresh_token
+  }) {
+    token
+    refresh_token
+    hasura_id
+    protocol_id
+  }
+}
+
+
+mutation protocol_add_email($email: String!) {
+  addEmail(email: $email) {
+    #REMOVELINE
+    code
+    email
+  }
+}
+
+mutation protocol_add_email_confirmation($email: String!, $code: Float!) {
+  addEmailConfirmation(input: {
+    email: $email
+    code: $code
+  }) {
+    user {
+      id
+    }
+  }
+}
+
+mutation protocol_remove_email($email: String!) {
+  removeEmail(email: $email) {
+    email
+  }
+}
+
+mutation protocol_add_wallet($wallet: String!, $chain: Chain) {
+    addWallet(input: {
+      wallet: $wallet,
+      chain: $chain
+    }) {
+      message
+    }
+}
+
+mutation protocol_add_wallet_confirmation($wallet: String!, $chain: Chain, $signature: String!) {
+  addWalletConfirmation(input: {
+    wallet: $wallet,
+    chain: $chain
+    signature: $signature
+  }) {
+    id
+  }
+}
+
+mutation protocol_remove_auth_method($id: String!) {
+  unregisterAuthMethod(input: {
+    id: $id
+  })
+}
+
+mutation protocol_migrate_auth($authId: String!, $ownerJwt: String!) {
+  migrateAuthMethod(input: {
+    authId: $authId
+    ownerJwt: $ownerJwt
+  })
+}

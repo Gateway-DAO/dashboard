@@ -1,29 +1,29 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { hasuraPublicService } from '@/services/hasura/api';
+import { apiPublic } from '@/services/protocol/api';
 import { SessionToken } from '@/types/user';
 
 const loginEmail = async (
   email: string,
   code: number
-): Promise<SessionToken> => {
+): Promise<SessionToken | null> => {
   try {
-    const res = await hasuraPublicService.login_email({
+    const res = await apiPublic.login_email({
       email,
       code,
     });
 
     const { error } = (res as any) ?? {};
 
-    if (error || !res.protocol.loginEmail) {
+    if (error || !res.loginEmail) {
       return null;
     }
 
-    const token = res.protocol.loginEmail;
+    const token = res.loginEmail;
 
     return token;
-  } catch (e) {
-    throw new Error(e);
+  } catch (error: any) {
+    throw new Error(error);
   }
 };
 
@@ -42,7 +42,7 @@ const credentialEmail = CredentialsProvider({
     },
   },
   async authorize(credentials) {
-    return loginEmail(credentials.email, parseInt(credentials.code, 10));
+    return loginEmail(credentials!.email, parseInt(credentials!.code, 10));
   },
 });
 
