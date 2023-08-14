@@ -1,6 +1,15 @@
 {
-  "extends": ["next/core-web-vitals", "prettier", "plugin:editorconfig/noconflict"],
-  "plugins": ["editorconfig", "eslint-plugin-import-helpers"],
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:editorconfig/noconflict",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
+  ],
+  "plugins": [
+    "editorconfig",
+    "eslint-plugin-import-helpers",
+    "@tanstack/query"
+  ],
   "rules": {
     "import-helpers/order-imports": [
       "warn",
