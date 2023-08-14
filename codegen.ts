@@ -6,9 +6,9 @@ const config: CodegenConfig = {
   generates: {
     './src/services/protocol/types.ts': {
       schema: {
-        [`${process.env.GATEWAY_PROTOCOL_ENDPOINT}`]: {
+        [`${process.env.NEXT_PUBLIC_API_ENDPOINT}`]: {
           headers: {
-            'x-api-key': process.env.GATEWAY_PROTOCOL_ENDPOINT as string,
+            'x-api-key': process.env.NEXT_PUBLIC_API_KEY as string,
           },
         },
       },
