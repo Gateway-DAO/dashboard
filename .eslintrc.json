@@ -1,3 +1,22 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "prettier", "plugin:editorconfig/noconflict"],
+  "plugins": ["editorconfig", "eslint-plugin-import-helpers"],
+  "rules": {
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          ["/^react$/", "/^react-(native|dom)$/", "/^next/"],
+          "module",
+          "/^@gateway//",
+          "/^@mui//",
+          ["parent", "sibling"],
+          "index"
+        ],
+        "alphabetize": { "order": "asc", "ignoreCase": false }
+      }
+    ],
+    "sort-imports": "off"
+  }
 }

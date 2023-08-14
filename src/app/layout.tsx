@@ -1,4 +1,4 @@
-import './globals.css'
+import { ThemeProvider, theme } from '@/theme'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -14,9 +14,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+    (window as any).theme = theme;
+  }
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ThemeProvider>
+          <p>Root</p>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
