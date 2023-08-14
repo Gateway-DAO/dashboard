@@ -1,35 +1,62 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/.tmp
+/out-tsc
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+node_modules
 
-# testing
-/coverage
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 # misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+.tool-versions
+
+# System Files
 .DS_Store
-*.pem
+Thumbs.db
+.env
+.nvmrc
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Sentry
+.sentryclirc
 
-# local env files
-.env*.local
+prisma/schema.prisma
+src/services/**/**/types.ts
+src/services/**/**/validation.ts
 
-# vercel
-.vercel
+# Sentry
+.sentryclirc
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# e2e Tests
+screenshots/
+test-results/
+storageState.json
+
+.next
+.vscode/settings.json
+src/pages/dev.tsx
