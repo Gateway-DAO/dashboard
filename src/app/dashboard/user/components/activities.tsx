@@ -1,4 +1,3 @@
-import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 
 import { timestampToString } from '@/utils/date';
@@ -34,7 +33,6 @@ const activityText = (type: string) => {
 };
 
 export default function Activities({ activities }: Props) {
-  const { t, lang } = useTranslation('protocol');
   const [expanded, setExpanded] = useState<boolean>(false);
 
   const handleChange =
@@ -54,6 +52,7 @@ export default function Activities({ activities }: Props) {
             ':before': { display: 'none' },
             m: '0!important',
             background: 'transparent!important',
+            boxShadow: 'none!important',
           }}
         >
           <AccordionSummary
@@ -126,7 +125,7 @@ export default function Activities({ activities }: Props) {
                       >
                         {timestampToString(
                           activity?.timestamp,
-                          lang,
+                          undefined,
                           protocol.credential.indeterminate
                         )}
                       </Typography>
