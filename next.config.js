@@ -6,12 +6,12 @@ const nextConfig = {
     return [
       {
         source: '/dashboard',
-        destination: '/dashboard/user/data-source',
+        destination: '/dashboard/user/data-assets',
         permanent: true,
       },
       {
         source: '/dashboard/user',
-        destination: '/dashboard/user/data-source',
+        destination: '/dashboard/user/data-assets',
         permanent: true,
       },
     ]
