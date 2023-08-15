@@ -14,7 +14,7 @@ type Props = {
 
 export default function CopyPaste({
   text,
-  sucessMessage = 'Copied to clipboard',
+  sucessMessage = 'Copied to clipboard', // TODO: Add locale
   limit = 6,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
@@ -38,10 +38,10 @@ export default function CopyPaste({
       title={text}
       onClick={() => copy(text)}
     >
-      <Typography fontSize={12} sx={{ whiteSpace: 'nowrap' }}>
+      <Typography sx={{ whiteSpace: 'nowrap', color: 'text.primary' }}>
         {limitCharsCentered(text, limit)}
       </Typography>
-      <ContentCopyIcon sx={{ fontSize: 16 }} />
+      <ContentCopyIcon sx={{ fontSize: 16, color: 'text.disabled' }} />
     </Stack>
   );
 }
