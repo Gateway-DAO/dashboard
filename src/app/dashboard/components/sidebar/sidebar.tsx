@@ -36,7 +36,6 @@ export default function Sidebar({ menuItems }: Props) {
             <Link
               href={item.link}
               underline={'none'}
-              ali
               sx={{
                 color: 'text.secondary',
                 ':hover': {
