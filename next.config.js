@@ -1,4 +1,4 @@
-const nextTranslate = require('next-translate-plugin')
+const nextTranslate = require('next-translate-plugin');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -6,11 +6,16 @@ const nextConfig = {
     return [
       {
         source: '/dashboard',
-        destination: '/dashboard/user',
+        destination: '/dashboard/user/data-assets',
         permanent: true,
       },
-    ]
+      {
+        source: '/dashboard/user',
+        destination: '/dashboard/user/data-assets',
+        permanent: true,
+      },
+    ];
   },
-}
+};
 
-module.exports = nextTranslate(nextConfig)
+module.exports = nextTranslate(nextConfig);
