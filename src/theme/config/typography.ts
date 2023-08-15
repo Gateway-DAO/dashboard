@@ -5,34 +5,30 @@ import { TypographyOptions } from '@mui/material/styles/createTypography';
 export const plus_jakarta_sans = Plus_Jakarta_Sans({
     display: 'swap',
     subsets: ['latin'],
+    weight: ["300", "500", "700"],
 })
-
-// export const fira_code = Fira_Code({
-//     display: 'swap',
-// })
-
 
 const typography: TypographyOptions = {
     allVariants: {
       fontFamily: `"${plus_jakarta_sans.style.fontFamily}", sans-serif`,
     },
     h1: {
-      fontWeight: 'medium',
+      fontWeight: 'normal',
     },
     h2: {
-      fontWeight: 'medium',
+      fontWeight: 'normal',
     },
     h3: {
-      fontWeight: 'medium',
+      fontWeight: 'normal',
     },
     h4: {
-      fontWeight: 'medium',
+      fontWeight: 'normal',
     },
     h5: {
-      fontWeight: 'medium',
+      fontWeight: 'normal',
     },
     h6: {
-      fontWeight: 'medium',
+      fontWeight: 'normal',
     },
     subtitle1: {
       fontWeight: 'bold',
