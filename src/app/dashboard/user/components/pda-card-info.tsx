@@ -1,19 +1,20 @@
 import CopyPaste from '@/components/copy-paste/copy-paste';
 import { limitCharsCentered } from '@/utils/string';
+import dayjs from 'dayjs';
 
 import { Stack, Box, Divider, Chip } from '@mui/material';
 
 import CardCell from './card-cell';
-
 type Props = {
-  credential?: any;
+  credential?: any; // TODO: Add type
 };
 
-export default function TdaCardInfo({ credential }: Props) {
+export default function PdaCardInfo({ credential }: Props) {
   return (
     <Stack
       sx={{
-        border: '1px solid rgba(0, 0, 0, 0.12)',
+        border: '1px solid',
+        borderColor: 'divider',
         borderRadius: 2,
         mb: 3,
         overflow: 'hidden',
@@ -25,16 +26,19 @@ export default function TdaCardInfo({ credential }: Props) {
       <Stack
         alignItems="stretch"
         justifyContent="space-around"
-        sx={{
-          flexDirection: 'column',
-        }}
+        direction="column"
         divider={
           <Box>
             <Divider />
           </Box>
         }
       >
-        <CardCell label="Share date">08/05/22, 11:45 am</CardCell>
+        {/* TODO: Add dynamic information */}
+        <CardCell label="Share date">
+          {dayjs('2018-04-04T16:00:00.000Z').format('MM/DD/YYYY, h:mm A')}
+        </CardCell>
+
+        {/* TODO: Add dynamic information */}
         <CardCell label="Data Proof ID">
           <CopyPaste
             text={limitCharsCentered(
@@ -43,32 +47,17 @@ export default function TdaCardInfo({ credential }: Props) {
             )}
           />
         </CardCell>
-        <CardCell label="Share date">
+
+        {/* TODO: Add dynamic information */}
+        <CardCell label="Status">
           <Chip
-            label="08/05/22, 11:45 am"
+            label="Up-to-date"
             size="small"
             variant="outlined"
-            color="warning"
+            color="success"
+            sx={{ color: 'success.main' }}
           />
         </CardCell>
-      </Stack>
-      <Stack
-        alignItems="stretch"
-        justifyContent="space-around"
-        sx={{
-          flexDirection: { xs: 'column', md: 'row' },
-        }}
-        divider={
-          <Box>
-            <Divider
-              sx={{
-                flexDirection: { xs: 'column', md: 'row' },
-              }}
-            />
-          </Box>
-        }
-      >
-        {credential?.title}
       </Stack>
     </Stack>
   );
