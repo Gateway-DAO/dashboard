@@ -6,7 +6,6 @@ import { theme } from '@/theme';
 import { SnackbarProvider, closeSnackbar } from 'notistack';
 
 import CloseIcon from '@mui/icons-material/Close';
-import { Button } from '@mui/material';
 
 type Props = {
   children: ReactNode;
@@ -28,7 +27,8 @@ const Notistack = ({ children }: Props) => {
       autoHideDuration={4000}
       style={{
         backgroundColor: theme.palette.primary.main,
-        color: '#fff',
+        color: theme.palette.common.white,
+        position: 'relative',
       }}
       action={(snackbarId) => (
         <CloseIcon

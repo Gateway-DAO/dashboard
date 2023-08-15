@@ -32,9 +32,15 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^4.32.6
     version: 4.32.6(react-dom@18.2.0)(react@18.2.0)
+  dayjs:
+    specifier: ^1.11.9
+    version: 1.11.9
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
+  fast-blurhash:
+    specifier: ^1.1.2
+    version: 1.1.2
   graphql:
     specifier: ^16.7.1
     version: 16.7.1
@@ -2974,6 +2980,10 @@ packages:
     resolution: {integrity: sha512-8YnDaaf7N3k/q5HnTJVuzSyLETjoZjVmHc4AeKAzOvKHEFQKcn64OKBfzHYtE9zGjctNM7V9I0MfnUVLpi7M5g==}
     dev: true
 
+  /dayjs@1.11.9:
+    resolution: {integrity: sha512-QvzAURSbQ0pKdIye2txOzNaHmxtUBXerpY0FJsFXUMKbIZeFm5ht1LS/jFsrncjnmtv8HsG0W2g6c0zUjZWmpA==}
+    dev: false
+
   /debounce@1.2.1:
     resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
     dev: true
@@ -3530,6 +3540,10 @@ packages:
     resolution: {integrity: sha512-FuoE1qtbJ4bBVvv94CC7s0oTnKUGvQs+Rjf1L2SJFfS+HTVVjhPFtehPdQ0JiGPqVNfSSZvL5yzHHQq2Z4WNhQ==}
     engines: {node: ^12.20 || >= 14.13}
     dev: true
+
+  /fast-blurhash@1.1.2:
+    resolution: {integrity: sha512-lJVOgYSlahqkRhrKumNx/SGB2F/qS0D1z7xjGYjb5EZJRtlzySGMniZjkQ9h9Rv8sPmM/V9orEgRiMwazDNH6A==}
+    dev: false
 
   /fast-decode-uri-component@1.0.1:
     resolution: {integrity: sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg==}

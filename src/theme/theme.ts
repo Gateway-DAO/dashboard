@@ -9,7 +9,7 @@ export const theme = createTheme({
   palette,
   typography,
   shape: {
-    borderRadius: 8,
+    borderRadius: 16,
   },
   components: {
     ...components,
