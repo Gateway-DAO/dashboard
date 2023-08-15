@@ -15,7 +15,7 @@ export default function Sidebar({ menuItems }: Props) {
         height: '100vh',
         borderRight: '1px solid',
         borderColor: 'divider',
-        maxWidth: '300px',
+        maxWidth: { xs: '100%', md: '300px' },
         padding: '2rem',
       }}
     >
