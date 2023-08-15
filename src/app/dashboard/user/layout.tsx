@@ -1,9 +1,40 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
-import DashboardLayout from "../components/dashboard-layout";
+import { WalletIcon } from '@/components/icons/wallet';
+
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+
+import DashboardLayout from '../components/dashboard-layout';
 
 export default function DashboardUserLayout({ children }: PropsWithChildren) {
-  return <DashboardLayout content={<><div>User</div></>}>
-    {children}
-  </DashboardLayout>
+  const menuItems = [
+    {
+      name: 'My data assets',
+      link: '/dashboard',
+      icon: <WalletIcon />,
+    },
+    {
+      name: 'Activity',
+      link: '/activity',
+      icon: <AccessTimeIcon />,
+    },
+    {
+      name: 'Notifications',
+      link: '/notifications',
+      icon: <NotificationsNoneIcon />,
+    },
+  ];
+  return (
+    <DashboardLayout
+      menuItems={menuItems}
+      content={
+        <>
+          <div>User</div>
+        </>
+      }
+    >
+      {children}
+    </DashboardLayout>
+  );
 }

@@ -6,8 +6,9 @@ import { Link, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import Logo from './logo';
+import Menu from './menu';
 
-interface MenuItem {
+export interface MenuItem {
   name: string;
   link: string;
   icon: ReactNode;
@@ -30,29 +31,7 @@ export default function Sidebar({ menuItems }: Props) {
       }}
     >
       <Logo />
-      <Stack component={'ul'}>
-        {menuItems?.map((item) => (
-          <li key={item.name}>
-            <Link
-              href={item.link}
-              underline={'none'}
-              sx={{
-                color: 'text.secondary',
-                ':hover': {
-                  color: 'primary.main',
-                },
-              }}
-            >
-              <Stack direction={'row'} spacing={2} alignItems={'center'}>
-                {item.icon}
-                <Typography variant="h2" sx={{ fontSize: '1rem' }}>
-                  {item.name}
-                </Typography>
-              </Stack>
-            </Link>
-          </li>
-        ))}
-      </Stack>
+      <Menu menuItems={menuItems} sx={{ mt: '40px' }} />
     </Stack>
   );
 }
