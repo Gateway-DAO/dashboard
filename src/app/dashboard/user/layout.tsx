@@ -28,11 +28,6 @@ export default function DashboardUserLayout({ children }: PropsWithChildren) {
   return (
     <DashboardLayout
       menuItems={menuItems}
-      content={
-        <>
-          <div>User</div>
-        </>
-      }
     >
       {children}
     </DashboardLayout>
