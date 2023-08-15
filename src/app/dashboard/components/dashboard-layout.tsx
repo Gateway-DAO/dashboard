@@ -5,7 +5,8 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
-import Sidebar, { MenuItem } from './sidebar/sidebar';
+import { MenuItem } from './sidebar/menu';
+import Sidebar from './sidebar/sidebar';
 
 type Props = {
   menuItems: Array<MenuItem>;

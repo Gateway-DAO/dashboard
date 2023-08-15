@@ -1,15 +1,7 @@
-import { ReactNode } from 'react';
-
 import { Stack } from '@mui/system';
 
 import Logo from './logo';
-import Menu from './menu';
-
-export interface MenuItem {
-  name: string;
-  link: string;
-  icon: ReactNode;
-}
+import Menu, { MenuItem } from './menu';
 
 type Props = {
   menuItems: Array<MenuItem>;
