@@ -17,21 +17,27 @@ const typography: TypographyOptions = {
       fontFamily: `"${plus_jakarta_sans.style.fontFamily}", sans-serif`,
     },
     h1: {
-      fontWeight: 'bold',
+      fontWeight: 'medium',
     },
     h2: {
-      fontWeight: 'bold',
+      fontWeight: 'medium',
     },
     h3: {
-      fontWeight: 'bold',
+      fontWeight: 'medium',
     },
     h4: {
-      fontWeight: 'bold',
+      fontWeight: 'medium',
     },
     h5: {
-      fontWeight: 'bold',
+      fontWeight: 'medium',
     },
     h6: {
+      fontWeight: 'medium',
+    },
+    subtitle1: {
+      fontWeight: 'bold',
+    },
+    subtitle2: {
       fontWeight: 'bold',
     },
   };
