@@ -5,6 +5,7 @@ export const protocol = {
     expiration_date: 'Expiration date',
     indeterminate: 'Indeterminate',
     status: 'Status',
+    up_to_date: 'Up-to-date',
     valid: 'Valid',
     expired: 'Expired',
     suspended: 'Suspended',
@@ -60,6 +61,10 @@ export const protocol = {
       revoke_if: 'Revoke if',
       suspend_if: 'Suspend if',
     },
+    data_shared_with: 'Data shared with',
+    share_date: 'Share date',
+    data_proof_id: 'Data Proof ID',
+    shared_pdas: 'Shared PDAs',
   },
   data_model: {
     data_model_id: 'Data model ID',
