@@ -5,7 +5,10 @@ import { GatewayIcon } from '@/components/icons/gateway';
 import { Link, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
-interface MenuItem {
+import Logo from './logo';
+import Menu from './menu';
+
+export interface MenuItem {
   name: string;
   link: string;
   icon: ReactNode;
@@ -17,29 +20,18 @@ type Props = {
 
 export default function Sidebar({ menuItems }: Props) {
   return (
-    <>
-      <Stack>
-        <Stack direction={'column'}>
-          <GatewayIcon />
-          <Typography variant="h2" sx={{ fontSize: '1rem' }}>
-            Gateway
-          </Typography>
-        </Stack>
-        <Stack component={'ul'}>
-          {menuItems?.map((item) => (
-            <li key={item.name}>
-              <Link href={item.link} underline={'none'}>
-                <Stack direction={'row'} spacing={2} alignItems={'center'}>
-                  {item.icon}
-                  <Typography variant="h2" sx={{ fontSize: '1rem' }}>
-                    {item.name}
-                  </Typography>
-                </Stack>
-              </Link>
-            </li>
-          ))}
-        </Stack>
-      </Stack>
-    </>
+    <Stack
+      component={'aside'}
+      sx={{
+        height: '100vh',
+        borderRight: '1px solid',
+        borderColor: 'divider',
+        maxWidth: '300px',
+        padding: '2rem',
+      }}
+    >
+      <Logo />
+      <Menu menuItems={menuItems} sx={{ mt: '40px' }} />
+    </Stack>
   );
 }
