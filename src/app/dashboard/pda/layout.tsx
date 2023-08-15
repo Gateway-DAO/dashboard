@@ -43,5 +43,11 @@ export default function DashboardUserLayout({ children }: PropsWithChildren) {
       icon: NotificationsNoneIcon,
     },
   ];
-  return <DashboardLayout menuItems={menuItems}>{children}</DashboardLayout>;
+  return (
+    <DashboardLayout
+      menuItems={menuItems}
+    >
+      {children}
+    </DashboardLayout>
+  );
 }
