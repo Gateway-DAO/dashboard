@@ -5,10 +5,10 @@ import { theme } from '@/theme';
 import { Stack, Divider, Typography, alpha } from '@mui/material';
 
 type Props = {
-  credential?: any; // TODO: Add type
+  pda?: any; // TODO: Add type
 };
 
-export default function PdaCardTitle({ credential }: Props) {
+export default function PdaCardTitle({ pda }: Props) {
   return (
     <Stack
       sx={{

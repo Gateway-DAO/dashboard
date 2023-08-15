@@ -23,11 +23,11 @@ type Props = {
 const activityText = (type: string) => {
   return (
     {
-      Issued: 'Credential issued',
-      Revoked: 'Credential revoked',
-      Suspended: 'Credential suspended',
-      Reactivated: 'Credential reactivated',
-      Updated: 'Credential updated',
+      Issued: 'PDA issued',
+      Revoked: 'PDA revoked',
+      Suspended: 'PDA suspended',
+      Reactivated: 'PDA reactivated',
+      Updated: 'PDA updated',
     }[type] || 'Unknown activity'
   );
 };
@@ -45,7 +45,7 @@ export default function Activities({ activities }: Props) {
       {/* {activities?.length > 0 && ( */}
       <Stack sx={{ mt: '-24px' }}>
         <Accordion
-          id="credential-button-activity"
+          id="pda-button-activity"
           expanded={expanded}
           onChange={handleChange()}
           sx={{
@@ -87,8 +87,8 @@ export default function Activities({ activities }: Props) {
                   }}
                 >
                   {expanded
-                    ? protocol.credential.hide_activity
-                    : protocol.credential.show_activity}
+                    ? protocol.pda.hide_activity
+                    : protocol.pda.show_activity}
                 </Typography>
                 <ArrowDropDownIcon
                   sx={{
@@ -126,7 +126,7 @@ export default function Activities({ activities }: Props) {
                         {timestampToString(
                           activity?.timestamp,
                           undefined,
-                          protocol.credential.indeterminate
+                          protocol.pda.indeterminate
                         )}
                       </Typography>
                     </Stack>

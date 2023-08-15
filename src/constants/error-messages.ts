@@ -45,8 +45,8 @@ export const errorMessages: Record<string, string> = {
   TASK_ALREADY_APPROVED: `The task has already been approved.`,
   NOT_ALLOWED_TO_APPROVE_OR_REJECT: `Not allowed to approve or reject`,
   INVALID_EVENT_TYPE: `An error ocurred trying to send the event`,
-  NOT_ALLOWED_TO_CREATE_CREDENTIAL:
-    'You are not allowed to create a credential for this data model',
+  NOT_ALLOWED_TO_CREATE_PDA:
+    'You are not allowed to create a PDA for this data model',
   EMAIL_ALREADY_IN_USE: 'E-mail already in use',
   USERNAME_ALREADY_IN_USE: 'Username already in use',
   ERROR_UPDATING_USER: `Error updating user, please, contact Gateway or try again.`,

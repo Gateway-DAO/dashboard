@@ -6,10 +6,10 @@ import { Stack, Divider, Chip } from '@mui/material';
 
 import CardCell from './card-cell';
 type Props = {
-  credential?: any; // TODO: Add type
+  pda?: any; // TODO: Add type
 };
 
-export default function PdaCardInfo({ credential }: Props) {
+export default function PdaCardInfo({ pda }: Props) {
   return (
     <Stack
       sx={{
