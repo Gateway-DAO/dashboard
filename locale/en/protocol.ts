@@ -32,6 +32,7 @@ export const protocol = {
       'If you revoke this PDA, it will not be possible to undo this action.',
     revoke_error_message:
       'There was a problem performing the revoke. Try again later.',
+    revoke_access: 'Revoke access',
     image: 'Image',
     qr_code: 'QR Code',
     share_dialog_title: 'Share PDA',
@@ -39,6 +40,7 @@ export const protocol = {
       revoke: 'Revoke',
       cancel: 'Cancel',
     },
+    share_a_copy: 'Share a copy',
     mint_card: {
       title: 'Minted on',
       chain_column: 'Chain',

@@ -5,6 +5,7 @@ import ExternalLink from '@/components/external-link/external-link';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Button, Stack } from '@mui/material';
 
+import { protocol } from '../../../../locale/en/protocol';
 import Activities from './components/activities';
 import PdaCardInfo from './components/pda-card-info';
 import PdaCardTitle from './components/pda-card-title';
@@ -19,7 +20,7 @@ export default function DashboardUser() {
         sx={{ mb: 2, width: '100%' }}
         onClick={() => console.log('test')}
       >
-        Share a copy
+        {protocol.pda.share_a_copy}
       </Button>
       <Button
         variant="outlined"
@@ -28,7 +29,7 @@ export default function DashboardUser() {
         onClick={() => console.log('test')}
         startIcon={<CancelIcon height={20} width={20} color="error" />}
       >
-        Revoke access
+        {protocol.pda.revoke_access}
       </Button>
       <ExternalLink
         text="test"
