@@ -2,7 +2,8 @@ import { PropsWithChildren, ReactNode } from 'react';
 
 import { Stack } from '@mui/system';
 
-import Sidebar, { MenuItem } from './sidebar/sidebar';
+import { MenuItem } from './sidebar/menu';
+import Sidebar from './sidebar/sidebar';
 
 type Props = {
   content: ReactNode;
