@@ -1,12 +1,9 @@
-import useTranslation from 'next-translate/useTranslation';
+import CopyPaste from '@/components/copy-paste/copy-paste';
+import { limitCharsCentered } from '@/utils/string';
 
-import { theme } from '@/theme';
-
-import { Stack, Paper, Box, Divider, Chip, useMediaQuery } from '@mui/material';
+import { Stack, Box, Divider, Chip } from '@mui/material';
 
 import CardCell from './card-cell';
-import { limitCharsCentered } from '@/utils/string';
-import CopyPaste from '@/components/copy-paste/copy-paste';
 
 type Props = {
   credential?: any;

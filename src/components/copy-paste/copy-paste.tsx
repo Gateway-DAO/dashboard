@@ -1,9 +1,10 @@
+'use client';
+import { errorMessages } from '@/constants/error-messages';
 import { limitCharsCentered } from '@/utils/string';
 import { useSnackbar } from 'notistack';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Button, Stack, Typography } from '@mui/material';
-import { errorMessages } from '@/constants/error-messages';
 
 type Props = {
   text: string;
@@ -21,9 +22,9 @@ export default function CopyPaste({
   const copy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      enqueueSnackbar(sucessMessage);
+      enqueueSnackbar(sucessMessage, { variant: 'error' });
     } catch (err) {
-      enqueueSnackbar(errorMessages['UNEXPECTED_ERROR']);
+      enqueueSnackbar(errorMessages['UNEXPECTED_ERROR'], { variant: 'error' });
     }
   };
 
