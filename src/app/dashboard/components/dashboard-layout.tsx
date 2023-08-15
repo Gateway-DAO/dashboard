@@ -4,6 +4,7 @@ import { WalletIcon } from '@/components/icons/wallet';
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { Stack } from '@mui/system';
 
 import Sidebar from './sidebar/sidebar';
 
@@ -33,13 +34,15 @@ export default function DashboardLayout({
     },
   ];
   return (
-    <div>
+    <Stack direction={'row'}>
       <Sidebar menuItems={menuItems} />
-      <div>
-        <h1>Dashboard</h1>
-        {content}
-      </div>
-      {children}
-    </div>
+      <Stack>
+        <Stack>
+          <h1>Dashboard</h1>
+          {content}
+        </Stack>
+        {children}
+      </Stack>
+    </Stack>
   );
 }
