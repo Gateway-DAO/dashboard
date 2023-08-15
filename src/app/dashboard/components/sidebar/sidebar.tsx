@@ -1,18 +1,7 @@
-import { PropsWithChildren, ReactNode } from 'react';
-
-import { GatewayIcon } from '@/components/icons/gateway';
-
-import { Link, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import Logo from './logo';
-import Menu from './menu';
-
-export interface MenuItem {
-  name: string;
-  link: string;
-  icon: ReactNode;
-}
+import Menu, { MenuItem } from './menu';
 
 type Props = {
   menuItems: Array<MenuItem>;
