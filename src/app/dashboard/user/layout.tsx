@@ -9,9 +9,10 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 import DashboardLayout from '../components/dashboard-layout';
+import { MenuItem } from '../components/sidebar/menu';
 
 export default function DashboardUserLayout({ children }: PropsWithChildren) {
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     {
       name: 'Home',
       link: '/',

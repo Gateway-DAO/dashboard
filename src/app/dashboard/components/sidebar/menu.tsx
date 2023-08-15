@@ -1,10 +1,12 @@
+import { FC } from 'react';
+
 import { SvgIconComponent } from '@mui/icons-material';
-import { Link, List, ListItem, ListProps, Typography } from '@mui/material';
+import { Link, List, ListItem, ListProps, SvgIconProps, Typography } from '@mui/material';
 
 export interface MenuItem {
   name: string;
   link: string;
-  icon: SvgIconComponent;
+  icon: FC<SvgIconProps>;
 }
 
 type Props = {
