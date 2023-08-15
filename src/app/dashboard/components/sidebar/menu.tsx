@@ -1,12 +1,10 @@
-import { ReactNode } from 'react';
-
+import { SvgIconComponent } from '@mui/icons-material';
 import { Link, List, ListItem, ListProps, Typography } from '@mui/material';
-import { Stack, SxProps } from '@mui/system';
 
-interface MenuItem {
+export interface MenuItem {
   name: string;
   link: string;
-  icon: ReactNode;
+  icon: SvgIconComponent;
 }
 
 type Props = {
@@ -16,24 +14,35 @@ type Props = {
 export default function Menu({ menuItems, ...props }: Props) {
   return (
     <List component={'ul'} {...props}>
-      {menuItems?.map((item) => (
-        <ListItem key={item.name} sx={{ pl: 0 }}>
+      {menuItems?.map(({ icon: Icon, link, name }) => (
+        <ListItem key={name} sx={{ pl: 0 }}>
           <Link
-            href={item.link}
+            href={link}
             underline={'none'}
             sx={{
               color: 'text.secondary',
+              display: 'flex',
+              alignItems: 'center',
+              direction: 'row',
+              gap: 2,
               ':hover': {
-                color: 'primary.main',
+                svg: {
+                  color: 'primary.main',
+                },
+                span: {
+                  color: 'black',
+                },
               },
             }}
           >
-            <Stack direction={'row'} spacing={2} alignItems={'center'}>
-              {item.icon}
-              <Typography variant="h2" sx={{ fontSize: '1rem' }}>
-                {item.name}
-              </Typography>
-            </Stack>
+            <Icon sx={{ fontSize: 32 }} />
+            <Typography
+              component={'span'}
+              variant="h2"
+              sx={{ fontSize: '1rem' }}
+            >
+              {name}
+            </Typography>
           </Link>
         </ListItem>
       ))}
