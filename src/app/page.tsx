@@ -1,10 +1,7 @@
-import useTranslation from 'next-translate/useTranslation'
+import useTranslation from 'next-translate/useTranslation';
 
 export default function Home() {
-  const { t } = useTranslation('home')
-  return (
-    <>
-      {t("title")}
-    </>
-  )
+  const { t } = useTranslation('home');
+
+  return <>{t('title')}</>;
 }
