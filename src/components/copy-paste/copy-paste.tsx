@@ -41,7 +41,9 @@ export default function CopyPaste({
       <Typography sx={{ whiteSpace: 'nowrap', color: 'text.primary' }}>
         {limitCharsCentered(text, limit)}
       </Typography>
-      <ContentCopyIcon sx={{ fontSize: 16, color: 'text.disabled' }} />
+      <ContentCopyIcon
+        sx={{ fontSize: 'body1.fontSize', color: 'text.disabled' }}
+      />
     </Stack>
   );
 }
