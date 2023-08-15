@@ -1,8 +1,5 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-import { GatewayIcon } from '@/components/icons/gateway';
-
-import { Link, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import Logo from './logo';
