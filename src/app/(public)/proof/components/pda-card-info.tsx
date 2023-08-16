@@ -1,9 +1,8 @@
-import CopyPaste from '@/components/copy-paste/copy-paste';
 import { protocol } from '@/locale/en/protocol';
-import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
 import { Stack, Divider, Chip } from '@mui/material';
+
 
 import CardCell from './card-cell';
 type Props = {
