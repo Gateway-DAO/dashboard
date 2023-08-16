@@ -21,6 +21,7 @@ export default function PdaCard({ pda }: Props) {
         flexBasis: 'calc(50% - 4px)',
         p: 2,
         backgroundColor: 'common.white',
+        maxWidth: 320,
       }}
     >
       <Stack alignItems="flex-start">
