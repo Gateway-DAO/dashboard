@@ -9,7 +9,7 @@ type Props = {
   pda: any; // TODO: Add type
 };
 
-export default function PdaCardInfo({ pda }: Props) {
+export default function ProofCardInfo({ pda }: Props) {
   return (
     <Stack
       sx={{

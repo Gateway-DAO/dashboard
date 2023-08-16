@@ -5,11 +5,11 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { Button, Divider, Stack } from '@mui/material';
 
 import Activities from './components/activities';
-import PdaCardInfo from './components/pda-card-info';
-import PdaCardTitle from './components/pda-card-title';
 import PdasDataModelCard from './components/pdas-data-model-card';
+import ProofCardInfo from './components/proof-card-info';
+import ProofCardTitle from './components/proof-card-title';
 
-export default function DashboardUser() {
+export default function ProofPage() {
   // TODO: Remove MOCK
   const pda = {
     id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fe375',
@@ -107,8 +107,8 @@ export default function DashboardUser() {
   return (
     <>
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
-        <PdaCardTitle pda={pda} />
-        <PdaCardInfo pda={pda} />
+        <ProofCardTitle pda={pda} />
+        <ProofCardInfo pda={pda} />
         <Button
           variant="contained"
           size="large"
