@@ -41,7 +41,7 @@ export default function PdaCard({ pda, dashed }: Props) {
             </Typography>
           </Stack>
           <Typography fontWeight={700} sx={{ mb: 2 }}>
-            {pda?.title}
+            {pda?.issuer?.name}
           </Typography>
           <Chip label={protocol.pda.valid} variant="outlined" color="success" />
         </Stack>
