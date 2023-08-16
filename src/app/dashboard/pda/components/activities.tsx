@@ -43,7 +43,7 @@ export default function Activities({ activities }: Props) {
   return (
     <>
       {activities?.length > 0 && (
-        <Stack sx={{ mt: '-24px' }}>
+        <Stack>
           <Accordion
             id="pda-button-activity"
             expanded={expanded}

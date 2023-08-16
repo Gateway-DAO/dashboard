@@ -28,11 +28,6 @@ export default function PdaCardInfo({ pda }: Props) {
       </CardCell>
 
       {/* TODO: Add dynamic information */}
-      <CardCell label={protocol.pda.data_proof_id}>
-        <CopyPaste text={limitCharsCentered(pda?.id, 8)} />
-      </CardCell>
-
-      {/* TODO: Add dynamic information */}
       <CardCell label={protocol.data_model.pdas_table.status}>
         {/* TODO: Add types */}
         {pda?.status === 'valid' && (

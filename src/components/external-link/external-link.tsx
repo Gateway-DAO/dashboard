@@ -1,12 +1,11 @@
-import { theme } from '@/theme';
-
 import LaunchIcon from '@mui/icons-material/Launch';
-import { Stack, Link, Typography, alpha, SxProps, Theme } from '@mui/material';
+import { Stack, Link, Typography, SxProps, Theme } from '@mui/material';
 
 type Props = {
   text: string;
   onClick: (e: any) => void;
   sxProps?: SxProps<Theme>;
+  textSxProps?: SxProps<Theme>;
   id?: string;
 };
 
@@ -14,6 +13,7 @@ export default function ExternalLink({
   text,
   onClick,
   sxProps,
+  textSxProps,
   id,
 }: Props) {
   return (
@@ -32,7 +32,10 @@ export default function ExternalLink({
       id={id}
       onClick={onClick}
     >
-      <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+      <Typography
+        variant="caption"
+        sx={{ color: 'text.secondary', fontWeight: 600, ...textSxProps }}
+      >
         {text}
       </Typography>
       <LaunchIcon

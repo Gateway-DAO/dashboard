@@ -1,4 +1,4 @@
-import { PropsWithChildren, } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
@@ -17,11 +17,14 @@ export default function DashboardLayout({
   menuItems,
 }: PropsWithChildren<Props>) {
   return (
-    <Stack direction={'row'}>
+    <Stack>
       <Sidebar menuItems={menuItems} />
-      <Box width="100%" sx={{
-        px: CONTAINER_PX
-      }}>
+      <Box
+        width="100%"
+        sx={{
+          px: CONTAINER_PX,
+        }}
+      >
         {children}
       </Box>
     </Stack>
