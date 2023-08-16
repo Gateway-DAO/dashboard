@@ -33,7 +33,7 @@ export default function PdaCard({ pda }: Props) {
             fallback={pda?.issuer?.avatar}
           />
           <Typography variant="body2" sx={{ flexGrow: 1 }}>
-            {pda?.issuer?.chain}
+            {pda?.issuer?.name}
           </Typography>
         </Stack>
         <Typography fontWeight={700} sx={{ mb: 2 }}>
