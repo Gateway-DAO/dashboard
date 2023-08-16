@@ -35,7 +35,7 @@ export default function PdasDataModelCard({ dataModels }: Props) {
             </Stack>
             <Stack direction="row" flexWrap="wrap" gap={1} mb={3}>
               {dataModel.credentials.map((pda: any) => (
-                <PdaCard key={pda.id} pda={pda} />
+                <PdaCard key={pda.id} pda={pda} dashed />
               ))}
             </Stack>
           </Stack>

@@ -37,7 +37,6 @@ export default function DataAssetsPage() {
   ];
   return (
     <>
-      <h1>DataAssetsPage</h1>
       <Stack direction="row" gap={1}>
         {pdas.map((pda) => (
           <PdaCard pda={pda} key={pda.id} />
