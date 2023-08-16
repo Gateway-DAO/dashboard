@@ -36,7 +36,7 @@ export default function PdasDataModelCard({ dataModels }: Props) {
             <ExternalLink
               text={protocol.pda.data_model_id}
               sxProps={{ alignSelf: 'flex-end' }}
-              handleClick={() => console.log('test')} // TODO: Add a dynamic url
+              onClick={() => console.log('test')} // TODO: Add a dynamic url
             />
           </Stack>
           <Stack divider={<Divider sx={{ width: '100%' }} />}>
