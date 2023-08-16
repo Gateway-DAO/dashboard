@@ -1,10 +1,10 @@
 'use client';
 import ExternalLink from '@/components/external-link/external-link';
 import PdaCard from '@/components/pda-card/pda-card';
+import { protocol } from '@/locale/en/protocol';
 
 import { Stack, Divider, Typography } from '@mui/material';
 
-import { protocol } from '../../../../../locale/en/protocol';
 
 type Props = {
   dataModels: any; // TODO: Add type

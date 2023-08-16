@@ -1,6 +1,7 @@
+import { protocol } from '@/locale/en/protocol';
+
 import { Chip, Stack, Typography } from '@mui/material';
 
-import { protocol } from '../../../locale/en/protocol';
 import { AvatarFile } from '../avatar-file/avatar-file';
 
 type Props = {

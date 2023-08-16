@@ -1,14 +1,15 @@
+import { protocol } from '@/locale/en/protocol';
 import dayjs from 'dayjs';
 
 import { Stack, Divider, Chip } from '@mui/material';
 
-import { protocol } from '../../../../../locale/en/protocol';
+
 import CardCell from './card-cell';
 type Props = {
   pda: any; // TODO: Add type
 };
 
-export default function PdaCardInfo({ pda }: Props) {
+export default function ProofCardInfo({ pda }: Props) {
   return (
     <Stack
       sx={{

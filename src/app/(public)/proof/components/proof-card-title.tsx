@@ -1,17 +1,17 @@
 import { AvatarFile } from '@/components/avatar-file/avatar-file';
 import ExternalLink from '@/components/external-link/external-link';
+import { protocol } from '@/locale/en/protocol';
 import { theme } from '@/theme';
 import { limitCharsCentered } from '@/utils/string';
 
 import { Stack, Divider, Typography, alpha } from '@mui/material';
 
-import { protocol } from '../../../../../locale/en/protocol';
 
 type Props = {
   pda: any; // TODO: Add type
 };
 
-export default function PdaCardTitle({ pda }: Props) {
+export default function ProofCardTitle({ pda }: Props) {
   return (
     <Stack
       sx={{
