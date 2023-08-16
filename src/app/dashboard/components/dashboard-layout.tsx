@@ -1,15 +1,14 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
 import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
-import { MenuItem } from './sidebar/menu';
 import Sidebar from './sidebar/sidebar';
 
 type Props = {
-  menuItems: Array<MenuItem>;
+  menuItems: ReactNode;
 };
 
 export default function DashboardLayout({

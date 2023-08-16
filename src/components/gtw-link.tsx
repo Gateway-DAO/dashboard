@@ -1,13 +1,14 @@
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
+import { Ref, forwardRef } from "react";
 
 import { LinkProps as MuiLinkProps, Link as MuiLink } from "@mui/material";
 // Defining the CustomNextLink
 export type CustomNextLinkProps = Omit<NextLinkProps, "href"> & {
   _href: NextLinkProps["href"];
 };
-export const CustomNextLink = ({ _href, ...props }: CustomNextLinkProps) => {
-  return <NextLink href={_href} {...props} />;
-};
+export const CustomNextLink = forwardRef(function CustomNextLink({ _href, ...props }: CustomNextLinkProps, ref: any) {
+  return <NextLink href={_href} {...props} ref={ref} />;
+});
 // combine MUI LinkProps with NextLinkProps
 type CombinedLinkProps = MuiLinkProps<typeof NextLink>;
 // remove both href properties
@@ -16,8 +17,8 @@ type GTWLinkProps = Omit<CombinedLinkProps, "href"> & {
   href: NextLinkProps["href"];
 };
 
-const GTWLink = ({ href, ...props }: GTWLinkProps) => {
+const GTWLink = forwardRef(function GTWLink({ href, ...props }: GTWLinkProps, ref) {
   // use _href props of CustomNextLink to set the href
-  return <MuiLink {...props} component={CustomNextLink} _href={href} />;
-};
+  return <MuiLink ref={ref} {...props} component={CustomNextLink} _href={href} />;
+});
 export default GTWLink;

@@ -6,14 +6,9 @@ const nextConfig = {
     return [
       {
         source: '/dashboard',
-        destination: '/dashboard/user/data-assets',
+        destination: '/dashboard/user',
         permanent: true,
-      },
-      {
-        source: '/dashboard/user',
-        destination: '/dashboard/user/data-assets',
-        permanent: true,
-      },
+      }
     ];
   },
 };

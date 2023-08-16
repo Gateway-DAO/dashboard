@@ -1,7 +1,6 @@
 import { GatewayIcon } from '@/components/icons/gateway';
 
 import { Link, Typography } from '@mui/material';
-import { Stack } from '@mui/system';
 
 export default function Logo() {
   return (

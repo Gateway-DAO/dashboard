@@ -1,10 +1,12 @@
+import { ReactNode } from 'react';
+
 import { Stack } from '@mui/system';
 
 import Logo from './logo';
-import Menu, { MenuItem } from './menu';
+import Menu from './menu';
 
 type Props = {
-  menuItems: Array<MenuItem>;
+  menuItems: ReactNode;
 };
 
 export default function Sidebar({ menuItems }: Props) {

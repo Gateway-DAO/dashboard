@@ -39,7 +39,7 @@ export default function DataAssetsPage() {
     <>
       <Stack direction="row" gap={1}>
         {pdas.map((pda) => (
-          <PdaCard pda={pda} key={pda.id} />
+          <PdaCard pda={pda} key={pda.id} href="/dashboard/user/proof" />
         ))}
       </Stack>
     </>

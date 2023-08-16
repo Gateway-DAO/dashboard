@@ -18,7 +18,6 @@ export function AvatarFile<Component extends React.ElementType>({
   ...props
 }: AvatarFileProps<Component, { component?: Component }>) {
   const image = useFile(file);
-  console.log(file, image);
   const src = image?.url ?? fallback;
 
   return (

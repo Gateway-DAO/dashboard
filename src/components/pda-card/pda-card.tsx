@@ -8,10 +8,11 @@ import { AvatarFile } from '../avatar-file/avatar-file';
 
 type Props = {
   dashed?: boolean;
+  href: string;
   pda: any; // TODO: Add type
 };
 
-export default function PdaCard({ pda, dashed }: Props) {
+export default function PdaCard({ pda, dashed, href }: Props) {
   return (
     <Stack
       component={Card}
@@ -22,11 +23,11 @@ export default function PdaCard({ pda, dashed }: Props) {
       gap={1}
       sx={{
         ...(dashed && { borderStyle: 'dashed' }),
-        // flexBasis: 'calc(50% - 4px)',
-        // maxWidth: 320,
+        flexBasis: 'calc(50% - 4px)',
+        maxWidth: 320,
       }}
     >
-      <CardActionArea component={Link} href={`/proof/`} sx={{
+      <CardActionArea component={Link} href={href} sx={{
         p: 2,
       }}>
         <Stack alignItems="flex-start">
