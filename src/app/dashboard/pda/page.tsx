@@ -1,7 +1,5 @@
 'use client';
 // TODO: remove use client here
-import ExternalLink from '@/components/external-link/external-link';
-
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Button, Divider, Stack } from '@mui/material';
 

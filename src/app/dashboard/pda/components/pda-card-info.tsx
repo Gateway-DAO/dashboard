@@ -1,5 +1,3 @@
-import CopyPaste from '@/components/copy-paste/copy-paste';
-import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
 import { Stack, Divider, Chip } from '@mui/material';

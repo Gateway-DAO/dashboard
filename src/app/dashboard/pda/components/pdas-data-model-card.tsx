@@ -1,9 +1,8 @@
 'use client';
-import { AvatarFile } from '@/components/avatar-file/avatar-file';
 import ExternalLink from '@/components/external-link/external-link';
 import PdaCard from '@/components/pda-card/pda-card';
 
-import { Stack, Divider, Typography, Chip } from '@mui/material';
+import { Stack, Divider, Typography } from '@mui/material';
 
 import { protocol } from '../../../../../locale/en/protocol';
 
