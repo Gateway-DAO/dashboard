@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { protocol } from '@/locale/en/protocol';
 import { timestampToString } from '@/utils/date';
 import { getExplorer } from '@/utils/web3';
 
@@ -14,7 +15,6 @@ import {
   Divider,
 } from '@mui/material';
 
-import { protocol } from '../../../../../locale/en/protocol';
 
 type Props = {
   activities: any; // TODO: Add types

@@ -1,11 +1,9 @@
 'use client';
-// TODO: remove use client here
-import ExternalLink from '@/components/external-link/external-link';
+import { protocol } from '@/locale/en/protocol';
 
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Button, Divider, Stack } from '@mui/material';
 
-import { protocol } from '../../../../locale/en/protocol';
 import Activities from './components/activities';
 import PdaCardInfo from './components/pda-card-info';
 import PdaCardTitle from './components/pda-card-title';

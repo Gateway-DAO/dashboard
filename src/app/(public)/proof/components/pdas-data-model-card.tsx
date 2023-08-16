@@ -1,10 +1,10 @@
 'use client';
 import { AvatarFile } from '@/components/avatar-file/avatar-file';
 import ExternalLink from '@/components/external-link/external-link';
+import { protocol } from '@/locale/en/protocol';
 
 import { Stack, Divider, Typography, Chip } from '@mui/material';
 
-import { protocol } from '../../../../../locale/en/protocol';
 
 type Props = {
   dataModels: any; // TODO: Add type
