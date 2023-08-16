@@ -134,7 +134,7 @@ export default function DashboardUser() {
         <ExternalLink
           text={protocol.pda.storage_id}
           sxProps={{ alignSelf: 'flex-end' }}
-          handleClick={() => console.log('test')} // TODO: Add a dynamic url
+          onClick={() => console.log('test')}
         />
         <Activities activities={pda.activities} />
       </Stack>

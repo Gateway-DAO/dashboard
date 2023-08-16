@@ -5,14 +5,14 @@ import { Stack, Link, Typography, alpha, SxProps, Theme } from '@mui/material';
 
 type Props = {
   text: string;
-  handleClick: (e: any) => void;
+  onClick: (e: any) => void;
   sxProps?: SxProps<Theme>;
   id?: string;
 };
 
 export default function ExternalLink({
   text,
-  handleClick,
+  onClick,
   sxProps,
   id,
 }: Props) {
@@ -30,7 +30,7 @@ export default function ExternalLink({
         ...sxProps,
       }}
       id={id}
-      onClick={handleClick}
+      onClick={onClick}
     >
       <Typography variant="caption" sx={{ color: 'text.secondary' }}>
         {text}
