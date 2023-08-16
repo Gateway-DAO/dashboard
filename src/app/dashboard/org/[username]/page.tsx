@@ -1,3 +1,3 @@
 export default function DashboardUser() {
-  return <>User page</>
+  return <>Org page</>;
 }
