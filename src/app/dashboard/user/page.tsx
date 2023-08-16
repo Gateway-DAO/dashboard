@@ -41,7 +41,6 @@ export default function DashboardUser() {
           title: 'Credit Card Transactions',
           issuer: {
             name: 'mastercard',
-            chain: 'Ethereum',
             avatar:
               'https://play-lh.googleusercontent.com/1KHh3KnzltZQR2hDUoEkQx12bn34tUjOstlnt2YGdWsa9-zluNpFxHiK_ETsbWyJcbky=w480-h960-rw',
           },
@@ -51,9 +50,8 @@ export default function DashboardUser() {
           title: 'Credit Card Transactions',
           issuer: {
             name: 'visa',
-            chain: 'Ethereum',
             avatar:
-              'https://static.vecteezy.com/system/resources/previews/009/469/638/original/visa-logo-company-providing-services-of-payment-operations-free-vector.jpg',
+              'https://logosmarcas.net/wp-content/uploads/2020/05/Visa-Logo.png',
           },
         },
         {
@@ -61,7 +59,6 @@ export default function DashboardUser() {
           title: 'Credit Card Transactions',
           issuer: {
             name: 'amex',
-            chain: 'Ethereum',
             avatar:
               'https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg',
           },
@@ -77,7 +74,6 @@ export default function DashboardUser() {
           title: 'Credit Score',
           issuer: {
             name: 'mastercard',
-            chain: 'Ethereum',
             avatar:
               'https://play-lh.googleusercontent.com/1KHh3KnzltZQR2hDUoEkQx12bn34tUjOstlnt2YGdWsa9-zluNpFxHiK_ETsbWyJcbky=w480-h960-rw',
           },
@@ -87,9 +83,8 @@ export default function DashboardUser() {
           title: 'Credit Score',
           issuer: {
             name: 'visa',
-            chain: 'Ethereum',
             avatar:
-              'https://static.vecteezy.com/system/resources/previews/009/469/638/original/visa-logo-company-providing-services-of-payment-operations-free-vector.jpg',
+              'https://logosmarcas.net/wp-content/uploads/2020/05/Visa-Logo.png',
           },
         },
         {
@@ -97,7 +92,6 @@ export default function DashboardUser() {
           title: 'Credit Score',
           issuer: {
             name: 'amex',
-            chain: 'Ethereum',
             avatar:
               'https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg',
           },
@@ -112,8 +106,7 @@ export default function DashboardUser() {
         <PdaCardTitle pda={pda} />
         <PdaCardInfo pda={pda} />
         <Button
-          variant="contained"
-          size="large"
+          variant="outlined"
           sx={{
             mb: 2,
             width: '100%',
@@ -126,7 +119,6 @@ export default function DashboardUser() {
         </Button>
         <Button
           variant="outlined"
-          size="large"
           color="error"
           sx={{
             mb: 2,
@@ -139,6 +131,11 @@ export default function DashboardUser() {
         >
           {protocol.pda.revoke_access}
         </Button>
+        <ExternalLink
+          text={protocol.pda.storage_id}
+          sxProps={{ alignSelf: 'flex-end' }}
+          handleClick={() => console.log('test')} // TODO: Add a dynamic url
+        />
         <Activities activities={pda.activities} />
       </Stack>
       <Divider sx={{ width: '100%', mb: 5, mt: 2 }} />

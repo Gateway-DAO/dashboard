@@ -10,6 +10,7 @@ type Props = {
 export default function CardCell({ label, children }: Props) {
   return (
     <Stack
+      gap={1}
       sx={{
         p: 2,
         width: '100%',
