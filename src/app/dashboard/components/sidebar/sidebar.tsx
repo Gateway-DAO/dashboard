@@ -18,11 +18,13 @@ export default function Sidebar({ menuItems }: Props) {
         borderRight: '1px solid',
         borderColor: 'divider',
         maxWidth: { xs: '100%', md: '300px' },
-        padding: '2rem',
+        width: '100%',
+        padding: 2,
+        boxSizing: 'border-box',
       }}
     >
       <Logo />
-      <Menu menuItems={menuItems} sx={{ mt: '40px' }} />
+      <Menu menuItems={menuItems} sx={{ mt: 5 }} />
     </Stack>
   );
 }
