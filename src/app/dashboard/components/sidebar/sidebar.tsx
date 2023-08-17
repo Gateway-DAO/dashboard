@@ -14,7 +14,6 @@ export default function Sidebar({ menuItems }: Props) {
     <Stack
       component={'aside'}
       sx={{
-        height: '100vh',
         borderRight: '1px solid',
         borderColor: 'divider',
         maxWidth: { xs: '100%', md: '300px' },

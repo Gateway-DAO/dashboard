@@ -1,5 +1,9 @@
 'use client';
 import { protocol } from '@/locale/en/protocol';
+import {
+  CONTAINER_PX,
+  NEGATIVE_CONTAINER_PX,
+} from '@/theme/config/style-tokens';
 
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Button, Divider, Stack } from '@mui/material';
@@ -139,7 +143,14 @@ export default function ProofPage() {
         </Button>
         <Activities activities={pda.activities} />
       </Stack>
-      <Divider sx={{ width: '100%', mb: 5, mt: 2 }} />
+      <Divider
+        sx={{
+          mb: 5,
+          mt: 2,
+          mx: NEGATIVE_CONTAINER_PX,
+          px: CONTAINER_PX,
+        }}
+      />
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
         <PdasDataModelCard dataModels={dataModels} />
       </Stack>

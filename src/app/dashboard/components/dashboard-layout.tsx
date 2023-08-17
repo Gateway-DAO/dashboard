@@ -16,7 +16,7 @@ export default function DashboardLayout({
   menuItems,
 }: PropsWithChildren<Props>) {
   return (
-    <Stack direction={'row'}>
+    <Stack direction="row" alignItems="stretch">
       <Sidebar menuItems={menuItems} />
       <Box
         width="100%"
