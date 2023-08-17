@@ -27,9 +27,15 @@ export default function PdaCard({ pda, dashed, href }: Props) {
         maxWidth: 320,
       }}
     >
-      <CardActionArea component={Link} href={href} sx={{
-        p: 2,
-      }}>
+      <CardActionArea
+        component={Link}
+        href={href}
+        sx={{
+          px: 2,
+          pt: 2,
+          pb: 3,
+        }}
+      >
         <Stack alignItems="flex-start">
           <Stack direction="row" alignItems="center" gap={1.5} sx={{ mb: 3 }}>
             <AvatarFile
