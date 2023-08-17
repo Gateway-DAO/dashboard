@@ -19,7 +19,9 @@ export default function Sidebar({ menuItems }: Props) {
         borderColor: 'divider',
         maxWidth: { xs: '100%', md: '300px' },
         width: '100%',
-        padding: 2,
+        pt: 5,
+        pb: 2,
+        px: 2,
         boxSizing: 'border-box',
       }}
     >
