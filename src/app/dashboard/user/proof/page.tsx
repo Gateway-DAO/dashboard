@@ -42,7 +42,7 @@ export default function ProofPage() {
           id: '7Cae5130c16e6c8b686440b900d93fe12asdfasdfasd91977e70b812d170024f1cffd0e3fe375',
           title: 'Credit Card Transactions',
           issuer: {
-            name: 'mastercard',
+            name: 'Mastercard',
             chain: 'Ethereum',
             avatar:
               'https://play-lh.googleusercontent.com/1KHh3KnzltZQR2hDUoEkQx12bn34tUjOstlnt2YGdWsa9-zluNpFxHiK_ETsbWyJcbky=w480-h960-rw',
@@ -52,7 +52,7 @@ export default function ProofPage() {
           id: 'asdfadfasdfasdf',
           title: 'Credit Card Transactions',
           issuer: {
-            name: 'visa',
+            name: 'Visa',
             chain: 'Ethereum',
             avatar:
               'https://static.vecteezy.com/system/resources/previews/009/469/638/original/visa-logo-company-providing-services-of-payment-operations-free-vector.jpg',
@@ -62,7 +62,7 @@ export default function ProofPage() {
           id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fasdfas',
           title: 'Credit Card Transactions',
           issuer: {
-            name: 'amex',
+            name: 'Amex',
             chain: 'Ethereum',
             avatar:
               'https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg',
@@ -78,7 +78,7 @@ export default function ProofPage() {
           id: 'a23q231231312312qdasdas',
           title: 'Credit Score',
           issuer: {
-            name: 'mastercard',
+            name: 'Mastercard',
             chain: 'Ethereum',
             avatar:
               'https://play-lh.googleusercontent.com/1KHh3KnzltZQR2hDUoEkQx12bn34tUjOstlnt2YGdWsa9-zluNpFxHiK_ETsbWyJcbky=w480-h960-rw',
@@ -88,7 +88,7 @@ export default function ProofPage() {
           id: 'a23q231231312312qdasdasasdfasdf',
           title: 'Credit Score',
           issuer: {
-            name: 'visa',
+            name: 'Visa',
             chain: 'Ethereum',
             avatar:
               'https://static.vecteezy.com/system/resources/previews/009/469/638/original/visa-logo-company-providing-services-of-payment-operations-free-vector.jpg',
@@ -98,7 +98,7 @@ export default function ProofPage() {
           id: 'a23q231231312312qdasdasasdfa3e4q3eqglkj',
           title: 'Credit Score',
           issuer: {
-            name: 'amex',
+            name: 'Amex',
             chain: 'Ethereum',
             avatar:
               'https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg',
