@@ -5,7 +5,8 @@
     "prettier",
     "plugin:editorconfig/noconflict",
     "plugin:@tanstack/eslint-plugin-query/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:storybook/recommended"
   ],
   "plugins": [
     "editorconfig",
@@ -24,28 +25,44 @@
         "destructuredArrayIgnorePattern": "^_"
       }
     ],
-    "@typescript-eslint/ban-types": ["warn"],
-    "@typescript-eslint/no-empty-function": ["warn"],
+    "@typescript-eslint/ban-types": [
+      "warn"
+    ],
+    "@typescript-eslint/no-empty-function": [
+      "warn"
+    ],
     "import-helpers/order-imports": [
       "warn",
       {
         "newlinesBetween": "always",
         "groups": [
-          ["/^react$/", "/^react-(native|dom)$/", "/^next/"],
+          [
+            "/^react$/",
+            "/^react-(native|dom)$/",
+            "/^next/"
+          ],
           "module",
           "/^@gateway//",
           "/^@mui//",
-          ["parent", "sibling"],
+          [
+            "parent",
+            "sibling"
+          ],
           "index"
         ],
-        "alphabetize": { "order": "asc", "ignoreCase": false }
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": false
+        }
       }
     ],
     "sort-imports": "off"
   },
   "overrides": [
     {
-      "files": ["*.js"],
+      "files": [
+        "*.js"
+      ],
       "rules": {
         "@typescript-eslint/no-var-requires": "off"
       }
