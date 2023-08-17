@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 
 import { ClientNav } from '@/components/navbar/client-nav';
 
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Avatar, Box, IconButton, Stack } from '@mui/material';
 
 import DashboardLayout from '../components/dashboard-layout';
@@ -26,10 +26,13 @@ export default function DashboardUserLayout({ children }: PropsWithChildren) {
             },
           }}
         >
-          {/* Add back action */}
+          {/* TODO: sAdd back action */}
           <IconButton onClick={() => console.log('Back')}>
-            <Avatar>
-              <ArrowBackIcon />
+            {/* TODO: Remove background color */}
+            <Avatar sx={{ backgroundColor: 'action.selected' }}>
+              <ArrowBackIosNewIcon
+                sx={{ width: 16, height: 16, color: 'text.secondary' }}
+              />
             </Avatar>
           </IconButton>
           <Box>
