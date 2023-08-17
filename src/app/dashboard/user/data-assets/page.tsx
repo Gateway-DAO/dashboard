@@ -67,7 +67,7 @@ export default function DataAssetsPage() {
   ];
   return (
     <>
-      <Stack direction="row" gap={1}>
+      <Stack direction="row" flexWrap="wrap" gap={1}>
         {pdas.map((pda) => (
           <PdaCard pda={pda} key={pda.id} href="/dashboard/user/proof" />
         ))}
