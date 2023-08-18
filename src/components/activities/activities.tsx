@@ -15,24 +15,19 @@ import {
   Divider,
 } from '@mui/material';
 
-
 type Props = {
   activities: any; // TODO: Add types
+  activitiesTextsType: Record<string, string>;
 };
 
-const activityText = (type: string) => {
-  return (
-    {
-      Issued: 'PDA issued',
-      Revoked: 'PDA revoked',
-      Suspended: 'PDA suspended',
-      Reactivated: 'PDA reactivated',
-      Updated: 'PDA updated',
-    }[type] || 'Unknown activity'
-  );
+const activityText = (
+  type: string,
+  activitiesTextsType: Record<string, string>
+) => {
+  return activitiesTextsType[type] || 'Unknown activity';
 };
 
-export default function Activities({ activities }: Props) {
+export default function Activities({ activities, activitiesTextsType }: Props) {
   const [expanded, setExpanded] = useState<boolean>(false);
 
   const handleChange =
@@ -117,7 +112,7 @@ export default function Activities({ activities }: Props) {
                     >
                       <Stack>
                         <Typography fontSize={14}>
-                          {activityText(activity?.type)}
+                          {activityText(activity?.type, activitiesTextsType)}
                         </Typography>
                         <Typography
                           fontSize={12}

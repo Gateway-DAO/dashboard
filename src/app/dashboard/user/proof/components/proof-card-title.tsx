@@ -7,10 +7,10 @@ import { limitCharsCentered } from '@/utils/string';
 import { Stack, Divider, Typography, alpha } from '@mui/material';
 
 type Props = {
-  pda: any; // TODO: Add type
+  proof: any; // TODO: Add type
 };
 
-export default function ProofCardTitle({ pda }: Props) {
+export default function ProofCardTitle({ proof }: Props) {
   return (
     <Stack
       sx={{
@@ -33,11 +33,11 @@ export default function ProofCardTitle({ pda }: Props) {
             fallback="https://1000logos.net/wp-content/uploads/2016/11/Shape-of-the-Chase-logo-500x311.jpg"
             sx={{ width: 56, height: 56 }}
           />
-          <Typography variant="h3">{pda?.title}</Typography>
+          <Typography variant="h3">{proof?.title}</Typography>
         </Stack>
       </Stack>
       <ExternalLink
-        text={`ID ${limitCharsCentered(pda?.id, 8)}`}
+        text={`ID ${limitCharsCentered(proof?.id, 8)}`}
         sxProps={{ alignSelf: 'flex-start' }}
         onClick={() => console.log('test')}
       />

@@ -5,12 +5,11 @@ import { protocol } from '@/locale/en/protocol';
 
 import { Stack, Divider, Typography } from '@mui/material';
 
-
 type Props = {
   dataModels: any; // TODO: Add type
 };
 
-export default function PdasDataModelCard({ dataModels }: Props) {
+export default function ProofData({ dataModels }: Props) {
   return (
     <>
       <Typography fontWeight={400} fontSize={24} sx={{ mb: 3 }}>
@@ -35,7 +34,12 @@ export default function PdasDataModelCard({ dataModels }: Props) {
             </Stack>
             <Stack direction="row" flexWrap="wrap" gap={1} mb={3}>
               {dataModel.credentials.map((pda: any) => (
-                <PdaCard key={pda.id} pda={pda} dashed href="/dashboard/user/proof" />
+                <PdaCard
+                  key={pda.id}
+                  pda={pda}
+                  dashed
+                  href="/dashboard/user/proof"
+                />
               ))}
             </Stack>
           </Stack>
