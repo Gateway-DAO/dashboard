@@ -8,14 +8,14 @@ import {
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Button, Divider, Stack } from '@mui/material';
 
-import Activities from './components/activities';
-import PdasDataModelCard from './components/pdas-data-model-card';
+import ProofData from './components/proof-data';
 import ProofCardInfo from './components/proof-card-info';
 import ProofCardTitle from './components/proof-card-title';
+import Activities from '@/components/activities/activities';
 
 export default function ProofPage() {
   // TODO: Remove MOCK
-  const pda = {
+  const proof = {
     id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fe375',
     title: 'Chase',
     issuance_date: '2018-04-04T16:00:00.000Z',
@@ -111,8 +111,8 @@ export default function ProofPage() {
   return (
     <>
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
-        <ProofCardTitle pda={pda} />
-        <ProofCardInfo pda={pda} />
+        <ProofCardTitle proof={proof} />
+        <ProofCardInfo proof={proof} />
         <Button
           variant="contained"
           size="large"
@@ -141,7 +141,16 @@ export default function ProofPage() {
         >
           {protocol.pda.revoke_access}
         </Button>
-        <Activities activities={pda.activities} />
+        <Activities
+          activities={proof.activities}
+          activitiesTextsType={{
+            Issued: 'PDA issued',
+            Revoked: 'PDA revoked',
+            Suspended: 'PDA suspended',
+            Reactivated: 'PDA reactivated',
+            Updated: 'PDA updated',
+          }}
+        />
       </Stack>
       <Divider
         sx={{
@@ -152,7 +161,7 @@ export default function ProofPage() {
         }}
       />
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
-        <PdasDataModelCard dataModels={dataModels} />
+        <ProofData dataModels={dataModels} />
       </Stack>
     </>
   );

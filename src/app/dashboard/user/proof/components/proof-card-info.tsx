@@ -3,13 +3,12 @@ import dayjs from 'dayjs';
 
 import { Stack, Divider, Chip } from '@mui/material';
 
-
 import CardCell from './card-cell';
 type Props = {
-  pda: any; // TODO: Add type
+  proof: any; // TODO: Add type
 };
 
-export default function ProofCardInfo({ pda }: Props) {
+export default function ProofCardInfo({ proof }: Props) {
   return (
     <Stack
       sx={{
@@ -23,13 +22,13 @@ export default function ProofCardInfo({ pda }: Props) {
     >
       {/* TODO: Add dynamic information */}
       <CardCell label={protocol.pda.share_date}>
-        {dayjs(pda?.issuance_date).format('MM/DD/YYYY, h:mm A')}
+        {dayjs(proof?.issuance_date).format('MM/DD/YYYY, h:mm A')}
       </CardCell>
 
       {/* TODO: Add dynamic information */}
       <CardCell label={protocol.data_model.pdas_table.status}>
         {/* TODO: Add types */}
-        {pda?.status === 'valid' && (
+        {proof?.status === 'valid' && (
           <Chip
             label={protocol.pda.up_to_date}
             size="small"
@@ -38,7 +37,7 @@ export default function ProofCardInfo({ pda }: Props) {
           />
         )}
         {/* TODO: Add types */}
-        {pda?.status === 'invalid' && (
+        {proof?.status === 'invalid' && (
           <Chip
             label={protocol.data_model.pdas_table.status}
             size="small"
@@ -47,7 +46,7 @@ export default function ProofCardInfo({ pda }: Props) {
           />
         )}
         {/* TODO: Add types */}
-        {pda?.status === 'revoked' && (
+        {proof?.status === 'revoked' && (
           <Chip
             label={protocol.pda.revoked}
             size="small"
