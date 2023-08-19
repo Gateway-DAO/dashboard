@@ -1,4 +1,5 @@
 'use client';
+import Activities from '@/components/activities/activities';
 import { protocol } from '@/locale/en/protocol';
 import {
   CONTAINER_PX,
@@ -8,10 +9,9 @@ import {
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Button, Divider, Stack } from '@mui/material';
 
-import ProofData from './components/proof-data';
 import ProofCardInfo from './components/proof-card-info';
 import ProofCardTitle from './components/proof-card-title';
-import Activities from '@/components/activities/activities';
+import ProofData from './components/proof-data';
 
 export default function ProofPage() {
   // TODO: Remove MOCK

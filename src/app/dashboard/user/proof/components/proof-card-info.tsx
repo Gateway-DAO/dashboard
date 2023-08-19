@@ -1,9 +1,9 @@
+import CardCell from '@/components/card-cell/card-cell';
 import { protocol } from '@/locale/en/protocol';
 import dayjs from 'dayjs';
 
 import { Stack, Divider, Chip } from '@mui/material';
 
-import CardCell from './card-cell';
 type Props = {
   proof: any; // TODO: Add type
 };

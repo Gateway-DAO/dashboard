@@ -4,7 +4,7 @@ import { protocol } from '@/locale/en/protocol';
 import { theme } from '@/theme';
 import { limitCharsCentered } from '@/utils/string';
 
-import { Stack, Divider, Typography, alpha } from '@mui/material';
+import { Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
   proof: any; // TODO: Add type

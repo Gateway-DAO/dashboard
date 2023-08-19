@@ -1,19 +1,24 @@
 'use client';
 import Activities from '@/components/activities/activities';
+import ExternalLink from '@/components/external-link/external-link';
+import Tags from '@/components/tags/tags';
 import { protocol } from '@/locale/en/protocol';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
+import { limitCharsCentered } from '@/utils/string';
 
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Button, Divider, Stack } from '@mui/material';
+import { Button, Divider, Skeleton, Stack, Typography } from '@mui/material';
 
 export default function ProofPage() {
   // TODO: Remove MOCK
+  const isLoading = false;
   const pda = {
     id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fe375',
     title: 'Chase',
+    description: 'Lorem ipsum dolor sit amet propectos dolores propensos',
     issuance_date: '2018-04-04T16:00:00.000Z',
     status: 'valid',
     activities: [
@@ -28,11 +33,27 @@ export default function ProofPage() {
         timestamp: '2018-04-04T16:00:00.000Z',
       },
     ],
+    dataModel: {
+      tags: ['lorem', 'ipsum', 'dolor', 'sit', 'amet'],
+    },
   };
 
   return (
     <>
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
+        <ExternalLink
+          text={`ID ${limitCharsCentered(pda?.id, 8)}`}
+          sxProps={{ alignSelf: 'flex-start' }}
+          onClick={() => console.log('test')}
+        />
+        <Typography
+          variant="h3"
+          sx={{ fontSize: { xs: 24, md: 48 }, my: 2, fontWeight: 400 }}
+        >
+          {isLoading ? <Skeleton width={300} /> : pda?.title}
+        </Typography>
+        <Tags tags={pda?.dataModel?.tags} />
+        <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
         <Button
           variant="contained"
           size="large"
