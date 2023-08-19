@@ -6,18 +6,19 @@ export const MuiChip: Extract<Theme['components'], object>['MuiChip'] = {
       fontFamily: 'inherit',
       borderRadius: 40
     },
-    colorError: ({theme}) => ({
-      color:  theme.palette.text.secondary
+    colorError: ({theme, ownerState}) => ownerState.variant ==="filled"  ? ({
+      color: theme.palette.text.secondary
+    }) : undefined,
+    colorInfo: ({theme, ownerState}) => ownerState.variant ==="filled"  ? ({
+      color: theme.palette.text.secondary
+    }) : undefined,
+    colorSuccess: ({theme, ownerState}) => ownerState.variant ==="filled"  ? ({
+      color: theme.palette.text.secondary
+    }) : ({
+      color: theme.palette.success.dark
     }),
-    colorInfo: ({theme}) => ({
-      color:  theme.palette.text.secondary
-    }),
-    colorSuccess: ({theme}) => ({
-      color:  theme.palette.text.secondary
-    }),
-    colorWarning: ({theme}) => ({
-      color:  theme.palette.text.secondary
-    }),
-
+    colorWarning: ({theme, ownerState}) => ownerState.variant ==="filled"  ? ({
+      color: theme.palette.text.secondary
+    }) : undefined,
   },
 };
