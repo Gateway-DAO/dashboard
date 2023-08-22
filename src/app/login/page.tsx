@@ -1,8 +1,8 @@
-import EthConnect from "./components/eth-connect";
+import EvmProvider from "./components/evm-provider";
 
 
 export default function Login() {
   return <div>
-    <EthConnect />
+    <EvmProvider />
   </div>;
 }

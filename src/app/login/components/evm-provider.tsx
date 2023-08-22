@@ -6,10 +6,14 @@ import { WagmiConfig } from 'wagmi';
 
 import { chains, theme, wagmiConfig } from '../libs/rainbow-config';
 
-export default function EthConnect() {
+export default function EvmProvider() {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains} theme={theme}>
+      <RainbowKitProvider chains={chains} theme={theme}
+        appInfo={{
+          appName: 'Gateway DAO',
+        }}
+      >
         <ConnectButton />
       </RainbowKitProvider>
     </WagmiConfig>
