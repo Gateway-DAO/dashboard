@@ -1,0 +1,6 @@
+query pdas {
+  credentials {
+    id
+    title
+  }
+}

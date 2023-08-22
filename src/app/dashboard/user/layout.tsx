@@ -1,10 +1,9 @@
-'use client';
 import { PropsWithChildren } from 'react';
 
+import BackButton from '@/components/buttons/back-button';
 import { ClientNav } from '@/components/navbar/client-nav';
 
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { Avatar, Box, IconButton, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 import DashboardLayout from '../components/dashboard-layout';
 import MenuItems from './components/menu-items';
@@ -27,14 +26,7 @@ export default function DashboardUserLayout({ children }: PropsWithChildren) {
           }}
         >
           {/* TODO: sAdd back action */}
-          <IconButton onClick={() => console.log('Back')}>
-            {/* TODO: Remove background color */}
-            <Avatar sx={{ backgroundColor: 'action.selected' }}>
-              <ArrowBackIosNewIcon
-                sx={{ width: 16, height: 16, color: 'text.secondary' }}
-              />
-            </Avatar>
-          </IconButton>
+          <BackButton />
           <Box>
             <ClientNav />
           </Box>
