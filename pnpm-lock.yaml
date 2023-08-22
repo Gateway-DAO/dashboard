@@ -46,7 +46,7 @@ dependencies:
     version: 16.7.1
   graphql-request:
     specifier: ^6.1.0
-    version: 6.1.0(graphql@16.7.1)
+    version: 6.1.0(encoding@0.1.13)(graphql@16.7.1)
   jsonwebtoken:
     specifier: ^9.0.1
     version: 9.0.1
@@ -75,49 +75,49 @@ devDependencies:
     version: 5.0.0(graphql@16.7.1)
   '@graphql-codegen/cli':
     specifier: ^5.0.0
-    version: 5.0.0(@parcel/watcher@2.2.0)(@types/node@20.4.10)(graphql@16.7.1)
+    version: 5.0.0(@parcel/watcher@2.2.0)(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1)
   '@graphql-codegen/import-types-preset':
     specifier: ^2.2.6
-    version: 2.2.6(graphql@16.7.1)
+    version: 2.2.6(encoding@0.1.13)(graphql@16.7.1)
   '@graphql-codegen/typescript':
     specifier: ^4.0.1
-    version: 4.0.1(graphql@16.7.1)
+    version: 4.0.1(encoding@0.1.13)(graphql@16.7.1)
   '@graphql-codegen/typescript-graphql-request':
     specifier: ^5.0.0
-    version: 5.0.0(graphql-request@6.1.0)(graphql-tag@2.12.6)(graphql@16.7.1)
+    version: 5.0.0(encoding@0.1.13)(graphql-request@6.1.0)(graphql-tag@2.12.6)(graphql@16.7.1)
   '@graphql-codegen/typescript-operations':
     specifier: ^4.0.1
-    version: 4.0.1(graphql@16.7.1)
+    version: 4.0.1(encoding@0.1.13)(graphql@16.7.1)
   '@graphql-codegen/typescript-resolvers':
     specifier: ^4.0.1
-    version: 4.0.1(graphql@16.7.1)
+    version: 4.0.1(encoding@0.1.13)(graphql@16.7.1)
   '@parcel/watcher':
     specifier: ^2.2.0
     version: 2.2.0
   '@storybook/addon-essentials':
     specifier: ^7.3.1
-    version: 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
+    version: 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)
   '@storybook/addon-interactions':
     specifier: ^7.3.1
-    version: 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
+    version: 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)
   '@storybook/addon-links':
     specifier: ^7.3.1
     version: 7.3.1(react-dom@18.2.0)(react@18.2.0)
   '@storybook/addon-onboarding':
     specifier: ^1.0.8
-    version: 1.0.8(react-dom@18.2.0)(react@18.2.0)
+    version: 1.0.8(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)
   '@storybook/addon-styling':
     specifier: ^1.3.6
-    version: 1.3.6(@types/react-dom@18.2.7)(@types/react@18.2.20)(less@4.2.0)(postcss@8.4.28)(react-dom@18.2.0)(react@18.2.0)(webpack@5.88.2)
+    version: 1.3.6(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(less@4.2.0)(postcss@8.4.28)(react-dom@18.2.0)(react@18.2.0)(webpack@5.88.2)
   '@storybook/blocks':
     specifier: ^7.3.1
-    version: 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
+    version: 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)
   '@storybook/nextjs':
     specifier: ^7.3.1
-    version: 7.3.1(@swc/core@1.3.78)(@types/react-dom@18.2.7)(@types/react@18.2.20)(esbuild@0.18.20)(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)(type-fest@4.2.0)(typescript@5.1.6)(webpack@5.88.2)
+    version: 7.3.1(@swc/core@1.3.78)(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(esbuild@0.18.20)(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)(type-fest@4.2.0)(typescript@5.1.6)(webpack@5.88.2)
   '@storybook/react':
     specifier: ^7.3.1
-    version: 7.3.1(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
+    version: 7.3.1(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
   '@storybook/testing-library':
     specifier: ^0.2.0
     version: 0.2.0
@@ -145,6 +145,9 @@ devDependencies:
   chromatic:
     specifier: ^6.22.0
     version: 6.22.0
+  encoding:
+    specifier: ^0.1.13
+    version: 0.1.13
   eslint:
     specifier: 8.47.0
     version: 8.47.0
@@ -168,7 +171,7 @@ devDependencies:
     version: 2.5.3(next-translate@2.5.3)
   storybook:
     specifier: ^7.3.1
-    version: 7.3.1
+    version: 7.3.1(encoding@0.1.13)
   ts-node:
     specifier: ^10.9.1
     version: 10.9.1(@swc/core@1.3.78)(@types/node@20.4.10)(typescript@5.1.6)
@@ -193,7 +196,7 @@ packages:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.19
 
-  /@ardatan/relay-compiler@12.0.0(graphql@16.7.1):
+  /@ardatan/relay-compiler@12.0.0(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-9anThAaj1dQr6IGmzBMcfzOQKTa5artjuPmw8NYK/fiGEMjADbSguBY2FMDykt+QhilR3wc9VA/3yVju7JHg7Q==}
     hasBin: true
     peerDependencies:
@@ -208,13 +211,13 @@ packages:
       babel-preset-fbjs: 3.4.0(@babel/core@7.22.10)
       chalk: 4.1.2
       fb-watchman: 2.0.2
-      fbjs: 3.0.5
+      fbjs: 3.0.5(encoding@0.1.13)
       glob: 7.2.3
       graphql: 16.7.1
       immutable: 3.7.6
       invariant: 2.2.4
       nullthrows: 1.1.1
-      relay-runtime: 12.0.0
+      relay-runtime: 12.0.0(encoding@0.1.13)
       signedsource: 1.0.0
       yargs: 15.4.1
     transitivePeerDependencies:
@@ -222,11 +225,11 @@ packages:
       - supports-color
     dev: true
 
-  /@ardatan/sync-fetch@0.0.1:
+  /@ardatan/sync-fetch@0.0.1(encoding@0.1.13):
     resolution: {integrity: sha512-xhlTqH0m31mnsG0tIP4ETgfSB6gXDaYYsUWTrlUV93fFQPI9dd8hE0Ot6MHLCtqgB32hwJAC3YZMWlXZw7AleA==}
     engines: {node: '>=14'}
     dependencies:
-      node-fetch: 2.6.12
+      node-fetch: 2.6.12(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
     dev: true
@@ -2049,7 +2052,7 @@ packages:
       tslib: 2.5.3
     dev: true
 
-  /@graphql-codegen/cli@5.0.0(@parcel/watcher@2.2.0)(@types/node@20.4.10)(graphql@16.7.1):
+  /@graphql-codegen/cli@5.0.0(@parcel/watcher@2.2.0)(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-A7J7+be/a6e+/ul2KI5sfJlpoqeqwX8EzktaKCeduyVKgOLA6W5t+NUGf6QumBDXU8PEOqXk3o3F+RAwCWOiqA==}
     hasBin: true
     peerDependencies:
@@ -2064,15 +2067,15 @@ packages:
       '@babel/types': 7.22.10
       '@graphql-codegen/core': 4.0.0(graphql@16.7.1)
       '@graphql-codegen/plugin-helpers': 5.0.1(graphql@16.7.1)
-      '@graphql-tools/apollo-engine-loader': 8.0.0(graphql@16.7.1)
+      '@graphql-tools/apollo-engine-loader': 8.0.0(encoding@0.1.13)(graphql@16.7.1)
       '@graphql-tools/code-file-loader': 8.0.2(graphql@16.7.1)
       '@graphql-tools/git-loader': 8.0.2(graphql@16.7.1)
-      '@graphql-tools/github-loader': 8.0.0(@types/node@20.4.10)(graphql@16.7.1)
+      '@graphql-tools/github-loader': 8.0.0(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1)
       '@graphql-tools/graphql-file-loader': 8.0.0(graphql@16.7.1)
       '@graphql-tools/json-file-loader': 8.0.0(graphql@16.7.1)
       '@graphql-tools/load': 8.0.0(graphql@16.7.1)
-      '@graphql-tools/prisma-loader': 8.0.1(@types/node@20.4.10)(graphql@16.7.1)
-      '@graphql-tools/url-loader': 8.0.0(@types/node@20.4.10)(graphql@16.7.1)
+      '@graphql-tools/prisma-loader': 8.0.1(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1)
+      '@graphql-tools/url-loader': 8.0.0(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1)
       '@graphql-tools/utils': 10.0.5(graphql@16.7.1)
       '@parcel/watcher': 2.2.0
       '@whatwg-node/fetch': 0.8.8
@@ -2081,7 +2084,7 @@ packages:
       debounce: 1.2.1
       detect-indent: 6.1.0
       graphql: 16.7.1
-      graphql-config: 5.0.2(@types/node@20.4.10)(graphql@16.7.1)
+      graphql-config: 5.0.2(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1)
       inquirer: 8.2.6
       is-glob: 4.0.3
       jiti: 1.19.1
@@ -2117,14 +2120,14 @@ packages:
       tslib: 2.5.3
     dev: true
 
-  /@graphql-codegen/import-types-preset@2.2.6(graphql@16.7.1):
+  /@graphql-codegen/import-types-preset@2.2.6(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-Lo2ITOln3UVdyyEPiijj8bVhVg0Ghp/JzHXA2LXxrJVCRbXizQhVC2vjiaWTjMskPt9Zub0yIoce4+RrbsXKcg==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/add': 3.2.3(graphql@16.7.1)
       '@graphql-codegen/plugin-helpers': 2.7.2(graphql@16.7.1)
-      '@graphql-codegen/visitor-plugin-common': 2.13.1(graphql@16.7.1)
+      '@graphql-codegen/visitor-plugin-common': 2.13.1(encoding@0.1.13)(graphql@16.7.1)
       graphql: 16.7.1
       tslib: 2.4.1
     transitivePeerDependencies:
@@ -2185,7 +2188,7 @@ packages:
       tslib: 2.5.3
     dev: true
 
-  /@graphql-codegen/typescript-graphql-request@5.0.0(graphql-request@6.1.0)(graphql-tag@2.12.6)(graphql@16.7.1):
+  /@graphql-codegen/typescript-graphql-request@5.0.0(encoding@0.1.13)(graphql-request@6.1.0)(graphql-tag@2.12.6)(graphql@16.7.1):
     resolution: {integrity: sha512-BM9UzZD/5q3b3Q4c+VOy/QoPWgsnfs1GAnGJjh9xtuty6YsCprwhh12BaV16F+xndNUd6qkghigGyjR8m8RdkA==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
@@ -2193,10 +2196,10 @@ packages:
       graphql-tag: ^2.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 3.1.2(graphql@16.7.1)
-      '@graphql-codegen/visitor-plugin-common': 2.13.1(graphql@16.7.1)
+      '@graphql-codegen/visitor-plugin-common': 2.13.1(encoding@0.1.13)(graphql@16.7.1)
       auto-bind: 4.0.0
       graphql: 16.7.1
-      graphql-request: 6.1.0(graphql@16.7.1)
+      graphql-request: 6.1.0(encoding@0.1.13)(graphql@16.7.1)
       graphql-tag: 2.12.6(graphql@16.7.1)
       tslib: 2.4.1
     transitivePeerDependencies:
@@ -2204,14 +2207,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/typescript-operations@4.0.1(graphql@16.7.1):
+  /@graphql-codegen/typescript-operations@4.0.1(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-GpUWWdBVUec/Zqo23aFLBMrXYxN2irypHqDcKjN78JclDPdreasAEPcIpMfqf4MClvpmvDLy4ql+djVAwmkjbw==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 5.0.1(graphql@16.7.1)
-      '@graphql-codegen/typescript': 4.0.1(graphql@16.7.1)
-      '@graphql-codegen/visitor-plugin-common': 4.0.1(graphql@16.7.1)
+      '@graphql-codegen/typescript': 4.0.1(encoding@0.1.13)(graphql@16.7.1)
+      '@graphql-codegen/visitor-plugin-common': 4.0.1(encoding@0.1.13)(graphql@16.7.1)
       auto-bind: 4.0.0
       graphql: 16.7.1
       tslib: 2.5.3
@@ -2220,14 +2223,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/typescript-resolvers@4.0.1(graphql@16.7.1):
+  /@graphql-codegen/typescript-resolvers@4.0.1(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-dydE2VsNud/gZZG9FV0DldPA7voExCn7FQE3V9ZAjhqCDjCcSDHUIWxG5JoaW0G75ooPEDmN7ZFd+uaJ2BEqzQ==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 5.0.1(graphql@16.7.1)
-      '@graphql-codegen/typescript': 4.0.1(graphql@16.7.1)
-      '@graphql-codegen/visitor-plugin-common': 4.0.1(graphql@16.7.1)
+      '@graphql-codegen/typescript': 4.0.1(encoding@0.1.13)(graphql@16.7.1)
+      '@graphql-codegen/visitor-plugin-common': 4.0.1(encoding@0.1.13)(graphql@16.7.1)
       '@graphql-tools/utils': 10.0.5(graphql@16.7.1)
       auto-bind: 4.0.0
       graphql: 16.7.1
@@ -2237,14 +2240,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/typescript@4.0.1(graphql@16.7.1):
+  /@graphql-codegen/typescript@4.0.1(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-3YziQ21dCVdnHb+Us1uDb3pA6eG5Chjv0uTK+bt9dXeMlwYBU8MbtzvQTo4qvzWVC1AxSOKj0rgfNu1xCXqJyA==}
     peerDependencies:
       graphql: ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 5.0.1(graphql@16.7.1)
       '@graphql-codegen/schema-ast': 4.0.0(graphql@16.7.1)
-      '@graphql-codegen/visitor-plugin-common': 4.0.1(graphql@16.7.1)
+      '@graphql-codegen/visitor-plugin-common': 4.0.1(encoding@0.1.13)(graphql@16.7.1)
       auto-bind: 4.0.0
       graphql: 16.7.1
       tslib: 2.5.3
@@ -2253,14 +2256,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/visitor-plugin-common@2.13.1(graphql@16.7.1):
+  /@graphql-codegen/visitor-plugin-common@2.13.1(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-mD9ufZhDGhyrSaWQGrU1Q1c5f01TeWtSWy/cDwXYjJcHIj1Y/DG2x0tOflEfCvh5WcnmHNIw4lzDsg1W7iFJEg==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 2.7.2(graphql@16.7.1)
       '@graphql-tools/optimize': 1.4.0(graphql@16.7.1)
-      '@graphql-tools/relay-operation-optimizer': 6.5.18(graphql@16.7.1)
+      '@graphql-tools/relay-operation-optimizer': 6.5.18(encoding@0.1.13)(graphql@16.7.1)
       '@graphql-tools/utils': 8.13.1(graphql@16.7.1)
       auto-bind: 4.0.0
       change-case-all: 1.0.14
@@ -2274,14 +2277,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/visitor-plugin-common@4.0.1(graphql@16.7.1):
+  /@graphql-codegen/visitor-plugin-common@4.0.1(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-Bi/1z0nHg4QMsAqAJhds+ForyLtk7A3HQOlkrZNm3xEkY7lcBzPtiOTLBtvziwopBsXUxqeSwVjOOFPLS5Yw1Q==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 5.0.1(graphql@16.7.1)
       '@graphql-tools/optimize': 2.0.0(graphql@16.7.1)
-      '@graphql-tools/relay-operation-optimizer': 7.0.0(graphql@16.7.1)
+      '@graphql-tools/relay-operation-optimizer': 7.0.0(encoding@0.1.13)(graphql@16.7.1)
       '@graphql-tools/utils': 10.0.5(graphql@16.7.1)
       auto-bind: 4.0.0
       change-case-all: 1.0.15
@@ -2295,13 +2298,13 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-tools/apollo-engine-loader@8.0.0(graphql@16.7.1):
+  /@graphql-tools/apollo-engine-loader@8.0.0(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-axQTbN5+Yxs1rJ6cWQBOfw3AEeC+fvIuZSfJLPLLvFJLj4pUm9fhxey/g6oQZAAQJqKPfw+tLDUQvnfvRK8Kmg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@ardatan/sync-fetch': 0.0.1
+      '@ardatan/sync-fetch': 0.0.1(encoding@0.1.13)
       '@graphql-tools/utils': 10.0.5(graphql@16.7.1)
       '@whatwg-node/fetch': 0.9.9
       graphql: 16.7.1
@@ -2438,13 +2441,13 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-tools/github-loader@8.0.0(@types/node@20.4.10)(graphql@16.7.1):
+  /@graphql-tools/github-loader@8.0.0(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-VuroArWKcG4yaOWzV0r19ElVIV6iH6UKDQn1MXemND0xu5TzrFme0kf3U9o0YwNo0kUYEk9CyFM0BYg4he17FA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@ardatan/sync-fetch': 0.0.1
+      '@ardatan/sync-fetch': 0.0.1(encoding@0.1.13)
       '@graphql-tools/executor-http': 1.0.2(@types/node@20.4.10)(graphql@16.7.1)
       '@graphql-tools/graphql-tag-pluck': 8.0.2(graphql@16.7.1)
       '@graphql-tools/utils': 10.0.5(graphql@16.7.1)
@@ -2558,13 +2561,13 @@ packages:
       tslib: 2.6.1
     dev: true
 
-  /@graphql-tools/prisma-loader@8.0.1(@types/node@20.4.10)(graphql@16.7.1):
+  /@graphql-tools/prisma-loader@8.0.1(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-bl6e5sAYe35Z6fEbgKXNrqRhXlCJYeWKBkarohgYA338/SD9eEhXtg3Cedj7fut3WyRLoQFpHzfiwxKs7XrgXg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-tools/url-loader': 8.0.0(@types/node@20.4.10)(graphql@16.7.1)
+      '@graphql-tools/url-loader': 8.0.0(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1)
       '@graphql-tools/utils': 10.0.5(graphql@16.7.1)
       '@types/js-yaml': 4.0.5
       '@types/json-stable-stringify': 1.0.34
@@ -2573,7 +2576,7 @@ packages:
       debug: 4.3.4
       dotenv: 16.3.1
       graphql: 16.7.1
-      graphql-request: 6.1.0(graphql@16.7.1)
+      graphql-request: 6.1.0(encoding@0.1.13)(graphql@16.7.1)
       http-proxy-agent: 7.0.0
       https-proxy-agent: 7.0.1
       jose: 4.14.4
@@ -2591,12 +2594,12 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@graphql-tools/relay-operation-optimizer@6.5.18(graphql@16.7.1):
+  /@graphql-tools/relay-operation-optimizer@6.5.18(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-mc5VPyTeV+LwiM+DNvoDQfPqwQYhPV/cl5jOBjTgSniyaq8/86aODfMkrE2OduhQ5E00hqrkuL2Fdrgk0w1QJg==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@ardatan/relay-compiler': 12.0.0(graphql@16.7.1)
+      '@ardatan/relay-compiler': 12.0.0(encoding@0.1.13)(graphql@16.7.1)
       '@graphql-tools/utils': 9.2.1(graphql@16.7.1)
       graphql: 16.7.1
       tslib: 2.6.1
@@ -2605,13 +2608,13 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-tools/relay-operation-optimizer@7.0.0(graphql@16.7.1):
+  /@graphql-tools/relay-operation-optimizer@7.0.0(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-UNlJi5y3JylhVWU4MBpL0Hun4Q7IoJwv9xYtmAz+CgRa066szzY7dcuPfxrA7cIGgG/Q6TVsKsYaiF4OHPs1Fw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@ardatan/relay-compiler': 12.0.0(graphql@16.7.1)
+      '@ardatan/relay-compiler': 12.0.0(encoding@0.1.13)(graphql@16.7.1)
       '@graphql-tools/utils': 10.0.5(graphql@16.7.1)
       graphql: 16.7.1
       tslib: 2.6.1
@@ -2633,13 +2636,13 @@ packages:
       value-or-promise: 1.0.12
     dev: true
 
-  /@graphql-tools/url-loader@8.0.0(@types/node@20.4.10)(graphql@16.7.1):
+  /@graphql-tools/url-loader@8.0.0(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-rPc9oDzMnycvz+X+wrN3PLrhMBQkG4+sd8EzaFN6dypcssiefgWKToXtRKI8HHK68n2xEq1PyrOpkjHFJB+GwA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@ardatan/sync-fetch': 0.0.1
+      '@ardatan/sync-fetch': 0.0.1(encoding@0.1.13)
       '@graphql-tools/delegate': 10.0.2(graphql@16.7.1)
       '@graphql-tools/executor-graphql-ws': 1.1.0(graphql@16.7.1)
       '@graphql-tools/executor-http': 1.0.2(@types/node@20.4.10)(graphql@16.7.1)
@@ -4017,7 +4020,7 @@ packages:
       - '@types/react-dom'
     dev: true
 
-  /@storybook/addon-controls@7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0):
+  /@storybook/addon-controls@7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-4izb5spfoXZYFW0hiF9fqagYY8XMQapLDtSPdcdp40mEvb/2XgIfGfdnh63nEEjLMCQcO7PyK5U8EuH64NCKkg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -4028,10 +4031,10 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@storybook/blocks': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/blocks': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)
       '@storybook/client-logger': 7.3.1
       '@storybook/components': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/core-common': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/core-events': 7.3.1
       '@storybook/manager-api': 7.3.1(react-dom@18.2.0)(react@18.2.0)
       '@storybook/node-logger': 7.3.1
@@ -4049,7 +4052,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/addon-docs@7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0):
+  /@storybook/addon-docs@7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-GjCE2+L7frDNsC3w7KLM8HZS71K0UL4pX7unaO4OYFZXbJecJFYYsC12dPGz9d34moTXGsPTJ5KXTmYBGFmXBg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -4057,7 +4060,7 @@ packages:
     dependencies:
       '@jest/transform': 29.6.2
       '@mdx-js/react': 2.3.0(react@18.2.0)
-      '@storybook/blocks': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/blocks': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)
       '@storybook/client-logger': 7.3.1
       '@storybook/components': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
       '@storybook/csf-plugin': 7.3.1
@@ -4083,7 +4086,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/addon-essentials@7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0):
+  /@storybook/addon-essentials@7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-3sVzE1c84MH4Q2i/MpJZuCk1GgLYrL+Ef4lU9j0/XNK6E/Ock/H8WnPTA6lYp9x3IxNfrLVtuNeXSBGHker1JA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -4091,14 +4094,14 @@ packages:
     dependencies:
       '@storybook/addon-actions': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
       '@storybook/addon-backgrounds': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-controls': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-docs': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-controls': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-docs': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)
       '@storybook/addon-highlight': 7.3.1
       '@storybook/addon-measure': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
       '@storybook/addon-outline': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
       '@storybook/addon-toolbars': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
       '@storybook/addon-viewport': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/core-common': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/manager-api': 7.3.1(react-dom@18.2.0)(react@18.2.0)
       '@storybook/node-logger': 7.3.1
       '@storybook/preview-api': 7.3.1
@@ -4120,7 +4123,7 @@ packages:
       '@storybook/preview-api': 7.3.1
     dev: true
 
-  /@storybook/addon-interactions@7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0):
+  /@storybook/addon-interactions@7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-6ogXTIxQCpm8GLn20vRmj7g6fCzPScxpdy0Y/stgnCPeguwpVqGKEdUjY/8LA85fZKo6uTRb5LbDBcuVF9s5fw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -4133,7 +4136,7 @@ packages:
     dependencies:
       '@storybook/client-logger': 7.3.1
       '@storybook/components': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/core-common': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/core-events': 7.3.1
       '@storybook/global': 5.0.0
       '@storybook/instrumenter': 7.3.1
@@ -4204,13 +4207,13 @@ packages:
       - '@types/react-dom'
     dev: true
 
-  /@storybook/addon-onboarding@1.0.8(react-dom@18.2.0)(react@18.2.0):
+  /@storybook/addon-onboarding@1.0.8(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-3WwCocUuTibHWO89uzAbeONEn6x9NkmxA0mOU4rYPhEsMQ4NDNDD1GXcievZmpwt5VviFgw5FRx8+BxPn54YmQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@storybook/telemetry': 7.3.1
+      '@storybook/telemetry': 7.3.1(encoding@0.1.13)
       react: 18.2.0
       react-confetti: 6.1.0(react@18.2.0)
       react-dom: 18.2.0(react@18.2.0)
@@ -4245,7 +4248,7 @@ packages:
       - '@types/react-dom'
     dev: true
 
-  /@storybook/addon-styling@1.3.6(@types/react-dom@18.2.7)(@types/react@18.2.20)(less@4.2.0)(postcss@8.4.28)(react-dom@18.2.0)(react@18.2.0)(webpack@5.88.2):
+  /@storybook/addon-styling@1.3.6(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(less@4.2.0)(postcss@8.4.28)(react-dom@18.2.0)(react@18.2.0)(webpack@5.88.2):
     resolution: {integrity: sha512-g4e9vLnNlpjR3hHcyC8iCtgqcWQj6IPK+HZ8PdF92O95sa0nus+NG4meahEBwCsZm6CtYV/QMymFtLnp2NvAmg==}
     hasBin: true
     peerDependencies:
@@ -4270,7 +4273,7 @@ packages:
       '@babel/types': 7.22.10
       '@storybook/api': 7.3.1(react-dom@18.2.0)(react@18.2.0)
       '@storybook/components': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/core-common': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/core-events': 7.3.1
       '@storybook/manager-api': 7.3.1(react-dom@18.2.0)(react@18.2.0)
       '@storybook/node-logger': 7.3.1
@@ -4367,7 +4370,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@storybook/blocks@7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0):
+  /@storybook/blocks@7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-MIMM5+nU/3/RHEmCmSwkHs3Mq6mwJqUpkWUDPx81sQnq9C5r0NHHNmHGTqxF/SPyptPxmWGI88ETpiidVZK6RQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -4378,7 +4381,7 @@ packages:
       '@storybook/components': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
       '@storybook/core-events': 7.3.1
       '@storybook/csf': 0.1.1
-      '@storybook/docs-tools': 7.3.1
+      '@storybook/docs-tools': 7.3.1(encoding@0.1.13)
       '@storybook/global': 5.0.0
       '@storybook/manager-api': 7.3.1(react-dom@18.2.0)(react@18.2.0)
       '@storybook/preview-api': 7.3.1
@@ -4405,11 +4408,11 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/builder-manager@7.3.1:
+  /@storybook/builder-manager@7.3.1(encoding@0.1.13):
     resolution: {integrity: sha512-kWM9ZKO1SONUW1OQE1lJafNBWYIsU2ZIQ0oP6KnMsLAauPKMo/uGLVrvmo37MmH9LXdCYTILUMfSQGL2GftgHQ==}
     dependencies:
       '@fal-works/esbuild-plugin-global-externals': 2.1.2
-      '@storybook/core-common': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/manager': 7.3.1
       '@storybook/node-logger': 7.3.1
       '@types/ejs': 3.1.2
@@ -4429,7 +4432,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/builder-webpack5@7.3.1(esbuild@0.18.20)(typescript@5.1.6):
+  /@storybook/builder-webpack5@7.3.1(encoding@0.1.13)(esbuild@0.18.20)(typescript@5.1.6):
     resolution: {integrity: sha512-+JHnzrZUpIfwhT114N4DTr6dWH6CQAYiyXAnUjfj8x4gUEFH3jNNxy/pXJmdncYBoHXjquQQoxzcjRF0B0VYWg==}
     peerDependencies:
       typescript: '*'
@@ -4440,9 +4443,9 @@ packages:
       '@babel/core': 7.22.10
       '@storybook/channels': 7.3.1
       '@storybook/client-logger': 7.3.1
-      '@storybook/core-common': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/core-events': 7.3.1
-      '@storybook/core-webpack': 7.3.1
+      '@storybook/core-webpack': 7.3.1(encoding@0.1.13)
       '@storybook/node-logger': 7.3.1
       '@storybook/preview': 7.3.1
       '@storybook/preview-api': 7.3.1
@@ -4494,7 +4497,7 @@ packages:
       tiny-invariant: 1.3.1
     dev: true
 
-  /@storybook/cli@7.3.1:
+  /@storybook/cli@7.3.1(encoding@0.1.13):
     resolution: {integrity: sha512-m7ET8sVIm9nDI9wKFIhs1gYq+txaUwF/PeDLh+hVHOIbTdQ+lmfzgG9BgNrXgsmfijzRdKcLcAJPhhUa3kyjDA==}
     hasBin: true
     dependencies:
@@ -4503,11 +4506,11 @@ packages:
       '@babel/types': 7.22.10
       '@ndelangen/get-tarball': 3.0.9
       '@storybook/codemod': 7.3.1
-      '@storybook/core-common': 7.3.1
-      '@storybook/core-server': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
+      '@storybook/core-server': 7.3.1(encoding@0.1.13)
       '@storybook/csf-tools': 7.3.1
       '@storybook/node-logger': 7.3.1
-      '@storybook/telemetry': 7.3.1
+      '@storybook/telemetry': 7.3.1(encoding@0.1.13)
       '@storybook/types': 7.3.1
       '@types/semver': 7.5.0
       '@yarnpkg/fslib': 2.10.3
@@ -4603,7 +4606,7 @@ packages:
       '@storybook/preview-api': 7.3.1
     dev: true
 
-  /@storybook/core-common@7.3.1:
+  /@storybook/core-common@7.3.1(encoding@0.1.13):
     resolution: {integrity: sha512-jALwn9T6xjVQ/GBD2UVMi0XAhJDIsSNf3ghxatRQpa5dphG4nZccF6xwnUdsQqDGr8E4lHgDDzIKP/wqQ3fi1Q==}
     dependencies:
       '@storybook/node-logger': 7.3.1
@@ -4622,7 +4625,7 @@ packages:
       glob: 10.3.3
       handlebars: 4.7.8
       lazy-universal-dotenv: 4.0.0
-      node-fetch: 2.6.12
+      node-fetch: 2.6.12(encoding@0.1.13)
       picomatch: 2.3.1
       pkg-dir: 5.0.0
       pretty-hrtime: 1.0.3
@@ -4637,14 +4640,14 @@ packages:
     resolution: {integrity: sha512-7Pkgwmj/9B7Z3NNSn2swnviBrg9L1VeYSFw6JJKxtQskt8QoY8LxAsPzVMlHjqRmO6sO7lHo9FgpzIFxdmFaAA==}
     dev: true
 
-  /@storybook/core-server@7.3.1:
+  /@storybook/core-server@7.3.1(encoding@0.1.13):
     resolution: {integrity: sha512-T/6zQrH+6AW7hin+p9PrQaEQsxbsJWeS/eIStA+/IsyYaJoVDsw//okr7O6VVbrdFWm+gLQ2WAXJh8x8u8AvgA==}
     dependencies:
       '@aw-web-design/x-default-browser': 1.4.126
       '@discoveryjs/json-ext': 0.5.7
-      '@storybook/builder-manager': 7.3.1
+      '@storybook/builder-manager': 7.3.1(encoding@0.1.13)
       '@storybook/channels': 7.3.1
-      '@storybook/core-common': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/core-events': 7.3.1
       '@storybook/csf': 0.1.1
       '@storybook/csf-tools': 7.3.1
@@ -4653,7 +4656,7 @@ packages:
       '@storybook/manager': 7.3.1
       '@storybook/node-logger': 7.3.1
       '@storybook/preview-api': 7.3.1
-      '@storybook/telemetry': 7.3.1
+      '@storybook/telemetry': 7.3.1(encoding@0.1.13)
       '@storybook/types': 7.3.1
       '@types/detect-port': 1.3.3
       '@types/node': 16.18.41
@@ -4689,10 +4692,10 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@storybook/core-webpack@7.3.1:
+  /@storybook/core-webpack@7.3.1(encoding@0.1.13):
     resolution: {integrity: sha512-rWyGdxmcj0c1jomYjKZAGPnuKZkGMQbQsOwB0eXTzbEsGcAhBJGkrjTW57XdoqpnqbVdmZvhZrFPS3M8o7KX8g==}
     dependencies:
-      '@storybook/core-common': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/node-logger': 7.3.1
       '@storybook/types': 7.3.1
       '@types/node': 16.18.41
@@ -4743,10 +4746,10 @@ packages:
     resolution: {integrity: sha512-JDaBR9lwVY4eSH5W8EGHrhODjygPd6QImRbwjAuJNEnY0Vw4ie3bPkeGfnacB3OBW6u/agqPv2aRlR46JcAQLg==}
     dev: true
 
-  /@storybook/docs-tools@7.3.1:
+  /@storybook/docs-tools@7.3.1(encoding@0.1.13):
     resolution: {integrity: sha512-9N8CRarcejQoYhIKxbSrS9WJwdbrnj2I8tRWS91cgC2o4pDykqoXD7hXabVixQREzHOZEwakKAg8LsDLfCZCkw==}
     dependencies:
-      '@storybook/core-common': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/preview-api': 7.3.1
       '@storybook/types': 7.3.1
       '@types/doctrine': 0.0.3
@@ -4815,7 +4818,7 @@ packages:
     resolution: {integrity: sha512-TXJJd5RAKakWx4BtpwvSNdgTDkKM6RkXU8GK34S/LhidQ5Pjz3wcnqb0TxEkfhK/ztbP8nKHqXFwLfa2CYkvQw==}
     dev: true
 
-  /@storybook/nextjs@7.3.1(@swc/core@1.3.78)(@types/react-dom@18.2.7)(@types/react@18.2.20)(esbuild@0.18.20)(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)(type-fest@4.2.0)(typescript@5.1.6)(webpack@5.88.2):
+  /@storybook/nextjs@7.3.1(@swc/core@1.3.78)(@types/react-dom@18.2.7)(@types/react@18.2.20)(encoding@0.1.13)(esbuild@0.18.20)(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)(type-fest@4.2.0)(typescript@5.1.6)(webpack@5.88.2):
     resolution: {integrity: sha512-GYOZEP8Et1CieUdJ8gI6Hw6roK1JxdBoXXuOw8IR7C8lMJ3wA73OBnWOqw1gSNVqo8C9/1PsmJqZXDYZVrHZ3w==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -4849,12 +4852,12 @@ packages:
       '@babel/preset-typescript': 7.22.5(@babel/core@7.22.10)
       '@babel/runtime': 7.22.10
       '@storybook/addon-actions': 7.3.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/builder-webpack5': 7.3.1(esbuild@0.18.20)(typescript@5.1.6)
-      '@storybook/core-common': 7.3.1
+      '@storybook/builder-webpack5': 7.3.1(encoding@0.1.13)(esbuild@0.18.20)(typescript@5.1.6)
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/node-logger': 7.3.1
-      '@storybook/preset-react-webpack': 7.3.1(@babel/core@7.22.10)(@swc/core@1.3.78)(esbuild@0.18.20)(react-dom@18.2.0)(react@18.2.0)(type-fest@4.2.0)(typescript@5.1.6)
+      '@storybook/preset-react-webpack': 7.3.1(@babel/core@7.22.10)(@swc/core@1.3.78)(encoding@0.1.13)(esbuild@0.18.20)(react-dom@18.2.0)(react@18.2.0)(type-fest@4.2.0)(typescript@5.1.6)
       '@storybook/preview-api': 7.3.1
-      '@storybook/react': 7.3.1(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
+      '@storybook/react': 7.3.1(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
       '@types/node': 16.18.41
       css-loader: 6.8.1(webpack@5.88.2)
       find-up: 5.0.0
@@ -4909,7 +4912,7 @@ packages:
     resolution: {integrity: sha512-5L6fWFJA/MyFkrhN22t2R9IoBOa76I9Nax9/10F2MM59Kgdl2BDO69e4yxYMSXSm2p7s1xoLs8VhSgWpjZkbNQ==}
     dev: true
 
-  /@storybook/preset-react-webpack@7.3.1(@babel/core@7.22.10)(@swc/core@1.3.78)(esbuild@0.18.20)(react-dom@18.2.0)(react@18.2.0)(type-fest@4.2.0)(typescript@5.1.6):
+  /@storybook/preset-react-webpack@7.3.1(@babel/core@7.22.10)(@swc/core@1.3.78)(encoding@0.1.13)(esbuild@0.18.20)(react-dom@18.2.0)(react@18.2.0)(type-fest@4.2.0)(typescript@5.1.6):
     resolution: {integrity: sha512-dm1c9v1rivr8WXTvKVq63mfAYaz7uNDAKX0E6rPX1XQgiSiHxNLBTUiKiUoZqg5lJk4eVdGIhDQS8YCOfhtYug==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -4927,10 +4930,10 @@ packages:
       '@babel/preset-flow': 7.22.5(@babel/core@7.22.10)
       '@babel/preset-react': 7.22.5(@babel/core@7.22.10)
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.11(react-refresh@0.11.0)(type-fest@4.2.0)(webpack@5.88.2)
-      '@storybook/core-webpack': 7.3.1
-      '@storybook/docs-tools': 7.3.1
+      '@storybook/core-webpack': 7.3.1(encoding@0.1.13)
+      '@storybook/docs-tools': 7.3.1(encoding@0.1.13)
       '@storybook/node-logger': 7.3.1
-      '@storybook/react': 7.3.1(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
+      '@storybook/react': 7.3.1(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)
       '@storybook/react-docgen-typescript-plugin': 1.0.6--canary.9.0c3f3b7.0(typescript@5.1.6)(webpack@5.88.2)
       '@types/node': 16.18.41
       '@types/semver': 7.5.0
@@ -5010,7 +5013,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@storybook/react@7.3.1(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6):
+  /@storybook/react@7.3.1(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6):
     resolution: {integrity: sha512-EIVxvI3qayJyQW83ExOt98/zveUeHv47AHUyUOanVOlwDpOHAv19VnijQq50Kk+XM1ooxz3rLJsNMlMPPeTiDw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -5023,7 +5026,7 @@ packages:
     dependencies:
       '@storybook/client-logger': 7.3.1
       '@storybook/core-client': 7.3.1
-      '@storybook/docs-tools': 7.3.1
+      '@storybook/docs-tools': 7.3.1(encoding@0.1.13)
       '@storybook/global': 5.0.0
       '@storybook/preview-api': 7.3.1
       '@storybook/react-dom-shim': 7.3.1(react-dom@18.2.0)(react@18.2.0)
@@ -5063,11 +5066,11 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@storybook/telemetry@7.3.1:
+  /@storybook/telemetry@7.3.1(encoding@0.1.13):
     resolution: {integrity: sha512-yRM1ACOIuacwIy0V0NzEpm83b/qhE9urHIZq9b9Bnnv22865vbJCSt5yfiH+HHn0FColNDgSx6dY35cneFG/Xg==}
     dependencies:
       '@storybook/client-logger': 7.3.1
-      '@storybook/core-common': 7.3.1
+      '@storybook/core-common': 7.3.1(encoding@0.1.13)
       '@storybook/csf-tools': 7.3.1
       chalk: 4.1.2
       detect-package-manager: 2.0.1
@@ -7237,10 +7240,10 @@ packages:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
     dev: true
 
-  /cross-fetch@3.1.8:
+  /cross-fetch@3.1.8(encoding@0.1.13):
     resolution: {integrity: sha512-cvA+JwZoU0Xq+h6WkMvAUqPEYy92Obet6UdKLfW60qn99ftItKjB5T+BkyWOFWe2pUyfQ+IJHmpOTznqk1M6Kg==}
     dependencies:
-      node-fetch: 2.6.12
+      node-fetch: 2.6.12(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
 
@@ -7692,6 +7695,11 @@ packages:
     resolution: {integrity: sha512-TPJXq8JqFaVYm2CWmPvnP2Iyo4ZSM7/QKcSmuMLDObfpH5fi7RUGmd/rTDf+rut/saiDiQEeVTNgAmJEdAOx0w==}
     engines: {node: '>= 0.8'}
     dev: true
+
+  /encoding@0.1.13:
+    resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
+    dependencies:
+      iconv-lite: 0.6.3
 
   /end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
@@ -8426,10 +8434,10 @@ packages:
     resolution: {integrity: sha512-b2XGFAFdWZWg0phtAWLHCk836A1Xann+I+Dgd3Gk64MHKZO44FfoD1KxyvbSh0qZsIoXQGGlVztIY+oitJPpRQ==}
     dev: true
 
-  /fbjs@3.0.5:
+  /fbjs@3.0.5(encoding@0.1.13):
     resolution: {integrity: sha512-ztsSx77JBtkuMrEypfhgc3cI0+0h+svqeie7xHbh1k/IKdcydnvadp/mUaGgjAOXQmQSxsqgaRhS3q9fy+1kxg==}
     dependencies:
-      cross-fetch: 3.1.8
+      cross-fetch: 3.1.8(encoding@0.1.13)
       fbjs-css-vars: 1.0.2
       loose-envify: 1.4.0
       object-assign: 4.1.1
@@ -8886,7 +8894,7 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
-  /graphql-config@5.0.2(@types/node@20.4.10)(graphql@16.7.1):
+  /graphql-config@5.0.2(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-7TPxOrlbiG0JplSZYCyxn2XQtqVhXomEjXUmWJVSS5ET1nPhOJSsIb/WTwqWhcYX6G0RlHXSj9PLtGTKmxLNGg==}
     engines: {node: '>= 16.0.0'}
     peerDependencies:
@@ -8900,7 +8908,7 @@ packages:
       '@graphql-tools/json-file-loader': 8.0.0(graphql@16.7.1)
       '@graphql-tools/load': 8.0.0(graphql@16.7.1)
       '@graphql-tools/merge': 9.0.0(graphql@16.7.1)
-      '@graphql-tools/url-loader': 8.0.0(@types/node@20.4.10)(graphql@16.7.1)
+      '@graphql-tools/url-loader': 8.0.0(@types/node@20.4.10)(encoding@0.1.13)(graphql@16.7.1)
       '@graphql-tools/utils': 10.0.5(graphql@16.7.1)
       cosmiconfig: 8.2.0
       graphql: 16.7.1
@@ -8915,13 +8923,13 @@ packages:
       - utf-8-validate
     dev: true
 
-  /graphql-request@6.1.0(graphql@16.7.1):
+  /graphql-request@6.1.0(encoding@0.1.13)(graphql@16.7.1):
     resolution: {integrity: sha512-p+XPfS4q7aIpKVcgmnZKhMNqhltk20hfXtkaIkTfjjmiKMJ5xrt5c743cL03y/K7y1rg3WrIC49xGiEQ4mxdNw==}
     peerDependencies:
       graphql: 14 - 16
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.7.1)
-      cross-fetch: 3.1.8
+      cross-fetch: 3.1.8(encoding@0.1.13)
       graphql: 16.7.1
     transitivePeerDependencies:
       - encoding
@@ -9185,8 +9193,6 @@ packages:
     requiresBuild: true
     dependencies:
       safer-buffer: 2.1.2
-    dev: true
-    optional: true
 
   /icss-utils@5.1.0(postcss@8.4.28):
     resolution: {integrity: sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==}
@@ -10504,7 +10510,7 @@ packages:
     resolution: {integrity: sha512-5IAMBTl9p6PaAjYCnMv5FmqIF6GcZnawAVnzaCG0rX2aYZJ4CxEkZNtVPuTRug7fL7wyM5BQYTlAzcyMPi6oTQ==}
     dev: true
 
-  /node-fetch@2.6.12:
+  /node-fetch@2.6.12(encoding@0.1.13):
     resolution: {integrity: sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
@@ -10513,6 +10519,7 @@ packages:
       encoding:
         optional: true
     dependencies:
+      encoding: 0.1.13
       whatwg-url: 5.0.0
 
   /node-int64@0.4.0:
@@ -11688,11 +11695,11 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
-  /relay-runtime@12.0.0:
+  /relay-runtime@12.0.0(encoding@0.1.13):
     resolution: {integrity: sha512-QU6JKr1tMsry22DXNy9Whsq5rmvwr3LSZiiWV/9+DFpuTWvp+WFhobWMc8TC4OjKFfNhEZy7mOiqUAn5atQtug==}
     dependencies:
       '@babel/runtime': 7.22.10
-      fbjs: 3.0.5
+      fbjs: 3.0.5(encoding@0.1.13)
       invariant: 2.2.4
     transitivePeerDependencies:
       - encoding
@@ -11891,7 +11898,6 @@ packages:
 
   /safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
-    dev: true
 
   /sass-loader@12.6.0(webpack@5.88.2):
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
@@ -12235,11 +12241,11 @@ packages:
     resolution: {integrity: sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==}
     dev: true
 
-  /storybook@7.3.1:
+  /storybook@7.3.1(encoding@0.1.13):
     resolution: {integrity: sha512-djrNw2WPJNXgdyHM+6Zxl6EvdhU9TCSghc7wQLXqJG8B1VvB6XSoiexVNOQcnpEaMWDUbU0wUnkBlVHE/Vowuw==}
     hasBin: true
     dependencies:
-      '@storybook/cli': 7.3.1
+      '@storybook/cli': 7.3.1(encoding@0.1.13)
     transitivePeerDependencies:
       - bufferutil
       - encoding

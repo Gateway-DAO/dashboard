@@ -7,8 +7,15 @@ import { getSdk, SdkFunctionWrapper } from './types';
 
 export type Api = ReturnType<typeof getSdk>;
 
+const headers = {
+  'x-api-key': process.env.NEXT_PUBLIC_API_KEY,
+}
+
 const glqAnonClient = new GraphQLClient(
-  process.env.NEXT_PUBLIC_API_ENDPOINT as string
+  process.env.NEXT_PUBLIC_API_ENDPOINT as string,
+  {
+    headers
+  }
 );
 
 export const apiPublic = getSdk(glqAnonClient);
@@ -19,7 +26,10 @@ export const userHeader = (token: string) => ({
 
 const gqlClient = (token?: string) =>
   new GraphQLClient(process.env.NEXT_PUBLIC__ENDPOINT as string, {
-    headers: token ? userHeader(token) : undefined,
+    headers: {
+      ...headers,
+      ...(token ? userHeader(token) : {}),
+    }
   });
 
 export const api = (token: string) =>
