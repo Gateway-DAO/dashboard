@@ -1,8 +1,9 @@
+
 import PdaCardSkeleton from "@/components/pda-card/pda-card-skeleton";
 
-import PDAsListContainer from "./pdas-list-container";
+import PDAsListContainer from "./components/pdas-list-container";
 
-export default function PDAsListSkeleton() {
+export default function DataAssetsLoadingPage() {
   return <PDAsListContainer>
     <PdaCardSkeleton />
     <PdaCardSkeleton />
