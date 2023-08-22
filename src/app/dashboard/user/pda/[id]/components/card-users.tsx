@@ -1,9 +1,8 @@
 import Loading from '@/components/loadings/loading';
 import { protocol } from '@/locale/en/protocol';
-import { theme } from '@/theme';
 import { limitCharsCentered } from '@/utils/string';
 
-import { Stack, Box, useMediaQuery } from '@mui/material';
+import { Stack, Box } from '@mui/material';
 
 import CardUserCell from './card-user-cell';
 
@@ -13,7 +12,6 @@ type Props = {
 };
 
 export default function CardUsers({ issuerAuth, recipientAuth }: Props) {
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
   const isLoading = false;
 
   return (

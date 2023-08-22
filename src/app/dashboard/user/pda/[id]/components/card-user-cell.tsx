@@ -32,8 +32,8 @@ export default function CardUserCell({
         flexBasis: '100%',
         cursor: hasLink ? 'pointer' : 'default',
         borderRadius: {
-          xs: '16px 16px 0 0',
-          md: alignRight ? '0 16px 0 0' : '16px 0 0 0',
+          xs: '8px 8px 0 0',
+          md: alignRight ? '0 8px 0 0' : '8px 0 0 0',
         },
         transition: 'background .3s ease',
         '&:hover': {
