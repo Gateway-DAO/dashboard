@@ -12,11 +12,10 @@ import { Box } from '@mui/system';
 
 export default function DataAssetsLayout({ children }: PropsWithChildren) {
   return (
-    <>
+    <Box sx={{ py: 7 }}>
       <Typography
         variant="h3"
         sx={{
-          mt: 7,
           mb: {
             xs: 4,
             md: 5,
@@ -43,6 +42,6 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
         </GTWTabs>
       </Box>
       <Box sx={{ pt: 5 }}>{children}</Box>
-    </>
+    </Box>
   );
 }
