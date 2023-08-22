@@ -23,7 +23,7 @@ export default function PdaCardInfo({ pda }: Props) {
       sx={{
         border: '1px solid',
         borderColor: 'divider',
-        borderRadius: 2,
+        borderRadius: 1,
         mb: 3,
         overflow: 'hidden',
         boxShadow: 'none',
