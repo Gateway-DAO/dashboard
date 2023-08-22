@@ -15,7 +15,7 @@ type Props = {
   elevation?: number;
 };
 
-export default function CredentialCardInfo({ pda, elevation = 2 }: Props) {
+export default function PdaCardInfo({ pda, elevation = 2 }: Props) {
   const { t } = useTranslation('protocol');
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
 
@@ -50,7 +50,7 @@ export default function CredentialCardInfo({ pda, elevation = 2 }: Props) {
         }
       >
         <AuthenticatedBy authenticatedBy={pda?.issuerUser} />
-        <CardCell label={t('pda.status')}>
+        <CardCell label={protocol.pda.status}>
           {pda?.status === 'valid' && (
             <Chip
               label={protocol.pda.valid}

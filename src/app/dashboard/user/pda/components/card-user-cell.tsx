@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { AvatarFile } from '@/components/avatar-file/avatar-file';
 import CardCell from '@/components/card-cell/card-cell';
 

@@ -1,6 +1,5 @@
-import useTranslation from 'next-translate/useTranslation';
-
 import Loading from '@/components/loadings/loading';
+import { protocol } from '@/locale/en/protocol';
 import { theme } from '@/theme';
 import { limitCharsCentered } from '@/utils/string';
 
@@ -15,13 +14,12 @@ type Props = {
 };
 
 export default function CardUsers({
-  issuer: issuerCredential,
+  issuer: issuerPda,
   organization: issuerOrganization,
   recipient: recipientCredential,
 }: Props) {
-  const { t } = useTranslation('protocol');
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
-  const issuerName = issuerCredential?.gatewayId;
+  const issuerName = issuerPda?.gatewayId;
   const recipientName = recipientCredential?.gatewayId;
   const isLoading = false;
 
@@ -38,15 +36,15 @@ export default function CardUsers({
         alignItems: { xs: 'baseline', md: 'stretch' },
       }}
     >
-      {issuerCredential.isLoading ? (
+      {issuerPda?.isLoading ? (
         <Loading margin={1} />
       ) : (
         <CardUserCell
-          label={t('credential.issuer-id')}
+          label={protocol.pda.issuer_id}
           picture={showPicture()}
           fallback={issuerOrganization?.data?.logo_url}
           name={limitCharsCentered(issuerName, 20)}
-          id="credential-textlink-issuerid"
+          id="pda-textlink-issuerid"
         />
       )}
       <Box
@@ -71,11 +69,11 @@ export default function CardUsers({
         <Loading margin={1} />
       ) : (
         <CardUserCell
-          label={t('credential.recipient-id')}
+          label={protocol.pda.recipient_id}
           picture={recipientCredential?.data?.picture}
           name={limitCharsCentered(recipientName, 20)}
           alignRight={!isMobile}
-          id="credential-textlink-recipientid"
+          id="pda-textlink-recipientid"
         />
       )}
     </Stack>

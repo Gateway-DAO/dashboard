@@ -12,6 +12,8 @@ import { limitCharsCentered } from '@/utils/string';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Button, Divider, Skeleton, Stack, Typography } from '@mui/material';
 
+import PdaCardInfo from './components/pda-card-info';
+
 export default function ProofPage() {
   // TODO: Remove MOCK
   const isLoading = false;
@@ -54,6 +56,7 @@ export default function ProofPage() {
         </Typography>
         <Tags tags={pda?.dataModel?.tags} />
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
+        <PdaCardInfo pda={pda} />
         <Button
           variant="contained"
           size="large"
@@ -66,21 +69,6 @@ export default function ProofPage() {
           onClick={() => console.log('test')} // TODO: Add action
         >
           {protocol.pda.share_a_copy}
-        </Button>
-        <Button
-          variant="outlined"
-          size="large"
-          color="error"
-          sx={{
-            mb: 2,
-            width: '100%',
-            fontWeight: 700,
-            fontSize: 13,
-          }}
-          onClick={() => console.log('test')} // TODO: Add action
-          startIcon={<CancelIcon height={20} width={20} color="error" />}
-        >
-          {protocol.pda.revoke_access}
         </Button>
         <Activities
           activities={pda.activities}

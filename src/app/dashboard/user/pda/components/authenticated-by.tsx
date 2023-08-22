@@ -1,6 +1,5 @@
-import useTranslation from 'next-translate/useTranslation';
-
 import CardCell from '@/components/card-cell/card-cell';
+import { protocol } from '@/locale/en/protocol';
 import { limitCharsCentered } from '@/utils/string';
 
 import { Stack } from '@mui/material';
@@ -10,12 +9,10 @@ type Props = {
 };
 
 export default function AuthenticatedBy({ authenticatedBy }: Props) {
-  const { t } = useTranslation('protocol');
-
   const authenticatedByName =
-    authenticatedBy?.gatewayId ?? authenticatedBy.primaryWallet.address;
+    authenticatedBy?.gatewayId ?? authenticatedBy?.primaryWallet?.address;
   return (
-    <CardCell label={t('credential.authenticated-by')}>
+    <CardCell label={protocol.pda.authenticated_by}>
       <Stack
         title={authenticatedByName}
         sx={{
