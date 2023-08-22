@@ -1,18 +1,15 @@
 import Link from 'next/link';
 
-import { protocol } from '@/locale/en/protocol';
 
-import { Card, CardActionArea, Chip, Stack, Typography } from '@mui/material';
+import { common } from '@/locale/en/common';
+
+import { Card, CardActionArea, Stack, Typography } from '@mui/material';
 
 import { AvatarFile } from '../avatar-file/avatar-file';
+import { StatusChip } from './status-chip';
+import { PdaCardProps } from './type';
 
-type Props = {
-  dashed?: boolean;
-  href: string;
-  pda: any; // TODO: Add type
-};
-
-export default function PdaCard({ pda, dashed, href }: Props) {
+export default function PdaCard({ chain, name, image, dashed, href, status }: PdaCardProps) {
   return (
     <Stack
       component={Card}
@@ -23,35 +20,40 @@ export default function PdaCard({ pda, dashed, href }: Props) {
       gap={1}
       sx={{
         ...(dashed && { borderStyle: 'dashed' }),
-        flexBasis: 'calc(50% - 4px)',
-        maxWidth: 320,
+        width: '100%',
       }}
     >
       <CardActionArea
         component={Link}
         href={href}
         sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
           px: 2,
           pt: 2,
           pb: 3,
+          height: '100%',
+          gap: 2
         }}
+        title={name}
       >
-        <Stack alignItems="flex-start">
+        <Stack alignItems="flex-start" >
           <Stack direction="row" alignItems="center" gap={1.5} sx={{ mb: 3 }}>
             <AvatarFile
-              file={pda?.issuer?.avatar}
+              file={image}
               sx={{ width: 32, height: 32 }}
-              fallback={pda?.issuer?.avatar}
             />
             <Typography variant="body2" sx={{ flexGrow: 1 }}>
-              {pda?.issuer?.chain}
+              {common.chain?.[chain] ?? common.chain.EVM}
             </Typography>
           </Stack>
-          <Typography fontWeight={700} sx={{ mb: 2 }}>
-            {pda?.issuer?.name}
+          <Typography fontWeight={700}>
+            {name}
           </Typography>
-          <Chip label={protocol.pda.valid} variant="outlined" color="success" />
         </Stack>
+        <StatusChip status={status} />
       </CardActionArea>
     </Stack>
   );
