@@ -97,10 +97,10 @@ export default function PdaCardInfo({ pda, elevation = 2 }: Props) {
           </Box>
         }
       >
-        <CardCell label={t('credential.issuance-date')}>
+        <CardCell label={protocol.pda.issuance_date}>
           {dayjs(pda?.createdAt).format('MM/DD/YYYY, h:mm A')}
         </CardCell>
-        <CardCell label={t('credential.expiration-date')}>
+        <CardCell label={protocol.pda.expiration_date}>
           {pda?.expirationDate
             ? dayjs(pda?.expirationDate).format('MM/DD/YYYY, h:mm A')
             : protocol.pda.indeterminate}
