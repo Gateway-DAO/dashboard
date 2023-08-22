@@ -5,3 +5,6 @@ export const pda = {
     revoked: "Revoked"
   }
 }
+export const pdas = {
+  empty: "No data assets yet"
+}
