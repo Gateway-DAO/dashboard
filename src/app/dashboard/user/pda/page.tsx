@@ -35,6 +35,18 @@ export default function ProofPage() {
         timestamp: '2018-04-04T16:00:00.000Z',
       },
     ],
+    issuerAuth: {
+      gatewayId: 'Mastercard',
+      data: {
+        logo_url: null,
+      },
+    },
+    recipientAuth: {
+      gatewayId: 'Visa',
+      data: {
+        logo_url: null,
+      },
+    },
     dataModel: {
       tags: ['lorem', 'ipsum', 'dolor', 'sit', 'amet'],
     },

@@ -12,6 +12,7 @@ type Props = {
   alignRight?: boolean;
   unique?: boolean;
   id?: string;
+  margin?: boolean;
 };
 
 export default function CardUserCell({
@@ -21,21 +22,19 @@ export default function CardUserCell({
   fallback,
   alignRight = false,
   hasLink = false,
-  unique = false,
   id,
 }: Props) {
   return (
     <Stack
       sx={{
-        flexDirection: alignRight ? 'row-reverse' : 'row',
+        flexDirection: { xs: 'row', md: alignRight ? 'row-reverse' : 'row' },
         alignItems: 'center',
         flexBasis: '100%',
         cursor: hasLink ? 'pointer' : 'default',
-        borderRadius: unique
-          ? '16px 16px 0 0'
-          : alignRight
-          ? '0 16px 0 0'
-          : '16px 0 0 0',
+        borderRadius: {
+          xs: '16px 16px 0 0',
+          md: alignRight ? '0 16px 0 0' : '16px 0 0 0',
+        },
         transition: 'background .3s ease',
         '&:hover': {
           background: hasLink ? 'primary' : 'inherit',
@@ -46,11 +45,14 @@ export default function CardUserCell({
       <AvatarFile
         file={picture}
         fallback={fallback || '/avatar.png'}
-        sx={{ ml: alignRight ? 0 : 2, mr: alignRight ? 2 : 0 }}
+        sx={{
+          ml: { xs: 2, md: alignRight ? 0 : 2 },
+          mr: { xs: 0, md: alignRight ? 2 : 0 },
+        }}
       >
         {name}
       </AvatarFile>
-      <CardCell label={label} alignRight={alignRight}>
+      <CardCell label={label} alignRight={alignRight} margin={false}>
         {hasLink ? (
           <Stack
             title={`${label} ${name}`}
@@ -59,7 +61,7 @@ export default function CardUserCell({
             {name}
           </Stack>
         ) : (
-          <Typography variant="body2">{name}</Typography>
+          <Typography fontWeight={600}>{name}</Typography>
         )}
       </CardCell>
     </Stack>

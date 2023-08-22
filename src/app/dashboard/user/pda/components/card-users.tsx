@@ -8,25 +8,13 @@ import { Stack, Box, useMediaQuery } from '@mui/material';
 import CardUserCell from './card-user-cell';
 
 type Props = {
-  issuer: any; // TODO: Add types
-  organization?: any; // TODO: Add types
-  recipient: any; // TODO: Add types
+  issuerAuth: any; // TODO: Add types
+  recipientAuth: any; // TODO: Add types
 };
 
-export default function CardUsers({
-  issuer: issuerPda,
-  organization: issuerOrganization,
-  recipient: recipientCredential,
-}: Props) {
+export default function CardUsers({ issuerAuth, recipientAuth }: Props) {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
-  const issuerName = issuerPda?.gatewayId;
-  const recipientName = recipientCredential?.gatewayId;
   const isLoading = false;
-
-  const showPicture = () => {
-    if (issuerOrganization) return issuerOrganization?.data?.logo;
-    return;
-  };
 
   return (
     <Stack
@@ -36,14 +24,14 @@ export default function CardUsers({
         alignItems: { xs: 'baseline', md: 'stretch' },
       }}
     >
-      {issuerPda?.isLoading ? (
+      {issuerAuth?.isLoading ? (
         <Loading margin={1} />
       ) : (
         <CardUserCell
-          label={protocol.pda.issuer_id}
-          picture={showPicture()}
-          fallback={issuerOrganization?.data?.logo_url}
-          name={limitCharsCentered(issuerName, 20)}
+          label={protocol.pda.issuer}
+          picture={null}
+          fallback={issuerAuth?.data?.logo_url}
+          name={limitCharsCentered(issuerAuth?.gatewayId, 20)}
           id="pda-textlink-issuerid"
         />
       )}
@@ -55,13 +43,19 @@ export default function CardUsers({
           transform: { xs: 'rotate(90deg)', md: 'none' },
         }}
       >
-        <svg width="18" height="36" fill="none" viewBox="0 0 18 36">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="19"
+          height="36"
+          viewBox="0 0 19 36"
+          fill="none"
+        >
           <path
-            stroke="#fff"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeOpacity=".7"
-            d="m.5 1 17 17-17 17"
+            d="M1 1L18 18L1 35"
+            stroke="black"
+            stroke-opacity="0.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           />
         </svg>
       </Box>
@@ -69,10 +63,10 @@ export default function CardUsers({
         <Loading margin={1} />
       ) : (
         <CardUserCell
-          label={protocol.pda.recipient_id}
-          picture={recipientCredential?.data?.picture}
-          name={limitCharsCentered(recipientName, 20)}
-          alignRight={!isMobile}
+          label={protocol.pda.owner}
+          picture={recipientAuth?.data?.picture}
+          name={limitCharsCentered(recipientAuth?.gatewayId, 20)}
+          alignRight={true}
           id="pda-textlink-recipientid"
         />
       )}
