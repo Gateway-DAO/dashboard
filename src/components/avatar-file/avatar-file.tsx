@@ -7,7 +7,7 @@ type AvatarFileProps<
   Component extends React.ElementType = 'div',
   Props = Record<string, unknown>
 > = {
-  file: PartialDeep<any>; // TODO: Add types
+  file: PartialDeep<any>;
   fallback?: string;
   sxProps?: SxProps;
 } & AvatarProps<Component, Props>;

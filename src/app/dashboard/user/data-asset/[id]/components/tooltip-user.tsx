@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 import { AvatarFile } from '@/components/avatar-file/avatar-file';
-import { PdaQuery } from '@/services/protocol/types';
 import dayjs from 'dayjs';
 
 import CloseIcon from '@mui/icons-material/Close';
