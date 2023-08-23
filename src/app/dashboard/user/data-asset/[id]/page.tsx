@@ -12,7 +12,16 @@ import PDASkeleton from './components/pda-skeleton';
 export default async function PDAPage({ params }: { params: { id: string } }) {
   return (
     <ErrorBoundary fallback={<Typography>Suspense error boundary</Typography>}>
-      <Suspense fallback={<PDASkeleton />}>
+      <Suspense
+        fallback={
+          <>
+            <TopBarContainer>
+              <BackButton />
+            </TopBarContainer>
+            <PDASkeleton />
+          </>
+        }
+      >
         <>
           <TopBarContainer>
             <BackButton />

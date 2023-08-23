@@ -66,6 +66,8 @@ export default function CardUsers({ pda }: Props) {
           pb: { xs: 0, md: 1.5 },
           px: { xs: 3, md: 2 },
           transform: { xs: 'rotate(90deg)', md: 'none' },
+          flexGrow: 0,
+          width: 20,
         }}
       >
         <svg
@@ -88,7 +90,7 @@ export default function CardUsers({ pda }: Props) {
         <CardUserCell
           label={protocol.pda.owner}
           picture={recipientPicture}
-          name={limitCharsCentered(recipientName, 20)}
+          name={limitCharsCentered(recipientName, 15)}
           alignRight={true}
           id={`pda-recipient-${recipientName}`}
           onClick={() => setTooltipRecipient(true)}
