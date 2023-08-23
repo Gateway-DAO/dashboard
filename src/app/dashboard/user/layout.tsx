@@ -1,14 +1,15 @@
 import { PropsWithChildren } from 'react';
 
 import DashboardLayout from '../components/dashboard-layout';
-import MenuItems, { MenuBottombarItems } from './components/menu-items';
+import MenuBottomListItems from './components/menu-bottom-list-items';
+import MenuListItems from './components/menu-list-items';
 
 export default function DashboardUserLayout({ children }: PropsWithChildren) {
   return (
     <>
       <DashboardLayout
-        menuItems={<MenuItems />}
-        mobileMenuItems={<MenuBottombarItems />}
+        menuItems={<MenuListItems />}
+        mobileMenuItems={<MenuBottomListItems />}
       >
         {children}
       </DashboardLayout>
