@@ -20,6 +20,22 @@ type Props = {
 export default function PdaCardInfo({ pda }: Props) {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
 
+  const issuerName =
+    pda?.issuerUser?.gatewayId ??
+    pda?.issuerUser?.primaryWallet?.address ??
+    pda?.issuerAuth?.data?.address ??
+    pda?.issuerAuth?.data?.email;
+
+  const issuerPicture = pda?.issuerAuth?.data?.picture ?? '';
+
+  const recipientName =
+    pda?.recipientUser?.gatewayId ??
+    pda?.recipientUser?.primaryWallet?.address ??
+    pda?.recipientAuth?.data?.address ??
+    pda?.recipientAuth?.data?.email;
+
+  const recipientPicture = pda?.recipientAuth?.data?.picture ?? '';
+
   return (
     <Stack
       sx={{
@@ -34,14 +50,16 @@ export default function PdaCardInfo({ pda }: Props) {
       divider={<Divider sx={{ width: '100%' }} />}
     >
       <CardUsers
-        issuerAuth={pda?.issuerUser}
-        recipientAuth={pda?.recipientUser}
+        issuerName={issuerName}
+        issuerPicture={issuerPicture}
+        recipientName={recipientName}
+        recipientPicture={recipientPicture}
       />
       <Stack
         alignItems="stretch"
         justifyContent="space-around"
         sx={{
-          flexDirection: isMobile ? 'column' : 'row',
+          flexDirection: { xs: 'column', md: 'row' },
         }}
         divider={
           <Box>
@@ -63,8 +81,8 @@ export default function PdaCardInfo({ pda }: Props) {
             >
               <MailOutlineIcon sx={{ width: 16 }} />
             </Stack>
-            {pda?.recipientUser?.gatewayId ??
-              pda?.recipientUser?.primaryWallet?.address}
+            {pda?.recipientAuth?.data?.address ??
+              pda?.recipientAuth?.data?.email}
           </Stack>
         </CardCell>
       </Stack>
@@ -72,7 +90,7 @@ export default function PdaCardInfo({ pda }: Props) {
         alignItems="stretch"
         justifyContent="space-around"
         sx={{
-          flexDirection: isMobile ? 'column' : 'row',
+          flexDirection: { xs: 'column', md: 'row' },
         }}
         divider={
           <Box>
@@ -94,7 +112,7 @@ export default function PdaCardInfo({ pda }: Props) {
         alignItems="stretch"
         justifyContent="space-around"
         sx={{
-          flexDirection: isMobile ? 'column' : 'row',
+          flexDirection: { xs: 'column', md: 'row' },
         }}
         divider={
           <Box>
