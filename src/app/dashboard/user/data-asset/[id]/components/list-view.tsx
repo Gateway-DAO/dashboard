@@ -1,3 +1,4 @@
+'use client';
 import { useMemo } from 'react';
 
 import { List, ListItem } from '@mui/material';
@@ -14,6 +15,7 @@ export function ListView({ value }: Props) {
     } else if (value !== '') {
       list.push(value);
     }
+    list = list.map((item) => item.replace(/\s/g, ''));
     return list;
   }, [value]);
 
