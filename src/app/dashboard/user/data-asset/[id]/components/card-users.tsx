@@ -45,7 +45,7 @@ export default function CardUsers({ pda }: Props) {
         <CardUserCell
           label={protocol.pda.issuer}
           picture={issuerPicture}
-          name={limitCharsCentered(issuerName, 20)}
+          name={limitCharsCentered(issuerName, 15)}
           id={`pda-issuer-${issuerName}`}
           onClick={() => setTooltipIssuer(true)}
           active={tooltipIssuer}
