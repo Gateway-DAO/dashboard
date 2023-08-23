@@ -13,7 +13,7 @@ export default function EvmProvider({ children }: PropsWithChildren) {
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains} theme={theme}
         appInfo={{
-          appName: 'Gateway DAO',
+          appName: 'Gateway Network',
         }}
       >
         {children}

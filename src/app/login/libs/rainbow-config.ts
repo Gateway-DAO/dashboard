@@ -30,13 +30,13 @@ export const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
+  appName: 'Gateway Network',
   projectId: 'YOUR_PROJECT_ID',
   chains
 });
 
 export const wagmiConfig = createConfig({
-  autoConnect: true,
+  autoConnect: false,
   connectors,
   publicClient
 })
