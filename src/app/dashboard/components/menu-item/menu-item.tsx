@@ -2,21 +2,21 @@ import { FC } from "react";
 
 import { ListItem, SvgIconProps, Typography } from "@mui/material";
 
-import GTWLink from "../gtw-link";
+import GTWLink from "../../../../components/gtw-link";
 
 
 export interface GTWMenuItemProps {
   name: string;
-  link: string;
+  href: string;
   active?: boolean;
   icon: FC<SvgIconProps>;
 }
 
-export default function GTWMenuItem({ icon: Icon, link, name, active }: GTWMenuItemProps) {
+export default function GTWMenuItem({ icon: Icon, href, name, active }: GTWMenuItemProps) {
   return (
     <ListItem sx={{ pl: 0 }}>
       <GTWLink
-        href={link}
+        href={href}
         underline={'none'}
         sx={{
           color: 'text.secondary',

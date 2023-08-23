@@ -15,8 +15,12 @@ const loginEmail = async (
 
     const { error } = (res as any) ?? {};
 
+    if(error) {
+      throw new Error(error);
+    }
+
     if (error || !res.loginEmail) {
-      return null;
+      throw new Error("Couldn't login");
     }
 
     const token = res.loginEmail;

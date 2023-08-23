@@ -11,7 +11,7 @@ export default function Logo() {
       alignItems={'center'}
     >
       <GatewayIcon sx={{ fontSize: 40 }} />
-      <Typography component={'h2'} ml={1} color={'black'}>
+      <Typography component={'h1'} ml={1} color={'black'}>
         Gateway
       </Typography>
     </Link>
