@@ -1,12 +1,14 @@
 "use client";
+import { PropsWithChildren } from 'react';
+
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { WagmiConfig } from 'wagmi';
 
-import { chains, theme, wagmiConfig } from '../libs/rainbow-config';
+import { chains, theme, wagmiConfig } from '../../libs/rainbow-config';
 
-export default function EvmProvider() {
+
+export default function EvmProvider({ children }: PropsWithChildren) {
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains} theme={theme}
@@ -14,7 +16,7 @@ export default function EvmProvider() {
           appName: 'Gateway DAO',
         }}
       >
-        <ConnectButton />
+        {children}
       </RainbowKitProvider>
     </WagmiConfig>
   )
