@@ -5,12 +5,10 @@ import { limitCharsCentered } from '@/utils/string';
 import { Stack } from '@mui/material';
 
 type Props = {
-  authenticatedBy: any; // TODO: Add types
+  authenticatedByName: string;
 };
 
-export default function AuthenticatedBy({ authenticatedBy }: Props) {
-  const authenticatedByName =
-    authenticatedBy?.gatewayId ?? authenticatedBy?.primaryWallet?.address;
+export default function AuthenticatedBy({ authenticatedByName }: Props) {
   return (
     <CardCell label={protocol.pda.authenticated_by}>
       <Stack

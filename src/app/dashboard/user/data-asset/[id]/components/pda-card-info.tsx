@@ -1,3 +1,4 @@
+'use client';
 import CardCell from '@/components/card-cell/card-cell';
 import ExternalLink from '@/components/external-link/external-link';
 import { protocol } from '@/locale/en/protocol';
@@ -19,6 +20,21 @@ type Props = {
 export default function PdaCardInfo({ pda }: Props) {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
 
+  const issuerName =
+    pda?.issuerUser?.gatewayId ?? pda?.issuerUser?.primaryWallet?.address ?? '';
+
+  const issuerPicture = pda?.issuerAuth?.data?.picture ?? '';
+
+  const recipientName =
+    pda?.recipientUser?.gatewayId ??
+    pda?.recipientUser?.primaryWallet?.address ??
+    '';
+
+  const recipientPicture = pda?.recipientAuth?.data?.picture ?? '';
+
+  const authenticatedByName =
+    pda?.issuerAuth?.data?.address ?? pda?.issuerAuth?.data?.email;
+
   return (
     <Stack
       sx={{
@@ -33,14 +49,16 @@ export default function PdaCardInfo({ pda }: Props) {
       divider={<Divider sx={{ width: '100%' }} />}
     >
       <CardUsers
-        issuerAuth={pda?.issuerUser}
-        recipientAuth={pda?.recipientUser}
+        issuerName={issuerName}
+        issuerPicture={issuerPicture}
+        recipientName={recipientName}
+        recipientPicture={recipientPicture}
       />
       <Stack
         alignItems="stretch"
         justifyContent="space-around"
         sx={{
-          flexDirection: isMobile ? 'column' : 'row',
+          flexDirection: { xs: 'column', md: 'row' },
         }}
         divider={
           <Box>
@@ -62,8 +80,8 @@ export default function PdaCardInfo({ pda }: Props) {
             >
               <MailOutlineIcon sx={{ width: 16 }} />
             </Stack>
-            {pda?.recipientUser?.gatewayId ??
-              pda?.recipientUser?.primaryWallet?.address}
+            {pda?.recipientAuth?.data?.address ??
+              pda?.recipientAuth?.data?.email}
           </Stack>
         </CardCell>
       </Stack>
@@ -71,7 +89,7 @@ export default function PdaCardInfo({ pda }: Props) {
         alignItems="stretch"
         justifyContent="space-around"
         sx={{
-          flexDirection: isMobile ? 'column' : 'row',
+          flexDirection: { xs: 'column', md: 'row' },
         }}
         divider={
           <Box>
@@ -79,13 +97,13 @@ export default function PdaCardInfo({ pda }: Props) {
           </Box>
         }
       >
-        <AuthenticatedBy authenticatedBy={pda?.issuerUser} />
+        <AuthenticatedBy authenticatedByName={authenticatedByName} />
         <CardCell label={protocol.data_model.data_model_id}>
           <ExternalLink
             text={limitCharsCentered(pda?.id, 6)}
-            sxProps={{ alignSelf: 'flex-start' }}
             textSxProps={{ fontSize: 16, fontWeight: 400 }}
-            onClick={() => console.log('test')}
+            iconSxProps={{ fontSize: 18, top: 4, color: 'text.primary' }}
+            href="https://www.google.com"
           />
         </CardCell>
       </Stack>
@@ -93,7 +111,7 @@ export default function PdaCardInfo({ pda }: Props) {
         alignItems="stretch"
         justifyContent="space-around"
         sx={{
-          flexDirection: isMobile ? 'column' : 'row',
+          flexDirection: { xs: 'column', md: 'row' },
         }}
         divider={
           <Box>

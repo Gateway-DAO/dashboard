@@ -1,4 +1,3 @@
-import Loading from '@/components/loadings/loading';
 import { protocol } from '@/locale/en/protocol';
 import { limitCharsCentered } from '@/utils/string';
 
@@ -7,13 +6,18 @@ import { Stack, Box } from '@mui/material';
 import CardUserCell from './card-user-cell';
 
 type Props = {
-  issuerAuth: any; // TODO: Add types
-  recipientAuth: any; // TODO: Add types
+  issuerName: string;
+  issuerPicture: string;
+  recipientName: string;
+  recipientPicture: string;
 };
 
-export default function CardUsers({ issuerAuth, recipientAuth }: Props) {
-  const isLoading = false;
-
+export default function CardUsers({
+  issuerName,
+  issuerPicture,
+  recipientName,
+  recipientPicture,
+}: Props) {
   return (
     <Stack
       justifyContent="space-between"
@@ -22,21 +26,17 @@ export default function CardUsers({ issuerAuth, recipientAuth }: Props) {
         alignItems: { xs: 'baseline', md: 'stretch' },
       }}
     >
-      {issuerAuth?.isLoading ? (
-        <Loading margin={1} />
-      ) : (
-        <CardUserCell
-          label={protocol.pda.issuer}
-          picture={null}
-          fallback={issuerAuth?.data?.logo_url}
-          name={limitCharsCentered(issuerAuth?.gatewayId, 20)}
-          id="pda-textlink-issuerid"
-        />
-      )}
+      <CardUserCell
+        label={protocol.pda.issuer}
+        picture={issuerPicture}
+        name={limitCharsCentered(issuerName, 20)}
+        id={`pda-issuer-${issuerName}`}
+      />
       <Box
         sx={{
           alignSelf: { md: 'center' },
-          py: { xs: 0, md: 2 },
+          pt: { xs: 0, md: 2.5 },
+          pb: { xs: 0, md: 1.5 },
           px: { xs: 3, md: 2 },
           transform: { xs: 'rotate(90deg)', md: 'none' },
         }}
@@ -51,23 +51,19 @@ export default function CardUsers({ issuerAuth, recipientAuth }: Props) {
           <path
             d="M1 1L18 18L1 35"
             stroke="black"
-            stroke-opacity="0.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeOpacity="0.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </Box>
-      {isLoading ? (
-        <Loading margin={1} />
-      ) : (
-        <CardUserCell
-          label={protocol.pda.owner}
-          picture={recipientAuth?.data?.picture}
-          name={limitCharsCentered(recipientAuth?.gatewayId, 20)}
-          alignRight={true}
-          id="pda-textlink-recipientid"
-        />
-      )}
+      <CardUserCell
+        label={protocol.pda.owner}
+        picture={recipientPicture}
+        name={limitCharsCentered(recipientName, 20)}
+        alignRight={true}
+        id={`pda-recipient-${recipientName}`}
+      />
     </Stack>
   );
 }

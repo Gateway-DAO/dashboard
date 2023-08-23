@@ -1,8 +1,9 @@
-'use client';
 import Activities from '@/components/activities/activities';
+import ShareButton from '@/components/buttons/share-button';
 import ExternalLink from '@/components/external-link/external-link';
 import Tags from '@/components/tags/tags';
 import { protocol } from '@/locale/en/protocol';
+import { apiPublic } from '@/services/protocol/api';
 import { PdaQuery } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
@@ -10,24 +11,27 @@ import {
 } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 
-import { Button, Divider, Stack, Typography } from '@mui/material';
+import { Divider, Stack, Typography } from '@mui/material';
 
+import DataTable from './data-table';
 import PdaCardInfo from './pda-card-info';
 
 type Props = {
-  pda: PdaQuery['credential'];
+  id: string;
 };
 
-export default function PDAItem({ pda }: Props) {
-  console.log('entrou', pda);
-
+export default async function PDAItem({ id }: Props) {
+  const getPDA = async (): Promise<PdaQuery['credential']> => {
+    const pda = await apiPublic.pda({ id });
+    return pda.credential;
+  };
+  const pda = await getPDA();
   return (
     <>
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
         <ExternalLink
           text={`ID ${limitCharsCentered(pda?.id, 8)}`}
-          sxProps={{ alignSelf: 'flex-start' }}
-          onClick={() => console.log('test')}
+          href="https://www.google.com"
         />
         <Typography
           variant="h3"
@@ -35,22 +39,10 @@ export default function PDAItem({ pda }: Props) {
         >
           {pda?.title}
         </Typography>
-        <Tags tags={pda?.dataModel?.tags} />
+        <Tags tags={pda?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
         <PdaCardInfo pda={pda} />
-        <Button
-          variant="contained"
-          size="large"
-          sx={{
-            mb: 2,
-            width: '100%',
-            fontWeight: 700,
-            fontSize: 13,
-          }}
-          onClick={() => console.log('test')} // TODO: Add action
-        >
-          {protocol.pda.share_a_copy}
-        </Button>
+        <ShareButton />
         <Activities
           activities={pda.activities}
           activitiesTextsType={{
@@ -70,7 +62,7 @@ export default function PDAItem({ pda }: Props) {
           px: CONTAINER_PX,
         }}
       />
-      <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>Joao</Stack>
+      <DataTable title={protocol.pda.claim} data={pda?.claimArray} />
     </>
   );
 }

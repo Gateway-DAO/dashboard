@@ -1,40 +1,34 @@
+'use client';
+import Link from 'next/link';
+
 import LaunchIcon from '@mui/icons-material/Launch';
-import { Stack, Link, Typography, SxProps, Theme } from '@mui/material';
+import { Typography, SxProps, Theme } from '@mui/material';
 
 type Props = {
   text: string;
-  onClick: (e: any) => void;
-  sxProps?: SxProps<Theme>;
+  href: string;
   textSxProps?: SxProps<Theme>;
+  iconSxProps?: SxProps<Theme>;
   id?: string;
 };
 
 export default function ExternalLink({
   text,
-  onClick,
-  sxProps,
+  href,
   textSxProps,
+  iconSxProps,
   id,
 }: Props) {
   return (
-    <Link
-      component={Stack}
-      gap={1}
-      direction="row"
-      alignItems="center"
-      sx={{
-        textDecoration: 'none',
-        position: 'relative',
-        cursor: 'pointer',
-        zIndex: 1,
-        ...sxProps,
-      }}
-      id={id}
-      onClick={onClick}
-    >
+    <Link id={id} passHref href={href} style={{ textDecoration: 'none' }}>
       <Typography
         variant="caption"
-        sx={{ color: 'text.secondary', fontWeight: 600, ...textSxProps }}
+        sx={{
+          color: 'text.secondary',
+          fontWeight: 600,
+          textDecoration: 'none',
+          ...textSxProps,
+        }}
       >
         {text}
       </Typography>
@@ -42,6 +36,10 @@ export default function ExternalLink({
         sx={{
           color: 'text.disabled',
           fontSize: 'body2.fontSize',
+          position: 'relative',
+          top: 2,
+          left: 8,
+          ...iconSxProps,
         }}
       />
     </Link>
