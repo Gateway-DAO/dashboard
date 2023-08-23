@@ -3,29 +3,33 @@ import {
   TableFilterSearch,
 } from '@/components/table-filter-search/table-filter-search';
 
-import { Stack } from '@mui/material';
+import { FilterListOutlined, SearchOutlined } from '@mui/icons-material';
+import { IconButton, Stack, TextField } from '@mui/material';
+
+import { TableSharedDataAssets } from './table-shared';
 
 export default function DataAssetsSharedWithPage() {
-  const columns: ColumnGrid[] = [
-    {
-      header_name: 'Verifier',
-    },
-    {
-      header_name: 'Share date',
-    },
-    {
-      header_name: 'Data amount',
-    },
-  ];
-
-  const data = {
-    pages: [{}],
-  };
-
   return (
     <Stack>
-      <Stack>top</Stack>
-      {/* <TableFilterSearch columns={columns} data={data} /> */}
+      <Stack
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+        }}
+      >
+        <TextField
+          variant="outlined"
+          size="small"
+          placeholder="Search"
+          label="Search"
+          InputProps={{ endAdornment: <SearchOutlined /> }}
+        />
+        <IconButton sx={{ borderRadius: '48px', border: '1px solid' }}>
+          <FilterListOutlined />
+        </IconButton>
+      </Stack>
+      <TableSharedDataAssets />
     </Stack>
   );
 }
