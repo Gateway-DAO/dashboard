@@ -39,7 +39,7 @@ export default async function PDAItem({ id }: Props) {
         >
           {pda?.title}
         </Typography>
-        <Tags tags={pda?.dataModel?.tags} />
+        <Tags tags={pda?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
         <PdaCardInfo pda={pda} />
         <ShareButton />
