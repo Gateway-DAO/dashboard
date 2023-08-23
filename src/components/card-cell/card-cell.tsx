@@ -6,28 +6,42 @@ type Props = {
   label: string;
   children: ReactNode;
   alignRight?: boolean;
+  margin?: boolean;
+  px?: number;
+  py?: number;
+  disabled?: boolean;
 };
 
 export default function CardCell({
   label,
   children,
   alignRight = false,
+  margin = true,
+  py = 2,
+  px = 2,
+  disabled = false,
 }: Props) {
   return (
     <Stack
-      gap={1}
+      gap={margin ? 1 : 0}
       sx={{
-        p: 2,
+        px,
+        py,
         width: '100%',
+        textAlign: { xs: 'left', md: alignRight ? 'right' : 'left' },
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
-        textAlign: alignRight ? 'right' : 'left',
       }}
     >
       <Typography variant="caption" color="text.secondary">
         {label}
       </Typography>
-      <Box sx={{ display: 'inline-flex', color: 'text.primary' }}>
+      <Box
+        sx={{
+          whiteSpace: 'pre',
+          color: disabled ? 'text.disabled' : 'text.primary',
+        }}
+      >
         {children}
       </Box>
     </Stack>

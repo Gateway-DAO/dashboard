@@ -5,19 +5,27 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
+import Logo from './sidebar/logo';
 import Sidebar from './sidebar/sidebar';
 
 type Props = {
   menuItems: ReactNode;
+  mobileMenuItems: ReactNode;
 };
 
 export default function DashboardLayout({
   children,
   menuItems,
+  mobileMenuItems,
 }: PropsWithChildren<Props>) {
   return (
-    <Stack direction="row" alignItems="stretch" sx={{ minHeight: '100%' }}>
-      <Sidebar menuItems={menuItems} />
+    <Stack direction={{
+      xs: "column",
+      lg: "row"
+    }} alignItems="stretch" sx={{ minHeight: '100%' }}>
+      <Sidebar menuItems={menuItems}>
+        <Logo />
+      </Sidebar>
       <Box
         width="100%"
         sx={{
@@ -26,6 +34,7 @@ export default function DashboardLayout({
       >
         {children}
       </Box>
+      {mobileMenuItems}
     </Stack>
   );
 }

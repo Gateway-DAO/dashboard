@@ -13,7 +13,7 @@ export const CustomNextLink = forwardRef(function CustomNextLink({ _href, ...pro
 type CombinedLinkProps = MuiLinkProps<typeof NextLink>;
 // remove both href properties
 // and define a new href property using NextLinkProps
-type GTWLinkProps = Omit<CombinedLinkProps, "href"> & {
+export type GTWLinkProps = Omit<CombinedLinkProps, "href"> & {
   href: NextLinkProps["href"];
 };
 

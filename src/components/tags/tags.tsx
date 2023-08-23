@@ -1,7 +1,7 @@
 import { Chip, Stack } from '@mui/material';
 
 type Props = {
-  tags: any; // TODO: Add types
+  tags: string[];
 };
 
 export default function Tags({ tags }: Props) {

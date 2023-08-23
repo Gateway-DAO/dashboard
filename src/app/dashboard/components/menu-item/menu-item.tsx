@@ -1,22 +1,23 @@
+import Link from "next/link";
 import { FC } from "react";
 
-import { ListItem, SvgIconProps, Typography } from "@mui/material";
-
-import GTWLink from "../gtw-link";
+import { ListItem, ListItemButton, ListItemButtonProps, SvgIconProps, Typography } from "@mui/material";
 
 
-export interface GTWMenuItemProps {
+
+export type GTWMenuItemProps = {
   name: string;
-  link: string;
+  href: string;
   active?: boolean;
   icon: FC<SvgIconProps>;
-}
+} & ListItemButtonProps;
 
-export default function GTWMenuItem({ icon: Icon, link, name, active }: GTWMenuItemProps) {
+export default function GTWMenuItem({ icon: Icon, href, name, active, ...props }: GTWMenuItemProps) {
   return (
-    <ListItem sx={{ pl: 0 }}>
-      <GTWLink
-        href={link}
+    <ListItem sx={{ p: 0 }}>
+      <ListItemButton
+        component={Link}
+        href={href}
         underline={'none'}
         sx={{
           color: 'text.secondary',
@@ -39,6 +40,7 @@ export default function GTWMenuItem({ icon: Icon, link, name, active }: GTWMenuI
             }
           })
         }}
+        {...props}
       >
         <Icon sx={{ fontSize: 32 }} />
         <Typography
@@ -48,7 +50,7 @@ export default function GTWMenuItem({ icon: Icon, link, name, active }: GTWMenuI
         >
           {name}
         </Typography>
-      </GTWLink>
+      </ListItemButton>
     </ListItem>
   )
 }

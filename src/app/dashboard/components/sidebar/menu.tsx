@@ -1,7 +1,6 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-import { SvgIconComponent } from '@mui/icons-material';
-import { Link, List, ListItem, ListProps, SvgIconProps, Typography } from '@mui/material';
+import { List, ListProps } from '@mui/material';
 
 
 type Props = {
