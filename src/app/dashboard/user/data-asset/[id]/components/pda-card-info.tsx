@@ -45,15 +45,18 @@ export default function PdaCardInfo({ pda }: Props) {
                 alignItems: 'center',
               }}
             >
-              {pda?.recipientAuth?.data?.wallet && (
+              {pda?.recipientAuth?.data?.address && (
                 <WalletIcon sx={{ width: 16 }} />
               )}
               {pda?.recipientAuth?.data?.email && (
                 <MailOutlineIcon sx={{ width: 16 }} />
               )}
             </Stack>
-            {pda?.recipientAuth?.data?.wallet ??
-              pda?.recipientAuth?.data?.email}
+            {limitCharsCentered(
+              pda?.recipientAuth?.data?.address ??
+                pda?.recipientAuth?.data?.email,
+              20
+            )}
           </Stack>
         </CardCell>
       </TableCellContainer>
