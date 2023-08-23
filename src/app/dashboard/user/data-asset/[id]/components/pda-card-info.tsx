@@ -21,20 +21,19 @@ export default function PdaCardInfo({ pda }: Props) {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
 
   const issuerName =
-    pda?.issuerUser?.gatewayId ??
-    pda?.issuerUser?.primaryWallet?.address ??
-    pda?.issuerAuth?.data?.address ??
-    pda?.issuerAuth?.data?.email;
+    pda?.issuerUser?.gatewayId ?? pda?.issuerUser?.primaryWallet?.address ?? '';
 
   const issuerPicture = pda?.issuerAuth?.data?.picture ?? '';
 
   const recipientName =
     pda?.recipientUser?.gatewayId ??
     pda?.recipientUser?.primaryWallet?.address ??
-    pda?.recipientAuth?.data?.address ??
-    pda?.recipientAuth?.data?.email;
+    '';
 
   const recipientPicture = pda?.recipientAuth?.data?.picture ?? '';
+
+  const authenticatedByName =
+    pda?.issuerAuth?.data?.address ?? pda?.issuerAuth?.data?.email;
 
   return (
     <Stack
@@ -98,7 +97,7 @@ export default function PdaCardInfo({ pda }: Props) {
           </Box>
         }
       >
-        <AuthenticatedBy authenticatedBy={pda?.issuerUser} />
+        <AuthenticatedBy authenticatedByName={authenticatedByName} />
         <CardCell label={protocol.data_model.data_model_id}>
           <ExternalLink
             text={limitCharsCentered(pda?.id, 6)}
