@@ -1,18 +1,13 @@
 import { PropsWithChildren } from 'react';
 
-import BackButton from '@/components/buttons/back-button';
-import { ClientNav } from '@/components/navbar/client-nav';
-
-import { Box, Stack } from '@mui/material';
-
 import DashboardLayout from '../components/dashboard-layout';
-import MenuItems from './components/menu-items';
+import MenuItems, { MenuBottombarItems } from './components/menu-items';
 
 export default function DashboardUserLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <DashboardLayout menuItems={<MenuItems />}>
-        <Stack
+      <DashboardLayout menuItems={<MenuItems />} mobileMenuItems={<MenuBottombarItems />}>
+        {/* <Stack
           direction="row"
           alignItems="center"
           justifyContent="space-between"
@@ -25,14 +20,10 @@ export default function DashboardUserLayout({ children }: PropsWithChildren) {
             },
           }}
         >
-          {/* TODO: sAdd back action */}
-          <BackButton />
-          <Box>
-            <ClientNav />
-          </Box>
-        </Stack>
+        <BackButton />
+      </Stack> */}
         {children}
-      </DashboardLayout>
+      </DashboardLayout >
     </>
   );
 }
