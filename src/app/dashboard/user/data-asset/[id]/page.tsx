@@ -6,11 +6,11 @@ import { Typography } from '@mui/material';
 
 import PDAItem from './components/pda-item';
 
-export default async function PDAPage() {
+export default async function PDAPage({ params }: { params: { id: string } }) {
   return (
     <ErrorBoundary fallback={<Typography>Suspense error boundary</Typography>}>
-      <Suspense fallback={<>Test</>}>
-        <PDAItem />
+      <Suspense fallback={<>Loading</>}>
+        <PDAItem id={params?.id} />
       </Suspense>
     </ErrorBoundary>
   );

@@ -36,7 +36,8 @@ export default function CardUsers({ issuerAuth, recipientAuth }: Props) {
       <Box
         sx={{
           alignSelf: { md: 'center' },
-          py: { xs: 0, md: 2 },
+          pt: { xs: 0, md: 2.5 },
+          pb: { xs: 0, md: 1.5 },
           px: { xs: 3, md: 2 },
           transform: { xs: 'rotate(90deg)', md: 'none' },
         }}
@@ -51,9 +52,9 @@ export default function CardUsers({ issuerAuth, recipientAuth }: Props) {
           <path
             d="M1 1L18 18L1 35"
             stroke="black"
-            stroke-opacity="0.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeOpacity="0.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </Box>

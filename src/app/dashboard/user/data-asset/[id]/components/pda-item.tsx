@@ -16,14 +16,15 @@ import { Divider, Stack, Typography } from '@mui/material';
 import DataTable from './data-table';
 import PdaCardInfo from './pda-card-info';
 
-const getPDA = async (): Promise<PdaQuery['credential']> => {
-  const pda = await apiPublic.pda({
-    id: '0c0ff388-23e7-47ec-9175-1bcd7880877c',
-  });
-  return pda.credential;
+type Props = {
+  id: string;
 };
 
-export default async function PDAItem() {
+export default async function PDAItem({ id }: Props) {
+  const getPDA = async (): Promise<PdaQuery['credential']> => {
+    const pda = await apiPublic.pda({ id });
+    return pda.credential;
+  };
   const pda = await getPDA();
   return (
     <>
