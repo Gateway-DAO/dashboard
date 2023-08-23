@@ -15,7 +15,6 @@ export default function CardCell({
   alignRight = false,
   margin = true,
 }: Props) {
-  console.log('test', alignRight, label);
   return (
     <Stack
       gap={margin ? 1 : 0}

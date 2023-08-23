@@ -5,3 +5,88 @@ query pdas {
     image
   }
 }
+
+query pda($id: String!) {
+  credential(id: $id) {
+    id
+    title
+    description
+    image
+    expirationDate
+    status
+    tags
+    claim
+    arweaveInfo
+
+    activities {
+      newStatus
+      oldStatus
+      type
+      oldUrl
+      newUrl
+      timestamp
+      txHash
+      credential {
+        id
+      }
+    }
+
+    claimArray {
+      description
+      type
+      property
+      label
+      value
+      metadata
+    }
+
+    issuerAuth {
+      id
+      data
+    }
+
+    issuerOrganization {
+      gatewayId
+    }
+
+    issuerUser {
+      gatewayId
+      primaryWallet {
+        address
+      }
+    }
+
+    recipientUser {
+      gatewayId
+      primaryWallet {
+        address
+      }
+    }
+
+    dataModel {
+      id
+      title
+      tags
+      schema
+      arweaveInfo
+      createdAt
+    }
+
+    activities {
+      type
+      oldStatus
+      newStatus
+      txHash
+      timestamp
+    }
+
+    nft {
+      chain
+      txHash
+      minted
+    }
+
+    createdAt
+    updatedAt
+  }
+}

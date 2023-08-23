@@ -1,6 +1,7 @@
 import CardCell from '@/components/card-cell/card-cell';
 import ExternalLink from '@/components/external-link/external-link';
 import { protocol } from '@/locale/en/protocol';
+import { CredentialStatus, PdaQuery } from '@/services/protocol/types';
 import { theme } from '@/theme';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
@@ -12,7 +13,7 @@ import AuthenticatedBy from './authenticated-by';
 import CardUsers from './card-users';
 
 type Props = {
-  pda: any; // TODO: Add types
+  pda: PdaQuery['credential'];
 };
 
 export default function PdaCardInfo({ pda }: Props) {
@@ -32,8 +33,8 @@ export default function PdaCardInfo({ pda }: Props) {
       divider={<Divider sx={{ width: '100%' }} />}
     >
       <CardUsers
-        issuerAuth={pda?.issuerAuth}
-        recipientAuth={pda?.recipientAuth}
+        issuerAuth={pda?.issuerUser}
+        recipientAuth={pda?.recipientUser}
       />
       <Stack
         alignItems="stretch"
@@ -61,7 +62,8 @@ export default function PdaCardInfo({ pda }: Props) {
             >
               <MailOutlineIcon sx={{ width: 16 }} />
             </Stack>
-            {pda?.recipientAuth?.wallet?.address ?? pda?.recipientAuth?.email}
+            {pda?.recipientUser?.gatewayId ??
+              pda?.recipientUser?.primaryWallet?.address}
           </Stack>
         </CardCell>
       </Stack>
@@ -108,7 +110,7 @@ export default function PdaCardInfo({ pda }: Props) {
             : protocol.pda.indeterminate}
         </CardCell>
         <CardCell label={protocol.pda.status}>
-          {pda?.status === 'valid' && (
+          {pda?.status === CredentialStatus.Valid && (
             <Chip
               label={protocol.pda.valid}
               size="small"
@@ -116,7 +118,7 @@ export default function PdaCardInfo({ pda }: Props) {
               color="success"
             />
           )}
-          {pda?.status === 'suspended' && (
+          {pda?.status === CredentialStatus.Suspended && (
             <Chip
               label={protocol.pda.suspended}
               size="small"
@@ -124,7 +126,7 @@ export default function PdaCardInfo({ pda }: Props) {
               color="warning"
             />
           )}
-          {pda?.status === 'revoked' && (
+          {pda?.status === CredentialStatus.Revoked && (
             <Chip
               label={protocol.pda.revoked}
               size="small"
@@ -132,7 +134,7 @@ export default function PdaCardInfo({ pda }: Props) {
               color="warning"
             />
           )}
-          {pda?.status === 'invalid' && (
+          {pda?.status === CredentialStatus.Revoked && (
             <Chip
               label={protocol.pda.invalid}
               size="small"
