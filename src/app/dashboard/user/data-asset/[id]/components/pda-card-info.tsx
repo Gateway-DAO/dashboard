@@ -1,3 +1,4 @@
+'use client';
 import CardCell from '@/components/card-cell/card-cell';
 import ExternalLink from '@/components/external-link/external-link';
 import { protocol } from '@/locale/en/protocol';
@@ -83,9 +84,9 @@ export default function PdaCardInfo({ pda }: Props) {
         <CardCell label={protocol.data_model.data_model_id}>
           <ExternalLink
             text={limitCharsCentered(pda?.id, 6)}
-            sxProps={{ alignSelf: 'flex-start' }}
             textSxProps={{ fontSize: 16, fontWeight: 400 }}
-            onClick={() => console.log('test')}
+            iconSxProps={{ fontSize: 18, top: 4, color: 'text.primary' }}
+            href="https://www.google.com"
           />
         </CardCell>
       </Stack>

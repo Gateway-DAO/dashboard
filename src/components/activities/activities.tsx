@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 
 import { protocol } from '@/locale/en/protocol';
@@ -76,9 +77,8 @@ export default function Activities({ activities, activitiesTextsType }: Props) {
                     sx={{
                       flexGrow: 0,
                       mr: 1,
-                      textTransform: 'uppercase',
                       fontWeight: 700,
-                      color: 'primary',
+                      color: 'primary.main',
                     }}
                   >
                     {expanded
@@ -88,7 +88,7 @@ export default function Activities({ activities, activitiesTextsType }: Props) {
                   <ArrowDropDownIcon
                     sx={{
                       transform: expanded ? 'rotate(180deg)' : 'none',
-                      color: 'primary',
+                      color: 'primary.main',
                       transition: 'all .3s ease',
                     }}
                   />
