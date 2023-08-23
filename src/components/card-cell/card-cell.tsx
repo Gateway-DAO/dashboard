@@ -28,7 +28,7 @@ export default function CardCell({
         px,
         py,
         width: '100%',
-        textAlign: alignRight ? 'right' : 'left',
+        textAlign: { xs: 'left', md: alignRight ? 'right' : 'left' },
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
       }}
