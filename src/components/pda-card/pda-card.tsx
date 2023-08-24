@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Card, CardActionArea, Stack, Typography } from '@mui/material';
 
 import { AvatarFile } from '../avatar-file/avatar-file';
-import { StatusChip } from './status-chip';
+import { PDAStatusChip } from './pda-status-chip';
 import { PdaCardProps } from './type';
 
 export default function PdaCard({ name, issuerImage, issuerName, dashed, href, status }: PdaCardProps) {
@@ -50,7 +50,7 @@ export default function PdaCard({ name, issuerImage, issuerName, dashed, href, s
             {name}
           </Typography>
         </Stack>
-        <StatusChip status={status} />
+        <PDAStatusChip variant="outlined" status={status} />
       </CardActionArea>
     </Stack>
   );

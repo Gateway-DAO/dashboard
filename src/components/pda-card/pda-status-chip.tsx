@@ -2,12 +2,15 @@ import { CredentialStatus } from '@/services/protocol/types';
 
 import { Chip, ChipProps } from '@mui/material';
 
-import { PdaCardProps } from './type';
+type Props = {
+  status: CredentialStatus;
+} & Omit<ChipProps, "label" | "color">;
 
-export function StatusChip({ status }: Pick<PdaCardProps, "status">) {
+export function PDAStatusChip({ status, ...chipProps }: Props) {
   const props: Pick<ChipProps, "label" | "color"> = {
     label: status.toLocaleLowerCase(),
-    color: "success"
+    color: "success",
+    ...chipProps
   };
   if (status === CredentialStatus.Expired) {
     props.color = "warning";
@@ -16,12 +19,12 @@ export function StatusChip({ status }: Pick<PdaCardProps, "status">) {
     props.color = "error";
   }
   if (status === CredentialStatus.Revoked) {
-    props.color = "warning";
+    props.color = "error";
   }
   if (status === CredentialStatus.Suspended) {
     props.color = "warning";
   }
 
 
-  return <Chip variant="outlined" {...props} />;
+  return <Chip {...props} />;
 }

@@ -1,6 +1,7 @@
 'use client';
 import CardCell from '@/components/card-cell/card-cell';
 import ExternalLink from '@/components/external-link/external-link';
+import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { protocol } from '@/locale/en/protocol';
 import { CredentialStatus, PdaQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
@@ -8,7 +9,7 @@ import dayjs from 'dayjs';
 
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import WalletIcon from '@mui/icons-material/Wallet';
-import { Stack, Divider, Chip, Typography } from '@mui/material';
+import { Stack, Divider, Typography } from '@mui/material';
 
 import CardUsers from './card-users';
 import { TableCellContainer } from './table-cell-container';
@@ -54,7 +55,7 @@ export default function PdaCardInfo({ pda }: Props) {
             </Stack>
             {limitCharsCentered(
               pda?.recipientAuth?.data?.address ??
-                pda?.recipientAuth?.data?.email,
+              pda?.recipientAuth?.data?.email,
               20
             )}
           </Stack>
@@ -88,38 +89,7 @@ export default function PdaCardInfo({ pda }: Props) {
             : protocol.pda.indeterminate}
         </CardCell>
         <CardCell label={protocol.pda.status}>
-          {pda?.status === CredentialStatus.Valid && (
-            <Chip
-              label={protocol.pda.valid}
-              size="small"
-              variant="filled"
-              color="success"
-            />
-          )}
-          {pda?.status === CredentialStatus.Suspended && (
-            <Chip
-              label={protocol.pda.suspended}
-              size="small"
-              variant="filled"
-              color="warning"
-            />
-          )}
-          {pda?.status === CredentialStatus.Revoked && (
-            <Chip
-              label={protocol.pda.revoked}
-              size="small"
-              variant="filled"
-              color="warning"
-            />
-          )}
-          {pda?.status === CredentialStatus.Revoked && (
-            <Chip
-              label={protocol.pda.invalid}
-              size="small"
-              variant="filled"
-              color="error"
-            />
-          )}
+          <PDAStatusChip status={pda.status} />
         </CardCell>
       </TableCellContainer>
     </Stack>
