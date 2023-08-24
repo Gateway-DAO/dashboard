@@ -1,10 +1,10 @@
-import { Chain } from '@/services/protocol/types';
+import { CredentialStatus } from "@/services/protocol/types";
 
 export type PdaCardProps = {
     dashed?: boolean;
     href: string;
-    chain: Chain;
+    issuerName: string;
+    issuerImage?: string | null;
     name: string;
-    image?: string | null;
-    status: string;
+    status: CredentialStatus;
 };

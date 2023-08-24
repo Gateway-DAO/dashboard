@@ -1,16 +1,13 @@
 'use client';
 import { ReactNode } from 'react';
 
-import { theme } from '@/theme';
-
-import { Box, Divider, Stack, useMediaQuery } from '@mui/material';
+import { Box, Divider, Stack } from '@mui/material';
 
 type Props = {
   children: ReactNode;
 };
 
 export function TableCellContainer({ children }: Props) {
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
 
   return (
     <Stack
@@ -21,7 +18,20 @@ export function TableCellContainer({ children }: Props) {
       }}
       divider={
         <Box>
-          <Divider orientation={isMobile ? 'horizontal' : 'vertical'} />
+          <Divider sx={{
+            display: {
+              xs: "none",
+              lg: "block"
+            }
+          }}
+            orientation='horizontal' />
+          <Divider sx={{
+            display: {
+              xs: "block",
+              lg: "none"
+            }
+          }}
+            orientation='vertical' />
         </Box>
       }
     >

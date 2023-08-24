@@ -10,7 +10,7 @@ export const plus_jakarta_sans = Plus_Jakarta_Sans({
 
 const typography: TypographyOptions = {
     allVariants: {
-      fontFamily: `"${plus_jakarta_sans.style.fontFamily}", sans-serif`,
+      fontFamily: `${plus_jakarta_sans.style.fontFamily}, sans-serif`,
     },
     h1: {
       fontWeight: 'normal',

@@ -17,15 +17,10 @@ import PdaCardInfo from './pda-card-info';
 import SendPda from './send-pda/send-pda';
 
 type Props = {
-  id: string;
+  pda: PdaQuery["credential"];
 };
 
-export default async function PDAItem({ id }: Props) {
-  const getPDA = async (): Promise<PdaQuery['credential']> => {
-    const pda = await apiPublic.pda({ id });
-    return pda.credential;
-  };
-  const pda = await getPDA();
+export default async function PDAItem({ pda }: Props) {
   return (
     <>
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>

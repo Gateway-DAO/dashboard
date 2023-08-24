@@ -2,19 +2,20 @@
 "use client";
 
 
+import { usePathname } from 'next/navigation';
+
 import GTWMenuItem from '@/app/dashboard/components/menu-item/menu-item';
 
 
-import menuItems from './menu-items';
-import useUserDashboardActivePath from './use-user-dashboard-active-path';
+import dashboardUserMenuItems from './dashboard-user-menu-items';
 
 /**
  * List all menu items of the desktop user dashboard
  */
 export default function MenuListItems() {
-  const activePath = useUserDashboardActivePath();
+  const activePath = usePathname();
 
-  return menuItems.map((item) => (
+  return dashboardUserMenuItems.map((item) => (
     <GTWMenuItem
       key={item.name}
       active={activePath === item.href}

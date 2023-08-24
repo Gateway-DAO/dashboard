@@ -1,4 +1,3 @@
-'use client';
 import Link from 'next/link';
 
 import LaunchIcon from '@mui/icons-material/Launch';

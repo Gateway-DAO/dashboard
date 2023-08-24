@@ -3,6 +3,7 @@ query pdas {
     id
     title
     image
+    status
   }
 }
 
