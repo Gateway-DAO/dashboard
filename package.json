@@ -81,6 +81,7 @@
     "next-translate-plugin": "^2.5.3",
     "storybook": "^7.3.1",
     "ts-node": "^10.9.1",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
     "type-fest": "^4.2.0",
     "typescript": "5.1.6"
   }
