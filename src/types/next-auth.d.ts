@@ -5,19 +5,18 @@
 import NextAuth, { Session } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 
-import { SessionUser, SessionToken } from './user';
+import { SessionToken } from './user';
 
 declare module 'next-auth' {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
   type User = SessionToken;
-  interface Session extends Session, SessionToken {
-    error?: string;
-  }
+  type Session = SessionToken;
 }
 
 declare module 'next-auth/jwt' {
   /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
+  type DefaultJWT = SessionToken;
   type JWT = SessionToken;
 }
