@@ -89,7 +89,7 @@ export default function PdaCardInfo({ pda }: Props) {
             : protocol.pda.indeterminate}
         </CardCell>
         <CardCell label={protocol.pda.status}>
-          <PDAStatusChip status={pda.status} />
+          <PDAStatusChip status={pda.status} size="small" />
         </CardCell>
       </TableCellContainer>
     </Stack>

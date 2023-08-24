@@ -50,7 +50,7 @@ export default function PdaCard({ name, issuerImage, issuerName, dashed, href, s
             {name}
           </Typography>
         </Stack>
-        <PDAStatusChip variant="outlined" status={status} />
+        <PDAStatusChip variant="outlined" status={status} size="small" />
       </CardActionArea>
     </Stack>
   );
