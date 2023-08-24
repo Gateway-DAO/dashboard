@@ -1,5 +1,4 @@
 import Activities from '@/components/activities/activities';
-import ShareButton from '@/components/buttons/share-button';
 import ExternalLink from '@/components/external-link/external-link';
 import Tags from '@/components/tags/tags';
 import { protocol } from '@/locale/en/protocol';
@@ -15,6 +14,7 @@ import { Divider, Stack, Typography } from '@mui/material';
 
 import DataTable from './data-table';
 import PdaCardInfo from './pda-card-info';
+import SendPda from './send-pda/send-pda';
 
 type Props = {
   id: string;
@@ -42,7 +42,7 @@ export default async function PDAItem({ id }: Props) {
         <Tags tags={pda?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
         <PdaCardInfo pda={pda} />
-        <ShareButton />
+        <SendPda />
         <Activities
           activities={pda.activities}
           activitiesTextsType={{
