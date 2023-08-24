@@ -5,6 +5,7 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
 import { Stack } from '@mui/system';
 
+import AuthComponent from '../auth-component';
 import Menu from './menu';
 
 type Props = {
@@ -31,6 +32,7 @@ export default function Sidebar({ menuItems, children }: PropsWithChildren<Props
     >
       {children}
       <Menu menuItems={menuItems} sx={{ mt: 5, display: { xs: 'none', lg: 'block' } }} />
+      <AuthComponent />
     </Stack>
   );
 }

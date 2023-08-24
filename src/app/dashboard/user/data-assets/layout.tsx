@@ -12,7 +12,7 @@ import { Box } from '@mui/system';
 
 export default function DataAssetsLayout({ children }: PropsWithChildren) {
   return (
-    <Box sx={{ py: 7 }}>
+    <Box sx={{ py: 2 }}>
       <Typography
         variant="h3"
         sx={{
