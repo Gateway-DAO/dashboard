@@ -1,4 +1,3 @@
-"use client";
 import { GTWMenuItemProps } from '@/app/dashboard/components/menu-item/menu-item';
 import { SquaredArrowDown } from '@/components/icons/squared-arrow-down';
 import { SquaredArrowRight } from '@/components/icons/squared-arrow-right';
@@ -6,12 +5,11 @@ import { WalletIcon } from '@/components/icons/wallet';
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 /**
  * List all menu items of the user dashboard
  */
-const menuItems: GTWMenuItemProps[] = [
+export const dashboardUserMenuItems: GTWMenuItemProps[] = [
   {
     name: 'Home',
     href: '/dashboard/user',
@@ -44,4 +42,4 @@ const menuItems: GTWMenuItemProps[] = [
   // },
 ];
 
-export default menuItems;
+export default dashboardUserMenuItems;
