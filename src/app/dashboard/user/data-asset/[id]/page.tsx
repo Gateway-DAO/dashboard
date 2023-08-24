@@ -1,6 +1,6 @@
-import BackButton from "@/components/buttons/back-button";
-import TopBarContainer from "@/components/top-bar-container/top-bar-container";
-import { apiPublic } from "@/services/protocol/api";
+import BackButton from '@/components/buttons/back-button';
+import TopBarContainer from '@/components/top-bar-container/top-bar-container';
+import { apiPublic } from '@/services/protocol/api';
 
 import PDAItem from './components/pda-item';
 
@@ -10,7 +10,6 @@ const getPDA = async (id: string) => {
 };
 
 export default async function PDAPage({ params }: { params: { id: string } }) {
-
   const pda = await getPDA(params.id);
   return (
     <>

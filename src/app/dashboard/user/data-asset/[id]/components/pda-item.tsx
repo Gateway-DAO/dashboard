@@ -15,9 +15,10 @@ import { Divider, Stack, Typography } from '@mui/material';
 
 import DataTable from './data-table';
 import PdaCardInfo from './pda-card-info';
+import SharedWithCard from './shared-with-card';
 
 type Props = {
-  pda: PdaQuery["credential"];
+  pda: PdaQuery['credential'];
 };
 
 export default async function PDAItem({ pda }: Props) {
@@ -37,6 +38,7 @@ export default async function PDAItem({ pda }: Props) {
         <Tags tags={pda?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
         <PdaCardInfo pda={pda} />
+        <SharedWithCard />
         <ShareButton />
         <Activities
           activities={pda.activities}
