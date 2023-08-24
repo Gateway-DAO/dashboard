@@ -17,7 +17,8 @@ import useUserDashboardActivePath from './use-user-dashboard-active-path';
 /**
  * List all menu items of the mobile user dashboard
  */
-
+//TODO: Make it reusable across dashboards
+//TODO: Only mount component on mobile, so it doesn't affect performance on desktop and remount the state of the component
 export default function MenuBottomListItems() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const activePath = useUserDashboardActivePath();
@@ -25,11 +26,7 @@ export default function MenuBottomListItems() {
   const theme = useTheme();
   const { width } = useWindowSize()
 
-  let bottomActivePath = activePath;
   const items = [menuItems[0], menuItems[3]];
-  if (!items.some(item => item.href === activePath) || isMenuOpen) {
-    bottomActivePath = "menu";
-  }
   const mobileItems = menuItems.filter(item => !items.some(i => i.href === item.href));
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
@@ -65,7 +62,7 @@ export default function MenuBottomListItems() {
         ))}
       </List>
     </Modal>
-    <BottomNavigation value={bottomActivePath} onChange={handleChange} sx={{
+    <BottomNavigation value={activePath} onChange={handleChange} sx={{
       position: "fixed", bottom: 0, left: 0, right: 0, display: {
         xs: "flex",
         lg: "none"
