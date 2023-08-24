@@ -76,11 +76,13 @@ export default function MenuBottomListItems() {
           href={item.href}
           label={item.name}
           value={item.href}
+          aria-label={item.name}
           icon={<Icon />} />
       ))}
       <BottomNavigationAction
         label="Menu"
         value="menu"
+        aria-label='Menu'
         icon={<MenuIcon />} />
     </BottomNavigation>
   </>;
