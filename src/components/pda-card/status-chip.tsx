@@ -1,26 +1,27 @@
-import { pda } from '@/locale/en/pda';
+import { CredentialStatus } from '@/services/protocol/types';
 
 import { Chip, ChipProps } from '@mui/material';
 
 import { PdaCardProps } from './type';
 
 export function StatusChip({ status }: Pick<PdaCardProps, "status">) {
-  let props: Pick<ChipProps, "label" | "color"> = {
-    label: pda.status.valid,
+  const props: Pick<ChipProps, "label" | "color"> = {
+    label: status.toLocaleLowerCase(),
     color: "success"
   };
-  if (status === "expired") {
-    props = {
-      label: pda.status.expired,
-      color: "error"
-    };
+  if (status === CredentialStatus.Expired) {
+    props.color = "warning";
   }
-  if (status === "revoked") {
-    props = {
-      label: pda.status.revoked,
-      color: "warning"
-    };
+  if (status === CredentialStatus.Invalid) {
+    props.color = "error";
   }
+  if (status === CredentialStatus.Revoked) {
+    props.color = "warning";
+  }
+  if (status === CredentialStatus.Suspended) {
+    props.color = "warning";
+  }
+
 
   return <Chip variant="outlined" {...props} />;
 }
