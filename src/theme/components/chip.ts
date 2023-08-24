@@ -8,10 +8,14 @@ export const MuiChip: Extract<Theme['components'], object>['MuiChip'] = {
     },
     colorError: ({theme, ownerState}) => ownerState.variant ==="filled"  ? ({
       color: theme.palette.text.secondary
-    }) : undefined,
+    }) : ({
+      color: theme.palette.error.dark
+    }),
     colorInfo: ({theme, ownerState}) => ownerState.variant ==="filled"  ? ({
       color: theme.palette.text.secondary
-    }) : undefined,
+    }) : ({
+      color: theme.palette.info.dark
+    }),
     colorSuccess: ({theme, ownerState}) => ownerState.variant ==="filled"  ? ({
       color: theme.palette.text.secondary
     }) : ({
@@ -19,6 +23,8 @@ export const MuiChip: Extract<Theme['components'], object>['MuiChip'] = {
     }),
     colorWarning: ({theme, ownerState}) => ownerState.variant ==="filled"  ? ({
       color: theme.palette.text.secondary
-    }) : undefined,
+    }) : ({
+      color: theme.palette.warning.dark
+    }),
   },
 };
