@@ -1,7 +1,6 @@
-
-import BackButton from '@/components/buttons/back-button';
-import TopBarContainer from '@/components/top-bar-container/top-bar-container';
-import { apiPublic } from '@/services/protocol/api';
+import BackButton from "@/components/buttons/back-button";
+import TopBarContainer from "@/components/top-bar-container/top-bar-container";
+import { apiPublic } from "@/services/protocol/api";
 
 import PDAItem from './components/pda-item';
 
@@ -22,5 +21,3 @@ export default async function PDAPage({ params }: { params: { id: string } }) {
     </>
   );
 }
-
-
