@@ -5,6 +5,7 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
+import DashboardPage from './dashboard-page';
 import Logo from './sidebar/logo';
 import Sidebar from './sidebar/sidebar';
 
@@ -26,14 +27,9 @@ export default function DashboardLayout({
       <Sidebar menuItems={menuItems}>
         <Logo />
       </Sidebar>
-      <Box
-        width="100%"
-        sx={{
-          px: CONTAINER_PX,
-        }}
-      >
+      <DashboardPage>
         {children}
-      </Box>
+      </DashboardPage>
       {mobileMenuItems}
     </Stack>
   );
