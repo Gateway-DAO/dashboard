@@ -23,7 +23,7 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
           },
         }}
       >
-        My data access
+        My data assets
       </Typography>
       <Box
         sx={{
