@@ -62,7 +62,7 @@ export default function MenuBottomListItems() {
         ))}
       </List>
     </Modal>
-    <BottomNavigation value={activePath} onChange={handleChange} sx={{
+    <BottomNavigation value={isMenuOpen ? 'menu' : activePath} onChange={handleChange} sx={{
       position: "fixed", bottom: 0, left: 0, right: 0, display: {
         xs: "flex",
         lg: "none"
