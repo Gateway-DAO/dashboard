@@ -9,6 +9,7 @@ export const pda = {
     share_a_copy_with: 'Share a copy with',
     share_a_copy_description: 'Fill a Gateway ID, email or wallet',
     account_type: 'Account type',
+    address: 'Address',
     sharing_cost: 'Sharing cost',
     sharing_cost_helper: 'For now Gateway is covering sharing costs',
     free: 'Free',
