@@ -1,5 +1,5 @@
 import CardCell from '@/components/card-cell/card-cell';
-import { protocol } from '@/locale/en/protocol';
+import { pda as pdaLocale } from '@/locale/en/pda';
 import { CredentialData } from '@/services/protocol/types';
 
 import { Stack, Typography, Divider } from '@mui/material';
@@ -21,7 +21,7 @@ function ClaimView(fieldData: CredentialData) {
     fieldData.metadata?.format
   );
   if (!fieldData.value || fieldData.value === '')
-    return <span>{protocol.pda.unfilled}</span>;
+    return <span>{pdaLocale.unfilled}</span>;
   switch (type) {
     case claimFields.image:
       return <ImageView src={fieldData?.value} alt={fieldData?.label} />;

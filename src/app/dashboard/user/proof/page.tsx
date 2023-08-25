@@ -1,6 +1,7 @@
 'use client';
 import Activities from '@/components/activities/activities';
-import { protocol } from '@/locale/en/protocol';
+import { common } from '@/locale/en/common';
+import { pda } from '@/locale/en/pda';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -19,7 +20,7 @@ export default function ProofPage() {
     id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fe375',
     title: 'Chase',
     issuance_date: '2018-04-04T16:00:00.000Z',
-    status: 'valid',
+    status: 'Valid',
     activities: [
       {
         type: 'Issued',
@@ -40,33 +41,27 @@ export default function ProofPage() {
       credentials: [
         {
           id: '7Cae5130c16e6c8b686440b900d93fe12asdfasdfasd91977e70b812d170024f1cffd0e3fe375',
-          title: 'Credit Card Transactions',
-          issuer: {
-            name: 'Mastercard',
-            chain: 'Ethereum',
-            avatar:
-              'https://play-lh.googleusercontent.com/1KHh3KnzltZQR2hDUoEkQx12bn34tUjOstlnt2YGdWsa9-zluNpFxHiK_ETsbWyJcbky=w480-h960-rw',
-          },
+          name: 'Credit Card Transactions',
+          issuerName: 'Mastercard',
+          issuerImage:
+            'https://play-lh.googleusercontent.com/1KHh3KnzltZQR2hDUoEkQx12bn34tUjOstlnt2YGdWsa9-zluNpFxHiK_ETsbWyJcbky=w480-h960-rw',
+          status: 'revoked',
         },
         {
           id: 'asdfadfasdfasdf',
-          title: 'Credit Card Transactions',
-          issuer: {
-            name: 'Visa',
-            chain: 'Ethereum',
-            avatar:
-              'https://static.vecteezy.com/system/resources/previews/009/469/638/original/visa-logo-company-providing-services-of-payment-operations-free-vector.jpg',
-          },
+          name: 'Credit Card Transactions',
+          issuerName: 'Visa',
+          issuerImage:
+            'https://static.vecteezy.com/system/resources/previews/009/469/638/original/visa-logo-company-providing-services-of-payment-operations-free-vector.jpg',
+          status: 'valid',
         },
         {
           id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fasdfas',
-          title: 'Credit Card Transactions',
-          issuer: {
-            name: 'Amex',
-            chain: 'Ethereum',
-            avatar:
-              'https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg',
-          },
+          name: 'Credit Card Transactions',
+          issuerName: 'Amex',
+          issuerImage:
+            'https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg',
+          status: 'valid',
         },
       ],
     },
@@ -76,33 +71,27 @@ export default function ProofPage() {
       credentials: [
         {
           id: 'a23q231231312312qdasdas',
-          title: 'Credit Score',
-          issuer: {
-            name: 'Mastercard',
-            chain: 'Ethereum',
-            avatar:
-              'https://play-lh.googleusercontent.com/1KHh3KnzltZQR2hDUoEkQx12bn34tUjOstlnt2YGdWsa9-zluNpFxHiK_ETsbWyJcbky=w480-h960-rw',
-          },
+          name: 'Credit Score',
+          issuerName: 'Mastercard',
+          issuerImage:
+            'https://play-lh.googleusercontent.com/1KHh3KnzltZQR2hDUoEkQx12bn34tUjOstlnt2YGdWsa9-zluNpFxHiK_ETsbWyJcbky=w480-h960-rw',
+          status: 'valid',
         },
         {
           id: 'a23q231231312312qdasdasasdfasdf',
-          title: 'Credit Score',
-          issuer: {
-            name: 'Visa',
-            chain: 'Ethereum',
-            avatar:
-              'https://static.vecteezy.com/system/resources/previews/009/469/638/original/visa-logo-company-providing-services-of-payment-operations-free-vector.jpg',
-          },
+          name: 'Credit Score',
+          issuerName: 'Visa',
+          issuerImage:
+            'https://static.vecteezy.com/system/resources/previews/009/469/638/original/visa-logo-company-providing-services-of-payment-operations-free-vector.jpg',
+          status: 'revoked',
         },
         {
           id: 'a23q231231312312qdasdasasdfa3e4q3eqglkj',
-          title: 'Credit Score',
-          issuer: {
-            name: 'Amex',
-            chain: 'Ethereum',
-            avatar:
-              'https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg',
-          },
+          name: 'Credit Score',
+          issuerName: 'Amex',
+          issuerImage:
+            'https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg',
+          status: 'valid',
         },
       ],
     },
@@ -124,7 +113,7 @@ export default function ProofPage() {
           }}
           onClick={() => console.log('test')} // TODO: Add action
         >
-          {protocol.pda.share_a_copy}
+          {common.actions.share_a_copy}
         </Button>
         <Button
           variant="outlined"
@@ -139,16 +128,16 @@ export default function ProofPage() {
           onClick={() => console.log('test')} // TODO: Add action
           startIcon={<CancelIcon height={20} width={20} color="error" />}
         >
-          {protocol.pda.revoke_access}
+          {common.actions.revoke_access}
         </Button>
         <Activities
           activities={proof.activities}
           activitiesTextsType={{
-            Issued: 'PDA issued',
-            Revoked: 'PDA revoked',
-            Suspended: 'PDA suspended',
-            Reactivated: 'PDA reactivated',
-            Updated: 'PDA updated',
+            Issued: pda.activities.issued,
+            Revoked: pda.activities.revoked,
+            Suspended: pda.activities.suspended,
+            Reactivated: pda.activities.reactivated,
+            Updated: pda.activities.updated,
           }}
         />
       </Stack>

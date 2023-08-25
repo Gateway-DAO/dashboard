@@ -2,8 +2,9 @@
 import CardCell from '@/components/card-cell/card-cell';
 import ExternalLink from '@/components/external-link/external-link';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
-import { protocol } from '@/locale/en/protocol';
-import { CredentialStatus, PdaQuery } from '@/services/protocol/types';
+import { datamodel } from '@/locale/en/datamodel';
+import { pda as pdaLocale } from '@/locale/en/pda';
+import { PdaQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
@@ -34,7 +35,7 @@ export default function PdaCardInfo({ pda }: Props) {
     >
       <CardUsers pda={pda} />
       <TableCellContainer>
-        <CardCell label={protocol.pda.received_at}>
+        <CardCell label={pdaLocale.received_at}>
           <Stack direction="row" gap={1}>
             <Stack
               width={24}
@@ -55,14 +56,14 @@ export default function PdaCardInfo({ pda }: Props) {
             </Stack>
             {limitCharsCentered(
               pda?.recipientAuth?.data?.address ??
-              pda?.recipientAuth?.data?.email,
-              20
+                pda?.recipientAuth?.data?.email,
+              40
             )}
           </Stack>
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
-        <CardCell label={protocol.pda.authenticated_by}>
+        <CardCell label={pdaLocale.authenticated_by}>
           <Typography>
             {limitCharsCentered(
               pda?.issuerAuth?.data?.address ?? pda?.issuerAuth?.data?.email,
@@ -70,7 +71,7 @@ export default function PdaCardInfo({ pda }: Props) {
             )}
           </Typography>
         </CardCell>
-        <CardCell label={protocol.data_model.data_model_id}>
+        <CardCell label={datamodel.data_model_id}>
           <ExternalLink
             text={limitCharsCentered(pda?.id, 6)}
             textSxProps={{ fontSize: 16, fontWeight: 400 }}
@@ -80,15 +81,15 @@ export default function PdaCardInfo({ pda }: Props) {
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
-        <CardCell label={protocol.pda.issuance_date}>
+        <CardCell label={pdaLocale.issuance_date}>
           {dayjs(pda?.createdAt).format('MM/DD/YYYY, h:mm A')}
         </CardCell>
-        <CardCell label={protocol.pda.expiration_date}>
+        <CardCell label={pdaLocale.expiration_date}>
           {pda?.expirationDate
             ? dayjs(pda?.expirationDate).format('MM/DD/YYYY, h:mm A')
-            : protocol.pda.indeterminate}
+            : pdaLocale.indeterminate}
         </CardCell>
-        <CardCell label={protocol.pda.status}>
+        <CardCell label={pdaLocale.status.title}>
           <PDAStatusChip status={pda.status} size="small" />
         </CardCell>
       </TableCellContainer>

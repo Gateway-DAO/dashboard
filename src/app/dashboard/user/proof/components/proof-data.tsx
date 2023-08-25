@@ -1,7 +1,8 @@
 'use client';
 import ExternalLink from '@/components/external-link/external-link';
 import PdaCard from '@/components/pda-card/pda-card';
-import { protocol } from '@/locale/en/protocol';
+import { datamodel } from '@/locale/en/datamodel';
+import { proof as proofLocale } from '@/locale/en/proof';
 
 import { Stack, Divider, Typography } from '@mui/material';
 
@@ -13,7 +14,7 @@ export default function ProofData({ dataModels }: Props) {
   return (
     <>
       <Typography fontWeight={400} fontSize={24} sx={{ mb: 3 }}>
-        {protocol.pda.data_asset_shared}
+        {proofLocale.share.data_asset_shared}
       </Typography>
       <Stack divider={<Divider sx={{ mb: 3 }} />}>
         {dataModels.map((dataModel: any) => (
@@ -26,19 +27,15 @@ export default function ProofData({ dataModels }: Props) {
               <Typography fontWeight={600} color="text.secondary">
                 {dataModel?.title}
               </Typography>
-              <ExternalLink
-                text={protocol.pda.data_model_id}
-                sxProps={{ alignSelf: 'flex-end' }}
-                onClick={() => console.log('test')} // TODO: Add a dynamic url
-              />
+              <ExternalLink text={datamodel.data_model_id} href="#" />
             </Stack>
             <Stack direction="row" flexWrap="wrap" gap={1} mb={3}>
               {dataModel.credentials.map((pda: any) => (
                 <PdaCard
                   key={pda.id}
-                  pda={pda}
                   dashed
                   href="/dashboard/user/proof"
+                  {...pda}
                 />
               ))}
             </Stack>

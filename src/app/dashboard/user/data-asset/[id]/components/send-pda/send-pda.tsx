@@ -4,11 +4,12 @@ import { useState } from 'react';
 
 import ConfirmDialog from '@/components/modal/confirm-dialog';
 import ModalRight from '@/components/modal/modal-right';
-import { protocol } from '@/locale/en/protocol';
+import ModalTitle from '@/components/modal/modal-title';
+import { common } from '@/locale/en/common';
+import { pda } from '@/locale/en/pda';
 import { useToggle } from '@react-hookz/web/cjs/useToggle';
 
-import CloseIcon from '@mui/icons-material/Close';
-import { Button, IconButton, Stack } from '@mui/material';
+import { Button } from '@mui/material';
 
 import SendPdaForm from './send-pda-form';
 
@@ -42,40 +43,24 @@ export default function SendPda() {
           setOpenSendPda(true);
         }}
       >
-        {protocol.pda.share_a_copy}
+        {common.actions.share_a_copy}
       </Button>
       <ModalRight
         open={openSendPda}
         handleClose={() => setConfirmDiscardChanges(true)}
       >
-        <Stack
-          sx={{
-            pt: { xs: 3, md: 6 },
-            pb: { xs: 2, md: 3 },
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            width: '100%',
-          }}
-        >
-          <IconButton
-            aria-label="close"
-            sx={{ backgroundColor: 'action.hover' }}
-            onClick={() => setConfirmDiscardChanges(true)}
-          >
-            <CloseIcon />
-          </IconButton>
-        </Stack>
+        <ModalTitle onClose={() => setConfirmDiscardChanges(true)} />
         <SendPdaForm />
       </ModalRight>
       <ConfirmDialog
         open={confirmDiscardChanges}
-        negativeAnswer="Nao"
-        positiveAnswer="Sim"
-        title="Tem certeza?"
+        negativeAnswer={pda.dialog.negative}
+        positiveAnswer={pda.dialog.positive}
+        title={pda.dialog.title}
         setOpen={setConfirmDiscardChanges}
         onConfirm={toggleModal}
       >
-        Dialog text
+        {pda.dialog.text}
       </ConfirmDialog>
     </>
   );

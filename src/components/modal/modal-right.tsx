@@ -29,7 +29,7 @@ export default function ModalRight({ children, open, handleClose }: Props) {
       scroll="paper"
       onClose={handleClose}
       sx={{
-        width: { xs: '100%', md: '600px', lg: '720px' },
+        width: { xs: '100%', md: '600px', lg: '646px' },
         left: 'auto',
         right: 16,
         bottom: 16,
