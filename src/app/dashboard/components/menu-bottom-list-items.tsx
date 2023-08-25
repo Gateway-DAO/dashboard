@@ -10,6 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { BottomNavigation, BottomNavigationAction, List, Modal, Stack, useTheme } from '@mui/material';
 
 import GTWMenuItem, { GTWMenuItemProps } from './menu-item/menu-item';
+import MobileHeader from './mobile-header';
 
 type Props = {
   activePath: string;
@@ -53,20 +54,25 @@ export default function MenuBottomListItems({ activePath, bottomItems, menuItems
     <Modal hideBackdrop open={isMenuOpen} sx={{
       bottom: 56,
     }} onClose={() => setIsMenuOpen(false)}>
-      <List sx={{
+      <Stack direction="column" sx={{
+        height: "100%",
         bgcolor: "background.default",
-        px: CONTAINER_PX,
-        height: "100%"
       }}>
-        {menuItems.map((item) => (
-          <GTWMenuItem
-            key={item.name}
-            active={activePath === item.href}
-            onClick={() => setIsMenuOpen(false)}
-            {...item}
-          />
-        ))}
-      </List>
+        <MobileHeader />
+        <List >
+          {menuItems.map((item) => (
+            <GTWMenuItem
+              key={item.name}
+              active={activePath === item.href}
+              onClick={() => setIsMenuOpen(false)}
+              {...item}
+              sx={{
+                px: CONTAINER_PX,
+              }}
+            />
+          ))}
+        </List>
+      </Stack>
     </Modal>
     <BottomNavigation value={isMenuOpen ? 'menu' : activePath} onChange={handleChange} sx={{
       position: "fixed", bottom: 0, left: 0, right: 0, display: {
