@@ -18,6 +18,7 @@ import { useToggle } from '@react-hookz/web';
 import { Divider, IconButton, Modal, Stack, Typography } from '@mui/material';
 
 import DataTable from './data-table';
+import ModalImage from './modal-image';
 import PdaCardInfo from './pda-card-info';
 import SendPda from './send-pda/send-pda';
 import SharedWithCard from './shared-with-card';
@@ -48,7 +49,7 @@ export default function PDAItem({ pda }: Props) {
             {pda?.title}
           </Typography>
           {pda.image && (
-            <IconButton>
+            <IconButton onClick={toggleShowImagePDAModal}>
               <Image
                 src={pda?.image ?? ''}
                 alt={pda?.title}
@@ -59,9 +60,11 @@ export default function PDAItem({ pda }: Props) {
             </IconButton>
           )}
         </Stack>
-        <Modal open={showImagePDAModal}>
-          <p>Carla Zambelli</p>
-        </Modal>
+        <ModalImage
+          open={showImagePDAModal}
+          handleClose={toggleShowImagePDAModal}
+          handleOpen={() => console.log('open')}
+        />
         <Tags tags={pda?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
         <PdaCardInfo pda={pda} />
