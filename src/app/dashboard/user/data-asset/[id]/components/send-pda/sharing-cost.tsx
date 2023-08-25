@@ -8,13 +8,7 @@ type Props = {
   chip?: string;
 };
 
-export function CardCostField({
-  label,
-  value,
-  prefix,
-  helperText,
-  chip,
-}: Props) {
+export function SharingCost({ label, value, prefix, helperText, chip }: Props) {
   return (
     <Stack
       direction="row"
