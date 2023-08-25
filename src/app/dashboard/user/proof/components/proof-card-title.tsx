@@ -38,8 +38,8 @@ export default function ProofCardTitle({ proof }: Props) {
       </Stack>
       <ExternalLink
         text={`ID ${limitCharsCentered(proof?.id, 8)}`}
-        sxProps={{ alignSelf: 'flex-start' }}
-        onClick={() => console.log('test')}
+        textSxProps={{ alignSelf: 'flex-start' }}
+        href="#"
       />
     </Stack>
   );

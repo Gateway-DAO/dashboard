@@ -28,15 +28,17 @@ export default function ProofData({ dataModels }: Props) {
               </Typography>
               <ExternalLink
                 text={protocol.pda.data_model_id}
-                sxProps={{ alignSelf: 'flex-end' }}
-                onClick={() => console.log('test')} // TODO: Add a dynamic url
+                textSxProps={{ alignSelf: 'flex-end' }}
+                href="#" // TODO: Add a dynamic url
               />
             </Stack>
             <Stack direction="row" flexWrap="wrap" gap={1} mb={3}>
               {dataModel.credentials.map((pda: any) => (
                 <PdaCard
                   key={pda.id}
-                  pda={pda}
+                  name={pda.title}
+                  status={pda.status}
+                  issuerName='Issuer Name'
                   dashed
                   href="/dashboard/user/proof"
                 />
