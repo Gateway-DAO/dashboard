@@ -5,7 +5,6 @@ import { useFormContext } from 'react-hook-form';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import WalletIcon from '@mui/icons-material/Wallet';
 import {
-  Divider,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -22,9 +21,7 @@ import { SendPdaSchema, SendPdaSchemaError } from './schema';
 export default function SendPdaFormField() {
   const {
     register,
-    control,
     formState: { errors },
-    watch,
   } = useFormContext<SendPdaSchema>();
 
   const mockAccountsTypes: Record<string, any>[] = [

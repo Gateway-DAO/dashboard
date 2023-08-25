@@ -32,7 +32,10 @@ export function CardCostField({
         <Typography variant="caption" color="text.secondary">
           {label}
         </Typography>
-        <Typography fontSize={24} sx={{ textDecoration: 'line-through' }}>
+        <Typography
+          fontSize={24}
+          sx={{ textDecoration: chip && helperText ? 'line-through' : 'none' }}
+        >
           {prefix}
           {value}
         </Typography>
