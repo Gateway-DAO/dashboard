@@ -2,8 +2,11 @@
 
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
+import useBreakpoints from "@/hooks/use-breakpoints";
 import { useMenu } from "@/hooks/use-menu";
+import { useWindowSize } from "@react-hookz/web";
 
 import { Avatar, ButtonBase, ButtonBaseProps, Menu, Stack, Theme, Typography, alpha } from "@mui/material";
 import { SystemStyleObject, } from "@mui/system";
@@ -15,6 +18,13 @@ export default function DesktopAuthComponent(props: ButtonBaseProps) {
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu()
   const pathname = usePathname();
   const isOrg = pathname.includes("/dashboard/org/");
+  const { isDesktop } = useBreakpoints()
+
+  useEffect(() => {
+    if (isOpen && !isDesktop) {
+      onClose()
+    }
+  }, [isDesktop, isOpen, onClose])
 
   if (!session) return null;
 
