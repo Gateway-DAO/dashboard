@@ -54,13 +54,13 @@ export default function SendPda() {
       </ModalRight>
       <ConfirmDialog
         open={confirmDiscardChanges}
-        negativeAnswer={pda.share.dialog_negative}
-        positiveAnswer={pda.share.dialog_positive}
-        title={pda.share.dialog_title}
+        negativeAnswer={pda.dialog.negative}
+        positiveAnswer={pda.dialog.positive}
+        title={pda.dialog.title}
         setOpen={setConfirmDiscardChanges}
         onConfirm={toggleModal}
       >
-        {pda.share.dialog_text}
+        {pda.dialog.text}
       </ConfirmDialog>
     </>
   );

@@ -6,10 +6,14 @@ export const pda = {
     revoked: 'Revoked',
   },
   share: {
-    dialog_title: 'Confirmation',
-    dialog_text: 'Are you sure you want to exit?',
-    dialog_positive: 'Confirm',
-    dialog_negative: 'Cancel',
+    share_a_copy_with: 'Share a copy with',
+    share_a_copy_description: 'Fill a Gateway ID, email or wallet',
+  },
+  dialog: {
+    title: 'Confirmation',
+    text: 'Are you sure you want to exit?',
+    positive: 'Confirm',
+    negative: 'Cancel',
   },
   activities: {
     issued: 'PDA issued',
