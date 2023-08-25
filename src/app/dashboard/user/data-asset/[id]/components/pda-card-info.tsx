@@ -57,7 +57,7 @@ export default function PdaCardInfo({ pda }: Props) {
             {limitCharsCentered(
               pda?.recipientAuth?.data?.address ??
                 pda?.recipientAuth?.data?.email,
-              20
+              40
             )}
           </Stack>
         </CardCell>
