@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { MutableRefObject, useEffect, useRef } from 'react';
 
 import { AvatarFile } from '@/components/avatar-file/avatar-file';
 import { limitCharsCentered } from '@/utils/string';
@@ -27,9 +28,28 @@ export function TooltipUser({
   issuance_date,
   isOrganization,
 }: Props) {
+  const wrapperRef = useRef(null);
+
+  const useOutsideAlerter = (ref: MutableRefObject<HTMLDivElement>) => {
+    useEffect(() => {
+      function handleClickOutside(event: any) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          onClose();
+        }
+      }
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [ref]);
+  };
+
+  useOutsideAlerter(wrapperRef as any);
+
   return (
     <Paper
       component={Stack}
+      ref={wrapperRef}
       elevation={2}
       sx={{
         position: 'absolute',
