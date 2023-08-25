@@ -31,7 +31,13 @@ export default function ModalRight({ children, open, handleClose }: Props) {
       sx={{
         width: { xs: '100%', md: '600px', lg: '720px' },
         left: 'auto',
-        right: '0',
+        right: 16,
+        bottom: 16,
+        top: 16,
+        borderRadius: 1,
+        '& .MuiPaper-elevation': {
+          borderRadius: 1,
+        },
       }}
     >
       <Stack

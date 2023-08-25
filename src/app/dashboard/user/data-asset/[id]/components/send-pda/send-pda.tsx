@@ -59,7 +59,7 @@ export default function SendPda() {
         >
           <IconButton
             aria-label="close"
-            sx={{ background: 'action.hover' }}
+            sx={{ backgroundColor: 'action.hover' }}
             onClick={() => setConfirmDiscardChanges(true)}
           >
             <CloseIcon />
