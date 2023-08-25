@@ -15,8 +15,8 @@ import {
   Typography,
 } from '@mui/material';
 
-import { CardCostField } from './card-cost-field';
 import { SendPdaSchema, SendPdaSchemaError } from './schema';
+import { SharingCost } from './sharing-cost';
 
 export default function SendPdaFormField() {
   const {
@@ -91,7 +91,7 @@ export default function SendPdaFormField() {
           sx={{ flexGrow: 1 }}
         />
       </Stack>
-      <CardCostField
+      <SharingCost
         label={pda.share.sharing_cost}
         prefix="$"
         value="0.02"
