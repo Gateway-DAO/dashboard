@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { AvatarFile } from '@/components/avatar-file/avatar-file';
+import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -68,9 +69,11 @@ export function TooltipUser({
           onClick={onClose}
         />
       </Stack>
-      <Typography fontSize={24}>{name}</Typography>
+      <Typography fontSize={24}>
+        {limitCharsCentered(name as string, 16)}
+      </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
-        {username}
+        {limitCharsCentered(username as string, 29)}
       </Typography>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack>
