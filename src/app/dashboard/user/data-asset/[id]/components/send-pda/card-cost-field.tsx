@@ -4,8 +4,8 @@ type Props = {
   label: string;
   value: string;
   prefix: string;
-  helperText: string;
-  chip: string;
+  helperText?: string;
+  chip?: string;
 };
 
 export function CardCostField({
