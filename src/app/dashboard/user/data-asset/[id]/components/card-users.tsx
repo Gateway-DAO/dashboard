@@ -1,14 +1,14 @@
 'use client';
 import { useState } from 'react';
 
-import { protocol } from '@/locale/en/protocol';
+import { TooltipUser } from '@/components/tooltip-user/tooltip-user';
+import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 
 import { Stack, Box } from '@mui/material';
 
 import CardUserCell from './card-user-cell';
-import { TooltipUser } from './tooltip-user';
 
 type Props = {
   pda: PdaQuery['credential'];
@@ -43,7 +43,7 @@ export default function CardUsers({ pda }: Props) {
     >
       <Stack sx={{ position: 'relative' }}>
         <CardUserCell
-          label={protocol.pda.issuer}
+          label={pdaLocale.issuer}
           picture={issuerPicture}
           name={limitCharsCentered(issuerName, 15)}
           id={`pda-issuer-${issuerName}`}
@@ -88,7 +88,7 @@ export default function CardUsers({ pda }: Props) {
       </Box>
       <Stack sx={{ position: 'relative' }}>
         <CardUserCell
-          label={protocol.pda.owner}
+          label={pdaLocale.owner}
           picture={recipientPicture}
           name={limitCharsCentered(recipientName, 15)}
           alignRight={true}

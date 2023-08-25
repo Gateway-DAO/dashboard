@@ -5,8 +5,7 @@ import Image from 'next/image';
 import Activities from '@/components/activities/activities';
 import ExternalLink from '@/components/external-link/external-link';
 import Tags from '@/components/tags/tags';
-import { protocol } from '@/locale/en/protocol';
-import { apiPublic } from '@/services/protocol/api';
+import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
@@ -73,11 +72,11 @@ export default function PDAItem({ pda }: Props) {
         <Activities
           activities={pda.activities}
           activitiesTextsType={{
-            Issued: 'PDA issued',
-            Revoked: 'PDA revoked',
-            Suspended: 'PDA suspended',
-            Reactivated: 'PDA reactivated',
-            Updated: 'PDA updated',
+            Issued: pdaLocale.activities.issued,
+            Revoked: pdaLocale.activities.revoked,
+            Suspended: pdaLocale.activities.suspended,
+            Reactivated: pdaLocale.activities.reactivated,
+            Updated: pdaLocale.activities.updated,
           }}
         />
       </Stack>
@@ -89,7 +88,7 @@ export default function PDAItem({ pda }: Props) {
           px: CONTAINER_PX,
         }}
       />
-      <DataTable title={protocol.pda.claim} data={pda?.claimArray} />
+      <DataTable title={pdaLocale.claim} data={pda?.claimArray} />
     </>
   );
 }
