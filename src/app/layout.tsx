@@ -4,7 +4,7 @@ import Providers from './providers';
 
 export const metadata: Metadata = {
   title: 'Gateway Network',
-  description: 'Gateway Network - A new concept',
+  description: 'Gateway Network - A new concept about web3',
 };
 
 export default function RootLayout({

@@ -64,10 +64,7 @@ export default function ProofCardTitle({ proof }: Props) {
           )}
         </Stack>
       </Stack>
-      <ExternalLink
-        text={`ID ${limitCharsCentered(proof?.id, 8)}`}
-        href="https://www.google.com"
-      />
+      <ExternalLink text={`ID ${limitCharsCentered(proof?.id, 8)}`} href="#" />
     </Stack>
   );
 }

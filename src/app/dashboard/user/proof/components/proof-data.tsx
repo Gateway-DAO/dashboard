@@ -27,10 +27,7 @@ export default function ProofData({ dataModels }: Props) {
               <Typography fontWeight={600} color="text.secondary">
                 {dataModel?.title}
               </Typography>
-              <ExternalLink
-                text={datamodel.data_model_id}
-                href="https://www.google.com"
-              />
+              <ExternalLink text={datamodel.data_model_id} href="#" />
             </Stack>
             <Stack direction="row" flexWrap="wrap" gap={1} mb={3}>
               {dataModel.credentials.map((pda: any) => (
