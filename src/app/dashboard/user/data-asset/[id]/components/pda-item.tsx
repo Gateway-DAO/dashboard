@@ -1,3 +1,7 @@
+'use client';
+
+import Image from 'next/image';
+
 import Activities from '@/components/activities/activities';
 import ExternalLink from '@/components/external-link/external-link';
 import Tags from '@/components/tags/tags';
@@ -8,8 +12,9 @@ import {
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
+import { useToggle } from '@react-hookz/web';
 
-import { Divider, Stack, Typography } from '@mui/material';
+import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
 import DataTable from './data-table';
 import PdaCardInfo from './pda-card-info';
@@ -20,7 +25,8 @@ type Props = {
   pda: PdaQuery['credential'];
 };
 
-export default async function PDAItem({ pda }: Props) {
+export default function PDAItem({ pda }: Props) {
+  const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
   return (
     <>
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
@@ -28,12 +34,30 @@ export default async function PDAItem({ pda }: Props) {
           text={`ID ${limitCharsCentered(pda?.id, 8)}`}
           href="https://www.google.com"
         />
-        <Typography
-          variant="h3"
-          sx={{ fontSize: { xs: 24, md: 48 }, my: 2, fontWeight: 400 }}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          gap={5}
+          alignItems="center"
         >
-          {pda?.title}
-        </Typography>
+          <Typography
+            variant="h3"
+            sx={{ fontSize: { xs: 24, md: 48 }, my: 2, fontWeight: 400 }}
+          >
+            {pda?.title}
+          </Typography>
+          {pda.image && (
+            <IconButton>
+              <Image
+                src={pda?.image ?? ''}
+                alt={pda?.title}
+                width={96}
+                height={96}
+                style={{ borderRadius: 16 }}
+              />
+            </IconButton>
+          )}
+        </Stack>
         <Tags tags={pda?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
         <PdaCardInfo pda={pda} />
