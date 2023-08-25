@@ -19,12 +19,14 @@ export default function GTWMenuItem({ icon: Icon, href, name, active, ...props }
         component={Link}
         href={href}
         underline={'none'}
+        {...props}
         sx={{
           color: 'text.secondary',
           display: 'flex',
           alignItems: 'center',
           direction: 'row',
           gap: 2,
+          px: 2.5,
           ':hover': {
             svg: {
               color: 'primary.main',
@@ -38,9 +40,9 @@ export default function GTWMenuItem({ icon: Icon, href, name, active, ...props }
             svg: {
               color: 'primary.main',
             }
-          })
+          }),
+          ...props.sx,
         }}
-        {...props}
       >
         <Icon sx={{ fontSize: 32 }} />
         <Typography
