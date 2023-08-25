@@ -25,6 +25,7 @@ export default function GTWMenuItem({ icon: Icon, href, name, active, ...props }
           alignItems: 'center',
           direction: 'row',
           gap: 2,
+          px: 2.5,
           ':hover': {
             svg: {
               color: 'primary.main',

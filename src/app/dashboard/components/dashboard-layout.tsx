@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import DashboardPage from './dashboard-page';
-import Logo from './sidebar/logo';
+import Logo from './logo/logo';
 import Sidebar from './sidebar/sidebar';
 
 type Props = {

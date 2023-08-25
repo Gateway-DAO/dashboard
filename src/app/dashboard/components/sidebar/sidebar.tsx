@@ -5,7 +5,7 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
 import { Stack } from '@mui/system';
 
-import AuthComponent from '../auth-component';
+import DesktopAuthComponent from '../auth-component/desktop-auth-component';
 import Menu from './menu';
 
 type Props = {
@@ -26,13 +26,13 @@ export default function Sidebar({ menuItems, children }: PropsWithChildren<Props
           borderColor: 'divider',
           maxWidth: { xs: '100%', md: '300px' },
           width: '100%',
-          px: 2,
+          px: 2.5,
         }
       })}
     >
       {children}
-      <Menu menuItems={menuItems} sx={{ mt: 5, display: { xs: 'none', lg: 'block' } }} />
-      <AuthComponent />
+      <Menu menuItems={menuItems} sx={{ mt: 5, mx: -2.5, display: { xs: 'none', lg: 'block' } }} />
+      <DesktopAuthComponent sx={{ display: { xs: 'none', lg: 'flex' } }} />
     </Stack>
   );
 }
