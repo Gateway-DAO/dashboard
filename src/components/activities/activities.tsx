@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
 
-import { protocol } from '@/locale/en/protocol';
+import { common } from '@/locale/en/common';
+import { pda } from '@/locale/en/pda';
 import { timestampToString } from '@/utils/date';
 import { getExplorer } from '@/utils/web3';
 
@@ -82,8 +83,8 @@ export default function Activities({ activities, activitiesTextsType }: Props) {
                     }}
                   >
                     {expanded
-                      ? protocol.pda.hide_activity
-                      : protocol.pda.show_activity}
+                      ? common.actions.hide_activity
+                      : common.actions.show_activity}
                   </Typography>
                   <ArrowDropDownIcon
                     sx={{
@@ -121,7 +122,7 @@ export default function Activities({ activities, activitiesTextsType }: Props) {
                           {timestampToString(
                             activity?.timestamp,
                             undefined,
-                            protocol.pda.indeterminate
+                            pda.indeterminate
                           )}
                         </Typography>
                       </Stack>
