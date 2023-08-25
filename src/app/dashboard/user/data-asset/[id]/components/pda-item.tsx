@@ -14,7 +14,7 @@ import {
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
 
-import { Divider, IconButton, Stack, Typography } from '@mui/material';
+import { Divider, IconButton, Modal, Stack, Typography } from '@mui/material';
 
 import DataTable from './data-table';
 import PdaCardInfo from './pda-card-info';
@@ -58,6 +58,9 @@ export default function PDAItem({ pda }: Props) {
             </IconButton>
           )}
         </Stack>
+        <Modal open={showImagePDAModal}>
+          <p>Carla Zambelli</p>
+        </Modal>
         <Tags tags={pda?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
         <PdaCardInfo pda={pda} />
