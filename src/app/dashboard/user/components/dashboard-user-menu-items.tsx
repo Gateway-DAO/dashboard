@@ -3,7 +3,7 @@ import { SquaredArrowDown } from '@/components/icons/squared-arrow-down';
 import { SquaredArrowRight } from '@/components/icons/squared-arrow-right';
 import { WalletIcon } from '@/components/icons/wallet';
 
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+// import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 /**
@@ -16,6 +16,11 @@ export const dashboardUserMenuItems: GTWMenuItemProps[] = [
     icon: HomeOutlinedIcon,
   },
   {
+    name: 'My data assets',
+    href: '/dashboard/user/data-assets',
+    icon: WalletIcon,
+  },
+  {
     name: 'Issued data assets',
     href: '/dashboard/user/issued-data-assets',
     icon: SquaredArrowRight,
@@ -25,16 +30,11 @@ export const dashboardUserMenuItems: GTWMenuItemProps[] = [
     href: '/dashboard/user/data-requests',
     icon: SquaredArrowDown,
   },
-  {
-    name: 'My data assets',
-    href: '/dashboard/user/data-assets',
-    icon: WalletIcon,
-  },
-  {
-    name: 'Activity',
-    href: '/dashboard/user/activity',
-    icon: AccessTimeIcon,
-  },
+  // {
+  //   name: 'Activity',
+  //   href: '/dashboard/user/activity',
+  //   icon: AccessTimeIcon,
+  // },
   // {
   //   name: 'Notifications',
   //   href: '/dashboard/user/notifications',
