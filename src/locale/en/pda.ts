@@ -13,6 +13,7 @@ export const pda = {
     sharing_cost: 'Sharing cost',
     sharing_cost_helper: 'For now Gateway is covering sharing costs',
     free: 'Free',
+    successfully_title: 'Copy shared successfully',
   },
   dialog: {
     title: 'Confirmation',

@@ -2,6 +2,7 @@
 import CardCell from '@/components/card-cell/card-cell';
 import ExternalLink from '@/components/external-link/external-link';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
+import { TableCellContainer } from '@/components/table-cell-container/table-cell-container';
 import { datamodel } from '@/locale/en/datamodel';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
@@ -13,7 +14,6 @@ import WalletIcon from '@mui/icons-material/Wallet';
 import { Stack, Divider, Typography } from '@mui/material';
 
 import CardUsers from './card-users';
-import { TableCellContainer } from './table-cell-container';
 
 type Props = {
   pda: PdaQuery['credential'];
