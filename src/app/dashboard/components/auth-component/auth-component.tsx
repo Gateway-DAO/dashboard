@@ -1,15 +1,15 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
 
 import { useMenu } from "@/hooks/use-menu";
+import useOrganization from "@/hooks/use-organization";
 
 import { MoreHorizOutlined } from "@mui/icons-material";
-import { Avatar, ButtonBase, ButtonBaseProps, Menu, Stack, Theme, Typography, alpha } from "@mui/material";
-import { SystemStyleObject, } from "@mui/system";
+import { ButtonBase, Menu, alpha } from "@mui/material";
 
 import AuthDropdown from "./auth-dropdown";
+import UserOrgInfo from "./user-org-info";
 
 type Props = {
   id: string;
@@ -19,9 +19,7 @@ type Props = {
 export default function AuthComponent({ id, controlId }: Props) {
   const { data: session } = useSession();
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu()
-  const pathname = usePathname();
-  const isOrg = pathname.includes("/dashboard/org/");
-  const orgName = isOrg ? pathname.split("/")[3] : null;
+  const { isOrg, organization } = useOrganization();
 
   if (!session) return null;
 
@@ -52,29 +50,11 @@ export default function AuthComponent({ id, controlId }: Props) {
             lg: 'row'
           }
         })} onClick={onOpen}>
-      <Stack component="span" direction="row" alignItems="center" sx={{
-        position: "relative",
-      }}>
-        <Avatar sx={{
-          mr: {
-            lg: 1.5
-          },
-          zIndex: 1,
-        }} />
-        <Stack direction="column" sx={{
-          display: {
-            xs: 'none',
-            lg: 'flex'
-          }
-        }}>
-          <Typography component="span" variant="subtitle1" color="primary.main">
-            {user.gatewayId}
-          </Typography>
-          <Typography component="span" variant="caption" color="primary.main">
-            @{user.gatewayId}
-          </Typography>
-        </Stack>
-      </Stack>
+      <UserOrgInfo
+        image={isOrg ? organization.image : undefined}
+        name={isOrg ? organization.name! : user.gatewayId!}
+        gatewayId={isOrg ? organization.gatewayId! : user.gatewayId!}
+      />
       <MoreHorizOutlined sx={{
         color: "action.active",
         backgroundColor: {
@@ -115,6 +95,11 @@ export default function AuthComponent({ id, controlId }: Props) {
       anchorOrigin={{
         horizontal: 'left',
         vertical: 'top'
+      }}
+      sx={{
+        '.MuiListItemIcon-root': {
+          minWidth: (theme) => `${theme.spacing(5 + 1.5)} !important`
+        }
       }}
     >
       <AuthDropdown onClose={onClose} />

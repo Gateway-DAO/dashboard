@@ -17,19 +17,6 @@ fragment login_data on LoginOutput {
   protocol_id
   refresh_token
   token
-  user {
-    id
-    gatewayId
-    # accesses {
-    #   role
-    #   organization {
-    #     id
-    #     image
-    #     name
-    #     gatewayId
-    #   }
-    # }
-  }
 }
 
 mutation login_wallet($signature: String!, $wallet: String!) {

@@ -13,7 +13,7 @@ export default function Providers({ children }: PropsWithChildren) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SessionProvider>
+      <SessionProvider refetchOnWindowFocus refetchInterval={5000}>
         <ThemeProvider>
           <Notistack>{children}</Notistack>
         </ThemeProvider>
