@@ -17,11 +17,7 @@ export default async function refreshToken(token: SessionToken): Promise<Session
 
     const newToken = res.refreshToken;
 
-    const user = await getMe(token!.token);
-    return {
-      ...newToken,
-      user,
-    };
+    return newToken;
   } catch (e) {
     return {
       ...token,

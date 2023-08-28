@@ -7,7 +7,6 @@ export type SessionUser = MeQuery["me"];
 
 export type SessionToken = Login_DataFragment & {
   error?: any;
-  user: SessionUser;
 };
 
 export type Session = Login_DataFragment & {

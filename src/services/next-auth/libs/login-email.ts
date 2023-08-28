@@ -25,12 +25,7 @@ export default async function loginEmail (
 
     const token = res.loginEmail;
 
-    const user = await getMe(token!.token);
-
-    return {
-      ...token,
-      user,
-    };
+    return token;
   } catch (error: any) {
     throw new Error(error);
   }

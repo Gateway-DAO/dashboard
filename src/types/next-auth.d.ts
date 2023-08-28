@@ -5,14 +5,14 @@
 import NextAuth, { Session, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 
-import { SessionToken, SessionUser } from './user';
+import { SessionToken, SessionUser, Session as UserSession } from './user';
 
 declare module 'next-auth' {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
   type User = SessionToken;
-  type Session = SessionToken
+  type Session = UserSession
 }
 
 declare module 'next-auth/jwt' {
