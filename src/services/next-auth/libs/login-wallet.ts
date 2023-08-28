@@ -24,11 +24,7 @@ export default async function loginWallet (
     }
 
     const token = res.loginWallet;
-    const user = await getMe(token!.token);
-    return {
-      ...token,
-      user,
-    };
+    return token;
   } catch (error: any) {
     throw new Error(error);
   }

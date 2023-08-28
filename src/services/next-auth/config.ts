@@ -3,6 +3,7 @@ import { NextAuthOptions } from 'next-auth';
 import { SessionToken } from '@/types/user';
 import jwt from 'jsonwebtoken';
 
+import getMe from './libs/get-me';
 import refreshToken from './libs/refresh-token';
 import credentialEmail from './providers/credential-email';
 import credentialWallet from './providers/credential-wallet';
@@ -29,10 +30,12 @@ export const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      const user = await getMe(token.token);
       return {
         ...session,
         ...(token.error && { error: token.error }),
         ...(token ?? {}),
+        user,
       };
     },
   },
