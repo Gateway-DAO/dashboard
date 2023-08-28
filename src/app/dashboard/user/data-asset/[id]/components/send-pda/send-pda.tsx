@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button';
-import ConfirmDialog from '@/components/modal/confirm-dialog';
 import ModalRight from '@/components/modal/modal-right';
 import ModalTitle from '@/components/modal/modal-title';
 import { common } from '@/locale/en/common';
@@ -52,10 +51,6 @@ export default function SendPda() {
     setOpenSendPda();
   };
 
-  const closeModel = () => {
-    setConfirmDiscardChanges(true);
-  };
-
   return (
     <>
       <Button
@@ -74,8 +69,8 @@ export default function SendPda() {
       >
         {common.actions.share_a_copy}
       </Button>
-      <ModalRight open={openSendPda} onClose={closeModel}>
-        <ModalTitle onClose={closeModel} />
+      <ModalRight open={openSendPda} onClose={toggleModal}>
+        <ModalTitle onClose={toggleModal} />
         {pdaSent ? (
           <SendPdaFormSuccessfully id={pdaSent} />
         ) : (
@@ -102,7 +97,6 @@ export default function SendPda() {
                   mt: 3,
                 }}
                 id="send-pda-button"
-                // disabled={true}
                 onClick={() => setPdaSent('id')}
               >
                 {common.actions.share_now}
@@ -111,16 +105,6 @@ export default function SendPda() {
           </FormProvider>
         )}
       </ModalRight>
-      <ConfirmDialog
-        open={confirmDiscardChanges}
-        negativeAnswer={pda.dialog.negative}
-        positiveAnswer={pda.dialog.positive}
-        title={pda.dialog.title}
-        setOpen={setConfirmDiscardChanges}
-        onConfirm={toggleModal}
-      >
-        {pda.dialog.text}
-      </ConfirmDialog>
     </>
   );
 }
