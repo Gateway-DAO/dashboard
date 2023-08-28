@@ -1,13 +1,24 @@
+/* eslint-disable @next/next/no-img-element */
+
 import SwipeableDrawerMobile from '@/components/modal/swipeable-drawer-mobile';
 import { theme } from '@/theme';
 
-import { Modal, useMediaQuery } from '@mui/material';
+import { CloseOutlined } from '@mui/icons-material';
+import {
+  Box,
+  Dialog,
+  DialogContent,
+  IconButton,
+  Paper,
+  Stack,
+  useMediaQuery,
+} from '@mui/material';
 
 type Props = {
   open?: boolean;
   handleClose: () => void;
   handleOpen: () => void;
-  title?: string;
+  image: string;
   swipeableDrawer?: boolean;
 };
 
@@ -15,7 +26,7 @@ export default function ModalImage({
   open = false,
   handleClose,
   handleOpen,
-  title,
+  image,
   swipeableDrawer = false,
 }: Props) {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
@@ -27,20 +38,60 @@ export default function ModalImage({
           handleClose={() => handleClose()}
           handleOpen={() => handleOpen()}
         >
-          <p>Teste</p>
+          <Box sx={{ width: { xs: '250px', md: '396px' }, margin: 'auto' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+              <IconButton
+                sx={{ backgroundColor: 'rgba(0, 0, 0, 0.08)' }}
+                onClick={() => handleClose()}
+              >
+                <CloseOutlined />
+              </IconButton>
+            </Box>
+            <DialogContent>
+              <img
+                src={image}
+                width="100%"
+                alt="PDA image"
+                style={{ borderRadius: 16 }}
+              />
+            </DialogContent>
+          </Box>
         </SwipeableDrawerMobile>
       ) : (
-        <Modal open={open} onClose={() => handleClose()}>
-          <p>bora</p>
-        </Modal>
-        // <Modal
-        //   open={open}
-        //   handleClose={() => handleClose()}
-        //   modalTitle={`Modal ${title}`}
-        //   modalDescription={`Modal ${title}`}
-        // >
-        //   <p>aqui tem uma modal</p>
-        // </Modal>
+        <Dialog open={open} onClose={() => handleClose()}>
+          <Paper
+            direction="column"
+            elevation={5}
+            component={Stack}
+            sx={{
+              px: { xs: 2, lg: 3 },
+              py: { xs: 2, lg: 3 },
+              height: '100%',
+              width: { md: '100%', xs: '444px' },
+              display: 'flex',
+              borderRadius: 1,
+            }}
+          >
+            <Box sx={{ width: { xs: '250px', md: '396px' }, margin: 'auto' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+                <IconButton
+                  sx={{ backgroundColor: 'rgba(0, 0, 0, 0.08)' }}
+                  onClick={() => handleClose()}
+                >
+                  <CloseOutlined />
+                </IconButton>
+              </Box>
+              <DialogContent>
+                <img
+                  src={image}
+                  width="100%"
+                  alt="PDA image"
+                  style={{ borderRadius: 16 }}
+                />
+              </DialogContent>
+            </Box>
+          </Paper>
+        </Dialog>
       )}
     </>
   );
