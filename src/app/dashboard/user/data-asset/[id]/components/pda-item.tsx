@@ -14,9 +14,10 @@ import {
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
 
-import { Divider, IconButton, Modal, Stack, Typography } from '@mui/material';
+import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
 import DataTable from './data-table';
+import ModalImage from './modal-image';
 import PdaCardInfo from './pda-card-info';
 import SendPda from './send-pda/send-pda';
 import SharedWithCard from './shared-with-card';
@@ -47,20 +48,26 @@ export default function PDAItem({ pda }: Props) {
             {pda?.title}
           </Typography>
           {pda.image && (
-            <IconButton>
-              <Image
-                src={pda?.image ?? ''}
-                alt={pda?.title}
-                width={96}
-                height={96}
-                style={{ borderRadius: 16 }}
+            <>
+              <IconButton onClick={toggleShowImagePDAModal}>
+                <Image
+                  src={pda?.image ?? ''}
+                  alt={pda?.title}
+                  width={96}
+                  height={96}
+                  style={{ borderRadius: 16 }}
+                />
+              </IconButton>
+              <ModalImage
+                open={showImagePDAModal}
+                handleClose={toggleShowImagePDAModal}
+                handleOpen={() => console.log('open')}
+                image={pda.image}
+                swipeableDrawer
               />
-            </IconButton>
+            </>
           )}
         </Stack>
-        <Modal open={showImagePDAModal}>
-          <p>Carla Zambelli</p>
-        </Modal>
         <Tags tags={pda?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
         <PdaCardInfo pda={pda} />
