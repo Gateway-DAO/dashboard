@@ -31,12 +31,12 @@ export default function ModalRight({ children, open, handleClose }: Props) {
       sx={{
         width: { xs: '100%', md: '600px', lg: '646px' },
         left: 'auto',
-        right: 16,
-        bottom: 16,
-        top: 16,
-        borderRadius: 1,
+        right: { xs: 0, md: 16 },
+        bottom: { xs: 0, md: 16 },
+        top: { xs: 0, md: 16 },
+        borderRadius: { xs: 0, md: 1 },
         '& .MuiPaper-elevation': {
-          borderRadius: 1,
+          borderRadius: { xs: 0, md: 1 },
         },
       }}
     >

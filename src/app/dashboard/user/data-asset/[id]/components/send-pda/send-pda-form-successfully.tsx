@@ -1,57 +1,59 @@
-import useTranslation from 'next-translate/useTranslation';
+import ProofCardInfo from '@/app/dashboard/user/proof/components/proof-card-info';
+import ProofCardTitle from '@/app/dashboard/user/proof/components/proof-card-title';
+import { SuccessfullyIcon } from '@/components/icons/successfully-icon';
+import { common } from '@/locale/en/common';
+import { pda } from '@/locale/en/pda';
 
+import LinkIcon from '@mui/icons-material/Link';
 import { Box, Button, Stack, Typography } from '@mui/material';
 
 type Props = {
-  credentialId: string;
+  id: string;
 };
 
-export default function SendPdaFormSuccessfully({ credentialId }: Props) {
-  const { t } = useTranslation('protocol');
+export default function SendPdaFormSuccessfully({ id }: Props) {
+  // TODO: Remove MOCK
+  const proof = {
+    id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fe375',
+    title: 'Chase',
+    issuance_date: '2018-04-04T16:00:00.000Z',
+    status: 'Valid',
+    activities: [
+      {
+        type: 'Issued',
+        txHash: 'txhash.com',
+        timestamp: '2018-04-04T16:00:00.000Z',
+      },
+      {
+        type: 'Revoked',
+        txHash: 'txhash.com',
+        timestamp: '2018-04-04T16:00:00.000Z',
+      },
+    ],
+    sharing_cost: 0,
+  };
 
   return (
     <Stack>
-      <Box sx={{ position: 'absolute', top: { xs: '24px', md: '48px' } }}>
-        Test
+      <Box sx={{ position: 'absolute', top: { xs: 24, md: 48 } }}>
+        <SuccessfullyIcon />
       </Box>
-      <Typography variant="h5" sx={{ mb: 3, maxWidth: 270 }}>
-        {t('data-model.successfully-title')}
+      <Typography fontSize={34} sx={{ mb: 6 }}>
+        {pda.share.successfully_title}
       </Typography>
-      <Stack
-        sx={{
-          border: '1px solid rgba(229, 229, 229, 0.12)',
-          borderRadius: 2,
-          pt: 2,
-          px: 2,
-        }}
+      <ProofCardTitle proof={proof} />
+      <ProofCardInfo proof={proof} />
+      <Button
+        variant="contained"
+        id="share-pda-button-check-now"
+        sx={{ mb: 1.5 }}
       >
-        <Stack direction="row" alignItems="center" gap={2} sx={{ mb: 2 }}>
-          <Box
-            sx={{
-              width: 80,
-              height: 80,
-              borderRadius: 1.5,
-              overflow: 'hidden',
-            }}
-          >
-            <img src="test" alt="test" width="100%" />
-          </Box>
-          <Stack justifyContent="center">
-            <Typography fontSize={14} sx={{ color: 'primary.main' }}>
-              ID aksdjfaksdjjfasjf;l
-            </Typography>
-            <Typography variant="h6">asdfasfasdf</Typography>
-          </Stack>
-        </Stack>
-        {/* <CredentialCardInfo credential={credential?.data} elevation={20} /> */}
-        <Button
-          variant="contained"
-          id="issuanceflow-button-checkcredential"
-          sx={{ mb: 3 }}
-        >
-          asfasdf
-        </Button>
-      </Stack>
+        {common.actions.check_now}
+      </Button>
+      <Button variant="outlined" id="share-pda-button-copy-url" sx={{ mb: 3 }}>
+        <LinkIcon sx={{ mr: 1 }} />
+        {common.actions.copy_url}
+      </Button>
     </Stack>
   );
 }
