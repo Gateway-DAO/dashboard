@@ -112,6 +112,10 @@ export default function AuthComponent({ id, controlId }: Props) {
       MenuListProps={{
         'aria-labelledby': id,
       }}
+      anchorOrigin={{
+        horizontal: 'left',
+        vertical: 'top'
+      }}
     >
       <AuthDropdown onClose={onClose} />
     </Menu>
