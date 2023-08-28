@@ -24,9 +24,10 @@ import SharedWithCard from './shared-with-card';
 
 type Props = {
   pda: PdaQuery['credential'];
+  viewOnly?: boolean;
 };
 
-export default function PDAItem({ pda }: Props) {
+export default function PDAItem({ pda, viewOnly = false }: Props) {
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
   return (
     <>
@@ -72,7 +73,8 @@ export default function PDAItem({ pda }: Props) {
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
         <PdaCardInfo pda={pda} />
         <SharedWithCard />
-        <SendPda />
+        {!viewOnly && <SendPda />}
+
         <Activities
           activities={pda.activities}
           activitiesTextsType={{
