@@ -45,10 +45,15 @@ export default function SendPda() {
   const toggleModal = () => {
     if (openSendPda) {
       router.back();
+      setPdaSent(undefined);
     } else {
       router.push('#send-pda');
     }
     setOpenSendPda();
+  };
+
+  const closeModel = () => {
+    setConfirmDiscardChanges(true);
   };
 
   return (
@@ -69,11 +74,8 @@ export default function SendPda() {
       >
         {common.actions.share_a_copy}
       </Button>
-      <ModalRight
-        open={openSendPda}
-        handleClose={() => setConfirmDiscardChanges(true)}
-      >
-        <ModalTitle onClose={() => setConfirmDiscardChanges(true)} />
+      <ModalRight open={openSendPda} onClose={closeModel}>
+        <ModalTitle onClose={closeModel} />
         {pdaSent ? (
           <SendPdaFormSuccessfully id={pdaSent} />
         ) : (
@@ -100,7 +102,8 @@ export default function SendPda() {
                   mt: 3,
                 }}
                 id="send-pda-button"
-                disabled={true}
+                // disabled={true}
+                onClick={() => setPdaSent('id')}
               >
                 {common.actions.share_now}
               </LoadingButton>
