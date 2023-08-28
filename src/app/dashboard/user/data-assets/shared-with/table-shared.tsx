@@ -34,18 +34,32 @@ export function TableSharedDataAssets() {
   ];
   return (
     <Stack py={3}>
-      <Table sx={{ minWidth: 650 }}>
+      <Table
+        sx={{
+          minWidth: {
+            xs: 0,
+            lg: 650,
+          },
+          width: {
+            xs: '100%',
+          },
+          overflowX: {
+            xs: 'scroll',
+          },
+        }}
+      >
         <TableHead>
           <TableRow
             sx={{
               display: 'grid',
-              gridTemplateColumns: '3fr 1fr 1fr',
               '& th:first-child': {
                 pl: CONTAINER_PX,
               },
               '& th:last-child': {
                 pr: CONTAINER_PX,
               },
+              gridTemplateColumns: '3fr 1fr 1fr',
+              mx: NEGATIVE_CONTAINER_PX,
             }}
           >
             <TableCell sx={{ border: 'none' }} variant="head" size="medium">
@@ -97,19 +111,5 @@ export function TableSharedDataAssets() {
         </TableBody>
       </Table>
     </Stack>
-    // <Stack>
-    //   {/* TABLE HEADERS */}
-    //   <Stack
-    //     sx={{
-    //       display: 'grid',
-    //       gridTemplateColumns: '3fr 2fr 1fr',
-    //       px: { xs: 0, md: 1, lg: 1 },
-    //     }}
-    //   >
-    //     <TableHeader>Verifier</TableHeader>
-    //     <TableHeader>Share Date</TableHeader>
-    //     <TableHeader>Data Amount</TableHeader>
-    //   </Stack>
-    // </Stack>
   );
 }
