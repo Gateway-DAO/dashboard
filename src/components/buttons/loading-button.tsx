@@ -12,12 +12,7 @@ export function LoadingButton({
   ...other
 }: Props) {
   return (
-    <Button
-      disabled={isLoading || disabled}
-      {...other}
-      variant="outlined"
-      color="info"
-    >
+    <Button disabled={isLoading || disabled} {...other}>
       {isLoading ? <CircularProgress size={loadingSize} /> : other.children}
     </Button>
   );
