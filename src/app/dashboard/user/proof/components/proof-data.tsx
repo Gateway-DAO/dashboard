@@ -1,4 +1,6 @@
 'use client';
+import { useRouter } from 'next/navigation';
+
 import ExternalLink from '@/components/external-link/external-link';
 import PdaCard from '@/components/pda-card/pda-card';
 import { datamodel } from '@/locale/en/datamodel';
@@ -11,6 +13,7 @@ type Props = {
 };
 
 export default function ProofData({ dataModels }: Props) {
+  const router = useRouter();
   return (
     <>
       <Typography fontWeight={400} fontSize={24} sx={{ mb: 3 }}>
@@ -34,7 +37,7 @@ export default function ProofData({ dataModels }: Props) {
                 <PdaCard
                   key={pda.id}
                   dashed
-                  href="/dashboard/user/proof"
+                  onClick={() => router.push(`?pda-id=${pda.id}`, { scroll: false })}
                   {...pda}
                 />
               ))}

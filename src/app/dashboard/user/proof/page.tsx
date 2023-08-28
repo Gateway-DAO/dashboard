@@ -1,4 +1,5 @@
 'use client';
+
 import Activities from '@/components/activities/activities';
 import { common } from '@/locale/en/common';
 import { pda } from '@/locale/en/pda';
@@ -10,11 +11,13 @@ import {
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Button, Divider, Stack } from '@mui/material';
 
+import ModalPDADetail from './components/modal-pda-detail/modal-pda-detail';
 import ProofCardInfo from './components/proof-card-info';
 import ProofCardTitle from './components/proof-card-title';
 import ProofData from './components/proof-data';
 
 export default function ProofPage() {
+
   // TODO: Remove MOCK
   const proof = {
     id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fe375',
@@ -152,6 +155,7 @@ export default function ProofPage() {
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
         <ProofData dataModels={dataModels} />
       </Stack>
+      <ModalPDADetail />
     </>
   );
 }
