@@ -16,6 +16,7 @@ const nextConfig = {
       'cdn.mygateway.xyz',
       'staging.cdn.mygateway.xyz',
       'i.postimg.cc',
+      'cdn.shopify.com',
     ],
   },
   async redirects() {
