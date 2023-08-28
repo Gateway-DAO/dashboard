@@ -12,6 +12,7 @@ export default function PdaCard({
   issuerName,
   dashed,
   href,
+  onClick,
   status,
 }: PdaCardProps) {
   return (
@@ -28,8 +29,11 @@ export default function PdaCard({
       }}
     >
       <CardActionArea
-        component={Link}
-        href={href}
+        {...(href && {
+          component: Link,
+          href: href,
+        })}
+        onClick={onClick}
         sx={{
           display: 'flex',
           flexDirection: 'column',
