@@ -15,12 +15,6 @@ export const pda = {
     free: 'Free',
     successfully_title: 'Copy shared successfully',
   },
-  dialog: {
-    title: 'Confirmation',
-    text: 'Are you sure you want to exit?',
-    positive: 'Confirm',
-    negative: 'Cancel',
-  },
   activities: {
     issued: 'PDA issued',
     revoked: 'PDA revoked',
