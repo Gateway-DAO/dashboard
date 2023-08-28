@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
-import { Typography } from "@mui/material"
+import DefaultError from '@/components/default-error/default-error';
 
 export default function DataAssetsErrorPage() {
-  return <Typography>Suspense error boundary</Typography>
+  return <DefaultError />;
 }

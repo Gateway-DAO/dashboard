@@ -35,5 +35,5 @@ export function PDAStatusChip({
     props.color = 'warning';
   }
 
-  return <Chip {...props} />;
+  return <Chip sx={{ textTransform: 'capitalize' }} {...props} />;
 }

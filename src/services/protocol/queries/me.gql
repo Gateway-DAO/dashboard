@@ -1,5 +1,15 @@
 query me {
   me {
     id
+    gatewayId
+    accesses {
+      role
+      organization {
+        id
+        image
+        name
+        gatewayId
+      }
+    }
   }
 }
