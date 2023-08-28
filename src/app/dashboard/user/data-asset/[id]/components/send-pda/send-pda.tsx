@@ -23,7 +23,6 @@ import SendPdaFormSuccessfully from './send-pda-form-successfully';
 export default function SendPda() {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
-  const [confirmDiscardChanges, setConfirmDiscardChanges] = useState(false);
   const [openSendPda, setOpenSendPda] = useToggle(false);
   const [pdaSent, setPdaSent] = useState<string>();
 
