@@ -25,7 +25,7 @@ export const userHeader = (token: string) => ({
 });
 
 const gqlClient = (token?: string) =>
-  new GraphQLClient(process.env.NEXT_PUBLIC__ENDPOINT as string, {
+  new GraphQLClient(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {
     headers: {
       ...headers,
       ...(token ? userHeader(token) : {}),

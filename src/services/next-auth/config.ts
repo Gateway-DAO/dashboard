@@ -3,32 +3,10 @@ import { NextAuthOptions } from 'next-auth';
 import { SessionToken } from '@/types/user';
 import jwt from 'jsonwebtoken';
 
-import { apiPublic } from '../protocol/api';
+import refreshToken from './libs/refresh-token';
 import credentialEmail from './providers/credential-email';
 import credentialWallet from './providers/credential-wallet';
 
-const callRefresh = async (token: SessionToken): Promise<SessionToken> => {
-  try {
-    const res = await apiPublic.refresh({
-      refresh_token: token.refresh_token,
-    });
-
-    const { error } = (res as any) ?? {};
-
-    if (error || !res.refreshToken) {
-      throw error;
-    }
-
-    const newToken = res.refreshToken;
-
-    return newToken;
-  } catch (e) {
-    return {
-      ...token,
-      error: 'RefreshAccessTokenError',
-    };
-  }
-};
 
 export const nextAuthConfig: NextAuthOptions = {
   providers: [credentialEmail, credentialWallet],
@@ -45,7 +23,7 @@ export const nextAuthConfig: NextAuthOptions = {
       const parsedToken = jwt.decode(token.token, { json: true });
 
       if (parsedToken!.exp! < Date.now() / 1000) {
-        const refreshedToken = await callRefresh(token);
+        const refreshedToken = await refreshToken(token);
         return refreshedToken;
       }
       return token;
