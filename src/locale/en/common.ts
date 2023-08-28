@@ -11,5 +11,7 @@ export const common = {
     revoke_access: 'Revoke access',
     hide_activity: 'Hide Activity',
     show_activity: 'See Activity',
+    check_now: 'Check now',
+    copy_url: 'Copy URL',
   },
 };
