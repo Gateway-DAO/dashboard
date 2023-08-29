@@ -91,6 +91,9 @@ export default function AuthComponent({ id, controlId }: Props) {
       onClose={onClose}
       MenuListProps={{
         'aria-labelledby': id,
+        sx: {
+          minWidth: 305,
+        }
       }}
       anchorOrigin={{
         horizontal: 'left',
