@@ -83,7 +83,6 @@ export default function SendPdaFormField() {
         </FormControl>
         <TextField
           required
-          label={pda.share.address}
           id="id-field-address"
           {...register('address')}
           error={!!errors.address}
