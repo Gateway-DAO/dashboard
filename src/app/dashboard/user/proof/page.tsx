@@ -1,20 +1,18 @@
-'use client';
-
 import Activities from '@/components/activities/activities';
-import { common } from '@/locale/en/common';
 import { pda } from '@/locale/en/pda';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
 
-import CancelIcon from '@mui/icons-material/Cancel';
-import { Button, Divider, Stack } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
 
 import ModalPDADetail from './components/modal-pda-detail/modal-pda-detail';
 import ProofCardInfo from './components/proof-card-info';
 import ProofCardTitle from './components/proof-card-title';
 import ProofData from './components/proof-data';
+import ProofRevokeButton from './components/proof-revoke-button';
+import ProofShareButton from './components/proof-share-button';
 
 export default function ProofPage() {
 
@@ -105,34 +103,8 @@ export default function ProofPage() {
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
         <ProofCardTitle proof={proof} />
         <ProofCardInfo proof={proof} />
-        <Button
-          variant="contained"
-          size="large"
-          sx={{
-            mb: 2,
-            width: '100%',
-            fontWeight: 700,
-            fontSize: 13,
-          }}
-          onClick={() => console.log('test')} // TODO: Add action
-        >
-          {common.actions.share_a_copy}
-        </Button>
-        <Button
-          variant="outlined"
-          size="large"
-          color="error"
-          sx={{
-            mb: 2,
-            width: '100%',
-            fontWeight: 700,
-            fontSize: 13,
-          }}
-          onClick={() => console.log('test')} // TODO: Add action
-          startIcon={<CancelIcon height={20} width={20} color="error" />}
-        >
-          {common.actions.revoke_access}
-        </Button>
+        <ProofShareButton proof={proof} />
+        <ProofRevokeButton proof={proof} />
         <Activities
           activities={proof.activities}
           activitiesTextsType={{

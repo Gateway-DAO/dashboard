@@ -6,7 +6,7 @@ import {
 
 import { Divider, Skeleton, Stack } from '@mui/material';
 
-export default async function PDASkeleton() {
+export default function PDASkeleton() {
   return (
     <>
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
