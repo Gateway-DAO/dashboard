@@ -15,7 +15,6 @@ import ProofRevokeButton from './components/proof-revoke-button';
 import ProofShareButton from './components/proof-share-button';
 
 export default function ProofPage() {
-
   // TODO: Remove MOCK
   const proof = {
     id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fe375',
@@ -71,7 +70,7 @@ export default function ProofPage() {
       title: 'Credit Score',
       credentials: [
         {
-          id: 'a23q231231312312qdasdas',
+          id: '0c0ff388-23e7-47ec-9175-1bcd7880877c',
           name: 'Credit Score',
           issuerName: 'Mastercard',
           issuerImage:
