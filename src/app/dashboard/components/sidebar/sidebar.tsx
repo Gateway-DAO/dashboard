@@ -29,9 +29,11 @@ export default function Sidebar({ menuItems, children }: PropsWithChildren<Props
         [theme.breakpoints.up('lg')]: {
           borderRight: '1px solid',
           borderColor: 'divider',
-          maxWidth: { xs: '100%', md: '300px' },
+          maxWidth: 300,
           width: '100%',
           px: 2.5,
+          position: 'fixed',
+          height: '100vh',
         }
       })}
     >
