@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { FC } from "react";
 
+import { CONTAINER_PX } from "@/theme/config/style-tokens";
+
 import { ListItem, ListItemButton, ListItemButtonProps, SvgIconProps, Typography } from "@mui/material";
 
 
@@ -26,7 +28,12 @@ export default function GTWMenuItem({ icon: Icon, href, name, active, ...props }
           alignItems: 'center',
           direction: 'row',
           gap: 2,
-          px: 2.5,
+          pl: {
+            xs: CONTAINER_PX.xs + 0.5,
+            md: CONTAINER_PX.md + 0.5,
+            lg: 3
+          },
+          pr: 2.5,
           ':hover': {
             svg: {
               color: 'primary.main',
