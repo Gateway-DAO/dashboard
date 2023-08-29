@@ -55,11 +55,9 @@ export default function SendPda() {
       <Button
         variant="contained"
         size="large"
+        fullWidth
         sx={{
           mb: 2,
-          width: '100%',
-          fontWeight: 700,
-          fontSize: 13,
         }}
         onClick={() => {
           router.push('#send-pda');

@@ -5,6 +5,7 @@ export const MuiButton: Extract<Theme['components'], object>['MuiButton'] = {
     root: ({theme}) => ({
       textTransform: 'unset',
       borderRadius: theme.spacing(5),
+      fontWeight: 'bold',
     }),
   },
 };
