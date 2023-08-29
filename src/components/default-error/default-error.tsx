@@ -1,10 +1,17 @@
 import Link from 'next/link';
 
+import { errorMessages } from '@/locale/en/errors';
+
 import { Box, Button, Stack, Typography } from '@mui/material';
 
 import { GatewayBrokenIcon } from '../icons/gateway-broken';
 
-export default function DefaultError(): JSX.Element {
+type Props = {
+  href?: string;
+  message?: string;
+}
+
+export default function DefaultError({ href = "/", message = errorMessages["page-not-found"] }: Props): JSX.Element {
   return (
     <Stack
       sx={{
@@ -22,9 +29,9 @@ export default function DefaultError(): JSX.Element {
         />
         <Box>
           <Typography variant="h3">Something went wrong</Typography>
-          <Typography variant="body1">Page not found.</Typography>
+          <Typography variant="body1">{message}</Typography>
         </Box>
-        <Link passHref href="/">
+        <Link passHref href={href}>
           <Button size="large" variant="contained">
             Back to home
           </Button>
