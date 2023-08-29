@@ -88,9 +88,6 @@ export default function SendPda() {
                 variant="contained"
                 type="submit"
                 sx={{
-                  height: 42,
-                  display: 'flex',
-                  borderRadius: 1,
                   mt: 3,
                 }}
                 id="send-pda-button"
