@@ -48,6 +48,7 @@ export default function CardUsers({ pda }: Props) {
           name={limitCharsCentered(issuerName, 15)}
           id={`pda-issuer-${issuerName}`}
           onClick={() => setTooltipIssuer(true)}
+          verified // TODO: Vefiry if the issuer is a verified user
           active={tooltipIssuer}
         />
         {tooltipIssuer && (
