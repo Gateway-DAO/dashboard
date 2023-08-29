@@ -27,7 +27,12 @@ export default function DashboardLayout({
       <Sidebar menuItems={menuItems}>
         <Logo />
       </Sidebar>
-      <DashboardPage>
+      <DashboardPage sx={{
+        marginLeft: {
+          xs: 0,
+          lg: '300px'
+        }
+      }}>
         {children}
       </DashboardPage>
       {mobileMenuItems}
