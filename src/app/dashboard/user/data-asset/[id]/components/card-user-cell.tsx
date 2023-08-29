@@ -2,7 +2,8 @@
 import { AvatarFile } from '@/components/avatar-file/avatar-file';
 import CardCell from '@/components/card-cell/card-cell';
 
-import { Stack, Typography } from '@mui/material';
+import { Verified } from '@mui/icons-material';
+import { Box, Stack, Typography } from '@mui/material';
 
 type Props = {
   label: string;
@@ -12,6 +13,7 @@ type Props = {
   id?: string;
   margin?: boolean;
   active: boolean;
+  verified?: boolean;
   onClick: () => void;
 };
 
@@ -23,6 +25,7 @@ export default function CardUserCell({
   id,
   active = false,
   onClick,
+  verified = false,
 }: Props) {
   return (
     <Stack
@@ -59,9 +62,19 @@ export default function CardUserCell({
         {name}
       </AvatarFile>
       <CardCell label={label} alignRight={alignRight} margin={false}>
-        <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
-          {name}
-        </Typography>
+        <Box display="flex" gap={1} alignItems="center">
+          <Typography fontWeight={600} sx={{ color: 'text.primary' }}>
+            {name}
+          </Typography>
+          {verified && (
+            <Verified
+              sx={{
+                fontSize: 16,
+                color: 'primary.main',
+              }}
+            />
+          )}
+        </Box>
       </CardCell>
     </Stack>
   );
