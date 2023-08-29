@@ -1,20 +1,27 @@
+"use client";
 import { apiPublic } from "@/services/protocol/api";
+import { useQuery } from "@tanstack/react-query";
 
 import PDAItem from "../../../data-asset/[id]/components/pda-item";
+import PDASkeleton from "../../../data-asset/[id]/components/pda-skeleton";
 
 type Props = {
   id: string;
 }
 
-const getPDA = async (id: string) => {
-  // const pda = await apiPublic.pda({ id });
-  // return pda.credential;
-  throw new Error("YEY")
-};
+export default function PDADetail({ id }: Props) {
+  const { data: pda, isLoading, isError } = useQuery({
+    queryKey: ["proof-pda", id],
+    queryFn: () => apiPublic.pda({ id }),
+    select: (data) => data.credential,
+  });
 
-export default async function PDADetail({ id }: Props) {
-  const pda = await getPDA(id);
-  console.log("YEY")
-  return <>Joao é lindo</>
-  // return <PDAItem pda={pda} viewOnly={true} />
+  if (isLoading) {
+    return <PDASkeleton />;
+  }
+
+  if (isError || !pda) {
+    return <div>Error</div>;
+  }
+  return <PDAItem pda={pda} viewOnly={true} />
 }
