@@ -66,9 +66,6 @@ export default function MenuBottomListItems({ activePath, bottomItems, menuItems
               active={activePath === item.href}
               onClick={() => setIsMenuOpen(false)}
               {...item}
-              sx={{
-                px: CONTAINER_PX,
-              }}
             />
           ))}
         </List>
