@@ -1,9 +1,12 @@
 'use client';
+import { Gateway2Icon } from '@/components/icons/gateway2';
 import { pda } from '@/locale/en/pda';
+import { theme } from '@/theme';
 import { useFormContext } from 'react-hook-form';
+import { FaEthereum } from 'react-icons/fa';
+import { TbCurrencySolana } from 'react-icons/tb';
 
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import WalletIcon from '@mui/icons-material/Wallet';
 import {
   FormControl,
   FormHelperText,
@@ -28,22 +31,30 @@ export default function SendPdaFormField() {
     {
       value: 0,
       name: 'Gateway ID',
-      icon: <MailOutlineIcon sx={{ color: 'text.secondary' }} />,
+      icon: (
+        <Gateway2Icon sx={{ color: 'text.secondary', width: 22, height: 22 }} />
+      ),
     },
     {
       value: 1,
       name: 'Email',
-      icon: <MailOutlineIcon sx={{ color: 'text.secondary' }} />,
+      icon: (
+        <MailOutlineIcon
+          sx={{ color: 'text.secondary', width: 22, height: 22 }}
+        />
+      ),
     },
     {
       value: 2,
       name: 'EVM Wallet',
-      icon: <WalletIcon sx={{ color: 'text.secondary' }} />,
+      icon: <FaEthereum color={theme.palette.text.secondary} fontSize="22" />,
     },
     {
       value: 3,
       name: 'Solana Wallet',
-      icon: <WalletIcon sx={{ color: 'text.secondary' }} />,
+      icon: (
+        <TbCurrencySolana color={theme.palette.text.secondary} fontSize="22" />
+      ),
     },
   ];
 
@@ -64,7 +75,7 @@ export default function SendPdaFormField() {
                 value={type?.name}
                 sx={{ width: '100%', py: 2 }}
               >
-                <Stack direction="row" gap={1}>
+                <Stack direction="row" alignItems="center" gap={1}>
                   {type.icon}
                   <Typography
                     sx={{ display: 'block', color: 'text.secondary' }}

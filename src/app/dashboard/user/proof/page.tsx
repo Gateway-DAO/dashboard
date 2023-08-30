@@ -40,7 +40,7 @@ export default function ProofPage() {
       title: 'Credit Card Transactions',
       credentials: [
         {
-          id: '7Cae5130c16e6c8b686440b900d93fe12asdfasdfasd91977e70b812d170024f1cffd0e3fe375',
+          id: '0c0ff388-23e7-47ec-9175-1bcd7880877c',
           name: 'Credit Card Transactions',
           issuerName: 'Mastercard',
           issuerImage:
@@ -48,7 +48,7 @@ export default function ProofPage() {
           status: 'revoked',
         },
         {
-          id: 'asdfadfasdfasdf',
+          id: '1640ed0a-5054-4d32-9bef-531ffc8b44fd',
           name: 'Credit Card Transactions',
           issuerName: 'Visa',
           issuerImage:
@@ -56,7 +56,7 @@ export default function ProofPage() {
           status: 'valid',
         },
         {
-          id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fasdfas',
+          id: '0cc1591b-e3e7-477a-bd2c-c8e3d91e57ee',
           name: 'Credit Card Transactions',
           issuerName: 'Amex',
           issuerImage:
@@ -70,7 +70,7 @@ export default function ProofPage() {
       title: 'Credit Score',
       credentials: [
         {
-          id: '0c0ff388-23e7-47ec-9175-1bcd7880877c',
+          id: '06b74feb-e647-4196-a6f9-8e231e7b8c73',
           name: 'Credit Score',
           issuerName: 'Mastercard',
           issuerImage:
@@ -78,7 +78,7 @@ export default function ProofPage() {
           status: 'valid',
         },
         {
-          id: 'a23q231231312312qdasdasasdfasdf',
+          id: '16015e45-a91d-49f1-a361-a0af9d3a6f8e',
           name: 'Credit Score',
           issuerName: 'Visa',
           issuerImage:
@@ -86,7 +86,7 @@ export default function ProofPage() {
           status: 'revoked',
         },
         {
-          id: 'a23q231231312312qdasdasasdfa3e4q3eqglkj',
+          id: '1ce079c6-9c39-4ac9-9b37-3eaefbe2b159',
           name: 'Credit Score',
           issuerName: 'Amex',
           issuerImage:

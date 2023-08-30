@@ -34,12 +34,15 @@ export default function ProofData({ dataModels }: Props) {
             </Stack>
             <Stack direction="row" flexWrap="wrap" gap={1} mb={3}>
               {dataModel.credentials.map((pda: any) => (
-                <PdaCard
-                  key={pda.id}
-                  dashed
-                  onClick={() => router.push(`?pda-id=${pda.id}`, { scroll: false })}
-                  {...pda}
-                />
+                <Stack key={pda.id} sx={{ flexBasis: 'calc(50% - 4px)' }}>
+                  <PdaCard
+                    dashed
+                    onClick={() =>
+                      router.push(`?pda-id=${pda.id}`, { scroll: false })
+                    }
+                    {...pda}
+                  />
+                </Stack>
               ))}
             </Stack>
           </Stack>
