@@ -31,7 +31,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
   return (
     <>
-      <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
+      <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2, width: '100%' }}>
         <ExternalLink
           text={`ID ${limitCharsCentered(pda?.id, 8)}`}
           href="https://www.google.com"
