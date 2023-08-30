@@ -3,22 +3,30 @@ import { getSession } from 'next-auth/react';
 
 import { GraphQLClient } from 'graphql-request';
 
+import { getServerSession } from '../next-auth/get-server-session';
 import { getSdk, SdkFunctionWrapper } from './types';
 
 export type Api = ReturnType<typeof getSdk>;
 
 const headers = {
   'x-api-key': process.env.NEXT_PUBLIC_API_KEY,
-}
+};
 
 const glqAnonClient = new GraphQLClient(
   process.env.NEXT_PUBLIC_API_ENDPOINT as string,
   {
-    headers
+    headers,
   }
 );
 
 export const apiPublic = getSdk(glqAnonClient);
+
+export async function getApiPrivate() {
+  const session = await getServerSession();
+  const token = session?.token;
+  if (!token) return null;
+  return api(token);
+}
 
 export const userHeader = (token: string) => ({
   Authorization: `Bearer ${token}`,
@@ -29,11 +37,10 @@ const gqlClient = (token?: string) =>
     headers: {
       ...headers,
       ...(token ? userHeader(token) : {}),
-    }
+    },
   });
 
-export const api = (token: string) =>
-  getSdk(gqlClient(token));
+export const api = (token: string) => getSdk(gqlClient(token));
 
 export const apiWithRefresh = (
   token: string,
