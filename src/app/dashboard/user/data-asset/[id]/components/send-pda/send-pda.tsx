@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button';
 import ModalRight from '@/components/modal/modal-right';
@@ -19,12 +19,18 @@ import { Button } from '@mui/material';
 import { sendPdaSchema } from './schema';
 import SendPdaFormField from './send-pda-form-fields';
 import SendPdaFormSuccessfully from './send-pda-form-successfully';
+import SendPdaFormSuccessSkeleton from './send-pda-form-successfully-skeleton';
 
 export default function SendPda() {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const [openSendPda, setOpenSendPda] = useToggle(false);
   const [pdaSent, setPdaSent] = useState<string>();
+
+  // TODO: REMOVE MOCK
+  const [loading0, setLoading0] = useState<boolean>(false);
+  // TODO: REMOVE MOCK
+  const [loading1, setLoading1] = useState<boolean>(false);
 
   const methods = useForm({
     resolver: zodResolver(sendPdaSchema as any),
@@ -69,7 +75,13 @@ export default function SendPda() {
       <ModalRight open={openSendPda} onClose={toggleModal}>
         <ModalTitle onClose={toggleModal} />
         {pdaSent ? (
-          <SendPdaFormSuccessfully id={pdaSent} />
+          <>
+            {loading1 ? (
+              <SendPdaFormSuccessSkeleton />
+            ) : (
+              <SendPdaFormSuccessfully id={pdaSent} />
+            )}
+          </>
         ) : (
           <FormProvider {...methods}>
             <Stack
@@ -91,7 +103,19 @@ export default function SendPda() {
                   mt: 3,
                 }}
                 id="send-pda-button"
-                onClick={() => setPdaSent('id')}
+                isLoading={loading0} // TODO: REMOVE MOCK
+                onClick={() => {
+                  // TODO: REMOVE MOCK
+                  setLoading0(true);
+                  setTimeout(() => {
+                    setLoading0(false);
+                    setLoading1(true);
+                    setPdaSent('id');
+                    setTimeout(() => {
+                      setLoading1(false);
+                    }, 2000);
+                  }, 2000);
+                }}
               >
                 {common.actions.share_now}
               </LoadingButton>
