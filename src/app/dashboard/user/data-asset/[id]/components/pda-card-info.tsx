@@ -1,6 +1,6 @@
 'use client';
 import CardCell from '@/components/card-cell/card-cell';
-import ExternalLink from '@/components/external-link/external-link';
+import CopyPaste from '@/components/copy-paste/copy-paste';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { TableCellContainer } from '@/components/table-cell-container/table-cell-container';
 import { datamodel } from '@/locale/en/datamodel';
@@ -71,13 +71,14 @@ export default function PdaCardInfo({ pda }: Props) {
             )}
           </Typography>
         </CardCell>
-        <CardCell label={datamodel.data_model_id}>
-          <ExternalLink
+        <CardCell label={datamodel.data_model_id} margin={false}>
+          <CopyPaste text={pda?.id} limit={12} />
+          {/* <ExternalLink
             text={limitCharsCentered(pda?.id, 6)}
             textSxProps={{ fontSize: 16, fontWeight: 400 }}
             iconSxProps={{ fontSize: 18, top: 4, color: 'text.primary' }}
             href="https://www.google.com"
-          />
+          /> */}
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>

@@ -37,26 +37,26 @@ export default function PDASkeleton() {
           px: CONTAINER_PX,
         }}
       />
-      <Skeleton
-        variant="text"
-        width={200}
-        height={30}
-        sx={{
-          mb: 3,
-        }}
-      />
-      <Skeleton
-        variant="rectangular"
-        width="100%"
-        height={200}
-        sx={{
-          borderRadius: 1,
-          mb: 3,
-          maxWidth: 550,
-          mx: 'auto',
-          width: '100%',
-        }}
-      />
+      <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2, width: '100%' }}>
+        <Skeleton
+          variant="text"
+          width={200}
+          height={30}
+          sx={{
+            mb: 3,
+          }}
+        />
+        <Skeleton
+          variant="rectangular"
+          width="100%"
+          height={200}
+          sx={{
+            borderRadius: 1,
+            mb: 3,
+            width: '100%',
+          }}
+        />
+      </Stack>
     </>
   );
 }

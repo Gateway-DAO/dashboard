@@ -18,6 +18,7 @@ export const claimFields: ClaimTypes = {
   number: 'number',
   array: 'array',
   link: 'link',
+  currency: 'currency',
 };
 
 // List all backend Types
@@ -30,10 +31,12 @@ export const mapBackendTypes: Record<string, string> = {
 export const getClaimType = (
   backendType: string,
   contentMediaType: string,
-  format: string
+  format: string,
+  currency: string
 ) => {
   if (contentMediaType) return claimFields.image;
   if (format === 'uri') return claimFields.link;
+  if (currency) return claimFields.currency;
   if (mapBackendTypes[backendType]) {
     backendType = mapBackendTypes[backendType];
   }
