@@ -22,7 +22,7 @@ export default function CopyPaste({
   const copy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      enqueueSnackbar(sucessMessage, { variant: 'error' });
+      enqueueSnackbar(sucessMessage);
     } catch (err) {
       enqueueSnackbar(errorMessages['UNEXPECTED_ERROR'], { variant: 'error' });
     }
