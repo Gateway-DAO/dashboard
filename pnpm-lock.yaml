@@ -89,9 +89,6 @@ dependencies:
   next-auth:
     specifier: ^4.23.0
     version: 4.23.0(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)
-  next-translate:
-    specifier: ^2.5.3
-    version: 2.5.3(next@13.4.13)(react@18.2.0)
   notistack:
     specifier: ^3.0.1
     version: 3.0.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
@@ -14321,6 +14318,7 @@ packages:
     dependencies:
       next: 13.4.13(@babel/core@7.22.10)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
+    dev: true
 
   /next@13.4.13(@babel/core@7.22.10)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-A3YVbVDNeXLhWsZ8Nf6IkxmNlmTNz0yVg186NJ97tGZqPDdPzTrHotJ+A1cuJm2XfuWPrKOUZILl5iBQkIf8Jw==}
