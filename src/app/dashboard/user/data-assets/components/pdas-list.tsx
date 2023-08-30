@@ -2,26 +2,24 @@
 import PdaCard from "@/components/pda-card/pda-card";
 import routes from "@/constants/routes";
 import { pdas as pdasLocales } from "@/locale/en/pda"
-import { apiPublic } from "@/services/protocol/api"
-import { Chain } from "@/services/protocol/types";
+import { Credential } from "@/services/protocol/types";
+import { DeepPartial } from "react-hook-form";
 
 import { Typography } from "@mui/material";
 
 import PDAsListContainer from "./pdas-list-container";
 
-const getPDAs = async () => {
-  const pdas = await apiPublic.pdas();
-  return pdas.credentials;
+type Props = {
+  pdas: DeepPartial<Credential>[]
 }
 
-export default async function PDAsList() {
-  const pdas = await getPDAs();
+export default async function PDAsList({ pdas }: Props) {
   if (!pdas.length) {
     return <Typography variant="body1" color="text.secondary" sx={{ textAlign: "center", width: "100%" }}>{pdasLocales.empty}</Typography>
   }
   return <PDAsListContainer>
     {pdas.map((pda) => (
-      <PdaCard key={pda.id} href={routes.dashboardUserPDA.replace("[id]", pda.id)} name={pda.title} issuerImage={pda.image} issuerName={"GET ISSUER NAME"} status={pda.status} />
+      <PdaCard key={pda.id} href={routes.dashboardUserPDA.replace("[id]", pda.id!)} name={pda.title!} issuerImage={pda.image} issuerName={"GET ISSUER NAME"} status={pda.status!} />
     ))}
   </PDAsListContainer>
 }
