@@ -71,20 +71,23 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
         </Stack>
         <Tags tags={pda?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
-        <PdaCardInfo pda={pda} />
-        <SharedWithCard />
-        {!viewOnly && <SendPda />}
-
-        <Activities
-          activities={pda.activities}
-          activitiesTextsType={{
-            Issued: pdaLocale.activities.issued,
-            Revoked: pdaLocale.activities.revoked,
-            Suspended: pdaLocale.activities.suspended,
-            Reactivated: pdaLocale.activities.reactivated,
-            Updated: pdaLocale.activities.updated,
-          }}
-        />
+        <PdaCardInfo pda={pda} viewOnly={viewOnly} />
+        {!viewOnly && (
+          <>
+            <SharedWithCard />
+            <SendPda />
+            <Activities
+              activities={pda.activities}
+              activitiesTextsType={{
+                Issued: pdaLocale.activities.issued,
+                Revoked: pdaLocale.activities.revoked,
+                Suspended: pdaLocale.activities.suspended,
+                Reactivated: pdaLocale.activities.reactivated,
+                Updated: pdaLocale.activities.updated,
+              }}
+            />
+          </>
+        )}
       </Stack>
       <Divider
         sx={{
