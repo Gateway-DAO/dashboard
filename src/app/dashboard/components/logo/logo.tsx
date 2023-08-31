@@ -1,6 +1,6 @@
 import { GatewayIcon } from '@/components/icons/gateway';
 
-import { Link, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
 import LogoContainer from './logo-container';
 

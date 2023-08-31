@@ -1,5 +1,5 @@
-import ProofCardInfo from '@/app/dashboard/user/proof/components/proof-card-info';
-import ProofCardTitle from '@/app/dashboard/user/proof/components/proof-card-title';
+import ProofCardInfo from '@/app/dashboard/user/proof/[id]/components/proof-card-info';
+import ProofCardTitle from '@/app/dashboard/user/proof/[id]/components/proof-card-title';
 import { SuccessfullyIcon } from '@/components/icons/successfully-icon';
 import { common } from '@/locale/en/common';
 import { pda } from '@/locale/en/pda';
@@ -11,7 +11,7 @@ type Props = {
   id: string;
 };
 
-export default function SendPdaFormSuccessfully({ id }: Props) {
+export default function SendPdaFormSuccessfully({ }: Props) {
   // TODO: Remove MOCK
   const proof = {
     id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fe375',
