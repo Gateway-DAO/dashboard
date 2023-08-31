@@ -13,7 +13,6 @@ export function CustomEvmButton({ onFirstModal }: Props) {
       {({
         account,
         chain,
-        openAccountModal,
         openChainModal,
         openConnectModal,
         authenticationStatus,

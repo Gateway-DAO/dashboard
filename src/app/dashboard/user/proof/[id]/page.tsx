@@ -1,4 +1,6 @@
 import Activities from '@/components/activities/activities';
+import BackButton from '@/components/back-button';
+import routes from '@/constants/routes';
 import { pda } from '@/locale/en/pda';
 import {
   CONTAINER_PX,
@@ -99,6 +101,7 @@ export default function ProofPage() {
 
   return (
     <>
+      <BackButton href={routes.dashboardUserProofs} />
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
         <ProofCardTitle proof={proof} />
         <ProofCardInfo proof={proof} />

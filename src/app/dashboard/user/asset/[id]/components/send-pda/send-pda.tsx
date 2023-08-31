@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button';
 import ModalRight from '@/components/modal/modal-right';
@@ -36,7 +36,7 @@ export default function SendPda() {
     resolver: zodResolver(sendPdaSchema as any),
   });
 
-  const handleMutation = async (data: any) => {
+  const handleMutation = async (_data: any) => {
     if (!(await methods.trigger())) return;
     try {
       setPdaSent('id');

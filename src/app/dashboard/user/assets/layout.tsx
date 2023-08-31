@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
+import routes from '@/constants/routes';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -34,10 +35,10 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
         }}
       >
         <GTWTabs>
-          <GTWTab label="Private" href="/dashboard/user/data-assets" />
+          <GTWTab label="Private" href={routes.dashboardUserPDAs} />
           <GTWTab
             label="Shared With"
-            href="/dashboard/user/data-assets/shared-with"
+            href={routes.dashboardUserSharedPDAs}
           />
         </GTWTabs>
       </Box>

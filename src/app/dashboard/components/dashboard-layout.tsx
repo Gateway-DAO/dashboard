@@ -1,8 +1,5 @@
 import { PropsWithChildren, ReactNode } from 'react';
 
-import { CONTAINER_PX } from '@/theme/config/style-tokens';
-
-import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import DashboardPage from './dashboard-page';

@@ -1,9 +1,7 @@
-import { apiPublic } from "@/services/protocol/api";
-import { SessionToken } from "@/types/user";
+import { apiPublic } from '@/services/protocol/api';
+import { SessionToken } from '@/types/user';
 
-import getMe from "./get-me";
-
-export default async function loginEmail (
+export default async function loginEmail(
   email: string,
   code: number
 ): Promise<SessionToken> {
@@ -15,7 +13,7 @@ export default async function loginEmail (
 
     const { error } = (res as any) ?? {};
 
-    if(error) {
+    if (error) {
       throw new Error(error);
     }
 
@@ -29,4 +27,4 @@ export default async function loginEmail (
   } catch (error: any) {
     throw new Error(error);
   }
-};
+}

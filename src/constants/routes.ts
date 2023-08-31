@@ -2,8 +2,14 @@ const routes = {
   home: '/',
   auth: '/auth',
   dashboardUser: '/dashboard/user',
-  dashboardUserPDAs: '/dashboard/user/data-assets',
-  dashboardUserPDA: '/dashboard/user/data-asset/[id]',
+  dashboardUserProof: '/dashboard/user/proof/[id]',
+  dashboardUserProofs: '/dashboard/user/proofs',
+  dashboardUserPDAs: '/dashboard/user/assets',
+  dashboardUserSharedPDAs: '/dashboard/user/assets/shared-with',
+  dashboardUserPDA: '/dashboard/user/asset/[id]',
+  dashboardUserRequests: '/dashboard/user/requests',
+  dashboardUserRequest: '/dashboard/user/request/[id]',
+  dashboardOrgRoot: '/dashboard/org',
   dashboardOrg: '/dashboard/org/[id]',
 };
 

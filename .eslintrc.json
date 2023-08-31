@@ -56,5 +56,5 @@
       }
     }
   ],
-  "ignorePatterns": ["./src/services/protocol/types.ts"]
+  "ignorePatterns": ["src/services/protocol/types.ts"]
 }
