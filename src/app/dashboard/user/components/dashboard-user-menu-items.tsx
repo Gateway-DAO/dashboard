@@ -23,7 +23,7 @@ export const dashboardUserMenuItems: GTWMenuItemProps[] = [
   },
   {
     name: 'Data requests',
-    href: routes.dashboardUserDataRequests,
+    href: routes.dashboardUserRequests,
     icon: SquaredArrowDown,
   },
   {
