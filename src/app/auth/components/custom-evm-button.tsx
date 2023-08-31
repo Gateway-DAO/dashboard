@@ -1,4 +1,3 @@
-import Image from 'next/image';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { FaEthereum } from 'react-icons/fa';
@@ -15,7 +14,6 @@ export function CustomEvmButton({ onFirstModal }: Props) {
       {({
         account,
         chain,
-        openAccountModal,
         openChainModal,
         openConnectModal,
         authenticationStatus,

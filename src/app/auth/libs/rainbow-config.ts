@@ -1,21 +1,13 @@
 import '@rainbow-me/rainbowkit/styles.css';
-import { palette } from "@/theme/config/palette"
+import { palette } from '@/theme/config/palette';
 import {
   getDefaultWallets,
-  RainbowKitProvider,
   lightTheme as LightTheme,
   // darkTheme as DarkTheme,
-  Theme
+  Theme,
 } from '@rainbow-me/rainbowkit';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  base,
-  zora,
-} from 'wagmi/chains';
+import { configureChains, createConfig } from 'wagmi';
+import { mainnet, polygon, optimism, arbitrum, base, zora } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -23,23 +15,20 @@ import { SimplePaletteColorOptions } from '@mui/material';
 
 export const { chains, publicClient } = configureChains(
   [mainnet, polygon, optimism, arbitrum, base, zora],
-  [
-    alchemyProvider({ apiKey: "process.env.ALCHEMY_ID" }),
-    publicProvider()
-  ]
+  [alchemyProvider({ apiKey: 'process.env.ALCHEMY_ID' }), publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
   appName: 'Gateway Network',
   projectId: 'YOUR_PROJECT_ID',
-  chains
+  chains,
 });
 
 export const wagmiConfig = createConfig({
   autoConnect: false,
   connectors,
-  publicClient
-})
+  publicClient,
+});
 
 const lightTheme = LightTheme({
   overlayBlur: 'small',
