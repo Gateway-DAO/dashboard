@@ -1,5 +1,5 @@
 'use client';
-import { Fragment, useMemo } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 
 import { WalletIconsTransition } from '@/components/wallet-icons-transition/wallet-icons-transition';
 import { auth } from '@/locale/en/auth';
@@ -9,14 +9,20 @@ import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Link, Stack, Typography } from '@mui/material';
 
+import EvmProvider from '../providers/evm-provider';
+import SolanaProvider from '../providers/solana-provider';
+import { WalletConnectModal } from './wallet-connect-modal';
+
 export function AuthenticationOptions() {
+  const [modalWallet, setModalWallet] = useState(false);
+
   const orSignUpMethods = useMemo(() => {
     return [
       {
         id: 'wallet',
         methodName: auth.steps.initial.connect_wallet,
         icon: <WalletIconsTransition />,
-        onClick: () => console.log('Login'),
+        onClick: () => setModalWallet(true),
         isVisible: true,
       },
       {
@@ -84,6 +90,16 @@ export function AuthenticationOptions() {
           {auth.steps.initial.terms_of_service}{' '}
         </Link>
       </Typography>
+      <EvmProvider>
+        <SolanaProvider>
+          <WalletConnectModal
+            title="Add Wallet"
+            description="Choose one of available wallet providers or create a new wallet."
+            isOpen={modalWallet}
+            onCancel={setModalWallet}
+          />
+        </SolanaProvider>
+      </EvmProvider>
     </>
   );
 }

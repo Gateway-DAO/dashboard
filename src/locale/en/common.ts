@@ -13,5 +13,6 @@ export const common = {
     show_activity: 'See Activity',
     check_now: 'Check now',
     copy_url: 'Copy URL',
+    connect_now: 'Connect now',
   },
 };
