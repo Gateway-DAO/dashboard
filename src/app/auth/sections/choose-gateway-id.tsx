@@ -7,8 +7,8 @@ import { useForm } from 'react-hook-form';
 
 import { Stack, TextField, Typography } from '@mui/material';
 
-import { GatewayIdSchema } from '../../schema';
-import { TitleSubtitleField } from '../title-field';
+import { TitleSubtitleField } from '../components/title-field';
+import { GatewayIdSchema } from '../schema';
 
 export function ChooseGatewayId() {
   const { enqueueSnackbar } = useSnackbar();

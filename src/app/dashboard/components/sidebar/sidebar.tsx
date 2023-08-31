@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { PropsWithChildren, ReactNode } from 'react';
 
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
@@ -12,7 +12,10 @@ type Props = {
   menuItems: ReactNode;
 };
 
-export default function Sidebar({ menuItems, children }: PropsWithChildren<Props>) {
+export default function Sidebar({
+  menuItems,
+  children,
+}: PropsWithChildren<Props>) {
   return (
     <Stack
       component={'aside'}
@@ -34,16 +37,21 @@ export default function Sidebar({ menuItems, children }: PropsWithChildren<Props
           px: 2.5,
           position: 'fixed',
           height: '100vh',
-        }
+        },
       })}
     >
       {children}
-      <Menu menuItems={menuItems} sx={{ mt: 5, mx: -2.5, display: { xs: 'none', lg: 'block' }, flexGrow: 1 }} />
-      <AuthComponent
-        id="profile-button"
-        controlId="profile-menu"
+      <Menu
+        menuItems={menuItems}
+        sx={{
+          mt: 5,
+          mx: -2.5,
+          display: { xs: 'none', lg: 'block' },
+          flexGrow: 1,
+        }}
       />
 
+      <AuthComponent id="profile-button" controlId="profile-menu" />
     </Stack>
   );
 }
