@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
+import PDAItem from '@/app/dashboard/user/data-asset/[id]/components/pda-item';
 import { apiPublic } from '@/services/protocol/api';
 
-import PDAItem from '../../../data-asset/[id]/components/pda-item';
 
 const getPDA = async (id: string) => {
   const pda = await apiPublic.pda({ id });
@@ -12,9 +12,9 @@ const getPDA = async (id: string) => {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: { pdaId: string };
 }): Promise<Metadata> {
-  const pda = await getPDA(params.id);
+  const pda = await getPDA(params.pdaId);
   return {
     title: `${pda.title} PDA - Gateway Network`,
     description: pda.description,
