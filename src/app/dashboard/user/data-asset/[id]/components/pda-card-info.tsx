@@ -17,9 +17,10 @@ import CardUsers from './card-users';
 
 type Props = {
   pda: PdaQuery['credential'];
+  viewOnly?: boolean;
 };
 
-export default function PdaCardInfo({ pda }: Props) {
+export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
   return (
     <Stack
       sx={{
@@ -34,34 +35,36 @@ export default function PdaCardInfo({ pda }: Props) {
       divider={<Divider sx={{ width: '100%' }} />}
     >
       <CardUsers pda={pda} />
-      <TableCellContainer>
-        <CardCell label={pdaLocale.received_at}>
-          <Stack direction="row" gap={1}>
-            <Stack
-              width={24}
-              height={24}
-              sx={{
-                backgroundColor: 'action.selected',
-                borderRadius: '50%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              {pda?.recipientAuth?.data?.address && (
-                <WalletIcon sx={{ width: 16 }} />
-              )}
-              {pda?.recipientAuth?.data?.email && (
-                <MailOutlineIcon sx={{ width: 16 }} />
+      {!viewOnly && (
+        <TableCellContainer>
+          <CardCell label={pdaLocale.received_at}>
+            <Stack direction="row" gap={1}>
+              <Stack
+                width={24}
+                height={24}
+                sx={{
+                  backgroundColor: 'action.selected',
+                  borderRadius: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {pda?.recipientAuth?.data?.address && (
+                  <WalletIcon sx={{ width: 16 }} />
+                )}
+                {pda?.recipientAuth?.data?.email && (
+                  <MailOutlineIcon sx={{ width: 16 }} />
+                )}
+              </Stack>
+              {limitCharsCentered(
+                pda?.recipientAuth?.data?.address ??
+                  pda?.recipientAuth?.data?.email,
+                40
               )}
             </Stack>
-            {limitCharsCentered(
-              pda?.recipientAuth?.data?.address ??
-                pda?.recipientAuth?.data?.email,
-              40
-            )}
-          </Stack>
-        </CardCell>
-      </TableCellContainer>
+          </CardCell>
+        </TableCellContainer>
+      )}
       <TableCellContainer>
         <CardCell label={pdaLocale.authenticated_by}>
           <Typography>
