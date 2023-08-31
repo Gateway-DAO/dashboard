@@ -7,8 +7,8 @@ import { useForm } from 'react-hook-form';
 
 import { Stack, TextField, Typography } from '@mui/material';
 
-import { EmailSchema } from '../../schema';
-import { TitleSubtitleField } from '../title-field';
+import { TitleSubtitleField } from '../components/title-field';
+import { EmailSchema } from '../schema';
 
 export function ChooseEmail() {
   const { enqueueSnackbar } = useSnackbar();

@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -10,12 +9,12 @@ import routes from '@/constants/routes';
 import CloseIcon from '@mui/icons-material/Close';
 import { Avatar, Box, Stack } from '@mui/material';
 
-import { ChooseEmail } from './../components/sections/choose-email';
-import { ChooseGatewayId } from './../components/sections/choose-gateway-id';
-import { ConnectMoreAuthDialog } from './../components/sections/completed';
-import { AuthenticationInitial } from './../components/sections/initial';
-import { VerifyEmailAddToken } from './../components/sections/verify-email-add-token';
-import { VerifyEmailLoginToken } from './../components/sections/verify-email-login-token';
+import { ChooseEmail } from '../sections/choose-email';
+import { ChooseGatewayId } from '../sections/choose-gateway-id';
+import { ConnectMoreAuthDialog } from '../sections/completed';
+import { AuthenticationInitial } from '../sections/initial';
+import { VerifyEmailAddToken } from '../sections/verify-email-add-token';
+import { VerifyEmailLoginToken } from '../sections/verify-email-login-token';
 
 export function Authentication() {
   const [canShowClose, setCanShowClose] = useState(false);
