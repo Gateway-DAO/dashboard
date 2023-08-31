@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import PDAItem from '@/app/dashboard/user/data-asset/[id]/components/pda-item';
+import PDAItem from '@/app/dashboard/user/asset/[id]/components/pda-item';
 import { apiPublic } from '@/services/protocol/api';
 
 
