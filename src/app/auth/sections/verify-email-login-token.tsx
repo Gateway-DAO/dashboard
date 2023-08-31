@@ -3,7 +3,7 @@ import { useCountdown } from '@/hooks/use-countdown';
 import { useToggle } from '@react-hookz/web';
 import { useSnackbar } from 'notistack';
 
-import { CodeField } from '../code-field';
+import { CodeField } from '../components/code-field';
 
 export function VerifyEmailLoginToken() {
   const { enqueueSnackbar } = useSnackbar();

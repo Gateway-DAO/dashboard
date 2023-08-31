@@ -8,7 +8,7 @@ import { FaTwitter } from 'react-icons/fa';
 import CloseIcon from '@mui/icons-material/Close';
 import { Avatar, Button, Dialog, Link, Stack, Typography } from '@mui/material';
 
-import { SocialAuthCardLink } from '../social-auth-card-link';
+import { SocialAuthCardLink } from '../components/social-auth-card-link';
 
 type Props = {
   open: boolean;

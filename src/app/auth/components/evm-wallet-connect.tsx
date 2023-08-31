@@ -3,14 +3,23 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
+import Loading from '@/components/loadings/loading';
 import routes from '@/constants/routes';
 import { Chain } from '@/services/protocol/types';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
 
 import useLoginWallet from '../libs/use-login-wallet';
+import { CustomEvmButton } from './custom-evm-button';
 
-export default function EvmWalletConnect() {
+type Props = {
+  onFirstModal: (value: boolean) => void;
+  isEvmLoading: (value: boolean) => void;
+};
+
+export default function EvmWalletConnect({
+  onFirstModal,
+  isEvmLoading,
+}: Props) {
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
@@ -36,9 +45,13 @@ export default function EvmWalletConnect() {
     if (address) onLogin(address);
   }, [address]);
 
+  useEffect(() => {
+    if (isLoading) isEvmLoading(true);
+  }, [isLoading]);
+
   if (isLoading) {
-    return <div>Connecting</div>;
+    return <Loading size={24} />;
   }
 
-  return <ConnectButton />;
+  return <CustomEvmButton onFirstModal={onFirstModal} />;
 }

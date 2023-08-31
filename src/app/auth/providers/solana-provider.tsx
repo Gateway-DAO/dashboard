@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { PropsWithChildren, useMemo } from 'react';
 
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
@@ -20,9 +20,7 @@ import {
 import { clusterApiUrl } from '@solana/web3.js';
 require('@solana/wallet-adapter-react-ui/styles.css');
 
-export default function SolanaProvider({
-  children,
-}: PropsWithChildren) {
+export default function SolanaProvider({ children }: PropsWithChildren) {
   const solNetwork = WalletAdapterNetwork.Mainnet;
   const endpoint = useMemo(() => clusterApiUrl(solNetwork), [solNetwork]);
 
