@@ -9,6 +9,7 @@ const routes = {
   dashboardUserPDA: '/dashboard/user/data-asset/[id]',
   dashboardUserDataRequests: '/dashboard/user/data-requests',
   dashboardUserDataRequest: '/dashboard/user/data-request/[id]',
+  dashboardOrgRoot: '/dashboard/org',
   dashboardOrg: '/dashboard/org/[id]',
 };
 
