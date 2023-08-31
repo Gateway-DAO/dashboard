@@ -1,7 +1,8 @@
 import { GTWMenuItemProps } from '@/app/dashboard/components/menu-item/menu-item';
+import DataProofIcon from '@/components/icons/data-proof';
 import { SquaredArrowDown } from '@/components/icons/squared-arrow-down';
-import { SquaredArrowRight } from '@/components/icons/squared-arrow-right';
 import { WalletIcon } from '@/components/icons/wallet';
+import routes from '@/constants/routes';
 
 // import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -12,34 +13,24 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 export const dashboardUserMenuItems: GTWMenuItemProps[] = [
   {
     name: 'Home',
-    href: '/dashboard/user',
+    href: routes.dashboardUser,
     icon: HomeOutlinedIcon,
   },
   {
-    name: 'My data assets',
-    href: '/dashboard/user/data-assets',
+    name: 'Data assets',
+    href: routes.dashboardUserPDAs,
     icon: WalletIcon,
   },
   {
-    name: 'Issued data assets',
-    href: '/dashboard/user/issued-data-assets',
-    icon: SquaredArrowRight,
-  },
-  {
     name: 'Data requests',
-    href: '/dashboard/user/data-requests',
+    href: routes.dashboardUserRequests,
     icon: SquaredArrowDown,
   },
-  // {
-  //   name: 'Activity',
-  //   href: '/dashboard/user/activity',
-  //   icon: AccessTimeIcon,
-  // },
-  // {
-  //   name: 'Notifications',
-  //   href: '/dashboard/user/notifications',
-  //   icon: NotificationsNoneIcon,
-  // },
+  {
+    name: 'Data proofs',
+    href: routes.dashboardUserProofs,
+    icon: DataProofIcon,
+  },
 ];
 
 export default dashboardUserMenuItems;

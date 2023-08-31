@@ -1,9 +1,9 @@
-import { apiPublic } from "@/services/protocol/api";
-import { SessionToken } from "@/types/user";
+import { apiPublic } from '@/services/protocol/api';
+import { SessionToken } from '@/types/user';
 
-import getMe from "./get-me";
-
-export default async function refreshToken(token: SessionToken): Promise<SessionToken> {
+export default async function refreshToken(
+  token: SessionToken
+): Promise<SessionToken> {
   try {
     const res = await apiPublic.refresh({
       refresh_token: token.refresh_token,
@@ -24,4 +24,4 @@ export default async function refreshToken(token: SessionToken): Promise<Session
       error: 'RefreshAccessTokenError',
     };
   }
-};
+}

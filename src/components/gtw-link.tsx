@@ -1,5 +1,5 @@
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
-import { Ref, forwardRef } from "react";
+import { forwardRef } from "react";
 
 import { LinkProps as MuiLinkProps, Link as MuiLink } from "@mui/material";
 // Defining the CustomNextLink

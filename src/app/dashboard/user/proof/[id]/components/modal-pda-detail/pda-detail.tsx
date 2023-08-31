@@ -1,9 +1,8 @@
 'use client';
+import PDAItem from '@/app/dashboard/user/asset/[id]/components/pda-item';
+import PDASkeleton from '@/app/dashboard/user/asset/[id]/components/pda-skeleton';
 import { apiPublic } from '@/services/protocol/api';
 import { useQuery } from '@tanstack/react-query';
-
-import PDAItem from '../../../data-asset/[id]/components/pda-item';
-import PDASkeleton from '../../../data-asset/[id]/components/pda-skeleton';
 
 type Props = {
   id: string;
