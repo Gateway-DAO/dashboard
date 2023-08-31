@@ -7,8 +7,8 @@ const routes = {
   dashboardUserPDAs: '/dashboard/user/assets',
   dashboardUserSharedPDAs: '/dashboard/user/assets/shared-with',
   dashboardUserPDA: '/dashboard/user/asset/[id]',
-  dashboardUserDataRequests: '/dashboard/user/requests',
-  dashboardUserDataRequest: '/dashboard/user/request/[id]',
+  dashboardUserRequests: '/dashboard/user/requests',
+  dashboardUserRequest: '/dashboard/user/request/[id]',
   dashboardOrgRoot: '/dashboard/org',
   dashboardOrg: '/dashboard/org/[id]',
 };
