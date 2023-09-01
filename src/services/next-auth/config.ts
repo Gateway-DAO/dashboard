@@ -1,5 +1,6 @@
 import { NextAuthOptions } from 'next-auth';
 
+import routes from '@/constants/routes';
 import { SessionToken } from '@/types/user';
 import jwt from 'jsonwebtoken';
 
@@ -7,7 +8,6 @@ import getMe from './libs/get-me';
 import refreshToken from './libs/refresh-token';
 import credentialEmail from './providers/credential-email';
 import credentialWallet from './providers/credential-wallet';
-
 
 export const nextAuthConfig: NextAuthOptions = {
   providers: [credentialEmail, credentialWallet],
@@ -40,6 +40,6 @@ export const nextAuthConfig: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: '/login'
-  }
+    signIn: routes.auth,
+  },
 };
