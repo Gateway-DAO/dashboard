@@ -2,11 +2,15 @@ import Link from "next/link";
 
 import routes from "@/constants/routes";
 
-import { Typography } from "@mui/material";
+import { Stack } from '@mui/material';
+
+import { TableSharedDataAssets } from './components/table-shared';
 
 export default function DashboardUserProofsPage() {
-  return <>
-    <Typography variant="h3">Proofs</Typography>
-    <Link href={routes.dashboardUserProof.replace("[id]", "mock")}>Open proof</Link>
-  </>
+  return (
+    <Stack>
+      <TableSharedDataAssets />
+      <Link href={routes.dashboardUserProof.replace("[id]", "mock")}>Open proof</Link>
+    </Stack>
+  );
 }
