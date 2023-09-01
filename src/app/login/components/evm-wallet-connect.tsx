@@ -46,7 +46,7 @@ export default function EvmWalletConnect({
   }, [address]);
 
   useEffect(() => {
-    if (isLoading) isEvmLoading(true);
+    isLoading ? isEvmLoading(true) : isEvmLoading(false);
   }, [isLoading]);
 
   if (isLoading) {
