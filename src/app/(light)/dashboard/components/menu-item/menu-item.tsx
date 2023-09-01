@@ -1,20 +1,32 @@
-import Link from "next/link";
-import { FC } from "react";
+import Link from 'next/link';
+import { FC } from 'react';
 
-import { CONTAINER_PX } from "@/theme/config/style-tokens";
+import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
-import { ListItem, ListItemButton, ListItemButtonProps, SvgIconProps, Typography } from "@mui/material";
-
-
+import {
+  ListItem,
+  ListItemButton,
+  ListItemButtonProps,
+  SvgIconProps,
+  Typography,
+} from '@mui/material';
 
 export type GTWMenuItemProps = {
   name: string;
   href: string;
   active?: boolean;
   icon: FC<SvgIconProps>;
+  activeIcon?: FC<SvgIconProps>;
 } & ListItemButtonProps;
 
-export default function GTWMenuItem({ icon: Icon, href, name, active, ...props }: GTWMenuItemProps) {
+export default function GTWMenuItem({
+  icon: Icon,
+  href,
+  name,
+  active,
+  activeIcon: ActiveIcon,
+  ...props
+}: GTWMenuItemProps) {
   return (
     <ListItem sx={{ p: 0 }}>
       <ListItemButton
@@ -31,7 +43,7 @@ export default function GTWMenuItem({ icon: Icon, href, name, active, ...props }
           pl: {
             xs: CONTAINER_PX.xs + 0.5,
             md: CONTAINER_PX.md + 0.5,
-            lg: 3
+            lg: 3,
           },
           pr: 2.5,
           ':hover': {
@@ -46,12 +58,16 @@ export default function GTWMenuItem({ icon: Icon, href, name, active, ...props }
             color: 'black',
             svg: {
               color: 'primary.main',
-            }
+            },
           }),
           ...props.sx,
         }}
       >
-        <Icon sx={{ fontSize: 32 }} />
+        {active && ActiveIcon ? (
+          <ActiveIcon sx={{ fontSize: 32 }} />
+        ) : (
+          <Icon sx={{ fontSize: 32 }} />
+        )}
         <Typography
           component={'span'}
           variant="subtitle1"
@@ -61,5 +77,5 @@ export default function GTWMenuItem({ icon: Icon, href, name, active, ...props }
         </Typography>
       </ListItemButton>
     </ListItem>
-  )
+  );
 }

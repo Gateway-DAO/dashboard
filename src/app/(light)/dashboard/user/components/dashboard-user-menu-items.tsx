@@ -1,5 +1,6 @@
 import { GTWMenuItemProps } from '@/app/(light)/dashboard/components/menu-item/menu-item';
 import DataProofIcon from '@/components/icons/data-proof';
+import DataProofFilledIcon from '@/components/icons/data-proof-filled';
 import { SquaredArrowDown } from '@/components/icons/squared-arrow-down';
 import { WalletIcon } from '@/components/icons/wallet';
 import routes from '@/constants/routes';
@@ -30,6 +31,7 @@ export const dashboardUserMenuItems: GTWMenuItemProps[] = [
     name: 'Data proofs',
     href: routes.dashboardUserProofs,
     icon: DataProofIcon,
+    activeIcon: DataProofFilledIcon,
   },
 ];
 
