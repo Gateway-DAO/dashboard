@@ -28,7 +28,6 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
         borderColor: 'divider',
         borderRadius: 1,
         mb: 3,
-        overflow: 'hidden',
         boxShadow: 'none',
         backgroundColor: 'common.white',
       }}
