@@ -33,6 +33,7 @@
     "@solana/web3.js": "^1.78.4",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.33.0",
+    "boring-avatars": "^1.10.1",
     "bs58": "^5.0.0",
     "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",
