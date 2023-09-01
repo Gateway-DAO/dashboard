@@ -2,6 +2,7 @@ import TagsSkeleton from '@/components/tags/tags-skeleton';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
+  WIDTH_CENTERED,
 } from '@/theme/config/style-tokens';
 
 import { Divider, Skeleton, Stack } from '@mui/material';
@@ -9,7 +10,7 @@ import { Divider, Skeleton, Stack } from '@mui/material';
 export default function PDASkeleton() {
   return (
     <>
-      <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2, width: '100%' }}>
+      <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
         <Skeleton variant="text" width={200} height={30} />
         <Skeleton variant="text" width={400} height={100} sx={{ my: 2 }} />
         <TagsSkeleton />
@@ -37,7 +38,7 @@ export default function PDASkeleton() {
           px: CONTAINER_PX,
         }}
       />
-      <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2, width: '100%' }}>
+      <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
         <Skeleton
           variant="text"
           width={200}
