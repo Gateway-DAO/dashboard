@@ -19,7 +19,7 @@ export default async function PDAsList({ pdas }: Props) {
   }
   return <PDAsListContainer>
     {pdas.map((pda) => (
-      <PdaCard key={pda.id} href={routes.dashboardUserPDA.replace("[id]", pda.id!)} name={pda.title!} issuerImage={pda.image} issuerName={"GET ISSUER NAME"} status={pda.status!} />
+      <PdaCard key={pda.id} href={routes.dashboardUserAsset.replace("[id]", pda.id!)} name={pda.title!} issuerImage={pda.image} issuerName={"GET ISSUER NAME"} status={pda.status!} />
     ))}
   </PDAsListContainer>
 }
