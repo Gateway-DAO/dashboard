@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { AvatarFile } from '@/components/avatar-file/avatar-file';
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 
 import { CardActionArea, Stack, Typography } from '@mui/material';
 
@@ -51,7 +51,7 @@ export default function ProofPdaListItem({
           <Typography variant="body2" sx={{ flexGrow: 1 }}>
             {issuerName}
           </Typography>
-          <AvatarFile file={issuerImage} sx={{ width: 32, height: 32 }} />
+          <GTWAvatar src={issuerImage} name={issuerName} size={32} />
         </Stack>
       </CardActionArea>
     </Stack>

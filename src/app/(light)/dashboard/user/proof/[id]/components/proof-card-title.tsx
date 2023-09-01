@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import { AvatarFile } from '@/components/avatar-file/avatar-file';
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { TooltipUser } from '@/components/tooltip-user/tooltip-user';
 import { proof as proofLocale } from '@/locale/en/proof';
 import { limitCharsCentered } from '@/utils/string';
@@ -20,7 +20,7 @@ export default function ProofCardTitle({ proof }: Props) {
         borderRadius: 1,
         mb: 3,
         p: 2,
-        backgroundColor: theme => alpha(theme.palette.secondary.main, 0.4),
+        backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.4),
       }}
       direction={{ xs: 'column', md: 'row' }}
       alignItems="flex-start"
@@ -45,10 +45,12 @@ export default function ProofCardTitle({ proof }: Props) {
             }}
             onClick={() => setTooltip(true)}
           >
-            <AvatarFile
-              file={null}
-              fallback="https://1000logos.net/wp-content/uploads/2016/11/Shape-of-the-Chase-logo-500x311.jpg"
-              sx={{ width: 56, height: 56 }}
+            <GTWAvatar
+              src={
+                'https://1000logos.net/wp-content/uploads/2016/11/Shape-of-the-Chase-logo-500x311.jpg'
+              }
+              size={56}
+              name={proof?.title}
             />
             <Typography variant="h3">{proof?.title}</Typography>
           </Stack>

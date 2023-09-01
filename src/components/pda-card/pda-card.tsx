@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Card, CardActionArea, Stack, Typography } from '@mui/material';
 
-import { AvatarFile } from '../avatar-file/avatar-file';
+import GTWAvatar from '../gtw-avatar/gtw-avatar';
 import { PDAStatusChip } from './pda-status-chip';
 import { PdaCardProps } from './type';
 
@@ -49,7 +49,7 @@ export default function PdaCard({
       >
         <Stack alignItems="flex-start">
           <Stack direction="row" alignItems="center" gap={1.5} sx={{ mb: 3 }}>
-            <AvatarFile file={issuerImage} sx={{ width: 32, height: 32 }} />
+            <GTWAvatar src={issuerImage} size={32} name={issuerName} />
             <Typography variant="body2" sx={{ flexGrow: 1 }} noWrap>
               {issuerName}
             </Typography>

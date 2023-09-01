@@ -6,7 +6,15 @@ import { AiFillGithub } from 'react-icons/ai';
 import { FaTwitter } from 'react-icons/fa';
 
 import CloseIcon from '@mui/icons-material/Close';
-import { Avatar, Button, Dialog, Link, Stack, Typography } from '@mui/material';
+import {
+  Avatar,
+  Button,
+  Dialog,
+  IconButton,
+  Link,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 import { SocialAuthCardLink } from '../components/social-auth-card-link';
 
@@ -38,19 +46,17 @@ export function ConnectMoreAuthDialog({ open, onClose }: Props) {
               alignSelf: 'center',
             }}
           />
-          <NextLink href={onClose} passHref>
-            <Avatar
-              component="a"
-              sx={{
-                width: 40,
-                height: 40,
-                alignSelf: 'center',
-                cursor: 'pointer',
-              }}
-            >
-              <CloseIcon />
-            </Avatar>
-          </NextLink>
+          <IconButton
+            component={NextLink}
+            href={onClose}
+            sx={{
+              width: 40,
+              height: 40,
+              alignSelf: 'center',
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
         </Stack>
         <Typography
           variant="h4"
