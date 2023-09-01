@@ -9,6 +9,7 @@ import { PdaQuery } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
+  WIDTH_CENTERED,
 } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
@@ -30,7 +31,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
   return (
     <>
-      <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2, width: '100%' }}>
+      <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
         <Typography
           variant="caption"
           sx={{
