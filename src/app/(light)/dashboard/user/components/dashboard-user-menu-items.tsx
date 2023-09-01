@@ -1,4 +1,4 @@
-import { GTWMenuItemProps } from '@/app/dashboard/components/menu-item/menu-item';
+import { GTWMenuItemProps } from '@/app/(light)/dashboard/components/menu-item/menu-item';
 import DataProofIcon from '@/components/icons/data-proof';
 import { SquaredArrowDown } from '@/components/icons/squared-arrow-down';
 import { WalletIcon } from '@/components/icons/wallet';

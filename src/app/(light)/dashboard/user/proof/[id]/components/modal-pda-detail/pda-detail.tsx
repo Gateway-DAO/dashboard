@@ -1,6 +1,6 @@
 'use client';
-import PDAItem from '@/app/dashboard/user/asset/[id]/components/pda-item';
-import PDASkeleton from '@/app/dashboard/user/asset/[id]/components/pda-skeleton';
+import PDAItem from '@/app/(light)/dashboard/user/asset/[id]/components/pda-item';
+import PDASkeleton from '@/app/(light)/dashboard/user/asset/[id]/components/pda-skeleton';
 import { apiPublic } from '@/services/protocol/api';
 import { useQuery } from '@tanstack/react-query';
 
