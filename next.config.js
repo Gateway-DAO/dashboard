@@ -1,3 +1,5 @@
+import routes from './src/constants/routes';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -20,10 +22,20 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/dashboard',
-        destination: '/dashboard/user',
+        source: '/dashboard/user',
+        destination: routes.dashboardReceivedUserAssets,
         permanent: true,
       },
+      {
+        source: '/dashboard',
+        destination: routes.dashboardReceivedUserAssets,
+        permanent: true,
+      },
+      {
+        source: '/dashboard/org',
+        destination: routes.dashboardReceivedUserAssets,
+        permanent: true,
+      }
     ];
   },
   webpack: (config) => {
