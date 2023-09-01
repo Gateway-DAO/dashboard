@@ -1,20 +1,49 @@
-"use client";
+'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { Avatar, IconButton } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { IconButton } from '@mui/material';
 
-export default function BackButton() {
+type Props = {
+  href?: string;
+};
+
+export default function BackButton({ href }: Props) {
   const router = useRouter();
+
+  if (!document) {
+    return (
+      <IconButton
+        {...(href
+          ? {
+              component: Link,
+              href,
+            }
+          : {
+              onClick: router.back,
+            })}
+        sx={{ backgroundColor: 'action.selected' }}
+      >
+        <ChevronLeftIcon sx={{ color: 'text.secondary' }} />
+      </IconButton>
+    );
+  }
+
   return (
-    <IconButton onClick={router.back}>
-      {/* TODO: Remove background color */}
-      <Avatar sx={{ backgroundColor: 'action.selected' }}>
-        <ArrowBackIosNewIcon
-          sx={{ width: 16, height: 16, color: 'text.secondary' }}
-        />
-      </Avatar>
+    <IconButton
+      {...(!document.referrer.startsWith(window.location.origin) && href
+        ? {
+            component: Link,
+            href,
+          }
+        : {
+            onClick: router.back,
+          })}
+      sx={{ backgroundColor: 'action.selected' }}
+    >
+      <ChevronLeftIcon sx={{ color: 'text.secondary' }} />
     </IconButton>
-  )
+  );
 }

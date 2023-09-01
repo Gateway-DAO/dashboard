@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 
 import BackButton from '@/components/buttons/back-button';
 import TopBarContainer from '@/components/top-bar-container/top-bar-container';
+import routes from '@/constants/routes';
 import { apiPublic } from '@/services/protocol/api';
 
 import PDAItem from './components/pda-item';
@@ -28,7 +29,7 @@ export default async function PDAPage({ params }: { params: { id: string } }) {
   return (
     <>
       <TopBarContainer>
-        <BackButton />
+        <BackButton href={routes.dashboardUserReceivedAssets} />
       </TopBarContainer>
       <PDAItem pda={pda} />
     </>
