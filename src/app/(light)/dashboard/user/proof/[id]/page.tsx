@@ -5,6 +5,7 @@ import { pda } from '@/locale/en/pda';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
+  WIDTH_CENTERED,
 } from '@/theme/config/style-tokens';
 
 import { Divider, Stack } from '@mui/material';
@@ -102,7 +103,7 @@ export default function ProofPage() {
   return (
     <>
       <BackButton href={routes.dashboardUserProofs} />
-      <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
+      <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
         <ProofCardTitle proof={proof} />
         <ProofCardInfo proof={proof} />
         <ProofShareButton proof={proof} />
@@ -126,9 +127,7 @@ export default function ProofPage() {
           px: CONTAINER_PX,
         }}
       />
-      <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2 }}>
-        <ProofData dataModels={dataModels} />
-      </Stack>
+      <ProofData dataModels={dataModels} />
       <ModalPDADetail />
     </>
   );
