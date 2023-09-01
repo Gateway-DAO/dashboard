@@ -18,7 +18,7 @@ export const dashboardUserMenuItems: GTWMenuItemProps[] = [
   },
   {
     name: 'Data assets',
-    href: routes.dashboardReceivedUserAssets,
+    href: routes.dashboardUserReceivedAssets,
     icon: WalletIcon,
   },
   {

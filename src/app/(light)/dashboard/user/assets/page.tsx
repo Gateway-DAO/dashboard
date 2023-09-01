@@ -21,8 +21,5 @@ export default async function DataAssetsPage() {
     })
   )?.findCredentialsByRecipientUser;
 
-  console.log('apiPrivate', apiPrivate);
-  console.log('pdas', pdas);
-
   return <PDAsList pdas={pdas ?? []} />;
 }

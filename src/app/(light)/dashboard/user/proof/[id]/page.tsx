@@ -1,5 +1,5 @@
 import Activities from '@/components/activities/activities';
-import BackButton from '@/components/back-button';
+import BackButton from '@/components/buttons/back-button';
 import routes from '@/constants/routes';
 import { pda } from '@/locale/en/pda';
 import {
