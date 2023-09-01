@@ -1,3 +1,4 @@
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 
@@ -54,7 +55,7 @@ export default function SharedWithCard({}) {
                 gap: 2,
               }}
             >
-              <Avatar />
+              <GTWAvatar name={row.name} />
               <Typography variant="subtitle1">{row.name}</Typography>
             </Stack>
             <Typography variant="body2">

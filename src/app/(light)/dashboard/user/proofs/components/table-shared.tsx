@@ -1,3 +1,4 @@
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -97,7 +98,7 @@ export function TableSharedDataAssets() {
                   gap: 2,
                 }}
               >
-                <Avatar />
+                <GTWAvatar name={row.name} />
                 <Typography variant="subtitle1">{row.name}</Typography>
               </TableCell>
               <TableCell>
