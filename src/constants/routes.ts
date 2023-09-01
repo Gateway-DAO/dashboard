@@ -1,6 +1,6 @@
 const routes = {
   home: '/',
-  auth: '/auth',
+  auth: '/login',
   dashboardUser: '/dashboard/user',
   dashboardUserProof: '/dashboard/user/proof/[id]',
   dashboardUserProofs: '/dashboard/user/proofs',
