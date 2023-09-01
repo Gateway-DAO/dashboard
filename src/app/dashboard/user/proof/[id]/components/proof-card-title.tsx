@@ -2,7 +2,6 @@
 import { useState } from 'react';
 
 import { AvatarFile } from '@/components/avatar-file/avatar-file';
-import ExternalLink from '@/components/external-link/external-link';
 import { TooltipUser } from '@/components/tooltip-user/tooltip-user';
 import { proof as proofLocale } from '@/locale/en/proof';
 import { theme } from '@/theme';
@@ -64,7 +63,17 @@ export default function ProofCardTitle({ proof }: Props) {
           )}
         </Stack>
       </Stack>
-      <ExternalLink text={`ID ${limitCharsCentered(proof?.id, 8)}`} href="#" />
+      <Typography
+        variant="caption"
+        sx={{
+          color: 'text.secondary',
+          fontWeight: 600,
+          textDecoration: 'none',
+        }}
+      >
+        {`ID ${limitCharsCentered(proof?.id, 8)}`}
+      </Typography>
+      {/* <ExternalLink text={`ID ${limitCharsCentered(proof?.id, 8)}`} href="#" /> */}
     </Stack>
   );
 }

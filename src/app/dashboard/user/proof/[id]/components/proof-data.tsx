@@ -1,9 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 
-import ExternalLink from '@/components/external-link/external-link';
 import PdaCard from '@/components/pda-card/pda-card';
-import { datamodel } from '@/locale/en/datamodel';
 import { proof as proofLocale } from '@/locale/en/proof';
 
 import { Stack, Divider, Typography } from '@mui/material';
@@ -30,7 +28,7 @@ export default function ProofData({ dataModels }: Props) {
               <Typography fontWeight={600} color="text.secondary">
                 {dataModel?.title}
               </Typography>
-              <ExternalLink text={datamodel.data_model_id} href="#" />
+              {/* <ExternalLink text={datamodel.data_model_id} href="#" /> */}
             </Stack>
             <Stack direction="row" flexWrap="wrap" gap={1} mb={3}>
               {dataModel.credentials.map((pda: any) => (

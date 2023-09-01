@@ -3,7 +3,6 @@
 import Image from 'next/image';
 
 import Activities from '@/components/activities/activities';
-import ExternalLink from '@/components/external-link/external-link';
 import Tags from '@/components/tags/tags';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
@@ -32,10 +31,20 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
   return (
     <>
       <Stack sx={{ maxWidth: 550, mx: 'auto', my: 2, width: '100%' }}>
-        <ExternalLink
+        <Typography
+          variant="caption"
+          sx={{
+            color: 'text.secondary',
+            fontWeight: 600,
+            textDecoration: 'none',
+          }}
+        >
+          {`ID ${limitCharsCentered(pda?.id, 8)}`}
+        </Typography>
+        {/* <ExternalLink
           text={`ID ${limitCharsCentered(pda?.id, 8)}`}
           href="https://www.google.com"
-        />
+        /> */}
         <Stack
           direction="row"
           justifyContent="space-between"
