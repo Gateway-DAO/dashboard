@@ -1,13 +1,28 @@
+import { getServerSession } from '@/services/next-auth/get-server-session';
 import { getApiPrivate } from '@/services/protocol/api';
 
 import PDAsList from './components/pdas-list';
 
 export default async function DataAssetsPage() {
-  const apiPrivate = await getApiPrivate()
-  if (!apiPrivate) {
-    return null
-  }
-  const pdas = (await apiPrivate.pdas())?.credentials
+  const apiPrivate = await getApiPrivate();
+  const session = await getServerSession();
 
-  return <PDAsList pdas={pdas ?? []} />
+  console.log(session);
+
+  if (!apiPrivate) {
+    return null;
+  }
+
+  const pdas = (
+    await apiPrivate.received_pdas({
+      id: session?.protocol_id ?? '',
+      take: 5,
+      skip: 0,
+    })
+  )?.findCredentialsByRecipientUser;
+
+  console.log('apiPrivate', apiPrivate);
+  console.log('pdas', pdas);
+
+  return <PDAsList pdas={pdas ?? []} />;
 }

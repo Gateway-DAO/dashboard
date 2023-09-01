@@ -96,3 +96,41 @@ query pda($id: String!) {
     updatedAt
   }
 }
+
+query received_pdas($id: String!, $take: Float!, $skip: Float!) {
+  findCredentialsByRecipientUser(
+    recipientUserId: $id
+    take: $take
+    skip: $skip
+  ) {
+    id
+    title
+    status
+    issuerOrganization {
+      gatewayId
+      image
+    }
+    issuerUser {
+      gatewayId
+    }
+  }
+}
+
+query sent_pdas($id: String!, $take: Float!, $skip: Float!) {
+  findCredentialsByRecipientUser(
+    recipientUserId: $id
+    take: $take
+    skip: $skip
+  ) {
+    id
+    title
+    status
+    issuerOrganization {
+      gatewayId
+      image
+    }
+    issuerUser {
+      gatewayId
+    }
+  }
+}
