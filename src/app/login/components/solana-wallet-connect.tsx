@@ -10,7 +10,7 @@ import { TbCurrencySolana } from 'react-icons/tb';
 
 import { Button } from '@mui/material';
 
-import useLoginWallet from '../../auth/libs/use-login-wallet';
+import useLoginWallet from '../libs/use-login-wallet';
 
 type Props = {
   onFirstModal: (value: boolean) => void;
