@@ -2,11 +2,11 @@
 import { createTheme } from '@mui/material/styles';
 
 import * as components from './components';
-import { palette } from './config/palette';
+import { lightPalette, darkPalette } from './config/palette';
 import typography from './config/typography';
 
-export const theme = createTheme({
-  palette,
+export const lightTheme = createTheme({
+  palette: lightPalette,
   typography,
   shape: {
     borderRadius: 16,
@@ -16,4 +16,15 @@ export const theme = createTheme({
   },
 });
 
-export type GatewayTheme = typeof theme;
+export const darkTheme = createTheme({
+  palette: darkPalette,
+  typography,
+  shape: {
+    borderRadius: 16,
+  },
+  components: {
+    ...components,
+  },
+});
+
+export type GatewayTheme = typeof lightTheme;
