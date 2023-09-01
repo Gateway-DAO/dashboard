@@ -1,8 +1,9 @@
 import CardCell from '@/components/card-cell/card-cell';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { CredentialData } from '@/services/protocol/types';
+import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
-import { Stack, Typography, Divider } from '@mui/material';
+import { Stack, Typography, Divider, Card } from '@mui/material';
 
 import { claimFields, getClaimType } from './ClaimTypes';
 import { CurrencyView } from './currency-view';
@@ -46,21 +47,13 @@ function ClaimView(fieldData: CredentialData) {
 
 export default function DataTable({ title, data }: Props) {
   return (
-    <Stack
-      sx={{
-        maxWidth: 550,
-        width: '100%',
-        mx: 'auto',
-      }}
-    >
+    <Stack sx={{ ...WIDTH_CENTERED }}>
       <Typography sx={{ fontWeight: 700, mb: 3 }}>{title}</Typography>
       <Stack
+        component={Card}
+        variant="outlined"
         sx={{
-          border: '1px solid',
-          borderColor: 'divider',
-          borderRadius: 1,
           mb: 2,
-          backgroundColor: 'common.white',
           width: '100%',
         }}
       >
