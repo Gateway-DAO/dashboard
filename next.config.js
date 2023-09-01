@@ -1,4 +1,4 @@
-import routes from './src/constants/routes';
+const routes = require("./src/constants/routes")
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

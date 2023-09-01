@@ -13,4 +13,4 @@ const routes = {
   dashboardOrg: '/dashboard/org/[id]',
 };
 
-export default routes;
+module.exports = routes;
