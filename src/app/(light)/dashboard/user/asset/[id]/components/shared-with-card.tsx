@@ -1,6 +1,7 @@
+import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 
-import { Avatar, Divider, Stack, Typography } from '@mui/material';
+import { Avatar, Card, Divider, Stack, Typography } from '@mui/material';
 
 export default function SharedWithCard({}) {
   const rows = [
@@ -16,15 +17,11 @@ export default function SharedWithCard({}) {
   ];
   return (
     <Stack
+      component={Card}
+      variant="outlined"
       sx={{
-        border: '1px solid',
-        borderColor: 'divider',
-        borderRadius: 1,
         mb: 2,
-        backgroundColor: 'common.white',
-        maxWidth: 550,
-        width: '100%',
-        mx: 'auto',
+        ...WIDTH_CENTERED,
       }}
     >
       <Typography
