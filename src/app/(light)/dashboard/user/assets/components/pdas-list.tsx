@@ -26,16 +26,27 @@ export default async function PDAsList({ pdas }: Props) {
   }
   return (
     <PDAsListContainer>
-      {pdas.map((pda) => (
-        <PdaCard
-          key={pda.id}
-          href={routes.dashboardUserAsset.replace('[id]', pda.id!)}
-          name={pda.title!}
-          issuerImage={pda.image}
-          issuerName={'GET ISSUER NAME'}
-          status={pda.status!}
-        />
-      ))}
+      {pdas.map((pda) => {
+        const issuer = pda.issuerOrganization
+          ? {
+              image: pda.issuerOrganization.image,
+              name: pda.issuerOrganization.name,
+            }
+          : {
+              image: null,
+              name: pda.issuerUser?.gatewayId,
+            };
+        return (
+          <PdaCard
+            key={pda.id}
+            href={routes.dashboardUserAsset.replace('[id]', pda.id!)}
+            name={pda.title!}
+            issuerImage={issuer.image}
+            issuerName={issuer.name ?? 'ISSUER NAME'}
+            status={pda.status!}
+          />
+        );
+      })}
     </PDAsListContainer>
   );
 }

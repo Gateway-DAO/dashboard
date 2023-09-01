@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import { MutableRefObject, useEffect, useRef } from 'react';
 
-import { AvatarFile } from '@/components/avatar-file/avatar-file';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
 import CloseIcon from '@mui/icons-material/Close';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { Paper, Stack, Typography } from '@mui/material';
+
+import GTWAvatar from '../gtw-avatar/gtw-avatar';
 
 type Props = {
   onClose: () => void;
@@ -70,13 +71,7 @@ export function TooltipUser({
         gap={1}
         sx={{ mb: 2 }}
       >
-        <AvatarFile
-          file={picture}
-          fallback={'/avatar.png'}
-          sxProps={{ width: 64, height: 64 }}
-        >
-          {name}
-        </AvatarFile>
+        <GTWAvatar src={picture} size={64} name={name!} />
         <CloseIcon
           sx={{
             cursor: 'pointer',

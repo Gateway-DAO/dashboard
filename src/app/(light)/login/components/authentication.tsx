@@ -7,7 +7,7 @@ import { GatewayIcon3 } from '@/components/icons/gateway3';
 import routes from '@/constants/routes';
 
 import CloseIcon from '@mui/icons-material/Close';
-import { Avatar, Box, Stack } from '@mui/material';
+import { Avatar, Box, IconButton, Stack } from '@mui/material';
 
 import { ChooseEmail } from '../sections/choose-email';
 import { ChooseGatewayId } from '../sections/choose-gateway-id';
@@ -32,23 +32,22 @@ export function Authentication() {
       }}
     >
       {canShowClose ? (
-        <Link passHref href={routes.home}>
-          <Avatar
-            component="a"
-            sx={{
-              width: 40,
-              height: 40,
-              alignSelf: 'center',
-              position: 'absolute',
-              top: { xs: 10, md: 38 },
-              right: { xs: 20, md: 48 },
-              zIndex: 1,
-              cursor: 'pointer',
-            }}
-          >
-            <CloseIcon />
-          </Avatar>
-        </Link>
+        <IconButton
+          component={Link}
+          href={routes.home}
+          sx={{
+            width: 40,
+            height: 40,
+            alignSelf: 'center',
+            position: 'absolute',
+            top: { xs: 10, md: 38 },
+            right: { xs: 20, md: 48 },
+            zIndex: 1,
+            cursor: 'pointer',
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
       ) : (
         <LogoutButton />
       )}

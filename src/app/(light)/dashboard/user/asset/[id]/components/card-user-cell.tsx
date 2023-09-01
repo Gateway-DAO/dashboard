@@ -1,6 +1,6 @@
 'use client';
-import { AvatarFile } from '@/components/avatar-file/avatar-file';
 import CardCell from '@/components/card-cell/card-cell';
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 
 import { Verified } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
@@ -51,16 +51,14 @@ export default function CardUserCell({
       id={id}
       onClick={onClick}
     >
-      <AvatarFile
-        file={picture}
-        fallback={'/avatar.png'}
+      <Box
         sx={{
           ml: { xs: 2, md: alignRight ? 0 : 2 },
           mr: { xs: 0, md: alignRight ? 2 : 0 },
         }}
       >
-        {name}
-      </AvatarFile>
+        <GTWAvatar src={picture} name={name} />
+      </Box>
       <CardCell label={label} alignRight={alignRight} margin={false}>
         <Box display="flex" gap={1} alignItems="center">
           <Typography fontWeight={600} sx={{ color: 'text.primary' }}>

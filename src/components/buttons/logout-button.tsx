@@ -1,11 +1,11 @@
 'use client';
 
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Avatar, Button } from '@mui/material';
+import { IconButton } from '@mui/material';
 
 export default function LogoutButton() {
   return (
-    <Button
+    <IconButton
       onClick={async () => {
         console.log('logout');
       }}
@@ -14,20 +14,10 @@ export default function LogoutButton() {
         top: { xs: 10, md: 38 },
         right: { xs: 20, md: 48 },
         zIndex: 1,
+        backgroundColor: 'primary.main',
       }}
     >
-      <Avatar
-        component="a"
-        sx={{
-          width: 40,
-          height: 40,
-          alignSelf: 'center',
-          cursor: 'pointer',
-          backgroundColor: 'primary.main',
-        }}
-      >
-        <LogoutIcon />
-      </Avatar>
-    </Button>
+      <LogoutIcon />
+    </IconButton>
   );
 }
