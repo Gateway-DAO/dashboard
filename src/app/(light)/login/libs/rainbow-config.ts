@@ -1,5 +1,6 @@
+"use client";
 import '@rainbow-me/rainbowkit/styles.css';
-import { palette } from '@/theme/config/palette';
+import { brandColors } from '@/theme/config/brand';
 import {
   getDefaultWallets,
   lightTheme as LightTheme,
@@ -10,8 +11,6 @@ import { configureChains, createConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, base, zora } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-
-import { SimplePaletteColorOptions } from '@mui/material';
 
 export const { chains, publicClient } = configureChains(
   [mainnet, polygon, optimism, arbitrum, base, zora],
@@ -32,7 +31,7 @@ export const wagmiConfig = createConfig({
 
 const lightTheme = LightTheme({
   overlayBlur: 'small',
-  accentColor: (palette.primary as SimplePaletteColorOptions).main,
+  accentColor: brandColors.primary,
 });
 
 export const theme: Theme = {

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { AvatarFile } from '@/components/avatar-file/avatar-file';
 import { TooltipUser } from '@/components/tooltip-user/tooltip-user';
 import { proof as proofLocale } from '@/locale/en/proof';
-import { theme } from '@/theme';
 import { limitCharsCentered } from '@/utils/string';
 
 import { Stack, Typography, alpha } from '@mui/material';
@@ -21,7 +20,7 @@ export default function ProofCardTitle({ proof }: Props) {
         borderRadius: 1,
         mb: 3,
         p: 2,
-        backgroundColor: alpha(theme.palette.secondary.main, 0.4),
+        backgroundColor: theme => alpha(theme.palette.secondary.main, 0.4),
       }}
       direction={{ xs: 'column', md: 'row' }}
       alignItems="flex-start"
