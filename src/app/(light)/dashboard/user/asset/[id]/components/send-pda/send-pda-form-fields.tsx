@@ -1,7 +1,6 @@
 'use client';
 import { Gateway2Icon } from '@/components/icons/gateway2';
 import { pda } from '@/locale/en/pda';
-import { theme } from '@/theme';
 import { useFormContext } from 'react-hook-form';
 import { FaEthereum } from 'react-icons/fa';
 import { TbCurrencySolana } from 'react-icons/tb';
@@ -16,6 +15,7 @@ import {
   Stack,
   TextField,
   Typography,
+  useTheme,
 } from '@mui/material';
 
 import { SendPdaSchema, SendPdaSchemaError } from './schema';
@@ -26,6 +26,9 @@ export default function SendPdaFormField() {
     register,
     formState: { errors },
   } = useFormContext<SendPdaSchema>();
+
+
+  const theme = useTheme()
 
   const mockAccountsTypes: Record<string, any>[] = [
     {

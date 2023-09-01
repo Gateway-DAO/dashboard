@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-
+"use client";
 import SwipeableDrawerMobile from '@/components/modal/swipeable-drawer-mobile';
-import { theme } from '@/theme';
 
 import { CloseOutlined } from '@mui/icons-material';
 import {
@@ -12,6 +11,7 @@ import {
   Paper,
   Stack,
   useMediaQuery,
+  useTheme,
 } from '@mui/material';
 
 type Props = {
@@ -29,6 +29,7 @@ export default function ModalImage({
   image,
   swipeableDrawer = false,
 }: Props) {
+  const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
   return (
     <>

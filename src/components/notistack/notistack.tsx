@@ -2,16 +2,17 @@
 
 import React, { ReactNode } from 'react';
 
-import { theme } from '@/theme';
 import { SnackbarProvider, closeSnackbar } from 'notistack';
 
 import CloseIcon from '@mui/icons-material/Close';
+import { useTheme } from '@mui/material';
 
 type Props = {
   children: ReactNode;
 };
 
 const Notistack = ({ children }: Props) => {
+  const theme = useTheme();
   const notistackRef = React.useRef<SnackbarProvider>();
 
   return (
