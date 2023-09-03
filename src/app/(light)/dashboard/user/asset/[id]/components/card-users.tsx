@@ -3,15 +3,16 @@ import { useState } from 'react';
 
 import { TooltipUser } from '@/components/tooltip-user/tooltip-user';
 import { pda as pdaLocale } from '@/locale/en/pda';
-import { PdaQuery } from '@/services/protocol/types';
+import { PrivateDataAsset } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
+import { PartialDeep } from 'type-fest';
 
 import { Stack, Box } from '@mui/material';
 
 import CardUserCell from './card-user-cell';
 
 type Props = {
-  pda: PdaQuery['credential'];
+  pda: PartialDeep<PrivateDataAsset>;
 };
 
 export default function CardUsers({ pda }: Props) {
@@ -19,19 +20,15 @@ export default function CardUsers({ pda }: Props) {
   const [tooltipRecipient, setTooltipRecipient] = useState<boolean>(false);
 
   const issuerName =
-    pda?.issuerOrganization?.gatewayId ??
-    pda?.issuerUser?.gatewayId ??
-    pda?.issuerUser?.primaryWallet?.address ??
+    pda?.dataAsset?.issuerOrganization?.gatewayId ??
+    pda?.dataAsset?.issuerUser?.gatewayId ??
     '';
 
-  const issuerPicture = pda?.issuerAuth?.data?.picture ?? '';
+  const issuerPicture = pda?.dataAsset?.issuerAuth?.data?.picture ?? '';
 
-  const recipientName =
-    pda?.recipientUser?.gatewayId ??
-    pda?.recipientUser?.primaryWallet?.address ??
-    '';
+  const recipientName = pda?.dataAsset?.recipientUser?.gatewayId ?? '';
 
-  const recipientPicture = pda?.recipientAuth?.data?.picture ?? '';
+  const recipientPicture = pda?.dataAsset?.recipientAuth?.data?.picture ?? '';
 
   return (
     <Stack
@@ -48,7 +45,7 @@ export default function CardUsers({ pda }: Props) {
           name={limitCharsCentered(issuerName, 15)}
           id={`pda-issuer-${issuerName}`}
           onClick={() => setTooltipIssuer(true)}
-          verified // TODO: Vefiry if the issuer is a verified user
+          verified={false} // TODO: Vefiry if the issuer is a verified user (backloged)
           active={tooltipIssuer}
         />
         {tooltipIssuer && (
