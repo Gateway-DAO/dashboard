@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Activities from '@/components/activities/activities';
 import Tags from '@/components/tags/tags';
 import { pda as pdaLocale } from '@/locale/en/pda';
-import { PdaQuery } from '@/services/protocol/types';
+import { PdaQuery, PrivateDataAsset } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -13,6 +13,7 @@ import {
 } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
+import { PartialDeep } from 'type-fest';
 
 import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
@@ -23,12 +24,25 @@ import SendPda from './send-pda/send-pda';
 import SharedWithCard from './shared-with-card';
 
 type Props = {
-  pda: PdaQuery['credential'];
+  pda: PartialDeep<PrivateDataAsset>;
   viewOnly?: boolean;
 };
 
 export default function PDAItem({ pda, viewOnly = false }: Props) {
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
+  function transformObjectToArray(obj: any) {
+    const resultArray = [];
+
+    for (const prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+        resultArray.push({ name: prop, value: obj[prop] });
+      }
+    }
+
+    return resultArray;
+  }
+
+  const claimArray = transformObjectToArray(pda.dataAsset?.claim);
   return (
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
@@ -40,7 +54,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
             textDecoration: 'none',
           }}
         >
-          {`ID ${limitCharsCentered(pda?.id, 8)}`}
+          {`ID ${limitCharsCentered(pda?.id ?? 'id', 8)}`}
         </Typography>
         {/* <ExternalLink
           text={`ID ${limitCharsCentered(pda?.id, 8)}`}
@@ -56,14 +70,14 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
             variant="h3"
             sx={{ fontSize: { xs: 24, md: 48 }, my: 2, fontWeight: 400 }}
           >
-            {pda?.title}
+            {pda?.dataAsset?.title}
           </Typography>
-          {pda.image && (
+          {pda.dataAsset?.image && (
             <>
               <IconButton onClick={toggleShowImagePDAModal}>
                 <Image
-                  src={pda?.image ?? ''}
-                  alt={pda?.title}
+                  src={pda?.dataAsset?.image ?? ''}
+                  alt={pda?.dataAsset?.title ?? ''}
                   width={96}
                   height={96}
                   style={{ borderRadius: 16 }}
@@ -73,20 +87,21 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
                 open={showImagePDAModal}
                 handleClose={toggleShowImagePDAModal}
                 handleOpen={() => console.log('open')}
-                image={pda.image}
+                image={pda?.dataAsset?.image}
                 swipeableDrawer
               />
             </>
           )}
         </Stack>
-        <Tags tags={pda?.dataModel?.tags as string[]} />
-        <Typography sx={{ mb: 3 }}>{pda?.description}</Typography>
+        <Tags tags={pda?.dataAsset?.tags as string[]} />
+        <Typography sx={{ mb: 3 }}>{pda?.dataAsset?.description}</Typography>
         <PdaCardInfo pda={pda} viewOnly={viewOnly} />
         {!viewOnly && (
           <>
             <SharedWithCard />
             <SendPda />
-            <Activities
+            {/* Activies backloged 09/02 */}
+            {/* <Activities
               activities={pda.activities}
               activitiesTextsType={{
                 Issued: pdaLocale.activities.issued,
@@ -95,7 +110,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
                 Reactivated: pdaLocale.activities.reactivated,
                 Updated: pdaLocale.activities.updated,
               }}
-            />
+            /> */}
           </>
         )}
       </Stack>
@@ -107,7 +122,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           px: CONTAINER_PX,
         }}
       />
-      <DataTable title={pdaLocale.claim} data={pda?.claimArray} />
+      <DataTable title={pdaLocale.claim} data={claimArray ?? []} />
     </>
   );
 }

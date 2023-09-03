@@ -13,7 +13,8 @@ import { ListView } from './list-view';
 
 type Props = {
   title: string;
-  data: CredentialData[];
+  data: any[];
+  // data: CredentialData[];
 };
 
 function ClaimView(fieldData: CredentialData) {
