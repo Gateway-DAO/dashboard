@@ -5,7 +5,7 @@ const routes = {
   dashboardUserProof: '/dashboard/user/proof/[id]',
   dashboardUserProofs: '/dashboard/user/proofs',
   dashboardUserReceivedAssets: '/dashboard/user/assets/received',
-  dashboardUserSentAssets: '/dashboard/user/assets/sent',
+  dashboardUserIssuedAssets: '/dashboard/user/assets/issued',
   dashboardUserAsset: '/dashboard/user/asset/[id]',
   dashboardUserRequests: '/dashboard/user/requests',
   dashboardUserRequest: '/dashboard/user/request/[id]',
