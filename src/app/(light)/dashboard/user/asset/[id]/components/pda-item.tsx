@@ -2,10 +2,9 @@
 
 import Image from 'next/image';
 
-import Activities from '@/components/activities/activities';
 import Tags from '@/components/tags/tags';
 import { pda as pdaLocale } from '@/locale/en/pda';
-import { PdaQuery, PrivateDataAsset } from '@/services/protocol/types';
+import { PdaQuery } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -24,7 +23,7 @@ import PdaCardInfo from './pda-card-info';
 import SharedWithCard from './shared-with-card';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDAbyId']>;
+  pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
   viewOnly?: boolean;
 };
 
@@ -42,7 +41,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
     return resultArray;
   }
 
-  const claimArray = transformObjectToArray(pda.dataAsset?.claim);
+  const claimArray = transformObjectToArray(pda?.dataAsset?.claim);
   return (
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
@@ -72,7 +71,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           >
             {pda?.dataAsset?.title}
           </Typography>
-          {pda.dataAsset?.image && (
+          {pda?.dataAsset?.image && (
             <>
               <IconButton onClick={toggleShowImagePDAModal}>
                 <Image
