@@ -1,18 +1,20 @@
 import PdaCard from '@/components/pda-card/pda-card';
 import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';
-import { CredentialStatus, PrivateDataAsset } from '@/services/protocol/types';
-import { DeepPartial } from 'react-hook-form';
+import {
+  CredentialStatus,
+  Received_PdasQuery,
+} from '@/services/protocol/types';
 
 import { Typography } from '@mui/material';
 
 import PDAsListContainer from './pdas-list-container';
 
 type Props = {
-  pdas: DeepPartial<PrivateDataAsset>[];
+  pdas: Received_PdasQuery['myPDAs'];
 };
 
-export default async function PDAsList({ pdas }: Props) {
+export default async function PDAsList({ pdas = [] }: Props) {
   //TODO: Do pagination
   if (!pdas.length) {
     return (
