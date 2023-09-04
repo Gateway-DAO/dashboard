@@ -9,9 +9,9 @@ export default function DashboardUserDataRequest({ params: { id } }: PageProps<{
       <h1>DashboardUserDataRequest</h1>
       <p>Open <Link href={{
         query: {
-          back: routes.dashboardUserRequest.replace("[id]", id)
+          back: routes.dashboardUserRequest(id)
         },
-        pathname: routes.dashboardUserProof.replace("[id]", "mock")
+        pathname: routes.dashboardUserProof("mock")
       }}>proof</Link></p>
     </>
   )

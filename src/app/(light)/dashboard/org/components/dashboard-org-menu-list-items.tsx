@@ -1,8 +1,10 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { useMemo } from 'react';
 
 import GTWMenuItem from '@/app/(light)/dashboard/components/menu-item/menu-item';
+import useOrganization from '@/hooks/use-organization';
 
 import dashboardOrgMenuItems from './dashboard-org-menu-items';
 
@@ -11,8 +13,10 @@ import dashboardOrgMenuItems from './dashboard-org-menu-items';
  */
 export default function DashboardOrgMenuListItems() {
   const activePath = usePathname();
+  const { pathnameOrg } = useOrganization();
+  const menuItems = useMemo(() => pathnameOrg ? dashboardOrgMenuItems(pathnameOrg) : undefined, [pathnameOrg]);
 
-  return dashboardOrgMenuItems.map((item) => (
-    <GTWMenuItem key={item.name} active={activePath === item.href} {...item} />
-  ));
+  return menuItems?.map(({ activeHrefs, ...item }) => (
+    <GTWMenuItem key={item.name} active={activeHrefs.some(path => activePath.includes(path))} {...item} />
+  )) ?? null;
 }

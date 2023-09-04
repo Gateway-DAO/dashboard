@@ -11,13 +11,17 @@ import {
   Typography,
 } from '@mui/material';
 
-export type GTWMenuItemProps = {
+type Props = {
   name: string;
   href: string;
   active?: boolean;
   icon: FC<SvgIconProps>;
   activeIcon?: FC<SvgIconProps>;
-} & ListItemButtonProps;
+};
+
+export type GTWMenuItemSettings = Props & {
+  activeHrefs: string[];
+}
 
 export default function GTWMenuItem({
   icon: Icon,
@@ -26,7 +30,7 @@ export default function GTWMenuItem({
   active,
   activeIcon: ActiveIcon,
   ...props
-}: GTWMenuItemProps) {
+}: Props & ListItemButtonProps) {
   return (
     <ListItem sx={{ p: 0 }}>
       <ListItemButton
