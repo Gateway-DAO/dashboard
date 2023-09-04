@@ -4,10 +4,13 @@ import BackButton from '@/components/buttons/back-button';
 import TopBarContainer from '@/components/top-bar-container/top-bar-container';
 import routes from '@/constants/routes';
 import { getApiPrivate } from '@/services/protocol/api';
+import { PdaQuery } from '@/services/protocol/types';
 
 import PDAItem from './components/pda-item';
 
-export const getPDA = async (id: string) => {
+export const getPDA = async (
+  id: string
+): Promise<PdaQuery['PDAbyId'] | null> => {
   const apiPrivate = await getApiPrivate();
   if (!apiPrivate) {
     return null;

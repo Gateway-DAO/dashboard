@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { TooltipUser } from '@/components/tooltip-user/tooltip-user';
 import { pda as pdaLocale } from '@/locale/en/pda';
-import { PrivateDataAsset } from '@/services/protocol/types';
+import { PdaQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { PartialDeep } from 'type-fest';
 
@@ -12,23 +12,20 @@ import { Stack, Box } from '@mui/material';
 import CardUserCell from './card-user-cell';
 
 type Props = {
-  pda: PartialDeep<PrivateDataAsset>;
+  pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
 };
 
 export default function CardUsers({ pda }: Props) {
   const [tooltipIssuer, setTooltipIssuer] = useState<boolean>(false);
   const [tooltipRecipient, setTooltipRecipient] = useState<boolean>(false);
 
-  const issuerName =
-    pda?.dataAsset?.issuerOrganization?.gatewayId ??
-    pda?.dataAsset?.issuerUser?.gatewayId ??
-    '';
+  const issuerName = pda?.dataAsset?.issuer?.user?.gatewayId ?? '';
 
-  const issuerPicture = pda?.dataAsset?.issuerAuth?.data?.picture ?? '';
+  const issuerPicture = '';
 
-  const recipientName = pda?.dataAsset?.recipientUser?.gatewayId ?? '';
+  const recipientName = pda?.dataAsset?.owner?.user?.gatewayId ?? '';
 
-  const recipientPicture = pda?.dataAsset?.recipientAuth?.data?.picture ?? '';
+  const recipientPicture = '';
 
   return (
     <Stack
@@ -52,7 +49,7 @@ export default function CardUsers({ pda }: Props) {
           <TooltipUser
             name={issuerName}
             username={issuerName}
-            issuance_date={pda?.createdAt} // TODO: created at user
+            issuance_date={pda?.dataAsset?.issuer?.user?.createdAt}
             onClose={() => setTooltipIssuer(false)}
           />
         )}
@@ -98,7 +95,7 @@ export default function CardUsers({ pda }: Props) {
           <TooltipUser
             name={recipientName}
             username={recipientName}
-            issuance_date={pda?.createdAt} // TODO: created at user
+            issuance_date={pda?.dataAsset?.owner?.user?.createdAt}
             right={true}
             onClose={() => setTooltipRecipient(false)}
           />

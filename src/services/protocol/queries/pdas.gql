@@ -10,26 +10,31 @@ query pdas {
 query pda($id: String!) {
   PDAbyId(id: $id) {
     id
+    issuanceDate
     dataAsset {
       title
       description
       expirationDate
       image
-      issuerOrganization {
+      organization {
         image
         gatewayId
       }
       issuer {
         id
         userId
+        data
         user {
           gatewayId
+          createdAt
         }
       }
       owner {
         id
+        data
         user {
           gatewayId
+          createdAt
         }
       }
       dataModel {
@@ -48,7 +53,7 @@ query received_pdas($take: Float!, $skip: Float!) {
     id
     dataAsset {
       title
-      issuerOrganization {
+      organization {
         image
         name
         gatewayId

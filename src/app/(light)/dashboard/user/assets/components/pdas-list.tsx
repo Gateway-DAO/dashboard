@@ -28,10 +28,10 @@ export default async function PDAsList({ pdas }: Props) {
   return (
     <PDAsListContainer>
       {pdas.map((pda) => {
-        const issuer = pda.dataAsset?.issuerOrganization
+        const issuer = pda.dataAsset?.organization
           ? {
-              image: pda.dataAsset?.issuerOrganization.image,
-              name: pda.dataAsset?.issuerOrganization.name,
+              image: pda.dataAsset?.organization?.image,
+              name: pda.dataAsset?.organization?.name,
             }
           : {
               image: null,

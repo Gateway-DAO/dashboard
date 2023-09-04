@@ -6,7 +6,7 @@ import MenuItemLink from '@/components/menu-item-link/menu-item-link';
 import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 
-import { Avatar, Divider, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, ListItemIcon, ListItemText } from '@mui/material';
 
 type Props = {
   onClose: () => void;
@@ -23,9 +23,9 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
 
   const accessess = isOrg
     ? user.accesses?.filter(
-      ({ organization: accessOrganization }) =>
-        accessOrganization.id !== organization.id
-    )
+        ({ organization: accessOrganization }) =>
+          accessOrganization.id !== organization.id
+      )
     : user.accesses;
 
   if (!user.accesses?.length) return null;
