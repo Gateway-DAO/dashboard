@@ -37,8 +37,8 @@ export default function EvmWalletConnect({
   const onLogin = async (wallet: string) => {
     try {
       await login(wallet);
-      router.push(routes.dashboardUser);
-    } catch (error) {}
+      router.push(routes.dashboardUserHome);
+    } catch (error) { }
   };
 
   useEffect(() => {
