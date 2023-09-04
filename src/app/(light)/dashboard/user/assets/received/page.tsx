@@ -10,5 +10,5 @@ export default async function DataAssetsPage() {
 
   const pdas = (await apiPrivate.received_pdas({ take: 6, skip: 0 }))?.myPDAs;
 
-  return <PDAsList pdas={pdas ?? []} />;
+  return <PDAsList pdas={pdas} />;
 }
