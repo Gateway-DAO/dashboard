@@ -10,25 +10,25 @@ import routes from '@/constants/routes';
 /**
  * List all menu items of the user dashboard
  */
-export const dashboardOrgMenuItems = (organization: string): GTWMenuItemSettings[] => [
+export const dashboardOrgMenuItems = (username: string): GTWMenuItemSettings[] => [
   {
     name: 'Issued data assets',
-    href: routes.dashboardOrgIssuedAssets.replace("[id]", organization),
-    activeHrefs: [routes.dashboardOrgIssuedAssets.replace("[id]", organization)],
+    href: routes.dashboardOrgIssuedAssets(username),
+    activeHrefs: [routes.dashboardOrgIssuedAssets(username)],
     icon: DataOutlinedIcon,
     activeIcon: DataFilledIcon,
   },
   {
     name: 'Data requests',
-    href: routes.dashboardOrgRequests.replace("[id]", organization),
-    activeHrefs: [routes.dashboardOrgRequests.replace("[id]", organization)],
+    href: routes.dashboardOrgRequests(username),
+    activeHrefs: [routes.dashboardOrgRequests(username)],
     icon: DataRequestOutlinedIcon,
     activeIcon: DataRequestFilledIcon,
   },
   {
     name: 'Received data proofs',
-    href: routes.dashboardOrgReceivedProofs.replace("[id]", organization),
-    activeHrefs: [routes.dashboardOrgReceivedProofs.replace("[id]", organization)],
+    href: routes.dashboardOrgReceivedProofs(username),
+    activeHrefs: [routes.dashboardOrgReceivedProofs(username)],
     icon: DataProofOutlinedIcon,
     activeIcon: DataProofFilledIcon,
   },
