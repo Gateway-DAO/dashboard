@@ -14,31 +14,31 @@ query pda($id: String!) {
       title
       description
       expirationDate
+      image
       issuerOrganization {
         image
         gatewayId
       }
-      issuerUser {
-        gatewayId
+      issuer {
+        id
+        userId
+        user {
+          gatewayId
+        }
       }
-      recipientUser {
-        gatewayId
-      }
-      issuerAuth {
-        data
-      }
-      recipientAuth {
-        data
+      owner {
+        id
+        user {
+          gatewayId
+        }
       }
       dataModel {
         id
         createdAt
+        tags
       }
       claim
       status
-      issuerUser {
-        id
-      }
     }
   }
 }
@@ -53,8 +53,11 @@ query received_pdas($take: Float!, $skip: Float!) {
         name
         gatewayId
       }
-      issuerUser {
-        gatewayId
+      issuer {
+        data
+        user {
+          gatewayId
+        }
       }
       status
     }

@@ -24,7 +24,7 @@ import PdaCardInfo from './pda-card-info';
 import SharedWithCard from './shared-with-card';
 
 type Props = {
-  pda: PartialDeep<PrivateDataAsset>;
+  pda: PartialDeep<PdaQuery['PDAbyId']>;
   viewOnly?: boolean;
 };
 
@@ -93,7 +93,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
             </>
           )}
         </Stack>
-        <Tags tags={pda?.dataAsset?.tags as string[]} />
+        <Tags tags={pda?.dataAsset?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.dataAsset?.description}</Typography>
         <PdaCardInfo pda={pda} viewOnly={viewOnly} />
         {!viewOnly && (
