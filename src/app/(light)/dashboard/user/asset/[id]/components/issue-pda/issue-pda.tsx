@@ -16,15 +16,15 @@ import { FormProvider } from 'react-hook-form';
 import { Stack, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 
-import { sendPdaSchema } from './schema';
-import SendPdaFormField from './send-pda-form-fields';
-import SendPdaFormSuccessfully from './send-pda-form-successfully';
-import SendPdaFormSuccessSkeleton from './send-pda-form-successfully-skeleton';
+import IssuePdaFormField from './issue-pda-form-fields';
+import IssuePdaFormSuccessfully from './issue-pda-form-successfully';
+import IssuePdaFormSuccessSkeleton from './issue-pda-form-successfully-skeleton';
+import { issuePdaSchema } from './schema';
 
-export default function SendPda() {
+export default function IssuePda() {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
-  const [openSendPda, setOpenSendPda] = useToggle(false);
+  const [openIssuePda, setOpenIssuePda] = useToggle(false);
   const [pdaIssued, setPdaIssued] = useState<string>();
 
   // TODO: REMOVE MOCK
@@ -33,7 +33,7 @@ export default function SendPda() {
   const [loading1, setLoading1] = useState<boolean>(false);
 
   const methods = useForm({
-    resolver: zodResolver(sendPdaSchema as any),
+    resolver: zodResolver(issuePdaSchema as any),
   });
 
   const handleMutation = async (_data: any) => {
@@ -47,13 +47,13 @@ export default function SendPda() {
   };
 
   const toggleModal = () => {
-    if (openSendPda) {
+    if (openIssuePda) {
       router.back();
       setPdaIssued(undefined);
     } else {
-      router.push('#send-pda');
+      router.push('#issue-pda');
     }
-    setOpenSendPda();
+    setOpenIssuePda();
   };
 
   return (
@@ -66,27 +66,27 @@ export default function SendPda() {
           mb: 2,
         }}
         onClick={() => {
-          router.push('#send-pda');
-          setOpenSendPda(true);
+          router.push('#issue-pda');
+          setOpenIssuePda(true);
         }}
       >
         {common.actions.share_a_copy}
       </Button>
-      <ModalRight open={openSendPda} onClose={toggleModal}>
+      <ModalRight open={openIssuePda} onClose={toggleModal}>
         <ModalTitle onClose={toggleModal} />
         {pdaIssued ? (
           <>
             {loading1 ? (
-              <SendPdaFormSuccessSkeleton />
+              <IssuePdaFormSuccessSkeleton />
             ) : (
-              <SendPdaFormSuccessfully id={pdaIssued} />
+              <IssuePdaFormSuccessfully id={pdaIssued} />
             )}
           </>
         ) : (
           <FormProvider {...methods}>
             <Stack
               component="form"
-              id="send-pda-form"
+              id="issue-pda-form"
               onSubmit={methods.handleSubmit(handleMutation)}
             >
               <Typography fontSize={34}>
@@ -95,14 +95,14 @@ export default function SendPda() {
               <Typography sx={{ mb: 6 }}>
                 {pda.share.share_a_copy_description}
               </Typography>
-              <SendPdaFormField />
+              <IssuePdaFormField />
               <LoadingButton
                 variant="contained"
                 type="submit"
                 sx={{
                   mt: 3,
                 }}
-                id="send-pda-button"
+                id="issue-pda-button"
                 isLoading={loading0} // TODO: REMOVE MOCK
                 onClick={() => {
                   // TODO: REMOVE MOCK
