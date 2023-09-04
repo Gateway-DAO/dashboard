@@ -40,7 +40,7 @@ export default async function PDAsList({ pdas }: Props) {
         return (
           <PdaCard
             key={pda.id}
-            href={routes.dashboardUserAsset.replace('[id]', pda.id!)}
+            href={routes.dashboardUserAsset(pda.id!)}
             name={pda.dataAsset?.title ?? 'PDA name'}
             issuerImage={issuer.image}
             issuerName={issuer.name ?? 'Issuer'}

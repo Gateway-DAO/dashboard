@@ -7,10 +7,10 @@ import {
   BottomNavigationAction,
 } from '@mui/material';
 
-import { GTWMenuItemProps } from './menu-item/menu-item';
+import { GTWMenuItemSettings } from './menu-item/menu-item';
 
 type Props = {
-  menuItems: GTWMenuItemProps[];
+  menuItems: GTWMenuItemSettings[];
 };
 
 /**
@@ -36,17 +36,22 @@ export default function MenuBottomListItems({
         zIndex: 10,
       }}
     >
-      {menuItems.map(({ icon: Icon, activeIcon: ActiveIcon, ...item }) => (
-        <BottomNavigationAction
-          key={item.name}
-          component={Link}
-          href={item.href}
-          label={item.name}
-          value={item.href}
-          aria-label={item.name}
-          icon={activePath === item.href && ActiveIcon ? <ActiveIcon /> : <Icon />}
-        />
-      ))}
+      {menuItems.map(({ icon: Icon, activeIcon: ActiveIcon, activeHrefs, ...item }) => {
+        const isActive = activeHrefs.some((path) =>
+          activePath.includes(path)
+        );
+        return (
+          <BottomNavigationAction
+            key={item.name}
+            component={Link}
+            href={item.href}
+            label={item.name}
+            value={item.href}
+            aria-label={item.name}
+            icon={isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
+          />
+        )
+      })}
     </BottomNavigation>
   );
 }
