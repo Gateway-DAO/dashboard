@@ -5,7 +5,7 @@ import { apiPublic } from '@/services/protocol/api';
 
 const getPDA = async (id: string) => {
   const pda = await apiPublic.pda({ id });
-  return pda.credential;
+  return pda?.PDAbyId?.dataAsset;
 };
 
 export async function generateMetadata({
@@ -15,8 +15,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const pda = await getPDA(params.pdaId);
   return {
-    title: `${pda.title} PDA - Gateway Network`,
-    description: pda.description,
+    title: `${pda?.title} PDA - Gateway Network`,
+    description: pda?.description,
   };
 }
 
