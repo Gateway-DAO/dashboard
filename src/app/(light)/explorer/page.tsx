@@ -5,7 +5,7 @@ import routes from "@/constants/routes";
 export default function ExplorerHome() {
 
   return <>
-    <Link href={routes.dashboardUser}>
+    <Link href={routes.dashboardUserHome}>
       Go to dashboard
     </Link>
   </>;

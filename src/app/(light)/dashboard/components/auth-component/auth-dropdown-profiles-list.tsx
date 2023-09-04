@@ -23,9 +23,9 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
 
   const accessess = isOrg
     ? user.accesses?.filter(
-        ({ organization: accessOrganization }) =>
-          accessOrganization.id !== organization.id
-      )
+      ({ organization: accessOrganization }) =>
+        accessOrganization.id !== organization.id
+    )
     : user.accesses;
 
   if (!user.accesses?.length) return null;
@@ -52,7 +52,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
       ))}
       {isOrg && (
         <MenuItemLink
-          href={routes.dashboardUser}
+          href={routes.dashboardUserHome}
           key={user.id}
           onClick={onClose}
         >
