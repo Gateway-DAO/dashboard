@@ -6,5 +6,5 @@ import useOrganization from "@/hooks/use-organization"
 
 export default function DashboardOrgErrorPage() {
   const { pathnameOrg } = useOrganization()
-  return <DefaultError href={routes.dashboardOrg.replace("[id]", pathnameOrg!)} />
+  return <DefaultError href={routes.dashboardOrgHome.replace("[id]", pathnameOrg!)} />
 }
