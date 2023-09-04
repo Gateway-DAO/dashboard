@@ -25,7 +25,7 @@ export default function SendPda() {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const [openSendPda, setOpenSendPda] = useToggle(false);
-  const [pdaSent, setPdaSent] = useState<string>();
+  const [pdaIssued, setPdaIssued] = useState<string>();
 
   // TODO: REMOVE MOCK
   const [loading0, setLoading0] = useState<boolean>(false);
@@ -39,7 +39,7 @@ export default function SendPda() {
   const handleMutation = async (_data: any) => {
     if (!(await methods.trigger())) return;
     try {
-      setPdaSent('id');
+      setPdaIssued('id');
       methods.reset();
     } catch (e) {
       enqueueSnackbar('test');
@@ -49,7 +49,7 @@ export default function SendPda() {
   const toggleModal = () => {
     if (openSendPda) {
       router.back();
-      setPdaSent(undefined);
+      setPdaIssued(undefined);
     } else {
       router.push('#send-pda');
     }
@@ -74,12 +74,12 @@ export default function SendPda() {
       </Button>
       <ModalRight open={openSendPda} onClose={toggleModal}>
         <ModalTitle onClose={toggleModal} />
-        {pdaSent ? (
+        {pdaIssued ? (
           <>
             {loading1 ? (
               <SendPdaFormSuccessSkeleton />
             ) : (
-              <SendPdaFormSuccessfully id={pdaSent} />
+              <SendPdaFormSuccessfully id={pdaIssued} />
             )}
           </>
         ) : (
@@ -110,7 +110,7 @@ export default function SendPda() {
                   setTimeout(() => {
                     setLoading0(false);
                     setLoading1(true);
-                    setPdaSent('id');
+                    setPdaIssued('id');
                     setTimeout(() => {
                       setLoading1(false);
                     }, 2000);
