@@ -1,6 +1,6 @@
 import { SvgIcon, SvgIconProps } from '@mui/material';
 
-export function WalletIcon(props: SvgIconProps) {
+export default function DataFilledIcon(props: SvgIconProps) {
   return (
     <SvgIcon
       width="32"

@@ -1,8 +1,8 @@
 import { GTWMenuItemProps } from '@/app/(light)/dashboard/components/menu-item/menu-item';
-import DataProofIcon from '@/components/icons/data-proof';
+import DataFilledIcon from '@/components/icons/data-filled';
 import DataProofFilledIcon from '@/components/icons/data-proof-filled';
-import { SquaredArrowDown } from '@/components/icons/squared-arrow-down';
-import { WalletIcon } from '@/components/icons/wallet';
+import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
+import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
 import routes from '@/constants/routes';
 
 // import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -20,17 +20,17 @@ export const dashboardUserMenuItems: GTWMenuItemProps[] = [
   {
     name: 'Data assets',
     href: routes.dashboardUserReceivedAssets,
-    icon: WalletIcon,
+    icon: DataFilledIcon,
   },
   {
     name: 'Data requests',
     href: routes.dashboardUserRequests,
-    icon: SquaredArrowDown,
+    icon: DataRequestOutlinedIcon,
   },
   {
     name: 'Data proofs',
     href: routes.dashboardUserProofs,
-    icon: DataProofIcon,
+    icon: DataProofOutlinedIcon,
     activeIcon: DataProofFilledIcon,
   },
 ];
