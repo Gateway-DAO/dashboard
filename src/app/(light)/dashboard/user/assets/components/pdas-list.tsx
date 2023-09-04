@@ -1,7 +1,7 @@
 import PdaCard from '@/components/pda-card/pda-card';
 import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';
-import { Credential } from '@/services/protocol/types';
+import { CredentialStatus, PrivateDataAsset } from '@/services/protocol/types';
 import { DeepPartial } from 'react-hook-form';
 
 import { Typography } from '@mui/material';
@@ -9,10 +9,11 @@ import { Typography } from '@mui/material';
 import PDAsListContainer from './pdas-list-container';
 
 type Props = {
-  pdas: DeepPartial<Credential>[];
+  pdas: DeepPartial<PrivateDataAsset>[];
 };
 
 export default async function PDAsList({ pdas }: Props) {
+  //TODO: Do pagination
   if (!pdas.length) {
     return (
       <Typography
@@ -27,23 +28,23 @@ export default async function PDAsList({ pdas }: Props) {
   return (
     <PDAsListContainer>
       {pdas.map((pda) => {
-        const issuer = pda.issuerOrganization
+        const issuer = pda.dataAsset?.issuerOrganization
           ? {
-              image: pda.issuerOrganization.image,
-              name: pda.issuerOrganization.name,
+              image: pda.dataAsset?.issuerOrganization.image,
+              name: pda.dataAsset?.issuerOrganization.name,
             }
           : {
               image: null,
-              name: pda.issuerUser?.gatewayId,
+              name: pda.dataAsset?.issuerUser?.gatewayId,
             };
         return (
           <PdaCard
             key={pda.id}
             href={routes.dashboardUserAsset.replace('[id]', pda.id!)}
-            name={pda.title!}
+            name={pda.dataAsset?.title ?? 'PDA name'}
             issuerImage={issuer.image}
-            issuerName={issuer.name ?? 'ISSUER NAME'}
-            status={pda.status!}
+            issuerName={issuer.name ?? 'Issuer'}
+            status={pda.dataAsset?.status ?? CredentialStatus.Valid}
           />
         );
       })}
