@@ -35,8 +35,8 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
         }}
       >
         <GTWTabs>
-          <GTWTab label="Private" href={routes.dashboardUserReceivedAssets} />
-          <GTWTab label="Received" href={routes.dashboardUserSentAssets} />
+          <GTWTab label="Received" href={routes.dashboardUserReceivedAssets} />
+          <GTWTab label="Sent" href={routes.dashboardUserSentAssets} />
         </GTWTabs>
       </Box>
       <Box sx={{ pt: 5 }}>{children}</Box>
