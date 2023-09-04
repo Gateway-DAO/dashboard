@@ -5,11 +5,11 @@ import {
   Stack
 } from '@mui/material';
 
-import GTWMenuItem, { GTWMenuItemProps } from './menu-item/menu-item';
+import GTWMenuItem, { GTWMenuItemSettings } from './menu-item/menu-item';
 import MobileHeader from './mobile-header';
 
 type Props = {
-  isMenuOpen: boolean, setIsMenuOpen: (active: boolean) => void, menuItems: GTWMenuItemProps[], activePath: string
+  isMenuOpen: boolean, setIsMenuOpen: (active: boolean) => void, menuItems: GTWMenuItemSettings[], activePath: string
 }
 
 export function MobileMenuModal({ activePath, isMenuOpen, menuItems, setIsMenuOpen }: Props) {

@@ -13,6 +13,6 @@ export default function DashboardUserMenuListItems() {
   const activePath = usePathname();
 
   return dashboardUserMenuItems.map((item) => (
-    <GTWMenuItem key={item.name} active={activePath === item.href} {...item} />
+    <GTWMenuItem key={item.name} active={item.activeHrefs.some(path => activePath.includes(path))} {...item} />
   ));
 }
