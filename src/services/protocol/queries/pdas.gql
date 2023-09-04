@@ -17,6 +17,7 @@ query pda($id: String!) {
       expirationDate
       image
       organization {
+        name
         image
         gatewayId
       }
