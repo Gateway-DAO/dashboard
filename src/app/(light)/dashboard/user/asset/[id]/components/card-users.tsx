@@ -19,9 +19,14 @@ export default function CardUsers({ pda }: Props) {
   const [tooltipIssuer, setTooltipIssuer] = useState<boolean>(false);
   const [tooltipRecipient, setTooltipRecipient] = useState<boolean>(false);
 
-  const issuerName = pda?.dataAsset?.issuer?.user?.gatewayId ?? '';
+  const issuerGatewayId =
+    pda?.dataAsset?.organization?.gatewayId ??
+    pda?.dataAsset?.issuer?.user?.gatewayId ??
+    '';
 
-  const issuerPicture = '';
+  const issuerName = pda?.dataAsset?.organization?.name ?? issuerGatewayId;
+
+  const issuerPicture = pda?.dataAsset?.organization?.image ?? '';
 
   const recipientName = pda?.dataAsset?.owner?.user?.gatewayId ?? '';
 
@@ -40,7 +45,7 @@ export default function CardUsers({ pda }: Props) {
           label={pdaLocale.issuer}
           picture={issuerPicture}
           name={limitCharsCentered(issuerName, 15)}
-          id={`pda-issuer-${issuerName}`}
+          id={`pda-issuer-${issuerGatewayId}`}
           onClick={() => setTooltipIssuer(true)}
           verified={false} // TODO: Vefiry if the issuer is a verified user (backloged)
           active={tooltipIssuer}
@@ -48,7 +53,7 @@ export default function CardUsers({ pda }: Props) {
         {tooltipIssuer && (
           <TooltipUser
             name={issuerName}
-            username={issuerName}
+            username={issuerGatewayId}
             issuance_date={pda?.dataAsset?.issuer?.user?.createdAt}
             onClose={() => setTooltipIssuer(false)}
           />
