@@ -21,11 +21,16 @@ query pda($id: String!) {
       }
       issuer {
         id
-        data
+        userId
+        user {
+          gatewayId
+        }
       }
       owner {
         id
-        data
+        user {
+          gatewayId
+        }
       }
       dataModel {
         id
@@ -50,6 +55,9 @@ query received_pdas($take: Float!, $skip: Float!) {
       }
       issuer {
         data
+        user {
+          gatewayId
+        }
       }
       status
     }

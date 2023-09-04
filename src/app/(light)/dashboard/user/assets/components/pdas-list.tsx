@@ -35,7 +35,7 @@ export default async function PDAsList({ pdas }: Props) {
             }
           : {
               image: null,
-              name: pda.dataAsset?.issuerUser?.gatewayId,
+              name: pda.dataAsset?.issuer?.user?.gatewayId,
             };
         return (
           <PdaCard
