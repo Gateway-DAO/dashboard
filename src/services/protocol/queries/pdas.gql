@@ -18,17 +18,16 @@ query pda($id: String!) {
         image
         gatewayId
       }
-      issuerUser {
-        gatewayId
+      issuer {
+        userId
+        user {
+          gatewayId
+        }
       }
-      recipientUser {
-        gatewayId
-      }
-      issuerAuth {
-        data
-      }
-      recipientAuth {
-        data
+      owner {
+        user {
+          gatewayId
+        }
       }
       dataModel {
         id
@@ -36,9 +35,6 @@ query pda($id: String!) {
       }
       claim
       status
-      issuerUser {
-        id
-      }
     }
   }
 }
@@ -53,8 +49,10 @@ query received_pdas($take: Float!, $skip: Float!) {
         name
         gatewayId
       }
-      issuerUser {
-        gatewayId
+      issuer {
+        user {
+          gatewayId
+        }
       }
       status
     }
