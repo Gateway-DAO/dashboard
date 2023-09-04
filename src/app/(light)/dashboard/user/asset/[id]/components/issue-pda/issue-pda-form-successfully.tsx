@@ -11,7 +11,7 @@ type Props = {
   id: string;
 };
 
-export default function SendPdaFormSuccessfully({ }: Props) {
+export default function IssuePdaFormSuccessfully({ }: Props) {
   // TODO: Remove MOCK
   const proof = {
     id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fe375',
