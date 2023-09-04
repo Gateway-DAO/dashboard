@@ -1,5 +1,5 @@
 'use client';
-import { Gateway2Icon } from '@/components/icons/gateway2';
+import GatewayIcon from '@/components/icons/gateway';
 import { pda } from '@/locale/en/pda';
 import { useFormContext } from 'react-hook-form';
 import { FaEthereum } from 'react-icons/fa';
@@ -35,7 +35,7 @@ export default function SendPdaFormField() {
       value: 0,
       name: 'Gateway ID',
       icon: (
-        <Gateway2Icon sx={{ color: 'text.secondary', width: 22, height: 22 }} />
+        <GatewayIcon sx={{ color: 'text.secondary', width: 22, height: 22 }} />
       ),
     },
     {

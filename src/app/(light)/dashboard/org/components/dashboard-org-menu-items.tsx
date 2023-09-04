@@ -1,7 +1,6 @@
 
-import { SquaredArrowDown } from '@/components/icons/squared-arrow-down';
-import { SquaredArrowRight } from '@/components/icons/squared-arrow-right';
-import { WalletIcon } from '@/components/icons/wallet';
+import DataFilledIcon from '@/components/icons/data-filled';
+import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -21,27 +20,27 @@ export const dashboardOrgMenuItems: GTWMenuItemProps[] = [
   {
     name: 'Issued data assets',
     href: '/issued',
-    icon: SquaredArrowRight,
+    icon: DataRequestOutlinedIcon,
   },
   {
     name: 'Data requests',
     href: '/user/data-requests',
-    icon: SquaredArrowDown,
+    icon: DataRequestOutlinedIcon,
   },
   {
     name: 'Org data assets',
     href: '/dashboard',
-    icon: WalletIcon,
+    icon: DataFilledIcon,
   },
   {
     name: 'Data proofs',
     href: '/dashboard',
-    icon: WalletIcon,
+    icon: DataFilledIcon,
   },
   {
     name: 'Saved and created data models',
     href: '/dashboard',
-    icon: WalletIcon,
+    icon: DataFilledIcon,
   },
   {
     name: 'Activity',

@@ -4,7 +4,7 @@ import { errorMessages } from '@/locale/en/errors';
 
 import { Box, Button, Stack, Typography } from '@mui/material';
 
-import { GatewayBrokenIcon } from '../icons/gateway-broken';
+import GatewayBrokenIcon from '../icons/gateway-broken';
 
 type Props = {
   href?: string;

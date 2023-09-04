@@ -1,4 +1,5 @@
-import { GatewayIcon } from '@/components/icons/gateway';
+
+import GatewaySquaredIcon from '@/components/icons/gateway-squared';
 
 import { Typography } from '@mui/material';
 
@@ -8,8 +9,8 @@ export default function Logo() {
   return (
     <LogoContainer
     >
-      <GatewayIcon sx={{ fontSize: 40 }} />
-      <Typography component={'h1'} ml={1} color={'black'}>
+      <GatewaySquaredIcon sx={{ fontSize: 40 }} />
+      <Typography component="h1" ml={1} color="black" fontWeight="bold">
         Gateway
       </Typography>
     </LogoContainer>

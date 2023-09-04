@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import GTWLink from '@/components/gtw-link';
-import { GatewayIcon } from '@/components/icons/gateway';
+import GatewayIcon from '@/components/icons/gateway';
 import routes from '@/constants/routes';
 
 import { Box, Button, Stack } from '@mui/material';
