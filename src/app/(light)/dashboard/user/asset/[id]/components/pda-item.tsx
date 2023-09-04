@@ -29,19 +29,7 @@ type Props = {
 
 export default function PDAItem({ pda, viewOnly = false }: Props) {
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
-  function transformObjectToArray(obj: any) {
-    const resultArray = [];
 
-    for (const prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
-        resultArray.push({ name: prop, value: obj[prop] });
-      }
-    }
-
-    return resultArray;
-  }
-
-  const claimArray = transformObjectToArray(pda?.dataAsset?.claim);
   return (
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
@@ -121,7 +109,8 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           px: CONTAINER_PX,
         }}
       />
-      <DataTable title={pdaLocale.claim} data={claimArray ?? []} />
+
+      <DataTable title={pdaLocale.claim} data={pda?.dataAsset?.claimArray} />
     </>
   );
 }

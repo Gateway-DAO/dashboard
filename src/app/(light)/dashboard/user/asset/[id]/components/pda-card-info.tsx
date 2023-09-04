@@ -60,15 +60,17 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
         </TableCellContainer>
       )}
       <TableCellContainer>
-        <CardCell label={pdaLocale.authenticated_by}>
-          <Typography>
-            {limitCharsCentered(
-              pda?.dataAsset?.issuer?.data?.address ??
-                pda?.dataAsset?.issuer?.data?.email,
-              20
-            )}
-          </Typography>
-        </CardCell>
+        {pda?.dataAsset?.organization && (
+          <CardCell label={pdaLocale.authenticated_by}>
+            <Typography>
+              {limitCharsCentered(
+                pda?.dataAsset?.issuer?.data?.address ??
+                  pda?.dataAsset?.issuer?.data?.email,
+                20
+              )}
+            </Typography>
+          </CardCell>
+        )}
         <CardCell label={datamodel.data_model_id}>
           {limitCharsCentered(pda?.id ?? '', 6)}
           {/* <c
