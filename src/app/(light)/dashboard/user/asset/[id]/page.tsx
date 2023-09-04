@@ -3,17 +3,15 @@ import { Metadata } from 'next';
 import BackButton from '@/components/buttons/back-button';
 import TopBarContainer from '@/components/top-bar-container/top-bar-container';
 import routes from '@/constants/routes';
-import { apiPublic, getApiPrivate } from '@/services/protocol/api';
+import { getApiPrivate } from '@/services/protocol/api';
 
 import PDAItem from './components/pda-item';
 
-const getPDA = async (id: string) => {
+export const getPDA = async (id: string) => {
   const apiPrivate = await getApiPrivate();
   if (!apiPrivate) {
     return null;
   }
-  // const pda = await apiPublic.pda({ id });
-  // return pda.credential;
 
   const pda = (await apiPrivate.pda({ id }))?.PDAbyId;
   return pda;
