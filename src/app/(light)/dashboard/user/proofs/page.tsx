@@ -10,7 +10,7 @@ export default function DashboardUserProofsPage() {
   return (
     <Stack>
       <TableSharedDataAssets />
-      <Link href={routes.dashboardUserProof.replace("[id]", "mock")}>Open proof</Link>
+      <Link href={routes.dashboardUserProof("mock")}>Open proof</Link>
     </Stack>
   );
 }

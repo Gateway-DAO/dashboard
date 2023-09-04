@@ -30,17 +30,17 @@ export default async function PDAsList({ pdas }: Props) {
       {pdas.map((pda) => {
         const issuer = pda.dataAsset?.issuerOrganization
           ? {
-              image: pda.dataAsset?.issuerOrganization.image,
-              name: pda.dataAsset?.issuerOrganization.name,
-            }
+            image: pda.dataAsset?.issuerOrganization.image,
+            name: pda.dataAsset?.issuerOrganization.name,
+          }
           : {
-              image: null,
-              name: pda.dataAsset?.issuer?.user?.gatewayId,
-            };
+            image: null,
+            name: pda.dataAsset?.issuer?.user?.gatewayId,
+          };
         return (
           <PdaCard
             key={pda.id}
-            href={routes.dashboardUserAsset.replace('[id]', pda.id!)}
+            href={routes.dashboardUserAsset(pda.id!)}
             name={pda.dataAsset?.title ?? 'PDA name'}
             issuerImage={issuer.image}
             issuerName={issuer.name ?? 'Issuer'}
