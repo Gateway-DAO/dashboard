@@ -16,7 +16,7 @@ export default function DashboardOrgMenuListItems() {
   const { pathnameOrg } = useOrganization();
   const menuItems = useMemo(() => pathnameOrg ? dashboardOrgMenuItems(pathnameOrg) : undefined, [pathnameOrg]);
 
-  return menuItems?.map((item) => (
-    <GTWMenuItem key={item.name} active={item.activeHrefs.some(path => activePath.includes(path))} {...item} />
+  return menuItems?.map(({ activeHrefs, ...item }) => (
+    <GTWMenuItem key={item.name} active={activeHrefs.some(path => activePath.includes(path))} {...item} />
   )) ?? null;
 }

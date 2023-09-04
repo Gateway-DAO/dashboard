@@ -36,8 +36,8 @@ export default function MenuBottomListItems({
         zIndex: 10,
       }}
     >
-      {menuItems.map(({ icon: Icon, activeIcon: ActiveIcon, ...item }) => {
-        const isActive = item.activeHrefs.some((path) =>
+      {menuItems.map(({ icon: Icon, activeIcon: ActiveIcon, activeHrefs, ...item }) => {
+        const isActive = activeHrefs.some((path) =>
           activePath.includes(path)
         );
         return (
