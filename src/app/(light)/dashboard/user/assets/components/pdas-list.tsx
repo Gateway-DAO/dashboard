@@ -13,6 +13,7 @@ type Props = {
 };
 
 export default async function PDAsList({ pdas }: Props) {
+  //TODO: Do pagination
   if (!pdas.length) {
     return (
       <Typography
