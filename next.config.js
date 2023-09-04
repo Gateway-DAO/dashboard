@@ -1,4 +1,4 @@
-const routes = require("./src/constants/routes")
+const routes = require('./src/constants/routes');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -35,7 +35,7 @@ const nextConfig = {
         source: '/dashboard/org',
         destination: routes.dashboardUserReceivedAssets,
         permanent: true,
-      }
+      },
     ];
   },
   webpack: (config) => {
