@@ -2,6 +2,9 @@ const routes = require('./src/constants/routes');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverActions: true,
+  },
   images: {
     domains: [
       'api.staging.mygateway.xyz',
