@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 
 import PDAsList from '@/app/(light)/dashboard/user/assets/components/pdas-list';
 import { getMyPdas } from '@/app/actions/get-myPdas';
+import Loading from '@/components/loadings/loading';
+import { pdas } from '@/locale/en/pda';
 import { useToggle } from '@react-hookz/web';
 import { useInView } from 'react-intersection-observer';
 
 import { Button, Stack } from '@mui/material';
-
-import Loading from '../../../../../../components/loadings/loading';
 
 export default function InfiniteLoadMore({ pageSize = 6 }) {
   const [items, setItems] = useState<any[]>([]);
@@ -55,7 +55,7 @@ export default function InfiniteLoadMore({ pageSize = 6 }) {
               toggleFirstLoadMore(false);
             }}
           >
-            load more
+            {pdas.load_more}
           </Button>
         </Stack>
       )}
