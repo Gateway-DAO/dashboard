@@ -1,7 +1,10 @@
-const routes = require("./src/constants/routes")
+const routes = require('./src/constants/routes');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverActions: true,
+  },
   images: {
     domains: [
       'api.staging.mygateway.xyz',
@@ -35,7 +38,7 @@ const nextConfig = {
         source: '/dashboard/org',
         destination: routes.dashboardUserReceivedAssets,
         permanent: true,
-      }
+      },
     ];
   },
   webpack: (config) => {
