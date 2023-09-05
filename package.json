@@ -23,6 +23,7 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.4",
     "@mui/system": "^5.14.4",
+    "@mui/x-data-grid": "^6.12.1",
     "@prisma/client": "5.1.1",
     "@rainbow-me/rainbowkit": "^1.0.9",
     "@react-hookz/web": "^23.1.0",
