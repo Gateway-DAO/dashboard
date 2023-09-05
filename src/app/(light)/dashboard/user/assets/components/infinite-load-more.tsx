@@ -46,7 +46,7 @@ export default function InfiniteLoadMore({ pageSize = 6 }) {
         <PDAsList pdas={items} />
       </Stack>
       {firstLoadMore && (
-        <Stack mt={1} display="flex" alignItems="center">
+        <Stack mt={2} display="flex" alignItems="center">
           <Button
             variant="outlined"
             size="medium"
@@ -60,9 +60,9 @@ export default function InfiniteLoadMore({ pageSize = 6 }) {
         </Stack>
       )}
       {loadMoreButton && (
-        <div ref={ref}>
+        <Stack mt={2} ref={ref}>
           <Loading />
-        </div>
+        </Stack>
       )}
     </>
   );
