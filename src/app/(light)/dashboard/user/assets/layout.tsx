@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import routes from '@/constants/routes';
+import { pdas } from '@/locale/en/pda';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -24,7 +25,7 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
           },
         }}
       >
-        My data assets
+        {pdas.my_data_assets}
       </Typography>
       <Box
         sx={{

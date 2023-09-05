@@ -1,4 +1,8 @@
 export const auth = {
+  menu: {
+    gatewayId: 'GatewayId',
+    disconnect: 'Disconnect',
+  },
   steps: {
     initial: {
       title: 'Enter the Gateway',

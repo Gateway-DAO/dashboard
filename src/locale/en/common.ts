@@ -1,6 +1,9 @@
 import { Chain } from '@/services/protocol/types';
 
 export const common = {
+  general: {
+    gateway: 'Gateway',
+  },
   chain: {
     EVM: 'Ethereum',
     SOL: 'Solana',
@@ -14,5 +17,6 @@ export const common = {
     check_now: 'Check now',
     copy_url: 'Copy URL',
     connect_now: 'Connect now',
+    back_to_home: 'Back to home',
   },
 };
