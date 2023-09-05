@@ -10,11 +10,13 @@ import GatewayBrokenIcon from '../icons/gateway-broken';
 type Props = {
   href?: string;
   message?: string;
+  isModal?: boolean;
 };
 
 export default function DefaultError({
   href = '/',
   message = errorMessages.PAGE_NOT_FOUND,
+  isModal = false,
 }: Props): JSX.Element {
   return (
     <Stack
@@ -27,21 +29,23 @@ export default function DefaultError({
       <Stack gap={4}>
         <GatewayBrokenIcon
           sx={{
-            width: '160px',
+            width: isModal ? 100 : 160,
             height: 'auto',
           }}
         />
         <Box>
-          <Typography variant="h3">
+          <Typography variant={isModal ? 'h4' : 'h3'}>
             {errorMessages.SOMETHING_WENT_WRONG}
           </Typography>
           <Typography variant="body1">{message}</Typography>
         </Box>
-        <Link passHref href={href}>
-          <Button size="large" variant="contained">
-            {common.actions.back_to_home}
-          </Button>
-        </Link>
+        {!isModal && (
+          <Link passHref href={href}>
+            <Button size="large" variant="contained">
+              {common.actions.back_to_home}
+            </Button>
+          </Link>
+        )}
       </Stack>
     </Stack>
   );
