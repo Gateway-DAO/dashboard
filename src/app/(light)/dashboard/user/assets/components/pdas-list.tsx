@@ -1,14 +1,9 @@
 'use client';
 
-import { Fragment } from 'react';
-
 import PdaCard from '@/components/pda-card/pda-card';
 import routes from '@/constants/routes';
-import { pdas as pdasLocales } from '@/locale/en/pda';
 import { CredentialStatus, PrivateDataAsset } from '@/services/protocol/types';
 import { DeepPartial } from 'react-hook-form';
-
-import { Typography } from '@mui/material';
 
 import PDAsListContainer from './pdas-list-container';
 
@@ -19,7 +14,7 @@ type Props = {
 export default function PDAsList({ pdas }: Props) {
   return (
     <>
-      {pdas ? (
+      {pdas && pdas.length > 0 && (
         <PDAsListContainer>
           {pdas.map((pda: DeepPartial<PrivateDataAsset>) => {
             const issuer = pda.dataAsset?.organization
@@ -43,14 +38,6 @@ export default function PDAsList({ pdas }: Props) {
             );
           })}
         </PDAsListContainer>
-      ) : (
-        <Typography
-          variant="body1"
-          color="text.secondary"
-          sx={{ textAlign: 'center', width: '100%' }}
-        >
-          {pdasLocales.empty}
-        </Typography>
       )}
     </>
   );
