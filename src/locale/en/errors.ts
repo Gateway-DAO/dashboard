@@ -1,3 +1,18 @@
-export const errorMessages = {
-  'page-not-found': 'Page not found',
+export const errorMessages: Record<string, string> = {
+  PAGE_NOT_FOUND: 'Page not found',
+  UNEXPECTED_ERROR: `There was an unexpected error, please, contact Gateway or try again.`,
+  EMAIL_ALREADY_REGISTERED: `E-mail already registered`,
+  GATEWAY_ID_ALREADY_REGISTERED: `Gateway ID already registered`,
+  GATEWAY_ID_UPDATED_RECENTLY: 'You will be able to update in [days] days.',
+  ERROR_TRYING_TO_SEND_THE_CODE: `An error ocurred trying to send the code`,
+  ERROR_TRYING_TO_CREATE_THE_CODE: `An error ocurred trying to create the code`,
+  EXPIRED_CODE: `Expired code`,
+  INVALID_CODE_VERIFICATION: `Invalid code verification`,
+  MAXIMUM_ATTEMPTS_REACHED: `Maximum attempts reached`,
+  MAXIMUM_TIME_REACHED: `Expired token`,
+  EMAIL_ALREADY_IN_USE: 'E-mail already in use',
+  USERNAME_ALREADY_IN_USE: 'Username already in use',
+  WALLET_ALREADY_ASSOCIATED: `Wallet already associated to another user`,
+  CANNOT_REMOVE_LAST_AUTH_METHOD: `You cannot remove the last authentication method of your account`,
+  SOMETHING_WENT_WRONG: 'Something went wrong',
 };
