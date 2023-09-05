@@ -7,7 +7,7 @@ import GatewayIcon from '@/components/icons/gateway';
 import routes from '@/constants/routes';
 
 import CloseIcon from '@mui/icons-material/Close';
-import { Avatar, Box, IconButton, Stack } from '@mui/material';
+import { Box, IconButton, Stack } from '@mui/material';
 
 import { ChooseEmail } from '../sections/choose-email';
 import { ChooseGatewayId } from '../sections/choose-gateway-id';
@@ -17,8 +17,8 @@ import { VerifyEmailAddToken } from '../sections/verify-email-add-token';
 import { VerifyEmailLoginToken } from '../sections/verify-email-login-token';
 
 export function Authentication() {
-  const [canShowClose, setCanShowClose] = useState(false);
-  const [step, setStep] = useState('initial');
+  const [canShowClose, _setCanShowClose] = useState(false);
+  const [step, _setStep] = useState('initial');
 
   return (
     <Stack

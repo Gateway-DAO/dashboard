@@ -2,7 +2,6 @@ import CardCell from '@/components/card-cell/card-cell';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { CredentialData } from '@/services/protocol/types';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
-import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import { Stack, Typography, Divider, Card } from '@mui/material';
 
