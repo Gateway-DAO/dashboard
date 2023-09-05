@@ -26,7 +26,6 @@ export default function InfiniteLoadMore({ pageSize = 6 }) {
     setItems((prevItems) => [...prevItems, ...newItems]);
     setPagesLoaded(nextPage);
     if (newItems && newItems.length && newItems.length < pageSize) {
-      console.log(newItems.length);
       toggleLoadMoreButton(false);
     } else {
       toggleLoadMoreButton(true);
@@ -47,14 +46,18 @@ export default function InfiniteLoadMore({ pageSize = 6 }) {
         <PDAsList pdas={items} />
       </Stack>
       {firstLoadMore && (
-        <Button
-          onClick={() => {
-            toggleLoadMoreButton(true);
-            toggleFirstLoadMore(false);
-          }}
-        >
-          load more
-        </Button>
+        <Stack mt={1} display="flex" alignItems="center">
+          <Button
+            variant="outlined"
+            size="medium"
+            onClick={() => {
+              toggleLoadMoreButton(true);
+              toggleFirstLoadMore(false);
+            }}
+          >
+            load more
+          </Button>
+        </Stack>
       )}
       {loadMoreButton && (
         <div ref={ref}>
