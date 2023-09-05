@@ -18,5 +18,6 @@ export const common = {
     copy_url: 'Copy URL',
     connect_now: 'Connect now',
     back_to_home: 'Back to home',
+    close: 'Close',
   },
 };
