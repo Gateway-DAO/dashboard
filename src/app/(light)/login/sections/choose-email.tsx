@@ -1,7 +1,7 @@
 'use client';
 import { LoadingButton } from '@/components/buttons/loading-button';
-import { errorMessages } from '@/constants/error-messages';
 import { auth } from '@/locale/en/auth';
+import { errorMessages } from '@/locale/en/errors';
 import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 
