@@ -84,7 +84,7 @@ export function TooltipUser({
           onClick={onClose}
         />
       </Stack>
-      <Typography fontSize={24}>
+      <Typography fontSize={24} id="tooltip-user-name">
         {limitCharsCentered(name as string, 16)}
       </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>

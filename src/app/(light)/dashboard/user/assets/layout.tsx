@@ -24,7 +24,9 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
           },
         }}
       >
-        <Typography variant="h3">{pdas.my_data_assets}</Typography>
+        <Typography variant="h3" id="title-assets">
+          {pdas.my_data_assets}
+        </Typography>
         <Typography variant="body1">{pdas.data_assets_subtitle}</Typography>
       </Box>
       <Box
