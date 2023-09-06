@@ -5,12 +5,14 @@ import { Chip, ChipProps } from '@mui/material';
 
 type Props = {
   status: CredentialStatus;
+  variant?: 'filled' | 'outlined';
   isProof?: boolean;
 } & Omit<ChipProps, 'label' | 'color'>;
 
 export function PDAStatusChip({
   status,
   isProof = false,
+  variant = 'filled',
   ...chipProps
 }: Props) {
   const labelValidProof = proof.status.up_to_date;
@@ -35,5 +37,7 @@ export function PDAStatusChip({
     props.color = 'warning';
   }
 
-  return <Chip sx={{ textTransform: 'capitalize' }} {...props} />;
+  return (
+    <Chip variant={variant} sx={{ textTransform: 'capitalize' }} {...props} />
+  );
 }
