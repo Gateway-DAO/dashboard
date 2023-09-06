@@ -64,7 +64,7 @@ export function AuthenticationOptions() {
           .map((method) => (
             <Fragment key={method.id}>
               <Button
-                id={method.methodName}
+                id={`connect-${method.id}`}
                 key={method.methodName}
                 variant="outlined"
                 size="large"
