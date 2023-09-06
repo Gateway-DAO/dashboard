@@ -41,6 +41,6 @@ test('connect wallet using default metamask account', async () => {
 test('Welcome page', async () => {
   await sharedPage.waitForTimeout(5000);
   await expect(sharedPage.locator('#title-assets')).toContainText(
-    'My data assets'
+    'Data assets'
   );
 });
