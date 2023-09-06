@@ -55,6 +55,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
         >
           <Typography
             variant="h3"
+            id="pda-title"
             sx={{ fontSize: { xs: 24, md: 48 }, my: 2, fontWeight: 400 }}
           >
             {pda?.dataAsset?.title}

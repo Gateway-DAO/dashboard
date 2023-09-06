@@ -29,6 +29,7 @@ export default function PdaCard({
       }}
     >
       <CardActionArea
+        className="pda-card"
         {...(href && {
           component: Link,
           href: href,
@@ -54,7 +55,9 @@ export default function PdaCard({
               {issuerName}
             </Typography>
           </Stack>
-          <Typography fontWeight={700}>{name}</Typography>
+          <Typography fontWeight={700} className="pda-card-name">
+            {name}
+          </Typography>
         </Stack>
         <PDAStatusChip variant="outlined" status={status} size="small" />
       </CardActionArea>
