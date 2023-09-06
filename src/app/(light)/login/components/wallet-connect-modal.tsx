@@ -31,7 +31,9 @@ export function WalletConnectModal({
   const [evmIsLoading, setEvmIsLoading] = useState(false);
   return (
     <Dialog open={isOpen} onClose={onCancel} maxWidth="xs">
-      <DialogTitle sx={{ textAlign: 'left' }}>{title}</DialogTitle>
+      <DialogTitle id="title-modal" sx={{ textAlign: 'left' }}>
+        {title}
+      </DialogTitle>
       <DialogContent>
         <Typography variant="body1">{description}</Typography>
         <Stack mt={4}>

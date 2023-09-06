@@ -13,15 +13,22 @@ type Props = {
 
 const colors = [
   brandColors.primary,
-  "#53128C",
-  "#70ECFE",
-  "#4EA5B1",
-  "#F5B5FF",
-]
+  '#53128C',
+  '#70ECFE',
+  '#4EA5B1',
+  '#F5B5FF',
+];
 
 export default function GTWAvatar({ src, name, alt, hasBorder, size }: Props) {
   if (!src) {
-    return <BoringAvatar variant="marble" name={name} size={size} colors={colors} />;
+    return (
+      <BoringAvatar
+        variant="marble"
+        name={name ?? 'User'}
+        size={size}
+        colors={colors}
+      />
+    );
   }
 
   return (
