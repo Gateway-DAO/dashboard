@@ -15,9 +15,7 @@ import { Box } from '@mui/system';
 export default function DataAssetsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
-      <Typography
-        variant="h3"
-        id="title-assets"
+      <Box
         sx={{
           mb: {
             xs: 4,
@@ -26,8 +24,11 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
           },
         }}
       >
-        {pdas.my_data_assets}
-      </Typography>
+        <Typography variant="h3" id="title-assets">
+          {pdas.my_data_assets}
+        </Typography>
+        <Typography variant="body1">{pdas.data_assets_subtitle}</Typography>
+      </Box>
       <Box
         sx={{
           borderBottom: 1,
