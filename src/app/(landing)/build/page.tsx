@@ -1,3 +1,3 @@
-export default function BuildPage () {
-  return (<></>)
+export default function BuildPage() {
+  return <></>;
 }
