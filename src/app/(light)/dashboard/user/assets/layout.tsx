@@ -17,6 +17,7 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
     <Box sx={{ py: 2 }}>
       <Typography
         variant="h3"
+        id="title-assets"
         sx={{
           mb: {
             xs: 4,

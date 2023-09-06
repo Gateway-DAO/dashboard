@@ -42,6 +42,7 @@ export function CustomEvmButton({ onFirstModal }: Props) {
               if (!connected) {
                 return (
                   <Button
+                    id="connect-evm"
                     variant="contained"
                     startIcon={<FaEthereum fontSize="24" />}
                     onClick={() => {

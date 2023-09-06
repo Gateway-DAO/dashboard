@@ -1,0 +1,24 @@
+import { chromium } from '@playwright/test';
+import path from 'node:path';
+
+export default async function globalConfig() {
+  const storagePath = path.resolve(__dirname, 'storageState.json');
+  const sessionToken =
+    'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..xi5MaYXDlDa-UQfd.ectIN-M2hw4SBQtaB9-K9mHmdKtMX6s8urjgZdOO9q-5wEVbnZfJyMEpXNU0IoM_hS1p5RwWTlxUPuV3DycxIQibL841q49Y4Z6ilUDpIpG9KhcaVkxXqz6-SnCtAhNHdqmBlmiKdYcO8RqmIWBplMAkdegDP5iJVKpKjiyX6CzJJp9GCnkspEIrnV-vjLQhFWkQhh2JAm8CS6817-y3ay1o9txDW0U3O4s8AeNcPruWd3p59j0f-tK_lh5cUhDuaBQn9Y1OufoBIdyP6S8FS_tNGkA4HYhG-VtqfYKPNVzcBH7j6Wmt0-57EI4_XhrMQ1fsm7AtDlnzqQqErNNpmy9h25pbQzek1gCcZTGT7fssVryUlruz0QTsPa7fURVZyPMAlagvEYESONLZLEpk1DzNt9nHOs0xQERnGPrDGjpVfAEH-fP5bWD_vrnRNny6_1uZEQQYFRyEyqiM38lRR-NkfaGFKXPBoD1XMHs4cWMGqSbJKNO-k1EHIXbX6Fod3OxDmG4NxTURMosgsDJF-LN_YS4UPDtGvqCK8MlwFnQGE2QojxwBytVJABGfcojF2tO5DDvl3p7xkWWYfuMA075ho52z64UObm26TQrwcNb_AZ3Jsergg33kQhn--1TnPlA0xk3YFi2LPimdh6g0VQk8ZzRM1wFgUr6GmGpR4XCJr8JM2Q7S8OnBtI7NoZA4LRNJXMYLjWKpwoR2Elzvu2-G1turhqcNr55H5d5gB3sZaodaIlvlTdBUXly6jRzesRWjA6JjWFhUACkCnELd9zfeR5fCkLd4CmnQber7vHrYcT3fZeuF8dZGaTAiT0lvS1gYn80odQvM0JDyROegFds_VGb7Wn2lT7wEmiZM0spIa1rg3Y3FLNVcmFqFSLk3BQdyMV4rk0OqQCejpCSwyV4Kny1VoOxp65S0-5mPr8S1hi91SClEzxsA22gexrc7Cb9Cjl-u7_0uUwhwwrMqCF2lL-nzspfLNaEmeSTQNNSTc8iBo-jmrsspWWQQf3T4SArFArxtdMhXkL4g4kdtms2RxkAs_m7lu_dmp26T6sB7XkMTv0-mLlCyWvWX1i02JHjvGrxCe1TkzmgZmPqCqQ8D_tidp_fy4UI5SWmFxXzCOIB7-JkUXibph5F291EovA-7HEQebhWUbtBDbvie2jJ1waJxWRNwUYSkVaYMvPHjbpUkLc_p7hsICEpPA5Qrw07lmUUW5S6rLQS0ZDOHoM-MmnEdnZwndTzDsuzDi3BU_dEluT4uldmiu85KXob42FOlejwjDH3Upc0vMdhqzIV52YHGUccOJ5-0IlgDmc0SVnIba9wrM1FQCLe_acf6JYGuQLuCvff3dGmw3qu7YyHHt008dQMJhBTK1CxYNYxqF_kOmmz8s2wHj7dyfgE-FTqNYiUvnsFD0_NdGuTYi6A_4KVbQncrZhjDzGbYpoDTooZj55Cvv56rl9bPYeBKjGFWbPfd0fyr3qkpFaDDeML_anuHOA8bY6XtMnmuRL1DzpREc9TxJNttOCr5hScdCzzbB2wBAfWtDnmV8YezQdOEIbG6VIGQ9EPAbaoboAlW0kV_-elMc2U3DLC_C_xPtVfIE7jiuVSsWTn45GGqljV0EOCryRE1fLfmuyX5BqbM4Rt096gXnUSvzjEsJ0AxFfnKwbS8eqZK-BGjTUtviRJ3vv-7ghNXrdKUSAhcTy20sY3EycnxMk-xjXJO-WlLARP2hx83oWeew_L0V6dgYet1yUremZzx101HqcHaq5MBIrOAdy-wIw-gsGTz7y1sMcewjpPAw583AtFcwzmnJPedc9G8RhJMmCX_1cJeD7t03UzXIYtMokVE0HFyuRFWVKy0ugZYflDwDe_xhksG2ZUxxvAdDSl8eqxBNRS4Ioz21cWBgH5B_LRUxhgQbGooszg3hLO8nMB10gAb1wAxCed_dIGai1ed70YSy_VjoO1FLRySAr3oJf0DyLcmaPj7LCL4Krf1eylq8dxNBOSIies8LkoUvHXrd438wl3EdMGPv6nCaOJuuOqDOcqK40jRZvPGntxlCrVApZ7r17y89egGmZJpihdplvz32ZGChzES_NaQrl-m_JXyrATTpHhO004jnmQ1YAIBRpeJlnvPm5WerYPp-4rJ9VpLBg35FLZj19A0FIU8BAhnb0V0C6vLA__zDMArMi5inZuIllSLlLDjMtbXhIRY86ol-rhPQNkwwFaYkelJMl13TU_1yS3NvgmrSoPMqNKhuP8DGw.RZMCqGNyICWyhvCDKW6cJA';
+
+  const browser = await chromium.launch();
+  const context = await browser.newContext();
+  await context.addCookies([
+    {
+      name: 'next-auth.session-token',
+      value: sessionToken,
+      domain: 'localhost',
+      path: '/',
+      httpOnly: true,
+      sameSite: 'Lax',
+      expires: Math.round((Date.now() + 86400000 * 1) / 1000),
+    },
+  ]);
+  await context.storageState({ path: storagePath });
+  await browser.close();
+}
