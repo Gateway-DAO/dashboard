@@ -32,7 +32,7 @@ export function VerifyEmailAddToken() {
           console.log('MAXIMUM');
         }
         enqueueSnackbar(
-          errorMessages[message] || errorMessages.UNEXPECTED_ERROR,
+          errorMessages[message as keyof typeof errorMessages] || errorMessages.UNEXPECTED_ERROR,
           {
             variant: 'error',
           }
