@@ -1,15 +1,5 @@
-mutation create_proof(
-  $claims: JSON
-  $organizationId: String
-  $requestId: String
-  $verifier: String
-) {
-  createProof(
-    requestId: $requestId
-    claims: $claims
-    organizationId: $organizationId
-    verifier: $verifier
-  ) {
+mutation create_proof($claims: JSON, $verifier: String) {
+  createProof(claims: $claims, verifier: $verifier) {
     id
     totalCost
     facilitationFee
