@@ -11,10 +11,10 @@ type Props = {
   id: string;
 };
 
-export default function IssuePdaFormSuccessfully({ }: Props) {
+export default function IssuePdaFormSuccessfully({ id }: Props) {
   // TODO: Remove MOCK
   const proof = {
-    id: '7Cae5130c16e6c8b686440b900d93fe1291977e70b812d170024f1cffd0e3fe375',
+    id,
     title: 'Chase',
     issuance_date: '2018-04-04T16:00:00.000Z',
     status: 'Valid',
@@ -36,7 +36,9 @@ export default function IssuePdaFormSuccessfully({ }: Props) {
   return (
     <Stack>
       <Box sx={{ position: 'absolute', top: { xs: 24, md: 48 } }}>
-        <Avatar sx={{ backgroundColor: "success.main", color: "action.active" }}>
+        <Avatar
+          sx={{ backgroundColor: 'success.main', color: 'action.active' }}
+        >
           <CheckOutlined />
         </Avatar>
       </Box>

@@ -1,4 +1,4 @@
-export const errorMessages: Record<string, string> = {
+export const errorMessages = {
   PAGE_NOT_FOUND: 'Page not found',
   UNEXPECTED_ERROR: `There was an unexpected error, please, contact Gateway or try again.`,
   EMAIL_ALREADY_REGISTERED: `E-mail already registered`,
@@ -6,6 +6,7 @@ export const errorMessages: Record<string, string> = {
   GATEWAY_ID_UPDATED_RECENTLY: 'You will be able to update in [days] days.',
   ERROR_TRYING_TO_SEND_THE_CODE: `An error ocurred trying to send the code`,
   ERROR_TRYING_TO_CREATE_THE_CODE: `An error ocurred trying to create the code`,
+  ERROR_TRYING_TO_ISSUE_A_PROOF: `An error ocurred trying to issue a proof`,
   EXPIRED_CODE: `Expired code`,
   INVALID_CODE_VERIFICATION: `Invalid code verification`,
   MAXIMUM_ATTEMPTS_REACHED: `Maximum attempts reached`,
