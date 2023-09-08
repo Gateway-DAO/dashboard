@@ -5,13 +5,22 @@ import { useState } from 'react';
 import { LoadingButton } from '@/components/buttons/loading-button';
 import ModalRight from '@/components/modal/modal-right';
 import ModalTitle from '@/components/modal/modal-title';
+import { mutations } from '@/constants/queries';
 import { common } from '@/locale/en/common';
-import { pda } from '@/locale/en/pda';
+import { errorMessages } from '@/locale/en/errors';
+import { pda as pdaLocale } from '@/locale/en/pda';
+import { getApiPrivate } from '@/services/protocol/api';
+import {
+  Create_ProofMutationVariables,
+  PdaQuery,
+} from '@/services/protocol/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToggle } from '@react-hookz/web/cjs/useToggle';
+import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { FormProvider } from 'react-hook-form';
+import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import { Stack, Typography } from '@mui/material';
 import { Button } from '@mui/material';
@@ -19,32 +28,24 @@ import { Button } from '@mui/material';
 import IssuePdaFormField from './issue-pda-form-fields';
 import IssuePdaFormSuccessfully from './issue-pda-form-successfully';
 import IssuePdaFormSuccessSkeleton from './issue-pda-form-successfully-skeleton';
-import { issuePdaSchema } from './schema';
+import { IssuePdaSchema, issuePdaSchema } from './schema';
 
-export default function IssuePda() {
+type Props = {
+  pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
+};
+
+export default function IssuePda({ pda }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const [openIssuePda, setOpenIssuePda] = useToggle(false);
   const [pdaIssued, setPdaIssued] = useState<string>();
 
   // TODO: REMOVE MOCK
-  const [loading0, setLoading0] = useState<boolean>(false);
-  // TODO: REMOVE MOCK
   const [loading1, setLoading1] = useState<boolean>(false);
 
   const methods = useForm({
     resolver: zodResolver(issuePdaSchema as any),
   });
-
-  const handleMutation = async (_data: any) => {
-    if (!(await methods.trigger())) return;
-    try {
-      setPdaIssued('id');
-      methods.reset();
-    } catch (e) {
-      enqueueSnackbar('test');
-    }
-  };
 
   const toggleModal = () => {
     if (openIssuePda) {
@@ -54,6 +55,44 @@ export default function IssuePda() {
       router.push('#issue-pda');
     }
     setOpenIssuePda();
+  };
+
+  const createProof = useMutation({
+    mutationKey: [mutations.create_proof],
+    mutationFn: async (data: Create_ProofMutationVariables) => {
+      const apiPrivate = await getApiPrivate();
+      return apiPrivate?.create_proof(data);
+    },
+  });
+
+  const handleMutation = async (
+    data: IssuePdaSchema | FieldValues
+  ): Promise<any> => {
+    console.log('entrou aqui');
+    if (!(await methods.trigger())) return;
+    try {
+      console.log({
+        claims: pda?.dataAsset?.claim,
+        verifier: data?.address ?? null,
+        organizationId: null,
+        requestId: null,
+      });
+      const res = await createProof.mutateAsync({
+        claims: pda?.dataAsset?.claim,
+        verifier: data?.address ?? null,
+        organizationId: null,
+        requestId: null,
+      });
+      setPdaIssued(res?.createProof?.id);
+      // TODO: REMOVE MOCK
+      // setLoading1(true);
+      // setTimeout(() => {
+      //   setLoading1(false);
+      // }, 2000);
+      methods.reset();
+    } catch (e) {
+      enqueueSnackbar(errorMessages.ERROR_TRYING_TO_ISSUE_A_PROOF);
+    }
   };
 
   return (
@@ -90,10 +129,10 @@ export default function IssuePda() {
               onSubmit={methods.handleSubmit(handleMutation)}
             >
               <Typography fontSize={34}>
-                {pda.share.share_a_copy_with}
+                {pdaLocale.share.share_a_copy_with}
               </Typography>
               <Typography sx={{ mb: 6 }}>
-                {pda.share.share_a_copy_description}
+                {pdaLocale.share.share_a_copy_description}
               </Typography>
               <IssuePdaFormField />
               <LoadingButton
@@ -103,19 +142,7 @@ export default function IssuePda() {
                   mt: 3,
                 }}
                 id="issue-pda-button"
-                isLoading={loading0} // TODO: REMOVE MOCK
-                onClick={() => {
-                  // TODO: REMOVE MOCK
-                  setLoading0(true);
-                  setTimeout(() => {
-                    setLoading0(false);
-                    setLoading1(true);
-                    setPdaIssued('id');
-                    setTimeout(() => {
-                      setLoading1(false);
-                    }, 2000);
-                  }, 2000);
-                }}
+                isLoading={createProof?.isLoading}
               >
                 {common.actions.share_now}
               </LoadingButton>

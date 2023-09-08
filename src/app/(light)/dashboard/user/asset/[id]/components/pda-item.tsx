@@ -87,7 +87,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
         {!viewOnly && (
           <>
             <SharedWithCard />
-            <IssuePda />
+            <IssuePda pda={pda} />
             {/* Activies backloged 09/02 */}
             {/* <Activities
               activities={pda.activities}
