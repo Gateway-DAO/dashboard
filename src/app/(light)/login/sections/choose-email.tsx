@@ -28,11 +28,11 @@ export function ChooseEmail() {
         if (message === 'EMAIL_ALREADY_REGISTERED') {
           setError('email_address', {
             type: 'manual',
-            message: errorMessages[message],
+            message: errorMessages[message as keyof typeof errorMessages],
           });
         } else {
           enqueueSnackbar(
-            errorMessages[message] || errorMessages.UNEXPECTED_ERROR,
+            errorMessages[message as keyof typeof errorMessages] || errorMessages.UNEXPECTED_ERROR,
             {
               variant: 'error',
             }
