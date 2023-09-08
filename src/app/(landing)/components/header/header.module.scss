@@ -1,0 +1,56 @@
+.element {
+  left: 0;
+  position: absolute;
+  top: 29px;
+  width: 100%;
+  z-index: 3;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: -31px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    opacity: 0.2;
+    background-color: #fff;
+  }
+}
+
+.links {
+  align-items: center;
+  display: flex;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.link {
+  display: block;
+
+  span {
+    color: #fff;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: 0.46px;
+    transition: opacity 0.6s ease;
+  }
+
+  &:not(:first-child) {
+    margin-left: 31px;
+  }
+
+  &:hover {
+    span {
+      opacity: 0.6;
+    }
+  }
+}

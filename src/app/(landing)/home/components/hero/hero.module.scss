@@ -1,0 +1,43 @@
+.element {
+  background-color: #771ac9;
+  height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  height: 100;
+}
+
+.wrapper {
+  // align-items: center;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  // width: 100%;
+}
+
+.title {
+  span {
+    color: #fff;
+    font-size: 82px;
+    font-weight: 400;
+    letter-spacing: 0.412px;
+    line-height: 82px;
+    width: 100%;
+  }
+}
+
+.title_line {
+  display: block;
+}
+
+.text {
+  color: #fff;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
