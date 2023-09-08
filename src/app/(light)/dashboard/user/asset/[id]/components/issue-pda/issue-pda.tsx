@@ -27,7 +27,6 @@ import { Button } from '@mui/material';
 
 import IssuePdaFormField from './issue-pda-form-fields';
 import IssuePdaFormSuccessfully from './issue-pda-form-successfully';
-import IssuePdaFormSuccessSkeleton from './issue-pda-form-successfully-skeleton';
 import { IssuePdaSchema, issuePdaSchema } from './schema';
 
 type Props = {
@@ -39,9 +38,6 @@ export default function IssuePda({ pda }: Props) {
   const router = useRouter();
   const [openIssuePda, setOpenIssuePda] = useToggle(false);
   const [pdaIssued, setPdaIssued] = useState<string>();
-
-  // TODO: REMOVE MOCK
-  const [loading1, setLoading1] = useState<boolean>(false);
 
   const methods = useForm({
     resolver: zodResolver(issuePdaSchema as any),
@@ -68,20 +64,8 @@ export default function IssuePda({ pda }: Props) {
   const handleMutation = async (
     data: IssuePdaSchema | FieldValues
   ): Promise<any> => {
-    console.log('entrou aqui');
     if (!(await methods.trigger())) return;
     try {
-      console.log({
-        claims: [
-          {
-            claimKeys: Object.keys(pda?.dataAsset?.claim) ?? [],
-            pdaId: pda?.id,
-          },
-        ],
-        verifier: data?.address ?? null,
-        organizationId: null,
-        requestId: null,
-      });
       const res = await createProof.mutateAsync({
         claims: [
           {
@@ -94,11 +78,6 @@ export default function IssuePda({ pda }: Props) {
         requestId: null,
       });
       setPdaIssued(res?.createProof?.id);
-      // TODO: REMOVE MOCK
-      // setLoading1(true);
-      // setTimeout(() => {
-      //   setLoading1(false);
-      // }, 2000);
       methods.reset();
     } catch (e) {
       enqueueSnackbar(errorMessages.ERROR_TRYING_TO_ISSUE_A_PROOF);
@@ -124,13 +103,7 @@ export default function IssuePda({ pda }: Props) {
       <ModalRight open={openIssuePda} onClose={toggleModal}>
         <ModalTitle onClose={toggleModal} />
         {pdaIssued ? (
-          <>
-            {loading1 ? (
-              <IssuePdaFormSuccessSkeleton />
-            ) : (
-              <IssuePdaFormSuccessfully id={pdaIssued} />
-            )}
-          </>
+          <IssuePdaFormSuccessfully id={pdaIssued} />
         ) : (
           <FormProvider {...methods}>
             <Stack
