@@ -72,13 +72,23 @@ export default function IssuePda({ pda }: Props) {
     if (!(await methods.trigger())) return;
     try {
       console.log({
-        claims: pda?.dataAsset?.claim,
+        claims: [
+          {
+            claimKeys: Object.keys(pda?.dataAsset?.claim) ?? [],
+            pdaId: pda?.id,
+          },
+        ],
         verifier: data?.address ?? null,
         organizationId: null,
         requestId: null,
       });
       const res = await createProof.mutateAsync({
-        claims: pda?.dataAsset?.claim,
+        claims: [
+          {
+            claimKeys: Object.keys(pda?.dataAsset?.claim) ?? [],
+            pdaId: pda?.id,
+          },
+        ],
         verifier: data?.address ?? null,
         organizationId: null,
         requestId: null,
