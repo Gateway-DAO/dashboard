@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import styles from './header-icon.module.scss';
 
 type Props = {
   type?: 'primary' | 'secondary';
@@ -18,8 +18,13 @@ const colors = {
 
 export default function HeaderIcon({ type = 'primary', withName }: Props) {
   return (
-    <Box sx={{ display: 'flex' }}>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 42 42">
+    <div className={styles.element}>
+      <svg
+        className={styles.logo}
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 42 42"
+      >
         <path
           fill={colors[type].background}
           d="M0 10.244C0 4.586 4.586 0 10.244 0h21.512C37.414 0 42 4.586 42 10.244v21.512C42 37.414 37.414 42 31.756 42H10.244C4.586 42 0 37.414 0 31.756V10.244Z"
@@ -34,7 +39,7 @@ export default function HeaderIcon({ type = 'primary', withName }: Props) {
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 75 16"
-          style={{ width: 75, marginLeft: 15 }}
+          className={styles.text}
         >
           <path
             fill="#fff"
@@ -42,6 +47,6 @@ export default function HeaderIcon({ type = 'primary', withName }: Props) {
           />
         </svg>
       )}
-    </Box>
+    </div>
   );
 }

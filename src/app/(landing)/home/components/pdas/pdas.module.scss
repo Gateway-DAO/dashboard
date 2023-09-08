@@ -1,0 +1,33 @@
+.element {
+  background-color: #212121;
+  height: 500vh;
+  // overflow: hidden;
+  // padding-bottom: 2000px;
+  position: relative;
+  width: 100%;
+}
+
+.svg_container {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  // bottom: 200px;
+  width: 100%;
+}
+
+.svg {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.lines_parent {
+  path {
+    transform: scale(20);
+    transform-origin: center !important;
+  }
+}
