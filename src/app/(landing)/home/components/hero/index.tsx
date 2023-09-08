@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
 
+import Button from '@/app/(landing)/components/button';
+import GTWLink from '@/components/gtw-link';
 import gsap from 'gsap';
 
 import Wrapper from '../../../components/wrapper';
@@ -47,6 +49,16 @@ export default function Hero() {
           Gateway is the foundation to securely create, own, manage, <br />
           and verify private data assets (PDAs) across the digital world.
         </p>
+
+        <div className={styles.buttons_container}>
+          <GTWLink href="/">
+            <Button variant="contained">Try it now</Button>
+          </GTWLink>
+
+          <GTWLink href="/">
+            <Button variant="text">See how it works</Button>
+          </GTWLink>
+        </div>
       </Wrapper>
     </section>
   );
