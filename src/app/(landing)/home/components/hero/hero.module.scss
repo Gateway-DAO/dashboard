@@ -16,6 +16,7 @@
   height: 100%;
   flex-direction: column;
   justify-content: center;
+  padding-bottom: 60px;
   // width: 100%;
 }
 
@@ -40,4 +41,16 @@
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
+  margin-bottom: 31px;
+}
+
+.buttons_container {
+  align-items: center;
+  display: flex;
+
+  a {
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+  }
 }
