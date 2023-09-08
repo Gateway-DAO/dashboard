@@ -6,10 +6,10 @@ import { LoadingButton } from '@/components/buttons/loading-button';
 import ModalRight from '@/components/modal/modal-right';
 import ModalTitle from '@/components/modal/modal-title';
 import { mutations } from '@/constants/queries';
+import usePrivateApi from '@/hooks/use-private-api';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
-import { getApiPrivate } from '@/services/protocol/api';
 import {
   Create_ProofMutationVariables,
   PdaQuery,
@@ -38,6 +38,7 @@ export default function IssuePda({ pda }: Props) {
   const router = useRouter();
   const [openIssuePda, setOpenIssuePda] = useToggle(false);
   const [pdaIssued, setPdaIssued] = useState<string>();
+  const privateApi = usePrivateApi();
 
   const methods = useForm({
     resolver: zodResolver(issuePdaSchema as any),
@@ -55,9 +56,8 @@ export default function IssuePda({ pda }: Props) {
 
   const createProof = useMutation({
     mutationKey: [mutations.create_proof],
-    mutationFn: async (data: Create_ProofMutationVariables) => {
-      const apiPrivate = await getApiPrivate();
-      return apiPrivate?.create_proof(data);
+    mutationFn: (data: Create_ProofMutationVariables) => {
+      return privateApi?.create_proof(data);
     },
   });
 
@@ -74,8 +74,6 @@ export default function IssuePda({ pda }: Props) {
           },
         ],
         verifier: data?.address ?? null,
-        organizationId: null,
-        requestId: null,
       });
       setPdaIssued(res?.createProof?.id);
       methods.reset();
