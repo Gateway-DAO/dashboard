@@ -11,10 +11,10 @@ import styles from './pdas.module.scss';
 export default function Pdas() {
   const refSection = useRef<HTMLElement>(null);
   const refLinesParent = useRef<SVGGElement>(null);
-  const refLogoBackground = useRef<SVGElement>(null);
-  const refLogoContainer = useRef<SVGElement>(null);
-  const refLogo = useRef<SVGElement>(null);
-  const refLogoText = useRef<SVGElement>(null);
+  const refLogoBackground = useRef<SVGPathElement>(null);
+  const refLogoContainer = useRef<SVGPathElement>(null);
+  const refLogo = useRef<SVGPathElement>(null);
+  const refLogoText = useRef<SVGSVGElement>(null);
   const refTextPdas = useRef<(HTMLSpanElement | null)[]>([]);
   const refPdasLogoContainer = useRef<HTMLDivElement>(null);
   const refTextPdasParagraph = useRef<(HTMLParagraphElement | null)[]>([]);
@@ -71,20 +71,21 @@ export default function Pdas() {
         tl.set(refSlash.current[0], { display: 'inline-block' });
         tl.from(spans, { width: 0, display: 'none', stagger: 0.1 });
         tl.set(refLogoText.current, { transformOrigin: 'left' });
-        tl.to(refLogoText.current, { scale: 0.5, left: 0, x: 0 });
+        tl.to(refLogoText.current, { scale: 0.6712, left: 0, x: 0 });
         tl.to(refPdasLogoContainer.current, {
           leftPercent: 0,
           xPercent: 0,
           left: 0,
+          y: -73 - 96,
         });
 
         if (!paragraphBounds) return;
 
         const x = paragraphBounds.left - texPdaBounds.left;
-        tl.to(refTextPdasParagraph.current, { x });
+        tl.to(refTextPdasParagraph.current, { x, y: -120 });
         tl.set(refTextPdasParagraph.current, {
           textAlign: 'left',
-          clearProps: 'x',
+          x: 0,
         });
         tl.set(refSlash.current[0], { display: 'none' });
         tl.set(refSlash.current[1], { display: 'inline-block' });
