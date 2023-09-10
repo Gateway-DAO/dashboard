@@ -8,129 +8,83 @@ query pdas {
 }
 
 query pda($id: String!) {
-  credential(id: $id) {
+  PDAbyId(id: $id) {
     id
-    title
-    description
-    image
-    expirationDate
-    status
-    tags
-    claim
-    arweaveInfo
-
-    activities {
-      newStatus
-      oldStatus
-      type
-      oldUrl
-      newUrl
-      timestamp
-      txHash
-      credential {
-        id
-      }
-    }
-
-    claimArray {
-      description
-      type
-      property
-      label
-      value
-      metadata
-    }
-
-    issuerAuth {
-      id
-      data
-    }
-
-    issuerOrganization {
-      gatewayId
-    }
-
-    issuerUser {
-      gatewayId
-      primaryWallet {
-        address
-      }
-    }
-
-    recipientUser {
-      gatewayId
-      primaryWallet {
-        address
-      }
-    }
-
-    recipientAuth {
-      id
-      data
-    }
-
-    dataModel {
-      id
+    issuanceDate
+    dataAsset {
       title
-      tags
-      schema
-      arweaveInfo
-      createdAt
+      description
+      expirationDate
+      image
+      organization {
+        image
+        name
+        gatewayId
+      }
+      issuer {
+        id
+        userId
+        data
+        user {
+          gatewayId
+          createdAt
+        }
+      }
+      owner {
+        id
+        data
+        user {
+          gatewayId
+          createdAt
+        }
+      }
+      dataModel {
+        id
+        createdAt
+        tags
+      }
+      claim
+      claimArray {
+        label
+        metadata
+        property
+        description
+        type
+        value
+      }
+      status
     }
-
-    activities {
-      type
-      oldStatus
-      newStatus
-      txHash
-      timestamp
-    }
-
-    nft {
-      chain
-      txHash
-      minted
-    }
-
-    createdAt
-    updatedAt
   }
 }
 
-query received_pdas($id: String!, $take: Float!, $skip: Float!) {
-  findCredentialsByRecipientUser(
-    recipientUserId: $id
-    take: $take
-    skip: $skip
-  ) {
+query received_pdas($take: Float!, $skip: Float!) {
+  myPDAs(skip: $skip, take: $take) {
     id
-    title
-    status
-    issuerOrganization {
-      gatewayId
-      image
-    }
-    issuerUser {
-      gatewayId
+    dataAsset {
+      title
+      organization {
+        image
+        name
+        gatewayId
+      }
+      issuer {
+        data
+        user {
+          gatewayId
+        }
+      }
+      status
     }
   }
 }
 
-query sent_pdas($id: String!, $take: Float!, $skip: Float!) {
-  findCredentialsByRecipientUser(
-    recipientUserId: $id
-    take: $take
-    skip: $skip
-  ) {
+query issued_pdas($take: Float!, $skip: Float!) {
+  myPDAs(skip: $skip, take: $take) {
     id
-    title
-    status
-    issuerOrganization {
-      gatewayId
+    dataAsset {
+      title
       image
-    }
-    issuerUser {
-      gatewayId
+      status
     }
   }
 }

@@ -3,13 +3,21 @@ import { Metadata } from 'next';
 import BackButton from '@/components/buttons/back-button';
 import TopBarContainer from '@/components/top-bar-container/top-bar-container';
 import routes from '@/constants/routes';
-import { apiPublic } from '@/services/protocol/api';
+import { getApiPrivate } from '@/services/protocol/api';
+import { PdaQuery } from '@/services/protocol/types';
 
 import PDAItem from './components/pda-item';
 
-const getPDA = async (id: string) => {
-  const pda = await apiPublic.pda({ id });
-  return pda.credential;
+const getPDA = async (
+  id: string
+): Promise<PdaQuery['PDAbyId'] | null> => {
+  const apiPrivate = await getApiPrivate();
+  if (!apiPrivate) {
+    return null;
+  }
+
+  const pda = (await apiPrivate.pda({ id }))?.PDAbyId;
+  return pda;
 };
 
 export async function generateMetadata({
@@ -19,8 +27,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const pda = await getPDA(params.id);
   return {
-    title: `${pda.title} PDA - Gateway Network`,
-    description: pda.description,
+    title: `${pda?.dataAsset?.title} PDA - Gateway Network`,
+    description: pda?.dataAsset?.description,
   };
 }
 

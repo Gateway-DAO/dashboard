@@ -9,7 +9,7 @@ import { Link } from "@mui/material";
 
 export default function LogoContainer({ children }: PropsWithChildren) {
   const { isOrg, pathnameOrg } = useOrganization();
-  const link = isOrg ? routes.dashboardOrg.replace("[id]", pathnameOrg) : routes.dashboardUser;
+  const link = isOrg ? routes.dashboardOrgHome(pathnameOrg) : routes.dashboardUserHome;
 
 
   return (

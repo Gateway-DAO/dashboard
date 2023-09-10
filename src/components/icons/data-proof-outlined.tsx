@@ -1,6 +1,6 @@
 import { SvgIcon, SvgIconProps } from '@mui/material';
 
-export default function DataProofIcon(props: SvgIconProps) {
+export default function DataProofOutlinedIcon(props: SvgIconProps) {
   return (
     <SvgIcon
       viewBox="0 0 24 24"

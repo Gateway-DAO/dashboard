@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import LogoutButton from '@/components/buttons/logout-button';
-import { GatewayIcon3 } from '@/components/icons/gateway3';
+import GatewayIcon from '@/components/icons/gateway';
 import routes from '@/constants/routes';
 
 import CloseIcon from '@mui/icons-material/Close';
-import { Avatar, Box, IconButton, Stack } from '@mui/material';
+import { Box, IconButton, Stack } from '@mui/material';
 
 import { ChooseEmail } from '../sections/choose-email';
 import { ChooseGatewayId } from '../sections/choose-gateway-id';
@@ -17,8 +17,8 @@ import { VerifyEmailAddToken } from '../sections/verify-email-add-token';
 import { VerifyEmailLoginToken } from '../sections/verify-email-login-token';
 
 export function Authentication() {
-  const [canShowClose, setCanShowClose] = useState(false);
-  const [step, setStep] = useState('initial');
+  const [canShowClose, _setCanShowClose] = useState(false);
+  const [step, _setStep] = useState('initial');
 
   return (
     <Stack
@@ -70,7 +70,7 @@ export function Authentication() {
             left: { xs: 20, md: 48 },
           }}
         >
-          <GatewayIcon3 />
+          <GatewayIcon colored />
         </Box>
         <>
           {step === 'initial' && <AuthenticationInitial />}

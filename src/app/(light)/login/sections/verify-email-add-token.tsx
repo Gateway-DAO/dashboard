@@ -1,6 +1,6 @@
 'use client';
-import { errorMessages } from '@/constants/error-messages';
 import { useCountdown } from '@/hooks/use-countdown';
+import { errorMessages } from '@/locale/en/errors';
 import { useToggle } from '@react-hookz/web';
 import { useSnackbar } from 'notistack';
 
@@ -32,7 +32,7 @@ export function VerifyEmailAddToken() {
           console.log('MAXIMUM');
         }
         enqueueSnackbar(
-          errorMessages[message] || errorMessages.UNEXPECTED_ERROR,
+          errorMessages[message as keyof typeof errorMessages] || errorMessages.UNEXPECTED_ERROR,
           {
             variant: 'error',
           }

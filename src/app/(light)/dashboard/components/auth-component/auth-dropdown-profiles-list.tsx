@@ -6,7 +6,7 @@ import MenuItemLink from '@/components/menu-item-link/menu-item-link';
 import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 
-import { Avatar, Divider, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, ListItemIcon, ListItemText } from '@mui/material';
 
 type Props = {
   onClose: () => void;
@@ -34,7 +34,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
     <>
       {accessess?.map(({ organization }) => (
         <MenuItemLink
-          href={routes.dashboardOrg.replace('[id]', organization.gatewayId)}
+          href={routes.dashboardOrgIssuedAssets(organization.gatewayId)}
           key={organization.id}
           onClick={onClose}
         >
@@ -52,7 +52,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
       ))}
       {isOrg && (
         <MenuItemLink
-          href={routes.dashboardUser}
+          href={routes.dashboardUserHome}
           key={user.id}
           onClick={onClose}
         >

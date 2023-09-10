@@ -1,16 +1,19 @@
 const routes = {
   home: '/',
   auth: '/login',
-  dashboardUser: '/dashboard/user',
-  dashboardUserProof: '/dashboard/user/proof/[id]',
-  dashboardUserProofs: '/dashboard/user/proofs',
+  dashboardUserHome: '/dashboard/user',
+  dashboardUserAsset: (pdaId) => `/dashboard/user/asset/${pdaId}`,
+  dashboardUserIssuedAssets: '/dashboard/user/assets/issued',
   dashboardUserReceivedAssets: '/dashboard/user/assets/received',
-  dashboardUserSentAssets: '/dashboard/user/assets/sent',
-  dashboardUserAsset: '/dashboard/user/asset/[id]',
+  dashboardUserProof: (proofId) =>  `/dashboard/user/proof/${proofId}`,
+  dashboardUserProofs: '/dashboard/user/proofs',
+  dashboardUserRequest: (requestId) =>  `/dashboard/user/request/${requestId}`,
   dashboardUserRequests: '/dashboard/user/requests',
-  dashboardUserRequest: '/dashboard/user/request/[id]',
   dashboardOrgRoot: '/dashboard/org',
-  dashboardOrg: '/dashboard/org/[id]',
+  dashboardOrgHome: (organizationId) => `/dashboard/org/${organizationId}`,
+  dashboardOrgIssuedAssets: (organizationId) => `/dashboard/org/${organizationId}/assets/issued`,
+  dashboardOrgRequests: (organizationId) => `/dashboard/org/${organizationId}/requests`,
+  dashboardOrgReceivedProofs: (organizationId) => `/dashboard/org/${organizationId}/proofs/received`,
 };
 
 module.exports = routes;

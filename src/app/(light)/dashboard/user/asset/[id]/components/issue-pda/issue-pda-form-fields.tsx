@@ -1,5 +1,5 @@
 'use client';
-import { Gateway2Icon } from '@/components/icons/gateway2';
+import GatewayIcon from '@/components/icons/gateway';
 import { pda } from '@/locale/en/pda';
 import { useFormContext } from 'react-hook-form';
 import { FaEthereum } from 'react-icons/fa';
@@ -18,14 +18,14 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { SendPdaSchema, SendPdaSchemaError } from './schema';
+import { IssuePdaSchema, IssuePdaSchemaError } from './schema';
 import { SharingCost } from './sharing-cost';
 
-export default function SendPdaFormField() {
+export default function IssuePdaFormField() {
   const {
     register,
     formState: { errors },
-  } = useFormContext<SendPdaSchema>();
+  } = useFormContext<IssuePdaSchema>();
 
 
   const theme = useTheme()
@@ -35,7 +35,7 @@ export default function SendPdaFormField() {
       value: 0,
       name: 'Gateway ID',
       icon: (
-        <Gateway2Icon sx={{ color: 'text.secondary', width: 22, height: 22 }} />
+        <GatewayIcon sx={{ color: 'text.secondary', width: 22, height: 22 }} />
       ),
     },
     {
@@ -68,7 +68,7 @@ export default function SendPdaFormField() {
           <InputLabel htmlFor="type">{pda.share.account_type}</InputLabel>
           <Select
             label={pda.share.account_type}
-            error={!!(errors.account_type as SendPdaSchemaError)}
+            error={!!(errors.account_type as IssuePdaSchemaError)}
             id="id-account-type"
             {...register(`account_type`)}
           >
@@ -89,7 +89,7 @@ export default function SendPdaFormField() {
               </MenuItem>
             ))}
           </Select>
-          {!!(errors.account_type as SendPdaSchemaError) && (
+          {!!(errors.account_type as IssuePdaSchemaError) && (
             <FormHelperText sx={{ color: 'error' }}>
               {errors.account_type?.message}
             </FormHelperText>

@@ -1,6 +1,6 @@
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 
-import { Avatar, Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 
 type Props = {
   image?: string | null;

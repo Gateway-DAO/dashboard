@@ -2,13 +2,13 @@
 
 import { useSession } from 'next-auth/react';
 
-import { ConnectNow } from '@/components/buttons/connect-now';
 import { useMenu } from '@/hooks/use-menu';
 import useOrganization from '@/hooks/use-organization';
 
 import { MoreHorizOutlined } from '@mui/icons-material';
 import { ButtonBase, Menu, alpha } from '@mui/material';
 
+import AuthComponentSkeleton from './auth-component-skeleton';
 import AuthDropdown from './auth-dropdown';
 import UserOrgInfo from './user-org-info';
 
@@ -18,11 +18,13 @@ type Props = {
 };
 
 export default function AuthComponent({ id, controlId }: Props) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
   const { isOrg, organization } = useOrganization();
 
-  if (!session) return <ConnectNow />;
+  if (status === "loading" || !session) {
+    return <AuthComponentSkeleton />;
+  }
 
   const { user } = session;
 

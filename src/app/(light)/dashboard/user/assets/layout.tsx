@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import routes from '@/constants/routes';
+import { pdas } from '@/locale/en/pda';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -14,8 +15,7 @@ import { Box } from '@mui/system';
 export default function DataAssetsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
-      <Typography
-        variant="h3"
+      <Box
         sx={{
           mb: {
             xs: 4,
@@ -24,8 +24,11 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
           },
         }}
       >
-        My data assets
-      </Typography>
+        <Typography variant="h3" id="title-assets">
+          {pdas.my_data_assets}
+        </Typography>
+        <Typography variant="body1">{pdas.data_assets_subtitle}</Typography>
+      </Box>
       <Box
         sx={{
           borderBottom: 1,
@@ -35,8 +38,8 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
         }}
       >
         <GTWTabs>
-          <GTWTab label="Private" href={routes.dashboardUserReceivedAssets} />
-          <GTWTab label="Received" href={routes.dashboardUserSentAssets} />
+          <GTWTab label="Received" href={routes.dashboardUserReceivedAssets} />
+          <GTWTab label="Issued" href={routes.dashboardUserIssuedAssets} />
         </GTWTabs>
       </Box>
       <Box sx={{ pt: 5 }}>{children}</Box>
