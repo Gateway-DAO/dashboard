@@ -1,30 +1,145 @@
 'use client';
 import { useRef, useEffect } from 'react';
 
+import Wrapper from '@/app/(landing)/components/wrapper';
+import { joinClasses } from '@/app/(landing)/utils/function';
+import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
 import gsap from 'gsap';
 
 import styles from './pdas.module.scss';
 
 export default function Pdas() {
+  const refSection = useRef<HTMLElement>(null);
   const refLinesParent = useRef<SVGGElement>(null);
+  const refLogoBackground = useRef<SVGElement>(null);
+  const refLogoContainer = useRef<SVGElement>(null);
+  const refLogo = useRef<SVGElement>(null);
+  const refLogoText = useRef<SVGElement>(null);
+  const refTextPdas = useRef<(HTMLSpanElement | null)[]>([]);
+  const refPdasLogoContainer = useRef<HTMLDivElement>(null);
+  const refTextPdasParagraph = useRef<(HTMLParagraphElement | null)[]>([]);
+  const refSlash = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     if (!refLinesParent.current) return;
 
-    const elements = refLinesParent.current?.querySelectorAll('path');
+    const lines = refLinesParent.current.querySelectorAll('path');
 
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({ paused: true });
 
-    tl.to(elements, {
-      transform: 'scale(1)',
-      duration: 1.5,
+    tl.set(refPdasLogoContainer.current, {
+      leftPercent: 50,
+      topPercent: 50,
+      position: 'absolute',
+      xPercent: -50,
+      yPercent: -50,
+    });
+    tl.to(refLogoBackground.current, { autoAlpha: 1 });
+    tl.fromTo(refLogo.current, { y: -10 }, { autoAlpha: 1, y: 0 }, '-=0.3');
+    tl.to(
+      lines,
+      {
+        transform: 'scale(1)',
+        duration: 1,
+        stagger: 0.1,
+        ease: 'power4.out',
+      },
+      '-=0.6'
+    );
+    tl.to(lines, {
+      autoAlpha: 0,
+      duration: 1,
       stagger: 0.1,
       ease: 'power4.out',
     });
+    tl.set(refLogoContainer.current, { autoAlpha: 0 });
+    tl.set(refLogoText.current, { autoAlpha: 1 });
+    tl.to(refLogoText.current, { scale: 0.8 });
+    tl.to(refPdasLogoContainer.current, { y: -73 });
+
+    refTextPdas.current.forEach((element, index) => {
+      if (!element) return;
+
+      splitSpans(element);
+      const spans = element.querySelectorAll('span');
+
+      const paragraphBounds =
+        refTextPdasParagraph.current[0]?.getBoundingClientRect();
+      const texPdaBounds = element.getBoundingClientRect();
+
+      if (index === 0) {
+        tl.set(refSlash.current[0], { display: 'inline-block' });
+        tl.from(spans, { width: 0, display: 'none', stagger: 0.1 });
+        tl.set(refLogoText.current, { transformOrigin: 'left' });
+        tl.to(refLogoText.current, { scale: 0.5, left: 0, x: 0 });
+        tl.to(refPdasLogoContainer.current, {
+          leftPercent: 0,
+          xPercent: 0,
+          left: 0,
+        });
+
+        if (!paragraphBounds) return;
+
+        const x = paragraphBounds.left - texPdaBounds.left;
+        tl.to(refTextPdasParagraph.current, { x });
+        tl.set(refTextPdasParagraph.current, {
+          textAlign: 'left',
+          clearProps: 'x',
+        });
+        tl.set(refSlash.current[0], { display: 'none' });
+        tl.set(refSlash.current[1], { display: 'inline-block' });
+      } else {
+        tl.from(spans, { width: 0, display: 'none', stagger: 0.1 });
+      }
+    });
+
+    setTimeout(() => {
+      setLogoTextBounds();
+    }, 500);
+
+    LenisManager?.on('scroll', (e: IInstanceOptions) => {
+      if (!refSection.current) return;
+
+      const offsetTop = refSection.current.offsetTop - window.innerHeight / 2;
+      const sectionHeight = refSection.current.clientHeight;
+      const scrollSection = e.scroll - offsetTop;
+      const progress = scrollSection / (sectionHeight - window.innerHeight);
+
+      if (progress >= 0 && progress <= 1) tl.progress(progress);
+    });
   }, []);
 
+  const splitSpans = (element: HTMLSpanElement) => {
+    const text = element.innerText;
+    const spans = text.split('').map((letter) => {
+      const span = document.createElement('span');
+      span.innerText = letter;
+      return span;
+    });
+    element.innerHTML = '';
+    spans.forEach((span) => element.appendChild(span));
+
+    const parent = element.parentNode as HTMLParagraphElement;
+    const { height } = parent.getBoundingClientRect();
+    gsap.set(parent, { height });
+    // gsap.set(element, { width: element.offsetWidth });
+  };
+
+  const setLogoTextBounds = () => {
+    if (!refLogoText.current || !refLogoContainer.current) return;
+
+    const logoBounds = refLogoContainer.current.getBoundingClientRect();
+    const logoTextBounds = refLogoText.current.getBoundingClientRect();
+
+    const top = logoBounds.top - logoTextBounds.top;
+    const left = logoBounds.left - logoTextBounds.left;
+
+    gsap.set(refLogoText.current, { top, left });
+    refLogoText.current.style.width = `${logoBounds.width}px`;
+  };
+
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={refSection}>
       <div className={styles.svg_container}>
         <svg
           className={styles.svg}
@@ -46,10 +161,6 @@ export default function Pdas() {
               className={styles.lines_parent}
               ref={refLinesParent}
             >
-              {/* <path
-                fill="#E6D5FA"
-                d="M748.395 813.073h-57.789a28.72 28.72 0 0 1-28.678-28.679v-57.789a28.717 28.717 0 0 1 28.678-28.678h57.789a28.715 28.715 0 0 1 28.678 28.678v57.789a28.717 28.717 0 0 1-28.678 28.679Zm-57.789-112.827a26.39 26.39 0 0 0-26.36 26.359v57.789a26.39 26.39 0 0 0 26.36 26.36h57.789a26.393 26.393 0 0 0 26.36-26.36v-57.789a26.394 26.394 0 0 0-26.36-26.359h-57.789Z"
-              /> */}
               <path
                 fill="#771AC9"
                 d="M771.871 859.602H667.128a51.776 51.776 0 0 1-51.731-51.73V703.128a51.776 51.776 0 0 1 51.731-51.73h104.743a51.776 51.776 0 0 1 51.731 51.73v104.744a51.776 51.776 0 0 1-51.731 51.73ZM667.128 655.107a48.086 48.086 0 0 0-48.021 48.021v104.744a48.082 48.082 0 0 0 48.021 48.021h104.743a48.082 48.082 0 0 0 48.021-48.021V703.128a48.083 48.083 0 0 0-48.021-48.021H667.128Z"
@@ -123,12 +234,19 @@ export default function Pdas() {
             />
             <rect width="100%" height="100%" x="0" fill="url(#d)" />
           </g>
-          <g clip-path="url(#e)">
+          <g clip-path="url(#logo)" ref={refLogoContainer}>
             <path
+              className={styles.logo_background}
+              ref={refLogoBackground}
               fill="#E6D5FA"
               d="M647 720.61c0-19.667 15.943-35.61 35.61-35.61h74.78c19.667 0 35.61 15.943 35.61 35.61v74.78c0 19.667-15.943 35.61-35.61 35.61h-74.78c-19.667 0-35.61-15.943-35.61-35.61v-74.78Z"
             />
-            <g fill="#771AC9" clip-path="url(#f)">
+            <g
+              fill="#771AC9"
+              clip-path="url(#f)"
+              ref={refLogo}
+              className={styles.logo}
+            >
               <path d="M683.319 804.333a3.148 3.148 0 0 1-2.412-.898 3.08 3.08 0 0 1-.907-2.388v-55.869c.052-9.048 3.706-17.712 10.169-24.11 6.463-6.399 15.214-10.016 24.354-10.068h10.954c9.14.052 17.891 3.669 24.354 10.068 6.463 6.398 10.117 15.062 10.169 24.11v14.461a3.27 3.27 0 0 1-.972 2.323 3.336 3.336 0 0 1-2.348.963c-.88 0-1.724-.346-2.347-.963a3.27 3.27 0 0 1-.972-2.323v-14.461a27.632 27.632 0 0 0-8.215-19.472 28.191 28.191 0 0 0-19.669-8.133h-10.954a28.191 28.191 0 0 0-19.669 8.133 27.632 27.632 0 0 0-8.215 19.472v55.869c0 .872-.35 1.707-.972 2.324a3.339 3.339 0 0 1-2.348.962Z" />
               <path d="M729.461 776.07a3.15 3.15 0 0 1-2.413-.898 3.08 3.08 0 0 1-.907-2.388v-22.676a5.143 5.143 0 0 0-.386-2.023 5.192 5.192 0 0 0-1.15-1.715 5.25 5.25 0 0 0-1.732-1.138 5.292 5.292 0 0 0-2.043-.382h-1.328a5.288 5.288 0 0 0-2.043.382 5.25 5.25 0 0 0-1.732 1.138 5.192 5.192 0 0 0-1.15 1.715 5.143 5.143 0 0 0-.386 2.023v22.676c0 .872-.35 1.707-.972 2.324a3.339 3.339 0 0 1-2.348.962c-.88 0-1.724-.346-2.347-.962a3.273 3.273 0 0 1-.972-2.324v-22.676a11.688 11.688 0 0 1 .901-4.533 11.808 11.808 0 0 1 2.589-3.843 11.936 11.936 0 0 1 3.882-2.563 12.026 12.026 0 0 1 4.578-.892h1.328a12.03 12.03 0 0 1 4.578.892 11.936 11.936 0 0 1 3.882 2.563c1.11 1.1 1.99 2.406 2.589 3.843.599 1.438.905 2.978.901 4.533v22.676a3.536 3.536 0 0 1-1.041 2.256 3.602 3.602 0 0 1-2.278 1.03Z" />
               <path d="M723.154 791.516h-5.975a24.135 24.135 0 0 1-9.196-1.936 23.935 23.935 0 0 1-7.734-5.294 24.586 24.586 0 0 1-6.639-13.802 3.261 3.261 0 0 1 .847-2.54 3.343 3.343 0 0 1 2.473-1.075 3.535 3.535 0 0 1 2.194.89 3.472 3.472 0 0 1 1.125 2.067 18.56 18.56 0 0 0 4.98 10.188 17.3 17.3 0 0 0 11.95 5.258h5.975a16.74 16.74 0 0 0 6.52-1.414 16.596 16.596 0 0 0 5.43-3.844 18.553 18.553 0 0 0 4.979-13.145v-18.404a20.806 20.806 0 0 0-4.979-13.146 17.309 17.309 0 0 0-11.95-5.258h-5.975c-2.248.03-4.466.511-6.52 1.415a16.583 16.583 0 0 0-5.43 3.843 18.56 18.56 0 0 0-4.98 13.146 3.27 3.27 0 0 1-.972 2.324 3.337 3.337 0 0 1-2.347.962c-.88 0-1.725-.346-2.347-.962a3.271 3.271 0 0 1-.973-2.324 24.092 24.092 0 0 1 1.724-9.4 24.294 24.294 0 0 1 5.247-8.018 23.253 23.253 0 0 1 7.71-5.349 23.445 23.445 0 0 1 9.22-1.881h5.643c3.165.037 6.29.695 9.196 1.936a23.936 23.936 0 0 1 7.733 5.294 25.651 25.651 0 0 1 6.971 17.418v18.404a24.098 24.098 0 0 1-1.723 9.4 24.266 24.266 0 0 1-5.248 8.017 23.224 23.224 0 0 1-7.709 5.349 23.428 23.428 0 0 1-9.22 1.881Z" />
@@ -138,7 +256,7 @@ export default function Pdas() {
             <clipPath id="lines">
               <path fill="#fff" d="M-36 0h1511v1511H-36z" />
             </clipPath>
-            <clipPath id="e">
+            <clipPath id="logo">
               <path fill="#fff" d="M647 685h146v146H647z" />
             </clipPath>
             <clipPath id="f">
@@ -168,6 +286,79 @@ export default function Pdas() {
             </radialGradient>
           </defs>
         </svg>
+
+        <Wrapper className={styles.wrapper}>
+          <div
+            className={styles.pdas_logo_container}
+            ref={refPdasLogoContainer}
+          >
+            <svg
+              className={styles.logo_text}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 120 120"
+              ref={refLogoText}
+            >
+              <g clip-path="url(#a)">
+                <path
+                  fill="#E6D5FA"
+                  d="M0 29.268C0 13.104 13.104 0 29.268 0h61.464C106.896 0 120 13.104 120 29.268v61.464C120 106.896 106.896 120 90.732 120H29.268C13.104 120 0 106.896 0 90.732V29.268Z"
+                />
+                <g fill="#771AC9" clip-path="url(#b)">
+                  <path d="M29.851 98.082a2.588 2.588 0 0 1-1.983-.738 2.536 2.536 0 0 1-.745-1.963v-45.92a28.113 28.113 0 0 1 8.358-19.816c5.312-5.259 12.505-8.232 20.017-8.275H64.5c7.512.043 14.705 3.016 20.017 8.275a28.114 28.114 0 0 1 8.358 19.817v11.885c0 .716-.287 1.403-.799 1.91a2.743 2.743 0 0 1-1.93.791 2.743 2.743 0 0 1-1.928-.791 2.687 2.687 0 0 1-.8-1.91V49.462a22.711 22.711 0 0 0-6.752-16.005 23.172 23.172 0 0 0-16.166-6.685h-9.003a23.172 23.172 0 0 0-16.166 6.685 22.711 22.711 0 0 0-6.752 16.005v45.92c0 .716-.288 1.403-.8 1.91a2.742 2.742 0 0 1-1.929.79Z" />
+                  <path d="M67.776 74.853a2.588 2.588 0 0 1-1.983-.738 2.536 2.536 0 0 1-.746-1.963V53.513a4.23 4.23 0 0 0-.317-1.663 4.264 4.264 0 0 0-.945-1.41 4.347 4.347 0 0 0-3.103-1.25h-1.091a4.347 4.347 0 0 0-3.103 1.25 4.264 4.264 0 0 0-.945 1.41 4.23 4.23 0 0 0-.318 1.663V72.15c0 .717-.287 1.404-.799 1.91a2.742 2.742 0 0 1-1.929.792 2.742 2.742 0 0 1-1.93-.791 2.687 2.687 0 0 1-.798-1.91V53.513a9.614 9.614 0 0 1 .74-3.726 9.692 9.692 0 0 1 2.128-3.158 9.805 9.805 0 0 1 3.19-2.108 9.88 9.88 0 0 1 3.764-.732h1.091a9.88 9.88 0 0 1 3.763.733 9.805 9.805 0 0 1 3.19 2.107 9.69 9.69 0 0 1 2.129 3.158 9.614 9.614 0 0 1 .74 3.726V72.15c-.05.7-.354 1.359-.855 1.855a2.96 2.96 0 0 1-1.873.847Z" />
+                  <path d="M62.591 87.548H57.68a19.843 19.843 0 0 1-7.559-1.591 19.677 19.677 0 0 1-6.356-4.351A20.202 20.202 0 0 1 38.31 70.26a2.676 2.676 0 0 1 .696-2.087 2.727 2.727 0 0 1 2.032-.884c.669.03 1.306.288 1.804.732.497.443.824 1.043.924 1.699a15.255 15.255 0 0 0 4.093 8.373 14.225 14.225 0 0 0 9.822 4.322h4.911c1.848-.024 3.67-.42 5.36-1.163a13.64 13.64 0 0 0 4.462-3.159 15.255 15.255 0 0 0 4.093-10.804V52.163a17.106 17.106 0 0 0-4.093-10.804 14.225 14.225 0 0 0-9.822-4.322H57.68c-1.847.024-3.67.42-5.36 1.163a13.64 13.64 0 0 0-4.462 3.159 15.255 15.255 0 0 0-4.093 10.804c0 .717-.287 1.404-.799 1.91a2.742 2.742 0 0 1-1.929.791 2.742 2.742 0 0 1-1.93-.79 2.688 2.688 0 0 1-.798-1.91 19.811 19.811 0 0 1 1.416-7.727 19.969 19.969 0 0 1 4.313-6.59 19.099 19.099 0 0 1 6.337-4.396 19.263 19.263 0 0 1 7.578-1.546h4.638c2.601.03 5.17.571 7.559 1.591a19.677 19.677 0 0 1 6.356 4.351 21.09 21.09 0 0 1 5.73 14.316V67.29a19.814 19.814 0 0 1-1.417 7.726 19.97 19.97 0 0 1-4.313 6.59 19.101 19.101 0 0 1-6.337 4.396 19.264 19.264 0 0 1-7.578 1.546Z" />
+                </g>
+              </g>
+              <defs>
+                <clipPath id="a">
+                  <path fill="#fff" d="M0 0h120v120H0z" />
+                </clipPath>
+                <clipPath id="b">
+                  <path fill="#fff" d="M27.123 21.37h65.753v76.712H27.123z" />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <div className={styles.text_container}>
+            <p
+              className={joinClasses(
+                styles.pdas_text,
+                styles['pdas_text--white']
+              )}
+              ref={(ref) => (refTextPdasParagraph.current[0] = ref)}
+            >
+              <span ref={(ref) => (refTextPdas.current[0] = ref)}>
+                Private Data Assets (PDAs)
+              </span>
+              <span
+                className={styles.type_slash}
+                ref={(ref) => (refSlash.current[0] = ref)}
+              >
+                _
+              </span>
+            </p>
+            <p
+              className={joinClasses(
+                styles.pdas_text,
+                styles['pdas_text--purple']
+              )}
+              ref={(ref) => (refTextPdasParagraph.current[1] = ref)}
+            >
+              <span ref={(ref) => (refTextPdas.current[1] = ref)}>
+                The foundation for true data privacy, sovereignty, and
+                portability. Turn raw data into encrypted, secure, portable, and
+                publicly verifiable assets.
+              </span>
+              <span
+                className={styles.type_slash}
+                ref={(ref) => (refSlash.current[1] = ref)}
+              >
+                _
+              </span>
+            </p>
+          </div>
+        </Wrapper>
       </div>
     </section>
   );
