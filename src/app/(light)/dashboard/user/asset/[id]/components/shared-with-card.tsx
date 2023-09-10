@@ -1,8 +1,9 @@
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { pda } from '@/locale/en/pda';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 
-import { Avatar, Card, Divider, Stack, Typography } from '@mui/material';
+import { Card, Divider, Stack, Typography } from '@mui/material';
 
 export default function SharedWithCard({}) {
   const rows = [
@@ -28,14 +29,14 @@ export default function SharedWithCard({}) {
       <Typography
         sx={{ fontSize: 14, fontWeight: 600, p: 2, color: 'text.secondary' }}
       >
-        Shared with
+        {pda.shared_with.shared_with}
       </Typography>
       <Stack p={2} direction="row" justifyContent="space-between">
         <Typography variant="caption" color="text.secondary">
-          Verifier
+          {pda.shared_with.verifier}
         </Typography>
         <Typography variant="caption" color="text.secondary">
-          Data proof ID
+          {pda.shared_with.data_proof_id}
         </Typography>
       </Stack>
       <Stack divider={<Divider />}>

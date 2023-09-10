@@ -12,7 +12,6 @@ import {
   TableRow,
   TableBody,
   Typography,
-  Avatar,
 } from '@mui/material';
 
 export function TableSharedDataAssets() {

@@ -1,6 +1,6 @@
 import { SvgIcon, SvgIconProps } from '@mui/material';
 
-export function GatewayBrokenIcon(props: SvgIconProps) {
+export default function GatewayBrokenIcon(props: SvgIconProps) {
   return (
     <SvgIcon
       viewBox="0 0 159 115"

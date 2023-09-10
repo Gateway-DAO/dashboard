@@ -1,57 +1,36 @@
-
-import { SquaredArrowDown } from '@/components/icons/squared-arrow-down';
-import { SquaredArrowRight } from '@/components/icons/squared-arrow-right';
-import { WalletIcon } from '@/components/icons/wallet';
-
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-
-import { GTWMenuItemProps } from '../../components/menu-item/menu-item';
+import { GTWMenuItemSettings } from '@/app/(light)/dashboard/components/menu-item/menu-item';
+import DataFilledIcon from '@/components/icons/data-filled';
+import DataOutlinedIcon from '@/components/icons/data-outlined';
+import DataProofFilledIcon from '@/components/icons/data-proof-filled';
+import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
+import DataRequestFilledIcon from '@/components/icons/data-request-filled';
+import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
+import routes from '@/constants/routes';
 
 /**
  * List all menu items of the user dashboard
  */
-export const dashboardOrgMenuItems: GTWMenuItemProps[] = [
-  {
-    name: 'Home',
-    href: '/',
-    icon: HomeOutlinedIcon,
-  },
+export const dashboardOrgMenuItems = (username: string): GTWMenuItemSettings[] => [
   {
     name: 'Issued data assets',
-    href: '/issued',
-    icon: SquaredArrowRight,
+    href: routes.dashboardOrgIssuedAssets(username),
+    activeHrefs: [routes.dashboardOrgIssuedAssets(username)],
+    icon: DataOutlinedIcon,
+    activeIcon: DataFilledIcon,
   },
   {
     name: 'Data requests',
-    href: '/user/data-requests',
-    icon: SquaredArrowDown,
+    href: routes.dashboardOrgRequests(username),
+    activeHrefs: [routes.dashboardOrgRequests(username)],
+    icon: DataRequestOutlinedIcon,
+    activeIcon: DataRequestFilledIcon,
   },
   {
-    name: 'Org data assets',
-    href: '/dashboard',
-    icon: WalletIcon,
-  },
-  {
-    name: 'Data proofs',
-    href: '/dashboard',
-    icon: WalletIcon,
-  },
-  {
-    name: 'Saved and created data models',
-    href: '/dashboard',
-    icon: WalletIcon,
-  },
-  {
-    name: 'Activity',
-    href: '/activity',
-    icon: AccessTimeIcon,
-  },
-  {
-    name: 'Notifications',
-    href: '/notifications',
-    icon: NotificationsNoneIcon,
+    name: 'Received data proofs',
+    href: routes.dashboardOrgReceivedProofs(username),
+    activeHrefs: [routes.dashboardOrgReceivedProofs(username)],
+    icon: DataProofOutlinedIcon,
+    activeIcon: DataProofFilledIcon,
   },
 ];
 

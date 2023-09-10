@@ -5,33 +5,32 @@ import { TooltipUser } from '@/components/tooltip-user/tooltip-user';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
+import { PartialDeep } from 'type-fest';
 
 import { Stack, Box } from '@mui/material';
 
 import CardUserCell from './card-user-cell';
 
 type Props = {
-  pda: PdaQuery['credential'];
+  pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
 };
 
 export default function CardUsers({ pda }: Props) {
   const [tooltipIssuer, setTooltipIssuer] = useState<boolean>(false);
   const [tooltipRecipient, setTooltipRecipient] = useState<boolean>(false);
 
-  const issuerName =
-    pda?.issuerOrganization?.gatewayId ??
-    pda?.issuerUser?.gatewayId ??
-    pda?.issuerUser?.primaryWallet?.address ??
+  const issuerGatewayId =
+    pda?.dataAsset?.organization?.gatewayId ??
+    pda?.dataAsset?.issuer?.user?.gatewayId ??
     '';
 
-  const issuerPicture = pda?.issuerAuth?.data?.picture ?? '';
+  const issuerName = pda?.dataAsset?.organization?.name ?? issuerGatewayId;
 
-  const recipientName =
-    pda?.recipientUser?.gatewayId ??
-    pda?.recipientUser?.primaryWallet?.address ??
-    '';
+  const issuerPicture = pda?.dataAsset?.organization?.image ?? '';
 
-  const recipientPicture = pda?.recipientAuth?.data?.picture ?? '';
+  const recipientName = pda?.dataAsset?.owner?.user?.gatewayId ?? '';
+
+  const recipientPicture = '';
 
   return (
     <Stack
@@ -46,16 +45,16 @@ export default function CardUsers({ pda }: Props) {
           label={pdaLocale.issuer}
           picture={issuerPicture}
           name={limitCharsCentered(issuerName, 15)}
-          id={`pda-issuer-${issuerName}`}
+          id={`pda-issuer-${issuerGatewayId}`}
           onClick={() => setTooltipIssuer(true)}
-          verified // TODO: Vefiry if the issuer is a verified user
+          verified={false} // TODO: Vefiry if the issuer is a verified user (backloged)
           active={tooltipIssuer}
         />
         {tooltipIssuer && (
           <TooltipUser
             name={issuerName}
-            username={issuerName}
-            issuance_date={pda?.createdAt} // TODO: created at user
+            username={issuerGatewayId}
+            issuance_date={pda?.dataAsset?.issuer?.user?.createdAt}
             onClose={() => setTooltipIssuer(false)}
           />
         )}
@@ -101,7 +100,7 @@ export default function CardUsers({ pda }: Props) {
           <TooltipUser
             name={recipientName}
             username={recipientName}
-            issuance_date={pda?.createdAt} // TODO: created at user
+            issuance_date={pda?.dataAsset?.owner?.user?.createdAt}
             right={true}
             onClose={() => setTooltipRecipient(false)}
           />

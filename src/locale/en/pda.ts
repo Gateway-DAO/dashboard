@@ -15,6 +15,11 @@ export const pda = {
     free: 'Free',
     successfully_title: 'Copy shared successfully',
   },
+  shared_with: {
+    shared_with: 'Shared with',
+    verifier: 'Verifier',
+    data_proof_id: 'Data proof ID',
+  },
   activities: {
     issued: 'PDA issued',
     revoked: 'PDA revoked',
@@ -34,4 +39,8 @@ export const pda = {
 };
 export const pdas = {
   empty: 'No data assets yet',
+  load_more: 'load more',
+  my_data_assets: 'Data assets',
+  data_assets_subtitle:
+    'These are the private data assets you have collected and sent',
 };

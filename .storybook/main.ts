@@ -1,6 +1,6 @@
 import type { StorybookConfig } from '@storybook/nextjs';
 import path from 'path';
-import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -24,12 +24,13 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  webpackFinal: async (config) => { // 👈 and add this here
-    if(!config.resolve) config.resolve = {};
+  webpackFinal: async (config) => {
+    // 👈 and add this here
+    if (!config.resolve) config.resolve = {};
     config.resolve.plugins = config.resolve.plugins || [];
     config.resolve.plugins.push(
       new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, "../tsconfig.json"),
+        configFile: path.resolve(__dirname, '../tsconfig.json'),
       })
     );
     return config;
@@ -39,7 +40,6 @@ const config: StorybookConfig = {
     // checkOptions: {},
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
-
       compilerOptions: {
         // speeds up storybook build time
         allowSyntheticDefaultImports: false,
@@ -53,12 +53,13 @@ const config: StorybookConfig = {
       shouldExtractLiteralValuesFromEnum: true,
       // makes string and boolean types that can be undefined appear as inputs and switches
       shouldRemoveUndefinedFromOptional: true,
-        // Filter out third-party props from node_modules except @mui packages
-      propFilter: (prop) =>{
-          console.log(prop)
+      // Filter out third-party props from node_modules except @mui packages
+      propFilter: (prop) => {
+        // console.log(prop)
         return prop.parent
           ? !/node_modules\/(?!@mui)/.test(prop.parent.fileName)
-          : true},
+          : true;
+      },
     },
   },
 };

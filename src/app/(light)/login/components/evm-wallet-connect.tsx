@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 import Loading from '@/components/loadings/loading';
@@ -24,6 +24,7 @@ export default function EvmWalletConnect({
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
   const router = useRouter();
+  const searchParams = useSearchParams()
 
   const { login, isLoading } = useLoginWallet({
     address,
@@ -37,8 +38,10 @@ export default function EvmWalletConnect({
   const onLogin = async (wallet: string) => {
     try {
       await login(wallet);
-      router.push(routes.dashboardUser);
-    } catch (error) {}
+      //TODO: Make it reusable
+      const callbackUrl = searchParams.get('callbackUrl');
+      router.push(callbackUrl ?? routes.dashboardUserHome);
+    } catch (error) { }
   };
 
   useEffect(() => {

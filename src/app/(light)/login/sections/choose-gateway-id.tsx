@@ -1,7 +1,7 @@
 'use client';
 import { LoadingButton } from '@/components/buttons/loading-button';
-import { errorMessages } from '@/constants/error-messages';
 import { auth } from '@/locale/en/auth';
+import { errorMessages } from '@/locale/en/errors';
 import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 
@@ -28,11 +28,11 @@ export function ChooseGatewayId() {
           message = 'GATEWAY_ID_ALREADY_REGISTERED';
           setError('gatewayId', {
             type: 'manual',
-            message: errorMessages['GATEWAY_ID_ALREADY_REGISTERED'],
+            message: errorMessages.GATEWAY_ID_ALREADY_REGISTERED,
           });
         } else {
           enqueueSnackbar(
-            errorMessages[message] || errorMessages.UNEXPECTED_ERROR,
+            errorMessages[message as keyof typeof errorMessages] || errorMessages.UNEXPECTED_ERROR,
             {
               variant: 'error',
             }

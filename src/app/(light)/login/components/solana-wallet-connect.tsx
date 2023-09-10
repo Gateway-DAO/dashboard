@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 import routes from '@/constants/routes';
@@ -23,6 +23,9 @@ export default function SolanaWalletConnect({ onFirstModal }: Props) {
 
   const address = publicKey?.toString();
 
+  const searchParams = useSearchParams()
+
+
   const { login } = useLoginWallet({
     address,
     chain: Chain.Sol,
@@ -37,8 +40,10 @@ export default function SolanaWalletConnect({ onFirstModal }: Props) {
   const onLogin = async (wallet: string) => {
     try {
       await login(wallet);
-      router.push(routes.dashboardUser);
-    } catch (error) {}
+      //TODO: Make it reusable
+      const callbackUrl = searchParams.get('callbackUrl');
+      router.push(callbackUrl ?? routes.dashboardUserHome);
+    } catch (error) { }
   };
 
   useEffect(() => {

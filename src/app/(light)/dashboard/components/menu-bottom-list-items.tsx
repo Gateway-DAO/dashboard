@@ -1,109 +1,46 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
-import { useWindowSize } from '@react-hookz/web';
-
-import MenuIcon from '@mui/icons-material/Menu';
 import {
   BottomNavigation,
   BottomNavigationAction,
-  List,
-  Modal,
-  Stack,
-  useTheme,
 } from '@mui/material';
 
-import GTWMenuItem, { GTWMenuItemProps } from './menu-item/menu-item';
-import MobileHeader from './mobile-header';
+import { GTWMenuItemSettings } from './menu-item/menu-item';
 
 type Props = {
-  activePath: string;
-  bottomItems: GTWMenuItemProps[];
-  menuItems: GTWMenuItemProps[];
-};
-
-const useMenuState = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const theme = useTheme();
-  const { width } = useWindowSize();
-
-  useEffect(() => {
-    if (isMenuOpen && width >= theme.breakpoints.values.lg) {
-      setIsMenuOpen(false);
-    }
-  }, [width, theme.breakpoints.values.lg, isMenuOpen]);
-
-  return { isMenuOpen, setIsMenuOpen };
+  menuItems: GTWMenuItemSettings[];
 };
 
 /**
  * List all menu items of the mobile user dashboard
  */
-//TODO: Make it reusable across dashboards
-//TODO: Only mount component on mobile, so it doesn't affect performance on desktop and remount the state of the component
 export default function MenuBottomListItems({
-  activePath,
-  bottomItems,
   menuItems,
 }: Props) {
-  const { isMenuOpen, setIsMenuOpen } = useMenuState();
-
-  const handleChange = (_event: React.ChangeEvent<{}>, newValue: string) => {
-    if (newValue !== 'menu') {
-      setIsMenuOpen(false);
-      return;
-    }
-    setIsMenuOpen((open) => !open);
-  };
+  const activePath = usePathname();
 
   return (
-    <>
-      <Modal
-        hideBackdrop
-        open={isMenuOpen}
-        sx={{
-          bottom: 56,
-        }}
-        onClose={() => setIsMenuOpen(false)}
-      >
-        <Stack
-          direction="column"
-          sx={{
-            height: '100%',
-            bgcolor: 'background.default',
-          }}
-        >
-          <MobileHeader />
-          <List>
-            {menuItems.map((item) => (
-              <GTWMenuItem
-                key={item.name}
-                active={activePath === item.href}
-                onClick={() => setIsMenuOpen(false)}
-                {...item}
-              />
-            ))}
-          </List>
-        </Stack>
-      </Modal>
-      <BottomNavigation
-        value={isMenuOpen ? 'menu' : activePath}
-        onChange={handleChange}
-        sx={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          display: {
-            xs: 'flex',
-            lg: 'none',
-          },
-          zIndex: 10,
-        }}
-      >
-        {bottomItems.map(({ icon: Icon, ...item }) => (
+    <BottomNavigation
+      value={activePath}
+      sx={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        display: {
+          xs: 'flex',
+          lg: 'none',
+        },
+        zIndex: 10,
+      }}
+    >
+      {menuItems.map(({ icon: Icon, activeIcon: ActiveIcon, activeHrefs, ...item }) => {
+        const isActive = activeHrefs.some((path) =>
+          activePath.includes(path)
+        );
+        return (
           <BottomNavigationAction
             key={item.name}
             component={Link}
@@ -111,16 +48,12 @@ export default function MenuBottomListItems({
             label={item.name}
             value={item.href}
             aria-label={item.name}
-            icon={<Icon />}
+            icon={isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
           />
-        ))}
-        <BottomNavigationAction
-          label="Menu"
-          value="menu"
-          aria-label="Menu"
-          icon={<MenuIcon />}
-        />
-      </BottomNavigation>
-    </>
+        )
+      })}
+    </BottomNavigation>
   );
 }
+
+

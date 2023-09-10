@@ -13,7 +13,7 @@ import { ListView } from './list-view';
 
 type Props = {
   title: string;
-  data: CredentialData[];
+  data: CredentialData[] | undefined;
 };
 
 function ClaimView(fieldData: CredentialData) {
@@ -23,6 +23,7 @@ function ClaimView(fieldData: CredentialData) {
     fieldData.metadata?.format,
     fieldData.metadata?.currency
   );
+
   if (!fieldData.value || fieldData.value === '')
     return <span>{pdaLocale.unfilled}</span>;
   switch (type) {

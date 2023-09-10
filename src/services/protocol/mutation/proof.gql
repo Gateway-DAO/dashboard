@@ -1,0 +1,14 @@
+mutation create_proof($claims: JSON, $verifier: String) {
+  createProof(claims: $claims, verifier: $verifier) {
+    id
+    totalCost
+    facilitationFee
+    arweaveUrl
+    dataRequest {
+      id
+    }
+    organization {
+      gatewayId
+    }
+  }
+}
