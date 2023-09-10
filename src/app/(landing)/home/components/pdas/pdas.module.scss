@@ -31,3 +31,75 @@
     transform-origin: center !important;
   }
 }
+
+.logo_background,
+.logo {
+  opacity: 0;
+}
+
+.wrapper {
+  height: 100%;
+}
+
+.text_container {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.text_container {
+  margin-top: 170px;
+}
+
+.logo_text {
+  position: absolute;
+  top: 0;
+  width: 20px;
+  opacity: 0;
+}
+
+.pdas_text {
+  color: #fff;
+  text-align: center;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+  // opacity: 0;
+  line-height: 67.2px;
+  letter-spacing: 0.412px;
+  width: 100%;
+
+  &--white {
+    color: #fff;
+  }
+
+  &--purple {
+    color: #e6d5fa;
+  }
+}
+
+.type_slash {
+  animation: blink 1s infinite;
+  color: #9247d3;
+  display: none;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  transition: blink 0.6s ease;
+  width: 0;
+
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
