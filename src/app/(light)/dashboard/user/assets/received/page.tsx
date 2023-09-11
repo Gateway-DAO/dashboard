@@ -1,9 +1,9 @@
 import { getMyPdas } from '@/app/actions/get-myPdas';
+import InfiniteLoadMore from '@/components/infinite-load-more/infinite-load-more';
 import { pdas as pdasLocales } from '@/locale/en/pda';
 
 import { Typography } from '@mui/material';
 
-import InfiniteLoadMore from '../components/infinite-load-more';
 import PDAsList from '../components/pdas-list';
 
 export default async function DataAssetsPage() {
