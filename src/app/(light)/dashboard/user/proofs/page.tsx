@@ -1,16 +1,15 @@
-import Link from "next/link";
-
-import routes from "@/constants/routes";
+import { getReceivedProofs } from '@/app/actions/get-receivedProofs';
 
 import { Stack } from '@mui/material';
 
 import { TableSharedDataAssets } from './components/table-shared';
 
-export default function DashboardUserProofsPage() {
+export default async function DashboardUserProofsPage() {
+  const proofs = await getReceivedProofs(0, 6);
+
   return (
     <Stack>
-      <TableSharedDataAssets />
-      <Link href={routes.dashboardUserProof("mock")}>Open proof</Link>
+      <TableSharedDataAssets proofs={proofs} />
     </Stack>
   );
 }
