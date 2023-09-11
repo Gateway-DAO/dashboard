@@ -1,0 +1,39 @@
+query receivedProofs($take: Float!, $skip: Float!) {
+  receivedProofs(skip: $skip, take: $take) {
+    id
+    totalCost
+    facilitationFee
+    createdAt
+    data {
+      dataModels {
+        id
+      }
+      PDAs {
+        id
+        claim
+        dataModel {
+          id
+        }
+        issuer {
+          id
+        }
+        organization {
+          id
+          gatewayId
+        }
+        owner {
+          id
+        }
+      }
+    }
+    arweaveUrl
+    organization {
+      gatewayId
+      image
+    }
+    dataRequest {
+      arweaveUrl
+      status
+    }
+  }
+}
