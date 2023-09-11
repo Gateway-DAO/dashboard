@@ -2,10 +2,10 @@
 import { useEffect, useState, useRef } from 'react';
 
 import Button from '@/app/(landing)/components/button';
+import Wrapper from '@/app/(landing)/components/wrapper';
 import GTWLink from '@/components/gtw-link';
 import gsap from 'gsap';
 
-import Wrapper from '../../../components/wrapper';
 import styles from './hero.module.scss';
 
 export default function Hero() {
