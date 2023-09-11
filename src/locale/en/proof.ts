@@ -12,3 +12,9 @@ export const proof = {
     data_asset_shared: 'Data asset shared',
   },
 };
+
+export const proofs = {
+  verifier: 'Verifier',
+  share_date: 'Share date',
+  data_amount: 'Data amount',
+};
