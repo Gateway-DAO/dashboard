@@ -1,8 +1,14 @@
+import Link from 'next/link';
+
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import routes from '@/constants/routes';
+import { proofs as proofsLocale } from '@/locale/en/proof';
+import { ReceivedProofsQuery } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
+import dayjs from 'dayjs';
 
 import {
   Stack,
@@ -14,24 +20,11 @@ import {
   Typography,
 } from '@mui/material';
 
-export function TableSharedDataAssets() {
-  const rows = [
-    {
-      name: 'Chase',
-      shared_date: '07/09/23, 12:22am',
-      data_amount: 6,
-    },
-    {
-      name: 'Ticketmaster',
-      shared_date: '07/09/23, 12:22am',
-      data_amount: 6,
-    },
-    {
-      name: 'Ticketmaster',
-      shared_date: '07/09/23, 12:22am',
-      data_amount: 6,
-    },
-  ];
+type Props = {
+  proofs: ReceivedProofsQuery['receivedProofs'] | null;
+};
+
+export function TableSharedDataAssets({ proofs }: Props) {
   return (
     <Stack py={3}>
       <Table
@@ -63,50 +56,63 @@ export function TableSharedDataAssets() {
             }}
           >
             <TableCell sx={{ border: 'none' }} variant="head" size="medium">
-              Verifier
+              {proofsLocale.verifier}
             </TableCell>
             <TableCell sx={{ border: 'none' }} variant="head">
-              Share date
+              {proofsLocale.share_date}
             </TableCell>
             <TableCell sx={{ border: 'none' }} variant="head">
-              Data amount
+              {proofsLocale.data_amount}
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              sx={{
-                '&:last-child td, ˆ:last-child th': { border: 0 },
-                '& td:first-child': {
-                  pl: CONTAINER_PX,
-                },
-                '& td:last-child': {
-                  pr: CONTAINER_PX,
-                },
-                display: 'grid',
-                gridTemplateColumns: '3fr 1fr 1fr',
-                mx: NEGATIVE_CONTAINER_PX,
-              }}
-              key={row.name}
+          {proofs?.map((proof) => (
+            <Link
+              key={proof?.id}
+              href={routes.dashboardUserProof(proof?.id)}
+              passHref
+              style={{ textDecoration: 'none' }}
             >
-              <TableCell
+              <TableRow
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 2,
+                  '&:last-child td, ˆ:last-child th': { border: 0 },
+                  '& td:first-child': {
+                    pl: CONTAINER_PX,
+                  },
+                  '& td:last-child': {
+                    pr: CONTAINER_PX,
+                  },
+                  display: 'grid',
+                  gridTemplateColumns: '3fr 1fr 1fr',
+                  mx: NEGATIVE_CONTAINER_PX,
                 }}
+                hover={true}
               >
-                <GTWAvatar name={row.name} />
-                <Typography variant="subtitle1">{row.name}</Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="body1">{row.shared_date}</Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="body2">{row.data_amount}</Typography>
-              </TableCell>
-            </TableRow>
+                <TableCell
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                  }}
+                >
+                  <GTWAvatar name={proof?.organization?.image ?? ''} />
+                  <Typography variant="subtitle1">
+                    {proof?.organization?.gatewayId}
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body1">
+                    {dayjs(proof?.createdAt).format('MM/DD/YYYY, h:mm A')}
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2">
+                    {proof?.data?.PDAs?.length}
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            </Link>
           ))}
         </TableBody>
       </Table>
