@@ -1,5 +1,52 @@
 .element {
-  background-color: blue;
+  background-color: #212121;
   height: 100vh;
+  padding-top: 133px;
   width: 100%;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.title_container {
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+.icon {
+  width: 42px;
+}
+
+.title_text {
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25.2px;
+  letter-spacing: 0.412px;
+  margin-left: 13px;
+}
+
+.button {
+  align-items: center;
+  display: flex;
+  padding: 8px 15px;
+  max-height: 42px;
+
+  span {
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: 0.46px;
+  }
+}
+
+.button_icon {
+  margin-right: 8px;
+  width: 24px;
 }
