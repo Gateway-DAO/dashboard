@@ -4,14 +4,14 @@ import { proofs as proofsLocales } from '@/locale/en/proof';
 
 import { Typography } from '@mui/material';
 
-import { TableSharedDataAssets } from '../components/table-shared';
+import { TableSharedDataProofs } from '../components/table-shared';
 
 export default async function DataAssetsPage() {
   const proofs = await getReceivedProofs(0, 6);
 
   return (
     <>
-      <TableSharedDataAssets proofs={proofs} />
+      <TableSharedDataProofs proofs={proofs} />
       {proofs && proofs.length === 0 && (
         <Typography
           variant="body1"

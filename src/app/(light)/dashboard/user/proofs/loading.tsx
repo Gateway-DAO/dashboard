@@ -1,16 +1,16 @@
-import PdaCardSkeleton from '@/components/pda-card/pda-card-skeleton';
+import { Skeleton, Stack } from '@mui/material';
 
-import PDAsListContainer from '../assets/components/pdas-list-container';
+import { TableSharedDataProofsContainer } from './components/table-shared-container';
 
 export default function DataAssetsLoadingPage() {
   return (
-    <PDAsListContainer>
-      <PdaCardSkeleton />
-      <PdaCardSkeleton />
-      <PdaCardSkeleton />
-      <PdaCardSkeleton />
-      <PdaCardSkeleton />
-      <PdaCardSkeleton />
-    </PDAsListContainer>
+    <TableSharedDataProofsContainer>
+      <Stack direction="column" sx={{ width: '100%' }}>
+        <Skeleton height={50} />
+        <Skeleton height={50} />
+        <Skeleton height={50} />
+        <Skeleton height={50} />
+      </Stack>
+    </TableSharedDataProofsContainer>
   );
 }
