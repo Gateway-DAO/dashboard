@@ -8,6 +8,7 @@
 .head {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
   width: 100%;
 }
 
@@ -49,4 +50,54 @@
 .button_icon {
   margin-right: 8px;
   width: 24px;
+}
+
+.svg_flow {
+  margin-bottom: 83px;
+}
+
+.steps {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+.step_item {
+  padding-left: 18px;
+  position: relative;
+  width: 25%;
+
+  &:before {
+    background-color: #fff;
+    content: '';
+    left: 0;
+    height: 100%;
+    opacity: 0.2;
+    position: absolute;
+    width: 0.5px;
+  }
+}
+
+.step_icon {
+  margin-bottom: 23px;
+  width: 48px;
+}
+
+.step_title,
+.step_text {
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  line-height: 25.2px;
+  letter-spacing: 0.412px;
+}
+
+.step_title {
+  font-weight: 600;
+  margin: 0 0 30px 0;
+}
+
+.step_text {
+  font-weight: 400;
+  margin: 0;
 }
