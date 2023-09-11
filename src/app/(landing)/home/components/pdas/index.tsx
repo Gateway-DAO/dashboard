@@ -9,107 +9,131 @@ import gsap from 'gsap';
 import styles from './pdas.module.scss';
 
 export default function Pdas() {
-  const refSection = useRef<HTMLElement>(null);
-  const refLinesParent = useRef<SVGGElement>(null);
-  const refLogoBackground = useRef<SVGPathElement>(null);
-  const refLogoContainer = useRef<SVGPathElement>(null);
-  const refLogo = useRef<SVGPathElement>(null);
-  const refLogoText = useRef<SVGSVGElement>(null);
-  const refTextPdas = useRef<(HTMLSpanElement | null)[]>([]);
-  const refPdasLogoContainer = useRef<HTMLDivElement>(null);
-  const refTextPdasParagraph = useRef<(HTMLParagraphElement | null)[]>([]);
-  const refSlash = useRef<(HTMLSpanElement | null)[]>([]);
+  // Refs for DOM elements
+  const sectionRef = useRef<HTMLElement>(null);
+  const linesParentRef = useRef<SVGGElement>(null);
+  const logoBackgroundRef = useRef<SVGPathElement>(null);
+  const logoContainerRef = useRef<SVGPathElement>(null);
+  const logoRef = useRef<SVGPathElement>(null);
+  const logoTextRef = useRef<SVGSVGElement>(null);
+  const textPdasRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const pdasLogoContainerRef = useRef<HTMLDivElement>(null);
+  const textPdasParagraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const slashRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
+  // Animation setup using useEffect
   useEffect(() => {
-    if (!refLinesParent.current) return;
+    if (!linesParentRef.current) return;
 
-    const lines = refLinesParent.current.querySelectorAll('path');
+    const lines = linesParentRef.current.querySelectorAll('path');
 
     const tl = gsap.timeline({ paused: true });
 
-    tl.set(refPdasLogoContainer.current, {
+    tl.set(pdasLogoContainerRef.current, {
       leftPercent: 50,
       topPercent: 50,
       position: 'absolute',
       xPercent: -50,
       yPercent: -50,
     });
-    tl.to(refLogoBackground.current, { autoAlpha: 1 });
-    tl.fromTo(refLogo.current, { y: -10 }, { autoAlpha: 1, y: 0 }, '-=0.3');
-    tl.to(
-      lines,
-      {
-        transform: 'scale(1)',
-        duration: 1,
-        stagger: 0.1,
-        ease: 'power4.out',
-      },
-      '-=0.6'
-    );
+    tl.to(logoBackgroundRef.current, { autoAlpha: 1 });
+    tl.fromTo(logoRef.current, { y: -10 }, { autoAlpha: 1, y: 0 }, '-=0.3');
+    tl.set(logoContainerRef.current, { autoAlpha: 0 });
+    tl.set(logoTextRef.current, { autoAlpha: 1 });
     tl.to(lines, {
-      autoAlpha: 0,
-      duration: 1,
+      transform: 'scale(1)',
       stagger: 0.1,
       ease: 'power4.out',
+      delay: 0.6,
+      duration: 1,
     });
-    tl.set(refLogoContainer.current, { autoAlpha: 0 });
-    tl.set(refLogoText.current, { autoAlpha: 1 });
-    tl.to(refLogoText.current, { scale: 0.8 });
-    tl.to(refPdasLogoContainer.current, { y: -73 });
+    tl.to(lines, {
+      autoAlpha: 0,
+      stagger: 0.1,
+      ease: 'power4.out',
+      duration: 1,
+    });
+    tl.to(logoTextRef.current, { scale: 0.8 }, '-=1');
+    tl.to(pdasLogoContainerRef.current, { y: -73 }, '<');
 
-    refTextPdas.current.forEach((element, index) => {
+    textPdasRefs.current.forEach((element, index) => {
       if (!element) return;
 
       splitSpans(element);
       const spans = element.querySelectorAll('span');
 
       const paragraphBounds =
-        refTextPdasParagraph.current[0]?.getBoundingClientRect();
+        textPdasParagraphRefs.current[0]?.getBoundingClientRect();
       const texPdaBounds = element.getBoundingClientRect();
 
       if (index === 0) {
-        tl.set(refSlash.current[0], { display: 'inline-block' });
+        tl.set(slashRefs.current[0], { display: 'inline-block' });
         tl.from(spans, { width: 0, display: 'none', stagger: 0.1 });
-        tl.set(refLogoText.current, { transformOrigin: 'left' });
-        tl.to(refLogoText.current, { scale: 0.6712, left: 0, x: 0 });
-        tl.to(refPdasLogoContainer.current, {
-          leftPercent: 0,
-          xPercent: 0,
-          left: 0,
-          y: -73 - 96,
-        });
+        tl.set(logoTextRef.current, { transformOrigin: 'left' });
+        tl.to(
+          logoTextRef.current,
+          { scale: 0.6712, left: 0, x: 0, duration: 0.8 },
+          '<'
+        );
+        tl.to(
+          pdasLogoContainerRef.current,
+          {
+            leftPercent: 0,
+            xPercent: 0,
+            left: 0,
+            y: -73 - 96,
+            duration: 0.8,
+          },
+          '<'
+        );
 
         if (!paragraphBounds) return;
 
         const x = paragraphBounds.left - texPdaBounds.left;
-        tl.to(refTextPdasParagraph.current, { x, y: -120 });
-        tl.set(refTextPdasParagraph.current, {
+        tl.to(
+          textPdasParagraphRefs.current,
+          { x, y: -120, duration: 0.8 },
+          '-=0.6'
+        );
+        tl.set(textPdasParagraphRefs.current, {
           textAlign: 'left',
           x: 0,
         });
-        tl.set(refSlash.current[0], { display: 'none' });
-        tl.set(refSlash.current[1], { display: 'inline-block' });
+        tl.set(slashRefs.current[0], { display: 'none' });
+        tl.set(slashRefs.current[1], { display: 'inline-block' });
       } else {
         tl.from(spans, { width: 0, display: 'none', stagger: 0.1 });
       }
     });
 
-    setTimeout(() => {
-      setLogoTextBounds();
-    }, 500);
+    // Scroll event handling
+    const handleScroll = (e: IInstanceOptions) => {
+      if (!sectionRef.current) return;
 
-    LenisManager?.on('scroll', (e: IInstanceOptions) => {
-      if (!refSection.current) return;
-
-      const offsetTop = refSection.current.offsetTop - window.innerHeight / 2;
-      const sectionHeight = refSection.current.clientHeight;
+      const offsetTop =
+        sectionRef.current.offsetTop - window.innerHeight / 2 + 200;
+      const sectionHeight = sectionRef.current.clientHeight;
       const scrollSection = e.scroll - offsetTop;
       const progress = scrollSection / (sectionHeight - window.innerHeight);
 
       if (progress >= 0 && progress <= 1) tl.progress(progress);
-    });
+
+      if (progress < 0) tl.progress(0);
+    };
+
+    // Set second logo text bounds
+    gsap.delayedCall(0.5, setLogoTextBounds);
+
+    // Attach scroll event listener
+    LenisManager?.on('scroll', handleScroll);
+
+    // Cleanup function
+    return () => {
+      LenisManager?.off('scroll', handleScroll);
+    };
   }, []);
 
+  // Function to split spans in a text element
   const splitSpans = (element: HTMLSpanElement) => {
     const text = element.innerText;
     const spans = text.split('').map((letter) => {
@@ -123,24 +147,24 @@ export default function Pdas() {
     const parent = element.parentNode as HTMLParagraphElement;
     const { height } = parent.getBoundingClientRect();
     gsap.set(parent, { height });
-    // gsap.set(element, { width: element.offsetWidth });
   };
 
+  // Function to set logo text bounds
   const setLogoTextBounds = () => {
-    if (!refLogoText.current || !refLogoContainer.current) return;
+    if (!logoTextRef.current || !logoContainerRef.current) return;
 
-    const logoBounds = refLogoContainer.current.getBoundingClientRect();
-    const logoTextBounds = refLogoText.current.getBoundingClientRect();
+    const logoBounds = logoContainerRef.current.getBoundingClientRect();
+    const logoTextBounds = logoTextRef.current.getBoundingClientRect();
 
     const top = logoBounds.top - logoTextBounds.top;
     const left = logoBounds.left - logoTextBounds.left;
 
-    gsap.set(refLogoText.current, { top, left });
-    refLogoText.current.style.width = `${logoBounds.width}px`;
+    gsap.set(logoTextRef.current, { top, left });
+    logoTextRef.current.style.width = `${logoBounds.width}px`;
   };
 
   return (
-    <section className={styles.element} ref={refSection}>
+    <section className={styles.element} ref={sectionRef}>
       <div className={styles.svg_container}>
         <svg
           className={styles.svg}
@@ -160,7 +184,7 @@ export default function Pdas() {
             <g
               clip-path="url(#lines)"
               className={styles.lines_parent}
-              ref={refLinesParent}
+              ref={linesParentRef}
             >
               <path
                 fill="#771AC9"
@@ -235,17 +259,17 @@ export default function Pdas() {
             />
             <rect width="100%" height="100%" x="0" fill="url(#d)" />
           </g>
-          <g clip-path="url(#logo)" ref={refLogoContainer}>
+          <g clip-path="url(#logo)" ref={logoContainerRef}>
             <path
               className={styles.logo_background}
-              ref={refLogoBackground}
+              ref={logoBackgroundRef}
               fill="#E6D5FA"
               d="M647 720.61c0-19.667 15.943-35.61 35.61-35.61h74.78c19.667 0 35.61 15.943 35.61 35.61v74.78c0 19.667-15.943 35.61-35.61 35.61h-74.78c-19.667 0-35.61-15.943-35.61-35.61v-74.78Z"
             />
             <g
               fill="#771AC9"
               clip-path="url(#f)"
-              ref={refLogo}
+              ref={logoRef}
               className={styles.logo}
             >
               <path d="M683.319 804.333a3.148 3.148 0 0 1-2.412-.898 3.08 3.08 0 0 1-.907-2.388v-55.869c.052-9.048 3.706-17.712 10.169-24.11 6.463-6.399 15.214-10.016 24.354-10.068h10.954c9.14.052 17.891 3.669 24.354 10.068 6.463 6.398 10.117 15.062 10.169 24.11v14.461a3.27 3.27 0 0 1-.972 2.323 3.336 3.336 0 0 1-2.348.963c-.88 0-1.724-.346-2.347-.963a3.27 3.27 0 0 1-.972-2.323v-14.461a27.632 27.632 0 0 0-8.215-19.472 28.191 28.191 0 0 0-19.669-8.133h-10.954a28.191 28.191 0 0 0-19.669 8.133 27.632 27.632 0 0 0-8.215 19.472v55.869c0 .872-.35 1.707-.972 2.324a3.339 3.339 0 0 1-2.348.962Z" />
@@ -291,14 +315,14 @@ export default function Pdas() {
         <Wrapper className={styles.wrapper}>
           <div
             className={styles.pdas_logo_container}
-            ref={refPdasLogoContainer}
+            ref={pdasLogoContainerRef}
           >
             <svg
               className={styles.logo_text}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 120 120"
-              ref={refLogoText}
+              ref={logoTextRef}
             >
               <g clip-path="url(#a)">
                 <path
@@ -327,14 +351,14 @@ export default function Pdas() {
                 styles.pdas_text,
                 styles['pdas_text--white']
               )}
-              ref={(ref) => (refTextPdasParagraph.current[0] = ref)}
+              ref={(ref) => (textPdasParagraphRefs.current[0] = ref)}
             >
-              <span ref={(ref) => (refTextPdas.current[0] = ref)}>
+              <span ref={(ref) => (textPdasRefs.current[0] = ref)}>
                 Private Data Assets (PDAs)
               </span>
               <span
                 className={styles.type_slash}
-                ref={(ref) => (refSlash.current[0] = ref)}
+                ref={(ref) => (slashRefs.current[0] = ref)}
               >
                 _
               </span>
@@ -344,16 +368,16 @@ export default function Pdas() {
                 styles.pdas_text,
                 styles['pdas_text--purple']
               )}
-              ref={(ref) => (refTextPdasParagraph.current[1] = ref)}
+              ref={(ref) => (textPdasParagraphRefs.current[1] = ref)}
             >
-              <span ref={(ref) => (refTextPdas.current[1] = ref)}>
+              <span ref={(ref) => (textPdasRefs.current[1] = ref)}>
                 The foundation for true data privacy, sovereignty, and
                 portability. Turn raw data into encrypted, secure, portable, and
                 publicly verifiable assets.
               </span>
               <span
                 className={styles.type_slash}
-                ref={(ref) => (refSlash.current[1] = ref)}
+                ref={(ref) => (slashRefs.current[1] = ref)}
               >
                 _
               </span>
