@@ -1,3 +1,5 @@
+//Mutations and queries
+
 export const queries = {};
 
 export const mutations = {
