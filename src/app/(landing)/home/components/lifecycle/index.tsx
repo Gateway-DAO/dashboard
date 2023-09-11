@@ -1,11 +1,38 @@
 import Button from '@/app/(landing)/components/button';
 import Fingerprint from '@/app/(landing)/components/icons/fingerprint';
+import Issue from '@/app/(landing)/components/icons/issue';
+import Manage from '@/app/(landing)/components/icons/manage';
+import Own from '@/app/(landing)/components/icons/own';
 import Replay from '@/app/(landing)/components/icons/replay';
+import Verify from '@/app/(landing)/components/icons/verify';
 import Wrapper from '@/app/(landing)/components/wrapper';
 
 import styles from './lifecycle.module.scss';
 
 export default function Lifecycle() {
+  const steps = [
+    {
+      icon: Issue,
+      title: 'Issue',
+      text: 'Entities and users can issue you private data assets (PDAs). ',
+    },
+    {
+      icon: Own,
+      title: 'Own',
+      text: 'Your private date will be encrypted and you will have full control of it.',
+    },
+    {
+      icon: Manage,
+      title: 'Manage',
+      text: 'Your private date will be encrypted and you will have full control of it.',
+    },
+    {
+      icon: Verify,
+      title: 'Verify',
+      text: 'Entities can request your private data to unlock better experience.',
+    },
+  ];
+
   return (
     <section className={styles.element}>
       <Wrapper>
@@ -23,6 +50,7 @@ export default function Lifecycle() {
           </Button>
         </div>
         <svg
+          className={styles.svg_flow}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 1163 669"
@@ -187,6 +215,16 @@ export default function Lifecycle() {
             </clipPath>
           </defs>
         </svg>
+
+        <div className={styles.steps}>
+          {steps.map((step, index) => (
+            <div key={index} className={styles.step_item}>
+              <step.icon className={styles.step_icon} />
+              <h3 className={styles.step_title}>{step.title}</h3>
+              <p className={styles.step_text}>{step.text}</p>
+            </div>
+          ))}
+        </div>
       </Wrapper>
     </section>
   );
