@@ -4,7 +4,7 @@ import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
-import { pdas } from '@/locale/en/pda';
+import { proofs } from '@/locale/en/proof';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -13,7 +13,7 @@ import {
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
-export default function DataAssetsLayout({ children }: PropsWithChildren) {
+export default function DataProofsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
       <Box
@@ -25,10 +25,10 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
           },
         }}
       >
-        <Typography variant="h3" id="title-assets">
-          {pdas.my_data_assets}
+        <Typography variant="h3" id="title-proofs">
+          {proofs.data_proofs}
         </Typography>
-        <Typography variant="body1">{pdas.data_assets_subtitle}</Typography>
+        <Typography variant="body1">{proofs.data_proofs_subtitle}</Typography>
       </Box>
       <Box
         sx={{
@@ -41,11 +41,11 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
         <GTWTabs>
           <GTWTab
             label={common.general.received}
-            href={routes.dashboardUserReceivedAssets}
+            href={routes.dashboardUserReceivedProofs}
           />
           <GTWTab
             label={common.general.issued}
-            href={routes.dashboardUserIssuedAssets}
+            href={routes.dashboardUserIssuedProofs}
           />
         </GTWTabs>
       </Box>

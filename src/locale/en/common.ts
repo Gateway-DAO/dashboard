@@ -3,6 +3,8 @@ import { Chain } from '@/services/protocol/types';
 export const common = {
   general: {
     gateway: 'Gateway',
+    received: 'Received',
+    issued: 'Issued',
   },
   chain: {
     EVM: 'Ethereum',
