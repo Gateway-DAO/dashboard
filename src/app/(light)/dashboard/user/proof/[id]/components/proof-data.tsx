@@ -70,6 +70,7 @@ export default function ProofData({ dataModels, pdas }: Props) {
                     key={pda?.id}
                     name={pda?.title as string}
                     issuerName={
+                      pda?.organization?.name ??
                       pda?.organization?.gatewayId ??
                       (pda?.issuer?.user?.gatewayId as string)
                     }
