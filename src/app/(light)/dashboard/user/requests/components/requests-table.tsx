@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import RequestStatusChip from '@/components/requests/request-status-chip';
@@ -21,13 +22,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     field: 'id',
     headerName: 'Request ID',
     flex: 1,
-    renderCell(params) {
-      return (
-        <Link href={routes.dashboardUserRequest(params.row.id)}>
-          {params.row.id}
-        </Link>
-      );
-    },
+    valueGetter: (params) => params.row.id,
   },
   {
     field: 'userVerifier',
@@ -75,6 +70,8 @@ type Props = {
 };
 
 export default function RequestsTable({ data }: Props) {
+  const router = useRouter()
+
   return (
     <DataGrid
       rows={data}
@@ -88,19 +85,27 @@ export default function RequestsTable({ data }: Props) {
       }}
       pageSizeOptions={[10, 25, 50, 100]}
       autoHeight
+      onCellClick={({ field, value }) => {
+        if (field === "id") {
+          router.push(routes.dashboardUserRequest(value as string))
+        }
+      }}
       sx={{
         mx: NEGATIVE_CONTAINER_PX,
         borderLeft: 'none',
         borderRight: 'none',
         borderRadius: 0,
         '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
-          {
-            paddingLeft: CONTAINER_PX,
-          },
+        {
+          paddingLeft: CONTAINER_PX,
+        },
         '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
-          {
-            paddingRight: CONTAINER_PX,
-          },
+        {
+          paddingRight: CONTAINER_PX,
+        },
+        '.MuiDataGrid-cell[data-field="id"]': {
+          cursor: 'pointer',
+        },
       }}
     />
   );
