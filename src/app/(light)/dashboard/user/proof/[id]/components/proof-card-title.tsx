@@ -26,7 +26,7 @@ export default function ProofCardTitle({ proof }: Props) {
         p: 2,
         backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.4),
       }}
-      direction={{ xs: 'column', md: 'row' }}
+      direction="row"
       alignItems="flex-start"
       justifyContent="space-between"
     >

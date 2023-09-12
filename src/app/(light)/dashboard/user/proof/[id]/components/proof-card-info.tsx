@@ -1,3 +1,4 @@
+'use client';
 import CardCell from '@/components/card-cell/card-cell';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { TableCellContainer } from '@/components/table-cell-container/table-cell-container';
@@ -8,6 +9,7 @@ import {
   DataResourceStatus,
   Proof,
 } from '@/services/protocol/types';
+import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
@@ -18,6 +20,7 @@ type Props = {
 };
 
 export default function ProofCardInfo({ proof }: Props) {
+  console.log(proof);
   return (
     <Stack
       component={Card}
@@ -54,10 +57,13 @@ export default function ProofCardInfo({ proof }: Props) {
       {proof?.dataRequest && (
         <TableCellContainer>
           <CardCell label={proofLocale.request_id}>
-            {proof?.dataRequest?.id}
+            {limitCharsCentered(proof?.dataRequest?.id as string, 16)}
           </CardCell>
           <CardCell label={proofLocale.request_template_id}>
-            {proof?.dataRequest?.dataRequestTemplate?.id}
+            {limitCharsCentered(
+              proof?.dataRequest?.dataRequestTemplate?.id as string,
+              16
+            )}
           </CardCell>
         </TableCellContainer>
       )}
