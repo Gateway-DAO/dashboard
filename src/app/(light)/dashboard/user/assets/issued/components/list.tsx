@@ -1,48 +1,53 @@
 'use client';
 
 import InfiniteLoadMore from '@/components/infinite-load-more/infinite-load-more';
-import Loading from '@/components/loadings/loading';
+import PdaCardSkeleton from '@/components/pda-card/pda-card-skeleton';
 import usePrivateApi from '@/hooks/use-private-api';
-import { Proof } from '@/services/protocol/types';
+import { PrivateDataAsset } from '@/services/protocol/types';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { PartialDeep } from 'type-fest';
 
 import { Stack } from '@mui/material';
 
-import { TableSharedDataProofs } from '../../components/table-shared';
+import PDAsList from '../../components/pdas-list';
+import PDAsListContainer from '../../components/pdas-list-container';
 
 type Props = {
-  proofs: PartialDeep<Proof>[];
+  pdas: PartialDeep<PrivateDataAsset>[];
 };
 
-export default function ReceivedProofsList({ proofs: initialProofs }: Props) {
+export default function IssuedPDAsList({ pdas: initialPdas }: Props) {
   const privateApi = usePrivateApi();
   const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery({
-      queryKey: ['proofs', privateApi],
+      queryKey: ['issued_pdas', privateApi],
       queryFn: async ({ pageParam }) => {
-        return (await privateApi!.received_proofs({ take: 6, skip: pageParam }))
-          ?.receivedProofs as PartialDeep<Proof>[];
+        return (await privateApi!.issued_pdas({ take: 6, skip: pageParam }))
+          ?.issuedPDAs;
       },
       getNextPageParam: (lastPage, pages) =>
         lastPage && lastPage.length < 6 ? undefined : pages.length * 6,
       initialData: {
         pageParams: [0],
-        pages: [initialProofs],
+        pages: [initialPdas],
       },
     });
 
-  const proofs = data?.pages.flat().filter(Boolean);
+  const pdas = data?.pages.flat().filter(Boolean);
 
   return (
     <Stack gap={1}>
-      <TableSharedDataProofs proofs={proofs ?? []} />
+      <PDAsList pdas={pdas ?? []} />
       {privateApi && hasNextPage && (
         <InfiniteLoadMore
           isLoading={isFetchingNextPage}
           onLoadMore={() => fetchNextPage()}
         >
-          <Loading />
+          <PDAsListContainer>
+            <PdaCardSkeleton />
+            <PdaCardSkeleton />
+            <PdaCardSkeleton />
+          </PDAsListContainer>
         </InfiniteLoadMore>
       )}
     </Stack>

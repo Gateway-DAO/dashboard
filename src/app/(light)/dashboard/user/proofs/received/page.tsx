@@ -7,7 +7,6 @@ import { Typography } from '@mui/material';
 
 import { TableSharedDataProofs } from '../components/table-shared';
 
-
 export default async function ProofsPage() {
   const apiPrivate = await getApiPrivate();
 
