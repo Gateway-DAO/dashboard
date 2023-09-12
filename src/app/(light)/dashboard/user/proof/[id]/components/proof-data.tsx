@@ -67,8 +67,8 @@ export default function ProofData({ dataModels, pdas }: Props) {
                 .filter((pda) => pda?.dataModel?.id === dataModel?.id)
                 .map((pda: PartialDeep<DecryptedProofPda>) => (
                   <ProofPdaListItem
-                    key={pda.id}
-                    name={dataModel?.title as string}
+                    key={pda?.id}
+                    name={pda?.title as string}
                     issuerName={
                       pda?.organization?.gatewayId ??
                       (pda?.issuer?.user?.gatewayId as string)
