@@ -4,16 +4,20 @@ import { useState } from 'react';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { TooltipUser } from '@/components/tooltip-user/tooltip-user';
 import { proof as proofLocale } from '@/locale/en/proof';
+import { Proof } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
+import dayjs from 'dayjs';
+import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import { Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
-  proof: any; // TODO: Add type
+  proof: PartialDeep<Proof>;
 };
 
 export default function ProofCardTitle({ proof }: Props) {
   const [tooltip, setTooltip] = useState<boolean>(false);
+
   return (
     <Stack
       sx={{
@@ -46,19 +50,21 @@ export default function ProofCardTitle({ proof }: Props) {
             onClick={() => setTooltip(true)}
           >
             <GTWAvatar
-              src={
-                'https://1000logos.net/wp-content/uploads/2016/11/Shape-of-the-Chase-logo-500x311.jpg'
-              }
+              src={''}
               size={56}
-              name={proof?.title}
+              name={proof?.verifier?.user?.gatewayId as string}
             />
-            <Typography variant="h3">{proof?.title}</Typography>
+            <Typography variant="h3">
+              {proof?.verifier?.user?.gatewayId}
+            </Typography>
           </Stack>
           {tooltip && (
             <TooltipUser
-              name={proof?.title}
-              username={proof?.title}
-              issuance_date={''}
+              name={proof?.verifier?.user?.gatewayId as string}
+              username={proof?.verifier?.user?.gatewayId as string}
+              issuance_date={dayjs(proof?.createdAt).format(
+                'MM/DD/YYYY, h:mm A'
+              )}
               onClose={() => setTooltip(false)}
             />
           )}
@@ -72,7 +78,7 @@ export default function ProofCardTitle({ proof }: Props) {
           textDecoration: 'none',
         }}
       >
-        {`ID ${limitCharsCentered(proof?.id, 8)}`}
+        {`ID ${limitCharsCentered(proof?.id as string, 8)}`}
       </Typography>
       {/* <ExternalLink text={`ID ${limitCharsCentered(proof?.id, 8)}`} href="#" /> */}
     </Stack>
