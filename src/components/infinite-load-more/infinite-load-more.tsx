@@ -1,69 +1,38 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 
-import PDAsList from '@/app/(light)/dashboard/user/assets/components/pdas-list';
-import { getMyPdas } from '@/app/actions/get-myPdas';
 import Loading from '@/components/loadings/loading';
-import { pdas } from '@/locale/en/pda';
-import { useToggle } from '@react-hookz/web';
 import { useInView } from 'react-intersection-observer';
 
-import { Button, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 
-export default function InfiniteLoadMore({ pageSize = 6 }) {
-  const [items, setItems] = useState<any[]>([]);
-  const [pagesLoaded, setPagesLoaded] = useState(0);
-  const [loadMoreButton, toggleLoadMoreButton] = useToggle(false);
-  const [firstLoadMore, toggleFirstLoadMore] = useToggle(true);
+type Props = {
+  isLoading: boolean;
+  onLoadMore: () => void;
+}
+
+export default function InfiniteLoadMore({
+  isLoading,
+  onLoadMore,
+  children,
+}: PropsWithChildren<Props>) {
 
   const { ref, inView } = useInView();
 
-  const loadMoreItems = async () => {
-    const nextPage = pagesLoaded + 1;
-    const skip = pageSize * nextPage;
-    const newItems = (await getMyPdas(skip, pageSize)) ?? [];
-    setItems((prevItems) => [...prevItems, ...newItems]);
-    setPagesLoaded(nextPage);
-    if (newItems && newItems.length && newItems.length < pageSize) {
-      toggleLoadMoreButton(false);
-    } else {
-      toggleLoadMoreButton(true);
-    }
-    toggleFirstLoadMore(false);
-  };
-
   useEffect(() => {
-    if (inView && loadMoreButton) {
-      loadMoreItems();
+    if (inView && !isLoading) {
+      onLoadMore();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView, loadMoreButton]);
+  }, [inView, isLoading]);
+
+  if (isLoading) {
+    return children;
+  }
 
   return (
-    <>
-      <Stack mt={1}>
-        <PDAsList pdas={items} />
-      </Stack>
-      {firstLoadMore && (
-        <Stack mt={2} display="flex" alignItems="center">
-          <Button
-            variant="outlined"
-            size="medium"
-            onClick={() => {
-              toggleLoadMoreButton(true);
-              toggleFirstLoadMore(false);
-            }}
-          >
-            {pdas.load_more}
-          </Button>
-        </Stack>
-      )}
-      {loadMoreButton && (
-        <Stack mt={2} ref={ref}>
-          <Loading />
-        </Stack>
-      )}
-    </>
+    <Stack mt={2} ref={ref}>
+    </Stack>
   );
 }
