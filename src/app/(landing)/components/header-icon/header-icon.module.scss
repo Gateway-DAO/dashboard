@@ -1,5 +1,9 @@
 .element {
   display: flex;
+
+  path {
+    transition: fill 0.8s ease;
+  }
 }
 
 .logo {

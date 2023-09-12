@@ -4,6 +4,44 @@
   top: 29px;
   width: 100%;
   z-index: 3;
+
+  &--light {
+    .wrapper {
+      &:before {
+        background-color: #fff;
+      }
+    }
+
+    .link {
+      button {
+        color: #fff;
+      }
+    }
+  }
+
+  &--dark {
+    .wrapper {
+      &:before {
+        background-color: #212121;
+      }
+    }
+
+    .link {
+      button {
+        color: #212121;
+      }
+    }
+
+    .button_outlined {
+      border-color: #771ac9;
+      color: #771ac9;
+
+      &:hover {
+        border-color: #fff;
+        color: #fff;
+      }
+    }
+  }
 }
 
 .wrapper {
@@ -19,6 +57,7 @@
     height: 1px;
     opacity: 0.2;
     background-color: #fff;
+    transition: background-color 0.8s ease;
   }
 }
 
@@ -33,6 +72,10 @@
 
 .link {
   display: block;
+
+  button {
+    transition: color 0.8s ease, opacity 0.6s ease;
+  }
 
   &:not(:first-child) {
     margin-left: 20px;

@@ -1,15 +1,54 @@
+import { useEffect, useRef } from 'react';
+
+import HeaderIcon from '@/app/(landing)/components/header-icon';
+import Wrapper from '@/app/(landing)/components/wrapper';
+import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
+import { joinClasses } from '@/app/(landing)/utils/function';
 import GTWLink from '@/components/gtw-link';
+import gsap from 'gsap';
 
 import Button from '../button';
-import HeaderIcon from '../header-icon';
-import Wrapper from '../wrapper';
 import styles from './header.module.scss';
 
 export default function Header() {
+  const navRef = useRef<HTMLElement>(null);
+  const { fixed, variant } = useHeaderContext();
+  const previousFixedValue = useRef(fixed);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    if (fixed) {
+      const tl = gsap.timeline();
+      tl.set(navRef.current, { position: 'fixed' });
+      tl.from(navRef.current, { top: -100 });
+    } else {
+      const tl = gsap.timeline();
+
+      if (previousFixedValue.current) {
+        tl.to(navRef.current, { top: -100 });
+      }
+      tl.set(navRef.current, { position: 'absolute', clearProps: 'top' });
+    }
+
+    previousFixedValue.current = fixed;
+  }, [fixed]);
+
   return (
-    <nav className={styles.element}>
+    <nav
+      className={joinClasses(
+        styles.element,
+        styles[`element--${fixed}`],
+        styles[`element--${variant}`]
+      )}
+      ref={navRef}
+    >
       <Wrapper className={styles.wrapper}>
-        <HeaderIcon withName />
+        <HeaderIcon withName variant={variant} />
 
         <div className={styles.links}>
           <GTWLink className={styles.link} href="/#learn">
@@ -22,7 +61,9 @@ export default function Header() {
 
         <div className={styles.buttons_container}>
           <GTWLink href="/explorer">
-            <Button variant="outlined">Explorer</Button>
+            <Button className={styles.button_outlined} variant="outlined">
+              Explorer
+            </Button>
           </GTWLink>
 
           <GTWLink href="/dashboard">
