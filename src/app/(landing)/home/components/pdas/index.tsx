@@ -2,6 +2,7 @@
 import { useRef, useEffect } from 'react';
 
 import Wrapper from '@/app/(landing)/components/wrapper';
+import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
 import gsap from 'gsap';
@@ -20,6 +21,7 @@ export default function Pdas() {
   const pdasLogoContainerRef = useRef<HTMLDivElement>(null);
   const textPdasParagraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const slashRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const { setFixed, setVariant } = useHeaderContext();
 
   // Animation setup using useEffect
   useEffect(() => {
@@ -116,9 +118,14 @@ export default function Pdas() {
       const scrollSection = e.scroll - offsetTop;
       const progress = scrollSection / (sectionHeight - window.innerHeight);
 
-      if (progress >= 0 && progress <= 1) tl.progress(progress);
-
-      if (progress < 0) tl.progress(0);
+      if (progress >= 0 && progress <= 1) {
+        tl.progress(progress);
+        setFixed(false);
+      } else if (progress < 0) {
+        tl.progress(0);
+      } else {
+        setFixed(true);
+      }
     };
 
     // Set second logo text bounds

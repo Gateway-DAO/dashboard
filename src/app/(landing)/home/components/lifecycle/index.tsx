@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import Button from '@/app/(landing)/components/button';
 import Fingerprint from '@/app/(landing)/components/icons/fingerprint';
 import Issue from '@/app/(landing)/components/icons/issue';
@@ -6,6 +8,8 @@ import Own from '@/app/(landing)/components/icons/own';
 import Replay from '@/app/(landing)/components/icons/replay';
 import Verify from '@/app/(landing)/components/icons/verify';
 import Wrapper from '@/app/(landing)/components/wrapper';
+import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
+import LenisManager from '@/app/(landing)/utils/scroll';
 
 import styles from './lifecycle.module.scss';
 
@@ -33,8 +37,24 @@ const steps = [
 ];
 
 export default function Lifecycle() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { setVariant } = useHeaderContext();
+
+  useEffect(() => {
+    LenisManager?.on('scroll', () => {
+      if (!sectionRef.current) return;
+
+      const bounds = sectionRef.current.getBoundingClientRect();
+      const { bottom } = bounds;
+
+      if (bottom >= 80) {
+        setVariant('light');
+      }
+    });
+  }, []);
+
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper>
         <div className={styles.head}>
           <div className={styles.title_container}>
