@@ -1,6 +1,7 @@
 import CardCell from '@/components/card-cell/card-cell';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { TableCellContainer } from '@/components/table-cell-container/table-cell-container';
+import { DATE_FORMAT } from '@/constants/date';
 import { pda } from '@/locale/en/pda';
 import { proof as proofLocale } from '@/locale/en/proof';
 import dayjs from 'dayjs';
@@ -25,7 +26,7 @@ export default function ProofCardInfo({ proof }: Props) {
     >
       <TableCellContainer>
         <CardCell label={proofLocale.share_date}>
-          {dayjs(proof?.issuance_date).format('MM/DD/YYYY, h:mm A')}
+          {dayjs(proof?.issuance_date).format(DATE_FORMAT)}
         </CardCell>
         {!isNaN(proof?.sharing_cost) && (
           <CardCell label={pda.share.sharing_cost}>
