@@ -44,3 +44,59 @@ query receivedProofs($take: Float!, $skip: Float!) {
     }
   }
 }
+
+query proof($id: String!) {
+  proof(id: $id) {
+    id
+    totalCost
+    facilitationFee
+    createdAt
+    active
+    arweaveUrl
+
+    data {
+      dataModels {
+        id
+        title
+        consumptionPrice
+      }
+      PDAs {
+        id
+        claim
+        dataModel {
+          id
+        }
+        issuer {
+          id
+          user {
+            gatewayId
+          }
+        }
+        organization {
+          id
+          gatewayId
+          image
+        }
+        owner {
+          id
+        }
+      }
+    }
+
+    organization {
+      gatewayId
+    }
+
+    verifier {
+      user {
+        gatewayId
+      }
+      data
+    }
+
+    dataRequest {
+      arweaveUrl
+      status
+    }
+  }
+}
