@@ -2,6 +2,6 @@
 
 import DefaultError from '@/components/default-error/default-error';
 
-export default function DataProofsErrorPage() {
+export default function ProofErrorPage() {
   return <DefaultError />;
 }

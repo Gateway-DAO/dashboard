@@ -26,7 +26,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
     <Stack
       component={Card}
       variant="outlined"
-      sx={{ mb: 3 }}
+      sx={{ mb: 3, overflow: 'visible' }}
       divider={<Divider sx={{ width: '100%' }} />}
     >
       <CardUsers pda={pda} />
@@ -65,6 +65,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
           <CardCell label={pdaLocale.authenticated_by}>
             <Typography>
               {limitCharsCentered(
+                pda?.dataAsset?.issuer?.user?.gatewayId ??
                 pda?.dataAsset?.issuer?.data?.address ??
                 pda?.dataAsset?.issuer?.data?.email,
                 20

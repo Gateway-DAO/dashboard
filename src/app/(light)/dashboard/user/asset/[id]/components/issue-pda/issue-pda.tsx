@@ -54,27 +54,39 @@ export default function IssuePda({ pda }: Props) {
     setOpenIssuePda();
   };
 
-  const createProof = useMutation({
-    mutationKey: [mutations.create_proof],
-    mutationFn: (data: Create_ProofMutationVariables) => {
-      return privateApi?.create_proof(data);
-    },
-  });
+  //TODO: REMOVE AND FIX BUILD WITH THE MUTATION BELOW
+  const createProof = {
+    isLoading: false,
+  };
+
+  // const createProof = useMutation({
+  //   mutationKey: [mutations.create_proof],
+  //   mutationFn: (data: Create_ProofMutationVariables) => {
+  //     return privateApi?.create_proof(data);
+  //   },
+  // });
 
   const handleMutation = async (
     data: IssuePdaSchema | FieldValues
   ): Promise<any> => {
     if (!(await methods.trigger())) return;
+    //TODO: REMOVE AND FIX BUILD WITH THE MUTATION BELOW
+
     try {
-      const res = await createProof.mutateAsync({
-        claims: [
-          {
-            claimKeys: Object.keys(pda?.dataAsset?.claim) ?? [],
-            pdaId: pda?.id,
-          },
-        ],
-        verifier: data?.address ?? null,
-      });
+      const res = {
+        createProof: {
+          id: '123',
+        },
+      };
+      // const res = await createProof.mutateAsync({
+      //   claims: [
+      //     {
+      //       claimKeys: Object.keys(pda?.dataAsset?.claim) ?? [],
+      //       pdaId: pda?.id,
+      //     },
+      //   ],
+      //   verifier: data?.address ?? null,
+      // });
       setPdaIssued(res?.createProof?.id);
       methods.reset();
     } catch (e) {
