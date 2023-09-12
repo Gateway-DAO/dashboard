@@ -3,6 +3,10 @@
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
 import { CredentialStatus } from '@/services/protocol/types';
+import {
+  CONTAINER_PX,
+  NEGATIVE_CONTAINER_PX,
+} from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
@@ -185,10 +189,15 @@ export default function PDAsTable({}) {
     <DataGrid
       rows={rows}
       columns={columns}
+      autoHeight
       initialState={{
         pagination: {
           paginationModel: { page: 0, pageSize: 10 },
         },
+      }}
+      onCellClick={({ field, value }) => {
+        //TODO: Implement go to wih router.push
+        console.log(value as string);
       }}
       disableColumnFilter
       disableColumnMenu
@@ -196,6 +205,23 @@ export default function PDAsTable({}) {
       disableRowSelectionOnClick
       disableDensitySelector
       pageSizeOptions={[5, 10]}
+      sx={{
+        mx: NEGATIVE_CONTAINER_PX,
+        borderLeft: 'none',
+        borderRight: 'none',
+        borderRadius: 0,
+        '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
+          {
+            paddingLeft: CONTAINER_PX,
+          },
+        '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
+          {
+            paddingRight: CONTAINER_PX,
+          },
+        '.MuiDataGrid-cell[data-field="id"]': {
+          cursor: 'pointer',
+        },
+      }}
     />
   );
 }
