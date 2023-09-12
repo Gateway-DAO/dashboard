@@ -10,7 +10,7 @@ import { TableSharedDataProofs } from '../components/table-shared';
 export default async function ProofsPage() {
   const apiPrivate = await getApiPrivate();
 
-  const proofs = (await apiPrivate.receivedProofs({ take: 6, skip: 0 }))
+  const proofs = (await apiPrivate.received_proofs({ take: 6, skip: 0 }))
     ?.receivedProofs as PartialDeep<Proof>[];
 
   return (
