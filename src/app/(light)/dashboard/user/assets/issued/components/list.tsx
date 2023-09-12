@@ -20,7 +20,7 @@ export default function IssuedPDAsList({ pdas: initialPdas }: Props) {
   const privateApi = usePrivateApi();
   const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery({
-      queryKey: ['pdas', privateApi],
+      queryKey: ['issued_pdas', privateApi],
       queryFn: async ({ pageParam }) => {
         return (await privateApi!.issued_pdas({ take: 6, skip: pageParam }))
           ?.issuedPDAs;
