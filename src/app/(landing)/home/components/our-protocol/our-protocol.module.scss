@@ -1,6 +1,8 @@
 .element {
-  background-color: #fff;
+  background-color: #f6f4fa;
   padding-top: 171px;
+  padding-bottom: 100px;
+  overflow: hidden;
 }
 
 .head {
@@ -18,9 +20,43 @@
   letter-spacing: 0.412px;
 }
 
+.controls {
+  display: flex;
+}
+
+.controls_button {
+  background-color: #fff;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  height: 42px;
+  outline: none;
+  width: 42px;
+
+  &:not(:first-child) {
+    margin-left: 5px;
+  }
+
+  .arrow {
+    fill: #771ac9;
+    transition: fill 0.8s ease;
+  }
+
+  &--disabled {
+    pointer-events: none;
+    .arrow {
+      fill: #0000009d;
+    }
+  }
+}
+
+.arrow {
+  width: 16px;
+}
+
 .card_text {
   color: #e6d5fa;
-  font-size: 30.009px;
+  font-size: 29px;
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
@@ -32,5 +68,37 @@
   }
 }
 
+.card_vector_container {
+  height: 340px;
+  padding-top: 80px;
+  position: relative;
+
+  &--full-width {
+    width: 100%;
+  }
+}
+
 .card_svg {
+  bottom: 0;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+
+  &--id {
+    // padding-top: 80px;
+    width: 100%;
+  }
+
+  &--standardize {
+    // padding: 80px 55px;
+    width: 260px;
+  }
+
+  &--privacy {
+    width: 243px;
+  }
+
+  &--verification {
+    width: 230px;
+  }
 }

@@ -5,7 +5,7 @@ type Props = {
 export default function CardId({ className }: Props) {
   return (
     <svg
-      viewBox="14 0 368 300"
+      viewBox="14 0 368 275"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}

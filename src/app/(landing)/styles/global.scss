@@ -5,3 +5,9 @@
 html.lenis {
   height: auto;
 }
+
+.slick-list-parent {
+  .slick-list {
+    overflow: initial;
+  }
+}
