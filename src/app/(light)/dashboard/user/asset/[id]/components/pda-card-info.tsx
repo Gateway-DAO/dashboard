@@ -64,7 +64,8 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
           <CardCell label={pdaLocale.authenticated_by}>
             <Typography>
               {limitCharsCentered(
-                pda?.dataAsset?.issuer?.data?.address ??
+                pda?.dataAsset?.issuer?.user?.gatewayId ??
+                  pda?.dataAsset?.issuer?.data?.address ??
                   pda?.dataAsset?.issuer?.data?.email,
                 20
               )}
