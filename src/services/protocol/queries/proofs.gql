@@ -1,4 +1,4 @@
-query receivedProofs($take: Float!, $skip: Float!) {
+query received_proofs($take: Float!, $skip: Float!) {
   receivedProofs(skip: $skip, take: $take) {
     id
     totalCost
