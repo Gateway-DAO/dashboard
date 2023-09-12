@@ -9,30 +9,30 @@ import Wrapper from '@/app/(landing)/components/wrapper';
 
 import styles from './lifecycle.module.scss';
 
-export default function Lifecycle() {
-  const steps = [
-    {
-      icon: Issue,
-      title: 'Issue',
-      text: 'Entities and users can issue you private data assets (PDAs). ',
-    },
-    {
-      icon: Own,
-      title: 'Own',
-      text: 'Your private date will be encrypted and you will have full control of it.',
-    },
-    {
-      icon: Manage,
-      title: 'Manage',
-      text: 'Your private date will be encrypted and you will have full control of it.',
-    },
-    {
-      icon: Verify,
-      title: 'Verify',
-      text: 'Entities can request your private data to unlock better experience.',
-    },
-  ];
+const steps = [
+  {
+    icon: Issue,
+    title: 'Issue',
+    text: 'Entities and users can issue you private data assets (PDAs). ',
+  },
+  {
+    icon: Own,
+    title: 'Own',
+    text: 'Your private date will be encrypted and you will have full control of it.',
+  },
+  {
+    icon: Manage,
+    title: 'Manage',
+    text: 'Your private date will be encrypted and you will have full control of it.',
+  },
+  {
+    icon: Verify,
+    title: 'Verify',
+    text: 'Entities can request your private data to unlock better experience.',
+  },
+];
 
+export default function Lifecycle() {
   return (
     <section className={styles.element}>
       <Wrapper>
