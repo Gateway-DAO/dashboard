@@ -62,6 +62,7 @@ query proof($id: String!) {
       }
       PDAs {
         id
+        title
         claim
         dataModel {
           id
