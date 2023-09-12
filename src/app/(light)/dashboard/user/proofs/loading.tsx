@@ -1,6 +1,6 @@
 import { Skeleton, Stack } from '@mui/material';
 
-export default function DataAssetsLoadingPage() {
+export default function DataProofsLoadingPage() {
   return (
     <Stack gap={1} sx={{ pt: 5 }}>
       <Stack direction="row" gap={2} sx={{ mb: 2 }}>
