@@ -21,7 +21,7 @@ export default function ReceivedProofsList({ proofs: initialProofs }: Props) {
     useInfiniteQuery({
       queryKey: ['proofs', privateApi],
       queryFn: async ({ pageParam }) => {
-        return (await privateApi!.receivedProofs({ take: 6, skip: pageParam }))
+        return (await privateApi!.received_proofs({ take: 6, skip: pageParam }))
           ?.receivedProofs as PartialDeep<Proof>[];
       },
       getNextPageParam: (lastPage, pages) =>
