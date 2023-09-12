@@ -3,12 +3,12 @@
 import PdaCard from '@/components/pda-card/pda-card';
 import routes from '@/constants/routes';
 import { CredentialStatus, PrivateDataAsset } from '@/services/protocol/types';
-import { DeepPartial } from 'react-hook-form';
+import { PartialDeep } from 'type-fest';
 
 import PDAsListContainer from './pdas-list-container';
 
 type Props = {
-  pdas: DeepPartial<PrivateDataAsset>[];
+  pdas: PartialDeep<PrivateDataAsset>[];
 };
 
 export default function PDAsList({ pdas }: Props) {
@@ -16,16 +16,16 @@ export default function PDAsList({ pdas }: Props) {
     <>
       {pdas && pdas.length > 0 && (
         <PDAsListContainer>
-          {pdas.map((pda: DeepPartial<PrivateDataAsset>) => {
+          {pdas.map((pda: PartialDeep<PrivateDataAsset>) => {
             const issuer = pda.dataAsset?.organization
               ? {
-                  image: pda.dataAsset?.organization?.image,
-                  name: pda.dataAsset?.organization?.name,
-                }
+                image: pda.dataAsset?.organization?.image,
+                name: pda.dataAsset?.organization?.name,
+              }
               : {
-                  image: null,
-                  name: pda.dataAsset?.issuer?.user?.gatewayId,
-                };
+                image: null,
+                name: pda.dataAsset?.issuer?.user?.gatewayId,
+              };
             return (
               <PdaCard
                 key={pda.id}
