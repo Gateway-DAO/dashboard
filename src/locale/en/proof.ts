@@ -6,6 +6,8 @@ export const proof = {
     revoked: 'Revoked',
   },
   share_date: 'Share date',
+  request_id: 'Request ID',
+  request_template_id: 'Request template ID',
   share: {
     data_shared_with: 'Data shared with',
     data_proof_id: 'Data Proof ID',
