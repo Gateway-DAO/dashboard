@@ -96,8 +96,12 @@ query proof($id: String!) {
     }
 
     dataRequest {
+      id
       arweaveUrl
       status
+      dataRequestTemplate {
+        id
+      }
     }
   }
 }
