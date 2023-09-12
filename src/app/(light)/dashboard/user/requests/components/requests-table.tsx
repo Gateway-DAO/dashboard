@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import RequestStatusChip from '@/components/requests/request-status-chip';
+import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { DataRequest } from '@/services/protocol/types';
 import {
@@ -52,7 +53,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     type: 'number',
     flex: 1,
     valueFormatter: (params) =>
-      dayjs(params.value).format('MM/DD/YYYY, h:mm A'),
+      dayjs(params.value).format(DATE_FORMAT),
   },
   {
     field: 'status',

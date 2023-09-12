@@ -2,6 +2,7 @@
 
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
+import { DATE_FORMAT } from '@/constants/date';
 import { CredentialStatus } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
@@ -13,7 +14,7 @@ import dayjs from 'dayjs';
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
-export default function PDAsTable({}) {
+export default function PDAsTable({ }) {
   const columns: GridColDef[] = [
     {
       field: 'dataAsset',
@@ -54,7 +55,7 @@ export default function PDAsTable({}) {
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography>
-            {dayjs(params.row.issuanceDate).format('MM/DD/YYYY, h:mm A')}
+            {dayjs(params.row.issuanceDate).format(DATE_FORMAT)}
           </Typography>
         );
       },
@@ -211,13 +212,13 @@ export default function PDAsTable({}) {
         borderRight: 'none',
         borderRadius: 0,
         '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
-          {
-            paddingLeft: CONTAINER_PX,
-          },
+        {
+          paddingLeft: CONTAINER_PX,
+        },
         '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
-          {
-            paddingRight: CONTAINER_PX,
-          },
+        {
+          paddingRight: CONTAINER_PX,
+        },
         '.MuiDataGrid-cell[data-field="id"]': {
           cursor: 'pointer',
         },

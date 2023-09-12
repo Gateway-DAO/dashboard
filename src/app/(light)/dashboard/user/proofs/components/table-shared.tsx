@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import Loading from '@/components/loadings/loading';
+import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { Proof } from '@/services/protocol/types';
 import {
@@ -67,7 +68,7 @@ export function TableSharedDataProofs({ proofs }: Props) {
               </TableCell>
               <TableCell>
                 <Typography variant="body1">
-                  {dayjs(proof?.createdAt).format('MM/DD/YYYY, h:mm A')}
+                  {dayjs(proof?.createdAt).format(DATE_FORMAT)}
                 </Typography>
               </TableCell>
               <TableCell>
