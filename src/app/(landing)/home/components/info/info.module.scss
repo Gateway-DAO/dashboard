@@ -1,0 +1,45 @@
+.element {
+  background-color: #e6d5fa;
+  height: 100vh;
+}
+
+.wrapper {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+
+.text {
+  color: #771ac9;
+  font-size: 49px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 67.2px;
+  letter-spacing: 0.412px;
+  text-align: center;
+  width: 100%;
+}
+
+.type_slash {
+  animation: blink 1s infinite;
+  color: #70ecfe;
+  display: inline-block;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  transition: blink 0.6s ease;
+  width: 0;
+
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
