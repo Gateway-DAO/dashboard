@@ -2,8 +2,8 @@
 import PDAItem from '@/app/(light)/dashboard/user/asset/[id]/components/pda-item';
 import PDASkeleton from '@/app/(light)/dashboard/user/asset/[id]/components/pda-skeleton';
 import DefaultError from '@/components/default-error/default-error';
+import usePrivateApi from '@/hooks/use-private-api';
 import { errorMessages } from '@/locale/en/errors';
-import { apiPublic } from '@/services/protocol/api';
 import { useQuery } from '@tanstack/react-query';
 
 type Props = {
@@ -11,13 +11,14 @@ type Props = {
 };
 
 export default function PDADetail({ id }: Props) {
+  const privateApi = usePrivateApi();
   const {
     data: pda,
     isLoading,
     isError,
   } = useQuery({
     queryKey: ['proof-pda', id],
-    queryFn: () => apiPublic.pda({ id }),
+    queryFn: () => privateApi.pda({ id }),
     select: (data) => data.PDAbyId,
   });
 
