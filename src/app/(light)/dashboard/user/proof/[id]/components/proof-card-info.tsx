@@ -51,7 +51,7 @@ export default function ProofCardInfo({ proof }: Props) {
           />
         </CardCell>
       </TableCellContainer>
-      {proof?.dataRequest?.status === DataResourceStatus.Accepted && (
+      {proof?.dataRequest && (
         <TableCellContainer>
           <CardCell label={proofLocale.request_id}>
             {proof?.dataRequest?.id}
