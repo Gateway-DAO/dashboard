@@ -1,5 +1,8 @@
+import { requests } from "@/locale/en/request";
 import { DataRequest, DataResourceStatus } from "@/services/protocol/types"
 import { PartialDeep } from "type-fest";
+
+import { Box, Typography } from "@mui/material";
 
 import RequestsTable from "./components/requests-table";
 
@@ -21,9 +24,22 @@ const oneHundredMockRequests = Array.from({ length: 100 }, (_, i) => ({ ...mockr
 
 export default function DashboardUserDataRequestsPage() {
   return (
-    <>
-      <h1>DashboardUserDataRequestsPage</h1>
+    <Box sx={{ py: 2 }}>
+      <Box
+        sx={{
+          mb: {
+            xs: 4,
+            md: 5,
+            lg: 6,
+          },
+        }}
+      >
+        <Typography variant="h3" id="title-requests" sx={{ mb: 1 }}>
+          {requests.title}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">{requests.subtitle}</Typography>
+      </Box>
       <RequestsTable data={oneHundredMockRequests} />
-    </>
+    </Box>
   );
 }
