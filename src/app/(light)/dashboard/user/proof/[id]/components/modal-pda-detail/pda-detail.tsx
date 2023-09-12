@@ -18,8 +18,8 @@ export default function PDADetail({ id }: Props) {
     isError,
   } = useQuery({
     queryKey: ['proof-pda', id],
-    queryFn: () => privateApi.pda({ id }),
-    select: (data) => data.PDAbyId,
+    queryFn: () => privateApi?.pda({ id }),
+    select: (data) => data?.PDAbyId,
   });
 
   if (isLoading) {
