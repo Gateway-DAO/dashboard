@@ -50,7 +50,6 @@ export default function Info() {
           as="p"
           className={styles.text}
           onChange={(inView) => {
-            console.log(inView);
             if (inView && letters.current.length) {
               gsap.to(letters.current, {
                 display: 'inline',

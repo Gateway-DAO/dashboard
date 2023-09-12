@@ -1,5 +1,7 @@
 'use client';
 import './styles/global.scss';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import Header from './components/header';
 import { HeaderContextProvider } from './contexts/header-context';
