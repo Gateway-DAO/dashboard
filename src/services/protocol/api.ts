@@ -21,13 +21,6 @@ const glqAnonClient = new GraphQLClient(
 
 export const apiPublic = getSdk(glqAnonClient);
 
-export async function getApiPrivate() {
-  const session = await getServerSession();
-  const token = session?.token;
-  if (!token) return null;
-  return api(token);
-}
-
 export const userHeader = (token: string) => ({
   Authorization: `Bearer ${token}`,
 });
@@ -36,7 +29,7 @@ const gqlClient = (token?: string) =>
   new GraphQLClient(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {
     headers: {
       ...headers,
-      ...(token ? userHeader(token) : {}),
+      ...(token && userHeader(token)),
     },
   });
 
@@ -62,3 +55,9 @@ export const apiWithRefresh = (
   };
   return getSdk(gqlClient(token), wrapper);
 };
+
+export async function getApiPrivate() {
+  const session = await getServerSession();
+  const token = session?.token;
+  return api(token ?? '');
+}

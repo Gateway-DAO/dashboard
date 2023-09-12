@@ -1,17 +1,17 @@
-import { getMyPdas } from '@/app/actions/get-myPdas';
-import InfiniteLoadMore from '@/components/infinite-load-more/infinite-load-more';
 import { pdas as pdasLocales } from '@/locale/en/pda';
+import { getApiPrivate } from '@/services/protocol/api';
 
 import { Typography } from '@mui/material';
 
-import PDAsList from '../components/pdas-list';
+import ReceivedPDAsList from './components/list';
 
 export default async function DataAssetsPage() {
-  const pdas = await getMyPdas(0, 6);
+  const apiPrivate = await getApiPrivate();
+  const pdas = (await apiPrivate.received_pdas({ take: 6, skip: 0 }))?.myPDAs;
 
   return (
     <>
-      <PDAsList pdas={pdas ?? []} />
+      {pdas && pdas.length > 0 && (<ReceivedPDAsList pdas={pdas} />)}
       {pdas && pdas.length === 0 && (
         <Typography
           variant="body1"
@@ -21,7 +21,6 @@ export default async function DataAssetsPage() {
           {pdasLocales.empty}
         </Typography>
       )}
-      {pdas && pdas?.length > 0 && <InfiniteLoadMore />}
     </>
   );
 }

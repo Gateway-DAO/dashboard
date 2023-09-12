@@ -5,24 +5,26 @@ import { useState } from 'react';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import Loading from '@/components/loadings/loading';
 import routes from '@/constants/routes';
-import { ReceivedProofsQuery } from '@/services/protocol/types';
+import { Proof } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
 import dayjs from 'dayjs';
+import { PartialDeep } from 'type-fest';
 
 import { TableCell, TableRow, Typography } from '@mui/material';
 
 import { TableSharedDataProofsContainer } from './table-shared-container';
 
 type Props = {
-  proofs: ReceivedProofsQuery['receivedProofs'] | null;
+  proofs: PartialDeep<Proof>[];
 };
 
 export function TableSharedDataProofs({ proofs }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
   return (
     <TableSharedDataProofsContainer>
       {isLoading ? (

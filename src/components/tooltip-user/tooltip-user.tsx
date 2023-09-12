@@ -99,14 +99,14 @@ export function TooltipUser({
             Joined in {dayjs(issuance_date).format('MM/DD/YYYY, h:mm A')}
           </Typography>
         </Stack>
-        <Link href="https://www.google.com" passHref target="_blank">
+        {/* <Link href="https://www.google.com" passHref target="_blank">
           <LaunchIcon
             sx={{
               color: 'text.primary',
               fontSize: 16,
             }}
           />
-        </Link>
+        </Link> */}
       </Stack>
     </Paper>
   );
