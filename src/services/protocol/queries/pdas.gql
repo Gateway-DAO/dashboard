@@ -78,7 +78,7 @@ query received_pdas($take: Float!, $skip: Float!) {
 }
 
 query issued_pdas($take: Float!, $skip: Float!) {
-  myPDAs(skip: $skip, take: $take) {
+  issuedPDAs(skip: $skip, take: $take) {
     id
     dataAsset {
       title
