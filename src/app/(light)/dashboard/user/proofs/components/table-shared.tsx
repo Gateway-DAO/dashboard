@@ -58,9 +58,9 @@ export function TableSharedDataProofs({ proofs }: Props) {
                   gap: 2,
                 }}
               >
-                <GTWAvatar name={proof?.organization?.image ?? ''} />
+                <GTWAvatar name={''} />
                 <Typography variant="subtitle1">
-                  {proof?.organization?.gatewayId}
+                  {proof?.owner?.user?.gatewayId}
                 </Typography>
               </TableCell>
               <TableCell>

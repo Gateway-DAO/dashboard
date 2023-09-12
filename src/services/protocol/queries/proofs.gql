@@ -4,6 +4,13 @@ query receivedProofs($take: Float!, $skip: Float!) {
     totalCost
     facilitationFee
     createdAt
+    owner {
+      id
+      user {
+        gatewayId
+      }
+      data
+    }
     data {
       dataModels {
         id

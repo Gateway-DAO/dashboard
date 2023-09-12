@@ -23,7 +23,6 @@ query pda($id: String!) {
       }
       issuer {
         id
-        userId
         data
         user {
           gatewayId
