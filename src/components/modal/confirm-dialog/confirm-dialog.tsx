@@ -23,8 +23,8 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
     open,
     setOpen,
     onConfirm,
-    positiveAnswer,
-    negativeAnswer,
+    positiveAnswer = 'Yes',
+    negativeAnswer = 'No',
   } = props;
   return (
     <Dialog
