@@ -37,7 +37,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     href: routes.dashboardUserReceivedProofs,
     activeHrefs: [
       routes.dashboardUserReceivedProofs,
-      routes.dashboardUserIssuedProofs,
+      routes.dashboardUserSentProofs,
       routes.dashboardUserProof(''),
     ],
     icon: DataProofOutlinedIcon,
