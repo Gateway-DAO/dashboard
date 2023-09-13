@@ -20,7 +20,7 @@ import RequestedData from "./components/requested-data";
 const mockrequest: PartialDeep<DataRequest> = {
   id: "cr_3r8fn374f",
   createdAt: "2021-10-13T14:00:00.000Z",
-  status: DataResourceStatus.Rejected,
+  status: DataResourceStatus.Pending,
   userVerifier: {
     id: "1",
     gatewayId: "Chase"
