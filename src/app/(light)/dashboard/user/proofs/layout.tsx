@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
+import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { proofs } from '@/locale/en/proof';
@@ -10,28 +11,16 @@ import {
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
 
-import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 export default function DataProofsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
-      <Box
-        sx={{
-          mb: {
-            xs: 4,
-            md: 5,
-            lg: 6,
-          },
-        }}
-      >
-        <Typography variant="h3" id="title-proofs" sx={{ mb: 1 }}>
-          {proofs.data_proofs}
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {proofs.data_proofs_subtitle}
-        </Typography>
-      </Box>
+      <TitleLayout
+        title={proofs.data_proofs}
+        subtitle={proofs.data_proofs_subtitle}
+        titleId="title-proofs"
+      />
       <Box
         sx={{
           borderBottom: 1,

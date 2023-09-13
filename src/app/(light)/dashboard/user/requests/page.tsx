@@ -1,7 +1,7 @@
 import { requests } from '@/locale/en/request';
 import { getApiPrivate } from '@/services/protocol/api';
 
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
 import RequestsTable from './components/requests-table';
 
@@ -10,24 +10,19 @@ export default async function DashboardUserDataRequestsPage() {
   const requestsData = (await privateApi.requests())?.dataRequests ?? [];
 
   return (
-    <Box sx={{ py: 2 }}>
-      <Box
-        sx={{
-          mb: {
-            xs: 4,
-            md: 5,
-            lg: 6,
-          },
-        }}
-      >
-        <Typography variant="h3" id="title-requests" sx={{ mb: 1 }}>
-          {requests.title}
+    <>
+      {requestsData && requestsData.length > 0 && (
+        <RequestsTable data={requestsData} />
+      )}
+      {requestsData && requestsData.length === 0 && (
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ textAlign: 'center', width: '100%' }}
+        >
+          {requests.empty}
         </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {requests.subtitle}
-        </Typography>
-      </Box>
-      <RequestsTable data={requestsData} />
-    </Box>
+      )}
+    </>
   );
 }
