@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-import LogoutButton from '@/components/buttons/logout-button';
+import LogoutButton from '@/components/buttons/logout-button/logout-button';
 import GatewayIcon from '@/components/icons/gateway';
 import routes from '@/constants/routes';
 
