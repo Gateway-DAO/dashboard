@@ -1,5 +1,5 @@
-import LoadingTable from '@/components/loadings/loading-table';
+import SkeletonTable from '@/components/loadings/skeleton-table/skeleton-table';
 
 export default function DataProofsLoadingPage() {
-  return <LoadingTable columns={3} />;
+  return <SkeletonTable columns={3} />;
 }

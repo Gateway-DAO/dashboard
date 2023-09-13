@@ -4,7 +4,7 @@ type Props = {
   columns?: number;
 };
 
-export default function LoadingTable({ columns = 5 }: Props) {
+export default function SkeletonTable({ columns = 5 }: Props) {
   const arrayColumns = Array.from({ length: columns }, () => 1);
 
   return (
