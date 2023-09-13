@@ -22,5 +22,7 @@ export const common = {
     connect_now: 'Connect now',
     back_to_home: 'Back to home',
     close: 'Close',
+    show: 'Show',
+    hide: 'Hide',
   },
 };

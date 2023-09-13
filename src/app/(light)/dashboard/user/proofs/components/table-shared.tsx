@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { Proof } from '@/services/protocol/types';
 import {
@@ -52,18 +53,20 @@ export function TableSharedDataProofs({ proofs }: Props) {
               gap: 2,
             }}
           >
-            <GTWAvatar name={''} />
+            <GTWAvatar name={proof?.owner?.user?.gatewayId ?? ""} />
             <Typography variant="subtitle1">
               {proof?.owner?.user?.gatewayId}
             </Typography>
           </TableCell>
           <TableCell>
             <Typography variant="body1">
-              {dayjs(proof?.createdAt).format('MM/DD/YYYY, h:mm A')}
+              {dayjs(proof?.createdAt).format(DATE_FORMAT)}
             </Typography>
           </TableCell>
           <TableCell>
-            <Typography variant="body2">{proof?.data?.PDAs?.length}</Typography>
+            <Typography variant="body2">
+              {proof?.data?.PDAs?.length}
+            </Typography>
           </TableCell>
         </TableRow>
       ))}
