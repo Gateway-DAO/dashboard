@@ -5,9 +5,9 @@ import { PartialDeep } from 'type-fest';
 
 import { Typography } from '@mui/material';
 
-import { TableSharedDataProofs } from '../components/table-shared';
+import ProofsReceivedTable from './components/proofs-received-table';
 
-export default async function ProofsPage() {
+export default async function DashboardUserReceivedProofs() {
   const apiPrivate = await getApiPrivate();
 
   const proofs = (await apiPrivate.received_proofs({ take: 6, skip: 0 }))
@@ -15,7 +15,7 @@ export default async function ProofsPage() {
 
   return (
     <>
-      {proofs && proofs.length > 0 && <TableSharedDataProofs proofs={proofs} />}
+      {proofs && proofs.length > 0 && <ProofsReceivedTable data={proofs} />}
       {proofs && proofs.length === 0 && (
         <Typography
           variant="body1"

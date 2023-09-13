@@ -37,6 +37,12 @@ query received_proofs($take: Float!, $skip: Float!) {
       }
     }
 
+    verifier {
+      user {
+        gatewayId
+      }
+    }
+
     organization {
       gatewayId
       image

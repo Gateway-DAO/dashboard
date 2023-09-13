@@ -46,8 +46,8 @@ export default function DataProofsLayout({ children }: PropsWithChildren) {
             href={routes.dashboardUserReceivedProofs}
           />
           <GTWTab
-            label={common.general.sent}
-            href={routes.dashboardUserSentProofs}
+            label={common.general.issued}
+            href={routes.dashboardUserIssuedProofs}
           />
         </GTWTabs>
       </Box>
