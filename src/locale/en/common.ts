@@ -5,6 +5,7 @@ export const common = {
     gateway: 'Gateway',
     received: 'Received',
     issued: 'Issued',
+    sent: 'Sent',
   },
   chain: {
     EVM: 'Ethereum',

@@ -21,6 +21,8 @@ export const proofs = {
   data_proofs_subtitle:
     'These are the copies of data proofs that you have sent and that have been sent to you',
   verifier: 'Verifier',
+  request_id: 'Request ID',
+  request_template_id: 'Request template ID',
   share_date: 'Share date',
   data_amount: 'Data amount',
 };
