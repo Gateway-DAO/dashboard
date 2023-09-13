@@ -16,6 +16,6 @@ type Story = StoryObj<typeof CenteredLoader>;
 
 export const Playground: Story = {
   args: {
-    progressProps: { size: 24 },
+    progressProps: { size: 24, value: 44 },
   },
 };
