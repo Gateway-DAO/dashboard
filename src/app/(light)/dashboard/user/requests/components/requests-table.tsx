@@ -32,9 +32,12 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" spacing={1}>
-          <GTWAvatar name={params.row.userVerifier!.gatewayId!} size={32} />
+          <GTWAvatar
+            name={params.row.userVerifier!.gatewayId! || ''}
+            size={32}
+          />
           <Typography variant="body2">
-            {params.row.userVerifier!.gatewayId}
+            {params.row.userVerifier?.gatewayId}
           </Typography>
         </Stack>
       );
@@ -66,9 +69,10 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
 
 type Props = {
   data: PartialDeep<DataRequest>[];
+  loading?: boolean;
 };
 
-export default function RequestsTable({ data }: Props) {
+export default function RequestsTable({ data, loading = false }: Props) {
   const router = useRouter();
 
   return (
@@ -82,6 +86,7 @@ export default function RequestsTable({ data }: Props) {
           },
         },
       }}
+      loading={loading}
       disableColumnFilter
       disableColumnMenu
       disableColumnSelector
