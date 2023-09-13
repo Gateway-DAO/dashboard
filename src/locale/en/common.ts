@@ -9,6 +9,9 @@ export const common = {
     created_at: 'Created at',
     updated_at: 'Updated at',
     sent: 'Sent',
+    wallet: 'Wallet',
+    other_accounts: 'Other accounts',
+    email: 'Email',
   },
   chain: {
     EVM: 'Ethereum',
@@ -33,5 +36,13 @@ export const common = {
     hide: 'Hide',
     more_info: 'More info',
     less_info: 'Less info',
+    connect: 'Connect',
+    disconnect: 'Disconnect',
+  },
+  socials: {
+    twitter: 'Twitter',
+    google: 'Google',
+    github: 'Github',
+    discord: 'Discord',
   },
 };
