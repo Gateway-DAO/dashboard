@@ -5,18 +5,14 @@ import { useState } from 'react';
 import { LoadingButton } from '@/components/buttons/loading-button';
 import ModalRight from '@/components/modal/modal-right';
 import ModalTitle from '@/components/modal/modal-title';
-import { mutations } from '@/constants/queries';
-import usePrivateApi from '@/hooks/use-private-api';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import {
-  Create_ProofMutationVariables,
   PdaQuery,
 } from '@/services/protocol/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToggle } from '@react-hookz/web/cjs/useToggle';
-import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { FieldValues, useForm } from 'react-hook-form';
 import { FormProvider } from 'react-hook-form';
@@ -38,7 +34,6 @@ export default function IssuePda({ pda }: Props) {
   const router = useRouter();
   const [openIssuePda, setOpenIssuePda] = useToggle(false);
   const [pdaIssued, setPdaIssued] = useState<string>();
-  const privateApi = usePrivateApi();
 
   const methods = useForm({
     resolver: zodResolver(issuePdaSchema as any),
