@@ -11,6 +11,7 @@ const routes = {
   dashboardUserReceivedProofs: '/dashboard/user/proofs/received',
   dashboardUserRequest: (requestId) => `/dashboard/user/request/${requestId}`,
   dashboardUserRequests: '/dashboard/user/requests',
+  dashboardUserSettings: '/dashboard/user/settings',
   dashboardOrgRoot: '/dashboard/org',
   dashboardOrgHome: (organizationId) => `/dashboard/org/${organizationId}`,
   dashboardOrgIssuedAssets: (organizationId) =>
