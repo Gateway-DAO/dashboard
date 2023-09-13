@@ -3,18 +3,18 @@ import { Metadata } from 'next';
 import BackButton from '@/components/buttons/back-button';
 import TopBarContainer from '@/components/top-bar-container/top-bar-container';
 import routes from '@/constants/routes';
-import { getApiPrivate } from '@/services/protocol/api';
+import { getPrivateApi } from '@/services/protocol/api';
 import { Proof } from '@/services/protocol/types';
 
 import ProofItem from './components/proof-item';
 
 const getProof = async (id: string): Promise<Proof | null> => {
-  const apiPrivate = await getApiPrivate();
-  if (!apiPrivate) {
+  const privateApi = await getPrivateApi();
+  if (!privateApi) {
     return null;
   }
 
-  const proof: any = (await apiPrivate.proof({ id }))?.proof;
+  const proof: any = (await privateApi.proof({ id }))?.proof;
   return proof;
 };
 

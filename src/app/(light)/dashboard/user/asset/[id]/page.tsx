@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import BackButton from '@/components/buttons/back-button';
 import TopBarContainer from '@/components/top-bar-container/top-bar-container';
 import routes from '@/constants/routes';
-import { getApiPrivate } from '@/services/protocol/api';
+import { getPrivateApi } from '@/services/protocol/api';
 import { PdaQuery } from '@/services/protocol/types';
 
 import PDAItem from './components/pda-item';
@@ -11,12 +11,12 @@ import PDAItem from './components/pda-item';
 const getPDA = async (
   id: string
 ): Promise<PdaQuery['PDAbyId'] | null> => {
-  const apiPrivate = await getApiPrivate();
-  if (!apiPrivate) {
+  const privateApi = await getPrivateApi();
+  if (!privateApi) {
     return null;
   }
 
-  const pda = (await apiPrivate.pda({ id }))?.PDAbyId;
+  const pda = (await privateApi.pda({ id }))?.PDAbyId;
   return pda;
 };
 
