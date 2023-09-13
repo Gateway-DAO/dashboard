@@ -4,6 +4,8 @@ import RequestStatusChip from "@/components/requests/request-status-chip";
 import ToggleCollapse from "@/components/toggle-collapse/toggle-collapse";
 import { DATE_FORMAT } from "@/constants/date";
 import routes from "@/constants/routes";
+import { common } from "@/locale/en/common";
+import { request } from "@/locale/en/request";
 import { DataModel, DataRequest, DataResourceStatus } from "@/services/protocol/types";
 import { NEGATIVE_CONTAINER_PX } from "@/theme/config/style-tokens";
 import { PageProps } from "@/types/next";
@@ -18,10 +20,10 @@ import RequestedData from "./components/requested-data";
 const mockrequest: PartialDeep<DataRequest> = {
   id: "cr_3r8fn374f",
   createdAt: "2021-10-13T14:00:00.000Z",
-  status: DataResourceStatus.Accepted,
+  status: DataResourceStatus.Rejected,
   userVerifier: {
     id: "1",
-    gatewayId: "user"
+    gatewayId: "Chase"
   },
   dataRequestTemplate: {
     id: "crtmlp_ds34r3fg45",
@@ -73,46 +75,39 @@ export default function DashboardUserDataRequest({ params: { id } }: PageProps<{
   return (
     <>
       <Typography variant="h3" component="h2" sx={{ mb: 6.5 }}>
-        {mockrequest.id}
+        {id}
       </Typography>
       <Stack direction="column" gap={2}>
-        <RequestCard />
+        <RequestCard requester={mockrequest.userVerifier!.gatewayId!} status={mockrequest.status!} proofId="" />
         <Paper component={Stack} divider={<Divider orientation="vertical" sx={{ height: "unset" }} />} direction="row" elevation={0}>
           <Stack gap={1} flex="1" sx={{ p: 2 }}>
-            <Typography variant="caption" color="text.secondary">Created at</Typography>
+            <Typography variant="caption" color="text.secondary">{common.general.created_at}</Typography>
             <Typography>{dayjs(mockrequest.createdAt).format(DATE_FORMAT)}</Typography>
           </Stack>
           <Stack gap={1} flex="1" alignItems="flex-start" sx={{ p: 2 }}>
-            <Typography variant="caption" color="text.secondary">Status</Typography>
+            <Typography variant="caption" color="text.secondary">{common.general.status}</Typography>
             <RequestStatusChip status={mockrequest.status!} variant="filled" size="small" />
           </Stack>
         </Paper>
-        <ToggleCollapse hiddenLabel="More info" visibleLabel="Less info">
+        <ToggleCollapse hiddenLabel={common.actions.more_info} visibleLabel={common.actions.less_info}>
           <Paper component={Stack} divider={<Divider orientation="vertical" sx={{ height: "unset" }} />} direction="row" elevation={0}>
             <Stack gap={1} flex="1" sx={{ p: 2 }}>
-              <Typography variant="caption" color="text.secondary">Request ID</Typography>
-              <Typography>{mockrequest.id}</Typography>
+              <Typography variant="caption" color="text.secondary">{request.label.request_id}</Typography>
+              <Typography>{id}</Typography>
             </Stack>
             <Stack gap={1} flex="1" alignItems="flex-start" sx={{ p: 2 }}>
-              <Typography variant="caption" color="text.secondary">Request template ID</Typography>
+              <Typography variant="caption" color="text.secondary">{request.label.request_template_id}</Typography>
               <Typography>{mockrequest.dataRequestTemplate?.id}</Typography>
             </Stack>
           </Paper>
         </ToggleCollapse>
         <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, mt: 2, mb: 4 }} />
         <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-          Requested data
+          {request.label.requested_data}
         </Typography>
         <Stack direction="column" gap={2}>
           {requestedData.map(({ dataModel }) => (<RequestedData key={dataModel.id} dataModel={dataModel} />))}
         </Stack>
-
-        <p>Open <Link href={{
-          query: {
-            back: routes.dashboardUserRequest(id)
-          },
-          pathname: routes.dashboardUserProof("mock")
-        }}>proof</Link></p>
       </Stack >
     </>
   )
