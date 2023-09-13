@@ -51,7 +51,7 @@ export default function RequestCard({
           <Typography variant="h5">{request.request_card.content.rejected.title}</Typography>
           <Typography >{request.request_card.content.rejected.description(requester)}</Typography>
           <Stack direction="row" gap={1} sx={{ mt: 3 }}>
-            <Button variant="outlined" color="primary">{common.actions.learn_more}</Button>
+            <Button variant="outlined" color="inherit">{common.actions.learn_more}</Button>
           </Stack>
         </>)}
         {status === DataResourceStatus.Accepted && (<>
