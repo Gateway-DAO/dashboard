@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { getApiPrivate } from '@/services/protocol/api';
+import { getPrivateApi } from '@/services/protocol/api';
 import { render, screen } from '@testing-library/react';
 
 import PDAPage from './page';
 
 jest.mock('@/services/protocol/api', () => ({
-  getApiPrivate: jest.fn(),
+  getPrivateApi: jest.fn(),
 }));
 jest.mock('./components/pda-item', () => ({
   __esModule: true,
@@ -15,7 +15,7 @@ jest.mock('./components/pda-item', () => ({
 
 describe('PDAPage', () => {
   it('renders PDAPage with data', async () => {
-    (getApiPrivate as jest.Mock).mockResolvedValueOnce({
+    (getPrivateApi as jest.Mock).mockResolvedValueOnce({
       pda: jest.fn().mockResolvedValueOnce({
         PDAbyId: {
           dataAsset: {
@@ -35,7 +35,7 @@ describe('PDAPage', () => {
   });
 
   it('renders PDAPage without data', async () => {
-    (getApiPrivate as jest.Mock).mockResolvedValueOnce(null);
+    (getPrivateApi as jest.Mock).mockResolvedValueOnce(null);
 
     render(<PDAPage params={{ id: 'test-id' }} />);
 

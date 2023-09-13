@@ -56,7 +56,7 @@ export const apiWithRefresh = (
   return getSdk(gqlClient(token), wrapper);
 };
 
-export async function getApiPrivate() {
+export async function getPrivateApi() {
   const session = await getServerSession();
   const token = session?.token;
   return api(token ?? '');

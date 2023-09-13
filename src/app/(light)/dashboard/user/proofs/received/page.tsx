@@ -1,5 +1,5 @@
 import { proofs as proofsLocales } from '@/locale/en/proof';
-import { getApiPrivate } from '@/services/protocol/api';
+import { getPrivateApi } from '@/services/protocol/api';
 import { Proof } from '@/services/protocol/types';
 import { PartialDeep } from 'type-fest';
 
@@ -8,9 +8,9 @@ import { Typography } from '@mui/material';
 import ProofsReceivedTable from './components/proofs-received-table';
 
 export default async function DashboardUserReceivedProofs() {
-  const apiPrivate = await getApiPrivate();
+  const privateApi = await getPrivateApi();
 
-  const proofs = (await apiPrivate.received_proofs({ take: 6, skip: 0 }))
+  const proofs = (await privateApi.received_proofs({ take: 6, skip: 0 }))
     ?.receivedProofs as PartialDeep<Proof>[];
 
   return (
