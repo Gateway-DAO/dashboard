@@ -1,18 +1,28 @@
 import { PropsWithChildren } from 'react';
 
-import TitleLayout from '@/components/title-layout/title-layout';
 import { requests } from '@/locale/en/request';
 
-import { Box } from '@mui/system';
+import { Box, Typography } from '@mui/material';
 
 export default function DataRequestsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
-      <TitleLayout
-        title={requests.title}
-        subtitle={requests.subtitle}
-        titleId="title-requests"
-      />
+      <Box
+        sx={{
+          mb: {
+            xs: 4,
+            md: 5,
+            lg: 6,
+          },
+        }}
+      >
+        <Typography variant="h3" id="title-requests" sx={{ mb: 1 }}>
+          {requests.title}
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          {requests.subtitle}
+        </Typography>
+      </Box>
       {children}
     </Box>
   );
