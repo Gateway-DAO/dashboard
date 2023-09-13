@@ -16,7 +16,7 @@ type Story = StoryObj<typeof CopyPaste>;
 
 export const Playground: Story = {
   args: {
-    text: 'text to copy',
+    text: 'Lorem ipsum',
     sucessMessage: 'Copied to clipboard',
     limit: 12,
   },
