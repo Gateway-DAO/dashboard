@@ -196,9 +196,6 @@ devDependencies:
   '@synthetixio/synpress':
     specifier: 3.7.2-beta.5
     version: 3.7.2-beta.5(@babel/core@7.22.10)(@babel/preset-env@7.22.10)(babel-loader@9.1.3)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.1.6)(webpack@5.88.2)(zod@3.22.2)
-  '@synthetixio__synpress':
-    specifier: link:@types/@synthetixio__synpress
-    version: link:@types/@synthetixio__synpress
   '@tanstack/eslint-plugin-query':
     specifier: ^4.32.5
     version: 4.32.5
@@ -271,9 +268,6 @@ devDependencies:
   storybook:
     specifier: ^7.3.1
     version: 7.3.1(encoding@0.1.13)
-  synpress:
-    specifier: link:@types/@synthetixio/synpress
-    version: link:@types/@synthetixio/synpress
   ts-node:
     specifier: ^10.9.1
     version: 10.9.1(@swc/core@1.3.78)(@types/node@20.4.10)(typescript@5.1.6)

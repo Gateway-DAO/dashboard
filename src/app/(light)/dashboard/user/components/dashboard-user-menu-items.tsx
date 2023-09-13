@@ -14,21 +14,32 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
   {
     name: 'Data assets',
     href: routes.dashboardUserReceivedAssets,
-    activeHrefs: [routes.dashboardUserReceivedAssets, routes.dashboardUserIssuedAssets, routes.dashboardUserAsset("")],
+    activeHrefs: [
+      routes.dashboardUserReceivedAssets,
+      routes.dashboardUserIssuedAssets,
+      routes.dashboardUserAsset(''),
+    ],
     icon: DataOutlinedIcon,
     activeIcon: DataFilledIcon,
   },
   {
     name: 'Data requests',
     href: routes.dashboardUserRequests,
-    activeHrefs: [routes.dashboardUserRequests, routes.dashboardUserRequest("")],
+    activeHrefs: [
+      routes.dashboardUserRequests,
+      routes.dashboardUserRequest(''),
+    ],
     icon: DataRequestOutlinedIcon,
     activeIcon: DataRequestFilledIcon,
   },
   {
     name: 'Data proofs',
-    href: routes.dashboardUserProofs,
-    activeHrefs: [routes.dashboardUserProofs, routes.dashboardUserProof("")],
+    href: routes.dashboardUserReceivedProofs,
+    activeHrefs: [
+      routes.dashboardUserReceivedProofs,
+      routes.dashboardUserIssuedProofs,
+      routes.dashboardUserProof(''),
+    ],
     icon: DataProofOutlinedIcon,
     activeIcon: DataProofFilledIcon,
   },

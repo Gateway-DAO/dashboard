@@ -17,19 +17,25 @@ export default function DashboardLayout({
   mobileMenuItems,
 }: PropsWithChildren<Props>) {
   return (
-    <Stack direction={{
-      xs: "column",
-      lg: "row"
-    }} alignItems="stretch" sx={{ minHeight: '100%' }}>
+    <Stack
+      direction={{
+        xs: 'column',
+        lg: 'row',
+      }}
+      alignItems="stretch"
+      sx={{ minHeight: '100%' }}
+    >
       <Sidebar menuItems={menuItems}>
         <Logo />
       </Sidebar>
-      <DashboardPage sx={{
-        marginLeft: {
-          xs: 0,
-          lg: '300px'
-        }
-      }}>
+      <DashboardPage
+        sx={{
+          marginLeft: {
+            xs: 0,
+            lg: '300px',
+          },
+        }}
+      >
         {children}
       </DashboardPage>
       {mobileMenuItems}

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { MutableRefObject, useEffect, useRef } from 'react';
 
+import { DATE_FORMAT } from '@/constants/date';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
@@ -96,17 +97,17 @@ export function TooltipUser({
             {isOrganization ? 'Organization ID' : 'User ID'}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Joined in {dayjs(issuance_date).format('MM/DD/YYYY, h:mm A')}
+            Joined in {dayjs(issuance_date).format(DATE_FORMAT)}
           </Typography>
         </Stack>
-        <Link href="https://www.google.com" passHref target="_blank">
+        {/* <Link href="https://www.google.com" passHref target="_blank">
           <LaunchIcon
             sx={{
               color: 'text.primary',
               fontSize: 16,
             }}
           />
-        </Link>
+        </Link> */}
       </Stack>
     </Paper>
   );
