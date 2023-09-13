@@ -8,6 +8,7 @@ import { HeaderContextProvider } from './contexts/header-context';
 import Hero from './home/components/hero';
 import Info from './home/components/info';
 import Lifecycle from './home/components/lifecycle';
+import OurNetwork from './home/components/our-network';
 import OurProtocol from './home/components/our-protocol';
 import Pdas from './home/components/pdas';
 import LenisManager from './utils/scroll';
@@ -23,6 +24,7 @@ export default function IndexPage() {
       <Lifecycle />
       <Info />
       <OurProtocol />
+      <OurNetwork />
     </HeaderContextProvider>
   );
 }
