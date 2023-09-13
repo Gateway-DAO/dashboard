@@ -75,7 +75,7 @@ type Props = {
   data: PartialDeep<Proof>[];
 };
 
-export default function ProofsIssuedTable({ data }: Props) {
+export default function ProofsSentTable({ data }: Props) {
   const router = useRouter();
 
   return (
