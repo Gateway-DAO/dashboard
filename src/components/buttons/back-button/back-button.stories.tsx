@@ -7,12 +7,6 @@ const meta: Meta<typeof BackButton> = {
   component: BackButton,
   parameters: {
     layout: 'centered',
-    nextjs: {
-      appDirectory: true,
-      navigation: {
-        pathname: '/',
-      },
-    },
   },
   tags: ['autodocs'],
 };

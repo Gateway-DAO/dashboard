@@ -7,12 +7,6 @@ const meta: Meta<typeof CheckButton> = {
   component: CheckButton,
   parameters: {
     layout: 'centered',
-    nextjs: {
-      appDirectory: true,
-      navigation: {
-        pathname: '#',
-      },
-    },
   },
   tags: ['autodocs'],
 };

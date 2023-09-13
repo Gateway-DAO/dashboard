@@ -5,7 +5,7 @@ import { common } from '@/locale/en/common';
 
 import { Stack } from '@mui/material';
 
-import { LoadingButton } from './loading-button';
+import { LoadingButton } from '../loading-button';
 
 export function ConnectNow() {
   return (
