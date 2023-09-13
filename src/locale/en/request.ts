@@ -1,4 +1,5 @@
 export const requests = {
+  empty: 'No data requests yet',
   title: 'Data requests',
   subtitle: 'These are the requests to access your private data assets',
 };

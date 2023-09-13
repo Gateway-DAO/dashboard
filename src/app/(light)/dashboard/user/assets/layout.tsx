@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
+import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { pdas } from '@/locale/en/pda';
@@ -10,26 +11,16 @@ import {
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
 
-import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 export default function DataAssetsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
-      <Box
-        sx={{
-          mb: {
-            xs: 4,
-            md: 5,
-            lg: 6,
-          },
-        }}
-      >
-        <Typography variant="h3" id="title-assets">
-          {pdas.my_data_assets}
-        </Typography>
-        <Typography variant="body1">{pdas.data_assets_subtitle}</Typography>
-      </Box>
+      <TitleLayout
+        title={pdas.my_data_assets}
+        subtitle={pdas.data_assets_subtitle}
+        titleId="title-assets"
+      />
       <Box
         sx={{
           borderBottom: 1,
