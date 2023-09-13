@@ -2,7 +2,6 @@
 
 import { PropsWithChildren, useEffect } from 'react';
 
-import Loading from '@/components/loadings/loading';
 import { useInView } from 'react-intersection-observer';
 
 import { Stack } from '@mui/material';
@@ -10,14 +9,13 @@ import { Stack } from '@mui/material';
 type Props = {
   isLoading: boolean;
   onLoadMore: () => void;
-}
+};
 
 export default function InfiniteLoadMore({
   isLoading,
   onLoadMore,
   children,
 }: PropsWithChildren<Props>) {
-
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -31,8 +29,5 @@ export default function InfiniteLoadMore({
     return children;
   }
 
-  return (
-    <Stack mt={2} ref={ref}>
-    </Stack>
-  );
+  return <Stack mt={2} ref={ref}></Stack>;
 }
