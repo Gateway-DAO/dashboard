@@ -9,16 +9,14 @@ export default function LoadingTable({ columns = 5 }: Props) {
 
   return (
     <Stack gap={1} sx={{ pt: 3 }}>
-      <Stack direction="row" gap={2} sx={{ mb: 2 }}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        gap={1}
+        sx={{ mb: 2 }}
+      >
         {arrayColumns.map((item) => (
-          <Stack key={item} sx={{ flexGrow: 1 }}>
-            <Skeleton
-              variant="text"
-              height={30}
-              width={100}
-              sx={{ maxWidth: '50%' }}
-            />
-          </Stack>
+          <Skeleton key={item} variant="text" height={30} width={100} />
         ))}
       </Stack>
       <Stack gap={1}>
