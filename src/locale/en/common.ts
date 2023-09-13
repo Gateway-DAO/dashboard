@@ -8,6 +8,7 @@ export const common = {
     status: 'Status',
     created_at: 'Created at',
     updated_at: 'Updated at',
+    sent: 'Sent',
   },
   chain: {
     EVM: 'Ethereum',

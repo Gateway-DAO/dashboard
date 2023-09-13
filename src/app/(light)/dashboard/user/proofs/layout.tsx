@@ -28,7 +28,9 @@ export default function DataProofsLayout({ children }: PropsWithChildren) {
         <Typography variant="h3" id="title-proofs" sx={{ mb: 1 }}>
           {proofs.data_proofs}
         </Typography>
-        <Typography variant="body1" color="text.secondary">{proofs.data_proofs_subtitle}</Typography>
+        <Typography variant="body1" color="text.secondary">
+          {proofs.data_proofs_subtitle}
+        </Typography>
       </Box>
       <Box
         sx={{
@@ -44,8 +46,8 @@ export default function DataProofsLayout({ children }: PropsWithChildren) {
             href={routes.dashboardUserReceivedProofs}
           />
           <GTWTab
-            label={common.general.issued}
-            href={routes.dashboardUserIssuedProofs}
+            label={common.general.sent}
+            href={routes.dashboardUserSentProofs}
           />
         </GTWTabs>
       </Box>
