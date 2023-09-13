@@ -1,0 +1,64 @@
+.element {
+  background-color: #212121;
+  padding-bottom: 140px;
+}
+
+.wrapper {
+  border-radius: 16px;
+  border: 1px solid rgba(230, 213, 250, 0.15);
+  padding: 20px 24px;
+}
+
+.title {
+  color: #e6d5fa;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0.46px;
+  margin: 0;
+  padding-bottom: 35px;
+}
+
+.logos,
+.names {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.logos {
+  &:after {
+    background: #e6d5fa;
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0.2;
+    position: absolute;
+    height: 0.5px;
+    width: 100%;
+  }
+}
+
+.names {
+  padding-top: 66px;
+  padding-left: 10px;
+}
+
+.logo_container,
+.name_container {
+  align-items: center;
+  display: flex;
+  margin-bottom: 35px;
+  width: 25%;
+}
+
+.name {
+  color: #a6a6a6;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20.02px;
+  letter-spacing: 0.17px;
+  max-width: 150px;
+}
