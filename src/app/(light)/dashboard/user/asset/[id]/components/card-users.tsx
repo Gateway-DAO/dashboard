@@ -53,6 +53,7 @@ export default function CardUsers({ pda }: Props) {
         {tooltipIssuer && (
           <TooltipUser
             name={issuerName}
+            picture={issuerPicture}
             username={issuerGatewayId}
             issuance_date={pda?.dataAsset?.issuer?.user?.createdAt}
             onClose={() => setTooltipIssuer(false)}

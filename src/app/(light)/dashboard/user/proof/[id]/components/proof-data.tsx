@@ -2,21 +2,24 @@
 import { useRouter } from 'next/navigation';
 
 import { proof as proofLocale } from '@/locale/en/proof';
+import { DataModel, DecryptedProofPda } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
   WIDTH_CENTERED,
 } from '@/theme/config/style-tokens';
+import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import { Stack, Divider, Typography, Card } from '@mui/material';
 
 import ProofPdaListItem from './proof-pda-list-item';
 
 type Props = {
-  dataModels: any; // TODO: Add type
+  dataModels: PartialDeep<DataModel>[];
+  pdas: PartialDeep<DecryptedProofPda>[];
 };
 
-export default function ProofData({ dataModels }: Props) {
+export default function ProofData({ dataModels, pdas }: Props) {
   const router = useRouter();
   return (
     <Stack sx={{ my: 2 }}>
@@ -36,7 +39,7 @@ export default function ProofData({ dataModels }: Props) {
           />
         }
       >
-        {dataModels.map((dataModel: any) => (
+        {dataModels.map((dataModel: PartialDeep<DataModel>) => (
           <Stack key={dataModel.id}>
             <Stack
               direction="row"
@@ -60,15 +63,23 @@ export default function ProofData({ dataModels }: Props) {
               }}
               divider={<Divider sx={{ width: '100%' }} />}
             >
-              {dataModel.credentials.map((pda: any) => (
-                <ProofPdaListItem
-                  key={pda.id}
-                  onClick={() =>
-                    router.push(`?pda-id=${pda.id}`, { scroll: false })
-                  }
-                  {...pda}
-                />
-              ))}
+              {pdas
+                .filter((pda) => pda?.dataModel?.id === dataModel?.id)
+                .map((pda: PartialDeep<DecryptedProofPda>) => (
+                  <ProofPdaListItem
+                    key={pda?.id}
+                    name={pda?.title as string}
+                    issuerName={
+                      pda?.organization?.name ??
+                      pda?.organization?.gatewayId ??
+                      (pda?.issuer?.user?.gatewayId as string)
+                    }
+                    issuerImage={pda?.organization?.image}
+                    onClick={() =>
+                      router.push(`?pda-id=${pda.id}`, { scroll: false })
+                    }
+                  />
+                ))}
             </Stack>
           </Stack>
         ))}

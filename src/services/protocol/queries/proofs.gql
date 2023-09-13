@@ -1,0 +1,108 @@
+query received_proofs($take: Float!, $skip: Float!) {
+  receivedProofs(skip: $skip, take: $take) {
+    id
+    totalCost
+    facilitationFee
+    createdAt
+    owner {
+      id
+      user {
+        gatewayId
+      }
+      data
+    }
+    data {
+      dataModels {
+        id
+      }
+      PDAs {
+        id
+        claim
+        dataModel {
+          id
+        }
+        issuer {
+          id
+        }
+        organization {
+          id
+          gatewayId
+        }
+        owner {
+          id
+        }
+      }
+    }
+    arweaveUrl
+    organization {
+      gatewayId
+      image
+    }
+    dataRequest {
+      arweaveUrl
+      status
+    }
+  }
+}
+
+query proof($id: String!) {
+  proof(id: $id) {
+    id
+    totalCost
+    facilitationFee
+    createdAt
+    active
+    arweaveUrl
+
+    data {
+      dataModels {
+        id
+        title
+        consumptionPrice
+      }
+      PDAs {
+        id
+        title
+        claim
+        dataModel {
+          id
+        }
+        issuer {
+          id
+          user {
+            gatewayId
+          }
+        }
+        organization {
+          id
+          name
+          gatewayId
+          image
+        }
+        owner {
+          id
+        }
+      }
+    }
+
+    organization {
+      gatewayId
+    }
+
+    verifier {
+      user {
+        gatewayId
+      }
+      data
+    }
+
+    dataRequest {
+      id
+      arweaveUrl
+      status
+      dataRequestTemplate {
+        id
+      }
+    }
+  }
+}

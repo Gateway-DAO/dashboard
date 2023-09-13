@@ -1,16 +1,20 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
-import GTWAvatar from "@/components/gtw-avatar/gtw-avatar";
-import RequestStatusChip from "@/components/requests/request-status-chip";
-import routes from "@/constants/routes";
-import { DataRequest } from "@/services/protocol/types"
-import { CONTAINER_PX, NEGATIVE_CONTAINER_PX } from "@/theme/config/style-tokens";
-import dayjs from "dayjs";
-import { PartialDeep } from "type-fest";
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import RequestStatusChip from '@/components/requests/request-status-chip';
+import { DATE_FORMAT } from '@/constants/date';
+import routes from '@/constants/routes';
+import { DataRequest } from '@/services/protocol/types';
+import {
+  CONTAINER_PX,
+  NEGATIVE_CONTAINER_PX,
+} from '@/theme/config/style-tokens';
+import dayjs from 'dayjs';
+import { PartialDeep } from 'type-fest';
 
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const columns: GridColDef<PartialDeep<DataRequest>>[] = [
@@ -18,13 +22,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     field: 'id',
     headerName: 'Request ID',
     flex: 1,
-    renderCell(params) {
-      return (
-        <Link href={routes.dashboardUserRequest(params.row.id)}>
-          {params.row.id}
-        </Link>
-      )
-    },
+    valueGetter: (params) => params.row.id,
   },
   {
     field: 'userVerifier',
@@ -35,9 +33,11 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
       return (
         <Stack direction="row" alignItems="center" spacing={1}>
           <GTWAvatar name={params.row.userVerifier!.gatewayId!} size={32} />
-          <Typography variant="body2">{params.row.userVerifier!.gatewayId}</Typography>
+          <Typography variant="body2">
+            {params.row.userVerifier!.gatewayId}
+          </Typography>
         </Stack>
-      )
+      );
     },
   },
   {
@@ -51,7 +51,8 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     headerName: 'Created At',
     type: 'number',
     flex: 1,
-    valueFormatter: (params) => dayjs(params.value).format('MM/DD/YYYY, h:mm A'),
+    valueFormatter: (params) =>
+      dayjs(params.value).format(DATE_FORMAT),
   },
   {
     field: 'status',
@@ -59,18 +60,17 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     type: 'number',
     flex: 1,
     renderCell(params) {
-      return (
-        <RequestStatusChip status={params.row.status!} />
-      )
+      return <RequestStatusChip status={params.row.status!} />;
     },
   },
 ];
 
 type Props = {
-  data: PartialDeep<DataRequest>[]
-}
+  data: PartialDeep<DataRequest>[];
+};
 
 export default function RequestsTable({ data }: Props) {
+  const router = useRouter();
 
   return (
     <DataGrid
@@ -80,23 +80,43 @@ export default function RequestsTable({ data }: Props) {
         pagination: {
           paginationModel: {
             pageSize: 10,
-          }
+          },
+        },
+      }}
+      disableColumnFilter
+      disableColumnMenu
+      disableColumnSelector
+      disableRowSelectionOnClick
+      disableDensitySelector
+      pageSizeOptions={[5, 10]}
+      autoHeight
+      onCellClick={({ field, value }) => {
+        if (field === 'id') {
+          router.push(routes.dashboardUserRequest(value as string));
         }
       }}
-      pageSizeOptions={[10, 25, 50, 100]}
-      autoHeight
       sx={{
         mx: NEGATIVE_CONTAINER_PX,
         borderLeft: 'none',
         borderRight: 'none',
+        borderTop: 'none',
+        borderBottom: 'none',
         borderRadius: 0,
-        "& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child": {
-          paddingLeft: CONTAINER_PX,
+        '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
+          border: 'none',
         },
-        "& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child": {
-          paddingRight: CONTAINER_PX,
+        '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
+          {
+            paddingLeft: CONTAINER_PX,
+          },
+        '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
+          {
+            paddingRight: CONTAINER_PX,
+          },
+        '.MuiDataGrid-cell[data-field="id"]': {
+          cursor: 'pointer',
         },
       }}
     />
-  )
+  );
 }

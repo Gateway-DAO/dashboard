@@ -1,0 +1,14 @@
+query requests {
+  dataRequests {
+    id
+    status
+    userVerifier {
+      id
+      gatewayId
+    }
+    createdAt
+    dataRequestTemplate {
+      id
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import routes from '@/constants/routes';
+import { common } from '@/locale/en/common';
 import { pdas } from '@/locale/en/pda';
 import {
   CONTAINER_PX,
@@ -38,8 +39,14 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
         }}
       >
         <GTWTabs>
-          <GTWTab label="Received" href={routes.dashboardUserReceivedAssets} />
-          <GTWTab label="Issued" href={routes.dashboardUserIssuedAssets} />
+          <GTWTab
+            label={common.general.received}
+            href={routes.dashboardUserReceivedAssets}
+          />
+          <GTWTab
+            label={common.general.issued}
+            href={routes.dashboardUserIssuedAssets}
+          />
         </GTWTabs>
       </Box>
       <Box sx={{ pt: 5 }}>{children}</Box>

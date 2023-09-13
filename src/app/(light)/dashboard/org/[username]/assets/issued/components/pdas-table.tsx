@@ -2,14 +2,19 @@
 
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
+import { DATE_FORMAT } from '@/constants/date';
 import { CredentialStatus } from '@/services/protocol/types';
+import {
+  CONTAINER_PX,
+  NEGATIVE_CONTAINER_PX,
+} from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
-export default function PDAsTable({}) {
+export default function PDAsTable({ }) {
   const columns: GridColDef[] = [
     {
       field: 'dataAsset',
@@ -50,7 +55,7 @@ export default function PDAsTable({}) {
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography>
-            {dayjs(params.row.issuanceDate).format('MM/DD/YYYY, h:mm A')}
+            {dayjs(params.row.issuanceDate).format(DATE_FORMAT)}
           </Typography>
         );
       },
@@ -185,10 +190,15 @@ export default function PDAsTable({}) {
     <DataGrid
       rows={rows}
       columns={columns}
+      autoHeight
       initialState={{
         pagination: {
           paginationModel: { page: 0, pageSize: 10 },
         },
+      }}
+      onCellClick={({ field, value }) => {
+        //TODO: Implement go to wih router.push
+        console.log(value as string);
       }}
       disableColumnFilter
       disableColumnMenu
@@ -196,6 +206,23 @@ export default function PDAsTable({}) {
       disableRowSelectionOnClick
       disableDensitySelector
       pageSizeOptions={[5, 10]}
+      sx={{
+        mx: NEGATIVE_CONTAINER_PX,
+        borderLeft: 'none',
+        borderRight: 'none',
+        borderRadius: 0,
+        '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
+        {
+          paddingLeft: CONTAINER_PX,
+        },
+        '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
+        {
+          paddingRight: CONTAINER_PX,
+        },
+        '.MuiDataGrid-cell[data-field="id"]': {
+          cursor: 'pointer',
+        },
+      }}
     />
   );
 }
