@@ -3,6 +3,7 @@ import './styles/global.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import Footer from './components/footer';
 import Header from './components/header';
 import { HeaderContextProvider } from './contexts/header-context';
 import Hero from './home/components/hero';
@@ -29,6 +30,7 @@ export default function IndexPage() {
       <OurNetwork />
       <Stats />
       <Investors />
+      <Footer variant="light" />
     </HeaderContextProvider>
   );
 }
