@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { LoadingButton } from '@/components/buttons/loading-button';
+import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import ModalRight from '@/components/modal/modal-right';
 import ModalTitle from '@/components/modal/modal-title';
 import { mutations } from '@/constants/queries';

@@ -1,5 +1,5 @@
 'use client';
-import { LoadingButton } from '@/components/buttons/loading-button';
+import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import { auth } from '@/locale/en/auth';
 import { errorMessages } from '@/locale/en/errors';
 import { useSnackbar } from 'notistack';
@@ -32,7 +32,8 @@ export function ChooseGatewayId() {
           });
         } else {
           enqueueSnackbar(
-            errorMessages[message as keyof typeof errorMessages] || errorMessages.UNEXPECTED_ERROR,
+            errorMessages[message as keyof typeof errorMessages] ||
+              errorMessages.UNEXPECTED_ERROR,
             {
               variant: 'error',
             }
