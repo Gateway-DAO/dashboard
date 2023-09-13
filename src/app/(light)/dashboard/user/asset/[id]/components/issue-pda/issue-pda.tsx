@@ -3,8 +3,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
-import ModalRight from '@/components/modal/modal-right';
-import ModalTitle from '@/components/modal/modal-title';
+import ModalRight from '@/components/modal/modal-right/modal-right';
+import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { mutations } from '@/constants/queries';
 import usePrivateApi from '@/hooks/use-private-api';
 import { common } from '@/locale/en/common';
