@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import RequestStatusChip from '@/components/requests/request-status-chip';
+import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { DataRequest } from '@/services/protocol/types';
 import {
@@ -52,7 +52,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     type: 'number',
     flex: 1,
     valueFormatter: (params) =>
-      dayjs(params.value).format('MM/DD/YYYY, h:mm A'),
+      dayjs(params.value).format(DATE_FORMAT),
   },
   {
     field: 'status',
@@ -70,7 +70,7 @@ type Props = {
 };
 
 export default function RequestsTable({ data }: Props) {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <DataGrid
@@ -83,26 +83,36 @@ export default function RequestsTable({ data }: Props) {
           },
         },
       }}
-      pageSizeOptions={[10, 25, 50, 100]}
+      disableColumnFilter
+      disableColumnMenu
+      disableColumnSelector
+      disableRowSelectionOnClick
+      disableDensitySelector
+      pageSizeOptions={[5, 10]}
       autoHeight
       onCellClick={({ field, value }) => {
-        if (field === "id") {
-          router.push(routes.dashboardUserRequest(value as string))
+        if (field === 'id') {
+          router.push(routes.dashboardUserRequest(value as string));
         }
       }}
       sx={{
         mx: NEGATIVE_CONTAINER_PX,
         borderLeft: 'none',
         borderRight: 'none',
+        borderTop: 'none',
+        borderBottom: 'none',
         borderRadius: 0,
+        '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
+          border: 'none',
+        },
         '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
-        {
-          paddingLeft: CONTAINER_PX,
-        },
+          {
+            paddingLeft: CONTAINER_PX,
+          },
         '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
-        {
-          paddingRight: CONTAINER_PX,
-        },
+          {
+            paddingRight: CONTAINER_PX,
+          },
         '.MuiDataGrid-cell[data-field="id"]': {
           cursor: 'pointer',
         },

@@ -2,6 +2,7 @@
 import CardCell from '@/components/card-cell/card-cell';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { TableCellContainer } from '@/components/table-cell-container/table-cell-container';
+import { DATE_FORMAT } from '@/constants/date';
 import { datamodel } from '@/locale/en/datamodel';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { CredentialStatus, PdaQuery } from '@/services/protocol/types';
@@ -52,7 +53,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
               </Stack>
               {limitCharsCentered(
                 pda?.dataAsset?.owner?.data?.address ??
-                  pda?.dataAsset?.owner?.data?.email,
+                pda?.dataAsset?.owner?.data?.email,
                 40
               )}
             </Stack>
@@ -65,8 +66,8 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
             <Typography>
               {limitCharsCentered(
                 pda?.dataAsset?.issuer?.user?.gatewayId ??
-                  pda?.dataAsset?.issuer?.data?.address ??
-                  pda?.dataAsset?.issuer?.data?.email,
+                pda?.dataAsset?.issuer?.data?.address ??
+                pda?.dataAsset?.issuer?.data?.email,
                 20
               )}
             </Typography>
@@ -84,11 +85,11 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={pdaLocale.issuance_date}>
-          {dayjs(pda?.issuanceDate).format('MM/DD/YYYY, h:mm A')}
+          {dayjs(pda?.issuanceDate).format(DATE_FORMAT)}
         </CardCell>
         <CardCell label={pdaLocale.expiration_date}>
           {pda?.dataAsset?.expirationDate
-            ? dayjs(pda?.dataAsset?.expirationDate).format('MM/DD/YYYY, h:mm A')
+            ? dayjs(pda?.dataAsset?.expirationDate).format(DATE_FORMAT)
             : pdaLocale.indeterminate}
         </CardCell>
         <CardCell label={pdaLocale.status.title}>
