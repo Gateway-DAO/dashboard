@@ -10,7 +10,6 @@ import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
-import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
@@ -22,6 +21,7 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     field: 'verifier',
     headerName: proofs.verifier,
     flex: 1,
+    valueGetter: (params) => params.row.verifier?.user?.gatewayId,
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" spacing={1}>
@@ -32,23 +32,6 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
         </Stack>
       );
     },
-  },
-  {
-    field: 'requestId',
-    headerName: proofs.request_id,
-    flex: 1,
-    valueGetter: (params) =>
-      limitCharsCentered(params.row.dataRequest?.id as string, 12),
-  },
-  {
-    field: 'dataRequestTemplateId',
-    headerName: proofs.request_template_id,
-    flex: 1,
-    valueGetter: (params) =>
-      limitCharsCentered(
-        params.row.dataRequest?.dataRequestTemplate?.id as string,
-        12
-      ),
   },
   {
     field: 'shareDate',
@@ -70,7 +53,7 @@ type Props = {
   data: PartialDeep<Proof>[];
 };
 
-export default function ProofsSentTable({ data }: Props) {
+export default function ProofsReceivedTable({ data }: Props) {
   const router = useRouter();
 
   return (
@@ -84,17 +67,26 @@ export default function ProofsSentTable({ data }: Props) {
           },
         },
       }}
-      pageSizeOptions={[10, 25, 50, 100]}
+      disableColumnFilter
+      disableColumnMenu
+      disableColumnSelector
+      disableRowSelectionOnClick
+      disableDensitySelector
+      pageSizeOptions={[5, 10]}
       autoHeight
-      onCellClick={({ field, value }) => {
-        if (field === 'id') {
-          router.push(routes.dashboardUserProof(value as string));
-        }
+      onRowClick={(value) => {
+        router.push(routes.dashboardUserProof(value?.id));
       }}
       sx={{
         mx: NEGATIVE_CONTAINER_PX,
         border: 'none',
         borderRadius: 0,
+        '& .MuiDataGrid-row': {
+          cursor: 'pointer',
+        },
+        '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
+          border: 'none',
+        },
         '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
           {
             paddingLeft: CONTAINER_PX,
@@ -103,9 +95,6 @@ export default function ProofsSentTable({ data }: Props) {
           {
             paddingRight: CONTAINER_PX,
           },
-        '.MuiDataGrid-cell[data-field="id"]': {
-          cursor: 'pointer',
-        },
       }}
     />
   );

@@ -1,11 +1,9 @@
-import { requests } from "@/locale/en/request";
-import { getApiPrivate } from "@/services/protocol/api";
-import { DataRequest, DataResourceStatus } from "@/services/protocol/types"
-import { PartialDeep } from "type-fest";
+import { requests } from '@/locale/en/request';
+import { getApiPrivate } from '@/services/protocol/api';
 
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from '@mui/material';
 
-import RequestsTable from "./components/requests-table";
+import RequestsTable from './components/requests-table';
 
 export default async function DashboardUserDataRequestsPage() {
   const privateApi = await getApiPrivate();
@@ -25,7 +23,9 @@ export default async function DashboardUserDataRequestsPage() {
         <Typography variant="h3" id="title-requests" sx={{ mb: 1 }}>
           {requests.title}
         </Typography>
-        <Typography variant="body1" color="text.secondary">{requests.subtitle}</Typography>
+        <Typography variant="body1" color="text.secondary">
+          {requests.subtitle}
+        </Typography>
       </Box>
       <RequestsTable data={requestsData} />
     </Box>
