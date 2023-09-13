@@ -1,8 +1,19 @@
 .element {
   background-color: #f6f4fa;
-  padding-top: 171px;
-  padding-bottom: 100px;
   overflow: hidden;
+  padding-top: 171px;
+  padding-bottom: 140px;
+  position: relative;
+
+  &:after {
+    background-color: #cbcacf;
+    bottom: 0;
+    content: '';
+    height: 1px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
 }
 
 .head {
