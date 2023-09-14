@@ -1,13 +1,10 @@
 'use client';
 
+import { defaultGridCustomization } from '@/components/data-grid/grid-default';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
 import { DATE_FORMAT } from '@/constants/date';
 import { PdaStatus } from '@/services/protocol/types';
-import {
-  CONTAINER_PX,
-  NEGATIVE_CONTAINER_PX,
-} from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
@@ -19,7 +16,7 @@ export default function PDAsTable({}) {
     {
       field: 'dataAsset',
       headerName: 'Data asset',
-      width: 150,
+      flex: 1.3,
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography variant="body1" fontWeight={700}>
@@ -31,7 +28,7 @@ export default function PDAsTable({}) {
     {
       field: 'owner',
       headerName: 'Recipient',
-      width: 200,
+      flex: 1.3,
       renderCell: (params: GridRenderCellParams) => {
         return <AvatarTextCell name={params.row.owner?.user?.gatewayId} />;
       },
@@ -39,7 +36,7 @@ export default function PDAsTable({}) {
     {
       field: 'dataModelId',
       headerName: 'Data model ID',
-      minWidth: 150,
+      flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography variant="body1">
@@ -51,7 +48,7 @@ export default function PDAsTable({}) {
     {
       field: 'issuanceDate',
       headerName: 'Issuance date',
-      width: 200,
+      flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography>
@@ -63,6 +60,7 @@ export default function PDAsTable({}) {
     {
       field: 'status',
       headerName: 'Status',
+      flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
           <PDAStatusChip
@@ -188,41 +186,10 @@ export default function PDAsTable({}) {
 
   return (
     <DataGrid
+      {...defaultGridCustomization}
       rows={rows}
       columns={columns}
-      autoHeight
-      initialState={{
-        pagination: {
-          paginationModel: { page: 0, pageSize: 10 },
-        },
-      }}
-      onCellClick={({ field, value }) => {
-        //TODO: Implement go to wih router.push
-        console.log(value as string);
-      }}
-      disableColumnFilter
-      disableColumnMenu
-      disableColumnSelector
-      disableRowSelectionOnClick
-      disableDensitySelector
-      pageSizeOptions={[5, 10]}
-      sx={{
-        mx: NEGATIVE_CONTAINER_PX,
-        borderLeft: 'none',
-        borderRight: 'none',
-        borderRadius: 0,
-        '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
-          {
-            paddingLeft: CONTAINER_PX,
-          },
-        '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
-          {
-            paddingRight: CONTAINER_PX,
-          },
-        '.MuiDataGrid-cell[data-field="id"]': {
-          cursor: 'pointer',
-        },
-      }}
+      sx={defaultGridCustomization}
     />
   );
 }
