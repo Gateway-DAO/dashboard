@@ -5,7 +5,7 @@ import { TableCellContainer } from '@/components/containers/table-cell-container
 import { DATE_FORMAT } from '@/constants/date';
 import { pda } from '@/locale/en/pda';
 import { proof as proofLocale } from '@/locale/en/proof';
-import { CredentialStatus, Proof } from '@/services/protocol/types';
+import { PdaStatus, Proof } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
@@ -44,11 +44,7 @@ export default function ProofCardInfo({ proof }: Props) {
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={proofLocale.status.title}>
-          <PDAStatusChip
-            status={CredentialStatus.Valid}
-            isProof={true}
-            size="small"
-          />
+          <PDAStatusChip status={PdaStatus.Valid} isProof={true} size="small" />
         </CardCell>
       </TableCellContainer>
       {proof?.dataRequest && (

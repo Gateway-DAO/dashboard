@@ -41,6 +41,9 @@ export const common = {
     connect: 'Connect',
     disconnect: 'Disconnect',
     crop: 'Crop',
+    revoke: 'Revoke',
+    suspend: 'Suspend',
+    make_valid: 'Make valid',
   },
   socials: {
     twitter: 'Twitter',

@@ -5,7 +5,7 @@ dotenv.config();
 
 export default async function globalConfig() {
   const storagePath = path.resolve(__dirname, 'storageState.json');
-  const sessionToken = process.env.TEST_SESSION_TOKEN;
+  const sessionToken = process.env.TEST_NEXT_AUTH_TOKEN;
 
   const browser = await chromium.launch();
   const context = await browser.newContext();
