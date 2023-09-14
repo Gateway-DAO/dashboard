@@ -36,7 +36,13 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
 
   const isIssuer = useMemo(
-    () => session.user.gatewayId === pda?.dataAsset?.issuer?.user?.gatewayId,
+    () =>
+      session.user.gatewayId === pda?.dataAsset?.issuer?.user?.gatewayId ||
+      session?.user?.accesses?.find(
+        (access) =>
+          pda?.dataAsset?.organization?.gatewayId ===
+          access?.organization?.gatewayId
+      ),
     [pda, session]
   );
 
@@ -44,6 +50,8 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
     () => session.user.gatewayId === pda?.dataAsset?.owner?.user?.gatewayId,
     [pda, session]
   );
+
+  console.log(pda?.dataAsset?.issuer, session.user);
 
   return (
     <>
