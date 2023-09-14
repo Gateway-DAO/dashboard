@@ -3,6 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import {
+  defaultGridConfiguration,
+  defaultGridCustomization,
+} from '@/components/data-grid/grid-default';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import RequestStatusChip from '@/components/requests/request-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
@@ -121,43 +125,18 @@ export default function RequestsTable({
 
   return (
     <DataGrid
+      {...defaultGridConfiguration}
       rows={data && data.length ? data : initialData}
       columns={columns}
       paginationModel={paginationModel}
       onPaginationModelChange={setNewPage}
-      disableColumnFilter
-      disableColumnMenu
-      disableColumnSelector
-      disableRowSelectionOnClick
       loading={isFetching}
       rowCount={totalCount}
       paginationMode="server"
-      autoHeight
       onRowClick={(params: GridRowParams) => {
         router.push(routes.dashboardUserRequest(params.id));
       }}
-      sx={{
-        mx: NEGATIVE_CONTAINER_PX,
-        border: 'none',
-        borderRadius: 0,
-        '& .MuiDataGrid-footerContainer': {
-          paddingRight: CONTAINER_PX,
-        },
-        '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
-          border: 'none',
-        },
-        '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
-          {
-            paddingLeft: CONTAINER_PX,
-          },
-        '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
-          {
-            paddingRight: CONTAINER_PX,
-          },
-        '.MuiDataGrid-row': {
-          cursor: 'pointer',
-        },
-      }}
+      sx={defaultGridCustomization}
     />
   );
 }

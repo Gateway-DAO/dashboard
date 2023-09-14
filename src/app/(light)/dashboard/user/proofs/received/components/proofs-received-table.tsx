@@ -2,6 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 
+import {
+  defaultGridConfiguration,
+  defaultGridCustomization,
+} from '@/components/data-grid/grid-default';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import routes from '@/constants/routes';
 import { proofs } from '@/locale/en/proof';
@@ -58,43 +62,12 @@ export default function ProofsReceivedTable({ data }: Props) {
 
   return (
     <DataGrid
+      {...defaultGridConfiguration}
       rows={data}
       columns={columns}
-      initialState={{
-        pagination: {
-          paginationModel: {
-            pageSize: 10,
-          },
-        },
-      }}
-      disableColumnFilter
-      disableColumnMenu
-      disableColumnSelector
-      disableRowSelectionOnClick
-      disableDensitySelector
-      pageSizeOptions={[5, 10]}
-      autoHeight
+      sx={defaultGridCustomization}
       onRowClick={(value) => {
         router.push(routes.dashboardUserProof(value?.id));
-      }}
-      sx={{
-        mx: NEGATIVE_CONTAINER_PX,
-        border: 'none',
-        borderRadius: 0,
-        '& .MuiDataGrid-row': {
-          cursor: 'pointer',
-        },
-        '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
-          border: 'none',
-        },
-        '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
-          {
-            paddingLeft: CONTAINER_PX,
-          },
-        '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
-          {
-            paddingRight: CONTAINER_PX,
-          },
       }}
     />
   );
