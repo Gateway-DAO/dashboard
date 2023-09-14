@@ -1,11 +1,16 @@
+import { useRef } from 'react';
+
 import Wrapper from '@/app/(landing)/components/wrapper';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 import { joinClasses } from '@/app/(landing)/utils/function';
 
 import styles from './stats.module.scss';
 
 export default function Stats() {
+  const sectionRef = useRef<HTMLElement>(null);
+  useHeaderVariantDetection(sectionRef, 'light');
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper>
         <h2 className={styles.title}>
           Join the growing network solving data privacy and usage

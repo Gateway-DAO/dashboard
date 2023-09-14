@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Card from '@/app/(landing)/components/card';
 import ArrowLeft from '@/app/(landing)/components/icons/arrow-left';
@@ -8,7 +8,9 @@ import CardPrivacy from '@/app/(landing)/components/svgs/card-privacy';
 import CardStandardize from '@/app/(landing)/components/svgs/card-stamdardize';
 import CardVerification from '@/app/(landing)/components/svgs/card-verification';
 import Wrapper from '@/app/(landing)/components/wrapper';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
 import Slider from 'react-slick';
 
 import styles from './our-protocol.module.scss';
@@ -86,6 +88,7 @@ const cards = [
 
 export default function OurProtocol() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const sliderRef = useRef<Slider>(null);
   const settings = {
@@ -113,8 +116,10 @@ export default function OurProtocol() {
     return condition ? className : '';
   };
 
+  useHeaderVariantDetection(sectionRef, 'dark');
+
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper>
         <div className={styles.head}>
           <h2 className={styles.title}>Our Protocol</h2>

@@ -9,6 +9,7 @@ import Replay from '@/app/(landing)/components/icons/replay';
 import Verify from '@/app/(landing)/components/icons/verify';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 import animationData from '@/app/(landing)/json/pda-cycle-animation.json';
 import LenisManager from '@/app/(landing)/utils/scroll';
 import gsap from 'gsap';
@@ -44,20 +45,8 @@ export default function Lifecycle() {
   const sectionRef = useRef<HTMLElement>(null);
   const animationContainerRef = useRef<HTMLDivElement>(null);
   const lottieRef = useRef<AnimationItem>();
-  const { setVariant } = useHeaderContext();
 
-  useEffect(() => {
-    LenisManager?.on('scroll', () => {
-      if (!sectionRef.current) return;
-
-      const bounds = sectionRef.current.getBoundingClientRect();
-      const { bottom } = bounds;
-
-      if (bottom >= 80) {
-        setVariant('light');
-      }
-    });
-  }, []);
+  useHeaderVariantDetection(sectionRef, 'light');
 
   useEffect(() => {
     if (!animationContainerRef.current) return;
