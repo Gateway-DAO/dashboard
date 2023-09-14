@@ -1,6 +1,8 @@
-import styles from './header-icon.module.scss';
+import { joinClasses } from '../../utils/function';
+import styles from './gateway-logo.module.scss';
 
 type Props = {
+  className?: string;
   variant?: 'light' | 'dark';
   withName?: boolean;
 };
@@ -18,11 +20,15 @@ const colors = {
   },
 };
 
-export default function HeaderIcon({ variant = 'light', withName }: Props) {
+export default function GatewayLogo({
+  variant = 'light',
+  withName,
+  className,
+}: Props) {
   return (
     <div className={styles.element}>
       <svg
-        className={styles.logo}
+        className={joinClasses(styles.logo, className)}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 42 42"

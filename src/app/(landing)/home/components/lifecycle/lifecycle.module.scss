@@ -8,8 +8,9 @@
 .head {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  position: relative;
   width: 100%;
+  z-index: 1;
 }
 
 .title_container {
@@ -52,8 +53,8 @@
   width: 24px;
 }
 
-.svg_flow {
-  margin-bottom: 83px;
+.animation_container {
+  margin-top: -40px;
 }
 
 .steps {

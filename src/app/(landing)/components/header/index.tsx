@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import HeaderIcon from '@/app/(landing)/components/header-icon';
+import GatewayLogo from '@/app/(landing)/components/gateway-logo';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { joinClasses } from '@/app/(landing)/utils/function';
@@ -48,7 +48,7 @@ export default function Header() {
       ref={navRef}
     >
       <Wrapper className={styles.wrapper}>
-        <HeaderIcon withName variant={variant} />
+        <GatewayLogo withName variant={variant} />
 
         <div className={styles.links}>
           <GTWLink className={styles.link} href="/#learn">
