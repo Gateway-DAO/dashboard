@@ -13,7 +13,7 @@ query requests {
   }
 }
 
-query myDataRequests($take: Float!, $skip: Float!) {
+query myRequestsReceived($take: Float!, $skip: Float!) {
   requestsReceived(skip: $skip, take: $take) {
     id
     status
@@ -25,4 +25,8 @@ query myDataRequests($take: Float!, $skip: Float!) {
       id
     }
   }
+}
+
+query requestsCount {
+  requestsReceivedCount
 }

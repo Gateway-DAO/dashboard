@@ -1,25 +1,26 @@
+import TitleLayout from '@/components/title-layout/title-layout';
 import { pdas } from '@/locale/en/pda';
+import { getPrivateApi } from '@/services/protocol/api';
 
-import { Box, Stack, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import PDAsTable from './components/pdas-table';
 
-export default function OrganizationIssuedAssetsPage() {
+export default async function OrganizationIssuedAssetsPage() {
+  const privateApi = await getPrivateApi();
+  const issuedPdas =
+    (await privateApi.issued_pdas_by_org({ skip: 0, take: 5, orgId: '' }))
+      ?.issuedPDAs ?? [];
+  const count = (await privateApi.requestsCount()).requestsReceivedCount;
+
   return (
-    <Stack>
-      <Box
-        sx={{
-          mb: {
-            xs: 4,
-            md: 5,
-            lg: 6,
-          },
-        }}
-      >
-        <Typography variant="h3">{pdas.my_data_assets}</Typography>
-        <Typography variant="body1">{pdas.data_assets_subtitle}</Typography>
-      </Box>
-      <PDAsTable />
-    </Stack>
+    <Box sx={{ py: 2 }}>
+      <TitleLayout
+        title={pdas.my_data_assets}
+        subtitle={pdas.data_assets_subtitle}
+        titleId="title-org-assets"
+      />
+      <PDAsTable data={issuedPdas} totalCount={count} />
+    </Box>
   );
 }

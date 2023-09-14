@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { CredentialStatus } from '../../services/protocol/types';
+import { PdaStatus } from '../../services/protocol/types';
 import PDACard from './pda-card';
 
 const meta: Meta<typeof PDACard> = {
@@ -19,7 +19,7 @@ export const Playground: Story = {
   args: {
     name: 'PDA Card',
     href: '#',
-    status: CredentialStatus.Valid,
+    status: PdaStatus.Valid,
     issuerImage: 'https://picsum.photos/200',
     issuerName: 'Issuer Name',
   },
