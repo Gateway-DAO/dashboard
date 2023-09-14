@@ -47,10 +47,13 @@
 
 .logo_container,
 .name_container {
-  align-items: center;
   display: flex;
   margin-bottom: 35px;
   width: 25%;
+}
+
+.logo_container {
+  align-items: center;
 }
 
 .name {
