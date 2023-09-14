@@ -1,5 +1,5 @@
-import LoadingTable from '@/components/loadings/loading-table';
+import SkeletonTable from '@/components/loadings/skeleton-table/skeleton-table';
 
 export default function DataRequestsLoadingPage() {
-  return <LoadingTable columns={5} />;
+  return <SkeletonTable columns={5} />;
 }

@@ -2,15 +2,13 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { LoadingButton } from '@/components/buttons/loading-button';
-import ModalRight from '@/components/modal/modal-right';
-import ModalTitle from '@/components/modal/modal-title';
+import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import ModalRight from '@/components/modal/modal-right/modal-right';
+import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
-import {
-  PdaQuery,
-} from '@/services/protocol/types';
+import { PdaQuery } from '@/services/protocol/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToggle } from '@react-hookz/web/cjs/useToggle';
 import { useSnackbar } from 'notistack';

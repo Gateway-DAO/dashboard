@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { MutableRefObject, useEffect, useRef } from 'react';
 
 import { DATE_FORMAT } from '@/constants/date';
@@ -6,7 +5,6 @@ import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
 import CloseIcon from '@mui/icons-material/Close';
-import LaunchIcon from '@mui/icons-material/Launch';
 import { Paper, Stack, Typography } from '@mui/material';
 
 import GTWAvatar from '../gtw-avatar/gtw-avatar';
@@ -15,9 +13,9 @@ type Props = {
   onClose: () => void;
   right?: boolean;
   picture?: string;
-  name?: string;
-  username?: string;
-  issuance_date?: string;
+  name: string;
+  username: string;
+  issuance_date: string;
   isOrganization?: boolean;
 };
 
