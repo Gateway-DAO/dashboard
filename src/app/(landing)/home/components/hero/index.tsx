@@ -3,14 +3,17 @@ import { useEffect, useState, useRef } from 'react';
 
 import Button from '@/app/(landing)/components/button';
 import Wrapper from '@/app/(landing)/components/wrapper';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 import GTWLink from '@/components/gtw-link';
 import gsap from 'gsap';
 
 import styles from './hero.module.scss';
 
 export default function Hero() {
-  const [currentWord, setCurrentWord] = useState<string>('create');
+  const sectionRef = useRef<HTMLElement>(null);
   const refCurrentWordElement = useRef<HTMLSpanElement>(null);
+
+  const [currentWord, setCurrentWord] = useState<string>('create');
 
   useEffect(() => {
     const words = ['create', 'transfer', 'update'];
@@ -32,8 +35,10 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
+  useHeaderVariantDetection(sectionRef, 'light');
+
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper className={styles.wrapper}>
         <h1 className={styles.title}>
           <span className={styles.title_line}>The safer and faster</span>

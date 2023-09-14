@@ -1,4 +1,7 @@
+import { useRef } from 'react';
+
 import Wrapper from '@/app/(landing)/components/wrapper';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 
 import styles from './investors.module.scss';
 
@@ -22,8 +25,12 @@ const names = [
 ];
 
 export default function Investors() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useHeaderVariantDetection(sectionRef, 'light');
+
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper className={styles.wrapper}>
         <h2 className={styles.title}>Investors</h2>
 

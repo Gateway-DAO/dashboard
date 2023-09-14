@@ -1,13 +1,20 @@
+import { useRef } from 'react';
+
 import ForIssues from '@/app/(landing)/components/svgs/for-issues';
 import ForOwners from '@/app/(landing)/components/svgs/for-owners';
 import ForVerifies from '@/app/(landing)/components/svgs/for-verifies';
 import Wrapper from '@/app/(landing)/components/wrapper';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 
 import styles from './our-network.module.scss';
 
 export default function OurNetwork() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useHeaderVariantDetection(sectionRef, 'dark');
+
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper>
         <h2 className={styles.title}>Our Network</h2>
 
