@@ -87,3 +87,22 @@ query issued_pdas($take: Float!, $skip: Float!) {
     }
   }
 }
+
+query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
+  issuedPDAs(skip: $skip, take: $take, orgId: $orgId) {
+    id
+    issuanceDate
+    dataAsset {
+      title
+      owner {
+        user {
+          gatewayId
+        }
+      }
+      dataModel {
+        id
+      }
+      status
+    }
+  }
+}

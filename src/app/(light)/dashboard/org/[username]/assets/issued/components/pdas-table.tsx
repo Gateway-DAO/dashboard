@@ -1,17 +1,39 @@
 'use client';
 
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+
 import { defaultGridCustomization } from '@/components/data-grid/grid-default';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
 import { DATE_FORMAT } from '@/constants/date';
+import routes from '@/constants/routes';
+import { useSession } from '@/context/session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { PdaStatus } from '@/services/protocol/types';
+import { PrivateDataAsset } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
+import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
+import { PartialDeep } from 'type-fest';
 
 import { Typography } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridRowParams,
+} from '@mui/x-data-grid';
 
-export default function PDAsTable({}) {
+type Props = {
+  data: PartialDeep<PrivateDataAsset>[];
+  totalCount: number;
+};
+
+export default function PDAsTable({
+  data: initialData,
+  totalCount = 0,
+}: Props) {
   const columns: GridColDef[] = [
     {
       field: 'dataAsset',
@@ -73,123 +95,54 @@ export default function PDAsTable({}) {
     },
   ];
 
-  const rows = [
-    {
-      id: '123',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'Ishita Choudhary',
-        },
-      },
-      dataModelId: 'e3ffee1f-0836-4851-a862-d9d9de9d49a8',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '124',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '151ace14-d1ce-4c37-88a2-cd0359576b9e',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '125',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '350a7efe-aef0-45d8-9932-c670267203c7',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '126',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '82f9bbf8-69a5-4bd3-a886-2711df0005b0',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '127',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: 'e3ffee1f-0836-4851-a862-d9d9de9d49a8',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '128',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '82f9bbf8-69a5-4bd3-a886-2711df0005b0',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '129',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '151ace14-d1ce-4c37-88a2-cd0359576b9e',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '130',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '350a7efe-aef0-45d8-9932-c670267203c7',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '131',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '82f9bbf8-69a5-4bd3-a886-2711df0005b0',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-  ];
+  const router = useRouter();
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 5,
+  });
+
+  const { organization } = useOrganization();
+
+  const { privateApi } = useSession();
+  const { data, isFetching } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: [
+      'issued-data-assets-by-org',
+      organization?.id,
+      paginationModel ? paginationModel.page : 0,
+      paginationModel ? paginationModel.pageSize : 5,
+    ],
+    queryFn: () =>
+      privateApi?.issued_pdas_by_org({
+        skip: paginationModel.page * paginationModel.pageSize,
+        take: paginationModel.pageSize,
+        orgId: organization?.id || '',
+      }),
+    select: (data: any) => data?.issuedPdas,
+    initialData: initialData && initialData.length ? initialData : null,
+  });
+
+  const setNewPage = ({ page }: { page: number }) => {
+    setPaginationModel((prev) => ({
+      ...prev,
+      page: page ? page : 0,
+    }));
+  };
 
   return (
     <DataGrid
       {...defaultGridCustomization}
-      rows={rows}
+      rows={data}
       columns={columns}
+      rowCount={totalCount}
+      paginationModel={paginationModel}
+      onPaginationModelChange={setNewPage}
+      paginationMode="server"
+      loading={isFetching}
       sx={defaultGridCustomization}
+      onRowClick={(params: GridRowParams) => {
+        router.push(routes.dashboardUserAsset(params.id));
+      }}
     />
   );
 }
