@@ -48,7 +48,7 @@ export default function ForIssues({ className }: Props) {
           y2="95.185"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F8CEFF" />
+          <stop stopColor="#F8CEFF" />
           <stop offset="1" stopColor="#FAD9FF" stopOpacity="0" />
           <stop offset="1" stopColor="#F8CEFF" />
         </linearGradient>

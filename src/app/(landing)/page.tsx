@@ -30,7 +30,7 @@ export default function IndexPage() {
       <OurNetwork />
       <Stats />
       <Investors />
-      <Footer variant="light" />
+      <Footer variant="dark" />
     </HeaderContextProvider>
   );
 }

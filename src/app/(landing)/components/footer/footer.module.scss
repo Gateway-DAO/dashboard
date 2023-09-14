@@ -1,6 +1,7 @@
 .element {
   background-color: #771ac9;
   padding-top: 256px;
+  padding-bottom: 82px;
 }
 
 .title {
@@ -28,4 +29,142 @@
 .button {
   display: block;
   margin: auto;
+}
+
+.footer {
+  background-color: #e6d5fa;
+  border-radius: 18px;
+  padding: 40px 30px;
+  margin-top: 192px;
+  width: 100%;
+}
+
+.logo {
+  width: 74px;
+}
+
+.columns {
+  display: flex;
+  margin-top: 27px;
+}
+
+.column {
+  &:nth-child(1) {
+    width: 269px;
+  }
+
+  &:nth-child(2) {
+    margin-left: 93px;
+    width: 321px;
+  }
+
+  &:nth-child(3) {
+    margin-left: 71px;
+    width: 294px;
+  }
+}
+
+.copyright {
+  color: #212121;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20.02px;
+  letter-spacing: 0.17px;
+  margin-bottom: 23px;
+  margin-top: 0;
+}
+
+.links {
+  display: flex;
+}
+
+.link {
+  background-color: #fff;
+  border-radius: 12px;
+  height: 40px;
+  padding: 8px;
+  position: relative;
+  width: 40px;
+
+  &:not(:first-child) {
+    margin-left: 8px;
+  }
+}
+
+.link_logo {
+  fill: #771ac9;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 20px;
+}
+
+.links_list {
+  column-count: 2; /* Divide em duas colunas */
+  column-gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.links_item {
+  margin-bottom: 10px;
+  position: relative;
+  width: 156px;
+}
+
+.links_link {
+  color: #212121 !important;
+  display: block;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  opacity: 1;
+  position: relative;
+  text-decoration: none !important;
+  transition: opacity 0.8s ease;
+  width: 100%;
+
+  &:hover {
+    opacity: 0.4;
+  }
+}
+
+.subscribe_text {
+  color: #212121;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  max-width: 294px;
+  margin-top: 0;
+  strong {
+    font-weight: 600;
+  }
+}
+
+.input {
+  border: 1px solid #771ac9;
+  background-color: transparent;
+  border-radius: 16px;
+  color: #771ac9;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  padding: 0 12px;
+  height: 56px;
+  margin-bottom: 16px;
+  outline: none;
+  width: 294px;
+
+  &::placeholder {
+    color: #771ac9;
+  }
 }
