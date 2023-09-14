@@ -61,7 +61,9 @@ export default function Lifecycle() {
 
   const handleInView = (inView: boolean) => {
     if (inView) {
-      lottieRef.current?.play();
+      gsap.delayedCall(0.5, () => {
+        lottieRef.current?.play();
+      });
     }
   };
 
