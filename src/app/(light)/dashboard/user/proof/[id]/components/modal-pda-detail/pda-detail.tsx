@@ -2,7 +2,7 @@
 import PDAItem from '@/app/(light)/dashboard/user/asset/[id]/components/pda-item';
 import PDASkeleton from '@/app/(light)/dashboard/user/asset/[id]/components/pda-skeleton';
 import DefaultError from '@/components/default-error/default-error';
-import usePrivateApi from '@/hooks/use-private-api';
+import { useSession } from '@/context/session-provider';
 import { errorMessages } from '@/locale/en/errors';
 import { useQuery } from '@tanstack/react-query';
 
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function PDADetail({ id }: Props) {
-  const privateApi = usePrivateApi();
+  const { privateApi } = useSession();
   const {
     data: pda,
     isLoading,

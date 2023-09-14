@@ -1,13 +1,13 @@
 import { pdas as pdasLocales } from '@/locale/en/pda';
-import { getApiPrivate } from '@/services/protocol/api';
+import { getPrivateApi } from '@/services/protocol/api';
 
 import { Typography } from '@mui/material';
 
 import IssuedPDAsList from './components/list';
 
 export default async function DataAssetsPage() {
-  const apiPrivate = await getApiPrivate();
-  const pdas = (await apiPrivate.issued_pdas({ take: 6, skip: 0 }))?.issuedPDAs;
+  const privateApi = await getPrivateApi();
+  const pdas = (await privateApi.issued_pdas({ take: 6, skip: 0 }))?.issuedPDAs;
 
   return (
     <>

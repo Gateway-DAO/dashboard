@@ -2,8 +2,8 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import ModalRight from '@/components/modal/modal-right';
-import ModalTitle from '@/components/modal/modal-title';
+import ModalRight from '@/components/modal/modal-right/modal-right';
+import ModalTitle from '@/components/modal/modal-title/modal-title';
 
 import PDADetail from './pda-detail';
 
