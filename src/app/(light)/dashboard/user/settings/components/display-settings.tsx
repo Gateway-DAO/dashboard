@@ -5,7 +5,9 @@ import { useSession } from "@/context/session-provider";
 import { useForm, Controller } from "react-hook-form";
 import zod from "zod";
 
-import { Button, FormControl, FormHelperText, FormLabel, Input, InputAdornment, InputLabel, Stack, TextField } from "@mui/material";
+import { Box, Button, FormControl, FormHelperText, FormLabel, Input, InputAdornment, InputLabel, Stack, TextField } from "@mui/material";
+import AvatarPicker from "@/components/form/avatar-picker/avatar-picker";
+import { common } from "@/locale/en/common";
 
 const validations = zod.object({
   // name: zod.string().min(1, "Please enter your name"),
@@ -16,10 +18,14 @@ const validations = zod.object({
 export default function DisplaySettings() {
   const { session } = useSession();
 
-  const { register, control } = useForm({
+  const { register, control, watch } = useForm<{
+    avatar: string,
+    gatewayId: string,
+    name: string
+  }>({
     defaultValues: {
       avatar: undefined,
-      gatewayId: session?.user?.gatewayId,
+      gatewayId: session?.user?.gatewayId ?? undefined,
       name: undefined
     }
   })
@@ -28,17 +34,13 @@ export default function DisplaySettings() {
     gatewayId
   } } = session;
 
+  console.log(watch("avatar"))
+
   return <>
     <Stack spacing={3} alignItems="flex-start">
       <FormControl>
-        <FormLabel htmlFor="avatar" sx={{ fontSize: 14 }}>Avatar</FormLabel>
-        <Controller name="avatar" control={control} render={(props) => <Stack component="label" direction="row" gap={2} alignItems="center" sx={{ pt: 1 }}>
-          <GTWAvatar name={gatewayId!} src={props.field.value} size={80} />
-          <Button size="small" variant="outlined" component="span" sx={{ minWidth: 0 }}>
-            Change Image
-            <input id="avatar" type="file" hidden {...props.field} />
-          </Button>
-        </Stack>} />
+        <FormLabel htmlFor="avatar" sx={{ fontSize: 14 }}>{common.general.avatar}</FormLabel>
+        <AvatarPicker name="avatar" control={control} username={gatewayId!} />
       </FormControl>
       <TextField
         id="name"
