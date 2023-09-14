@@ -75,6 +75,23 @@ export default function Stats() {
     });
   }, []);
 
+  const onChangeInview = (inView: boolean) => {
+    if (inView) {
+      tl.current.forEach((timeline) => timeline?.play());
+      gsap.to(spinNumbersAnimationElementsRef.current, {
+        autoAlpha: 1,
+        duration: 0.8,
+        delay: 0.3,
+      });
+    } else {
+      gsap.set(spinNumbersAnimationElementsRef.current, { autoAlpha: 0 });
+      tl.current.forEach((timeline) => {
+        timeline?.pause();
+        timeline?.time(0);
+      });
+    }
+  };
+
   return (
     <section className={styles.element} ref={sectionRef}>
       <Wrapper>
@@ -82,19 +99,7 @@ export default function Stats() {
           Join the growing network solving data privacy and usage
         </h2>
 
-        <InView
-          className={styles.stats}
-          onChange={(inView) => {
-            if (inView) {
-              tl.current.forEach((timeline) => timeline?.play());
-            } else {
-              tl.current.forEach((timeline) => {
-                timeline?.pause();
-                timeline?.time(0);
-              });
-            }
-          }}
-        >
+        <InView className={styles.stats} onChange={onChangeInview}>
           <div className={joinClasses(styles.box, styles['box--lg'])}>
             <h3 className={styles.box_title}>Private Data Assets Created</h3>
             <span
