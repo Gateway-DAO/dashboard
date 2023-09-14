@@ -3,7 +3,7 @@ import { test, expect, Page } from '@playwright/test';
 let sharedPage: Page;
 let name: string;
 
-test.describe('Data asset flow', async () => {
+test.describe('Data asset', async () => {
   test.beforeEach(async ({ page }) => {
     sharedPage = page;
     await sharedPage.goto('/dashboard/user/assets/received');
@@ -20,7 +20,7 @@ test.describe('Data asset flow', async () => {
   });
   test('Check tooltip user', async () => {
     await sharedPage.locator('div[id*="pda-issuer-"]').click();
-    await sharedPage.waitForTimeout(5000);
+    await sharedPage.waitForTimeout(2000);
     expect(sharedPage.locator('#tooltip-user-name')).toBeVisible();
   });
 });

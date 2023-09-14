@@ -47,6 +47,7 @@ export default function ProofCardTitle({ proof }: Props) {
               cursor: 'pointer',
               '&:hover': { opacity: 0.7, transition: 'opacity .3s ease' },
             }}
+            id="tooltip-link-proof"
             onClick={() => setTooltip(true)}
           >
             <GTWAvatar
@@ -54,7 +55,7 @@ export default function ProofCardTitle({ proof }: Props) {
               size={56}
               name={proof?.verifier?.user?.gatewayId as string}
             />
-            <Typography variant="h3">
+            <Typography variant="h3" id="proof-title">
               {proof?.verifier?.user?.gatewayId}
             </Typography>
           </Stack>
