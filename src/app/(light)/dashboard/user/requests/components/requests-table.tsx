@@ -19,7 +19,12 @@ import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
 import { Stack, Typography } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridRowParams,
+} from '@mui/x-data-grid';
 
 const columns: GridColDef<PartialDeep<DataRequest>>[] = [
   {
@@ -121,20 +126,20 @@ export default function RequestsTable({ data: initialData }: Props) {
       disableColumnMenu
       disableColumnSelector
       disableRowSelectionOnClick
-      disableDensitySelector
       loading={isFetching}
       rowCount={rowCountState}
       paginationMode="server"
       autoHeight
-      onCellClick={({ field, value }) => {
-        if (field === 'id') {
-          router.push(routes.dashboardUserRequest(value as string));
-        }
+      onRowClick={(params: GridRowParams) => {
+        router.push(routes.dashboardUserRequest(params.id));
       }}
       sx={{
         mx: NEGATIVE_CONTAINER_PX,
         border: 'none',
         borderRadius: 0,
+        '& .MuiDataGrid-footerContainer': {
+          paddingRight: CONTAINER_PX,
+        },
         '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
           border: 'none',
         },
@@ -146,7 +151,7 @@ export default function RequestsTable({ data: initialData }: Props) {
           {
             paddingRight: CONTAINER_PX,
           },
-        '.MuiDataGrid-cell[data-field="id"]': {
+        '.MuiDataGrid-row': {
           cursor: 'pointer',
         },
       }}
