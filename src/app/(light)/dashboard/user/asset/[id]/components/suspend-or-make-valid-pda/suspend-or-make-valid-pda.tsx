@@ -87,7 +87,11 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
       )}
 
       <ConfirmDialog
-        title={pdaLocale.change_status.dialog_title}
+        title={
+          isValid
+            ? pdaLocale.change_status.dialog_title_suspend
+            : pdaLocale.change_status.dialog_title_valid
+        }
         open={dialogConfirmation}
         positiveAnswer={
           isValid ? common.actions.suspend : common.actions.make_valid
