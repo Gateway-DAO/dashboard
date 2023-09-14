@@ -1,8 +1,5 @@
 import { pda } from '@/locale/en/pda';
-import {
-  CredentialActivity,
-  CredentialStatus,
-} from '@/services/protocol/types';
+import { CredentialActivity, PdaStatus } from '@/services/protocol/types';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Box } from '@mui/material';
@@ -35,8 +32,8 @@ export const Playground: Story = {
         type: CredentialActivity.Issued,
         txHash: 'txhash.com',
         timestamp: '2018-04-04T16:00:00.000Z',
-        newStatus: CredentialStatus.Expired,
-        oldStatus: CredentialStatus.Valid,
+        newStatus: PdaStatus.Expired,
+        oldStatus: PdaStatus.Valid,
         credential: {} as any,
         oldUrl: '',
         newUrl: '',
@@ -45,8 +42,8 @@ export const Playground: Story = {
         type: CredentialActivity.Revoked,
         txHash: 'txhash.com',
         timestamp: '2018-04-04T16:00:00.000Z',
-        newStatus: CredentialStatus.Expired,
-        oldStatus: CredentialStatus.Valid,
+        newStatus: PdaStatus.Expired,
+        oldStatus: PdaStatus.Valid,
         credential: {} as any,
         oldUrl: '',
         newUrl: '',

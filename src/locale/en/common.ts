@@ -41,6 +41,7 @@ export const common = {
     revoke: 'Revoke',
     suspend: 'Suspend',
     make_valid: 'Make valid',
+    cancel: 'Cancel',
   },
   socials: {
     twitter: 'Twitter',

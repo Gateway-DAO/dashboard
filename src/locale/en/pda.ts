@@ -27,6 +27,15 @@ export const pda = {
     reactivated: 'PDA reactivated',
     updated: 'PDA updated',
   },
+  revoke: {
+    dialog_title: 'Are you sure to revoke this PDA?',
+    dialog_text:
+      'If you revoke this PDA, it will not be possible to undo this action.',
+  },
+  change_status: {
+    dialog_title: 'Confirmation',
+    dialog_text: 'Are you sure to change this PDA?',
+  },
   claim: 'Claim',
   issuer: 'Issuer',
   owner: 'Owner',

@@ -108,7 +108,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
             {isOwner && (
               <Stack direction="row" gap={1}>
                 <SuspendOrMakeValidPDA pda={pda} />
-                <RevokePDA />
+                <RevokePDA pda={pda} />
               </Stack>
             )}
 

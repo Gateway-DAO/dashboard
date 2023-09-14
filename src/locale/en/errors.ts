@@ -16,4 +16,7 @@ export const errorMessages = {
   WALLET_ALREADY_ASSOCIATED: `Wallet already associated to another user`,
   CANNOT_REMOVE_LAST_AUTH_METHOD: `You cannot remove the last authentication method of your account`,
   SOMETHING_WENT_WRONG: 'Something went wrong',
+  REVOKE_ERROR: 'There was a problem performing the revoke. Try again later.',
+  STATUS_CHANGE_ERROR:
+    'There was a problem performing the status change. Try again later.',
 };
