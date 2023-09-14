@@ -5,16 +5,16 @@ import { PropsWithChildren, createContext, useContext } from "react";
 import { Api, api, apiPublic } from "@/services/protocol/api";
 
 type SessionType = {
-  session: Session | null
+  session: Session
   privateApi: Api
 }
 
 export const SessionContext = createContext<SessionType>({
-  session: null,
+  session: {} as Session,
   privateApi: apiPublic
 })
 
-export function SessionProvider({ children, session }: PropsWithChildren<{ session: Session | null }>) {
+export function SessionProvider({ children, session }: PropsWithChildren<{ session: Session }>) {
   return (
     <SessionContext.Provider value={{ session, privateApi: api(session?.token ?? "") }}>
       {children}
