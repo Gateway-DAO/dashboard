@@ -12,4 +12,6 @@ export const splitSpans = (
   spans.forEach((span) => element.appendChild(span));
 
   callback && callback(spans);
+
+  return spans;
 };

@@ -65,11 +65,14 @@
 
 .box_value {
   color: var(--primary-main, #771ac9);
+  display: flex;
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
   line-height: 45px; /* 4 */
   letter-spacing: -5px;
+  overflow: hidden;
+  max-height: 45px;
 
   &--lg {
     font-size: 82px;
@@ -77,5 +80,10 @@
     font-weight: 400;
     letter-spacing: -8px;
     line-height: 82px;
+    max-height: 82px;
   }
+}
+
+.letter_container {
+  display: block;
 }

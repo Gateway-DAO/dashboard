@@ -1,14 +1,80 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
+import { splitSpans } from '@/app/(landing)/utils/dom';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import gsap from 'gsap';
+import { InView } from 'react-intersection-observer';
 
 import styles from './stats.module.scss';
 
 export default function Stats() {
   const sectionRef = useRef<HTMLElement>(null);
+  const spinNumbersAnimationElementsRef = useRef<(HTMLSpanElement | null)[]>(
+    []
+  );
+  const tl = useRef<gsap.core.Timeline[]>([]);
+
   useHeaderVariantDetection(sectionRef, 'light');
+
+  useEffect(() => {
+    if (!spinNumbersAnimationElementsRef.current.length) return;
+
+    spinNumbersAnimationElementsRef.current.forEach((spanRef, indexSpanRef) => {
+      if (!spanRef) return;
+      const letters = splitSpans(spanRef);
+
+      const lettersWithoutNumbers = letters.filter((letter) => {
+        const content = letter.textContent as string;
+        const number = Number(content);
+        return !isNaN(number);
+      });
+
+      tl.current[indexSpanRef] = gsap.timeline({ paused: true });
+
+      lettersWithoutNumbers.forEach((letter, index) => {
+        const content = letter.textContent as string;
+        const number = Number(content);
+        gsap.set(letter, { width: letter.getBoundingClientRect().width });
+
+        if (isNaN(number)) return;
+
+        letter.innerHTML = '';
+
+        const arr: number[] = [];
+
+        for (let i = 0; i <= index + 1; i++) {
+          const numberToBeShown = number - i;
+          if (numberToBeShown <= 0) {
+            arr.push(0);
+          } else {
+            arr.push(numberToBeShown);
+          }
+        }
+        arr.reverse();
+
+        arr.forEach((number) => {
+          const container = document.createElement('span');
+          container.classList.add(styles.letter_container);
+          container.textContent = String(number);
+          letter.appendChild(container);
+        });
+
+        const letterHeight = letter.getBoundingClientRect().height;
+        tl.current[indexSpanRef].to(
+          letter,
+          {
+            y: -letterHeight * (index + 1),
+            duration: 2,
+            ease: 'Power4.easeInOut',
+          },
+          0
+        );
+      });
+    });
+  }, []);
+
   return (
     <section className={styles.element} ref={sectionRef}>
       <Wrapper>
@@ -16,32 +82,64 @@ export default function Stats() {
           Join the growing network solving data privacy and usage
         </h2>
 
-        <div className={styles.stats}>
+        <InView
+          className={styles.stats}
+          onChange={(inView) => {
+            if (inView) {
+              tl.current.forEach((timeline) => timeline?.play());
+            } else {
+              tl.current.forEach((timeline) => {
+                timeline?.pause();
+                timeline?.time(0);
+              });
+            }
+          }}
+        >
           <div className={joinClasses(styles.box, styles['box--lg'])}>
             <h3 className={styles.box_title}>Private Data Assets Created</h3>
             <span
               className={joinClasses(styles.box_value, styles['box_value--lg'])}
+              ref={(ref) => (spinNumbersAnimationElementsRef.current[0] = ref)}
             >
-              10,000,000
+              3,000,000
             </span>
           </div>
 
           <div className={styles.small_boxes_container}>
             <div className={joinClasses(styles.box, styles['box--sm'])}>
               <h3 className={styles.box_title}>Unique Issuers</h3>
-              <span className={styles.box_value}>200</span>
+              <span
+                className={styles.box_value}
+                ref={(ref) =>
+                  (spinNumbersAnimationElementsRef.current[1] = ref)
+                }
+              >
+                200
+              </span>
             </div>
             <div className={joinClasses(styles.box, styles['box--sm'])}>
               <h3 className={styles.box_title}>Users Empowered</h3>
-              <span className={styles.box_value}>400,000</span>
+              <span
+                className={styles.box_value}
+                ref={(ref) =>
+                  (spinNumbersAnimationElementsRef.current[2] = ref)
+                }
+              >
+                400,000
+              </span>
             </div>
           </div>
 
           <div className={joinClasses(styles.box, styles['box--md'])}>
             <h3 className={styles.box_title}>Verifications</h3>
-            <span className={styles.box_value}>2,000,000</span>
+            <span
+              className={styles.box_value}
+              ref={(ref) => (spinNumbersAnimationElementsRef.current[3] = ref)}
+            >
+              2,000,000
+            </span>
           </div>
-        </div>
+        </InView>
       </Wrapper>
     </section>
   );
