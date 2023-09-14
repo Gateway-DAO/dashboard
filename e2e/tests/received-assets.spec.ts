@@ -2,7 +2,7 @@ import { test, expect, Page } from '@playwright/test';
 
 let sharedPage: Page;
 
-test.describe('Data assets flow', async () => {
+test.describe('Received Data assets', async () => {
   test.beforeEach(async ({ page }) => {
     sharedPage = page;
     await sharedPage.goto('/dashboard/user/assets/received');
@@ -11,9 +11,9 @@ test.describe('Data assets flow', async () => {
   test.afterAll(async ({}) => {
     await sharedPage.close();
   });
-  test('View data assets page', async () => {
-    await expect(sharedPage.locator('#title-assets')).toContainText(
-      'Data assets'
+  test('Check if Tab Received is active', async () => {
+    await expect(sharedPage.locator('a[aria-selected="true"]')).toContainText(
+      'Received'
     );
   });
 });
