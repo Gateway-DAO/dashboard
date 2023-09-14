@@ -3,6 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import {
+  defaultGridConfiguration,
+  defaultGridCustomization,
+} from '@/components/data-grid/grid-default';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import RequestStatusChip from '@/components/requests/request-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
@@ -82,11 +86,14 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
 
 type Props = {
   data: PartialDeep<DataRequest>[];
+  totalCount: number;
 };
 
-export default function RequestsTable({ data: initialData }: Props) {
+export default function RequestsTable({
+  data: initialData,
+  totalCount = 0,
+}: Props) {
   const router = useRouter();
-  const rowCountState = 6; //TODO: REMOVE THIS MAGIC NUMBER
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 5,
@@ -101,7 +108,7 @@ export default function RequestsTable({ data: initialData }: Props) {
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
-      privateApi?.myDataRequests({
+      privateApi?.myRequestsReceived({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
@@ -118,43 +125,18 @@ export default function RequestsTable({ data: initialData }: Props) {
 
   return (
     <DataGrid
+      {...defaultGridConfiguration}
       rows={data && data.length ? data : initialData}
       columns={columns}
       paginationModel={paginationModel}
       onPaginationModelChange={setNewPage}
-      disableColumnFilter
-      disableColumnMenu
-      disableColumnSelector
-      disableRowSelectionOnClick
       loading={isFetching}
-      rowCount={rowCountState}
+      rowCount={totalCount}
       paginationMode="server"
-      autoHeight
       onRowClick={(params: GridRowParams) => {
         router.push(routes.dashboardUserRequest(params.id));
       }}
-      sx={{
-        mx: NEGATIVE_CONTAINER_PX,
-        border: 'none',
-        borderRadius: 0,
-        '& .MuiDataGrid-footerContainer': {
-          paddingRight: CONTAINER_PX,
-        },
-        '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
-          border: 'none',
-        },
-        '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
-          {
-            paddingLeft: CONTAINER_PX,
-          },
-        '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
-          {
-            paddingRight: CONTAINER_PX,
-          },
-        '.MuiDataGrid-row': {
-          cursor: 'pointer',
-        },
-      }}
+      sx={defaultGridCustomization}
     />
   );
 }

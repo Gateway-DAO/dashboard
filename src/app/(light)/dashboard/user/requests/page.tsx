@@ -5,8 +5,9 @@ import RequestsTable from './components/requests-table';
 export default async function DashboardUserDataRequestsPage() {
   const privateApi = await getPrivateApi();
   const requestsData =
-    (await privateApi.myDataRequests({ skip: 0, take: 5 }))?.requestsReceived ??
-    [];
+    (await privateApi.myRequestsReceived({ skip: 0, take: 5 }))
+      ?.requestsReceived ?? [];
+  const count = (await privateApi.requestsCount()).requestsReceivedCount;
 
-  return <RequestsTable data={requestsData} />;
+  return <RequestsTable data={requestsData} totalCount={count} />;
 }
