@@ -2,7 +2,12 @@
   background-color: #771ac9;
   border-radius: 16px;
   height: 535px;
+  transition: background-color 0.8s ease;
   width: 368px;
+
+  &:hover {
+    background-color: #591597;
+  }
 }
 
 .svg_container {

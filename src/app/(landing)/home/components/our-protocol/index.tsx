@@ -10,7 +10,6 @@ import CardVerification from '@/app/(landing)/components/svgs/card-verification'
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 import { joinClasses } from '@/app/(landing)/utils/function';
-import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
 import Slider from 'react-slick';
 
 import styles from './our-protocol.module.scss';
