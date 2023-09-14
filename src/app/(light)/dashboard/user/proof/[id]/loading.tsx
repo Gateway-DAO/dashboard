@@ -1,5 +1,5 @@
-import BackButton from '@/components/buttons/back-button';
-import TopBarContainer from '@/components/top-bar-container/top-bar-container';
+import BackButton from '@/components/buttons/back-button/back-button';
+import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
 
 import ProofSkeleton from './components/proof-skeleton';
 

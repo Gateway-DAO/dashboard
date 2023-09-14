@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-import Loading from '@/components/loadings/loading';
+import Loading from '@/components/loadings/loading/loading';
 import routes from '@/constants/routes';
 import { Chain } from '@/services/protocol/types';
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
@@ -24,7 +24,7 @@ export default function EvmWalletConnect({
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
   const router = useRouter();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   const { login, isLoading } = useLoginWallet({
     address,
@@ -41,7 +41,7 @@ export default function EvmWalletConnect({
       //TODO: Make it reusable
       const callbackUrl = searchParams.get('callbackUrl');
       router.push(callbackUrl ?? routes.dashboardUserHome);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {

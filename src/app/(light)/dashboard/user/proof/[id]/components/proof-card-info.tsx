@@ -1,14 +1,11 @@
 'use client';
 import CardCell from '@/components/card-cell/card-cell';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
-import { TableCellContainer } from '@/components/table-cell-container/table-cell-container';
+import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import { DATE_FORMAT } from '@/constants/date';
 import { pda } from '@/locale/en/pda';
 import { proof as proofLocale } from '@/locale/en/proof';
-import {
-  CredentialStatus,
-  Proof,
-} from '@/services/protocol/types';
+import { CredentialStatus, Proof } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';

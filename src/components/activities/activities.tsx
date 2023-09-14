@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { common } from '@/locale/en/common';
 import { pda } from '@/locale/en/pda';
+import { Activity } from '@/services/protocol/types';
 import { timestampToString } from '@/utils/date';
 import { getExplorer } from '@/utils/web3';
 
@@ -18,18 +19,27 @@ import {
 } from '@mui/material';
 
 type Props = {
-  activities: any; // TODO: Add types
+  activities: Activity[];
   activitiesTextsType: Record<string, string>;
 };
 
 const activityText = (
   type: string,
-  activitiesTextsType: Record<string, string>
+  activitiesTextsType?: Record<string, string>
 ) => {
-  return activitiesTextsType[type] || 'Unknown activity';
+  return activitiesTextsType ? activitiesTextsType[type] : 'Unknown activity';
 };
 
-export default function Activities({ activities, activitiesTextsType }: Props) {
+export default function Activities({
+  activities,
+  activitiesTextsType = {
+    Issued: pda.activities.issued,
+    Revoked: pda.activities.revoked,
+    Suspended: pda.activities.suspended,
+    Reactivated: pda.activities.reactivated,
+    Updated: pda.activities.updated,
+  },
+}: Props) {
   const [expanded, setExpanded] = useState<boolean>(false);
 
   const handleChange =
@@ -110,6 +120,7 @@ export default function Activities({ activities, activitiesTextsType }: Props) {
                       direction="row"
                       alignItems="center"
                       justifyContent="space-between"
+                      gap={2}
                     >
                       <Stack>
                         <Typography fontSize={14}>
