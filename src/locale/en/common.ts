@@ -38,6 +38,9 @@ export const common = {
     less_info: 'Less info',
     connect: 'Connect',
     disconnect: 'Disconnect',
+    revoke: 'Revoke',
+    suspend: 'Suspend',
+    make_valid: 'Make valid',
   },
   socials: {
     twitter: 'Twitter',
