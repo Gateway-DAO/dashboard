@@ -22,7 +22,6 @@
 
 .small_boxes_container {
   position: relative;
-  width: 23%;
 }
 
 .box {
@@ -36,12 +35,12 @@
   &--lg {
     height: 400px;
     margin-right: 24px;
-    width: 48%;
+    width: 564px;
   }
 
   &--sm {
     height: 188px;
-    width: 100%;
+    width: 270px;
 
     &:first-child {
       margin-bottom: 24px;
@@ -51,7 +50,7 @@
   &--md {
     height: 400px;
     margin-left: 24px;
-    width: 23%;
+    width: 270px;
   }
 }
 
