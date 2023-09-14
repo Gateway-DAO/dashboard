@@ -30,10 +30,10 @@ export const pda = {
   revoke: {
     dialog_title: 'Are you sure to revoke this PDA?',
     dialog_text:
-      'If you revoke this PDA, it will not be possible to undo this action.',
+      'After changing the status of this PDA, you can change to the previous state.',
   },
   change_status: {
-    dialog_title: 'Confirmation',
+    dialog_title: 'Are you sure to change this PDA?',
     dialog_text: 'Are you sure to change this PDA?',
   },
   claim: 'Claim',
