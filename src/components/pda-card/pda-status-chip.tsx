@@ -1,10 +1,10 @@
 import { proof } from '@/locale/en/proof';
-import { CredentialStatus } from '@/services/protocol/types';
+import { PdaStatus } from '@/services/protocol/types';
 
 import { Chip, ChipProps } from '@mui/material';
 
 type Props = {
-  status: CredentialStatus;
+  status: PdaStatus;
   variant?: 'filled' | 'outlined';
   isProof?: boolean;
 } & Omit<ChipProps, 'label' | 'color'>;
@@ -18,22 +18,19 @@ export function PDAStatusChip({
   const labelValidProof = proof.status.up_to_date;
   const props: Pick<ChipProps, 'label' | 'color'> = {
     label:
-      isProof && status === CredentialStatus.Valid
+      isProof && status === PdaStatus.Valid
         ? labelValidProof
         : status?.toLocaleLowerCase(),
     color: 'success',
     ...chipProps,
   };
-  if (status === CredentialStatus.Expired) {
+  if (status === PdaStatus.Expired) {
     props.color = 'warning';
   }
-  if (status === CredentialStatus.Invalid) {
+  if (status === PdaStatus.Revoked) {
     props.color = 'error';
   }
-  if (status === CredentialStatus.Revoked) {
-    props.color = 'error';
-  }
-  if (status === CredentialStatus.Suspended) {
+  if (status === PdaStatus.Suspended) {
     props.color = 'warning';
   }
 

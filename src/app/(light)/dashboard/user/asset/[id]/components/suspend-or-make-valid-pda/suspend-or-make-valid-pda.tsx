@@ -1,6 +1,19 @@
+import { useMemo, useState } from 'react';
+
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
+import { mutations } from '@/constants/queries';
+import { useSession } from '@/context/session-provider';
 import { common } from '@/locale/en/common';
-import { CredentialStatus, PdaQuery } from '@/services/protocol/types';
+import { errorMessages } from '@/locale/en/errors';
+import { pda as pdaLocale } from '@/locale/en/pda';
+import {
+  ChangePdaStatusMutationVariables,
+  PdaQuery,
+  PdaStatus,
+} from '@/services/protocol/types';
+import { useMutation } from '@tanstack/react-query';
+import { useSnackbar } from 'notistack';
 import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -11,44 +24,93 @@ type Props = {
 };
 
 export function SuspendOrMakeValidPDA({ pda }: Props) {
+  const { privateApi } = useSession();
+  const { enqueueSnackbar } = useSnackbar();
+  const [dialogConfirmation, setDialogConfirmation] = useState(false);
+
+  const mutationReq = {
+    mutationKey: [mutations.change_pda_status],
+    mutationFn: (data: ChangePdaStatusMutationVariables) => {
+      return privateApi?.changePDAStatus(data);
+    },
+    onSuccess: () => console.log('Status changed'), // TODO: Refetch queries
+    onError: () => enqueueSnackbar(errorMessages.STATUS_CHANGE_ERROR),
+  };
+
+  const suspendPda = useMutation(mutationReq);
+  const makeValidPda = useMutation(mutationReq);
+
+  const isValid = useMemo(
+    () => pda?.dataAsset?.status === PdaStatus.Valid,
+    [pda]
+  );
+  const isSuspended = useMemo(
+    () => pda?.dataAsset?.status === PdaStatus.Suspended,
+    [pda]
+  );
+
   return (
     <>
-      {pda?.dataAsset?.status === CredentialStatus.Valid && (
+      {isValid && (
         <LoadingButton
           variant="outlined"
           startIcon={<DoNotDisturbAltIcon />}
           size="large"
           color="warning"
           fullWidth
+          isLoading={suspendPda.isLoading}
           sx={{
             mb: 2,
           }}
-          onClick={() => {
-            console.log('Suspended');
-          }}
+          onClick={() => setDialogConfirmation(true)}
         >
           {common.actions.suspend}
         </LoadingButton>
       )}
 
-      {pda?.dataAsset?.status === CredentialStatus.Suspended && (
+      {isSuspended && (
         <LoadingButton
           variant="contained"
           startIcon={<CheckCircleIcon />}
           size="large"
           color="success"
           fullWidth
+          isLoading={makeValidPda.isLoading}
           sx={{
             mb: 2,
             color: 'common.white',
           }}
-          onClick={() => {
-            console.log('Valid');
-          }}
+          onClick={() => setDialogConfirmation(true)}
         >
           {common.actions.make_valid}
         </LoadingButton>
       )}
+
+      <ConfirmDialog
+        title={pdaLocale.change_status.dialog_title}
+        open={dialogConfirmation}
+        positiveAnswer={
+          isValid ? common.actions.suspend : common.actions.make_valid
+        }
+        negativeAnswer={common.actions.cancel}
+        setOpen={setDialogConfirmation}
+        onConfirm={() => {
+          if (pda?.dataAsset?.status === PdaStatus.Valid) {
+            suspendPda.mutateAsync({
+              id: pda?.id as string,
+              status: PdaStatus.Suspended,
+            });
+          }
+          if (pda?.dataAsset?.status === PdaStatus.Suspended) {
+            makeValidPda.mutateAsync({
+              id: pda?.id as string,
+              status: PdaStatus.Valid,
+            });
+          }
+        }}
+      >
+        {pdaLocale.change_status.dialog_text}
+      </ConfirmDialog>
     </>
   );
 }
