@@ -13,28 +13,34 @@ import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
+import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
 import { Stack, Typography } from '@mui/material';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
 const columns: GridColDef<PartialDeep<DataRequest>>[] = [
   {
     field: 'id',
     headerName: 'Request ID',
-    flex: 1,
-    valueGetter: (params) => params.row.id,
+    flex: 1.3,
+    renderCell: (params: GridRenderCellParams) => {
+      return (
+        <Typography variant="body1">
+          {limitCharsCentered(params.row.id, 10)}
+        </Typography>
+      );
+    },
   },
   {
     field: 'userVerifier',
     headerName: 'Requested By',
-    flex: 1,
-    valueGetter: (params) => params.row.userVerifier?.gatewayId,
+    flex: 1.3,
     renderCell(params) {
       return (
-        <Stack direction="row" alignItems="center" spacing={1}>
+        <Stack direction="row" alignItems="center" spacing={1.5}>
           <GTWAvatar
             name={params.row.userVerifier!.gatewayId! || ''}
             size={32}
@@ -49,21 +55,20 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
   {
     field: 'dataRequestTemplate',
     headerName: 'Request Template ID',
-    flex: 1,
+    flex: 1.2,
     valueGetter: (params) => params.row.dataRequestTemplate?.id,
+    valueFormatter: (params) => limitCharsCentered(params.value, 15),
   },
   {
     field: 'createdAt',
     headerName: 'Created At',
-    type: 'number',
-    flex: 1,
+    flex: 1.2,
     valueFormatter: (params) => dayjs(params.value).format(DATE_FORMAT),
   },
   {
     field: 'status',
-    headerName: 'status',
-    type: 'number',
-    flex: 1,
+    headerName: 'Status',
+    flex: 1.2,
     renderCell(params) {
       return <RequestStatusChip status={params.row.status!} />;
     },
