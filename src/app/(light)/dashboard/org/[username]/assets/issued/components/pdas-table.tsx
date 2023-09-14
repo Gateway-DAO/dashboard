@@ -1,25 +1,44 @@
 'use client';
 
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+
+import { defaultGridCustomization } from '@/components/data-grid/grid-default';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
 import { DATE_FORMAT } from '@/constants/date';
-import { CredentialStatus } from '@/services/protocol/types';
-import {
-  CONTAINER_PX,
-  NEGATIVE_CONTAINER_PX,
-} from '@/theme/config/style-tokens';
+import routes from '@/constants/routes';
+import { useSession } from '@/context/session-provider';
+import useOrganization from '@/hooks/use-organization';
+import { PdaStatus } from '@/services/protocol/types';
+import { PrivateDataAsset } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
+import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
+import { PartialDeep } from 'type-fest';
 
 import { Typography } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridRowParams,
+} from '@mui/x-data-grid';
 
-export default function PDAsTable({ }) {
+type Props = {
+  data: PartialDeep<PrivateDataAsset>[];
+  totalCount: number;
+};
+
+export default function PDAsTable({
+  data: initialData,
+  totalCount = 0,
+}: Props) {
   const columns: GridColDef[] = [
     {
       field: 'dataAsset',
       headerName: 'Data asset',
-      width: 150,
+      flex: 1.3,
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography variant="body1" fontWeight={700}>
@@ -31,7 +50,7 @@ export default function PDAsTable({ }) {
     {
       field: 'owner',
       headerName: 'Recipient',
-      width: 200,
+      flex: 1.3,
       renderCell: (params: GridRenderCellParams) => {
         return <AvatarTextCell name={params.row.owner?.user?.gatewayId} />;
       },
@@ -39,7 +58,7 @@ export default function PDAsTable({ }) {
     {
       field: 'dataModelId',
       headerName: 'Data model ID',
-      minWidth: 150,
+      flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography variant="body1">
@@ -51,7 +70,7 @@ export default function PDAsTable({ }) {
     {
       field: 'issuanceDate',
       headerName: 'Issuance date',
-      width: 200,
+      flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography>
@@ -63,10 +82,11 @@ export default function PDAsTable({ }) {
     {
       field: 'status',
       headerName: 'Status',
+      flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
           <PDAStatusChip
-            status={params.row.status ?? CredentialStatus.Invalid}
+            status={params.row.status ?? PdaStatus.Valid}
             size="small"
             variant="outlined"
           />
@@ -75,153 +95,53 @@ export default function PDAsTable({ }) {
     },
   ];
 
-  const rows = [
-    {
-      id: '123',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'Ishita Choudhary',
-        },
-      },
-      dataModelId: 'e3ffee1f-0836-4851-a862-d9d9de9d49a8',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '124',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '151ace14-d1ce-4c37-88a2-cd0359576b9e',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '125',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '350a7efe-aef0-45d8-9932-c670267203c7',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '126',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '82f9bbf8-69a5-4bd3-a886-2711df0005b0',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '127',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: 'e3ffee1f-0836-4851-a862-d9d9de9d49a8',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '128',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '82f9bbf8-69a5-4bd3-a886-2711df0005b0',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '129',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '151ace14-d1ce-4c37-88a2-cd0359576b9e',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '130',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '350a7efe-aef0-45d8-9932-c670267203c7',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-    {
-      id: '131',
-      dataAsset: 'Credit Score',
-      owner: {
-        user: {
-          gatewayId: 'gatewayid',
-        },
-      },
-      dataModelId: '82f9bbf8-69a5-4bd3-a886-2711df0005b0',
-      issuanceDate: '2023-09-04 18:50:48.888',
-      status: 'Valid',
-    },
-  ];
+  const router = useRouter();
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 5,
+  });
+
+  const { organization } = useOrganization();
+
+  const { privateApi } = useSession();
+  const { data, isFetching } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: [
+      'issued-data-assets-by-org',
+      organization?.id,
+      paginationModel ? paginationModel.page : 0,
+      paginationModel ? paginationModel.pageSize : 5,
+    ],
+    queryFn: () =>
+      privateApi?.issued_pdas_by_org({
+        skip: paginationModel.page * paginationModel.pageSize,
+        take: paginationModel.pageSize,
+        orgId: organization?.id || '',
+      }),
+    select: (data: any) => data?.issuedPdas,
+    initialData: initialData && initialData.length ? initialData : null,
+  });
+
+  const setNewPage = ({ page }: { page: number }) => {
+    setPaginationModel((prev) => ({
+      ...prev,
+      page: page ? page : 0,
+    }));
+  };
 
   return (
     <DataGrid
-      rows={rows}
+      {...defaultGridCustomization}
+      rows={data}
       columns={columns}
-      autoHeight
-      initialState={{
-        pagination: {
-          paginationModel: { page: 0, pageSize: 10 },
-        },
-      }}
-      onCellClick={({ field, value }) => {
-        //TODO: Implement go to wih router.push
-        console.log(value as string);
-      }}
-      disableColumnFilter
-      disableColumnMenu
-      disableColumnSelector
-      disableRowSelectionOnClick
-      disableDensitySelector
-      pageSizeOptions={[5, 10]}
-      sx={{
-        mx: NEGATIVE_CONTAINER_PX,
-        borderLeft: 'none',
-        borderRight: 'none',
-        borderRadius: 0,
-        '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child':
-        {
-          paddingLeft: CONTAINER_PX,
-        },
-        '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child':
-        {
-          paddingRight: CONTAINER_PX,
-        },
-        '.MuiDataGrid-cell[data-field="id"]': {
-          cursor: 'pointer',
-        },
+      rowCount={totalCount}
+      paginationModel={paginationModel}
+      onPaginationModelChange={setNewPage}
+      paginationMode="server"
+      loading={isFetching}
+      sx={defaultGridCustomization}
+      onRowClick={(params: GridRowParams) => {
+        router.push(routes.dashboardUserAsset(params.id));
       }}
     />
   );

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-import SwipeableDrawerMobile from '@/components/modal/swipeable-drawer-mobile';
+'use client';
+import SwipeableDrawerMobile from '@/components/modal/swipeable-drawer-mobile/swipeable-drawer-mobile';
 
 import { CloseOutlined } from '@mui/icons-material';
 import {

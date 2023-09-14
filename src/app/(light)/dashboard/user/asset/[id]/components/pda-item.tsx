@@ -1,8 +1,10 @@
 'use client';
 
 import Image from 'next/image';
+import { useMemo } from 'react';
 
 import Tags from '@/components/tags/tags';
+import { useSession } from '@/context/session-provider';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
 import {
@@ -20,7 +22,9 @@ import DataTable from './data-table';
 import IssuePda from './issue-pda/issue-pda';
 import ModalImage from './modal-image';
 import PdaCardInfo from './pda-card-info';
+import { RevokePDA } from './revoke-pda/revoke-pda';
 import SharedWithCard from './shared-with-card';
+import { SuspendOrMakeValidPDA } from './suspend-or-make-valid-pda/suspend-or-make-valid-pda';
 
 type Props = {
   pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
@@ -28,7 +32,26 @@ type Props = {
 };
 
 export default function PDAItem({ pda, viewOnly = false }: Props) {
+  const { session } = useSession();
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
+
+  const isIssuer = useMemo(
+    () =>
+      session.user.gatewayId === pda?.dataAsset?.issuer?.user?.gatewayId ||
+      session?.user?.accesses?.find(
+        (access) =>
+          pda?.dataAsset?.organization?.gatewayId ===
+          access?.organization?.gatewayId
+      ),
+    [pda, session]
+  );
+
+  const isOwner = useMemo(
+    () => session.user.gatewayId === pda?.dataAsset?.owner?.user?.gatewayId,
+    [pda, session]
+  );
+
+  console.log(pda?.dataAsset?.issuer, session.user);
 
   return (
     <>
@@ -88,7 +111,15 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           <>
             {/* TODO: DISPLAY SHARED WITH CARD ONLY IF IT HAS SHARED DATA (PROOFS) */}
             {/* <SharedWithCard /> */}
-            <IssuePda pda={pda} />
+
+            {isIssuer && <IssuePda pda={pda} />}
+            {isOwner && (
+              <Stack direction="row" gap={1}>
+                <SuspendOrMakeValidPDA pda={pda} />
+                <RevokePDA pda={pda} />
+              </Stack>
+            )}
+
             {/* Activies backloged 09/02 */}
             {/* <Activities
               activities={pda.activities}

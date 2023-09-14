@@ -1,11 +1,11 @@
 'use client';
 import CardCell from '@/components/card-cell/card-cell';
+import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
-import { TableCellContainer } from '@/components/table-cell-container/table-cell-container';
 import { DATE_FORMAT } from '@/constants/date';
 import { datamodel } from '@/locale/en/datamodel';
 import { pda as pdaLocale } from '@/locale/en/pda';
-import { CredentialStatus, PdaQuery } from '@/services/protocol/types';
+import { PdaStatus, PdaQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
@@ -53,7 +53,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
               </Stack>
               {limitCharsCentered(
                 pda?.dataAsset?.owner?.data?.address ??
-                pda?.dataAsset?.owner?.data?.email,
+                  pda?.dataAsset?.owner?.data?.email,
                 40
               )}
             </Stack>
@@ -66,8 +66,8 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
             <Typography>
               {limitCharsCentered(
                 pda?.dataAsset?.issuer?.user?.gatewayId ??
-                pda?.dataAsset?.issuer?.data?.address ??
-                pda?.dataAsset?.issuer?.data?.email,
+                  pda?.dataAsset?.issuer?.data?.address ??
+                  pda?.dataAsset?.issuer?.data?.email,
                 20
               )}
             </Typography>
@@ -94,7 +94,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
         </CardCell>
         <CardCell label={pdaLocale.status.title}>
           <PDAStatusChip
-            status={pda?.dataAsset?.status ?? CredentialStatus.Invalid}
+            status={pda?.dataAsset?.status ?? PdaStatus.Valid}
             size="small"
           />
         </CardCell>

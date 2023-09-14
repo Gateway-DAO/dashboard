@@ -2,7 +2,7 @@
 import NextLink from 'next/link';
 import { useState } from 'react';
 
-import { CheckButton } from '@/components/buttons/check-button';
+import { CheckButton } from '@/components/buttons/check-button/check-button';
 
 import {
   Icon,

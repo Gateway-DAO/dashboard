@@ -1,3 +1,4 @@
+'use client';
 import { MouseEvent, useCallback, useMemo, useState } from 'react';
 
 /**

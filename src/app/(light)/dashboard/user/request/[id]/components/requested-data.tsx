@@ -40,7 +40,7 @@ export default function RequestedData({ dataModel }: Props) {
         borderBottom: 0
       }
     }}>
-      <TableHead>
+      <TableHead sx={{ borderBottomStyle: "solid", borderBottomWidth: 1, borderBottomColor: "divider" }}>
         <TableRow>
           <TableCell>Requested</TableCell>
           <TableCell>My Data</TableCell>

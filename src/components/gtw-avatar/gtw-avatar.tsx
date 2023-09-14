@@ -5,7 +5,7 @@ import { Avatar } from '@mui/material';
 
 type Props = {
   src?: string | undefined | null;
-  name: string;
+  name?: string;
   alt?: string;
   size?: number;
   hasBorder?: boolean;

@@ -12,3 +12,21 @@ query requests {
     }
   }
 }
+
+query myRequestsReceived($take: Float!, $skip: Float!) {
+  requestsReceived(skip: $skip, take: $take) {
+    id
+    status
+    userVerifier {
+      gatewayId
+    }
+    createdAt
+    dataRequestTemplate {
+      id
+    }
+  }
+}
+
+query requestsCount {
+  requestsReceivedCount
+}

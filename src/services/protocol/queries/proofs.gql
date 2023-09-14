@@ -4,6 +4,8 @@ query received_proofs($take: Float!, $skip: Float!) {
     totalCost
     facilitationFee
     createdAt
+    arweaveUrl
+
     owner {
       id
       user {
@@ -11,6 +13,7 @@ query received_proofs($take: Float!, $skip: Float!) {
       }
       data
     }
+
     data {
       dataModels {
         id
@@ -33,14 +36,48 @@ query received_proofs($take: Float!, $skip: Float!) {
         }
       }
     }
-    arweaveUrl
+
+    verifier {
+      user {
+        gatewayId
+      }
+    }
+
     organization {
       gatewayId
       image
     }
+
     dataRequest {
-      arweaveUrl
-      status
+      id
+      dataRequestTemplate {
+        id
+      }
+    }
+  }
+}
+
+query sent_proofs($take: Float!, $skip: Float!) {
+  sentProofs(skip: $skip, take: $take) {
+    id
+
+    data {
+      PDAs {
+        id
+      }
+    }
+
+    verifier {
+      user {
+        gatewayId
+      }
+    }
+
+    dataRequest {
+      id
+      dataRequestTemplate {
+        id
+      }
     }
   }
 }
@@ -51,7 +88,6 @@ query proof($id: String!) {
     totalCost
     facilitationFee
     createdAt
-    active
     arweaveUrl
 
     data {
@@ -85,20 +121,14 @@ query proof($id: String!) {
       }
     }
 
-    organization {
-      gatewayId
-    }
-
     verifier {
       user {
         gatewayId
       }
-      data
     }
 
     dataRequest {
       id
-      arweaveUrl
       status
       dataRequestTemplate {
         id
