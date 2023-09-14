@@ -130,9 +130,9 @@ export default function RequestsTable({
       columns={columns}
       paginationModel={paginationModel}
       onPaginationModelChange={setNewPage}
+      paginationMode="server"
       loading={isFetching}
       rowCount={totalCount}
-      paginationMode="server"
       onRowClick={(params: GridRowParams) => {
         router.push(routes.dashboardUserRequest(params.id));
       }}
