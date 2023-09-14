@@ -77,7 +77,11 @@ export default function Stats() {
 
   const onChangeInview = (inView: boolean) => {
     if (inView) {
-      tl.current.forEach((timeline) => timeline?.play());
+      tl.current.forEach((timeline, index) => {
+        gsap.delayedCall(0.1 * index, () => {
+          timeline?.play();
+        });
+      });
       gsap.to(spinNumbersAnimationElementsRef.current, {
         autoAlpha: 1,
         duration: 0.8,
