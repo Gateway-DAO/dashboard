@@ -17,7 +17,7 @@ type Props = {
   variant: 'dark' | 'light';
 };
 
-const links = [
+const linksSocial = [
   {
     icon: LogoTwitter,
     href: '/',
@@ -105,7 +105,7 @@ export default function Footer({ variant }: Props) {
               </p>
 
               <div className={styles.links}>
-                {links.map(({ icon: Icon, href }, index) => (
+                {linksSocial.map(({ icon: Icon, href }, index) => (
                   <GTWLink
                     key={index}
                     className={styles.link}

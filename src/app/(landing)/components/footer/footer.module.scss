@@ -50,11 +50,10 @@
 
 .column {
   &:nth-child(1) {
-    width: 269px;
+    width: 365px;
   }
 
   &:nth-child(2) {
-    margin-left: 93px;
     width: 321px;
   }
 
@@ -149,7 +148,7 @@
 }
 
 .input {
-  border: 1px solid #771ac9;
+  border: 0.5px solid #771ac9;
   background-color: transparent;
   border-radius: 16px;
   color: #771ac9;

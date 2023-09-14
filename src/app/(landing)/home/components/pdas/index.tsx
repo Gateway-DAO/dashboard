@@ -21,13 +21,55 @@ export default function Pdas() {
   const pdasLogoContainerRef = useRef<HTMLDivElement>(null);
   const textPdasParagraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const slashRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const { setFixed, setVariant } = useHeaderContext();
+  const { setFixed } = useHeaderContext();
 
   // Animation setup using useEffect
   useEffect(() => {
-    if (!linesParentRef.current) return;
+    const tl = createAnimation();
+
+    // window.addEventListener('resize', () => {
+    //   setLogoTextBounds();
+    // });
+
+    // Scroll event handling
+    const handleScroll = (e: IInstanceOptions) => {
+      if (!sectionRef.current) return;
+
+      const offsetTop =
+        sectionRef.current.offsetTop - window.innerHeight / 2 + 200;
+      const sectionHeight = sectionRef.current.clientHeight;
+      const scrollSection = e.scroll - offsetTop;
+      const progress = scrollSection / (sectionHeight - window.innerHeight);
+
+      if (progress >= 0 && progress <= 1) {
+        tl.progress(progress);
+        setFixed(false);
+      } else if (progress < 0) {
+        tl.progress(0);
+      } else {
+        // tl.progress(1);
+        setFixed(true);
+      }
+    };
+
+    // Set second logo text bounds
+    gsap.delayedCall(0.3, setLogoTextBounds);
+
+    // Attach scroll event listener
+    LenisManager?.on('scroll', handleScroll);
+
+    // Cleanup function
+    return () => {
+      LenisManager?.off('scroll', handleScroll);
+    };
+  }, []);
+
+  const createAnimation = () => {
+    if (!linesParentRef.current || !logoContainerRef.current)
+      return gsap.timeline();
 
     const lines = linesParentRef.current.querySelectorAll('path');
+    const boundsLogo = logoContainerRef.current.getBoundingClientRect();
 
     const tl = gsap.timeline({ paused: true });
 
@@ -55,7 +97,7 @@ export default function Pdas() {
       ease: 'power4.out',
       duration: 1,
     });
-    tl.to(logoTextRef.current, { scale: 0.8 }, '-=1');
+    tl.to(logoTextRef.current, { scale: 120 / boundsLogo.width }, '-=1');
     tl.to(pdasLogoContainerRef.current, { y: -73 }, '<');
 
     textPdasRefs.current.forEach((element, index) => {
@@ -74,7 +116,12 @@ export default function Pdas() {
         tl.set(logoTextRef.current, { transformOrigin: 'left' });
         tl.to(
           logoTextRef.current,
-          { scale: 0.6712, left: 0, x: 0, duration: 0.8 },
+          {
+            scale: 98 / boundsLogo.width,
+            left: 0,
+            x: 0,
+            duration: 0.8,
+          },
           '<'
         );
         tl.to(
@@ -108,37 +155,8 @@ export default function Pdas() {
       }
     });
 
-    // Scroll event handling
-    const handleScroll = (e: IInstanceOptions) => {
-      if (!sectionRef.current) return;
-
-      const offsetTop =
-        sectionRef.current.offsetTop - window.innerHeight / 2 + 200;
-      const sectionHeight = sectionRef.current.clientHeight;
-      const scrollSection = e.scroll - offsetTop;
-      const progress = scrollSection / (sectionHeight - window.innerHeight);
-
-      if (progress >= 0 && progress <= 1) {
-        tl.progress(progress);
-        setFixed(false);
-      } else if (progress < 0) {
-        tl.progress(0);
-      } else {
-        setFixed(true);
-      }
-    };
-
-    // Set second logo text bounds
-    gsap.delayedCall(0.5, setLogoTextBounds);
-
-    // Attach scroll event listener
-    LenisManager?.on('scroll', handleScroll);
-
-    // Cleanup function
-    return () => {
-      LenisManager?.off('scroll', handleScroll);
-    };
-  }, []);
+    return tl;
+  };
 
   // Function to split spans in a text element
   const splitSpans = (element: HTMLSpanElement) => {
