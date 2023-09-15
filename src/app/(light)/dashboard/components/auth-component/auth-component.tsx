@@ -22,7 +22,7 @@ export default function AuthComponent({ id, controlId }: Props) {
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
   const { isOrg, organization } = useOrganization();
 
-  if (status === "loading" || !session) {
+  if (status === 'loading' || !session) {
     return <AuthComponentSkeleton />;
   }
 

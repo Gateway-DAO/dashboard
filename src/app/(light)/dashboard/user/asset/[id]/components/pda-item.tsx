@@ -51,8 +51,6 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
     [pda, session]
   );
 
-  console.log(pda?.dataAsset?.issuer, session.user);
-
   return (
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
@@ -109,11 +107,10 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
         <PdaCardInfo pda={pda} viewOnly={viewOnly} />
         {!viewOnly && (
           <>
-            {/* TODO: DISPLAY SHARED WITH CARD ONLY IF IT HAS SHARED DATA (PROOFS) */}
-            {/* <SharedWithCard /> */}
+            <SharedWithCard pdaId={pda?.id as string} />
 
-            {isIssuer && <IssuePda pda={pda} />}
-            {isOwner && (
+            {isOwner && <IssuePda pda={pda} />}
+            {isIssuer && (
               <Stack direction="row" gap={1}>
                 <SuspendOrMakeValidPDA pda={pda} />
                 <RevokePDA pda={pda} />
