@@ -62,10 +62,6 @@ query received_pdas($take: Float!, $skip: Float!) {
   myPDAs(skip: $skip, take: $take) {
     id
     status
-<<<<<<< HEAD
-
-=======
->>>>>>> 8f83333 (fix: statuses on pdas)
     dataAsset {
       title
       organization {
