@@ -12,6 +12,7 @@ export const common = {
     wallet: 'Wallet',
     other_accounts: 'Other accounts',
     email: 'Email',
+    avatar: 'Avatar',
   },
   chain: {
     EVM: 'Ethereum',
@@ -20,6 +21,7 @@ export const common = {
   actions: {
     accept: 'Accept',
     reject: 'Reject',
+    cancel: 'Cancel',
     check_data_proof: 'Check data proof',
     share_now: 'Share now',
     share_a_copy: 'Share a copy',
@@ -38,10 +40,10 @@ export const common = {
     less_info: 'Less info',
     connect: 'Connect',
     disconnect: 'Disconnect',
+    crop: 'Crop',
     revoke: 'Revoke',
     suspend: 'Suspend',
     make_valid: 'Make valid',
-    cancel: 'Cancel',
   },
   socials: {
     twitter: 'Twitter',
