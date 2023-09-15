@@ -1,6 +1,6 @@
 "use client";
 
-import CopyPaste from "@/components/copy-paste/copy-paste";
+import CopyButton from "@/components/copy-button/copy-button";
 import { useSession } from "@/context/session-provider";
 import { settings } from "@/locale/en/settings";
 
@@ -15,7 +15,7 @@ export default function DeveloperPortal() {
         <Typography variant="h5" sx={{ mb: 1 }}>{settings.developer_portal.title}</Typography>
         <Typography>{settings.developer_portal.description}</Typography>
       </Box>
-      <CopyPaste limit={20} text={session.token} />
+      <CopyButton text={session.token} />
     </Stack>
   )
 }
