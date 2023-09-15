@@ -30,7 +30,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
       divider={<Divider sx={{ width: '100%' }} />}
     >
       <CardUsers pda={pda} />
-      {!viewOnly && (
+      {/* {!viewOnly && (
         <TableCellContainer>
           <CardCell label={pdaLocale.received_at}>
             <Stack direction="row" gap={1}>
@@ -59,7 +59,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
             </Stack>
           </CardCell>
         </TableCellContainer>
-      )}
+      )} */}
       <TableCellContainer>
         {pda?.dataAsset?.organization && (
           <CardCell label={pdaLocale.authenticated_by}>
