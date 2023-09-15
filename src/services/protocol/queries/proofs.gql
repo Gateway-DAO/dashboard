@@ -10,6 +10,7 @@ query received_proofs($take: Float!, $skip: Float!) {
       id
       user {
         gatewayId
+        profilePicture
       }
       data
     }
@@ -40,6 +41,7 @@ query received_proofs($take: Float!, $skip: Float!) {
     verifier {
       user {
         gatewayId
+        profilePicture
       }
     }
 
@@ -70,6 +72,7 @@ query sent_proofs($take: Float!, $skip: Float!) {
     verifier {
       user {
         gatewayId
+        profilePicture
       }
     }
 
@@ -107,6 +110,7 @@ query proof($id: String!) {
           id
           user {
             gatewayId
+            profilePicture
           }
         }
         organization {
@@ -124,11 +128,72 @@ query proof($id: String!) {
     verifier {
       user {
         gatewayId
+        profilePicture
       }
     }
 
     dataRequest {
       id
+      status
+      dataRequestTemplate {
+        id
+      }
+    }
+  }
+}
+
+query proofsByPDAIds($pdaIds: [String!]!) {
+  proofsByPDAIds(pdaIds: $pdaIds) {
+    id
+    totalCost
+    facilitationFee
+    createdAt
+    active
+    data {
+      dataModels {
+        id
+        title
+        consumptionPrice
+      }
+      PDAs {
+        id
+        claim
+        title
+        dataModel {
+          id
+        }
+        issuer {
+          id
+          user {
+            gatewayId
+            profilePicture
+          }
+        }
+        organization {
+          id
+          name
+          gatewayId
+          image
+        }
+        owner {
+          id
+        }
+      }
+    }
+    arweaveUrl
+    organization {
+      gatewayId
+    }
+    verifier {
+      user {
+        gatewayId
+        profilePicture
+      }
+      data
+    }
+    dataRequest {
+      id
+      arweaveUrl
       status
       dataRequestTemplate {
         id
