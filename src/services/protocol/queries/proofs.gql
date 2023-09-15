@@ -58,6 +58,9 @@ query received_proofs($take: Float!, $skip: Float!) {
     }
   }
 }
+query countReceivedProofs {
+  receivedProofsCount
+}
 
 query sent_proofs($take: Float!, $skip: Float!) {
   sentProofs(skip: $skip, take: $take) {
