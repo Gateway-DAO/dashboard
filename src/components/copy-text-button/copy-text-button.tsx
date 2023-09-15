@@ -12,7 +12,7 @@ type Props = {
   limit?: number;
 };
 
-export default function CopyPaste({
+export default function CopyTextButton({
   text,
   sucessMessage = 'Copied to clipboard', // TODO: Add locale
   limit = 6,

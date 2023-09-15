@@ -31,6 +31,7 @@ export const common = {
     show_activity: 'See Activity',
     learn_more: 'Learn more',
     check_now: 'Check now',
+    copy: 'Copy',
     copy_url: 'Copy URL',
     connect_now: 'Connect now',
     back_to_home: 'Back to home',
