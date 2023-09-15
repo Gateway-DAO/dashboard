@@ -1,11 +1,11 @@
 'use client';
 import CardCell from '@/components/card-cell/card-cell';
-import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
+import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import { pda } from '@/locale/en/pda';
 import { proof as proofLocale } from '@/locale/en/proof';
-import { PdaStatus, Proof } from '@/services/protocol/types';
+import { PdaStatus, ProofQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
@@ -13,7 +13,7 @@ import { PartialDeep } from 'type-fest';
 import { Stack, Divider, Card } from '@mui/material';
 
 type Props = {
-  proof: PartialDeep<Proof>;
+  proof: PartialDeep<ProofQuery['proof']> | undefined;
 };
 
 export default function ProofCardInfo({ proof }: Props) {

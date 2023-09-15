@@ -13,6 +13,7 @@ export const common = {
     other_accounts: 'Other accounts',
     email: 'Email',
     avatar: 'Avatar',
+    success_copy_message: 'Copied to clipboard',
   },
   chain: {
     EVM: 'Ethereum',
