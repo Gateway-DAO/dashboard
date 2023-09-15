@@ -4,7 +4,7 @@ import { useState } from 'react';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { TooltipUser } from '@/components/tooltip-user/tooltip-user';
 import { proof as proofLocale } from '@/locale/en/proof';
-import { Proof } from '@/services/protocol/types';
+import { ProofQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest/source/partial-deep';
@@ -12,7 +12,7 @@ import { PartialDeep } from 'type-fest/source/partial-deep';
 import { Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
-  proof: PartialDeep<Proof>;
+  proof: PartialDeep<ProofQuery['proof']> | undefined;
 };
 
 export default function ProofCardTitle({ proof }: Props) {
