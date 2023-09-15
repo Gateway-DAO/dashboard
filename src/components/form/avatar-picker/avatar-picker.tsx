@@ -1,12 +1,14 @@
 "use client";
 import { ChangeEvent, useRef, useState } from 'react';
 
-import { FieldPath, FieldValues, UseControllerProps, useController } from 'react-hook-form';
 import useDropArea from '@/hooks/use-drop-area/use-drop-area';
+import { FieldPath, FieldValues, UseControllerProps, useController } from 'react-hook-form';
+
 import { Box, Button, Dialog, Stack } from '@mui/material';
+
+import CropDialog from '../../crop-dialog/crop-dialog';
 import GTWAvatar from '../../gtw-avatar/gtw-avatar';
 import { readImageFile } from './utils';
-import CropDialog from '../../crop-dialog/crop-dialog';
 
 type Props = {
   username: string;
@@ -62,7 +64,7 @@ export default function AvatarPicker<
 
   return (
     <>
-      <Stack component="label" direction="row" gap={2} alignItems="center" sx={{ pt: 1, marginLeft: -1, borderWidth: 1, borderStyle: "solid", borderColor: "transparent" }}>
+      <Stack component="label" direction="row" gap={2} alignItems="center" sx={{ pt: 1, borderWidth: 1, borderStyle: "solid", borderColor: "transparent" }}>
         <Box component="span" sx={{ cursor: "pointer" }}>
           <GTWAvatar name={username} src={field.value} size={80} />
         </Box>
