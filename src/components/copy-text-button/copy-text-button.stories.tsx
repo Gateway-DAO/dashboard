@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CopyPaste from './copy-paste';
+import CopyTextButton from './copy-text-button';
 
-const meta: Meta<typeof CopyPaste> = {
-  title: 'Components/Copy Paste',
-  component: CopyPaste,
+const meta: Meta<typeof CopyTextButton> = {
+  title: 'Components/Copy Text Button',
+  component: CopyTextButton,
   parameters: {
     layout: 'centered',
   },
@@ -12,7 +12,7 @@ const meta: Meta<typeof CopyPaste> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof CopyPaste>;
+type Story = StoryObj<typeof CopyTextButton>;
 
 export const Playground: Story = {
   args: {

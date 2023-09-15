@@ -19,6 +19,8 @@ export const settings = {
     description: "Here's all the info needed to connect to our API.",
     api_key: 'API key',
     auth_token: 'Authentication token',
+    auth_token_warning:
+      'By sharing your authentication token, you assume all responsibility for any actions performed using your token, whether authorized or unauthorized.',
     usage_limit: {
       title: 'Usage limit',
       issued_credentials: 'Issued credentials',
