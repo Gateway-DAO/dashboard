@@ -109,8 +109,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
         <PdaCardInfo pda={pda} viewOnly={viewOnly} />
         {!viewOnly && (
           <>
-            {/* TODO: DISPLAY SHARED WITH CARD ONLY IF IT HAS SHARED DATA (PROOFS) */}
-            {/* <SharedWithCard /> */}
+            <SharedWithCard pdaId={pda?.id as string} />
 
             {isIssuer && <IssuePda pda={pda} />}
             {isOwner && (

@@ -10,10 +10,6 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import routes from '@/constants/routes';
 import { proofs } from '@/locale/en/proof';
 import { Proof } from '@/services/protocol/types';
-import {
-  CONTAINER_PX,
-  NEGATIVE_CONTAINER_PX,
-} from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
@@ -30,7 +26,10 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" spacing={1}>
-          <GTWAvatar name={''} size={32} />
+          <GTWAvatar
+            name={params.row.verifier!.user?.profilePicture ?? ''}
+            size={32}
+          />
           <Typography variant="body2">
             {params.row.verifier!.user?.gatewayId}
           </Typography>

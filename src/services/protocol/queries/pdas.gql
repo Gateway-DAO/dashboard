@@ -28,6 +28,7 @@ query pda($id: String!) {
         data
         user {
           gatewayId
+          profilePicture
           createdAt
         }
       }
@@ -36,6 +37,7 @@ query pda($id: String!) {
         data
         user {
           gatewayId
+          profilePicture
           createdAt
         }
       }
@@ -73,6 +75,7 @@ query received_pdas($take: Float!, $skip: Float!) {
         data
         user {
           gatewayId
+          profilePicture
         }
       }
     }
@@ -102,6 +105,7 @@ query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
       owner {
         user {
           gatewayId
+          profilePicture
         }
       }
       dataModel {
