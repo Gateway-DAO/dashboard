@@ -28,8 +28,6 @@ export default function AuthComponent({ id, controlId }: Props) {
 
   const { user } = session;
 
-  console.log('bora', user);
-
   return (
     <>
       <ButtonBase
