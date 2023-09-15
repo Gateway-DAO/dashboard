@@ -1,15 +1,19 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import {
   defaultGridConfiguration,
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
+import { useSession } from '@/context/session-provider';
 import { proofs } from '@/locale/en/proof';
 import { Proof } from '@/services/protocol/types';
+import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
@@ -18,19 +22,19 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const columns: GridColDef<PartialDeep<Proof>>[] = [
   {
-    field: 'verifier',
-    headerName: proofs.verifier,
+    field: 'owner',
+    headerName: proofs.sender,
     flex: 1,
-    valueGetter: (params) => params.row.verifier?.user?.gatewayId,
+    valueGetter: (params) => params.row.owner?.user?.gatewayId,
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" spacing={1}>
           <GTWAvatar
-            name={params.row.verifier!.user?.profilePicture ?? ''}
+            name={params.row.owner!.user?.profilePicture ?? ''}
             size={32}
           />
           <Typography variant="body2">
-            {params.row.verifier!.user?.gatewayId}
+            {params.row.owner!.user?.gatewayId}
           </Typography>
         </Stack>
       );
@@ -54,16 +58,52 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
 
 type Props = {
   data: PartialDeep<Proof>[];
+  count: number;
 };
 
-export default function ProofsReceivedTable({ data }: Props) {
+export default function ProofsReceivedTable({
+  data: initialData,
+  count = 0,
+}: Props) {
   const router = useRouter();
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 5,
+  });
+
+  const { privateApi } = useSession();
+  const { data, isFetching } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: [
+      queries.proofs_received,
+      paginationModel ? paginationModel.page : 0,
+      paginationModel ? paginationModel.pageSize : 5,
+    ],
+    queryFn: () =>
+      privateApi?.received_proofs({
+        skip: paginationModel.page * paginationModel.pageSize,
+        take: paginationModel.pageSize,
+      }),
+    select: (data: any) => data?.receivedProofs,
+    initialData: initialData && initialData.length ? initialData : null,
+  });
+
+  const setNewPage = ({ page }: { page: number }) => {
+    setPaginationModel((prev) => ({
+      ...prev,
+      page: page ? page : 0,
+    }));
+  };
 
   return (
     <DataGrid
       {...defaultGridConfiguration}
-      rows={data}
+      rows={data && data.length ? data : initialData}
+      rowCount={count}
       columns={columns}
+      paginationModel={paginationModel}
+      loading={isFetching}
+      onPaginationModelChange={setNewPage}
       sx={defaultGridCustomization}
       onRowClick={(value) => {
         router.push(routes.dashboardUserProof(value?.id));

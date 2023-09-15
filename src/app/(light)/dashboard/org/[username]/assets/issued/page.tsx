@@ -10,18 +10,25 @@ import { Box } from '@mui/material';
 import PDAsTable from './components/pdas-table';
 
 export default async function OrganizationIssuedAssetsPage() {
-  const session = (await getServerSession()) as Session;
+  // const session = (await getServerSession()) as Session;
+  // const pathname = window.location.pathname;
+  // const pathnameOrg = pathname.split('/')[3];
+  // const organization = session?.user?.accesses?.find(
+  //   (access) => access.organization?.gatewayId === pathnameOrg
+  // )?.organization;
 
-  const privateApi = await getPrivateApi();
-  const issuedPdas =
-    (
-      await privateApi.issued_pdas_by_org({
-        skip: 0,
-        take: 5,
-        orgId: session?.user?.accesses?.[0].organization.id || '',
-      })
-    )?.issuedPDAs ?? [];
-  const count = (await privateApi.requestsCount()).requestsReceivedCount;
+  // console.log('ˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆ', pathname, pathnameOrg, organization);
+
+  // const privateApi = await getPrivateApi();
+  // const issuedPdas =
+  //   (
+  //     await privateApi.issued_pdas_by_org({
+  //       skip: 0,
+  //       take: 5,
+  //       orgId: session?.user?.accesses?.[0].organization.id || '',
+  //     })
+  //   )?.issuedPDAs ?? [];
+  // const count = (await privateApi.requestsCount()).requestsReceivedCount;
 
   return (
     <Box sx={{ py: 2 }}>
@@ -30,7 +37,7 @@ export default async function OrganizationIssuedAssetsPage() {
         subtitle={pdas.data_assets_subtitle}
         titleId="title-org-assets"
       />
-      <PDAsTable data={issuedPdas} totalCount={count} />
+      <PDAsTable />
     </Box>
   );
 }

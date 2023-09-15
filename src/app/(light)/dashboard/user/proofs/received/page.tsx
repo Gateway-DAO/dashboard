@@ -10,12 +10,15 @@ import ProofsReceivedTable from './components/proofs-received-table';
 export default async function DashboardUserReceivedProofs() {
   const privateApi = await getPrivateApi();
 
-  const proofs = (await privateApi.received_proofs({ take: 6, skip: 0 }))
+  const proofs = (await privateApi.received_proofs({ take: 5, skip: 0 }))
     ?.receivedProofs as PartialDeep<Proof>[];
+  const count = (await privateApi.countReceivedProofs()).receivedProofsCount;
 
   return (
     <>
-      {proofs && proofs.length > 0 && <ProofsReceivedTable data={proofs} />}
+      {proofs && proofs.length > 0 && (
+        <ProofsReceivedTable data={proofs} count={count} />
+      )}
       {proofs && proofs.length === 0 && (
         <Typography
           variant="body1"

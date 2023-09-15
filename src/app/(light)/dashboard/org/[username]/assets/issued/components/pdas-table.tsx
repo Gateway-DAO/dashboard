@@ -30,10 +30,7 @@ type Props = {
   totalCount: number;
 };
 
-export default function PDAsTable({
-  data: initialData,
-  totalCount = 0,
-}: Props) {
+export default function PDAsTable() {
   const columns: GridColDef[] = [
     {
       field: 'dataAsset',
@@ -103,6 +100,12 @@ export default function PDAsTable({
 
   const { organization } = useOrganization();
 
+  const { data: count } = useQuery({
+    queryKey: ['total-rows-issued-by-org', organization?.gatewayId],
+    queryFn: () => privateApi?.requestsCount(),
+    select: (data: any) => data?.requestsReceivedCount,
+  });
+
   const { privateApi } = useSession();
   const { data, isFetching } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
@@ -119,7 +122,7 @@ export default function PDAsTable({
         orgId: organization?.id || '',
       }),
     select: (data: any) => data?.issuedPdas,
-    initialData: initialData && initialData.length ? initialData : null,
+    // initialData: initialData && initialData.length ? initialData : null,
   });
 
   const setNewPage = ({ page }: { page: number }) => {
@@ -134,7 +137,7 @@ export default function PDAsTable({
       {...defaultGridCustomization}
       rows={data}
       columns={columns}
-      rowCount={totalCount}
+      rowCount={count || 0}
       paginationModel={paginationModel}
       onPaginationModelChange={setNewPage}
       paginationMode="server"
