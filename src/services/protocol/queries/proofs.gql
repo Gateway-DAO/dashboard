@@ -88,6 +88,10 @@ query sent_proofs($take: Float!, $skip: Float!) {
   }
 }
 
+query count_sent_proofs {
+  sentProofsCount
+}
+
 query proof($id: String!) {
   proof(id: $id) {
     id
