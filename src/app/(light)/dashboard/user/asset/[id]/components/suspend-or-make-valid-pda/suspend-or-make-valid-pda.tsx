@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
@@ -25,6 +26,7 @@ type Props = {
 
 export function SuspendOrMakeValidPDA({ pda }: Props) {
   const { privateApi } = useSession();
+  const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
 
@@ -33,7 +35,7 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
     mutationFn: (data: ChangePdaStatusMutationVariables) => {
       return privateApi?.changePDAStatus(data);
     },
-    onSuccess: () => console.log('Status changed'), // TODO: Refetch queries
+    onSuccess: () => router.refresh(),
     onError: () => enqueueSnackbar(errorMessages.STATUS_CHANGE_ERROR),
   };
 
