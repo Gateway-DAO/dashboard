@@ -17,7 +17,7 @@ export default function AccountSection({ title, button, children }: PropsWithChi
       {children && <Stack component={List} divider={<Divider />} direction="column" sx={{
         backgroundColor: "background.paper",
         borderColor: "divider",
-        borderRadius: 2,
+        borderRadius: 1,
         borderWidth: 1,
         borderStyle: "solid",
       }}>
