@@ -51,8 +51,6 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
     [pda, session]
   );
 
-  console.log(pda?.dataAsset?.issuer, session.user);
-
   return (
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
