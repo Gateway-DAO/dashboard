@@ -112,12 +112,10 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
             <SharedWithCard pdaId={pda?.id as string} />
 
             {isIssuer && <IssuePda pda={pda} />}
-            {isOwner && (
-              <Stack direction="row" gap={1}>
-                <SuspendOrMakeValidPDA pda={pda} />
-                <RevokePDA pda={pda} />
-              </Stack>
-            )}
+            <Stack direction="row" gap={1}>
+              {isIssuer && <SuspendOrMakeValidPDA pda={pda} />}
+              {isOwner && <RevokePDA pda={pda} />}
+            </Stack>
 
             {/* Activies backloged 09/02 */}
             {/* <Activities
