@@ -40,14 +40,8 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
   const suspendPda = useMutation(mutationReq);
   const makeValidPda = useMutation(mutationReq);
 
-  const isValid = useMemo(
-    () => pda?.dataAsset?.status === PdaStatus.Valid,
-    [pda]
-  );
-  const isSuspended = useMemo(
-    () => pda?.dataAsset?.status === PdaStatus.Suspended,
-    [pda]
-  );
+  const isValid = useMemo(() => pda?.status === PdaStatus.Valid, [pda]);
+  const isSuspended = useMemo(() => pda?.status === PdaStatus.Suspended, [pda]);
 
   return (
     <>
@@ -99,13 +93,13 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
         negativeAnswer={common.actions.cancel}
         setOpen={setDialogConfirmation}
         onConfirm={() => {
-          if (pda?.dataAsset?.status === PdaStatus.Valid) {
+          if (pda?.status === PdaStatus.Valid) {
             suspendPda.mutateAsync({
               id: pda?.id as string,
               status: PdaStatus.Suspended,
             });
           }
-          if (pda?.dataAsset?.status === PdaStatus.Suspended) {
+          if (pda?.status === PdaStatus.Suspended) {
             makeValidPda.mutateAsync({
               id: pda?.id as string,
               status: PdaStatus.Valid,

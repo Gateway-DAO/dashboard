@@ -11,6 +11,8 @@ query pda($id: String!) {
   PDAbyId(id: $id) {
     id
     issuanceDate
+    status
+
     dataAsset {
       title
       description
@@ -51,7 +53,6 @@ query pda($id: String!) {
         type
         value
       }
-      status
     }
   }
 }
@@ -59,6 +60,8 @@ query pda($id: String!) {
 query received_pdas($take: Float!, $skip: Float!) {
   myPDAs(skip: $skip, take: $take) {
     id
+    status
+
     dataAsset {
       title
       organization {
@@ -72,7 +75,6 @@ query received_pdas($take: Float!, $skip: Float!) {
           gatewayId
         }
       }
-      status
     }
   }
 }
@@ -80,10 +82,11 @@ query received_pdas($take: Float!, $skip: Float!) {
 query issued_pdas($take: Float!, $skip: Float!) {
   issuedPDAs(skip: $skip, take: $take) {
     id
+    status
+
     dataAsset {
       title
       image
-      status
     }
   }
 }
@@ -92,6 +95,8 @@ query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
   issuedPDAs(skip: $skip, take: $take, orgId: $orgId) {
     id
     issuanceDate
+    status
+
     dataAsset {
       title
       owner {
@@ -102,7 +107,6 @@ query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
       dataModel {
         id
       }
-      status
     }
   }
 }

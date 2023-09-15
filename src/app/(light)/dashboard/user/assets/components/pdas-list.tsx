@@ -33,7 +33,7 @@ export default function PDAsList({ pdas }: Props) {
                 name={pda.dataAsset?.title ?? 'PDA name'}
                 issuerImage={issuer.image}
                 issuerName={issuer.name ?? 'Issuer'}
-                status={pda.dataAsset?.status ?? PdaStatus.Valid}
+                status={pda.status ?? PdaStatus.Valid}
               />
             );
           })}
