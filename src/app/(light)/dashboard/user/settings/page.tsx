@@ -6,6 +6,7 @@ import { Divider } from "@mui/material";
 
 import ConnectedAccounts from "./components/connected-accounts";
 import DisplaySettings from "./components/display-settings";
+import TokenSection from "./components/token-section";
 
 export default async function SettingsPage() {
   return (
@@ -15,6 +16,8 @@ export default async function SettingsPage() {
       <DisplaySettings />
       <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, my: 4 }} />
       <ConnectedAccounts />
+      <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, my: 4 }} />
+      <TokenSection />
     </>
   )
 }
