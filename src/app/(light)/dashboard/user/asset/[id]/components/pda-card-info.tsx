@@ -93,10 +93,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
             : pdaLocale.indeterminate}
         </CardCell>
         <CardCell label={pdaLocale.status.title}>
-          <PDAStatusChip
-            status={pda?.dataAsset?.status ?? PdaStatus.Valid}
-            size="small"
-          />
+          <PDAStatusChip status={pda?.status ?? PdaStatus.Valid} size="small" />
         </CardCell>
       </TableCellContainer>
     </Stack>
