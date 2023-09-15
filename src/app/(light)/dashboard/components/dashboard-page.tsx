@@ -20,7 +20,7 @@ export default function DashboardPage({
         },
         pb: {
           xs: 7,
-          lg: 2,
+          lg: 4,
         },
         ...props.sx,
       }}
