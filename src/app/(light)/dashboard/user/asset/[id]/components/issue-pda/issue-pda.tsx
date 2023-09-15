@@ -5,12 +5,18 @@ import { useState } from 'react';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalTitle from '@/components/modal/modal-title/modal-title';
+import { mutations } from '@/constants/queries';
+import { useSession } from '@/context/session-provider';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
-import { PdaQuery } from '@/services/protocol/types';
+import {
+  Create_ProofMutationVariables,
+  PdaQuery,
+} from '@/services/protocol/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToggle } from '@react-hookz/web/cjs/useToggle';
+import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { FieldValues, useForm } from 'react-hook-form';
 import { FormProvider } from 'react-hook-form';
@@ -32,6 +38,7 @@ export default function IssuePda({ pda }: Props) {
   const router = useRouter();
   const [openIssuePda, setOpenIssuePda] = useToggle(false);
   const [pdaIssued, setPdaIssued] = useState<string>();
+  const { privateApi } = useSession();
 
   const methods = useForm({
     resolver: zodResolver(issuePdaSchema as any),
@@ -47,40 +54,29 @@ export default function IssuePda({ pda }: Props) {
     setOpenIssuePda();
   };
 
-  //TODO: REMOVE AND FIX BUILD WITH THE MUTATION BELOW
-  const createProof = {
-    isLoading: false,
-  };
-
-  // const createProof = useMutation({
-  //   mutationKey: [mutations.create_proof],
-  //   mutationFn: (data: Create_ProofMutationVariables) => {
-  //     return privateApi?.create_proof(data);
-  //   },
-  // });
+  const createProof = useMutation({
+    mutationKey: [mutations.create_proof],
+    mutationFn: (data: Create_ProofMutationVariables) => {
+      return privateApi?.create_proof(data);
+    },
+  });
 
   const handleMutation = async (
     data: IssuePdaSchema | FieldValues
   ): Promise<any> => {
     if (!(await methods.trigger())) return;
-    //TODO: REMOVE AND FIX BUILD WITH THE MUTATION BELOW
-
     try {
-      const res = {
-        createProof: {
-          id: '123',
-        },
-      };
-      // const res = await createProof.mutateAsync({
-      //   claims: [
-      //     {
-      //       claimKeys: Object.keys(pda?.dataAsset?.claim) ?? [],
-      //       pdaId: pda?.id,
-      //     },
-      //   ],
-      //   verifier: data?.address ?? null,
-      // });
+      const res = await createProof.mutateAsync({
+        claims: [
+          {
+            claimKeys: Object.keys(pda?.dataAsset?.claim) ?? [],
+            pdaId: pda?.id,
+          },
+        ],
+        verifier: data?.address ?? null,
+      });
       setPdaIssued(res?.createProof?.id);
+      router.refresh();
       methods.reset();
     } catch (e) {
       enqueueSnackbar(errorMessages.ERROR_TRYING_TO_ISSUE_A_PROOF);
