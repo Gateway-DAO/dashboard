@@ -5,7 +5,7 @@ import { NEGATIVE_CONTAINER_PX } from "@/theme/config/style-tokens";
 import { Divider } from "@mui/material";
 
 import ConnectedAccounts from "./components/connected-accounts";
-import DeveloperPortal from "./components/developer-portal";
+import DeveloperPortal from "./components/developer-portal/developer-portal";
 import DisplaySettings from "./components/display-settings";
 
 export default async function SettingsPage() {
