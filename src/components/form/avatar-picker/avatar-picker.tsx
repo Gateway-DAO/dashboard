@@ -57,7 +57,6 @@ export default function AvatarPicker<
     onCloseModal();
   };
 
-
   const [dropBond, { over: isOver }] = useDropArea({
     onFiles: onReadFile,
   });

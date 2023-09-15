@@ -1,13 +1,13 @@
 "use client"
 
+import AvatarPicker from "@/components/form/avatar-picker/avatar-picker";
 import GTWAvatar from "@/components/gtw-avatar/gtw-avatar";
 import { useSession } from "@/context/session-provider";
+import { common } from "@/locale/en/common";
 import { useForm, Controller } from "react-hook-form";
 import zod from "zod";
 
 import { Box, Button, FormControl, FormHelperText, FormLabel, Input, InputAdornment, InputLabel, Stack, TextField } from "@mui/material";
-import AvatarPicker from "@/components/form/avatar-picker/avatar-picker";
-import { common } from "@/locale/en/common";
 
 const validations = zod.object({
   // name: zod.string().min(1, "Please enter your name"),
@@ -33,8 +33,6 @@ export default function DisplaySettings() {
   const { user: {
     gatewayId
   } } = session;
-
-  console.log(watch("avatar"))
 
   return <>
     <Stack spacing={3} alignItems="flex-start">
