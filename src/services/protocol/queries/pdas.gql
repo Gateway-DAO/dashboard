@@ -10,6 +10,7 @@ query pdas {
 query pda($id: String!) {
   PDAbyId(id: $id) {
     id
+    status
     issuanceDate
     status
 
@@ -61,7 +62,10 @@ query received_pdas($take: Float!, $skip: Float!) {
   myPDAs(skip: $skip, take: $take) {
     id
     status
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8f83333 (fix: statuses on pdas)
     dataAsset {
       title
       organization {
@@ -83,7 +87,6 @@ query issued_pdas($take: Float!, $skip: Float!) {
   issuedPDAs(skip: $skip, take: $take) {
     id
     status
-
     dataAsset {
       title
       image
@@ -94,6 +97,7 @@ query issued_pdas($take: Float!, $skip: Float!) {
 query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
   issuedPDAs(skip: $skip, take: $take, orgId: $orgId) {
     id
+    status
     issuanceDate
     status
 
