@@ -8,13 +8,13 @@ import Own from '@/app/(landing)/components/icons/own';
 import Replay from '@/app/(landing)/components/icons/replay';
 import Verify from '@/app/(landing)/components/icons/verify';
 import Wrapper from '@/app/(landing)/components/wrapper';
-import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 import animationData from '@/app/(landing)/json/pda-cycle-animation.json';
-import LenisManager from '@/app/(landing)/utils/scroll';
+import { joinClasses } from '@/app/(landing)/utils/function';
 import gsap from 'gsap';
 import lottie, { AnimationItem } from 'lottie-web';
 import { InView } from 'react-intersection-observer';
+import Slider from 'react-slick';
 
 import styles from './lifecycle.module.scss';
 
@@ -80,6 +80,15 @@ export default function Lifecycle() {
     });
   };
 
+  const settings = {
+    arrows: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    variableWidth: true,
+  };
+
   return (
     <section className={styles.element} ref={sectionRef}>
       <Wrapper>
@@ -115,6 +124,34 @@ export default function Lifecycle() {
               <p className={styles.step_text}>{step.text}</p>
             </div>
           ))}
+        </div>
+
+        <Button
+          className={joinClasses(styles.button, styles.button_mobile)}
+          variant="outlined"
+        >
+          Click to expand
+        </Button>
+
+        <div
+          className={joinClasses(
+            styles.mobile_steps,
+            'mobile-lifecycle-slider'
+          )}
+        >
+          <Slider {...settings}>
+            {steps.map((step, index) => (
+              <div
+                key={index}
+                className={styles.step_item}
+                style={{ width: '75vw' }}
+              >
+                <step.icon className={styles.step_icon} />
+                <h3 className={styles.step_title}>{step.title}</h3>
+                <p className={styles.step_text}>{step.text}</p>
+              </div>
+            ))}
+          </Slider>
         </div>
       </Wrapper>
     </section>

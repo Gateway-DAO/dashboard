@@ -21,8 +21,8 @@ export default function BurgerButton({ active, onClick, className }: Props) {
   useEffect(() => {
     tl.current = gsap.timeline({ paused: true });
     tl.current
-      .to(refSpansOpen.current, { scaleX: 0, duration: 0.2 })
-      .to(refSpansClose.current, { autoAlpha: 1, duration: 0.2 });
+      .to(refSpansOpen.current, { scaleX: 0, duration: 0.2, stagger: 0.1 })
+      .to(refSpansClose.current, { autoAlpha: 1, duration: 0.2 }, '-=0.25');
   }, []);
 
   useEffect(() => {

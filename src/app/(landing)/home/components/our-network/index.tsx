@@ -5,6 +5,7 @@ import ForOwners from '@/app/(landing)/components/svgs/for-owners';
 import ForVerifies from '@/app/(landing)/components/svgs/for-verifies';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
+import { joinClasses } from '@/app/(landing)/utils/function';
 
 import styles from './our-network.module.scss';
 
@@ -61,6 +62,14 @@ export default function OurNetwork() {
           </div>
           <div className={styles.column_large_content}>
             <h3 className={styles.column_label}>For Verifiers</h3>
+
+            <ForVerifies
+              className={joinClasses(
+                styles.column_vector,
+                styles['column_vector--mobile-only']
+              )}
+            />
+
             <h2 className={styles.column_title}>
               Verify information and
               <br />

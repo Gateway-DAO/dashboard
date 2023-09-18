@@ -19,6 +19,12 @@
   letter-spacing: 0.412px;
   text-align: center;
   width: 100%;
+
+  @media (max-width: 768px) {
+    font-size: 3.6rem;
+    line-height: 5rem;
+    letter-spacing: 0.0412rem;
+  }
 }
 
 .type_slash {

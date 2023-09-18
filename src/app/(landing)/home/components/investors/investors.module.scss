@@ -1,6 +1,10 @@
 .element {
   background-color: #212121;
   padding-bottom: 140px;
+
+  @media (max-width: 768px) {
+    padding-bottom: 64px;
+  }
 }
 
 .wrapper {
@@ -18,6 +22,10 @@
   letter-spacing: 0.46px;
   margin: 0;
   padding-bottom: 35px;
+
+  @media (max-width: 768px) {
+    color: #a3a3a3;
+  }
 }
 
 .logos,
@@ -43,6 +51,11 @@
 .names {
   padding-top: 66px;
   padding-left: 10px;
+
+  @media (max-width: 768px) {
+    padding-left: 0;
+    padding-top: 32px;
+  }
 }
 
 .logo_container,
@@ -50,6 +63,44 @@
   display: flex;
   margin-bottom: 35px;
   width: 25%;
+
+  @media (max-width: 768px) {
+    height: 62px;
+    position: relative;
+    width: 50%;
+
+    &:nth-child(even) {
+      padding-left: 20px;
+
+      img {
+        max-width: 70%;
+      }
+    }
+
+    &:nth-child(odd) {
+      padding-right: 20px;
+    }
+    &:nth-child(4) {
+      img {
+        max-width: 70%;
+      }
+    }
+
+    img {
+      max-height: 100%;
+      max-width: 90%;
+    }
+  }
+}
+
+.name_container {
+  @media (max-width: 768px) {
+    height: 40px;
+
+    &:nth-last-child(-n + 2) {
+      margin-bottom: 10px;
+    }
+  }
 }
 
 .logo_container {

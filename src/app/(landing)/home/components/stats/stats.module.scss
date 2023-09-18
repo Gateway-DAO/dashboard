@@ -2,6 +2,11 @@
   background-color: #212121;
   padding-top: 211px;
   padding-bottom: 24px;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding-top: 73px;
+  }
 }
 
 .title {
@@ -12,16 +17,32 @@
   line-height: 82px;
   letter-spacing: 0.412px;
   margin-bottom: 140px;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+    font-style: normal;
+    line-height: 50.4px;
+    letter-spacing: 0.412px;
+    margin-bottom: 80px;
+  }
 }
 
 .stats {
   display: flex;
   position: relative;
   width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .small_boxes_container {
   position: relative;
+
+  @media (max-width: 768px) {
+    margin: 24px 0;
+  }
 }
 
 .box {
@@ -52,6 +73,16 @@
     margin-left: 24px;
     width: 270px;
   }
+
+  @media (max-width: 768px) {
+    &--lg,
+    &--sm,
+    &--md {
+      height: 249px;
+      margin-left: 0;
+      width: 100%;
+    }
+  }
 }
 
 .box_title {
@@ -81,6 +112,13 @@
     letter-spacing: -8px;
     line-height: 82px;
     max-height: 82px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 60px;
+    font-style: normal;
+    line-height: 60px;
+    max-height: initial;
   }
 }
 
