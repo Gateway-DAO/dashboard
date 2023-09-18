@@ -31,7 +31,7 @@ export const nextAuthConfig: NextAuthOptions = {
       }
       return token;
     },
-    async session({ session, token, ...props }) {
+    async session({ session, token }) {
       const user = await getMe(token.token, !!(token as any).update);
       return {
         ...session,
