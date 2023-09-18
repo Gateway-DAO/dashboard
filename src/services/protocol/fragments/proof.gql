@@ -34,10 +34,8 @@ fragment proof on Proof {
       }
       issuer {
         id
-        user {
-          gatewayId
-          profilePicture
-        }
+        gatewayId
+        profilePicture
       }
       organization {
         id
