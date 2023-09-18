@@ -42,18 +42,6 @@ export default function Header() {
     previousFixedValue.current = fixed;
   }, [fixed]);
 
-  useEffect(() => {
-    if (isFirstRender) return;
-
-    gsap.killTweensOf(mobileMenuRef.current);
-
-    if (burgerActive) {
-      gsap.to(mobileMenuRef.current, { height: '100vh' });
-    } else {
-      gsap.to(mobileMenuRef.current, { height: 0 });
-    }
-  }, [burgerActive]);
-
   return (
     <nav
       className={joinClasses(
@@ -111,7 +99,7 @@ export default function Header() {
       <div
         className={joinClasses(
           styles.mobile_menu_mask,
-          burgerActive && styles['mobile_menu_mask--open']
+          burgerActive ? styles['mobile_menu_mask--open'] : ''
         )}
         ref={mobileMenuRef}
       >

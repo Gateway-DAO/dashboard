@@ -1,8 +1,12 @@
 .element {
   background-color: #212121;
-  // padding-top: 133px;
+  overflow: hidden;
   padding-bottom: 126px;
   width: 100%;
+
+  @media (max-width: 768px) {
+    padding-top: 147px;
+  }
 }
 
 .head {
@@ -46,6 +50,19 @@
     line-height: 26px;
     letter-spacing: 0.46px;
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.button_mobile {
+  margin: 30px auto 100px;
+  padding: 8px 22px;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
 
 .button_icon {
@@ -55,12 +72,20 @@
 
 .animation_container {
   margin-top: -40px;
+
+  @media (max-width: 768px) {
+    margin-top: 110px;
+  }
 }
 
 .steps {
   display: flex;
   position: relative;
   width: 100%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .step_item {
@@ -76,6 +101,10 @@
     opacity: 0.2;
     position: absolute;
     width: 0.5px;
+  }
+
+  @media (max-width: 768px) {
+    padding-right: 40px;
   }
 }
 
@@ -102,4 +131,12 @@
 .step_text {
   font-weight: 400;
   margin: 0;
+}
+
+.mobile_steps {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 }

@@ -20,22 +20,27 @@
   flex-direction: column;
   justify-content: center;
   padding-bottom: 60px;
+
+  @media (max-width: 768px) {
+    justify-content: flex-end;
+    padding-bottom: 7.9rem;
+  }
 }
 
 .title {
-  span {
-    color: #fff;
-    font-size: 82px;
-    font-weight: 400;
-    letter-spacing: 0.412px;
-    line-height: 82px;
-    width: 100%;
-  }
+  color: #fff;
+  font-size: 82px;
+  font-weight: 400;
+  letter-spacing: 0.412px;
+  line-height: 82px;
+  width: 100%;
 
   @media (max-width: 768px) {
-    span {
-      font-size: 36px;
-      line-height: 36px;
+    font-size: 3.6rem;
+    line-height: 3.6rem;
+
+    br {
+      display: none;
     }
   }
 }
@@ -53,8 +58,9 @@
   margin-bottom: 31px;
 
   @media (max-width: 768px) {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    margin-bottom: 3.1rem;
 
     br {
       display: none;

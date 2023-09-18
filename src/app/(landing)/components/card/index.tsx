@@ -1,15 +1,18 @@
 import { ReactNode } from 'react';
 
+import { joinClasses } from '@/app/(landing)/utils/function';
+
 import styles from './card.module.scss';
 
 type Props = {
+  className?: string;
   svg: ReactNode;
   text: ReactNode;
 };
 
-export default function Card({ svg, text }: Props) {
+export default function Card({ className, svg, text }: Props) {
   return (
-    <div className={styles.element}>
+    <div className={joinClasses(styles.element, className)}>
       {svg}
       {text}
     </div>

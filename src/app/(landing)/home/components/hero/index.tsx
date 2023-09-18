@@ -41,14 +41,13 @@ export default function Hero() {
     <section className={styles.element} ref={sectionRef}>
       <Wrapper className={styles.wrapper}>
         <h1 className={styles.title}>
-          <span className={styles.title_line}>The safer and faster</span>
-          <span className={styles.title_line}>
-            way for you to{' '}
-            <span ref={refCurrentWordElement} style={{ color: '#70ECFE' }}>
-              {currentWord}
-            </span>
-          </span>
-          <span className={styles.title_line}>private data</span>
+          The safer and faster <br />
+          way for you to{' '}
+          <span ref={refCurrentWordElement} style={{ color: '#70ECFE' }}>
+            {currentWord}
+          </span>{' '}
+          <br />
+          private data
         </h1>
         <p className={styles.text}>
           Gateway is the foundation to securely create, own, manage, <br />

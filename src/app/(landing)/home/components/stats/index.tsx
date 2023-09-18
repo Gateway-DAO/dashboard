@@ -36,7 +36,11 @@ export default function Stats() {
       lettersWithoutNumbers.forEach((letter, index) => {
         const content = letter.textContent as string;
         const number = Number(content);
-        gsap.set(letter, { width: letter.getBoundingClientRect().width });
+        const letterBounds = letter.getBoundingClientRect();
+        gsap.set(letter, {
+          width: letterBounds.width,
+          height: letterBounds.height,
+        });
 
         if (isNaN(number)) return;
 
@@ -61,11 +65,10 @@ export default function Stats() {
           letter.appendChild(container);
         });
 
-        const letterHeight = letter.getBoundingClientRect().height;
         tl.current[indexSpanRef].to(
           letter,
           {
-            y: -letterHeight * (index + 1),
+            y: -letterBounds.height * (index + 1),
             duration: 2,
             ease: 'Power4.easeInOut',
           },

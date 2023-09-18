@@ -93,12 +93,12 @@ export default function OurProtocol() {
   const settings = {
     arrows: false,
     infinite: false,
-    speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     beforeChange: (current: number, next: number) => {
       setCurrentIndex(next);
     },
+    variableWidth: true,
   };
 
   const onClickLeft = () => {
@@ -107,7 +107,7 @@ export default function OurProtocol() {
   };
 
   const onClickRight = () => {
-    if (currentIndex === cards.length - 3) return;
+    if (currentIndex === cards.length - 1) return;
     sliderRef.current?.slickNext();
   };
 
@@ -140,7 +140,7 @@ export default function OurProtocol() {
               className={joinClasses(
                 styles.controls_button,
                 handleClass(
-                  currentIndex === cards.length - 3,
+                  currentIndex === cards.length - 1,
                   styles['controls_button--disabled']
                 )
               )}
@@ -151,16 +151,39 @@ export default function OurProtocol() {
           </div>
         </div>
 
-        <div className={joinClasses(styles.slider_test, 'slick-list-parent')}>
+        <div className={styles.cards_container}>
+          {cards.map((card, index) => (
+            <Card
+              key={index}
+              svg={card.svg}
+              text={<p className={styles.card_text}>{card.text}</p>}
+            />
+          ))}
+        </div>
+
+        <div className={joinClasses(styles.mobile_slider, 'slick-list-parent')}>
           <Slider {...settings} ref={sliderRef}>
             {cards.map((card, index) => (
               <Card
                 key={index}
                 svg={card.svg}
                 text={<p className={styles.card_text}>{card.text}</p>}
+                className={styles.card}
               />
             ))}
           </Slider>
+
+          <div className={styles.dots_container}>
+            {cards.map((card, index) => (
+              <span
+                key={index}
+                className={joinClasses(
+                  styles.dot,
+                  index === currentIndex ? styles['dot--active'] : ''
+                )}
+              />
+            ))}
+          </div>
         </div>
       </Wrapper>
     </section>

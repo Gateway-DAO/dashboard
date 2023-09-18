@@ -24,17 +24,20 @@
   &:nth-child(1) {
     left: 0;
     top: 0;
+    transform-origin: left;
   }
 
   &:nth-child(2) {
     left: 0;
     top: 50%;
     transform: translateY(-50%);
+    transform-origin: left;
   }
 
   &:nth-child(3) {
     bottom: 0;
     left: 0;
+    transform-origin: left;
   }
 
   &:nth-child(4),

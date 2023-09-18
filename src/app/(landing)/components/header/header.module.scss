@@ -112,12 +112,18 @@
   background-color: #212121;
   display: none;
   height: 0;
-  // padding-top: 123px;
   overflow: hidden;
+  pointer-events: none;
   position: absolute;
   top: 0;
+  transition: height 0.8s ease;
   width: 100%;
   z-index: -1;
+
+  &--open {
+    pointer-events: initial;
+    height: 100vh;
+  }
 
   @media (max-width: 768px) {
     display: block;

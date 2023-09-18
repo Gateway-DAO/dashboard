@@ -14,12 +14,21 @@
     position: absolute;
     width: 100%;
   }
+
+  @media (max-width: 768px) {
+    padding-top: 30px;
+  }
 }
 
 .head {
+  align-items: center;
   display: flex;
   justify-content: space-between;
   width: 100%;
+
+  @media (max-width: 768px) {
+    margin-bottom: 50px;
+  }
 }
 
 .title {
@@ -29,10 +38,23 @@
   font-weight: 400;
   line-height: 67.2px;
   letter-spacing: 0.412px;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 50.4px;
+    letter-spacing: 0.412px;
+    margin: 0;
+  }
 }
 
 .controls {
-  display: flex;
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
 }
 
 .controls_button {
@@ -65,9 +87,27 @@
   width: 16px;
 }
 
+.card {
+  @media (max-width: 768px) {
+    margin-right: 18px;
+    width: 70vw;
+  }
+}
+
+.cards_container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 80px;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
 .card_text {
   color: #e6d5fa;
-  font-size: 29px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
@@ -80,7 +120,7 @@
 }
 
 .card_vector_container {
-  height: 340px;
+  height: 230px;
   padding-top: 80px;
   position: relative;
 
@@ -102,14 +142,44 @@
 
   &--standardize {
     // padding: 80px 55px;
-    width: 260px;
+    width: 160px;
   }
 
   &--privacy {
-    width: 243px;
+    width: 143px;
   }
 
   &--verification {
-    width: 230px;
+    width: 130px;
+  }
+}
+
+.mobile_slider {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.dots_container {
+  display: flex;
+  margin-top: 50px;
+  justify-content: center;
+}
+
+.dot {
+  background-color: #b3b3b3;
+  border-radius: 50%;
+  height: 8px;
+  transition: background-color 0.8s ease;
+  width: 8px;
+
+  &--active {
+    background-color: #771ac9;
+  }
+
+  &:not(:last-child) {
+    margin-right: 5px;
   }
 }
