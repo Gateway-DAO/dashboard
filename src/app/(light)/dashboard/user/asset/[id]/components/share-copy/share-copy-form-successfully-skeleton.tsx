@@ -1,6 +1,6 @@
 import { Box, Skeleton, Stack } from '@mui/material';
 
-export default function IssuePdaFormSuccessSkeleton() {
+export default function ShareCopyFormSuccessSkeleton() {
   return (
     <Stack>
       <Box sx={{ position: 'absolute', top: { xs: 24, md: 48 } }}>
