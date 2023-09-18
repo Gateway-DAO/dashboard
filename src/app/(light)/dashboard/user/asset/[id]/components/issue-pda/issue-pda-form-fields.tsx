@@ -24,18 +24,22 @@ import { SharingCost } from './sharing-cost';
 export default function IssuePdaFormField() {
   const {
     register,
+    clearErrors,
+    setValue,
     formState: { errors },
   } = useFormContext<IssuePdaSchema>();
 
-
-  const theme = useTheme()
+  const theme = useTheme();
 
   const mockAccountsTypes: Record<string, any>[] = [
     {
       value: 0,
       name: 'Gateway ID',
       icon: (
-        <GatewayIcon sx={{ color: 'text.secondary', width: 22, height: 22 }} />
+        <GatewayIcon
+          colored={false}
+          sx={{ color: 'text.secondary', width: 22, height: 22 }}
+        />
       ),
     },
     {
@@ -70,7 +74,13 @@ export default function IssuePdaFormField() {
             label={pda.share.account_type}
             error={!!(errors.account_type as IssuePdaSchemaError)}
             id="id-account-type"
-            {...register(`account_type`)}
+            defaultValue={'Gateway ID'}
+            {...register(`account_type`, {
+              onChange: () => {
+                setValue('address', '');
+                clearErrors();
+              },
+            })}
           >
             {mockAccountsTypes.map((type) => (
               <MenuItem
