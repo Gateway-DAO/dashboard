@@ -37,7 +37,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
 
   const isIssuer = useMemo(
     () =>
-      session.user.gatewayId === pda?.dataAsset?.issuer?.user?.gatewayId ||
+      session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId ||
       session?.user?.accesses?.find(
         (access) =>
           pda?.dataAsset?.organization?.gatewayId ===
@@ -47,7 +47,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
   );
 
   const isOwner = useMemo(
-    () => session.user.gatewayId === pda?.dataAsset?.owner?.user?.gatewayId,
+    () => session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId,
     [pda, session]
   );
 
