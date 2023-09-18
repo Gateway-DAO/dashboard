@@ -60,9 +60,12 @@ query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
 
     dataAsset {
       title
-      image
+      organization {
+        gatewayId
+      }
       owner {
-        ...user
+        gatewayId
+        displayName
       }
       dataModel {
         id
