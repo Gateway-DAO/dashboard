@@ -2,6 +2,7 @@ fragment user on User {
   id
   gatewayId
   profilePicture
+  displayName
   email
   primaryWallet {
     address
