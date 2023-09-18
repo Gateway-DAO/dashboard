@@ -22,6 +22,7 @@ export const common = {
   actions: {
     accept: 'Accept',
     reject: 'Reject',
+    save: 'Save',
     cancel: 'Cancel',
     check_data_proof: 'Check data proof',
     share_now: 'Share now',

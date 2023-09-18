@@ -1,0 +1,3 @@
+mutation update_display_name($input: String!) {
+  updateMyDisplayName(displayName: $input)
+}
