@@ -1,6 +1,9 @@
 import { Theme } from '@mui/material/styles';
 
 export const MuiButton: Extract<Theme['components'], object>['MuiButton'] = {
+  defaultProps: {
+    disableElevation: true,
+  },
   styleOverrides: {
     root: ({ theme }) => ({
       textTransform: 'unset',
