@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react';
 
 import { GraphQLClient } from 'graphql-request';
 
-import { getServerSession } from '../next-auth/get-server-session';
+import { getGtwServerSession } from '../next-auth/get-gtw-server-session';
 import { getSdk, SdkFunctionWrapper } from './types';
 
 export type Api = ReturnType<typeof getSdk>;
@@ -64,7 +64,7 @@ export const apiWithRefresh = (
 export async function getPrivateApi(session?: Session | null) {
   let propSession = session;
   if (!session) {
-    propSession = await getServerSession();
+    propSession = await getGtwServerSession();
   }
   const token = propSession?.token;
   return api(token ?? '');

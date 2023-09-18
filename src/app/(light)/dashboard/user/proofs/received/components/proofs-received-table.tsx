@@ -10,7 +10,7 @@ import {
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
-import { useSession } from '@/context/session-provider';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { proofs } from '@/locale/en/proof';
 import { Proof } from '@/services/protocol/types';
 import { useQuery } from '@tanstack/react-query';
@@ -71,7 +71,7 @@ export default function ProofsReceivedTable({
     pageSize: 5,
   });
 
-  const { privateApi } = useSession();
+  const { privateApi } = useGtwSession();
   const { data, isFetching } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [

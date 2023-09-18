@@ -6,7 +6,7 @@ import ProofCardInfo from '@/app/(light)/dashboard/user/proof/[id]/components/pr
 import ProofCardTitle from '@/app/(light)/dashboard/user/proof/[id]/components/proof-card-title';
 import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
-import { useSession } from '@/context/session-provider';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda } from '@/locale/en/pda';
@@ -24,7 +24,7 @@ type Props = {
 };
 
 export default function IssuePdaFormSuccessfully({ id }: Props) {
-  const { privateApi } = useSession();
+  const { privateApi } = useGtwSession();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 

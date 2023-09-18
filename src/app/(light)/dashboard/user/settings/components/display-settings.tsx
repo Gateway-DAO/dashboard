@@ -2,12 +2,14 @@
 
 import AvatarPicker from "@/components/form/avatar-picker/avatar-picker";
 import GTWAvatar from "@/components/gtw-avatar/gtw-avatar";
-import { useSession } from "@/context/session-provider";
+import { useGtwSession } from "@/context/gtw-session-provider";
 import { common } from "@/locale/en/common";
 import { useForm, Controller } from "react-hook-form";
 import zod from "zod";
 
 import { Box, Button, FormControl, FormHelperText, FormLabel, Input, InputAdornment, InputLabel, Stack, TextField } from "@mui/material";
+
+import DisplayName from "./display-fields/display-name";
 
 const validations = zod.object({
   // name: zod.string().min(1, "Please enter your name"),
@@ -16,7 +18,7 @@ const validations = zod.object({
 })
 
 export default function DisplaySettings() {
-  const { session } = useSession();
+  const { session } = useGtwSession();
 
   const { register, control, watch } = useForm<{
     avatar: string,
@@ -40,13 +42,7 @@ export default function DisplaySettings() {
         <FormLabel htmlFor="avatar" sx={{ fontSize: 14 }}>{common.general.avatar}</FormLabel>
         <AvatarPicker name="avatar" control={control} username={gatewayId!} />
       </FormControl>
-      <TextField
-        id="name"
-        label="Name"
-        fullWidth
-        sx={{ maxWidth: 478 }}
-        {...register("name")}
-      />
+      <DisplayName />
       <TextField
         id="gateway-id"
         label="Username"
