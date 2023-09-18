@@ -10,7 +10,7 @@ const wallet = [{
   address: "0x1234567890",
   chain: Chain.Evm,
 }, {
-  address: "0x1234567890",
+  address: "0x122227890",
   chain: Chain.Sol,
 }];
 
