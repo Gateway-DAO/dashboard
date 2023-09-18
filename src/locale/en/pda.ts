@@ -61,3 +61,8 @@ export const pdas = {
   data_assets_subtitle:
     'These are the private data assets you have collected and sent',
 };
+export const orgPdas = {
+  empty: 'No issued Data Assets yet',
+  data_assets_title: 'Issued data assets',
+  data_assets_subtitle: 'These are the private data assets you have issued',
+};

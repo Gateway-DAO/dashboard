@@ -1,9 +1,12 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { defaultGridCustomization } from '@/components/data-grid/grid-default';
+import {
+  defaultGridConfiguration,
+  defaultGridCustomization,
+} from '@/components/data-grid/grid-default';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
 import { DATE_FORMAT } from '@/constants/date';
@@ -141,7 +144,7 @@ export default function PDAsTable({ data: initialData }: Props) {
 
   return (
     <DataGrid
-      {...defaultGridCustomization}
+      {...defaultGridConfiguration}
       rows={data && data.length ? data : initialData}
       columns={columns}
       rowCount={count || 0}
