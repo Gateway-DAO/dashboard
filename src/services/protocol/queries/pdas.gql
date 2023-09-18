@@ -19,6 +19,7 @@ query received_pdas($take: Float!, $skip: Float!) {
     status
     dataAsset {
       title
+      image
       organization {
         image
         name
@@ -38,6 +39,14 @@ query issued_pdas($take: Float!, $skip: Float!) {
     dataAsset {
       title
       image
+      organization {
+        image
+        name
+        gatewayId
+      }
+      issuer {
+        ...user
+      }
     }
   }
 }
@@ -51,6 +60,7 @@ query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
 
     dataAsset {
       title
+      image
       owner {
         ...user
       }

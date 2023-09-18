@@ -3,9 +3,8 @@
 import InfiniteLoadMore from '@/components/infinite-load-more/infinite-load-more';
 import PdaCardSkeleton from '@/components/pda-card/pda-card-skeleton';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import { PrivateDataAsset } from '@/services/protocol/types';
+import { Issued_PdasQuery } from '@/services/protocol/types';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { PartialDeep } from 'type-fest';
 
 import { Stack } from '@mui/material';
 
@@ -13,7 +12,7 @@ import PDAsList from '../../components/pdas-list';
 import PDAsListContainer from '../../components/pdas-list-container';
 
 type Props = {
-  pdas: PartialDeep<PrivateDataAsset>[];
+  pdas: Issued_PdasQuery['issuedPDAs'];
 };
 
 export default function IssuedPDAsList({ pdas: initialPdas }: Props) {
