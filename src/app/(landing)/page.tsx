@@ -24,13 +24,13 @@ export default function IndexPage() {
       <Header />
       <Hero />
       <Pdas />
-      <Lifecycle />
+      {/* <Lifecycle />
       <Info />
       <OurProtocol />
       <OurNetwork />
       <Stats />
       <Investors />
-      <Footer variant="dark" />
+      <Footer variant="dark" /> */}
     </HeaderContextProvider>
   );
 }

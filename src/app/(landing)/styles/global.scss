@@ -11,3 +11,9 @@ html.lenis {
     overflow: initial;
   }
 }
+
+html {
+  @media (max-width: 768px) {
+    font-size: calc(100vw / 390 * 10);
+  }
+}

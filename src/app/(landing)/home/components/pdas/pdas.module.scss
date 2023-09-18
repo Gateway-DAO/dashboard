@@ -23,6 +23,11 @@
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+
+  // @media (max-width: 768px) {
+  //   height: 100vh;
+  //   width: initial;
+  // }
 }
 
 .lines_parent {
@@ -47,6 +52,10 @@
   top: calc(50% + 170px);
   transform: translate(-50%, -50%);
   width: 100%;
+
+  @media (max-width: 768px) {
+    top: calc(50% + 29rem);
+  }
 }
 
 .logo_text {
@@ -54,6 +63,10 @@
   top: 0;
   width: 20px;
   opacity: 0;
+
+  @media (max-width: 768px) {
+    width: 2rem;
+  }
 }
 
 .pdas_text {
@@ -74,6 +87,12 @@
 
   &--purple {
     color: #e6d5fa;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 3.6rem;
+    line-height: 5rem;
+    letter-spacing: 0.0412rem;
   }
 }
 
@@ -97,5 +116,10 @@
     100% {
       opacity: 0;
     }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 3.6rem;
+    line-height: 5rem;
   }
 }
