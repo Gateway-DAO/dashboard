@@ -1,3 +1,4 @@
+import { IdentifierType } from '@/services/protocol/types';
 import { FieldError } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -7,14 +8,14 @@ const ethRegex = /^0x[a-fA-F0-9]{40}$/;
 
 export type IssuePdaSchema = {
   id: string;
-  account_type?: string;
+  identifier_type?: string;
   address?: string;
   image?: string;
 };
 
 export type IssuePdaSchemaError = {
   id?: FieldError;
-  account_type?: FieldError;
+  identifier_type?: FieldError;
   address?: FieldError;
   image?: FieldError;
 };
@@ -24,28 +25,28 @@ const address = z
   .string({ required_error: 'Address is required' })
   .min(2, 'The field must contain at least 2 character(s)');
 
-export const issuePdaSchema = z.discriminatedUnion('account_type', [
+export const issuePdaSchema = z.discriminatedUnion('identifier_type', [
   z.object({
-    account_type: z.literal('Gateway ID'),
+    identifier_type: z.literal(IdentifierType.GatewayId),
     address: address.regex(RegExp(usernameRegex), {
       message: 'Only lowercase letters, numbers and ._-',
     }),
     image,
   }),
   z.object({
-    account_type: z.literal('Email'),
+    identifier_type: z.literal(IdentifierType.Email),
     address: address.email(),
     image,
   }),
   z.object({
-    account_type: z.literal('EVM Wallet'),
+    identifier_type: z.literal(IdentifierType.Evm),
     address: address.regex(RegExp(ethRegex), {
       message: 'Invalid EVM Wallet',
     }),
     image,
   }),
   z.object({
-    account_type: z.literal('Solana Wallet'),
+    identifier_type: z.literal(IdentifierType.Solana),
     address,
     image,
   }),
