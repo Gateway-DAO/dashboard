@@ -24,7 +24,7 @@ export default function PDAsList({ pdas }: Props) {
                 }
               : {
                   image: null,
-                  name: pda.dataAsset?.issuer?.user?.gatewayId,
+                  name: pda.dataAsset?.issuer?.gatewayId,
                 };
             return (
               <PdaCard
