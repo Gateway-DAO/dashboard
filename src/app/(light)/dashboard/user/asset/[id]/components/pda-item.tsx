@@ -19,10 +19,10 @@ import { PartialDeep } from 'type-fest';
 import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
 import DataTable from './data-table';
-import IssuePda from './issue-pda/issue-pda';
 import ModalImage from './modal-image';
 import PdaCardInfo from './pda-card-info';
 import { RevokePDA } from './revoke-pda/revoke-pda';
+import ShareCopy from './share-copy/share-copy';
 import SharedWithCard from './shared-with-card';
 import { SuspendOrMakeValidPDA } from './suspend-or-make-valid-pda/suspend-or-make-valid-pda';
 
@@ -109,7 +109,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           <>
             <SharedWithCard pdaId={pda?.id as string} />
 
-            {isOwner && <IssuePda pda={pda} />}
+            {isOwner && <ShareCopy pda={pda} />}
             {isIssuer && (
               <Stack direction="row" gap={1}>
                 <SuspendOrMakeValidPDA pda={pda} />

@@ -17,13 +17,13 @@ import { CheckOutlined } from '@mui/icons-material';
 import LinkIcon from '@mui/icons-material/Link';
 import { Avatar, Box, Button, Stack, Typography } from '@mui/material';
 
-import IssuePdaFormSuccessSkeleton from './issue-pda-form-successfully-skeleton';
+import ShareCopyFormSuccessSkeleton from './share-copy-form-successfully-skeleton';
 
 type Props = {
   id: string;
 };
 
-export default function IssuePdaFormSuccessfully({ id }: Props) {
+export default function ShareCopyFormSuccessfully({ id }: Props) {
   const { privateApi } = useGtwSession();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
@@ -50,7 +50,7 @@ export default function IssuePdaFormSuccessfully({ id }: Props) {
   return (
     <>
       {isFetching || isLoading ? (
-        <IssuePdaFormSuccessSkeleton />
+        <ShareCopyFormSuccessSkeleton />
       ) : (
         <Stack>
           <Box sx={{ position: 'absolute', top: { xs: 24, md: 48 } }}>

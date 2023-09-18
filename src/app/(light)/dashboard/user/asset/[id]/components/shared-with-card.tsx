@@ -77,11 +77,9 @@ export default function SharedWithCard({ pdaId }: Props) {
                         gap: 2,
                       }}
                     >
-                      <GTWAvatar
-                        name={proof.verifier?.user?.profilePicture ?? ''}
-                      />
+                      <GTWAvatar name={proof.verifier?.profilePicture ?? ''} />
                       <Typography variant="subtitle1">
-                        {proof.verifier?.user.gatewayId}
+                        {proof.verifier?.gatewayId}
                       </Typography>
                     </Stack>
                     <Typography variant="body2">

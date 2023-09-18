@@ -1,9 +1,12 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { defaultGridCustomization } from '@/components/data-grid/grid-default';
+import {
+  defaultGridConfiguration,
+  defaultGridCustomization,
+} from '@/components/data-grid/grid-default';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
 import { DATE_FORMAT } from '@/constants/date';
@@ -30,7 +33,7 @@ type Props = {
   totalCount: number;
 };
 
-export default function PDAsTable() {
+export default function PDAsTable({ data: initialData }: Props) {
   const columns: GridColDef[] = [
     {
       field: 'dataAsset',
@@ -39,7 +42,7 @@ export default function PDAsTable() {
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography variant="body1" fontWeight={700}>
-            {params.row.dataAsset}
+            {params.row.dataAsset.title}
           </Typography>
         );
       },
@@ -49,7 +52,14 @@ export default function PDAsTable() {
       headerName: 'Recipient',
       flex: 1.3,
       renderCell: (params: GridRenderCellParams) => {
-        return <AvatarTextCell name={params.row.owner?.user?.gatewayId} />;
+        return (
+          <AvatarTextCell
+            name={
+              params.row.dataAsset?.owner?.displayName ??
+              params.row.dataAsset?.owner?.gatewayId
+            }
+          />
+        );
       },
     },
     {
@@ -59,7 +69,7 @@ export default function PDAsTable() {
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography variant="body1">
-            {limitCharsCentered(params.row.dataModelId, 6)}
+            {limitCharsCentered(params.row.dataAsset?.dataModel?.id, 6)}
           </Typography>
         );
       },
@@ -122,7 +132,7 @@ export default function PDAsTable() {
         orgId: organization?.id || '',
       }),
     select: (data: any) => data?.issuedPdas,
-    // initialData: initialData && initialData.length ? initialData : null,
+    initialData: initialData && initialData.length ? initialData : null,
   });
 
   const setNewPage = ({ page }: { page: number }) => {
@@ -134,8 +144,8 @@ export default function PDAsTable() {
 
   return (
     <DataGrid
-      {...defaultGridCustomization}
-      rows={data}
+      {...defaultGridConfiguration}
+      rows={data && data.length ? data : initialData}
       columns={columns}
       rowCount={count || 0}
       paginationModel={paginationModel}
