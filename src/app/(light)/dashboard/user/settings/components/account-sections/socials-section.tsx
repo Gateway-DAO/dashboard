@@ -3,7 +3,7 @@ import { FaDiscord, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 
 import { Button, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
-import AccountSection from "../account-section";
+import AccountSection from "./account-section";
 import AliasMenuButton from "../alias-menu-button";
 
 const socials = [

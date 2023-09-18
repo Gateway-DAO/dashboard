@@ -3,8 +3,8 @@ import { Chain } from "@/services/protocol/types";
 import { AddOutlined } from "@mui/icons-material";
 import { Button, ListItem, ListItemText } from "@mui/material";
 
-import AccountSection from "../account-section";
 import AliasMenuButton from "../alias-menu-button";
+import AccountSection from "./account-section";
 
 const wallet = [{
   address: "0x1234567890",
