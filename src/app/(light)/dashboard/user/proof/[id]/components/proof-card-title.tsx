@@ -53,16 +53,16 @@ export default function ProofCardTitle({ proof }: Props) {
             <GTWAvatar
               src={''}
               size={56}
-              name={proof?.verifier?.user?.gatewayId as string}
+              name={proof?.verifier?.gatewayId as string}
             />
             <Typography variant="h3" id="proof-title">
-              {proof?.verifier?.user?.gatewayId}
+              {proof?.verifier?.gatewayId}
             </Typography>
           </Stack>
           {tooltip && (
             <TooltipUser
-              name={proof?.verifier?.user?.gatewayId as string}
-              username={proof?.verifier?.user?.gatewayId as string}
+              name={proof?.verifier?.gatewayId as string}
+              username={proof?.verifier?.gatewayId as string}
               issuance_date={dayjs(proof?.createdAt).format(
                 'MM/DD/YYYY, h:mm A'
               )}
