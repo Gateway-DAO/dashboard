@@ -25,15 +25,17 @@ export const userHeader = (token: string) => ({
   Authorization: `Bearer ${token}`,
 });
 
-const gqlClient = (token?: string) =>
+const gqlClient = (token: string, reloadCache = false) =>
   new GraphQLClient(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {
     headers: {
       ...headers,
       ...(token && userHeader(token)),
     },
+    ...(reloadCache && { cache: 'reload' }),
   });
 
-export const api = (token: string) => getSdk(gqlClient(token));
+export const api = (token: string, reloadCache = false) =>
+  getSdk(gqlClient(token, reloadCache));
 
 export const apiWithRefresh = (
   token: string,
