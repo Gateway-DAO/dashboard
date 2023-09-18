@@ -34,11 +34,8 @@ const gqlClient = (token: string, reloadCache = false) =>
     ...(reloadCache && { cache: 'reload' }),
   });
 
-export const api = (token: string, reloadCache = false) => {
-  const client = gqlClient(token, reloadCache);
-  console.log(client);
-  getSdk(client);
-};
+export const api = (token: string, reloadCache = false) =>
+  getSdk(gqlClient(token, reloadCache));
 
 export const apiWithRefresh = (
   token: string,
