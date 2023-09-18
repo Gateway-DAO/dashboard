@@ -24,11 +24,19 @@ export default function CardUsers({ pda }: Props) {
     pda?.dataAsset?.issuer?.gatewayId ??
     '';
 
-  const issuerName = pda?.dataAsset?.organization?.name ?? issuerGatewayId;
+  const issuerDisplayName =
+    pda?.dataAsset?.organization?.name ?? pda?.dataAsset?.issuer?.displayName;
 
-  const issuerPicture = pda?.dataAsset?.organization?.image ?? '';
+  const issuerName =
+    issuerDisplayName ?? issuerGatewayId ?? pda?.dataAsset?.issuer?.id;
 
-  const recipientName = pda?.dataAsset?.owner?.gatewayId ?? '';
+  const issuerPicture =
+    pda?.dataAsset?.organization?.image ??
+    pda?.dataAsset?.issuer?.profilePicture ??
+    '';
+
+  const recipientName =
+    pda?.dataAsset?.owner?.gatewayId ?? pda?.dataAsset?.owner?.id ?? '';
 
   const recipientPicture = '';
 
