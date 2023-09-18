@@ -1,0 +1,54 @@
+.element {
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background-color: transparent;
+  height: 36px;
+  padding: 11px 8px;
+  position: relative;
+  width: 36px;
+}
+
+.container {
+  display: block;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.line {
+  background-color: #fff;
+  height: 2px;
+  position: absolute;
+  width: 18px;
+
+  &:nth-child(1) {
+    left: 0;
+    top: 0;
+  }
+
+  &:nth-child(2) {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &:nth-child(3) {
+    bottom: 0;
+    left: 0;
+  }
+
+  &:nth-child(4),
+  &:nth-child(5) {
+    left: 0;
+    opacity: 0;
+    top: 5px;
+  }
+
+  &:nth-child(4) {
+    transform: rotate(45deg);
+  }
+
+  &:nth-child(5) {
+    transform: rotate(-45deg);
+  }
+}

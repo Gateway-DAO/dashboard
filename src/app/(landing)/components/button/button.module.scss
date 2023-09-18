@@ -9,6 +9,11 @@
   border: 0;
   outline: none;
 
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
   &--text {
     background-color: transparent;
     opacity: 1;
@@ -28,6 +33,10 @@
     &:hover {
       background-color: #53128c;
     }
+
+    @media (max-width: 768px) {
+      padding: 6px 16px;
+    }
   }
 
   &--outlined {
@@ -40,6 +49,10 @@
     &:hover {
       background-color: #53128c;
       border-color: #53128c;
+    }
+
+    @media (max-width: 768px) {
+      padding: 6px 16px;
     }
   }
 }
