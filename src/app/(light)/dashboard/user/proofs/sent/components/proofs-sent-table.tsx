@@ -26,16 +26,16 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     field: 'verifier',
     headerName: proofs.verifier,
     flex: 1,
-    valueGetter: (params) => params.row.verifier?.user?.gatewayId,
+    valueGetter: (params) => params.row.verifier?.gatewayId,
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" spacing={1}>
           <GTWAvatar
-            name={params.row.verifier!.user?.profilePicture ?? ''}
+            name={params.row.verifier!.profilePicture ?? ''}
             size={32}
           />
           <Typography variant="body2">
-            {params.row.verifier!.user?.gatewayId}
+            {params.row.verifier!.gatewayId}
           </Typography>
         </Stack>
       );

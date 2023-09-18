@@ -19,16 +19,16 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { IssuePdaSchema, IssuePdaSchemaError } from './schema';
+import { ShareCopySchema, ShareCopySchemaError } from './schema';
 import { SharingCost } from './sharing-cost';
 
-export default function IssuePdaFormField() {
+export default function ShareCopyFormField() {
   const {
     register,
     clearErrors,
     setValue,
     formState: { errors },
-  } = useFormContext<IssuePdaSchema>();
+  } = useFormContext<ShareCopySchema>();
 
   const theme = useTheme();
 
@@ -73,7 +73,7 @@ export default function IssuePdaFormField() {
           <InputLabel htmlFor="type">{pda.share.account_type}</InputLabel>
           <Select
             label={pda.share.account_type}
-            error={!!(errors.identifier_type as IssuePdaSchemaError)}
+            error={!!(errors.identifier_type as ShareCopySchemaError)}
             id="id-account-type"
             defaultValue={IdentifierType.GatewayId}
             {...register(`identifier_type`, {
@@ -100,7 +100,7 @@ export default function IssuePdaFormField() {
               </MenuItem>
             ))}
           </Select>
-          {!!(errors.identifier_type as IssuePdaSchemaError) && (
+          {!!(errors.identifier_type as ShareCopySchemaError) && (
             <FormHelperText sx={{ color: 'error' }}>
               {errors.identifier_type?.message}
             </FormHelperText>

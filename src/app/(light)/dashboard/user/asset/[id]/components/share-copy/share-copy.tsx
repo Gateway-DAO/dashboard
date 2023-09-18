@@ -6,6 +6,7 @@ import { LoadingButton } from '@/components/buttons/loading-button/loading-butto
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { mutations } from '@/constants/queries';
+import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
@@ -25,34 +26,35 @@ import { PartialDeep } from 'type-fest/source/partial-deep';
 import { Stack, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 
-import IssuePdaFormField from './issue-pda-form-fields';
-import IssuePdaFormSuccessfully from './issue-pda-form-successfully';
-import { IssuePdaSchema, issuePdaSchema } from './schema';
+import { ShareCopySchema, shareCopySchema } from './schema';
+import ShareCopyFormField from './share-copy-form-fields';
+import ShareCopyFormSuccessfully from './share-copy-form-successfully';
 
 type Props = {
   pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
 };
 
-export default function IssuePda({ pda }: Props) {
+export default function ShareCopy({ pda }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
-  const [openIssuePda, setOpenIssuePda] = useToggle(false);
+  const [openShareCopy, setOpenShareCopy] = useToggle(false);
   const [pdaIssued, setPdaIssued] = useState<string>();
   const { privateApi } = useGtwSession();
 
   const methods = useForm({
-    resolver: zodResolver(issuePdaSchema as any),
+    resolver: zodResolver(shareCopySchema as any),
     mode: 'all',
   });
 
   const toggleModal = () => {
-    if (openIssuePda) {
-      router.back();
+    if (openShareCopy) {
+      methods.reset();
+      router.push(routes.dashboardUserAsset(pda?.id));
       setPdaIssued(undefined);
     } else {
-      router.push('#issue-pda');
+      router.push('#share-copy');
     }
-    setOpenIssuePda();
+    setOpenShareCopy();
   };
 
   const createProof = useMutation({
@@ -63,7 +65,7 @@ export default function IssuePda({ pda }: Props) {
   });
 
   const handleMutation = async (
-    data: IssuePdaSchema | FieldValues
+    data: ShareCopySchema | FieldValues
   ): Promise<any> => {
     if (!(await methods.trigger())) return;
     try {
@@ -97,21 +99,21 @@ export default function IssuePda({ pda }: Props) {
           mb: 2,
         }}
         onClick={() => {
-          router.push('#issue-pda');
-          setOpenIssuePda(true);
+          router.push('#share-copy');
+          setOpenShareCopy(true);
         }}
       >
         {common.actions.share_a_copy}
       </Button>
-      <ModalRight open={openIssuePda} onClose={toggleModal}>
+      <ModalRight open={openShareCopy} onClose={toggleModal}>
         <ModalTitle onClose={toggleModal} />
         {pdaIssued ? (
-          <IssuePdaFormSuccessfully id={pdaIssued} />
+          <ShareCopyFormSuccessfully id={pdaIssued} />
         ) : (
           <FormProvider {...methods}>
             <Stack
               component="form"
-              id="issue-pda-form"
+              id="share-copy-form"
               onSubmit={methods.handleSubmit(handleMutation)}
             >
               <Typography fontSize={34}>
@@ -120,14 +122,14 @@ export default function IssuePda({ pda }: Props) {
               <Typography sx={{ mb: 6 }}>
                 {pdaLocale.share.share_a_copy_description}
               </Typography>
-              <IssuePdaFormField />
+              <ShareCopyFormField />
               <LoadingButton
                 variant="contained"
                 type="submit"
                 sx={{
                   mt: 3,
                 }}
-                id="issue-pda-button"
+                id="share-copy-button"
                 isLoading={createProof?.isLoading}
               >
                 {common.actions.share_now}

@@ -2,13 +2,16 @@
 
 import PdaCard from '@/components/pda-card/pda-card';
 import routes from '@/constants/routes';
-import { PdaStatus, PrivateDataAsset } from '@/services/protocol/types';
-import { PartialDeep } from 'type-fest';
+import {
+  Issued_PdasQuery,
+  PdaStatus,
+  Received_PdasQuery,
+} from '@/services/protocol/types';
 
 import PDAsListContainer from './pdas-list-container';
 
 type Props = {
-  pdas: PartialDeep<PrivateDataAsset>[];
+  pdas: Received_PdasQuery['myPDAs'] | Issued_PdasQuery['issuedPDAs'];
 };
 
 export default function PDAsList({ pdas }: Props) {
@@ -16,7 +19,7 @@ export default function PDAsList({ pdas }: Props) {
     <>
       {pdas && pdas.length > 0 && (
         <PDAsListContainer>
-          {pdas.map((pda: PartialDeep<PrivateDataAsset>) => {
+          {pdas.map((pda) => {
             const issuer = pda.dataAsset?.organization
               ? {
                   image: pda.dataAsset?.organization?.image,
@@ -24,7 +27,7 @@ export default function PDAsList({ pdas }: Props) {
                 }
               : {
                   image: null,
-                  name: pda.dataAsset?.issuer?.user?.gatewayId,
+                  name: pda.dataAsset?.issuer?.gatewayId,
                 };
             return (
               <PdaCard

@@ -25,17 +25,12 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     field: 'owner',
     headerName: proofs.sender,
     flex: 1,
-    valueGetter: (params) => params.row.owner?.user?.gatewayId,
+    valueGetter: (params) => params.row.owner?.gatewayId,
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" spacing={1}>
-          <GTWAvatar
-            name={params.row.owner!.user?.profilePicture ?? ''}
-            size={32}
-          />
-          <Typography variant="body2">
-            {params.row.owner!.user?.gatewayId}
-          </Typography>
+          <GTWAvatar name={params.row.owner!.profilePicture ?? ''} size={32} />
+          <Typography variant="body2">{params.row.owner!.gatewayId}</Typography>
         </Stack>
       );
     },
