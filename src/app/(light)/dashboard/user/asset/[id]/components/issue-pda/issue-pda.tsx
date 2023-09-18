@@ -42,6 +42,7 @@ export default function IssuePda({ pda }: Props) {
 
   const methods = useForm({
     resolver: zodResolver(issuePdaSchema as any),
+    mode: 'all',
   });
 
   const toggleModal = () => {
