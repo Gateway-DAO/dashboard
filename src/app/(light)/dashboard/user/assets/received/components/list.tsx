@@ -2,7 +2,7 @@
 
 import InfiniteLoadMore from "@/components/infinite-load-more/infinite-load-more";
 import PdaCardSkeleton from "@/components/pda-card/pda-card-skeleton";
-import { useSession } from "@/context/session-provider";
+import { useGtwSession } from "@/context/gtw-session-provider";
 import { PrivateDataAsset } from "@/services/protocol/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { PartialDeep } from "type-fest";
@@ -17,7 +17,7 @@ type Props = {
 }
 
 export default function ReceivedPDAsList({ pdas: initialPdas }: Props) {
-  const { privateApi } = useSession();
+  const { privateApi } = useGtwSession();
   const { data, fetchNextPage, isFetchingNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['pdas', privateApi],
     queryFn: async ({ pageParam }) => {

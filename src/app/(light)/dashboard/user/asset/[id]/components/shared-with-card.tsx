@@ -1,7 +1,7 @@
 'use client';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { queries } from '@/constants/queries';
-import { useSession } from '@/context/session-provider';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { pda } from '@/locale/en/pda';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
@@ -16,7 +16,7 @@ type Props = {
 };
 
 export default function SharedWithCard({ pdaId }: Props) {
-  const { privateApi } = useSession();
+  const { privateApi } = useGtwSession();
   const { data, isFetching, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [queries.proofs_by_pdas_id, [pdaId]],

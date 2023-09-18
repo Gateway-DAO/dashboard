@@ -2,7 +2,7 @@
 
 import AvatarPicker from "@/components/form/avatar-picker/avatar-picker";
 import GTWAvatar from "@/components/gtw-avatar/gtw-avatar";
-import { useSession } from "@/context/session-provider";
+import { useGtwSession } from "@/context/gtw-session-provider";
 import { common } from "@/locale/en/common";
 import { useForm, Controller } from "react-hook-form";
 import zod from "zod";
@@ -18,7 +18,7 @@ const validations = zod.object({
 })
 
 export default function DisplaySettings() {
-  const { session } = useSession();
+  const { session } = useGtwSession();
 
   const { register, control, watch } = useForm<{
     avatar: string,

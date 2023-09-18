@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
 import { mutations } from '@/constants/queries';
-import { useSession } from '@/context/session-provider';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -25,7 +25,7 @@ type Props = {
 };
 
 export function SuspendOrMakeValidPDA({ pda }: Props) {
-  const { privateApi } = useSession();
+  const { privateApi } = useGtwSession();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
