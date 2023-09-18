@@ -12,3 +12,10 @@ fragment user on User {
   createdAt
   updatedAt
 }
+
+fragment min_user on User {
+  id
+  gatewayId
+  profilePicture
+  createdAt
+}
