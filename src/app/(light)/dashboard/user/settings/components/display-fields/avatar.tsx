@@ -11,12 +11,12 @@ import { useForm } from "react-hook-form";
 
 import { Box, Button, FormControl, FormHelperText, FormLabel, Input, InputAdornment, InputLabel, Skeleton, Stack, TextField } from "@mui/material";
 
-export default function UpdateAvatar() {
+export default function Avatar() {
   const { data: session, update } = useSession()
   const { privateApi } = useGtwSession()
   const { mutateAsync } = useMutation({
     mutationKey: ["update-avatar"],
-    mutationFn: async (profilePicture: string) => privateApi.update_display_name({ profilePicture }),
+    mutationFn: async (profilePicture: string) => privateApi.update_profile_picture_url({ profilePictureUrl: "" }),
   })
 
 
@@ -29,8 +29,6 @@ export default function UpdateAvatar() {
       profilePicture: session?.user.profilePicture ?? ""
     },
   })
-
-  const profilePicture = watch("profilePicture");
 
   const onCancel = () => {
     reset();
@@ -51,16 +49,19 @@ export default function UpdateAvatar() {
     }
   }
 
+  return <form>
+    <FormControl>
+      <FormLabel htmlFor="avatar" sx={{ fontSize: 14 }}>{common.general.avatar}</FormLabel>
+      {session ? <AvatarPicker name="profilePicture" control={control} username={session.user.gatewayId!} /> : <Stack direction="row" spacing={2} alignItems="center">
+        <Skeleton variant="circular" width={80} height={80} />
+        <Skeleton width={120} height={46} />
+      </Stack>}
+    </FormControl>
 
-  if (!session) return <Skeleton sx={{
-    maxWidth: 478,
-    width: "100%",
-    height: 80,
-    mt: '0 !important'
-  }} />;
+    {formState.dirtyFields.profilePicture && <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+      <Button variant="contained" onClick={handleSubmit(onSubmit)}>{common.actions.save}</Button>
+      <Button variant="outlined" onClick={onCancel}>{common.actions.cancel}</Button>
+    </Stack>}
 
-  return <form><FormControl>
-    <FormLabel htmlFor="avatar" sx={{ fontSize: 14 }}>{common.general.avatar}</FormLabel>
-    <AvatarPicker name="profilePicture" control={control} username={session.user.gatewayId!} />
-  </FormControl></form>
+  </form>
 }
