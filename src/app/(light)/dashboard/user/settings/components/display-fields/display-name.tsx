@@ -9,7 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, Skeleton, Stack, TextField } from "@mui/material";
 
 export default function DisplayName() {
   const { data: session, update } = useSession()
@@ -52,7 +52,12 @@ export default function DisplayName() {
   }
 
 
-  if (!session) return null;
+  if (!session) return <Skeleton sx={{
+    maxWidth: 478,
+    width: "100%",
+    height: 80,
+    mt: '0 !important'
+  }} />;
 
   return <form onSubmit={handleSubmit(onSubmit)}>
     <TextField

@@ -31,7 +31,6 @@ const gqlClient = (token: string, reloadCache = false) =>
       ...headers,
       ...(token && userHeader(token)),
     },
-    ...(reloadCache && { cache: 'reload' }),
   });
 
 export const api = (token: string, reloadCache = false) =>
