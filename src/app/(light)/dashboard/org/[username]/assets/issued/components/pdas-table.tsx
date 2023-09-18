@@ -8,7 +8,7 @@ import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
-import { useSession } from '@/context/session-provider';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
 import { PdaStatus } from '@/services/protocol/types';
 import { PrivateDataAsset } from '@/services/protocol/types';
@@ -106,7 +106,7 @@ export default function PDAsTable() {
     select: (data: any) => data?.requestsReceivedCount,
   });
 
-  const { privateApi } = useSession();
+  const { privateApi } = useGtwSession();
   const { data, isFetching } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [

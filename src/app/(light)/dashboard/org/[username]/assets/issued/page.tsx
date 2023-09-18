@@ -2,7 +2,7 @@ import { Session } from 'next-auth';
 
 import TitleLayout from '@/components/title-layout/title-layout';
 import { pdas } from '@/locale/en/pda';
-import { getServerSession } from '@/services/next-auth/get-server-session';
+import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
 
 import { Box } from '@mui/material';
