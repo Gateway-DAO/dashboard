@@ -36,7 +36,10 @@ export default function CardUsers({ pda }: Props) {
     '';
 
   const recipientName =
-    pda?.dataAsset?.owner?.gatewayId ?? pda?.dataAsset?.owner?.id ?? '';
+    pda?.dataAsset?.owner?.displayName ??
+    pda?.dataAsset?.owner?.gatewayId ??
+    pda?.dataAsset?.owner?.id ??
+    '';
 
   const recipientPicture = '';
 
