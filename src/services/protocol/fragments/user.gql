@@ -1,0 +1,14 @@
+fragment user on User {
+  id
+  gatewayId
+  profilePicture
+  email
+  primaryWallet {
+    address
+  }
+  wallets {
+    address
+  }
+  createdAt
+  updatedAt
+}

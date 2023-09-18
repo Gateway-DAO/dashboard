@@ -1,0 +1,62 @@
+fragment proof on Proof {
+  id
+  totalCost
+  facilitationFee
+  createdAt
+  arweaveUrl
+  active
+
+  owner {
+    ...user
+  }
+
+  verifier {
+    ...user
+  }
+
+  organization {
+    gatewayId
+    image
+  }
+
+  data {
+    dataModels {
+      id
+      title
+      consumptionPrice
+    }
+    PDAs {
+      id
+      title
+      claim
+      dataModel {
+        id
+      }
+      issuer {
+        id
+        user {
+          gatewayId
+          profilePicture
+        }
+      }
+      organization {
+        id
+        name
+        gatewayId
+        image
+      }
+      owner {
+        id
+      }
+    }
+  }
+
+  dataRequest {
+    id
+    arweaveUrl
+    status
+    dataRequestTemplate {
+      id
+    }
+  }
+}

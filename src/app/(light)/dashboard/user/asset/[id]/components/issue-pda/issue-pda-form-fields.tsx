@@ -1,6 +1,7 @@
 'use client';
 import GatewayIcon from '@/components/icons/gateway';
 import { pda } from '@/locale/en/pda';
+import { IdentifierType } from '@/services/protocol/types';
 import { useFormContext } from 'react-hook-form';
 import { FaEthereum } from 'react-icons/fa';
 import { TbCurrencySolana } from 'react-icons/tb';
@@ -31,10 +32,10 @@ export default function IssuePdaFormField() {
 
   const theme = useTheme();
 
-  const mockAccountsTypes: Record<string, any>[] = [
+  const identifierTypes: Record<string, any>[] = [
     {
-      value: 0,
-      name: 'Gateway ID',
+      value: IdentifierType.GatewayId,
+      name: pda.share.identifier_type.gateway_id,
       icon: (
         <GatewayIcon
           colored={false}
@@ -43,8 +44,8 @@ export default function IssuePdaFormField() {
       ),
     },
     {
-      value: 1,
-      name: 'Email',
+      value: IdentifierType.Email,
+      name: pda.share.identifier_type.email,
       icon: (
         <MailOutlineIcon
           sx={{ color: 'text.secondary', width: 22, height: 22 }}
@@ -52,13 +53,13 @@ export default function IssuePdaFormField() {
       ),
     },
     {
-      value: 2,
-      name: 'EVM Wallet',
+      value: IdentifierType.Evm,
+      name: pda.share.identifier_type.evm_wallet,
       icon: <FaEthereum color={theme.palette.text.secondary} fontSize="22" />,
     },
     {
-      value: 3,
-      name: 'Solana Wallet',
+      value: IdentifierType.Solana,
+      name: pda.share.identifier_type.solana_wallet,
       icon: (
         <TbCurrencySolana color={theme.palette.text.secondary} fontSize="22" />
       ),
@@ -72,20 +73,20 @@ export default function IssuePdaFormField() {
           <InputLabel htmlFor="type">{pda.share.account_type}</InputLabel>
           <Select
             label={pda.share.account_type}
-            error={!!(errors.account_type as IssuePdaSchemaError)}
+            error={!!(errors.identifier_type as IssuePdaSchemaError)}
             id="id-account-type"
-            defaultValue={'Gateway ID'}
-            {...register(`account_type`, {
+            defaultValue={IdentifierType.GatewayId}
+            {...register(`identifier_type`, {
               onChange: () => {
                 setValue('address', '');
                 clearErrors();
               },
             })}
           >
-            {mockAccountsTypes.map((type) => (
+            {identifierTypes.map((type) => (
               <MenuItem
                 key={type?.value}
-                value={type?.name}
+                value={type?.value}
                 sx={{ width: '100%', py: 2 }}
               >
                 <Stack direction="row" alignItems="center" gap={1}>
@@ -99,9 +100,9 @@ export default function IssuePdaFormField() {
               </MenuItem>
             ))}
           </Select>
-          {!!(errors.account_type as IssuePdaSchemaError) && (
+          {!!(errors.identifier_type as IssuePdaSchemaError) && (
             <FormHelperText sx={{ color: 'error' }}>
-              {errors.account_type?.message}
+              {errors.identifier_type?.message}
             </FormHelperText>
           )}
         </FormControl>
