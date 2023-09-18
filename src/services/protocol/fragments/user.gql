@@ -1,0 +1,7 @@
+fragment user on User {
+  id
+  gatewayId
+  profilePicture
+  createdAt
+  updatedAt
+}
