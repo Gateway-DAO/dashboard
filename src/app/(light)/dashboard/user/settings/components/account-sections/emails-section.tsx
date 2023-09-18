@@ -2,8 +2,8 @@ import { AddOutlined, NotificationsOutlined } from "@mui/icons-material";
 import { Button, Chip, ListItem, ListItemText, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 
-import AccountSection from "../account-section";
 import AliasMenuButton from "../alias-menu-button";
+import AccountSection from "./account-section";
 
 const email = [{
   email: "sanket@gmail.com",

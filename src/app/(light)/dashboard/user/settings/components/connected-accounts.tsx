@@ -3,9 +3,9 @@ import { NEGATIVE_CONTAINER_PX } from "@/theme/config/style-tokens";
 import { Box, Divider, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 
-import EmailsSection from "./sections/emails-section";
-import SocialsSection from "./sections/socials-section";
-import WalletsSection from "./sections/wallets-section";
+import EmailsSection from "./account-sections/emails-section";
+import SocialsSection from "./account-sections/socials-section";
+import WalletsSection from "./account-sections/wallets-section";
 
 export default function ConnectedAccounts() {
   return <Box sx={{
