@@ -9,53 +9,7 @@ query pdas {
 
 query pda($id: String!) {
   PDAbyId(id: $id) {
-    id
-    status
-    issuanceDate
-    status
-    dataAsset {
-      title
-      description
-      expirationDate
-      image
-      organization {
-        image
-        name
-        gatewayId
-      }
-      issuer {
-        id
-        data
-        user {
-          gatewayId
-          profilePicture
-          createdAt
-        }
-      }
-      owner {
-        id
-        data
-        user {
-          gatewayId
-          profilePicture
-          createdAt
-        }
-      }
-      dataModel {
-        id
-        createdAt
-        tags
-      }
-      claim
-      claimArray {
-        label
-        metadata
-        property
-        description
-        type
-        value
-      }
-    }
+    ...pda
   }
 }
 
@@ -71,11 +25,7 @@ query received_pdas($take: Float!, $skip: Float!) {
         gatewayId
       }
       issuer {
-        data
-        user {
-          gatewayId
-          profilePicture
-        }
+        ...user
       }
     }
   }
@@ -102,10 +52,7 @@ query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
     dataAsset {
       title
       owner {
-        user {
-          gatewayId
-          profilePicture
-        }
+        ...user
       }
       dataModel {
         id

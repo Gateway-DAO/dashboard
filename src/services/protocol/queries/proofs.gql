@@ -1,61 +1,6 @@
 query received_proofs($take: Float!, $skip: Float!) {
   receivedProofs(skip: $skip, take: $take) {
-    id
-    totalCost
-    facilitationFee
-    createdAt
-    arweaveUrl
-
-    owner {
-      id
-      user {
-        gatewayId
-        profilePicture
-      }
-      data
-    }
-
-    data {
-      dataModels {
-        id
-      }
-      PDAs {
-        id
-        claim
-        dataModel {
-          id
-        }
-        issuer {
-          id
-        }
-        organization {
-          id
-          gatewayId
-        }
-        owner {
-          id
-        }
-      }
-    }
-
-    verifier {
-      user {
-        gatewayId
-        profilePicture
-      }
-    }
-
-    organization {
-      gatewayId
-      image
-    }
-
-    dataRequest {
-      id
-      dataRequestTemplate {
-        id
-      }
-    }
+    ...proof
   }
 }
 query countReceivedProofs {
@@ -73,10 +18,7 @@ query sent_proofs($take: Float!, $skip: Float!) {
     }
 
     verifier {
-      user {
-        gatewayId
-        profilePicture
-      }
+      ...user
     }
 
     dataRequest {
@@ -94,117 +36,12 @@ query count_sent_proofs {
 
 query proof($id: String!) {
   proof(id: $id) {
-    id
-    totalCost
-    facilitationFee
-    createdAt
-    arweaveUrl
-
-    data {
-      dataModels {
-        id
-        title
-        consumptionPrice
-      }
-      PDAs {
-        id
-        title
-        claim
-        dataModel {
-          id
-        }
-        issuer {
-          id
-          user {
-            gatewayId
-            profilePicture
-          }
-        }
-        organization {
-          id
-          name
-          gatewayId
-          image
-        }
-        owner {
-          id
-        }
-      }
-    }
-
-    verifier {
-      user {
-        gatewayId
-        profilePicture
-      }
-    }
-
-    dataRequest {
-      id
-      status
-      dataRequestTemplate {
-        id
-      }
-    }
+    ...proof
   }
 }
 
 query proofsByPDAIds($pdaIds: [String!]!) {
   proofsByPDAIds(pdaIds: $pdaIds) {
-    id
-    totalCost
-    facilitationFee
-    createdAt
-    active
-    data {
-      dataModels {
-        id
-        title
-        consumptionPrice
-      }
-      PDAs {
-        id
-        claim
-        title
-        dataModel {
-          id
-        }
-        issuer {
-          id
-          user {
-            gatewayId
-            profilePicture
-          }
-        }
-        organization {
-          id
-          name
-          gatewayId
-          image
-        }
-        owner {
-          id
-        }
-      }
-    }
-    arweaveUrl
-    organization {
-      gatewayId
-    }
-    verifier {
-      user {
-        gatewayId
-        profilePicture
-      }
-      data
-    }
-    dataRequest {
-      id
-      arweaveUrl
-      status
-      dataRequestTemplate {
-        id
-      }
-    }
+    ...proof
   }
 }
