@@ -73,3 +73,7 @@ query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
     }
   }
 }
+
+query countIssuedPdasByOrg($orgId: String!) {
+  issuedPDAsCount(orgId: $orgId)
+}
