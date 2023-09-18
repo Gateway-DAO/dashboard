@@ -11,7 +11,7 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import RequestStatusChip from '@/components/requests/request-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
-import { useSession } from '@/context/session-provider';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { DataRequest } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
@@ -99,7 +99,7 @@ export default function RequestsTable({
     pageSize: 5,
   });
 
-  const { privateApi } = useSession();
+  const { privateApi } = useGtwSession();
   const { data, isFetching } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [

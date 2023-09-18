@@ -6,7 +6,7 @@ import { LoadingButton } from '@/components/buttons/loading-button/loading-butto
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { mutations } from '@/constants/queries';
-import { useSession } from '@/context/session-provider';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -38,7 +38,7 @@ export default function IssuePda({ pda }: Props) {
   const router = useRouter();
   const [openIssuePda, setOpenIssuePda] = useToggle(false);
   const [pdaIssued, setPdaIssued] = useState<string>();
-  const { privateApi } = useSession();
+  const { privateApi } = useGtwSession();
 
   const methods = useForm({
     resolver: zodResolver(issuePdaSchema as any),
