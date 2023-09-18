@@ -74,7 +74,10 @@ export default function IssuePda({ pda }: Props) {
             pdaId: pda?.id,
           },
         ],
-        verifier: data?.address ?? null,
+        verifier: {
+          type: data.identifier_type,
+          value: data?.address ?? null,
+        },
       });
       setPdaIssued(res?.createProof?.id);
       router.refresh();
