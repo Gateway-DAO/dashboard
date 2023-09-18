@@ -1,4 +1,4 @@
-import { useGtwSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 
 import routes from '@/constants/routes';
@@ -27,7 +27,7 @@ type UseOrganizationFalsyResponse = {
 export default function useOrganization():
   | UseOrganizationTruthyResponse
   | UseOrganizationFalsyResponse {
-  const { data: session } = useGtwSession();
+  const { data: session } = useSession();
   const pathname = usePathname();
   const isOrg = pathname.includes(routes.dashboardOrgRoot);
   const pathnameOrg = isOrg ? pathname.split('/')[3] : undefined;
