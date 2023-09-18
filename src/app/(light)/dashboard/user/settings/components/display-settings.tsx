@@ -9,6 +9,8 @@ import zod from "zod";
 
 import { Box, Button, FormControl, FormHelperText, FormLabel, Input, InputAdornment, InputLabel, Stack, TextField } from "@mui/material";
 
+import DisplayName from "./display-fields/display-name";
+
 const validations = zod.object({
   // name: zod.string().min(1, "Please enter your name"),
   gatewayId: zod.string().min(1, "Please enter your Gateway Id"),
@@ -40,13 +42,7 @@ export default function DisplaySettings() {
         <FormLabel htmlFor="avatar" sx={{ fontSize: 14 }}>{common.general.avatar}</FormLabel>
         <AvatarPicker name="avatar" control={control} username={gatewayId!} />
       </FormControl>
-      <TextField
-        id="name"
-        label="Name"
-        fullWidth
-        sx={{ maxWidth: 478 }}
-        {...register("name")}
-      />
+      <DisplayName />
       <TextField
         id="gateway-id"
         label="Username"
