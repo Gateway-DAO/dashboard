@@ -6,13 +6,11 @@ import DashboardUserMenuListItems from './components/dashboard-user-menu-list-it
 
 export default function DashboardUserLayout({ children }: PropsWithChildren) {
   return (
-    <>
-      <DashboardLayout
-        menuItems={<DashboardUserMenuListItems />}
-        mobileMenuItems={<DashboardUserBottomBar />}
-      >
-        {children}
-      </DashboardLayout>
-    </>
+    <DashboardLayout
+      menuItems={<DashboardUserMenuListItems />}
+      mobileMenuItems={<DashboardUserBottomBar />}
+    >
+      {children}
+    </DashboardLayout>
   );
 }
