@@ -6,6 +6,7 @@ import { LoadingButton } from '@/components/buttons/loading-button/loading-butto
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { mutations } from '@/constants/queries';
+import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
@@ -47,7 +48,8 @@ export default function ShareCopy({ pda }: Props) {
 
   const toggleModal = () => {
     if (openShareCopy) {
-      router.back();
+      methods.reset();
+      router.push(routes.dashboardUserAsset(pda?.id));
       setPdaIssued(undefined);
     } else {
       router.push('#share-copy');
