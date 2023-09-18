@@ -26,7 +26,7 @@ query received_pdas($take: Float!, $skip: Float!) {
         gatewayId
       }
       issuer {
-        ...user
+        ...min_user
       }
     }
   }
@@ -45,7 +45,7 @@ query issued_pdas($take: Float!, $skip: Float!) {
         gatewayId
       }
       issuer {
-        ...user
+        ...min_user
       }
     }
   }
