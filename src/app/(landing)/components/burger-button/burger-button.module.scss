@@ -1,11 +1,27 @@
 .element {
-  border: 1px solid #fff;
+  // border: 1px solid #fff;
   border-radius: 50%;
   background-color: transparent;
   height: 36px;
   padding: 11px 8px;
   position: relative;
   width: 36px;
+
+  &--light {
+    border: 1px solid #fff;
+
+    .line {
+      background-color: #fff;
+    }
+  }
+
+  &--dark {
+    border: 1px solid #771ac9;
+
+    .line {
+      background-color: #771ac9;
+    }
+  }
 }
 
 .container {
@@ -16,7 +32,7 @@
 }
 
 .line {
-  background-color: #fff;
+  // background-color: #fff;
   height: 2px;
   position: absolute;
   width: 18px;

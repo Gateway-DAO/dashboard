@@ -4,6 +4,7 @@ import './styles/global.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import SetSizes from './components/set-sizes';
 import Providers from './providers';
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>{children}</Providers>
+        <SetSizes />
       </body>
     </html>
   );

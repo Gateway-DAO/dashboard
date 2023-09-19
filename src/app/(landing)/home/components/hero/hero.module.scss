@@ -1,11 +1,11 @@
 .element {
   background-color: #771ac9;
-  height: 100vh;
+  height: var(--vh);
   position: relative;
   width: 100%;
 
   @media (max-width: 599px) {
-    height: 100vh;
+    height: var(--vh);
   }
 }
 
