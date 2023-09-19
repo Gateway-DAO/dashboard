@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalTitle from '@/components/modal/modal-title/modal-title';
-import { mutations } from '@/constants/queries';
+import { mutations, queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
@@ -17,7 +17,7 @@ import {
 } from '@/services/protocol/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToggle } from '@react-hookz/web/cjs/useToggle';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { FieldValues, useForm } from 'react-hook-form';
 import { FormProvider } from 'react-hook-form';
@@ -40,6 +40,7 @@ export default function ShareCopy({ pda }: Props) {
   const [openShareCopy, setOpenShareCopy] = useToggle(false);
   const [pdaIssued, setPdaIssued] = useState<string>();
   const { privateApi } = useGtwSession();
+  const queryClient = useQueryClient();
 
   const methods = useForm({
     resolver: zodResolver(shareCopySchema as any),
@@ -82,8 +83,9 @@ export default function ShareCopy({ pda }: Props) {
         },
       });
       setPdaIssued(res?.createProof?.id);
-      router.refresh();
       methods.reset();
+      queryClient.refetchQueries([queries.proofs_by_pdas_id, [pda?.id]]);
+      router.refresh();
     } catch (e) {
       enqueueSnackbar(errorMessages.ERROR_TRYING_TO_ISSUE_A_PROOF);
     }
