@@ -30,3 +30,20 @@ query myRequestsReceived($take: Float!, $skip: Float!) {
 query requestsCount {
   requestsReceivedCount
 }
+
+query dataRequest($id: String!) {
+  dataRequest(requestId: $id) {
+    id
+    dataUse
+    status
+    userVerifier {
+      id
+      gatewayId
+      profilePicture
+      displayName
+    }
+    dataRequestTemplate {
+      id
+    }
+  }
+}
