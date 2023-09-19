@@ -134,10 +134,7 @@ export default function Lifecycle() {
         </Button>
 
         <div
-          className={joinClasses(
-            styles.mobile_steps,
-            'mobile-lifecycle-slider'
-          )}
+          className={joinClasses(styles.mobile_steps, 'slick-remove-overflow')}
         >
           <Slider {...settings}>
             {steps.map((step, index) => (

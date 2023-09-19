@@ -9,7 +9,7 @@
   border: 0;
   outline: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     font-size: 14px;
     line-height: 24px;
   }
@@ -34,7 +34,7 @@
       background-color: #53128c;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 599px) {
       padding: 6px 16px;
     }
   }
@@ -51,7 +51,7 @@
       border-color: #53128c;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 599px) {
       padding: 6px 16px;
     }
   }

@@ -161,7 +161,9 @@ export default function OurProtocol() {
           ))}
         </div>
 
-        <div className={joinClasses(styles.mobile_slider, 'slick-list-parent')}>
+        <div
+          className={joinClasses(styles.mobile_slider, 'slick-remove-overflow')}
+        >
           <Slider {...settings} ref={sliderRef}>
             {cards.map((card, index) => (
               <Card

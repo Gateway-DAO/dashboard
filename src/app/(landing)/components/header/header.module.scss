@@ -1,8 +1,9 @@
 .element {
   left: 0;
   height: 100px;
-  position: absolute;
+  position: fixed;
   top: 0;
+  transition: transform 0.6s ease;
   width: 100%;
   z-index: 3;
 
@@ -47,6 +48,10 @@
   &--hide {
     opacity: 0;
   }
+
+  &--down {
+    transform: translateY(-100%);
+  }
 }
 
 .wrapper {
@@ -65,6 +70,10 @@
     background-color: #fff;
     transition: background-color 0.8s ease;
   }
+}
+
+.logo_link {
+  display: flex;
 }
 
 .links {
@@ -125,7 +134,7 @@
     height: 100vh;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     display: block;
   }
 }

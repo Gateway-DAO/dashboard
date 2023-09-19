@@ -4,7 +4,7 @@
   padding-bottom: 126px;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     padding-top: 147px;
   }
 }
@@ -51,16 +51,17 @@
     letter-spacing: 0.46px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     display: none;
   }
 }
 
 .button_mobile {
+  display: none;
   margin: 30px auto 100px;
   padding: 8px 22px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     display: block;
   }
 }
@@ -73,7 +74,7 @@
 .animation_container {
   margin-top: -40px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     margin-top: 110px;
   }
 }
@@ -83,7 +84,7 @@
   position: relative;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     display: none;
   }
 }
@@ -103,7 +104,7 @@
     width: 0.5px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     padding-right: 40px;
   }
 }
@@ -136,7 +137,7 @@
 .mobile_steps {
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     display: block;
   }
 }

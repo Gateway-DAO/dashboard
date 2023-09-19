@@ -24,11 +24,14 @@ const DEFAULT_STATE: HeaderContext = {
 
 const HeaderContext = createContext<HeaderContext>(DEFAULT_STATE);
 
-export const HeaderContextProvider: FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const HeaderContextProvider: FC<{
+  children: ReactNode;
+  initialVariant?: 'light' | 'dark';
+}> = ({ children, initialVariant }) => {
   const [fixed, setFixed] = useState(DEFAULT_STATE.fixed);
-  const [variant, setVariant] = useState(DEFAULT_STATE.variant);
+  const [variant, setVariant] = useState(
+    initialVariant || DEFAULT_STATE.variant
+  );
 
   const value = {
     fixed,

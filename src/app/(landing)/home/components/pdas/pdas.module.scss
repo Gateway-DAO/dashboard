@@ -24,7 +24,7 @@
   transform: translate(-50%, -50%);
   width: 100%;
 
-  // @media (max-width: 768px) {
+  // @media (max-width: 599px) {
   //   height: 100vh;
   //   width: initial;
   // }
@@ -53,7 +53,7 @@
   transform: translate(-50%, -50%);
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     top: calc(50% + 29rem);
   }
 }
@@ -64,7 +64,7 @@
   width: 20px;
   opacity: 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     width: 2rem;
   }
 }
@@ -89,7 +89,7 @@
     color: #e6d5fa;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     font-size: 3.6rem;
     line-height: 5rem;
     letter-spacing: 0.0412rem;
@@ -118,7 +118,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     font-size: 3.6rem;
     line-height: 5rem;
   }

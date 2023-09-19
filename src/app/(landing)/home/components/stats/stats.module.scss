@@ -4,7 +4,7 @@
   padding-bottom: 24px;
   overflow: hidden;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     padding-top: 73px;
   }
 }
@@ -18,7 +18,7 @@
   letter-spacing: 0.412px;
   margin-bottom: 140px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     font-size: 36px;
     font-style: normal;
     line-height: 50.4px;
@@ -32,7 +32,7 @@
   position: relative;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     flex-direction: column;
   }
 }
@@ -40,7 +40,7 @@
 .small_boxes_container {
   position: relative;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     margin: 24px 0;
   }
 }
@@ -74,7 +74,7 @@
     width: 270px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     &--lg,
     &--sm,
     &--md {
@@ -114,7 +114,7 @@
     max-height: 82px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     font-size: 60px;
     font-style: normal;
     line-height: 60px;

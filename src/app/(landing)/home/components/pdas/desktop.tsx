@@ -2,7 +2,6 @@
 import { useRef, useEffect } from 'react';
 
 import Wrapper from '@/app/(landing)/components/wrapper';
-import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { splitSpans } from '@/app/(landing)/utils/dom';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
@@ -22,7 +21,6 @@ export default function Pdas() {
   const pdasLogoContainerRef = useRef<HTMLDivElement>(null);
   const textPdasParagraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const slashRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const { setFixed } = useHeaderContext();
 
   // Animation setup using useEffect
   useEffect(() => {
@@ -40,12 +38,8 @@ export default function Pdas() {
 
       if (progress >= 0 && progress <= 1) {
         tl.progress(progress);
-        setFixed(false);
       } else if (progress < 0) {
         tl.progress(0);
-      } else {
-        // tl.progress(1);
-        setFixed(true);
       }
     };
 

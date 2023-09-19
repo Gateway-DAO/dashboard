@@ -4,7 +4,7 @@
   position: relative;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     height: 100vh;
   }
 }
@@ -21,7 +21,7 @@
   justify-content: center;
   padding-bottom: 60px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     justify-content: flex-end;
     padding-bottom: 7.9rem;
   }
@@ -35,7 +35,7 @@
   line-height: 82px;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     font-size: 3.6rem;
     line-height: 3.6rem;
 
@@ -57,7 +57,7 @@
   line-height: 28px;
   margin-bottom: 31px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     font-size: 1.6rem;
     line-height: 2.4rem;
     margin-bottom: 3.1rem;

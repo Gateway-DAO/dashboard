@@ -9,7 +9,7 @@ export default function useHeaderVariantDetection(
 ) {
   const { setVariant } = useHeaderContext();
   useEffect(() => {
-    LenisManager?.on('scroll', () => {
+    const handleVariant = () => {
       if (!sectionRef.current) return;
 
       const { top, bottom } = sectionRef.current.getBoundingClientRect();
@@ -17,6 +17,12 @@ export default function useHeaderVariantDetection(
       if (top <= 0 && bottom >= 100) {
         setVariant(variant);
       }
-    });
+    };
+    handleVariant();
+    LenisManager?.on('scroll', handleVariant);
+
+    return () => {
+      LenisManager?.off('scroll', handleVariant);
+    };
   }, []);
 }
