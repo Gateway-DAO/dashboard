@@ -70,8 +70,7 @@ query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
         gatewayId
       }
       owner {
-        gatewayId
-        displayName
+        ...min_user
       }
       dataModel {
         id
