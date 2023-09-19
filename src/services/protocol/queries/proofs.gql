@@ -1,6 +1,17 @@
 query received_proofs($take: Float!, $skip: Float!) {
   receivedProofs(skip: $skip, take: $take) {
-    ...proof
+    id
+    createdAt
+
+    owner {
+      ...min_user
+    }
+
+    data {
+      PDAs {
+        id
+      }
+    }
   }
 }
 query countReceivedProofs {
@@ -42,6 +53,11 @@ query proof($id: String!) {
 
 query proofsByPDAIds($pdaIds: [String!]!) {
   proofsByPDAIds(pdaIds: $pdaIds) {
-    ...proof
+    id
+
+    verifier {
+      gatewayId
+      profilePicture
+    }
   }
 }

@@ -7,11 +7,11 @@ fragment proof on Proof {
   active
 
   owner {
-    ...user
+    ...min_user
   }
 
   verifier {
-    ...user
+    ...min_user
   }
 
   organization {
@@ -33,9 +33,7 @@ fragment proof on Proof {
         id
       }
       issuer {
-        id
-        gatewayId
-        profilePicture
+        ...min_user
       }
       organization {
         id
@@ -44,7 +42,7 @@ fragment proof on Proof {
         image
       }
       owner {
-        id
+        ...min_user
       }
     }
   }

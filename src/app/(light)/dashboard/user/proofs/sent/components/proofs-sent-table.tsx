@@ -31,11 +31,13 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
       return (
         <Stack direction="row" alignItems="center" spacing={1}>
           <GTWAvatar
-            name={params.row.verifier!.profilePicture ?? ''}
+            name={params.row.verifier?.profilePicture ?? ''}
             size={32}
           />
           <Typography variant="body2">
-            {params.row.verifier!.gatewayId}
+            {params.row.verifier?.displayName ??
+              params.row.verifier?.gatewayId ??
+              params.row.verifier?.id}
           </Typography>
         </Stack>
       );
