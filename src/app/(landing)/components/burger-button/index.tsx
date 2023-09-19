@@ -10,9 +10,15 @@ type Props = {
   active?: boolean;
   onClick?: () => void;
   className?: string;
+  variant: 'light' | 'dark';
 };
 
-export default function BurgerButton({ active, onClick, className }: Props) {
+export default function BurgerButton({
+  active,
+  onClick,
+  className,
+  variant,
+}: Props) {
   const tl = useRef<gsap.core.Timeline>();
   const refSpansOpen = useRef<(HTMLSpanElement | null)[]>([]);
   const refSpansClose = useRef<(HTMLSpanElement | null)[]>([]);
@@ -39,7 +45,11 @@ export default function BurgerButton({ active, onClick, className }: Props) {
 
   return (
     <button
-      className={joinClasses(styles.element, className)}
+      className={joinClasses(
+        styles.element,
+        className,
+        styles[`element--${variant}`]
+      )}
       onClick={onClick}
     >
       <span className={styles.container}>

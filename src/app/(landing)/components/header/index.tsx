@@ -4,24 +4,27 @@ import BurgerButton from '@/app/(landing)/components/burger-button';
 import GatewayLogo from '@/app/(landing)/components/gateway-logo';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
+import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
 import GTWLink from '@/components/gtw-link';
 
-import LenisManager, { IInstanceOptions } from '../../utils/scroll';
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
 import styles from './header.module.scss';
 
 export default function Header() {
   const navRef = useRef<HTMLElement>(null);
-  const { variant } = useHeaderContext();
+  const { variant, setVariant } = useHeaderContext();
   const { isMobile } = useMobileDetect();
   const [burgerActive, setBurgerActive] = useState<boolean>(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const [scrollDirection, setScrollDirection] = useState<'down' | 'top' | null>(
     'top'
   );
+  const previousVariant = useRef<'light' | 'dark' | null>(null);
+  const isFirstRender = useIsFirstRender();
 
   useEffect(() => {
     const handleScroll = ({ direction }: IInstanceOptions) => {
@@ -39,6 +42,19 @@ export default function Header() {
     };
   }),
     [];
+
+  useEffect(() => {
+    if (isFirstRender) return;
+
+    if (burgerActive) {
+      previousVariant.current = variant;
+      setVariant('light');
+      LenisManager?.stop();
+    } else {
+      setVariant(previousVariant.current || 'dark');
+      LenisManager?.start();
+    }
+  }, [burgerActive]);
 
   return (
     <nav
@@ -68,6 +84,7 @@ export default function Header() {
                 className={styles.mobile_burger}
                 active={burgerActive}
                 onClick={() => setBurgerActive(!burgerActive)}
+                variant={variant}
               />
             </div>
           </>

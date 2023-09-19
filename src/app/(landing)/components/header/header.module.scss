@@ -135,7 +135,7 @@
 
   &--open {
     pointer-events: initial;
-    height: 100vh;
+    height: var(--vh);
   }
 
   @media (max-width: 599px) {
@@ -144,7 +144,7 @@
 }
 
 .mobile_wrapper {
-  height: 100vh;
+  height: var(--vh);
   padding-top: 123px;
 }
 
