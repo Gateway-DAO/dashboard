@@ -4,49 +4,47 @@ import BurgerButton from '@/app/(landing)/components/burger-button';
 import GatewayLogo from '@/app/(landing)/components/gateway-logo';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
-import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import GTWLink from '@/components/gtw-link';
-import gsap from 'gsap';
 
+import LenisManager, { IInstanceOptions } from '../../utils/scroll';
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
 import styles from './header.module.scss';
 
 export default function Header() {
   const navRef = useRef<HTMLElement>(null);
-  const { fixed, variant } = useHeaderContext();
-  const previousFixedValue = useRef(fixed);
-  const isFirstRender = useIsFirstRender();
+  const { variant } = useHeaderContext();
   const { isMobile } = useMobileDetect();
   const [burgerActive, setBurgerActive] = useState<boolean>(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const [scrollDirection, setScrollDirection] = useState<'down' | 'top' | null>(
+    'top'
+  );
 
   useEffect(() => {
-    if (isFirstRender) return;
-
-    if (fixed) {
-      const tl = gsap.timeline();
-      tl.set(navRef.current, { position: 'fixed' });
-      tl.from(navRef.current, { top: -100 });
-    } else {
-      const tl = gsap.timeline();
-
-      if (previousFixedValue.current) {
-        tl.to(navRef.current, { top: -100 });
+    const handleScroll = ({ direction }: IInstanceOptions) => {
+      if (direction === 1) {
+        setScrollDirection('down');
+      } else {
+        setScrollDirection('top');
       }
-      tl.set(navRef.current, { position: 'absolute', clearProps: 'top' });
-    }
+    };
 
-    previousFixedValue.current = fixed;
-  }, [fixed]);
+    LenisManager?.on('scroll', handleScroll);
+
+    return () => {
+      LenisManager?.off('scroll', handleScroll);
+    };
+  }),
+    [];
 
   return (
     <nav
       className={joinClasses(
         styles.element,
-        styles[`element--${fixed}`],
+        styles[`element--${scrollDirection}`],
         styles[`element--${variant}`],
         styles[`element--${isMobile === null && 'hide'}`]
       )}
@@ -70,13 +68,15 @@ export default function Header() {
           </>
         ) : (
           <>
-            <GatewayLogo withName variant={variant} />
+            <GTWLink href="/" className={styles.logo_link}>
+              <GatewayLogo withName variant={variant} />
+            </GTWLink>
 
             <div className={styles.links}>
-              <GTWLink className={styles.link} href="/#learn">
+              <GTWLink className={styles.link} href="/learn">
                 <Button variant="text">Learn</Button>
               </GTWLink>
-              <GTWLink className={styles.link} href="/#build">
+              <GTWLink className={styles.link} href="/build">
                 <Button variant="text">Build</Button>
               </GTWLink>
             </div>
@@ -104,13 +104,13 @@ export default function Header() {
         ref={mobileMenuRef}
       >
         <Wrapper className={styles.mobile_wrapper}>
-          <GTWLink className={styles.mobile_link} href="/#learn">
+          <GTWLink className={styles.mobile_link} href="/learn">
             <Button variant="text">
               <span>Learn</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
             </Button>
           </GTWLink>
-          <GTWLink className={styles.mobile_link} href="/#build">
+          <GTWLink className={styles.mobile_link} href="/build">
             <Button variant="text">
               <span>Build</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />

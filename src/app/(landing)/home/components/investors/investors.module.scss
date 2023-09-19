@@ -2,7 +2,7 @@
   background-color: #212121;
   padding-bottom: 140px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     padding-bottom: 64px;
   }
 }
@@ -23,7 +23,7 @@
   margin: 0;
   padding-bottom: 35px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     color: #a3a3a3;
   }
 }
@@ -52,7 +52,7 @@
   padding-top: 66px;
   padding-left: 10px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     padding-left: 0;
     padding-top: 32px;
   }
@@ -64,7 +64,7 @@
   margin-bottom: 35px;
   width: 25%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     height: 62px;
     position: relative;
     width: 50%;
@@ -94,7 +94,7 @@
 }
 
 .name_container {
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     height: 40px;
 
     &:nth-last-child(-n + 2) {

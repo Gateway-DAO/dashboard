@@ -15,7 +15,7 @@
     width: 100%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     padding-top: 30px;
   }
 }
@@ -26,7 +26,7 @@
   justify-content: space-between;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     margin-bottom: 50px;
   }
 }
@@ -39,7 +39,7 @@
   line-height: 67.2px;
   letter-spacing: 0.412px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     font-size: 36px;
     font-style: normal;
     font-weight: 400;
@@ -52,7 +52,7 @@
 .controls {
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     display: flex;
   }
 }
@@ -88,7 +88,7 @@
 }
 
 .card {
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     margin-right: 18px;
     width: 70vw;
   }
@@ -100,7 +100,7 @@
   margin-top: 80px;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     display: none;
   }
 }
@@ -157,7 +157,7 @@
 .mobile_slider {
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     display: block;
   }
 }

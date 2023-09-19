@@ -1,20 +1,31 @@
-.lenis.lenis-smooth {
-  scroll-behavior: auto;
-}
-
 html.lenis {
   height: auto;
 }
 
-.slick-list-parent,
-.mobile-lifecycle-slider {
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.slick-remove-overflow {
   .slick-list {
     overflow: initial;
   }
 }
 
 html {
-  @media (max-width: 768px) {
+  @media (max-width: 599px) {
     font-size: calc(100vw / 390 * 10);
   }
 }

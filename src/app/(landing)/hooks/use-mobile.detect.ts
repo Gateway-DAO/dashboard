@@ -4,7 +4,7 @@ interface MobileDetectHookResult {
   isMobile: boolean | null;
 }
 
-const MOBILE_BREAKPOINT = 768;
+const MOBILE_BREAKPOINT = 599;
 
 const useMobileDetect = (): MobileDetectHookResult => {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
