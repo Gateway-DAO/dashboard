@@ -4,15 +4,17 @@ import GTWAvatar from '../gtw-avatar/gtw-avatar';
 
 type Props = {
   name: string;
+  picture?: string;
+  bold?: boolean;
 };
 
-export default function AvatarTextCell({ name }: Props) {
+export default function AvatarTextCell({ name, picture, bold = false }: Props) {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-      <GTWAvatar src={null} size={32} name={name} />
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-        <Typography variant="body1">{name}</Typography>
-      </Box>
+      <GTWAvatar src={picture ?? null} size={32} name={name} />
+      <Typography variant="body1" fontWeight={bold ? 700 : 400}>
+        {name}
+      </Typography>
     </Box>
   );
 }
