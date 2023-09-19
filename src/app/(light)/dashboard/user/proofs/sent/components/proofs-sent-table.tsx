@@ -104,7 +104,7 @@ export default function ProofsSentTable({
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
-      privateApi?.received_proofs({
+      privateApi?.sent_proofs({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
