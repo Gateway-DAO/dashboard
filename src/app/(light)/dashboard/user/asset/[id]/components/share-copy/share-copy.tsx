@@ -86,8 +86,14 @@ export default function ShareCopy({ pda }: Props) {
       methods.reset();
       queryClient.refetchQueries([queries.proofs_by_pdas_id, [pda?.id]]);
       router.refresh();
-    } catch (e) {
-      enqueueSnackbar(errorMessages.ERROR_TRYING_TO_ISSUE_A_PROOF);
+    } catch (e: any) {
+      if (e.message === 'VERIFIER_NOT_FOUND') {
+        methods.setError('address', {
+          message: errorMessages.VERIFIER_NOT_FOUND,
+        });
+      } else {
+        enqueueSnackbar(errorMessages.ERROR_TRYING_TO_ISSUE_A_PROOF);
+      }
     }
   };
 

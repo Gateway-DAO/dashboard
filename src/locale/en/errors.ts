@@ -19,4 +19,5 @@ export const errorMessages = {
   REVOKE_ERROR: 'There was a problem performing the revoke. Try again later.',
   STATUS_CHANGE_ERROR:
     'There was a problem performing the status change. Try again later.',
+  VERIFIER_NOT_FOUND: `Verifier doesn't exist`,
 };
