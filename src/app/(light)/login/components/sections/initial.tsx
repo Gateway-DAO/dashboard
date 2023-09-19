@@ -1,6 +1,6 @@
 import { auth } from '@/locale/en/auth';
 
-import { Stack, Typography } from '@mui/material';
+import { Link, Stack, Typography } from '@mui/material';
 
 import { AuthenticationOptions } from '../authentication-options';
 import { LoginEmail } from '../login-email';
@@ -18,6 +18,15 @@ export function AuthenticationInitial() {
       />
       <LoginEmail />
       <AuthenticationOptions />
+      <Typography color="text.secondary" variant="caption">
+        {auth.steps.initial.terms_info}{' '}
+        <Link href="/terms" underline="none">
+          {auth.steps.initial.terms_of_service}{' '}
+        </Link>
+      </Typography>
+      <Typography color="text.secondary" variant="caption">
+        {auth.steps.initial.term_email}
+      </Typography>
     </Stack>
   );
 }
