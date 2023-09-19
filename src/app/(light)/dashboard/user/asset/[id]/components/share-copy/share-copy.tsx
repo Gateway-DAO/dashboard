@@ -138,6 +138,7 @@ export default function ShareCopy({ pda }: Props) {
                   mt: 3,
                 }}
                 id="share-copy-button"
+                disabled={!methods.formState.isValid}
                 isLoading={createProof?.isLoading}
               >
                 {common.actions.share_now}
