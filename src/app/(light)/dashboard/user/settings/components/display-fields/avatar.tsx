@@ -33,7 +33,7 @@ export default function Avatar() {
 
   return <FormControl>
     <FormLabel htmlFor="avatar" sx={{ fontSize: 14 }}>{common.general.avatar}</FormLabel>
-    {session ? <AvatarPicker name="profilePicture" username={session.user.gatewayId!} value={session.user.profilePicture} onChange={onSubmit} onRemove={() => onSubmit(null)} /> : <Stack direction="row" spacing={2} alignItems="center">
+    {session ? <AvatarPicker name="profilePicture" username={session.user.gatewayId!} value={session.user.profilePicture} onChange={onSubmit} /> : <Stack direction="row" spacing={2} alignItems="center">
       <Skeleton variant="circular" width={80} height={80} />
       <Skeleton width={120} height={46} />
     </Stack>}
