@@ -36,7 +36,7 @@ export default function IssuedPDAsList({ pdas: initialPdas }: Props) {
 
   return (
     <Stack gap={1}>
-      <PDAsList pdas={pdas ?? []} />
+      <PDAsList pdas={pdas ?? []} issuedPdas />
       {privateApi && hasNextPage && (
         <InfiniteLoadMore
           isLoading={isFetchingNextPage}

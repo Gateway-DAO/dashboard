@@ -68,13 +68,14 @@ export default function ShareCopyFormField() {
 
   return (
     <Stack gap={3}>
-      <Stack direction="row" gap={1}>
-        <FormControl sx={{ width: 220 }}>
+      <Stack gap={1} sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
+        <FormControl sx={{ width: { xs: '100%', md: 220 } }}>
           <InputLabel htmlFor="type">{pda.share.account_type}</InputLabel>
           <Select
             label={pda.share.account_type}
             error={!!(errors.identifier_type as ShareCopySchemaError)}
             id="id-account-type"
+            sx={{ mb: { xs: 1, md: 0 } }}
             defaultValue={IdentifierType.GatewayId}
             {...register(`identifier_type`, {
               onChange: () => {

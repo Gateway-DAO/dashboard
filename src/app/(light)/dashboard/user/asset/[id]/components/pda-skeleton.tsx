@@ -12,7 +12,7 @@ export default function PDASkeleton() {
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
         <Skeleton variant="text" width={200} height={30} />
-        <Skeleton variant="text" width={400} height={100} sx={{ my: 2 }} />
+        <Skeleton variant="text" width="100%" height={100} sx={{ my: 2 }} />
         <TagsSkeleton />
         <Skeleton variant="text" width="100%" />
         <Skeleton variant="text" width="50%" sx={{ mb: 3 }} />

@@ -20,7 +20,7 @@ export const Playground: Story = {
     name: 'PDA Card',
     href: '#',
     status: PdaStatus.Valid,
-    issuerImage: 'https://picsum.photos/200',
-    issuerName: 'Issuer Name',
+    userImage: 'https://picsum.photos/200',
+    userName: 'Issuer Name',
   },
 };
