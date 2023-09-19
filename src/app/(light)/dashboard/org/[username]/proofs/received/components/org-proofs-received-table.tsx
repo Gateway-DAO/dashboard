@@ -23,21 +23,18 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const columns: GridColDef<PartialDeep<Proof>>[] = [
   {
-    field: 'verifier',
-    headerName: proofs.verifier,
+    field: 'owner',
+    headerName: proofs.sender,
     flex: 1,
-    valueGetter: (params) => params.row.verifier?.gatewayId,
+    valueGetter: (params) => params.row.owner?.gatewayId,
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" gap={2}>
-          <GTWAvatar
-            name={params.row.verifier?.profilePicture ?? ''}
-            size={32}
-          />
+          <GTWAvatar name={params.row.owner!.profilePicture ?? ''} size={32} />
           <Typography fontWeight={700}>
-            {params.row.verifier?.displayName ??
-              params.row.verifier?.gatewayId ??
-              params.row.verifier?.id}
+            {params.row.owner?.displayName ??
+              params.row.owner?.gatewayId ??
+              params.row.owner?.id}
           </Typography>
         </Stack>
       );
@@ -85,7 +82,7 @@ type Props = {
   count: number;
 };
 
-export default function ProofsSentTable({
+export default function OrganizationProofsReceivedTable({
   data: initialData,
   count = 0,
 }: Props) {
@@ -99,7 +96,7 @@ export default function ProofsSentTable({
   const { data, isFetching } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
-      queries.proofs_sent,
+      queries.proofs_received,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
     ],
@@ -108,7 +105,7 @@ export default function ProofsSentTable({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
-    select: (data: any) => data?.sentProofs,
+    select: (data: any) => data?.receivedProofs,
     initialData: initialData && initialData.length ? initialData : null,
   });
 
@@ -123,11 +120,11 @@ export default function ProofsSentTable({
     <DataGrid
       {...defaultGridConfiguration}
       rows={data && data.length ? data : initialData}
+      rowCount={count}
+      columns={columns}
       paginationModel={paginationModel}
       loading={isFetching}
       onPaginationModelChange={setNewPage}
-      columns={columns}
-      rowCount={count}
       sx={defaultGridCustomization}
       onRowClick={(value) => {
         router.push(routes.dashboardUserProof(value?.id));
