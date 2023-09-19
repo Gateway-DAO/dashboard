@@ -87,7 +87,7 @@ export default function ShareCopy({ pda }: Props) {
       queryClient.refetchQueries([queries.proofs_by_pdas_id, [pda?.id]]);
       router.refresh();
     } catch (e: any) {
-      if (e.message === 'VERIFIER_NOT_FOUND') {
+      if (e?.response?.errors?.[0].message === 'VERIFIER_NOT_FOUND') {
         methods.setError('address', {
           message: errorMessages.VERIFIER_NOT_FOUND,
         });
