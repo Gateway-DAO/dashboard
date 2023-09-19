@@ -27,10 +27,10 @@ export default function Header() {
   const isFirstRender = useIsFirstRender();
 
   useEffect(() => {
-    const handleScroll = ({ direction }: IInstanceOptions) => {
-      if (direction === 1) {
+    const handleScroll = ({ direction, scroll }: IInstanceOptions) => {
+      if (direction === 1 && scroll > 0) {
         setScrollDirection('down');
-      } else {
+      } else if (direction === -1 || scroll === 0) {
         setScrollDirection('top');
       }
     };
