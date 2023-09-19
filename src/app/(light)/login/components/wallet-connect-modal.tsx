@@ -13,8 +13,6 @@ import {
 import EvmWalletConnect from './evm-wallet-connect';
 import SolanaWalletConnect from './solana-wallet-connect';
 
-require('@solana/wallet-adapter-react-ui/styles.css');
-
 type Props = {
   title: string;
   description: string;
@@ -49,7 +47,7 @@ export default function WalletConnectModal({
               onClose={onCancel}
               isEvmLoading={setEvmIsLoading}
             />
-            {!evmIsLoading && <SolanaWalletConnect onClose={onCancel} />}
+            <SolanaWalletConnect onClose={onCancel} />
           </Stack>
         </Stack>
       </DialogContent>

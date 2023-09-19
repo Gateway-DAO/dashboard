@@ -28,6 +28,7 @@
     "@rainbow-me/rainbowkit": "^1.0.9",
     "@react-hookz/web": "^23.1.0",
     "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-base-ui": "^0.1.2",
     "@solana/wallet-adapter-react": "^0.15.34",
     "@solana/wallet-adapter-react-ui": "^0.9.33",
     "@solana/wallet-adapter-wallets": "^0.19.20",

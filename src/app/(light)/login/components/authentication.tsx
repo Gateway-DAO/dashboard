@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 import routes from '@/constants/routes';
 
-
 import AuthenticationLayout from './authentication-layout';
 import { ChooseGatewayId } from './sections/choose-gateway-id';
 import { ConnectMoreAuthDialog } from './sections/completed';
@@ -17,7 +16,6 @@ export function Authentication() {
 
   return (
     <AuthenticationLayout step={step}>
-      {/* <GatewayIcon colored /> */}
       {step === 'initial' && <AuthenticationInitial />}
       {step === 'verify-email-login-code' && <VerifyEmailLoginToken />}
       {step === 'verify-email-add-code' && <VerifyEmailAddToken />}
