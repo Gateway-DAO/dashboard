@@ -23,21 +23,19 @@ export default async function OrganizationReceivedProofsPage() {
         titleId="title-org-proofs"
       />
 
-      <Box sx={{ pt: 1 }}>
-        <>
-          {proofs && proofs.length > 0 && (
-            <ProofsReceivedTable data={proofs} count={count} />
-          )}
-          {proofs && proofs.length === 0 && (
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              sx={{ textAlign: 'center', width: '100%' }}
-            >
-              {proofsLocales.empty}
-            </Typography>
-          )}
-        </>
+      <Box>
+        {proofs && proofs.length > 0 && (
+          <ProofsReceivedTable data={proofs} count={count} />
+        )}
+        {proofs && proofs.length === 0 && (
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{ textAlign: 'center', width: '100%' }}
+          >
+            {proofsLocales.empty}
+          </Typography>
+        )}
       </Box>
     </Box>
   );
