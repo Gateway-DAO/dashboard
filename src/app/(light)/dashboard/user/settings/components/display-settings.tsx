@@ -10,7 +10,7 @@ import Username from "./display-fields/username";
 export default function DisplaySettings() {
 
   return <>
-    <Stack spacing={3} alignItems="flex-start">
+    <Stack gap={3} alignItems="stretch">
       <Avatar />
       <DisplayName />
       <Username />
