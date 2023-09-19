@@ -72,7 +72,7 @@ export default function ProofData({ dataModels, pdas }: Props) {
                     issuerName={
                       pda?.organization?.name ??
                       pda?.organization?.gatewayId ??
-                      (pda?.issuer?.user?.gatewayId as string)
+                      (pda?.issuer?.gatewayId as string)
                     }
                     issuerImage={pda?.organization?.image}
                     onClick={() =>

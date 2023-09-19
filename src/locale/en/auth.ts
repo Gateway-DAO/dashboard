@@ -14,8 +14,10 @@ export const auth = {
       connect_discord: 'Continue with Discord',
       terms_info: 'By continuing you agree to our',
       terms_of_service: 'Terms of Service',
+      term_email:
+        "By continuing with email, you'll receive email notifications about your account, including private data assets and other relevant information.",
       or: 'or',
-      btn: 'continue',
+      continue: 'Continue',
     },
     choose_email: {
       title: 'Connect your email to be notified when you receive a credential',

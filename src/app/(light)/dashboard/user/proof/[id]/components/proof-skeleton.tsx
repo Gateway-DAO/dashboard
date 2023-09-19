@@ -1,4 +1,3 @@
-import TagsSkeleton from '@/components/tags/tags-skeleton';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,

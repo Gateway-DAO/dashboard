@@ -12,10 +12,13 @@ export default async function DashboardUserSentProofs() {
 
   const proofs = (await privateApi.sent_proofs({ take: 6, skip: 0 }))
     ?.sentProofs as PartialDeep<Proof>[];
+  const count = (await privateApi.count_sent_proofs()).sentProofsCount;
 
   return (
     <>
-      {proofs && proofs.length > 0 && <ProofsSentTable data={proofs} />}
+      {proofs && proofs.length > 0 && (
+        <ProofsSentTable count={count} data={proofs} />
+      )}
       {proofs && proofs.length === 0 && (
         <Typography
           variant="body1"

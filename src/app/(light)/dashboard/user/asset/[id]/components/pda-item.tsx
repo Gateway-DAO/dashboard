@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useMemo } from 'react';
 
 import Tags from '@/components/tags/tags';
-import { useSession } from '@/context/session-provider';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
 import {
@@ -19,10 +19,10 @@ import { PartialDeep } from 'type-fest';
 import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
 import DataTable from './data-table';
-import IssuePda from './issue-pda/issue-pda';
 import ModalImage from './modal-image';
 import PdaCardInfo from './pda-card-info';
 import { RevokePDA } from './revoke-pda/revoke-pda';
+import ShareCopy from './share-copy/share-copy';
 import SharedWithCard from './shared-with-card';
 import { SuspendOrMakeValidPDA } from './suspend-or-make-valid-pda/suspend-or-make-valid-pda';
 
@@ -32,12 +32,12 @@ type Props = {
 };
 
 export default function PDAItem({ pda, viewOnly = false }: Props) {
-  const { session } = useSession();
+  const { session } = useGtwSession();
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
 
   const isIssuer = useMemo(
     () =>
-      session.user.gatewayId === pda?.dataAsset?.issuer?.user?.gatewayId ||
+      session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId ||
       session?.user?.accesses?.find(
         (access) =>
           pda?.dataAsset?.organization?.gatewayId ===
@@ -47,11 +47,9 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
   );
 
   const isOwner = useMemo(
-    () => session.user.gatewayId === pda?.dataAsset?.owner?.user?.gatewayId,
+    () => session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId,
     [pda, session]
   );
-
-  console.log(pda?.dataAsset?.issuer, session.user);
 
   return (
     <>
@@ -109,11 +107,10 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
         <PdaCardInfo pda={pda} viewOnly={viewOnly} />
         {!viewOnly && (
           <>
-            {/* TODO: DISPLAY SHARED WITH CARD ONLY IF IT HAS SHARED DATA (PROOFS) */}
-            {/* <SharedWithCard /> */}
+            <SharedWithCard pdaId={pda?.id as string} />
 
-            {isIssuer && <IssuePda pda={pda} />}
-            {isOwner && (
+            {isOwner && <ShareCopy pda={pda} />}
+            {isIssuer && (
               <Stack direction="row" gap={1}>
                 <SuspendOrMakeValidPDA pda={pda} />
                 <RevokePDA pda={pda} />

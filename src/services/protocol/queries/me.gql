@@ -1,6 +1,8 @@
 query me {
   me {
     id
+    displayName
+    profilePicture
     gatewayId
     accesses {
       role

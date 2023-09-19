@@ -30,7 +30,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
       divider={<Divider sx={{ width: '100%' }} />}
     >
       <CardUsers pda={pda} />
-      {!viewOnly && (
+      {/* {!viewOnly && (
         <TableCellContainer>
           <CardCell label={pdaLocale.received_at}>
             <Stack direction="row" gap={1}>
@@ -59,15 +59,16 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
             </Stack>
           </CardCell>
         </TableCellContainer>
-      )}
+      )} */}
       <TableCellContainer>
         {pda?.dataAsset?.organization && (
           <CardCell label={pdaLocale.authenticated_by}>
             <Typography>
               {limitCharsCentered(
-                pda?.dataAsset?.issuer?.user?.gatewayId ??
-                  pda?.dataAsset?.issuer?.data?.address ??
-                  pda?.dataAsset?.issuer?.data?.email,
+                pda?.dataAsset?.issuer?.gatewayId ??
+                  pda?.dataAsset?.issuer?.primaryWallet?.address ??
+                  pda?.dataAsset?.issuer?.email ??
+                  '',
                 20
               )}
             </Typography>
@@ -93,10 +94,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
             : pdaLocale.indeterminate}
         </CardCell>
         <CardCell label={pdaLocale.status.title}>
-          <PDAStatusChip
-            status={pda?.dataAsset?.status ?? PdaStatus.Valid}
-            size="small"
-          />
+          <PDAStatusChip status={pda?.status ?? PdaStatus.Valid} size="small" />
         </CardCell>
       </TableCellContainer>
     </Stack>

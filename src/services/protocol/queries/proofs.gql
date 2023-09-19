@@ -1,60 +1,21 @@
 query received_proofs($take: Float!, $skip: Float!) {
   receivedProofs(skip: $skip, take: $take) {
     id
-    totalCost
-    facilitationFee
     createdAt
-    arweaveUrl
 
     owner {
-      id
-      user {
-        gatewayId
-      }
-      data
+      ...min_user
     }
 
     data {
-      dataModels {
-        id
-      }
       PDAs {
-        id
-        claim
-        dataModel {
-          id
-        }
-        issuer {
-          id
-        }
-        organization {
-          id
-          gatewayId
-        }
-        owner {
-          id
-        }
-      }
-    }
-
-    verifier {
-      user {
-        gatewayId
-      }
-    }
-
-    organization {
-      gatewayId
-      image
-    }
-
-    dataRequest {
-      id
-      dataRequestTemplate {
         id
       }
     }
   }
+}
+query countReceivedProofs {
+  receivedProofsCount
 }
 
 query sent_proofs($take: Float!, $skip: Float!) {
@@ -68,9 +29,7 @@ query sent_proofs($take: Float!, $skip: Float!) {
     }
 
     verifier {
-      user {
-        gatewayId
-      }
+      ...user
     }
 
     dataRequest {
@@ -82,57 +41,23 @@ query sent_proofs($take: Float!, $skip: Float!) {
   }
 }
 
+query count_sent_proofs {
+  sentProofsCount
+}
+
 query proof($id: String!) {
   proof(id: $id) {
-    id
-    totalCost
-    facilitationFee
-    createdAt
-    arweaveUrl
+    ...proof
+  }
+}
 
-    data {
-      dataModels {
-        id
-        title
-        consumptionPrice
-      }
-      PDAs {
-        id
-        title
-        claim
-        dataModel {
-          id
-        }
-        issuer {
-          id
-          user {
-            gatewayId
-          }
-        }
-        organization {
-          id
-          name
-          gatewayId
-          image
-        }
-        owner {
-          id
-        }
-      }
-    }
+query proofsByPDAIds($pdaIds: [String!]!) {
+  proofsByPDAIds(pdaIds: $pdaIds) {
+    id
 
     verifier {
-      user {
-        gatewayId
-      }
-    }
-
-    dataRequest {
-      id
-      status
-      dataRequestTemplate {
-        id
-      }
+      gatewayId
+      profilePicture
     }
   }
 }

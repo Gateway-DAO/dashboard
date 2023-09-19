@@ -14,6 +14,12 @@ export const pda = {
     sharing_cost_helper: 'For now Gateway is covering sharing costs',
     free: 'Free',
     successfully_title: 'Copy shared successfully',
+    identifier_type: {
+      gateway_id: 'Gateway ID',
+      email: 'Email',
+      evm_wallet: 'EVM Wallet',
+      solana_wallet: 'Solana Wallet',
+    },
   },
   shared_with: {
     shared_with: 'Shared with',
@@ -54,4 +60,9 @@ export const pdas = {
   my_data_assets: 'Data assets',
   data_assets_subtitle:
     'These are the private data assets you have collected and sent',
+};
+export const orgPdas = {
+  empty: 'No issued Data Assets yet',
+  data_assets_title: 'Issued data assets',
+  data_assets_subtitle: 'These are the private data assets you have issued',
 };

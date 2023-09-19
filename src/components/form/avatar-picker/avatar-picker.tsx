@@ -1,30 +1,24 @@
 "use client";
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, Ref, forwardRef, useState } from 'react';
 
-import { FieldPath, FieldValues, UseControllerProps, useController } from 'react-hook-form';
 import useDropArea from '@/hooks/use-drop-area/use-drop-area';
+
 import { Box, Button, Dialog, Stack } from '@mui/material';
+
+import CropDialog from '../../crop-dialog/crop-dialog';
 import GTWAvatar from '../../gtw-avatar/gtw-avatar';
 import { readImageFile } from './utils';
-import CropDialog from '../../crop-dialog/crop-dialog';
 
 type Props = {
+  name: string;
   username: string;
+  value?: string | null;
+  onChange: (image: string) => void;
 }
 
 // TOOD: Reset when user selected an image
 
-export default function AvatarPicker<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
->({ name, control, username }: UseControllerProps<TFieldValues, TName> & Props) {
-  const { field, fieldState, formState } = useController({
-    name,
-    control,
-  })
-
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
+function AvatarPickerField({ name, username, value, onChange }: Props, ref: Ref<HTMLInputElement>) {
   const [cropableImage, setCropableImage] = useState<string>()
 
   const onCloseModal = () => setCropableImage(undefined);
@@ -33,7 +27,7 @@ export default function AvatarPicker<
     try {
       const { image, isGif } = await readImageFile(files);
       if (isGif) {
-        field.onChange(image);
+        onChange(image);
         return;
       }
       setCropableImage(image);
@@ -51,10 +45,9 @@ export default function AvatarPicker<
   };
 
   const onCrop = (image: string) => {
-    field.onChange(image);
+    onChange(image);
     onCloseModal();
   };
-
 
   const [dropBond, { over: isOver }] = useDropArea({
     onFiles: onReadFile,
@@ -62,16 +55,13 @@ export default function AvatarPicker<
 
   return (
     <>
-      <Stack component="label" direction="row" gap={2} alignItems="center" sx={{ pt: 1, marginLeft: -1, borderWidth: 1, borderStyle: "solid", borderColor: "transparent" }}>
+      <Stack component="label" direction="row" gap={2} alignItems="center" sx={{ pt: 1, borderWidth: 1, borderStyle: "solid", borderColor: "transparent" }}>
         <Box component="span" sx={{ cursor: "pointer" }}>
-          <GTWAvatar name={username} src={field.value} size={80} />
+          <GTWAvatar name={username} src={value} size={80} />
         </Box>
-        <Button size="small" variant="outlined" component="span" sx={{ minWidth: 0 }}>
+        <Button size="small" variant="outlined" component="span">
           Change Image
-          <input id={name} type="file" hidden ref={(el) => {
-            field.ref(el);
-            inputRef.current = el;
-          }} name={field.name} onChange={onSelectFile}
+          <input id={name} type="file" hidden ref={ref} name={name} onChange={onSelectFile}
             tabIndex={-1}
             accept="image/*"
           />
@@ -83,3 +73,7 @@ export default function AvatarPicker<
     </>
   )
 }
+
+const AvatarPicker = forwardRef(AvatarPickerField);
+
+export default AvatarPicker;
