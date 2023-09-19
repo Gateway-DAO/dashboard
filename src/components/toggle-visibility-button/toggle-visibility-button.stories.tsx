@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ToggleVisibilityButton from './toggle-visibility-button';
 
 const meta: Meta<typeof ToggleVisibilityButton> = {
-  title: 'Components/Copy Button',
+  title: 'Components/Toggle visibility button',
   component: ToggleVisibilityButton,
   parameters: {
     layout: 'centered',

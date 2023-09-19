@@ -11,7 +11,7 @@ import { Button, Link, Stack, Typography } from '@mui/material';
 
 import EvmProvider from '../providers/evm-provider';
 import SolanaProvider from '../providers/solana-provider';
-import { WalletConnectModal } from './wallet-connect-modal';
+import WalletConnectModal from './wallet-connect-modal';
 
 export function AuthenticationOptions() {
   const [modalWallet, setModalWallet] = useState(false);
@@ -84,22 +84,13 @@ export function AuthenticationOptions() {
             </Fragment>
           ))}
       </Stack>
-      <Typography color="text.secondary" variant="caption">
-        {auth.steps.initial.terms_info}{' '}
-        <Link href="/terms" underline="none">
-          {auth.steps.initial.terms_of_service}{' '}
-        </Link>
-      </Typography>
-      <Typography color="text.secondary" variant="caption">
-        {auth.steps.initial.term_email}
-      </Typography>
       <EvmProvider>
         <SolanaProvider>
           <WalletConnectModal
-            title="Add Wallet"
-            description="Choose one of available wallet providers or create a new wallet."
+            title="Choose wallet"
+            description="Select a chain and choose one of available wallet providers or create a new wallet."
             isOpen={modalWallet}
-            onCancel={setModalWallet}
+            onCancel={() => setModalWallet(false)}
           />
         </SolanaProvider>
       </EvmProvider>
