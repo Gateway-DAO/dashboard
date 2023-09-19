@@ -3,15 +3,25 @@
 import { HeaderContextProvider } from '@/app/(landing)/contexts/header-context';
 import LenisManager from '@/app/(landing)/utils/scroll';
 
+import Footer from '../components/footer';
 import Header from '../components/header';
 import Api from '../components/icons/api';
+import Criteria from '../components/icons/criteria';
 import Data from '../components/icons/data';
+import Goal from '../components/icons/goal';
 import Id from '../components/icons/id';
+import Lock from '../components/icons/lock';
+import Organizations from '../components/icons/organizations';
+import Ownership from '../components/icons/ownership';
+import Permission from '../components/icons/permission';
+import Share from '../components/icons/share';
 import Star from '../components/icons/star';
 import ForIssues from '../components/svgs/for-issues';
 import ForOwners from '../components/svgs/for-owners';
 import ForVerifies from '../components/svgs/for-verifies';
 import Hero from './components/hero';
+import OurProducts from './components/our-products';
+import OurProtocol from './components/our-protocol';
 import TemplateLearnSection from './components/template-learn-section';
 
 export default function BuildPage() {
@@ -83,25 +93,25 @@ export default function BuildPage() {
         Vector={ForOwners}
         features={[
           {
-            icon: Id,
+            icon: Ownership,
             title: 'Take ownership',
             description: 'Have full control of your Data Assets.',
           },
           {
-            icon: Data,
+            icon: Share,
             title: 'Share your data',
             description:
               'Share unique copies of your data  to specific recipients.',
           },
           {
-            icon: Api,
+            icon: Permission,
             title: 'Grant permission',
             description:
               'With your consent, your PDAs can unlock experiences and services.',
           },
         ]}
         highlight={{
-          icon: Star,
+          icon: Lock,
           text: 'Unlock the potential of your data',
           info: {
             title: 'Managing PDAs',
@@ -129,26 +139,26 @@ export default function BuildPage() {
         Vector={ForVerifies}
         features={[
           {
-            icon: Id,
+            icon: Goal,
             title: 'Set the goal',
             description:
               'First, create your organization account with Gateway.',
           },
           {
-            icon: Data,
+            icon: Criteria,
             title: 'Define the criteria',
             description:
               'Create your own data model with the data that is relevant to your users and your business.',
           },
           {
-            icon: Api,
+            icon: Permission,
             title: 'Start the verification',
             description:
               'Using our API you can integrate with your platform and start issue PDAs seamlessly.',
           },
         ]}
         highlight={{
-          icon: Star,
+          icon: Organizations,
           text: 'See how organizations are using it.',
           info: {
             title: 'Verification Widget',
@@ -158,6 +168,9 @@ export default function BuildPage() {
         }}
         firstColumnLarger
       />
+      <OurProtocol />
+      <OurProducts />
+      <Footer variant="light" />
     </HeaderContextProvider>
   );
 }
