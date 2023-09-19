@@ -29,6 +29,7 @@ export default function ProofCardTitle({ proof }: Props) {
       }}
       alignItems="flex-start"
       justifyContent="space-between"
+      gap={2}
     >
       <Stack gap={2.5}>
         <Typography variant="caption" color="text.secondary">
@@ -77,7 +78,6 @@ export default function ProofCardTitle({ proof }: Props) {
           color: 'text.secondary',
           fontWeight: 600,
           textDecoration: 'none',
-          mt: { xs: 3, md: 0 },
         }}
       >
         {`ID ${limitCharsCentered(proof?.id as string, 8)}`}
