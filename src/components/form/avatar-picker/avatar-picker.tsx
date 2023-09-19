@@ -14,12 +14,11 @@ type Props = {
   username: string;
   value?: string | null;
   onChange: (image: string) => void;
-  onRemove?: () => void;
 }
 
 // TOOD: Reset when user selected an image
 
-function AvatarPickerField({ name, username, value, onChange, onRemove }: Props, ref: Ref<HTMLInputElement>) {
+function AvatarPickerField({ name, username, value, onChange }: Props, ref: Ref<HTMLInputElement>) {
   const [cropableImage, setCropableImage] = useState<string>()
 
   const onCloseModal = () => setCropableImage(undefined);
@@ -60,18 +59,13 @@ function AvatarPickerField({ name, username, value, onChange, onRemove }: Props,
         <Box component="span" sx={{ cursor: "pointer" }}>
           <GTWAvatar name={username} src={value} size={80} />
         </Box>
-        <Stack direction="row" gap={1} alignItems="center">
-          <Button size="small" variant="outlined" component="span">
-            Change Image
-            <input id={name} type="file" hidden ref={ref} name={name} onChange={onSelectFile}
-              tabIndex={-1}
-              accept="image/*"
-            />
-          </Button>
-          {!!value && !!onRemove && <Button type="button" size="small" variant="outlined" color="inherit" onClick={onRemove}>
-            Remove
-          </Button>}
-        </Stack>
+        <Button size="small" variant="outlined" component="span">
+          Change Image
+          <input id={name} type="file" hidden ref={ref} name={name} onChange={onSelectFile}
+            tabIndex={-1}
+            accept="image/*"
+          />
+        </Button>
       </Stack>
       <Dialog open={!!cropableImage} onClose={onCloseModal} fullWidth>
         {!!cropableImage && <CropDialog image={cropableImage} onClose={onCloseModal} onSubmit={onCrop} />}
