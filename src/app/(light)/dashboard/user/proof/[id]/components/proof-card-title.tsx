@@ -25,8 +25,8 @@ export default function ProofCardTitle({ proof }: Props) {
         mb: 3,
         p: 2,
         backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.4),
+        flexDirection: { xs: 'column', row: 'row' },
       }}
-      direction="row"
       alignItems="flex-start"
       justifyContent="space-between"
     >
@@ -77,6 +77,7 @@ export default function ProofCardTitle({ proof }: Props) {
           color: 'text.secondary',
           fontWeight: 600,
           textDecoration: 'none',
+          mt: { xs: 3, md: 0 },
         }}
       >
         {`ID ${limitCharsCentered(proof?.id as string, 8)}`}
