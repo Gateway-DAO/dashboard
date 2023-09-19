@@ -4,8 +4,8 @@ export type PdaCardProps = {
   dashed?: boolean;
   href?: string;
   onClick?: () => void;
-  issuerName: string;
-  issuerImage?: string | null;
+  userName: string;
+  userImage?: string | null;
   name: string;
   status: PdaStatus;
 };

@@ -25,6 +25,9 @@ query received_pdas($take: Float!, $skip: Float!) {
         name
         gatewayId
       }
+      owner {
+        ...min_user
+      }
       issuer {
         ...min_user
       }
@@ -45,6 +48,9 @@ query issued_pdas($take: Float!, $skip: Float!) {
         gatewayId
       }
       issuer {
+        ...min_user
+      }
+      owner {
         ...min_user
       }
     }
