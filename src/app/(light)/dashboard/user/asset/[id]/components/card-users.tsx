@@ -41,7 +41,7 @@ export default function CardUsers({ pda }: Props) {
     pda?.dataAsset?.owner?.id ??
     '';
 
-  const recipientPicture = '';
+  const recipientPicture = pda?.dataAsset?.owner?.profilePicture ?? '';
 
   return (
     <Stack
