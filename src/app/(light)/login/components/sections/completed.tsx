@@ -16,7 +16,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { SocialAuthCardLink } from '../components/social-auth-card-link';
+import { SocialAuthCardLink } from '../social-auth-card-link';
 
 type Props = {
   open: boolean;

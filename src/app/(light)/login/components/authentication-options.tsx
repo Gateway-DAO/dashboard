@@ -90,6 +90,9 @@ export function AuthenticationOptions() {
           {auth.steps.initial.terms_of_service}{' '}
         </Link>
       </Typography>
+      <Typography color="text.secondary" variant="caption">
+        {auth.steps.initial.term_email}
+      </Typography>
       <EvmProvider>
         <SolanaProvider>
           <WalletConnectModal

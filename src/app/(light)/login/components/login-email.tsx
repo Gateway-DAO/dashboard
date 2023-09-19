@@ -42,7 +42,7 @@ export function LoginEmail() {
         sx={{ mt: 2, height: 48 }}
         isLoading={false}
       >
-        {auth.steps.initial.btn}
+        {auth.steps.initial.continue}
       </LoadingButton>
     </Stack>
   );

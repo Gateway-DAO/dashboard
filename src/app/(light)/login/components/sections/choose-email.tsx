@@ -7,8 +7,8 @@ import { useForm } from 'react-hook-form';
 
 import { Stack, TextField, Typography } from '@mui/material';
 
-import { TitleSubtitleField } from '../components/title-field';
-import { EmailSchema } from '../schema';
+import { EmailSchema } from '../../schema';
+import { TitleSubtitleField } from '../title-field';
 
 export function ChooseEmail() {
   const { enqueueSnackbar } = useSnackbar();
@@ -33,7 +33,7 @@ export function ChooseEmail() {
         } else {
           enqueueSnackbar(
             errorMessages[message as keyof typeof errorMessages] ||
-              errorMessages.UNEXPECTED_ERROR,
+            errorMessages.UNEXPECTED_ERROR,
             {
               variant: 'error',
             }
@@ -76,7 +76,7 @@ export function ChooseEmail() {
         sx={{ mt: 2, height: 48 }}
         isLoading={false}
       >
-        {auth.steps.initial.btn}
+        {auth.steps.initial.continue}
       </LoadingButton>
     </Stack>
   );

@@ -7,8 +7,8 @@ import { useForm } from 'react-hook-form';
 
 import { Stack, TextField, Typography } from '@mui/material';
 
-import { TitleSubtitleField } from '../components/title-field';
-import { GatewayIdSchema } from '../schema';
+import { GatewayIdSchema } from '../../schema';
+import { TitleSubtitleField } from '../title-field';
 
 export function ChooseGatewayId() {
   const { enqueueSnackbar } = useSnackbar();
@@ -33,7 +33,7 @@ export function ChooseGatewayId() {
         } else {
           enqueueSnackbar(
             errorMessages[message as keyof typeof errorMessages] ||
-              errorMessages.UNEXPECTED_ERROR,
+            errorMessages.UNEXPECTED_ERROR,
             {
               variant: 'error',
             }
