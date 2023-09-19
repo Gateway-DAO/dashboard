@@ -1,11 +1,59 @@
 .element {
-  background-color: #771ac9;
   padding-top: 256px;
   padding-bottom: 82px;
 
   @media (max-width: 599px) {
     padding-top: 155px;
     padding-bottom: 49px;
+  }
+
+  &--dark {
+    background-color: #771ac9;
+  }
+
+  &--light {
+    background-color: #e6d5fa;
+
+    .title {
+      color: rgba(0, 0, 0, 0.87);
+    }
+
+    .text {
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    .footer {
+      background-color: #771ac9;
+    }
+
+    .copyright {
+      color: #fff;
+    }
+
+    .links_link {
+      color: #fff !important;
+    }
+
+    .subscribe_text {
+      color: #fff;
+    }
+
+    .input {
+      border-color: #fff !important;
+      color: #fff !important;
+
+      &::placeholder {
+        color: #fff !important;
+      }
+    }
+
+    .button {
+      background-color: #771ac9;
+
+      &:hover {
+        background-color: #9247d3;
+      }
+    }
   }
 }
 
@@ -25,6 +73,10 @@
     line-height: 36px;
     letter-spacing: 0.412px;
     margin-bottom: 30px;
+
+    br {
+      display: none;
+    }
   }
 }
 

@@ -79,10 +79,13 @@ export default function Footer({ variant }: Props) {
   const [email, setEmail] = useState<string>('');
 
   return (
-    <section className={joinClasses(styles.element, styles[`--${variant}`])}>
+    <section
+      className={joinClasses(styles.element, styles[`element--${variant}`])}
+    >
       <Wrapper>
         <h2 className={styles.title}>
-          Build the new age of private data with us
+          Build the new age of <br />
+          private data with us
         </h2>
         <p className={styles.text}>
           Natively integrate our products to enable a new paradigm <br />

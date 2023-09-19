@@ -34,15 +34,19 @@
       }
     }
 
-    .button_outlined {
-      border-color: #771ac9;
-      color: #771ac9;
-
-      &:hover {
-        border-color: #fff;
-        color: #fff;
-      }
+    .mobile_button_head_dashboard,
+    .mobile_menu_button_link_contained {
+      background-color: #771ac9;
     }
+    // .button_outlined {
+    //   border-color: #771ac9;
+    //   color: #771ac9;
+
+    //   &:hover {
+    //     border-color: #fff;
+    //     color: #fff;
+    //   }
+    // }
   }
 
   &--hide {

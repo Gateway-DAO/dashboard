@@ -57,7 +57,12 @@ export default function Header() {
 
             <div className={styles.mobile_buttons}>
               <GTWLink href="/dashboard">
-                <Button variant="contained">Open dashboard</Button>
+                <Button
+                  variant="contained"
+                  className={styles.mobile_button_head_dashboard}
+                >
+                  Open dashboard
+                </Button>
               </GTWLink>
               <BurgerButton
                 className={styles.mobile_burger}
@@ -89,7 +94,9 @@ export default function Header() {
               </GTWLink>
 
               <GTWLink href="/dashboard">
-                <Button variant="contained">Open dashboard</Button>
+                <Button variant="contained" className={styles.button_contained}>
+                  Open dashboard
+                </Button>
               </GTWLink>
             </div>
           </>
@@ -122,7 +129,12 @@ export default function Header() {
               className={styles.mobile_menu_button_link}
               href="/dashboard"
             >
-              <Button variant="contained">Open dashboard</Button>
+              <Button
+                variant="contained"
+                className={styles.mobile_menu_button_link_contained}
+              >
+                Open dashboard
+              </Button>
             </GTWLink>
             <GTWLink
               className={styles.mobile_menu_button_link}
