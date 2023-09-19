@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import Button from '@/app/(landing)/components/button';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
+import { splitSpans } from '@/app/(landing)/utils/dom';
 import GTWLink from '@/components/gtw-link';
 import gsap from 'gsap';
 
@@ -12,25 +13,50 @@ import styles from './hero.module.scss';
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const refCurrentWordElement = useRef<HTMLSpanElement>(null);
-
-  const [currentWord, setCurrentWord] = useState<string>('create');
+  const wordsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const words = ['create', 'transfer', 'update'];
 
   useEffect(() => {
-    const words = ['create', 'transfer', 'update'];
+    if (!wordsRef.current.length) return;
+
     let currentIndex = 0;
 
+    const wordsSplitted = wordsRef.current.map((word) => splitSpans(word!));
+
+    gsap.set(refCurrentWordElement.current, {
+      width: wordsRef.current[currentIndex]!.offsetWidth,
+    });
+
     const changeWord = () => {
+      gsap.to(wordsSplitted[currentIndex], {
+        autoAlpha: 0,
+        duration: 0.6,
+        y: -20,
+        stagger: 0.05,
+      });
+
       currentIndex = currentIndex === words.length - 1 ? 0 : currentIndex + 1;
 
-      const tl = gsap.timeline();
-      tl.to(refCurrentWordElement.current, { autoAlpha: 0, duration: 0.3 });
-      tl.call(() => {
-        setCurrentWord(words[currentIndex]);
+      gsap.to(refCurrentWordElement.current, {
+        width: wordsRef.current[currentIndex]!.offsetWidth,
+        duration: 0.3,
+        delay: 0.5,
       });
-      tl.to(refCurrentWordElement.current, { autoAlpha: 1, duration: 0.3 });
+
+      gsap.fromTo(
+        wordsSplitted[currentIndex],
+        { y: 20 },
+        {
+          autoAlpha: 1,
+          duration: 0.6,
+          stagger: 0.05,
+          y: 0,
+          delay: 0.2,
+        }
+      );
     };
 
-    const interval = setInterval(changeWord, 3000);
+    const interval = setInterval(changeWord, 4000);
 
     return () => clearInterval(interval);
   }, []);
@@ -42,10 +68,23 @@ export default function Hero() {
       <Wrapper className={styles.wrapper}>
         <h1 className={styles.title}>
           The safer and faster <br />
-          way for you to{' '}
-          <span ref={refCurrentWordElement} style={{ color: '#70ECFE' }}>
-            {currentWord}
-          </span>{' '}
+          way for you to&nbsp;
+          <span
+            className={styles.title_highlight}
+            ref={refCurrentWordElement}
+            style={{ color: '#70ECFE' }}
+          >
+            {words.map((word, index) => (
+              <span
+                className={styles.word}
+                key={index}
+                ref={(ref) => (wordsRef.current[index] = ref)}
+              >
+                {word}
+              </span>
+            ))}
+          </span>
+          &nbsp;
           <br />
           private data
         </h1>
