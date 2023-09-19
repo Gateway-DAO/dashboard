@@ -69,7 +69,9 @@ export default function Header() {
       <Wrapper className={styles.wrapper}>
         {isMobile ? (
           <>
-            <GatewayLogo variant={variant} />
+            <GTWLink href="/" className={styles.logo_link}>
+              <GatewayLogo variant={variant} />
+            </GTWLink>
 
             <div className={styles.mobile_buttons}>
               <GTWLink href="/dashboard">
