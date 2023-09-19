@@ -35,7 +35,9 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
             size={32}
           />
           <Typography variant="body2">
-            {params.row.verifier?.gatewayId}
+            {params.row.verifier?.displayName ??
+              params.row.verifier?.gatewayId ??
+              params.row.verifier?.id}
           </Typography>
         </Stack>
       );

@@ -12,10 +12,11 @@ import { Button, InputAdornment, Skeleton, Stack, TextField } from "@mui/materia
 
 export default function Username() {
   const { data: session, update } = useSession()
+
   const { privateApi } = useGtwSession()
   const { mutateAsync } = useMutation({
     mutationKey: ["updateUsername"],
-    mutationFn: async (username: string) => privateApi.update_display_name({ displayName: "" }),
+    mutationFn: async (username: string) => { },
   })
 
 
@@ -50,8 +51,6 @@ export default function Username() {
     }
   }
 
-
-
   return <form onSubmit={handleSubmit(onSubmit)}>
     {session ? <TextField
       id="username"
@@ -61,13 +60,14 @@ export default function Username() {
         startAdornment: <InputAdornment position="start">@</InputAdornment>,
       }}
       {...register("username")}
-    /> : <Skeleton sx={{
-      maxWidth: 478,
-      width: "100%",
-      height: 80,
-      mt: '0 !important'
-    }} />}
-    {username !== session?.user.gatewayId && <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
+    /> : <Skeleton height={56}
+      variant="rounded"
+      sx={{
+        maxWidth: 478,
+        width: "100%",
+        m: '0 !important'
+      }} />}
+    {session && username !== session?.user.gatewayId && session?.user.gatewayId !== null && <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
       <Button variant="contained" type="submit">{common.actions.save}</Button>
       <Button variant='outlined' type="button" onClick={onCancel}>{common.actions.cancel}</Button>
     </Stack>}

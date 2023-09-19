@@ -2,6 +2,6 @@ mutation update_display_name($displayName: String!) {
   updateMyDisplayName(displayName: $displayName)
 }
 
-mutation update_profile_picture_url($profilePictureUrl: String!) {
+mutation update_profile_picture_url($profilePictureUrl: String) {
   updateMyProfilePicture(profilePictureUrl: $profilePictureUrl)
 }
