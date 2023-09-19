@@ -1,4 +1,5 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { Fragment, useMemo, useState } from 'react';
 
 import { WalletIconsTransition } from '@/components/wallet-icons-transition/wallet-icons-transition';
@@ -9,9 +10,14 @@ import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Link, Stack, Typography } from '@mui/material';
 
-import EvmProvider from '../providers/evm-provider';
-import SolanaProvider from '../providers/solana-provider';
 import WalletConnectModal from './wallet-connect-modal';
+
+const EvmProvider = dynamic(() => import('../providers/evm-provider'), {
+  ssr: false,
+});
+const SolanaProvider = dynamic(() => import('../providers/solana-provider'), {
+  ssr: false,
+});
 
 export function AuthenticationOptions() {
   const [modalWallet, setModalWallet] = useState(false);
