@@ -2,9 +2,9 @@ import { auth } from '@/locale/en/auth';
 
 import { Stack, Typography } from '@mui/material';
 
-import { AuthenticationOptions } from '../components/authentication-options';
-import { LoginEmail } from '../components/login-email';
-import { TitleSubtitleField } from '../components/title-field';
+import { AuthenticationOptions } from '../authentication-options';
+import { LoginEmail } from '../login-email';
+import { TitleSubtitleField } from '../title-field';
 
 export function AuthenticationInitial() {
   return (

@@ -4,8 +4,8 @@ import { errorMessages } from '@/locale/en/errors';
 import { useToggle } from '@react-hookz/web';
 import { useSnackbar } from 'notistack';
 
-import { CodeField } from '../components/code-field';
-import { TokenConfirmationSchema } from '../schema';
+import { TokenConfirmationSchema } from '../../schema';
+import { CodeField } from '../code-field';
 
 export function VerifyEmailAddToken() {
   const { enqueueSnackbar } = useSnackbar();
