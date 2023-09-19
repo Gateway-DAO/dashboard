@@ -51,13 +51,15 @@ export default function DisplayName() {
     }
   }
 
+  if (!session) return <Skeleton
 
-  if (!session) return <Skeleton sx={{
-    maxWidth: 478,
-    width: "100%",
-    height: 80,
-    mt: '0 !important'
-  }} />;
+    variant="rounded"
+    sx={{
+      maxWidth: 478,
+      width: "100%",
+      height: 56,
+      mt: '0 !important'
+    }} />;
 
   return <form onSubmit={handleSubmit(onSubmit)}>
     <TextField
@@ -65,9 +67,12 @@ export default function DisplayName() {
       label="Display Name"
       fullWidth
       sx={{ maxWidth: 478 }}
+      InputLabelProps={{
+        shrink: !!displayName
+      }}
       {...register("displayName")}
     />
-    {displayName !== session?.user.displayName && <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
+    {displayName !== session?.user.displayName && session?.user.displayName !== null && <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
       <Button variant="contained" type="submit">{common.actions.save}</Button>
       <Button variant='outlined' type="button" onClick={onCancel}>{common.actions.cancel}</Button>
     </Stack>}
