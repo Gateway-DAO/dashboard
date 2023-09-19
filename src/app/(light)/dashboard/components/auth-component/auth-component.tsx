@@ -22,7 +22,7 @@ export default function AuthComponent({ id, controlId }: Props) {
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
   const { isOrg, organization } = useOrganization();
 
-  if (status === "loading" || !session) {
+  if (status === 'loading' || !session) {
     return <AuthComponentSkeleton />;
   }
 
@@ -58,11 +58,16 @@ export default function AuthComponent({ id, controlId }: Props) {
         })}
         onClick={onOpen}
       >
-        <UserOrgInfo
-          image={isOrg ? organization.image : undefined}
-          name={isOrg ? organization.name! : user.gatewayId!}
-          gatewayId={isOrg ? organization.gatewayId! : user.gatewayId!}
-        />
+        {isOrg ? <UserOrgInfo
+          image={organization.image!}
+          name={organization.name!}
+          gatewayId={organization.gatewayId!}
+        /> : <UserOrgInfo
+          image={user.profilePicture}
+          name={user.displayName!}
+          gatewayId={user.gatewayId!}
+        />}
+
         <MoreHorizOutlined
           sx={{
             color: 'action.active',

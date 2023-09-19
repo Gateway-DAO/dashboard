@@ -11,7 +11,7 @@ export default async function DataAssetsPage() {
 
   return (
     <>
-      {pdas && pdas.length > 0 && (<ReceivedPDAsList pdas={pdas} />)}
+      {pdas && pdas.length > 0 && <ReceivedPDAsList pdas={pdas} />}
       {pdas && pdas.length === 0 && (
         <Typography
           variant="body1"

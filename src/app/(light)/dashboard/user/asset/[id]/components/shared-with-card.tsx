@@ -1,70 +1,97 @@
+'use client';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { queries } from '@/constants/queries';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { pda } from '@/locale/en/pda';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
+import { useQuery } from '@tanstack/react-query';
 
 import { Card, Divider, Stack, Typography } from '@mui/material';
 
-export default function SharedWithCard({}) {
-  const rows = [
-    {
-      name: 'Chase',
-      data_proof_id:
-        '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-    },
-    {
-      name: 'Chase',
-      data_proof_id: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
-    },
-  ];
+import SharedWithCardSkeleton from './shared-with-card-skeleton';
+
+type Props = {
+  pdaId: string;
+};
+
+export default function SharedWithCard({ pdaId }: Props) {
+  const { privateApi } = useGtwSession();
+  const { data, isFetching, isLoading } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: [queries.proofs_by_pdas_id, [pdaId]],
+    queryFn: () =>
+      privateApi?.proofsByPDAIds({
+        pdaIds: [pdaId],
+      }),
+    select: (data) => data?.proofsByPDAIds,
+  });
+
   return (
-    <Stack
-      component={Card}
-      variant="outlined"
-      sx={{
-        mb: 2,
-        ...WIDTH_CENTERED,
-      }}
-    >
-      <Typography
-        sx={{ fontSize: 14, fontWeight: 600, p: 2, color: 'text.secondary' }}
-      >
-        {pda.shared_with.shared_with}
-      </Typography>
-      <Stack p={2} direction="row" justifyContent="space-between">
-        <Typography variant="caption" color="text.secondary">
-          {pda.shared_with.verifier}
-        </Typography>
-        <Typography variant="caption" color="text.secondary">
-          {pda.shared_with.data_proof_id}
-        </Typography>
-      </Stack>
-      <Stack divider={<Divider />}>
-        {rows.map((row, index) => (
-          <Stack
-            p={2}
-            key={index}
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
+    <>
+      {data && data.length > 0 && (
+        <Stack
+          component={Card}
+          variant="outlined"
+          sx={{
+            mb: 2,
+            ...WIDTH_CENTERED,
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: 14,
+              fontWeight: 600,
+              p: 2,
+              color: 'text.secondary',
+            }}
           >
-            <Stack
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 2,
-              }}
-            >
-              <GTWAvatar name={row.name} />
-              <Typography variant="subtitle1">{row.name}</Typography>
-            </Stack>
-            <Typography variant="body2">
-              {limitCharsCentered(row.data_proof_id, 8)}
+            {pda.shared_with.shared_with}
+          </Typography>
+          <Stack p={2} direction="row" justifyContent="space-between">
+            <Typography variant="caption" color="text.secondary">
+              {pda.shared_with.verifier}
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              {pda.shared_with.data_proof_id}
             </Typography>
           </Stack>
-        ))}
-      </Stack>
-    </Stack>
+          <Stack divider={<Divider />}>
+            {isFetching || isLoading ? (
+              <SharedWithCardSkeleton />
+            ) : (
+              <>
+                {data?.map((proof, index) => (
+                  <Stack
+                    p={2}
+                    key={index}
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Stack
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 2,
+                      }}
+                    >
+                      <GTWAvatar name={proof.verifier?.profilePicture ?? ''} />
+                      <Typography variant="subtitle1">
+                        {proof.verifier?.gatewayId}
+                      </Typography>
+                    </Stack>
+                    <Typography variant="body2">
+                      {limitCharsCentered(proof.id, 8)}
+                    </Typography>
+                  </Stack>
+                ))}
+              </>
+            )}
+          </Stack>
+        </Stack>
+      )}
+    </>
   );
 }

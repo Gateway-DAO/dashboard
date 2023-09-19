@@ -5,6 +5,7 @@ import { NEGATIVE_CONTAINER_PX } from "@/theme/config/style-tokens";
 import { Divider } from "@mui/material";
 
 import ConnectedAccounts from "./components/connected-accounts";
+import DeveloperPortal from "./components/developer-portal/developer-portal";
 import DisplaySettings from "./components/display-settings";
 
 export default async function SettingsPage() {
@@ -15,6 +16,8 @@ export default async function SettingsPage() {
       <DisplaySettings />
       <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, my: 4 }} />
       <ConnectedAccounts />
+      <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, my: 4 }} />
+      <DeveloperPortal />
     </>
   )
 }

@@ -21,16 +21,27 @@ export default function CardUsers({ pda }: Props) {
 
   const issuerGatewayId =
     pda?.dataAsset?.organization?.gatewayId ??
-    pda?.dataAsset?.issuer?.user?.gatewayId ??
+    pda?.dataAsset?.issuer?.gatewayId ??
     '';
 
-  const issuerName = pda?.dataAsset?.organization?.name ?? issuerGatewayId;
+  const issuerDisplayName =
+    pda?.dataAsset?.organization?.name ?? pda?.dataAsset?.issuer?.displayName;
 
-  const issuerPicture = pda?.dataAsset?.organization?.image ?? '';
+  const issuerName =
+    issuerDisplayName ?? issuerGatewayId ?? pda?.dataAsset?.issuer?.id;
 
-  const recipientName = pda?.dataAsset?.owner?.user?.gatewayId ?? '';
+  const issuerPicture =
+    pda?.dataAsset?.organization?.image ??
+    pda?.dataAsset?.issuer?.profilePicture ??
+    '';
 
-  const recipientPicture = '';
+  const recipientName =
+    pda?.dataAsset?.owner?.displayName ??
+    pda?.dataAsset?.owner?.gatewayId ??
+    pda?.dataAsset?.owner?.id ??
+    '';
+
+  const recipientPicture = pda?.dataAsset?.owner?.profilePicture ?? '';
 
   return (
     <Stack
@@ -55,7 +66,7 @@ export default function CardUsers({ pda }: Props) {
             name={issuerName}
             picture={issuerPicture}
             username={issuerGatewayId}
-            issuance_date={pda?.dataAsset?.issuer?.user?.createdAt}
+            issuance_date={pda?.dataAsset?.issuer?.createdAt}
             onClose={() => setTooltipIssuer(false)}
           />
         )}
@@ -101,7 +112,7 @@ export default function CardUsers({ pda }: Props) {
           <TooltipUser
             name={recipientName}
             username={recipientName}
-            issuance_date={pda?.dataAsset?.owner?.user?.createdAt}
+            issuance_date={pda?.dataAsset?.owner?.createdAt}
             right={true}
             onClose={() => setTooltipRecipient(false)}
           />

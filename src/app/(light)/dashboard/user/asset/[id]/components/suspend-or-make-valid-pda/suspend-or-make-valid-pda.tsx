@@ -1,9 +1,10 @@
+import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
 import { mutations } from '@/constants/queries';
-import { useSession } from '@/context/session-provider';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -24,7 +25,8 @@ type Props = {
 };
 
 export function SuspendOrMakeValidPDA({ pda }: Props) {
-  const { privateApi } = useSession();
+  const { privateApi } = useGtwSession();
+  const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
 
@@ -33,21 +35,15 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
     mutationFn: (data: ChangePdaStatusMutationVariables) => {
       return privateApi?.changePDAStatus(data);
     },
-    onSuccess: () => console.log('Status changed'), // TODO: Refetch queries
+    onSuccess: () => router.refresh(),
     onError: () => enqueueSnackbar(errorMessages.STATUS_CHANGE_ERROR),
   };
 
   const suspendPda = useMutation(mutationReq);
   const makeValidPda = useMutation(mutationReq);
 
-  const isValid = useMemo(
-    () => pda?.dataAsset?.status === PdaStatus.Valid,
-    [pda]
-  );
-  const isSuspended = useMemo(
-    () => pda?.dataAsset?.status === PdaStatus.Suspended,
-    [pda]
-  );
+  const isValid = useMemo(() => pda?.status === PdaStatus.Valid, [pda]);
+  const isSuspended = useMemo(() => pda?.status === PdaStatus.Suspended, [pda]);
 
   return (
     <>
@@ -99,13 +95,13 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
         negativeAnswer={common.actions.cancel}
         setOpen={setDialogConfirmation}
         onConfirm={() => {
-          if (pda?.dataAsset?.status === PdaStatus.Valid) {
+          if (pda?.status === PdaStatus.Valid) {
             suspendPda.mutateAsync({
               id: pda?.id as string,
               status: PdaStatus.Suspended,
             });
           }
-          if (pda?.dataAsset?.status === PdaStatus.Suspended) {
+          if (pda?.status === PdaStatus.Suspended) {
             makeValidPda.mutateAsync({
               id: pda?.id as string,
               status: PdaStatus.Valid,

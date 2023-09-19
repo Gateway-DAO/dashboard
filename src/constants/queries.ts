@@ -1,6 +1,11 @@
 //Mutations and queries
 
-export const queries = {};
+export const queries = {
+  proofs_by_pdas_id: 'proofs_by_pdas_id',
+  proof: 'proof',
+  proofs_received: 'proofs_received',
+  proofs_sent: 'proofs_sent',
+};
 
 export const mutations = {
   create_proof: 'create_proof',

@@ -13,6 +13,7 @@ export const common = {
     other_accounts: 'Other accounts',
     email: 'Email',
     avatar: 'Avatar',
+    success_copy_message: 'Copied to clipboard',
   },
   chain: {
     EVM: 'Ethereum',
@@ -21,6 +22,7 @@ export const common = {
   actions: {
     accept: 'Accept',
     reject: 'Reject',
+    save: 'Save',
     cancel: 'Cancel',
     check_data_proof: 'Check data proof',
     share_now: 'Share now',
@@ -30,6 +32,7 @@ export const common = {
     show_activity: 'See Activity',
     learn_more: 'Learn more',
     check_now: 'Check now',
+    copy: 'Copy',
     copy_url: 'Copy URL',
     connect_now: 'Connect now',
     back_to_home: 'Back to home',

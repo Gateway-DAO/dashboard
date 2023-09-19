@@ -1,0 +1,22 @@
+fragment user on User {
+  id
+  gatewayId
+  profilePicture
+  displayName
+  email
+  primaryWallet {
+    address
+  }
+  wallets {
+    address
+  }
+  createdAt
+  updatedAt
+}
+
+fragment min_user on User {
+  id
+  gatewayId
+  profilePicture
+  createdAt
+}

@@ -15,11 +15,13 @@ export const nextAuthConfig: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       // We're retrieving the token from the provider
       if (user) {
         token = user as SessionToken;
       }
+
+      (token as any).update = trigger === 'update';
 
       const parsedToken = jwt.decode(token.token, { json: true });
 
@@ -30,7 +32,7 @@ export const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      const user = await getMe(token.token);
+      const user = await getMe(token.token, !!(token as any).update);
       return {
         ...session,
         ...(token.error && { error: token.error }),

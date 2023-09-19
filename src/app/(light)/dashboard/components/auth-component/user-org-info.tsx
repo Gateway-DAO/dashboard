@@ -4,11 +4,12 @@ import { Box, Stack, Typography } from '@mui/material';
 
 type Props = {
   image?: string | null;
-  name: string;
+  name?: string | null;
   gatewayId: string;
 };
 
 export default function UserOrgInfo({ image, name, gatewayId }: Props) {
+  const hasName = name && name.length > 0;
   return (
     <Stack
       component="span"
@@ -38,11 +39,11 @@ export default function UserOrgInfo({ image, name, gatewayId }: Props) {
         }}
       >
         <Typography component="span" variant="subtitle1" color="primary.main">
-          {name}
+          {hasName ? name : `@${gatewayId}`}
         </Typography>
-        <Typography component="span" variant="caption" color="primary.main">
+        {hasName && <Typography component="span" variant="caption" color="primary.main">
           @{gatewayId}
-        </Typography>
+        </Typography>}
       </Stack>
     </Stack>
   );

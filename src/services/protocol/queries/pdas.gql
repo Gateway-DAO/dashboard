@@ -9,12 +9,16 @@ query pdas {
 
 query pda($id: String!) {
   PDAbyId(id: $id) {
+    ...pda
+  }
+}
+
+query received_pdas($take: Float!, $skip: Float!) {
+  myPDAs(skip: $skip, take: $take) {
     id
-    issuanceDate
+    status
     dataAsset {
       title
-      description
-      expirationDate
       image
       organization {
         image
@@ -22,57 +26,8 @@ query pda($id: String!) {
         gatewayId
       }
       issuer {
-        id
-        data
-        user {
-          gatewayId
-          createdAt
-        }
+        ...min_user
       }
-      owner {
-        id
-        data
-        user {
-          gatewayId
-          createdAt
-        }
-      }
-      dataModel {
-        id
-        createdAt
-        tags
-      }
-      claim
-      claimArray {
-        label
-        metadata
-        property
-        description
-        type
-        value
-      }
-      status
-    }
-  }
-}
-
-query received_pdas($take: Float!, $skip: Float!) {
-  myPDAs(skip: $skip, take: $take) {
-    id
-    dataAsset {
-      title
-      organization {
-        image
-        name
-        gatewayId
-      }
-      issuer {
-        data
-        user {
-          gatewayId
-        }
-      }
-      status
     }
   }
 }
@@ -80,10 +35,18 @@ query received_pdas($take: Float!, $skip: Float!) {
 query issued_pdas($take: Float!, $skip: Float!) {
   issuedPDAs(skip: $skip, take: $take) {
     id
+    status
     dataAsset {
       title
       image
-      status
+      organization {
+        image
+        name
+        gatewayId
+      }
+      issuer {
+        ...min_user
+      }
     }
   }
 }
@@ -91,18 +54,26 @@ query issued_pdas($take: Float!, $skip: Float!) {
 query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
   issuedPDAs(skip: $skip, take: $take, orgId: $orgId) {
     id
+    status
     issuanceDate
+    status
+
     dataAsset {
       title
+      organization {
+        gatewayId
+      }
       owner {
-        user {
-          gatewayId
-        }
+        gatewayId
+        displayName
       }
       dataModel {
         id
       }
-      status
     }
   }
+}
+
+query countIssuedPdasByOrg($orgId: String!) {
+  issuedPDAsCount(orgId: $orgId)
 }

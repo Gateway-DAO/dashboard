@@ -1,8 +1,9 @@
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
 import { mutations } from '@/constants/queries';
-import { useSession } from '@/context/session-provider';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -23,7 +24,8 @@ type Props = {
 };
 
 export function RevokePDA({ pda }: Props) {
-  const { privateApi } = useSession();
+  const { privateApi } = useGtwSession();
+  const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
 
@@ -32,7 +34,7 @@ export function RevokePDA({ pda }: Props) {
     mutationFn: (data: ChangePdaStatusMutationVariables) => {
       return privateApi?.changePDAStatus(data);
     },
-    onSuccess: () => console.log('Revoked'), // TODO: Refetch queries
+    onSuccess: () => router.refresh(),
     onError: () => enqueueSnackbar(errorMessages.REVOKE_ERROR),
   });
 
