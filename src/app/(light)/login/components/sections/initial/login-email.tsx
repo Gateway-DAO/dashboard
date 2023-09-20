@@ -26,13 +26,13 @@ export function LoginEmail() {
     resolver: zodResolver(schema),
   });
 
-  const { setState } = useStepState()
+  const { setStepState } = useStepState()
 
   const { mutate, isLoading } = useMutation({
     mutationKey: ['login-email-create-nonce'],
     mutationFn: async (email: string) => apiPublic.create_email_nonce({ email }),
     onSuccess: (response) => {
-      setState({
+      setStepState({
         step: "verify-email-login-code",
         values: {
           email: response.createEmailNonce.email

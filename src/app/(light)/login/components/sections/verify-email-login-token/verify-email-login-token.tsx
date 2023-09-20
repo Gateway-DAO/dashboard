@@ -16,7 +16,7 @@ export function VerifyEmailLoginToken() {
   const [startCountdown, setStartCountdown] = useToggle(true);
   const countdown = useCountdown({ time: 30, trigger: startCountdown });
 
-  const { values, setState } = useStepState()
+  const { values, setStepState } = useStepState()
   const email = values?.email ?? "";
 
   const resendEmail = useMutation({
@@ -47,7 +47,7 @@ export function VerifyEmailLoginToken() {
 
   return (
     <CodeField
-      onClickEdit={() => setState({ step: "initial" })}
+      onClickEdit={() => setStepState({ step: "initial" })}
       onSubmitConfirmCode={sendConfirmationToken.mutate}
       isLoadingConfirmCode={sendConfirmationToken.isLoading}
       onResendEmail={onResendEmail}

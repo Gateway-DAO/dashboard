@@ -1,3 +1,4 @@
+import { Session } from "next-auth";
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 
 import { Step } from "../types";
@@ -10,17 +11,25 @@ type State = {
 }
 
 type StepContextType = {
-  setState: (step: State) => void;
+  setStepState: (step: State) => void;
 } & State;
 
 const StepContext = createContext<StepContextType>({} as StepContextType);
 
-export default function StepProvider({ children }: PropsWithChildren) {
-  const [state, setState] = useState<State>({
-    step: 'initial',
-    values: undefined
+export default function StepProvider({ children, session }: PropsWithChildren<{ session: Session | null }>) {
+  const [state, setStepState] = useState<State>(() => {
+    if (session) {
+      if (!session.user.gatewayId) {
+        return {
+          step: "choose-gatewayid"
+        }
+      }
+    }
+    return {
+      step: "initial"
+    }
   });
-  return <StepContext.Provider value={{ ...state, setState }}>{children}</StepContext.Provider>
+  return <StepContext.Provider value={{ ...state, setStepState }}>{children}</StepContext.Provider>
 }
 
 export const useStepState = () => useContext(StepContext);
