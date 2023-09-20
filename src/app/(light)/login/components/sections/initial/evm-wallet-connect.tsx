@@ -8,16 +8,17 @@ import routes from '@/constants/routes';
 import { Chain } from '@/services/protocol/types';
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
 
-import useLoginWallet from '../libs/use-login-wallet';
-import { CustomEvmButton } from './custom-evm-button';
+import useLoginWallet from '../../../libs/use-login-wallet';
+import { CustomEvmButton } from '../../custom-evm-button';
+
 
 type Props = {
-  onFirstModal: (value: boolean) => void;
+  onClose: () => void;
   isEvmLoading: (value: boolean) => void;
 };
 
 export default function EvmWalletConnect({
-  onFirstModal,
+  onClose,
   isEvmLoading,
 }: Props) {
   const { address } = useAccount();
@@ -41,7 +42,7 @@ export default function EvmWalletConnect({
       //TODO: Make it reusable
       const callbackUrl = searchParams.get('callbackUrl');
       router.push(callbackUrl ?? routes.dashboardUserHome);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -56,5 +57,5 @@ export default function EvmWalletConnect({
     return <Loading size={24} />;
   }
 
-  return <CustomEvmButton onFirstModal={onFirstModal} />;
+  return <CustomEvmButton onClose={onClose} />;
 }

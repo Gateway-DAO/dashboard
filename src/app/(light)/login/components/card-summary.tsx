@@ -1,15 +1,15 @@
 'use client';
 import EditIcon from '@mui/icons-material/Edit';
-import { Stack, Typography, SxProps, Theme } from '@mui/material';
+import { Stack, Typography, SxProps, Theme, IconButton } from '@mui/material';
 
 type Props = {
   title: string;
   email: string;
   onClickEdit: (value: boolean) => void;
-  sxProps?: SxProps<Theme>;
+  sx?: SxProps<Theme>;
 };
 
-export function CardSummary({ title, email, onClickEdit, sxProps }: Props) {
+export function CardSummary({ title, email, onClickEdit, sx }: Props) {
   return (
     <Stack
       direction="row"
@@ -19,24 +19,25 @@ export function CardSummary({ title, email, onClickEdit, sxProps }: Props) {
       sx={{
         width: '100%',
         p: 2,
-        backgroundColor: 'primary.main',
-        border: '1px solid rgba(229, 229, 229, 0.12)',
-        borderRadius: 2,
+        pr: 1,
+        borderRadius: 1,
+        border: 1,
+        borderColor: 'divider',
+        backgroundColor: 'grey.100',
         position: 'relative',
-        ...sxProps,
+        ...sx,
       }}
     >
       <Stack direction="column">
-        <Typography sx={{ fontWeight: 700, mb: 1 }}>{title}</Typography>
-        <Typography sx={{ color: 'text.secondary' }}>{email}</Typography>
+        <Typography variant="subtitle1">{title}</Typography>
+        <Typography>{email}</Typography>
       </Stack>
-      <EditIcon
+      <IconButton
         onClick={() => onClickEdit(false)}
-        sx={{
-          color: 'text.secondary',
-          cursor: 'pointer',
-        }}
-      />
+      >
+        <EditIcon />
+
+      </IconButton>
     </Stack>
   );
 }

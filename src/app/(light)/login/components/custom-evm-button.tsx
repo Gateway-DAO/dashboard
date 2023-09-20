@@ -3,11 +3,13 @@ import { FaEthereum } from 'react-icons/fa';
 
 import { Button, Typography } from '@mui/material';
 
+import WalletModalButton from './wallet-modal-button';
+
 type Props = {
-  onFirstModal: (value: boolean) => void;
+  onClose: () => void;
 };
 
-export function CustomEvmButton({ onFirstModal }: Props) {
+export function CustomEvmButton({ onClose }: Props) {
   return (
     <ConnectButton.Custom>
       {({
@@ -29,19 +31,24 @@ export function CustomEvmButton({ onFirstModal }: Props) {
 
         return (
           <div
+            style={{
+              width: '100%',
+            }}
             {...(!ready && {
               'aria-hidden': true,
               style: {
+                width: '100%',
                 opacity: 0,
                 pointerEvents: 'none',
                 userSelect: 'none',
+
               },
             })}
           >
             {(() => {
               if (!connected) {
                 return (
-                  <Button
+                  <WalletModalButton
                     id="connect-evm"
                     variant="contained"
                     startIcon={<FaEthereum fontSize="24" />}
@@ -50,20 +57,20 @@ export function CustomEvmButton({ onFirstModal }: Props) {
                     }}
                   >
                     EVM
-                  </Button>
+                  </WalletModalButton>
                 );
               }
 
               if (chain.unsupported) {
                 return (
-                  <Button
+                  <WalletModalButton
                     onClick={() => {
-                      onFirstModal(false);
+                      onClose();
                       openChainModal;
                     }}
                   >
                     Wrong network
-                  </Button>
+                  </WalletModalButton>
                 );
               }
 

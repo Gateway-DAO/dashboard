@@ -36,6 +36,11 @@ query dataRequest($id: String!) {
     id
     dataUse
     status
+    createdAt
+
+    proofs {
+      id
+    }
     userVerifier {
       id
       gatewayId

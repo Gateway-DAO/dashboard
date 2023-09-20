@@ -1,5 +1,5 @@
 import { Authentication } from './components/authentication';
 
-export default async function AuthPage() {
+export default function AuthPage() {
   return <Authentication />;
 }

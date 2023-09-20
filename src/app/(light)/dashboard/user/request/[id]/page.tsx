@@ -8,7 +8,7 @@ import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { request } from '@/locale/en/request';
 import { getPrivateApi } from '@/services/protocol/api';
-import { DataRequest } from '@/services/protocol/types';
+import { DataRequest, DataRequestQuery } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { PageProps } from '@/types/next';
 import dayjs from 'dayjs';
@@ -21,7 +21,7 @@ import RequestedData from './components/requested-data';
 
 const getDataRequest = async (
   id: string
-): Promise<PartialDeep<DataRequest> | null> => {
+): Promise<PartialDeep<DataRequestQuery['dataRequest']> | null> => {
   const privateApi = await getPrivateApi();
   if (!privateApi) {
     return null;
@@ -58,9 +58,13 @@ export default async function DashboardUserDataRequest({
       </Typography>
       <Stack direction="column" gap={2}>
         <RequestCard
-          requester={dataRequest.userVerifier!.gatewayId!}
+          requester={
+            dataRequest.userVerifier?.displayName ??
+            dataRequest.userVerifier!.gatewayId!
+          }
           status={dataRequest.status!}
-          proofId=""
+          requestId={dataRequest.id}
+          proofId={dataRequest.proofs?.[0]?.id}
         />
         <Paper
           component={Stack}

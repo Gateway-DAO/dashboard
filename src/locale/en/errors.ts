@@ -7,6 +7,7 @@ export const errorMessages = {
   ERROR_TRYING_TO_SEND_THE_CODE: `An error ocurred trying to send the code`,
   ERROR_TRYING_TO_CREATE_THE_CODE: `An error ocurred trying to create the code`,
   ERROR_TRYING_TO_ISSUE_A_PROOF: `An error ocurred trying to issue a proof`,
+  ERROR_TRYING_TO_REJECT_A_REQUEST: `An error ocurred trying to reject Data Request`,
   EXPIRED_CODE: `Expired code`,
   INVALID_CODE_VERIFICATION: `Invalid code verification`,
   MAXIMUM_ATTEMPTS_REACHED: `Maximum attempts reached`,
@@ -19,4 +20,5 @@ export const errorMessages = {
   REVOKE_ERROR: 'There was a problem performing the revoke. Try again later.',
   STATUS_CHANGE_ERROR:
     'There was a problem performing the status change. Try again later.',
+  VERIFIER_NOT_FOUND: `Verifier doesn't exist`,
 };

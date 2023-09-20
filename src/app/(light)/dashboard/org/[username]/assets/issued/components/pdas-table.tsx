@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 
 import {
@@ -56,8 +56,10 @@ export default function PDAsTable({ data: initialData }: Props) {
           <AvatarTextCell
             name={
               params.row.dataAsset?.owner?.displayName ??
-              params.row.dataAsset?.owner?.gatewayId
+              params.row.dataAsset?.owner?.gatewayId ??
+              params.row.dataAsset?.owner?.id
             }
+            picture={params.row.dataAsset?.owner?.profilePicture ?? null}
           />
         );
       },
