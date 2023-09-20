@@ -1,10 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useMemo } from 'react';
 
 import Tags from '@/components/tags/tags';
-import { useGtwSession } from '@/context/gtw-session-provider';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
 import {
@@ -32,24 +30,7 @@ type Props = {
 };
 
 export default function PDAItem({ pda, viewOnly = false }: Props) {
-  const { session } = useGtwSession();
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
-
-  const isIssuer = useMemo(
-    () =>
-      session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId ||
-      session?.user?.accesses?.find(
-        (access) =>
-          pda?.dataAsset?.organization?.gatewayId ===
-          access?.organization?.gatewayId
-      ),
-    [pda, session]
-  );
-
-  const isOwner = useMemo(
-    () => session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId,
-    [pda, session]
-  );
 
   return (
     <>
@@ -109,13 +90,11 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           <>
             <SharedWithCard pdaId={pda?.id as string} />
 
-            {isOwner && <ShareCopy pda={pda} />}
-            {isIssuer && (
-              <Stack direction="row" gap={1}>
-                <SuspendOrMakeValidPDA pda={pda} />
-                <RevokePDA pda={pda} />
-              </Stack>
-            )}
+            <ShareCopy pda={pda} />
+            <Stack direction="row" gap={1}>
+              <SuspendOrMakeValidPDA pda={pda} />
+              <RevokePDA pda={pda} />
+            </Stack>
 
             {/* Activies backloged 09/02 */}
             {/* <Activities

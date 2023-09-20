@@ -1,6 +1,6 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter } from 'next-nprogress-bar';
+import { useMemo, useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import ModalRight from '@/components/modal/modal-right/modal-right';
@@ -14,6 +14,7 @@ import { pda as pdaLocale } from '@/locale/en/pda';
 import {
   Create_ProofMutationVariables,
   PdaQuery,
+  PdaStatus,
 } from '@/services/protocol/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToggle } from '@react-hookz/web/cjs/useToggle';
@@ -39,7 +40,7 @@ export default function ShareCopy({ pda }: Props) {
   const router = useRouter();
   const [openShareCopy, setOpenShareCopy] = useToggle(false);
   const [pdaIssued, setPdaIssued] = useState<string>();
-  const { privateApi } = useGtwSession();
+  const { privateApi, session } = useGtwSession();
   const queryClient = useQueryClient();
 
   const methods = useForm({
@@ -97,56 +98,65 @@ export default function ShareCopy({ pda }: Props) {
     }
   };
 
+  const isOwner = useMemo(
+    () => session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId,
+    [pda, session]
+  );
+
   return (
     <>
-      <Button
-        variant="contained"
-        size="large"
-        fullWidth
-        sx={{
-          mb: 2,
-        }}
-        onClick={() => {
-          router.push('#share-copy');
-          setOpenShareCopy(true);
-        }}
-      >
-        {common.actions.share_a_copy}
-      </Button>
-      <ModalRight open={openShareCopy} onClose={toggleModal}>
-        <ModalTitle onClose={toggleModal} />
-        {pdaIssued ? (
-          <ShareCopyFormSuccessfully id={pdaIssued} />
-        ) : (
-          <FormProvider {...methods}>
-            <Stack
-              component="form"
-              id="share-copy-form"
-              onSubmit={methods.handleSubmit(handleMutation)}
-            >
-              <Typography fontSize={34}>
-                {pdaLocale.share.share_a_copy_with}
-              </Typography>
-              <Typography sx={{ mb: 6 }}>
-                {pdaLocale.share.share_a_copy_description}
-              </Typography>
-              <ShareCopyFormField />
-              <LoadingButton
-                variant="contained"
-                type="submit"
-                sx={{
-                  mt: 3,
-                }}
-                id="share-copy-button"
-                disabled={!methods.formState.isValid}
-                isLoading={createProof?.isLoading}
-              >
-                {common.actions.share_now}
-              </LoadingButton>
-            </Stack>
-          </FormProvider>
-        )}
-      </ModalRight>
+      {isOwner && pda?.status === PdaStatus.Valid && (
+        <>
+          <Button
+            variant="contained"
+            size="large"
+            fullWidth
+            sx={{
+              mb: 2,
+            }}
+            onClick={() => {
+              router.push('#share-copy');
+              setOpenShareCopy(true);
+            }}
+          >
+            {common.actions.share_a_copy}
+          </Button>
+          <ModalRight open={openShareCopy} onClose={toggleModal}>
+            <ModalTitle onClose={toggleModal} />
+            {pdaIssued ? (
+              <ShareCopyFormSuccessfully id={pdaIssued} />
+            ) : (
+              <FormProvider {...methods}>
+                <Stack
+                  component="form"
+                  id="share-copy-form"
+                  onSubmit={methods.handleSubmit(handleMutation)}
+                >
+                  <Typography fontSize={34}>
+                    {pdaLocale.share.share_a_copy_with}
+                  </Typography>
+                  <Typography sx={{ mb: 6 }}>
+                    {pdaLocale.share.share_a_copy_description}
+                  </Typography>
+                  <ShareCopyFormField />
+                  <LoadingButton
+                    variant="contained"
+                    type="submit"
+                    sx={{
+                      mt: 3,
+                    }}
+                    id="share-copy-button"
+                    disabled={!methods.formState.isValid}
+                    isLoading={createProof?.isLoading}
+                  >
+                    {common.actions.share_now}
+                  </LoadingButton>
+                </Stack>
+              </FormProvider>
+            )}
+          </ModalRight>
+        </>
+      )}
     </>
   );
 }
