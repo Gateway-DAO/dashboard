@@ -11,8 +11,9 @@ import { CardSummary } from './card-summary';
 import { TitleSubtitleField } from './title-field';
 
 type Props = {
+  title: string;
   onClickEdit: () => void;
-  onSubmitConfirmCode: (data: TokenConfirmationSchema) => Promise<void>;
+  onSubmitConfirmCode: (code: string) => void;
   isLoadingConfirmCode: boolean;
   onResendEmail: () => void;
   isLoadingOnResend: boolean;
@@ -21,6 +22,7 @@ type Props = {
 };
 
 export function CodeField({
+  title,
   onClickEdit,
   onSubmitConfirmCode,
   isLoadingConfirmCode,
@@ -35,57 +37,63 @@ export function CodeField({
     handleSubmit,
   } = useForm<TokenConfirmationSchema>();
 
+  const onSubmit = (data: TokenConfirmationSchema) => onSubmitConfirmCode(data.code);
+
   return (
-    <Stack
-      component="form"
-      direction="column"
-      gap={2}
-      onSubmit={handleSubmit(onSubmitConfirmCode)}
-    >
+    <>
       <CardSummary
-        title={auth.card_summary_title}
+        title={auth.card_summary.verify_email}
         onClickEdit={onClickEdit}
         email={email}
-        sxProps={{ top: { xs: -30, md: -40, lg: -50 } }}
+        sx={{ mb: 6 }}
       />
-      <Typography component="h1" variant="h4" sx={{ mb: 3 }}>
-        {auth.steps.verify_token.title}
-      </Typography>
-      <TitleSubtitleField
-        title={auth.steps.verify_token.description}
-        subtitle={auth.steps.verify_token.caption}
-      />
-      <TextField
-        required
-        label={auth.steps.verify_token.label}
-        id="code"
-        type="text"
-        inputMode="numeric"
-        {...register('code')}
-        error={!!errors?.code}
-        helperText={errors?.code?.message as string}
-      />
-      <Stack direction="row" gap={1} sx={{ mt: 2 }}>
-        <LoadingButton
-          variant="contained"
-          type="submit"
-          sx={{ height: 48 }}
-          isLoading={isLoadingConfirmCode}
-        >
-          {auth.steps.verify_token.action}
-        </LoadingButton>
-        <LoadingButton
-          variant="outlined"
-          type="button"
-          sx={{ height: 48 }}
-          isLoading={isLoadingOnResend}
-          onClick={onResendEmail}
-          disabled={countdown?.counting}
-        >
-          {auth.steps.verify_token.send_code_again}
-          {countdown?.counting ? ` (${countdown.time})` : ' '}
-        </LoadingButton>
+      <Stack
+        component="form"
+        direction="column"
+        gap={2}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+
+        <Typography component="h1" variant="h4" sx={{ mb: 3 }}>
+          {title}
+        </Typography>
+        <TitleSubtitleField
+          title={auth.steps.verify_token.description}
+          subtitle={auth.steps.verify_token.caption}
+        />
+        <TextField
+          required
+          label={auth.steps.verify_token.label}
+          id="code"
+          type="text"
+          inputMode="numeric"
+          {...register('code')}
+          error={!!errors?.code}
+          helperText={errors?.code?.message as string}
+        />
+        <Stack direction="row" gap={1} sx={{ mt: 2 }}>
+          <LoadingButton
+            variant="contained"
+            type="submit"
+            sx={{ height: 48 }}
+            isLoading={isLoadingConfirmCode}
+          >
+            {auth.steps.verify_token.action}
+          </LoadingButton>
+          <LoadingButton
+            variant="outlined"
+            type="button"
+            sx={{ height: 48 }}
+            isLoading={isLoadingOnResend}
+            onClick={onResendEmail}
+            disabled={countdown?.counting}
+          >
+            {auth.steps.verify_token.send_code_again}
+            {countdown?.counting ? ` (${countdown.time})` : ' '}
+          </LoadingButton>
+        </Stack>
       </Stack>
-    </Stack>
+    </>
+
   );
 }

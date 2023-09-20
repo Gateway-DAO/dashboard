@@ -8,14 +8,8 @@ import { Box, Stack, Typography, alpha } from '@mui/material';
 
 import Background from './background';
 import CloseButton from './close-button';
-import { Step } from './types';
 
-type Props = {
-  step: Step
-}
-
-export default function AuthenticationLayout({ children, step }: PropsWithChildren<Props>) {
-
+export default function AuthenticationLayout({ children }: PropsWithChildren) {
   return (
     <Stack
       sx={{
@@ -23,7 +17,6 @@ export default function AuthenticationLayout({ children, step }: PropsWithChildr
       }}
       direction="row"
     >
-
       <Box sx={{
         pt: 6,
         px: { xs: 2, lg: 6 },
@@ -45,7 +38,7 @@ export default function AuthenticationLayout({ children, step }: PropsWithChildr
         <Stack direction="row" alignItems="center" justifyContent="space-between" gap={2} sx={{
           mb: {
             xs: 8,
-            lg: 2
+            lg: 6
           }
         }}>
           <Stack alignItems="center" direction="row" justifySelf="flex-start">
@@ -60,18 +53,12 @@ export default function AuthenticationLayout({ children, step }: PropsWithChildr
                 xs: "flex",
                 lg: "none"
               },
-            }} step={step} />
+            }} />
         </Stack>
         <Box
           sx={{
             width: '100%',
             height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: {
-              xs: 'flex-start',
-              lg: 'center',
-            },
           }}
         >
           {children}
@@ -93,7 +80,6 @@ export default function AuthenticationLayout({ children, step }: PropsWithChildr
         position: "relative",
       }}>
         <CloseButton
-          step={step}
           sx={{
             position: 'absolute',
             top: { xs: 10, lg: 48 },
