@@ -24,7 +24,9 @@ export default function ProofCardTitle({ proof }: Props) {
       sx={{
         borderRadius: 1,
         mb: 3,
-        p: 2,
+        px: 2,
+        pt: 2,
+        pb: 3,
         backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.4),
         position: 'relative',
       }}
@@ -79,9 +81,9 @@ export default function ProofCardTitle({ proof }: Props) {
           />
         )}
       </Stack>
-      <Stack sx={{ position: 'absolute', top: 12, right: 12 }}>
+      <Stack sx={{ position: 'absolute', top: 10, right: 12 }}>
         {/* <ExternalLink text={`ID ${limitCharsCentered(proof?.id, 8)}`} href="#" /> */}
-        <CopyTextButton text={proof?.id as string} limit={12} size={12} />
+        <CopyTextButton text={proof?.id as string} limit={12} size={14} />
       </Stack>
     </Stack>
   );
