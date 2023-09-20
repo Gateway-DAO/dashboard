@@ -1,6 +1,9 @@
 'use client';
+import { useRouter } from 'next-nprogress-bar';
+
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { queries } from '@/constants/queries';
+import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { pda } from '@/locale/en/pda';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
@@ -17,6 +20,7 @@ type Props = {
 
 export default function SharedWithCard({ pdaId }: Props) {
   const { privateApi } = useGtwSession();
+  const router = useRouter();
   const { data, isFetching, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [queries.proofs_by_pdas_id, [pdaId]],
@@ -68,6 +72,17 @@ export default function SharedWithCard({ pdaId }: Props) {
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
+                    title={`Proof ID ${proof.id}`}
+                    onClick={() =>
+                      router.push(routes.dashboardUserProof(proof.id))
+                    }
+                    sx={{
+                      cursor: 'pointer',
+                      transition: 'opacity ease .3s',
+                      '&:hover': {
+                        opacity: 0.8,
+                      },
+                    }}
                   >
                     <Stack
                       sx={{
