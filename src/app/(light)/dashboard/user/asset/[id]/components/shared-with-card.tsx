@@ -79,7 +79,13 @@ export default function SharedWithCard({ pdaId }: Props) {
                     >
                       <GTWAvatar name={proof.verifier?.profilePicture ?? ''} />
                       <Typography variant="subtitle1">
-                        {proof.verifier?.gatewayId}
+                        {limitCharsCentered(
+                          proof.verifier?.displayName ??
+                            proof.verifier?.gatewayId ??
+                            proof.verifier?.id ??
+                            '',
+                          20
+                        )}
                       </Typography>
                     </Stack>
                     <Typography variant="body2">
