@@ -40,6 +40,7 @@ export default function Stats() {
         gsap.set(letter, {
           width: letterBounds.width,
           height: letterBounds.height,
+          willChange: 'transform',
         });
 
         if (isNaN(number)) return;
