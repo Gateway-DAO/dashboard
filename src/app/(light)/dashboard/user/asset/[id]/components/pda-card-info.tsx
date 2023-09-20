@@ -75,7 +75,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
           </CardCell>
         )}
         <CardCell label={datamodel.data_model_id}>
-          {limitCharsCentered(pda?.id ?? '', 6)}
+          {limitCharsCentered(pda?.dataAsset?.dataModel?.id ?? '', 6)}
           {/* <c
             text={}
             textSxProps={{ fontSize: 16, fontWeight: 400 }}
