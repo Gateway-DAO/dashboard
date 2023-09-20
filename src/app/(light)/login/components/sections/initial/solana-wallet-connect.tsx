@@ -9,8 +9,9 @@ import { useWalletConnectButton } from '@solana/wallet-adapter-base-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
-import useLoginWallet from '../libs/use-login-wallet';
-import WalletModalButton from './wallet-modal-button';
+import useLoginWallet from '../../../libs/use-login-wallet';
+import WalletModalButton from '../../wallet-modal-button';
+
 
 type Props = {
   onClose: () => void;
