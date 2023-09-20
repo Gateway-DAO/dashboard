@@ -1,5 +1,6 @@
 'use client';
 import GatewayIcon from '@/components/icons/gateway';
+import { SharingCost } from '@/components/sharing-cost/sharing-cost';
 import { pda } from '@/locale/en/pda';
 import { IdentifierType } from '@/services/protocol/types';
 import { useFormContext } from 'react-hook-form';
@@ -20,7 +21,6 @@ import {
 } from '@mui/material';
 
 import { ShareCopySchema, ShareCopySchemaError } from './schema';
-import { SharingCost } from './sharing-cost';
 
 export default function ShareCopyFormField() {
   const {
