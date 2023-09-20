@@ -1,6 +1,6 @@
 .element {
   background-color: #771ac9;
-  height: var(--vh);
+  height: calc(var(--vh) - 80px);
   position: relative;
   width: 100%;
 
@@ -19,7 +19,6 @@
   height: 100%;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 60px;
 
   @media (max-width: 599px) {
     justify-content: flex-end;

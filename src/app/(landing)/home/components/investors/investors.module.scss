@@ -61,8 +61,14 @@
 .logo_container,
 .name_container {
   display: flex;
+  opacity: 0.4;
   margin-bottom: 35px;
+  transition: opacity 0.8s ease;
   width: 25%;
+
+  &:hover {
+    opacity: 1;
+  }
 
   @media (max-width: 599px) {
     height: 62px;
@@ -108,7 +114,7 @@
 }
 
 .name {
-  color: #a6a6a6;
+  color: #fff;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

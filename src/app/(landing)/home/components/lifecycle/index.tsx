@@ -57,6 +57,7 @@ export default function Lifecycle() {
       autoplay: false,
       animationData,
     });
+    lottieRef.current.setSpeed(1.5);
   }, []);
 
   const handleInView = (inView: boolean) => {
