@@ -13,7 +13,10 @@ export const common = {
     other_accounts: 'Other accounts',
     email: 'Email',
     avatar: 'Avatar',
+    username: 'Username',
+    name: 'Name',
     success_copy_message: 'Copied to clipboard',
+    optional: 'Optional',
   },
   chain: {
     EVM: 'Ethereum',
@@ -47,6 +50,7 @@ export const common = {
     revoke: 'Revoke',
     suspend: 'Suspend',
     make_valid: 'Make valid',
+    create_id: 'Create ID',
   },
   socials: {
     twitter: 'Twitter',

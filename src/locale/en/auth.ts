@@ -36,13 +36,16 @@ export const auth = {
       send_code_again: 'Send code again in',
     },
     choose_gateway_id: {
-      title: 'You’re a step closer to entering the Gateway',
-      title_send_email: 'Create your personal Gateway ID',
-      caption_send_email:
-        'Through the ID you are recognized and found within the Gateway',
+      title: 'Create your personal Gateway ID',
+      subtitle:
+        'Gateway ID constitutes a user or an organization on the Gateway Protocol. Additionally, it serves as a powerful solution that serves as a way of aggregating your other identities into a single identifier. ',
+      create_username: 'Create your username',
+      create_username_rules:
+        'Use only lowercase letters, numbers and the “._-” symbols.',
+      create_display_name: 'How do you want to be called?',
+      create_display_name_rules:
+        'Fill up your first and last name or choose any name you would like to be called',
       btn: 'create id',
-      label: 'Gateway ID',
-      helper_text: 'Only lowercase letters, numbers and ._-',
     },
     completed: {
       connect_more: {

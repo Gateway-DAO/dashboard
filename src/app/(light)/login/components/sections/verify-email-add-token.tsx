@@ -1,5 +1,6 @@
 'use client';
 import { useCountdown } from '@/hooks/use-countdown';
+import { auth } from '@/locale/en/auth';
 import { errorMessages } from '@/locale/en/errors';
 import { useToggle } from '@react-hookz/web';
 import { useSnackbar } from 'notistack';
@@ -23,9 +24,9 @@ export function VerifyEmailAddToken() {
     }
   };
 
-  const onSubmitConfirmToken = async (data: TokenConfirmationSchema) => {
+  const onSubmitConfirmToken = async (code: string) => {
     try {
-      console.log('onSubmitConfirmToken', data);
+      console.log('onSubmitConfirmToken', code);
     } catch (error: any) {
       (error.response as any)?.errors?.forEach(({ message }: any) => {
         if (message === 'MAXIMUM_ATTEMPTS_REACHED') {
@@ -52,6 +53,7 @@ export function VerifyEmailAddToken() {
       isLoadingOnResend={false}
       countdown={countdown}
       email={'test@test.com'}
+      title={auth.steps.verify_token.title}
     />
   );
 }
