@@ -43,6 +43,8 @@ export default function CardUsers({ pda }: Props) {
 
   const recipientPicture = pda?.dataAsset?.owner?.profilePicture ?? '';
 
+  console.log('teste', pda?.dataAsset);
+
   return (
     <Stack
       justifyContent="space-between"
@@ -68,6 +70,7 @@ export default function CardUsers({ pda }: Props) {
             username={issuerGatewayId}
             issuance_date={pda?.dataAsset?.issuer?.createdAt}
             onClose={() => setTooltipIssuer(false)}
+            isOrganization={!!pda?.dataAsset?.issuer?.gatewayId}
           />
         )}
       </Stack>
