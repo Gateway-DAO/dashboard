@@ -80,6 +80,16 @@
   }
 }
 
+.title_line {
+  display: block;
+  overflow: hidden;
+
+  span {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+}
+
 .text {
   color: #e6d5fa;
   text-align: center;
