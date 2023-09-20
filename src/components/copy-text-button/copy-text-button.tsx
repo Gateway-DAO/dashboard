@@ -10,12 +10,14 @@ type Props = {
   text: string;
   sucessMessage?: string;
   limit?: number;
+  size?: number;
 };
 
 export default function CopyTextButton({
   text,
   sucessMessage = 'Copied to clipboard', // TODO: Add locale
   limit = 6,
+  size = 16,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
@@ -38,12 +40,13 @@ export default function CopyTextButton({
       title={text}
       onClick={() => copy(text)}
     >
-      <Typography sx={{ whiteSpace: 'nowrap', color: 'text.primary' }}>
+      <Typography
+        fontSize={size}
+        sx={{ whiteSpace: 'nowrap', color: 'text.primary' }}
+      >
         {limitCharsCentered(text, limit)}
       </Typography>
-      <ContentCopyIcon
-        sx={{ fontSize: 'body1.fontSize', color: 'text.disabled' }}
-      />
+      <ContentCopyIcon sx={{ fontSize: size, color: 'text.disabled' }} />
     </Stack>
   );
 }
