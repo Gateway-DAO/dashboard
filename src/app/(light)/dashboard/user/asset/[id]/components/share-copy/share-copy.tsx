@@ -13,6 +13,7 @@ import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import {
   Create_ProofMutationVariables,
+  IdentifierType,
   PdaQuery,
   PdaStatus,
 } from '@/services/protocol/types';
@@ -44,8 +45,12 @@ export default function ShareCopy({ pda }: Props) {
   const queryClient = useQueryClient();
 
   const methods = useForm({
-    resolver: zodResolver(shareCopySchema as any),
+    resolver: zodResolver(shareCopySchema as any), // TODO: remove type any
     mode: 'all',
+    defaultValues: {
+      identifier_type: IdentifierType.GatewayId,
+      address: '',
+    },
   });
 
   const toggleModal = () => {
