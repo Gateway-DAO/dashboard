@@ -1,25 +1,49 @@
 'use client';
 
+import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { mutations } from '@/constants/queries';
 import routes from '@/constants/routes';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
+import { errorMessages } from '@/locale/en/errors';
 import { request } from '@/locale/en/request';
-import { DataResourceStatus } from '@/services/protocol/types';
+import {
+  Create_Proof_From_RequestMutationVariables,
+  DataResourceStatus,
+} from '@/services/protocol/types';
+import { useMutation } from '@tanstack/react-query';
+import { useSnackbar } from 'notistack';
 
 import { Box, Button, Divider, Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
   requester: string;
   status: DataResourceStatus;
+  requestId: string;
   proofId?: string;
 };
 
-export default function RequestCard({ requester, status, proofId }: Props) {
-  const acceptDataRequest = () => {
-    console.log('data request');
-  };
+export default function RequestCard({
+  requester,
+  status,
+  proofId,
+  requestId,
+}: Props) {
+  const { enqueueSnackbar } = useSnackbar();
+  const { privateApi } = useGtwSession();
+  const router = useRouter();
+
+  const acceptDataRequest = useMutation({
+    mutationKey: [mutations.create_proof_from_request],
+    mutationFn: (data: Create_Proof_From_RequestMutationVariables) => {
+      return privateApi?.create_proof_from_request(data);
+    },
+    onSuccess: () => router.refresh(),
+    onError: () => enqueueSnackbar(errorMessages.ERROR_TRYING_TO_ISSUE_A_PROOF),
+  });
 
   return (
     <Box
@@ -66,7 +90,9 @@ export default function RequestCard({ requester, status, proofId }: Props) {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={acceptDataRequest}
+                onClick={() =>
+                  acceptDataRequest.mutate({ requestId: requestId })
+                }
               >
                 {common.actions.accept}
               </Button>
