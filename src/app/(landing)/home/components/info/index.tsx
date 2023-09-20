@@ -81,9 +81,9 @@ export default function Info() {
         } else {
           gsap.to(letters, {
             yPercent: 0,
-            duration: 1.5,
-            ease: 'power3.inOut',
-            delay: index * 0.1,
+            duration: 1.2,
+            ease: 'power3.out',
+            delay: (index + 0.5) * 0.15,
           });
         }
       });
