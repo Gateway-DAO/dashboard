@@ -26,69 +26,63 @@ export default function ProofCardTitle({ proof }: Props) {
         mb: 3,
         p: 2,
         backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.4),
-        flexDirection: { xs: 'column', md: 'row' },
+        position: 'relative',
       }}
-      alignItems="flex-start"
-      justifyContent="space-between"
-      gap={2}
+      gap={2.5}
     >
-      <Stack gap={2.5}>
-        <Typography variant="caption" color="text.secondary">
-          {proofLocale.share.data_shared_with}
-        </Typography>
-        <Stack sx={{ position: 'relative' }}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            gap={1.5}
+      <Typography variant="caption" color="text.secondary">
+        {proofLocale.share.data_shared_with}
+      </Typography>
+      <Stack sx={{ position: 'relative' }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          gap={1.5}
+          sx={{
+            cursor: 'pointer',
+            '&:hover': { opacity: 0.7, transition: 'opacity .3s ease' },
+          }}
+          id="tooltip-link-proof"
+          onClick={() => setTooltip(true)}
+        >
+          <GTWAvatar
+            src={proof?.verifier?.profilePicture ?? ''}
+            size={56}
+            name={proof?.verifier?.gatewayId as string}
+          />
+          <Typography
+            variant="h3"
+            id="proof-title"
             sx={{
-              cursor: 'pointer',
-              '&:hover': { opacity: 0.7, transition: 'opacity .3s ease' },
+              whiteSpace: 'pre-wrap',
+              wordWrap: 'break-word',
+              wordBreak: 'break-all',
             }}
-            id="tooltip-link-proof"
-            onClick={() => setTooltip(true)}
           >
-            <GTWAvatar
-              src={''}
-              size={56}
-              name={proof?.verifier?.gatewayId as string}
-            />
-            <Typography variant="h3" id="proof-title">
-              {proof?.verifier?.displayName ??
-                proof?.verifier?.gatewayId ??
-                limitCharsCentered(proof?.verifier?.id as string, 12)}
-            </Typography>
-          </Stack>
-          {tooltip && (
-            <TooltipUser
-              name={
-                proof?.verifier?.displayName ??
-                proof?.verifier?.gatewayId ??
-                (proof?.verifier?.id as string)
-              }
-              username={
-                proof?.verifier?.gatewayId ?? (proof?.verifier?.id as string)
-              }
-              issuance_date={dayjs(proof?.createdAt).format(
-                'MM/DD/YYYY, h:mm A'
-              )}
-              onClose={() => setTooltip(false)}
-            />
-          )}
+            {proof?.verifier?.displayName ??
+              proof?.verifier?.gatewayId ??
+              limitCharsCentered(proof?.verifier?.id as string, 12)}
+          </Typography>
         </Stack>
+        {tooltip && (
+          <TooltipUser
+            name={
+              proof?.verifier?.displayName ??
+              proof?.verifier?.gatewayId ??
+              (proof?.verifier?.id as string)
+            }
+            username={
+              proof?.verifier?.gatewayId ?? (proof?.verifier?.id as string)
+            }
+            issuance_date={dayjs(proof?.createdAt).format('MM/DD/YYYY, h:mm A')}
+            onClose={() => setTooltip(false)}
+          />
+        )}
       </Stack>
-      {/* <Typography
-        variant="caption"
-        sx={{
-          color: 'text.secondary',
-          fontWeight: 600,
-          textDecoration: 'none',
-        }}
-      >
-        {`ID ${limitCharsCentered(proof?.id as string, 8)}`}
-      </Typography> */}
-      <CopyTextButton text={proof?.id as string} limit={12} size={12} />
-      {/* <ExternalLink text={`ID ${limitCharsCentered(proof?.id, 8)}`} href="#" /> */}
+      <Stack sx={{ position: 'absolute', top: 12, right: 12 }}>
+        {/* <ExternalLink text={`ID ${limitCharsCentered(proof?.id, 8)}`} href="#" /> */}
+        <CopyTextButton text={proof?.id as string} limit={12} size={12} />
+      </Stack>
     </Stack>
   );
 }
