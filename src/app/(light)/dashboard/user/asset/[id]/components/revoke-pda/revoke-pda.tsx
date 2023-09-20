@@ -43,39 +43,43 @@ export function RevokePDA({ pda }: Props) {
   return (
     <>
       {loadingAfter && <Loading fullScreen />}
-      <Button
-        variant="outlined"
-        startIcon={<CancelIcon />}
-        size="large"
-        color="error"
-        fullWidth
-        sx={{
-          mb: 2,
-        }}
-        onClick={() => setDialogConfirmation(true)}
-      >
-        {common.actions.revoke}
-      </Button>
-      <ConfirmDialog
-        title={pdaLocale.revoke.dialog_title}
-        open={dialogConfirmation}
-        positiveAnswer={common.actions.revoke}
-        negativeAnswer={common.actions.cancel}
-        setOpen={setDialogConfirmation}
-        onConfirm={() =>
-          revokePda
-            .mutateAsync({
-              id: pda?.id as string,
-              status: PdaStatus.Revoked,
-            })
-            .finally(() => {
-              setLoadingAfter(true);
-              setTimeout(() => setLoadingAfter(false), 2000);
-            })
-        }
-      >
-        {pdaLocale.revoke.dialog_text}
-      </ConfirmDialog>
+      {pda?.status !== PdaStatus.Revoked && (
+        <>
+          <Button
+            variant="outlined"
+            startIcon={<CancelIcon />}
+            size="large"
+            color="error"
+            fullWidth
+            sx={{
+              mb: 2,
+            }}
+            onClick={() => setDialogConfirmation(true)}
+          >
+            {common.actions.revoke}
+          </Button>
+          <ConfirmDialog
+            title={pdaLocale.revoke.dialog_title}
+            open={dialogConfirmation}
+            positiveAnswer={common.actions.revoke}
+            negativeAnswer={common.actions.cancel}
+            setOpen={setDialogConfirmation}
+            onConfirm={() =>
+              revokePda
+                .mutateAsync({
+                  id: pda?.id as string,
+                  status: PdaStatus.Revoked,
+                })
+                .finally(() => {
+                  setLoadingAfter(true);
+                  setTimeout(() => setLoadingAfter(false), 2000);
+                })
+            }
+          >
+            {pdaLocale.revoke.dialog_text}
+          </ConfirmDialog>
+        </>
+      )}
     </>
   );
 }
