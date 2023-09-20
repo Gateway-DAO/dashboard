@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import Loading from '@/components/loadings/loading/loading';
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
 import { mutations } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
@@ -28,6 +29,7 @@ export function RevokePDA({ pda }: Props) {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
+  const [loadingAfter, setLoadingAfter] = useState(false);
 
   const revokePda = useMutation({
     mutationKey: [mutations.change_pda_status],
@@ -40,6 +42,7 @@ export function RevokePDA({ pda }: Props) {
 
   return (
     <>
+      {loadingAfter && <Loading fullScreen />}
       <Button
         variant="outlined"
         startIcon={<CancelIcon />}
@@ -60,10 +63,15 @@ export function RevokePDA({ pda }: Props) {
         negativeAnswer={common.actions.cancel}
         setOpen={setDialogConfirmation}
         onConfirm={() =>
-          revokePda.mutateAsync({
-            id: pda?.id as string,
-            status: PdaStatus.Revoked,
-          })
+          revokePda
+            .mutateAsync({
+              id: pda?.id as string,
+              status: PdaStatus.Revoked,
+            })
+            .finally(() => {
+              setLoadingAfter(true);
+              setTimeout(() => setLoadingAfter(false), 2000);
+            })
         }
       >
         {pdaLocale.revoke.dialog_text}

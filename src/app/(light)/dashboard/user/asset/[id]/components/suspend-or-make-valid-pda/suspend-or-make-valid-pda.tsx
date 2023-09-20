@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import Loading from '@/components/loadings/loading/loading';
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
 import { mutations } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
@@ -29,6 +30,7 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
+  const [loadingAfter, setLoadingAfter] = useState(false);
 
   const mutationReq = {
     mutationKey: [mutations.change_pda_status],
@@ -47,6 +49,7 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
 
   return (
     <>
+      {loadingAfter && <Loading fullScreen />}
       {isValid && (
         <LoadingButton
           variant="outlined"
@@ -96,16 +99,26 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
         setOpen={setDialogConfirmation}
         onConfirm={() => {
           if (pda?.status === PdaStatus.Valid) {
-            suspendPda.mutateAsync({
-              id: pda?.id as string,
-              status: PdaStatus.Suspended,
-            });
+            suspendPda
+              .mutateAsync({
+                id: pda?.id as string,
+                status: PdaStatus.Suspended,
+              })
+              .finally(() => {
+                setLoadingAfter(true);
+                setTimeout(() => setLoadingAfter(false), 2000);
+              });
           }
           if (pda?.status === PdaStatus.Suspended) {
-            makeValidPda.mutateAsync({
-              id: pda?.id as string,
-              status: PdaStatus.Valid,
-            });
+            makeValidPda
+              .mutateAsync({
+                id: pda?.id as string,
+                status: PdaStatus.Valid,
+              })
+              .finally(() => {
+                setLoadingAfter(true);
+                setTimeout(() => setLoadingAfter(false), 2000);
+              });
           }
         }}
       >
