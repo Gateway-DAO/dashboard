@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import Loading from '@/components/loadings/loading/loading';
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
@@ -25,7 +25,7 @@ type Props = {
 };
 
 export function RevokePDA({ pda }: Props) {
-  const { privateApi } = useGtwSession();
+  const { privateApi, session } = useGtwSession();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
@@ -40,11 +40,22 @@ export function RevokePDA({ pda }: Props) {
     onError: () => enqueueSnackbar(errorMessages.REVOKE_ERROR),
   });
 
+  const isIssuer = useMemo(
+    () =>
+      session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId ||
+      session?.user?.accesses?.find(
+        (access) =>
+          pda?.dataAsset?.organization?.gatewayId ===
+          access?.organization?.gatewayId
+      ),
+    [pda, session]
+  );
+
   return (
     <>
-      {loadingAfter && <Loading fullScreen />}
-      {pda?.status !== PdaStatus.Revoked && (
+      {isIssuer && pda?.status !== PdaStatus.Revoked && (
         <>
+          {loadingAfter && <Loading fullScreen />}
           <Button
             variant="outlined"
             startIcon={<CancelIcon />}
