@@ -35,7 +35,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
   return (
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
-        <Stack width={150} direction="row" alignItems="center">
+        <Stack direction="row" alignItems="center">
           <Typography
             variant="body2"
             sx={{
