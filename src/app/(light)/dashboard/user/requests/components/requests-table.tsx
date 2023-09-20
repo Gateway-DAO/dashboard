@@ -13,10 +13,6 @@ import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { DataRequest } from '@/services/protocol/types';
-import {
-  CONTAINER_PX,
-  NEGATIVE_CONTAINER_PX,
-} from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';

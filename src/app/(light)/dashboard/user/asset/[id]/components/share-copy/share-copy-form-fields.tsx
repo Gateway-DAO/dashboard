@@ -76,6 +76,7 @@ export default function ShareCopyFormField() {
             error={!!(errors.identifier_type as ShareCopySchemaError)}
             id="id-account-type"
             sx={{ mb: { xs: 1, md: 0 } }}
+            inputProps={{ defaultValue: IdentifierType.GatewayId }}
             {...register(`identifier_type`, {
               onChange: () => {
                 setValue('address', '');

@@ -58,9 +58,15 @@ export default async function DashboardUserDataRequest({
       </Typography>
       <Stack direction="column" gap={2}>
         <RequestCard
-          requester={dataRequest.userVerifier!.gatewayId!}
+          requester={
+            dataRequest.userVerifier?.displayName ??
+            dataRequest.userVerifier!.gatewayId!
+          }
           status={dataRequest.status!}
+          requestId={dataRequest.id}
           proofId=""
+          // verifierGatewayId={dataRequest.userVerifier?.gatewayId}
+          // ver
         />
         <Paper
           component={Stack}
