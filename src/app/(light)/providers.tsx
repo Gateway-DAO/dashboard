@@ -21,7 +21,7 @@ export default function Providers({ children }: PropsWithChildren) {
             <ReactQueryDevtools initialIsOpen={false} />
             <ProgressBar
               height="4px"
-              color="#70ECFE"
+              color="#771AC9"
               options={{ showSpinner: false }}
               shallowRouting
             />
