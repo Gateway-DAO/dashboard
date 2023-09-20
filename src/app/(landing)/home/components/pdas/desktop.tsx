@@ -94,7 +94,7 @@ export default function Pdas() {
     textPdasRefs.current.forEach((element, index) => {
       if (!element) return;
 
-      splitSpans(element, () => {
+      splitSpans(element, '', () => {
         const parent = element.parentNode as HTMLParagraphElement;
         const { height } = parent.getBoundingClientRect();
         gsap.set(parent, { height });

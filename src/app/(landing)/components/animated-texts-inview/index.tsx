@@ -1,25 +1,32 @@
-import { useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 
-import Wrapper from '@/app/(landing)/components/wrapper';
-import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
-import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
+import gsap from 'gsap';
+import { InView } from 'react-intersection-observer';
+
+import useMobileDetect from '../../hooks/use-mobile.detect';
 import {
   calculateLines,
   findClosestNumbersWithIndices,
   spliWordsBySpan,
-} from '@/app/(landing)/utils/dom';
-import gsap from 'gsap';
-import { InView } from 'react-intersection-observer';
+} from '../../utils/dom';
 
-import styles from './info.module.scss';
+type Props = {
+  children?: ReactNode;
+  textClassName?: string;
+  lineClassName?: string;
+};
 
-export default function Info() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const textRef = useRef<HTMLSpanElement>(null);
+export default function AnimatedTextsInview({
+  children,
+  textClassName,
+  lineClassName,
+}: Props) {
+  const ref = useRef<HTMLSpanElement>(null);
   const { isMobile } = useMobileDetect();
 
   const splitTextintoLines = (parent: HTMLElement) => {
     // Step 1: Calculate lines and split the text into spans
+
     const lines = calculateLines(parent);
     const spans = spliWordsBySpan(parent);
 
@@ -32,6 +39,10 @@ export default function Info() {
       parent.getBoundingClientRect().right,
       lines
     );
+
+    wordsCloseToBreakLine.forEach((word) => {
+      console.log(spans[word.index]);
+    });
 
     // Step 4: Group spans into words
     const words: HTMLSpanElement[][] = [];
@@ -48,24 +59,23 @@ export default function Info() {
     words.forEach((word) => {
       const wordContainer = document.createElement('span');
       wordContainer.setAttribute('data-line', '');
-      wordContainer.classList.add(styles.line);
+      wordContainer.classList.add(lineClassName || '');
       word.forEach((span) => {
         wordContainer.appendChild(document.createTextNode(' '));
         wordContainer.appendChild(span);
       });
-      textRef.current!.appendChild(wordContainer);
+      ref.current!.appendChild(wordContainer);
     });
   };
 
   useEffect(() => {
-    if (!textRef.current) return;
-    splitTextintoLines(textRef.current);
+    if (!ref.current) return;
+    console.log('a', children);
+    splitTextintoLines(ref.current);
   }, []);
 
-  useHeaderVariantDetection(sectionRef, 'dark');
-
   const handleInviewAnimation = (inView: boolean) => {
-    const lines = textRef.current!.querySelectorAll('[data-line]');
+    const lines = ref.current!.querySelectorAll('[data-line]');
     gsap.killTweensOf('[data-word]');
     if (inView) {
       lines.forEach((line, index) => {
@@ -101,15 +111,8 @@ export default function Info() {
   };
 
   return (
-    <section className={styles.element} ref={sectionRef}>
-      <Wrapper className={styles.wrapper}>
-        <InView as="p" className={styles.text} onChange={handleInviewAnimation}>
-          <span className={styles.text} ref={textRef}>
-            We’re breaking the barriers of traditional data centralization,
-            immobility, and accessibility
-          </span>
-        </InView>
-      </Wrapper>
-    </section>
+    <InView as="p" className={textClassName} onChange={handleInviewAnimation}>
+      <span ref={ref}>{children}</span>
+    </InView>
   );
 }

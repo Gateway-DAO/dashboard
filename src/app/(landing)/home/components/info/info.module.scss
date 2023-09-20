@@ -12,6 +12,7 @@
 
 .text {
   color: #771ac9;
+  display: block;
   font-size: 49px;
   font-style: normal;
   font-weight: 400;
@@ -47,5 +48,14 @@
     100% {
       opacity: 0;
     }
+  }
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+
+  span {
+    display: inline-block;
   }
 }

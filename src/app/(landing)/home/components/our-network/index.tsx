@@ -23,7 +23,12 @@ export default function OurNetwork() {
           <div className={styles.column}>
             <h3 className={styles.column_label}>For Issuers</h3>
 
-            <ForIssues className={styles.column_vector} />
+            <ForIssues
+              className={joinClasses(
+                styles.column_vector,
+                styles['column_vector--issuers']
+              )}
+            />
 
             <h2 className={styles.column_title}>
               Define, Issue and <br />
