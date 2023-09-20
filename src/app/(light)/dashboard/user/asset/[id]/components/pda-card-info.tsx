@@ -1,6 +1,7 @@
 'use client';
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
+import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import { datamodel } from '@/locale/en/datamodel';
@@ -74,9 +75,14 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
             </Typography>
           </CardCell>
         )}
-        <CardCell label={datamodel.data_model_id}>
-          {limitCharsCentered(pda?.dataAsset?.dataModel?.id ?? '', 6)}
-          {/* <c
+        <CardCell label={datamodel.data_model_id} margin={false}>
+          {
+            <CopyTextButton
+              text={pda?.dataAsset?.dataModel?.id as string}
+              limit={6}
+            />
+          }
+          {/* <ExternalLink
             text={}
             textSxProps={{ fontSize: 16, fontWeight: 400 }}
             iconSxProps={{ fontSize: 18, top: 4, color: 'text.primary' }}

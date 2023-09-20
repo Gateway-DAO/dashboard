@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 
+import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import Tags from '@/components/tags/tags';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
@@ -10,7 +11,6 @@ import {
   NEGATIVE_CONTAINER_PX,
   WIDTH_CENTERED,
 } from '@/theme/config/style-tokens';
-import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
 import { PartialDeep } from 'type-fest';
 
@@ -35,7 +35,20 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
   return (
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
-        <Typography
+        <Stack width={150} direction="row" alignItems="center">
+          <Typography
+            variant="body2"
+            sx={{
+              color: 'text.secondary',
+              fontWeight: 600,
+              textDecoration: 'none',
+            }}
+          >
+            ID
+          </Typography>
+          <CopyTextButton text={pda?.id as string} limit={8} size={14} />
+        </Stack>
+        {/* <Typography
           variant="caption"
           sx={{
             color: 'text.secondary',
@@ -44,7 +57,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           }}
         >
           {`ID ${limitCharsCentered(pda?.id ?? 'id', 8)}`}
-        </Typography>
+        </Typography> */}
         {/* <ExternalLink
           text={`ID ${limitCharsCentered(pda?.id, 8)}`}
           href="https://www.google.com"

@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 
+import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { TooltipUser } from '@/components/tooltip-user/tooltip-user';
 import { proof as proofLocale } from '@/locale/en/proof';
@@ -25,7 +26,7 @@ export default function ProofCardTitle({ proof }: Props) {
         mb: 3,
         p: 2,
         backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.4),
-        flexDirection: { xs: 'column', row: 'row' },
+        flexDirection: { xs: 'column', md: 'row' },
       }}
       alignItems="flex-start"
       justifyContent="space-between"
@@ -35,11 +36,7 @@ export default function ProofCardTitle({ proof }: Props) {
         <Typography variant="caption" color="text.secondary">
           {proofLocale.share.data_shared_with}
         </Typography>
-        <Stack
-          sx={{
-            position: 'relative',
-          }}
-        >
+        <Stack sx={{ position: 'relative' }}>
           <Stack
             direction="row"
             alignItems="center"
@@ -80,7 +77,7 @@ export default function ProofCardTitle({ proof }: Props) {
           )}
         </Stack>
       </Stack>
-      <Typography
+      {/* <Typography
         variant="caption"
         sx={{
           color: 'text.secondary',
@@ -89,7 +86,8 @@ export default function ProofCardTitle({ proof }: Props) {
         }}
       >
         {`ID ${limitCharsCentered(proof?.id as string, 8)}`}
-      </Typography>
+      </Typography> */}
+      <CopyTextButton text={proof?.id as string} limit={12} size={12} />
       {/* <ExternalLink text={`ID ${limitCharsCentered(proof?.id, 8)}`} href="#" /> */}
     </Stack>
   );
