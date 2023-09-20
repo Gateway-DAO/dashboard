@@ -56,8 +56,10 @@ query proofsByPDAIds($pdaIds: [String!]!) {
     id
 
     verifier {
+      id
       gatewayId
       profilePicture
+      displayName
     }
   }
 }
