@@ -10,6 +10,12 @@ mutation create_proof($claims: JSON, $verifier: IdentificationInput) {
     organization {
       gatewayId
     }
+    verifier {
+      id
+      gatewayId
+      profilePicture
+      displayName
+    }
   }
 }
 
@@ -24,6 +30,12 @@ mutation create_proof_from_request($requestId: String!) {
     }
     organization {
       gatewayId
+    }
+    verifier {
+      id
+      gatewayId
+      profilePicture
+      displayName
     }
   }
 }
