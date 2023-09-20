@@ -8,8 +8,9 @@ import routes from '@/constants/routes';
 import { Chain } from '@/services/protocol/types';
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
 
-import useLoginWallet from '../libs/use-login-wallet';
-import { CustomEvmButton } from './custom-evm-button';
+import useLoginWallet from '../../../libs/use-login-wallet';
+import { CustomEvmButton } from '../../custom-evm-button';
+
 
 type Props = {
   onClose: () => void;

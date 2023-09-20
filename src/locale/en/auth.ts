@@ -28,12 +28,12 @@ export const auth = {
         "You'll receive email updates for your account, including credentials and other relevant information",
     },
     verify_token: {
-      title: 'Verify your email to create your account',
+      title: 'Verify your email',
       description: 'Paste here the code sent to email address',
       caption: 'This code will expire in 30 minutes',
       label: 'Code',
       action: 'Verify',
-      send_code_again: 'Send code again',
+      send_code_again: 'Send code again in',
     },
     choose_gateway_id: {
       title: 'You’re a step closer to entering the Gateway',
@@ -78,5 +78,7 @@ export const auth = {
         'Connect your EVM and Solana wallets to claim credentials with on-chain and offline conditions.',
     },
   },
-  card_summary_title: 'Your account',
+  card_summary: {
+    verify_email: 'Your email',
+  },
 };
