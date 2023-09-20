@@ -90,6 +90,14 @@
       display: block;
     }
   }
+
+  &--issuers {
+    margin-left: -41px;
+
+    @media (max-width: 599px) {
+      display: block;
+    }
+  }
 }
 
 .column_title {

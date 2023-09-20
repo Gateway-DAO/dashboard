@@ -51,7 +51,7 @@
   height: 69px;
 
   @media (max-width: 599px) {
-    height: 2.6rem;
+    height: 2.45rem;
   }
 }
 
@@ -69,6 +69,7 @@
   }
   span {
     opacity: 0;
+    will-change: transform, opacity;
   }
 }
 

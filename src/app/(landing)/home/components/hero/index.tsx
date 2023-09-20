@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import Button from '@/app/(landing)/components/button';
 import Wrapper from '@/app/(landing)/components/wrapper';
@@ -19,46 +19,48 @@ export default function Hero() {
   useEffect(() => {
     if (!wordsRef.current.length) return;
 
-    let currentIndex = 0;
-
     const wordsSplitted = wordsRef.current.map((word) => splitSpans(word!));
 
     gsap.set(refCurrentWordElement.current, {
-      width: wordsRef.current[currentIndex]!.offsetWidth,
+      width: wordsRef.current[0]!.offsetWidth,
+      opacity: 1,
     });
 
-    const changeWord = () => {
-      gsap.to(wordsSplitted[currentIndex], {
+    const tl = gsap.timeline({ repeat: -1 });
+    tl.set(wordsSplitted[0], { y: 0 });
+
+    wordsSplitted.forEach((word, index) => {
+      tl.to(word, {
         autoAlpha: 0,
         duration: 0.6,
         y: -20,
         stagger: 0.05,
-      });
-
-      currentIndex = currentIndex === words.length - 1 ? 0 : currentIndex + 1;
-
-      gsap.to(refCurrentWordElement.current, {
-        width: wordsRef.current[currentIndex]!.offsetWidth,
-        duration: 0.3,
-        delay: 0.5,
-      });
-
-      gsap.fromTo(
-        wordsSplitted[currentIndex],
-        { y: 20 },
-        {
-          autoAlpha: 1,
-          duration: 0.6,
-          stagger: 0.05,
-          y: 0,
-          delay: 0.2,
-        }
-      );
-    };
-
-    const interval = setInterval(changeWord, 4000);
-
-    return () => clearInterval(interval);
+        delay: 2,
+      })
+        .set(word, { y: 0 })
+        .to(
+          refCurrentWordElement.current,
+          {
+            width:
+              wordsRef.current[
+                index + 1 === wordsSplitted.length ? 0 : index + 1
+              ]!.offsetWidth,
+            duration: 0.3,
+          },
+          '-=0.7'
+        )
+        .fromTo(
+          wordsSplitted[index + 1 === wordsSplitted.length ? 0 : index + 1],
+          { y: 20 },
+          {
+            autoAlpha: 1,
+            duration: 0.6,
+            stagger: 0.05,
+            y: 0,
+          },
+          '<'
+        );
+    });
   }, []);
 
   useHeaderVariantDetection(sectionRef, 'light');
@@ -72,7 +74,7 @@ export default function Hero() {
           <span
             className={styles.title_highlight}
             ref={refCurrentWordElement}
-            style={{ color: '#70ECFE' }}
+            style={{ color: '#70ECFE', opacity: 0 }}
           >
             {words.map((word, index) => (
               <span
