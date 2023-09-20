@@ -2,7 +2,9 @@
 
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
+import { useState } from 'react';
 
+import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import Loading from '@/components/loadings/loading/loading';
 import { mutations } from '@/constants/queries';
@@ -14,6 +16,7 @@ import { request } from '@/locale/en/request';
 import {
   Create_Proof_From_RequestMutationVariables,
   DataResourceStatus,
+  Reject_RequestMutationVariables,
 } from '@/services/protocol/types';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
@@ -36,6 +39,7 @@ export default function RequestCard({
   const { enqueueSnackbar } = useSnackbar();
   const { privateApi } = useGtwSession();
   const router = useRouter();
+  const [loadingAfter, setLoadingAfter] = useState(false);
 
   const acceptDataRequest = useMutation({
     mutationKey: [mutations.create_proof_from_request],
@@ -44,11 +48,32 @@ export default function RequestCard({
     },
     onSuccess: () => router.refresh(),
     onError: () => enqueueSnackbar(errorMessages.ERROR_TRYING_TO_ISSUE_A_PROOF),
+    onSettled: () => {
+      setLoadingAfter(true);
+      setTimeout(() => setLoadingAfter(false), 2000);
+    },
+  });
+
+  const rejectDataRequest = useMutation({
+    mutationKey: [mutations.reject_data_request],
+    mutationFn: (data: Reject_RequestMutationVariables) => {
+      return privateApi?.reject_request(data);
+    },
+    onSuccess: () => router.refresh(),
+    onError: () =>
+      enqueueSnackbar(errorMessages.ERROR_TRYING_TO_REJECT_A_REQUEST),
+    onSettled: () => {
+      setLoadingAfter(true);
+      setTimeout(() => setLoadingAfter(false), 2000);
+    },
   });
 
   return (
     <>
-      {acceptDataRequest.isLoading && <Loading />}
+      {(loadingAfter ||
+        acceptDataRequest.isLoading ||
+        rejectDataRequest.isLoading) && <Loading fullScreen />}
+
       <Box
         sx={{
           backgroundColor: (theme) => {
@@ -90,18 +115,22 @@ export default function RequestCard({
                 {request.request_card.content.pending.description(requester)}
               </Typography>
               <Stack direction="row" gap={1} sx={{ mt: 3 }}>
-                <Button
+                <LoadingButton
                   variant="contained"
                   color="primary"
-                  onClick={() =>
-                    acceptDataRequest.mutate({ requestId: requestId })
-                  }
+                  isLoading={acceptDataRequest.isLoading}
+                  onClick={() => acceptDataRequest.mutate({ requestId })}
                 >
                   {common.actions.accept}
-                </Button>
-                <Button variant="outlined" color="primary">
+                </LoadingButton>
+                <LoadingButton
+                  isLoading={rejectDataRequest.isLoading}
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => rejectDataRequest.mutate({ requestId })}
+                >
                   {common.actions.reject}
-                </Button>
+                </LoadingButton>
               </Stack>
             </>
           )}
