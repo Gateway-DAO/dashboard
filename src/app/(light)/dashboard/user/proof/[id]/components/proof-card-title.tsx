@@ -56,7 +56,7 @@ export default function ProofCardTitle({ proof }: Props) {
             <Typography variant="h3" id="proof-title">
               {proof?.verifier?.displayName ??
                 proof?.verifier?.gatewayId ??
-                proof?.verifier?.id}
+                limitCharsCentered(proof?.verifier?.id as string, 12)}
             </Typography>
           </Stack>
           {tooltip && (

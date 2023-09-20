@@ -7,6 +7,7 @@ import {
   PdaStatus,
   Received_PdasQuery,
 } from '@/services/protocol/types';
+import { limitCharsCentered } from '@/utils/string';
 
 import PDAsListContainer from './pdas-list-container';
 
@@ -33,10 +34,13 @@ export default function PDAsList({ pdas, issuedPdas }: Props) {
                   name: issuedPdas
                     ? pda.dataAsset?.owner?.displayName ??
                       pda.dataAsset?.owner?.gatewayId ??
-                      pda.dataAsset?.owner?.id
+                      limitCharsCentered(pda.dataAsset?.owner?.id as string, 12)
                     : pda.dataAsset?.issuer?.displayName ??
                       pda.dataAsset?.issuer?.gatewayId ??
-                      pda.dataAsset?.issuer?.id,
+                      limitCharsCentered(
+                        pda.dataAsset?.issuer?.id as string,
+                        12
+                      ),
                 };
             return (
               <PdaCard
