@@ -1,5 +1,6 @@
 'use client';
 import GatewayIcon from '@/components/icons/gateway';
+import { SharingCost } from '@/components/sharing-cost/sharing-cost';
 import { pda } from '@/locale/en/pda';
 import { IdentifierType } from '@/services/protocol/types';
 import { useFormContext } from 'react-hook-form';
@@ -20,7 +21,6 @@ import {
 } from '@mui/material';
 
 import { ShareCopySchema, ShareCopySchemaError } from './schema';
-import { SharingCost } from './sharing-cost';
 
 export default function ShareCopyFormField() {
   const {
@@ -76,7 +76,6 @@ export default function ShareCopyFormField() {
             error={!!(errors.identifier_type as ShareCopySchemaError)}
             id="id-account-type"
             sx={{ mb: { xs: 1, md: 0 } }}
-            defaultValue={IdentifierType.GatewayId}
             {...register(`identifier_type`, {
               onChange: () => {
                 setValue('address', '');

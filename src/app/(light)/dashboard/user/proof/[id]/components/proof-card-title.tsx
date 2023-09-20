@@ -57,13 +57,21 @@ export default function ProofCardTitle({ proof }: Props) {
               name={proof?.verifier?.gatewayId as string}
             />
             <Typography variant="h3" id="proof-title">
-              {proof?.verifier?.gatewayId}
+              {proof?.verifier?.displayName ??
+                proof?.verifier?.gatewayId ??
+                proof?.verifier?.id}
             </Typography>
           </Stack>
           {tooltip && (
             <TooltipUser
-              name={proof?.verifier?.gatewayId as string}
-              username={proof?.verifier?.gatewayId as string}
+              name={
+                proof?.verifier?.displayName ??
+                proof?.verifier?.gatewayId ??
+                (proof?.verifier?.id as string)
+              }
+              username={
+                proof?.verifier?.gatewayId ?? (proof?.verifier?.id as string)
+              }
               issuance_date={dayjs(proof?.createdAt).format(
                 'MM/DD/YYYY, h:mm A'
               )}
