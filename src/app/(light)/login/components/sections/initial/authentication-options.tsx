@@ -12,10 +12,10 @@ import { Button, Link, Stack, Typography } from '@mui/material';
 
 import WalletConnectModal from './wallet-connect-modal';
 
-const EvmProvider = dynamic(() => import('../providers/evm-provider'), {
+const EvmProvider = dynamic(() => import('../../../providers/evm-provider'), {
   ssr: false,
 });
-const SolanaProvider = dynamic(() => import('../providers/solana-provider'), {
+const SolanaProvider = dynamic(() => import('../../../providers/solana-provider'), {
   ssr: false,
 });
 

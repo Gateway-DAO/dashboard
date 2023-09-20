@@ -12,3 +12,18 @@ mutation create_proof($claims: JSON, $verifier: IdentificationInput) {
     }
   }
 }
+
+mutation create_proof_from_request($requestId: String!) {
+  createProof(requestId: $requestId) {
+    id
+    totalCost
+    facilitationFee
+    arweaveUrl
+    dataRequest {
+      id
+    }
+    organization {
+      gatewayId
+    }
+  }
+}
