@@ -82,11 +82,16 @@
 
 .title_line {
   display: block;
+  height: 92px;
   overflow: hidden;
 
   span {
     display: inline-block;
     will-change: transform, opacity;
+  }
+
+  @media (max-width: 599px) {
+    height: 40px;
   }
 }
 
