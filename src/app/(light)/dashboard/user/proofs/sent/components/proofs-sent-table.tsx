@@ -37,7 +37,7 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
           <Typography fontWeight={700}>
             {params.row.verifier?.displayName ??
               params.row.verifier?.gatewayId ??
-              params.row.verifier?.id}
+              limitCharsCentered(params.row.verifier?.id as string, 12)}
           </Typography>
         </Stack>
       );
@@ -49,7 +49,9 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     flex: 1,
     valueGetter: (params) => params.row.dataRequest?.id,
     renderCell(params) {
-      return limitCharsCentered(params.row.dataRequest?.id as string, 12);
+      return (
+        limitCharsCentered(params.row.dataRequest?.id as string, 12) || '-'
+      );
     },
   },
   {
@@ -58,9 +60,11 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     flex: 1,
     valueGetter: (params) => params.row.dataRequest?.dataRequestTemplate?.id,
     renderCell(params) {
-      return limitCharsCentered(
-        params.row.dataRequest?.dataRequestTemplate?.id as string,
-        12
+      return (
+        limitCharsCentered(
+          params.row.dataRequest?.dataRequestTemplate?.id as string,
+          12
+        ) || '-'
       );
     },
   },
