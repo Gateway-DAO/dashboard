@@ -85,7 +85,7 @@ type Props = {
   totalCount: number;
 };
 
-export default function RequestsTable({
+export default function OrgRequestsTable({
   data: initialData,
   totalCount = 0,
 }: Props) {

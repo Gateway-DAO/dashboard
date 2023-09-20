@@ -1,10 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { useMemo } from 'react';
 
+import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import Tags from '@/components/tags/tags';
-import { useGtwSession } from '@/context/gtw-session-provider';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
 import {
@@ -12,7 +11,6 @@ import {
   NEGATIVE_CONTAINER_PX,
   WIDTH_CENTERED,
 } from '@/theme/config/style-tokens';
-import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
 import { PartialDeep } from 'type-fest';
 
@@ -32,29 +30,25 @@ type Props = {
 };
 
 export default function PDAItem({ pda, viewOnly = false }: Props) {
-  const { session } = useGtwSession();
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
-
-  const isIssuer = useMemo(
-    () =>
-      session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId ||
-      session?.user?.accesses?.find(
-        (access) =>
-          pda?.dataAsset?.organization?.gatewayId ===
-          access?.organization?.gatewayId
-      ),
-    [pda, session]
-  );
-
-  const isOwner = useMemo(
-    () => session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId,
-    [pda, session]
-  );
 
   return (
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
-        <Typography
+        <Stack direction="row" alignItems="center">
+          <Typography
+            variant="body2"
+            sx={{
+              color: 'text.secondary',
+              fontWeight: 600,
+              textDecoration: 'none',
+            }}
+          >
+            ID
+          </Typography>
+          <CopyTextButton text={pda?.id as string} limit={12} size={14} />
+        </Stack>
+        {/* <Typography
           variant="caption"
           sx={{
             color: 'text.secondary',
@@ -63,7 +57,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           }}
         >
           {`ID ${limitCharsCentered(pda?.id ?? 'id', 8)}`}
-        </Typography>
+        </Typography> */}
         {/* <ExternalLink
           text={`ID ${limitCharsCentered(pda?.id, 8)}`}
           href="https://www.google.com"
@@ -109,13 +103,11 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           <>
             <SharedWithCard pdaId={pda?.id as string} />
 
-            {isOwner && <ShareCopy pda={pda} />}
-            {isIssuer && (
-              <Stack direction="row" gap={1}>
-                <SuspendOrMakeValidPDA pda={pda} />
-                <RevokePDA pda={pda} />
-              </Stack>
-            )}
+            <ShareCopy pda={pda} />
+            <Stack direction="row" gap={1}>
+              <SuspendOrMakeValidPDA pda={pda} />
+              <RevokePDA pda={pda} />
+            </Stack>
 
             {/* Activies backloged 09/02 */}
             {/* <Activities

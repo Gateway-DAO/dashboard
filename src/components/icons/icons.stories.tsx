@@ -12,7 +12,7 @@ import GatewayIcon from './gateway';
 import GatewayBrokenIcon from './gateway-broken';
 import GatewaySquaredIcon from './gateway-squared';
 import PassFilledIcon from './pass-filled';
-import SolanaColorIcon from './solana-color';
+import SolanaIcon from './solana';
 import VerifiedFilledIcon from './verified-filled';
 
 
@@ -24,7 +24,7 @@ const meta = {
     <GatewaySquaredIcon />
     <GatewayIcon />
     <GatewayBrokenIcon />
-    <SolanaColorIcon />
+    <SolanaIcon />
     <DataRequestFilledIcon />
     <DataRequestOutlinedIcon />
     <DataFilledIcon />

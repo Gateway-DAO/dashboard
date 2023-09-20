@@ -2,22 +2,23 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
+import SolanaIcon from '@/components/icons/solana';
 import routes from '@/constants/routes';
 import { Chain } from '@/services/protocol/types';
+import { useWalletConnectButton } from '@solana/wallet-adapter-base-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
-import { TbCurrencySolana } from 'react-icons/tb';
 
-import { Button } from '@mui/material';
+import useLoginWallet from '../../../libs/use-login-wallet';
+import WalletModalButton from '../../wallet-modal-button';
 
-import useLoginWallet from '../libs/use-login-wallet';
 
 type Props = {
-  onFirstModal: (value: boolean) => void;
+  onClose: () => void;
 };
 
-export default function SolanaWalletConnect({ onFirstModal }: Props) {
-  const { setVisible } = useWalletModal();
+export default function SolanaWalletConnect({ onClose }: Props) {
+  const { setVisible, visible } = useWalletModal();
   const { disconnect, publicKey, signMessage } = useWallet();
   const router = useRouter();
 
@@ -25,6 +26,7 @@ export default function SolanaWalletConnect({ onFirstModal }: Props) {
 
   const searchParams = useSearchParams()
 
+  const { onButtonClick } = useWalletConnectButton()
 
   const { login } = useLoginWallet({
     address,
@@ -51,15 +53,14 @@ export default function SolanaWalletConnect({ onFirstModal }: Props) {
   }, [address]);
 
   return (
-    <Button
-      variant="contained"
-      startIcon={<TbCurrencySolana fontSize="24" />}
+    <WalletModalButton
+      startIcon={<SolanaIcon sx={{ fontSize: "24" }} />}
       onClick={() => {
-        onFirstModal(false);
-        setVisible(true);
+        onClose();
+        onButtonClick?.();
       }}
     >
       Solana
-    </Button>
+    </WalletModalButton>
   );
 }

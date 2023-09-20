@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
+import Loading from '@/components/loadings/loading/loading';
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
 import { mutations } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
@@ -24,10 +25,11 @@ type Props = {
 };
 
 export function RevokePDA({ pda }: Props) {
-  const { privateApi } = useGtwSession();
+  const { privateApi, session } = useGtwSession();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
+  const [loadingAfter, setLoadingAfter] = useState(false);
 
   const revokePda = useMutation({
     mutationKey: [mutations.change_pda_status],
@@ -38,36 +40,57 @@ export function RevokePDA({ pda }: Props) {
     onError: () => enqueueSnackbar(errorMessages.REVOKE_ERROR),
   });
 
+  const isIssuer = useMemo(
+    () =>
+      session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId ||
+      session?.user?.accesses?.find(
+        (access) =>
+          pda?.dataAsset?.organization?.gatewayId ===
+          access?.organization?.gatewayId
+      ),
+    [pda, session]
+  );
+
   return (
     <>
-      <Button
-        variant="outlined"
-        startIcon={<CancelIcon />}
-        size="large"
-        color="error"
-        fullWidth
-        sx={{
-          mb: 2,
-        }}
-        onClick={() => setDialogConfirmation(true)}
-      >
-        {common.actions.revoke}
-      </Button>
-      <ConfirmDialog
-        title={pdaLocale.revoke.dialog_title}
-        open={dialogConfirmation}
-        positiveAnswer={common.actions.revoke}
-        negativeAnswer={common.actions.cancel}
-        setOpen={setDialogConfirmation}
-        onConfirm={() =>
-          revokePda.mutateAsync({
-            id: pda?.id as string,
-            status: PdaStatus.Revoked,
-          })
-        }
-      >
-        {pdaLocale.revoke.dialog_text}
-      </ConfirmDialog>
+      {isIssuer && pda?.status !== PdaStatus.Revoked && (
+        <>
+          {loadingAfter && <Loading fullScreen />}
+          <Button
+            variant="outlined"
+            startIcon={<CancelIcon />}
+            size="large"
+            color="error"
+            fullWidth
+            sx={{
+              mb: 2,
+            }}
+            onClick={() => setDialogConfirmation(true)}
+          >
+            {common.actions.revoke}
+          </Button>
+          <ConfirmDialog
+            title={pdaLocale.revoke.dialog_title}
+            open={dialogConfirmation}
+            positiveAnswer={common.actions.revoke}
+            negativeAnswer={common.actions.cancel}
+            setOpen={setDialogConfirmation}
+            onConfirm={() =>
+              revokePda
+                .mutateAsync({
+                  id: pda?.id as string,
+                  status: PdaStatus.Revoked,
+                })
+                .finally(() => {
+                  setLoadingAfter(true);
+                  setTimeout(() => setLoadingAfter(false), 2000);
+                })
+            }
+          >
+            {pdaLocale.revoke.dialog_text}
+          </ConfirmDialog>
+        </>
+      )}
     </>
   );
 }

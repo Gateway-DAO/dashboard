@@ -12,30 +12,39 @@ import PDAsListContainer from './pdas-list-container';
 
 type Props = {
   pdas: Received_PdasQuery['myPDAs'] | Issued_PdasQuery['issuedPDAs'];
+  issuedPdas?: boolean;
 };
 
-export default function PDAsList({ pdas }: Props) {
+export default function PDAsList({ pdas, issuedPdas }: Props) {
   return (
     <>
       {pdas && pdas.length > 0 && (
         <PDAsListContainer>
           {pdas.map((pda) => {
-            const issuer = pda.dataAsset?.organization
+            const user = pda.dataAsset?.organization
               ? {
                   image: pda.dataAsset?.organization?.image,
                   name: pda.dataAsset?.organization?.name,
                 }
               : {
-                  image: null,
-                  name: pda.dataAsset?.issuer?.gatewayId,
+                  image: issuedPdas
+                    ? pda.dataAsset?.owner?.profilePicture ?? null
+                    : pda.dataAsset?.issuer?.profilePicture ?? null,
+                  name: issuedPdas
+                    ? pda.dataAsset?.owner?.displayName ??
+                      pda.dataAsset?.owner?.gatewayId ??
+                      pda.dataAsset?.owner?.id
+                    : pda.dataAsset?.issuer?.displayName ??
+                      pda.dataAsset?.issuer?.gatewayId ??
+                      pda.dataAsset?.issuer?.id,
                 };
             return (
               <PdaCard
                 key={pda.id}
                 href={routes.dashboardUserAsset(pda.id!)}
                 name={pda.dataAsset?.title ?? 'PDA name'}
-                issuerImage={issuer.image}
-                issuerName={issuer.name ?? 'Issuer'}
+                userImage={user.image}
+                userName={user.name ?? 'Issuer'}
                 status={pda.status ?? PdaStatus.Valid}
               />
             );
