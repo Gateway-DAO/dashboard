@@ -33,7 +33,8 @@ export function VerifyEmailAddToken() {
           console.log('MAXIMUM');
         }
         enqueueSnackbar(
-          errorMessages[message as keyof typeof errorMessages] || errorMessages.UNEXPECTED_ERROR,
+          errorMessages[message as keyof typeof errorMessages] ||
+            errorMessages.UNEXPECTED_ERROR,
           {
             variant: 'error',
           }
@@ -44,8 +45,9 @@ export function VerifyEmailAddToken() {
 
   return (
     <CodeField
+      title="" // TODO: Add a title
       onClickEdit={() => console.log('onNewUser')}
-      onSubmitConfirmCode={onSubmitConfirmToken}
+      onSubmitConfirmCode={onSubmitConfirmToken as any} // TODO: Change de type
       isLoadingConfirmCode={false}
       onResendEmail={onResendEmail}
       isLoadingOnResend={false}
