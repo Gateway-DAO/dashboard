@@ -130,13 +130,21 @@ export default function Header() {
         ref={mobileMenuRef}
       >
         <Wrapper className={styles.mobile_wrapper}>
-          <GTWLink className={styles.mobile_link} href="/learn">
+          <GTWLink
+            className={styles.mobile_link}
+            href="/learn"
+            onClick={() => setBurgerActive(false)}
+          >
             <Button variant="text">
               <span>Learn</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
             </Button>
           </GTWLink>
-          <GTWLink className={styles.mobile_link} href="/build">
+          <GTWLink
+            className={styles.mobile_link}
+            href="/build"
+            onClick={() => setBurgerActive(false)}
+          >
             <Button variant="text">
               <span>Build</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
@@ -147,6 +155,7 @@ export default function Header() {
             <GTWLink
               className={styles.mobile_menu_button_link}
               href="/dashboard"
+              onClick={() => setBurgerActive(false)}
             >
               <Button
                 variant="contained"
@@ -158,6 +167,7 @@ export default function Header() {
             <GTWLink
               className={styles.mobile_menu_button_link}
               href="/explorer"
+              onClick={() => setBurgerActive(false)}
             >
               <Button className={styles.button_outlined} variant="outlined">
                 Explorer

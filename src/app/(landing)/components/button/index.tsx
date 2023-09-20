@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { forwardRef, ReactNode, Ref } from 'react';
 
 import { joinClasses } from '../../utils/function';
 import styles from './button.module.scss';
@@ -10,14 +10,12 @@ type Props = {
   className?: string;
 };
 
-export default function Button({
-  variant,
-  onClick,
-  children,
-  className,
-}: Props) {
+function Button(props: Props, ref: Ref<HTMLButtonElement>) {
+  const { variant, onClick, children, className } = props;
+
   return (
     <button
+      ref={ref}
       className={joinClasses(
         styles.element,
         styles[`element--${variant}`],
@@ -29,3 +27,5 @@ export default function Button({
     </button>
   );
 }
+
+export default forwardRef(Button);
