@@ -46,7 +46,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           >
             ID
           </Typography>
-          <CopyTextButton text={pda?.id as string} limit={8} size={14} />
+          <CopyTextButton text={pda?.id as string} limit={12} size={14} />
         </Stack>
         {/* <Typography
           variant="caption"
