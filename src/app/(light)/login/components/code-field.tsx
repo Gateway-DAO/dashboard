@@ -70,6 +70,12 @@ export function CodeField({
           {...register('code')}
           error={!!errors?.code}
           helperText={errors?.code?.message as string}
+          sx={{
+            maxWidth: 400,
+          }}
+          inputProps={{
+            maxLength: 6,
+          }}
         />
         <Stack direction="row" gap={1} sx={{ mt: 2 }}>
           <LoadingButton
