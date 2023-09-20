@@ -1,7 +1,7 @@
 'use client';
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import routes from '@/constants/routes';
 import { auth } from '@/locale/en/auth';
@@ -25,7 +25,11 @@ export default function AuthDropdown({ onClose }: Props) {
   return (
     <>
       <AuthDropdownProfilesList onClose={onClose} />
-      <MenuItem component={Link} href={routes.dashboardUserSettings} onClick={onClose}>
+      <MenuItem
+        component={Link}
+        href={routes.dashboardUserSettings}
+        onClick={onClose}
+      >
         <ListItemIcon>
           <AccountCircleOutlined />
         </ListItemIcon>

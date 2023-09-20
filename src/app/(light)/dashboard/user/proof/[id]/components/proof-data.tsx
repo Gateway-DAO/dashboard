@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
 
 import { proof as proofLocale } from '@/locale/en/proof';
 import { DataModel, DecryptedProofPda } from '@/services/protocol/types';
