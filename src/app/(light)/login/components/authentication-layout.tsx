@@ -1,15 +1,23 @@
 'use client';
+import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 
 import GatewaySquaredIcon from '@/components/icons/gateway-squared';
 import { common } from '@/locale/en/common';
 
-import { Box, Stack, Typography, alpha } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, IconButton, Stack, Typography, alpha } from '@mui/material';
 
 import Background from './background';
-import CloseButton from './close-button';
+import CloseButton, { CloseButtonProps } from './close-button';
 
-export default function AuthenticationLayout({ children }: PropsWithChildren) {
+type Props = {
+  closeButonProps: CloseButtonProps
+}
+
+export default function AuthenticationLayout({ children, closeButonProps }: PropsWithChildren<Props>) {
+
+
   return (
     <Stack
       sx={{
@@ -48,6 +56,7 @@ export default function AuthenticationLayout({ children }: PropsWithChildren) {
             </Typography>
           </Stack>
           <CloseButton
+            {...closeButonProps}
             sx={{
               display: {
                 xs: "flex",
@@ -80,6 +89,7 @@ export default function AuthenticationLayout({ children }: PropsWithChildren) {
         position: "relative",
       }}>
         <CloseButton
+          {...closeButonProps}
           sx={{
             position: 'absolute',
             top: { xs: 10, lg: 48 },

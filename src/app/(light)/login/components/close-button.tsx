@@ -1,15 +1,12 @@
 import Link from "next/link";
-import { useMemo } from "react";
-
-import routes from "@/constants/routes";
 
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, IconButtonProps } from "@mui/material";
 
-import { useStepState } from "../providers/step-provider";
-
-
-type Props = IconButtonProps
+export type CloseButtonProps = {
+  href?: string;
+  onClick?: () => void;
+} & Omit<IconButtonProps, 'onClick'>;
 
 const sx = {
   width: 40,
@@ -18,24 +15,11 @@ const sx = {
   background: "rgba(0, 0, 0, 0.08)",
 }
 
-export default function CloseButton(props: Props) {
-
-  const { step, setState } = useStepState()
-
-  let customProps: any = {
-    component: Link,
-    href: routes.home,
-  };
-
-  if (step === "verify-email-login-code") {
-    customProps = {
-      onClick: () => setState({ step: "initial" }),
-    }
-  }
-
+export default function CloseButton({ href, ...props }: CloseButtonProps) {
   return (
     <IconButton
-      {...customProps}
+      {...props}
+      {...(href ? { component: Link, href } : {})}
       sx={{
         ...sx,
         ...props.sx,
