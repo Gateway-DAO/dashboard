@@ -54,7 +54,7 @@ export default function Username() {
   return <form onSubmit={handleSubmit(onSubmit)}>
     {session ? <TextField
       id="username"
-      label="Username"
+      label={common.general.username}
       helperText=" You can edit it once a month"
       InputProps={{
         startAdornment: <InputAdornment position="start">@</InputAdornment>,

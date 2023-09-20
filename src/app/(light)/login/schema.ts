@@ -4,9 +4,6 @@ export type EmailSchema = {
   email_address: string;
 };
 
-export type GatewayIdSchema = {
-  gatewayId: string;
-};
 export type TokenConfirmationSchema = {
   code: string;
 };
@@ -29,8 +26,8 @@ export const schemaTokenConfirmation = z.object({
     .max(6, 'Invalid code'),
 });
 
-export const schemaGatewayId = z.object({
-  gatewayId: z
+export const usernameSchema = z.object({
+  username: z
     .string({ required_error: 'Code is required' })
     .min(2)
     .max(20)
@@ -38,4 +35,7 @@ export const schemaGatewayId = z.object({
       (value) => usernameRegex.test(value),
       'Only lowercase letters, numbers and ._-'
     ),
+  displayName: z.string().min(2).optional(),
 });
+
+export type UsernameSchema = z.infer<typeof usernameSchema>;

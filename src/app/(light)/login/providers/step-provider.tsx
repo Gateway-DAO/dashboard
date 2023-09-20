@@ -1,3 +1,4 @@
+"use client"
 import { Session } from "next-auth";
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 
@@ -29,6 +30,7 @@ export default function StepProvider({ children, session }: PropsWithChildren<{ 
       step: "initial"
     }
   });
+
   return <StepContext.Provider value={{ ...state, setStepState }}>{children}</StepContext.Provider>
 }
 

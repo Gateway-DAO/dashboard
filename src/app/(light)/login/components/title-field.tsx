@@ -8,7 +8,7 @@ type Props = {
 export function TitleSubtitleField({ title, subtitle = '' }: Props) {
   return (
     <Stack>
-      <Typography component="h2" variant="h6" fontSize={16}>
+      <Typography component="p" variant="h6" fontSize={16} fontWeight="bold">
         {title}
       </Typography>
       <Typography component="p" variant="caption">
