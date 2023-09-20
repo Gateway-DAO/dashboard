@@ -46,11 +46,6 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
     [pda, session]
   );
 
-  const isOwner = useMemo(
-    () => session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId,
-    [pda, session]
-  );
-
   return (
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
@@ -109,13 +104,11 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           <>
             <SharedWithCard pdaId={pda?.id as string} />
 
-            {isOwner && <ShareCopy pda={pda} />}
-            {isIssuer && (
-              <Stack direction="row" gap={1}>
-                <SuspendOrMakeValidPDA pda={pda} />
-                <RevokePDA pda={pda} />
-              </Stack>
-            )}
+            <ShareCopy pda={pda} />
+            <Stack direction="row" gap={1}>
+              <SuspendOrMakeValidPDA pda={pda} />
+              <RevokePDA pda={pda} />
+            </Stack>
 
             {/* Activies backloged 09/02 */}
             {/* <Activities
