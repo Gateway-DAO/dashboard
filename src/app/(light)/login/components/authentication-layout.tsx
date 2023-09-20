@@ -12,7 +12,7 @@ import Background from './background';
 import CloseButton, { CloseButtonProps } from './close-button';
 
 type Props = {
-  closeButonProps: CloseButtonProps
+  closeButonProps?: CloseButtonProps
 }
 
 export default function AuthenticationLayout({ children, closeButonProps }: PropsWithChildren<Props>) {
@@ -26,7 +26,11 @@ export default function AuthenticationLayout({ children, closeButonProps }: Prop
       direction="row"
     >
       <Box sx={{
-        pt: 6,
+        overflowY: {
+          xs: "unset",
+          lg: "auto"
+        },
+        py: 6,
         px: { xs: 2, lg: 6 },
         display: 'flex',
         flexDirection: 'column',
@@ -55,14 +59,14 @@ export default function AuthenticationLayout({ children, closeButonProps }: Prop
               {common.general.gateway}
             </Typography>
           </Stack>
-          <CloseButton
+          {closeButonProps && <CloseButton
             {...closeButonProps}
             sx={{
               display: {
                 xs: "flex",
                 lg: "none"
               },
-            }} />
+            }} />}
         </Stack>
         <Box
           sx={{
@@ -88,14 +92,14 @@ export default function AuthenticationLayout({ children, closeButonProps }: Prop
         justifyContent: "stretch",
         position: "relative",
       }}>
-        <CloseButton
+        {closeButonProps && <CloseButton
           {...closeButonProps}
           sx={{
             position: 'absolute',
             top: { xs: 10, lg: 48 },
             right: { xs: 20, lg: 48 },
             zIndex: 1,
-          }} />
+          }} />}
         <Background sx={{ flex: 1, height: "100%" }} />
       </Box>
     </Stack>
