@@ -64,9 +64,7 @@ export default async function DashboardUserDataRequest({
           }
           status={dataRequest.status!}
           requestId={dataRequest.id}
-          proofId=""
-          // verifierGatewayId={dataRequest.userVerifier?.gatewayId}
-          // ver
+          proofId={dataRequest.proofs?.[0]?.id}
         />
         <Paper
           component={Stack}
