@@ -74,7 +74,7 @@ export default function ShareCopyFormField() {
           <Select
             label={pda.share.account_type}
             error={!!(errors.identifier_type as ShareCopySchemaError)}
-            id="id-account-type"
+            id="field-identifier-type"
             sx={{ mb: { xs: 1, md: 0 } }}
             inputProps={{ defaultValue: IdentifierType.GatewayId }}
             {...register(`identifier_type`, {
@@ -109,7 +109,7 @@ export default function ShareCopyFormField() {
         </FormControl>
         <TextField
           required
-          id="id-field-address"
+          id="field-address"
           {...register('address')}
           error={!!errors.address}
           helperText={errors.address?.message}
