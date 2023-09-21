@@ -60,7 +60,12 @@ export default function ShareCopyFormSuccessfully({ id }: Props) {
               <CheckOutlined />
             </Avatar>
           </Box>
-          <Typography fontSize={34} sx={{ mb: 6 }}>
+          <Typography
+            id="proof-created-title"
+            component="h3"
+            fontSize={34}
+            sx={{ mb: 6 }}
+          >
             {pda.share.successfully_title}
           </Typography>
           <ProofCardTitle proof={data} />

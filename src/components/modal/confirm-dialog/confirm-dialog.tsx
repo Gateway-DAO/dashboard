@@ -33,7 +33,10 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
       aria-labelledby="confirm-dialog"
       maxWidth="xs"
     >
-      <DialogTitle id="confirm-dialog" sx={{ minWidth: { xs: 200, md: 400 } }}>
+      <DialogTitle
+        id="confirm-dialog-title"
+        sx={{ minWidth: { xs: 200, md: 400 } }}
+      >
         {title}
       </DialogTitle>
       <DialogContent>{children}</DialogContent>
@@ -50,6 +53,7 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
           sx={{
             flexGrow: 1,
           }}
+          id="cancel-dialog"
         >
           {negativeAnswer}
         </Button>
@@ -63,6 +67,7 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
           sx={{
             flexGrow: 1,
           }}
+          id="confirm-dialog"
         >
           {positiveAnswer}
         </Button>
