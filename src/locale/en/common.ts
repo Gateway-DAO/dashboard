@@ -51,6 +51,7 @@ export const common = {
     suspend: 'Suspend',
     make_valid: 'Make valid',
     create_id: 'Create ID',
+    continue: 'Continue',
   },
   socials: {
     twitter: 'Twitter',

@@ -12,19 +12,20 @@ export default function useStepHandler() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const onHandleSession = async () => {
+  const onHandleStep = async () => {
     const session = await getSession();
     const step = getStep(session);
     switch (step) {
-      case 'choose-gatewayid':
-        setStepState({ step: 'choose-gatewayid' });
-        break;
       case 'completed':
         const callbackUrl = searchParams.get('callbackUrl');
         router.push(callbackUrl ?? routes.dashboardUserHome);
         break;
+
+      default:
+        setStepState({ step });
+        break;
     }
   };
 
-  return onHandleSession;
+  return onHandleStep;
 }

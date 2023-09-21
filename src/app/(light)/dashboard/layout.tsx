@@ -7,6 +7,5 @@ import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session
 
 export default async function DashboardLayout({ children }: PropsWithChildren) {
   const session = (await getGtwServerSession()) as Session;
-
   return <GtwSessionProvider session={session}>{children}</GtwSessionProvider>;
 }

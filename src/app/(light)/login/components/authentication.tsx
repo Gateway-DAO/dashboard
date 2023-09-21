@@ -7,6 +7,7 @@ import routes from '@/constants/routes';
 
 import { useStepState } from '../providers/step-provider';
 import AuthenticationLayout from './authentication-layout';
+import AddEmail from './sections/add-email';
 import { ChooseGatewayId } from './sections/choose-gateway-id';
 import { AuthenticationInitial } from './sections/initial/initial';
 import { VerifyEmailAddToken } from './sections/verify-email-add-token';
@@ -40,6 +41,17 @@ export function Authentication() {
       }
     }}>
       <ChooseGatewayId />
+    </AuthenticationLayout>
+  }
+
+  if (step === "add-email") {
+    return <AuthenticationLayout closeButonProps={{
+      onClick: async () => {
+        await signOut({ redirect: false });
+        setStepState({ step: "initial" })
+      }
+    }}>
+      <AddEmail />
     </AuthenticationLayout>
   }
 
