@@ -35,6 +35,13 @@ export const auth = {
       action: 'Verify',
       send_code_again: 'Send code again in',
     },
+    add_email: {
+      title:
+        'Connect your email to be notified when you receive a private data asset',
+      subtitle:
+        "You'll receive email updates for your account, including PDAs (private data assets) and other relevant information.",
+      skip: 'Skip for now',
+    },
     choose_gateway_id: {
       title: 'Create your personal Gateway ID',
       subtitle:

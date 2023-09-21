@@ -1,9 +1,5 @@
 import { z } from 'zod';
 
-export type EmailSchema = {
-  email_address: string;
-};
-
 export type TokenConfirmationSchema = {
   code: string;
 };
@@ -18,6 +14,8 @@ const usernameRegex =
 export const schemaEmail = z.object({
   email_address: z.string({ required_error: 'Email is required' }),
 });
+
+export type EmailSchema = z.infer<typeof schemaEmail>;
 
 export const schemaTokenConfirmation = z.object({
   email_address: z
