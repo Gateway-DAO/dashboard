@@ -1,8 +1,6 @@
 'use client';
-import { getSession, signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next-nprogress-bar';
+import { signIn } from 'next-auth/react';
 
-import routes from '@/constants/routes';
 import { useCountdown } from '@/hooks/use-countdown';
 import { auth } from '@/locale/en/auth';
 import { apiPublic } from '@/services/protocol/api';
@@ -22,8 +20,6 @@ export function VerifyEmailLoginToken() {
 
   const { values, setStepState } = useStepState()
   const email = values?.email ?? "";
-
-
 
   const resendEmail = useMutation({
     mutationKey: ['resendEmail'],

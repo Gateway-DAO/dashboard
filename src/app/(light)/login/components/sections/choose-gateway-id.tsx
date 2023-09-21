@@ -8,6 +8,7 @@ import { common } from '@/locale/en/common';
 import { getClientPrivateApi } from '@/services/protocol/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 
 import { Check, Close } from '@mui/icons-material';
@@ -18,6 +19,7 @@ import useStepHandler from '../../utils/use-step-handler';
 import { TitleSubtitleField } from '../title-field';
 
 export function ChooseGatewayId() {
+  const { enqueueSnackbar } = useSnackbar()
   const { data: session, update: updateSession } = useSession();
   const onHandleSuccess = useStepHandler()
   const {
@@ -55,6 +57,7 @@ export function ChooseGatewayId() {
           displayName: displayName,
         },
       });
+      enqueueSnackbar(auth.steps.choose_gateway_id.success, { variant: 'success' })
       await onHandleSuccess();
     } catch (error) { }
   };
