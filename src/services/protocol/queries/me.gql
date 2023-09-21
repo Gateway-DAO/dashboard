@@ -13,5 +13,13 @@ query me {
         gatewayId
       }
     }
+    authentications {
+      id
+      type
+      data {
+        address
+        chain
+      }
+    }
   }
 }

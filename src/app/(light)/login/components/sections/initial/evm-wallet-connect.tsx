@@ -1,10 +1,8 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 import Loading from '@/components/loadings/loading/loading';
-import routes from '@/constants/routes';
 import { Chain } from '@/services/protocol/types';
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
 
