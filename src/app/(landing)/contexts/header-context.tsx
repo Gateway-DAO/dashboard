@@ -9,15 +9,11 @@ import {
 } from 'react';
 
 type HeaderContext = {
-  fixed: boolean;
-  setFixed: Dispatch<SetStateAction<boolean>>;
   variant: 'light' | 'dark';
   setVariant: Dispatch<SetStateAction<'light' | 'dark'>>;
 };
 
 const DEFAULT_STATE: HeaderContext = {
-  fixed: false,
-  setFixed: () => null,
   variant: 'light',
   setVariant: () => null,
 };
@@ -28,20 +24,14 @@ export const HeaderContextProvider: FC<{
   children: ReactNode;
   initialVariant?: 'light' | 'dark';
 }> = ({ children, initialVariant }) => {
-  const [fixed, setFixed] = useState(DEFAULT_STATE.fixed);
   const [variant, setVariant] = useState(
     initialVariant || DEFAULT_STATE.variant
   );
 
-  const value = {
-    fixed,
-    setFixed,
-    variant,
-    setVariant,
-  };
-
   return (
-    <HeaderContext.Provider value={value}>{children}</HeaderContext.Provider>
+    <HeaderContext.Provider value={{ variant, setVariant }}>
+      {children}
+    </HeaderContext.Provider>
   );
 };
 
