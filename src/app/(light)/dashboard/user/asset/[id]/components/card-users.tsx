@@ -21,17 +21,13 @@ export default function CardUsers({ pda }: Props) {
 
   const issuerGatewayId =
     pda?.dataAsset?.organization?.gatewayId ??
-    pda?.dataAsset?.issuer?.gatewayId ??
-    '';
+    pda?.dataAsset?.issuer?.gatewayId;
 
   const issuerDisplayName =
     pda?.dataAsset?.organization?.name ?? pda?.dataAsset?.issuer?.displayName;
 
   const issuerName =
-    issuerDisplayName ??
-    issuerGatewayId ??
-    limitCharsCentered(pda?.dataAsset?.issuer?.id as string, 12) ??
-    '';
+    issuerDisplayName ?? issuerGatewayId ?? pda?.dataAsset?.issuer?.id ?? '';
 
   const issuerPicture =
     pda?.dataAsset?.organization?.image ??
@@ -41,8 +37,7 @@ export default function CardUsers({ pda }: Props) {
   const recipientName =
     pda?.dataAsset?.owner?.displayName ??
     pda?.dataAsset?.owner?.gatewayId ??
-    limitCharsCentered(pda?.dataAsset?.owner?.id as string, 12) ??
-    '';
+    limitCharsCentered(pda?.dataAsset?.owner?.id as string, 12);
 
   const recipientPicture = pda?.dataAsset?.owner?.profilePicture ?? '';
 
@@ -68,7 +63,7 @@ export default function CardUsers({ pda }: Props) {
           <TooltipUser
             name={issuerName}
             picture={issuerPicture}
-            username={issuerGatewayId}
+            username={issuerGatewayId ?? ''}
             issuance_date={pda?.dataAsset?.issuer?.createdAt}
             onClose={() => setTooltipIssuer(false)}
             isOrganization={!!pda?.dataAsset?.issuer?.gatewayId}
