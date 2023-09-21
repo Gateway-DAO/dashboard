@@ -5,3 +5,11 @@ mutation update_display_name($displayName: String!) {
 mutation update_profile_picture_url($profilePictureUrl: String) {
   updateMyProfilePicture(profilePictureUrl: $profilePictureUrl)
 }
+
+mutation update_user($username: String!, $displayName: String) {
+  updateUser(input: { gatewayId: $username, displayName: $displayName }) {
+    id
+    gatewayId
+    displayName
+  }
+}

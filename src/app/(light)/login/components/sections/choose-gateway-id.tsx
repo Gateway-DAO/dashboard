@@ -1,9 +1,13 @@
 'use client';
+import { useSession } from 'next-auth/react';
+
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import { useGtwSession } from '@/context/gtw-session-provider';
+import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
-import { errorMessages } from '@/locale/en/errors';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 
@@ -13,40 +17,40 @@ import { UsernameSchema, usernameSchema } from '../../schema';
 import { TitleSubtitleField } from '../title-field';
 
 export function ChooseGatewayId() {
-  const { enqueueSnackbar } = useSnackbar();
+  const { privateApi } = useGtwSession();
+  const { data: session, update: updateSession } = useSession();
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-    setError,
-    watch
   } = useForm<UsernameSchema>({
     resolver: zodResolver(usernameSchema),
     mode: 'onChange',
   });
 
-  const onSubmit = async ({ }: UsernameSchema) => {
-    /*     try {
-          console.log('test', gatewayId);
-        } catch (e) {
-          (e as any)?.response?.errors?.forEach(({ message }: any) => {
-            if (message.indexOf(`You don't own the gatewayId`) > -1) {
-              message = 'GATEWAY_ID_ALREADY_REGISTERED';
-              setError('gatewayId', {
-                type: 'manual',
-                message: errorMessages.GATEWAY_ID_ALREADY_REGISTERED,
-              });
-            } else {
-              enqueueSnackbar(
-                errorMessages[message as keyof typeof errorMessages] ||
-                errorMessages.UNEXPECTED_ERROR,
-                {
-                  variant: 'error',
-                }
-              );
-            }
-          });
-        } */
+  const updateUser = useMutation({
+    mutationKey: ["updateUser"],
+    mutationFn: (data: UsernameSchema) => privateApi.update_user({
+      username: data.username,
+      displayName: data.displayName ?? null
+    })
+  })
+
+  const { avaibility, onCheckAvaibility, onResetAvaibility } = useDebouncedUsernameAvaibility()
+
+  const onSubmit = async (data: UsernameSchema) => {
+    if (avaibility !== "success") return;
+    try {
+      const { updateUser: { displayName, gatewayId } } = await updateUser.mutateAsync(data)
+      await updateSession({
+        ...session, user: {
+          ...session!.user,
+          username: gatewayId,
+          displayName: displayName
+        }
+      })
+    } catch (error) {
+    }
   };
 
   return (
@@ -71,13 +75,26 @@ export function ChooseGatewayId() {
           required
           label={common.general.username}
           id="username"
-          {...register('username')}
+          {...register('username', {
+            onChange(event) {
+              const value = event.target.value
+              if (value.length > 2) {
+                return onCheckAvaibility(value)
+              }
+              if (avaibility !== "idle") {
+                onResetAvaibility()
+              }
+            },
+          })}
           error={!!errors.username}
           helperText={
             errors.username?.message
           }
           InputProps={{
             startAdornment: <InputAdornment position="start">@</InputAdornment>,
+            endAdornment: <InputAdornment position="end">
+              {avaibility === "loading" && "..."} {avaibility === "success" && "✅"} {avaibility === "invalid" && "❌"}
+            </InputAdornment>
           }}
         />
         <TitleSubtitleField
@@ -85,7 +102,6 @@ export function ChooseGatewayId() {
           subtitle={auth.steps.choose_gateway_id.create_display_name_rules}
         />
         <TextField
-          required
           label={common.general.name}
           id="displayName"
           {...register('displayName')}
@@ -99,8 +115,8 @@ export function ChooseGatewayId() {
           variant="contained"
           type="submit"
           sx={{ mt: 2, height: 48 }}
-          isLoading={false}
-          disabled={!isValid}
+          isLoading={updateUser.isLoading}
+          disabled={!isValid || avaibility !== "success"}
         >
           {common.actions.create_id}
         </LoadingButton>

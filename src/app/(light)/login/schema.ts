@@ -29,13 +29,16 @@ export const schemaTokenConfirmation = z.object({
 export const usernameSchema = z.object({
   username: z
     .string({ required_error: 'Code is required' })
-    .min(2)
+    .min(2, "Username can't be less than 2 characters")
     .max(20)
     .refine(
       (value) => usernameRegex.test(value),
       'Only lowercase letters, numbers and ._-'
     ),
-  displayName: z.string().min(2).optional(),
+  displayName: z.preprocess((value) => {
+    if (!value || typeof value !== 'string') return undefined;
+    return value === '' ? undefined : value;
+  }, z.string().min(2).optional()),
 });
 
 export type UsernameSchema = z.infer<typeof usernameSchema>;
