@@ -1,6 +1,8 @@
 'use client';
-import { signIn } from 'next-auth/react';
+import { getSession, signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next-nprogress-bar';
 
+import routes from '@/constants/routes';
 import { useCountdown } from '@/hooks/use-countdown';
 import { auth } from '@/locale/en/auth';
 import { apiPublic } from '@/services/protocol/api';
@@ -8,16 +10,20 @@ import { useToggle } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
-import { useStepState } from '../../../providers/step-provider';
-import { CodeField } from '../../code-field';
+import { useStepState } from '../../providers/step-provider';
+import getStep, { useStepHandler } from '../../utils/get-step';
+import { CodeField } from '../code-field';
 
 export function VerifyEmailLoginToken() {
   const { enqueueSnackbar } = useSnackbar();
   const [startCountdown, setStartCountdown] = useToggle(true);
+  const onHandleSession = useStepHandler();
   const countdown = useCountdown({ time: 30, trigger: startCountdown });
 
   const { values, setStepState } = useStepState()
   const email = values?.email ?? "";
+
+
 
   const resendEmail = useMutation({
     mutationKey: ['resendEmail'],
@@ -45,10 +51,22 @@ export function VerifyEmailLoginToken() {
     }
   };
 
+  const onSubmit = async (code: string) => {
+    try {
+      await sendConfirmationToken.mutateAsync(code);
+      await onHandleSession();
+
+    } catch (e: any) {
+      enqueueSnackbar(e.message, {
+        variant: 'error',
+      });
+    }
+  }
+
   return (
     <CodeField
       onClickEdit={() => setStepState({ step: "initial" })}
-      onSubmitConfirmCode={sendConfirmationToken.mutate}
+      onSubmitConfirmCode={onSubmit}
       isLoadingConfirmCode={sendConfirmationToken.isLoading}
       onResendEmail={onResendEmail}
       isLoadingOnResend={resendEmail.isLoading}
