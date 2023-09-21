@@ -158,10 +158,12 @@ export default function RequestCard({
           {status === DataResourceStatus.Pending && !requestIsAcceptable && (
             <>
               <Typography variant="h5">
-                {request.request_card.content.rejected.title}
+                {request.request_card.content.notAcceptable.title}
               </Typography>
               <Typography>
-                {request.request_card.content.rejected.description(requester)}
+                {request.request_card.content.notAcceptable.description(
+                  requester
+                )}
               </Typography>
               <Stack direction="row" gap={1} sx={{ mt: 3 }}>
                 <Button
@@ -177,22 +179,12 @@ export default function RequestCard({
           )}
           {status === DataResourceStatus.Rejected && (
             <>
-              {/* <Typography variant="h5">
+              <Typography variant="h5">
                 {request.request_card.content.rejected.title}
               </Typography>
               <Typography>
                 {request.request_card.content.rejected.description(requester)}
               </Typography>
-              <Stack direction="row" gap={1} sx={{ mt: 3 }}>
-                <Button
-                  component="a"
-                  href="#learn-more-request-data-table__anchor"
-                  variant="outlined"
-                  color="inherit"
-                >
-                  {common.actions.learn_more}
-                </Button>
-              </Stack> */}
             </>
           )}
           {status === DataResourceStatus.Accepted && (
