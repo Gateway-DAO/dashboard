@@ -9,6 +9,7 @@ import { Chain } from '@/services/protocol/types';
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
 
 import useLoginWallet from '../../../libs/use-login-wallet';
+import { useStepHandler } from '../../../utils/get-step';
 import { CustomEvmButton } from '../../custom-evm-button';
 
 
@@ -24,8 +25,7 @@ export default function EvmWalletConnect({
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const onHandleSession = useStepHandler();
 
   const { login, isLoading } = useLoginWallet({
     address,
@@ -39,9 +39,7 @@ export default function EvmWalletConnect({
   const onLogin = async (wallet: string) => {
     try {
       await login(wallet);
-      //TODO: Make it reusable
-      const callbackUrl = searchParams.get('callbackUrl');
-      router.push(callbackUrl ?? routes.dashboardUserHome);
+      await onHandleSession();
     } catch (error) { }
   };
 
