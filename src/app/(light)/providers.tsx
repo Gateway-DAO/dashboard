@@ -10,6 +10,8 @@ import { ThemeProvider } from '@/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+// TODO: pass session from Layout
+
 export default function Providers({ children }: PropsWithChildren) {
   const [queryClient] = useState(() => new QueryClient(queryClientConfig));
 

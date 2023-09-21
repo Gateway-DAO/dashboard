@@ -8,7 +8,7 @@ import AuthenticationLayout from './authentication-layout';
 import { ChooseGatewayId } from './sections/choose-gateway-id';
 import { AuthenticationInitial } from './sections/initial/initial';
 import { VerifyEmailAddToken } from './sections/verify-email-add-token';
-import { VerifyEmailLoginToken } from './sections/verify-email-login-token/verify-email-login-token';
+import { VerifyEmailLoginToken } from './sections/verify-email-login-token';
 
 export function Authentication() {
   const { step, setStepState } = useStepState()
