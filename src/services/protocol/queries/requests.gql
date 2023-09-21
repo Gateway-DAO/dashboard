@@ -18,7 +18,7 @@ query myRequestsReceived($take: Float!, $skip: Float!) {
     id
     status
     userVerifier {
-      gatewayId
+      ...min_user
     }
     createdAt
     dataRequestTemplate {

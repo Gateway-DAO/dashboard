@@ -51,7 +51,9 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
             size={32}
           />
           <Typography variant="body2">
-            {params.row.userVerifier?.gatewayId}
+            {params.row.userVerifier?.displayName ??
+              params.row.userVerifier?.gatewayId ??
+              limitCharsCentered(params.row.userVerifier?.id as string, 12)}
           </Typography>
         </Stack>
       );
