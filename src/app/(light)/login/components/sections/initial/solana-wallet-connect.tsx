@@ -10,6 +10,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
 import useLoginWallet from '../../../libs/use-login-wallet';
+import { useStepHandler } from '../../../utils/get-step';
 import WalletModalButton from '../../wallet-modal-button';
 
 
@@ -24,7 +25,7 @@ export default function SolanaWalletConnect({ onClose }: Props) {
 
   const address = publicKey?.toString();
 
-  const searchParams = useSearchParams()
+  const onHandleSession = useStepHandler();
 
   const { onButtonClick } = useWalletConnectButton()
 
@@ -42,9 +43,7 @@ export default function SolanaWalletConnect({ onClose }: Props) {
   const onLogin = async (wallet: string) => {
     try {
       await login(wallet);
-      //TODO: Make it reusable
-      const callbackUrl = searchParams.get('callbackUrl');
-      router.push(callbackUrl ?? routes.dashboardUserHome);
+      await onHandleSession();
     } catch (error) { }
   };
 
