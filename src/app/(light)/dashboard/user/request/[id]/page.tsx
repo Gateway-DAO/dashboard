@@ -18,6 +18,7 @@ import { PartialDeep } from 'type-fest';
 import { Divider, Paper, Stack, Typography } from '@mui/material';
 
 import RequestCard from './components/request-card';
+import RequestDataTable from './components/request-data-table';
 import RequestedData from './components/requested-data';
 
 const getDataRequest = async (
@@ -143,11 +144,9 @@ export default async function DashboardUserDataRequest({
         <Typography variant="body1" mb={1}>
           {dataRequest.dataUse}
         </Typography>
-        {/* <Stack direction="column" gap={2}>
-          {requestedData.map(({ dataModel }) => (
-            <RequestedData key={dataModel.id} dataModel={dataModel} />
-          ))}
-        </Stack> */}
+        <RequestDataTable
+          dataModels={dataRequest.dataRequestTemplate?.dataModels}
+        />
       </Stack>
     </>
   );
