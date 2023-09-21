@@ -1,13 +1,6 @@
 import Link from 'next/link';
 
-import {
-  DataModel,
-  DataRequest,
-  DataRequestQuery,
-} from '@/services/protocol/types';
-import { PartialDeep } from 'type-fest';
-
-import { Check } from '@mui/icons-material';
+import { Check, Close } from '@mui/icons-material';
 import {
   Card,
   CardActionArea,
@@ -23,21 +16,23 @@ import {
 
 type Props = {
   dataModel: any;
+  validDataProvided: any;
 };
 
-export default function RequestedData({ dataModel }: Props) {
+export default function RequestedData({ dataModel, validDataProvided }: Props) {
   // Function to translate claimValidations into a object easy to run and read
   const propertiesArray = [];
   for (const propertyName in dataModel.claimValidations?.properties) {
     const propertyObj = dataModel.claimValidations?.properties[propertyName];
     const validations = Object.keys(propertyObj)
-      .filter((key) => key !== 'type')
+      .filter((key) => key !== 'type' && key !== 'title')
       .map((key) => `${key} ${propertyObj[key]}`)
       .join(', ');
 
     propertiesArray.push({
       propertyName,
       type: propertyObj.type,
+      title: propertyObj.title,
       validations,
     });
   }
@@ -74,6 +69,7 @@ export default function RequestedData({ dataModel }: Props) {
       </Card>
       <Table
         sx={{
+          backgroundColor: 'common.white',
           flex: 2,
           '.MuiTableCell-head': {
             fontWeight: 'bold',
@@ -88,13 +84,7 @@ export default function RequestedData({ dataModel }: Props) {
           },
         }}
       >
-        <TableHead
-          sx={{
-            borderBottomStyle: 'solid',
-            borderBottomWidth: 1,
-            borderBottomColor: 'divider',
-          }}
-        >
+        <TableHead id="learn-more-request-data-table__anchor">
           <TableRow>
             <TableCell>Requested</TableCell>
             <TableCell>My Data</TableCell>
@@ -104,17 +94,52 @@ export default function RequestedData({ dataModel }: Props) {
         <TableBody>
           {propertiesArray.map((property, index) => (
             <TableRow key={index}>
-              <TableCell>
+              <TableCell sx={{ width: '50%' }}>
                 <Typography variant="subtitle2">
-                  {property.propertyName}
+                  {property.title ?? property.propertyName}
                 </Typography>
                 <Typography variant="body2">
                   {property.type} / {property.validations}
                 </Typography>
               </TableCell>
-              <TableCell>My Data</TableCell>
-              <TableCell align="right">
-                <Check color="success" />
+              <TableCell sx={{ width: '45%' }}>
+                {property.type === 'array' &&
+                validDataProvided.validData[0]?.provided?.[
+                  property.propertyName
+                ] ? (
+                  <>
+                    {validDataProvided.validData[0]?.provided?.[
+                      property.propertyName
+                    ].map((item: any, index: number) => (
+                      <Typography variant="body2" key={index}>
+                        {item}
+                      </Typography>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {validDataProvided.validData[0]?.provided?.[
+                      property.propertyName
+                    ] ? (
+                      <>
+                        {
+                          validDataProvided.validData[0]?.provided?.[
+                            property.propertyName
+                          ]
+                        }
+                      </>
+                    ) : (
+                      <Typography color="error">-</Typography>
+                    )}
+                  </>
+                )}
+              </TableCell>
+              <TableCell sx={{ width: '5%' }} align="right">
+                {!!validDataProvided.validData[0] ? (
+                  <Check color="success" />
+                ) : (
+                  <Close color="error" />
+                )}
               </TableCell>
             </TableRow>
           ))}
