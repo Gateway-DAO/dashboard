@@ -24,33 +24,37 @@ export function ChooseGatewayId() {
     formState: { errors, isValid },
     handleSubmit,
   } = useForm<UsernameSchema>({
-    resolver: zodResolver(usernameSchema),
+    resolver: zodResolver(usernameSchema as any), // TODO: Add type
     mode: 'onChange',
   });
 
   const updateUser = useMutation({
-    mutationKey: ["updateUser"],
-    mutationFn: (data: UsernameSchema) => privateApi.update_user({
-      username: data.username,
-      displayName: data.displayName ?? null
-    })
-  })
+    mutationKey: ['updateUser'],
+    mutationFn: (data: UsernameSchema) =>
+      privateApi.update_user({
+        username: data.username,
+        displayName: data.displayName ?? null,
+      }),
+  });
 
-  const { avaibility, onCheckAvaibility, onResetAvaibility } = useDebouncedUsernameAvaibility()
+  const { avaibility, onCheckAvaibility, onResetAvaibility } =
+    useDebouncedUsernameAvaibility();
 
   const onSubmit = async (data: UsernameSchema) => {
-    if (avaibility !== "success") return;
+    if (avaibility !== 'success') return;
     try {
-      const { updateUser: { displayName, gatewayId } } = await updateUser.mutateAsync(data)
+      const {
+        updateUser: { displayName, gatewayId },
+      } = await updateUser.mutateAsync(data);
       await updateSession({
-        ...session, user: {
+        ...session,
+        user: {
           ...session!.user,
           username: gatewayId,
-          displayName: displayName
-        }
-      })
-    } catch (error) {
-    }
+          displayName: displayName,
+        },
+      });
+    } catch (error) { }
   };
 
   return (
@@ -61,7 +65,12 @@ export function ChooseGatewayId() {
         direction={'column'}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Typography component="h2" variant="h4" sx={{ mb: 3 }}>
+        <Typography
+          id="title-choose-gateway-id"
+          component="h2"
+          variant="h4"
+          sx={{ mb: 3 }}
+        >
           {auth.steps.choose_gateway_id.title}
         </Typography>
         <Typography component="p" variant="body1" sx={{ mb: 3 }}>
@@ -82,15 +91,13 @@ export function ChooseGatewayId() {
               if (success) {
                 return onCheckAvaibility(value)
               }
-              if (avaibility !== "idle") {
-                onResetAvaibility()
+              if (avaibility !== 'idle') {
+                onResetAvaibility();
               }
             },
           })}
           error={!!errors.username}
-          helperText={
-            errors.username?.message
-          }
+          helperText={errors.username?.message}
           InputProps={{
             startAdornment: <InputAdornment position="start">@</InputAdornment>,
             endAdornment: <InputAdornment position="end">
@@ -108,17 +115,14 @@ export function ChooseGatewayId() {
           id="displayName"
           {...register('displayName')}
           error={!!errors.displayName}
-          helperText={
-            errors.displayName?.message ??
-            common.general.optional
-          }
+          helperText={errors.displayName?.message ?? common.general.optional}
         />
         <LoadingButton
           variant="contained"
           type="submit"
           sx={{ mt: 2, height: 48 }}
           isLoading={updateUser.isLoading}
-          disabled={!isValid || avaibility !== "success"}
+          disabled={!isValid || avaibility !== 'success'}
         >
           {common.actions.create_id}
         </LoadingButton>
