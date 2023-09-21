@@ -5,9 +5,11 @@ import { useSession } from "next-auth/react";
 import { LoadingButton } from "@/components/buttons/loading-button/loading-button";
 import { auth } from "@/locale/en/auth";
 import { common } from "@/locale/en/common";
+import { errorMessages } from "@/locale/en/errors";
 import { api } from "@/services/protocol/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 
 import { Button, Stack, TextField, Typography } from "@mui/material";
@@ -21,12 +23,13 @@ import useStepHandler from "../../utils/use-step-handler";
 export default function AddEmail() {
   const { setStepState } = useStepState()
   const { data: session, update } = useSession()
-
   const onHandleStep = useStepHandler()
+
+  const { enqueueSnackbar } = useSnackbar()
 
   const { register, handleSubmit, formState: {
     errors
-  } } = useForm<EmailSchema>({
+  }, setError } = useForm<EmailSchema>({
     resolver: zodResolver(schemaEmail)
   })
 
@@ -48,8 +51,22 @@ export default function AddEmail() {
           email: data.email_address
         }
       })
-    } catch (e) {
-      console.error(e)
+    } catch (error: any) {
+      const message = error?.response?.errors?.[0]?.message ?? "UNEXPECTED_ERROR";
+      if (message === 'EMAIL_ALREADY_REGISTERED' || message === 'EMAIL_ALREADY_REGISTERED_TO_USER') {
+        return setError('email_address', {
+          type: 'manual',
+          message: errorMessages[message as keyof typeof errorMessages],
+        });
+      } else {
+        enqueueSnackbar(
+          errorMessages[message as keyof typeof errorMessages] ||
+          errorMessages.UNEXPECTED_ERROR,
+          {
+            variant: 'error',
+          }
+        );
+      }
     }
   }
 

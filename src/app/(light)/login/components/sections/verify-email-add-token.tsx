@@ -1,7 +1,10 @@
 'use client';
+import { useSession } from 'next-auth/react';
+
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { useCountdown } from '@/hooks/use-countdown';
 import { auth } from '@/locale/en/auth';
+import { api } from '@/services/protocol/api';
 import { useToggle } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
@@ -16,19 +19,19 @@ export function VerifyEmailAddToken() {
   const onHandleSession = useStepHandler();
   const countdown = useCountdown({ time: 30, trigger: startCountdown });
 
+  const { data: session, update } = useSession()
+
   const { values, setStepState } = useStepState()
   const email = values?.email ?? "";
 
-  const { privateApi } = useGtwSession()
-
   const resendEmail = useMutation({
     mutationKey: ['resendEmail'],
-    mutationFn: async () => privateApi.protocol_add_email({ email })
+    mutationFn: async () => api(session?.token ?? "").protocol_add_email({ email })
   })
 
   const sendConfirmationToken = useMutation({
     mutationKey: ['add-email', email],
-    mutationFn: (code: string) => privateApi.protocol_add_email_confirmation({ email, code: parseInt(code) })
+    mutationFn: (code: string) => api(session?.token ?? "").protocol_add_email_confirmation({ email, code: parseInt(code) })
   })
 
   const onResendEmail = async () => {
@@ -46,6 +49,7 @@ export function VerifyEmailAddToken() {
   const onSubmit = async (code: string) => {
     try {
       await sendConfirmationToken.mutateAsync(code);
+      await update();
       await onHandleSession();
 
     } catch (e: any) {
