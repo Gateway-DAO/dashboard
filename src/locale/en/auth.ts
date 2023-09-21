@@ -46,6 +46,7 @@ export const auth = {
       create_display_name_rules:
         'Fill up your first and last name or choose any name you would like to be called',
       btn: 'create id',
+      success: 'Your Gateway ID has been created successfully',
     },
     completed: {
       connect_more: {
