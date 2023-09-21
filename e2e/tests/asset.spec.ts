@@ -9,7 +9,6 @@ test.describe('Data asset', async () => {
     await sharedPage.goto('/dashboard/user/assets/received');
     name = await sharedPage.locator('.pda-card-name').first().textContent();
     await sharedPage.click('.pda-card');
-    await sharedPage.waitForTimeout(5000);
   });
 
   test.afterAll(async ({}) => {
@@ -20,7 +19,6 @@ test.describe('Data asset', async () => {
   });
   test('Check tooltip user', async () => {
     await sharedPage.locator('div[id*="pda-issuer-"]').click();
-    await sharedPage.waitForTimeout(2000);
-    expect(sharedPage.locator('#tooltip-user-name')).toBeVisible();
+    await expect(sharedPage.locator('#tooltip-user-name')).toBeVisible();
   });
 });

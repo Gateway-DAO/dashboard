@@ -9,7 +9,7 @@ import { LoginEmail } from './login-email';
 export function AuthenticationInitial() {
   return (
     <Stack gap={2} direction={'column'}>
-      <Typography component="h1" variant="h4" sx={{ mb: 3 }}>
+      <Typography id="title-login" component="h2" variant="h4" sx={{ mb: 3 }}>
         {auth.steps.initial.title}
       </Typography>
       <TitleSubtitleField
