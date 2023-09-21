@@ -24,10 +24,15 @@ export const request = {
         description: (requester: string) =>
           `${requester} is requesting to access your private data assets`,
       },
-      rejected: {
+      notAcceptable: {
         title: "You don't met the criteria",
         description: (requester: string) =>
           `${requester} is requested your private data assets, but you don’t meet the criterias requested.`,
+      },
+      rejected: {
+        title: 'Request rejected',
+        description: (requester: string) =>
+          `You didn't authorize ${requester} to access your private data assets.`,
       },
       accepted: {
         title: 'Request accepted',
