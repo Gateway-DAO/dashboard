@@ -67,7 +67,7 @@ export function VerifyEmailLoginToken() {
       onResendEmail={onResendEmail}
       isLoadingOnResend={resendEmail.isLoading}
       countdown={countdown}
-      email={'test@test.com'}
+      email={email}
       title={auth.steps.verify_token.title}
     />
   );
