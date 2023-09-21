@@ -1,21 +1,21 @@
 import { useState } from 'react';
 
-import { useGtwSession } from '@/context/gtw-session-provider';
-import { useDebouncedCallback } from '@react-hookz/web';
+import { getClientPrivateApi } from '@/services/protocol/api';
+import { useThrottledCallback } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 
 type AvaibilityState = 'idle' | 'loading' | 'success' | 'invalid';
 
 export default function useDebouncedUsernameAvaibility() {
-  const { privateApi } = useGtwSession();
   const [avaibility, setAvaibility] = useState<AvaibilityState>('idle');
 
   const checkAvaibility = useMutation({
     mutationKey: ['check-avaibility'],
     mutationFn: async (username: string) => {
       setAvaibility('loading');
-      const { checkGatewayIdAvaibility } =
-        await privateApi.check_username_avaibility({ username });
+      const { checkGatewayIdAvaibility } = await (
+        await getClientPrivateApi()
+      ).check_username_avaibility({ username });
       return checkGatewayIdAvaibility;
     },
     onSuccess: (valid) => {
@@ -26,11 +26,10 @@ export default function useDebouncedUsernameAvaibility() {
     },
   });
 
-  const onCheckAvaibility = useDebouncedCallback(
+  const onCheckAvaibility = useThrottledCallback(
     checkAvaibility.mutate,
     [checkAvaibility.mutate],
-    500,
-    2000
+    500
   );
 
   const onResetAvaibility = () => setAvaibility('idle');
