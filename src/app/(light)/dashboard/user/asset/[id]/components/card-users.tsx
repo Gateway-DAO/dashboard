@@ -28,7 +28,10 @@ export default function CardUsers({ pda }: Props) {
     pda?.dataAsset?.organization?.name ?? pda?.dataAsset?.issuer?.displayName;
 
   const issuerName =
-    issuerDisplayName ?? issuerGatewayId ?? pda?.dataAsset?.issuer?.id;
+    issuerDisplayName ??
+    issuerGatewayId ??
+    limitCharsCentered(pda?.dataAsset?.issuer?.id as string, 12) ??
+    '';
 
   const issuerPicture =
     pda?.dataAsset?.organization?.image ??
@@ -38,7 +41,7 @@ export default function CardUsers({ pda }: Props) {
   const recipientName =
     pda?.dataAsset?.owner?.displayName ??
     pda?.dataAsset?.owner?.gatewayId ??
-    pda?.dataAsset?.owner?.id ??
+    limitCharsCentered(pda?.dataAsset?.owner?.id as string, 12) ??
     '';
 
   const recipientPicture = pda?.dataAsset?.owner?.profilePicture ?? '';
