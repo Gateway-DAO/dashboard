@@ -81,6 +81,7 @@
   @media (max-width: 599px) {
     max-height: 150px;
     margin-bottom: 25px;
+    max-width: 152px;
   }
 
   &--mobile-only {
@@ -96,6 +97,7 @@
 
     @media (max-width: 599px) {
       display: block;
+      max-width: 230px;
     }
   }
 }

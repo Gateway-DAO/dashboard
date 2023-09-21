@@ -59,4 +59,11 @@
     display: inline-block;
     will-change: transform;
   }
+
+  @media (max-width: 599px) {
+    overflow: initial;
+    span {
+      will-change: opacity;
+    }
+  }
 }

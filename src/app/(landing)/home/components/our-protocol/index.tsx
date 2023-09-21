@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import Card from '@/app/(landing)/components/card';
 import ArrowLeft from '@/app/(landing)/components/icons/arrow-left';

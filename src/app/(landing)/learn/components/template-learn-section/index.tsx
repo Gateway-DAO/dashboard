@@ -84,7 +84,10 @@ export default function TemplateLearnSection({
         <div className={styles.features}>
           {features.map((feature, index) => (
             <div key={index} className={styles.features_card}>
-              <feature.icon className={styles.features_card_icon} />
+              <div className={styles.features_card_icon_container}>
+                <feature.icon className={styles.features_card_icon} />
+              </div>
+
               <h4 className={styles.features_card_title}>{feature.title}</h4>
               <p className={styles.features_card_description}>
                 {feature.description}
