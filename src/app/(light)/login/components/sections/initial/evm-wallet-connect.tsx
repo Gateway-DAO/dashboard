@@ -9,7 +9,7 @@ import { Chain } from '@/services/protocol/types';
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
 
 import useLoginWallet from '../../../libs/use-login-wallet';
-import { useStepHandler } from '../../../utils/get-step';
+import useStepHandler from '../../../utils/use-step-handler';
 import { CustomEvmButton } from '../../custom-evm-button';
 
 
