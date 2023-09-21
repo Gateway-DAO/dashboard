@@ -1,5 +1,7 @@
 'use client';
 
+import { signOut } from 'next-auth/react';
+
 import routes from '@/constants/routes';
 
 
@@ -31,7 +33,12 @@ export function Authentication() {
   }
 
   if (step === "choose-gatewayid") {
-    return <AuthenticationLayout>
+    return <AuthenticationLayout closeButonProps={{
+      onClick: async () => {
+        await signOut({ redirect: false });
+        setStepState({ step: "initial" })
+      }
+    }}>
       <ChooseGatewayId />
     </AuthenticationLayout>
   }
