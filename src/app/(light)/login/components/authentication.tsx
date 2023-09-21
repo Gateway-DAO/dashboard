@@ -25,6 +25,18 @@ export function Authentication() {
   }
 
 
+  if (step === "add-email") {
+    return <AuthenticationLayout closeButonProps={{
+      onClick: async () => {
+        await signOut({ redirect: false });
+        setStepState({ step: "initial" })
+      }
+    }}>
+      <AddEmail />
+    </AuthenticationLayout>
+  }
+
+
   if (step === "verify-email-add-code") {
     return <AuthenticationLayout closeButonProps={{
       onClick: () => setStepState({ step: "initial" })
@@ -41,17 +53,6 @@ export function Authentication() {
       }
     }}>
       <ChooseGatewayId />
-    </AuthenticationLayout>
-  }
-
-  if (step === "add-email") {
-    return <AuthenticationLayout closeButonProps={{
-      onClick: async () => {
-        await signOut({ redirect: false });
-        setStepState({ step: "initial" })
-      }
-    }}>
-      <AddEmail />
     </AuthenticationLayout>
   }
 
