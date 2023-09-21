@@ -46,8 +46,6 @@ export default function CardUsers({ pda }: Props) {
 
   const recipientPicture = pda?.dataAsset?.owner?.profilePicture ?? '';
 
-  console.log('teste', pda?.dataAsset);
-
   return (
     <Stack
       justifyContent="space-between"
