@@ -52,3 +52,12 @@ query dataRequest($id: String!) {
     }
   }
 }
+
+query dataRequestValidData($requestId: String!) {
+  findValidPDAsForRequest(requestId: $requestId) {
+    required
+    validData {
+      provided
+    }
+  }
+}
