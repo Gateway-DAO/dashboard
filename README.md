@@ -46,4 +46,4 @@ If you want to say thank you and/or support the active development of the `dApp`
 
 # E2E
 
-Copy your next-auth-token and set the value in your dotenv file (TEST_NEXT_AUTH_TOKEN).
+Copy your `next-auth.session-token` and set the value in your dotenv file (`TEST_NEXT_AUTH_TOKEN`).
