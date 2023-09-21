@@ -13,7 +13,7 @@ export type AddEmailConfirmationSchema = {
 };
 
 const usernameRegex =
-  /^(?!.*\.\.)(?!.*\.\.$)(?!.*--)(?!.*--$)(?!.*__)(?!.*__$)[a-z0-9._-]{2,19}[a-z0-9]$/;
+  /^(?!.*\.\.)(?!.*\.\.$)(?!.*--)(?!.*--$)(?!.*__)(?!.*__$)[a-z0-9._-]{1,19}[a-z0-9]$/;
 
 export const schemaEmail = z.object({
   email_address: z.string({ required_error: 'Email is required' }),

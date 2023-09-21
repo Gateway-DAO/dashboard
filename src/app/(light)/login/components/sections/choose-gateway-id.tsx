@@ -8,10 +8,10 @@ import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 
-import { InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import { Check, Close } from '@mui/icons-material';
+import { CircularProgress, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 
 import { UsernameSchema, usernameSchema } from '../../schema';
 import { TitleSubtitleField } from '../title-field';
@@ -78,7 +78,8 @@ export function ChooseGatewayId() {
           {...register('username', {
             onChange(event) {
               const value = event.target.value
-              if (value.length > 2) {
+              const { success } = usernameSchema.safeParse({ username: value })
+              if (success) {
                 return onCheckAvaibility(value)
               }
               if (avaibility !== "idle") {
@@ -93,7 +94,8 @@ export function ChooseGatewayId() {
           InputProps={{
             startAdornment: <InputAdornment position="start">@</InputAdornment>,
             endAdornment: <InputAdornment position="end">
-              {avaibility === "loading" && "..."} {avaibility === "success" && "✅"} {avaibility === "invalid" && "❌"}
+              {avaibility === "loading" && <CircularProgress size={16} />}
+              {avaibility === "success" && <Check color="success" />} {avaibility === "invalid" && <Close color="error" />}
             </InputAdornment>
           }}
         />
