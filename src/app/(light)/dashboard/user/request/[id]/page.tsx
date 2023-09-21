@@ -11,6 +11,7 @@ import { getPrivateApi } from '@/services/protocol/api';
 import { DataRequest, DataRequestQuery } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { PageProps } from '@/types/next';
+import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
@@ -60,7 +61,9 @@ export default async function DashboardUserDataRequest({
         <RequestCard
           requester={
             dataRequest.userVerifier?.displayName ??
-            dataRequest.userVerifier!.gatewayId!
+            dataRequest.userVerifier?.gatewayId ??
+            limitCharsCentered(dataRequest.userVerifier?.id as string, 15) ??
+            ''
           }
           status={dataRequest.status!}
           requestId={dataRequest.id}
