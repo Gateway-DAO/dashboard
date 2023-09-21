@@ -8,10 +8,10 @@ import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 
-import { InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import { Check, Close } from '@mui/icons-material';
+import { CircularProgress, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 
 import { UsernameSchema, usernameSchema } from '../../schema';
 import { TitleSubtitleField } from '../title-field';
@@ -54,7 +54,7 @@ export function ChooseGatewayId() {
           displayName: displayName,
         },
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
@@ -86,9 +86,10 @@ export function ChooseGatewayId() {
           id="username"
           {...register('username', {
             onChange(event) {
-              const value = event.target.value;
-              if (value.length > 2) {
-                return onCheckAvaibility(value);
+              const value = event.target.value
+              const { success } = usernameSchema.safeParse({ username: value })
+              if (success) {
+                return onCheckAvaibility(value)
               }
               if (avaibility !== 'idle') {
                 onResetAvaibility();
@@ -99,13 +100,10 @@ export function ChooseGatewayId() {
           helperText={errors.username?.message}
           InputProps={{
             startAdornment: <InputAdornment position="start">@</InputAdornment>,
-            endAdornment: (
-              <InputAdornment position="end">
-                {avaibility === 'loading' && '...'}{' '}
-                {avaibility === 'success' && '✅'}{' '}
-                {avaibility === 'invalid' && '❌'}
-              </InputAdornment>
-            ),
+            endAdornment: <InputAdornment position="end">
+              {avaibility === "loading" && <CircularProgress size={16} />}
+              {avaibility === "success" && <Check color="success" />} {avaibility === "invalid" && <Close color="error" />}
+            </InputAdornment>
           }}
         />
         <TitleSubtitleField

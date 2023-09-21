@@ -70,3 +70,9 @@ export async function getPrivateApi(session?: Session | null) {
   const token = propSession?.token;
   return api(token ?? '');
 }
+
+export async function getClientPrivateApi() {
+  const session = await getSession();
+  const token = session?.token;
+  return api(token ?? '');
+}
