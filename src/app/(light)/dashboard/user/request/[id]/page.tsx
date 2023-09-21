@@ -11,6 +11,7 @@ import { getPrivateApi } from '@/services/protocol/api';
 import { DataRequest, DataRequestQuery } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { PageProps } from '@/types/next';
+import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
@@ -31,12 +32,25 @@ const getDataRequest = async (
   return dataRequest;
 };
 
+const getRequestValidData = async (requestId: string) => {
+  const privateApi = await getPrivateApi();
+  if (!privateApi) {
+    return null;
+  }
+
+  const requestValidData = (
+    await privateApi.dataRequestValidData({ requestId })
+  )?.findValidPDAsForRequest;
+  return requestValidData;
+};
+
 export async function generateMetadata({
   params,
 }: {
   params: { id: string };
 }): Promise<Metadata> {
   const dataRequest = await getDataRequest(params.id);
+
   return {
     title: `${dataRequest?.id} Data Request - Gateway Network`,
     description: dataRequest?.dataUse,
@@ -47,6 +61,8 @@ export default async function DashboardUserDataRequest({
   params: { id },
 }: PageProps<{ id: string }>) {
   const dataRequest = await getDataRequest(id);
+  const requestValidData = await getRequestValidData(id);
+
   if (!dataRequest || !dataRequest.id) {
     return <h1>Error</h1>;
   }
@@ -60,11 +76,14 @@ export default async function DashboardUserDataRequest({
         <RequestCard
           requester={
             dataRequest.userVerifier?.displayName ??
-            dataRequest.userVerifier!.gatewayId!
+            dataRequest.userVerifier?.gatewayId ??
+            limitCharsCentered(dataRequest.userVerifier?.id as string, 15) ??
+            ''
           }
           status={dataRequest.status!}
           requestId={dataRequest.id}
           proofId={dataRequest.proofs?.[0]?.id}
+          requestValidData={requestValidData}
         />
         <Paper
           component={Stack}
@@ -120,6 +139,9 @@ export default async function DashboardUserDataRequest({
         <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, mt: 2, mb: 4 }} />
         <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
           {request.label.requested_data}
+        </Typography>
+        <Typography variant="body1" mb={1}>
+          {dataRequest.dataUse}
         </Typography>
         {/* <Stack direction="column" gap={2}>
           {requestedData.map(({ dataModel }) => (

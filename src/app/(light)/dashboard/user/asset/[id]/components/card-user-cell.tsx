@@ -27,6 +27,7 @@ export default function CardUserCell({
   onClick,
   verified = false,
 }: Props) {
+  console.log(name, label);
   return (
     <Stack
       sx={{

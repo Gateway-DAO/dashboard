@@ -74,6 +74,7 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
                 mb: 2,
               }}
               onClick={() => setDialogConfirmation(true)}
+              id="suspend-pda"
             >
               {common.actions.suspend}
             </LoadingButton>
@@ -92,6 +93,7 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
                 color: 'common.white',
               }}
               onClick={() => setDialogConfirmation(true)}
+              id="make-valid-pda"
             >
               {common.actions.make_valid}
             </LoadingButton>
