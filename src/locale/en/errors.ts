@@ -2,6 +2,7 @@ export const errorMessages = {
   PAGE_NOT_FOUND: 'Page not found',
   UNEXPECTED_ERROR: `There was an unexpected error, please, contact Gateway or try again.`,
   EMAIL_ALREADY_REGISTERED: `E-mail already registered`,
+  EMAIL_ALREADY_REGISTERED_TO_USER: `E-mail already registered to current user`,
   GATEWAY_ID_ALREADY_REGISTERED: `Gateway ID already registered`,
   GATEWAY_ID_UPDATED_RECENTLY: 'You will be able to update in [days] days.',
   ERROR_TRYING_TO_SEND_THE_CODE: `An error ocurred trying to send the code`,
