@@ -49,6 +49,7 @@ query dataRequest($id: String!) {
     }
     dataRequestTemplate {
       id
+      dataModels
     }
   }
 }
