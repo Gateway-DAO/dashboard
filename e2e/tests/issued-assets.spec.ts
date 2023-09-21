@@ -1,13 +1,12 @@
 import { test, expect, Page } from '@playwright/test';
 
-let sharedPage: Page;
-
 test.describe('Issued Data assets', async () => {
-  test.beforeEach(async ({ page }) => {
-    sharedPage = page;
+  let sharedPage: Page;
+  test.beforeAll(async ({ browser }) => {
+    const context = await browser.newContext();
+    sharedPage = await context.newPage();
     await sharedPage.goto('/dashboard/user/assets/issued');
   });
-
   test.afterAll(async ({}) => {
     await sharedPage.close();
   });

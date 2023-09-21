@@ -1,11 +1,11 @@
 import { test, expect, Page } from '@playwright/test';
 
-let sharedPage: Page;
-let name: string;
-
 test.describe('Data proof', async () => {
-  test.beforeEach(async ({ page }) => {
-    sharedPage = page;
+  let sharedPage: Page;
+  let name: string;
+  test.beforeAll(async ({ browser }) => {
+    const context = await browser.newContext();
+    sharedPage = await context.newPage();
     await sharedPage.goto('/dashboard/user/proofs/received');
     name = await sharedPage
       .locator('.MuiDataGrid-row')
@@ -16,7 +16,6 @@ test.describe('Data proof', async () => {
       .textContent();
     await sharedPage.click('.MuiDataGrid-row');
   });
-
   test.afterAll(async ({}) => {
     await sharedPage.close();
   });
