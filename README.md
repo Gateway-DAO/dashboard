@@ -43,3 +43,7 @@ If you want to say thank you and/or support the active development of the `dApp`
 
 1. Add a [GitHub Star](https://github.com/Gateway-DAO/network-ui/stargazers) to the project.
 2. Talk to us on our [Discord](https://discord.gg/tgt3KjcHGs)
+
+# E2E
+
+Copy your `next-auth.session-token` and set the value in your dotenv file (`TEST_NEXT_AUTH_TOKEN`).

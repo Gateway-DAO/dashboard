@@ -1,11 +1,11 @@
 import { test, expect, Page } from '@playwright/test';
 
-let sharedPage: Page;
-let name: string;
-
 test.describe('Data proof', async () => {
-  test.beforeEach(async ({ page }) => {
-    sharedPage = page;
+  let sharedPage: Page;
+  let name: string;
+  test.beforeAll(async ({ browser }) => {
+    const context = await browser.newContext();
+    sharedPage = await context.newPage();
     await sharedPage.goto('/dashboard/user/proofs/received');
     name = await sharedPage
       .locator('.MuiDataGrid-row')
@@ -15,9 +15,7 @@ test.describe('Data proof', async () => {
       .locator('p')
       .textContent();
     await sharedPage.click('.MuiDataGrid-row');
-    await sharedPage.waitForTimeout(5000);
   });
-
   test.afterAll(async ({}) => {
     await sharedPage.close();
   });
@@ -26,7 +24,6 @@ test.describe('Data proof', async () => {
   });
   test('Check tooltip user', async () => {
     await sharedPage.locator('#tooltip-link-proof').click();
-    await sharedPage.waitForTimeout(2000);
-    expect(sharedPage.locator('#tooltip-user-name')).toBeVisible();
+    await expect(sharedPage.locator('#tooltip-user-name')).toBeVisible();
   });
 });

@@ -8,6 +8,7 @@ const config: PlaywrightTestConfig = {
   timeout: 30 * 1000,
   testDir: path.join(__dirname, './e2e/tests'),
   retries: 0,
+  workers: 1,
   reporter: 'html',
   outputDir: 'test-results/',
   fullyParallel: true,
