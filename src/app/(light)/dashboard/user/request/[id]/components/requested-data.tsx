@@ -84,7 +84,7 @@ export default function RequestedData({ dataModel, validDataProvided }: Props) {
           },
         }}
       >
-        <TableHead>
+        <TableHead id="learn-more-request-data-table__anchor">
           <TableRow>
             <TableCell>Requested</TableCell>
             <TableCell>My Data</TableCell>
