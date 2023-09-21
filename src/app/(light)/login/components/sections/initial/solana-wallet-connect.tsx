@@ -10,7 +10,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
 import useLoginWallet from '../../../libs/use-login-wallet';
-import { useStepHandler } from '../../../utils/get-step';
+import useStepHandler from '../../../utils/use-step-handler';
 import WalletModalButton from '../../wallet-modal-button';
 
 

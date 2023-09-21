@@ -2,10 +2,10 @@
 import { useSession } from 'next-auth/react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
-import { useGtwSession } from '@/context/gtw-session-provider';
 import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
+import { getClientPrivateApi } from '@/services/protocol/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
@@ -14,11 +14,12 @@ import { Check, Close } from '@mui/icons-material';
 import { CircularProgress, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 
 import { UsernameSchema, usernameSchema } from '../../schema';
+import useStepHandler from '../../utils/use-step-handler';
 import { TitleSubtitleField } from '../title-field';
 
 export function ChooseGatewayId() {
-  const { privateApi } = useGtwSession();
   const { data: session, update: updateSession } = useSession();
+  const onHandleSuccess = useStepHandler()
   const {
     register,
     formState: { errors, isValid },
@@ -30,8 +31,8 @@ export function ChooseGatewayId() {
 
   const updateUser = useMutation({
     mutationKey: ['updateUser'],
-    mutationFn: (data: UsernameSchema) =>
-      privateApi.update_user({
+    mutationFn: async (data: UsernameSchema) =>
+      (await getClientPrivateApi()).update_user({
         username: data.username,
         displayName: data.displayName ?? null,
       }),
@@ -54,6 +55,7 @@ export function ChooseGatewayId() {
           displayName: displayName,
         },
       });
+      await onHandleSuccess();
     } catch (error) { }
   };
 

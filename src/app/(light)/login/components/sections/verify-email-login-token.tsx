@@ -11,7 +11,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
 import { useStepState } from '../../providers/step-provider';
-import getStep, { useStepHandler } from '../../utils/get-step';
+import useStepHandler from '../../utils/use-step-handler';
 import { CodeField } from '../code-field';
 
 export function VerifyEmailLoginToken() {
