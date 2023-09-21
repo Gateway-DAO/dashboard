@@ -18,17 +18,13 @@ test.afterAll(async ({}) => {
 
 test('go to login page', async () => {
   await sharedPage.goto('/login');
-  await expect(sharedPage.locator('h1')).toContainText('Enter the Gateway');
-});
-
-test('connect wallet modal', async () => {
-  await sharedPage.click('#connect-wallet');
-  await expect(sharedPage.locator('h2#title-modal')).toContainText(
-    'Add Wallet'
+  await expect(sharedPage.locator('#title-login')).toContainText(
+    'Enter the Gateway'
   );
 });
 
 test('connect wallet using default metamask account', async () => {
+  await sharedPage.click('#connect-wallet');
   await sharedPage.click('#connect-evm');
   await sharedPage.click('button[data-testid="rk-wallet-option-metaMask"]');
   const notificationPage = await playwright.switchToMetamaskNotification();
@@ -38,9 +34,9 @@ test('connect wallet using default metamask account', async () => {
   await notificationPage.getByRole('button', { name: 'Sign' }).click();
 });
 
-test('Welcome page', async () => {
+test('Choose gateway id', async () => {
   await sharedPage.waitForTimeout(5000);
-  await expect(sharedPage.locator('#title-assets')).toContainText(
-    'Data assets'
+  await expect(sharedPage.locator('#title-choose-gateway-id')).toContainText(
+    'Create your personal Gateway ID'
   );
 });

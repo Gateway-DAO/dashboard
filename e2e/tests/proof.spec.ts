@@ -15,7 +15,6 @@ test.describe('Data proof', async () => {
       .locator('p')
       .textContent();
     await sharedPage.click('.MuiDataGrid-row');
-    await sharedPage.waitForTimeout(5000);
   });
 
   test.afterAll(async ({}) => {
@@ -26,7 +25,6 @@ test.describe('Data proof', async () => {
   });
   test('Check tooltip user', async () => {
     await sharedPage.locator('#tooltip-link-proof').click();
-    await sharedPage.waitForTimeout(2000);
-    expect(sharedPage.locator('#tooltip-user-name')).toBeVisible();
+    await expect(sharedPage.locator('#tooltip-user-name')).toBeVisible();
   });
 });
