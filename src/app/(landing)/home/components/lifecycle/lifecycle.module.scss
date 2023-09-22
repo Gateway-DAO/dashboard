@@ -75,7 +75,6 @@
   margin-top: -40px;
 
   @media (max-width: 599px) {
-    display: none;
     margin-top: 110px;
   }
 }
@@ -187,6 +186,11 @@
 }
 
 .modal {
+  &:before {
+    background-color: #212121;
+    opacity: 1;
+  }
+
   [data-modal-content] {
     height: 100vw;
     left: calc(50% - 50vh);

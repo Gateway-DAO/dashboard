@@ -86,6 +86,12 @@
 
 .text {
   padding-bottom: 40px;
+
+  @media (max-width: 599px) {
+    br {
+      display: none;
+    }
+  }
 }
 
 .vector {
