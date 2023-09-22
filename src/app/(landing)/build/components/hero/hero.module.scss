@@ -198,13 +198,18 @@
   height: 368px;
   padding: 30px 20px;
   justify-content: space-between;
-
+  text-decoration: none;
+  transition: background-color 0.8s ease;
   width: calc(33% - 12px);
 
   @media (max-width: 599px) {
     height: 280px;
     margin-right: 12px;
     width: 280px !important;
+  }
+
+  &:hover {
+    background-color: #591597;
   }
 }
 

@@ -10,16 +10,19 @@ const products = [
     title: 'Dashboard',
     description:
       'Issuers + Verifiers can  manage private data assets (PDAs). Recipients can view and share them.',
+    href: '/',
   },
   {
     title: 'API',
     description:
       'Integrate directly with your application  to issue, manage, and verify PDAs natively.',
+    href: '/',
   },
   {
     title: 'Widget (Coming Soon)',
     description:
       'Verifiers can seamlessly request and consume PDAs  by Issuer or Dataset.',
+    href: '/',
   },
 ];
 
@@ -46,12 +49,12 @@ export default function OurProducts() {
 
         <div className={styles.products_container}>
           {products.map((product, index) => (
-            <div className={styles.product} key={index}>
+            <a className={styles.product} key={index} href={product.href}>
               <h4 className={styles.product_title}>{product.title}</h4>
               <p className={styles.product_description}>
                 {product.description}
               </p>
-            </div>
+            </a>
           ))}
         </div>
 
@@ -64,12 +67,12 @@ export default function OurProducts() {
           <Slider {...settings}>
             {products.map((product, index) => (
               <div key={index}>
-                <div className={styles.product}>
+                <a className={styles.product} href={product.href}>
                   <h4 className={styles.product_title}>{product.title}</h4>
                   <p className={styles.product_description}>
                     {product.description}
                   </p>
-                </div>
+                </a>
               </div>
             ))}
           </Slider>

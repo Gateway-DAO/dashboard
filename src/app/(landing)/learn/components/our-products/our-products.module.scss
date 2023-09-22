@@ -57,6 +57,8 @@
   justify-content: space-between;
   height: 368px;
   padding: 30px 20px;
+  text-decoration: none;
+  transition: background-color 0.8s ease;
   width: calc(33.3% - 12px);
 
   @media (max-width: 960px) and (min-width: 600px) {
@@ -68,6 +70,10 @@
     height: 298px;
     margin-right: 12px;
     width: 280px !important;
+  }
+
+  &:hover {
+    background-color: #591597;
   }
 }
 

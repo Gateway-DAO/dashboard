@@ -47,6 +47,8 @@
   height: 228px;
   padding: 30px 20px;
   margin-bottom: 24px;
+  text-decoration: none;
+  transition: background-color 0.8s ease;
   width: calc(50% - 12px);
 
   @media (max-width: 960px) and (min-width: 600px) {
@@ -57,6 +59,10 @@
     height: auto;
     min-height: 24.2rem;
     width: 100%;
+  }
+
+  &:hover {
+    background-color: #d6d5d8;
   }
 }
 
