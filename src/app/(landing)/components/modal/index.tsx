@@ -24,10 +24,7 @@ export default function Modal({
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // setTimeout(() => {
-    console.log(1, isFirstRender, modalRef.current);
     if (isFirstRender || !modalRef.current) return;
-    console.log(2);
 
     if (active) {
       LenisManager?.stop();
@@ -41,7 +38,6 @@ export default function Modal({
         },
       });
     }
-    // }, 1000);
   }, [active]);
   return (
     <div className={joinClasses(styles.element, className)} ref={modalRef}>
