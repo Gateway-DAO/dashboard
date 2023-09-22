@@ -15,10 +15,14 @@ export const nextAuthConfig: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, user, trigger }) {
+    async jwt({ token, user, trigger, session }) {
       // We're retrieving the token from the provider
       if (user) {
         token = user as SessionToken;
+      }
+
+      if (trigger === 'update') {
+        token.skipEmail = session.skipEmail;
       }
 
       (token as any).update = trigger === 'update';

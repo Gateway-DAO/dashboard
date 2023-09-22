@@ -40,7 +40,7 @@ export default function AddEmail() {
 
   const onSkip = async () => {
     await update({ ...session, skipEmail: true });
-    onHandleStep();
+    await onHandleStep();
   }
 
   const onSubmit = async (data: EmailSchema) => {
