@@ -22,6 +22,7 @@ export const nextAuthConfig: NextAuthOptions = {
       }
 
       if (trigger === 'update' && session) {
+        // Defines if the user has skipped the add email step during the login
         token.skipEmail = session.skipEmail;
       }
 
