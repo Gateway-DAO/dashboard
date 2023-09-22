@@ -71,7 +71,7 @@ export default function Info() {
       lines.forEach((line, index) => {
         const letters = line.querySelectorAll('[data-word]');
 
-        if (isMobile) {
+        if (window.innerWidth <= 1199) {
           gsap.to(letters, {
             autoAlpha: 1,
             duration: 1.5,
@@ -91,7 +91,7 @@ export default function Info() {
       lines.forEach((line, index) => {
         const letters = line.querySelectorAll('[data-word]');
 
-        if (isMobile) {
+        if (window.innerWidth <= 1199) {
           gsap.set(letters, { autoAlpha: 0 });
         } else {
           gsap.set(letters, { yPercent: 100 });

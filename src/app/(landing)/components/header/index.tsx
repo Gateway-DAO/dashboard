@@ -17,7 +17,7 @@ import styles from './header.module.scss';
 export default function Header() {
   const navRef = useRef<HTMLElement>(null);
   const { variant, setVariant } = useHeaderContext();
-  const { isMobile } = useMobileDetect();
+  const { isMobile, isTablet } = useMobileDetect();
   const [burgerActive, setBurgerActive] = useState<boolean>(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const [scrollDirection, setScrollDirection] = useState<'down' | 'top' | null>(
@@ -62,12 +62,12 @@ export default function Header() {
         styles.element,
         styles[`element--${scrollDirection}`],
         styles[`element--${variant}`],
-        styles[`element--${isMobile === null && 'hide'}`]
+        styles[`element--${isMobile === null && isTablet === null && 'hide'}`]
       )}
       ref={navRef}
     >
       <Wrapper className={styles.wrapper}>
-        {isMobile ? (
+        {isMobile || isTablet ? (
           <>
             <GTWLink href="/" className={styles.logo_link}>
               <GatewayLogo variant={variant} />

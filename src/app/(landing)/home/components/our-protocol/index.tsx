@@ -157,6 +157,7 @@ export default function OurProtocol() {
               key={index}
               svg={card.svg}
               text={<p className={styles.card_text}>{card.text}</p>}
+              className={styles.card}
             />
           ))}
         </div>

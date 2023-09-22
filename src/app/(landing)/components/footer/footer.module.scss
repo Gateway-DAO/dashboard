@@ -2,7 +2,7 @@
   padding-top: 256px;
   padding-bottom: 82px;
 
-  @media (max-width: 599px) {
+  @media (max-width: 799px) {
     padding-top: 155px;
     padding-bottom: 49px;
   }
@@ -67,7 +67,7 @@
   letter-spacing: 0.412px;
   margin-bottom: 40px;
 
-  @media (max-width: 599px) {
+  @media (max-width: 799px) {
     font-size: 36px;
     font-weight: 300;
     line-height: 36px;
@@ -90,7 +90,7 @@
     will-change: transform, opacity;
   }
 
-  @media (max-width: 599px) {
+  @media (max-width: 799px) {
     height: 40px;
   }
 }
@@ -105,7 +105,7 @@
   letter-spacing: 0.412px;
   margin-bottom: 60px;
 
-  @media (max-width: 599px) {
+  @media (max-width: 799px) {
     font-size: 16px;
     font-weight: 400;
     line-height: 22.4px;
@@ -130,7 +130,7 @@
   margin-top: 192px;
   width: 100%;
 
-  @media (max-width: 599px) {
+  @media (max-width: 799px) {
     margin-top: 132px;
     padding: 30px 20px;
   }
@@ -139,7 +139,7 @@
 .logo {
   width: 74px;
 
-  @media (max-width: 599px) {
+  @media (max-width: 799px) {
     width: 42px;
   }
 }
@@ -148,7 +148,7 @@
   display: flex;
   margin-top: 27px;
 
-  @media (max-width: 599px) {
+  @media (max-width: 799px) {
     flex-direction: column;
   }
 }
@@ -160,14 +160,23 @@
 
   &:nth-child(2) {
     width: 321px;
+
+    @media (max-width: 1199px) and (min-width: 800px) {
+      padding-right: 40px;
+      width: 32%;
+    }
   }
 
   &:nth-child(3) {
     margin-left: 71px;
     width: 294px;
+
+    @media (max-width: 1199px) and (min-width: 800px) {
+      margin-left: 20px;
+    }
   }
 
-  @media (max-width: 599px) {
+  @media (max-width: 799px) {
     width: 100% !important;
 
     &:nth-child(3) {
@@ -249,7 +258,12 @@
     opacity: 0.4;
   }
 
-  @media (max-width: 599px) {
+  @media (max-width: 1199px) and (min-width: 800px) {
+    font-size: 13px !important;
+    font-weight: 400;
+  }
+
+  @media (max-width: 799px) {
     font-size: 16px !important;
     font-style: normal;
     font-weight: 400;
@@ -277,6 +291,7 @@
   background-color: transparent;
   border-radius: 16px;
   color: #771ac9;
+  display: block;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -292,7 +307,11 @@
     color: #771ac9;
   }
 
-  @media (max-width: 599px) {
+  @media (max-width: 1199px) and (min-width: 800px) {
+    width: 100%;
+  }
+
+  @media (max-width: 799px) {
     border-width: 1px;
   }
 }

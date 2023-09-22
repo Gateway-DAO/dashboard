@@ -4,7 +4,7 @@
   padding-bottom: 24px;
   overflow: hidden;
 
-  @media (max-width: 599px) {
+  @media (max-width: 1199px) {
     padding-top: 73px;
   }
 }
@@ -18,7 +18,7 @@
   letter-spacing: 0.412px;
   margin-bottom: 140px;
 
-  @media (max-width: 599px) {
+  @media (max-width: 1199px) {
     font-size: 36px;
     font-style: normal;
     line-height: 50.4px;
@@ -32,7 +32,7 @@
   position: relative;
   width: 100%;
 
-  @media (max-width: 599px) {
+  @media (max-width: 1199px) {
     flex-direction: column;
   }
 }
@@ -40,7 +40,7 @@
 .small_boxes_container {
   position: relative;
 
-  @media (max-width: 599px) {
+  @media (max-width: 1199px) {
     margin: 24px 0;
   }
 }
@@ -74,7 +74,30 @@
     width: 270px;
   }
 
-  @media (max-width: 599px) {
+  @media (max-width: 1199px) and (min-width: 600px) {
+    // &--lg {
+    //   height: 400px;
+    //   margin-right: 24px;
+    //   width: 564px;
+    // }
+
+    // &--sm {
+    //   height: 188px;
+    //   width: 270px;
+
+    //   &:first-child {
+    //     margin-bottom: 24px;
+    //   }
+    // }
+
+    // &--md {
+    //   height: 400px;
+    //   margin-left: 24px;
+    //   width: 270px;
+    // }
+  }
+
+  @media (max-width: 1199px) {
     &--lg,
     &--sm,
     &--md {
@@ -112,6 +135,13 @@
     letter-spacing: -8px;
     line-height: 82px;
     max-height: 82px;
+  }
+
+  @media (max-width: 1199px) and (min-width: 600px) {
+    font-size: 85px;
+    font-style: normal;
+    line-height: 85px;
+    max-height: initial;
   }
 
   @media (max-width: 599px) {
