@@ -53,6 +53,7 @@ query dataRequest($id: String!) {
       dataModels {
         id
         title
+        schema
       }
     }
   }

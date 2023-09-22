@@ -147,6 +147,7 @@ export default async function DashboardUserDataRequest({
         <RequestDataTable
           schema={dataRequest.dataRequestTemplate?.schema}
           validData={requestValidData}
+          dataModels={dataRequest.dataRequestTemplate?.dataModels || []}
         />
       </Stack>
     </>
