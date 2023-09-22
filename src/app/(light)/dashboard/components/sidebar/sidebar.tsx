@@ -36,7 +36,7 @@ export default function Sidebar({
           width: '100%',
           px: 2.5,
           position: 'fixed',
-          height: 'var(--vh)',
+          height: '100%',
         },
       })}
     >
