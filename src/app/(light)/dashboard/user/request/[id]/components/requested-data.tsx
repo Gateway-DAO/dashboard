@@ -63,7 +63,7 @@ export default function RequestedData({ dataModel, validDataProvided }: Props) {
           href="#"
         >
           <Typography component="span" fontWeight="bold">
-            {/* {dataModel.title ??*/ 'Pedir Título'}
+            {dataModel.title}
           </Typography>
         </CardActionArea>
       </Card>
