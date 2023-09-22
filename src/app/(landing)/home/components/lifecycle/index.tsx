@@ -12,6 +12,7 @@ import Portal from '@/app/(landing)/components/portal';
 import { default as LifecycleVector } from '@/app/(landing)/components/svgs/lifecycle';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
+import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import animationData from '@/app/(landing)/json/pda-cycle-animation.json';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import gsap from 'gsap';
@@ -49,6 +50,7 @@ export default function Lifecycle() {
   const animationContainerRef = useRef<HTMLDivElement>(null);
   const lottieRef = useRef<AnimationItem>();
   const [modalActive, setModalActive] = useState(false);
+  const { isMobile } = useMobileDetect();
 
   useHeaderVariantDetection(sectionRef, 'light');
 
@@ -69,6 +71,8 @@ export default function Lifecycle() {
       gsap.delayedCall(0.5, () => {
         lottieRef.current?.play();
       });
+    } else if (isMobile) {
+      lottieRef.current?.goToAndStop(0);
     }
   };
 
@@ -120,10 +124,6 @@ export default function Lifecycle() {
             ref={animationContainerRef}
           />
         </InView>
-
-        <div className={styles.mobile_vector_parent}>
-          <LifecycleVector className={styles.mobile_vector} />
-        </div>
 
         <Portal>
           <Modal
