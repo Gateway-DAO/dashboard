@@ -1,7 +1,6 @@
 'use client';
 import { useSession } from 'next-auth/react';
 
-import { useGtwSession } from '@/context/gtw-session-provider';
 import { useCountdown } from '@/hooks/use-countdown';
 import { auth } from '@/locale/en/auth';
 import { api } from '@/services/protocol/api';
