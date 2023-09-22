@@ -9,7 +9,7 @@ export default function getStep(session: Session | null): Step {
   const hasEmail = !!session.user.authentications?.some(
     (au) => au.type === AuthType.Email
   );
-  if (!hasEmail && !session.skipEmail) return 'add-email';
+  if (!session.skipEmail && !hasEmail) return 'add-email';
   if (!session.user.gatewayId) return 'choose-gatewayid';
   return 'completed';
 }

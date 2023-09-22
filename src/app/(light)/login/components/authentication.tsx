@@ -1,6 +1,7 @@
 'use client';
 
 import { signOut } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 import routes from '@/constants/routes';
 
@@ -15,6 +16,10 @@ import { VerifyEmailLoginToken } from './sections/verify-email-login-token';
 
 export function Authentication() {
   const { step, setStepState } = useStepState()
+
+  if (step === "completed") {
+    redirect(routes.dashboardUserHome)
+  }
 
   if (step === "verify-email-login-code") {
     return <AuthenticationLayout closeButonProps={{
