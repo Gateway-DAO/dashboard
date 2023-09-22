@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Button from '@/app/(landing)/components/button';
 import Fingerprint from '@/app/(landing)/components/icons/fingerprint';
@@ -7,6 +7,9 @@ import Manage from '@/app/(landing)/components/icons/manage';
 import Own from '@/app/(landing)/components/icons/own';
 import Replay from '@/app/(landing)/components/icons/replay';
 import Verify from '@/app/(landing)/components/icons/verify';
+import Modal from '@/app/(landing)/components/modal';
+import Portal from '@/app/(landing)/components/portal';
+import { default as LifecycleVector } from '@/app/(landing)/components/svgs/lifecycle';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 import animationData from '@/app/(landing)/json/pda-cycle-animation.json';
@@ -45,6 +48,7 @@ export default function Lifecycle() {
   const sectionRef = useRef<HTMLElement>(null);
   const animationContainerRef = useRef<HTMLDivElement>(null);
   const lottieRef = useRef<AnimationItem>();
+  const [modalActive, setModalActive] = useState(false);
 
   useHeaderVariantDetection(sectionRef, 'light');
 
@@ -117,6 +121,22 @@ export default function Lifecycle() {
           />
         </InView>
 
+        <div className={styles.mobile_vector_parent}>
+          <LifecycleVector className={styles.mobile_vector} />
+        </div>
+
+        <Portal>
+          <Modal
+            className={styles.modal}
+            active={modalActive}
+            setActive={setModalActive}
+          >
+            <div className={styles.mobile_modal_vector_parent}>
+              <LifecycleVector className={styles.mobile_modal_vector} />
+            </div>
+          </Modal>
+        </Portal>
+
         <div className={styles.steps}>
           {steps.map((step, index) => (
             <div key={index} className={styles.step_item}>
@@ -130,6 +150,7 @@ export default function Lifecycle() {
         <Button
           className={joinClasses(styles.button, styles.button_mobile)}
           variant="outlined"
+          onClick={() => setModalActive(true)}
         >
           Click to expand
         </Button>

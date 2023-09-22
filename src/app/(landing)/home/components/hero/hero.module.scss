@@ -4,7 +4,7 @@
   position: relative;
   width: 100%;
 
-  @media (max-width: 599px) {
+  @media (max-width: 969px) {
     height: 100vh;
   }
 }
@@ -20,7 +20,7 @@
   flex-direction: column;
   justify-content: center;
 
-  @media (max-width: 599px) {
+  @media (max-width: 969px) {
     justify-content: flex-end;
     padding-bottom: 7.9rem;
   }
@@ -34,7 +34,7 @@
   line-height: 82px;
   width: 100%;
 
-  @media (max-width: 599px) {
+  @media (max-width: 969px) {
     font-size: 3.5rem;
     line-height: 3.5rem;
 
@@ -49,7 +49,7 @@
   position: relative;
   height: 69px;
 
-  @media (max-width: 599px) {
+  @media (max-width: 969px) {
     height: 2.45rem;
   }
 }
@@ -84,7 +84,7 @@
   line-height: 28px;
   margin-bottom: 31px;
 
-  @media (max-width: 599px) {
+  @media (max-width: 969px) {
     font-size: 1.6rem;
     line-height: 2.4rem;
     margin-bottom: 3.1rem;
