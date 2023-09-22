@@ -1,17 +1,21 @@
 'use client';
 
+import Link from 'next/link';
+
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import routes from '@/constants/routes';
+import { common } from '@/locale/en/common';
 import { request } from '@/locale/en/request';
 import { DataResourceStatus } from '@/services/protocol/types';
 
-import { Box, Divider, Stack, Typography, alpha } from '@mui/material';
+import { Box, Button, Divider, Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
   recipient: string;
   status: DataResourceStatus;
   profilePicture?: string;
   // requestId: string;
-  // proofId?: string;
+  proofId?: string;
   // requestValidData: PartialDeep<
   //   DataRequestValidDataQuery['findValidPDAsForRequest']
   // > | null;
@@ -22,6 +26,7 @@ export default function RequestCardVerfierView({
   status,
   recipient,
   profilePicture,
+  proofId,
 }: Props) {
   return (
     <Box
@@ -66,6 +71,31 @@ export default function RequestCardVerfierView({
                 recipient
               )}
             </Typography>
+          </Box>
+        </>
+      )}
+      {status === DataResourceStatus.Accepted && (
+        <>
+          <Divider />
+          <Box sx={{ p: 2 }}>
+            <Typography variant="h5">
+              {request.request_card_verifier.content.accepted.title}
+            </Typography>
+            <Typography>
+              {request.request_card_verifier.content.accepted.description(
+                recipient
+              )}
+            </Typography>
+            <Stack direction="row" gap={1} sx={{ mt: 3 }}>
+              <Button
+                component={Link}
+                href={routes.dashboardUserProof(proofId ?? '')}
+                variant="contained"
+                color="primary"
+              >
+                {common.actions.check_data_proof}
+              </Button>
+            </Stack>
           </Box>
         </>
       )}
