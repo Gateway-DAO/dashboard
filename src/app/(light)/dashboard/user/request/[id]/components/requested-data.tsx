@@ -92,59 +92,50 @@ export default function RequestedData({ dataModel, validDataProvided }: Props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {propertiesArray.map((property, index) => (
-            <TableRow key={index}>
-              <TableCell sx={{ width: '50%' }}>
-                <Typography variant="subtitle2">
-                  {property.title ?? property.propertyName}
-                </Typography>
-                <Typography variant="body2">
-                  {property.type} / {property.validations}
-                </Typography>
-              </TableCell>
-              <TableCell sx={{ width: '45%' }}>
-                {property.type === 'array' &&
-                validDataProvided.validData[0]?.provided?.[
-                  property.propertyName
-                ] ? (
-                  <>
-                    {validDataProvided.validData[0]?.provided?.[
-                      property.propertyName
-                    ].map((item: any, index: number) => (
-                      <Typography variant="body2" key={index}>
-                        {item}
-                      </Typography>
-                    ))}
-                  </>
-                ) : (
-                  <>
-                    {validDataProvided.validData[0]?.provided?.[
-                      property.propertyName
-                    ] ? (
-                      <>
-                        {
-                          validDataProvided.validData[0]?.provided?.[
-                            property.propertyName
-                          ]
-                        }
-                      </>
-                    ) : (
-                      <Typography color="error">
-                        It doesn't met the criteria
-                      </Typography>
-                    )}
-                  </>
-                )}
-              </TableCell>
-              <TableCell sx={{ width: '5%' }} align="right">
-                {!!validDataProvided.validData[0] ? (
-                  <Check color="success" />
-                ) : (
-                  <Close color="error" />
-                )}
-              </TableCell>
-            </TableRow>
-          ))}
+          {propertiesArray.map((property, index) => {
+            const currentProperties =
+              validDataProvided.validData[0]?.provided?.[property.propertyName];
+            return (
+              <TableRow key={index}>
+                <TableCell sx={{ width: '50%' }}>
+                  <Typography variant="subtitle2">
+                    {property.title ?? property.propertyName}
+                  </Typography>
+                  <Typography variant="body2">
+                    {property.type} / {property.validations}
+                  </Typography>
+                </TableCell>
+                <TableCell sx={{ width: '45%' }}>
+                  {property.type === 'array' && currentProperties ? (
+                    <>
+                      {currentProperties.map((item: any, index: number) => (
+                        <Typography variant="body2" key={index}>
+                          {item}
+                        </Typography>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      {currentProperties ? (
+                        <>{currentProperties}</>
+                      ) : (
+                        <Typography color="error">
+                          It doesn't met the criteria
+                        </Typography>
+                      )}
+                    </>
+                  )}
+                </TableCell>
+                <TableCell sx={{ width: '5%' }} align="right">
+                  {!!validDataProvided.validData[0] ? (
+                    <Check color="success" />
+                  ) : (
+                    <Close color="error" />
+                  )}
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </Stack>
