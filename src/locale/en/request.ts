@@ -41,4 +41,7 @@ export const request = {
       },
     },
   },
+  request_card_verifier: {
+    title: 'Requested to',
+  },
 };

@@ -1,5 +1,9 @@
 export const errorMessages = {
   PAGE_NOT_FOUND: 'Page not found',
+  NEED_PERMISSION: 'You need permission to access this data',
+  NEED_PERMISSION_DESCRIPTION:
+    'Request access or switch to an account that you have access to. Learn more.',
+  PDA_NO_ACCESS: "You don't have access to this PDA",
   UNEXPECTED_ERROR: `There was an unexpected error, please, contact Gateway or try again.`,
   EMAIL_ALREADY_REGISTERED: `E-mail already registered`,
   EMAIL_ALREADY_REGISTERED_TO_USER: `E-mail already registered to current user`,
