@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
-import Link from '@/app/(landing)/components/Link';
 import BurgerButton from '@/app/(landing)/components/burger-button';
 import GatewayLogo from '@/app/(landing)/components/gateway-logo';
+import Link from '@/app/(landing)/components/link';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
