@@ -21,7 +21,7 @@ export const nextAuthConfig: NextAuthOptions = {
         token = user as SessionToken;
       }
 
-      if (trigger === 'update') {
+      if (trigger === 'update' && session) {
         token.skipEmail = session.skipEmail;
       }
 
