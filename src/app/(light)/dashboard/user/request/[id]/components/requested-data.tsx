@@ -31,8 +31,8 @@ export default function RequestedData({ dataModel, validDataProvided }: Props) {
 
     propertiesArray.push({
       propertyName,
+      title: dataModel.schema?.properties?.[propertyName]?.title,
       type: propertyObj.type,
-      title: propertyObj.title,
       validations,
     });
   }
@@ -129,7 +129,9 @@ export default function RequestedData({ dataModel, validDataProvided }: Props) {
                         }
                       </>
                     ) : (
-                      <Typography color="error">-</Typography>
+                      <Typography color="error">
+                        It doesn't met the criteria
+                      </Typography>
                     )}
                   </>
                 )}
