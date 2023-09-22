@@ -84,6 +84,10 @@
   position: relative;
   width: 100%;
 
+  @media (max-width: 1199px) and (min-width: 600px) {
+    flex-wrap: wrap;
+  }
+
   @media (max-width: 599px) {
     display: none;
   }
@@ -104,6 +108,15 @@
     width: 0.5px;
   }
 
+  @media (max-width: 1199px) and (min-width: 600px) {
+    width: 50%;
+
+    &:nth-child(1),
+    &:nth-child(2) {
+      margin-bottom: 40px;
+    }
+  }
+
   @media (max-width: 599px) {
     padding-right: 40px;
   }
@@ -122,6 +135,12 @@
   font-style: normal;
   line-height: 25.2px;
   letter-spacing: 0.412px;
+
+  @media (max-width: 1199px) and (min-width: 600px) {
+    font-size: 16px;
+    line-height: 23.2px;
+    width: 70%;
+  }
 }
 
 .step_title {

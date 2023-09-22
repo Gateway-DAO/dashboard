@@ -23,6 +23,12 @@
     font-weight: 400;
   }
 
+  @media (max-width: 969px) {
+    br {
+      display: none;
+    }
+  }
+
   @media (max-width: 599px) {
     font-size: 36px;
     font-style: normal;
@@ -30,10 +36,6 @@
     line-height: 36px;
     letter-spacing: 0.412px;
     padding-bottom: 56px;
-
-    br {
-      display: none;
-    }
   }
 }
 
@@ -45,6 +47,7 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 40px;
   width: 100%;
 }
@@ -135,6 +138,10 @@
   &--concept {
     height: 368px;
     width: calc(33% - 12px);
+
+    @media (max-width: 1199px) and (min-width: 600px) {
+      height: 260px;
+    }
 
     @media (max-width: 599px) {
       height: 280px;

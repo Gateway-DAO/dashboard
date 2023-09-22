@@ -5,7 +5,7 @@ import PDAsDesktop from './desktop';
 import PDAsMobile from './mobile';
 
 export default function Pdas() {
-  const { isMobile } = useMobileDetect();
+  const { isMobile, isTablet } = useMobileDetect();
 
-  return isMobile ? <PDAsMobile /> : <PDAsDesktop />;
+  return isMobile || isTablet ? <PDAsMobile /> : <PDAsDesktop />;
 }
