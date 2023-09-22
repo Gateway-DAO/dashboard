@@ -43,5 +43,12 @@ export const request = {
   },
   request_card_verifier: {
     title: 'Requested to',
+    content: {
+      rejected: {
+        title: 'Request rejected',
+        description: (recipient: string) =>
+          `${recipient} didn't authorize you to access their private data assets`,
+      },
+    },
   },
 };

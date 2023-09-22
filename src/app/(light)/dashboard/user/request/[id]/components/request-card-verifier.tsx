@@ -4,7 +4,7 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { request } from '@/locale/en/request';
 import { DataResourceStatus } from '@/services/protocol/types';
 
-import { Box, Stack, Typography, alpha } from '@mui/material';
+import { Box, Divider, Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
   recipient: string;
@@ -54,6 +54,21 @@ export default function RequestCardVerfierView({
           <Typography variant="h5">{recipient}</Typography>
         </Stack>
       </Box>
+      {status === DataResourceStatus.Rejected && (
+        <>
+          <Divider />
+          <Box sx={{ p: 2 }}>
+            <Typography variant="h5">
+              {request.request_card_verifier.content.rejected.title}
+            </Typography>
+            <Typography>
+              {request.request_card_verifier.content.rejected.description(
+                recipient
+              )}
+            </Typography>
+          </Box>
+        </>
+      )}
     </Box>
   );
 }
