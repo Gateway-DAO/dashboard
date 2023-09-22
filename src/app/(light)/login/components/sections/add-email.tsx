@@ -17,6 +17,7 @@ import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useStepState } from "../../providers/step-provider";
 import { EmailSchema, schemaEmail } from "../../schema";
 import useStepHandler from "../../utils/use-step-handler";
+import AuthenticationLayout from "../authentication-layout";
 
 
 
@@ -71,43 +72,47 @@ export default function AddEmail() {
   }
 
 
-  return <Stack
-    component="form"
-    gap={2}
-    direction={'column'}
-    onSubmit={handleSubmit(onSubmit)}
-  >
-    <Typography
-      id="title-choose-gateway-id"
-      component="h2"
-      variant="h4"
-      sx={{ mb: 3 }}
+  return (<AuthenticationLayout closeButonProps={{
+    onClick: onSkip
+  }}>
+    <Stack
+      component="form"
+      gap={2}
+      direction={'column'}
+      onSubmit={handleSubmit(onSubmit)}
     >
-      {auth.steps.add_email.title}
-    </Typography>
-    <Typography component="p" variant="body1" sx={{ mb: 3 }}>
-      {auth.steps.add_email.subtitle}
-    </Typography>
-    <TextField
-      required
-      label={auth.steps.choose_email.label}
-      type="email"
-      id="email"
-      {...register('email_address')}
-      error={!!errors.email_address}
-      helperText={errors.email_address?.message as string}
-    />
-    <Stack direction={'row'} gap={2}>
-      <LoadingButton
-        variant="contained"
-        type="submit"
-        isLoading={sendEmail.isLoading}
+      <Typography
+        id="title-choose-gateway-id"
+        component="h2"
+        variant="h4"
+        sx={{ mb: 3 }}
       >
-        {common.actions.continue}
-      </LoadingButton>
-      <Button type="button" variant="outlined" onClick={onSkip}>
-        {auth.steps.add_email.skip}
-      </Button>
+        {auth.steps.add_email.title}
+      </Typography>
+      <Typography component="p" variant="body1" sx={{ mb: 3 }}>
+        {auth.steps.add_email.subtitle}
+      </Typography>
+      <TextField
+        required
+        label={auth.steps.choose_email.label}
+        type="email"
+        id="email"
+        {...register('email_address')}
+        error={!!errors.email_address}
+        helperText={errors.email_address?.message as string}
+      />
+      <Stack direction={'row'} gap={2}>
+        <LoadingButton
+          variant="contained"
+          type="submit"
+          isLoading={sendEmail.isLoading}
+        >
+          {common.actions.continue}
+        </LoadingButton>
+        <Button type="button" variant="outlined" onClick={onSkip}>
+          {auth.steps.add_email.skip}
+        </Button>
+      </Stack>
     </Stack>
-  </Stack>
+  </AuthenticationLayout>)
 }

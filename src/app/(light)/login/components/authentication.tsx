@@ -31,14 +31,7 @@ export function Authentication() {
 
 
   if (step === "add-email") {
-    return <AuthenticationLayout closeButonProps={{
-      onClick: async () => {
-        await signOut({ redirect: false });
-        setStepState({ step: "initial" })
-      }
-    }}>
-      <AddEmail />
-    </AuthenticationLayout>
+    return <AddEmail />
   }
 
 
