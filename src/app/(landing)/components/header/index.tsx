@@ -74,7 +74,7 @@ export default function Header() {
             </GTWLink>
 
             <div className={styles.mobile_buttons}>
-              <GTWLink href="/dashboard">
+              <GTWLink href="/login">
                 <Button
                   variant="contained"
                   className={styles.mobile_button_head_dashboard}
@@ -112,7 +112,7 @@ export default function Header() {
                 </Button>
               </GTWLink>
 
-              <GTWLink href="/dashboard">
+              <GTWLink href="/login">
                 <Button variant="contained" className={styles.button_contained}>
                   Open dashboard
                 </Button>
