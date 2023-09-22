@@ -18,8 +18,8 @@ import { PartialDeep } from 'type-fest';
 import { Divider, Paper, Stack, Typography } from '@mui/material';
 
 import RequestCard from './components/request-card';
+import RequestCardVerfierView from './components/request-card-verifier';
 import RequestDataTable from './components/request-data-table';
-import RequestedData from './components/requested-data';
 
 const getDataRequest = async (
   id: string
@@ -67,6 +67,17 @@ export default async function DashboardUserDataRequest({
   if (!dataRequest || !dataRequest.id) {
     return <h1>Error</h1>;
   }
+  const isOwner = true;
+  const requester =
+    dataRequest.userVerifier?.displayName ??
+    dataRequest.userVerifier?.gatewayId ??
+    limitCharsCentered(dataRequest.userVerifier?.id as string, 15) ??
+    '';
+  const recipient =
+    dataRequest.userRecipient?.displayName ??
+    dataRequest.userRecipient?.gatewayId ??
+    limitCharsCentered(dataRequest.userRecipient?.id as string, 15) ??
+    '';
 
   return (
     <>
@@ -74,18 +85,21 @@ export default async function DashboardUserDataRequest({
         {id}
       </Typography>
       <Stack direction="column" gap={2}>
-        <RequestCard
-          requester={
-            dataRequest.userVerifier?.displayName ??
-            dataRequest.userVerifier?.gatewayId ??
-            limitCharsCentered(dataRequest.userVerifier?.id as string, 15) ??
-            ''
-          }
-          status={dataRequest.status!}
-          requestId={dataRequest.id}
-          proofId={dataRequest.proofs?.[0]?.id}
-          requestValidData={requestValidData}
-        />
+        {!!isOwner ? (
+          <RequestCard
+            requester={requester}
+            status={dataRequest.status!}
+            requestId={dataRequest.id}
+            proofId={dataRequest.proofs?.[0]?.id}
+            requestValidData={requestValidData}
+            profilePicture={dataRequest.userVerifier?.profilePicture}
+          />
+        ) : (
+          <RequestCardVerfierView
+            recipient={recipient}
+            status={dataRequest.status!}
+          />
+        )}
         <Paper
           component={Stack}
           divider={<Divider orientation="vertical" sx={{ height: 'unset' }} />}

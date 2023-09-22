@@ -28,6 +28,7 @@ import { Box, Button, Divider, Stack, Typography, alpha } from '@mui/material';
 type Props = {
   requester: string;
   status: DataResourceStatus;
+  profilePicture?: string | null;
   requestId: string;
   proofId?: string;
   requestValidData: PartialDeep<
@@ -41,6 +42,7 @@ export default function RequestCard({
   proofId,
   requestId,
   requestValidData,
+  profilePicture,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const { privateApi } = useGtwSession();
@@ -121,7 +123,7 @@ export default function RequestCard({
             {request.request_card.title}
           </Typography>
           <Stack direction="row" alignItems="center" gap={2}>
-            <GTWAvatar name="chase" />{' '}
+            <GTWAvatar name={requester} src={profilePicture} />{' '}
             <Typography variant="h5">{requester}</Typography>
           </Stack>
         </Box>
