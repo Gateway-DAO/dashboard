@@ -1,0 +1,58 @@
+.element {
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: 0.46px;
+  border: 0;
+  outline: none;
+
+  @media (max-width: 599px) {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  &--text {
+    background-color: transparent;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  &--contained {
+    background-color: #9247d3;
+    border-radius: 40px;
+    padding: 8px 22px;
+    transition: background-color 0.6s ease;
+
+    &:hover {
+      background-color: #53128c;
+    }
+
+    @media (max-width: 599px) {
+      padding: 6px 16px;
+    }
+  }
+
+  &--outlined {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+    padding: 8px 22px;
+    transition: border 0.6s ease, background-color 0.6s ease, color 0.6s ease;
+
+    &:hover {
+      background-color: #53128c;
+      border-color: #53128c;
+    }
+
+    @media (max-width: 599px) {
+      padding: 6px 16px;
+    }
+  }
+}
