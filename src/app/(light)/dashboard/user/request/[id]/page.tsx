@@ -111,6 +111,7 @@ export default async function DashboardUserDataRequest({
           <RequestCardVerfierView
             recipient={recipient}
             status={dataRequest.status!}
+            proofId={dataRequest.proofs?.[0]?.id}
           />
         )}
         <Paper
