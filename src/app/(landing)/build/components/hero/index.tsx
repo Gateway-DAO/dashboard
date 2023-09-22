@@ -11,14 +11,17 @@ const journeySteps = [
   {
     title: 'Getting Started',
     description: 'Learn the basics of our protocol',
+    href: '/',
   },
   {
     title: 'Architecture',
     description: 'How the protocol is structured',
+    href: '/',
   },
   {
     title: 'API & SDK',
     description: 'Use the SDK from your applications',
+    href: '/',
   },
 ];
 
@@ -86,10 +89,10 @@ export default function Hero() {
 
         <div className={styles.steps}>
           {journeySteps.map((card, index) => (
-            <div className={styles.card} key={index}>
+            <a className={styles.card} key={index} href={card.href}>
               <h3 className={styles.card_title}>{card.title}</h3>
               <p className={styles.card_description}>{card.description}</p>
-            </div>
+            </a>
           ))}
         </div>
 
@@ -99,10 +102,10 @@ export default function Hero() {
           <Slider {...settings}>
             {journeySteps.map((card, index) => (
               <div key={index}>
-                <div className={styles.card}>
+                <a className={styles.card} href={card.href}>
                   <h3 className={styles.card_title}>{card.title}</h3>
                   <p className={styles.card_description}>{card.description}</p>
-                </div>
+                </a>
               </div>
             ))}
           </Slider>
