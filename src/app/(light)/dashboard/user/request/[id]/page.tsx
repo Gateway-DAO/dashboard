@@ -1,12 +1,15 @@
 import { Metadata } from 'next';
+import { Session } from 'next-auth';
 import Link from 'next/link';
 
+import PermissionError from '@/components/permission-error/permission-error';
 import RequestStatusChip from '@/components/requests/request-status-chip';
 import ToggleCollapse from '@/components/toggle-collapse/toggle-collapse';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { request } from '@/locale/en/request';
+import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
 import { DataRequest, DataRequestQuery } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
@@ -61,13 +64,23 @@ export async function generateMetadata({
 export default async function DashboardUserDataRequest({
   params: { id },
 }: PageProps<{ id: string }>) {
+  const session = (await getGtwServerSession()) as Session;
+  const userId = session.user.id;
   const dataRequest = await getDataRequest(id);
   const requestValidData = await getRequestValidData(id);
 
   if (!dataRequest || !dataRequest.id) {
     return <h1>Error</h1>;
   }
-  const isOwner = true;
+
+  if (
+    userId !== dataRequest?.userRecipient?.id &&
+    userId !== dataRequest?.userVerifier?.id
+  ) {
+    return <PermissionError />;
+  }
+
+  const isOwner = userId === dataRequest?.userRecipient?.id;
   const requester =
     dataRequest.userVerifier?.displayName ??
     dataRequest.userVerifier?.gatewayId ??

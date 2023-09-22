@@ -17,20 +17,16 @@ export default function RequestDataTable({
   dataModels,
 }: Props) {
   if (schema && schema.length > 0) {
-    console.log('entrei no if');
     for (const schemaItem of schema) {
       const matchingDataModel = dataModels?.find(
         (dataModel) => dataModel.id === schemaItem.id
       );
-      console.log('tô no for', matchingDataModel);
       if (matchingDataModel) {
         schemaItem.title = matchingDataModel.title;
         schemaItem.schema = matchingDataModel.schema;
       }
     }
   }
-
-  console.log(schema);
 
   return (
     <Stack direction="column" gap={2} mt={2}>
