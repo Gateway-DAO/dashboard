@@ -19,6 +19,7 @@ fragment proof on Proof {
   }
 
   data {
+    raw
     dataModels {
       id
       title
