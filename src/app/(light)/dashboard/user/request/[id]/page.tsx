@@ -23,6 +23,7 @@ import { Divider, Paper, Stack, Typography } from '@mui/material';
 import RequestCard from './components/request-card';
 import RequestCardVerfierView from './components/request-card-verifier';
 import RequestDataTable from './components/request-data-table';
+import RequestDataTableVerifierView from './components/request-data-table-verifier';
 
 const getDataRequest = async (
   id: string
@@ -67,7 +68,8 @@ export default async function DashboardUserDataRequest({
   const session = (await getGtwServerSession()) as Session;
   const userId = session.user.id;
   const dataRequest = await getDataRequest(id);
-  const requestValidData = await getRequestValidData(id);
+  const isOwner = userId === dataRequest?.userRecipient?.id;
+  const requestValidData = isOwner ? await getRequestValidData(id) : null;
 
   if (!dataRequest || !dataRequest.id) {
     return <h1>Error</h1>;
@@ -80,7 +82,6 @@ export default async function DashboardUserDataRequest({
     return <PermissionError />;
   }
 
-  const isOwner = userId === dataRequest?.userRecipient?.id;
   const requester =
     dataRequest.userVerifier?.displayName ??
     dataRequest.userVerifier?.gatewayId ??
@@ -172,11 +173,18 @@ export default async function DashboardUserDataRequest({
         <Typography variant="body1" mb={1}>
           {dataRequest.dataUse}
         </Typography>
-        <RequestDataTable
-          schema={dataRequest.dataRequestTemplate?.schema}
-          validData={requestValidData}
-          dataModels={dataRequest.dataRequestTemplate?.dataModels || []}
-        />
+        {isOwner ? (
+          <RequestDataTable
+            schema={dataRequest.dataRequestTemplate?.schema}
+            validData={requestValidData}
+            dataModels={dataRequest.dataRequestTemplate?.dataModels || []}
+          />
+        ) : (
+          <RequestDataTableVerifierView
+            schema={dataRequest.dataRequestTemplate?.schema}
+            dataModels={dataRequest.dataRequestTemplate?.dataModels || []}
+          />
+        )}
       </Stack>
     </>
   );
