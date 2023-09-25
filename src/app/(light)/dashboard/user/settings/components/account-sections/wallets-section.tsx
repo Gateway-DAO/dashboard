@@ -1,29 +1,39 @@
-import { Chain } from "@/services/protocol/types";
+import { Chain } from '@/services/protocol/types';
 
-import { AddOutlined } from "@mui/icons-material";
-import { Button, ListItem, ListItemText } from "@mui/material";
+import { AddOutlined } from '@mui/icons-material';
+import { Button, ListItem, ListItemText } from '@mui/material';
 
-import AliasMenuButton from "../alias-menu-button";
-import AccountSection from "./account-section";
+import AliasMenuButton from '../alias-menu-button';
+import AccountSection from './account-section';
 
-const wallet = [{
-  address: "0x1234567890",
-  chain: Chain.Evm,
-}, {
-  address: "0x122227890",
-  chain: Chain.Sol,
-}];
+type Wallet = {
+  id: string;
+  type: 'WALLET';
+  data: {
+    address: string;
+    chain: Chain;
+  };
+};
 
-export default function WalletsSection() {
-  return <AccountSection title="Wallet" button={<Button variant="text" startIcon={<AddOutlined />}>Add wallet</Button>}>
+type Props = {
+  wallets: Wallet[];
+};
 
-    {wallet.map(({ address, chain }) => (<ListItem
-      key={address}
-      secondaryAction={<AliasMenuButton />}
+export default function WalletsSection({ wallets }: Props) {
+  return (
+    <AccountSection
+      title="Wallet"
+      button={
+        <Button variant="text" startIcon={<AddOutlined />}>
+          Add wallet
+        </Button>
+      }
     >
-      <ListItemText
-        primary={address}
-        secondary={chain} />
-    </ListItem>))}
-  </AccountSection>;
+      {wallets.map(({ data }) => (
+        <ListItem key={data.address} secondaryAction={<AliasMenuButton />}>
+          <ListItemText primary={data.address} secondary={data.chain} />
+        </ListItem>
+      ))}
+    </AccountSection>
+  );
 }
