@@ -5,7 +5,6 @@ import { errorMessages } from '@/locale/en/errors';
 
 import { Box, Button, Stack, Typography } from '@mui/material';
 
-import GatewayBrokenIcon from '../icons/gateway-broken';
 import RequestAccessIcon from '../icons/request-access';
 
 type Props = {
