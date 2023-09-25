@@ -1,3 +1,6 @@
+import { DataResourceStatus } from '@/services/protocol/types';
+
+import { Check } from '@mui/icons-material';
 import {
   Divider,
   Card,
@@ -11,15 +14,25 @@ import {
   TableBody,
   Stack,
 } from '@mui/material';
+import { grey } from '@mui/material/colors';
 
 import { createPropertiesArray } from './utils';
 
 type Props = {
   dataModel: any;
+  raw?: any;
+  status: DataResourceStatus;
 };
 
-export default function RequestDataVerifierView({ dataModel }: Props) {
+export default function RequestDataVerifierView({
+  dataModel,
+  raw,
+  status,
+}: Props) {
   const propertiesArray = createPropertiesArray(dataModel) || [];
+
+  const color = grey[50];
+
   return (
     <Stack
       direction="row"
@@ -52,7 +65,7 @@ export default function RequestDataVerifierView({ dataModel }: Props) {
       </Card>
       <Table
         sx={{
-          //   backgroundColor: 'common.white',
+          backgroundColor: color,
           flex: 2,
           '.MuiTableCell-head': {
             fontWeight: 'bold',
@@ -67,25 +80,74 @@ export default function RequestDataVerifierView({ dataModel }: Props) {
           },
         }}
       >
-        <TableHead id="learn-more-request-data-table__anchor">
-          <TableRow>
-            <TableCell>Requested</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {propertiesArray.map((property, index) => (
-            <TableRow key={index}>
-              <TableCell>
-                <Typography variant="subtitle2">
-                  {property.title ?? property.propertyName}
-                </Typography>
-                <Typography variant="body2">
-                  {property.type} / {property.validations}
-                </Typography>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+        {status === DataResourceStatus.Accepted && raw ? (
+          <>
+            <TableHead id="learn-more-request-data-table__anchor">
+              <TableRow>
+                <TableCell>Requested</TableCell>
+                <TableCell>User data</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {propertiesArray.map((property, index) => {
+                const currentProperty =
+                  raw[dataModel.id]?.[Object.keys(raw[dataModel.id])[0]]
+                    ?.claim?.[property.propertyName];
+                return (
+                  <TableRow key={index}>
+                    <TableCell sx={{ width: '50%' }}>
+                      <Typography variant="subtitle2">
+                        {property.title ?? property.propertyName}
+                      </Typography>
+                      <Typography variant="body2">
+                        {property.type} / {property.validations}
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ width: '45%' }}>
+                      {property.type === 'array' && currentProperty ? (
+                        <>
+                          {currentProperty.map((item: any, index: number) => (
+                            <Typography variant="body2" key={index}>
+                              {item}
+                            </Typography>
+                          ))}
+                        </>
+                      ) : (
+                        <>{currentProperty}</>
+                      )}
+                    </TableCell>
+                    <TableCell sx={{ width: '5%' }} align="right">
+                      <Check color="success" />
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </>
+        ) : (
+          <>
+            <TableHead id="learn-more-request-data-table__anchor">
+              <TableRow>
+                <TableCell>Requested</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {propertiesArray.map((property, index) => (
+                <TableRow key={index}>
+                  <TableCell>
+                    <Typography variant="subtitle2">
+                      {property.title ?? property.propertyName}
+                    </Typography>
+                    <Typography variant="body2">
+                      {property.type} / {property.validations}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </>
+        )}
       </Table>
     </Stack>
   );

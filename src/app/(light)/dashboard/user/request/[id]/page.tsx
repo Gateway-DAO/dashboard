@@ -1,17 +1,19 @@
 import { Metadata } from 'next';
 import { Session } from 'next-auth';
-import Link from 'next/link';
 
 import PermissionError from '@/components/permission-error/permission-error';
 import RequestStatusChip from '@/components/requests/request-status-chip';
 import ToggleCollapse from '@/components/toggle-collapse/toggle-collapse';
 import { DATE_FORMAT } from '@/constants/date';
-import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { request } from '@/locale/en/request';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
-import { DataRequest, DataRequestQuery } from '@/services/protocol/types';
+import {
+  DataRequestQuery,
+  DataResourceStatus,
+  ProofQuery,
+} from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { PageProps } from '@/types/next';
 import { limitCharsCentered } from '@/utils/string';
@@ -49,6 +51,18 @@ const getRequestValidData = async (requestId: string) => {
   return requestValidData;
 };
 
+const getProofData = async (
+  proofId: string
+): Promise<PartialDeep<ProofQuery['proof']> | null> => {
+  const privateApi = await getPrivateApi();
+  if (!privateApi) {
+    return null;
+  }
+
+  const proof = (await privateApi.proof({ id: proofId })).proof;
+  return proof;
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -68,8 +82,6 @@ export default async function DashboardUserDataRequest({
   const session = (await getGtwServerSession()) as Session;
   const userId = session.user.id;
   const dataRequest = await getDataRequest(id);
-  const isOwner = userId === dataRequest?.userRecipient?.id;
-  const requestValidData = isOwner ? await getRequestValidData(id) : null;
 
   if (!dataRequest || !dataRequest.id) {
     return <h1>Error</h1>;
@@ -81,6 +93,15 @@ export default async function DashboardUserDataRequest({
   ) {
     return <PermissionError />;
   }
+
+  const isOwner = userId === dataRequest?.userRecipient?.id;
+  const requestValidData = isOwner ? await getRequestValidData(id) : null;
+  const proofData =
+    isOwner ||
+    dataRequest.status !== DataResourceStatus.Accepted ||
+    !dataRequest.proofs?.[0]?.id
+      ? {}
+      : await getProofData(dataRequest.proofs?.[0]?.id);
 
   const requester =
     dataRequest.userVerifier?.displayName ??
@@ -183,6 +204,8 @@ export default async function DashboardUserDataRequest({
           <RequestDataTableVerifierView
             schema={dataRequest.dataRequestTemplate?.schema}
             dataModels={dataRequest.dataRequestTemplate?.dataModels || []}
+            status={dataRequest.status!}
+            raw={proofData?.data?.raw}
           />
         )}
       </Stack>
