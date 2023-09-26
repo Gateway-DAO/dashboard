@@ -16,8 +16,6 @@ import WalletsSection from './account-sections/wallets-section';
 export default function ConnectedAccounts() {
   const { data: session } = useSession();
 
-  console.log('$$$$$$$$$$$$$$', session);
-
   const wallets = useMemo(() => {
     return (
       session?.user.authentications?.filter(
@@ -50,7 +48,10 @@ export default function ConnectedAccounts() {
         here.
       </Typography>
       <Stack divider={<Divider sx={{ mx: NEGATIVE_CONTAINER_PX }} />}>
-        <EmailsSection emails={emails} />
+        <EmailsSection
+          emails={emails}
+          userEmail={session?.user?.email as string}
+        />
         <WalletsSection wallets={wallets} />
         <SocialsSection />
       </Stack>
