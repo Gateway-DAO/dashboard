@@ -10,6 +10,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Link, Stack, Typography } from '@mui/material';
 
+import SolanaWalletConnect from './solana-wallet-connect';
 import WalletConnectModal from './wallet-connect-modal';
 
 const EvmProvider = dynamic(() => import('../../../providers/evm-provider'), {
@@ -98,6 +99,7 @@ export function AuthenticationOptions() {
             isOpen={modalWallet}
             onCancel={() => setModalWallet(false)}
           />
+          <SolanaWalletConnect onClose={() => { console.log("close") }} />
         </SolanaProvider>
       </EvmProvider>
     </>
