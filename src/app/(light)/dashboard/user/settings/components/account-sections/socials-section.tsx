@@ -13,7 +13,11 @@ const socials = [
   { icon: FaTwitter, name: 'Twitter', signed: true },
 ];
 
-export default function SocialsSection() {
+type Props = {
+  onDisconnect: (type: string) => void;
+};
+
+export default function SocialsSection({ onDisconnect }: Props) {
   return (
     <AccountSection title="Other accounts">
       {socials.map(({ icon: Icon, name, signed }) => (
@@ -21,7 +25,7 @@ export default function SocialsSection() {
           key={name}
           secondaryAction={
             signed ? (
-              <AliasMenuButton />
+              <AliasMenuButton onDisconnect={() => onDisconnect(name)} />
             ) : (
               <Button variant="outlined">{common.actions.connect}</Button>
             )
