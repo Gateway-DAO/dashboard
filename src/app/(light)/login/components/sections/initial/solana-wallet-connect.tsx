@@ -1,11 +1,8 @@
 'use client';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 import SolanaIcon from '@/components/icons/solana';
-import routes from '@/constants/routes';
 import { Chain } from '@/services/protocol/types';
-import { useWalletConnectButton } from '@solana/wallet-adapter-base-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
@@ -19,15 +16,12 @@ type Props = {
 };
 
 export default function SolanaWalletConnect({ onClose }: Props) {
-  const { setVisible, visible } = useWalletModal();
+  const { setVisible } = useWalletModal();
   const { disconnect, publicKey, signMessage } = useWallet();
-  const router = useRouter();
 
   const address = publicKey?.toString();
 
   const onHandleSession = useStepHandler();
-
-  const { onButtonClick } = useWalletConnectButton()
 
   const { login } = useLoginWallet({
     address,
@@ -55,8 +49,8 @@ export default function SolanaWalletConnect({ onClose }: Props) {
     <WalletModalButton
       startIcon={<SolanaIcon sx={{ fontSize: "24" }} />}
       onClick={() => {
+        setVisible(true);
         onClose();
-        onButtonClick?.();
       }}
     >
       Solana
