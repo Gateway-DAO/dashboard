@@ -20,18 +20,19 @@ type Alias = {
 
 export function useDisconnectAlias() {
   const { data: session } = useSession();
-  const [openModalRight, setOpenModalRight] = useToggle(false);
+  const [modalDeactivateGatewayId, setModalDeactivateGatewayId] =
+    useToggle(false);
   const [dataToDisconnect, setDataToDisconnect] = useState<Alias | null>(null);
   const router = useRouter();
 
   const openModal = () => {
     router.push(`#deactivate-gateway-id`, { scroll: false });
-    setOpenModalRight(true);
+    setModalDeactivateGatewayId(true);
   };
 
   const closeModal = () => {
     router.push(routes.dashboardUserSettings, { scroll: false });
-    setOpenModalRight(false);
+    setModalDeactivateGatewayId(false);
     setDataToDisconnect(null);
   };
 
@@ -54,10 +55,19 @@ export function useDisconnectAlias() {
   };
 
   const disconnectAlias = ({ type, address }: Alias) => {
-    if (type === 'email') disconnectEmail(address as string);
-    if (type === 'wallet') disconnectWallet(address as string);
-    if (type === 'Discord') disconnectDiscord();
-    if (type === 'Twitter') disconnectTwitter();
+    switch (type) {
+      case 'email':
+        disconnectEmail(address as string);
+        break;
+      case 'Discord':
+        disconnectDiscord();
+        break;
+      case 'Twitter':
+        disconnectTwitter();
+        break;
+      default:
+        disconnectWallet(address as string);
+    }
   };
 
   const disconnectEmail = (address: string) => {
@@ -80,6 +90,6 @@ export function useDisconnectAlias() {
     handleDisconnectAlias,
     deactivateGatewayId,
     closeModal,
-    openModalRight,
+    modalDeactivateGatewayId,
   };
 }
