@@ -26,12 +26,13 @@ export function useDisconnectAlias() {
 
   const openModal = () => {
     router.push(`#deactivate-gateway-id`, { scroll: false });
-    setOpenModalRight();
+    setOpenModalRight(true);
   };
 
   const closeModal = () => {
     router.push(routes.dashboardUserSettings, { scroll: false });
-    setOpenModalRight();
+    setOpenModalRight(false);
+    setDataToDisconnect(null);
   };
 
   const deactivateGatewayId = () => {
