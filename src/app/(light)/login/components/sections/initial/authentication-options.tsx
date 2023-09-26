@@ -17,9 +17,12 @@ import WalletLoadingModal from './wallet-loading-modal';
 const EvmProvider = dynamic(() => import('../../../providers/evm-provider'), {
   ssr: false,
 });
-const SolanaProvider = dynamic(() => import('../../../providers/solana-provider'), {
-  ssr: false,
-});
+const SolanaProvider = dynamic(
+  () => import('../../../providers/solana-provider'),
+  {
+    ssr: false,
+  }
+);
 
 export function AuthenticationOptions() {
   const [modalWallet, setModalWallet] = useState(false);
@@ -92,9 +95,9 @@ export function AuthenticationOptions() {
             </Fragment>
           ))}
       </Stack>
-      <WalletConnectionProvider>
-        <EvmProvider>
-          <SolanaProvider>
+      <EvmProvider>
+        <SolanaProvider>
+          <WalletConnectionProvider>
             <WalletConnectModal
               title="Choose wallet"
               description="Select a chain and choose one of available wallet providers or create a new wallet."
@@ -102,9 +105,9 @@ export function AuthenticationOptions() {
               onCancel={() => setModalWallet(false)}
             />
             <WalletLoadingModal />
-          </SolanaProvider>
-        </EvmProvider>
-      </WalletConnectionProvider>
+          </WalletConnectionProvider>
+        </SolanaProvider>
+      </EvmProvider>
     </>
   );
 }

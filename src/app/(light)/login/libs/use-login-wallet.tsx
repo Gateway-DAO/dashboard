@@ -1,44 +1,51 @@
-"use client";
+'use client';
 
-import { signIn, signOut } from "next-auth/react";
-import { useState } from "react";
+import { signIn, signOut } from 'next-auth/react';
+import { useState } from 'react';
 
-import { apiPublic } from "@/services/protocol/api";
-import { Chain } from "@/services/protocol/types";
-import { useMutation } from "@tanstack/react-query";
+import { apiPublic } from '@/services/protocol/api';
+import { Chain } from '@/services/protocol/types';
+import { useMutation } from '@tanstack/react-query';
 
-import { useWalletConnectionStep } from "../providers/wallet-connection-provider";
+import { useWalletConnectionStep } from '../providers/wallet-connection-provider';
 
 type Props = {
   address?: string;
   chain: Chain;
   signMessage: (message: string) => Promise<string>;
   disconnect: () => void;
-}
+};
 
-export default function useLoginWallet({ address, chain, disconnect, signMessage }: Props) {
+const SING_CANCEL_ERRORS = [
+  'UserRejectedRequestError',
+  'WalletSignMessageError',
+];
 
-  const {
-    onSigning,
-    onLoading,
-    onFinished,
-    onError
-  } = useWalletConnectionStep();
+export default function useLoginWallet({
+  address,
+  chain,
+  disconnect,
+  signMessage,
+}: Props) {
+  const { onPending, onSigning, onLoading, onSuccess, onError } =
+    useWalletConnectionStep();
 
   const onDisconnect = () => {
-    disconnect()
-    signOut({ redirect: false })
-  }
+    disconnect();
+    signOut({ redirect: false });
+  };
 
   const { mutateAsync: getNonce, isLoading: isLoadingNonce } = useMutation({
     mutationKey: ['get-nonce', address],
-    mutationFn: async (wallet: string) => (await apiPublic.get_nonce({ wallet, chain })).createWalletNonce.message,
-  })
+    mutationFn: async (wallet: string) =>
+      (await apiPublic.get_nonce({ wallet, chain })).createWalletNonce.message,
+  });
 
-  const { mutateAsync: getSignature, isLoading: isLoadingSignature } = useMutation({
-    mutationKey: ['get-signature', address],
-    mutationFn: (nonce: string) => signMessage(nonce),
-  })
+  const { mutateAsync: getSignature, isLoading: isLoadingSignature } =
+    useMutation({
+      mutationKey: ['get-signature', address],
+      mutationFn: (nonce: string) => signMessage(nonce),
+    });
 
   const { mutateAsync: loginWallet, isLoading: isLoadingWallet } = useMutation({
     mutationKey: ['login-wallet', address],
@@ -67,16 +74,19 @@ export default function useLoginWallet({ address, chain, disconnect, signMessage
       const signature = await getSignature(nonce);
       onLoading();
       await loginWallet(signature);
-      onFinished();
+      onSuccess();
     } catch (error: any) {
+      if (SING_CANCEL_ERRORS.includes(error?.name)) {
+        onPending();
+      } else {
+        onError(!!error?.message ? error.message : JSON.stringify(error));
+      }
       onDisconnect();
-      onError(error?.message ?? JSON.stringify(error));
     }
-  }
+  };
 
   return {
     login,
     isLoading: isLoadingNonce || isLoadingSignature || isLoadingWallet,
-  }
-
+  };
 }

@@ -11,3 +11,25 @@ export const MuiDialogActions: Extract<
     }),
   },
 };
+
+export const MuiDialogTitle: Extract<
+  Theme['components'],
+  object
+>['MuiDialogTitle'] = {
+  styleOverrides: {
+    root: ({ theme }) => ({
+      ...theme.typography.h5,
+    }),
+  },
+};
+
+export const MuiDialogContentText: Extract<
+  Theme['components'],
+  object
+>['MuiDialogContentText'] = {
+  styleOverrides: {
+    root: ({ theme }) => ({
+      color: theme.palette.text.primary,
+    }),
+  },
+};
