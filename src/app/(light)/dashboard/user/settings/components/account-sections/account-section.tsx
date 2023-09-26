@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode } from 'react';
 
-import { Card, Divider, List, Stack, Typography } from '@mui/material';
+import { Divider, List, Stack, Typography } from '@mui/material';
 
 type Props = {
   title: string;
@@ -14,7 +14,7 @@ export default function AccountSection({
 }: PropsWithChildren<Props>) {
   return (
     <>
-      <Stack gap={3} sx={{ my: 4 }}>
+      <Stack gap={3} sx={{ my: 4, maxWidth: 1094 }}>
         <Stack
           direction="row"
           justifyContent="space-between"

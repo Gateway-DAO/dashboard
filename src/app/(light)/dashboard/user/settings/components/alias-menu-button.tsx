@@ -15,12 +15,16 @@ export default function AliasMenuButton({ menuItems }: Props) {
   const { element, isOpen, onClose, onOpen } = useMenu();
   return (
     <>
-      <IconButton onClick={onOpen}>
-        <MoreVert />
-      </IconButton>
-      <Menu anchorEl={element} open={isOpen} onClose={onClose}>
-        {menuItems}
-      </Menu>
+      {menuItems && (
+        <>
+          <IconButton onClick={onOpen}>
+            <MoreVert />
+          </IconButton>
+          <Menu anchorEl={element} open={isOpen} onClose={onClose}>
+            {menuItems}
+          </Menu>
+        </>
+      )}
     </>
   );
 }
