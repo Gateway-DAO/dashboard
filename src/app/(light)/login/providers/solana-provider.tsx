@@ -2,22 +2,20 @@
 import { PropsWithChildren, useMemo } from 'react';
 
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import {
-  ConnectionProvider,
-  WalletProvider as SolanaWalletProvider,
-} from '@solana/wallet-adapter-react';
-import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
+  WalletModalProvider,
+} from '@solana/wallet-adapter-react-ui';
 import {
-  GlowWalletAdapter,
   LedgerWalletAdapter,
   PhantomWalletAdapter,
-  SlopeWalletAdapter,
   SolflareWalletAdapter,
-  SolletExtensionWalletAdapter,
-  SolletWalletAdapter,
   TorusWalletAdapter,
+  UnsafeBurnerWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
+
+// Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 export default function SolanaProvider({ children }: PropsWithChildren) {
@@ -28,22 +26,19 @@ export default function SolanaProvider({ children }: PropsWithChildren) {
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
-      new GlowWalletAdapter(),
-      new SlopeWalletAdapter(),
       new SolflareWalletAdapter({ network: solNetwork }),
       new TorusWalletAdapter(),
       new LedgerWalletAdapter(),
-      new SolletExtensionWalletAdapter(),
-      new SolletWalletAdapter(),
+      new UnsafeBurnerWalletAdapter(),
     ],
     [solNetwork]
   );
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <SolanaWalletProvider wallets={wallets}>
+      <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>{children}</WalletModalProvider>
-      </SolanaWalletProvider>
+      </WalletProvider>
     </ConnectionProvider>
   );
 }
