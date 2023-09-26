@@ -10,7 +10,6 @@ import useLoginWallet from '../../../libs/use-login-wallet';
 import useStepHandler from '../../../utils/use-step-handler';
 import WalletModalButton from '../../wallet-modal-button';
 
-
 type Props = {
   onClose: () => void;
 };
@@ -36,21 +35,23 @@ export default function SolanaWalletConnect({ onClose }: Props) {
 
   const onLogin = async (wallet: string) => {
     try {
+      onClose();
       await login(wallet);
       await onHandleSession();
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
-    if (address) onLogin(address);
+    if (address) {
+      onLogin(address);
+    }
   }, [address]);
 
   return (
     <WalletModalButton
-      startIcon={<SolanaIcon sx={{ fontSize: "24" }} />}
+      startIcon={<SolanaIcon sx={{ fontSize: '24' }} />}
       onClick={() => {
         setVisible(true);
-        onClose();
       }}
     >
       Solana
