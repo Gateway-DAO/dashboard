@@ -1,30 +1,34 @@
 'use client';
 
-import { ReactNode } from 'react';
-
 import { useMenu } from '@/hooks/use-menu';
+import { settings } from '@/locale/en/settings';
 
 import { MoreVert } from '@mui/icons-material';
-import { IconButton, Menu } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton, ListItemButton, Menu } from '@mui/material';
 
 type Props = {
-  menuItems?: ReactNode;
+  onDisconnect: () => void;
 };
-
-export default function AliasMenuButton({ menuItems }: Props) {
+export default function AliasMenuButton({ onDisconnect }: Props) {
   const { element, isOpen, onClose, onOpen } = useMenu();
+
   return (
     <>
-      {menuItems && (
-        <>
-          <IconButton onClick={onOpen}>
-            <MoreVert />
-          </IconButton>
-          <Menu anchorEl={element} open={isOpen} onClose={onClose}>
-            {menuItems}
-          </Menu>
-        </>
-      )}
+      <IconButton onClick={onOpen}>
+        <MoreVert />
+      </IconButton>
+      <Menu anchorEl={element} open={isOpen} onClose={onClose}>
+        <ListItemButton
+          onClick={() => {
+            onDisconnect();
+            onClose();
+          }}
+        >
+          <CloseIcon sx={{ mr: 1 }} />
+          {settings.actions.disconnect}
+        </ListItemButton>
+      </Menu>
     </>
   );
 }

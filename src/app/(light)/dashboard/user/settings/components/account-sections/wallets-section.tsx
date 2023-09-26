@@ -1,24 +1,25 @@
+import { settings } from '@/locale/en/settings';
 import { Auth } from '@/services/protocol/types';
 import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import { AddOutlined } from '@mui/icons-material';
-import CloseIcon from '@mui/icons-material/Close';
-import { Button, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { Button, ListItem, ListItemText } from '@mui/material';
 
 import AliasMenuButton from '../alias-menu-button';
 import AccountSection from './account-section';
 
 type Props = {
   wallets: PartialDeep<Auth>[];
+  onDisconnect: (address: string) => void;
 };
 
-export default function WalletsSection({ wallets }: Props) {
+export default function WalletsSection({ wallets, onDisconnect }: Props) {
   return (
     <AccountSection
-      title="Wallet"
+      title={settings.connected_accounts.wallet}
       button={
         <Button variant="text" startIcon={<AddOutlined />}>
-          Add wallet
+          {settings.actions.add_wallet}
         </Button>
       }
     >
@@ -27,12 +28,7 @@ export default function WalletsSection({ wallets }: Props) {
           key={data?.address}
           secondaryAction={
             <AliasMenuButton
-              menuItems={
-                <ListItemButton onClick={() => console.log()}>
-                  <CloseIcon sx={{ mr: 1 }} />
-                  Disconnect
-                </ListItemButton>
-              }
+              onDisconnect={() => onDisconnect(data?.address as string)}
             />
           }
         >

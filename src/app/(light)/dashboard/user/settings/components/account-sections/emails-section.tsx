@@ -1,3 +1,5 @@
+import { settings } from '@/locale/en/settings';
+
 import { AddOutlined, NotificationsOutlined } from '@mui/icons-material';
 import {
   Button,
@@ -14,15 +16,20 @@ import AccountSection from './account-section';
 type Props = {
   emails: any[];
   userEmail: string;
+  onDisconnect: (address: string) => void;
 };
 
-export default function EmailsSection({ emails, userEmail }: Props) {
+export default function EmailsSection({
+  emails,
+  userEmail,
+  onDisconnect,
+}: Props) {
   return (
     <AccountSection
       title="Email"
       button={
         <Button variant="text" startIcon={<AddOutlined />}>
-          Add email address
+          {settings.actions.add_email_address}
         </Button>
       }
     >
@@ -32,7 +39,14 @@ export default function EmailsSection({ emails, userEmail }: Props) {
           const primary = data.email === userEmail;
 
           return (
-            <ListItem key={data.address} secondaryAction={<AliasMenuButton />}>
+            <ListItem
+              key={data?.address}
+              secondaryAction={
+                <AliasMenuButton
+                  onDisconnect={() => onDisconnect(data?.address as string)}
+                />
+              }
+            >
               <ListItemText
                 {...(primary
                   ? {
@@ -40,7 +54,7 @@ export default function EmailsSection({ emails, userEmail }: Props) {
                         <>
                           <Typography component="p">{data.address}</Typography>
                           <Chip
-                            label="Receiving notifications"
+                            label={settings.notifications.receiving_account}
                             size="small"
                             icon={<NotificationsOutlined />}
                             sx={{
