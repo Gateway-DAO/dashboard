@@ -14,8 +14,7 @@ export default function ToggleVisibilityButton({
   isVisible,
   onToggle,
   ...props
-}: Props & Omit<ButtonProps, "onClick">) {
-
+}: Props & Omit<ButtonProps, 'onClick'>) {
   return (
     <Button
       onClick={onToggle}

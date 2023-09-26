@@ -18,22 +18,23 @@ export function VerifyEmailLoginToken() {
   const onHandleSession = useStepHandler();
   const countdown = useCountdown({ time: 30, trigger: startCountdown });
 
-  const { values, setStepState } = useStepState()
-  const email = values?.email ?? "";
+  const { values, setStepState } = useStepState();
+  const email = values?.email ?? '';
 
   const resendEmail = useMutation({
     mutationKey: ['resendEmail'],
-    mutationFn: async () => apiPublic.create_email_nonce({ email })
-  })
+    mutationFn: async () => apiPublic.create_email_nonce({ email }),
+  });
 
   const sendConfirmationToken = useMutation({
     mutationKey: ['sendConfirmationToken'],
-    mutationFn: (code: string) => signIn("credential-email", {
-      email,
-      code,
-      redirect: false,
-    })
-  })
+    mutationFn: (code: string) =>
+      signIn('credential-email', {
+        email,
+        code,
+        redirect: false,
+      }),
+  });
 
   const onResendEmail = async () => {
     try {
@@ -51,17 +52,16 @@ export function VerifyEmailLoginToken() {
     try {
       await sendConfirmationToken.mutateAsync(code);
       await onHandleSession();
-
     } catch (e: any) {
       enqueueSnackbar(e.message, {
         variant: 'error',
       });
     }
-  }
+  };
 
   return (
     <CodeField
-      onClickEdit={() => setStepState({ step: "initial" })}
+      onClickEdit={() => setStepState({ step: 'initial' })}
       onSubmitConfirmCode={onSubmit}
       isLoadingConfirmCode={sendConfirmationToken.isLoading}
       onResendEmail={onResendEmail}

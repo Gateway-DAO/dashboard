@@ -38,6 +38,12 @@ export default function RequestStatusChip({
   }
 
   return (
-    <Chip variant={variant} sx={{ textTransform: 'capitalize' }} color={color} label={label} {...props} />
+    <Chip
+      variant={variant}
+      sx={{ textTransform: 'capitalize' }}
+      color={color}
+      label={label}
+      {...props}
+    />
   );
 }

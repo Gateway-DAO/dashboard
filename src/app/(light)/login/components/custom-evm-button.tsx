@@ -41,7 +41,6 @@ export function CustomEvmButton({ onClose }: Props) {
                 opacity: 0,
                 pointerEvents: 'none',
                 userSelect: 'none',
-
               },
             })}
           >

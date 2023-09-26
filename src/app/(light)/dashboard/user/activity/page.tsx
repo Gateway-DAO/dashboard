@@ -1,5 +1,3 @@
 export default function DashboardUserActivityPage() {
-  return (
-    <h1>DashboardUserActivityPage</h1>
-  );
+  return <h1>DashboardUserActivityPage</h1>;
 }

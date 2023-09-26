@@ -14,9 +14,18 @@ import dashboardOrgMenuItems from './dashboard-org-menu-items';
 export default function DashboardOrgMenuListItems() {
   const activePath = usePathname();
   const { pathnameOrg } = useOrganization();
-  const menuItems = useMemo(() => pathnameOrg ? dashboardOrgMenuItems(pathnameOrg) : undefined, [pathnameOrg]);
+  const menuItems = useMemo(
+    () => (pathnameOrg ? dashboardOrgMenuItems(pathnameOrg) : undefined),
+    [pathnameOrg]
+  );
 
-  return menuItems?.map(({ activeHrefs, ...item }) => (
-    <GTWMenuItem key={item.name} active={activeHrefs.some(path => activePath.includes(path))} {...item} />
-  )) ?? null;
+  return (
+    menuItems?.map(({ activeHrefs, ...item }) => (
+      <GTWMenuItem
+        key={item.name}
+        active={activeHrefs.some((path) => activePath.includes(path))}
+        {...item}
+      />
+    )) ?? null
+  );
 }

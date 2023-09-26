@@ -12,16 +12,22 @@ import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 
 import { Check, Close } from '@mui/icons-material';
-import { CircularProgress, InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import {
+  CircularProgress,
+  InputAdornment,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 import { UsernameSchema, usernameSchema } from '../../schema';
 import useStepHandler from '../../utils/use-step-handler';
 import { TitleSubtitleField } from '../title-field';
 
 export function ChooseGatewayId() {
-  const { enqueueSnackbar } = useSnackbar()
+  const { enqueueSnackbar } = useSnackbar();
   const { data: session, update: updateSession } = useSession();
-  const onHandleSuccess = useStepHandler()
+  const onHandleSuccess = useStepHandler();
   const {
     register,
     formState: { errors, isValid },
@@ -57,9 +63,11 @@ export function ChooseGatewayId() {
           displayName: displayName,
         },
       });
-      enqueueSnackbar(auth.steps.choose_gateway_id.success, { variant: 'success' })
+      enqueueSnackbar(auth.steps.choose_gateway_id.success, {
+        variant: 'success',
+      });
       await onHandleSuccess();
-    } catch (error) { }
+    } catch (error) {}
   };
 
   return (
@@ -91,10 +99,10 @@ export function ChooseGatewayId() {
           id="username"
           {...register('username', {
             onChange(event) {
-              const value = event.target.value
-              const { success } = usernameSchema.safeParse({ username: value })
+              const value = event.target.value;
+              const { success } = usernameSchema.safeParse({ username: value });
               if (success) {
-                return onCheckAvaibility(value)
+                return onCheckAvaibility(value);
               }
               if (avaibility !== 'idle') {
                 onResetAvaibility();
@@ -105,10 +113,13 @@ export function ChooseGatewayId() {
           helperText={errors.username?.message}
           InputProps={{
             startAdornment: <InputAdornment position="start">@</InputAdornment>,
-            endAdornment: <InputAdornment position="end">
-              {avaibility === "loading" && <CircularProgress size={16} />}
-              {avaibility === "success" && <Check color="success" />} {avaibility === "invalid" && <Close color="error" />}
-            </InputAdornment>
+            endAdornment: (
+              <InputAdornment position="end">
+                {avaibility === 'loading' && <CircularProgress size={16} />}
+                {avaibility === 'success' && <Check color="success" />}{' '}
+                {avaibility === 'invalid' && <Close color="error" />}
+              </InputAdornment>
+            ),
           }}
         />
         <TitleSubtitleField

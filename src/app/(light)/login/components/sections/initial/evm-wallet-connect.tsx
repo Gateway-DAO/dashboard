@@ -10,16 +10,12 @@ import useLoginWallet from '../../../libs/use-login-wallet';
 import useStepHandler from '../../../utils/use-step-handler';
 import { CustomEvmButton } from '../../custom-evm-button';
 
-
 type Props = {
   onClose: () => void;
   isEvmLoading: (value: boolean) => void;
 };
 
-export default function EvmWalletConnect({
-  onClose,
-  isEvmLoading,
-}: Props) {
+export default function EvmWalletConnect({ onClose, isEvmLoading }: Props) {
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
@@ -39,7 +35,7 @@ export default function EvmWalletConnect({
       onClose();
       await login(wallet);
       await onHandleSession();
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {

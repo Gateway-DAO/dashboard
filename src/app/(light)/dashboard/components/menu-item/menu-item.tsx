@@ -21,7 +21,7 @@ type Props = {
 
 export type GTWMenuItemSettings = Props & {
   activeHrefs: string[];
-}
+};
 
 export default function GTWMenuItem({
   icon: Icon,
