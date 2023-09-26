@@ -1,57 +1,75 @@
-import { PropsWithChildren, createContext, useContext, useState } from "react";
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
-export type WalletLoadingStep = "pending" | "signing" | "loading" | "finished" | "error"
+export type WalletLoadingStep =
+  | 'pending'
+  | 'signing'
+  | 'loading'
+  | 'success'
+  | 'error';
 
 type State = {
   step: WalletLoadingStep;
   error?: string;
-}
+};
 
 type Context = State & {
   onPending: () => void;
   onSigning: () => void;
   onLoading: () => void;
-  onFinished: () => void;
+  onSuccess: () => void;
   onError: (error: string) => void;
-}
+};
 
 const WalletConnectionContext = createContext<Context>({
-  step: "pending",
-  onPending: () => { },
-  onSigning: () => { },
-  onLoading: () => { },
-  onFinished: () => { },
-  onError: () => { },
+  step: 'pending',
+  onPending: () => {},
+  onSigning: () => {},
+  onLoading: () => {},
+  onSuccess: () => {},
+  onError: () => {},
 });
 
 /**
  * Provider to handle the wallet connection state
  */
-export default function WalletConnectionProvider({ children }: PropsWithChildren) {
-  const [{ step, error }, setStep] = useState<State>({ step: "pending" });
+export default function WalletConnectionProvider({
+  children,
+}: PropsWithChildren) {
+  const [{ step, error }, setStep] = useState<State>({ step: 'pending' });
 
   const onPending = () => {
-    setStep({ step: "pending" })
-  }
+    setStep({ step: 'pending' });
+  };
 
   const onSigning = () => {
-    setStep({ step: "signing" })
+    setStep({ step: 'signing' });
   };
   const onLoading = () => {
-    setStep({ step: "loading" })
+    setStep({ step: 'loading' });
   };
-  const onFinished = () => {
-    setStep({ step: "finished" })
+  const onSuccess = () => {
+    setStep({ step: 'success' });
   };
   const onError = (newError: string) => {
-    setStep({ step: "error", error: newError })
+    setStep({ step: 'error', error: newError });
   };
 
   return (
-    <WalletConnectionContext.Provider value={{ step, error, onPending, onSigning, onLoading, onFinished, onError }}>
+    <WalletConnectionContext.Provider
+      value={{
+        step,
+        error,
+        onPending,
+        onSigning,
+        onLoading,
+        onSuccess,
+        onError,
+      }}
+    >
       {children}
     </WalletConnectionContext.Provider>
   );
 }
 
-export const useWalletConnectionStep = () => useContext(WalletConnectionContext);
+export const useWalletConnectionStep = () =>
+  useContext(WalletConnectionContext);

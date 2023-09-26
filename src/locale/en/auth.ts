@@ -94,20 +94,21 @@ export const auth = {
   },
   connection_modal: {
     signing: {
-      title: 'Signing message',
-      description: 'Waiting for you to sign the message',
+      title: 'Sign message with your wallet',
+      description:
+        "Gateway uses this signature to verify that you're the owner of this address.",
     },
     loading: {
       title: 'Authenticating',
       description: 'Logging you in',
     },
-    finished: {
+    success: {
       title: 'Authenticated',
       description: "You're now logged in",
     },
     error: {
-      title: 'Error',
-      description: 'An error ocurred',
+      title: 'Error verifying signature',
+      description: "Please try again or contact support if it doesn't work.",
     },
   },
 };
