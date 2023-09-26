@@ -36,6 +36,7 @@ export default function EvmWalletConnect({
 
   const onLogin = async (wallet: string) => {
     try {
+      onClose();
       await login(wallet);
       await onHandleSession();
     } catch (error) { }

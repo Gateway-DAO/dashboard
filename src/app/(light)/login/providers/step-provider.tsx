@@ -17,7 +17,9 @@ type StepContextType = {
 } & State;
 
 const StepContext = createContext<StepContextType>({} as StepContextType);
-
+/**
+ * Provider to handle the login/signup step state, and store the email value
+ */
 export default function StepProvider({ children, session }: PropsWithChildren<{ session: Session | null }>) {
   const [state, setStepState] = useState<State>(() => {
     const step = getStep(session);

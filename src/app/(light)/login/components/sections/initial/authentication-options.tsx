@@ -8,10 +8,11 @@ import { FaDiscord } from 'react-icons/fa';
 
 import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { Button, Link, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 
-import SolanaWalletConnect from './solana-wallet-connect';
+import WalletConnectionProvider from '../../../providers/wallet-connection-provider';
 import WalletConnectModal from './wallet-connect-modal';
+import WalletLoadingModal from './wallet-loading-modal';
 
 const EvmProvider = dynamic(() => import('../../../providers/evm-provider'), {
   ssr: false,
@@ -91,17 +92,19 @@ export function AuthenticationOptions() {
             </Fragment>
           ))}
       </Stack>
-      <EvmProvider>
-        <SolanaProvider>
-          <WalletConnectModal
-            title="Choose wallet"
-            description="Select a chain and choose one of available wallet providers or create a new wallet."
-            isOpen={modalWallet}
-            onCancel={() => setModalWallet(false)}
-          />
-          <SolanaWalletConnect onClose={() => { console.log("close") }} />
-        </SolanaProvider>
-      </EvmProvider>
+      <WalletConnectionProvider>
+        <EvmProvider>
+          <SolanaProvider>
+            <WalletConnectModal
+              title="Choose wallet"
+              description="Select a chain and choose one of available wallet providers or create a new wallet."
+              isOpen={modalWallet}
+              onCancel={() => setModalWallet(false)}
+            />
+            <WalletLoadingModal />
+          </SolanaProvider>
+        </EvmProvider>
+      </WalletConnectionProvider>
     </>
   );
 }
