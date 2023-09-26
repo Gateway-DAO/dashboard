@@ -24,7 +24,7 @@ export default function ConnectedAccounts() {
     handleDisconnectAlias,
     deactivateGatewayId,
     closeModal,
-    openModalRight,
+    modalDeactivateGatewayId,
   } = useDisconnectAlias();
 
   const wallets = useMemo(() => {
@@ -76,7 +76,7 @@ export default function ConnectedAccounts() {
           }
         />
       </Stack>
-      <ModalRight open={openModalRight} onClose={closeModal}>
+      <ModalRight open={modalDeactivateGatewayId} onClose={closeModal}>
         <ModalTitle onClose={closeModal} />
         <Stack>
           <Typography
