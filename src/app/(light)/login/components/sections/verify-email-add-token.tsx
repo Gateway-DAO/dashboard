@@ -18,20 +18,25 @@ export function VerifyEmailAddToken() {
   const onHandleSession = useStepHandler();
   const countdown = useCountdown({ time: 30, trigger: startCountdown });
 
-  const { data: session, update } = useSession()
+  const { data: session, update } = useSession();
 
-  const { values, setStepState } = useStepState()
-  const email = values?.email ?? "";
+  const { values, setStepState } = useStepState();
+  const email = values?.email ?? '';
 
   const resendEmail = useMutation({
     mutationKey: ['resendEmail'],
-    mutationFn: async () => api(session?.token ?? "").protocol_add_email({ email })
-  })
+    mutationFn: async () =>
+      api(session?.token ?? '').protocol_add_email({ email }),
+  });
 
   const sendConfirmationToken = useMutation({
     mutationKey: ['add-email', email],
-    mutationFn: (code: string) => api(session?.token ?? "").protocol_add_email_confirmation({ email, code: parseInt(code) })
-  })
+    mutationFn: (code: string) =>
+      api(session?.token ?? '').protocol_add_email_confirmation({
+        email,
+        code: parseInt(code),
+      }),
+  });
 
   const onResendEmail = async () => {
     try {
@@ -50,17 +55,16 @@ export function VerifyEmailAddToken() {
       await sendConfirmationToken.mutateAsync(code);
       await update();
       await onHandleSession();
-
     } catch (e: any) {
       enqueueSnackbar(e.message, {
         variant: 'error',
       });
     }
-  }
+  };
 
   return (
     <CodeField
-      onClickEdit={() => setStepState({ step: "add-email" })}
+      onClickEdit={() => setStepState({ step: 'add-email' })}
       onSubmitConfirmCode={onSubmit}
       isLoadingConfirmCode={sendConfirmationToken.isLoading}
       onResendEmail={onResendEmail}

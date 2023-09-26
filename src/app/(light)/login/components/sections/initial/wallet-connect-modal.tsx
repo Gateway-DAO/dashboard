@@ -26,10 +26,9 @@ export default function WalletConnectModal({
   isOpen,
   onCancel,
 }: Props) {
-
   const [evmIsLoading, setEvmIsLoading] = useState(false);
   return (
-    <Dialog open={isOpen} onClose={() => onCancel()} >
+    <Dialog open={isOpen} onClose={() => onCancel()}>
       <DialogTitle id="title-modal" sx={{ textAlign: 'left' }}>
         {title}
       </DialogTitle>
@@ -51,15 +50,12 @@ export default function WalletConnectModal({
           </Stack>
         </Stack>
       </DialogContent>
-      <DialogActions sx={{
-        px: 4
-      }}>
-        <Button
-          onClick={onCancel}
-          size="medium"
-          fullWidth
-          variant="outlined"
-        >
+      <DialogActions
+        sx={{
+          px: 4,
+        }}
+      >
+        <Button onClick={onCancel} size="medium" fullWidth variant="outlined">
           Cancel
         </Button>
       </DialogActions>

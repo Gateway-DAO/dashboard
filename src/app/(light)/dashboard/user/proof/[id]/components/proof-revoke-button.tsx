@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { common } from "@/locale/en/common";
+import { common } from '@/locale/en/common';
 
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Button } from "@mui/material";
+import { Button } from '@mui/material';
 
 type Props = {
   proof: any; // TODO: Add type
-}
+};
 
-export default function ProofRevokeButton({ }: Props) {
+export default function ProofRevokeButton({}: Props) {
   return (
     <Button
       variant="outlined"
@@ -26,5 +26,5 @@ export default function ProofRevokeButton({ }: Props) {
     >
       {common.actions.revoke_access}
     </Button>
-  )
+  );
 }

@@ -4,6 +4,10 @@ import { Authentication } from './components/authentication';
 import StepProvider from './providers/step-provider';
 
 export default async function AuthPage() {
-  const session = await getGtwServerSession()
-  return <StepProvider session={session}><Authentication /></StepProvider>;
+  const session = await getGtwServerSession();
+  return (
+    <StepProvider session={session}>
+      <Authentication />
+    </StepProvider>
+  );
 }

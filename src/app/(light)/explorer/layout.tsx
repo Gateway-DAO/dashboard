@@ -1,8 +1,8 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
-import { Container } from "@mui/material";
+import { Container } from '@mui/material';
 
-import Header from "./components/header/header";
+import Header from './components/header/header';
 
 export default function PublicLayout({ children }: PropsWithChildren) {
   return (
@@ -12,5 +12,5 @@ export default function PublicLayout({ children }: PropsWithChildren) {
         {children}
       </Container>
     </>
-  )
+  );
 }
