@@ -14,28 +14,15 @@ import {
   Typography,
 } from '@mui/material';
 
+import { createPropertiesArray } from './utils';
+
 type Props = {
   dataModel: any;
   validDataProvided: any;
 };
 
 export default function RequestedData({ dataModel, validDataProvided }: Props) {
-  // Function to translate claimValidations into a object easy to run and read
-  const propertiesArray = [];
-  for (const propertyName in dataModel.claimValidations?.properties) {
-    const propertyObj = dataModel.claimValidations?.properties[propertyName];
-    const validations = Object.keys(propertyObj)
-      .filter((key) => key !== 'type' && key !== 'title')
-      .map((key) => `${key} ${propertyObj[key]}`)
-      .join(', ');
-
-    propertiesArray.push({
-      propertyName,
-      title: dataModel.schema?.properties?.[propertyName]?.title,
-      type: propertyObj.type,
-      validations,
-    });
-  }
+  const propertiesArray = createPropertiesArray(dataModel) || [];
 
   return (
     <Stack

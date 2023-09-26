@@ -24,7 +24,7 @@ type Props = {
 };
 
 export default function ShareCopyFormSuccessfully({ id }: Props) {
-  const { privateApi } = useGtwSession();
+  const { privateApi, session } = useGtwSession();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -47,6 +47,8 @@ export default function ShareCopyFormSuccessfully({ id }: Props) {
     }
   };
 
+  const isOwner = data?.owner.id === session.user.id;
+
   return (
     <>
       {isFetching || isLoading ? (
@@ -68,7 +70,7 @@ export default function ShareCopyFormSuccessfully({ id }: Props) {
           >
             {pda.share.successfully_title}
           </Typography>
-          <ProofCardTitle proof={data} />
+          <ProofCardTitle isOwner={isOwner} proof={data} />
           <ProofCardInfo proof={data} />
           <Button
             variant="contained"

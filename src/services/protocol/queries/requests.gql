@@ -41,6 +41,12 @@ query dataRequest($id: String!) {
     proofs {
       id
     }
+    userRecipient {
+      id
+      gatewayId
+      profilePicture
+      displayName
+    }
     userVerifier {
       id
       gatewayId
