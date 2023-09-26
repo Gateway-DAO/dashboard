@@ -23,6 +23,13 @@ export default function ConnectedAccounts() {
     );
   }, [session]);
 
+  const emails = useMemo(() => {
+    return (
+      session.user.authentications?.filter((a) => a.type === AuthType.Email) ??
+      []
+    );
+  }, [session]);
+
   return (
     <Box
       sx={{
@@ -40,7 +47,7 @@ export default function ConnectedAccounts() {
         here.
       </Typography>
       <Stack divider={<Divider sx={{ mx: NEGATIVE_CONTAINER_PX }} />}>
-        <EmailsSection />
+        <EmailsSection emails={emails} />
         <WalletsSection wallets={wallets} />
         <SocialsSection />
       </Stack>
