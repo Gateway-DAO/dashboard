@@ -26,8 +26,6 @@ export const nextAuthConfig: NextAuthOptions = {
         token.skipEmail = session.skipEmail;
       }
 
-      (token as any).update = trigger === 'update';
-
       const parsedToken = jwt.decode(token.token, { json: true });
 
       if (parsedToken!.exp! < Date.now() / 1000) {
@@ -37,7 +35,7 @@ export const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      const user = await getMe(token.token, !!(token as any).update);
+      const user = await getMe(token.token);
       return {
         ...session,
         ...(token.error && { error: token.error }),
