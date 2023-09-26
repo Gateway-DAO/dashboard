@@ -1,4 +1,4 @@
-import { AuthType, Chain } from '@/services/protocol/types';
+import { Auth } from '@/services/protocol/types';
 import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import { AddOutlined } from '@mui/icons-material';
@@ -7,17 +7,9 @@ import { Button, ListItem, ListItemButton, ListItemText } from '@mui/material';
 
 import AliasMenuButton from '../alias-menu-button';
 import AccountSection from './account-section';
-type Wallet = {
-  id: string;
-  type: AuthType;
-  data: {
-    address: string;
-    chain: Chain | null;
-  } | null;
-};
 
 type Props = {
-  wallets: PartialDeep<Wallet>[];
+  wallets: PartialDeep<Auth>[];
 };
 
 export default function WalletsSection({ wallets }: Props) {
