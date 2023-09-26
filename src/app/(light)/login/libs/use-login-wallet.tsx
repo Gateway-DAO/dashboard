@@ -7,6 +7,8 @@ import { apiPublic } from "@/services/protocol/api";
 import { Chain } from "@/services/protocol/types";
 import { useMutation } from "@tanstack/react-query";
 
+import { useWalletConnectionStep } from "../providers/wallet-connection-provider";
+
 type Props = {
   address?: string;
   chain: Chain;
@@ -15,24 +17,27 @@ type Props = {
 }
 
 export default function useLoginWallet({ address, chain, disconnect, signMessage }: Props) {
-  const [error, setError] = useState<unknown | null>(null);
 
-  const onDisconnect = (error: unknown) => {
+  const {
+    onSigning,
+    onLoading,
+    onFinished,
+    onError
+  } = useWalletConnectionStep();
+
+  const onDisconnect = () => {
     disconnect()
     signOut({ redirect: false })
-    throw error;
   }
 
   const { mutateAsync: getNonce, isLoading: isLoadingNonce } = useMutation({
     mutationKey: ['get-nonce', address],
     mutationFn: async (wallet: string) => (await apiPublic.get_nonce({ wallet, chain })).createWalletNonce.message,
-    onError: onDisconnect,
   })
 
   const { mutateAsync: getSignature, isLoading: isLoadingSignature } = useMutation({
     mutationKey: ['get-signature', address],
     mutationFn: (nonce: string) => signMessage(nonce),
-    onError: onDisconnect,
   })
 
   const { mutateAsync: loginWallet, isLoading: isLoadingWallet } = useMutation({
@@ -57,19 +62,20 @@ export default function useLoginWallet({ address, chain, disconnect, signMessage
 
   const login = async (wallet: string) => {
     try {
-      setError(null);
+      onSigning();
       const nonce = await getNonce(wallet);
       const signature = await getSignature(nonce);
+      onLoading();
       await loginWallet(signature);
-    } catch (error) {
-      onDisconnect(error);
-      throw error;
+      onFinished();
+    } catch (error: any) {
+      onDisconnect();
+      onError(error?.message ?? JSON.stringify(error));
     }
   }
 
   return {
     login,
-    error,
     isLoading: isLoadingNonce || isLoadingSignature || isLoadingWallet,
   }
 

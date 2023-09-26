@@ -92,4 +92,22 @@ export const auth = {
   card_summary: {
     verify_email: 'Your email',
   },
+  connection_modal: {
+    signing: {
+      title: 'Signing message',
+      description: 'Waiting for you to sign the message',
+    },
+    loading: {
+      title: 'Authenticating',
+      description: 'Logging you in',
+    },
+    finished: {
+      title: 'Authenticated',
+      description: "You're now logged in",
+    },
+    error: {
+      title: 'Error',
+      description: 'An error ocurred',
+    },
+  },
 };
