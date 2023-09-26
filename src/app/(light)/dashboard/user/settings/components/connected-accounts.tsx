@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import ModalRight from '@/components/modal/modal-right/modal-right';
@@ -20,12 +20,22 @@ import EmailsSection from './account-sections/emails-section';
 import SocialsSection from './account-sections/socials-section';
 import WalletsSection from './account-sections/wallets-section';
 
-type ModalType = 'email' | 'wallet';
+export type AliasType =
+  | 'email'
+  | 'wallet'
+  | 'Google'
+  | 'Discord'
+  | 'Github'
+  | 'Twitter';
 
 export default function ConnectedAccounts() {
   const { data: session } = useSession();
   const router = useRouter();
   const [openModalRight, setOpenModalRight] = useToggle(false);
+  const [dataToDisconnect, setDataToDisconnect] = useState<{
+    type: AliasType | undefined;
+    address: string | undefined;
+  } | null>(null);
 
   const wallets = useMemo(() => {
     return (
@@ -52,21 +62,57 @@ export default function ConnectedAccounts() {
     setOpenModalRight();
   };
 
-  const handleDisconnectAlias = (type: ModalType, address: string) => {
-    if (session?.user?.authentications?.length === 1) {
+  const deactivateGatewayId = () => {
+    disconnectAlias({
+      type: dataToDisconnect?.type as AliasType,
+      address: dataToDisconnect?.address,
+    });
+    console.log('Gateway ID deactivated!');
+    setDataToDisconnect(null);
+  };
+
+  const handleDisconnectAlias = ({
+    type,
+    address,
+  }: {
+    type: AliasType;
+    address?: string;
+  }) => {
+    if (session?.user?.authentications?.length !== 1) {
       openModal();
+      setDataToDisconnect({ type, address });
     } else {
-      if (type === 'email') disconnectEmail(address);
-      if (type === 'wallet') disconnectWallet(address);
+      disconnectAlias({ type, address });
     }
   };
 
+  const disconnectAlias = ({
+    type,
+    address,
+  }: {
+    type: AliasType;
+    address?: string;
+  }) => {
+    if (type === 'email') disconnectEmail(address as string);
+    if (type === 'wallet') disconnectWallet(address as string);
+    if (type === 'Discord') disconnectDiscord();
+    if (type === 'Twitter') disconnectTwitter();
+  };
+
   const disconnectEmail = (address: string) => {
-    console.log('Email removed!', address);
+    console.log('Email disconnected!', address);
   };
 
   const disconnectWallet = (address: string) => {
-    console.log('Wallet removed!', address);
+    console.log('Wallet disconnected!', address);
+  };
+
+  const disconnectDiscord = () => {
+    console.log('Discord disconnected!');
+  };
+
+  const disconnectTwitter = () => {
+    console.log('Twitter disconnected!');
   };
 
   return (
@@ -87,13 +133,21 @@ export default function ConnectedAccounts() {
         <EmailsSection
           emails={emails}
           userEmail={session?.user?.email as string}
-          onDisconnect={(address) => handleDisconnectAlias('email', address)}
+          onDisconnect={(address) =>
+            handleDisconnectAlias({ type: 'email', address })
+          }
         />
         <WalletsSection
           wallets={wallets}
-          onDisconnect={(address) => handleDisconnectAlias('wallet', address)}
+          onDisconnect={(address) =>
+            handleDisconnectAlias({ type: 'wallet', address })
+          }
         />
-        <SocialsSection />
+        <SocialsSection
+          onDisconnect={(type) =>
+            handleDisconnectAlias({ type: type as AliasType })
+          }
+        />
       </Stack>
       <ModalRight open={openModalRight} onClose={closeModal}>
         <ModalTitle onClose={closeModal} />
@@ -113,6 +167,7 @@ export default function ConnectedAccounts() {
               mt: 3,
             }}
             id="disconnect-alias-action"
+            onClick={() => deactivateGatewayId()}
           >
             Deactivate
           </LoadingButton>
