@@ -13,10 +13,10 @@ import AccountSection from './account-section';
 
 type Props = {
   emails: any[];
+  userEmail: string;
 };
 
-export default function EmailsSection({ emails }: Props) {
-  // console.log(emails);
+export default function EmailsSection({ emails, userEmail }: Props) {
   return (
     <AccountSection
       title="Email"
@@ -26,55 +26,59 @@ export default function EmailsSection({ emails }: Props) {
         </Button>
       }
     >
-      {/* {emails &&
+      {emails &&
         emails.length > 0 &&
-        emails.map(({ data }) => (
-          <ListItem key={data.email} secondaryAction={<AliasMenuButton />}>
-            <ListItemText
-              {...(primary
-                ? {
-                    primary: (
-                      <>
-                        <Typography component="p">{data.email}</Typography>
-                        <Chip
-                          label="Receiving notifications"
-                          size="small"
-                          icon={<NotificationsOutlined />}
-                          sx={{
-                            '.MuiChip-icon': {
-                              marginRight: {
-                                xs: 0.5,
-                                md: -0.5,
+        emails.map(({ data }) => {
+          const primary = data.email === userEmail;
+
+          return (
+            <ListItem key={data.address} secondaryAction={<AliasMenuButton />}>
+              <ListItemText
+                {...(primary
+                  ? {
+                      primary: (
+                        <>
+                          <Typography component="p">{data.address}</Typography>
+                          <Chip
+                            label="Receiving notifications"
+                            size="small"
+                            icon={<NotificationsOutlined />}
+                            sx={{
+                              '.MuiChip-icon': {
+                                marginRight: {
+                                  xs: 0.5,
+                                  md: -0.5,
+                                },
                               },
-                            },
-                            '.MuiChip-label': {
-                              display: {
-                                xs: 'none',
-                                md: 'block',
+                              '.MuiChip-label': {
+                                display: {
+                                  xs: 'none',
+                                  md: 'block',
+                                },
                               },
-                            },
-                          }}
-                        />
-                      </>
-                    ),
-                    primaryTypographyProps: {
-                      component: Stack,
-                      direction: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: 1,
-                      sx: {
-                        display: 'flex',
-                        pr: 1,
+                            }}
+                          />
+                        </>
+                      ),
+                      primaryTypographyProps: {
+                        component: Stack,
+                        direction: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: 1,
+                        sx: {
+                          display: 'flex',
+                          pr: 1,
+                        },
                       },
-                    },
-                  }
-                : {
-                    primary: email,
-                  })}
-            />
-          </ListItem>
-        ))} */}
+                    }
+                  : {
+                      primary: data.address,
+                    })}
+              />
+            </ListItem>
+          );
+        })}
     </AccountSection>
   );
 }
