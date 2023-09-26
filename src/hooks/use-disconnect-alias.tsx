@@ -25,9 +25,14 @@ export function useDisconnectAlias() {
   const [dataToDisconnect, setDataToDisconnect] = useState<Alias | null>(null);
   const router = useRouter();
 
-  const openModal = () => {
-    router.push(`#deactivate-gateway-id`, { scroll: false });
-    setModalDeactivateGatewayId(true);
+  const handleDisconnectAlias = ({ type, address }: Alias) => {
+    if (session?.user?.authentications?.length === 1) {
+      router.push(`#deactivate-gateway-id`, { scroll: false });
+      setModalDeactivateGatewayId(true);
+      setDataToDisconnect({ type, address });
+    } else {
+      disconnectAlias({ type, address });
+    }
   };
 
   const closeModal = () => {
@@ -43,15 +48,6 @@ export function useDisconnectAlias() {
     });
     console.log('Gateway ID deactivated!');
     setDataToDisconnect(null);
-  };
-
-  const handleDisconnectAlias = ({ type, address }: Alias) => {
-    if (session?.user?.authentications?.length === 1) {
-      openModal();
-      setDataToDisconnect({ type, address });
-    } else {
-      disconnectAlias({ type, address });
-    }
   };
 
   const disconnectAlias = ({ type, address }: Alias) => {
