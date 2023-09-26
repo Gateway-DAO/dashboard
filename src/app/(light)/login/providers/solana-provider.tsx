@@ -2,16 +2,16 @@
 import { PropsWithChildren, useMemo } from 'react';
 
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import {
-  WalletModalProvider,
-} from '@solana/wallet-adapter-react-ui';
+  ConnectionProvider,
+  WalletProvider,
+} from '@solana/wallet-adapter-react';
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import {
   LedgerWalletAdapter,
   PhantomWalletAdapter,
   SolflareWalletAdapter,
   TorusWalletAdapter,
-  UnsafeBurnerWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
 
@@ -29,7 +29,6 @@ export default function SolanaProvider({ children }: PropsWithChildren) {
       new SolflareWalletAdapter({ network: solNetwork }),
       new TorusWalletAdapter(),
       new LedgerWalletAdapter(),
-      new UnsafeBurnerWalletAdapter(),
     ],
     [solNetwork]
   );
