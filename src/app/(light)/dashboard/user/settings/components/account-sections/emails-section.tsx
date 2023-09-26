@@ -16,6 +16,7 @@ type Props = {
 };
 
 export default function EmailsSection({ emails }: Props) {
+  // console.log(emails);
   return (
     <AccountSection
       title="Email"
