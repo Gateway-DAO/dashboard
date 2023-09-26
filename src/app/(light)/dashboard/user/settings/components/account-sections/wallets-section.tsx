@@ -1,4 +1,5 @@
-import { Chain } from '@/services/protocol/types';
+import { AuthType, Chain } from '@/services/protocol/types';
+import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import { AddOutlined } from '@mui/icons-material';
 import { Button, ListItem, ListItemText } from '@mui/material';
@@ -8,15 +9,15 @@ import AccountSection from './account-section';
 
 type Wallet = {
   id: string;
-  type: 'WALLET';
+  type: AuthType;
   data: {
     address: string;
-    chain: Chain;
-  };
+    chain: Chain | null;
+  } | null;
 };
 
 type Props = {
-  wallets: Wallet[];
+  wallets: PartialDeep<Wallet>[];
 };
 
 export default function WalletsSection({ wallets }: Props) {
@@ -29,9 +30,9 @@ export default function WalletsSection({ wallets }: Props) {
         </Button>
       }
     >
-      {wallets.map(({ data }) => (
-        <ListItem key={data.address} secondaryAction={<AliasMenuButton />}>
-          <ListItemText primary={data.address} secondary={data.chain} />
+      {wallets?.map(({ data }) => (
+        <ListItem key={data?.address} secondaryAction={<AliasMenuButton />}>
+          <ListItemText primary={data?.address} secondary={data?.chain} />
         </ListItem>
       ))}
     </AccountSection>
