@@ -1,8 +1,8 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
-import { useGtwSession } from '@/context/gtw-session-provider';
 import { AuthType } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 
@@ -14,18 +14,21 @@ import SocialsSection from './account-sections/socials-section';
 import WalletsSection from './account-sections/wallets-section';
 
 export default function ConnectedAccounts() {
-  const { session } = useGtwSession();
+  const { data: session } = useSession();
+
+  console.log('$$$$$$$$$$$$$$', session);
 
   const wallets = useMemo(() => {
     return (
-      session.user.authentications?.filter((a) => a.type === AuthType.Wallet) ??
-      []
+      session?.user.authentications?.filter(
+        (a) => a.type === AuthType.Wallet
+      ) ?? []
     );
   }, [session]);
 
   const emails = useMemo(() => {
     return (
-      session.user.authentications?.filter((a) => a.type === AuthType.Email) ??
+      session?.user.authentications?.filter((a) => a.type === AuthType.Email) ??
       []
     );
   }, [session]);
