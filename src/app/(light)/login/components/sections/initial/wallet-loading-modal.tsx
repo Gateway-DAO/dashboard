@@ -4,8 +4,10 @@ import { common } from '@/locale/en/common';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useDisconnect } from 'wagmi';
 
+import { CheckOutlined } from '@mui/icons-material';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import {
+  Avatar,
   Box,
   Button,
   CircularProgress,
@@ -45,31 +47,56 @@ export default function WalletLoadingModal() {
       aria-describedby="wallet-loading-modal-description"
     >
       <DialogTitle id="wallet-loading-modal-title">
-        {!isError && (
-          <CircularProgress
-            size={32}
-            sx={{
-              display: 'block',
-              mb: 1,
-            }}
-          />
+        {(step === 'signing' || step === 'loading') && (
+          <CircularProgress size={32} />
         )}
-        {locale?.title}
-      </DialogTitle>
-      <DialogContent>
-        {isError && (
-          <Box
-            key="error"
+        {step === 'success' && (
+          <Avatar
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              backgroundColor: 'success.main',
+              color: 'action.active',
+              width: 40,
+              height: 40,
             }}
           >
-            <ErrorOutlineIcon color="error" sx={{ fontSize: 48 }} />
-          </Box>
+            <CheckOutlined />
+          </Avatar>
         )}
-        {step === 'loading' && <Loading marginTop={0} />}
+        {isError && (
+          <Avatar
+            sx={{
+              backgroundColor: 'error.main',
+              color: 'action.active',
+              width: 40,
+              height: 40,
+            }}
+          >
+            <ErrorOutlineIcon />
+          </Avatar>
+        )}
+        <Typography
+          component="span"
+          sx={{
+            display: 'block',
+            mt: 1,
+            fontSize: 'inherit',
+            fontWeight: 'inherit',
+          }}
+        >
+          {locale?.title}
+        </Typography>
+      </DialogTitle>
+      <DialogContent>
+        {isError ||
+          (step === 'success' && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            ></Box>
+          ))}
         <DialogContentText id="wallet-loading-modal-description" sx={{ mt: 2 }}>
           {locale?.description}
           {error && (
