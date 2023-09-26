@@ -15,23 +15,24 @@ import PassFilledIcon from './pass-filled';
 import SolanaIcon from './solana';
 import VerifiedFilledIcon from './verified-filled';
 
-
 const meta = {
   title: 'Gateway/Icons',
-  component: () => <>
-    <DataProofOutlinedIcon />
-    <DataProofFilledIcon />
-    <GatewaySquaredIcon />
-    <GatewayIcon />
-    <GatewayBrokenIcon />
-    <SolanaIcon />
-    <DataRequestFilledIcon />
-    <DataRequestOutlinedIcon />
-    <DataFilledIcon />
-    <DataOutlinedIcon />
-    <VerifiedFilledIcon />
-    <PassFilledIcon />
-  </>,
+  component: () => (
+    <>
+      <DataFilledIcon />
+      <DataOutlinedIcon />
+      <DataProofOutlinedIcon />
+      <DataProofFilledIcon />
+      <DataRequestFilledIcon />
+      <DataRequestOutlinedIcon />
+      <VerifiedFilledIcon />
+      <PassFilledIcon />
+      <GatewaySquaredIcon />
+      <GatewayIcon />
+      <GatewayBrokenIcon />
+      <SolanaIcon />
+    </>
+  ),
   parameters: {
     layout: 'centered',
   },
@@ -42,7 +43,6 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-
 export const Default: Story = {
   // render: (args: SvgIconProps) => <Icons. {...args} />
-}
+};
