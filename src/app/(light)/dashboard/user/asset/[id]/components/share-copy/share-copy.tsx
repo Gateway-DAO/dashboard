@@ -56,10 +56,10 @@ export default function ShareCopy({ pda }: Props) {
   const toggleModal = () => {
     if (openShareCopy) {
       methods.reset();
-      router.push(routes.dashboardUserAsset(pda?.id));
+      router.push(routes.dashboardUserAsset(pda?.id), { scroll: false });
       setPdaIssued(undefined);
     } else {
-      router.push('#share-copy');
+      router.push('#share-copy', { scroll: false });
     }
     setOpenShareCopy();
   };

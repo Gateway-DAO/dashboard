@@ -5,6 +5,7 @@ export const settings = {
     title: 'Connected accounts',
     description:
       'These are the accounts you connected to your Gateway ID to log in and receive private data assets. You can disconnect or connect more accounts here.',
+    wallet: 'Wallet',
   },
   notifications: {
     receiving_account: 'Receiving notifications',
@@ -13,6 +14,7 @@ export const settings = {
   actions: {
     add_email_address: 'Add email address',
     add_wallet: 'Add wallet',
+    disconnect: 'Disconnect',
   },
   developer_portal: {
     title: 'Developer portal',
