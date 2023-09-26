@@ -7,7 +7,7 @@ import { Button, ListItem, ListItemText } from '@mui/material';
 import AliasMenuButton from '../alias-menu-button';
 import AccountSection from './account-section';
 
-type Wallet = {
+type wallet = {
   id: string;
   type: AuthType;
   data: {
