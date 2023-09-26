@@ -2,12 +2,12 @@ import { AuthType, Chain } from '@/services/protocol/types';
 import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import { AddOutlined } from '@mui/icons-material';
-import { Button, ListItem, ListItemText } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { Button, ListItem, ListItemButton, ListItemText } from '@mui/material';
 
 import AliasMenuButton from '../alias-menu-button';
 import AccountSection from './account-section';
-
-type wallet = {
+type Wallet = {
   id: string;
   type: AuthType;
   data: {
@@ -31,7 +31,19 @@ export default function WalletsSection({ wallets }: Props) {
       }
     >
       {wallets?.map(({ data }) => (
-        <ListItem key={data?.address} secondaryAction={<AliasMenuButton />}>
+        <ListItem
+          key={data?.address}
+          secondaryAction={
+            <AliasMenuButton
+              menuItems={
+                <ListItemButton onClick={() => console.log()}>
+                  <CloseIcon sx={{ mr: 1 }} />
+                  Disconnect
+                </ListItemButton>
+              }
+            />
+          }
+        >
           <ListItemText primary={data?.address} secondary={data?.chain} />
         </ListItem>
       ))}

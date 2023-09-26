@@ -1,12 +1,11 @@
 'use client';
-import Link from 'next/link';
+
 import { PropsWithChildren } from 'react';
 
 import GatewaySquaredIcon from '@/components/icons/gateway-squared';
 import { common } from '@/locale/en/common';
 
-import CloseIcon from '@mui/icons-material/Close';
-import { Box, IconButton, Stack, Typography, alpha } from '@mui/material';
+import { Box, Stack, Typography, alpha } from '@mui/material';
 
 import Background from './background';
 import CloseButton, { CloseButtonProps } from './close-button';
