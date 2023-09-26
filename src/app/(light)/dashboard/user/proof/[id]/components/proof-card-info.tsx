@@ -17,7 +17,6 @@ type Props = {
 };
 
 export default function ProofCardInfo({ proof }: Props) {
-  console.log(proof);
   return (
     <Stack
       component={Card}

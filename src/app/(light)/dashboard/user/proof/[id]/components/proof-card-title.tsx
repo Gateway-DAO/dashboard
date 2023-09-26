@@ -14,10 +14,27 @@ import { Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
   proof: PartialDeep<ProofQuery['proof']> | undefined;
+  isOwner: boolean;
 };
 
-export default function ProofCardTitle({ proof }: Props) {
+export default function ProofCardTitle({ proof, isOwner }: Props) {
   const [tooltip, setTooltip] = useState<boolean>(false);
+
+  const profilePicture = isOwner
+    ? proof?.verifier?.profilePicture ?? ''
+    : proof?.owner?.profilePicture ?? '';
+  const userName = isOwner
+    ? proof?.verifier?.displayName ??
+      proof?.verifier?.gatewayId ??
+      limitCharsCentered(proof?.verifier?.id as string, 12)
+    : proof?.owner?.displayName ??
+      proof?.owner?.gatewayId ??
+      limitCharsCentered(proof?.owner?.id as string, 12);
+  const gtwName = isOwner
+    ? proof?.verifier?.gatewayId ??
+      limitCharsCentered(proof?.verifier?.id as string, 12)
+    : proof?.owner?.gatewayId ??
+      limitCharsCentered(proof?.owner?.id as string, 12);
 
   return (
     <Stack
@@ -33,7 +50,9 @@ export default function ProofCardTitle({ proof }: Props) {
       gap={2.5}
     >
       <Typography variant="caption" color="text.secondary">
-        {proofLocale.share.data_shared_with}
+        {isOwner
+          ? proofLocale.share.data_shared_with
+          : proofLocale.share.data_shared_by}
       </Typography>
       <Stack sx={{ position: 'relative' }}>
         <Stack
@@ -47,11 +66,7 @@ export default function ProofCardTitle({ proof }: Props) {
           id="tooltip-link-proof"
           onClick={() => setTooltip(true)}
         >
-          <GTWAvatar
-            src={proof?.verifier?.profilePicture ?? ''}
-            size={56}
-            name={proof?.verifier?.gatewayId as string}
-          />
+          <GTWAvatar src={profilePicture} size={56} name={userName} />
           <Typography
             variant="h3"
             id="proof-title"
@@ -61,21 +76,14 @@ export default function ProofCardTitle({ proof }: Props) {
               wordBreak: 'break-all',
             }}
           >
-            {proof?.verifier?.displayName ??
-              proof?.verifier?.gatewayId ??
-              limitCharsCentered(proof?.verifier?.id as string, 12)}
+            {userName}
           </Typography>
         </Stack>
         {tooltip && (
           <TooltipUser
-            name={
-              proof?.verifier?.displayName ??
-              proof?.verifier?.gatewayId ??
-              (proof?.verifier?.id as string)
-            }
-            username={
-              proof?.verifier?.gatewayId ?? (proof?.verifier?.id as string)
-            }
+            name={userName}
+            picture={profilePicture}
+            username={gtwName}
             issuance_date={dayjs(proof?.createdAt).format('MM/DD/YYYY, h:mm A')}
             onClose={() => setTooltip(false)}
           />

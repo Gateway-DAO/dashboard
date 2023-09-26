@@ -17,13 +17,14 @@ import ProofShareButton from './proof-share-button';
 
 type Props = {
   proof: PartialDeep<Proof>;
+  isOwner?: boolean;
 };
 
-export default function ProofItem({ proof }: Props) {
+export default function ProofItem({ proof, isOwner = false }: Props) {
   return (
     <>
       <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
-        <ProofCardTitle proof={proof} />
+        <ProofCardTitle isOwner={isOwner} proof={proof} />
         <ProofCardInfo proof={proof} />
         {/* <ProofShareButton proof={proof} />
         <ProofRevokeButton proof={proof} /> */}
