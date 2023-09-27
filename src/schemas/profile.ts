@@ -11,3 +11,8 @@ export const usernameSchema = zod
     (value) => usernameRegex.test(value),
     'Only lowercase letters, numbers and ._-'
   );
+
+export const displayNameSchema = zod.preprocess((value) => {
+  if (!value || typeof value !== 'string') return undefined;
+  return value === '' ? undefined : value;
+}, zod.string().min(2).optional());

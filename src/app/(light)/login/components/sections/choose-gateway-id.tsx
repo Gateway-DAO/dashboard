@@ -6,7 +6,7 @@ import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaib
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
 import { settings } from '@/locale/en/settings';
-import { usernameSchema } from '@/schemas/username';
+import { usernameSchema } from '@/schemas/profile';
 import { getClientPrivateApi } from '@/services/protocol/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
