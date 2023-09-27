@@ -27,6 +27,8 @@ export default function ConnectedAccounts() {
     modalDeactivateGatewayId,
   } = useDisconnectAlias();
 
+  console.log(session, session?.user?.email);
+
   const wallets = useMemo(() => {
     return (
       session?.user.authentications?.filter(
