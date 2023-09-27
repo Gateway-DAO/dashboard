@@ -53,12 +53,6 @@ mutation protocol_add_email_confirmation($email: String!, $code: Float!) {
   }
 }
 
-mutation protocol_remove_email($email: String!) {
-  removeEmail(email: $email) {
-    email
-  }
-}
-
 mutation protocol_add_wallet($wallet: String!, $chain: Chain) {
   addWallet(input: { wallet: $wallet, chain: $chain }) {
     message
@@ -77,8 +71,8 @@ mutation protocol_add_wallet_confirmation(
   }
 }
 
-mutation protocol_remove_auth_method($id: String!) {
-  unregisterAuthMethod(input: { id: $id })
+mutation protocol_unregister_auth_method($data: JSON!, $type: AuthType!) {
+  unregisterAuthMethod(input: { data: $data, type: $type })
 }
 
 mutation protocol_migrate_auth($authId: String!, $ownerJwt: String!) {
