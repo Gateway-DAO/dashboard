@@ -35,21 +35,6 @@ export function useDisconnectAlias() {
     }
   };
 
-  const closeModal = () => {
-    router.push(routes.dashboardUserSettings, { scroll: false });
-    setModalDeactivateGatewayId(false);
-    setDataToDisconnect(null);
-  };
-
-  const deactivateGatewayId = () => {
-    disconnectAlias({
-      type: dataToDisconnect?.type as AliasType,
-      address: dataToDisconnect?.address,
-    });
-    console.log('Gateway ID deactivated!');
-    setDataToDisconnect(null);
-  };
-
   const disconnectAlias = ({ type, address }: Alias) => {
     switch (type) {
       case 'email':
@@ -80,6 +65,21 @@ export function useDisconnectAlias() {
 
   const disconnectTwitter = () => {
     console.log('Twitter disconnected!');
+  };
+
+  const deactivateGatewayId = () => {
+    disconnectAlias({
+      type: dataToDisconnect?.type as AliasType,
+      address: dataToDisconnect?.address,
+    });
+    console.log('Gateway ID deactivated!');
+    setDataToDisconnect(null);
+  };
+
+  const closeModal = () => {
+    router.push(routes.dashboardUserSettings, { scroll: false });
+    setModalDeactivateGatewayId(false);
+    setDataToDisconnect(null);
   };
 
   return {
