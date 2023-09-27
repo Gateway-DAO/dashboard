@@ -20,7 +20,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { UsernameSchema, usernameSchema } from '../../schema';
+import { CreateProfileSchema, createProfileSchema } from '../../schema';
 import useStepHandler from '../../utils/use-step-handler';
 import { TitleSubtitleField } from '../title-field';
 
@@ -32,14 +32,14 @@ export function ChooseGatewayId() {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm<UsernameSchema>({
-    resolver: zodResolver(usernameSchema as any), // TODO: Add type
+  } = useForm<CreateProfileSchema>({
+    resolver: zodResolver(createProfileSchema),
     mode: 'onChange',
   });
 
   const updateUser = useMutation({
     mutationKey: ['updateUser'],
-    mutationFn: async (data: UsernameSchema) =>
+    mutationFn: async (data: CreateProfileSchema) =>
       (await getClientPrivateApi()).update_user({
         username: data.username,
         displayName: data.displayName ?? null,
@@ -49,7 +49,7 @@ export function ChooseGatewayId() {
   const { avaibility, onCheckAvaibility, onResetAvaibility } =
     useDebouncedUsernameAvaibility();
 
-  const onSubmit = async (data: UsernameSchema) => {
+  const onSubmit = async (data: CreateProfileSchema) => {
     if (avaibility !== 'success') return;
     try {
       const {
@@ -100,7 +100,9 @@ export function ChooseGatewayId() {
           {...register('username', {
             onChange(event) {
               const value = event.target.value;
-              const { success } = usernameSchema.safeParse({ username: value });
+              const { success } = createProfileSchema.safeParse({
+                username: value,
+              });
               if (success) {
                 return onCheckAvaibility(value);
               }
