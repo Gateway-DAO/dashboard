@@ -115,7 +115,6 @@ export function useDisconnectAlias() {
       type: dataToDisconnect?.type as AliasType,
       address: dataToDisconnect?.address,
     });
-    console.log('Gateway ID deactivated!');
     setDataToDisconnect(null);
     closeModal();
   };
