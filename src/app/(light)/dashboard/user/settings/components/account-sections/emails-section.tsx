@@ -17,18 +17,20 @@ type Props = {
   emails: any[];
   userEmail: string;
   onDisconnect: (address: string) => void;
+  onAddEmail: () => void;
 };
 
 export default function EmailsSection({
   emails,
   userEmail,
   onDisconnect,
+  onAddEmail,
 }: Props) {
   return (
     <AccountSection
       title="Email"
       button={
-        <Button variant="text" startIcon={<AddOutlined />}>
+        <Button onClick={onAddEmail} variant="text" startIcon={<AddOutlined />}>
           {settings.actions.add_email_address}
         </Button>
       }
