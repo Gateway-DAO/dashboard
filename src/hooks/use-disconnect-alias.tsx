@@ -1,9 +1,15 @@
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 
+import { mutations } from '@/constants/queries';
 import routes from '@/constants/routes';
+import { useGtwSession } from '@/context/gtw-session-provider';
+import { errorMessages } from '@/locale/en/errors';
+import { settings } from '@/locale/en/settings';
+import { Exact } from '@/services/protocol/types';
 import { useToggle } from '@react-hookz/web';
+import { useMutation } from '@tanstack/react-query';
+import { useSnackbar } from 'notistack';
 
 export type AliasType =
   | 'email'
@@ -19,27 +25,48 @@ type Alias = {
 };
 
 export function useDisconnectAlias() {
-  const { data: session } = useSession();
+  const { privateApi, session } = useGtwSession();
   const [modalDeactivateGatewayId, setModalDeactivateGatewayId] =
     useToggle(false);
   const [dataToDisconnect, setDataToDisconnect] = useState<Alias | null>(null);
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
 
-  // const { privateApi } = useGtwSession();
+  const disconnectEmailMutation = useMutation({
+    mutationKey: [mutations.disconnect_email],
+    mutationFn: ({
+      email,
+    }: Exact<{
+      email: string;
+    }>) => {
+      return privateApi.protocol_remove_email({
+        email,
+      });
+    },
+    onError: () => {
+      enqueueSnackbar(errorMessages.SOMETHING_WENT_WRONG, {
+        variant: 'error',
+      });
+    },
+  });
 
-  // const deleteEmailMutation = useMutation({
-  //   mutationKey: [mutations.remove_email],
-  //   mutationFn: ({
-  //     email,
-  //   }: Exact<{
-  //     email: string;
-  //   }>) => {
-  //     return privateApi.protocol_remove_email({
-  //       email,
-  //     });
-  //   },
-  //   onSuccess,
-  // });
+  const disconnectWalletMutation = useMutation({
+    mutationKey: [mutations.disconnect_wallet],
+    mutationFn: ({
+      id,
+    }: Exact<{
+      id: string;
+    }>) => {
+      return privateApi.protocol_remove_auth_method({
+        id,
+      });
+    },
+    onError: () => {
+      enqueueSnackbar(errorMessages.SOMETHING_WENT_WRONG, {
+        variant: 'error',
+      });
+    },
+  });
 
   const handleDisconnectAlias = ({ type, address }: Alias) => {
     if (
@@ -54,10 +81,10 @@ export function useDisconnectAlias() {
     }
   };
 
-  const disconnect = ({ type, address }: Alias) => {
+  const disconnect = async ({ type, address }: Alias) => {
     switch (type) {
       case 'email':
-        disconnectEmail(address as string);
+        await disconnectEmailMutation.mutateAsync({ email: address as string });
         break;
       case 'Discord':
         disconnectDiscord();
@@ -66,16 +93,13 @@ export function useDisconnectAlias() {
         disconnectTwitter();
         break;
       default:
-        disconnectWallet(address as string);
+        const authToRemove = session?.user?.authentications?.find(
+          (auth) => auth.data?.address === address
+        );
+        await disconnectWalletMutation.mutateAsync({
+          id: authToRemove?.id as string,
+        });
     }
-  };
-
-  const disconnectEmail = (address: string) => {
-    console.log('Email disconnected!', address);
-  };
-
-  const disconnectWallet = (address: string) => {
-    console.log('Wallet disconnected!', address);
   };
 
   const disconnectDiscord = () => {
@@ -107,5 +131,7 @@ export function useDisconnectAlias() {
     deactivateGatewayId,
     closeModal,
     modalDeactivateGatewayId,
+    isLoading:
+      disconnectEmailMutation.isLoading || disconnectWalletMutation.isLoading,
   };
 }

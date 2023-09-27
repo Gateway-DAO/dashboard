@@ -27,9 +27,10 @@ const Notistack = ({ children }: Props) => {
       }}
       autoHideDuration={4000}
       style={{
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: '#323232',
         color: theme.palette.common.white,
         position: 'relative',
+        borderRadius: 2,
       }}
       action={(snackbarId) => (
         <CloseIcon
