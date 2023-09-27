@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { Stack } from '@mui/material';
 
 import Avatar from './display-fields/avatar';
-import DisplayName from './display-fields/display-name';
+import DisplayName from './display-fields/display-name/display-name';
 import DisplayFieldsSkeletons from './display-fields/skeletons';
 import Username from './display-fields/username/username';
 
