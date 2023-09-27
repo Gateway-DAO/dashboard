@@ -56,10 +56,10 @@ export default function ShareCopy({ pda }: Props) {
   const toggleModal = () => {
     if (openShareCopy) {
       methods.reset();
-      router.push(routes.dashboardUserAsset(pda?.id));
+      router.push(routes.dashboardUserAsset(pda?.id), { scroll: false });
       setPdaIssued(undefined);
     } else {
-      router.push('#share-copy');
+      router.push('#share-copy', { scroll: false });
     }
     setOpenShareCopy();
   };
@@ -123,6 +123,7 @@ export default function ShareCopy({ pda }: Props) {
               router.push('#share-copy');
               setOpenShareCopy(true);
             }}
+            id="share-a-copy"
           >
             {common.actions.share_a_copy}
           </Button>
@@ -137,7 +138,11 @@ export default function ShareCopy({ pda }: Props) {
                   id="share-copy-form"
                   onSubmit={methods.handleSubmit(handleMutation)}
                 >
-                  <Typography fontSize={34}>
+                  <Typography
+                    component="h3"
+                    fontSize={34}
+                    id="share-a-copy-title"
+                  >
                     {pdaLocale.share.share_a_copy_with}
                   </Typography>
                   <Typography sx={{ mb: 6 }}>
@@ -150,7 +155,7 @@ export default function ShareCopy({ pda }: Props) {
                     sx={{
                       mt: 3,
                     }}
-                    id="share-copy-button"
+                    id="share-copy-action"
                     disabled={!methods.formState.isValid}
                     isLoading={createProof?.isLoading}
                   >

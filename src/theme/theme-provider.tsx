@@ -23,7 +23,6 @@ export function ThemeProvider({
   children,
   withGlobalStyles = true,
 }: PropsWithChildren<Props>) {
-
   const theme = dark ? darkTheme : lightTheme;
 
   const [{ cache, flush }] = useState(() => {

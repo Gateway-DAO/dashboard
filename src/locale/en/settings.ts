@@ -1,10 +1,29 @@
 export const settings = {
   title: 'Gateway ID',
   subtitle: 'Edit your ID and manage connected accounts',
+  username: {
+    helper: 'You can edit it once a month',
+    not_available: 'Username not available',
+  },
   connected_accounts: {
     title: 'Connected accounts',
     description:
       'These are the accounts you connected to your Gateway ID to log in and receive private data assets. You can disconnect or connect more accounts here.',
+    wallet: 'Wallet',
+    modal_confirm_delete: {
+      text_key: 'deactivate my gateway id',
+      text_confirm1: 'To confirm this, type',
+      text_confirm2: 'into the field and mark the checkbox',
+      title: 'Are you sure you want to deactivate your Gateway ID?',
+      subtitle:
+        'Once you disconnect this account, you will lose the only way to access this Gateway ID. Please be certain.',
+      subtitle2: 'Disconnecting the account, be aware:',
+      text1: `You won't be able undo this action`,
+      text2: 'The Gateway ID will be deactivated',
+      text3: 'will be available to anyone to use as ID',
+      checkbox: `I acknowledge that upon Gateway ID deactivation, I won't be able undo these actions`,
+      error_message: 'Something seems to be wrong, please try again',
+    },
   },
   notifications: {
     receiving_account: 'Receiving notifications',
@@ -13,6 +32,7 @@ export const settings = {
   actions: {
     add_email_address: 'Add email address',
     add_wallet: 'Add wallet',
+    disconnect: 'Disconnect',
   },
   developer_portal: {
     title: 'Developer portal',

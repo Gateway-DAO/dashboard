@@ -32,11 +32,8 @@ export function CardSummary({ title, email, onClickEdit, sx }: Props) {
         <Typography variant="subtitle1">{title}</Typography>
         <Typography>{email}</Typography>
       </Stack>
-      <IconButton
-        onClick={() => onClickEdit(false)}
-      >
+      <IconButton onClick={() => onClickEdit(false)}>
         <EditIcon />
-
       </IconButton>
     </Stack>
   );

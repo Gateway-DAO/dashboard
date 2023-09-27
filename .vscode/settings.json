@@ -5,9 +5,15 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "eslint.format.enable": true,
   "editor.formatOnSave": true,
-  "[markdown]": {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "todo-tree.highlights.defaultHighlight": {

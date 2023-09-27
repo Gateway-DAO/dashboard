@@ -33,7 +33,7 @@ export function ChooseEmail() {
         } else {
           enqueueSnackbar(
             errorMessages[message as keyof typeof errorMessages] ||
-            errorMessages.UNEXPECTED_ERROR,
+              errorMessages.UNEXPECTED_ERROR,
             {
               variant: 'error',
             }

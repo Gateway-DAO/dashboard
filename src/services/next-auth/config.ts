@@ -15,13 +15,16 @@ export const nextAuthConfig: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, user, trigger }) {
+    async jwt({ token, user, trigger, session }) {
       // We're retrieving the token from the provider
       if (user) {
         token = user as SessionToken;
       }
 
-      (token as any).update = trigger === 'update';
+      if (trigger === 'update' && session) {
+        // Defines if the user has skipped the add email step during the login
+        token.skipEmail = session.skipEmail;
+      }
 
       const parsedToken = jwt.decode(token.token, { json: true });
 
@@ -32,7 +35,7 @@ export const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      const user = await getMe(token.token, !!(token as any).update);
+      const user = await getMe(token.token);
       return {
         ...session,
         ...(token.error && { error: token.error }),

@@ -1,9 +1,11 @@
-"use client";
+'use client';
 
+import dynamic from 'next/dynamic';
 import { useCallback, useState } from 'react';
 
+import { common } from '@/locale/en/common';
 import type { Area } from 'react-easy-crop';
-import getCroppedImg from './utils';
+
 import { Add, Remove } from '@mui/icons-material';
 import {
   Box,
@@ -14,10 +16,9 @@ import {
   Stack,
 } from '@mui/material';
 
-import dynamic from "next/dynamic";
-import { common } from '@/locale/en/common';
+import getCroppedImg from './utils';
 
-const EasyCropper = dynamic(() => import("react-easy-crop"), { ssr: false })
+const EasyCropper = dynamic(() => import('react-easy-crop'), { ssr: false });
 
 export type Props = {
   image: string;
@@ -25,19 +26,17 @@ export type Props = {
   onClose: () => void;
 };
 
-export default function CropDialog({
-  image,
-  onSubmit,
-  onClose
-}: Props) {
-
-  const [crop, setCrop] = useState<Pick<Area, "x" | "y">>({ x: 0, y: 0 });
+export default function CropDialog({ image, onSubmit, onClose }: Props) {
+  const [crop, setCrop] = useState<Pick<Area, 'x' | 'y'>>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [croppedArea, setCroppedArea] = useState<Area>()
+  const [croppedArea, setCroppedArea] = useState<Area>();
 
-  const onCropComplete = useCallback((_croppedArea: Area, croppedAreaPixels: Area) => {
-    setCroppedArea(croppedAreaPixels)
-  }, [])
+  const onCropComplete = useCallback(
+    (_croppedArea: Area, croppedAreaPixels: Area) => {
+      setCroppedArea(croppedAreaPixels);
+    },
+    []
+  );
 
   const onCrop = useCallback(async () => {
     if (!croppedArea) return;
@@ -64,7 +63,7 @@ export default function CropDialog({
           crop={crop}
           zoom={zoom}
           aspect={1}
-          cropShape='round'
+          cropShape="round"
           onCropChange={setCrop}
           onCropComplete={onCropComplete}
           onZoomChange={setZoom}
@@ -110,5 +109,5 @@ export default function CropDialog({
         </Button>
       </DialogActions>
     </>
-  )
+  );
 }

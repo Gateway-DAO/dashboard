@@ -1,9 +1,17 @@
-"use client";
+'use client';
 
-import { ClipboardEventHandler, DragEventHandler, useMemo, useState, DragEvent, ClipboardEvent } from 'react';
+import {
+  ClipboardEventHandler,
+  DragEventHandler,
+  useMemo,
+  useState,
+  DragEvent,
+  ClipboardEvent,
+} from 'react';
+
 import useMountedState from './use-mounted-state';
 
-const noop = () => { };
+const noop = () => {};
 
 export interface DropAreaState {
   over: boolean;
@@ -30,7 +38,8 @@ const defaultState: DropAreaState = {
 */
 
 const createProcess =
-  (options: DropAreaOptions, mounted: boolean) => (dataTransfer: DataTransfer, event: DragEvent | ClipboardEvent) => {
+  (options: DropAreaOptions, mounted: boolean) =>
+  (dataTransfer: DataTransfer, event: DragEvent | ClipboardEvent) => {
     const uri = dataTransfer.getData('text/uri-list');
 
     if (uri) {
@@ -39,7 +48,10 @@ const createProcess =
     }
 
     if (dataTransfer.files && dataTransfer.files.length) {
-      (options.onFiles || noop)(Array.from(dataTransfer.files), event as DragEvent);
+      (options.onFiles || noop)(
+        Array.from(dataTransfer.files),
+        event as DragEvent
+      );
       return;
     }
 
@@ -52,7 +64,10 @@ const createProcess =
     }
   };
 
-const createBond = (process: ReturnType<typeof createProcess>, setOver: (state: boolean) => void): DropAreaBond => ({
+const createBond = (
+  process: ReturnType<typeof createProcess>,
+  setOver: (state: boolean) => void
+): DropAreaBond => ({
   onDragOver: (event) => {
     event.preventDefault();
   },
@@ -75,12 +90,20 @@ const createBond = (process: ReturnType<typeof createProcess>, setOver: (state: 
   },
 });
 
-const useDropArea = (options: DropAreaOptions = {}): [DropAreaBond, DropAreaState] => {
+const useDropArea = (
+  options: DropAreaOptions = {}
+): [DropAreaBond, DropAreaState] => {
   const { onFiles, onText, onUri } = options;
   const isMounted = useMountedState();
   const [over, setOver] = useState<boolean>(false);
-  const process = useMemo(() => createProcess(options, isMounted()), [onFiles, onText, onUri]);
-  const bond: DropAreaBond = useMemo(() => createBond(process, setOver), [process, setOver]);
+  const process = useMemo(
+    () => createProcess(options, isMounted()),
+    [onFiles, onText, onUri]
+  );
+  const bond: DropAreaBond = useMemo(
+    () => createBond(process, setOver),
+    [process, setOver]
+  );
 
   return [bond, { over }];
 };

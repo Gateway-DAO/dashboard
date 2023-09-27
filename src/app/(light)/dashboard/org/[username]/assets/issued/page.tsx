@@ -11,7 +11,6 @@ import PDAsTable from './components/pdas-table';
 
 export default async function OrganizationIssuedAssetsPage(props: any) {
   const session = (await getGtwServerSession()) as Session;
-  console.log(props);
   const pathnameOrg = props.params?.username;
   const organization = session?.user?.accesses?.find(
     (access) => access.organization?.gatewayId === pathnameOrg

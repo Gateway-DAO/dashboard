@@ -1,23 +1,31 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
+import { Session } from 'next-auth';
 
+import PermissionError from '@/components/permission-error/permission-error';
 import RequestStatusChip from '@/components/requests/request-status-chip';
 import ToggleCollapse from '@/components/toggle-collapse/toggle-collapse';
 import { DATE_FORMAT } from '@/constants/date';
-import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { request } from '@/locale/en/request';
+import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
-import { DataRequest, DataRequestQuery } from '@/services/protocol/types';
+import {
+  DataRequestQuery,
+  DataResourceStatus,
+  ProofQuery,
+} from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { PageProps } from '@/types/next';
+import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
 import { Divider, Paper, Stack, Typography } from '@mui/material';
 
 import RequestCard from './components/request-card';
-import RequestedData from './components/requested-data';
+import RequestCardVerfierView from './components/request-card-verifier';
+import RequestDataTable from './components/request-data-table';
+import RequestDataTableVerifierView from './components/request-data-table-verifier';
 
 const getDataRequest = async (
   id: string
@@ -31,12 +39,37 @@ const getDataRequest = async (
   return dataRequest;
 };
 
+const getRequestValidData = async (requestId: string) => {
+  const privateApi = await getPrivateApi();
+  if (!privateApi) {
+    return null;
+  }
+
+  const requestValidData = (
+    await privateApi.dataRequestValidData({ requestId })
+  )?.findValidPDAsForRequest;
+  return requestValidData;
+};
+
+const getProofData = async (
+  proofId: string
+): Promise<PartialDeep<ProofQuery['proof']> | null> => {
+  const privateApi = await getPrivateApi();
+  if (!privateApi) {
+    return null;
+  }
+
+  const proof = (await privateApi.proof({ id: proofId })).proof;
+  return proof;
+};
+
 export async function generateMetadata({
   params,
 }: {
   params: { id: string };
 }): Promise<Metadata> {
   const dataRequest = await getDataRequest(params.id);
+
   return {
     title: `${dataRequest?.id} Data Request - Gateway Network`,
     description: dataRequest?.dataUse,
@@ -46,10 +79,40 @@ export async function generateMetadata({
 export default async function DashboardUserDataRequest({
   params: { id },
 }: PageProps<{ id: string }>) {
+  const session = (await getGtwServerSession()) as Session;
+  const userId = session.user.id;
   const dataRequest = await getDataRequest(id);
+
   if (!dataRequest || !dataRequest.id) {
     return <h1>Error</h1>;
   }
+
+  if (
+    userId !== dataRequest?.userRecipient?.id &&
+    userId !== dataRequest?.userVerifier?.id
+  ) {
+    return <PermissionError />;
+  }
+
+  const isOwner = userId === dataRequest?.userRecipient?.id;
+  const requestValidData = isOwner ? await getRequestValidData(id) : null;
+  const proofData =
+    isOwner ||
+    dataRequest.status !== DataResourceStatus.Accepted ||
+    !dataRequest.proofs?.[0]?.id
+      ? {}
+      : await getProofData(dataRequest.proofs?.[0]?.id);
+
+  const requester =
+    dataRequest.userVerifier?.displayName ??
+    dataRequest.userVerifier?.gatewayId ??
+    limitCharsCentered(dataRequest.userVerifier?.id as string, 15) ??
+    '';
+  const recipient =
+    dataRequest.userRecipient?.displayName ??
+    dataRequest.userRecipient?.gatewayId ??
+    limitCharsCentered(dataRequest.userRecipient?.id as string, 15) ??
+    '';
 
   return (
     <>
@@ -57,15 +120,22 @@ export default async function DashboardUserDataRequest({
         {id}
       </Typography>
       <Stack direction="column" gap={2}>
-        <RequestCard
-          requester={
-            dataRequest.userVerifier?.displayName ??
-            dataRequest.userVerifier!.gatewayId!
-          }
-          status={dataRequest.status!}
-          requestId={dataRequest.id}
-          proofId={dataRequest.proofs?.[0]?.id}
-        />
+        {!!isOwner ? (
+          <RequestCard
+            requester={requester}
+            status={dataRequest.status!}
+            requestId={dataRequest.id}
+            proofId={dataRequest.proofs?.[0]?.id}
+            requestValidData={requestValidData}
+            profilePicture={dataRequest.userVerifier?.profilePicture}
+          />
+        ) : (
+          <RequestCardVerfierView
+            recipient={recipient}
+            status={dataRequest.status!}
+            proofId={dataRequest.proofs?.[0]?.id}
+          />
+        )}
         <Paper
           component={Stack}
           divider={<Divider orientation="vertical" sx={{ height: 'unset' }} />}
@@ -121,11 +191,23 @@ export default async function DashboardUserDataRequest({
         <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
           {request.label.requested_data}
         </Typography>
-        {/* <Stack direction="column" gap={2}>
-          {requestedData.map(({ dataModel }) => (
-            <RequestedData key={dataModel.id} dataModel={dataModel} />
-          ))}
-        </Stack> */}
+        <Typography variant="body1" mb={1}>
+          {dataRequest.dataUse}
+        </Typography>
+        {isOwner ? (
+          <RequestDataTable
+            schema={dataRequest.dataRequestTemplate?.schema}
+            validData={requestValidData}
+            dataModels={dataRequest.dataRequestTemplate?.dataModels || []}
+          />
+        ) : (
+          <RequestDataTableVerifierView
+            schema={dataRequest.dataRequestTemplate?.schema}
+            dataModels={dataRequest.dataRequestTemplate?.dataModels || []}
+            status={dataRequest.status!}
+            raw={proofData?.data?.raw}
+          />
+        )}
       </Stack>
     </>
   );

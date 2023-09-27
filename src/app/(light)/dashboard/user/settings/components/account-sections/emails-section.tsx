@@ -1,56 +1,98 @@
-import { AddOutlined, NotificationsOutlined } from "@mui/icons-material";
-import { Button, Chip, ListItem, ListItemText, Typography } from "@mui/material";
-import { Stack } from "@mui/system";
+import { settings } from '@/locale/en/settings';
 
-import AliasMenuButton from "../alias-menu-button";
-import AccountSection from "./account-section";
+import { AddOutlined, NotificationsOutlined } from '@mui/icons-material';
+import {
+  Button,
+  Chip,
+  ListItem,
+  ListItemText,
+  Typography,
+} from '@mui/material';
+import { Stack } from '@mui/system';
 
-const email = [{
-  email: "sanket@gmail.com",
-  primary: true,
-}, {
-  email: "s.jain@gmail.com"
-}];
-export default function EmailsSection() {
-  return <AccountSection title="Email" button={<Button variant="text" startIcon={<AddOutlined />}>Add email address</Button>}>
-    {email.map(({ email, primary }) => (<ListItem
-      key={email}
-      secondaryAction={<AliasMenuButton />}
+import AliasMenuButton from '../alias-menu-button';
+import AccountSection from './account-section';
+
+type Props = {
+  emails: any[];
+  userEmail: string;
+  onDisconnect: (address: string) => void;
+};
+
+export default function EmailsSection({
+  emails,
+  userEmail,
+  onDisconnect,
+}: Props) {
+  return (
+    <AccountSection
+      title="Email"
+      button={
+        <Button variant="text" startIcon={<AddOutlined />}>
+          {settings.actions.add_email_address}
+        </Button>
+      }
     >
-      <ListItemText
-        {...(primary ? {
-          primary: <>
-            <Typography component="p">{email}</Typography>
-            <Chip label="Receiving notifications" size="small" icon={<NotificationsOutlined />} sx={{
-              ".MuiChip-icon": {
-                marginRight: {
-                  xs: 0.5,
-                  md: -0.5
-                }
-              },
-              ".MuiChip-label": {
-                display: {
-                  xs: "none",
-                  md: "block"
-                }
+      {emails &&
+        emails.length > 0 &&
+        emails.map(({ data }) => {
+          const primary = data.email === userEmail;
+
+          return (
+            <ListItem
+              key={data?.address}
+              secondaryAction={
+                <AliasMenuButton
+                  onDisconnect={() => onDisconnect(data?.address as string)}
+                />
               }
-            }} />
-          </>,
-          primaryTypographyProps: {
-            component: Stack,
-            direction: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 1,
-            sx: {
-              display: "flex",
-              pr: 1,
-            }
-          }
-        } : {
-          primary: email
+            >
+              <ListItemText
+                {...(primary
+                  ? {
+                      primary: (
+                        <>
+                          <Typography component="p">{data.address}</Typography>
+                          <Chip
+                            label={settings.notifications.receiving_account}
+                            size="small"
+                            icon={<NotificationsOutlined />}
+                            sx={{
+                              '.MuiChip-icon': {
+                                marginRight: {
+                                  xs: 0.5,
+                                  md: -0.5,
+                                },
+                              },
+                              '.MuiChip-label': {
+                                display: {
+                                  xs: 'none',
+                                  md: 'block',
+                                },
+                              },
+                            }}
+                          />
+                        </>
+                      ),
+                      primaryTypographyProps: {
+                        component: Stack,
+                        direction: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: 1,
+                        sx: {
+                          display: 'flex',
+                          pr: 1,
+                        },
+                      },
+                    }
+                  : {
+                      primary: data.address,
+                    })}
+              />
+            </ListItem>
+          );
         })}
-      />
-    </ListItem>))}
-  </AccountSection>;
+    </AccountSection>
+  );
 }

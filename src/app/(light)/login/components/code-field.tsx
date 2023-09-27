@@ -37,7 +37,8 @@ export function CodeField({
     handleSubmit,
   } = useForm<TokenConfirmationSchema>();
 
-  const onSubmit = (data: TokenConfirmationSchema) => onSubmitConfirmCode(data.code);
+  const onSubmit = (data: TokenConfirmationSchema) =>
+    onSubmitConfirmCode(data.code);
 
   return (
     <>
@@ -53,7 +54,6 @@ export function CodeField({
         gap={2}
         onSubmit={handleSubmit(onSubmit)}
       >
-
         <Typography component="h1" variant="h4" sx={{ mb: 3 }}>
           {title}
         </Typography>
@@ -100,6 +100,5 @@ export function CodeField({
         </Stack>
       </Stack>
     </>
-
   );
 }

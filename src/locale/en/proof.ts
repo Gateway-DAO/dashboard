@@ -9,7 +9,8 @@ export const proof = {
   request_id: 'Request ID',
   request_template_id: 'Request template ID',
   share: {
-    data_shared_with: 'Data shared with',
+    data_shared_with: 'Shared with',
+    data_shared_by: 'Shared by',
     data_proof_id: 'Data Proof ID',
     data_asset_shared: 'Data asset shared',
   },

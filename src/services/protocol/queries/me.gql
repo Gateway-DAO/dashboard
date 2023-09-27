@@ -2,6 +2,7 @@ query me {
   me {
     id
     displayName
+    email
     profilePicture
     gatewayId
     accesses {
@@ -11,6 +12,14 @@ query me {
         image
         name
         gatewayId
+      }
+    }
+    authentications {
+      id
+      type
+      data {
+        address
+        chain
       }
     }
   }

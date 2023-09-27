@@ -1,55 +1,75 @@
 'use client';
-import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+
+import { signOut } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 import routes from '@/constants/routes';
 
-import { Skeleton } from '@mui/material';
-
-import StepProvider, { useStepState } from '../providers/step-provider';
-import { Step } from '../types';
+import { useStepState } from '../providers/step-provider';
 import AuthenticationLayout from './authentication-layout';
-import { CloseButtonProps } from './close-button';
+import AddEmail from './sections/add-email';
 import { ChooseGatewayId } from './sections/choose-gateway-id';
-import { ConnectMoreAuthDialog } from './sections/completed';
 import { AuthenticationInitial } from './sections/initial/initial';
 import { VerifyEmailAddToken } from './sections/verify-email-add-token';
-import { VerifyEmailLoginToken } from './sections/verify-email-login-token/verify-email-login-token';
+import { VerifyEmailLoginToken } from './sections/verify-email-login-token';
 
 export function Authentication() {
-  const { step, setStepState } = useStepState()
-  const { data: session, status } = useSession();
+  const { step, setStepState } = useStepState();
 
-  let closeButonProps: CloseButtonProps = {
-    href: routes.home,
+  if (step === 'completed') {
+    redirect(routes.dashboardUserHome);
   }
 
-  if (step === "verify-email-login-code") {
-    closeButonProps = {
-      onClick: () => setStepState({ step: "initial" })
-    }
-  }
-  if (status === "loading") {
-
-    return <AuthenticationLayout closeButonProps={closeButonProps}>
-      <Skeleton variant="text" width="100%" height={80} />
-      <Skeleton variant="text" width="80%" height={50} />
-      <Skeleton variant="text" width="100%" height={90} sx={{ marginTop: 4 }} />
-    </AuthenticationLayout>
-  }
-  return (
-    <StepProvider session={session}>
-      <AuthenticationLayout closeButonProps={closeButonProps}>
-        {step === 'initial' && <AuthenticationInitial />}
-        {step === 'verify-email-login-code' && <VerifyEmailLoginToken />}
-        {step === 'verify-email-add-code' && <VerifyEmailAddToken />}
-        {step === 'choose-gatewayid' && <ChooseGatewayId />}
-
-        <ConnectMoreAuthDialog
-          open={step === 'completed'}
-          onClose={routes.home}
-        />
+  if (step === 'verify-email-login-code') {
+    return (
+      <AuthenticationLayout
+        closeButonProps={{
+          onClick: () => setStepState({ step: 'initial' }),
+        }}
+      >
+        <VerifyEmailLoginToken />
       </AuthenticationLayout>
-    </StepProvider>
+    );
+  }
+
+  if (step === 'add-email') {
+    return <AddEmail />;
+  }
+
+  if (step === 'verify-email-add-code') {
+    return (
+      <AuthenticationLayout
+        closeButonProps={{
+          onClick: () => setStepState({ step: 'initial' }),
+        }}
+      >
+        <VerifyEmailAddToken />
+      </AuthenticationLayout>
+    );
+  }
+
+  if (step === 'choose-gatewayid') {
+    return (
+      <AuthenticationLayout
+        closeButonProps={{
+          onClick: async () => {
+            await signOut({ redirect: false });
+            setStepState({ step: 'initial' });
+          },
+        }}
+      >
+        <ChooseGatewayId />
+      </AuthenticationLayout>
+    );
+  }
+
+  return (
+    <AuthenticationLayout
+      closeButonProps={{
+        href: routes.home,
+      }}
+    >
+      <AuthenticationInitial />
+    </AuthenticationLayout>
   );
 }
