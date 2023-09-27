@@ -1,4 +1,4 @@
-import { usernameSchema } from '@/schemas/username';
+import { usernameSchema } from '@/schemas/profile';
 import zod from 'zod';
 
 export const updateUsernameSchema = zod.object({
