@@ -20,7 +20,7 @@ export default function IndexPage() {
     <HeaderContextProvider>
       <Header />
       <Hero />
-      {/* <Pdas /> */}
+      <Pdas />
       <Lifecycle />
       <Info />
       <OurProtocol />
