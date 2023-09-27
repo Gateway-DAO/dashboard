@@ -8,30 +8,33 @@ import { useToggle } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
-import { useStepState } from '../../../providers/step-provider';
-import { CodeField } from '../../code-field';
+import { useStepState } from '../../providers/step-provider';
+import useStepHandler from '../../utils/use-step-handler';
+import { CodeField } from '../code-field';
 
 export function VerifyEmailLoginToken() {
   const { enqueueSnackbar } = useSnackbar();
   const [startCountdown, setStartCountdown] = useToggle(true);
+  const onHandleSession = useStepHandler();
   const countdown = useCountdown({ time: 30, trigger: startCountdown });
 
-  const { values, setStepState } = useStepState()
-  const email = values?.email ?? "";
+  const { values, setStepState } = useStepState();
+  const email = values?.email ?? '';
 
   const resendEmail = useMutation({
     mutationKey: ['resendEmail'],
-    mutationFn: async () => apiPublic.create_email_nonce({ email })
-  })
+    mutationFn: async () => apiPublic.create_email_nonce({ email }),
+  });
 
   const sendConfirmationToken = useMutation({
     mutationKey: ['sendConfirmationToken'],
-    mutationFn: (code: string) => signIn("credential-email", {
-      email,
-      code,
-      redirect: false,
-    })
-  })
+    mutationFn: (code: string) =>
+      signIn('credential-email', {
+        email,
+        code,
+        redirect: false,
+      }),
+  });
 
   const onResendEmail = async () => {
     try {
@@ -45,15 +48,26 @@ export function VerifyEmailLoginToken() {
     }
   };
 
+  const onSubmit = async (code: string) => {
+    try {
+      await sendConfirmationToken.mutateAsync(code);
+      await onHandleSession();
+    } catch (e: any) {
+      enqueueSnackbar(e.message, {
+        variant: 'error',
+      });
+    }
+  };
+
   return (
     <CodeField
-      onClickEdit={() => setStepState({ step: "initial" })}
-      onSubmitConfirmCode={sendConfirmationToken.mutate}
+      onClickEdit={() => setStepState({ step: 'initial' })}
+      onSubmitConfirmCode={onSubmit}
       isLoadingConfirmCode={sendConfirmationToken.isLoading}
       onResendEmail={onResendEmail}
       isLoadingOnResend={resendEmail.isLoading}
       countdown={countdown}
-      email={'test@test.com'}
+      email={email}
       title={auth.steps.verify_token.title}
     />
   );

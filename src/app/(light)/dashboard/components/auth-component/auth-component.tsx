@@ -58,15 +58,19 @@ export default function AuthComponent({ id, controlId }: Props) {
         })}
         onClick={onOpen}
       >
-        {isOrg ? <UserOrgInfo
-          image={organization.image!}
-          name={organization.name!}
-          gatewayId={organization.gatewayId!}
-        /> : <UserOrgInfo
-          image={user.profilePicture}
-          name={user.displayName!}
-          gatewayId={user.gatewayId!}
-        />}
+        {isOrg ? (
+          <UserOrgInfo
+            image={organization.image!}
+            name={organization.name!}
+            gatewayId={organization.gatewayId!}
+          />
+        ) : (
+          <UserOrgInfo
+            image={user.profilePicture}
+            name={user.displayName!}
+            gatewayId={user.gatewayId!}
+          />
+        )}
 
         <MoreHorizOutlined
           sx={{

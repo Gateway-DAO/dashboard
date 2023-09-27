@@ -1,0 +1,3 @@
+query check_username_avaibility($username: String!) {
+  checkGatewayIdAvaibility(gatewayId: $username)
+}

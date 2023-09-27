@@ -1,12 +1,6 @@
+import { usernameSchema } from '@/schemas/username';
 import { z } from 'zod';
 
-export type EmailSchema = {
-  email_address: string;
-};
-
-export type GatewayIdSchema = {
-  gatewayId: string;
-};
 export type TokenConfirmationSchema = {
   code: string;
 };
@@ -15,12 +9,11 @@ export type AddEmailConfirmationSchema = {
   email: string;
 };
 
-const usernameRegex =
-  /^(?!.*\.\.)(?!.*\.\.$)(?!.*--)(?!.*--$)(?!.*__)(?!.*__$)[a-z0-9._-]{2,19}[a-z0-9]$/;
-
 export const schemaEmail = z.object({
   email_address: z.string({ required_error: 'Email is required' }),
 });
+
+export type EmailSchema = z.infer<typeof schemaEmail>;
 
 export const schemaTokenConfirmation = z.object({
   email_address: z
@@ -29,13 +22,12 @@ export const schemaTokenConfirmation = z.object({
     .max(6, 'Invalid code'),
 });
 
-export const schemaGatewayId = z.object({
-  gatewayId: z
-    .string({ required_error: 'Code is required' })
-    .min(2)
-    .max(20)
-    .refine(
-      (value) => usernameRegex.test(value),
-      'Only lowercase letters, numbers and ._-'
-    ),
+export const createProfileSchema = z.object({
+  username: usernameSchema,
+  displayName: z.preprocess((value) => {
+    if (!value || typeof value !== 'string') return undefined;
+    return value === '' ? undefined : value;
+  }, z.string().min(2).optional()),
 });
+
+export type CreateProfileSchema = z.infer<typeof createProfileSchema>;

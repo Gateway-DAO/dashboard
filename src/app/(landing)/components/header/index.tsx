@@ -75,7 +75,7 @@ export default function Header() {
             </Link>
 
             <div className={styles.mobile_buttons}>
-              <Link href="/dashboard">
+              <Link href="/login">
                 <Button
                   variant="contained"
                   className={styles.mobile_button_head_dashboard}
@@ -113,7 +113,7 @@ export default function Header() {
                 </Button>
               </Link>
 
-              <Link href="/dashboard">
+              <Link href="/login">
                 <Button variant="contained" className={styles.button_contained}>
                   Open dashboard
                 </Button>
@@ -155,7 +155,7 @@ export default function Header() {
           <div className={styles.mobile_menu_buttons}>
             <Link
               className={styles.mobile_menu_button_link}
-              href="/dashboard"
+              href="/login"
               onClick={() => setBurgerActive(false)}
             >
               <Button

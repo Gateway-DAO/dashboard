@@ -8,16 +8,21 @@ import { FaDiscord } from 'react-icons/fa';
 
 import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { Button, Link, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 
+import WalletConnectionProvider from '../../../providers/wallet-connection-provider';
 import WalletConnectModal from './wallet-connect-modal';
+import WalletLoadingModal from './wallet-loading-modal';
 
 const EvmProvider = dynamic(() => import('../../../providers/evm-provider'), {
   ssr: false,
 });
-const SolanaProvider = dynamic(() => import('../../../providers/solana-provider'), {
-  ssr: false,
-});
+const SolanaProvider = dynamic(
+  () => import('../../../providers/solana-provider'),
+  {
+    ssr: false,
+  }
+);
 
 export function AuthenticationOptions() {
   const [modalWallet, setModalWallet] = useState(false);
@@ -92,12 +97,15 @@ export function AuthenticationOptions() {
       </Stack>
       <EvmProvider>
         <SolanaProvider>
-          <WalletConnectModal
-            title="Choose wallet"
-            description="Select a chain and choose one of available wallet providers or create a new wallet."
-            isOpen={modalWallet}
-            onCancel={() => setModalWallet(false)}
-          />
+          <WalletConnectionProvider>
+            <WalletConnectModal
+              title="Choose wallet"
+              description="Select a chain and choose one of available wallet providers or create a new wallet."
+              isOpen={modalWallet}
+              onCancel={() => setModalWallet(false)}
+            />
+            <WalletLoadingModal />
+          </WalletConnectionProvider>
         </SolanaProvider>
       </EvmProvider>
     </>

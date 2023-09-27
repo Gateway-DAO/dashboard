@@ -9,7 +9,7 @@ module.exports = {
           },
         },
       },
-      documents: 'src/services/protocol/**/*.gql'
-    }
-  }
-}
+      documents: 'src/services/protocol/**/*.gql',
+    },
+  },
+};

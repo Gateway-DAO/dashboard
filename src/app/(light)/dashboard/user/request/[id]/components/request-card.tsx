@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
@@ -15,19 +15,25 @@ import { errorMessages } from '@/locale/en/errors';
 import { request } from '@/locale/en/request';
 import {
   Create_Proof_From_RequestMutationVariables,
+  DataRequestValidDataQuery,
   DataResourceStatus,
   Reject_RequestMutationVariables,
 } from '@/services/protocol/types';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
+import { PartialDeep } from 'type-fest';
 
 import { Box, Button, Divider, Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
   requester: string;
   status: DataResourceStatus;
+  profilePicture?: string | null;
   requestId: string;
   proofId?: string;
+  requestValidData: PartialDeep<
+    DataRequestValidDataQuery['findValidPDAsForRequest']
+  > | null;
 };
 
 export default function RequestCard({
@@ -35,6 +41,8 @@ export default function RequestCard({
   status,
   proofId,
   requestId,
+  requestValidData,
+  profilePicture,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const { privateApi } = useGtwSession();
@@ -68,6 +76,19 @@ export default function RequestCard({
     },
   });
 
+  const requestIsAcceptable = useMemo(() => {
+    if (!requestValidData) {
+      return false;
+    }
+    const hasEmptyValidData = requestValidData.some(
+      (item) => item.validData?.length === 0
+    );
+    if (hasEmptyValidData) {
+      return false;
+    }
+    return true;
+  }, [requestValidData]);
+
   return (
     <>
       {(loadingAfter ||
@@ -78,11 +99,13 @@ export default function RequestCard({
         sx={{
           backgroundColor: (theme) => {
             const color =
-              status === DataResourceStatus.Rejected
+              status === DataResourceStatus.Rejected ||
+              (status === DataResourceStatus.Pending && !requestIsAcceptable)
                 ? theme.palette.error.main
                 : theme.palette.primary.main;
             const focusOpacity =
-              status === DataResourceStatus.Rejected
+              status === DataResourceStatus.Rejected ||
+              (status === DataResourceStatus.Pending && !requestIsAcceptable)
                 ? theme.palette.action.disabledOpacity
                 : theme.palette.action.focusOpacity;
             return alpha(color, focusOpacity);
@@ -100,13 +123,13 @@ export default function RequestCard({
             {request.request_card.title}
           </Typography>
           <Stack direction="row" alignItems="center" gap={2}>
-            <GTWAvatar name="chase" />{' '}
+            <GTWAvatar name={requester} src={profilePicture} />{' '}
             <Typography variant="h5">{requester}</Typography>
           </Stack>
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          {status === DataResourceStatus.Pending && (
+          {status === DataResourceStatus.Pending && requestIsAcceptable && (
             <>
               <Typography variant="h5">
                 {request.request_card.content.pending.title}
@@ -134,6 +157,28 @@ export default function RequestCard({
               </Stack>
             </>
           )}
+          {status === DataResourceStatus.Pending && !requestIsAcceptable && (
+            <>
+              <Typography variant="h5">
+                {request.request_card.content.notAcceptable.title}
+              </Typography>
+              <Typography>
+                {request.request_card.content.notAcceptable.description(
+                  requester
+                )}
+              </Typography>
+              <Stack direction="row" gap={1} sx={{ mt: 3 }}>
+                <Button
+                  component="a"
+                  href="#learn-more-request-data-table__anchor"
+                  variant="outlined"
+                  color="inherit"
+                >
+                  {common.actions.learn_more}
+                </Button>
+              </Stack>
+            </>
+          )}
           {status === DataResourceStatus.Rejected && (
             <>
               <Typography variant="h5">
@@ -142,11 +187,6 @@ export default function RequestCard({
               <Typography>
                 {request.request_card.content.rejected.description(requester)}
               </Typography>
-              <Stack direction="row" gap={1} sx={{ mt: 3 }}>
-                <Button variant="outlined" color="inherit">
-                  {common.actions.learn_more}
-                </Button>
-              </Stack>
             </>
           )}
           {status === DataResourceStatus.Accepted && (

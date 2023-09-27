@@ -1,9 +1,6 @@
 import { GTWMenuItemSettings } from '@/app/(light)/dashboard/components/menu-item/menu-item';
-import DataFilledIcon from '@/components/icons/data-filled';
 import DataOutlinedIcon from '@/components/icons/data-outlined';
-import DataProofFilledIcon from '@/components/icons/data-proof-filled';
 import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
-import DataRequestFilledIcon from '@/components/icons/data-request-filled';
 import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
 import routes from '@/constants/routes';
 
@@ -20,7 +17,6 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserAsset(''),
     ],
     icon: DataOutlinedIcon,
-    activeIcon: DataFilledIcon,
   },
   {
     name: 'Data requests',
@@ -30,7 +26,6 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserRequest(''),
     ],
     icon: DataRequestOutlinedIcon,
-    activeIcon: DataRequestFilledIcon,
   },
   {
     name: 'Data proofs',
@@ -41,7 +36,6 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserProof(''),
     ],
     icon: DataProofOutlinedIcon,
-    activeIcon: DataProofFilledIcon,
   },
 ];
 

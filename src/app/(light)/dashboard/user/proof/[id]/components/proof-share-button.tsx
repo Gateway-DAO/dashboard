@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { common } from "@/locale/en/common";
+import { common } from '@/locale/en/common';
 
-import { Button } from "@mui/material";
+import { Button } from '@mui/material';
 
 type Props = {
   proof: any; // TODO: Add type
-}
+};
 
-export default function ProofShareButton({ }: Props) {
+export default function ProofShareButton({}: Props) {
   return (
     <Button
       variant="contained"
@@ -23,5 +23,5 @@ export default function ProofShareButton({ }: Props) {
     >
       {common.actions.share_a_copy}
     </Button>
-  )
+  );
 }

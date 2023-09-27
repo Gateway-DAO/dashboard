@@ -17,7 +17,7 @@ const credentialWallet = CredentialsProvider({
     },
   },
   async authorize(credentials) {
-    return loginWallet(credentials!.signature, credentials!.wallet)
+    return loginWallet(credentials!.signature, credentials!.wallet);
   },
 });
 

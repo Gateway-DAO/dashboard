@@ -1,20 +1,47 @@
 'use client';
+import { useSession } from 'next-auth/react';
+
 import { useCountdown } from '@/hooks/use-countdown';
-import { errorMessages } from '@/locale/en/errors';
+import { auth } from '@/locale/en/auth';
+import { api } from '@/services/protocol/api';
 import { useToggle } from '@react-hookz/web';
+import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
-import { TokenConfirmationSchema } from '../../schema';
+import { useStepState } from '../../providers/step-provider';
+import useStepHandler from '../../utils/use-step-handler';
 import { CodeField } from '../code-field';
 
 export function VerifyEmailAddToken() {
   const { enqueueSnackbar } = useSnackbar();
   const [startCountdown, setStartCountdown] = useToggle(true);
+  const onHandleSession = useStepHandler();
   const countdown = useCountdown({ time: 30, trigger: startCountdown });
+
+  const { data: session, update } = useSession();
+
+  const { values, setStepState } = useStepState();
+  const email = values?.email ?? '';
+
+  const resendEmail = useMutation({
+    mutationKey: ['resendEmail'],
+    mutationFn: async () =>
+      api(session?.token ?? '').protocol_add_email({ email }),
+  });
+
+  const sendConfirmationToken = useMutation({
+    mutationKey: ['add-email', email],
+    mutationFn: (code: string) =>
+      api(session?.token ?? '').protocol_add_email_confirmation({
+        email,
+        code: parseInt(code),
+      }),
+  });
 
   const onResendEmail = async () => {
     try {
-      console.log('onResend');
+      await resendEmail.mutateAsync();
+      setStartCountdown();
     } catch (e: any) {
       enqueueSnackbar(e.message, {
         variant: 'error',
@@ -23,35 +50,28 @@ export function VerifyEmailAddToken() {
     }
   };
 
-  const onSubmitConfirmToken = async (data: TokenConfirmationSchema) => {
+  const onSubmit = async (code: string) => {
     try {
-      console.log('onSubmitConfirmToken', data);
-    } catch (error: any) {
-      (error.response as any)?.errors?.forEach(({ message }: any) => {
-        if (message === 'MAXIMUM_ATTEMPTS_REACHED') {
-          console.log('MAXIMUM');
-        }
-        enqueueSnackbar(
-          errorMessages[message as keyof typeof errorMessages] ||
-            errorMessages.UNEXPECTED_ERROR,
-          {
-            variant: 'error',
-          }
-        );
+      await sendConfirmationToken.mutateAsync(code);
+      await update();
+      await onHandleSession();
+    } catch (e: any) {
+      enqueueSnackbar(e.message, {
+        variant: 'error',
       });
     }
   };
 
   return (
     <CodeField
-      title="" // TODO: Add a title
-      onClickEdit={() => console.log('onNewUser')}
-      onSubmitConfirmCode={onSubmitConfirmToken as any} // TODO: Change de type
-      isLoadingConfirmCode={false}
+      onClickEdit={() => setStepState({ step: 'add-email' })}
+      onSubmitConfirmCode={onSubmit}
+      isLoadingConfirmCode={sendConfirmationToken.isLoading}
       onResendEmail={onResendEmail}
-      isLoadingOnResend={false}
+      isLoadingOnResend={resendEmail.isLoading}
       countdown={countdown}
-      email={'test@test.com'}
+      email={email}
+      title={auth.steps.verify_token.title}
     />
   );
 }

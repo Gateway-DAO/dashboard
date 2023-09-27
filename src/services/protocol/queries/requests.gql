@@ -18,7 +18,7 @@ query myRequestsReceived($take: Float!, $skip: Float!) {
     id
     status
     userVerifier {
-      gatewayId
+      ...min_user
     }
     createdAt
     dataRequestTemplate {
@@ -41,6 +41,12 @@ query dataRequest($id: String!) {
     proofs {
       id
     }
+    userRecipient {
+      id
+      gatewayId
+      profilePicture
+      displayName
+    }
     userVerifier {
       id
       gatewayId
@@ -49,6 +55,21 @@ query dataRequest($id: String!) {
     }
     dataRequestTemplate {
       id
+      schema
+      dataModels {
+        id
+        title
+        schema
+      }
+    }
+  }
+}
+
+query dataRequestValidData($requestId: String!) {
+  findValidPDAsForRequest(requestId: $requestId) {
+    required
+    validData {
+      provided
     }
   }
 }
