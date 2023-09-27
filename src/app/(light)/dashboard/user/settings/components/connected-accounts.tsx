@@ -3,9 +3,10 @@
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
+import Loading from '@/components/loadings/loading/loading';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalTitle from '@/components/modal/modal-title/modal-title';
-import { AliasType, useDisconnectAlias } from '@/hooks/use-disconnect-alias';
+import { useDisconnectAlias } from '@/hooks/use-disconnect-alias';
 import { settings } from '@/locale/en/settings';
 import { AuthType } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
@@ -28,8 +29,6 @@ export default function ConnectedAccounts() {
     isLoading,
   } = useDisconnectAlias();
 
-  console.log(session, session?.user?.email);
-
   const wallets = useMemo(() => {
     return (
       session?.user.authentications?.filter(
@@ -46,47 +45,53 @@ export default function ConnectedAccounts() {
   }, [session]);
 
   return (
-    <Box
-      sx={{
-        '.MuiListItem-root': {
-          minHeight: 72,
-        },
-      }}
-    >
-      <Typography variant="h5" sx={{ mb: 1 }}>
-        {settings.connected_accounts.title}
-      </Typography>
-      <Typography variant="body1" color="text.secondary">
-        {settings.connected_accounts.description}
-      </Typography>
-      <Stack divider={<Divider sx={{ mx: NEGATIVE_CONTAINER_PX }} />}>
-        <EmailsSection
-          emails={emails}
-          userEmail={session?.user?.email as string}
-          onDisconnect={(address) =>
-            handleDisconnectAlias({ type: 'email', address })
-          }
-        />
-        <WalletsSection
-          wallets={wallets}
-          onDisconnect={(address) =>
-            handleDisconnectAlias({ type: 'wallet', address })
-          }
-        />
-        <SocialsSection
-          onDisconnect={(type) =>
-            handleDisconnectAlias({ type: type as AliasType })
-          }
-        />
-      </Stack>
-      <ModalRight open={modalDeactivateGatewayId} onClose={closeModal}>
-        <ModalTitle onClose={closeModal} />
-        <DeactivateGatewayId
-          onCancel={closeModal}
-          onConfirm={deactivateGatewayId}
-          isLoading={isLoading}
-        />
-      </ModalRight>
-    </Box>
+    <>
+      {isLoading ? (
+        <Loading fullScreen />
+      ) : (
+        <Box
+          sx={{
+            '.MuiListItem-root': {
+              minHeight: 72,
+            },
+          }}
+        >
+          <Typography variant="h5" sx={{ mb: 1 }}>
+            {settings.connected_accounts.title}
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            {settings.connected_accounts.description}
+          </Typography>
+          <Stack divider={<Divider sx={{ mx: NEGATIVE_CONTAINER_PX }} />}>
+            <EmailsSection
+              emails={emails}
+              userEmail={session?.user?.email as string}
+              onDisconnect={(address) =>
+                handleDisconnectAlias({ type: AuthType.Email, address })
+              }
+            />
+            <WalletsSection
+              wallets={wallets}
+              onDisconnect={(address) =>
+                handleDisconnectAlias({ type: AuthType.Wallet, address })
+              }
+            />
+            <SocialsSection
+              onDisconnect={(type) =>
+                handleDisconnectAlias({ type: type as AuthType })
+              }
+            />
+          </Stack>
+          <ModalRight open={modalDeactivateGatewayId} onClose={closeModal}>
+            <ModalTitle onClose={closeModal} />
+            <DeactivateGatewayId
+              onCancel={closeModal}
+              onConfirm={deactivateGatewayId}
+              isLoading={isLoading}
+            />
+          </ModalRight>
+        </Box>
+      )}
+    </>
   );
 }
