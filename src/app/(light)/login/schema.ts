@@ -1,4 +1,4 @@
-import { usernameSchema } from '@/schemas/username';
+import { displayNameSchema, usernameSchema } from '@/schemas/profile';
 import { z } from 'zod';
 
 export type TokenConfirmationSchema = {
@@ -24,10 +24,7 @@ export const schemaTokenConfirmation = z.object({
 
 export const createProfileSchema = z.object({
   username: usernameSchema,
-  displayName: z.preprocess((value) => {
-    if (!value || typeof value !== 'string') return undefined;
-    return value === '' ? undefined : value;
-  }, z.string().min(2).optional()),
+  displayName: displayNameSchema,
 });
 
 export type CreateProfileSchema = z.infer<typeof createProfileSchema>;

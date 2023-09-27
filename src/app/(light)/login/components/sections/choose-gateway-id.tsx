@@ -5,6 +5,8 @@ import { LoadingButton } from '@/components/buttons/loading-button/loading-butto
 import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
+import { settings } from '@/locale/en/settings';
+import { usernameSchema } from '@/schemas/profile';
 import { getClientPrivateApi } from '@/services/protocol/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -46,8 +48,12 @@ export function ChooseGatewayId() {
       }),
   });
 
-  const { avaibility, onCheckAvaibility, onResetAvaibility } =
-    useDebouncedUsernameAvaibility();
+  const {
+    avaibility,
+    onStartCheckAvaibility,
+    onCheckAvaibility,
+    onResetAvaibility,
+  } = useDebouncedUsernameAvaibility();
 
   const onSubmit = async (data: CreateProfileSchema) => {
     if (avaibility !== 'success') return;
@@ -69,6 +75,11 @@ export function ChooseGatewayId() {
       await onHandleSuccess();
     } catch (error) {}
   };
+
+  const avaibilityText =
+    avaibility === 'invalid'
+      ? settings.username.not_available
+      : settings.username.helper;
 
   return (
     <>
@@ -100,10 +111,9 @@ export function ChooseGatewayId() {
           {...register('username', {
             onChange(event) {
               const value = event.target.value;
-              const { success } = createProfileSchema.safeParse({
-                username: value,
-              });
+              const { success } = usernameSchema.safeParse(value);
               if (success) {
+                onStartCheckAvaibility();
                 return onCheckAvaibility(value);
               }
               if (avaibility !== 'idle') {
@@ -111,14 +121,14 @@ export function ChooseGatewayId() {
               }
             },
           })}
-          error={!!errors.username}
-          helperText={errors.username?.message}
+          error={!!errors.username || avaibility === 'invalid'}
+          helperText={errors.username?.message ?? avaibilityText}
           InputProps={{
             startAdornment: <InputAdornment position="start">@</InputAdornment>,
             endAdornment: (
               <InputAdornment position="end">
                 {avaibility === 'loading' && <CircularProgress size={16} />}
-                {avaibility === 'success' && <Check color="success" />}{' '}
+                {avaibility === 'success' && <Check color="success" />}
                 {avaibility === 'invalid' && <Close color="error" />}
               </InputAdornment>
             ),
