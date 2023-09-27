@@ -45,6 +45,7 @@ export default function Pdas() {
 
     // Set second logo text bounds
     gsap.delayedCall(0.3, setLogoTextBounds);
+    gsap.to(sectionRef.current, { autoAlpha: 1 });
 
     // Attach scroll event listener
     LenisManager?.on('scroll', handleScroll);

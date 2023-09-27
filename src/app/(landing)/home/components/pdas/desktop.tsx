@@ -18,33 +18,37 @@ export default function Pdas() {
   const logoRef = useRef<SVGPathElement>(null);
   const logoTextRef = useRef<SVGSVGElement>(null);
   const textPdasRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const textContentPdasRefs = useRef<string[]>([]);
   const pdasLogoContainerRef = useRef<HTMLDivElement>(null);
   const textPdasParagraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const slashRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const tlRef = useRef<gsap.core.Timeline>();
 
   // Animation setup using useEffect
   useEffect(() => {
-    const tl = createAnimation();
+    createAnimation();
+
+    let firstRender = true;
 
     // Scroll event handling
     const handleScroll = (e: IInstanceOptions) => {
-      if (!sectionRef.current) return;
+      if (firstRender) {
+        firstRender = false;
 
-      const offsetTop =
-        sectionRef.current.offsetTop - window.innerHeight / 2 + 200;
-      const sectionHeight = sectionRef.current.clientHeight;
-      const scrollSection = e.scroll - offsetTop;
-      const progress = scrollSection / (sectionHeight - window.innerHeight);
-
-      if (progress >= 0 && progress <= 1) {
-        tl.progress(progress);
-      } else if (progress < 0) {
-        tl.progress(0);
+        gsap.delayedCall(0.4, () => {
+          setTimelineProgress(e.scroll);
+          gsap.to(sectionRef.current, { autoAlpha: 1 });
+        });
+        return;
       }
+
+      setTimelineProgress(e.scroll);
     };
 
+    window.addEventListener('resize', reCalc);
+
     // Set second logo text bounds
-    gsap.delayedCall(0.3, setLogoTextBounds);
+    gsap.delayedCall(0.2, setLogoTextBounds);
 
     // Attach scroll event listener
     LenisManager?.on('scroll', handleScroll);
@@ -52,45 +56,97 @@ export default function Pdas() {
     // Cleanup function
     return () => {
       LenisManager?.off('scroll', handleScroll);
+      window.removeEventListener('resize', reCalc);
     };
   }, []);
 
+  const setTimelineProgress = (scroll: number) => {
+    if (!sectionRef.current || !tlRef.current) return;
+
+    const offsetTop =
+      sectionRef.current.offsetTop - window.innerHeight / 2 + 200;
+    const sectionHeight = sectionRef.current.clientHeight;
+    const scrollSection = scroll - offsetTop;
+    const progress = scrollSection / (sectionHeight - window.innerHeight);
+
+    if (progress >= 0 && progress <= 1) {
+      tlRef.current.progress(progress);
+    } else if (progress < 0) {
+      tlRef.current.progress(0);
+    }
+  };
+
+  const reCalc = () => {
+    if (!tlRef.current) return;
+
+    tlRef.current.progress(0);
+    tlRef.current.kill();
+
+    if (textContentPdasRefs.current.length) {
+      textContentPdasRefs.current.forEach((content, index) => {
+        if (!textPdasRefs.current[index]) return;
+
+        textPdasRefs.current[index]!.innerHTML = content;
+      });
+    }
+
+    setLogoTextBounds();
+    createAnimation();
+    gsap.delayedCall(0.1, () => {
+      setTimelineProgress(LenisManager?.scroll || 0);
+    });
+  };
+
   const createAnimation = () => {
-    if (!linesParentRef.current || !logoContainerRef.current)
-      return gsap.timeline();
+    if (!linesParentRef.current || !logoContainerRef.current) return;
+
+    if (tlRef.current) tlRef.current.kill();
 
     const lines = linesParentRef.current.querySelectorAll('path');
     const boundsLogo = logoContainerRef.current.getBoundingClientRect();
 
-    const tl = gsap.timeline({ paused: true });
+    tlRef.current = gsap.timeline({ paused: true });
 
-    tl.set(pdasLogoContainerRef.current, {
+    tlRef.current.set(pdasLogoContainerRef.current, {
       position: 'absolute',
       xPercent: -50,
       yPercent: -50,
     });
-    tl.to(logoBackgroundRef.current, { autoAlpha: 1 });
-    tl.fromTo(logoRef.current, { y: -10 }, { autoAlpha: 1, y: 0 }, '-=0.3');
-    tl.set(logoContainerRef.current, { autoAlpha: 0 });
-    tl.set(logoTextRef.current, { autoAlpha: 1 });
-    tl.to(lines, {
+    tlRef.current.to(logoBackgroundRef.current, { autoAlpha: 1 });
+    tlRef.current.fromTo(
+      logoRef.current,
+      { y: -10 },
+      { autoAlpha: 1, y: 0 },
+      '-=0.3'
+    );
+    tlRef.current.set(logoContainerRef.current, { autoAlpha: 0 });
+    tlRef.current.set(logoTextRef.current, { autoAlpha: 1 });
+    tlRef.current.to(lines, {
       transform: 'scale(1)',
       stagger: 0.1,
       ease: 'power4.out',
       delay: 0.6,
       duration: 1,
     });
-    tl.to(lines, {
+    tlRef.current.to(lines, {
       autoAlpha: 0,
       stagger: 0.1,
       ease: 'power4.out',
       duration: 1,
     });
-    tl.to(logoTextRef.current, { scale: 120 / boundsLogo.width }, '-=1');
-    tl.to(pdasLogoContainerRef.current, { y: -73 }, '<');
+    tlRef.current.to(
+      logoTextRef.current,
+      { scale: 120 / boundsLogo.width },
+      '-=1'
+    );
+    tlRef.current.to(pdasLogoContainerRef.current, { y: -73 }, '<');
 
     textPdasRefs.current.forEach((element, index) => {
-      if (!element) return;
+      if (!element || !tlRef.current) return;
+
+      if (!textContentPdasRefs.current[index]) {
+        textContentPdasRefs.current[index] = element.textContent as string;
+      }
 
       splitSpans(element, '', () => {
         const parent = element.parentNode as HTMLParagraphElement;
@@ -104,10 +160,10 @@ export default function Pdas() {
       const texPdaBounds = element.getBoundingClientRect();
 
       if (index === 0) {
-        tl.set(slashRefs.current[0], { display: 'inline-block' });
-        tl.from(spans, { width: 0, display: 'none', stagger: 0.1 });
-        tl.set(logoTextRef.current, { transformOrigin: 'left' });
-        tl.to(
+        tlRef.current.set(slashRefs.current[0], { display: 'inline-block' });
+        tlRef.current.from(spans, { width: 0, display: 'none', stagger: 0.1 });
+        tlRef.current.set(logoTextRef.current, { transformOrigin: 'left' });
+        tlRef.current.to(
           logoTextRef.current,
           {
             scale: 98 / boundsLogo.width,
@@ -117,7 +173,7 @@ export default function Pdas() {
           },
           '<'
         );
-        tl.to(
+        tlRef.current.to(
           pdasLogoContainerRef.current,
           {
             xPercent: 0,
@@ -131,28 +187,30 @@ export default function Pdas() {
         if (!paragraphBounds) return;
 
         const x = paragraphBounds.left - texPdaBounds.left;
-        tl.to(
+        tlRef.current.to(
           textPdasParagraphRefs.current,
           { x, y: -120, duration: 0.8 },
           '-=0.6'
         );
-        tl.set(textPdasParagraphRefs.current, {
+        tlRef.current.set(textPdasParagraphRefs.current, {
           textAlign: 'left',
           x: 0,
         });
-        tl.set(slashRefs.current[0], { display: 'none' });
-        tl.set(slashRefs.current[1], { display: 'inline-block' });
+        tlRef.current.set(slashRefs.current[0], { display: 'none' });
+        tlRef.current.set(slashRefs.current[1], { display: 'inline-block' });
       } else {
-        tl.from(spans, { width: 0, display: 'none', stagger: 0.1 });
+        tlRef.current.from(spans, { width: 0, display: 'none', stagger: 0.1 });
       }
     });
 
-    return tl;
+    return tlRef.current;
   };
 
   // Function to set logo text bounds
   const setLogoTextBounds = () => {
     if (!logoTextRef.current || !logoContainerRef.current) return;
+
+    logoTextRef.current.removeAttribute('style');
 
     const logoBounds = logoContainerRef.current.getBoundingClientRect();
     const logoTextBounds = logoTextRef.current.getBoundingClientRect();
