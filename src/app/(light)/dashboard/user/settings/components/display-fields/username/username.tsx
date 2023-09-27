@@ -3,7 +3,10 @@
 import { useSession } from 'next-auth/react';
 
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
 import { common } from '@/locale/en/common';
+import { usernameSchema } from '@/schemas/username';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
@@ -16,10 +19,16 @@ import {
   TextField,
 } from '@mui/material';
 
+import { updateUsernameSchema } from './schema';
+
 export default function Username() {
   const { data: session, update } = useSession();
 
-  const { privateApi } = useGtwSession();
+  const initialUsername = session!.user.gatewayId!;
+
+  const { avaibility, onCheckAvaibility, onResetAvaibility } =
+    useDebouncedUsernameAvaibility();
+
   const { mutateAsync } = useMutation({
     mutationKey: ['updateUsername'],
     mutationFn: async (username: string) => {},
@@ -28,11 +37,10 @@ export default function Username() {
   const { enqueueSnackbar } = useSnackbar();
 
   const { register, control, watch, reset, handleSubmit, formState, setValue } =
-    useForm<{
-      username: string;
-    }>({
+    useForm({
+      resolver: zodResolver(updateUsernameSchema),
       values: {
-        username: session?.user.gatewayId ?? '',
+        username: initialUsername,
       },
     });
 
@@ -40,9 +48,7 @@ export default function Username() {
 
   const onCancel = () => {
     reset();
-    if (session?.user.gatewayId) {
-      setValue('username', session?.user.gatewayId);
-    }
+    setValue('username', initialUsername);
   };
 
   const onSubmit = async (data: { username: string }) => {
@@ -65,7 +71,23 @@ export default function Username() {
           InputProps={{
             startAdornment: <InputAdornment position="start">@</InputAdornment>,
           }}
-          {...register('username')}
+          {...register('username', {
+            onChange(event) {
+              const value = event.target.value;
+              if (value === initialUsername) {
+                reset();
+                return onResetAvaibility();
+              }
+
+              const { success } = usernameSchema.safeParse(value);
+              if (success) {
+                return onCheckAvaibility(value);
+              }
+              if (avaibility !== 'idle') {
+                onResetAvaibility();
+              }
+            },
+          })}
         />
       ) : (
         <Skeleton
@@ -78,8 +100,7 @@ export default function Username() {
           }}
         />
       )}
-      {session &&
-        username !== session?.user.gatewayId &&
+      {username !== session?.user.gatewayId &&
         session?.user.gatewayId !== null && (
           <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
             <Button variant="contained" type="submit">
