@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { getClientPrivateApi } from '@/services/protocol/api';
-import { useThrottledCallback } from '@react-hookz/web';
+import { useDebouncedCallback, useThrottledCallback } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 
 type AvaibilityState = 'idle' | 'loading' | 'success' | 'invalid';
@@ -12,27 +12,41 @@ export default function useDebouncedUsernameAvaibility() {
   const checkAvaibility = useMutation({
     mutationKey: ['check-avaibility'],
     mutationFn: async (username: string) => {
-      setAvaibility('loading');
       const { checkGatewayIdAvaibility } = await (
         await getClientPrivateApi()
       ).check_username_avaibility({ username });
       return checkGatewayIdAvaibility;
     },
     onSuccess: (valid) => {
-      setAvaibility(valid ? 'success' : 'invalid');
+      if (avaibility !== 'idle') {
+        setAvaibility(valid ? 'success' : 'invalid');
+      }
     },
     onError: () => {
-      setAvaibility('invalid');
+      if (avaibility !== 'idle') {
+        setAvaibility('invalid');
+      }
     },
   });
 
-  const onCheckAvaibility = useThrottledCallback(
+  const onCheckAvaibility = useDebouncedCallback(
     checkAvaibility.mutate,
     [checkAvaibility.mutate],
-    500
+    1000
   );
 
-  const onResetAvaibility = () => setAvaibility('idle');
+  const onStartCheckAvaibility = () => {
+    setAvaibility('loading');
+  };
 
-  return { avaibility, onCheckAvaibility, onResetAvaibility };
+  const onResetAvaibility = () => {
+    setAvaibility('idle');
+  };
+
+  return {
+    avaibility,
+    onStartCheckAvaibility,
+    onCheckAvaibility,
+    onResetAvaibility,
+  };
 }

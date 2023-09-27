@@ -1,6 +1,10 @@
 export const settings = {
   title: 'Gateway ID',
   subtitle: 'Edit your ID and manage connected accounts',
+  username: {
+    helper: 'You can edit it once a month',
+    not_available: 'Username not available',
+  },
   connected_accounts: {
     title: 'Connected accounts',
     description:
