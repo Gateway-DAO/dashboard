@@ -2,18 +2,22 @@
 
 import { useSession } from 'next-auth/react';
 
+import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 
-import { Button, Skeleton, Stack, TextField } from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
+
+import { UpdateDisplayNameSchema, updateDisplayNameSchema } from './schema';
 
 export default function DisplayName() {
   const { data: session, update } = useSession();
   const { privateApi } = useGtwSession();
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isLoading } = useMutation({
     mutationKey: ['updateDisplayName'],
     mutationFn: async (displayName: string) =>
       privateApi.update_display_name({ displayName }),
@@ -21,11 +25,17 @@ export default function DisplayName() {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { register, watch, reset, handleSubmit, setValue } = useForm<{
-    displayName: string;
-  }>({
+  const {
+    register,
+    watch,
+    reset,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(updateDisplayNameSchema),
     values: {
-      displayName: session?.user.displayName ?? '',
+      displayName: session!.user.displayName ?? '',
     },
   });
 
@@ -38,9 +48,9 @@ export default function DisplayName() {
     }
   };
 
-  const onSubmit = async (data: { displayName: string }) => {
+  const onSubmit = async (data: UpdateDisplayNameSchema) => {
     try {
-      await mutateAsync(data.displayName);
+      await mutateAsync(data.displayName ?? '');
       await update();
       reset();
     } catch {
@@ -59,13 +69,19 @@ export default function DisplayName() {
           shrink: !!displayName,
         }}
         {...register('displayName')}
+        error={!!errors.displayName}
+        helperText={errors.displayName?.message}
       />
       {displayName !== session?.user.displayName &&
         session?.user.displayName !== null && (
           <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
-            <Button variant="contained" type="submit">
+            <LoadingButton
+              variant="contained"
+              type="submit"
+              isLoading={isLoading}
+            >
               {common.actions.save}
-            </Button>
+            </LoadingButton>
             <Button variant="outlined" type="button" onClick={onCancel}>
               {common.actions.cancel}
             </Button>
