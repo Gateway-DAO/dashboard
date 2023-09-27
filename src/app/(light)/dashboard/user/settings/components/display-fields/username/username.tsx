@@ -1,11 +1,12 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { useMemo } from 'react';
 
 import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
 import { common } from '@/locale/en/common';
 import { settings } from '@/locale/en/settings';
-import { usernameSchema } from '@/schemas/username';
+import { usernameSchema } from '@/schemas/profile';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
