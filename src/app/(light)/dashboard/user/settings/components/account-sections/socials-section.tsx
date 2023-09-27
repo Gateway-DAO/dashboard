@@ -7,10 +7,10 @@ import AliasMenuButton from '../alias-menu-button';
 import AccountSection from './account-section';
 
 const socials = [
-  { icon: FaGoogle, name: 'Google' },
-  { icon: FaGithub, name: 'Github' },
-  { icon: FaDiscord, name: 'Discord', signed: true },
-  { icon: FaTwitter, name: 'Twitter', signed: true },
+  { icon: FaGoogle, name: 'Google', type: 'GOOGLE' },
+  { icon: FaGithub, name: 'Github', type: 'GITHUB' },
+  { icon: FaDiscord, name: 'Discord', type: 'DISCORD', signed: true },
+  { icon: FaTwitter, name: 'Twitter', type: 'TWITTER', signed: true },
 ];
 
 type Props = {
@@ -20,12 +20,12 @@ type Props = {
 export default function SocialsSection({ onDisconnect }: Props) {
   return (
     <AccountSection title="Other accounts">
-      {socials.map(({ icon: Icon, name, signed }) => (
+      {socials.map(({ icon: Icon, name, type, signed }) => (
         <ListItem
           key={name}
           secondaryAction={
             signed ? (
-              <AliasMenuButton onDisconnect={() => onDisconnect(name)} />
+              <AliasMenuButton onDisconnect={() => onDisconnect(type)} />
             ) : (
               <Button variant="outlined">{common.actions.connect}</Button>
             )
