@@ -67,8 +67,8 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
             <Typography>
               {limitCharsCentered(
                 pda?.dataAsset?.issuer?.gatewayId ??
-                  pda?.dataAsset?.issuer?.primaryWallet?.address ??
                   pda?.dataAsset?.issuer?.email ??
+                  pda?.dataAsset?.issuer?.id ??
                   '',
                 20
               )}
