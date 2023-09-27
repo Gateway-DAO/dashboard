@@ -122,7 +122,6 @@ export default function Pdas() {
         tl.to(
           pdasLogoContainerRef.current,
           {
-            leftPercent: 0,
             xPercent: 0,
             left: 0,
             y: '-27.3rem',
