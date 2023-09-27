@@ -65,8 +65,8 @@ export default function Pdas() {
     const tl = gsap.timeline({ paused: true });
 
     tl.set(pdasLogoContainerRef.current, {
-      leftPercent: 50,
-      topPercent: 50,
+      left: '50%',
+      top: '50%',
       position: 'absolute',
       xPercent: -50,
       yPercent: -50,
