@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 
@@ -24,7 +25,8 @@ type Alias = {
 };
 
 export function useDisconnectAlias() {
-  const { privateApi, session } = useGtwSession();
+  const { privateApi } = useGtwSession();
+  const { data: session, update } = useSession();
   const [modalDeactivateGatewayId, setModalDeactivateGatewayId] =
     useToggle(false);
   const [dataToDisconnect, setDataToDisconnect] = useState<Alias | null>(null);
@@ -47,6 +49,7 @@ export function useDisconnectAlias() {
         variant: 'error',
       });
     },
+    onSuccess: () => update,
   });
 
   const disconnectWalletMutation = useMutation({
@@ -65,6 +68,7 @@ export function useDisconnectAlias() {
         variant: 'error',
       });
     },
+    onSuccess: () => update,
   });
 
   const handleDisconnectAlias = ({ type, address }: Alias) => {
