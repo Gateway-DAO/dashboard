@@ -10,6 +10,21 @@ export const settings = {
     description:
       'These are the accounts you connected to your Gateway ID to log in and receive private data assets. You can disconnect or connect more accounts here.',
     wallet: 'Wallet',
+    add_email: {
+      card_summary_title: 'Your account',
+      title: 'Connect email',
+      subtitle: 'Email',
+      description:
+        'Adding another email you increase the chances of receiving credentials',
+      label: 'E-mail address',
+    },
+    verify_token: {
+      card_summary_title: 'Code sent to',
+      description1: 'Please check',
+      description2:
+        'for an email from Gateway and enter your code below. This code will expire in 30 minutes.',
+      code_placeholder: 'Code',
+    },
     modal_confirm_delete: {
       text_key: 'deactivate my gateway id',
       text_confirm1: 'To confirm this, type',
