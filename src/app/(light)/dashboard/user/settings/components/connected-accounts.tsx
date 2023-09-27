@@ -3,7 +3,6 @@
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
-import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { AliasType, useDisconnectAlias } from '@/hooks/use-disconnect-alias';
@@ -14,6 +13,7 @@ import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { Box, Divider, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
+import { DeactivateGatewayId } from './account-sections/deactivate-gateway-id';
 import EmailsSection from './account-sections/emails-section';
 import SocialsSection from './account-sections/socials-section';
 import WalletsSection from './account-sections/wallets-section';
@@ -78,27 +78,11 @@ export default function ConnectedAccounts() {
       </Stack>
       <ModalRight open={modalDeactivateGatewayId} onClose={closeModal}>
         <ModalTitle onClose={closeModal} />
-        <Stack>
-          <Typography
-            component="h3"
-            fontSize={34}
-            id="deactivate-gateway-id-title"
-          >
-            Deactivate Gateway ID
-          </Typography>
-          <Typography sx={{ mb: 6 }}>Test</Typography>
-          <LoadingButton
-            variant="contained"
-            type="submit"
-            sx={{
-              mt: 3,
-            }}
-            id="disconnect-alias-action"
-            onClick={() => deactivateGatewayId()}
-          >
-            Deactivate
-          </LoadingButton>
-        </Stack>
+        <DeactivateGatewayId
+          onCancel={closeModal}
+          onConfirm={deactivateGatewayId}
+          isLoading={false}
+        />
       </ModalRight>
     </Box>
   );

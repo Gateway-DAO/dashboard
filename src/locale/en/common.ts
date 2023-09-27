@@ -17,6 +17,7 @@ export const common = {
     name: 'Name',
     success_copy_message: 'Copied to clipboard',
     optional: 'Optional',
+    alert_important: 'This is extremely important',
   },
   chain: {
     EVM: 'Ethereum',
