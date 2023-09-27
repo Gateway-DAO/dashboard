@@ -25,6 +25,7 @@ export default function ConnectedAccounts() {
     deactivateGatewayId,
     closeModal,
     modalDeactivateGatewayId,
+    isLoading,
   } = useDisconnectAlias();
 
   const wallets = useMemo(() => {
@@ -81,7 +82,7 @@ export default function ConnectedAccounts() {
         <DeactivateGatewayId
           onCancel={closeModal}
           onConfirm={deactivateGatewayId}
-          isLoading={false}
+          isLoading={isLoading}
         />
       </ModalRight>
     </Box>
