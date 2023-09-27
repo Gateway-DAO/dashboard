@@ -28,6 +28,8 @@ export default function ConnectedAccounts() {
     isLoading,
   } = useDisconnectAlias();
 
+  console.log(session, session?.user?.email);
+
   const wallets = useMemo(() => {
     return (
       session?.user.authentications?.filter(

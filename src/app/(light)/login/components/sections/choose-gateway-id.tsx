@@ -123,6 +123,7 @@ export function ChooseGatewayId() {
               </InputAdornment>
             ),
           }}
+          disabled={updateUser.isSuccess}
         />
         <TitleSubtitleField
           title={auth.steps.choose_gateway_id.create_display_name}
@@ -134,15 +135,20 @@ export function ChooseGatewayId() {
           {...register('displayName')}
           error={!!errors.displayName}
           helperText={errors.displayName?.message ?? common.general.optional}
+          disabled={updateUser.isSuccess}
         />
         <LoadingButton
           variant="contained"
           type="submit"
           sx={{ mt: 2, height: 48 }}
           isLoading={updateUser.isLoading}
-          disabled={!isValid || avaibility !== 'success'}
+          disabled={
+            !isValid || avaibility !== 'success' || updateUser.isSuccess
+          }
         >
-          {common.actions.create_id}
+          {updateUser.isSuccess
+            ? common.general.success
+            : common.actions.create_id}
         </LoadingButton>
       </Stack>
     </>
