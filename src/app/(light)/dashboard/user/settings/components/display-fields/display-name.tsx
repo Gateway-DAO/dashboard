@@ -48,19 +48,6 @@ export default function DisplayName() {
     }
   };
 
-  if (!session)
-    return (
-      <Skeleton
-        variant="rounded"
-        sx={{
-          maxWidth: 478,
-          width: '100%',
-          height: 56,
-          mt: '0 !important',
-        }}
-      />
-    );
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextField
