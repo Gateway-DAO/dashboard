@@ -4,12 +4,6 @@ fragment user on User {
   profilePicture
   displayName
   email
-  primaryWallet {
-    address
-  }
-  wallets {
-    address
-  }
   createdAt
   updatedAt
 }

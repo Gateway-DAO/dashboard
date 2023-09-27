@@ -6,21 +6,13 @@ import { mutations } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { errorMessages } from '@/locale/en/errors';
-import { Exact } from '@/services/protocol/types';
+import { AuthType, Exact, Scalars } from '@/services/protocol/types';
 import { useToggle } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
-export type AliasType =
-  | 'email'
-  | 'wallet'
-  | 'Google'
-  | 'Discord'
-  | 'Github'
-  | 'Twitter';
-
 type Alias = {
-  type: AliasType;
+  type: AuthType;
   address?: string;
 };
 
@@ -33,34 +25,18 @@ export function useDisconnectAlias() {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
-  const disconnectEmailMutation = useMutation({
-    mutationKey: [mutations.disconnect_email],
-    mutationFn: ({
-      email,
-    }: Exact<{
-      email: string;
-    }>) => {
-      return privateApi.protocol_remove_email({
-        email,
-      });
-    },
-    onError: () => {
-      enqueueSnackbar(errorMessages.SOMETHING_WENT_WRONG, {
-        variant: 'error',
-      });
-    },
-    onSuccess: () => update,
-  });
-
-  const disconnectWalletMutation = useMutation({
+  const disconnectMutation = useMutation({
     mutationKey: [mutations.disconnect_wallet],
     mutationFn: ({
-      id,
+      data,
+      type,
     }: Exact<{
-      id: string;
+      data: Scalars['JSON'];
+      type: AuthType;
     }>) => {
-      return privateApi.protocol_remove_auth_method({
-        id,
+      return privateApi.protocol_unregister_auth_method({
+        data,
+        type,
       });
     },
     onError: () => {
@@ -68,12 +44,12 @@ export function useDisconnectAlias() {
         variant: 'error',
       });
     },
-    onSuccess: () => update,
+    onSuccess: update,
   });
 
   const handleDisconnectAlias = ({ type, address }: Alias) => {
     if (
-      (type === 'wallet' || type === 'email') &&
+      (type === AuthType.Wallet || type === AuthType.Email) &&
       session?.user?.authentications?.length === 1
     ) {
       router.push(`#deactivate-gateway-id`, { scroll: false });
@@ -86,36 +62,24 @@ export function useDisconnectAlias() {
 
   const disconnect = async ({ type, address }: Alias) => {
     switch (type) {
-      case 'email':
-        await disconnectEmailMutation.mutateAsync({ email: address as string });
-        break;
-      case 'Discord':
-        disconnectDiscord();
-        break;
-      case 'Twitter':
-        disconnectTwitter();
+      case 'GOOGLE':
+        disconnectGoogle();
         break;
       default:
-        const authToRemove = session?.user?.authentications?.find(
-          (auth) => auth.data?.address === address
-        );
-        await disconnectWalletMutation.mutateAsync({
-          id: authToRemove?.id as string,
+        await disconnectMutation.mutateAsync({
+          type,
+          data: { address: address as string },
         });
     }
   };
 
-  const disconnectDiscord = () => {
-    console.log('Discord disconnected!');
-  };
-
-  const disconnectTwitter = () => {
-    console.log('Twitter disconnected!');
+  const disconnectGoogle = () => {
+    console.log('Google disconnected!');
   };
 
   const deactivateGatewayId = () => {
     disconnect({
-      type: dataToDisconnect?.type as AliasType,
+      type: dataToDisconnect?.type as AuthType,
       address: dataToDisconnect?.address,
     });
     setDataToDisconnect(null);
@@ -133,7 +97,6 @@ export function useDisconnectAlias() {
     deactivateGatewayId,
     closeModal,
     modalDeactivateGatewayId,
-    isLoading:
-      disconnectEmailMutation.isLoading || disconnectWalletMutation.isLoading,
+    isLoading: disconnectMutation.isLoading,
   };
 }
