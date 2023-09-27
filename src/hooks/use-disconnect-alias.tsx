@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 
@@ -5,7 +6,6 @@ import { mutations } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { errorMessages } from '@/locale/en/errors';
-import { settings } from '@/locale/en/settings';
 import { Exact } from '@/services/protocol/types';
 import { useToggle } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
@@ -25,7 +25,8 @@ type Alias = {
 };
 
 export function useDisconnectAlias() {
-  const { privateApi, session } = useGtwSession();
+  const { privateApi } = useGtwSession();
+  const { data: session, update } = useSession();
   const [modalDeactivateGatewayId, setModalDeactivateGatewayId] =
     useToggle(false);
   const [dataToDisconnect, setDataToDisconnect] = useState<Alias | null>(null);
@@ -48,6 +49,7 @@ export function useDisconnectAlias() {
         variant: 'error',
       });
     },
+    onSuccess: () => update,
   });
 
   const disconnectWalletMutation = useMutation({
@@ -66,6 +68,7 @@ export function useDisconnectAlias() {
         variant: 'error',
       });
     },
+    onSuccess: () => update,
   });
 
   const handleDisconnectAlias = ({ type, address }: Alias) => {
@@ -115,7 +118,6 @@ export function useDisconnectAlias() {
       type: dataToDisconnect?.type as AliasType,
       address: dataToDisconnect?.address,
     });
-    console.log('Gateway ID deactivated!');
     setDataToDisconnect(null);
     closeModal();
   };
