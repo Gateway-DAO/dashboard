@@ -12,4 +12,5 @@ export const mutations = {
   change_pda_status: 'change_pda_status',
   create_proof_from_request: 'create_proof_from_request',
   reject_data_request: 'reject_data_request',
+  remove_email: 'remove_email',
 };

@@ -25,17 +25,36 @@ export function useDisconnectAlias() {
   const [dataToDisconnect, setDataToDisconnect] = useState<Alias | null>(null);
   const router = useRouter();
 
+  // const { privateApi } = useGtwSession();
+
+  // const deleteEmailMutation = useMutation({
+  //   mutationKey: [mutations.remove_email],
+  //   mutationFn: ({
+  //     email,
+  //   }: Exact<{
+  //     email: string;
+  //   }>) => {
+  //     return privateApi.protocol_remove_email({
+  //       email,
+  //     });
+  //   },
+  //   onSuccess,
+  // });
+
   const handleDisconnectAlias = ({ type, address }: Alias) => {
-    if (session?.user?.authentications?.length === 1) {
+    if (
+      (type === 'wallet' || type === 'email') &&
+      session?.user?.authentications?.length === 1
+    ) {
       router.push(`#deactivate-gateway-id`, { scroll: false });
       setModalDeactivateGatewayId(true);
       setDataToDisconnect({ type, address });
     } else {
-      disconnectAlias({ type, address });
+      disconnect({ type, address });
     }
   };
 
-  const disconnectAlias = ({ type, address }: Alias) => {
+  const disconnect = ({ type, address }: Alias) => {
     switch (type) {
       case 'email':
         disconnectEmail(address as string);
@@ -68,12 +87,13 @@ export function useDisconnectAlias() {
   };
 
   const deactivateGatewayId = () => {
-    disconnectAlias({
+    disconnect({
       type: dataToDisconnect?.type as AliasType,
       address: dataToDisconnect?.address,
     });
     console.log('Gateway ID deactivated!');
     setDataToDisconnect(null);
+    closeModal();
   };
 
   const closeModal = () => {
