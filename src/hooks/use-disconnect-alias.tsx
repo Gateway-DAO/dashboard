@@ -5,7 +5,6 @@ import { mutations } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { errorMessages } from '@/locale/en/errors';
-import { settings } from '@/locale/en/settings';
 import { Exact } from '@/services/protocol/types';
 import { useToggle } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
