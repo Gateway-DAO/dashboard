@@ -38,7 +38,7 @@ query dataRequest($id: String!) {
     status
     createdAt
 
-    proofs {
+    proof {
       id
     }
     userRecipient {
