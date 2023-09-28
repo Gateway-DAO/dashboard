@@ -32,7 +32,13 @@
   font-weight: 400;
   letter-spacing: 0.412px;
   line-height: 82px;
+  margin-top: 0;
+  margin-bottom: 10px;
   width: 100%;
+
+  @media (max-width: 1199px) and (min-width: 1024px) {
+    margin-top: 50px;
+  }
 
   @media (max-width: 969px) {
     font-size: 3.5rem;
