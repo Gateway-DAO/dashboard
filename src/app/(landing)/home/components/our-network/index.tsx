@@ -6,6 +6,7 @@ import ForVerifies from '@/app/(landing)/components/svgs/for-verifies';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import GTWLink from '@/components/gtw-link';
 
 import styles from './our-network.module.scss';
 
@@ -20,7 +21,7 @@ export default function OurNetwork() {
         <h2 className={styles.title}>Our Network</h2>
 
         <div className={styles.columns}>
-          <div className={styles.column}>
+          <GTWLink href="/" className={styles.column}>
             <h3 className={styles.column_label}>For Issuers</h3>
 
             <ForIssues
@@ -40,9 +41,9 @@ export default function OurNetwork() {
               <li>Programatically control PDA issuance and management.</li>
               <li>Increase data interoperability and monetization. </li>
             </ul>
-          </div>
+          </GTWLink>
 
-          <div className={styles.column}>
+          <GTWLink href="/" className={styles.column}>
             <h3 className={styles.column_label}>For Owners</h3>
 
             <ForOwners className={styles.column_vector} />
@@ -58,10 +59,10 @@ export default function OurNetwork() {
               <li>Encrypted PDAs enable true data-sovereignty.</li>
               <li>Share and revoke access in a single click.</li>
             </ul>
-          </div>
+          </GTWLink>
         </div>
 
-        <div className={styles.column_large}>
+        <GTWLink href="/" className={styles.column_large}>
           <div className={styles.column_large_vector}>
             <ForVerifies className={styles.column_vector} />
           </div>
@@ -94,7 +95,7 @@ export default function OurNetwork() {
               <li>Unlock marketing partners and user experiences.</li>
             </ul>
           </div>
-        </div>
+        </GTWLink>
       </Wrapper>
     </section>
   );
