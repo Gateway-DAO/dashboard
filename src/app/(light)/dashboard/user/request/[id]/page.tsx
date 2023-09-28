@@ -99,9 +99,9 @@ export default async function DashboardUserDataRequest({
   const proofData =
     isOwner ||
     dataRequest.status !== DataResourceStatus.Accepted ||
-    !dataRequest.proofs?.[0]?.id
+    !dataRequest.proof?.id
       ? {}
-      : await getProofData(dataRequest.proofs?.[0]?.id);
+      : await getProofData(dataRequest.proof?.id);
 
   const requester =
     dataRequest.userVerifier?.displayName ??
@@ -125,7 +125,7 @@ export default async function DashboardUserDataRequest({
             requester={requester}
             status={dataRequest.status!}
             requestId={dataRequest.id}
-            proofId={dataRequest.proofs?.[0]?.id}
+            proofId={dataRequest.proof?.id}
             requestValidData={requestValidData}
             profilePicture={dataRequest.userVerifier?.profilePicture}
           />
@@ -133,7 +133,7 @@ export default async function DashboardUserDataRequest({
           <RequestCardVerfierView
             recipient={recipient}
             status={dataRequest.status!}
-            proofId={dataRequest.proofs?.[0]?.id}
+            proofId={dataRequest.proof?.id}
           />
         )}
         <Paper
