@@ -38,8 +38,11 @@ export default function Stats() {
         const number = Number(content);
         const letterBounds = letter.getBoundingClientRect();
         gsap.set(letter, {
-          width: letterBounds.width,
+          // width: letterBounds.width,
           height: letterBounds.height,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
           willChange: 'transform',
         });
 
@@ -75,6 +78,22 @@ export default function Stats() {
           },
           0
         );
+
+        if (index === 0) {
+          const lastSpan = letter.querySelectorAll('span');
+          const boundsLastSpan =
+            lastSpan[lastSpan.length - 1].getBoundingClientRect();
+
+          const xValue = boundsLastSpan.x - spanRef.getBoundingClientRect().x;
+
+          if (xValue) {
+            tl.current[indexSpanRef].to(
+              spanRef,
+              { x: -xValue, duration: 1.5, ease: 'Power3.easeInOut' },
+              '-=1.7'
+            );
+          }
+        }
       });
     });
   }, []);
