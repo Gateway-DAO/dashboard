@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import Footer from './components/footer';
 import Header from './components/header';
 import { HeaderContextProvider } from './contexts/header-context';
@@ -14,7 +16,9 @@ import Stats from './home/components/stats';
 import LenisManager from './utils/scroll';
 
 export default function IndexPage() {
-  LenisManager;
+  useEffect(() => {
+    LenisManager;
+  }, []);
 
   return (
     <HeaderContextProvider>
