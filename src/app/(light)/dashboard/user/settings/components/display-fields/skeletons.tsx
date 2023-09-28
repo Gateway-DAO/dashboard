@@ -7,7 +7,7 @@ export default function DisplayFieldsSkeletons() {
     <>
       <FormControl>
         <FormLabel htmlFor="avatar" sx={{ fontSize: 14 }}>
-          {common.general.avatar}
+          {' '}
         </FormLabel>
         <Stack direction="row" spacing={2} alignItems="center">
           <Skeleton variant="circular" width={80} height={80} />
