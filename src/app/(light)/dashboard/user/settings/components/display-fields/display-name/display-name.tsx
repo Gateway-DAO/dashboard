@@ -25,6 +25,8 @@ export default function DisplayName() {
 
   const { enqueueSnackbar } = useSnackbar();
 
+  const initialDisplayName = session?.user.displayName ?? '';
+
   const {
     register,
     watch,
@@ -35,7 +37,7 @@ export default function DisplayName() {
   } = useForm({
     resolver: zodResolver(updateDisplayNameSchema),
     values: {
-      displayName: session!.user.displayName ?? '',
+      displayName: initialDisplayName,
     },
   });
 
@@ -43,8 +45,8 @@ export default function DisplayName() {
 
   const onCancel = () => {
     reset();
-    if (session?.user.displayName) {
-      setValue('displayName', session?.user.displayName);
+    if (initialDisplayName) {
+      setValue('displayName', initialDisplayName);
     }
   };
 
@@ -72,21 +74,20 @@ export default function DisplayName() {
         error={!!errors.displayName}
         helperText={errors.displayName?.message}
       />
-      {displayName !== session?.user.displayName &&
-        session?.user.displayName !== null && (
-          <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
-            <LoadingButton
-              variant="contained"
-              type="submit"
-              isLoading={isLoading}
-            >
-              {common.actions.save}
-            </LoadingButton>
-            <Button variant="outlined" type="button" onClick={onCancel}>
-              {common.actions.cancel}
-            </Button>
-          </Stack>
-        )}
+      {displayName !== initialDisplayName && (
+        <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
+          <LoadingButton
+            variant="contained"
+            type="submit"
+            isLoading={isLoading}
+          >
+            {common.actions.save}
+          </LoadingButton>
+          <Button variant="outlined" type="button" onClick={onCancel}>
+            {common.actions.cancel}
+          </Button>
+        </Stack>
+      )}
     </form>
   );
 }
