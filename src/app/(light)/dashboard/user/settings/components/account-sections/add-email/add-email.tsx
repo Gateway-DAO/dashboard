@@ -26,7 +26,7 @@ export default function AddEmail({ onSuccess }: Props) {
   const [email, setEmail] = useState<string | null>(null);
   const { privateApi } = useGtwSession();
 
-  const methodsAddEmail = useForm<EmailSchema>({
+  const methodsAddEmail = useForm({
     resolver: zodResolver(schemaEmail as any), // TODO: Add right types
   });
 
