@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
+import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
 import { common } from '@/locale/en/common';
@@ -49,7 +50,7 @@ export default function Username() {
     onResetAvaibility,
   } = useDebouncedUsernameAvaibility();
 
-  const { mutateAsync } = useMutation({
+  const updateUsername = useMutation({
     mutationKey: ['updateUsername'],
     mutationFn: async (username: string) =>
       privateApi.update_username({ username }),
@@ -82,7 +83,7 @@ export default function Username() {
   const onSubmit = async (data: { username: string }) => {
     if (avaibility !== 'success' || !canUpdateUsername) return;
     try {
-      await mutateAsync(data.username);
+      await updateUsername.mutateAsync(data.username);
       await update();
       reset();
     } catch {
@@ -137,13 +138,14 @@ export default function Username() {
       />
       {username !== initialUsername && canUpdateUsername && (
         <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
-          <Button
+          <LoadingButton
             variant="contained"
             type="submit"
             disabled={avaibility !== 'success'}
+            isLoading={updateUsername.isLoading}
           >
             {common.actions.save}
-          </Button>
+          </LoadingButton>
           <Button variant="outlined" type="button" onClick={onCancel}>
             {common.actions.cancel}
           </Button>
