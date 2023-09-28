@@ -29,10 +29,9 @@ export default function CardUsers({ pda }: Props) {
   const issuerName =
     issuerDisplayName ?? issuerGatewayId ?? pda?.dataAsset?.issuer?.id ?? '';
 
-  const issuerPicture =
-    pda?.dataAsset?.organization?.image ??
-    pda?.dataAsset?.issuer?.profilePicture ??
-    '';
+  const issuerPicture = pda?.dataAsset?.organization?.gatewayId
+    ? pda?.dataAsset?.organization?.image
+    : pda?.dataAsset?.issuer?.profilePicture;
 
   const recipientName =
     pda?.dataAsset?.owner?.displayName ??
@@ -52,7 +51,7 @@ export default function CardUsers({ pda }: Props) {
       <Stack sx={{ position: 'relative' }}>
         <CardUserCell
           label={pdaLocale.issuer}
-          picture={issuerPicture}
+          picture={issuerPicture ?? ''}
           name={limitCharsCentered(issuerName, 15)}
           id={`pda-issuer-${issuerGatewayId}`}
           onClick={() => setTooltipIssuer(true)}

@@ -156,7 +156,9 @@ export default function PDAsTable({ data: initialData }: Props) {
       loading={isFetching}
       sx={defaultGridCustomization}
       onRowClick={(params: GridRowParams) => {
-        router.push(routes.dashboardUserAsset(params.id));
+        router.push(
+          routes.dashboardOrgAsset(organization?.gatewayId, params.id)
+        );
       }}
     />
   );
