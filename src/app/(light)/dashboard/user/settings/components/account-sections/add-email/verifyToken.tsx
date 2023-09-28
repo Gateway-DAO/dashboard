@@ -27,7 +27,7 @@ export default function VerifyToken({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useFormContext<TokenConfirmationSchema>();
 
   const [startCountdown, setStartCountdown] = useToggle(true);
@@ -46,7 +46,7 @@ export default function VerifyToken({
     >
       <Typography sx={{ color: 'text.secondary.main' }}>
         {settings.connected_accounts.verify_token.description1}{' '}
-        <span style={{ color: 'common.white' }}>{email}</span>{' '}
+        <span style={{ color: 'common.white', fontWeight: 700 }}>{email}</span>{' '}
         {settings.connected_accounts.verify_token.description2}
       </Typography>
       <TextField
@@ -63,6 +63,7 @@ export default function VerifyToken({
           variant="contained"
           type="submit"
           isLoading={isLoadingConfirmToken}
+          disabled={!isValid}
           sx={{
             height: 48,
             mr: 1,

@@ -21,7 +21,7 @@ export default function SendEmail({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { isValid, errors },
   } = useFormContext<EmailSchema>();
 
   return (
@@ -43,6 +43,7 @@ export default function SendEmail({
         variant="contained"
         type="submit"
         isLoading={isLoading}
+        disabled={!isValid}
         sx={{ height: 48 }}
       >
         {common.actions.continue}
