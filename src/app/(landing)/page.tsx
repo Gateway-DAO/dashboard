@@ -16,8 +16,10 @@ import Stats from './home/components/stats';
 import LenisManager from './utils/scroll';
 
 export default function IndexPage() {
+  LenisManager;
+
   useEffect(() => {
-    LenisManager;
+    document.documentElement.setAttribute('class', 'lenis lenis-smooth');
   }, []);
 
   return (
