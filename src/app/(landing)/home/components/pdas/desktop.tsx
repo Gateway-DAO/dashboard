@@ -73,6 +73,8 @@ export default function Pdas() {
       tlRef.current.progress(progress);
     } else if (progress < 0) {
       tlRef.current.progress(0);
+    } else {
+      tlRef.current.progress(1);
     }
   };
 
