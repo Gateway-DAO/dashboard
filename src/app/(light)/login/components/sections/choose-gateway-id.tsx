@@ -2,6 +2,7 @@
 import { useSession } from 'next-auth/react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import { TitleSubtitleField } from '@/components/title-field/title-field';
 import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
@@ -24,7 +25,6 @@ import {
 
 import { CreateProfileSchema, createProfileSchema } from '../../schema';
 import useStepHandler from '../../utils/use-step-handler';
-import { TitleSubtitleField } from '../title-field';
 
 export function ChooseGatewayId() {
   const { enqueueSnackbar } = useSnackbar();
@@ -35,7 +35,7 @@ export function ChooseGatewayId() {
     formState: { errors, isValid },
     handleSubmit,
   } = useForm<CreateProfileSchema>({
-    resolver: zodResolver(createProfileSchema),
+    resolver: zodResolver(createProfileSchema as any), // TODO: Add a right types
     mode: 'onChange',
   });
 
