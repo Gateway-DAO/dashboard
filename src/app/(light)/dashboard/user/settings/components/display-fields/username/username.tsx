@@ -3,12 +3,14 @@
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
+import { useGtwSession } from '@/context/gtw-session-provider';
 import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
 import { common } from '@/locale/en/common';
 import { settings } from '@/locale/en/settings';
 import { usernameSchema } from '@/schemas/profile';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 
@@ -17,7 +19,6 @@ import {
   Button,
   CircularProgress,
   InputAdornment,
-  Skeleton,
   Stack,
   TextField,
 } from '@mui/material';
@@ -26,8 +27,20 @@ import { updateUsernameSchema } from './schema';
 
 export default function Username() {
   const { data: session, update } = useSession();
+  const { privateApi } = useGtwSession();
 
   const initialUsername = session!.user.gatewayId!;
+
+  const diffUpdateDays = useMemo(() => {
+    if (!session) return 0;
+    if (!session.user.gatewayIdLastupdate) return 31;
+    const lastUpdate = dayjs(session.user.gatewayIdLastupdate);
+    const now = dayjs();
+    const diff = now.diff(lastUpdate, 'day');
+    return diff;
+  }, [session?.user.gatewayIdLastupdate]);
+
+  const canUpdateUsername = diffUpdateDays > 30;
 
   const {
     avaibility,
@@ -38,14 +51,14 @@ export default function Username() {
 
   const { mutateAsync } = useMutation({
     mutationKey: ['updateUsername'],
-    mutationFn: async (username: string) => {},
+    mutationFn: async (username: string) =>
+      privateApi.update_username({ username }),
   });
 
   const { enqueueSnackbar } = useSnackbar();
 
   const {
     register,
-    control,
     watch,
     reset,
     handleSubmit,
@@ -67,7 +80,7 @@ export default function Username() {
   };
 
   const onSubmit = async (data: { username: string }) => {
-    if (avaibility !== 'success') return;
+    if (avaibility !== 'success' || !canUpdateUsername) return;
     try {
       await mutateAsync(data.username);
       await update();
@@ -77,10 +90,13 @@ export default function Username() {
     }
   };
 
-  const avaibilityText =
-    avaibility === 'invalid'
-      ? settings.username.not_available
-      : settings.username.helper;
+  const helperText = useMemo(() => {
+    if (errors.username?.message) return errors.username.message;
+    if (avaibility === 'invalid') return settings.username.not_available;
+    return canUpdateUsername
+      ? settings.username.can_edit
+      : settings.username.when_can_edit(30 - diffUpdateDays);
+  }, [errors.username?.message, avaibility, canUpdateUsername, diffUpdateDays]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -106,7 +122,8 @@ export default function Username() {
           },
         })}
         error={!!errors.username || avaibility === 'invalid'}
-        helperText={errors.username?.message ?? avaibilityText}
+        helperText={helperText}
+        disabled={!canUpdateUsername}
         InputProps={{
           startAdornment: <InputAdornment position="start">@</InputAdornment>,
           endAdornment: (
@@ -118,7 +135,7 @@ export default function Username() {
           ),
         }}
       />
-      {username !== initialUsername && (
+      {username !== initialUsername && canUpdateUsername && (
         <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
           <Button
             variant="contained"

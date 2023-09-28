@@ -2,7 +2,11 @@ export const settings = {
   title: 'Gateway ID',
   subtitle: 'Edit your ID and manage connected accounts',
   username: {
-    helper: 'You can edit it once a month',
+    can_edit: 'You can edit it once a month.',
+    when_can_edit: (remainingDays: number) =>
+      `You can edit it once a month. You will be able to do it in ${remainingDays} day${
+        remainingDays > 1 ? 's' : ''
+      }`,
     not_available: 'Username not available',
   },
   connected_accounts: {

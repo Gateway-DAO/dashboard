@@ -13,3 +13,9 @@ mutation update_user($username: String!, $displayName: String) {
     displayName
   }
 }
+
+mutation update_username($username: String!) {
+  updateMyGatewayId(gatewayId: $username) {
+    id
+  }
+}
