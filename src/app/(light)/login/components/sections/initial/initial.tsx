@@ -1,8 +1,8 @@
+import { TitleSubtitleField } from '@/components/title-field/title-field';
 import { auth } from '@/locale/en/auth';
 
 import { Link, Stack, Typography } from '@mui/material';
 
-import { TitleSubtitleField } from '../../title-field';
 import { AuthenticationOptions } from './authentication-options';
 import { LoginEmail } from './login-email';
 

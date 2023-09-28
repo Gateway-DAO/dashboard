@@ -7,6 +7,7 @@ import { Button, ListItem, ListItemText } from '@mui/material';
 
 import AliasMenuButton from '../alias-menu-button';
 import AccountSection from './account-section';
+import SectionSkeleton from './section-skeleton';
 
 type Props = {
   wallets: PartialDeep<Auth>[];
@@ -23,18 +24,20 @@ export default function WalletsSection({ wallets, onDisconnect }: Props) {
         </Button>
       }
     >
-      {wallets?.map(({ data }) => (
-        <ListItem
-          key={data?.address}
-          secondaryAction={
-            <AliasMenuButton
-              onDisconnect={() => onDisconnect(data?.address as string)}
-            />
-          }
-        >
-          <ListItemText primary={data?.address} secondary={data?.chain} />
-        </ListItem>
-      ))}
+      {wallets.length === 0 && <SectionSkeleton />}
+      {wallets.length > 0 &&
+        wallets?.map(({ data }) => (
+          <ListItem
+            key={data?.address}
+            secondaryAction={
+              <AliasMenuButton
+                onDisconnect={() => onDisconnect(data?.address as string)}
+              />
+            }
+          >
+            <ListItemText primary={data?.address} secondary={data?.chain} />
+          </ListItem>
+        ))}
     </AccountSection>
   );
 }

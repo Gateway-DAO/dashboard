@@ -4,35 +4,41 @@ import { AddOutlined, NotificationsOutlined } from '@mui/icons-material';
 import {
   Button,
   Chip,
+  Divider,
   ListItem,
   ListItemText,
+  Skeleton,
   Typography,
 } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import AliasMenuButton from '../alias-menu-button';
 import AccountSection from './account-section';
+import SectionSkeleton from './section-skeleton';
 
 type Props = {
   emails: any[];
   userEmail: string;
   onDisconnect: (address: string) => void;
+  onAddEmail: () => void;
 };
 
 export default function EmailsSection({
   emails,
   userEmail,
   onDisconnect,
+  onAddEmail,
 }: Props) {
   return (
     <AccountSection
       title="Email"
       button={
-        <Button variant="text" startIcon={<AddOutlined />}>
+        <Button onClick={onAddEmail} variant="text" startIcon={<AddOutlined />}>
           {settings.actions.add_email_address}
         </Button>
       }
     >
+      {emails.length === 0 && <SectionSkeleton />}
       {emails &&
         emails.length > 0 &&
         emails.map(({ data }) => {

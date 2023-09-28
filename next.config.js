@@ -43,6 +43,9 @@ const nextConfig = {
     config.externals.push('pino-pretty', 'lokijs', 'encoding');
     return config;
   },
+  profiler:
+    process.env.NEXT_PUBLIC_API_ENV === 'development' ||
+    process.env.NODE_ENV === 'development',
 };
 
 module.exports = nextConfig;
