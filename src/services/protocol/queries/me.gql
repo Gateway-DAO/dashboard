@@ -5,6 +5,7 @@ query me {
     email
     profilePicture
     gatewayId
+    gatewayIdLastupdate
     accesses {
       role
       organization {
