@@ -10,17 +10,21 @@ import { useDisconnectAlias } from '@/hooks/use-disconnect-alias';
 import { settings } from '@/locale/en/settings';
 import { AuthType } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
+import { useToggle } from '@react-hookz/web/cjs/useToggle';
 
 import { Box, Divider, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
+import AddEmail from './account-sections/add-email/add-email';
 import { DeactivateGatewayId } from './account-sections/deactivate-gateway-id';
 import EmailsSection from './account-sections/emails-section';
 import SocialsSection from './account-sections/socials-section';
 import WalletsSection from './account-sections/wallets-section';
 
 export default function ConnectedAccounts() {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
+
+  const [modalAddEmail, setModalAddEmail] = useToggle(false);
   const {
     handleDisconnectAlias,
     deactivateGatewayId,
@@ -66,6 +70,7 @@ export default function ConnectedAccounts() {
             <EmailsSection
               emails={emails}
               userEmail={session?.user?.email as string}
+              onAddEmail={setModalAddEmail}
               onDisconnect={(address) =>
                 handleDisconnectAlias({ type: AuthType.Email, address })
               }
@@ -82,13 +87,34 @@ export default function ConnectedAccounts() {
               }
             />
           </Stack>
-          <ModalRight open={modalDeactivateGatewayId} onClose={closeModal}>
-            <ModalTitle onClose={closeModal} />
-            <DeactivateGatewayId
-              onCancel={closeModal}
-              onConfirm={deactivateGatewayId}
-              isLoading={isLoading}
+          <ModalRight
+            open={modalDeactivateGatewayId || modalAddEmail}
+            onClose={() => {
+              closeModal();
+              setModalAddEmail(false);
+            }}
+          >
+            <ModalTitle
+              onClose={() => {
+                closeModal();
+                setModalAddEmail(false);
+              }}
             />
+            {modalDeactivateGatewayId && (
+              <DeactivateGatewayId
+                onCancel={closeModal}
+                onConfirm={deactivateGatewayId}
+                isLoading={isLoading}
+              />
+            )}
+            {modalAddEmail && (
+              <AddEmail
+                onSuccess={() => {
+                  update();
+                  setModalAddEmail(false);
+                }}
+              />
+            )}
           </ModalRight>
         </Box>
       )}

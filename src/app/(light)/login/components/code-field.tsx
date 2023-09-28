@@ -1,5 +1,6 @@
 'use client';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import { TitleSubtitleField } from '@/components/title-field/title-field';
 import { CountdownType } from '@/hooks/use-countdown';
 import { auth } from '@/locale/en/auth';
 import { useForm } from 'react-hook-form';
@@ -8,7 +9,6 @@ import { Stack, TextField, Typography } from '@mui/material';
 
 import { TokenConfirmationSchema } from '../schema';
 import { CardSummary } from './card-summary';
-import { TitleSubtitleField } from './title-field';
 
 type Props = {
   title: string;

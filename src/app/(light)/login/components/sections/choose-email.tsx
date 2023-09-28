@@ -1,5 +1,6 @@
 'use client';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import { TitleSubtitleField } from '@/components/title-field/title-field';
 import { auth } from '@/locale/en/auth';
 import { errorMessages } from '@/locale/en/errors';
 import { useSnackbar } from 'notistack';
@@ -8,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import { Stack, TextField, Typography } from '@mui/material';
 
 import { EmailSchema } from '../../schema';
-import { TitleSubtitleField } from '../title-field';
 
 export function ChooseEmail() {
   const { enqueueSnackbar } = useSnackbar();
