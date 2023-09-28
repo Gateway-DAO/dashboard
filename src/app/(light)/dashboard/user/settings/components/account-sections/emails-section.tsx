@@ -4,14 +4,17 @@ import { AddOutlined, NotificationsOutlined } from '@mui/icons-material';
 import {
   Button,
   Chip,
+  Divider,
   ListItem,
   ListItemText,
+  Skeleton,
   Typography,
 } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import AliasMenuButton from '../alias-menu-button';
 import AccountSection from './account-section';
+import SectionSkeleton from './section-skeleton';
 
 type Props = {
   emails: any[];
@@ -35,6 +38,7 @@ export default function EmailsSection({
         </Button>
       }
     >
+      {emails.length === 0 && <SectionSkeleton />}
       {emails &&
         emails.length > 0 &&
         emails.map(({ data }) => {

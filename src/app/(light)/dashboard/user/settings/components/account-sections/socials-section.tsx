@@ -5,6 +5,7 @@ import { Button, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 
 import AliasMenuButton from '../alias-menu-button';
 import AccountSection from './account-section';
+import SectionSkeleton from './section-skeleton';
 
 const socials = [
   { icon: FaGoogle, name: 'Google', type: 'GOOGLE' },
@@ -20,31 +21,33 @@ type Props = {
 export default function SocialsSection({ onDisconnect }: Props) {
   return (
     <AccountSection title="Other accounts">
-      {socials.map(({ icon: Icon, name, type, signed }) => (
-        <ListItem
-          key={name}
-          secondaryAction={
-            signed ? (
-              <AliasMenuButton onDisconnect={() => onDisconnect(type)} />
-            ) : (
-              <Button variant="outlined">{common.actions.connect}</Button>
-            )
-          }
-        >
-          <ListItemAvatar
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              mr: 2,
-              minWidth: 'unset',
-              fontSize: 24,
-            }}
+      {socials.length === 0 && <SectionSkeleton />}
+      {socials.length > 0 &&
+        socials.map(({ icon: Icon, name, type, signed }) => (
+          <ListItem
+            key={name}
+            secondaryAction={
+              signed ? (
+                <AliasMenuButton onDisconnect={() => onDisconnect(type)} />
+              ) : (
+                <Button variant="outlined">{common.actions.connect}</Button>
+              )
+            }
           >
-            <Icon />
-          </ListItemAvatar>
-          <ListItemText primary={name} />
-        </ListItem>
-      ))}
+            <ListItemAvatar
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                mr: 2,
+                minWidth: 'unset',
+                fontSize: 24,
+              }}
+            >
+              <Icon />
+            </ListItemAvatar>
+            <ListItemText primary={name} />
+          </ListItem>
+        ))}
     </AccountSection>
   );
 }
