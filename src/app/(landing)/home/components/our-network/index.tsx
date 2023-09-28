@@ -66,7 +66,14 @@ export default function OurNetwork() {
             <ForVerifies className={styles.column_vector} />
           </div>
           <div className={styles.column_large_content}>
-            <h3 className={styles.column_label}>For Verifiers</h3>
+            <h3
+              className={joinClasses(
+                styles.column_label,
+                styles['column_label--verifier']
+              )}
+            >
+              For Verifiers
+            </h3>
 
             <ForVerifies
               className={joinClasses(
