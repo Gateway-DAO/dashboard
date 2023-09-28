@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="lenis lenis-smooth">
       <body>
         <Main>
           <Providers>{children}</Providers>
