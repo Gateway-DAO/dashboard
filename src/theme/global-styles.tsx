@@ -18,6 +18,9 @@ export const GlobalStyles = () => {
           padding: 0,
           fontFamily: `${plus_jakarta_sans.style.fontFamily}, sans-serif`,
         },
+        '*': {
+          fontFamily: `${plus_jakarta_sans.style.fontFamily}, sans-serif`,
+        },
         '.wallet-adapter-modal': {
           zIndex: '2000 !important',
         },
