@@ -3,6 +3,7 @@ const routes = {
   auth: '/login',
   dashboardUserHome: '/dashboard/user',
   dashboardUserAsset: (pdaId) => `/dashboard/user/asset/${pdaId}`,
+  dashboardOrgAsset: (org, pdaId) => `/dashboard/org/${org}/asset/${pdaId}`,
   dashboardUserIssuedAssets: '/dashboard/user/assets/issued',
   dashboardUserReceivedAssets: '/dashboard/user/assets/received',
   dashboardUserProofs: `/dashboard/user/proofs`,
