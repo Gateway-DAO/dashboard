@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 import Footer from './components/footer';
@@ -16,11 +17,12 @@ import Stats from './home/components/stats';
 import LenisManager from './utils/scroll';
 
 export default function IndexPage() {
+  const pathname = usePathname();
   LenisManager;
 
   useEffect(() => {
-    document.documentElement.setAttribute('class', 'lenis lenis-smooth');
-  }, []);
+    LenisManager?.start();
+  }, [pathname]);
 
   return (
     <HeaderContextProvider>

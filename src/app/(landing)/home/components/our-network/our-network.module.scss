@@ -43,11 +43,18 @@
 .column {
   background-color: #fff;
   border-radius: 16px;
+  box-shadow: transparent;
   padding: 40px;
-  filter: drop-shadow(6px 8px 20px rgba(119, 26, 201, 0.1));
+  transition: box-shadow 0.8s ease;
+  text-decoration: none !important;
   width: calc(50% - 12px);
 
+  &:hover {
+    box-shadow: 6px 8px 20px rgba(119, 26, 201, 0.1);
+  }
+
   @media (max-width: 860px) {
+    box-shadow: 6px 8px 20px rgba(119, 26, 201, 0.1);
     padding: 25px;
     width: 100%;
 
@@ -188,16 +195,23 @@
 .column_large {
   align-items: center;
   background-color: #fff;
+  box-shadow: transparent;
   border-radius: 16px;
   display: flex;
-  filter: drop-shadow(6px 8px 20px rgba(119, 26, 201, 0.1));
   padding: 68px 40px;
+  text-decoration: none !important;
+  transition: box-shadow 0.8s ease;
+
+  &:hover {
+    box-shadow: 6px 8px 20px rgba(119, 26, 201, 0.1);
+  }
 
   @media (max-width: 860px) and (min-width: 600px) {
     flex-direction: column;
   }
 
   @media (max-width: 599px) {
+    box-shadow: 6px 8px 20px rgba(119, 26, 201, 0.1);
     padding: 25px;
   }
 }
