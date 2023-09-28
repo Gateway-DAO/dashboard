@@ -40,6 +40,8 @@ export default function Pdas() {
         tl.progress(progress);
       } else if (progress < 0) {
         tl.progress(0);
+      } else {
+        tl.progress(1);
       }
     };
 
