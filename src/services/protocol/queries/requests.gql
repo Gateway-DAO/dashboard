@@ -89,3 +89,7 @@ query requestsByOrg($orgId: String!, $take: Float!, $skip: Float!) {
     }
   }
 }
+
+query requestsByOrgCount($orgId: String!) {
+  requestsSentCount(filter: { orgId: $orgId })
+}
