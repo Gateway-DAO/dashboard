@@ -5,6 +5,7 @@ declare global {
       NEXT_PUBLIC_API_KEY: string;
       NEXT_PUBLIC_API_ENV: string;
       NEXTAUTH_SECRET: string;
+      SECURE_API_KEY: string;
     }
   }
 }
