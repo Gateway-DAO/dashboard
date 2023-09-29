@@ -61,6 +61,7 @@ export function AuthenticationOptions() {
         alignSelf={'center'}
         textTransform={'uppercase'}
         color="text.secondary"
+        sx={{ mb: 2 }}
       >
         {auth.steps.initial.or}
       </Typography>
