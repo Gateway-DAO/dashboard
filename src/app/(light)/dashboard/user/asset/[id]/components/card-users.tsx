@@ -110,6 +110,7 @@ export default function CardUsers({ pda }: Props) {
           <TooltipUser
             name={recipientName}
             username={recipientName}
+            picture={recipientPicture}
             issuance_date={pda?.dataAsset?.owner?.createdAt}
             right={true}
             onClose={() => setTooltipRecipient(false)}
