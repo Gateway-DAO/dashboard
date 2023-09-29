@@ -96,8 +96,12 @@ export default function ConnectedAccounts() {
                 <WalletConnectionProvider>
                   <WalletsSection
                     wallets={wallets}
-                    onDisconnect={(address) =>
-                      handleDisconnectAlias({ type: AuthType.Wallet, address })
+                    onDisconnect={(address, chain) =>
+                      handleDisconnectAlias({
+                        type: AuthType.Wallet,
+                        address,
+                        chain,
+                      })
                     }
                     isLoading={status === 'loading'}
                   />
