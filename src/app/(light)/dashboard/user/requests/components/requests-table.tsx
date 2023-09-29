@@ -47,17 +47,30 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     headerName: 'Requested By',
     flex: 1.3,
     renderCell(params) {
+      const hasOrg = !!params.row.organization?.id;
       return (
         <Stack direction="row" alignItems="center" spacing={1.5}>
           <GTWAvatar
-            name={params.row.verifier!.gatewayId! || ''}
-            src={params.row.verifier?.profilePicture}
+            name={
+              hasOrg
+                ? params.row.organization?.name || ''
+                : params.row.verifier!.gatewayId! || ''
+            }
+            src={
+              hasOrg
+                ? params.row.organization?.image
+                : params.row.verifier?.profilePicture
+            }
             size={32}
           />
           <Typography variant="body2">
-            {params.row.verifier?.displayName ??
-              params.row.verifier?.gatewayId ??
-              limitCharsCentered(params.row.verifier?.id as string, 12)}
+            {hasOrg
+              ? params.row.organization?.name ??
+                params.row.organization?.gatewayId ??
+                limitCharsCentered(params.row.organization?.id as string, 12)
+              : params.row.verifier?.displayName ??
+                params.row.verifier?.gatewayId ??
+                limitCharsCentered(params.row.verifier?.id as string, 12)}
           </Typography>
         </Stack>
       );
