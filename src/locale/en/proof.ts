@@ -21,6 +21,7 @@ export const proofs = {
   data_proofs: 'Data proofs',
   data_proofs_subtitle:
     'These are the copies of data proofs that you have sent and that have been sent to you',
+  owner: 'Owners',
   verifier: 'Verifier',
   sender: 'Senders',
   request_id: 'Request ID',
