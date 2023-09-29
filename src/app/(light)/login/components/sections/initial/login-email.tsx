@@ -9,7 +9,8 @@ import zod from 'zod';
 
 import { Stack, TextField } from '@mui/material';
 
-import { useStepState } from '../../../providers/step-provider';
+import { useLoginStepState } from '../../../providers/step-provider/step-provider';
+
 const schema = zod.object({
   email: zod.string().email(),
 });
@@ -26,7 +27,7 @@ export function LoginEmail() {
     resolver: zodResolver(schema as any),
   });
 
-  const { setStepState } = useStepState();
+  const { setStepState } = useLoginStepState();
 
   const { mutate, isLoading } = useMutation({
     mutationKey: ['login-email-create-nonce'],

@@ -2,12 +2,12 @@ import { Session } from 'next-auth';
 
 import { AuthType } from '@/services/protocol/types';
 
-import { Step } from '../types';
+import { LoginStep } from './types';
 
-export default function getStep(session: Session | null): Step {
+export default function getLoginStep(session: Session | null): LoginStep {
   if (!session) return 'initial';
   const hasEmail = !!session.user.authentications?.some(
-    (au) => au.type === AuthType.Email
+    (authentication) => authentication.type === AuthType.Email
   );
   if (!session.skipEmail && !hasEmail) return 'add-email';
   if (!session.user.gatewayId) return 'choose-gatewayid';

@@ -3,9 +3,9 @@
 import { signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
+import { useLoginStepState } from '@/app/(light)/login/providers/step-provider/step-provider';
 import routes from '@/constants/routes';
 
-import { useStepState } from '../providers/step-provider';
 import AuthenticationLayout from './authentication-layout';
 import AddEmail from './sections/add-email';
 import { ChooseGatewayId } from './sections/choose-gateway-id';
@@ -14,7 +14,7 @@ import { VerifyEmailAddToken } from './sections/verify-email-add-token';
 import { VerifyEmailLoginToken } from './sections/verify-email-login-token';
 
 export function Authentication() {
-  const { step, setStepState } = useStepState();
+  const { step, setStepState } = useLoginStepState();
 
   if (step === 'completed') {
     redirect(routes.dashboardUserHome);

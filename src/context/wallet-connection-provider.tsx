@@ -12,13 +12,15 @@ type State = {
   error?: string;
 };
 
-type Context = State & {
+export type WalletConnectionStateHandlers = {
   onPending: () => void;
   onSigning: () => void;
   onLoading: () => void;
   onSuccess: () => void;
   onError: (error: string) => void;
 };
+
+type Context = State & WalletConnectionStateHandlers;
 
 const WalletConnectionContext = createContext<Context>({
   step: 'pending',

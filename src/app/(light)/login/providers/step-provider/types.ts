@@ -1,4 +1,4 @@
-export type Step =
+export type LoginStep =
   | 'initial'
   | 'verify-email-login-code'
   | 'add-email'

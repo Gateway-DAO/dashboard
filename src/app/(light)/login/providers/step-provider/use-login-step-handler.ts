@@ -4,17 +4,17 @@ import { useSearchParams } from 'next/navigation';
 
 import routes from '@/constants/routes';
 
-import { useStepState } from '../providers/step-provider';
-import getStep from './get-step';
+import getLoginStep from './get-step';
+import { useLoginStepState } from './step-provider';
 
-export default function useStepHandler() {
-  const { setStepState } = useStepState();
+export default function useLoginStepHandler() {
+  const { setStepState } = useLoginStepState();
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const onHandleStep = async () => {
     const session = await getSession();
-    const step = getStep(session);
+    const step = getLoginStep(session);
     switch (step) {
       case 'completed':
         const callbackUrl = searchParams.get('callbackUrl');

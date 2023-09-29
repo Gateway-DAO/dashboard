@@ -8,19 +8,19 @@ import { useToggle } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
-import { useStepState } from '../../providers/step-provider';
-import useStepHandler from '../../utils/use-step-handler';
+import { useLoginStepState } from '../../providers/step-provider/step-provider';
+import useLoginStepHandler from '../../providers/step-provider/use-login-step-handler';
 import { CodeField } from '../code-field';
 
 export function VerifyEmailAddToken() {
   const { enqueueSnackbar } = useSnackbar();
   const [startCountdown, setStartCountdown] = useToggle(true);
-  const onHandleSession = useStepHandler();
+  const onHandleSession = useLoginStepHandler();
   const countdown = useCountdown({ time: 30, trigger: startCountdown });
 
   const { data: session, update } = useSession();
 
-  const { values, setStepState } = useStepState();
+  const { values, setStepState } = useLoginStepState();
   const email = values?.email ?? '';
 
   const resendEmail = useMutation({

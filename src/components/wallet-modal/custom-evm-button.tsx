@@ -1,7 +1,7 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { FaEthereum } from 'react-icons/fa';
 
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
 import WalletModalButton from './wallet-modal-button';
 
@@ -15,7 +15,6 @@ export function CustomEvmButton({ onClose }: Props) {
       {({
         account,
         chain,
-        openChainModal,
         openConnectModal,
         authenticationStatus,
         mounted,
@@ -65,7 +64,6 @@ export function CustomEvmButton({ onClose }: Props) {
                   <WalletModalButton
                     onClick={() => {
                       onClose();
-                      openChainModal;
                     }}
                   >
                     Wrong network

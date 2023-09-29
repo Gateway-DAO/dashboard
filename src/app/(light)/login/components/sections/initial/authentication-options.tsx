@@ -1,8 +1,9 @@
 'use client';
-import dynamic from 'next/dynamic';
 import { Fragment, useMemo, useState } from 'react';
 
 import { WalletIconsTransition } from '@/components/wallet-icons-transition/wallet-icons-transition';
+import WalletConnectionProvider from '@/context/wallet-connection-provider';
+import useDisconnectWallets from '@/hooks/use-disconnect-wallets';
 import { auth } from '@/locale/en/auth';
 import { FaDiscord } from 'react-icons/fa';
 
@@ -10,22 +11,11 @@ import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Stack, Typography } from '@mui/material';
 
-import WalletConnectionProvider from '../../../providers/wallet-connection-provider';
-import WalletConnectModal from './wallet-connect-modal';
-import WalletLoadingModal from './wallet-loading-modal';
-
-const EvmProvider = dynamic(() => import('../../../providers/evm-provider'), {
-  ssr: false,
-});
-const SolanaProvider = dynamic(
-  () => import('../../../providers/solana-provider'),
-  {
-    ssr: false,
-  }
-);
+import AuthenticationWalletModals from './authentication-wallet-modals';
 
 export function AuthenticationOptions() {
-  const [modalWallet, setModalWallet] = useState(false);
+  const [isModalWaleltOpen, setModalWallet] = useState(false);
+  const onDisconnectWallets = useDisconnectWallets();
 
   const orSignUpMethods = useMemo(() => {
     return [
@@ -33,7 +23,10 @@ export function AuthenticationOptions() {
         id: 'wallet',
         methodName: auth.steps.initial.connect_wallet,
         icon: <WalletIconsTransition />,
-        onClick: () => setModalWallet(true),
+        onClick: async () => {
+          await onDisconnectWallets();
+          setModalWallet(true);
+        },
         isVisible: true,
       },
       {
@@ -59,6 +52,8 @@ export function AuthenticationOptions() {
       },
     ];
   }, []);
+
+  const onCloseModal = () => setModalWallet(false);
 
   return (
     <>
@@ -95,19 +90,12 @@ export function AuthenticationOptions() {
             </Fragment>
           ))}
       </Stack>
-      <EvmProvider>
-        <SolanaProvider>
-          <WalletConnectionProvider>
-            <WalletConnectModal
-              title="Choose wallet"
-              description="Select a chain and choose one of available wallet providers or create a new wallet."
-              isOpen={modalWallet}
-              onCancel={() => setModalWallet(false)}
-            />
-            <WalletLoadingModal />
-          </WalletConnectionProvider>
-        </SolanaProvider>
-      </EvmProvider>
+      <WalletConnectionProvider>
+        <AuthenticationWalletModals
+          isOpen={isModalWaleltOpen}
+          onCancel={onCloseModal}
+        />
+      </WalletConnectionProvider>
     </>
   );
 }

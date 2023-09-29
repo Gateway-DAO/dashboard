@@ -1,12 +1,14 @@
-import WalletConnectModal from '@/app/(light)/login/components/sections/initial/wallet-connect-modal';
-import WalletLoadingModal from '@/app/(light)/login/components/sections/initial/wallet-loading-modal';
-import { useWalletConnectionStep } from '@/app/(light)/login/providers/wallet-connection-provider';
+import { useSession } from 'next-auth/react';
+
+import WalletConnectModal from '@/components/wallet-modal/wallet-connect-modal';
+import WalletLoadingModal from '@/components/wallet-modal/wallet-loading-modal';
+import { useGtwSession } from '@/context/gtw-session-provider';
+import { useWalletConnectionStep } from '@/context/wallet-connection-provider';
+import useConnectWallet from '@/hooks/use-connect-wallet';
 import { settings } from '@/locale/en/settings';
-import { Auth } from '@/services/protocol/types';
+import { Auth, Chain } from '@/services/protocol/types';
 import { useToggle } from '@react-hookz/web';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { PartialDeep } from 'type-fest/source/partial-deep';
-import { useDisconnect } from 'wagmi';
 
 import { AddOutlined } from '@mui/icons-material';
 import { Button, ListItem, ListItemText } from '@mui/material';
@@ -26,18 +28,53 @@ export default function WalletsSection({
   onDisconnect,
   isLoading,
 }: Props) {
-  const { step, error, onSigning } = useWalletConnectionStep();
+  const connectionStep = useWalletConnectionStep();
+  const { update } = useSession();
+  const { privateApi } = useGtwSession();
   const [modalWallet, setModalWallet] = useToggle(false);
-  const { disconnect: solanaDisconnect } = useWallet();
-  const { disconnectAsync: evmDisconnect } = useDisconnect();
 
-  const onOpen = async () => {
+  const { onConnect, onDisconnectWallets } = useConnectWallet({
+    async onGetNonce(wallet, chain) {
+      const res = await privateApi.protocol_add_wallet({ wallet, chain });
+      return res.addWallet.message;
+    },
+    async onSignedMessage({ chain, signature, wallet }) {
+      const res = await privateApi.protocol_add_wallet_confirmation({
+        signature,
+        wallet,
+        chain,
+      });
+
+      if (!res || (res && !res.addWalletConfirmation.id)) {
+        throw new Error('Could not add wallet');
+      }
+      await update();
+    },
+    statesHandler: connectionStep,
+  });
+
+  const onSetPending = async () => {
     try {
-      await Promise.all([solanaDisconnect(), evmDisconnect()]);
+      await onDisconnectWallets();
     } catch {
     } finally {
-      setModalWallet(true);
+      connectionStep.onPending();
     }
+  };
+
+  const onOpen = async () => {
+    await onDisconnectWallets();
+    setModalWallet(true);
+  };
+
+  const onConnectWallet = (address: string, chain: Chain) => {
+    setModalWallet(false);
+    onConnect(address, chain);
+  };
+
+  const onCancel = async () => {
+    onSetPending();
+    setModalWallet(false);
   };
 
   return (
@@ -46,10 +83,10 @@ export default function WalletsSection({
         title="Choose wallet"
         description="Select a chain and choose one of available wallet providers or create a new wallet."
         isOpen={modalWallet}
-        isAddWallet={true}
-        onCancel={() => setModalWallet(false)}
+        onConnect={onConnectWallet}
+        onCancel={onCancel}
       />
-      <WalletLoadingModal />
+      <WalletLoadingModal canClose onDisconnect={onSetPending} />
 
       <AccountSection
         title={settings.connected_accounts.wallet}
