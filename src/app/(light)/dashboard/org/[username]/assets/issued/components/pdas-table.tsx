@@ -113,7 +113,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
   const { organization } = useOrganization();
 
   const { privateApi } = useGtwSession();
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       'issued-data-assets-by-org',
@@ -147,7 +147,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
       paginationModel={paginationModel}
       onPaginationModelChange={setNewPage}
       paginationMode="server"
-      loading={isFetching}
+      loading={isLoading}
       sx={defaultGridCustomization}
       onRowClick={(params: GridRowParams) => {
         router.push(

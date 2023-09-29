@@ -102,7 +102,7 @@ export default function RequestsTable({
   });
 
   const { privateApi } = useGtwSession();
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       'data-requests-received',
@@ -133,7 +133,7 @@ export default function RequestsTable({
       paginationModel={paginationModel}
       onPaginationModelChange={setNewPage}
       paginationMode="server"
-      loading={isFetching}
+      loading={isLoading}
       rowCount={totalCount}
       onRowClick={(params: GridRowParams) => {
         router.push(routes.dashboardUserRequest(params.id));
