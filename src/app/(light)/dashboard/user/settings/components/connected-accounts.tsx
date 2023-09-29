@@ -109,11 +109,11 @@ export default function ConnectedAccounts() {
               </SolanaProvider>
             </EvmProvider>
 
-            <SocialsSection
+            {/* <SocialsSection
               onDisconnect={(type) =>
                 handleDisconnectAlias({ type: type as AuthType })
               }
-            />
+            /> */}
           </Stack>
           <ModalRight
             open={modalDeactivateGatewayId || modalAddEmail}
