@@ -12,7 +12,7 @@ import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { proofs } from '@/locale/en/proof';
-import { Proof } from '@/services/protocol/types';
+import { Proof, Sent_ProofsQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -100,7 +100,7 @@ export default function ProofsSentTable({
   });
 
   const { privateApi } = useGtwSession();
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       queries.proofs_sent,
@@ -112,7 +112,7 @@ export default function ProofsSentTable({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
-    select: (data: any) => data?.sentProofs,
+    select: (data: any) => (data as Sent_ProofsQuery)?.sentProofs,
     initialData: initialData && initialData.length ? initialData : null,
   });
 
@@ -128,7 +128,7 @@ export default function ProofsSentTable({
       {...defaultGridConfiguration}
       rows={data && data.length ? data : initialData}
       paginationModel={paginationModel}
-      loading={isFetching}
+      loading={isLoading}
       onPaginationModelChange={setNewPage}
       columns={columns}
       rowCount={count}

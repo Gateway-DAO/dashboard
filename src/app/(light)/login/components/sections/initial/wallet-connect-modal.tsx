@@ -18,6 +18,7 @@ type Props = {
   description: string;
   isOpen: boolean;
   onCancel: () => void;
+  isAddWallet?: boolean;
 };
 
 export default function WalletConnectModal({
@@ -25,6 +26,7 @@ export default function WalletConnectModal({
   description,
   isOpen,
   onCancel,
+  isAddWallet = false,
 }: Props) {
   const [evmIsLoading, setEvmIsLoading] = useState(false);
   return (
@@ -45,8 +47,9 @@ export default function WalletConnectModal({
             <EvmWalletConnect
               onClose={onCancel}
               isEvmLoading={setEvmIsLoading}
+              isAddWallet={isAddWallet}
             />
-            <SolanaWalletConnect onClose={onCancel} />
+            <SolanaWalletConnect onClose={onCancel} isAddWallet={isAddWallet} />
           </Stack>
         </Stack>
       </DialogContent>
