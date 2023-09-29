@@ -1,4 +1,9 @@
-import Loading from '@/components/loadings/loading/loading';
+'use client';
+
+import {
+  WalletConnectionStateHandlers,
+  useWalletConnectionStep,
+} from '@/context/wallet-connection-provider';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
 import { useWallet } from '@solana/wallet-adapter-react';
@@ -19,29 +24,31 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useWalletConnectionStep } from '../../../providers/wallet-connection-provider';
-export default function WalletLoadingModal() {
-  const { step, error, onPending } = useWalletConnectionStep();
-  const { disconnect: solanaDisconnect } = useWallet();
-  const { disconnectAsync: evmDisconnect } = useDisconnect();
+type Props = {
+  canClose?: boolean;
+  onDisconnect: () => Promise<void>;
+};
 
-  const onDisconnect = async () => {
-    try {
-      await Promise.all([solanaDisconnect(), evmDisconnect()]);
-    } catch {
-    } finally {
-      onPending();
-    }
-  };
+export default function WalletLoadingModal({
+  onDisconnect,
+  canClose = false,
+}: Props) {
+  const { step, error, onPending } = useWalletConnectionStep();
 
   const isError = step === 'error';
 
   const locale = step !== 'pending' ? auth.connection_modal[step] : undefined;
 
+  const onClose = () => {
+    if (isError || (canClose && step === 'success')) {
+      onPending();
+    }
+  };
+
   return (
     <Dialog
       open={step !== 'pending'}
-      onClose={isError ? onPending : undefined}
+      onClose={onClose}
       fullWidth
       aria-labelledby="wallet-loading-modal-title"
       aria-describedby="wallet-loading-modal-description"
@@ -110,6 +117,13 @@ export default function WalletLoadingModal() {
           )}
         </DialogContentText>
       </DialogContent>
+      {step === 'success' && canClose && (
+        <DialogActions>
+          <Button fullWidth variant="contained" onClick={onPending}>
+            {common.actions.close}
+          </Button>
+        </DialogActions>
+      )}
       {step === 'signing' && (
         <DialogActions>
           <Button fullWidth variant="contained" onClick={onDisconnect}>

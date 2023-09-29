@@ -4,10 +4,10 @@ import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 
-import WalletConnectionProvider from '@/app/(light)/login/providers/wallet-connection-provider';
 import Loading from '@/components/loadings/loading/loading';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalTitle from '@/components/modal/modal-title/modal-title';
+import WalletConnectionProvider from '@/context/wallet-connection-provider';
 import { useDisconnectAlias } from '@/hooks/use-disconnect-alias';
 import { settings } from '@/locale/en/settings';
 import { AuthType } from '@/services/protocol/types';
@@ -24,13 +24,13 @@ import SocialsSection from './account-sections/socials-section';
 import WalletsSection from './account-sections/wallets-section';
 
 const EvmProvider = dynamic(
-  () => import('../../../../login/providers/evm-provider'),
+  () => import('../../../../../../context/evm-provider/evm-provider'),
   {
     ssr: false,
   }
 );
 const SolanaProvider = dynamic(
-  () => import('../../../../login/providers/solana-provider'),
+  () => import('../../../../../../context/solana-provider'),
   {
     ssr: false,
   }

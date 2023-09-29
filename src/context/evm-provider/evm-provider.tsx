@@ -5,7 +5,7 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import { WagmiConfig } from 'wagmi';
 
-import { chains, theme, wagmiConfig } from '../libs/rainbow-config';
+import { chains, theme, wagmiConfig } from './rainbow-config';
 
 export default function EvmProvider({ children }: PropsWithChildren) {
   return (

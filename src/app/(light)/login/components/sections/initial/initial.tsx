@@ -1,3 +1,5 @@
+import dynamic from 'next/dynamic';
+
 import { TitleSubtitleField } from '@/components/title-field/title-field';
 import { auth } from '@/locale/en/auth';
 
@@ -6,6 +8,18 @@ import { Link, Stack, Typography } from '@mui/material';
 import { AuthenticationOptions } from './authentication-options';
 import { LoginEmail } from './login-email';
 
+const EvmProvider = dynamic(
+  () => import('../../../../../../context/evm-provider/evm-provider'),
+  {
+    ssr: false,
+  }
+);
+const SolanaProvider = dynamic(
+  () => import('../../../../../../context/solana-provider'),
+  {
+    ssr: false,
+  }
+);
 export function AuthenticationInitial() {
   return (
     <Stack gap={2} direction={'column'}>
@@ -17,7 +31,11 @@ export function AuthenticationInitial() {
         subtitle={auth.steps.initial.caption_email}
       />
       <LoginEmail />
-      <AuthenticationOptions />
+      <EvmProvider>
+        <SolanaProvider>
+          <AuthenticationOptions />
+        </SolanaProvider>
+      </EvmProvider>
       <Typography color="text.secondary" variant="caption">
         {auth.steps.initial.terms_info}{' '}
         <Link href="/terms" underline="none">

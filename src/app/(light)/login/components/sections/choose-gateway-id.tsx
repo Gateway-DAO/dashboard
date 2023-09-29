@@ -23,13 +23,13 @@ import {
   Typography,
 } from '@mui/material';
 
+import useLoginStepHandler from '../../providers/step-provider/use-login-step-handler';
 import { CreateProfileSchema, createProfileSchema } from '../../schema';
-import useStepHandler from '../../utils/use-step-handler';
 
 export function ChooseGatewayId() {
   const { enqueueSnackbar } = useSnackbar();
   const { data: session, update: updateSession } = useSession();
-  const onHandleSuccess = useStepHandler();
+  const onHandleSuccess = useLoginStepHandler();
   const {
     register,
     formState: { errors, isValid },
@@ -45,6 +45,7 @@ export function ChooseGatewayId() {
       (await getClientPrivateApi()).update_user({
         username: data.username,
         displayName: data.displayName ?? null,
+        profilePicture: null,
       }),
   });
 

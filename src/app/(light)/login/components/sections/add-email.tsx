@@ -2,6 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 
+import { useLoginStepState } from '@/app/(light)/login/providers/step-provider/step-provider';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
@@ -14,15 +15,14 @@ import { useForm } from 'react-hook-form';
 
 import { Button, Stack, TextField, Typography } from '@mui/material';
 
-import { useStepState } from '../../providers/step-provider';
+import useLoginStepHandler from '../../providers/step-provider/use-login-step-handler';
 import { EmailSchema, schemaEmail } from '../../schema';
-import useStepHandler from '../../utils/use-step-handler';
 import AuthenticationLayout from '../authentication-layout';
 
 export default function AddEmail() {
-  const { setStepState } = useStepState();
+  const { setStepState } = useLoginStepState();
   const { data: session, update } = useSession();
-  const onHandleStep = useStepHandler();
+  const onHandleStep = useLoginStepHandler();
 
   const { enqueueSnackbar } = useSnackbar();
 

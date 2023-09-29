@@ -1,4 +1,6 @@
-import { useState } from 'react';
+'use client';
+
+import { Chain } from '@/services/protocol/types';
 
 import {
   Button,
@@ -17,18 +19,17 @@ type Props = {
   title: string;
   description: string;
   isOpen: boolean;
+  onConnect: (address: string, chain: Chain) => void;
   onCancel: () => void;
-  isAddWallet?: boolean;
 };
 
 export default function WalletConnectModal({
   title,
   description,
   isOpen,
+  onConnect,
   onCancel,
-  isAddWallet = false,
 }: Props) {
-  const [evmIsLoading, setEvmIsLoading] = useState(false);
   return (
     <Dialog open={isOpen} onClose={() => onCancel()}>
       <DialogTitle id="title-modal" sx={{ textAlign: 'left' }}>
@@ -44,12 +45,12 @@ export default function WalletConnectModal({
             gap={1}
             sx={{ zIndex: 10, position: 'relative' }}
           >
-            <EvmWalletConnect
-              onClose={onCancel}
-              isEvmLoading={setEvmIsLoading}
-              isAddWallet={isAddWallet}
-            />
-            <SolanaWalletConnect onClose={onCancel} isAddWallet={isAddWallet} />
+            {isOpen && (
+              <>
+                <EvmWalletConnect onConnect={onConnect} onClose={onCancel} />
+                <SolanaWalletConnect onConnect={onConnect} />
+              </>
+            )}
           </Stack>
         </Stack>
       </DialogContent>
