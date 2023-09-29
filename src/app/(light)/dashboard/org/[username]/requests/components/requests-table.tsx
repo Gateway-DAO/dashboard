@@ -41,7 +41,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     },
   },
   {
-    field: 'userVerifier',
+    field: 'verifier',
     headerName: 'Requested By',
     flex: 1.3,
     renderCell(params) {
