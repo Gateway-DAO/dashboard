@@ -1,20 +1,14 @@
-import { Session } from 'next-auth';
-// import { AppProps } from 'next/app';
-
 import { orgPdas } from '@/locale/en/pda';
-import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
+import { getCurrentOrg } from '@/utils/currentOrg';
 
 import { Typography } from '@mui/material';
 
 import PDAsTable from './components/pdas-table';
 
 export default async function OrganizationIssuedAssetsPage(props: any) {
-  const session = (await getGtwServerSession()) as Session;
   const pathnameOrg = props.params?.username;
-  const organization = session?.user?.accesses?.find(
-    (access) => access.organization?.gatewayId === pathnameOrg
-  )?.organization;
+  const organization = await getCurrentOrg(pathnameOrg);
 
   const privateApi = await getPrivateApi();
   const issuedPdas =
