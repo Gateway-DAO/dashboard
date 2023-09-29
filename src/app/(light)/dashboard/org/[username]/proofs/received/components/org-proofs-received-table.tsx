@@ -12,7 +12,7 @@ import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { proofs } from '@/locale/en/proof';
-import { Proof } from '@/services/protocol/types';
+import { Proof, Received_ProofsQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -93,7 +93,7 @@ export default function OrganizationProofsReceivedTable({
   });
 
   const { privateApi } = useGtwSession();
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       queries.proofs_received,
@@ -105,7 +105,7 @@ export default function OrganizationProofsReceivedTable({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
-    select: (data: any) => data?.receivedProofs,
+    select: (data: any) => (data as Received_ProofsQuery)?.receivedProofs,
     initialData: initialData && initialData.length ? initialData : null,
   });
 
@@ -123,7 +123,7 @@ export default function OrganizationProofsReceivedTable({
       rowCount={count}
       columns={columns}
       paginationModel={paginationModel}
-      loading={isFetching}
+      loading={isLoading}
       onPaginationModelChange={setNewPage}
       sx={defaultGridCustomization}
       onRowClick={(value) => {

@@ -12,7 +12,10 @@ import RequestStatusChip from '@/components/requests/request-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import { DataRequest } from '@/services/protocol/types';
+import {
+  DataRequest,
+  MyRequestsReceivedQuery,
+} from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -99,7 +102,7 @@ export default function RequestsTable({
   });
 
   const { privateApi } = useGtwSession();
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       'data-requests-received',
@@ -111,7 +114,7 @@ export default function RequestsTable({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
-    select: (data: any) => data?.requestsReceived,
+    select: (data: any) => (data as MyRequestsReceivedQuery)?.requestsReceived,
     initialData: initialData && initialData.length ? initialData : null,
   });
 
@@ -130,7 +133,7 @@ export default function RequestsTable({
       paginationModel={paginationModel}
       onPaginationModelChange={setNewPage}
       paginationMode="server"
-      loading={isFetching}
+      loading={isLoading}
       rowCount={totalCount}
       onRowClick={(params: GridRowParams) => {
         router.push(routes.dashboardUserRequest(params.id));

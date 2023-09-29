@@ -2,7 +2,7 @@ query requests {
   dataRequests {
     id
     status
-    userVerifier {
+    verifier {
       id
       gatewayId
     }
@@ -17,8 +17,8 @@ query myRequestsReceived($take: Float!, $skip: Float!) {
   requestsReceived(skip: $skip, take: $take) {
     id
     status
-    userVerifier {
-      ...min_user
+    verifier {
+      id
     }
     createdAt
     dataRequestTemplate {
@@ -41,13 +41,13 @@ query dataRequest($id: String!) {
     proof {
       id
     }
-    userRecipient {
+    owner {
       id
       gatewayId
       profilePicture
       displayName
     }
-    userVerifier {
+    verifier {
       id
       gatewayId
       profilePicture
@@ -70,6 +70,22 @@ query dataRequestValidData($requestId: String!) {
     required
     validData {
       provided
+    }
+  }
+}
+
+query requestsByOrg($orgId: String!, $take: Float!, $skip: Float!) {
+  requestsSent(filter: { orgId: $orgId }, skip: $skip, take: $take) {
+    id
+    createdAt
+    owner {
+      id
+      gatewayId
+      displayName
+      profilePicture
+    }
+    dataRequestTemplate {
+      id
     }
   }
 }
