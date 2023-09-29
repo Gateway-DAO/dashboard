@@ -13,7 +13,7 @@ const headers = {
 };
 
 const glqAnonClient = new GraphQLClient(
-  process.env.NEXT_PUBLIC_API_ENDPOINT as string,
+  `${process.env.NEXT_PUBLIC_API_ENDPOINT}/graphql`,
   {
     headers,
   }
@@ -26,7 +26,7 @@ export const userHeader = (token: string) => ({
 });
 
 const gqlClient = (token: string) =>
-  new GraphQLClient(process.env.NEXT_PUBLIC_API_ENDPOINT as string, {
+  new GraphQLClient(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/graphql`, {
     headers: {
       ...headers,
       ...(token && userHeader(token)),
