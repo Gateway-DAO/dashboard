@@ -4,8 +4,6 @@ import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 
-import WalletConnectModal from '@/app/(light)/login/components/sections/initial/wallet-connect-modal';
-import WalletLoadingModal from '@/app/(light)/login/components/sections/initial/wallet-loading-modal';
 import WalletConnectionProvider from '@/app/(light)/login/providers/wallet-connection-provider';
 import Loading from '@/components/loadings/loading/loading';
 import ModalRight from '@/components/modal/modal-right/modal-right';
@@ -40,7 +38,6 @@ const SolanaProvider = dynamic(
 
 export default function ConnectedAccounts() {
   const { data: session, update, status } = useSession();
-  const [modalWallet, setModalWallet] = useToggle(false);
 
   const [modalAddEmail, setModalAddEmail] = useToggle(false);
   const {
@@ -94,14 +91,20 @@ export default function ConnectedAccounts() {
               }
               isLoading={status === 'loading'}
             />
-            <WalletsSection
-              wallets={wallets}
-              onAddWallet={setModalWallet}
-              onDisconnect={(address) =>
-                handleDisconnectAlias({ type: AuthType.Wallet, address })
-              }
-              isLoading={status === 'loading'}
-            />
+            <EvmProvider>
+              <SolanaProvider>
+                <WalletConnectionProvider>
+                  <WalletsSection
+                    wallets={wallets}
+                    onDisconnect={(address) =>
+                      handleDisconnectAlias({ type: AuthType.Wallet, address })
+                    }
+                    isLoading={status === 'loading'}
+                  />
+                </WalletConnectionProvider>
+              </SolanaProvider>
+            </EvmProvider>
+
             <SocialsSection
               onDisconnect={(type) =>
                 handleDisconnectAlias({ type: type as AuthType })
@@ -137,19 +140,6 @@ export default function ConnectedAccounts() {
               />
             )}
           </ModalRight>
-          <EvmProvider>
-            <SolanaProvider>
-              <WalletConnectionProvider>
-                <WalletConnectModal
-                  title="Choose wallet"
-                  description="Select a chain and choose one of available wallet providers or create a new wallet."
-                  isOpen={modalWallet}
-                  onCancel={() => setModalWallet(false)}
-                />
-                <WalletLoadingModal />
-              </WalletConnectionProvider>
-            </SolanaProvider>
-          </EvmProvider>
         </Box>
       )}
     </>
