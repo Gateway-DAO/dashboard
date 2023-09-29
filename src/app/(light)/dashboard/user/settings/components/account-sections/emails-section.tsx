@@ -21,6 +21,7 @@ type Props = {
   userEmail: string;
   onDisconnect: (address: string) => void;
   onAddEmail: () => void;
+  isLoading: boolean;
 };
 
 export default function EmailsSection({
@@ -28,6 +29,7 @@ export default function EmailsSection({
   userEmail,
   onDisconnect,
   onAddEmail,
+  isLoading,
 }: Props) {
   return (
     <AccountSection
@@ -38,7 +40,10 @@ export default function EmailsSection({
         </Button>
       }
     >
-      {emails.length === 0 && <SectionSkeleton />}
+      {isLoading && <SectionSkeleton />}
+      {emails.length === 0 && !isLoading && (
+        <ListItemText sx={{ mx: 2 }}>No items to be displayed</ListItemText>
+      )}
       {emails &&
         emails.length > 0 &&
         emails.map(({ data }) => {

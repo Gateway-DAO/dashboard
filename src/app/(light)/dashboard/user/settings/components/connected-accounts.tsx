@@ -1,8 +1,12 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 
+import WalletConnectModal from '@/app/(light)/login/components/sections/initial/wallet-connect-modal';
+import WalletLoadingModal from '@/app/(light)/login/components/sections/initial/wallet-loading-modal';
+import WalletConnectionProvider from '@/app/(light)/login/providers/wallet-connection-provider';
 import Loading from '@/components/loadings/loading/loading';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalTitle from '@/components/modal/modal-title/modal-title';
@@ -21,8 +25,22 @@ import EmailsSection from './account-sections/emails-section';
 import SocialsSection from './account-sections/socials-section';
 import WalletsSection from './account-sections/wallets-section';
 
+const EvmProvider = dynamic(
+  () => import('../../../../login/providers/evm-provider'),
+  {
+    ssr: false,
+  }
+);
+const SolanaProvider = dynamic(
+  () => import('../../../../login/providers/solana-provider'),
+  {
+    ssr: false,
+  }
+);
+
 export default function ConnectedAccounts() {
-  const { data: session, update } = useSession();
+  const { data: session, update, status } = useSession();
+  const [modalWallet, setModalWallet] = useToggle(false);
 
   const [modalAddEmail, setModalAddEmail] = useToggle(false);
   const {
@@ -74,12 +92,15 @@ export default function ConnectedAccounts() {
               onDisconnect={(address) =>
                 handleDisconnectAlias({ type: AuthType.Email, address })
               }
+              isLoading={status === 'loading'}
             />
             <WalletsSection
               wallets={wallets}
+              onAddWallet={setModalWallet}
               onDisconnect={(address) =>
                 handleDisconnectAlias({ type: AuthType.Wallet, address })
               }
+              isLoading={status === 'loading'}
             />
             <SocialsSection
               onDisconnect={(type) =>
@@ -116,6 +137,19 @@ export default function ConnectedAccounts() {
               />
             )}
           </ModalRight>
+          <EvmProvider>
+            <SolanaProvider>
+              <WalletConnectionProvider>
+                <WalletConnectModal
+                  title="Choose wallet"
+                  description="Select a chain and choose one of available wallet providers or create a new wallet."
+                  isOpen={modalWallet}
+                  onCancel={() => setModalWallet(false)}
+                />
+                <WalletLoadingModal />
+              </WalletConnectionProvider>
+            </SolanaProvider>
+          </EvmProvider>
         </Box>
       )}
     </>
