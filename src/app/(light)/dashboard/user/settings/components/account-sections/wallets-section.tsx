@@ -11,20 +11,34 @@ import SectionSkeleton from './section-skeleton';
 
 type Props = {
   wallets: PartialDeep<Auth>[];
+  onAddWallet: () => void;
   onDisconnect: (address: string) => void;
+  isLoading: boolean;
 };
 
-export default function WalletsSection({ wallets, onDisconnect }: Props) {
+export default function WalletsSection({
+  wallets,
+  onAddWallet,
+  onDisconnect,
+  isLoading,
+}: Props) {
   return (
     <AccountSection
       title={settings.connected_accounts.wallet}
       button={
-        <Button variant="text" startIcon={<AddOutlined />}>
+        <Button
+          variant="text"
+          startIcon={<AddOutlined />}
+          onClick={onAddWallet}
+        >
           {settings.actions.add_wallet}
         </Button>
       }
     >
-      {wallets.length === 0 && <SectionSkeleton />}
+      {isLoading && <SectionSkeleton />}
+      {wallets.length === 0 && !isLoading && (
+        <ListItemText sx={{ mx: 2 }}>No items to be displayed</ListItemText>
+      )}
       {wallets.length > 0 &&
         wallets?.map(({ data }) => (
           <ListItem
