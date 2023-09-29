@@ -79,7 +79,7 @@ export function ChooseGatewayId() {
   const avaibilityText =
     avaibility === 'invalid'
       ? settings.username.not_available
-      : settings.username.helper;
+      : settings.username.can_edit;
 
   return (
     <>
