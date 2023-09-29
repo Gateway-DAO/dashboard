@@ -88,13 +88,13 @@ export default async function DashboardUserDataRequest({
   }
 
   if (
-    userId !== dataRequest?.userRecipient?.id &&
-    userId !== dataRequest?.userVerifier?.id
+    userId !== dataRequest?.owner?.id &&
+    userId !== dataRequest?.verifier?.id
   ) {
     return <PermissionError />;
   }
 
-  const isOwner = userId === dataRequest?.userRecipient?.id;
+  const isOwner = userId === dataRequest?.owner?.id;
   const requestValidData = isOwner ? await getRequestValidData(id) : null;
   const proofData =
     isOwner ||
@@ -104,14 +104,14 @@ export default async function DashboardUserDataRequest({
       : await getProofData(dataRequest.proof?.id);
 
   const requester =
-    dataRequest.userVerifier?.displayName ??
-    dataRequest.userVerifier?.gatewayId ??
-    limitCharsCentered(dataRequest.userVerifier?.id as string, 15) ??
+    dataRequest.verifier?.displayName ??
+    dataRequest.verifier?.gatewayId ??
+    limitCharsCentered(dataRequest.verifier?.id as string, 15) ??
     '';
   const recipient =
-    dataRequest.userRecipient?.displayName ??
-    dataRequest.userRecipient?.gatewayId ??
-    limitCharsCentered(dataRequest.userRecipient?.id as string, 15) ??
+    dataRequest.owner?.displayName ??
+    dataRequest.owner?.gatewayId ??
+    limitCharsCentered(dataRequest.owner?.id as string, 15) ??
     '';
 
   return (
@@ -127,7 +127,7 @@ export default async function DashboardUserDataRequest({
             requestId={dataRequest.id}
             proofId={dataRequest.proof?.id}
             requestValidData={requestValidData}
-            profilePicture={dataRequest.userVerifier?.profilePicture}
+            profilePicture={dataRequest.verifier?.profilePicture}
           />
         ) : (
           <RequestCardVerfierView
