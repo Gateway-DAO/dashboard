@@ -6,7 +6,7 @@ const config: CodegenConfig = {
   generates: {
     './src/services/protocol/types.ts': {
       schema: {
-        [`${process.env.NEXT_PUBLIC_API_ENDPOINT}`]: {
+        [`${process.env.NEXT_PUBLIC_API_ENDPOINT}/graphql`]: {
           headers: {
             'x-api-key': process.env.NEXT_PUBLIC_API_KEY as string,
           },
