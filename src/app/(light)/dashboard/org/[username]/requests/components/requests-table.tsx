@@ -12,10 +12,8 @@ import RequestStatusChip from '@/components/requests/request-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import {
-  DataRequest,
-  MyRequestsReceivedQuery,
-} from '@/services/protocol/types';
+import useOrganization from '@/hooks/use-organization';
+import { DataRequest, RequestsByOrgQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -49,12 +47,9 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" spacing={1.5}>
-          <GTWAvatar
-            name={params.row.userVerifier!.gatewayId! || ''}
-            size={32}
-          />
+          <GTWAvatar name={params.row.verifier!.gatewayId! || ''} size={32} />
           <Typography variant="body2">
-            {params.row.userVerifier?.gatewayId}
+            {params.row.verifier?.gatewayId}
           </Typography>
         </Stack>
       );
@@ -99,6 +94,8 @@ export default function OrgRequestsTable({
   });
 
   const { privateApi } = useGtwSession();
+  const { organization } = useOrganization();
+
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
@@ -107,11 +104,12 @@ export default function OrgRequestsTable({
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
-      privateApi?.myRequestsReceived({
+      privateApi?.requestsByOrg({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
+        orgId: organization?.id || '',
       }),
-    select: (data: any) => (data as MyRequestsReceivedQuery)?.requestsReceived,
+    select: (data: any) => (data as RequestsByOrgQuery)?.requestsSent,
     initialData: initialData && initialData.length ? initialData : null,
   });
 

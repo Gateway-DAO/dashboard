@@ -1,14 +1,25 @@
 import { getPrivateApi } from '@/services/protocol/api';
+import { getCurrentOrg } from '@/utils/currentOrg';
 
 import RequestsTable from './components/requests-table';
 
-export default async function OrganizationRequestsPage() {
+export default async function OrganizationRequestsPage(props: any) {
   const privateApi = await getPrivateApi();
-  const requestsData =
-    (await privateApi.myRequestsReceived({ skip: 0, take: 5 }))
-      ?.requestsReceived ?? [];
+  const pathnameOrg = props.params?.username;
 
-  const count = (await privateApi.requestsCount()).requestsReceivedCount;
+  const organization = await getCurrentOrg(pathnameOrg);
+  const requestsData =
+    (
+      await privateApi.requestsByOrg({
+        skip: 0,
+        take: 5,
+        orgId: organization?.id || '',
+      })
+    )?.requestsSent ?? [];
+
+  const count = (
+    await privateApi.requestsByOrgCount({ orgId: organization?.id ?? '' })
+  ).requestsSentCount;
 
   return <RequestsTable data={requestsData} totalCount={count} />;
 }

@@ -14,12 +14,7 @@ type Props = {
   recipient: string;
   status: DataResourceStatus;
   profilePicture?: string;
-  // requestId: string;
   proofId?: string;
-  // requestValidData: PartialDeep<
-  //   DataRequestValidDataQuery['findValidPDAsForRequest']
-  // > | null;
-  // isOwner: boolean;
 };
 
 export default function RequestCardVerfierView({
