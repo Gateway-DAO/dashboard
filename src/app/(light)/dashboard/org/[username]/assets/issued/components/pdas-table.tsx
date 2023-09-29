@@ -13,7 +13,7 @@ import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
-import { PdaStatus } from '@/services/protocol/types';
+import { Issued_Pdas_By_OrgQuery, PdaStatus } from '@/services/protocol/types';
 import { PrivateDataAsset } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
@@ -127,7 +127,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
         take: paginationModel.pageSize,
         orgId: organization?.id || '',
       }),
-    select: (data: any) => data?.issuedPdas,
+    select: (data: any) => (data as Issued_Pdas_By_OrgQuery)?.issuedPDAs,
     initialData: initialData && initialData.length ? initialData : null,
   });
 
@@ -143,7 +143,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
       {...defaultGridConfiguration}
       rows={data && data.length ? data : initialData}
       columns={columns}
-      rowCount={totalCount || 0}
+      rowCount={totalCount}
       paginationModel={paginationModel}
       onPaginationModelChange={setNewPage}
       paginationMode="server"
