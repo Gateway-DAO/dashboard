@@ -12,7 +12,7 @@ import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { proofs } from '@/locale/en/proof';
-import { Proof } from '@/services/protocol/types';
+import { Proof, Received_ProofsQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -105,7 +105,7 @@ export default function OrganizationProofsReceivedTable({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
-    select: (data: any) => data?.receivedProofs,
+    select: (data: any) => (data as Received_ProofsQuery)?.receivedProofs,
     initialData: initialData && initialData.length ? initialData : null,
   });
 

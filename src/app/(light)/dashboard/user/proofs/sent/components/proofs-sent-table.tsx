@@ -12,7 +12,7 @@ import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { proofs } from '@/locale/en/proof';
-import { Proof } from '@/services/protocol/types';
+import { Proof, Sent_ProofsQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -112,7 +112,7 @@ export default function ProofsSentTable({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
-    select: (data: any) => data?.sentProofs,
+    select: (data: any) => (data as Sent_ProofsQuery)?.sentProofs,
     initialData: initialData && initialData.length ? initialData : null,
   });
 
