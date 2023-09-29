@@ -93,7 +93,7 @@ export default function OrganizationProofsReceivedTable({
   });
 
   const { privateApi } = useGtwSession();
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       queries.proofs_received,
@@ -123,7 +123,7 @@ export default function OrganizationProofsReceivedTable({
       rowCount={count}
       columns={columns}
       paginationModel={paginationModel}
-      loading={isFetching}
+      loading={isLoading}
       onPaginationModelChange={setNewPage}
       sx={defaultGridCustomization}
       onRowClick={(value) => {

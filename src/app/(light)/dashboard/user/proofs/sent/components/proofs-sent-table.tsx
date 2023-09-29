@@ -100,7 +100,7 @@ export default function ProofsSentTable({
   });
 
   const { privateApi } = useGtwSession();
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       queries.proofs_sent,
@@ -128,7 +128,7 @@ export default function ProofsSentTable({
       {...defaultGridConfiguration}
       rows={data && data.length ? data : initialData}
       paginationModel={paginationModel}
-      loading={isFetching}
+      loading={isLoading}
       onPaginationModelChange={setNewPage}
       columns={columns}
       rowCount={count}
