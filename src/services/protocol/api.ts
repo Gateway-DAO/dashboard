@@ -12,6 +12,11 @@ const headers = {
   'x-api-key': process.env.NEXT_PUBLIC_API_KEY,
 };
 
+export const tokenHeader = (token?: string) => ({
+  ...headers,
+  ...(token && userHeader(token)),
+});
+
 const glqAnonClient = new GraphQLClient(
   `${process.env.NEXT_PUBLIC_API_ENDPOINT}/graphql`,
   {
@@ -27,10 +32,7 @@ export const userHeader = (token: string) => ({
 
 const gqlClient = (token: string) =>
   new GraphQLClient(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/graphql`, {
-    headers: {
-      ...headers,
-      ...(token && userHeader(token)),
-    },
+    headers: tokenHeader(token),
   });
 
 export const api = (token: string) => getSdk(gqlClient(token));

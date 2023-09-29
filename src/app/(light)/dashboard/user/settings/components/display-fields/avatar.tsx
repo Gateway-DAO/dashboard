@@ -11,16 +11,22 @@ import { FormControl, FormLabel, Skeleton, Stack } from '@mui/material';
 
 export default function Avatar() {
   const { data: session, update } = useSession();
-  const { privateApi } = useGtwSession();
   const { mutateAsync } = useMutation({
     mutationKey: ['update-avatar'],
-    mutationFn: async (profilePictureUrl: string | null) =>
-      privateApi.update_profile_picture_url({ profilePictureUrl }),
+    mutationFn: async (profilePictureUrl: Blob) => {
+      const formData = new FormData();
+      console.log(profilePictureUrl.toString());
+      formData.append('image', profilePictureUrl!);
+      return fetch('/api/upload-image', {
+        method: 'POST',
+        body: formData,
+      });
+    },
   });
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const onSubmit = async (profilePicture: string | null) => {
+  const onSubmit = async (profilePicture: Blob) => {
     try {
       await mutateAsync(profilePicture);
       await update();

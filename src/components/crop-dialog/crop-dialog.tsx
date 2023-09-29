@@ -22,7 +22,7 @@ const EasyCropper = dynamic(() => import('react-easy-crop'), { ssr: false });
 
 export type Props = {
   image: string;
-  onSubmit: (image: string) => void;
+  onSubmit: (image: Blob) => void;
   onClose: () => void;
 };
 

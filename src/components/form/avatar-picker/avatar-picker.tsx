@@ -13,7 +13,7 @@ type Props = {
   name: string;
   username: string;
   value?: string | null;
-  onChange: (image: string) => void;
+  onChange: (image: Blob) => void;
 };
 
 // TOOD: Reset when user selected an image
@@ -28,9 +28,9 @@ function AvatarPickerField(
 
   const onReadFile = async (files: File[] | FileList) => {
     try {
-      const { image, isGif } = await readImageFile(files);
+      const { image, file, isGif } = await readImageFile(files);
       if (isGif) {
-        onChange(image);
+        onChange(file);
         return;
       }
       setCropableImage(image);
@@ -47,7 +47,7 @@ function AvatarPickerField(
     onReadFile(event.target.files);
   };
 
-  const onCrop = (image: string) => {
+  const onCrop = (image: Blob) => {
     onChange(image);
     onCloseModal();
   };
