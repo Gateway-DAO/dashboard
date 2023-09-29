@@ -274,9 +274,6 @@ devDependencies:
   jest-environment-jsdom:
     specifier: ^29.6.4
     version: 29.6.4
-  next-translate-plugin:
-    specifier: ^2.5.3
-    version: 2.5.3(next-translate@2.5.3)
   storybook:
     specifier: ^7.3.1
     version: 7.3.1(encoding@0.1.13)
@@ -17043,28 +17040,6 @@ packages:
       nprogress: 0.2.0
     dev: false
 
-  /next-translate-plugin@2.5.3(next-translate@2.5.3):
-    resolution: {integrity: sha512-P/cdU0Uk6KXnIKoMejBB7JiHxfkGGEffZtiOWrqJdisvdn2XPPjQ94r+YfBgHJIWXVIYF76JMMLCSzCPLb+mEg==}
-    engines: {node: '>=14.15.0'}
-    requiresBuild: true
-    peerDependencies:
-      next-translate: '>= 2.4.1'
-    dependencies:
-      next-translate: 2.5.3(next@13.4.13)(react@18.2.0)
-      typescript: 4.5.2
-    dev: true
-
-  /next-translate@2.5.3(next@13.4.13)(react@18.2.0):
-    resolution: {integrity: sha512-Wl4CWqqIqeoPlrKmTgnc7w49mOEi93INUnfVHJDTqNKavlhFg26isqy0LGKWHcvthGiPFBoh5aOXBqhGEfzrSw==}
-    engines: {node: '>=16.10.0'}
-    peerDependencies:
-      next: '>= 13.2.5'
-      react: '>= 18.0.0'
-    dependencies:
-      next: 13.4.13(@babel/core@7.22.10)(react-dom@18.2.0)(react@18.2.0)(sass@1.66.1)
-      react: 18.2.0
-    dev: true
-
   /next@13.4.13(@babel/core@7.22.10)(react-dom@18.2.0)(react@18.2.0)(sass@1.66.1):
     resolution: {integrity: sha512-A3YVbVDNeXLhWsZ8Nf6IkxmNlmTNz0yVg186NJ97tGZqPDdPzTrHotJ+A1cuJm2XfuWPrKOUZILl5iBQkIf8Jw==}
     engines: {node: '>=16.8.0'}
@@ -20676,12 +20651,6 @@ packages:
 
   /typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
-    dev: true
-
-  /typescript@4.5.2:
-    resolution: {integrity: sha512-5BlMof9H1yGt0P8/WF+wPNw6GfctgGjXp5hkblpyT+8rkASSmkUKMXrxR0Xg8ThVCi/JnHQiKXeBaEwCeQwMFw==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
     dev: true
 
   /typescript@4.9.5:
