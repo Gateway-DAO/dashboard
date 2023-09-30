@@ -62,7 +62,7 @@ export const settings = {
       'By sharing your authentication token, you assume all responsibility for any actions performed using your token, whether authorized or unauthorized.',
     usage_limit: {
       title: 'Usage limit',
-      issued_credentials: 'Issued credentials',
+      issued_credentials: 'Issued PDAs',
       data_model_created: 'Data model created',
       rate: (minimum: number, maxium: number) => `${minimum} out of ${maxium}`,
     },
