@@ -92,7 +92,10 @@ export default function SharedWithCard({ pdaId }: Props) {
                         gap: 2,
                       }}
                     >
-                      <GTWAvatar name={proof.verifier?.profilePicture ?? ''} />
+                      <GTWAvatar
+                        name={proof.verifier?.profilePicture ?? ''}
+                        src={proof.verifier?.profilePicture}
+                      />
                       <Typography variant="subtitle1">
                         {limitCharsCentered(
                           proof.verifier?.displayName ??
