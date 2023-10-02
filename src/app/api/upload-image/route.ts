@@ -44,9 +44,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: uploadedImage.error }, { status: 400 });
   }
 
-  const updateImage = await api(token.token).update_user({
-    profileImage: uploadedImage.url,
+  const updateImage = await api(token.token).update_profile_picture_url({
+    profilePicture: uploadedImage.url,
   });
 
-  return NextResponse.json({ image: updateImage.updateUser.profileImage });
+  return NextResponse.json({ image: updateImage.updateUser.profilePicture });
 }
