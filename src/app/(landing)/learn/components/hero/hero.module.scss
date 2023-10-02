@@ -134,6 +134,8 @@
   background-color: #771ac9;
   border-radius: 16px;
   padding: 30px 20px;
+  transition: background-color 0.8s ease;
+  text-decoration: none;
 
   &--concept {
     height: 368px;
@@ -162,6 +164,10 @@
         margin-bottom: 12px;
       }
     }
+  }
+
+  &:hover {
+    background-color: #591597;
   }
 }
 
@@ -230,6 +236,10 @@
     line-height: 22.4px;
     letter-spacing: 0.412px;
     margin-bottom: 40px;
+
+    br {
+      display: none;
+    }
   }
 }
 

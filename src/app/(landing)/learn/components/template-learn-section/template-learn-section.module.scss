@@ -86,6 +86,12 @@
 
 .text {
   padding-bottom: 40px;
+
+  @media (max-width: 599px) {
+    br {
+      display: none;
+    }
+  }
 }
 
 .vector {
@@ -188,6 +194,7 @@
 }
 
 .highlight_item {
+  text-decoration: none;
   width: 50%;
 
   &:first-child {
@@ -215,6 +222,13 @@
   &--primary {
     &:last-child {
       background-color: #fff;
+      border: 1px solid transparent;
+      transition: background-color 0.8s ease, border-color 0.8s ease;
+
+      &:hover {
+        background-color: #d6d5d8;
+        border-color: rgba(0, 0, 0, 0.1);
+      }
     }
   }
 
@@ -222,6 +236,11 @@
     &:last-child {
       background-color: #f6f4fa;
       border: 1px solid rgba(0, 0, 0, 0.1);
+      transition: background-color 0.8s ease;
+
+      &:hover {
+        background-color: #d6d5d8;
+      }
     }
   }
 

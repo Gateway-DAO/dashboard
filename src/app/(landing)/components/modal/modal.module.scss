@@ -1,0 +1,40 @@
+.element {
+  height: var(--vh);
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+
+  &:before {
+    background-color: #000;
+    content: '';
+    height: 100%;
+    left: 0;
+    opacity: 0.8;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.content {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.close_button {
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  height: 36px;
+  padding: 10px;
+  position: absolute;
+  width: 36px;
+  right: 20px;
+  top: 20px;
+  z-index: 3;
+}
