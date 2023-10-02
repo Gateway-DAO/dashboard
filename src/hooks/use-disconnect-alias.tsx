@@ -6,7 +6,7 @@ import { mutations } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { errorMessages } from '@/locale/en/errors';
-import { AuthType, Exact, Scalars } from '@/services/protocol/types';
+import { AuthType, Chain, Exact, Scalars } from '@/services/protocol/types';
 import { useToggle } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
@@ -14,6 +14,7 @@ import { useSnackbar } from 'notistack';
 type Alias = {
   type: AuthType;
   address?: string;
+  chain?: Chain;
 };
 
 export function useDisconnectAlias() {
@@ -47,23 +48,29 @@ export function useDisconnectAlias() {
     onSuccess: update,
   });
 
-  const handleDisconnectAlias = ({ type, address }: Alias) => {
+  const handleDisconnectAlias = ({ type, address, chain }: Alias) => {
     if (
       (type === AuthType.Wallet || type === AuthType.Email) &&
       session?.user?.authentications?.length === 1
     ) {
       router.push(`#deactivate-gateway-id`, { scroll: false });
       setModalDeactivateGatewayId(true);
-      setDataToDisconnect({ type, address });
+      setDataToDisconnect({ type, address, chain });
     } else {
-      disconnect({ type, address });
+      disconnect({ type, address, chain });
     }
   };
 
-  const disconnect = async ({ type, address }: Alias) => {
+  const disconnect = async ({ type, address, chain }: Alias) => {
     switch (type) {
       case 'GOOGLE':
         disconnectGoogle();
+        break;
+      case AuthType.Wallet:
+        await disconnectMutation.mutateAsync({
+          type,
+          data: { address: address as string, chain },
+        });
         break;
       default:
         await disconnectMutation.mutateAsync({

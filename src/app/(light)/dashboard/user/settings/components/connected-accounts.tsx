@@ -20,7 +20,6 @@ import { Stack } from '@mui/system';
 import AddEmail from './account-sections/add-email/add-email';
 import { DeactivateGatewayId } from './account-sections/deactivate-gateway-id';
 import EmailsSection from './account-sections/emails-section';
-import SocialsSection from './account-sections/socials-section';
 import WalletsSection from './account-sections/wallets-section';
 
 const EvmProvider = dynamic(
@@ -96,8 +95,12 @@ export default function ConnectedAccounts() {
                 <WalletConnectionProvider>
                   <WalletsSection
                     wallets={wallets}
-                    onDisconnect={(address) =>
-                      handleDisconnectAlias({ type: AuthType.Wallet, address })
+                    onDisconnect={(address, chain) =>
+                      handleDisconnectAlias({
+                        type: AuthType.Wallet,
+                        address,
+                        chain,
+                      })
                     }
                     isLoading={status === 'loading'}
                   />
