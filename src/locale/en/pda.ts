@@ -66,3 +66,10 @@ export const orgPdas = {
   data_assets_title: 'Issued data assets',
   data_assets_subtitle: 'These are the private data assets you have issued',
 };
+
+export const helpMenu = {
+  docsTitle: 'Help & documentation',
+  docsLink: 'https://docs.mygateway.xyz/docs/private-data-assets-pda',
+  discordTitle: 'Support channel',
+  discordLink: 'https://discord.com/invite/bxTaYsJ6WD',
+};
