@@ -19,7 +19,9 @@ export async function POST(request: NextRequest) {
   const newFormData = new FormData();
   newFormData.append(
     'file',
-    new Blob([buffer]),
+    new Blob([buffer], {
+      type: 'image/jpeg',
+    }),
     `${token.protocol_id}-avatar.jpg`
   );
 

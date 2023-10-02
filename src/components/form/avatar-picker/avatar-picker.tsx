@@ -1,9 +1,10 @@
 'use client';
 import { ChangeEvent, Ref, forwardRef, useState } from 'react';
 
+import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import useDropArea from '@/hooks/use-drop-area/use-drop-area';
 
-import { Box, Button, Dialog, Stack } from '@mui/material';
+import { Box, Dialog, Stack } from '@mui/material';
 
 import CropDialog from '../../crop-dialog/crop-dialog';
 import GTWAvatar from '../../gtw-avatar/gtw-avatar';
@@ -13,13 +14,14 @@ type Props = {
   name: string;
   username: string;
   value?: string | null;
+  isLoading?: boolean;
   onChange: (image: Blob) => void;
 };
 
 // TOOD: Reset when user selected an image
 
 function AvatarPickerField(
-  { name, username, value, onChange }: Props,
+  { name, username, value, onChange, isLoading }: Props,
   ref: Ref<HTMLInputElement>
 ) {
   const [cropableImage, setCropableImage] = useState<string>();
@@ -73,7 +75,12 @@ function AvatarPickerField(
         <Box component="span" sx={{ cursor: 'pointer' }}>
           <GTWAvatar name={username} src={value} size={80} />
         </Box>
-        <Button size="small" variant="outlined" component="span">
+        <LoadingButton
+          size="small"
+          variant="outlined"
+          component="span"
+          isLoading={isLoading}
+        >
           Change Image
           <input
             id={name}
@@ -85,7 +92,7 @@ function AvatarPickerField(
             tabIndex={-1}
             accept="image/*"
           />
-        </Button>
+        </LoadingButton>
       </Stack>
       <Dialog open={!!cropableImage} onClose={onCloseModal} fullWidth>
         {!!cropableImage && (

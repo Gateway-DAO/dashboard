@@ -11,7 +11,7 @@ import { FormControl, FormLabel, Skeleton, Stack } from '@mui/material';
 
 export default function Avatar() {
   const { data: session, update } = useSession();
-  const { mutateAsync } = useMutation({
+  const uploadImage = useMutation({
     mutationKey: ['update-avatar'],
     mutationFn: async (profilePictureUrl: Blob) => {
       const formData = new FormData();
@@ -28,7 +28,7 @@ export default function Avatar() {
 
   const onSubmit = async (profilePicture: Blob) => {
     try {
-      await mutateAsync(profilePicture);
+      await uploadImage.mutateAsync(profilePicture);
       await update();
     } catch {
       enqueueSnackbar('Failed to update avatar', { variant: 'error' });
@@ -45,6 +45,7 @@ export default function Avatar() {
         username={session!.user.gatewayId!}
         value={session!.user.profilePicture}
         onChange={onSubmit}
+        isLoading={uploadImage.isLoading}
       />
     </FormControl>
   );
