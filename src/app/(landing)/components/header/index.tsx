@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+import Link from '@/app/(landing)/components/Link';
 import BurgerButton from '@/app/(landing)/components/burger-button';
 import GatewayLogo from '@/app/(landing)/components/gateway-logo';
 import Wrapper from '@/app/(landing)/components/wrapper';
@@ -8,7 +9,7 @@ import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
-import GTWLink from '@/components/gtw-link';
+// import Link from '@/components/gtw-link';
 
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
@@ -69,19 +70,19 @@ export default function Header() {
       <Wrapper className={styles.wrapper}>
         {isMobile || isTablet ? (
           <>
-            <GTWLink href="/" className={styles.logo_link}>
+            <Link href="/" className={styles.logo_link}>
               <GatewayLogo variant={variant} />
-            </GTWLink>
+            </Link>
 
             <div className={styles.mobile_buttons}>
-              <GTWLink href="/login">
+              <Link href="/login">
                 <Button
                   variant="contained"
                   className={styles.mobile_button_head_dashboard}
                 >
                   Open dashboard
                 </Button>
-              </GTWLink>
+              </Link>
               <BurgerButton
                 className={styles.mobile_burger}
                 active={burgerActive}
@@ -92,31 +93,31 @@ export default function Header() {
           </>
         ) : (
           <>
-            <GTWLink href="/" className={styles.logo_link}>
+            <Link href="/" className={styles.logo_link}>
               <GatewayLogo withName variant={variant} />
-            </GTWLink>
+            </Link>
 
             <div className={styles.links}>
-              <GTWLink className={styles.link} href="/learn">
+              <Link className={styles.link} href="/learn">
                 <Button variant="text">Learn</Button>
-              </GTWLink>
-              <GTWLink className={styles.link} href="/build">
+              </Link>
+              <Link className={styles.link} href="/build">
                 <Button variant="text">Build</Button>
-              </GTWLink>
+              </Link>
             </div>
 
             <div className={styles.buttons_container}>
-              <GTWLink href="/explorer">
+              <Link href="/explorer">
                 <Button className={styles.button_outlined} variant="outlined">
                   Explorer
                 </Button>
-              </GTWLink>
+              </Link>
 
-              <GTWLink href="/login">
+              <Link href="/login">
                 <Button variant="contained" className={styles.button_contained}>
                   Open dashboard
                 </Button>
-              </GTWLink>
+              </Link>
             </div>
           </>
         )}
@@ -130,7 +131,7 @@ export default function Header() {
         ref={mobileMenuRef}
       >
         <Wrapper className={styles.mobile_wrapper}>
-          <GTWLink
+          <Link
             className={styles.mobile_link}
             href="/learn"
             onClick={() => setBurgerActive(false)}
@@ -139,8 +140,8 @@ export default function Header() {
               <span>Learn</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
             </Button>
-          </GTWLink>
-          <GTWLink
+          </Link>
+          <Link
             className={styles.mobile_link}
             href="/build"
             onClick={() => setBurgerActive(false)}
@@ -149,12 +150,12 @@ export default function Header() {
               <span>Build</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
             </Button>
-          </GTWLink>
+          </Link>
 
           <div className={styles.mobile_menu_buttons}>
-            <GTWLink
+            <Link
               className={styles.mobile_menu_button_link}
-              href="/dashboard"
+              href="/login"
               onClick={() => setBurgerActive(false)}
             >
               <Button
@@ -163,8 +164,8 @@ export default function Header() {
               >
                 Open dashboard
               </Button>
-            </GTWLink>
-            <GTWLink
+            </Link>
+            <Link
               className={styles.mobile_menu_button_link}
               href="/explorer"
               onClick={() => setBurgerActive(false)}
@@ -172,7 +173,7 @@ export default function Header() {
               <Button className={styles.button_outlined} variant="outlined">
                 Explorer
               </Button>
-            </GTWLink>
+            </Link>
           </div>
         </Wrapper>
       </div>

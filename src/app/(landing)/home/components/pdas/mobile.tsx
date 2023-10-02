@@ -40,11 +40,14 @@ export default function Pdas() {
         tl.progress(progress);
       } else if (progress < 0) {
         tl.progress(0);
+      } else {
+        tl.progress(1);
       }
     };
 
     // Set second logo text bounds
     gsap.delayedCall(0.3, setLogoTextBounds);
+    gsap.to(sectionRef.current, { autoAlpha: 1 });
 
     // Attach scroll event listener
     LenisManager?.on('scroll', handleScroll);
@@ -65,8 +68,6 @@ export default function Pdas() {
     const tl = gsap.timeline({ paused: true });
 
     tl.set(pdasLogoContainerRef.current, {
-      leftPercent: 50,
-      topPercent: 50,
       position: 'absolute',
       xPercent: -50,
       yPercent: -50,
@@ -122,7 +123,6 @@ export default function Pdas() {
         tl.to(
           pdasLogoContainerRef.current,
           {
-            leftPercent: 0,
             xPercent: 0,
             left: 0,
             y: '-27.3rem',

@@ -13,14 +13,17 @@ const conceptsCards = [
   {
     title: 'Getting Started',
     description: 'Learn the basics of our protocol',
+    href: '/',
   },
   {
     title: 'Architecture',
     description: 'How the protocol is structured',
+    href: '/',
   },
   {
     title: 'API & SDK',
     description: 'Use the SDK from your applications',
+    href: '/',
   },
 ];
 
@@ -28,10 +31,12 @@ const solutionsCards = [
   {
     title: 'Loyalty Programs',
     description: 'Engage your community with our loyalty program protocol',
+    href: '/',
   },
   {
     title: 'Automate Issuance',
     description: 'SDK integration step-by-step',
+    href: '/',
   },
 ];
 
@@ -74,15 +79,16 @@ export default function Hero() {
 
         <div className={styles.concepts}>
           {conceptsCards.map((card, index) => (
-            <div
+            <a
               className={joinClasses(styles.card, styles['card--concept'])}
               key={index}
+              href={card.href}
             >
               <div className={styles.card_container}>
                 <h3 className={styles.card_title}>{card.title}</h3>
                 <p className={styles.card_description}>{card.description}</p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
@@ -94,15 +100,16 @@ export default function Hero() {
         >
           <Slider {...settings}>
             {conceptsCards.map((card, index) => (
-              <div
+              <a
                 className={joinClasses(styles.card, styles['card--concept'])}
                 key={index}
+                href={card.href}
               >
                 <div className={styles.card_container}>
                   <h3 className={styles.card_title}>{card.title}</h3>
                   <p className={styles.card_description}>{card.description}</p>
                 </div>
-              </div>
+              </a>
             ))}
           </Slider>
 
@@ -126,15 +133,16 @@ export default function Hero() {
 
           <div className={styles.solutions_cards_container}>
             {solutionsCards.map((card, index) => (
-              <div
+              <a
                 className={joinClasses(styles.card, styles['card--solution'])}
                 key={index}
+                href={card.href}
               >
                 <div className={styles.card_container}>
                   <h3 className={styles.card_title}>{card.title}</h3>
                   <p className={styles.card_description}>{card.description}</p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 

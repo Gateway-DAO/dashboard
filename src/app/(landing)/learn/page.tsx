@@ -76,6 +76,7 @@ export default function BuildPage() {
             title: 'Loyalty Programs',
             description:
               'Using our Loyalty program data model you can unleash New experiences in your community.',
+            href: '/',
           },
         }}
       />
@@ -116,6 +117,7 @@ export default function BuildPage() {
           info: {
             title: 'Managing PDAs',
             description: 'Learn how to manage, authorize, and share your PDAs.',
+            href: '/',
           },
         }}
       />
@@ -164,6 +166,7 @@ export default function BuildPage() {
             title: 'Verification Widget',
             description:
               'Seamless integration of our solution, ensuring user transparency on your platform.',
+            href: '/',
           },
         }}
         firstColumnLarger

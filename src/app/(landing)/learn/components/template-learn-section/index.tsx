@@ -26,6 +26,7 @@ type Props = {
     info: {
       title: string;
       description: string;
+      href: string;
     };
   };
   firstColumnLarger?: boolean;
@@ -102,11 +103,12 @@ export default function TemplateLearnSection({
             <p className={styles.highlight_text}>{highlight.text}</p>
           </div>
 
-          <div
+          <a
             className={joinClasses(
               styles.highlight_item,
               styles[`highlight_item--${variant}`]
             )}
+            href={highlight.info.href}
           >
             <h4 className={styles.highlight_item_title}>
               {highlight.info.title}
@@ -114,7 +116,7 @@ export default function TemplateLearnSection({
             <p className={styles.highlight_item_description}>
               {highlight.info.description}
             </p>
-          </div>
+          </a>
         </div>
       </Wrapper>
     </section>

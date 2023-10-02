@@ -4,6 +4,7 @@ import './styles/global.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import Main from './components/Main';
 import SetSizes from './components/set-sizes';
 import Providers from './providers';
 
@@ -18,9 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="lenis lenis-smooth">
       <body>
-        <Providers>{children}</Providers>
+        <Main>
+          <Providers>{children}</Providers>
+        </Main>
+
         <SetSizes />
       </body>
     </html>
