@@ -66,3 +66,17 @@ export const orgPdas = {
   data_assets_title: 'Issued data assets',
   data_assets_subtitle: 'These are the private data assets you have issued',
 };
+
+export const helperContent = {
+  title: 'What is a Private Data Asset',
+  desc: 'Data Assets are the core asset of the protocol and the easiest way to hold and prove information verifiably about yourself.',
+  btnText: 'Learn more',
+  btnLink: 'https://docs.mygateway.xyz/docs/private-data-assets-pda',
+};
+
+export const helpMenu = {
+  docsTitle: 'Help & documentation',
+  docsLink: 'https://docs.mygateway.xyz/docs/private-data-assets-pda',
+  discordTitle: 'Support channel',
+  discordLink: 'https://discord.com/invite/bxTaYsJ6WD',
+};
