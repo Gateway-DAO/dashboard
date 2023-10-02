@@ -63,10 +63,4 @@ export const common = {
     github: 'Github',
     discord: 'Discord',
   },
-  helpMenu: {
-    docsTitle: 'Help & documentation',
-    docsLink: 'https://docs.mygateway.xyz/docs/private-data-assets-pda',
-    discordTitle: 'Support channel',
-    discordLink: 'https://discord.com/invite/bxTaYsJ6WD',
-  },
 };

@@ -13,7 +13,7 @@ import {
   Icon,
 } from '@mui/material';
 import { SiDiscord } from 'react-icons/si';
-import { common } from '@/locale/en/common';
+import { helpMenu } from '@/locale/en/pda';
 
 export default function HelpMenu() {
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
@@ -66,27 +66,19 @@ export default function HelpMenu() {
           },
         }}
       >
-        <MenuItem
-          component={Link}
-          target="_blank"
-          href={common.helpMenu.docsLink}
-        >
+        <MenuItem component={Link} target="_blank" href={helpMenu.docsLink}>
           <ListItemIcon>
             <MenuBookIcon />
           </ListItemIcon>
-          <ListItemText>{common.helpMenu.docsTitle}</ListItemText>
+          <ListItemText>{helpMenu.docsTitle}</ListItemText>
         </MenuItem>
-        <MenuItem
-          component={Link}
-          target="_blank"
-          href={common.helpMenu.discordLink}
-        >
+        <MenuItem component={Link} target="_blank" href={helpMenu.discordLink}>
           <ListItemIcon>
             <Icon>
               <SiDiscord />
             </Icon>
           </ListItemIcon>
-          <ListItemText>{common.helpMenu.discordTitle}</ListItemText>
+          <ListItemText>{helpMenu.discordTitle}</ListItemText>
         </MenuItem>
       </Menu>
     </>
