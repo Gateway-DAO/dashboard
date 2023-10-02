@@ -18,10 +18,12 @@ import LenisManager from './utils/scroll';
 
 export default function IndexPage() {
   const pathname = usePathname();
-  LenisManager;
 
   useEffect(() => {
     LenisManager?.start();
+    return () => {
+      LenisManager?.stop();
+    };
   }, [pathname]);
 
   return (
