@@ -2,10 +2,6 @@ mutation update_display_name($displayName: String!) {
   updateMyDisplayName(displayName: $displayName)
 }
 
-mutation update_profile_picture_url($profilePictureUrl: String) {
-  updateMyProfilePicture(profilePictureUrl: $profilePictureUrl)
-}
-
 mutation update_user(
   $username: String
   $displayName: String
@@ -18,6 +14,14 @@ mutation update_user(
       profilePicture: $profilePicture
     }
   ) {
+    id
+    gatewayId
+    displayName
+    profilePicture
+  }
+}
+mutation update_profile_picture_url($profilePicture: String) {
+  updateUser(input: { profilePicture: $profilePicture }) {
     id
     gatewayId
     displayName
