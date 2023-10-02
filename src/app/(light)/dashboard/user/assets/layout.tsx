@@ -10,6 +10,7 @@ import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
+import HelpMenu from './components/help-menu';
 
 import { Box } from '@mui/system';
 
@@ -41,6 +42,7 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
         </GTWTabs>
       </Box>
       <Box sx={{ pt: 5 }}>{children}</Box>
+      <HelpMenu />
     </Box>
   );
 }
