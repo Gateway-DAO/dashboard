@@ -29,7 +29,7 @@ query sent_proofs($take: Float!, $skip: Float!) {
     }
 
     verifier {
-      ...user
+      ...min_user
     }
 
     dataRequest {

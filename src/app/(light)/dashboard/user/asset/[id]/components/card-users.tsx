@@ -33,6 +33,8 @@ export default function CardUsers({ pda }: Props) {
     ? pda?.dataAsset?.organization?.image
     : pda?.dataAsset?.issuer?.profilePicture;
 
+  const recipientGatewayId = pda?.dataAsset?.owner?.gatewayId ?? '';
+
   const recipientName =
     pda?.dataAsset?.owner?.displayName ??
     pda?.dataAsset?.owner?.gatewayId ??
@@ -109,7 +111,7 @@ export default function CardUsers({ pda }: Props) {
         {tooltipRecipient && (
           <TooltipUser
             name={recipientName}
-            username={recipientName}
+            username={recipientGatewayId}
             picture={recipientPicture}
             issuance_date={pda?.dataAsset?.owner?.createdAt}
             right={true}

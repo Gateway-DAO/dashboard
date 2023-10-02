@@ -17,8 +17,11 @@ query myRequestsReceived($take: Float!, $skip: Float!) {
   requestsReceived(skip: $skip, take: $take) {
     id
     status
+    organization {
+      ...org
+    }
     verifier {
-      id
+      ...min_user
     }
     createdAt
     dataRequestTemplate {

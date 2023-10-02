@@ -19,7 +19,7 @@ import SectionSkeleton from './section-skeleton';
 
 type Props = {
   wallets: PartialDeep<Auth>[];
-  onDisconnect: (address: string) => void;
+  onDisconnect: (address: string, chain: Chain) => void;
   isLoading: boolean;
 };
 
@@ -106,7 +106,9 @@ export default function WalletsSection({
               key={data?.address}
               secondaryAction={
                 <AliasMenuButton
-                  onDisconnect={() => onDisconnect(data?.address as string)}
+                  onDisconnect={() =>
+                    onDisconnect(data?.address as string, data?.chain as Chain)
+                  }
                 />
               }
             >
