@@ -1,0 +1,63 @@
+'use client';
+
+import {
+  Box,
+  Button,
+  Icon,
+  Stack,
+  Typography,
+  IconButton,
+} from '@mui/material';
+import { helperContent } from '@/locale/en/pda';
+import CloseIcon from '@mui/icons-material/Close';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState } from 'react';
+
+export default function HelpContent() {
+  const [showHelperBar, setHelperBar] = useState(true);
+  return (
+    showHelperBar && (
+      <Box sx={{ width: '100%' }}>
+        <Stack
+          spacing={2}
+          direction={'row'}
+          padding={4}
+          sx={{ backgroundColor: '#69DCED26' }}
+          borderRadius={1}
+        >
+          <Image
+            src={'/question.svg'}
+            width={112}
+            height={112}
+            alt="question mark image"
+          />
+          <Stack width={'100%'}>
+            <Typography variant="subtitle1" color={'#407077'} gutterBottom>
+              {helperContent.title}
+            </Typography>
+            <Typography variant="body1" gutterBottom color={'#407077'}>
+              {helperContent.desc}
+            </Typography>
+            <div style={{ marginTop: 20 }}>
+              <Button
+                LinkComponent={Link}
+                variant="outlined"
+                href={helperContent.btnLink}
+                sx={{ color: '#407077', borderColor: '#407077' }}
+                target="_blank"
+              >
+                {helperContent.btnText}
+              </Button>
+            </div>
+          </Stack>
+          <div>
+            <IconButton onClick={() => setHelperBar(false)}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+        </Stack>
+      </Box>
+    )
+  );
+}
