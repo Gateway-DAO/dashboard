@@ -40,8 +40,8 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
         >
           <ListItemIcon>
             <GTWAvatar
-              src={organization.image}
-              name={organization.name}
+              src={organization.image ?? null}
+              name={organization.image ? organization.name : organization.id}
               hasBorder={!!organization.image}
             />
           </ListItemIcon>
