@@ -1,10 +1,13 @@
 import { Metadata } from 'next';
 import { Session } from 'next-auth';
 
+import BackButton from '@/components/buttons/back-button/back-button';
+import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
 import PermissionError from '@/components/permission-error/permission-error';
 import RequestStatusChip from '@/components/requests/request-status-chip';
 import ToggleCollapse from '@/components/toggle-collapse/toggle-collapse';
 import { DATE_FORMAT } from '@/constants/date';
+import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { request } from '@/locale/en/request';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
@@ -116,6 +119,9 @@ export default async function DashboardUserDataRequest({
 
   return (
     <>
+      <TopBarContainer>
+        <BackButton href={routes.dashboardUserRequests} />
+      </TopBarContainer>
       <Typography variant="h3" component="h2" sx={{ mb: 6.5 }}>
         {id}
       </Typography>
