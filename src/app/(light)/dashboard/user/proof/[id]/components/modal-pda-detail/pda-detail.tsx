@@ -25,6 +25,5 @@ export default function PDADetail({ pdas, id }: Props) {
     );
   }
 
-  console.log(PDAPattern);
   return <PDAItem pda={PDAPattern} viewOnly={true} />;
 }
