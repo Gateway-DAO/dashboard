@@ -122,7 +122,7 @@ export default async function DashboardUserDataRequest({
       <TopBarContainer>
         <BackButton href={routes.dashboardUserRequests} />
       </TopBarContainer>
-      <Typography variant="h3" component="h2" sx={{ mb: 6.5 }}>
+      <Typography variant="h3" component="h2" sx={{ mt: 6.5, mb: 6.5 }}>
         {id}
       </Typography>
       <Stack direction="column" gap={2}>
