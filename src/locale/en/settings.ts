@@ -73,4 +73,8 @@ export const orgSettings = {
   title: 'Gateway ID',
   subtitle:
     'Edit your Gateway ID, manage connected accounts and organization members',
+  membersArea: {
+    title: 'Organization members',
+    subtitle: "Manage your organization's members",
+  },
 };

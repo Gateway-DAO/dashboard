@@ -49,7 +49,7 @@ export default function DeveloperPortal() {
             }}
             title={settings.developer_portal.usage_limit.title}
           />
-          <CardContent>
+          <CardContent sx={{ pb: 0 }}>
             <List sx={{ p: 0 }}>
               <ListItem
                 sx={{ px: 0 }}
