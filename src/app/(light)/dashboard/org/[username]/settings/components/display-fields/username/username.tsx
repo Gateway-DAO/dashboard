@@ -1,9 +1,11 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
 import UsernameField from '@/app/(light)/dashboard/components/forms/username-field';
+import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
 import useOrganization from '@/hooks/use-organization';
@@ -18,21 +20,24 @@ import { updateUsernameSchema } from './schema';
 
 export default function Username() {
   const { data: session, update } = useSession();
-  const { pathnameOrg } = useOrganization();
+  const { pathnameOrg, organization } = useOrganization();
   const { privateApi } = useGtwSession();
+  const router = useRouter();
 
   const initialUsername = pathnameOrg ?? '';
 
-  const diffUpdateDays = useMemo(() => {
-    if (!session) return 0;
-    if (!session.user.gatewayIdLastupdate) return 31;
-    const lastUpdate = dayjs(session.user.gatewayIdLastupdate);
-    const now = dayjs();
-    const diff = now.diff(lastUpdate, 'day');
-    return diff;
-  }, [session?.user.gatewayIdLastupdate]);
+  // const diffUpdateDays = useMemo(() => {
+  //   if (!session) return 0;
+  //   if (!session.user.gatewayIdLastupdate) return 31;
+  //   const lastUpdate = dayjs(session.user.gatewayIdLastupdate);
+  //   const now = dayjs();
+  //   const diff = now.diff(lastUpdate, 'day');
+  //   return diff;
+  // }, [session?.user.gatewayIdLastupdate]);
 
-  const canUpdateUsername = diffUpdateDays > 30;
+  // const canUpdateUsername = diffUpdateDays > 30;
+  const diffUpdateDays = 0;
+  const canUpdateUsername = true;
 
   const {
     avaibility,
@@ -44,7 +49,7 @@ export default function Username() {
   const updateUsername = useMutation({
     mutationKey: ['updateUsername'],
     mutationFn: async (username: string) =>
-      privateApi.update_username({ username }),
+      privateApi.update_org_username({ username, id: organization!.id! }),
   });
 
   const { enqueueSnackbar } = useSnackbar();
@@ -72,8 +77,8 @@ export default function Username() {
     if (avaibility !== 'success' || !canUpdateUsername) return;
     try {
       await updateUsername.mutateAsync(data.username);
-      await update();
-      reset();
+      // router.replace(routes.dashboardOrgSettings(data.username));
+      // reset();
     } catch {
       enqueueSnackbar('Failed to update display name', { variant: 'error' });
     }
