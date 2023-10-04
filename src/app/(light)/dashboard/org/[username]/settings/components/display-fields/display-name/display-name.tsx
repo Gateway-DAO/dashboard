@@ -21,8 +21,8 @@ export default function DisplayName() {
   const { privateApi } = useGtwSession();
   const { mutateAsync, isLoading } = useMutation({
     mutationKey: ['updateOrgDisplayName'],
-    mutationFn: async (displayName: string) =>
-      privateApi.update_display_name({ displayName }),
+    mutationFn: async (name: string) =>
+      privateApi.update_org_display_name({ name, id: organization!.id! }),
   });
 
   const { enqueueSnackbar } = useSnackbar();
