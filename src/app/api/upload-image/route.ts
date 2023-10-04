@@ -7,6 +7,7 @@ import sharp from 'sharp';
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const image = formData.get('image') as Blob;
+  const organization = formData.get('organization') as string;
   const token = (await getToken({ req: request })) as JWT | null;
   if (!token?.token) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
     new Blob([buffer], {
       type: 'image/jpeg',
     }),
-    `${token.protocol_id}-avatar.jpg`
+    `${organization ? organization : token.protocol_id}-avatar.jpg`
   );
 
   const uploadImageResponse = await fetch(
@@ -44,6 +45,15 @@ export async function POST(request: NextRequest) {
 
   if ('error' in uploadedImage) {
     return NextResponse.json({ error: uploadedImage.error }, { status: 400 });
+  }
+
+  if (organization) {
+    const updateImage = await api(token.token).update_org_image({
+      image: uploadedImage.url,
+      id: organization,
+    });
+
+    return NextResponse.json({ image: updateImage.updateOrganization.image });
   }
 
   const updateImage = await api(token.token).update_profile_picture_url({
