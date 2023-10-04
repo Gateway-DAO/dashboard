@@ -12,7 +12,7 @@ import { Stack, Box } from '@mui/material';
 import CardUserCell from './card-user-cell';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
+  pda: PartialDeep<PdaQuery['PDA'] | null>;
 };
 
 export default function CardUsers({ pda }: Props) {
