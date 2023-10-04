@@ -1,17 +1,20 @@
 mutation update_org_image($id: String!, $image: String!) {
   updateOrganization(input: { id: $id, image: $image }) {
     id
+    image
   }
 }
 
 mutation update_org_display_name($id: String!, $name: String!) {
   updateOrganization(input: { id: $id, name: $name }) {
     id
+    name
   }
 }
 
 mutation update_org_username($id: String!, $username: String!) {
   updateOrganization(input: { id: $id, username: $username }) {
     id
+    gatewayId
   }
 }
