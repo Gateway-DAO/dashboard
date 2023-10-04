@@ -8,13 +8,13 @@ import { PdaQuery } from '@/services/protocol/types';
 
 import PDAItem from './components/pda-item';
 
-const getPDA = async (id: string): Promise<PdaQuery['PDAbyId'] | null> => {
+const getPDA = async (id: string): Promise<PdaQuery['PDA'] | null> => {
   const privateApi = await getPrivateApi();
   if (!privateApi) {
     return null;
   }
 
-  const pda = (await privateApi.pda({ id }))?.PDAbyId;
+  const pda = (await privateApi.pda({ id }))?.PDA;
   return pda;
 };
 
