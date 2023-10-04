@@ -1,0 +1,17 @@
+mutation update_org_image($id: String!, $image: String!) {
+  updateOrganization(input: { id: $id, image: $image }) {
+    id
+  }
+}
+
+mutation update_org_display_name($id: String!, $name: String!) {
+  updateOrganization(input: { id: $id, name: $name }) {
+    id
+  }
+}
+
+mutation update_org_username($id: String!, $username: String!) {
+  updateOrganization(input: { id: $id, username: $username }) {
+    id
+  }
+}
