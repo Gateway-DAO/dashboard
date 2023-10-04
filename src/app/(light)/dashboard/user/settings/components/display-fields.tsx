@@ -9,7 +9,7 @@ import DisplayName from './display-fields/display-name/display-name';
 import DisplayFieldsSkeletons from './display-fields/skeletons';
 import Username from './display-fields/username/username';
 
-export default function DisplaySettings() {
+export default function DisplayFields() {
   const { data: session } = useSession();
   return (
     <>
