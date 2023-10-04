@@ -6,9 +6,10 @@ type Props = {
   image?: string | null;
   name?: string | null;
   gatewayId: string;
+  id: string;
 };
 
-export default function UserOrgInfo({ image, name, gatewayId }: Props) {
+export default function UserOrgInfo({ image, name, gatewayId, id }: Props) {
   const hasName = name && name.length > 0;
   return (
     <Stack
@@ -27,7 +28,7 @@ export default function UserOrgInfo({ image, name, gatewayId }: Props) {
           zIndex: 1,
         }}
       >
-        <GTWAvatar src={image ?? undefined} name={gatewayId} />
+        <GTWAvatar src={image ?? undefined} name={image ? gatewayId : id} />
       </Box>
       <Stack
         direction="column"

@@ -22,7 +22,7 @@ export default function HelpContent() {
         <Stack
           spacing={2}
           direction={'row'}
-          padding={4}
+          padding={3}
           sx={{ backgroundColor: '#69DCED26' }}
           borderRadius={1}
         >
@@ -42,6 +42,7 @@ export default function HelpContent() {
             <div style={{ marginTop: 20 }}>
               <Button
                 LinkComponent={Link}
+                size="small"
                 variant="outlined"
                 href={helperContent.btnLink}
                 sx={{ color: '#407077', borderColor: '#407077' }}
