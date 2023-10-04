@@ -4,6 +4,8 @@ import { useSession } from 'next-auth/react';
 
 import { Stack } from '@mui/material';
 
+import Avatar from './display-fields/avatar';
+import DisplayName from './display-fields/display-name/display-name';
 import DisplayFieldsSkeletons from './display-fields/skeletons';
 import Username from './display-fields/username/username';
 
@@ -16,8 +18,8 @@ export default function DisplayFields() {
           <DisplayFieldsSkeletons />
         ) : (
           <>
-            {/* <Avatar />
-            <DisplayName /> */}
+            <Avatar />
+            <DisplayName />
             <Username />
           </>
         )}

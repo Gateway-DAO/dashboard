@@ -6,6 +6,7 @@ import { useMemo } from 'react';
 import UsernameField from '@/app/(light)/dashboard/components/forms/username-field';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
+import useOrganization from '@/hooks/use-organization';
 import { settings } from '@/locale/en/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -17,9 +18,10 @@ import { updateUsernameSchema } from './schema';
 
 export default function Username() {
   const { data: session, update } = useSession();
+  const { pathnameOrg } = useOrganization();
   const { privateApi } = useGtwSession();
 
-  const initialUsername = session!.user.gatewayId!;
+  const initialUsername = pathnameOrg ?? '';
 
   const diffUpdateDays = useMemo(() => {
     if (!session) return 0;
