@@ -2,17 +2,25 @@ import TitleLayout from '@/components/title-layout/title-layout';
 import { proofs as proofsLocales } from '@/locale/en/proof';
 import { getPrivateApi } from '@/services/protocol/api';
 import { Proof } from '@/services/protocol/types';
+import { getCurrentOrg } from '@/utils/currentOrg';
 import { PartialDeep } from 'type-fest';
 
 import { Box, Typography } from '@mui/material';
 
 import ProofsReceivedTable from './components/org-proofs-received-table';
 
-export default async function OrganizationReceivedProofsPage() {
+export default async function OrganizationReceivedProofsPage(props: any) {
   const privateApi = await getPrivateApi();
+  const pathnameOrg = props.params?.username;
+  const organization = await getCurrentOrg(pathnameOrg);
 
-  const proofs = (await privateApi.received_proofs({ take: 5, skip: 0 }))
-    ?.receivedProofs as PartialDeep<Proof>[];
+  const proofs = (
+    await privateApi.received_proofs_by_org({
+      take: 5,
+      skip: 0,
+      organizationId: organization?.id ?? '',
+    })
+  )?.receivedProofs as PartialDeep<Proof>[];
   const count = (await privateApi.countReceivedProofs()).receivedProofsCount;
 
   return (
