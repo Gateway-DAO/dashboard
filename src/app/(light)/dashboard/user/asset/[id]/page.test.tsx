@@ -17,7 +17,7 @@ describe('PDAPage', () => {
   it('renders PDAPage with data', async () => {
     (getPrivateApi as jest.Mock).mockResolvedValueOnce({
       pda: jest.fn().mockResolvedValueOnce({
-        PDAbyId: {
+        PDA: {
           dataAsset: {
             title: 'Test Title',
             description: 'Test Description',

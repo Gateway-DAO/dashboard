@@ -21,7 +21,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { Button } from '@mui/material';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
+  pda: PartialDeep<PdaQuery['PDA'] | null>;
 };
 
 export function RevokePDA({ pda }: Props) {

@@ -18,7 +18,7 @@ import { Stack, Divider, Typography, Card } from '@mui/material';
 import CardUsers from './card-users';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
+  pda: PartialDeep<PdaQuery['PDA'] | null>;
   viewOnly?: boolean;
 };
 
