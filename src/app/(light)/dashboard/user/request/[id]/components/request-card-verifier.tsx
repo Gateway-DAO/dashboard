@@ -13,7 +13,7 @@ import { Box, Button, Divider, Stack, Typography, alpha } from '@mui/material';
 type Props = {
   recipient: string;
   status: DataResourceStatus;
-  profilePicture?: string;
+  profilePicture?: string | null;
   proofId?: string;
 };
 
