@@ -1,6 +1,8 @@
 import TitleLayout from '@/components/title-layout/title-layout';
 import { orgSettings } from '@/locale/en/settings';
 
+import DisplayFields from './components/display-fields';
+
 export default function OrganizationSettings() {
   return (
     <>
@@ -9,6 +11,7 @@ export default function OrganizationSettings() {
         title={orgSettings.title}
         subtitle={orgSettings.subtitle}
       />
+      <DisplayFields />
     </>
   );
 }

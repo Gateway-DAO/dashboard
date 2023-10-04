@@ -21,6 +21,8 @@ const routes = {
     `/dashboard/org/${organizationId}/requests`,
   dashboardOrgReceivedProofs: (organizationId) =>
     `/dashboard/org/${organizationId}/proofs/received`,
+  dashboardOrgSettings: (organizationId) =>
+    `/dashboard/org/${organizationId}/settings`,
 };
 
 module.exports = routes;
