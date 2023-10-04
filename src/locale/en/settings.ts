@@ -68,3 +68,9 @@ export const settings = {
     },
   },
 };
+
+export const orgSettings = {
+  title: 'Gateway ID',
+  subtitle:
+    'Edit your Gateway ID, manage connected accounts and organization members',
+};
