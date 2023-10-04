@@ -8,12 +8,13 @@ import GTWLink from '@/components/gtw-link';
 import Slider from 'react-slick';
 
 import styles from './hero.module.scss';
+import { DOCS_BASE_URL } from '@/utils/docs';
 
 const conceptsCards = [
   {
     title: 'Getting Started',
     description: 'Learn the basics of our protocol',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/what-is-the-gatewayprotocol`,
   },
   {
     title: 'Architecture',
@@ -31,7 +32,7 @@ const solutionsCards = [
   {
     title: 'Loyalty Programs',
     description: 'Engage your community with our loyalty program protocol',
-    href: '/',
+    href: 'https://mygateway.substack.com/p/lifi-loyalty-pass-powered-by-gateway',
   },
   {
     title: 'Automate Issuance',
@@ -67,11 +68,14 @@ export default function Hero() {
           </p>
 
           <div className={styles.concepts_buttons}>
-            <GTWLink href="/" className={styles.concepts_link}>
+            <GTWLink
+              href="mailto:ayyan@mygateway.xyz"
+              className={styles.concepts_link}
+            >
               <Button variant="outlined">Get a demo</Button>
             </GTWLink>
 
-            <GTWLink href="/" className={styles.concepts_link}>
+            <GTWLink href={DOCS_BASE_URL} className={styles.concepts_link}>
               <Button variant="outlined">Open full documentation</Button>
             </GTWLink>
           </div>

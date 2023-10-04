@@ -3,6 +3,7 @@ import Wrapper from '@/app/(landing)/components/wrapper';
 
 import Title from '../title';
 import styles from './our-protocol.module.scss';
+import { DOCS_BASE_URL } from '@/utils/docs';
 
 const protocols = [
   {
@@ -41,7 +42,11 @@ export default function OurProtocol() {
           We made it easy for you to build your solutions quickly and securely
         </Title>
 
-        <Button variant="outlined" className={styles.buttom}>
+        <Button
+          variant="outlined"
+          onClick={() => (window.location.href = DOCS_BASE_URL)}
+          className={styles.buttom}
+        >
           Open full documentation
         </Button>
 

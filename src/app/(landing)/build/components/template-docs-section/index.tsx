@@ -13,7 +13,7 @@ type Props = {
   cards: {
     title: string;
     description: string;
-    href: '/';
+    href: string;
   }[];
 };
 

@@ -6,12 +6,13 @@ import GTWLink from '@/components/gtw-link';
 import Slider from 'react-slick';
 
 import styles from './hero.module.scss';
+import { DOCS_BASE_URL } from '@/utils/docs';
 
 const journeySteps = [
   {
     title: 'Getting Started',
     description: 'Learn the basics of our protocol',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/what-is-the-gatewayprotocol`,
   },
   {
     title: 'Architecture',
@@ -34,7 +35,7 @@ const Box = ({ type }: { type: 'desktop' | 'mobile' }) => {
       <p className={styles.box_text}>1.0.1</p>
 
       <div className={styles.box_buttons_container}>
-        <GTWLink href="/" className={styles.box_link}>
+        <GTWLink href={DOCS_BASE_URL} className={styles.box_link}>
           <Button variant="outlined">
             <span>Full Documentation</span>
             <Link className={styles.box_button_icon} />

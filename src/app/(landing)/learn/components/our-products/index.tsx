@@ -4,25 +4,26 @@ import Slider from 'react-slick';
 
 import Title from '../title';
 import styles from './our-products.module.scss';
+import { DOCS_BASE_URL } from '@/utils/docs';
 
 const products = [
   {
     title: 'Dashboard',
     description:
-      'Issuers + Verifiers can  manage private data assets (PDAs). Recipients can view and share them.',
-    href: '/',
+      'Issuers + Verifiers can manage private data assets (PDAs). Recipients can view and share them.',
+    href: `${DOCS_BASE_URL}docs/private-data-assets-pda`,
   },
   {
     title: 'API',
     description:
-      'Integrate directly with your application  to issue, manage, and verify PDAs natively.',
+      'Integrate directly with your application to issue, manage, and verify PDAs natively.',
     href: '/',
   },
   {
     title: 'Widget (Coming Soon)',
     description:
-      'Verifiers can seamlessly request and consume PDAs  by Issuer or Dataset.',
-    href: '/',
+      'Verifiers can seamlessly request and consume PDAs by Issuer or Dataset.',
+    href: `${DOCS_BASE_URL}docs/data-request`,
   },
 ];
 
