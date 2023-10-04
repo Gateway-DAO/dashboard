@@ -29,14 +29,15 @@ export default function HelpMenu() {
         }}
         sx={{
           backgroundColor: '#000000',
-          '&:hover': {
-            color: '#ffffff',
+          '&:hover .question-mark': {
+            color: 'black',
           },
         }}
         aria-label="help"
         onClick={onOpen}
+        size="small"
       >
-        <QuestionMarkIcon htmlColor="#ffffff" />
+        <QuestionMarkIcon className="question-mark" htmlColor="#ffffff" />
       </Fab>
 
       <Menu
@@ -46,7 +47,7 @@ export default function HelpMenu() {
         onClose={onClose}
         slotProps={{
           paper: {
-            sx: { mt: -10 },
+            sx: { mt: -8 },
           },
         }}
         MenuListProps={{
