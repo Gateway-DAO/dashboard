@@ -73,7 +73,7 @@ export default function Username() {
       await update();
       reset();
     } catch {
-      enqueueSnackbar('Failed to update display name', { variant: 'error' });
+      enqueueSnackbar('Failed to update username', { variant: 'error' });
     }
   };
 
