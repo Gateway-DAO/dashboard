@@ -1,10 +1,10 @@
+import ListSection from '@/app/(light)/dashboard/components/list-section';
 import { common } from '@/locale/en/common';
 import { FaDiscord, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 
 import { Button, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 
 import AliasMenuButton from '../alias-menu-button';
-import AccountSection from './account-section';
 import SectionSkeleton from './section-skeleton';
 
 const socials = [
@@ -20,7 +20,7 @@ type Props = {
 
 export default function SocialsSection({ onDisconnect }: Props) {
   return (
-    <AccountSection title="Other accounts">
+    <ListSection title="Other accounts">
       {socials.length === 0 && <SectionSkeleton />}
       {socials.length > 0 &&
         socials.map(({ icon: Icon, name, type, signed }) => (
@@ -48,6 +48,6 @@ export default function SocialsSection({ onDisconnect }: Props) {
             <ListItemText primary={name} />
           </ListItem>
         ))}
-    </AccountSection>
+    </ListSection>
   );
 }
