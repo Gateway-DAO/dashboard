@@ -29,6 +29,14 @@ fragment proof on Proof {
       id
       title
       claim
+      claimArray {
+        type
+        value
+        label
+        metadata
+        property
+        description
+      }
       dataModel {
         id
       }
