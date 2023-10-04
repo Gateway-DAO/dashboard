@@ -38,7 +38,7 @@ mutation refresh($refresh_token: String!) {
 }
 
 mutation protocol_add_email($email: String!) {
-  addEmail(email: $email) {
+  addEmail(input: { email: $email }) {
     #REMOVELINE
     code
     email

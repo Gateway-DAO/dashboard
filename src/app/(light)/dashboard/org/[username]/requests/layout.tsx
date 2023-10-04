@@ -11,7 +11,7 @@ export default function OrgDataRequestsLayout({ children }: PropsWithChildren) {
       <TitleLayout
         titleId={requests.title}
         title={requests.title}
-        subtitle={requests.subtitle}
+        subtitle={requests.org_subtitle}
       />
       {children}
     </Box>
