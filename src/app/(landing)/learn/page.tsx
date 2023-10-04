@@ -23,6 +23,7 @@ import Hero from './components/hero';
 import OurProducts from './components/our-products';
 import OurProtocol from './components/our-protocol';
 import TemplateLearnSection from './components/template-learn-section';
+import { DOCS_BASE_URL } from '@/utils/docs';
 
 export default function BuildPage() {
   LenisManager;
@@ -79,6 +80,7 @@ export default function BuildPage() {
             href: '/',
           },
         }}
+        href={`${DOCS_BASE_URL}docs/issuers-1`}
       />
 
       <TemplateLearnSection
@@ -117,9 +119,10 @@ export default function BuildPage() {
           info: {
             title: 'Managing PDAs',
             description: 'Learn how to manage, authorize, and share your PDAs.',
-            href: '/',
+            href: `${DOCS_BASE_URL}docs/private-data-assets-pda`,
           },
         }}
+        href={`${DOCS_BASE_URL}docs/owners`}
       />
 
       <TemplateLearnSection
@@ -166,10 +169,11 @@ export default function BuildPage() {
             title: 'Verification Widget',
             description:
               'Seamless integration of our solution, ensuring user transparency on your platform.',
-            href: '/',
+            href: `${DOCS_BASE_URL}docs/data-request`,
           },
         }}
         firstColumnLarger
+        href={`${DOCS_BASE_URL}docs/verifiers`}
       />
       <OurProtocol />
       <OurProducts />

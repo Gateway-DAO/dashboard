@@ -6,6 +6,7 @@ import Hero from '../build/components/hero';
 import Footer from '../components/footer';
 import Header from '../components/header';
 import TemplateDocsSection from './components/template-docs-section';
+import { DOCS_BASE_URL } from '@/utils/docs';
 
 export default function BuildPage() {
   return (
@@ -16,13 +17,13 @@ export default function BuildPage() {
         title="Become an Issuer"
         button={{
           text: 'Open issuer docs',
-          href: '/',
+          href: `${DOCS_BASE_URL}docs/issuers-1`,
         }}
         cards={[
           {
             title: 'Create Unique Data-Models',
             description: 'Easy create Data models that fits your needs',
-            href: '/',
+            href: `${DOCS_BASE_URL}docs/data-model`,
           },
           {
             title: 'Automate Issuance',
@@ -32,12 +33,12 @@ export default function BuildPage() {
           {
             title: 'Control PDA Status',
             description: 'How to Upgrade, Revoke, suspend and Update PDAs',
-            href: '/',
+            href: `${DOCS_BASE_URL}docs/private-data-assets-pda`,
           },
           {
             title: 'Monetize Data-Sharing',
             description: 'How to monetize using our Verification System',
-            href: '/',
+            href: `${DOCS_BASE_URL}docs/data-proof`,
           },
         ]}
       />
@@ -46,13 +47,13 @@ export default function BuildPage() {
         title="Become a Verifier"
         button={{
           text: 'Open verifier docs',
-          href: '/',
+          href: `${DOCS_BASE_URL}docs/verifiers`,
         }}
         cards={[
           {
             title: 'Creating a Data Request',
             description: 'Easily create Data models that fits your needs',
-            href: '/',
+            href: `${DOCS_BASE_URL}docs/data-request`,
           },
           {
             title: 'Verification Widget Integration',

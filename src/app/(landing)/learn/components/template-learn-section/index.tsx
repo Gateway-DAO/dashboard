@@ -30,6 +30,7 @@ type Props = {
     };
   };
   firstColumnLarger?: boolean;
+  href: string;
 };
 
 export default function TemplateLearnSection({
@@ -42,6 +43,7 @@ export default function TemplateLearnSection({
   features,
   highlight,
   firstColumnLarger,
+  href,
 }: Props) {
   return (
     <section
@@ -67,7 +69,11 @@ export default function TemplateLearnSection({
 
             <Description className={styles.text}>{description}</Description>
 
-            <Button className={styles.button} variant="outlined">
+            <Button
+              className={styles.button}
+              onClick={() => (window.location.href = href)}
+              variant="outlined"
+            >
               {buttonText}
             </Button>
           </div>
