@@ -4,6 +4,7 @@ import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 
 import routes from '@/constants/routes';
+import useOrganization from '@/hooks/use-organization';
 import { auth } from '@/locale/en/auth';
 
 import { AccountCircleOutlined, LogoutOutlined } from '@mui/icons-material';
@@ -16,6 +17,8 @@ type Props = {
 };
 
 export default function AuthDropdown({ onClose }: Props) {
+  const { isOrg, pathnameOrg } = useOrganization();
+
   const router = useRouter();
   const onSignOut = async () => {
     await signOut();
@@ -27,7 +30,11 @@ export default function AuthDropdown({ onClose }: Props) {
       <AuthDropdownProfilesList onClose={onClose} />
       <MenuItem
         component={Link}
-        href={routes.dashboardUserSettings}
+        href={
+          isOrg
+            ? routes.dashboardOrgSettings(pathnameOrg)
+            : routes.dashboardUserSettings
+        }
         onClick={onClose}
       >
         <ListItemIcon>
