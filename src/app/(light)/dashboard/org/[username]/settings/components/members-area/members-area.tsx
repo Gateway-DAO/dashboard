@@ -23,6 +23,7 @@ import {
 } from '@mui/material';
 
 import ManageMemberButton from './manage-member-button';
+import { LoadingMemberItem } from './skeleton';
 
 export default function MembersArea() {
   const { data: session } = useSession();
@@ -81,7 +82,10 @@ export default function MembersArea() {
   };
 
   const isMutating =
-    changeRole.isLoading || removeUser.isLoading || members.isRefetching;
+    changeRole.isLoading ||
+    removeUser.isLoading ||
+    members.isLoading ||
+    members.isRefetching;
 
   return (
     <Box sx={{ maxWidth: 1094 }}>
@@ -98,14 +102,14 @@ export default function MembersArea() {
             {orgSettings.membersArea.subtitle}
           </Typography>
         </Stack>
-        <Button>Add member</Button>
+        <Button disabled={isMutating}>Add member</Button>
       </Stack>
 
       {members.isLoading ? (
         <WhiteList>
-          <Skeleton sx={{ mx: 2, my: 1 }} />
-          <Skeleton sx={{ mx: 2, my: 1 }} />
-          <Skeleton sx={{ mx: 2, my: 1 }} />
+          <LoadingMemberItem />
+          <LoadingMemberItem />
+          <LoadingMemberItem />
         </WhiteList>
       ) : (
         <>
