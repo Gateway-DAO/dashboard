@@ -12,10 +12,10 @@ export default function useDebouncedUsernameAvaibility() {
   const checkAvaibility = useMutation({
     mutationKey: ['check-avaibility'],
     mutationFn: async (username: string) => {
-      const { checkGatewayIdAvaibility } = await (
+      const {  } = await (
         await getClientPrivateApi()
       ).check_username_avaibility({ username });
-      return checkGatewayIdAvaibility;
+      return checkUsernameAvailability;
     },
     onSuccess: (valid) => {
       if (avaibility !== 'idle') {
