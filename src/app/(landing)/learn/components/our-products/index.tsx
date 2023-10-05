@@ -50,7 +50,12 @@ export default function OurProducts() {
 
         <div className={styles.products_container}>
           {products.map((product, index) => (
-            <a className={styles.product} key={index} href={product.href}>
+            <a
+              className={styles.product}
+              key={index}
+              href={product.href}
+              target={'_blank'}
+            >
               <h4 className={styles.product_title}>{product.title}</h4>
               <p className={styles.product_description}>
                 {product.description}
@@ -68,7 +73,11 @@ export default function OurProducts() {
           <Slider {...settings}>
             {products.map((product, index) => (
               <div key={index}>
-                <a className={styles.product} href={product.href}>
+                <a
+                  className={styles.product}
+                  href={product.href}
+                  target={'_blank'}
+                >
                   <h4 className={styles.product_title}>{product.title}</h4>
                   <p className={styles.product_description}>
                     {product.description}

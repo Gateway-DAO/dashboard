@@ -75,7 +75,11 @@ export default function Hero() {
               <Button variant="outlined">Get a demo</Button>
             </GTWLink>
 
-            <GTWLink href={DOCS_BASE_URL} className={styles.concepts_link}>
+            <GTWLink
+              href={DOCS_BASE_URL}
+              className={styles.concepts_link}
+              target={'_blank'}
+            >
               <Button variant="outlined">Open full documentation</Button>
             </GTWLink>
           </div>
@@ -87,6 +91,7 @@ export default function Hero() {
               className={joinClasses(styles.card, styles['card--concept'])}
               key={index}
               href={card.href}
+              target={'_blank'}
             >
               <div className={styles.card_container}>
                 <h3 className={styles.card_title}>{card.title}</h3>

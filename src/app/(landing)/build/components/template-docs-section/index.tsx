@@ -30,7 +30,7 @@ export default function TemplateDocsSection({ title, button, cards }: Props) {
 
         <div className={styles.cards}>
           {cards.map((card, index) => (
-            <a className={styles.card} key={index} href={card.href}>
+            <a className={styles.card} key={index} href={card.href} target={"_blank"}>
               <h4 className={styles.card_title}>{card.title}</h4>
               <p className={styles.card_description}>{card.description}</p>
             </a>
