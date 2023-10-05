@@ -115,6 +115,7 @@ export default function TemplateLearnSection({
               styles[`highlight_item--${variant}`]
             )}
             href={highlight.info.href}
+            target={'_blank'}
           >
             <h4 className={styles.highlight_item_title}>
               {highlight.info.title}
