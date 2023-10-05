@@ -11,6 +11,7 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { proofs } from '@/locale/en/proof';
 import { Proof, Received_ProofsQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
@@ -92,6 +93,8 @@ export default function OrganizationProofsReceivedTable({
     pageSize: 5,
   });
 
+  const { organization } = useOrganization();
+
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
@@ -127,7 +130,9 @@ export default function OrganizationProofsReceivedTable({
       onPaginationModelChange={setNewPage}
       sx={defaultGridCustomization}
       onRowClick={(value) => {
-        router.push(routes.dashboardUserProof(value?.id));
+        router.push(
+          routes.dashboardOrgProof(organization?.gatewayId, value?.id)
+        );
       }}
     />
   );
