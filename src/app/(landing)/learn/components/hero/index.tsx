@@ -113,6 +113,7 @@ export default function Hero() {
                 className={joinClasses(styles.card, styles['card--concept'])}
                 key={index}
                 href={card.href}
+                target={'_blank'}
               >
                 <div className={styles.card_container}>
                   <h3 className={styles.card_title}>{card.title}</h3>
@@ -146,6 +147,7 @@ export default function Hero() {
                 className={joinClasses(styles.card, styles['card--solution'])}
                 key={index}
                 href={card.href}
+                target={'_blank'}
               >
                 <div className={styles.card_container}>
                   <h3 className={styles.card_title}>{card.title}</h3>
