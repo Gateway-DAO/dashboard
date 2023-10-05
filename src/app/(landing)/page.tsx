@@ -1,6 +1,5 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 import Footer from './components/footer';
@@ -14,17 +13,16 @@ import OurNetwork from './home/components/our-network';
 import OurProtocol from './home/components/our-protocol';
 import Pdas from './home/components/pdas';
 import Stats from './home/components/stats';
-import LenisManager from './utils/scroll';
+import LenisManager, { initializeLenis } from './utils/scroll';
 
 export default function IndexPage() {
-  const pathname = usePathname();
-
   useEffect(() => {
+    initializeLenis();
     LenisManager?.start();
     return () => {
-      LenisManager?.stop();
+      LenisManager?.destroy();
     };
-  }, [pathname]);
+  }, []);
 
   return (
     <HeaderContextProvider>

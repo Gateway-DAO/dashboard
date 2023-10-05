@@ -1,35 +1,29 @@
 'use client';
 import PDAItem from '@/app/(light)/dashboard/user/asset/[id]/components/pda-item';
-import PDASkeleton from '@/app/(light)/dashboard/user/asset/[id]/components/pda-skeleton';
 import DefaultError from '@/components/default-error/default-error';
-import { useGtwSession } from '@/context/gtw-session-provider';
 import { errorMessages } from '@/locale/en/errors';
-import { useQuery } from '@tanstack/react-query';
+import { DecryptedProofPda } from '@/services/protocol/types';
+import { PartialDeep } from 'type-fest/source/partial-deep';
 
 type Props = {
   id: string;
+  pdas: PartialDeep<DecryptedProofPda>[];
 };
 
-export default function PDADetail({ id }: Props) {
-  const { privateApi } = useGtwSession();
-  const {
-    data: pda,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ['proof-pda', id],
-    queryFn: () => privateApi?.pda({ id }),
-    select: (data) => data?.PDAbyId,
-  });
+export default function PDADetail({ pdas, id }: Props) {
+  const PDA = pdas.find(({ id: idInternal }) => id === idInternal);
+  const PDAPattern = {
+    id: PDA?.id,
+    dataAsset: {
+      ...PDA,
+    },
+  };
 
-  if (isLoading) {
-    return <PDASkeleton />;
-  }
-
-  if (isError || !pda) {
+  if (!PDA || !PDA.id) {
     return (
       <DefaultError message={errorMessages.UNEXPECTED_ERROR} isModal={true} />
     );
   }
-  return <PDAItem pda={pda} viewOnly={true} />;
+
+  return <PDAItem pda={PDAPattern} viewOnly={true} />;
 }

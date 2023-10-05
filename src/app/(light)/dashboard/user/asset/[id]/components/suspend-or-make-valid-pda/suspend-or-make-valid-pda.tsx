@@ -22,7 +22,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
+  pda: PartialDeep<PdaQuery['PDA'] | null>;
 };
 
 export function SuspendOrMakeValidPDA({ pda }: Props) {

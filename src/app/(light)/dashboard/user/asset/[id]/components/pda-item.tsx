@@ -25,7 +25,7 @@ import SharedWithCard from './shared-with-card';
 import { SuspendOrMakeValidPDA } from './suspend-or-make-valid-pda/suspend-or-make-valid-pda';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
+  pda: PartialDeep<PdaQuery['PDA'] | null>;
   viewOnly?: boolean;
 };
 

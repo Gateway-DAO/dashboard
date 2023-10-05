@@ -6,7 +6,7 @@ import { Divider } from '@mui/material';
 
 import ConnectedAccounts from './components/connected-accounts';
 import DeveloperPortal from './components/developer-portal/developer-portal';
-import DisplaySettings from './components/display-settings';
+import DisplayFields from './components/display-fields';
 
 export default async function SettingsPage() {
   return (
@@ -16,7 +16,7 @@ export default async function SettingsPage() {
         title={settings.title}
         subtitle={settings.subtitle}
       />
-      <DisplaySettings />
+      <DisplayFields />
       <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, my: 4 }} />
       <ConnectedAccounts />
       <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, my: 4 }} />

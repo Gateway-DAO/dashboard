@@ -3,26 +3,15 @@
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
-import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import UsernameField from '@/app/(light)/dashboard/components/forms/username-field';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
-import { common } from '@/locale/en/common';
 import { settings } from '@/locale/en/settings';
-import { usernameSchema } from '@/schemas/profile';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
-
-import { Check, Close } from '@mui/icons-material';
-import {
-  Button,
-  CircularProgress,
-  InputAdornment,
-  Stack,
-  TextField,
-} from '@mui/material';
 
 import { updateUsernameSchema } from './schema';
 
@@ -59,8 +48,7 @@ export default function Username() {
   const { enqueueSnackbar } = useSnackbar();
 
   const {
-    register,
-    watch,
+    control,
     reset,
     handleSubmit,
     formState: { errors },
@@ -71,8 +59,6 @@ export default function Username() {
       username: initialUsername,
     },
   });
-
-  const username = watch('username');
 
   const onCancel = () => {
     reset();
@@ -87,7 +73,7 @@ export default function Username() {
       await update();
       reset();
     } catch {
-      enqueueSnackbar('Failed to update display name', { variant: 'error' });
+      enqueueSnackbar('Failed to update username', { variant: 'error' });
     }
   };
 
@@ -99,58 +85,34 @@ export default function Username() {
       : settings.username.when_can_edit(30 - diffUpdateDays);
   }, [errors.username?.message, avaibility, canUpdateUsername, diffUpdateDays]);
 
+  const onSameUsername = () => {
+    reset();
+    onResetAvaibility();
+  };
+
+  const onInvalidUsername = () => {
+    onResetAvaibility();
+  };
+
+  const onValidUsername = (value: string) => {
+    onStartCheckAvaibility();
+    onCheckAvaibility(value);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        id="username"
-        label={common.general.username}
-        {...register('username', {
-          onChange(event) {
-            const value = event.target.value;
-            if (value === initialUsername) {
-              reset();
-              return onResetAvaibility();
-            }
-
-            const { success } = usernameSchema.safeParse(value);
-            if (success) {
-              onStartCheckAvaibility();
-              return onCheckAvaibility(value);
-            }
-            if (avaibility !== 'idle') {
-              onResetAvaibility();
-            }
-          },
-        })}
-        error={!!errors.username || avaibility === 'invalid'}
+      <UsernameField
+        avaibility={avaibility}
+        canUpdateUsername={canUpdateUsername}
+        control={control}
         helperText={helperText}
-        disabled={!canUpdateUsername}
-        InputProps={{
-          startAdornment: <InputAdornment position="start">@</InputAdornment>,
-          endAdornment: (
-            <InputAdornment position="end">
-              {avaibility === 'loading' && <CircularProgress size={16} />}
-              {avaibility === 'success' && <Check color="success" />}
-              {avaibility === 'invalid' && <Close color="error" />}
-            </InputAdornment>
-          ),
-        }}
+        initialUsername={initialUsername}
+        isLoading={updateUsername.isLoading}
+        onCancel={onCancel}
+        onSameUsername={onSameUsername}
+        onInvalidUsername={onInvalidUsername}
+        onValidUsername={onValidUsername}
       />
-      {username !== initialUsername && canUpdateUsername && (
-        <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 2 }}>
-          <LoadingButton
-            variant="contained"
-            type="submit"
-            disabled={avaibility !== 'success'}
-            isLoading={updateUsername.isLoading}
-          >
-            {common.actions.save}
-          </LoadingButton>
-          <Button variant="outlined" type="button" onClick={onCancel}>
-            {common.actions.cancel}
-          </Button>
-        </Stack>
-      )}
     </form>
   );
 }

@@ -4,10 +4,16 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalTitle from '@/components/modal/modal-title/modal-title';
+import { DecryptedProofPda } from '@/services/protocol/types';
+import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import PDADetail from './pda-detail';
 
-export default function ModalPDADetail() {
+export default function ModalPDADetail({
+  pdas,
+}: {
+  pdas: PartialDeep<DecryptedProofPda>[];
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -17,10 +23,11 @@ export default function ModalPDADetail() {
     params.delete('pda-id');
     router.replace(pathname + '?' + params.toString(), { scroll: false });
   };
+
   return (
     <ModalRight open={!!id} onClose={onClose}>
       <ModalTitle onClose={onClose} />
-      {id && <PDADetail id={id} />}
+      {id && <PDADetail pdas={pdas} id={id} />}
     </ModalRight>
   );
 }

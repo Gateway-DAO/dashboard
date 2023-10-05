@@ -1,5 +1,6 @@
 import { useSession } from 'next-auth/react';
 
+import ListSection from '@/app/(light)/dashboard/components/list-section';
 import WalletConnectModal from '@/components/wallet-modal/wallet-connect-modal';
 import WalletLoadingModal from '@/components/wallet-modal/wallet-loading-modal';
 import { useGtwSession } from '@/context/gtw-session-provider';
@@ -14,7 +15,6 @@ import { AddOutlined } from '@mui/icons-material';
 import { Button, ListItem, ListItemText } from '@mui/material';
 
 import AliasMenuButton from '../alias-menu-button';
-import AccountSection from './account-section';
 import SectionSkeleton from './section-skeleton';
 
 type Props = {
@@ -88,7 +88,7 @@ export default function WalletsSection({
       />
       <WalletLoadingModal canClose onDisconnect={onSetPending} />
 
-      <AccountSection
+      <ListSection
         title={settings.connected_accounts.wallet}
         button={
           <Button variant="text" startIcon={<AddOutlined />} onClick={onOpen}>
@@ -115,7 +115,7 @@ export default function WalletsSection({
               <ListItemText primary={data?.address} secondary={data?.chain} />
             </ListItem>
           ))}
-      </AccountSection>
+      </ListSection>
     </>
   );
 }

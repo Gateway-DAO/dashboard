@@ -12,8 +12,8 @@ import ModalPDADetail from './modal-pda-detail/modal-pda-detail';
 import ProofCardInfo from './proof-card-info';
 import ProofCardTitle from './proof-card-title';
 import ProofData from './proof-data';
-import ProofRevokeButton from './proof-revoke-button';
-import ProofShareButton from './proof-share-button';
+// import ProofRevokeButton from './proof-revoke-button';
+// import ProofShareButton from './proof-share-button';
 
 type Props = {
   proof: PartialDeep<Proof>;
@@ -51,7 +51,7 @@ export default function ProofItem({ proof, isOwner = false }: Props) {
         dataModels={proof?.data?.dataModels as DataModel[]}
         pdas={proof?.data?.PDAs as DecryptedProofPda[]}
       />
-      <ModalPDADetail />
+      <ModalPDADetail pdas={proof?.data?.PDAs as DecryptedProofPda[]} />
     </>
   );
 }
