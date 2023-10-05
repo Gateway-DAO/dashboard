@@ -1,10 +1,13 @@
 import { Metadata } from 'next';
 import { Session } from 'next-auth';
 
+import BackButton from '@/components/buttons/back-button/back-button';
+import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
 import PermissionError from '@/components/permission-error/permission-error';
 import RequestStatusChip from '@/components/requests/request-status-chip';
 import ToggleCollapse from '@/components/toggle-collapse/toggle-collapse';
 import { DATE_FORMAT } from '@/constants/date';
+import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { request } from '@/locale/en/request';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
@@ -16,6 +19,7 @@ import {
 } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { PageProps } from '@/types/next';
+import { getCurrentOrg } from '@/utils/currentOrg';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
@@ -77,11 +81,14 @@ export async function generateMetadata({
 }
 
 export default async function DashboardUserDataRequest({
-  params: { id },
-}: PageProps<{ id: string }>) {
+  params: { id, username },
+}: PageProps<{ id: string; username?: string }>) {
   const session = (await getGtwServerSession()) as Session;
   const userId = session.user.id;
   const dataRequest = await getDataRequest(id);
+  const pathnameOrg = username;
+
+  const organization = await getCurrentOrg(pathnameOrg || '');
 
   if (!dataRequest || !dataRequest.id) {
     return <h1>Error</h1>;
@@ -89,12 +96,14 @@ export default async function DashboardUserDataRequest({
 
   if (
     userId !== dataRequest?.owner?.id &&
-    userId !== dataRequest?.verifier?.id
+    userId !== dataRequest?.verifier?.id &&
+    organization?.id !== dataRequest?.organization?.id
   ) {
     return <PermissionError />;
   }
 
   const isOwner = userId === dataRequest?.owner?.id;
+  const requestHasOrgAsVerifier = !!dataRequest?.organization?.id;
   const requestValidData = isOwner ? await getRequestValidData(id) : null;
   const proofData =
     isOwner ||
@@ -103,11 +112,14 @@ export default async function DashboardUserDataRequest({
       ? {}
       : await getProofData(dataRequest.proof?.id);
 
-  const requester =
-    dataRequest.verifier?.displayName ??
-    dataRequest.verifier?.gatewayId ??
-    limitCharsCentered(dataRequest.verifier?.id as string, 15) ??
-    '';
+  const requester = requestHasOrgAsVerifier
+    ? dataRequest.organization?.name ??
+      dataRequest.organization?.gatewayId ??
+      limitCharsCentered(dataRequest.organization?.id as string, 15)
+    : dataRequest.verifier?.displayName ??
+      dataRequest.verifier?.gatewayId ??
+      limitCharsCentered(dataRequest.verifier?.id as string, 15) ??
+      '';
   const recipient =
     dataRequest.owner?.displayName ??
     dataRequest.owner?.gatewayId ??
@@ -116,7 +128,10 @@ export default async function DashboardUserDataRequest({
 
   return (
     <>
-      <Typography variant="h3" component="h2" sx={{ mb: 6.5 }}>
+      <TopBarContainer>
+        <BackButton href={routes.dashboardUserRequests} />
+      </TopBarContainer>
+      <Typography variant="h3" component="h2" sx={{ mt: 6.5, mb: 6.5 }}>
         {id}
       </Typography>
       <Stack direction="column" gap={2}>
@@ -127,13 +142,18 @@ export default async function DashboardUserDataRequest({
             requestId={dataRequest.id}
             proofId={dataRequest.proof?.id}
             requestValidData={requestValidData}
-            profilePicture={dataRequest.verifier?.profilePicture}
+            profilePicture={
+              requestHasOrgAsVerifier
+                ? dataRequest.organization?.image
+                : dataRequest.verifier?.profilePicture
+            }
           />
         ) : (
           <RequestCardVerfierView
             recipient={recipient}
             status={dataRequest.status!}
             proofId={dataRequest.proof?.id}
+            profilePicture={dataRequest.owner?.profilePicture}
           />
         )}
         <Paper

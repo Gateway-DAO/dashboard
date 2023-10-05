@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import { getClientPrivateApi } from '@/services/protocol/api';
-import { useDebouncedCallback, useThrottledCallback } from '@react-hookz/web';
+import { useDebouncedCallback } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 
-type AvaibilityState = 'idle' | 'loading' | 'success' | 'invalid';
+export type AvaibilityState = 'idle' | 'loading' | 'success' | 'invalid';
 
 export default function useDebouncedUsernameAvaibility() {
   const [avaibility, setAvaibility] = useState<AvaibilityState>('idle');
@@ -12,7 +12,7 @@ export default function useDebouncedUsernameAvaibility() {
   const checkAvaibility = useMutation({
     mutationKey: ['check-avaibility'],
     mutationFn: async (username: string) => {
-      const {  } = await (
+      const { checkUsernameAvailability } = await (
         await getClientPrivateApi()
       ).check_username_avaibility({ username });
       return checkUsernameAvailability;

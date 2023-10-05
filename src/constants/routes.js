@@ -11,6 +11,8 @@ const routes = {
   dashboardUserSentProofs: '/dashboard/user/proofs/sent',
   dashboardUserReceivedProofs: '/dashboard/user/proofs/received',
   dashboardUserRequest: (requestId) => `/dashboard/user/request/${requestId}`,
+  dashboardOrgRequest: (org, requestId) =>
+    `/dashboard/org/${org}/request/${requestId}`,
   dashboardUserRequests: '/dashboard/user/requests',
   dashboardUserSettings: '/dashboard/user/settings',
   dashboardOrgRoot: '/dashboard/org',
@@ -21,6 +23,8 @@ const routes = {
     `/dashboard/org/${organizationId}/requests`,
   dashboardOrgReceivedProofs: (organizationId) =>
     `/dashboard/org/${organizationId}/proofs/received`,
+  dashboardOrgSettings: (organizationId) =>
+    `/dashboard/org/${organizationId}/settings`,
 };
 
 module.exports = routes;

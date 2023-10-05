@@ -1,3 +1,4 @@
+import ListSection from '@/app/(light)/dashboard/components/list-section';
 import { settings } from '@/locale/en/settings';
 
 import { AddOutlined, NotificationsOutlined } from '@mui/icons-material';
@@ -13,7 +14,6 @@ import {
 import { Stack } from '@mui/system';
 
 import AliasMenuButton from '../alias-menu-button';
-import AccountSection from './account-section';
 import SectionSkeleton from './section-skeleton';
 
 type Props = {
@@ -32,7 +32,7 @@ export default function EmailsSection({
   isLoading,
 }: Props) {
   return (
-    <AccountSection
+    <ListSection
       title="Email"
       button={
         <Button onClick={onAddEmail} variant="text" startIcon={<AddOutlined />}>
@@ -104,6 +104,6 @@ export default function EmailsSection({
             </ListItem>
           );
         })}
-    </AccountSection>
+    </ListSection>
   );
 }

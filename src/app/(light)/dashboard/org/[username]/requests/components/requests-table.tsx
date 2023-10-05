@@ -42,15 +42,21 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
   },
   {
     field: 'verifier',
-    headerName: 'Requested By',
+    headerName: 'Requested to',
     flex: 1.3,
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" spacing={1.5}>
-          <GTWAvatar name={params.row.verifier!.gatewayId! || ''} size={32} />
-          <Typography variant="body2">
-            {params.row.verifier?.gatewayId}
-          </Typography>
+          <GTWAvatar
+            src={params.row.owner?.profilePicture ?? null}
+            name={
+              params.row.owner?.profilePicture
+                ? params.row.owner!.gatewayId!
+                : params.row.owner?.id
+            }
+            size={32}
+          />
+          <Typography variant="body2">{params.row.owner?.gatewayId}</Typography>
         </Stack>
       );
     },
@@ -131,7 +137,9 @@ export default function OrgRequestsTable({
       loading={isLoading}
       rowCount={totalCount}
       onRowClick={(params: GridRowParams) => {
-        router.push(routes.dashboardUserRequest(params.id));
+        router.push(
+          routes.dashboardOrgRequest(organization?.gatewayId, params.id)
+        );
       }}
       sx={defaultGridCustomization}
     />

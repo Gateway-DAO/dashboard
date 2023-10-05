@@ -1,7 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import { HeaderContextProvider } from '@/app/(landing)/contexts/header-context';
-import LenisManager from '@/app/(landing)/utils/scroll';
+import LenisManager, { initializeLenis } from '@/app/(landing)/utils/scroll';
 
 import Footer from '../components/footer';
 import Header from '../components/header';
@@ -26,7 +28,13 @@ import TemplateLearnSection from './components/template-learn-section';
 import { DOCS_BASE_URL } from '@/utils/docs';
 
 export default function BuildPage() {
-  LenisManager;
+  useEffect(() => {
+    initializeLenis();
+    LenisManager?.start();
+    return () => {
+      LenisManager?.destroy();
+    };
+  }, []);
 
   return (
     <HeaderContextProvider>

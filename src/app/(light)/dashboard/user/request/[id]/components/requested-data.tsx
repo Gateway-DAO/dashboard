@@ -81,7 +81,9 @@ export default function RequestedData({ dataModel, validDataProvided }: Props) {
         <TableBody>
           {propertiesArray.map((property, index) => {
             const currentProperties =
-              validDataProvided.validData[0]?.provided?.[property.propertyName];
+              validDataProvided?.validData[0]?.provided?.[
+                property.propertyName
+              ];
             return (
               <TableRow key={index}>
                 <TableCell sx={{ width: '50%' }}>
@@ -114,7 +116,7 @@ export default function RequestedData({ dataModel, validDataProvided }: Props) {
                   )}
                 </TableCell>
                 <TableCell sx={{ width: '5%' }} align="right">
-                  {!!validDataProvided.validData[0] ? (
+                  {!!validDataProvided?.validData[0] ? (
                     <Check color="success" />
                   ) : (
                     <Close color="error" />

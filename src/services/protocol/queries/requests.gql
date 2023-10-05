@@ -56,6 +56,9 @@ query dataRequest($id: String!) {
       profilePicture
       displayName
     }
+    organization {
+      ...org
+    }
     dataRequestTemplate {
       id
       schema
@@ -81,6 +84,7 @@ query requestsByOrg($orgId: String!, $take: Float!, $skip: Float!) {
   requestsSent(filter: { orgId: $orgId }, skip: $skip, take: $take) {
     id
     createdAt
+    status
     owner {
       id
       gatewayId

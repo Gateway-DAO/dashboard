@@ -70,11 +70,21 @@ export default function ProofData({ dataModels, pdas }: Props) {
                     key={pda?.id}
                     name={pda?.title as string}
                     issuerName={
-                      pda?.organization?.name ??
-                      pda?.organization?.gatewayId ??
-                      (pda?.issuer?.gatewayId as string)
+                      pda?.organization?.id
+                        ? pda?.organization?.name ??
+                          pda?.organization?.gatewayId ??
+                          pda?.organization?.id ??
+                          ''
+                        : pda?.issuer?.displayName ??
+                          pda?.issuer?.gatewayId ??
+                          pda?.issuer?.id ??
+                          ''
                     }
-                    issuerImage={pda?.organization?.image}
+                    issuerImage={
+                      pda?.organization?.id
+                        ? pda?.organization?.image
+                        : pda?.issuer?.profilePicture
+                    }
                     onClick={() =>
                       router.push(`?pda-id=${pda.id}`, { scroll: false })
                     }

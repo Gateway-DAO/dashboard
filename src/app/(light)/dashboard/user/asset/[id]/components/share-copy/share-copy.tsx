@@ -33,7 +33,7 @@ import ShareCopyFormField from './share-copy-form-fields';
 import ShareCopyFormSuccessfully from './share-copy-form-successfully';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDAbyId'] | null>;
+  pda: PartialDeep<PdaQuery['PDA'] | null>;
 };
 
 export default function ShareCopy({ pda }: Props) {
