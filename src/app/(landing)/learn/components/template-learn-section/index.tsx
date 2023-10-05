@@ -71,7 +71,7 @@ export default function TemplateLearnSection({
 
             <Button
               className={styles.button}
-              onClick={() => (window.location.href = href)}
+              onClick={() => window.open(href, '_blank')}
               variant="outlined"
             >
               {buttonText}

@@ -44,7 +44,7 @@ export default function OurProtocol() {
 
         <Button
           variant="outlined"
-          onClick={() => (window.location.href = DOCS_BASE_URL)}
+          onClick={() => window.open(DOCS_BASE_URL, '_blank')}
           className={styles.buttom}
         >
           Open full documentation
