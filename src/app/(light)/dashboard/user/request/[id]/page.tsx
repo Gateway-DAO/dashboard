@@ -97,13 +97,13 @@ export default async function DashboardUserDataRequest({
   if (
     userId !== dataRequest?.owner?.id &&
     userId !== dataRequest?.verifier?.id &&
-    organization?.id !== dataRequest?.organization?.id
+    organization?.id !== dataRequest?.verifierOrganization?.id
   ) {
     return <PermissionError />;
   }
 
   const isOwner = userId === dataRequest?.owner?.id;
-  const requestHasOrgAsVerifier = !!dataRequest?.organization?.id;
+  const requestHasOrgAsVerifier = !!dataRequest?.verifierOrganization?.id;
   const requestValidData = isOwner ? await getRequestValidData(id) : null;
   const proofData =
     isOwner ||
@@ -113,9 +113,9 @@ export default async function DashboardUserDataRequest({
       : await getProofData(dataRequest.proof?.id);
 
   const requester = requestHasOrgAsVerifier
-    ? dataRequest.organization?.name ??
-      dataRequest.organization?.gatewayId ??
-      limitCharsCentered(dataRequest.organization?.id as string, 15)
+    ? dataRequest.verifierOrganization?.name ??
+      dataRequest.verifierOrganization?.gatewayId ??
+      limitCharsCentered(dataRequest.verifierOrganization?.id as string, 15)
     : dataRequest.verifier?.displayName ??
       dataRequest.verifier?.gatewayId ??
       limitCharsCentered(dataRequest.verifier?.id as string, 15) ??
@@ -144,7 +144,7 @@ export default async function DashboardUserDataRequest({
             requestValidData={requestValidData}
             profilePicture={
               requestHasOrgAsVerifier
-                ? dataRequest.organization?.image
+                ? dataRequest.verifierOrganization?.image
                 : dataRequest.verifier?.profilePicture
             }
           />
