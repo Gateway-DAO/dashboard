@@ -86,7 +86,7 @@ export default function ShareCopy({ pda }: Props) {
           },
         ],
         verifier: {
-          type: data.identifier_type,
+          type: data.type,
           value: data?.address ?? null,
         },
       });
