@@ -5,8 +5,8 @@ import { Avatar } from '@mui/material';
 
 type Props = {
   src?: string | undefined | null;
-  name?: string;
-  alt?: string;
+  name?: string | undefined | null;
+  alt?: string | undefined | null;
   size?: number;
   hasBorder?: boolean;
 };
@@ -24,7 +24,7 @@ export default function GTWAvatar({ src, name, alt, hasBorder, size }: Props) {
     return (
       <BoringAvatar
         variant="marble"
-        name={name ?? 'User'}
+        name={name ?? 'Avatar'}
         size={size}
         colors={colors}
       />
@@ -34,7 +34,7 @@ export default function GTWAvatar({ src, name, alt, hasBorder, size }: Props) {
   return (
     <Avatar
       src={src}
-      alt={alt}
+      alt={alt ?? name ?? 'Avatar'}
       sx={{
         ...(hasBorder && {
           borderWidth: 1,
