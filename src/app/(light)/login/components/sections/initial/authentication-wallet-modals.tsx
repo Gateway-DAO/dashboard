@@ -52,7 +52,7 @@ export default function AuthenticationWalletModals({
   return (
     <>
       <WalletConnectModal
-        title="Choose wallet"
+        title="Connect wallet"
         description="Select a chain and choose one of available wallet providers or create a new wallet."
         isOpen={isOpen}
         onConnect={onConnectWallet}
