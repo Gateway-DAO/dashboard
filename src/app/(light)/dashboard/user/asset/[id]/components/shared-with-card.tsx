@@ -5,6 +5,7 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { pda } from '@/locale/en/pda';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
@@ -20,6 +21,7 @@ type Props = {
 
 export default function SharedWithCard({ pdaId }: Props) {
   const { privateApi } = useGtwSession();
+  const { organization } = useOrganization();
   const router = useRouter();
   const { data, isFetching, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
@@ -74,7 +76,14 @@ export default function SharedWithCard({ pdaId }: Props) {
                     alignItems="center"
                     title={`Proof ID ${proof.id}`}
                     onClick={() =>
-                      router.push(routes.dashboardUserProof(proof.id))
+                      router.push(
+                        !!organization
+                          ? routes.dashboardOrgProof(
+                              organization.gatewayId,
+                              proof.id
+                            )
+                          : routes.dashboardUserProof(proof.id)
+                      )
                     }
                     sx={{
                       cursor: 'pointer',
