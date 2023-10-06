@@ -63,4 +63,14 @@ export const common = {
     github: 'Github',
     discord: 'Discord',
   },
+  identifier: {
+    type: 'Account type',
+    value: 'Address',
+    types: {
+      gateway_id: 'Gateway ID',
+      email: 'Email',
+      evm_wallet: 'EVM Wallet',
+      solana_wallet: 'Solana Wallet',
+    },
+  },
 };
