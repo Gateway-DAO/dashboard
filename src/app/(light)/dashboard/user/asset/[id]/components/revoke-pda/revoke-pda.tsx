@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import Loading from '@/components/loadings/loading/loading';
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
@@ -10,22 +10,22 @@ import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import {
   ChangePdaStatusMutationVariables,
-  PdaQuery,
   PdaStatus,
 } from '@/services/protocol/types';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
-import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Button } from '@mui/material';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDA'] | null>;
+  pdaId: string | undefined;
+  pdaStatus: PdaStatus | undefined;
+  isIssuer: any;
 };
 
-export function RevokePDA({ pda }: Props) {
-  const { privateApi, session } = useGtwSession();
+export function RevokePDA({ pdaId, pdaStatus, isIssuer }: Props) {
+  const { privateApi } = useGtwSession();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
@@ -40,20 +40,9 @@ export function RevokePDA({ pda }: Props) {
     onError: () => enqueueSnackbar(errorMessages.REVOKE_ERROR),
   });
 
-  const isIssuer = useMemo(
-    () =>
-      session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId ||
-      session?.user?.accesses?.find(
-        (access) =>
-          pda?.dataAsset?.organization?.gatewayId ===
-          access?.organization?.gatewayId
-      ),
-    [pda, session]
-  );
-
   return (
     <>
-      {isIssuer && pda?.status !== PdaStatus.Revoked && (
+      {isIssuer && pdaStatus !== PdaStatus.Revoked && (
         <>
           {loadingAfter && <Loading fullScreen />}
           <Button
@@ -78,7 +67,7 @@ export function RevokePDA({ pda }: Props) {
             onConfirm={() =>
               revokePda
                 .mutateAsync({
-                  id: pda?.id as string,
+                  id: pdaId as string,
                   status: PdaStatus.Revoked,
                 })
                 .finally(() => {
