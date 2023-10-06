@@ -35,14 +35,18 @@ const Box = ({ type }: { type: 'desktop' | 'mobile' }) => {
       <p className={styles.box_text}>1.0.1</p>
 
       <div className={styles.box_buttons_container}>
-        <GTWLink href={DOCS_BASE_URL} className={styles.box_link} target={"_blank"}>
+        <GTWLink
+          href={DOCS_BASE_URL}
+          className={styles.box_link}
+          target={'_blank'}
+        >
           <Button variant="outlined">
             <span>Full Documentation</span>
             <Link className={styles.box_button_icon} />
           </Button>
         </GTWLink>
 
-        <GTWLink href="/" className={styles.box_link}>
+        <GTWLink href="/" className={styles.box_link} target={'_blank'}>
           <Button variant="outlined">
             <span>V2 API</span>
             <Link className={styles.box_button_icon} />
@@ -90,7 +94,12 @@ export default function Hero() {
 
         <div className={styles.steps}>
           {journeySteps.map((card, index) => (
-            <a className={styles.card} key={index} href={card.href}>
+            <a
+              className={styles.card}
+              key={index}
+              href={card.href}
+              target={'_blank'}
+            >
               <h3 className={styles.card_title}>{card.title}</h3>
               <p className={styles.card_description}>{card.description}</p>
             </a>
@@ -103,7 +112,7 @@ export default function Hero() {
           <Slider {...settings}>
             {journeySteps.map((card, index) => (
               <div key={index}>
-                <a className={styles.card} href={card.href} target={"_blank"}>
+                <a className={styles.card} href={card.href} target={'_blank'}>
                   <h3 className={styles.card_title}>{card.title}</h3>
                   <p className={styles.card_description}>{card.description}</p>
                 </a>
