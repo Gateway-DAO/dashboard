@@ -8,6 +8,7 @@ import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { mutations, queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -43,6 +44,7 @@ export default function ShareCopy({ pda }: Props) {
   const [pdaIssued, setPdaIssued] = useState<string>();
   const { privateApi, session } = useGtwSession();
   const queryClient = useQueryClient();
+  const { organization } = useOrganization();
 
   const methods = useForm({
     resolver: zodResolver(shareCopySchema as any), // TODO: remove type any
@@ -104,7 +106,9 @@ export default function ShareCopy({ pda }: Props) {
   };
 
   const isOwner = useMemo(
-    () => session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId,
+    () =>
+      session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId &&
+      !organization,
     [pda, session]
   );
 

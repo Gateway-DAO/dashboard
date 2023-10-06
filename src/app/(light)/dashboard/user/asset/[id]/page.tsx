@@ -5,6 +5,7 @@ import TopBarContainer from '@/components/containers/top-bar-container/top-bar-c
 import routes from '@/constants/routes';
 import { getPrivateApi } from '@/services/protocol/api';
 import { PdaQuery } from '@/services/protocol/types';
+import { getCurrentOrg } from '@/utils/currentOrg';
 
 import PDAItem from './components/pda-item';
 
@@ -30,12 +31,26 @@ export async function generateMetadata({
   };
 }
 
-export default async function PDAPage({ params }: { params: { id: string } }) {
+export default async function PDAPage({
+  params,
+  asOrg,
+}: {
+  params: { id: string; username: string };
+  asOrg?: boolean;
+}) {
   const pda = await getPDA(params.id);
+  const org = await getCurrentOrg(params.username);
+
   return (
     <>
       <TopBarContainer>
-        <BackButton href={routes.dashboardUserReceivedAssets} />
+        <BackButton
+          href={
+            asOrg
+              ? routes.dashboardOrgIssuedAssets(org?.gatewayId)
+              : routes.dashboardUserReceivedAssets
+          }
+        />
       </TopBarContainer>
       <PDAItem pda={pda} />
     </>
