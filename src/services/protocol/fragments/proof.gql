@@ -13,7 +13,7 @@ fragment proof on Proof {
     ...min_user
   }
 
-  organization {
+  verifierOrganization {
     gatewayId
     image
   }
