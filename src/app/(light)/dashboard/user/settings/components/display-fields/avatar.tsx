@@ -42,6 +42,7 @@ export default function Avatar() {
       </FormLabel>
       <AvatarPicker
         name="profilePicture"
+        id={session!.user.id!}
         username={session!.user.gatewayId!}
         value={session!.user.profilePicture}
         onChange={onSubmit}

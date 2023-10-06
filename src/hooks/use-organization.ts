@@ -2,19 +2,21 @@ import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 
 import routes from '@/constants/routes';
-import { Organization } from '@/services/protocol/types';
+import { Organization, OrganizationRole } from '@/services/protocol/types';
 import { PartialDeep } from 'type-fest';
 
 type UseOrganizationTruthyResponse = {
   isOrg: true;
   pathnameOrg: string;
+  canEdit: boolean;
+  role: OrganizationRole;
   organization: PartialDeep<Organization>;
 };
 
 type UseOrganizationFalsyResponse = {
+  [key in keyof Omit<UseOrganizationTruthyResponse, 'isOrg'>]: undefined;
+} & {
   isOrg: false;
-  pathnameOrg: undefined;
-  organization: undefined;
 };
 
 /**
@@ -31,15 +33,22 @@ export default function useOrganization():
   const pathname = usePathname();
   const isOrg = pathname.includes(routes.dashboardOrgRoot);
   const pathnameOrg = isOrg ? pathname.split('/')[3] : undefined;
-  const organization = session?.user?.accesses?.find(
+  const access = session?.user?.accesses?.find(
     (access) => access.organization?.gatewayId === pathnameOrg
-  )?.organization;
+  );
+  const organization = access?.organization;
+
+  const canEdit =
+    access?.role === OrganizationRole.Admin ||
+    access?.role === OrganizationRole.Owner;
 
   if (isOrg && pathnameOrg && organization) {
     return {
       isOrg,
       pathnameOrg,
       organization,
+      canEdit,
+      role: access?.role,
     };
   }
 
@@ -47,5 +56,7 @@ export default function useOrganization():
     isOrg: false,
     pathnameOrg: undefined,
     organization: undefined,
+    canEdit: undefined,
+    role: undefined,
   };
 }
