@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useIdentifierTypes } from './use-identifcation-types';
+import { useIdentifierTypes } from './use-identifier-types';
 
 type Props = {
   control: Control<IdentifierValueSchema>;
