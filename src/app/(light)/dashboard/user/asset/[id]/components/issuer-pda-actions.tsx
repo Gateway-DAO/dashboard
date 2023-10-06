@@ -17,9 +17,9 @@ type Props = {
 
 export default function IssuerPDAActions({ pda }: Props) {
   const { session } = useGtwSession();
-  const params = useParams();
+  const { organization } = useOrganization();
 
-  const displayingAsOrg = !!params.username;
+  const displayingAsOrg = !!organization;
   const verifierIsOrg = !!pda?.dataAsset?.organization?.gatewayId;
 
   const isValid = useMemo(() => pda?.status === PdaStatus.Valid, [pda]);
@@ -41,25 +41,23 @@ export default function IssuerPDAActions({ pda }: Props) {
     [pda, session, displayingAsOrg]
   );
 
+  if (
+    (!displayingAsOrg && verifierIsOrg) ||
+    (displayingAsOrg && !verifierIsOrg)
+  ) {
+    return null;
+  }
+
   return (
-    <>
-      {(displayingAsOrg && verifierIsOrg) ||
-        (!displayingAsOrg && !verifierIsOrg && (
-          <Stack direction="row" gap={1}>
-            <SuspendOrMakeValidPDA
-              pdaId={pda?.id}
-              pdaStatus={pda?.status}
-              isIssuer={isIssuer}
-              isSuspended={isSuspended}
-              isValid={isValid}
-            />
-            <RevokePDA
-              pdaId={pda?.id}
-              pdaStatus={pda?.status}
-              isIssuer={isIssuer}
-            />
-          </Stack>
-        ))}
-    </>
+    <Stack data-custom-id="issuer-pda-actions" direction="row" gap={1}>
+      <SuspendOrMakeValidPDA
+        pdaId={pda?.id}
+        pdaStatus={pda?.status}
+        isIssuer={isIssuer}
+        isSuspended={isSuspended}
+        isValid={isValid}
+      />
+      <RevokePDA pdaId={pda?.id} pdaStatus={pda?.status} isIssuer={isIssuer} />
+    </Stack>
   );
 }
