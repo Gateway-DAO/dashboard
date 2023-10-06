@@ -76,5 +76,6 @@ export const orgSettings = {
   membersArea: {
     title: 'Organization members',
     subtitle: "Manage your organization's members",
+    add_member: 'Add member',
   },
 };
