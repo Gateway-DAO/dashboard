@@ -54,7 +54,7 @@ query sent_proofs($take: Float!, $skip: Float!) {
       ...min_user
     }
 
-    organization {
+    verifierOrganization {
       ...org
     }
 
