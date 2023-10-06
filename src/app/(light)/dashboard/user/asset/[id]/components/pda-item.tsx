@@ -17,12 +17,11 @@ import { PartialDeep } from 'type-fest';
 import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
 import DataTable from './data-table';
+import IssuerPDAActions from './issuer-pda-actions';
 import ModalImage from './modal-image';
 import PdaCardInfo from './pda-card-info';
-import { RevokePDA } from './revoke-pda/revoke-pda';
 import ShareCopy from './share-copy/share-copy';
 import SharedWithCard from './shared-with-card';
-import { SuspendOrMakeValidPDA } from './suspend-or-make-valid-pda/suspend-or-make-valid-pda';
 
 type Props = {
   pda: PartialDeep<PdaQuery['PDA'] | null>;
@@ -104,11 +103,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
             <SharedWithCard pdaId={pda?.id as string} />
 
             <ShareCopy pda={pda} />
-            <Stack direction="row" gap={1}>
-              <SuspendOrMakeValidPDA pda={pda} />
-              <RevokePDA pda={pda} />
-            </Stack>
-
+            <IssuerPDAActions pda={pda} />
             {/* Activies backloged 09/02 */}
             {/* <Activities
               activities={pda.activities}
