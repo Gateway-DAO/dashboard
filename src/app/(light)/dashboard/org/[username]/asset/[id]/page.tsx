@@ -5,5 +5,5 @@ export default function PDAOrgPage({
 }: {
   params: { id: string; username: string };
 }) {
-  return <PDAPage params={params} asOrg />;
+  return <PDAPage params={params} />;
 }

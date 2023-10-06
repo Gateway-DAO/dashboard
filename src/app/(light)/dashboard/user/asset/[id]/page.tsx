@@ -33,10 +33,8 @@ export async function generateMetadata({
 
 export default async function PDAPage({
   params,
-  asOrg,
 }: {
   params: { id: string; username: string };
-  asOrg?: boolean;
 }) {
   const pda = await getPDA(params.id);
   const org = await getCurrentOrg(params.username);
@@ -46,7 +44,7 @@ export default async function PDAPage({
       <TopBarContainer>
         <BackButton
           href={
-            asOrg
+            !!org
               ? routes.dashboardOrgIssuedAssets(org?.gatewayId)
               : routes.dashboardUserReceivedAssets
           }
