@@ -1,6 +1,8 @@
+import WhiteList from '@/components/white-list/white-list';
+
 import { Skeleton, Stack } from '@mui/material';
 
-export const LoadingMemberItem = () => (
+const LoadingMemberItem = () => (
   <Stack direction="row" sx={{ mx: 2, my: 2 }} alignItems="center">
     <Skeleton variant="circular" sx={{ height: 40, width: 40, mr: 2 }} />
     <Stack>
@@ -9,3 +11,13 @@ export const LoadingMemberItem = () => (
     </Stack>
   </Stack>
 );
+
+export default function MembersAreaListSkeleton() {
+  return (
+    <WhiteList>
+      <LoadingMemberItem />
+      <LoadingMemberItem />
+      <LoadingMemberItem />
+    </WhiteList>
+  );
+}
