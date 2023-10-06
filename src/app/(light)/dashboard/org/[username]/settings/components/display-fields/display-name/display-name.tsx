@@ -37,7 +37,7 @@ export default function DisplayName() {
     setValue,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(updateDisplayNameSchema),
+    resolver: zodResolver(updateDisplayNameSchema as any),
     values: {
       displayName: initialDisplayName,
     },

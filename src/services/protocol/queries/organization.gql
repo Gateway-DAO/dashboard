@@ -1,5 +1,5 @@
 query organization_members($id: String!) {
-  organization(input: { type: USER_ID, value: $id }) {
+  organization(input: { type: ORG_ID, value: $id }) {
     accesses {
       id
       role

@@ -61,7 +61,7 @@ export default function Username() {
     formState: { errors },
     setValue,
   } = useForm({
-    resolver: zodResolver(updateUsernameSchema),
+    resolver: zodResolver(updateUsernameSchema as any),
     values: {
       username: initialUsername,
     },
