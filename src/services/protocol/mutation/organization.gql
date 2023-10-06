@@ -18,3 +18,29 @@ mutation update_org_username($id: String!, $username: String!) {
     gatewayId
   }
 }
+
+mutation update_org_user_role(
+  $id: String!
+  $userId: String!
+  $role: OrganizationRole!
+) {
+  changeMemberRole(
+    input: {
+      organization: { type: ORG_ID, value: $id }
+      user: { type: USER_ID, value: $userId }
+      role: $role
+    }
+  ) {
+    id
+    role
+  }
+}
+
+mutation remove_org_user($id: String!, $userId: String!) {
+  removeMemberFromOrganization(
+    input: {
+      organization: { type: ORG_ID, value: $id }
+      user: { type: USER_ID, value: $userId }
+    }
+  )
+}
