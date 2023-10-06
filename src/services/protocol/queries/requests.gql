@@ -17,7 +17,7 @@ query myRequestsReceived($take: Float!, $skip: Float!) {
   requestsReceived(skip: $skip, take: $take) {
     id
     status
-    organization {
+    verifierOrganization {
       ...org
     }
     verifier {
@@ -56,7 +56,7 @@ query dataRequest($id: String!) {
       profilePicture
       displayName
     }
-    organization {
+    verifierOrganization {
       ...org
     }
     dataRequestTemplate {
