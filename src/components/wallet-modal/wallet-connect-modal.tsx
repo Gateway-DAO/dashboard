@@ -32,13 +32,15 @@ export default function WalletConnectModal({
 }: Props) {
   return (
     <Dialog open={isOpen} onClose={() => onCancel()}>
-      <DialogTitle id="title-modal" sx={{ textAlign: 'left' }}>
+      <DialogTitle id="title-modal" sx={{ textAlign: 'left', mt: 1 }}>
         {title}
       </DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ maxWidth: 444 }}>
         <Typography variant="body1">{description}</Typography>
-        <Stack mt={4}>
-          <Typography variant="subtitle1">Choose chain</Typography>
+        <Stack mt={2.5}>
+          <Typography variant="subtitle1" sx={{ mb: 2 }}>
+            Choose chain
+          </Typography>
           <Stack
             direction="row"
             flex={1}
