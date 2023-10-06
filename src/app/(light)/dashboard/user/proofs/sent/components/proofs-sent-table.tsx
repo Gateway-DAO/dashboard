@@ -28,13 +28,13 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     flex: 1.4,
     valueGetter: (params) => params.row.owner?.gatewayId,
     renderCell(params) {
-      const hasOrg = !!params.row.organization?.id;
+      const hasOrg = !!params.row.verifierOrganization?.id;
       return (
         <Stack direction="row" alignItems="center" gap={2}>
           <GTWAvatar
             name={
               hasOrg
-                ? params.row.organization?.image ?? ''
+                ? params.row.verifierOrganization?.image ?? ''
                 : params.row.verifier?.profilePicture ?? ''
             }
             src={params.row.verifier?.profilePicture}
@@ -42,9 +42,12 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
           />
           <Typography fontWeight={700}>
             {hasOrg
-              ? params.row.organization?.name ??
-                params.row.organization?.gatewayId ??
-                limitCharsCentered(params.row.organization?.id as string, 12)
+              ? params.row.verifierOrganization?.name ??
+                params.row.verifierOrganization?.gatewayId ??
+                limitCharsCentered(
+                  params.row.verifierOrganization?.id as string,
+                  12
+                )
               : params.row.verifier?.displayName ??
                 params.row.verifier?.gatewayId ??
                 limitCharsCentered(params.row.verifier?.id as string, 12)}
