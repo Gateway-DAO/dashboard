@@ -101,16 +101,19 @@ export default function OrganizationProofsReceivedTable({
 
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
+    enabled: !!organization?.id,
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
-      queries.proofs_received,
+      queries.proofs_received_by_org,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
+      organization?.id,
     ],
     queryFn: () =>
-      privateApi?.received_proofs({
+      privateApi?.received_proofs_by_org({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
+        organizationId: organization?.id as string,
       }),
     select: (data: any) => (data as Received_ProofsQuery)?.receivedProofs,
     initialData: initialData && initialData.length ? initialData : null,
