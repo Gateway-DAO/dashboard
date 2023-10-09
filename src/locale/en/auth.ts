@@ -1,6 +1,6 @@
 export const auth = {
   menu: {
-    gatewayId: 'GatewayId',
+    gatewayId: 'Manager Gateway ID',
     disconnect: 'Disconnect',
   },
   steps: {
