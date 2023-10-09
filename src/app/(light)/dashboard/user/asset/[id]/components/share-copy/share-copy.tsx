@@ -3,8 +3,8 @@ import { useRouter } from 'next-nprogress-bar';
 import { useMemo, useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
-import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { mutations, queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
@@ -132,7 +132,7 @@ export default function ShareCopy({ pda }: Props) {
             {common.actions.share_a_copy}
           </Button>
           <ModalRight open={openShareCopy} onClose={toggleModal}>
-            <ModalTitle onClose={toggleModal} />
+            <ModalHeader onClose={toggleModal} />
             {pdaIssued ? (
               <ShareCopyFormSuccessfully id={pdaIssued} />
             ) : (

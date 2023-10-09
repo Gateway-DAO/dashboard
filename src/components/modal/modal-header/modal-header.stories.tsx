@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import ModalTitle from './modal-title';
+import ModalTitle from './modal-header';
 
 const meta: Meta<typeof ModalTitle> = {
   title: 'Components/Modals/Modal Title',

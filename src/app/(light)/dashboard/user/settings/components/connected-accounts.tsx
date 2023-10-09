@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 
 import Loading from '@/components/loadings/loading/loading';
 import ModalRight from '@/components/modal/modal-right/modal-right';
-import ModalTitle from '@/components/modal/modal-title/modal-title';
+import ModalHeader from '@/components/modal/modal-header/modal-header';
 import WalletConnectionProvider from '@/context/wallet-connection-provider';
 import { useDisconnectAlias } from '@/hooks/use-disconnect-alias';
 import { settings } from '@/locale/en/settings';
@@ -121,7 +121,7 @@ export default function ConnectedAccounts() {
               setModalAddEmail(false);
             }}
           >
-            <ModalTitle
+            <ModalHeader
               onClose={() => {
                 closeModal();
                 setModalAddEmail(false);
