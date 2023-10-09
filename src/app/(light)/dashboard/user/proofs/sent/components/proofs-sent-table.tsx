@@ -26,9 +26,9 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     field: 'verifier',
     headerName: proofs.verifier,
     flex: 1.4,
-    valueGetter: (params) => params.row.owner?.gatewayId,
+    valueGetter: (params) => params.row.verifier?.gatewayId,
     renderCell(params) {
-      const hasOrg = !!params.row.verifierOrganization?.id;
+      const hasOrg = !!params.row.verifierOrganization;
       return (
         <Stack direction="row" alignItems="center" gap={2}>
           <GTWAvatar
@@ -37,7 +37,11 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
                 ? params.row.verifierOrganization?.image ?? ''
                 : params.row.verifier?.profilePicture ?? ''
             }
-            src={params.row.verifier?.profilePicture}
+            src={
+              hasOrg
+                ? params.row.verifierOrganization?.image
+                : params.row.verifier?.profilePicture
+            }
             size={32}
           />
           <Typography fontWeight={700}>
