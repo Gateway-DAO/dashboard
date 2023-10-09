@@ -81,6 +81,13 @@ query proofsByPDAIds($pdaIds: [String!]!) {
   proofsByPDAIds(pdaIds: $pdaIds) {
     id
 
+    verifierOrganization {
+      id
+      name
+      gatewayId
+      image
+    }
+
     verifier {
       id
       gatewayId
