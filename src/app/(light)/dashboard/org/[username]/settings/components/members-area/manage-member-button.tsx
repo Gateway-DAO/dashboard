@@ -38,7 +38,6 @@ export default function ManageMemberButton({
           }}
         >
           Change user to {newRole}
-          {}
         </ListItemButton>
         <ListItemButton
           onClick={() => {
