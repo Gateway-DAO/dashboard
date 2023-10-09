@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
+import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
-import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { orgSettings } from '@/locale/en/settings';
 
 import { AddOutlined } from '@mui/icons-material';
@@ -28,7 +28,7 @@ export default function AddMember({ disabled }: Props) {
         {orgSettings.membersArea.add_member}
       </Button>
       <ModalRight open={isOpen} onClose={onClose}>
-        <ModalTitle onClose={onClose} />
+        <ModalHeader onClose={onClose} />
       </ModalRight>
     </>
   );
