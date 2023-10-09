@@ -84,7 +84,7 @@ export function TooltipUser({
         />
       </Stack>
       <Typography id="tooltip-name" fontSize={24}>
-        {limitCharsCentered(name as string, 16)}
+        {limitCharsCentered(name as string, 20)}
       </Typography>
       <Typography
         id="tooltip-username"

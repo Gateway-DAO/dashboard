@@ -52,6 +52,7 @@ export const settings = {
     add_email_address: 'Add email address',
     add_wallet: 'Add wallet',
     disconnect: 'Disconnect',
+    receive_notifications_here: 'Receive notifications here',
   },
   developer_portal: {
     title: 'Developer portal',
