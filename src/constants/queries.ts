@@ -14,4 +14,5 @@ export const mutations = {
   reject_data_request: 'reject_data_request',
   disconnect_email: 'disconnect_email',
   disconnect_wallet: 'disconnect_wallet',
+  update_notification_email: 'update_notification_email',
 };
