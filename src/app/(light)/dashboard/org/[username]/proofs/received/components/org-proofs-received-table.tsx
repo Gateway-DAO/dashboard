@@ -25,7 +25,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 const columns: GridColDef<PartialDeep<Proof>>[] = [
   {
     field: 'owner',
-    headerName: proofs.sender,
+    headerName: proofs.owner,
     flex: 1,
     valueGetter: (params) => params.row.owner?.gatewayId,
     renderCell(params) {
