@@ -8,18 +8,10 @@ export const pda = {
   share: {
     share_a_copy_with: 'Share a copy with',
     share_a_copy_description: 'Fill a Gateway ID, email or wallet',
-    account_type: 'Account type',
-    address: 'Address',
     sharing_cost: 'Sharing cost',
     sharing_cost_helper: 'For now Gateway is covering sharing costs',
     free: 'Free',
     successfully_title: 'Copy shared successfully',
-    identifier_type: {
-      gateway_id: 'Gateway ID',
-      email: 'Email',
-      evm_wallet: 'EVM Wallet',
-      solana_wallet: 'Solana Wallet',
-    },
   },
   shared_with: {
     shared_with: 'Shared with',
