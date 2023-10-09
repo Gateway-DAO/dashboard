@@ -25,5 +25,17 @@ export const errorMessages = {
   REVOKE_ERROR: 'There was a problem performing the revoke. Try again later.',
   STATUS_CHANGE_ERROR:
     'There was a problem performing the status change. Try again later.',
-  VERIFIER_NOT_FOUND: `Verifier doesn't exist`,
+  VERIFIER_NOT_FOUND: `Verifier doesn't exists`,
+  USER_NOT_FOUND: `User doesn't exists`,
+  DUPLICATED_MEMBERS: `Duplicated members`,
 };
+
+export type ErrorMessage = keyof typeof errorMessages;
+
+export const getErrorMessage = (error: any): ErrorMessage =>
+  error?.response?.errors?.[0]?.message ?? 'UNEXPECTED_ERROR';
+
+export const getErrorsMessages = (error: any): ErrorMessage[] =>
+  error?.response?.errors?.map(
+    (response: any) => (response?.message as ErrorMessage) ?? 'UNEXPECTED_ERROR'
+  ) ?? ['UNEXPECTED_ERROR'];

@@ -44,3 +44,21 @@ mutation remove_org_user($id: String!, $userId: String!) {
     }
   )
 }
+
+mutation add_org_user(
+  $id: String!
+  $type: UserIdentifierType!
+  $value: String!
+  $role: OrganizationRole!
+) {
+  addMemberToOrganization(
+    input: {
+      organization: { type: ORG_ID, value: $id }
+      user: { type: $type, value: $value }
+      role: $role
+    }
+  ) {
+    id
+    role
+  }
+}

@@ -47,10 +47,10 @@ export default function ShareCopy({ pda }: Props) {
   const { organization } = useOrganization();
 
   const methods = useForm({
-    resolver: zodResolver(shareCopySchema as any), // TODO: remove type any
+    resolver: zodResolver(shareCopySchema),
     mode: 'all',
     defaultValues: {
-      identifier_type: IdentifierType.GatewayId,
+      type: IdentifierType.GatewayId,
       address: '',
     },
   });
@@ -87,7 +87,7 @@ export default function ShareCopy({ pda }: Props) {
         ],
         verifier: {
           type: data.type,
-          value: data?.address ?? null,
+          value: data?.value ?? null,
         },
       });
       setPdaIssued(res?.createProof?.id);

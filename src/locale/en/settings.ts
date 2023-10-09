@@ -78,4 +78,10 @@ export const orgSettings = {
     subtitle: "Manage your organization's members",
     add_member: 'Add member',
   },
+  addMember: {
+    title: (name: string) => `Add member to ${name}`,
+    role: 'Role',
+    add_member: 'Add member',
+    success: 'Member added successfully',
+  },
 };
