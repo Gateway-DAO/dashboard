@@ -25,13 +25,17 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 const columns: GridColDef<PartialDeep<Proof>>[] = [
   {
     field: 'owner',
-    headerName: proofs.sender,
+    headerName: proofs.owner,
     flex: 1,
     valueGetter: (params) => params.row.owner?.gatewayId,
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" gap={2}>
-          <GTWAvatar name={params.row.owner!.profilePicture ?? ''} size={32} />
+          <GTWAvatar
+            name={params.row.owner!.id ?? ''}
+            src={params.row.owner?.profilePicture}
+            size={32}
+          />
           <Typography fontWeight={700}>
             {params.row.owner?.displayName ??
               params.row.owner?.gatewayId ??
@@ -63,7 +67,7 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     },
   },
   {
-    field: 'shareDate',
+    field: 'createdAt',
     headerName: proofs.share_date,
     flex: 1,
     valueFormatter: (params) =>
@@ -97,16 +101,19 @@ export default function OrganizationProofsReceivedTable({
 
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
+    enabled: !!organization?.id,
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
-      queries.proofs_received,
+      queries.proofs_received_by_org,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
+      organization?.id,
     ],
     queryFn: () =>
-      privateApi?.received_proofs({
+      privateApi?.received_proofs_by_org({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
+        organizationId: organization?.id as string,
       }),
     select: (data: any) => (data as Received_ProofsQuery)?.receivedProofs,
     initialData: initialData && initialData.length ? initialData : null,
