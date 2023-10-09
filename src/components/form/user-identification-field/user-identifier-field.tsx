@@ -20,7 +20,7 @@ import { useIdentifierTypes } from './use-identifier-types';
 type Props = {
   control: Control<IdentifierValueSchema>;
   clearErrors?: () => void;
-  sx: SxProps;
+  sx?: SxProps;
 };
 
 export default function UserIdentityField({ control, clearErrors, sx }: Props) {
