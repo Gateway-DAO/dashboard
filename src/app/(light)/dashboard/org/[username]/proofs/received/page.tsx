@@ -7,21 +7,25 @@ import { PartialDeep } from 'type-fest';
 
 import { Box, Typography } from '@mui/material';
 
-import ProofsReceivedTable from './components/org-proofs-received-table';
+import OrganizationProofsReceivedTable from './components/org-proofs-received-table';
 
 export default async function OrganizationReceivedProofsPage(props: any) {
   const privateApi = await getPrivateApi();
-  const pathnameOrg = props.params?.username;
+  const pathnameOrg = await props.params?.username;
   const organization = await getCurrentOrg(pathnameOrg);
 
   const proofs = (
     await privateApi.received_proofs_by_org({
       take: 5,
       skip: 0,
-      organizationId: organization?.id ?? '',
+      organizationId: organization?.id as string,
     })
   )?.receivedProofs as PartialDeep<Proof>[];
-  const count = (await privateApi.countReceivedProofs()).receivedProofsCount;
+  const count = (
+    await privateApi.countReceivedProofsByOrg({
+      organizationId: organization?.id as string,
+    })
+  ).receivedProofsCount;
 
   return (
     <Box sx={{ py: 2 }}>
@@ -33,7 +37,7 @@ export default async function OrganizationReceivedProofsPage(props: any) {
 
       <Box>
         {proofs && proofs.length > 0 && (
-          <ProofsReceivedTable data={proofs} count={count} />
+          <OrganizationProofsReceivedTable data={proofs} count={count} />
         )}
         {proofs && proofs.length === 0 && (
           <Typography

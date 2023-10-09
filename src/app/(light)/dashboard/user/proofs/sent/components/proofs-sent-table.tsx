@@ -86,7 +86,7 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     },
   },
   {
-    field: 'shareDate',
+    field: 'createdAt',
     headerName: proofs.share_date,
     flex: 1,
     valueFormatter: (params) =>

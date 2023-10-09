@@ -20,10 +20,15 @@ query received_proofs_by_org(
   $skip: Float!
   $organizationId: String!
 ) {
-  receivedProofs(skip: $skip, take: $take, organizationId: $organizationId) {
+  receivedProofs(organizationId: $organizationId, skip: $skip, take: $take) {
     id
+    dataRequest {
+      id
+      dataRequestTemplate {
+        id
+      }
+    }
     createdAt
-
     owner {
       ...min_user
     }
@@ -40,10 +45,14 @@ query countReceivedProofs {
   receivedProofsCount
 }
 
+query countReceivedProofsByOrg($organizationId: String!) {
+  receivedProofsCount(organizationId: $organizationId)
+}
+
 query sent_proofs($take: Float!, $skip: Float!) {
   sentProofs(skip: $skip, take: $take) {
     id
-
+    createdAt
     data {
       PDAs {
         id

@@ -4,6 +4,7 @@ export const queries = {
   proofs_by_pdas_id: 'proofs_by_pdas_id',
   proof: 'proof',
   proofs_received: 'proofs_received',
+  proofs_received_by_org: 'proofs_received_by_org',
   proofs_sent: 'proofs_sent',
 };
 
