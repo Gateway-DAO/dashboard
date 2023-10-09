@@ -5,14 +5,19 @@ import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 
 import Loading from '@/components/loadings/loading/loading';
-import ModalRight from '@/components/modal/modal-right/modal-right';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
+import ModalRight from '@/components/modal/modal-right/modal-right';
+import { mutations } from '@/constants/queries';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import WalletConnectionProvider from '@/context/wallet-connection-provider';
 import { useDisconnectAlias } from '@/hooks/use-disconnect-alias';
+import { errorMessages } from '@/locale/en/errors';
 import { settings } from '@/locale/en/settings';
-import { AuthType } from '@/services/protocol/types';
+import { AuthType, Exact, Scalars } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { useToggle } from '@react-hookz/web/cjs/useToggle';
+import { useMutation } from '@tanstack/react-query';
+import { useSnackbar } from 'notistack';
 
 import { Box, Divider, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
@@ -36,8 +41,9 @@ const SolanaProvider = dynamic(
 );
 
 export default function ConnectedAccounts() {
+  const { privateApi } = useGtwSession();
   const { data: session, update, status } = useSession();
-
+  const { enqueueSnackbar } = useSnackbar();
   const [modalAddEmail, setModalAddEmail] = useToggle(false);
   const {
     handleDisconnectAlias,
@@ -46,6 +52,25 @@ export default function ConnectedAccounts() {
     modalDeactivateGatewayId,
     isLoading,
   } = useDisconnectAlias();
+
+  const updateNotificationEmail = useMutation({
+    mutationKey: [mutations.update_notification_email],
+    mutationFn: ({
+      email,
+    }: Exact<{
+      email: string;
+    }>) => {
+      return privateApi.updateNotificationEmail({
+        email,
+      });
+    },
+    onError: () => {
+      enqueueSnackbar(errorMessages.SOMETHING_WENT_WRONG, {
+        variant: 'error',
+      });
+    },
+    onSuccess: update,
+  });
 
   const wallets = useMemo(() => {
     return (
@@ -85,6 +110,9 @@ export default function ConnectedAccounts() {
               emails={emails}
               userEmail={session?.user?.email as string}
               onAddEmail={setModalAddEmail}
+              onUpdateNotificationEmail={(address) =>
+                updateNotificationEmail.mutate({ email: address })
+              }
               onDisconnect={(address) =>
                 handleDisconnectAlias({ type: AuthType.Email, address })
               }
