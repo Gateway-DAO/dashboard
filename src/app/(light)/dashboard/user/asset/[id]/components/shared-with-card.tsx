@@ -102,12 +102,21 @@ export default function SharedWithCard({ pdaId }: Props) {
                       }}
                     >
                       <GTWAvatar
-                        name={proof.verifier?.profilePicture ?? ''}
-                        src={proof.verifier?.profilePicture}
+                        name={
+                          proof.verifierOrganization?.image ??
+                          proof.verifier?.profilePicture ??
+                          ''
+                        }
+                        src={
+                          proof.verifierOrganization?.image ??
+                          proof.verifier?.profilePicture
+                        }
                       />
                       <Typography variant="subtitle1">
                         {limitCharsCentered(
-                          proof.verifier?.displayName ??
+                          proof.verifierOrganization?.name ??
+                            proof.verifierOrganization?.gatewayId ??
+                            proof.verifier?.displayName ??
                             proof.verifier?.gatewayId ??
                             proof.verifier?.id ??
                             '',
