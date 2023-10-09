@@ -31,7 +31,11 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" gap={2}>
-          <GTWAvatar name={params.row.owner!.profilePicture ?? ''} size={32} />
+          <GTWAvatar
+            name={params.row.owner!.id ?? ''}
+            src={params.row.owner?.profilePicture}
+            size={32}
+          />
           <Typography fontWeight={700}>
             {params.row.owner?.displayName ??
               params.row.owner?.gatewayId ??
