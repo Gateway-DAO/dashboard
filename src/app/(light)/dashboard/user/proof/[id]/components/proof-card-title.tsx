@@ -21,17 +21,21 @@ export default function ProofCardTitle({ proof, isOwner }: Props) {
   const [tooltip, setTooltip] = useState<boolean>(false);
 
   const profilePicture = isOwner
-    ? proof?.verifier?.profilePicture ?? ''
+    ? proof?.verifierOrganization?.image ??
+      proof?.verifier?.profilePicture ??
+      ''
     : proof?.owner?.profilePicture ?? '';
   const userName = isOwner
-    ? proof?.verifier?.displayName ??
+    ? proof?.verifierOrganization?.name ??
+      proof?.verifier?.displayName ??
       proof?.verifier?.gatewayId ??
       limitCharsCentered(proof?.verifier?.id as string, 12)
     : proof?.owner?.displayName ??
       proof?.owner?.gatewayId ??
       limitCharsCentered(proof?.owner?.id as string, 12);
   const gtwName = isOwner
-    ? proof?.verifier?.gatewayId ??
+    ? proof?.verifierOrganization?.gatewayId ??
+      proof?.verifier?.gatewayId ??
       limitCharsCentered(proof?.verifier?.id as string, 12)
     : proof?.owner?.gatewayId ??
       limitCharsCentered(proof?.owner?.id as string, 12);
@@ -73,7 +77,7 @@ export default function ProofCardTitle({ proof, isOwner }: Props) {
             sx={{
               whiteSpace: 'pre-wrap',
               wordWrap: 'break-word',
-              wordBreak: 'break-all',
+              wordBreak: 'break-word',
             }}
           >
             {userName}
