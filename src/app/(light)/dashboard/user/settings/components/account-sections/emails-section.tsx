@@ -46,6 +46,7 @@ export default function EmailsSection({
       )}
       {emails &&
         emails.length > 0 &&
+        !isLoading &&
         emails.map(({ data }) => {
           const primary = data.address === userEmail;
 

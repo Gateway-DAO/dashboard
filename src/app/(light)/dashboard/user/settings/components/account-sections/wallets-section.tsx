@@ -101,6 +101,7 @@ export default function WalletsSection({
           <ListItemText sx={{ mx: 2 }}>No items to be displayed</ListItemText>
         )}
         {wallets.length > 0 &&
+          !isLoading &&
           wallets?.map(({ data }) => (
             <ListItem
               key={data?.address}
