@@ -19,9 +19,9 @@ export default function DisplayFieldsView() {
           {common.general.avatar}
         </FormLabel>
         <GTWAvatar
-          name={organization!.id!}
+          name={organization?.id}
           src={organization?.image}
-          alt={organization?.name ?? organization!.gatewayId!}
+          alt={organization?.name ?? organization?.gatewayId}
           size={80}
         />
       </FormControl>
