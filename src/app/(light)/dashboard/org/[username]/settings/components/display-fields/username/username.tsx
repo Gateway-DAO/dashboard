@@ -19,25 +19,23 @@ import { useForm } from 'react-hook-form';
 import { updateUsernameSchema } from './schema';
 
 export default function Username() {
-  const { data: session, update } = useSession();
+  const { update } = useSession();
   const { pathnameOrg, organization } = useOrganization();
   const { privateApi } = useGtwSession();
   const router = useRouter();
 
   const initialUsername = pathnameOrg ?? '';
 
-  // const diffUpdateDays = useMemo(() => {
-  //   if (!session) return 0;
-  //   if (!session.user.gatewayIdLastupdate) return 31;
-  //   const lastUpdate = dayjs(session.user.gatewayIdLastupdate);
-  //   const now = dayjs();
-  //   const diff = now.diff(lastUpdate, 'day');
-  //   return diff;
-  // }, [session?.user.gatewayIdLastupdate]);
+  const diffUpdateDays = useMemo(() => {
+    if (!organization) return 0;
+    if (!organization.usernameUpdatedAt) return 31;
+    const lastUpdate = dayjs(organization.usernameUpdatedAt);
+    const now = dayjs();
+    const diff = now.diff(lastUpdate, 'day');
+    return diff;
+  }, [organization?.usernameUpdatedAt]);
 
-  // const canUpdateUsername = diffUpdateDays > 30;
-  const diffUpdateDays = 0;
-  const canUpdateUsername = true;
+  const canUpdateUsername = diffUpdateDays > 30;
 
   const {
     avaibility,
@@ -49,7 +47,7 @@ export default function Username() {
   const updateUsername = useMutation({
     mutationKey: ['updateUsername'],
     mutationFn: async (username: string) =>
-      privateApi.update_org_username({ username, id: organization!.id! }),
+      privateApi.update_org_username({ username, id: organization?.id ?? '' }),
   });
 
   const { enqueueSnackbar } = useSnackbar();
@@ -77,8 +75,8 @@ export default function Username() {
     if (avaibility !== 'success' || !canUpdateUsername) return;
     try {
       await updateUsername.mutateAsync(data.username);
-      // router.replace(routes.dashboardOrgSettings(data.username));
-      // reset();
+      await update();
+      router.push(routes.dashboardOrgSettings(data.username));
     } catch {
       enqueueSnackbar('Failed to update display name', { variant: 'error' });
     }
