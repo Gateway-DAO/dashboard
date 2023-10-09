@@ -23,7 +23,6 @@ query received_proofs_by_org(
   receivedProofs(skip: $skip, take: $take, organizationId: $organizationId) {
     id
     createdAt
-
     owner {
       ...min_user
     }
@@ -43,7 +42,7 @@ query countReceivedProofs {
 query sent_proofs($take: Float!, $skip: Float!) {
   sentProofs(skip: $skip, take: $take) {
     id
-
+    createdAt
     data {
       PDAs {
         id
