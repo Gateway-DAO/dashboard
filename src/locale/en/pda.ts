@@ -41,7 +41,7 @@ export const pda = {
   owner: 'Owner',
   unfilled: 'Unfilled',
   received_at: 'Received at',
-  authenticated_by: 'Authenticated by',
+  authenticated_by: 'Signed by',
   issuance_date: 'Issuance date',
   expiration_date: 'Expiration date',
   indeterminate: 'Indeterminate',
