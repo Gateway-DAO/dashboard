@@ -8,6 +8,7 @@ import { PdaCardProps } from './type';
 
 export default function PdaCard({
   name,
+  userId,
   userImage,
   userName,
   dashed,
@@ -50,7 +51,7 @@ export default function PdaCard({
       >
         <Stack alignItems="flex-start">
           <Stack direction="row" alignItems="center" gap={1.5} sx={{ mb: 3 }}>
-            <GTWAvatar src={userImage} size={32} name={userName} />
+            <GTWAvatar src={userImage} size={32} name={userId} alt={userName} />
             <Typography variant="body2" sx={{ flexGrow: 1 }} noWrap>
               {userName}
             </Typography>

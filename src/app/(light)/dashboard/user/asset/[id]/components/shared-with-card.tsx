@@ -9,6 +9,7 @@ import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
+import { ProofsByPdaIdsQuery } from '@/services/protocol/types';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
@@ -33,7 +34,8 @@ export default function SharedWithCard({ pda }: Props) {
       privateApi?.proofsByPDAIds({
         pdaIds: [pda?.id as string],
       }),
-    select: (data) => data?.proofsByPDAIds,
+    select: (data: ProofsByPdaIdsQuery) =>
+      data?.proofsByPDAIds as ProofsByPdaIdsQuery['proofsByPDAIds'],
   });
 
   const isIssuer = useMemo(
@@ -111,9 +113,9 @@ export default function SharedWithCard({ pda }: Props) {
                     >
                       <GTWAvatar
                         name={
-                          proof.verifierOrganization?.image ??
-                          proof.verifier?.profilePicture ??
-                          ''
+                          proof.verifierOrganization
+                            ? proof.verifierOrganization?.id
+                            : proof.verifier?.id
                         }
                         src={
                           proof.verifierOrganization?.image ??

@@ -69,6 +69,11 @@ export default function ProofData({ dataModels, pdas }: Props) {
                   <ProofPdaListItem
                     key={pda?.id}
                     name={pda?.title as string}
+                    issuerId={
+                      pda?.organization
+                        ? (pda?.organization?.id as string)
+                        : (pda?.issuer?.id as string)
+                    }
                     issuerName={
                       pda?.organization?.id
                         ? pda?.organization?.name ??
