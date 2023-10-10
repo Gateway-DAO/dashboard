@@ -34,32 +34,44 @@ export const errorMessages = {
   DUPLICATED_MEMBERS: `Duplicated members`,
 };
 
-export type ErrorMessage = keyof typeof errorMessages;
+export type ErrorCode = keyof typeof errorMessages;
+
+export type ErrorObject = {
+  code: ErrorCode;
+  message: string;
+  rawError?: any;
+};
+
+const getCodeFromError = (error: any) =>
+  (error?.message as ErrorCode) ?? 'UNEXPECTED_ERROR';
+
+/**
+ * Retrieves the error message from an error code
+ * @param code
+ * @returns string
+ */
+export const getErrorFromCode = (code: string) =>
+  errorMessages[code as ErrorCode] ?? errorMessages.UNEXPECTED_ERROR;
+
+export const parseErrorObject = (
+  code: ErrorCode,
+  rawError?: any
+): ErrorObject => ({
+  code,
+  message: getErrorFromCode(code),
+  rawError,
+});
 
 /**
  * Retrieves the error code and the message from an error object
  * @param error
  * @returns { code: ErrorMessage, message: string }
  */
-export const getErrorMessage = (
-  error: any
-): {
-  code: ErrorMessage;
-  message: string;
-  rawError: any;
-} => {
-  const code =
-    (error?.response?.errors?.[0]?.message as ErrorMessage) ??
-    'UNEXPECTED_ERROR';
+export const getErrorMessage = (error: any): ErrorObject => {
+  const code = getCodeFromError(error);
 
-  return {
-    code,
-    message: errorMessages[code] ?? errorMessages.UNEXPECTED_ERROR,
-    rawError: error?.response?.errors?.[0],
-  };
+  return parseErrorObject(code, error?.response?.errors?.[0]);
 };
 
-export const getErrorsMessages = (error: any): ErrorMessage[] =>
-  error?.response?.errors?.map(
-    (response: any) => (response?.message as ErrorMessage) ?? 'UNEXPECTED_ERROR'
-  ) ?? ['UNEXPECTED_ERROR'];
+export const getErrorsMessages = (error: any): ErrorCode[] =>
+  error?.response?.errors?.map(getCodeFromError) ?? ['UNEXPECTED_ERROR'];

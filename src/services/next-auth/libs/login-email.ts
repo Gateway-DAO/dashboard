@@ -15,10 +15,10 @@ export default async function loginEmail(
     const { error } = (res as any) ?? {};
 
     if (error) {
-      throw new Error(error);
+      throw error;
     }
 
-    if (error || !res.loginEmail) {
+    if (!res.loginEmail) {
       throw new Error("Couldn't login");
     }
 
@@ -26,7 +26,10 @@ export default async function loginEmail(
 
     return token;
   } catch (error: any) {
-    console.error('Login with email error', getErrorMessage(error));
-    throw new Error(error);
+    const errorObj = getErrorMessage(error);
+    console.error('Login with email error', errorObj);
+    throw new Error(errorObj.code, {
+      cause: error,
+    });
   }
 }
