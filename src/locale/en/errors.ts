@@ -9,6 +9,7 @@ export const errorMessages = {
   EMAIL_ALREADY_REGISTERED_TO_USER: `E-mail already registered to current user`,
   GATEWAY_ID_ALREADY_REGISTERED: `Gateway ID already registered`,
   GATEWAY_ID_UPDATED_RECENTLY: 'You will be able to update in [days] days.',
+  USERNAME_ID_ALREADY_EXISTS: `Username already registered`,
   ERROR_TRYING_TO_SEND_THE_CODE: `An error ocurred trying to send the code`,
   ERROR_TRYING_TO_CREATE_THE_CODE: `An error ocurred trying to create the code`,
   ERROR_TRYING_TO_ISSUE_A_PROOF: `An error ocurred trying to issue a proof`,
@@ -45,6 +46,7 @@ export const getErrorMessage = (
 ): {
   code: ErrorMessage;
   message: string;
+  rawError: any;
 } => {
   const code =
     (error?.response?.errors?.[0]?.message as ErrorMessage) ??
@@ -53,6 +55,7 @@ export const getErrorMessage = (
   return {
     code,
     message: errorMessages[code] ?? errorMessages.UNEXPECTED_ERROR,
+    rawError: error?.response?.errors?.[0],
   };
 };
 

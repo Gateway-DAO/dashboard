@@ -1,3 +1,4 @@
+import { getErrorMessage } from '@/locale/en/errors';
 import { apiPublic } from '@/services/protocol/api';
 import { SessionToken } from '@/types/user';
 
@@ -25,6 +26,7 @@ export default async function loginEmail(
 
     return token;
   } catch (error: any) {
+    console.error('Login with email error', getErrorMessage(error));
     throw new Error(error);
   }
 }
