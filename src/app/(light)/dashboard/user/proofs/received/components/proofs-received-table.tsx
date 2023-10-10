@@ -74,7 +74,7 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     headerName: proofs.share_date,
     flex: 1,
     valueFormatter: (params) =>
-      dayjs(params.value).format('MM/DD/YYYY, h:mm A'),
+      params.value ? dayjs(params.value).format('MM/DD/YYYY, h:mm A') : '',
   },
   {
     field: 'dataAmount',

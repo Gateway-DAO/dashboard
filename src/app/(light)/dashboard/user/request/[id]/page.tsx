@@ -173,7 +173,9 @@ export default async function DashboardUserDataRequest({
               {common.general.created_at}
             </Typography>
             <Typography>
-              {dayjs(dataRequest.createdAt).format(DATE_FORMAT)}
+              {dataRequest.createdAt
+                ? dayjs(dataRequest.createdAt).format(DATE_FORMAT)
+                : ''}
             </Typography>
           </Stack>
           <Stack gap={1} flex="1" alignItems="flex-start" sx={{ p: 2 }}>

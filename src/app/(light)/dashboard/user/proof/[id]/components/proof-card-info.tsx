@@ -28,7 +28,7 @@ export default function ProofCardInfo({ proof }: Props) {
     >
       <TableCellContainer>
         <CardCell label={proofLocale.share_date}>
-          {dayjs(proof?.createdAt).format(DATE_FORMAT)}
+          {proof?.createdAt ? dayjs(proof?.createdAt).format(DATE_FORMAT) : ''}
         </CardCell>
         {!isNaN(proof?.facilitationFee as number) &&
           proof?.facilitationFee !== 0 && (

@@ -95,7 +95,8 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     field: 'createdAt',
     headerName: 'Created At',
     flex: 1.2,
-    valueFormatter: (params) => dayjs(params.value).format(DATE_FORMAT),
+    valueFormatter: (params) =>
+      params.value ? dayjs(params.value).format(DATE_FORMAT) : '',
   },
   {
     field: 'status',
