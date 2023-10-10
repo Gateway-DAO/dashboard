@@ -4,6 +4,7 @@ fragment proof on Proof {
   facilitationFee
   createdAt
   arweaveUrl
+  status
 
   owner {
     ...min_user
