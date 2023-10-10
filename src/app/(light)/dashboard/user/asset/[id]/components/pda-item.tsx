@@ -100,7 +100,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
         <PdaCardInfo pda={pda} viewOnly={viewOnly} />
         {!viewOnly && (
           <>
-            <SharedWithCard pdaId={pda?.id as string} />
+            <SharedWithCard pda={pda} />
 
             <ShareCopy pda={pda} />
             <IssuerPDAActions pda={pda} />
