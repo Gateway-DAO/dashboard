@@ -92,7 +92,9 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={pdaLocale.issuance_date}>
-          {dayjs(pda?.issuanceDate).format(DATE_FORMAT)}
+          {pda?.issuanceDate
+            ? dayjs(pda?.issuanceDate).format(DATE_FORMAT)
+            : ''}
         </CardCell>
         <CardCell label={pdaLocale.expiration_date}>
           {pda?.dataAsset?.expirationDate

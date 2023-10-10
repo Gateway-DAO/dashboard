@@ -103,7 +103,11 @@ export default function ProofCardTitle({ proof, isOwner }: Props) {
             name={userName}
             picture={profilePicture}
             username={gtwName}
-            issuance_date={dayjs(proof?.createdAt).format('MM/DD/YYYY, h:mm A')}
+            issuance_date={
+              proof?.createdAt
+                ? dayjs(proof?.createdAt).format('MM/DD/YYYY, h:mm A')
+                : ''
+            }
             onClose={() => setTooltip(false)}
           />
         )}

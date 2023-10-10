@@ -102,7 +102,8 @@ export function TooltipUser({
             {isOrganization ? 'Organization ID' : 'User ID'}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Joined in {dayjs(issuance_date).format(DATE_FORMAT)}
+            Joined in{' '}
+            {issuance_date ? dayjs(issuance_date).format(DATE_FORMAT) : ''}
           </Typography>
         </Stack>
         {/* <Link href="https://www.google.com" passHref target="_blank">

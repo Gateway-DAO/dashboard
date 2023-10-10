@@ -84,7 +84,9 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Typography>
-            {dayjs(params.row.issuanceDate).format(DATE_FORMAT)}
+            {params.row.issuanceDate
+              ? dayjs(params.row.issuanceDate).format(DATE_FORMAT)
+              : ''}
           </Typography>
         );
       },
