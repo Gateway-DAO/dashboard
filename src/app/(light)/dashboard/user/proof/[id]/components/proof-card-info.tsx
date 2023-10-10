@@ -5,7 +5,7 @@ import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import { pda } from '@/locale/en/pda';
 import { proof as proofLocale } from '@/locale/en/proof';
-import { PdaStatus, ProofQuery } from '@/services/protocol/types';
+import { ProofQuery, ProofStatus } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
@@ -43,7 +43,7 @@ export default function ProofCardInfo({ proof }: Props) {
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={proofLocale.status.title}>
-          <PDAStatusChip status={PdaStatus.Valid} isProof={true} size="small" />
+          <PDAStatusChip status={proof?.status as ProofStatus} size="small" />
         </CardCell>
       </TableCellContainer>
       {proof?.dataRequest && (
