@@ -1,6 +1,7 @@
 'use client';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import { auth } from '@/locale/en/auth';
+import { getErrorMessage } from '@/locale/en/errors';
 import { apiPublic } from '@/services/protocol/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -42,9 +43,11 @@ export function LoginEmail() {
       });
     },
     onError(error: any) {
+      const { message } = getErrorMessage(error);
+
       setError('email', {
         type: 'manual',
-        message: error.message,
+        message,
       });
     },
   });
