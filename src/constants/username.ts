@@ -1,2 +1,1 @@
-export const usernameRegex =
-  /^(?!.*\.\.)(?!.*\.\.$)(?!.*--)(?!.*--$)(?!.*__)(?!.*__$)[a-z0-9._-]{1,19}[a-z0-9]$/;
+export const usernameRegex = /^[A-Za-z0-9]([A-Za-z0-9_]{0,13}[A-Za-z0-9])?$/;

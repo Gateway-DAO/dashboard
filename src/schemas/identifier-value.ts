@@ -1,5 +1,6 @@
 import { usernameRegex } from '@/constants/username';
 import { ethRegex } from '@/constants/wallet';
+import { auth } from '@/locale/en/auth';
 import { UserIdentifierType } from '@/services/protocol/types';
 import { PublicKey } from '@solana/web3.js';
 import zod, { ZodType } from 'zod';
@@ -18,7 +19,7 @@ const identifierValueSchema: ZodType<zod.infer<typeof fallbackSchema>> =
     zod.object({
       type: zod.literal(UserIdentifierType.GatewayId),
       value: value.regex(RegExp(usernameRegex), {
-        message: 'Only lowercase letters, numbers and ._-',
+        message: auth.steps.choose_gateway_id.create_username_rules,
       }),
     }),
     zod.object({
