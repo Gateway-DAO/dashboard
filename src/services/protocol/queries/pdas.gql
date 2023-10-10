@@ -21,6 +21,7 @@ query received_pdas($take: Float!, $skip: Float!) {
       title
       image
       organization {
+        id
         image
         name
         gatewayId
@@ -43,6 +44,7 @@ query issued_pdas($take: Float!, $skip: Float!) {
       title
       image
       organization {
+        id
         image
         name
         gatewayId

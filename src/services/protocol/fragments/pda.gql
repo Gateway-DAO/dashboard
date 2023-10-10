@@ -10,6 +10,7 @@ fragment pda on PrivateDataAsset {
     expirationDate
     image
     organization {
+      id
       image
       name
       gatewayId

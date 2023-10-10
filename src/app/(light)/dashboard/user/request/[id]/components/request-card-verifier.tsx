@@ -13,6 +13,7 @@ import { Box, Button, Divider, Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
   recipient: string;
+  recipientId: string;
   status: DataResourceStatus;
   profilePicture?: string | null;
   proofId?: string;
@@ -22,6 +23,7 @@ export default function RequestCardVerfierView({
   status,
   recipient,
   profilePicture,
+  recipientId,
   proofId,
 }: Props) {
   const { organization } = useOrganization();
@@ -52,7 +54,7 @@ export default function RequestCardVerfierView({
           {request.request_card_verifier.title}
         </Typography>
         <Stack direction="row" alignItems="center" gap={2}>
-          <GTWAvatar name={recipient} src={profilePicture} />{' '}
+          <GTWAvatar name={recipientId} alt={recipient} src={profilePicture} />{' '}
           <Typography variant="h5">{recipient}</Typography>
         </Stack>
       </Box>
