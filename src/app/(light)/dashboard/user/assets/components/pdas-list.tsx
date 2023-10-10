@@ -26,6 +26,7 @@ export default function PDAsList({ pdas, issuedPdas }: Props) {
               ? {
                   image: pda.dataAsset?.organization?.image,
                   name: pda.dataAsset?.organization?.name,
+                  id: pda.dataAsset?.organization?.id,
                 }
               : {
                   image: issuedPdas
@@ -41,9 +42,13 @@ export default function PDAsList({ pdas, issuedPdas }: Props) {
                         pda.dataAsset?.issuer?.id as string,
                         12
                       ),
+                  id: issuedPdas
+                    ? pda.dataAsset?.owner?.id
+                    : pda.dataAsset?.issuer?.id,
                 };
             return (
               <PdaCard
+                userId={user.id as string}
                 key={pda.id}
                 href={routes.dashboardUserAsset(pda.id!)}
                 name={pda.dataAsset?.title ?? 'PDA name'}
