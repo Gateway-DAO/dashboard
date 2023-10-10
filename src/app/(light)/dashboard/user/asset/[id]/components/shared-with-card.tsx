@@ -37,9 +37,7 @@ export default function SharedWithCard({ pda }: Props) {
   });
 
   const isIssuer = useMemo(
-    () =>
-      session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId &&
-      !organization,
+    () => session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId,
     [pda, session]
   );
 
