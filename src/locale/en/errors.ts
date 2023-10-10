@@ -19,7 +19,10 @@ export const errorMessages = {
   MAXIMUM_TIME_REACHED: `Expired token`,
   EMAIL_ALREADY_IN_USE: 'E-mail already in use',
   USERNAME_ALREADY_IN_USE: 'Username already in use',
+  WALLET_ALREADY_REGISTERED: `Wallet already associated to another user`,
+  WALLET_ALREADY_REGISTERED_TO_USER: `Wallet already associated to your user`,
   WALLET_ALREADY_ASSOCIATED: `Wallet already associated to another user`,
+  WALLET_ALREADY_ASSOCIATED_TO_USER: `Wallet already associated to your user`,
   CANNOT_REMOVE_LAST_AUTH_METHOD: `You cannot remove the last authentication method of your account`,
   SOMETHING_WENT_WRONG: 'Something went wrong',
   REVOKE_ERROR: 'There was a problem performing the revoke. Try again later.',
@@ -32,8 +35,26 @@ export const errorMessages = {
 
 export type ErrorMessage = keyof typeof errorMessages;
 
-export const getErrorMessage = (error: any): ErrorMessage =>
-  error?.response?.errors?.[0]?.message ?? 'UNEXPECTED_ERROR';
+/**
+ * Retrieves the error code and the message from an error object
+ * @param error
+ * @returns { code: ErrorMessage, message: string }
+ */
+export const getErrorMessage = (
+  error: any
+): {
+  code: ErrorMessage;
+  message: string;
+} => {
+  const code =
+    (error?.response?.errors?.[0]?.message as ErrorMessage) ??
+    'UNEXPECTED_ERROR';
+
+  return {
+    code,
+    message: errorMessages[code] ?? errorMessages.UNEXPECTED_ERROR,
+  };
+};
 
 export const getErrorsMessages = (error: any): ErrorMessage[] =>
   error?.response?.errors?.map(

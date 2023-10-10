@@ -58,20 +58,17 @@ export default function AddMemberForm({ onSuccess }: Props) {
       enqueueSnackbar(orgSettings.addMember.success, { variant: 'success' });
       onSuccess();
     } catch (error: any) {
-      const message = getErrorMessage(error);
+      const { code, message } = getErrorMessage(error);
 
-      if (message === 'USER_NOT_FOUND' || message === 'DUPLICATED_MEMBERS') {
+      if (code === 'USER_NOT_FOUND' || code === 'DUPLICATED_MEMBERS') {
         methods.setError('value', {
           type: 'manual',
-          message: errorMessages[message],
+          message,
         });
         return;
       }
 
-      enqueueSnackbar(
-        errorMessages[message] ?? errorMessages.UNEXPECTED_ERROR,
-        { variant: 'error' }
-      );
+      enqueueSnackbar(message, { variant: 'error' });
     }
   };
 
