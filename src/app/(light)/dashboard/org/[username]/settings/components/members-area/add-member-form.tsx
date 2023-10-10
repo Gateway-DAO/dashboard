@@ -2,11 +2,7 @@ import { LoadingButton } from '@/components/buttons/loading-button/loading-butto
 import UserIdentityField from '@/components/form/user-identification-field/user-identifier-field';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
-import {
-  ErrorMessage,
-  errorMessages,
-  getErrorMessage,
-} from '@/locale/en/errors';
+import { getErrorMessage } from '@/locale/en/errors';
 import { orgSettings } from '@/locale/en/settings';
 import {
   Add_Org_UserMutationVariables,

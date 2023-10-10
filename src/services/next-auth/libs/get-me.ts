@@ -8,15 +8,15 @@ export default async function getMe(token: string): Promise<SessionUser> {
     const { error } = (res as any) ?? {};
 
     if (error) {
-      throw new Error(error);
+      throw error;
     }
 
-    if (error || !res.me) {
+    if (!res.me) {
       throw new Error("Couldn't login");
     }
 
     return res.me;
   } catch (error: any) {
-    throw new Error(error);
+    throw error;
   }
 }
