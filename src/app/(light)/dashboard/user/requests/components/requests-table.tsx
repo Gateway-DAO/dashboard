@@ -53,6 +53,11 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
           <GTWAvatar
             name={
               hasOrg
+                ? params.row.verifierOrganization?.id
+                : params.row.verifier?.id
+            }
+            alt={
+              hasOrg
                 ? params.row.verifierOrganization?.name || ''
                 : params.row.verifier!.gatewayId! || ''
             }

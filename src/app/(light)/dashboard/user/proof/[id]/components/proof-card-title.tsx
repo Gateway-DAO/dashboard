@@ -70,7 +70,16 @@ export default function ProofCardTitle({ proof, isOwner }: Props) {
           id="tooltip-link-proof"
           onClick={() => setTooltip(true)}
         >
-          <GTWAvatar src={profilePicture} size={56} name={userName} />
+          <GTWAvatar
+            src={profilePicture}
+            alt={userName}
+            size={56}
+            name={
+              isOwner
+                ? proof?.verifierOrganization?.id ?? proof?.verifier?.id
+                : proof?.owner?.id
+            }
+          />
           <Typography
             variant="h3"
             id="proof-title"
@@ -85,6 +94,12 @@ export default function ProofCardTitle({ proof, isOwner }: Props) {
         </Stack>
         {tooltip && (
           <TooltipUser
+            userId={
+              isOwner
+                ? proof?.verifierOrganization?.id ??
+                  (proof?.verifier?.id as string)
+                : (proof?.owner?.id as string)
+            }
             name={userName}
             picture={profilePicture}
             username={gtwName}

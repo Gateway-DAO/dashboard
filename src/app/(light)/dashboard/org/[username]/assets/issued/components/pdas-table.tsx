@@ -54,6 +54,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
       renderCell: (params: GridRenderCellParams) => {
         return (
           <AvatarTextCell
+            userId={params.row.dataAsset?.owner?.id}
             name={
               params.row.dataAsset?.owner?.displayName ??
               params.row.dataAsset?.owner?.gatewayId ??

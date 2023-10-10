@@ -8,6 +8,7 @@ type Props = {
   href?: string;
   onClick?: () => void;
   issuerName: string;
+  issuerId: string;
   issuerImage?: string | null;
   name: string;
 };
@@ -15,6 +16,7 @@ type Props = {
 export default function ProofPdaListItem({
   name,
   issuerImage,
+  issuerId,
   issuerName,
   href,
   onClick,
@@ -51,7 +53,12 @@ export default function ProofPdaListItem({
           <Typography variant="body2" sx={{ flexGrow: 1 }}>
             {issuerName}
           </Typography>
-          <GTWAvatar src={issuerImage} name={issuerName} size={32} />
+          <GTWAvatar
+            src={issuerImage}
+            alt={issuerName}
+            name={issuerId}
+            size={32}
+          />
         </Stack>
       </CardActionArea>
     </Stack>
