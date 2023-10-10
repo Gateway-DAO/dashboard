@@ -8,6 +8,7 @@ import { Box, Stack, Typography } from '@mui/material';
 type Props = {
   label: string;
   name: string;
+  userId: string;
   picture: any;
   alignRight?: boolean;
   id?: string;
@@ -20,6 +21,7 @@ type Props = {
 export default function CardUserCell({
   label,
   name,
+  userId,
   picture,
   alignRight = false,
   id,
@@ -57,7 +59,7 @@ export default function CardUserCell({
           mr: { xs: 0, md: alignRight ? 2 : 0 },
         }}
       >
-        <GTWAvatar src={picture} name={name} />
+        <GTWAvatar src={picture} alt={name} name={userId} />
       </Box>
       <CardCell label={label} alignRight={alignRight} margin={false}>
         <Box display="flex" gap={1} alignItems="center">

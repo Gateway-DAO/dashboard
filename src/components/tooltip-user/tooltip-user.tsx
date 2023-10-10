@@ -14,6 +14,7 @@ type Props = {
   right?: boolean;
   picture?: string;
   name: string;
+  userId: string;
   username: string;
   issuance_date: string;
   isOrganization?: boolean;
@@ -27,6 +28,7 @@ export function TooltipUser({
   username,
   issuance_date,
   isOrganization,
+  userId,
 }: Props) {
   const wrapperRef = useRef(null);
 
@@ -70,7 +72,7 @@ export function TooltipUser({
         gap={1}
         sx={{ mb: 2 }}
       >
-        <GTWAvatar src={picture} size={64} name={name!} />
+        <GTWAvatar src={picture} size={64} name={userId} alt={name!} />
         <CloseIcon
           sx={{
             cursor: 'pointer',

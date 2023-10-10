@@ -138,6 +138,11 @@ export default async function DashboardUserDataRequest({
         {!!isOwner ? (
           <RequestCard
             requester={requester}
+            requesterId={
+              requestHasOrgAsVerifier
+                ? (dataRequest.verifierOrganization?.id as string)
+                : (dataRequest.verifier?.id as string)
+            }
             status={dataRequest.status!}
             requestId={dataRequest.id}
             proofId={dataRequest.proof?.id}
@@ -150,6 +155,7 @@ export default async function DashboardUserDataRequest({
           />
         ) : (
           <RequestCardVerfierView
+            recipientId={dataRequest.owner?.id as string}
             recipient={recipient}
             status={dataRequest.status!}
             proofId={dataRequest.proof?.id}
