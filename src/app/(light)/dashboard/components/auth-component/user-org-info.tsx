@@ -28,7 +28,7 @@ export default function UserOrgInfo({ image, name, gatewayId, id }: Props) {
           zIndex: 1,
         }}
       >
-        <GTWAvatar src={image ?? undefined} name={image ? gatewayId : id} />
+        <GTWAvatar src={image ?? undefined} name={id} />
       </Box>
       <Stack
         direction="column"

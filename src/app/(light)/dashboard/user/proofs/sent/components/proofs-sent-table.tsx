@@ -34,8 +34,13 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
           <GTWAvatar
             name={
               hasOrg
-                ? params.row.verifierOrganization?.image ?? ''
-                : params.row.verifier?.profilePicture ?? ''
+                ? params.row.verifierOrganization?.id
+                : params.row.verifier?.id
+            }
+            alt={
+              hasOrg
+                ? params.row.verifierOrganization?.name ?? ''
+                : params.row.verifier?.displayName ?? ''
             }
             src={
               hasOrg

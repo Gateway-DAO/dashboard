@@ -27,6 +27,7 @@ import { Box, Button, Divider, Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
   requester: string;
+  requesterId: string;
   status: DataResourceStatus;
   profilePicture?: string | null;
   requestId: string;
@@ -38,6 +39,7 @@ type Props = {
 
 export default function RequestCard({
   requester,
+  requesterId,
   status,
   proofId,
   requestId,
@@ -123,7 +125,11 @@ export default function RequestCard({
             {request.request_card.title}
           </Typography>
           <Stack direction="row" alignItems="center" gap={2}>
-            <GTWAvatar name={requester} src={profilePicture} />{' '}
+            <GTWAvatar
+              name={requesterId}
+              alt={requester}
+              src={profilePicture}
+            />{' '}
             <Typography variant="h5">{requester}</Typography>
           </Stack>
         </Box>

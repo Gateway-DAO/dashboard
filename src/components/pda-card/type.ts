@@ -5,6 +5,7 @@ export type PdaCardProps = {
   href?: string;
   onClick?: () => void;
   userName: string;
+  userId: string;
   userImage?: string | null;
   name: string;
   status: PdaStatus;

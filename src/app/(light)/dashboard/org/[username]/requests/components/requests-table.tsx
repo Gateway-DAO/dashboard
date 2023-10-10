@@ -49,11 +49,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
         <Stack direction="row" alignItems="center" spacing={1.5}>
           <GTWAvatar
             src={params.row.owner?.profilePicture ?? null}
-            name={
-              params.row.owner?.profilePicture
-                ? params.row.owner!.gatewayId!
-                : params.row.owner?.id
-            }
+            name={params.row.owner?.id}
             size={32}
           />
           <Typography variant="body2">{params.row.owner?.gatewayId}</Typography>
