@@ -3,14 +3,17 @@ import { Typography } from '@mui/material';
 export default function ViewDataByType({
   propertyType,
   currentProperties,
+  valid,
 }: {
   propertyType: string;
   currentProperties: any;
+  valid: boolean;
 }) {
   if (
-    !currentProperties &&
-    JSON.stringify(currentProperties) === 'false' &&
-    JSON.stringify(currentProperties) === 'true'
+    (!currentProperties &&
+      JSON.stringify(currentProperties) === 'false' &&
+      JSON.stringify(currentProperties) === 'true') ||
+    !valid
   ) {
     return <Typography color="error">It doesn't met the criteria</Typography>;
   }

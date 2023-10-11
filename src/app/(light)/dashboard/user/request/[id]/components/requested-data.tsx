@@ -97,6 +97,7 @@ export default function RequestedData({ dataModel, validDataProvided }: Props) {
                 </TableCell>
                 <TableCell sx={{ width: '45%' }}>
                   <ViewDataByType
+                    valid={!!validDataProvided?.validData[0]}
                     propertyType={property.type}
                     currentProperties={currentProperties}
                   />
