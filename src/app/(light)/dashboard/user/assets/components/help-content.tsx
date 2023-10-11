@@ -1,24 +1,19 @@
 'use client';
 
-import {
-  Box,
-  Button,
-  Icon,
-  Stack,
-  Typography,
-  IconButton,
-} from '@mui/material';
-import { helperContent } from '@/locale/en/pda';
-import CloseIcon from '@mui/icons-material/Close';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
+
+import { helperContent } from '@/locale/en/pda';
+
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, Button, Stack, Typography, IconButton } from '@mui/material';
 
 export default function HelpContent() {
   const [showHelperBar, setHelperBar] = useState(true);
   return (
     showHelperBar && (
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: '100%', mb: 3 }}>
         <Stack
           spacing={2}
           direction={'row'}
