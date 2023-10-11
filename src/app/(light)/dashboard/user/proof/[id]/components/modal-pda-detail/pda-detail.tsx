@@ -25,5 +25,5 @@ export default function PDADetail({ pdas, id }: Props) {
     );
   }
 
-  return <PDAItem pda={PDAPattern} viewOnly={true} />;
+  return <PDAItem pda={PDAPattern} isProofPda={true} />;
 }

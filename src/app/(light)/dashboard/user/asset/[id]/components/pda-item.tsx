@@ -25,10 +25,10 @@ import SharedWithCard from './shared-with-card';
 
 type Props = {
   pda: PartialDeep<PdaQuery['PDA'] | null>;
-  viewOnly?: boolean;
+  isProofPda?: boolean;
 };
 
-export default function PDAItem({ pda, viewOnly = false }: Props) {
+export default function PDAItem({ pda, isProofPda = false }: Props) {
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
 
   return (
@@ -97,11 +97,10 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
         </Stack>
         <Tags tags={pda?.dataAsset?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.dataAsset?.description}</Typography>
-        <PdaCardInfo pda={pda} viewOnly={viewOnly} />
-        {!viewOnly && (
+        <PdaCardInfo pda={pda} isProofPda={isProofPda} />
+        {!isProofPda && (
           <>
             <SharedWithCard pda={pda} />
-
             <ShareCopy pda={pda} />
             <IssuerPDAActions pda={pda} />
             {/* Activies backloged 09/02 */}
