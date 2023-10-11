@@ -24,8 +24,6 @@ export default function AddEmail() {
   const { data: session, update } = useSession();
   const onHandleStep = useLoginStepHandler();
 
-  console.log('joao', session?.user.id);
-
   const { enqueueSnackbar } = useSnackbar();
 
   const {
