@@ -1,14 +1,13 @@
 fragment pda on PrivateDataAsset {
   id
   status
-  status
+  issuanceDate
 
   dataAsset {
     title
     description
     expirationDate
     image
-    issuanceDate
 
     organization {
       id
