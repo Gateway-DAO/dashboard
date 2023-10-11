@@ -107,6 +107,7 @@ export default function RequestDataVerifierView({
                     </TableCell>
                     <TableCell sx={{ width: '45%' }}>
                       <ViewDataByType
+                        valid
                         propertyType={property.type}
                         currentProperties={currentProperty}
                       />
