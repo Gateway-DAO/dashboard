@@ -15,44 +15,11 @@ import {
 } from '@mui/material';
 
 import { createPropertiesArray } from './utils';
+import ViewDataByType from './view-data-by-type';
 
 type Props = {
   dataModel: any;
   validDataProvided: any;
-};
-
-const ViewDataByType = ({
-  propertyType,
-  currentProperties,
-}: {
-  propertyType: string;
-  currentProperties: any;
-}): JSX.Element => {
-  if (propertyType === 'boolean') {
-    if (JSON.stringify(currentProperties) === 'false') {
-      return <>FALSE</>;
-    } else {
-      return <>TRUE</>;
-    }
-  }
-
-  if (!currentProperties) {
-    return <Typography color="error">It doesn't met the criteria</Typography>;
-  }
-
-  if (propertyType === 'array') {
-    return (
-      <>
-        {currentProperties.map((item: any, index: number) => (
-          <Typography variant="body2" key={index}>
-            {item}
-          </Typography>
-        ))}
-      </>
-    );
-  }
-
-  return <>{currentProperties}</>;
 };
 
 export default function RequestedData({ dataModel, validDataProvided }: Props) {
