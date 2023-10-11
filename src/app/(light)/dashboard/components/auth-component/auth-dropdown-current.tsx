@@ -7,7 +7,14 @@ import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 import { auth } from '@/locale/en/auth';
 
-import { Button, MenuItem, Stack, Typography } from '@mui/material';
+import {
+  Button,
+  Chip,
+  MenuItem,
+  Stack,
+  Typography,
+  alpha,
+} from '@mui/material';
 
 type Props = {
   onClose: () => void;
@@ -46,14 +53,28 @@ export default function AuthDropdownCurrent({ onClose }: Props) {
           alt={name}
           size={64}
         />
-        <Stack direction="column">
-          <Typography component="span" variant="subtitle1" lineHeight={1}>
-            {name}
-          </Typography>
-          {hasName && (
-            <Typography component="span" variant="caption">
-              @{username}
+        <Stack direction="row" justifyContent="space-between">
+          <Stack direction="column">
+            <Typography component="span" variant="subtitle1" lineHeight={1}>
+              {name}
             </Typography>
+            {hasName && (
+              <Typography component="span" variant="caption">
+                @{username}
+              </Typography>
+            )}
+          </Stack>
+          {isOrg && (
+            <Chip
+              label="ORG"
+              sx={(theme) => ({
+                backgroundColor: alpha(
+                  theme.palette.primary.main,
+                  theme.palette.action.focusOpacity
+                ),
+                color: 'primary.main',
+              })}
+            />
           )}
         </Stack>
         <Button

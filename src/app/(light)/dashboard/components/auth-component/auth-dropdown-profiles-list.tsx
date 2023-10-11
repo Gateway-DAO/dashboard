@@ -6,7 +6,13 @@ import MenuItemLink from '@/components/menu-item-link/menu-item-link';
 import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 
-import { Divider, ListItemIcon, ListItemText } from '@mui/material';
+import {
+  Chip,
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  alpha,
+} from '@mui/material';
 
 type Props = {
   onClose: () => void;
@@ -48,6 +54,16 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
           <ListItemText secondary={`@${organization.gatewayId}`}>
             {organization.name}
           </ListItemText>
+          <Chip
+            label="ORG"
+            sx={(theme) => ({
+              backgroundColor: alpha(
+                theme.palette.primary.main,
+                theme.palette.action.focusOpacity
+              ),
+              color: 'primary.main',
+            })}
+          />
         </MenuItemLink>
       ))}
       {isOrg && (

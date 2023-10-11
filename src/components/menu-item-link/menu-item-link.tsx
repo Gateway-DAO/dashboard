@@ -28,6 +28,7 @@ export default function MenuItemLink({
           display: 'flex',
           width: '100%',
           textDecoration: 'none',
+          alignItems: 'center',
         }}
         {...linkProps}
       >
