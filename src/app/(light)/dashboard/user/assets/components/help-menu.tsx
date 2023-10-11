@@ -1,10 +1,14 @@
 'use client';
 
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-import Fab from '@mui/material/Fab';
-import { useMenu } from '@/hooks/use-menu';
 import Link from 'next/link';
+
+import { useMenu } from '@/hooks/use-menu';
+import { helpMenu } from '@/locale/en/pda';
+import { CONTAINER_PX } from '@/theme/config/style-tokens';
+import { SiDiscord } from 'react-icons/si';
+
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import {
   Menu,
   ListItemIcon,
@@ -12,8 +16,7 @@ import {
   MenuItem,
   Icon,
 } from '@mui/material';
-import { SiDiscord } from 'react-icons/si';
-import { helpMenu } from '@/locale/en/pda';
+import Fab from '@mui/material/Fab';
 
 export default function HelpMenu() {
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
@@ -21,17 +24,18 @@ export default function HelpMenu() {
   return (
     <>
       <Fab
-        style={{
-          margin: 2,
-          right: 55,
-          bottom: 30,
-          position: 'fixed',
-        }}
         sx={{
           backgroundColor: '#000000',
           '&:hover .question-mark': {
             color: 'black',
           },
+          margin: 2,
+          right: CONTAINER_PX,
+          bottom: {
+            xs: 54,
+            lg: 30,
+          },
+          position: 'fixed',
         }}
         aria-label="help"
         onClick={onOpen}
