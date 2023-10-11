@@ -34,10 +34,14 @@ export default function DeveloperPortal() {
               fontWeight: 'bold',
             }}
             title={settings.developer_portal.api_key}
-            action={<CopyButton text={process.env.NEXT_PUBLIC_API_KEY} />}
+            action={
+              <CopyButton text={process.env.NEXT_PUBLIC_API_PLAYGROUND_KEY!} />
+            }
           />
           <CardContent>
-            <Typography>{process.env.NEXT_PUBLIC_API_KEY}</Typography>
+            <Typography>
+              {process.env.NEXT_PUBLIC_API_PLAYGROUND_KEY!}
+            </Typography>
           </CardContent>
         </Card>
         <AuthenticationTokenSection />
