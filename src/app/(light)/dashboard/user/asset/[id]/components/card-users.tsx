@@ -62,7 +62,7 @@ export default function CardUsers({ pda }: Props) {
               : (pda?.dataAsset?.issuer?.id as string)
           }
           onClick={() => setTooltipIssuer(true)}
-          verified={false} // TODO: Vefiry if the issuer is a verified user (backloged)
+          verified={pda?.dataAsset?.organization?.verified}
           active={tooltipIssuer}
         />
         {tooltipIssuer && (
@@ -78,6 +78,7 @@ export default function CardUsers({ pda }: Props) {
             issuance_date={pda?.dataAsset?.issuer?.createdAt}
             onClose={() => setTooltipIssuer(false)}
             isOrganization={!!pda?.dataAsset?.issuer?.gatewayId}
+            verified={pda?.dataAsset?.organization?.verified}
           />
         )}
       </Stack>
