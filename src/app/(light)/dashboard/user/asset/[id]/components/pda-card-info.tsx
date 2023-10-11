@@ -6,7 +6,11 @@ import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import { datamodel } from '@/locale/en/datamodel';
 import { pda as pdaLocale } from '@/locale/en/pda';
-import { PdaStatus, PdaQuery } from '@/services/protocol/types';
+import {
+  PdaStatus,
+  PdaQuery,
+  DecryptedProofPda,
+} from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
@@ -19,10 +23,10 @@ import CardUsers from './card-users';
 
 type Props = {
   pda: PartialDeep<PdaQuery['PDA'] | null>;
-  viewOnly?: boolean;
+  isProofPda?: boolean;
 };
 
-export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
+export default function PdaCardInfo({ pda, isProofPda = false }: Props) {
   return (
     <Stack
       component={Card}
@@ -31,7 +35,7 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
       divider={<Divider sx={{ width: '100%' }} />}
     >
       <CardUsers pda={pda} />
-      {/* {!viewOnly && (
+      {/* {!isProofPda && (
         <TableCellContainer>
           <CardCell label={pdaLocale.received_at}>
             <Stack direction="row" gap={1}>
@@ -92,8 +96,13 @@ export default function PdaCardInfo({ pda, viewOnly = false }: Props) {
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={pdaLocale.issuance_date}>
-          {pda?.dataAsset?.issuanceDate
-            ? dayjs(pda?.dataAsset?.issuanceDate).format(DATE_FORMAT)
+          {isProofPda && (pda?.dataAsset as DecryptedProofPda)?.issuanceDate
+            ? dayjs((pda?.dataAsset as DecryptedProofPda)?.issuanceDate).format(
+                DATE_FORMAT
+              )
+            : ''}
+          {!isProofPda && pda?.issuanceDate
+            ? dayjs(pda?.issuanceDate).format(DATE_FORMAT)
             : ''}
         </CardCell>
         <CardCell label={pdaLocale.expiration_date}>
