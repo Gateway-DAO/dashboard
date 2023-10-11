@@ -17,6 +17,7 @@ import {
 import { grey } from '@mui/material/colors';
 
 import { createPropertiesArray } from './utils';
+import ViewDataByType from './view-data-by-type';
 
 type Props = {
   dataModel: any;
@@ -105,17 +106,10 @@ export default function RequestDataVerifierView({
                       </Typography>
                     </TableCell>
                     <TableCell sx={{ width: '45%' }}>
-                      {property.type === 'array' && currentProperty ? (
-                        <>
-                          {currentProperty.map((item: any, index: number) => (
-                            <Typography variant="body2" key={index}>
-                              {item}
-                            </Typography>
-                          ))}
-                        </>
-                      ) : (
-                        <>{currentProperty}</>
-                      )}
+                      <ViewDataByType
+                        propertyType={property.type}
+                        currentProperties={currentProperty}
+                      />
                     </TableCell>
                     <TableCell sx={{ width: '5%' }} align="right">
                       <Check color="success" />
