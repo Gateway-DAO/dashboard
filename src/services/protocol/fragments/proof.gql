@@ -32,6 +32,7 @@ fragment proof on Proof {
       id
       title
       claim
+      issuanceDate
       claimArray {
         type
         value
