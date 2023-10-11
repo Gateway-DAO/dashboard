@@ -4,6 +4,7 @@ import { DATE_FORMAT } from '@/constants/date';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
+import { Verified } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Paper, Stack, Typography } from '@mui/material';
 
@@ -18,6 +19,7 @@ type Props = {
   username: string;
   issuance_date: string;
   isOrganization?: boolean;
+  verified?: boolean;
 };
 
 export function TooltipUser({
@@ -29,6 +31,7 @@ export function TooltipUser({
   issuance_date,
   isOrganization,
   userId,
+  verified,
 }: Props) {
   const wrapperRef = useRef(null);
 
@@ -85,9 +88,20 @@ export function TooltipUser({
           onClick={onClose}
         />
       </Stack>
-      <Typography id="tooltip-name" fontSize={24}>
-        {limitCharsCentered(name as string, 20)}
-      </Typography>
+
+      <Stack direction="row" alignItems="center" gap={1}>
+        <Typography id="tooltip-name" fontSize={24}>
+          {limitCharsCentered(name as string, 20)}
+        </Typography>
+        {verified && (
+          <Verified
+            sx={{
+              fontSize: 16,
+              color: 'primary.main',
+            }}
+          />
+        )}
+      </Stack>
       <Typography
         id="tooltip-username"
         variant="body2"
@@ -96,6 +110,7 @@ export function TooltipUser({
       >
         {limitCharsCentered(username as string, 29)}
       </Typography>
+
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack>
           <Typography>
