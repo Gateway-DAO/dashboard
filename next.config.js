@@ -16,6 +16,7 @@ const nextConfig = {
       'cdn.mygateway.xyz',
       'staging.cdn.mygateway.xyz',
       'i.postimg.cc',
+      'i.imgur.com',
       'cdn.shopify.com',
     ],
   },

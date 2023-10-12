@@ -10,10 +10,12 @@ import Menu from './menu';
 
 type Props = {
   menuItems: ReactNode;
+  secondMenuItems?: ReactNode;
 };
 
 export default function Sidebar({
   menuItems,
+  secondMenuItems,
   children,
 }: PropsWithChildren<Props>) {
   return (
@@ -41,17 +43,35 @@ export default function Sidebar({
       })}
     >
       {children}
-      <Menu
-        menuItems={menuItems}
-        sx={{
-          mt: 5,
-          mx: -2.5,
-          display: { xs: 'none', lg: 'block' },
-          flexGrow: 1,
-        }}
-      />
-
-      <AuthComponent id="profile-button" controlId="profile-menu" />
+      <Stack
+        justifyContent="space-between"
+        flexDirection="column"
+        height="100%"
+      >
+        <Stack>
+          <Menu
+            menuItems={menuItems}
+            sx={{
+              mt: 5,
+              mx: -2.5,
+              display: { xs: 'none', lg: 'block' },
+              flexGrow: 1,
+            }}
+          />
+          {secondMenuItems && (
+            <Menu
+              menuItems={secondMenuItems}
+              sx={{
+                mt: 5,
+                mx: -2.5,
+                display: { xs: 'none', lg: 'block' },
+                flexGrow: 1,
+              }}
+            />
+          )}
+        </Stack>
+        <AuthComponent id="profile-button" controlId="profile-menu" />
+      </Stack>
     </Stack>
   );
 }
