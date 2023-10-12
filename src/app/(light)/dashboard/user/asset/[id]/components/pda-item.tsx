@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
