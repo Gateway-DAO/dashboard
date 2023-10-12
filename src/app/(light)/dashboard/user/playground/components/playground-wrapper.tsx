@@ -54,6 +54,7 @@ export default function PlaygroundWrapper() {
             Authorization: `Bearer ${session.token}`,
           },
           document: initialQuery,
+          includeCookies: false,
         }}
         initialEndpoint="https://develop.protocol.mygateway.xyz/v1/graphql"
       />
