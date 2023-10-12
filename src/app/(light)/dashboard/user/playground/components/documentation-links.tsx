@@ -2,12 +2,15 @@ import documentationRoutes from '@/constants/documentationRoutes';
 import { playground } from '@/locale/en/playground';
 
 import OpenInNew from '@mui/icons-material/OpenInNew';
-import { Button, Link, Stack, Typography } from '@mui/material';
+import { Link, Stack, Typography } from '@mui/material';
 
 const BoxButton = ({ text, href }: { text: string; href: string }) => {
   return (
     <Stack
-      direction="row"
+      direction={{
+        xs: 'column',
+        lg: 'row',
+      }}
       alignItems="center"
       justifyContent="space-between"
       component={Link}

@@ -26,3 +26,12 @@ query me {
     }
   }
 }
+
+query monthlyUserUsage {
+  getMonthlyUserUsage {
+    datamodelsUsageAllowedByMonth
+    credentialsUsageAllowedByMonth
+    monthlyDatamodels
+    monthlyCredentials
+  }
+}
