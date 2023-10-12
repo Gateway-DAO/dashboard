@@ -1,6 +1,7 @@
 'use client';
 
 import CopyButton from '@/components/copy-button/copy-button';
+import externalLinks from '@/constants/externalLinks';
 import { queries } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { settings } from '@/locale/en/settings';
@@ -19,6 +20,7 @@ import {
   Divider,
   Button,
   Skeleton,
+  Link,
 } from '@mui/material';
 
 import AuthenticationTokenSection from './authentication-token-section';
@@ -67,7 +69,12 @@ export default function DeveloperPortal() {
               <ListItem
                 sx={{ px: 0 }}
                 secondaryAction={
-                  <Button variant="outlined" size="small">
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    href={externalLinks.requestMoreAPIUsage}
+                    target="_blank"
+                  >
                     Request More
                   </Button>
                 }
@@ -94,7 +101,12 @@ export default function DeveloperPortal() {
               <ListItem
                 sx={{ px: 0 }}
                 secondaryAction={
-                  <Button variant="outlined" size="small">
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    href={externalLinks.requestMoreAPIUsage}
+                    target="_blank"
+                  >
                     Request More
                   </Button>
                 }
