@@ -57,6 +57,7 @@ export default function PlaygroundWrapper() {
           includeCookies: false,
         }}
         initialEndpoint="https://develop.protocol.mygateway.xyz/v1/graphql"
+        endpointIsEditable={false}
       />
     </Stack>
   );
