@@ -3,8 +3,6 @@ import { SvgIcon, SvgIconProps } from '@mui/material';
 export default function CodeBlocksOutlinedIcon(props: SvgIconProps) {
   return (
     <SvgIcon
-      width="32"
-      height="32"
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -12,8 +10,7 @@ export default function CodeBlocksOutlinedIcon(props: SvgIconProps) {
     >
       <path
         d="M12.8 20.8L14.6667 18.9L11.7667 16L14.6667 13.1L12.8 11.2L8 16L12.8 20.8ZM19.2 20.8L24 16L19.2 11.2L17.3333 13.1L20.2333 16L17.3333 18.9L19.2 20.8ZM6.66667 28C5.93333 28 5.30556 27.7389 4.78333 27.2167C4.26111 26.6944 4 26.0667 4 25.3333V6.66667C4 5.93333 4.26111 5.30556 4.78333 4.78333C5.30556 4.26111 5.93333 4 6.66667 4H25.3333C26.0667 4 26.6944 4.26111 27.2167 4.78333C27.7389 5.30556 28 5.93333 28 6.66667V25.3333C28 26.0667 27.7389 26.6944 27.2167 27.2167C26.6944 27.7389 26.0667 28 25.3333 28H6.66667ZM6.66667 25.3333H25.3333V6.66667H6.66667V25.3333Z"
-        fill="black"
-        fill-opacity="0.56"
+        fill="currentColor"
       />
     </SvgIcon>
   );
