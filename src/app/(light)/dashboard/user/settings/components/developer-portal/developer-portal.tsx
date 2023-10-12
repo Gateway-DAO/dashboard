@@ -1,8 +1,13 @@
+'use client';
+
 import CopyButton from '@/components/copy-button/copy-button';
+import { queries } from '@/constants/queries';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { settings } from '@/locale/en/settings';
+import { MonthlyUserUsageQuery } from '@/services/protocol/types';
+import { useQuery } from '@tanstack/react-query';
 
 import {
-  Box,
   Card,
   CardContent,
   CardHeader,
@@ -13,11 +18,21 @@ import {
   ListItemText,
   Divider,
   Button,
+  Skeleton,
 } from '@mui/material';
 
 import AuthenticationTokenSection from './authentication-token-section';
 
 export default function DeveloperPortal() {
+  const { privateApi } = useGtwSession();
+
+  const usageLimits = useQuery({
+    queryKey: [queries.usage_limit],
+    queryFn: () => privateApi.monthlyUserUsage(),
+    select: (data: MonthlyUserUsageQuery) =>
+      data.getMonthlyUserUsage as MonthlyUserUsageQuery['getMonthlyUserUsage'],
+  });
+
   return (
     <Stack spacing={3} alignItems="flex-start">
       <Stack direction="column" gap={2}>
@@ -57,15 +72,23 @@ export default function DeveloperPortal() {
                   </Button>
                 }
               >
-                <ListItemText
-                  primary={
-                    settings.developer_portal.usage_limit.issued_credentials
-                  }
-                  secondary={settings.developer_portal.usage_limit.rate(
-                    0,
-                    10000
-                  )}
-                />
+                {usageLimits.isLoading ? (
+                  <Stack direction="column">
+                    <Skeleton width={130} height={30} />
+                    <Skeleton width={120} height={30} />
+                  </Stack>
+                ) : (
+                  <ListItemText
+                    primary={
+                      settings.developer_portal.usage_limit.issued_credentials
+                    }
+                    secondary={settings.developer_portal.usage_limit.rate(
+                      usageLimits?.data?.monthlyCredentials as number,
+                      usageLimits?.data
+                        ?.credentialsUsageAllowedByMonth as number
+                    )}
+                  />
+                )}
               </ListItem>
               <Divider sx={{ mx: -2 }} />
               <ListItem
@@ -76,15 +99,22 @@ export default function DeveloperPortal() {
                   </Button>
                 }
               >
-                <ListItemText
-                  primary={
-                    settings.developer_portal.usage_limit.data_model_created
-                  }
-                  secondary={settings.developer_portal.usage_limit.rate(
-                    0,
-                    10000
-                  )}
-                />
+                {usageLimits.isLoading ? (
+                  <Stack direction="column">
+                    <Skeleton width={160} height={30} />
+                    <Skeleton width={120} height={30} />
+                  </Stack>
+                ) : (
+                  <ListItemText
+                    primary={
+                      settings.developer_portal.usage_limit.data_model_created
+                    }
+                    secondary={settings.developer_portal.usage_limit.rate(
+                      usageLimits?.data?.monthlyDatamodels as number,
+                      usageLimits?.data?.datamodelsUsageAllowedByMonth as number
+                    )}
+                  />
+                )}
               </ListItem>
             </List>
           </CardContent>
