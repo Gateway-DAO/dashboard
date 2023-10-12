@@ -1,4 +1,5 @@
 import CodeBlocksOutlinedIcon from '@/components/icons/code-blocks-outlined';
+import documentationRoutes from '@/constants/documentationRoutes';
 import routes from '@/constants/routes';
 
 import { CodeOutlined, MenuBookOutlined } from '@mui/icons-material';
@@ -14,22 +15,15 @@ export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
   },
   {
     name: 'Playground',
-    href: routes.dashboardUserReceivedProofs,
-    activeHrefs: [
-      routes.dashboardUserReceivedProofs,
-      routes.dashboardUserSentProofs,
-      routes.dashboardUserProof(''),
-    ],
+    href: routes.dashboardUserPlayground,
+    activeHrefs: [routes.dashboardUserPlayground],
     icon: CodeBlocksOutlinedIcon,
   },
   {
     name: 'Documentation',
-    href: routes.dashboardUserReceivedProofs,
-    activeHrefs: [
-      routes.dashboardUserReceivedProofs,
-      routes.dashboardUserSentProofs,
-      routes.dashboardUserProof(''),
-    ],
+    href: documentationRoutes.home,
+    activeHrefs: [],
     icon: MenuBookOutlined,
+    targetBlank: true,
   },
 ];
