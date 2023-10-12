@@ -15,6 +15,7 @@ type Props = {
   name: string;
   href: string;
   active?: boolean;
+  targetBlank?: boolean;
   icon: FC<SvgIconProps>;
   activeIcon?: FC<SvgIconProps>;
 };
@@ -28,6 +29,7 @@ export default function GTWMenuItem({
   href,
   name,
   active,
+  targetBlank,
   activeIcon: ActiveIcon,
   ...props
 }: Props & ListItemButtonProps) {
@@ -36,6 +38,7 @@ export default function GTWMenuItem({
       <ListItemButton
         component={Link}
         href={href}
+        target={targetBlank ? '_blank' : '_self'}
         underline={'none'}
         {...props}
         sx={{

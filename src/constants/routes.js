@@ -27,6 +27,7 @@ const routes = {
   dashboardOrgSettings: (organizationId) =>
     `/dashboard/org/${organizationId}/settings`,
   dashboardUserDeveloperAccess: '/dashboard/user/developer-access',
+  dashboardUserPlayground: '/dashboard/user/playground',
 };
 
 module.exports = routes;
