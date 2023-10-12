@@ -23,7 +23,6 @@ export default function DashboardUserDeveloperMenuListItems() {
       {dashboardDevelopersMenuItems.map(({ activeHrefs, ...item }) => (
         <GTWMenuItem
           key={item.name}
-          targetBlank={item.targetBlank}
           active={activeHrefs.some((path) => activePath.includes(path))}
           {...item}
         />
