@@ -20,12 +20,6 @@ import AuthenticationTokenSection from './authentication-token-section';
 export default function DeveloperPortal() {
   return (
     <Stack spacing={3} alignItems="flex-start">
-      <Box sx={{ mb: 1 }}>
-        <Typography variant="h5" sx={{ mb: 1 }}>
-          {settings.developer_portal.title}
-        </Typography>
-        <Typography>{settings.developer_portal.description}</Typography>
-      </Box>
       <Stack direction="column" gap={2}>
         <Card sx={{ width: '100%' }} variant="outlined">
           <CardHeader
