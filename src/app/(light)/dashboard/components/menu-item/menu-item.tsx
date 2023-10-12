@@ -3,6 +3,7 @@ import { FC } from 'react';
 
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
+import { OpenInNew } from '@mui/icons-material';
 import {
   ListItem,
   ListItemButton,
@@ -15,9 +16,9 @@ type Props = {
   name: string;
   href: string;
   active?: boolean;
-  targetBlank?: boolean;
   icon: FC<SvgIconProps>;
   activeIcon?: FC<SvgIconProps>;
+  externalLink?: boolean;
 };
 
 export type GTWMenuItemSettings = Props & {
@@ -29,7 +30,7 @@ export default function GTWMenuItem({
   href,
   name,
   active,
-  targetBlank,
+  externalLink,
   activeIcon: ActiveIcon,
   ...props
 }: Props & ListItemButtonProps) {
@@ -38,7 +39,7 @@ export default function GTWMenuItem({
       <ListItemButton
         component={Link}
         href={href}
-        target={targetBlank ? '_blank' : '_self'}
+        target={externalLink ? '_blank' : '_self'}
         underline={'none'}
         {...props}
         sx={{
@@ -82,6 +83,7 @@ export default function GTWMenuItem({
         >
           {name}
         </Typography>
+        {externalLink && <OpenInNew sx={{ ml: 2 }} />}
       </ListItemButton>
     </ListItem>
   );

@@ -24,6 +24,6 @@ export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
     href: documentationRoutes.home,
     activeHrefs: [],
     icon: MenuBookOutlined,
-    targetBlank: true,
+    externalLink: true,
   },
 ];
