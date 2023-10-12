@@ -1,6 +1,7 @@
 import TitleLayout from '@/components/title-layout/title-layout';
 import { playground } from '@/locale/en/playground';
 
+import DocumentationLinks from './components/documentation-links';
 import PlaygroundWrapper from './components/playground-wrapper';
 
 export default async function PlaygroundPage() {
@@ -11,6 +12,7 @@ export default async function PlaygroundPage() {
         title={playground.title}
         subtitle={playground.subtitle}
       />
+      <DocumentationLinks />
       <PlaygroundWrapper />
     </>
   );
