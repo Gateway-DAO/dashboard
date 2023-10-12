@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import Tags from '@/components/tags/tags';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -77,7 +75,7 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
           {pda?.dataAsset?.image && (
             <>
               <IconButton onClick={toggleShowImagePDAModal}>
-                <Image
+                <img
                   src={pda?.dataAsset?.image ?? ''}
                   alt={pda?.dataAsset?.title ?? ''}
                   width={96}
