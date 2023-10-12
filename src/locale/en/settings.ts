@@ -26,7 +26,7 @@ export const settings = {
       card_summary_title: 'Code sent to',
       description1: 'Please check',
       description2:
-        'for an email from Gateway and enter your code below. This code will expire in 30 minutes.',
+        'for an email from Gateway and enter your code below. Check if the email is not in the spam folder. This code will expire in 30 minutes.',
       code_placeholder: 'Code',
     },
     modal_confirm_delete: {
