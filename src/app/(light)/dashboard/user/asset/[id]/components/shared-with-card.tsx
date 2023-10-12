@@ -38,8 +38,16 @@ export default function SharedWithCard({ pda }: Props) {
       data?.proofsByPDAIds as ProofsByPdaIdsQuery['proofsByPDAIds'],
   });
 
+  const displayingAsOrg = !!organization?.gatewayId;
+  const verifierIsOrg = !!pda?.dataAsset?.organization?.gatewayId;
+
   const isIssuer = useMemo(
-    () => session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId,
+    () =>
+      displayingAsOrg
+        ? organization.gatewayId === pda?.dataAsset?.organization?.gatewayId
+        : verifierIsOrg
+        ? false
+        : session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId,
     [pda, session]
   );
 
