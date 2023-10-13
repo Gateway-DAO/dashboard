@@ -7,8 +7,8 @@ import { Stack } from '@mui/material';
 
 const dataModelIdByEnv = {
   development: 'f4014d53-b30f-4490-9812-cea379a1b398',
-  staging: 'f4014d53-b30f-4490-9812-cea379a1b398',
-  testnet: 'f4014d53-b30f-4490-9812-cea379a1b398',
+  staging: '478bbfb8-c6e2-4f2b-8b40-2ecb81757441',
+  testnet: '01ef1d89-c66d-49ff-8f43-167ca208ca04',
 };
 
 const currentDataModel = dataModelIdByEnv[
