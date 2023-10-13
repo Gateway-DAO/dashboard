@@ -6,6 +6,7 @@ export const requests = {
 };
 
 export const request = {
+  title: 'Data request',
   label: {
     request_id: 'Request ID',
     request_template_id: 'Request template ID',

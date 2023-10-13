@@ -3,8 +3,10 @@ import { Session } from 'next-auth';
 
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
+import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import PermissionError from '@/components/permission-error/permission-error';
 import RequestStatusChip from '@/components/requests/request-status-chip';
+import { TitleId } from '@/components/title-id/title-id';
 import ToggleCollapse from '@/components/toggle-collapse/toggle-collapse';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
@@ -87,7 +89,6 @@ export default async function DashboardUserDataRequest({
   const userId = session.user.id;
   const dataRequest = await getDataRequest(id);
   const pathnameOrg = username;
-
   const organization = await getCurrentOrg(pathnameOrg || '');
 
   if (!dataRequest || !dataRequest.id) {
@@ -137,9 +138,7 @@ export default async function DashboardUserDataRequest({
           }
         />
       </TopBarContainer>
-      <Typography variant="h3" component="h2" sx={{ mt: 6.5, mb: 6.5 }}>
-        {id}
-      </Typography>
+      <TitleId title={request.title} id={id} />
       <Stack direction="column" gap={2}>
         {!!isOwner ? (
           <RequestCard
