@@ -1,7 +1,7 @@
 const routes = {
   home: '/',
   auth: '/login',
-  dashboardUserHome: '/dashboard/user',
+  dashboardUserHome: '/dashboard/user/home',
   dashboardUserAsset: (pdaId) => `/dashboard/user/asset/${pdaId}`,
   dashboardOrgAsset: (org, pdaId) => `/dashboard/org/${org}/asset/${pdaId}`,
   dashboardUserIssuedAssets: '/dashboard/user/assets/issued',
@@ -30,6 +30,10 @@ const routes = {
   dashboardOrgSettings: (organizationId) =>
     `/dashboard/org/${organizationId}/settings`,
   dashboardUserDeveloperAccess: '/dashboard/user/developer-access',
+  dashboardOrgDeveloperAccess: (organizationId) =>
+    `/dashboard/org/${organizationId}/developer-access`,
+  dashboardOrgPlayground: (organizationId) =>
+    `/dashboard/org/${organizationId}/playground`,
   dashboardUserPlayground: '/dashboard/user/playground',
 };
 
