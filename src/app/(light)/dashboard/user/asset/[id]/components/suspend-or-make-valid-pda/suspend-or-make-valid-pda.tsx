@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import Loading from '@/components/loadings/loading/loading';
@@ -11,12 +11,10 @@ import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import {
   ChangePdaStatusMutationVariables,
-  PdaQuery,
   PdaStatus,
 } from '@/services/protocol/types';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
-import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';

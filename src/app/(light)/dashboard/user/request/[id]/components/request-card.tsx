@@ -4,7 +4,6 @@ import { useRouter } from 'next-nprogress-bar';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
-import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import Loading from '@/components/loadings/loading/loading';
 import { mutations } from '@/constants/queries';
@@ -50,17 +49,19 @@ export default function RequestCard({
   const { privateApi } = useGtwSession();
   const router = useRouter();
   const [loadingAfter, setLoadingAfter] = useState(false);
+  const [loadingText, setLoadingText] = useState('');
 
   const acceptDataRequest = useMutation({
     mutationKey: [mutations.create_proof_from_request],
     mutationFn: (data: Create_Proof_From_RequestMutationVariables) => {
       return privateApi?.create_proof_from_request(data);
     },
+    onMutate: () => setLoadingText('Data Proof is being processed...'),
     onSuccess: () => router.refresh(),
     onError: () => enqueueSnackbar(errorMessages.ERROR_TRYING_TO_ISSUE_A_PROOF),
     onSettled: () => {
       setLoadingAfter(true);
-      setTimeout(() => setLoadingAfter(false), 2000);
+      setTimeout(() => setLoadingAfter(false), 5000);
     },
   });
 
@@ -69,12 +70,13 @@ export default function RequestCard({
     mutationFn: (data: Reject_RequestMutationVariables) => {
       return privateApi?.reject_request(data);
     },
+    onMutate: () => setLoadingText('Data is being processed...'),
     onSuccess: () => router.refresh(),
     onError: () =>
       enqueueSnackbar(errorMessages.ERROR_TRYING_TO_REJECT_A_REQUEST),
     onSettled: () => {
       setLoadingAfter(true);
-      setTimeout(() => setLoadingAfter(false), 2000);
+      setTimeout(() => setLoadingAfter(false), 5000);
     },
   });
 
@@ -95,7 +97,9 @@ export default function RequestCard({
     <>
       {(loadingAfter ||
         acceptDataRequest.isLoading ||
-        rejectDataRequest.isLoading) && <Loading fullScreen />}
+        rejectDataRequest.isLoading) && (
+        <Loading loadingText={loadingText} fullScreen />
+      )}
 
       <Box
         sx={{
@@ -144,22 +148,20 @@ export default function RequestCard({
                 {request.request_card.content.pending.description(requester)}
               </Typography>
               <Stack direction="row" gap={1} sx={{ mt: 3 }}>
-                <LoadingButton
+                <Button
                   variant="contained"
                   color="primary"
-                  isLoading={acceptDataRequest.isLoading}
                   onClick={() => acceptDataRequest.mutate({ requestId })}
                 >
                   {common.actions.accept}
-                </LoadingButton>
-                <LoadingButton
-                  isLoading={rejectDataRequest.isLoading}
+                </Button>
+                <Button
                   variant="outlined"
                   color="primary"
                   onClick={() => rejectDataRequest.mutate({ requestId })}
                 >
                   {common.actions.reject}
-                </LoadingButton>
+                </Button>
               </Stack>
             </>
           )}

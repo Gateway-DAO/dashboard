@@ -1,6 +1,6 @@
 import { common } from '@/locale/en/common';
 import { IdentifierValueSchema } from '@/schemas/identifier-value';
-import { IdentifierType, UserIdentifierType } from '@/services/protocol/types';
+import { UserIdentifierType } from '@/services/protocol/types';
 import { Control, useController } from 'react-hook-form';
 
 import {

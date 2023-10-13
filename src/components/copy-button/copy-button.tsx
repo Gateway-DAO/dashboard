@@ -4,7 +4,7 @@ import { errorMessages } from '@/locale/en/errors';
 import { useSnackbar } from 'notistack';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { Button, ButtonProps, Stack } from '@mui/material';
+import { Button, ButtonProps } from '@mui/material';
 
 type Props = {
   text: string;

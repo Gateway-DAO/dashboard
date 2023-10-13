@@ -2,6 +2,7 @@
 import { useRouter } from 'next-nprogress-bar';
 import { useMemo } from 'react';
 
+import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
@@ -92,32 +93,30 @@ export default function SharedWithCard({ pda }: Props) {
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
-                    title={`Proof ID ${proof.id}`}
-                    onClick={() =>
-                      router.push(
-                        !!organization
-                          ? routes.dashboardOrgProof(
-                              organization.gatewayId,
-                              proof.id
-                            )
-                          : routes.dashboardUserProof(proof.id)
-                      )
-                    }
-                    sx={{
-                      cursor: 'pointer',
-                      transition: 'opacity ease .3s',
-                      '&:hover': {
-                        opacity: 0.8,
-                      },
-                    }}
                   >
                     <Stack
+                      title={`Proof ID ${proof.id}`}
                       sx={{
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'center',
                         gap: 2,
+                        cursor: 'pointer',
+                        transition: 'opacity ease .3s',
+                        '&:hover': {
+                          opacity: 0.8,
+                        },
                       }}
+                      onClick={() =>
+                        router.push(
+                          !!organization
+                            ? routes.dashboardOrgProof(
+                                organization.gatewayId,
+                                proof.id
+                              )
+                            : routes.dashboardUserProof(proof.id)
+                        )
+                      }
                     >
                       <GTWAvatar
                         name={
@@ -142,9 +141,11 @@ export default function SharedWithCard({ pda }: Props) {
                         )}
                       </Typography>
                     </Stack>
-                    <Typography variant="body2">
-                      {limitCharsCentered(proof.id, 8)}
-                    </Typography>
+                    <CopyTextButton
+                      size={14}
+                      text={proof?.id as string}
+                      limit={8}
+                    />
                   </Stack>
                 ))}
               </>
