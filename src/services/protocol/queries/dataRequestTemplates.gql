@@ -1,0 +1,11 @@
+query dataRequestTemplates($creatorID: String, $skip: Float, $take: Float) {
+  dataRequestTemplates(creatorID: $creatorID, skip: $skip, take: $take) {
+    id
+    name
+    createdAt
+  }
+}
+
+query myDataRequestTemplatesCount {
+  myDataRequestTemplatesCount
+}
