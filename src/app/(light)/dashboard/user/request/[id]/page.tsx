@@ -3,7 +3,6 @@ import { Session } from 'next-auth';
 
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
-import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import PermissionError from '@/components/permission-error/permission-error';
 import RequestStatusChip from '@/components/requests/request-status-chip';
 import { TitleId } from '@/components/title-id/title-id';
