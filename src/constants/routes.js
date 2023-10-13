@@ -27,6 +27,10 @@ const routes = {
   dashboardOrgSettings: (organizationId) =>
     `/dashboard/org/${organizationId}/settings`,
   dashboardUserDeveloperAccess: '/dashboard/user/developer-access',
+  dashboardOrgDeveloperAccess: (organizationId) =>
+    `/dashboard/org/${organizationId}/developer-access`,
+  dashboardOrgPlayground: (organizationId) =>
+    `/dashboard/org/${organizationId}/playground`,
   dashboardUserPlayground: '/dashboard/user/playground',
 };
 
