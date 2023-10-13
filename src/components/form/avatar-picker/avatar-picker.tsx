@@ -55,7 +55,7 @@ function AvatarPickerField(
     onCloseModal();
   };
 
-  const [dropBond, { over: isOver }] = useDropArea({
+  const [_dropBond, { over: _isOver }] = useDropArea({
     onFiles: onReadFile,
   });
 
