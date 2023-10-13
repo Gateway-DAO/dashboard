@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { orgPdas } from '@/locale/en/pda';
 import { getPrivateApi } from '@/services/protocol/api';
 import { getCurrentOrg } from '@/utils/currentOrg';
@@ -5,6 +7,12 @@ import { getCurrentOrg } from '@/utils/currentOrg';
 import { Typography } from '@mui/material';
 
 import PDAsTable from './components/pdas-table';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Issued Data Assets - Gateway Network',
+  };
+}
 
 export default async function OrganizationIssuedAssetsPage(props: any) {
   const pathnameOrg = props.params?.username;

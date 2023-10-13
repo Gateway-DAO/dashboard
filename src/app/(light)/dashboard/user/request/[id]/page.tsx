@@ -76,7 +76,7 @@ export async function generateMetadata({
   const dataRequest = await getDataRequest(params.id);
 
   return {
-    title: `${dataRequest?.id} Data Request - Gateway Network`,
+    title: `Data Request ${dataRequest?.id} - Gateway Network`,
     description: dataRequest?.dataUse,
   };
 }

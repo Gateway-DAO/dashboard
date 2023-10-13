@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import TitleLayout from '@/components/title-layout/title-layout';
 import { orgSettings } from '@/locale/en/settings';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
@@ -6,6 +8,12 @@ import { Divider } from '@mui/material';
 
 import DisplayFields from './components/display-fields/display-fields';
 import MembersArea from './components/members-area/members-area';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Manage Gateway ID - Gateway Network',
+  };
+}
 
 export default function OrganizationSettings() {
   return (

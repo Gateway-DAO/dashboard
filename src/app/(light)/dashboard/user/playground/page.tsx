@@ -4,6 +4,12 @@ import { playground } from '@/locale/en/playground';
 import DocumentationLinks from './components/documentation-links';
 import PlaygroundWrapper from './components/playground-wrapper';
 
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Start playing with playground - Gateway Network',
+  };
+}
+
 export default async function PlaygroundPage() {
   return (
     <>

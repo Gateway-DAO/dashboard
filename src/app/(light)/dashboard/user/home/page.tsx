@@ -1,12 +1,21 @@
-import { Button, Paper, Stack, Typography, Skeleton } from '@mui/material';
+import { Metadata } from 'next';
 import { Session } from 'next-auth';
-import { Box } from '@mui/material';
+import Link from 'next/link';
+
 import BannerIcon from '@/components/icons/banner';
 import PDABannerIcon from '@/components/icons/pda-banner';
 import PlaygroundIcon from '@/components/icons/playground';
-import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { home } from '@/locale/en/home';
-import Link from 'next/link';
+import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
+
+import { Box } from '@mui/material';
+import { Button, Paper, Stack, Typography } from '@mui/material';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `The Private Data Asset Network  - Gateway Network`,
+  };
+}
 
 export default async function Home() {
   const session = (await getGtwServerSession()) as Session;

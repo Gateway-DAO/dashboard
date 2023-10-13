@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { proofs as proofsLocales } from '@/locale/en/proof';
 import { getPrivateApi } from '@/services/protocol/api';
 import { Proof } from '@/services/protocol/types';
@@ -6,6 +8,12 @@ import { PartialDeep } from 'type-fest/source/partial-deep';
 import { Typography } from '@mui/material';
 
 import ProofsSentTable from './components/proofs-sent-table';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Sent Data Requests - Gateway Network',
+  };
+}
 
 export default async function DashboardUserSentProofs() {
   const privateApi = await getPrivateApi();

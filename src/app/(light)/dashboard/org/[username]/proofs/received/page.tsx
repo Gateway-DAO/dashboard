@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import TitleLayout from '@/components/title-layout/title-layout';
 import { proofs as proofsLocales } from '@/locale/en/proof';
 import { getPrivateApi } from '@/services/protocol/api';
@@ -8,6 +10,12 @@ import { PartialDeep } from 'type-fest';
 import { Box, Typography } from '@mui/material';
 
 import OrganizationProofsReceivedTable from './components/org-proofs-received-table';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Received Data Proofs - Gateway Network',
+  };
+}
 
 export default async function OrganizationReceivedProofsPage(props: any) {
   const privateApi = await getPrivateApi();
