@@ -56,6 +56,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
           </ListItemText>
           <Chip
             label="ORG"
+            size="small"
             sx={(theme) => ({
               backgroundColor: alpha(
                 theme.palette.primary.main,
