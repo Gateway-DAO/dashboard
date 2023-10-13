@@ -2,6 +2,7 @@ import { GTWMenuItemSettings } from '@/app/(light)/dashboard/components/menu-ite
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
 import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
+import DataRequestTemplateOutlinedIcon from '@/components/icons/data-request-template-outlined';
 import routes from '@/constants/routes';
 
 /**
@@ -26,6 +27,12 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserRequest(''),
     ],
     icon: DataRequestOutlinedIcon,
+  },
+  {
+    name: 'Request templates',
+    href: routes.dashboardUserRequestTemplates,
+    activeHrefs: [routes.dashboardUserRequestTemplates],
+    icon: DataRequestTemplateOutlinedIcon,
   },
   {
     name: 'Data proofs',

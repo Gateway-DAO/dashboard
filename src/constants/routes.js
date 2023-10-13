@@ -15,6 +15,7 @@ const routes = {
   dashboardOrgRequest: (org, requestId) =>
     `/dashboard/org/${org}/request/${requestId}`,
   dashboardUserRequests: '/dashboard/user/requests',
+  dashboardUserRequestTemplates: '/dashboard/user/request-templates',
   dashboardUserSettings: '/dashboard/user/settings',
   dashboardOrgRoot: '/dashboard/org',
   dashboardOrgHome: (organizationId) => `/dashboard/org/${organizationId}`,
