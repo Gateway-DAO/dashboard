@@ -75,6 +75,7 @@ export default function RequestTemplatesTable({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       'data-request-templates',
+      session?.user?.gatewayId,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
     ],

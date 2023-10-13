@@ -8,6 +8,7 @@ import {
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import {
   requestTemplate,
   requestTemplates,
@@ -64,29 +65,30 @@ export default function RequestTemplatesTable({
   data: initialData,
   totalCount = 0,
 }: Props) {
-  const { session } = useGtwSession();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 5,
   });
-
+  const { organization } = useOrganization();
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       'data-request-templates',
+      organization?.gatewayId as string,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
       privateApi?.dataRequestTemplates({
-        creatorID: session?.user?.gatewayId,
+        creatorID: organization?.gatewayId as string,
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
     select: (data: any) =>
       (data as DataRequestTemplatesQuery)?.dataRequestTemplates,
     initialData: initialData && initialData.length ? initialData : null,
+    enabled: !!organization,
   });
 
   const setNewPage = ({ page }: { page: number }) => {
