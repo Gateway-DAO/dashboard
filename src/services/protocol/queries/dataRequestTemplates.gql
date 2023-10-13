@@ -6,6 +6,18 @@ query dataRequestTemplates($creatorID: String, $skip: Float, $take: Float) {
   }
 }
 
+query dataRequestTemplatesByOrg(
+  $orgCreatorId: String
+  $skip: Float
+  $take: Float
+) {
+  dataRequestTemplates(orgCreatorId: $orgCreatorId, skip: $skip, take: $take) {
+    id
+    name
+    createdAt
+  }
+}
+
 query myDataRequestTemplatesCount {
   myDataRequestTemplatesCount
 }

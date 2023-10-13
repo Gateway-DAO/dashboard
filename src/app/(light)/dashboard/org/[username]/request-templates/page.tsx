@@ -8,8 +8,8 @@ export default async function DashboardOrgDataRequestTemplatesPage(props: any) {
 
   const requestsData =
     (
-      await privateApi.dataRequestTemplates({
-        creatorID: pathnameOrg,
+      await privateApi.dataRequestTemplatesByOrg({
+        orgCreatorId: pathnameOrg,
         skip: 0,
         take: 5,
       })
