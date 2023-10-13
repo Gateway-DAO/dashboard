@@ -19,6 +19,9 @@ export const defaultGridCustomization: GatewaySxProps = {
   mx: NEGATIVE_CONTAINER_PX,
   border: 'none',
   borderRadius: 0,
+  '& .MuiDataGrid-cell:focus': {
+    outline: 'none',
+  },
   '& .MuiDataGrid-footerContainer': {
     paddingRight: CONTAINER_PX,
   },
