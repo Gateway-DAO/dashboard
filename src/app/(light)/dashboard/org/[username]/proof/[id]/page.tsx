@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import ProofItem from '@/app/(light)/dashboard/user/proof/[id]/components/proof-item';
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
@@ -15,6 +17,18 @@ const getProof = async (id: string): Promise<Proof | null> => {
   const proof: any = (await privateApi.proof({ id }))?.proof;
   return proof;
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const proof = await getProof(params.id);
+  return {
+    title: `Proof ${proof?.id} - Gateway Network`,
+    description: `Proof description`,
+  };
+}
 
 export default async function OrgProofPage({
   params,
