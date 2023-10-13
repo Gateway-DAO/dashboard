@@ -20,7 +20,6 @@ import {
   Divider,
   Button,
   Skeleton,
-  Link,
 } from '@mui/material';
 
 import AuthenticationTokenSection from './authentication-token-section';

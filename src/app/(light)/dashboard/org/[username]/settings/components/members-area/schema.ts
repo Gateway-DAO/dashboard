@@ -1,6 +1,4 @@
-import identifierValueSchema, {
-  IdentifierValueSchema,
-} from '@/schemas/identifier-value';
+import identifierValueSchema from '@/schemas/identifier-value';
 import { OrganizationRole } from '@/services/protocol/types';
 import zod from 'zod';
 

@@ -5,7 +5,7 @@ import ModalRight from '@/components/modal/modal-right/modal-right';
 import { orgSettings } from '@/locale/en/settings';
 
 import { AddOutlined } from '@mui/icons-material';
-import { Button, Stack } from '@mui/material';
+import { Button } from '@mui/material';
 
 import AddMemberForm from './add-member-form';
 

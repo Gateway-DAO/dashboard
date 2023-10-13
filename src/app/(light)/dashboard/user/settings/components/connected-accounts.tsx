@@ -13,7 +13,7 @@ import WalletConnectionProvider from '@/context/wallet-connection-provider';
 import { useDisconnectAlias } from '@/hooks/use-disconnect-alias';
 import { errorMessages } from '@/locale/en/errors';
 import { settings } from '@/locale/en/settings';
-import { AuthType, Exact, Scalars } from '@/services/protocol/types';
+import { AuthType, Exact } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { useToggle } from '@react-hookz/web/cjs/useToggle';
 import { useMutation } from '@tanstack/react-query';
