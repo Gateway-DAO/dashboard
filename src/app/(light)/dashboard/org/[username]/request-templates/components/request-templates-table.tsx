@@ -81,7 +81,7 @@ export default function RequestTemplatesTable({
     ],
     queryFn: () =>
       privateApi?.dataRequestTemplatesByOrg({
-        orgCreatorID: organization?.gatewayId as string,
+        orgCreatorId: organization?.gatewayId as string,
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
