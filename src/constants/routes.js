@@ -23,6 +23,8 @@ const routes = {
     `/dashboard/org/${organizationId}/assets/issued`,
   dashboardOrgRequests: (organizationId) =>
     `/dashboard/org/${organizationId}/requests`,
+  dashboardOrgRequestTemplates: (organizationId) =>
+    `/dashboard/org/${organizationId}/request-templates`,
   dashboardOrgReceivedProofs: (organizationId) =>
     `/dashboard/org/${organizationId}/proofs/received`,
   dashboardOrgSettings: (organizationId) =>
