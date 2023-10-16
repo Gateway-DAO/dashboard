@@ -25,12 +25,6 @@ export const dashboardOrgMenuItems = (
     icon: DataRequestOutlinedIcon,
   },
   {
-    name: 'Request templates',
-    href: routes.dashboardOrgRequestTemplates(username),
-    activeHrefs: [routes.dashboardOrgRequestTemplates(username)],
-    icon: DataRequestTemplateOutlinedIcon,
-  },
-  {
     name: 'Received data proofs',
     href: routes.dashboardOrgReceivedProofs(username),
     activeHrefs: [routes.dashboardOrgReceivedProofs(username)],
@@ -41,6 +35,12 @@ export const dashboardOrgMenuItems = (
     href: routes.dashboardOrgDataModels(username),
     activeHrefs: [routes.dashboardOrgDataModels(username)],
     icon: DataModelOutlinedIcon,
+  },
+  {
+    name: 'Request templates',
+    href: routes.dashboardOrgRequestTemplates(username),
+    activeHrefs: [routes.dashboardOrgRequestTemplates(username)],
+    icon: DataRequestTemplateOutlinedIcon,
   },
 ];
 
