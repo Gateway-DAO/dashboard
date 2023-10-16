@@ -11,7 +11,7 @@ export default function OrgDataRequestTemplatesLayout({
   return (
     <Box sx={{ py: 2 }}>
       <TitleLayout
-        titleId={requestTemplates.title}
+        titleId={requestTemplates.id}
         title={requestTemplates.title}
         subtitle={requestTemplates.org_subtitle}
       />

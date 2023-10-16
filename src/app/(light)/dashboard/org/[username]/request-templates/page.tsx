@@ -15,8 +15,11 @@ export default async function DashboardOrgDataRequestTemplatesPage(props: any) {
       })
     )?.dataRequestTemplates ?? [];
 
-  const count = (await (await privateApi).myDataRequestTemplatesCount())
-    .myDataRequestTemplatesCount;
+  const count = (
+    await privateApi.myDataRequestTemplatesCountOrg({
+      orgGatewayId: pathnameOrg,
+    })
+  ).myDataRequestTemplatesCount;
 
   return <RequestTemplatesTable data={requestsData} totalCount={count} />;
 }
