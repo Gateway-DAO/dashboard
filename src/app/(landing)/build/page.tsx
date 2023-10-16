@@ -9,7 +9,7 @@ import Footer from '../components/footer';
 import Header from '../components/header';
 import LenisManager, { initializeLenis } from '../utils/scroll';
 import TemplateDocsSection from './components/template-docs-section';
-import { DOCS_BASE_URL } from '@/utils/docs';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 export default function BuildPage() {
   useEffect(() => {

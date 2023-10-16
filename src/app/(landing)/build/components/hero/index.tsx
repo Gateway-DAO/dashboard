@@ -6,7 +6,7 @@ import GTWLink from '@/components/gtw-link';
 import Slider from 'react-slick';
 
 import styles from './hero.module.scss';
-import { DOCS_BASE_URL } from '@/utils/docs';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 const journeySteps = [
   {

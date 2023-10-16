@@ -25,7 +25,7 @@ import Hero from './components/hero';
 import OurProducts from './components/our-products';
 import OurProtocol from './components/our-protocol';
 import TemplateLearnSection from './components/template-learn-section';
-import { DOCS_BASE_URL } from '@/utils/docs';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 export default function BuildPage() {
   useEffect(() => {

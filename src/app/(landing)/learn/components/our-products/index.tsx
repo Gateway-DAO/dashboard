@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 
 import Title from '../title';
 import styles from './our-products.module.scss';
-import { DOCS_BASE_URL } from '@/utils/docs';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 const products = [
   {
@@ -17,7 +17,7 @@ const products = [
     title: 'API',
     description:
       'Integrate directly with your application to issue, manage, and verify PDAs natively.',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/get-started-here`,
   },
   {
     title: 'Widget (Coming Soon)',
