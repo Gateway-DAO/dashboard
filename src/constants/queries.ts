@@ -7,6 +7,7 @@ export const queries = {
   proofs_received_by_org: 'proofs_received_by_org',
   proofs_sent: 'proofs_sent',
   usage_limit: 'user_monthly_usage_limits',
+  data_request_template: 'data_request_template',
 };
 
 export const mutations = {
