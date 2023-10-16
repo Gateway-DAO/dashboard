@@ -8,7 +8,7 @@ function rAF(time: number) {
   requestAnimationFrame(rAF);
 }
 
-export function initializeLenis() {
+if (typeof window !== 'undefined') {
   LenisManager = new Lenis({
     duration: 1,
     wheelMultiplier: 1,
