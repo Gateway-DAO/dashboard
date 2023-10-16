@@ -37,12 +37,6 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     icon: DataRequestOutlinedIcon,
   },
   {
-    name: 'Request templates',
-    href: routes.dashboardUserRequestTemplates,
-    activeHrefs: [routes.dashboardUserRequestTemplates],
-    icon: DataRequestTemplateOutlinedIcon,
-  },
-  {
     name: 'Data proofs',
     href: routes.dashboardUserReceivedProofs,
     activeHrefs: [
@@ -57,6 +51,12 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     href: routes.dashboardUserDataModels,
     activeHrefs: [routes.dashboardUserDataModels],
     icon: DataModelOutlinedIcon,
+  },
+  {
+    name: 'Request templates',
+    href: routes.dashboardUserRequestTemplates,
+    activeHrefs: [routes.dashboardUserRequestTemplates],
+    icon: DataRequestTemplateOutlinedIcon,
   },
 ];
 
