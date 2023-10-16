@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import CopyButton from '@/components/copy-button/copy-button';
 import routes from '@/constants/routes';
+import useOrganization from '@/hooks/use-organization';
 import { DataModelByIdQuery } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
@@ -55,6 +56,7 @@ export default function TabsStructure({
   data: DataModelByIdQuery['dataModel'];
 }) {
   const [currentTab, setTab] = useState(0);
+  const { organization } = useOrganization();
 
   const claimObj = !!data
     ? Object.keys(data?.schema.properties)
@@ -155,7 +157,14 @@ export default function TabsStructure({
             customButtonText="Copy mutation"
             text={mutation}
           />
-          <Button variant="outlined" href={routes.dashboardUserPlayground}>
+          <Button
+            variant="outlined"
+            href={
+              !!organization
+                ? routes.dashboardOrgPlayground(organization.gatewayId)
+                : routes.dashboardUserPlayground
+            }
+          >
             Go to playground
           </Button>
         </Box>
