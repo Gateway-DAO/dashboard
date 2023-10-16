@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import ModalDetail from '@/app/(light)/dashboard/user/data-models/components/modal-detail';
 import {
   defaultGridConfiguration,
   defaultGridCustomization,
@@ -12,12 +13,18 @@ import useOrganization from '@/hooks/use-organization';
 import { datamodel } from '@/locale/en/datamodel';
 import { DataModelsQuery, DataRequest } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
+import { useToggle } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
 import { Typography } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridRowParams,
+} from '@mui/x-data-grid';
 
 const columns: GridColDef<PartialDeep<DataRequest>>[] = [
   {
@@ -63,6 +70,9 @@ export default function DataModelsTable({
     page: 0,
     pageSize: 5,
   });
+  const [openDetailModal, toggleDetailModal] = useToggle(false);
+  const [currentDataModel, setCurrentDataModel] = useState('');
+
   const { organization } = useOrganization();
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
@@ -92,16 +102,27 @@ export default function DataModelsTable({
   };
 
   return (
-    <DataGrid
-      {...defaultGridConfiguration}
-      rows={data && data.length ? data : initialData}
-      columns={columns}
-      paginationModel={paginationModel}
-      onPaginationModelChange={setNewPage}
-      paginationMode="server"
-      loading={isLoading}
-      rowCount={totalCount}
-      sx={defaultGridCustomization}
-    />
+    <>
+      <DataGrid
+        {...defaultGridConfiguration}
+        rows={data && data.length ? data : initialData}
+        columns={columns}
+        paginationModel={paginationModel}
+        onRowClick={(params: GridRowParams) => {
+          toggleDetailModal(true);
+          setCurrentDataModel(params.id as string);
+        }}
+        onPaginationModelChange={setNewPage}
+        paginationMode="server"
+        loading={isLoading}
+        rowCount={totalCount}
+        sx={defaultGridCustomization}
+      />
+      <ModalDetail
+        open={openDetailModal}
+        onClose={toggleDetailModal}
+        id={currentDataModel}
+      />
+    </>
   );
 }

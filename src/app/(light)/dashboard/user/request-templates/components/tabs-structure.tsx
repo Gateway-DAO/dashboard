@@ -84,7 +84,11 @@ export default function TabsStructure({
         id: "${data?.id}",
         name: "${data?.name}",
         schema: ${JSON.stringify(data?.schema)},
-        organization: ${data?.organization},
+        organization: {
+          id: "${data?.organization?.id}",
+          gatewayId: "${data?.organization?.gatewayId}"
+          name: "${data?.organization?.name}"
+        },
         createdAt: "${data?.createdAt}"
       }
     }`,

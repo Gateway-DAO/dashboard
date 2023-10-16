@@ -26,7 +26,9 @@ export default function ModalDetail({
   const { data: dataModel, isLoading } = useQuery({
     queryKey: [queries.data_model, id],
     queryFn: () => privateApi?.dataModelById({ id }),
-    select: (data: any) => (data as DataModelByIdQuery)?.dataModel,
+    select: (data: any) =>
+      (data as DataModelByIdQuery)
+        ?.dataModel as DataModelByIdQuery['dataModel'],
   });
 
   return (
@@ -40,7 +42,11 @@ export default function ModalDetail({
         {isLoading ? <Skeleton /> : dataModel?.description}
       </Typography>
       <CopyBox title="Data request template ID" value={id} />
-      <TabsStructure id={id} isLoading={isLoading} data={dataModel} />
+      <TabsStructure
+        id={id}
+        isLoading={isLoading}
+        data={dataModel as DataModelByIdQuery['dataModel']}
+      />
     </ModalRight>
   );
 }
