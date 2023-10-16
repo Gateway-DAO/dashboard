@@ -17,8 +17,11 @@ export default async function DashboardOrgDataModelsPage(props: any) {
       })
     )?.dataModels ?? [];
 
-  // const count = (await (await privateApi).myDataRequestTemplatesCount())
-  //   .myDataRequestTemplatesCount;
+  const count = (
+    await privateApi.myDataModelsCountOrg({
+      orgGatewayId: pathnameOrg,
+    })
+  ).myDataModelsCount;
 
-  return <DataModelsTable data={requestsData} totalCount={0} />;
+  return <DataModelsTable data={requestsData} totalCount={count} />;
 }

@@ -21,3 +21,11 @@ query dataModelsByOrg($organizationId: String, $skip: Int, $take: Int) {
     createdAt
   }
 }
+
+query myDataModelsCount {
+  myDataModelsCount
+}
+
+query myDataModelsCountOrg($orgGatewayId: String) {
+  myDataModelsCount(orgGatewayId: $orgGatewayId)
+}
