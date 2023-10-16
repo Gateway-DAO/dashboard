@@ -70,7 +70,9 @@ export default function Header() {
           background: '#E6D5FA',
           height: 40,
           flexDirection: 'row',
+          position: 'relative',
           '& a': { textDecoration: 'none' },
+          zIndex: 10,
         }}
       >
         <Typography color="common.black">
