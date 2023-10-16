@@ -11,6 +11,7 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { proofs } from '@/locale/en/proof';
 import { Proof, Received_ProofsQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
@@ -24,13 +25,17 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 const columns: GridColDef<PartialDeep<Proof>>[] = [
   {
     field: 'owner',
-    headerName: proofs.sender,
+    headerName: proofs.owner,
     flex: 1,
     valueGetter: (params) => params.row.owner?.gatewayId,
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" gap={2}>
-          <GTWAvatar name={params.row.owner!.profilePicture ?? ''} size={32} />
+          <GTWAvatar
+            name={params.row.owner!.id ?? ''}
+            src={params.row.owner?.profilePicture}
+            size={32}
+          />
           <Typography fontWeight={700}>
             {params.row.owner?.displayName ??
               params.row.owner?.gatewayId ??
@@ -62,11 +67,11 @@ const columns: GridColDef<PartialDeep<Proof>>[] = [
     },
   },
   {
-    field: 'shareDate',
+    field: 'createdAt',
     headerName: proofs.share_date,
     flex: 1,
     valueFormatter: (params) =>
-      dayjs(params.value).format('MM/DD/YYYY, h:mm A'),
+      params.value ? dayjs(params.value).format('MM/DD/YYYY, h:mm A') : '',
   },
   {
     field: 'dataAmount',
@@ -92,18 +97,23 @@ export default function OrganizationProofsReceivedTable({
     pageSize: 5,
   });
 
+  const { organization } = useOrganization();
+
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
+    enabled: !!organization?.id,
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
-      queries.proofs_received,
+      queries.proofs_received_by_org,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
+      organization?.id,
     ],
     queryFn: () =>
-      privateApi?.received_proofs({
+      privateApi?.received_proofs_by_org({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
+        organizationId: organization?.id as string,
       }),
     select: (data: any) => (data as Received_ProofsQuery)?.receivedProofs,
     initialData: initialData && initialData.length ? initialData : null,
@@ -127,7 +137,9 @@ export default function OrganizationProofsReceivedTable({
       onPaginationModelChange={setNewPage}
       sx={defaultGridCustomization}
       onRowClick={(value) => {
-        router.push(routes.dashboardUserProof(value?.id));
+        router.push(
+          routes.dashboardOrgProof(organization?.gatewayId, value?.id)
+        );
       }}
     />
   );

@@ -4,6 +4,7 @@ fragment proof on Proof {
   facilitationFee
   createdAt
   arweaveUrl
+  status
 
   owner {
     ...min_user
@@ -13,7 +14,9 @@ fragment proof on Proof {
     ...min_user
   }
 
-  organization {
+  verifierOrganization {
+    id
+    name
     gatewayId
     image
   }
@@ -29,6 +32,7 @@ fragment proof on Proof {
       id
       title
       claim
+      issuanceDate
       claimArray {
         type
         value

@@ -13,6 +13,7 @@ query me {
         image
         name
         gatewayId
+        usernameUpdatedAt
       }
     }
     authentications {
@@ -23,5 +24,14 @@ query me {
         chain
       }
     }
+  }
+}
+
+query monthlyUserUsage {
+  getMonthlyUserUsage {
+    datamodelsUsageAllowedByMonth
+    credentialsUsageAllowedByMonth
+    monthlyDatamodels
+    monthlyCredentials
   }
 }

@@ -47,7 +47,7 @@ export default function GTWAvatar({ src, name, alt, hasBorder, size }: Props) {
         }),
       }}
     >
-      {name}
+      {alt ?? name}
     </Avatar>
   );
 }

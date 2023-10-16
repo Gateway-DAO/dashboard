@@ -25,6 +25,7 @@ export default function useLoginStepHandler() {
         setStepState({ step });
         break;
     }
+    return step;
   };
 
   return onHandleStep;

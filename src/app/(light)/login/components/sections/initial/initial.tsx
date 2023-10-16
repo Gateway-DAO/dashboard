@@ -1,6 +1,6 @@
-import dynamic from 'next/dynamic';
-
 import { TitleSubtitleField } from '@/components/title-field/title-field';
+import EvmProvider from '@/context/evm-provider/evm-provider';
+import SolanaProvider from '@/context/solana-provider';
 import { auth } from '@/locale/en/auth';
 
 import { Link, Stack, Typography } from '@mui/material';
@@ -8,18 +8,6 @@ import { Link, Stack, Typography } from '@mui/material';
 import { AuthenticationOptions } from './authentication-options';
 import { LoginEmail } from './login-email';
 
-const EvmProvider = dynamic(
-  () => import('../../../../../../context/evm-provider/evm-provider'),
-  {
-    ssr: false,
-  }
-);
-const SolanaProvider = dynamic(
-  () => import('../../../../../../context/solana-provider'),
-  {
-    ssr: false,
-  }
-);
 export function AuthenticationInitial() {
   return (
     <Stack gap={2} direction={'column'}>

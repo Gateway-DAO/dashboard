@@ -56,18 +56,29 @@ export default function CardUsers({ pda }: Props) {
           picture={issuerPicture ?? ''}
           name={limitCharsCentered(issuerName, 15)}
           id={`pda-issuer-${issuerGatewayId}`}
+          userId={
+            pda?.dataAsset?.organization
+              ? (pda.dataAsset.organization.id as string)
+              : (pda?.dataAsset?.issuer?.id as string)
+          }
           onClick={() => setTooltipIssuer(true)}
-          verified={false} // TODO: Vefiry if the issuer is a verified user (backloged)
+          verified={pda?.dataAsset?.organization?.verified}
           active={tooltipIssuer}
         />
         {tooltipIssuer && (
           <TooltipUser
+            userId={
+              pda?.dataAsset?.organization
+                ? (pda.dataAsset.organization.id as string)
+                : (pda?.dataAsset?.issuer?.id as string)
+            }
             name={issuerName}
             picture={issuerPicture ?? ''}
             username={issuerGatewayId ?? ''}
             issuance_date={pda?.dataAsset?.issuer?.createdAt}
             onClose={() => setTooltipIssuer(false)}
             isOrganization={!!pda?.dataAsset?.issuer?.gatewayId}
+            verified={pda?.dataAsset?.organization?.verified}
           />
         )}
       </Stack>
@@ -104,12 +115,14 @@ export default function CardUsers({ pda }: Props) {
           picture={recipientPicture}
           name={limitCharsCentered(recipientName, 15)}
           alignRight={true}
+          userId={pda?.dataAsset?.owner?.id as string}
           id={`pda-recipient-${recipientName}`}
           onClick={() => setTooltipRecipient(true)}
           active={tooltipRecipient}
         />
         {tooltipRecipient && (
           <TooltipUser
+            userId={pda?.dataAsset?.owner?.id as string}
             name={recipientName}
             username={recipientGatewayId}
             picture={recipientPicture}

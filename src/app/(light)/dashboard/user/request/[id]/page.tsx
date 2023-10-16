@@ -5,6 +5,7 @@ import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
 import PermissionError from '@/components/permission-error/permission-error';
 import RequestStatusChip from '@/components/requests/request-status-chip';
+import { TitleId } from '@/components/title-id/title-id';
 import ToggleCollapse from '@/components/toggle-collapse/toggle-collapse';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
@@ -75,7 +76,7 @@ export async function generateMetadata({
   const dataRequest = await getDataRequest(params.id);
 
   return {
-    title: `${dataRequest?.id} Data Request - Gateway Network`,
+    title: `Data Request ${dataRequest?.id} - Gateway Network`,
     description: dataRequest?.dataUse,
   };
 }
@@ -87,7 +88,6 @@ export default async function DashboardUserDataRequest({
   const userId = session.user.id;
   const dataRequest = await getDataRequest(id);
   const pathnameOrg = username;
-
   const organization = await getCurrentOrg(pathnameOrg || '');
 
   if (!dataRequest || !dataRequest.id) {
@@ -97,13 +97,13 @@ export default async function DashboardUserDataRequest({
   if (
     userId !== dataRequest?.owner?.id &&
     userId !== dataRequest?.verifier?.id &&
-    organization?.id !== dataRequest?.organization?.id
+    organization?.id !== dataRequest?.verifierOrganization?.id
   ) {
     return <PermissionError />;
   }
 
   const isOwner = userId === dataRequest?.owner?.id;
-  const requestHasOrgAsVerifier = !!dataRequest?.organization?.id;
+  const requestHasOrgAsVerifier = !!dataRequest?.verifierOrganization?.id;
   const requestValidData = isOwner ? await getRequestValidData(id) : null;
   const proofData =
     isOwner ||
@@ -113,9 +113,9 @@ export default async function DashboardUserDataRequest({
       : await getProofData(dataRequest.proof?.id);
 
   const requester = requestHasOrgAsVerifier
-    ? dataRequest.organization?.name ??
-      dataRequest.organization?.gatewayId ??
-      limitCharsCentered(dataRequest.organization?.id as string, 15)
+    ? dataRequest.verifierOrganization?.name ??
+      dataRequest.verifierOrganization?.gatewayId ??
+      limitCharsCentered(dataRequest.verifierOrganization?.id as string, 15)
     : dataRequest.verifier?.displayName ??
       dataRequest.verifier?.gatewayId ??
       limitCharsCentered(dataRequest.verifier?.id as string, 15) ??
@@ -129,27 +129,37 @@ export default async function DashboardUserDataRequest({
   return (
     <>
       <TopBarContainer>
-        <BackButton href={routes.dashboardUserRequests} />
+        <BackButton
+          href={
+            !!organization?.id
+              ? routes.dashboardOrgRequests(organization?.gatewayId)
+              : routes.dashboardUserRequests
+          }
+        />
       </TopBarContainer>
-      <Typography variant="h3" component="h2" sx={{ mt: 6.5, mb: 6.5 }}>
-        {id}
-      </Typography>
+      <TitleId title={request.title} id={id} />
       <Stack direction="column" gap={2}>
         {!!isOwner ? (
           <RequestCard
             requester={requester}
+            requesterId={
+              requestHasOrgAsVerifier
+                ? (dataRequest.verifierOrganization?.id as string)
+                : (dataRequest.verifier?.id as string)
+            }
             status={dataRequest.status!}
             requestId={dataRequest.id}
             proofId={dataRequest.proof?.id}
             requestValidData={requestValidData}
             profilePicture={
               requestHasOrgAsVerifier
-                ? dataRequest.organization?.image
+                ? dataRequest.verifierOrganization?.image
                 : dataRequest.verifier?.profilePicture
             }
           />
         ) : (
           <RequestCardVerfierView
+            recipientId={dataRequest.owner?.id as string}
             recipient={recipient}
             status={dataRequest.status!}
             proofId={dataRequest.proof?.id}
@@ -167,7 +177,9 @@ export default async function DashboardUserDataRequest({
               {common.general.created_at}
             </Typography>
             <Typography>
-              {dayjs(dataRequest.createdAt).format(DATE_FORMAT)}
+              {dataRequest.createdAt
+                ? dayjs(dataRequest.createdAt).format(DATE_FORMAT)
+                : ''}
             </Typography>
           </Stack>
           <Stack gap={1} flex="1" alignItems="flex-start" sx={{ p: 2 }}>

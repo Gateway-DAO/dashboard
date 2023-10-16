@@ -1,8 +1,14 @@
+'use client';
+
 import CopyButton from '@/components/copy-button/copy-button';
+import externalLinks from '@/constants/externalLinks';
+import { queries } from '@/constants/queries';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { settings } from '@/locale/en/settings';
+import { MonthlyUserUsageQuery } from '@/services/protocol/types';
+import { useQuery } from '@tanstack/react-query';
 
 import {
-  Box,
   Card,
   CardContent,
   CardHeader,
@@ -13,19 +19,23 @@ import {
   ListItemText,
   Divider,
   Button,
+  Skeleton,
 } from '@mui/material';
 
 import AuthenticationTokenSection from './authentication-token-section';
 
 export default function DeveloperPortal() {
+  const { privateApi } = useGtwSession();
+
+  const usageLimits = useQuery({
+    queryKey: [queries.usage_limit],
+    queryFn: () => privateApi.monthlyUserUsage(),
+    select: (data: MonthlyUserUsageQuery) =>
+      data.getMonthlyUserUsage as MonthlyUserUsageQuery['getMonthlyUserUsage'],
+  });
+
   return (
     <Stack spacing={3} alignItems="flex-start">
-      <Box sx={{ mb: 1 }}>
-        <Typography variant="h5" sx={{ mb: 1 }}>
-          {settings.developer_portal.title}
-        </Typography>
-        <Typography>{settings.developer_portal.description}</Typography>
-      </Box>
       <Stack direction="column" gap={2}>
         <Card sx={{ width: '100%' }} variant="outlined">
           <CardHeader
@@ -34,10 +44,14 @@ export default function DeveloperPortal() {
               fontWeight: 'bold',
             }}
             title={settings.developer_portal.api_key}
-            action={<CopyButton text={process.env.NEXT_PUBLIC_API_KEY} />}
+            action={
+              <CopyButton text={process.env.NEXT_PUBLIC_API_PLAYGROUND_KEY!} />
+            }
           />
           <CardContent>
-            <Typography>{process.env.NEXT_PUBLIC_API_KEY}</Typography>
+            <Typography>
+              {process.env.NEXT_PUBLIC_API_PLAYGROUND_KEY!}
+            </Typography>
           </CardContent>
         </Card>
         <AuthenticationTokenSection />
@@ -54,39 +68,64 @@ export default function DeveloperPortal() {
               <ListItem
                 sx={{ px: 0 }}
                 secondaryAction={
-                  <Button variant="outlined" size="small">
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    href={externalLinks.requestMoreAPIUsage}
+                    target="_blank"
+                  >
                     Request More
                   </Button>
                 }
               >
-                <ListItemText
-                  primary={
-                    settings.developer_portal.usage_limit.issued_credentials
-                  }
-                  secondary={settings.developer_portal.usage_limit.rate(
-                    0,
-                    10000
-                  )}
-                />
+                {usageLimits.isLoading ? (
+                  <Stack direction="column">
+                    <Skeleton width={130} height={30} />
+                    <Skeleton width={120} height={30} />
+                  </Stack>
+                ) : (
+                  <ListItemText
+                    primary={
+                      settings.developer_portal.usage_limit.issued_credentials
+                    }
+                    secondary={settings.developer_portal.usage_limit.rate(
+                      usageLimits?.data?.monthlyCredentials as number,
+                      usageLimits?.data
+                        ?.credentialsUsageAllowedByMonth as number
+                    )}
+                  />
+                )}
               </ListItem>
               <Divider sx={{ mx: -2 }} />
               <ListItem
                 sx={{ px: 0 }}
                 secondaryAction={
-                  <Button variant="outlined" size="small">
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    href={externalLinks.requestMoreAPIUsage}
+                    target="_blank"
+                  >
                     Request More
                   </Button>
                 }
               >
-                <ListItemText
-                  primary={
-                    settings.developer_portal.usage_limit.data_model_created
-                  }
-                  secondary={settings.developer_portal.usage_limit.rate(
-                    0,
-                    10000
-                  )}
-                />
+                {usageLimits.isLoading ? (
+                  <Stack direction="column">
+                    <Skeleton width={160} height={30} />
+                    <Skeleton width={120} height={30} />
+                  </Stack>
+                ) : (
+                  <ListItemText
+                    primary={
+                      settings.developer_portal.usage_limit.data_model_created
+                    }
+                    secondary={settings.developer_portal.usage_limit.rate(
+                      usageLimits?.data?.monthlyDatamodels as number,
+                      usageLimits?.data?.datamodelsUsageAllowedByMonth as number
+                    )}
+                  />
+                )}
               </ListItem>
             </List>
           </CardContent>

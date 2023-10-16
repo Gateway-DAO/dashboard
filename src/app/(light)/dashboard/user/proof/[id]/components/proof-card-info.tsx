@@ -1,12 +1,12 @@
 'use client';
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
+import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import { pda } from '@/locale/en/pda';
 import { proof as proofLocale } from '@/locale/en/proof';
-import { PdaStatus, ProofQuery } from '@/services/protocol/types';
-import { limitCharsCentered } from '@/utils/string';
+import { ProofQuery, ProofStatus } from '@/services/protocol/types';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
@@ -28,7 +28,7 @@ export default function ProofCardInfo({ proof }: Props) {
     >
       <TableCellContainer>
         <CardCell label={proofLocale.share_date}>
-          {dayjs(proof?.createdAt).format(DATE_FORMAT)}
+          {proof?.createdAt ? dayjs(proof?.createdAt).format(DATE_FORMAT) : ''}
         </CardCell>
         {!isNaN(proof?.facilitationFee as number) &&
           proof?.facilitationFee !== 0 && (
@@ -43,19 +43,22 @@ export default function ProofCardInfo({ proof }: Props) {
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={proofLocale.status.title}>
-          <PDAStatusChip status={PdaStatus.Valid} isProof={true} size="small" />
+          <PDAStatusChip status={proof?.status as ProofStatus} size="small" />
         </CardCell>
       </TableCellContainer>
       {proof?.dataRequest && (
         <TableCellContainer>
           <CardCell label={proofLocale.request_id}>
-            {limitCharsCentered(proof?.dataRequest?.id as string, 16)}
+            <CopyTextButton
+              text={proof?.dataRequest?.id as string}
+              limit={16}
+            />
           </CardCell>
           <CardCell label={proofLocale.request_template_id}>
-            {limitCharsCentered(
-              proof?.dataRequest?.dataRequestTemplate?.id as string,
-              16
-            )}
+            <CopyTextButton
+              text={proof?.dataRequest?.dataRequestTemplate?.id as string}
+              limit={16}
+            />
           </CardCell>
         </TableCellContainer>
       )}

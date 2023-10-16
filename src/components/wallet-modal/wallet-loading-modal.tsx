@@ -1,13 +1,8 @@
 'use client';
 
-import {
-  WalletConnectionStateHandlers,
-  useWalletConnectionStep,
-} from '@/context/wallet-connection-provider';
+import { useWalletConnectionStep } from '@/context/wallet-connection-provider';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { useDisconnect } from 'wagmi';
 
 import { CheckOutlined } from '@mui/icons-material';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';

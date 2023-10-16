@@ -2,12 +2,11 @@
 import { useSession } from 'next-auth/react';
 
 import AvatarPicker from '@/components/form/avatar-picker/avatar-picker';
-import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
-import { FormControl, FormLabel, Skeleton, Stack } from '@mui/material';
+import { FormControl, FormLabel } from '@mui/material';
 
 export default function Avatar() {
   const { data: session, update } = useSession();
@@ -42,6 +41,7 @@ export default function Avatar() {
       </FormLabel>
       <AvatarPicker
         name="profilePicture"
+        id={session!.user.id!}
         username={session!.user.gatewayId!}
         value={session!.user.profilePicture}
         onChange={onSubmit}

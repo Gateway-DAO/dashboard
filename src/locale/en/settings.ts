@@ -25,8 +25,7 @@ export const settings = {
     verify_token: {
       card_summary_title: 'Code sent to',
       description1: 'Please check',
-      description2:
-        'for an email from Gateway and enter your code below. This code will expire in 30 minutes.',
+      description2: `for an email from Gateway and enter your code below. Please check your spam folder if you haven't received the message. This code will expire in 30 minutes.`,
       code_placeholder: 'Code',
     },
     modal_confirm_delete: {
@@ -52,6 +51,7 @@ export const settings = {
     add_email_address: 'Add email address',
     add_wallet: 'Add wallet',
     disconnect: 'Disconnect',
+    receive_notifications_here: 'Receive notifications here',
   },
   developer_portal: {
     title: 'Developer portal',
@@ -76,5 +76,12 @@ export const orgSettings = {
   membersArea: {
     title: 'Organization members',
     subtitle: "Manage your organization's members",
+    add_member: 'Add member',
+  },
+  addMember: {
+    title: (name: string) => `Add member to ${name}`,
+    role: 'Role',
+    add_member: 'Add member',
+    success: 'Member added successfully',
   },
 };

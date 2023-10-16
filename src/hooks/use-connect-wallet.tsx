@@ -1,10 +1,11 @@
 'use client';
 
 import { WalletConnectionStateHandlers } from '@/context/wallet-connection-provider';
+import { getErrorMessage } from '@/locale/en/errors';
 import { Chain } from '@/services/protocol/types';
-import { WalletContextState, useWallet } from '@solana/wallet-adapter-react';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { useMutation } from '@tanstack/react-query';
-import { useDisconnect, useSignMessage } from 'wagmi';
+import { useSignMessage } from 'wagmi';
 
 import useDisconnectWallets from './use-disconnect-wallets';
 
@@ -102,9 +103,8 @@ export default function useConnectWallet({
       if (SING_CANCEL_ERRORS.includes(error?.name)) {
         statesHandler?.onPending?.();
       } else {
-        statesHandler?.onError?.(
-          !!error?.message ? error.message : JSON.stringify(error)
-        );
+        const { message } = getErrorMessage(error);
+        statesHandler?.onError?.(message);
       }
       onDisconnectWallets();
     }

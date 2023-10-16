@@ -3,11 +3,12 @@ import { useRouter } from 'next-nprogress-bar';
 import { useMemo, useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
-import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { mutations, queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -43,12 +44,13 @@ export default function ShareCopy({ pda }: Props) {
   const [pdaIssued, setPdaIssued] = useState<string>();
   const { privateApi, session } = useGtwSession();
   const queryClient = useQueryClient();
+  const { organization } = useOrganization();
 
   const methods = useForm({
-    resolver: zodResolver(shareCopySchema as any), // TODO: remove type any
+    resolver: zodResolver(shareCopySchema),
     mode: 'all',
     defaultValues: {
-      identifier_type: IdentifierType.GatewayId,
+      type: IdentifierType.GatewayId,
       address: '',
     },
   });
@@ -84,8 +86,8 @@ export default function ShareCopy({ pda }: Props) {
           },
         ],
         verifier: {
-          type: data.identifier_type,
-          value: data?.address ?? null,
+          type: data.type,
+          value: data?.value ?? null,
         },
       });
       setPdaIssued(res?.createProof?.id);
@@ -104,7 +106,9 @@ export default function ShareCopy({ pda }: Props) {
   };
 
   const isOwner = useMemo(
-    () => session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId,
+    () =>
+      session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId &&
+      !organization,
     [pda, session]
   );
 
@@ -128,7 +132,7 @@ export default function ShareCopy({ pda }: Props) {
             {common.actions.share_a_copy}
           </Button>
           <ModalRight open={openShareCopy} onClose={toggleModal}>
-            <ModalTitle onClose={toggleModal} />
+            <ModalHeader onClose={toggleModal} />
             {pdaIssued ? (
               <ShareCopyFormSuccessfully id={pdaIssued} />
             ) : (

@@ -1,5 +1,3 @@
-import { common } from '@/locale/en/common';
-
 import { FormControl, FormLabel, Skeleton, Stack } from '@mui/material';
 
 export default function DisplayFieldsSkeletons() {

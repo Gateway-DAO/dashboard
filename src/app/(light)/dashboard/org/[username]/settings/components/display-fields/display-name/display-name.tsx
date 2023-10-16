@@ -22,7 +22,7 @@ export default function DisplayName() {
   const { mutateAsync, isLoading } = useMutation({
     mutationKey: ['updateOrgDisplayName'],
     mutationFn: async (name: string) =>
-      privateApi.update_org_display_name({ name, id: organization!.id! }),
+      privateApi.update_org_display_name({ name, id: organization?.id ?? '' }),
   });
 
   const { enqueueSnackbar } = useSnackbar();

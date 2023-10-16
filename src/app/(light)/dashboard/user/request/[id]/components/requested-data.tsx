@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 
 import { createPropertiesArray } from './utils';
+import ViewDataByType from './view-data-by-type';
 
 type Props = {
   dataModel: any;
@@ -95,25 +96,11 @@ export default function RequestedData({ dataModel, validDataProvided }: Props) {
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ width: '45%' }}>
-                  {property.type === 'array' && currentProperties ? (
-                    <>
-                      {currentProperties.map((item: any, index: number) => (
-                        <Typography variant="body2" key={index}>
-                          {item}
-                        </Typography>
-                      ))}
-                    </>
-                  ) : (
-                    <>
-                      {currentProperties ? (
-                        <>{currentProperties}</>
-                      ) : (
-                        <Typography color="error">
-                          It doesn't met the criteria
-                        </Typography>
-                      )}
-                    </>
-                  )}
+                  <ViewDataByType
+                    valid={!!validDataProvided?.validData[0]}
+                    propertyType={property.type}
+                    currentProperties={currentProperties}
+                  />
                 </TableCell>
                 <TableCell sx={{ width: '5%' }} align="right">
                   {!!validDataProvided?.validData[0] ? (
