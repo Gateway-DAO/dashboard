@@ -1,9 +1,9 @@
 import { ReactNode, useEffect, useRef } from 'react';
 
+import { useLenis } from '@studio-freight/react-lenis';
 import gsap from 'gsap';
 
 import { useIsFirstRender } from '../../hooks/use-is-first-render';
-import { useLenisS } from '../../libs/lenis-provider';
 import { joinClasses } from '../../utils/function';
 import styles from './modal.module.scss';
 
@@ -22,7 +22,7 @@ export default function Modal({
 }: Props) {
   const isFirstRender = useIsFirstRender();
   const modalRef = useRef<HTMLDivElement>(null);
-  const lenis = useLenisS();
+  const lenis = useLenis();
   useEffect(() => {
     if (isFirstRender || !modalRef.current) return;
 
