@@ -3,9 +3,8 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { ReactNode, MouseEvent } from 'react';
 
+import { useLenis } from '@studio-freight/react-lenis';
 import gsap from 'gsap';
-
-import LenisManager from '../../utils/scroll';
 
 type Props = {
   children: ReactNode;
@@ -18,6 +17,8 @@ export default function Link({ href, children, className, onClick }: Props) {
   const pathname = usePathname();
   const router = useRouter();
 
+  const lenis = useLenis();
+
   const handleClick = (e: MouseEvent) => {
     e.preventDefault();
 
@@ -28,7 +29,7 @@ export default function Link({ href, children, className, onClick }: Props) {
     const tl = gsap.timeline();
     tl.to('main', { opacity: 0, duration: 0.3 });
     tl.add(() => {
-      LenisManager?.scrollTo(0, { duration: 0.01 });
+      lenis?.scrollTo(0, { duration: 0.01 });
       router.push(href);
     });
   };
