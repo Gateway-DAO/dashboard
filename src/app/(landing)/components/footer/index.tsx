@@ -78,10 +78,6 @@ const linksList = [
     href: '/',
   },
   {
-    title: 'Explorer',
-    href: '/',
-  },
-  {
     title: 'Dashboard',
     href: '/',
   },
