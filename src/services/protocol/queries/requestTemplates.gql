@@ -35,3 +35,7 @@ query dataRequestTemplateById($id: String!) {
 query myDataRequestTemplatesCount {
   myDataRequestTemplatesCount
 }
+
+query myDataRequestTemplatesCountOrg($orgGatewayId: String) {
+  myDataRequestTemplatesCount(orgGatewayId: $orgGatewayId)
+}
