@@ -8,7 +8,9 @@ import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
-import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
+
+import { useLenisS } from '../../libs/lenis-provider';
+import { IInstanceOptions } from '../../utils/IInstanceOptions';
 // import Link from '@/components/gtw-link';
 
 import Button from '../button';
@@ -27,6 +29,8 @@ export default function Header() {
   const previousVariant = useRef<'light' | 'dark' | null>(null);
   const isFirstRender = useIsFirstRender();
 
+  const lenis = useLenisS();
+
   useEffect(() => {
     const handleScroll = ({ direction, scroll }: IInstanceOptions) => {
       if (direction === 1 && scroll > 0) {
@@ -36,13 +40,13 @@ export default function Header() {
       }
     };
 
-    LenisManager?.on('scroll', handleScroll);
+    lenis?.on('scroll', handleScroll);
 
     return () => {
-      LenisManager?.off('scroll', handleScroll);
+      lenis?.off('scroll', handleScroll);
     };
   }),
-    [];
+    [lenis];
 
   useEffect(() => {
     if (isFirstRender) return;
@@ -50,12 +54,12 @@ export default function Header() {
     if (burgerActive) {
       previousVariant.current = variant;
       setVariant('light');
-      LenisManager?.stop();
+      lenis?.stop();
     } else {
       setVariant(previousVariant.current || 'dark');
-      LenisManager?.start();
+      lenis?.start();
     }
-  }, [burgerActive]);
+  }, [burgerActive, lenis]);
 
   return (
     <nav

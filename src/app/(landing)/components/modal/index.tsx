@@ -3,8 +3,8 @@ import { ReactNode, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 import { useIsFirstRender } from '../../hooks/use-is-first-render';
+import { useLenisS } from '../../libs/lenis-provider';
 import { joinClasses } from '../../utils/function';
-import LenisManager from '../../utils/scroll';
 import styles from './modal.module.scss';
 
 type Props = {
@@ -22,19 +22,19 @@ export default function Modal({
 }: Props) {
   const isFirstRender = useIsFirstRender();
   const modalRef = useRef<HTMLDivElement>(null);
-
+  const lenis = useLenisS();
   useEffect(() => {
     if (isFirstRender || !modalRef.current) return;
 
     if (active) {
-      LenisManager?.stop();
+      lenis?.stop();
       gsap.to(modalRef.current, { zIndex: 5, autoAlpha: 1 });
     } else {
       gsap.to(modalRef.current, {
         autoAlpha: 0,
         onComplete: () => {
           gsap.set(modalRef.current, { zIndex: -1 });
-          LenisManager?.start();
+          lenis?.start();
         },
       });
     }
