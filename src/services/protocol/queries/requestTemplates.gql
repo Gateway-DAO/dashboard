@@ -1,0 +1,41 @@
+query dataRequestTemplates($creatorID: String, $skip: Float, $take: Float) {
+  dataRequestTemplates(creatorID: $creatorID, skip: $skip, take: $take) {
+    id
+    name
+    createdAt
+  }
+}
+
+query dataRequestTemplatesByOrg(
+  $orgCreatorId: String
+  $skip: Float
+  $take: Float
+) {
+  dataRequestTemplates(orgCreatorId: $orgCreatorId, skip: $skip, take: $take) {
+    id
+    name
+    createdAt
+  }
+}
+
+query dataRequestTemplateById($id: String!) {
+  dataRequestTemplate(id: $id) {
+    id
+    name
+    description
+    tags
+    organization {
+      ...org
+    }
+    createdAt
+    schema
+  }
+}
+
+query myDataRequestTemplatesCount {
+  myDataRequestTemplatesCount
+}
+
+query myDataRequestTemplatesCountOrg($orgGatewayId: String) {
+  myDataRequestTemplatesCount(orgGatewayId: $orgGatewayId)
+}

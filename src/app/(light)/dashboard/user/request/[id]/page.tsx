@@ -3,6 +3,7 @@ import { Session } from 'next-auth';
 
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
+import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import PermissionError from '@/components/permission-error/permission-error';
 import RequestStatusChip from '@/components/requests/request-status-chip';
 import { TitleId } from '@/components/title-id/title-id';
@@ -25,7 +26,7 @@ import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
-import { Divider, Paper, Stack, Typography } from '@mui/material';
+import { Box, Divider, Paper, Stack, Typography } from '@mui/material';
 
 import RequestCard from './components/request-card';
 import RequestCardVerfierView from './components/request-card-verifier';
@@ -76,7 +77,7 @@ export async function generateMetadata({
   const dataRequest = await getDataRequest(params.id);
 
   return {
-    title: `${dataRequest?.id} Data Request - Gateway Network`,
+    title: `Data Request ${dataRequest?.id} - Gateway Network`,
     description: dataRequest?.dataUse,
   };
 }
@@ -209,13 +210,20 @@ export default async function DashboardUserDataRequest({
               <Typography variant="caption" color="text.secondary">
                 {request.label.request_id}
               </Typography>
-              <Typography>{id}</Typography>
+              <Box>
+                <CopyTextButton text={id} limit={8} />
+              </Box>
             </Stack>
             <Stack gap={1} flex="1" alignItems="flex-start" sx={{ p: 2 }}>
               <Typography variant="caption" color="text.secondary">
                 {request.label.request_template_id}
               </Typography>
-              <Typography>{dataRequest.dataRequestTemplate?.id}</Typography>
+              <Box>
+                <CopyTextButton
+                  text={dataRequest.dataRequestTemplate?.id as string}
+                  limit={8}
+                />
+              </Box>
             </Stack>
           </Paper>
         </ToggleCollapse>

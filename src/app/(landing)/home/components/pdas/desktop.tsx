@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'react';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import { splitSpans } from '@/app/(landing)/utils/dom';
 import { joinClasses } from '@/app/(landing)/utils/function';
-import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
+import { useLenis } from '@studio-freight/react-lenis';
 import gsap from 'gsap';
 
 import styles from './pdas.module.scss';
@@ -12,6 +12,7 @@ import styles from './pdas.module.scss';
 export default function Pdas() {
   // Refs for DOM elements
   const sectionRef = useRef<HTMLElement>(null);
+  const firstRenderRef = useRef(true);
   const linesParentRef = useRef<SVGGElement>(null);
   const logoBackgroundRef = useRef<SVGPathElement>(null);
   const logoContainerRef = useRef<SVGPathElement>(null);
@@ -24,38 +25,31 @@ export default function Pdas() {
   const slashRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const tlRef = useRef<gsap.core.Timeline>();
 
+  const lenis = useLenis(({ scroll }) => {
+    if (firstRenderRef.current) {
+      firstRenderRef.current = false;
+
+      gsap.delayedCall(0.4, () => {
+        setTimelineProgress(scroll);
+        gsap.to(sectionRef.current, { autoAlpha: 1 });
+      });
+      return;
+    }
+
+    setTimelineProgress(scroll);
+  });
+
   // Animation setup using useEffect
   useEffect(() => {
     createAnimation();
-
-    let firstRender = true;
-
-    // Scroll event handling
-    const handleScroll = (e: IInstanceOptions) => {
-      if (firstRender) {
-        firstRender = false;
-
-        gsap.delayedCall(0.4, () => {
-          setTimelineProgress(e.scroll);
-          gsap.to(sectionRef.current, { autoAlpha: 1 });
-        });
-        return;
-      }
-
-      setTimelineProgress(e.scroll);
-    };
 
     window.addEventListener('resize', reCalc);
 
     // Set second logo text bounds
     gsap.delayedCall(0.2, setLogoTextBounds);
 
-    // Attach scroll event listener
-    LenisManager?.on('scroll', handleScroll);
-
     // Cleanup function
     return () => {
-      LenisManager?.off('scroll', handleScroll);
       window.removeEventListener('resize', reCalc);
     };
   }, []);
@@ -95,7 +89,7 @@ export default function Pdas() {
     setLogoTextBounds();
     createAnimation();
     gsap.delayedCall(0.1, () => {
-      setTimelineProgress(LenisManager?.scroll || 0);
+      setTimelineProgress(lenis?.scroll || 0);
     });
   };
 

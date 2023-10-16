@@ -20,9 +20,14 @@ const getProof = async (id: string): Promise<Proof | null> => {
   return proof;
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const proof = await getProof(params.id);
   return {
-    title: `Proof - Gateway Network`,
+    title: `Proof ${proof?.id} - Gateway Network`,
     description: `Proof description`,
   };
 }

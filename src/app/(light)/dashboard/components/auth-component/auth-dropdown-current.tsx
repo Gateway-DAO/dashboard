@@ -67,6 +67,7 @@ export default function AuthDropdownCurrent({ onClose }: Props) {
           {isOrg && (
             <Chip
               label="ORG"
+              size="small"
               sx={(theme) => ({
                 backgroundColor: alpha(
                   theme.palette.primary.main,

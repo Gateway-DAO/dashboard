@@ -1,7 +1,15 @@
+import { Metadata } from 'next';
+
 import { getPrivateApi } from '@/services/protocol/api';
 import { getCurrentOrg } from '@/utils/currentOrg';
 
 import RequestsTable from './components/requests-table';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Issued Data Requests - Gateway Network',
+  };
+}
 
 export default async function OrganizationRequestsPage(props: any) {
   const privateApi = await getPrivateApi();
