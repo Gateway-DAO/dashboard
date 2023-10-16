@@ -2,8 +2,8 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
-import ModalTitle from '@/components/modal/modal-title/modal-title';
 import { DecryptedProofPda } from '@/services/protocol/types';
 import { PartialDeep } from 'type-fest/source/partial-deep';
 
@@ -26,7 +26,7 @@ export default function ModalPDADetail({
 
   return (
     <ModalRight open={!!id} onClose={onClose}>
-      <ModalTitle onClose={onClose} />
+      <ModalHeader onClose={onClose} />
       {id && <PDADetail pdas={pdas} id={id} />}
     </ModalRight>
   );

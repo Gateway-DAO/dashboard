@@ -1,6 +1,5 @@
 'use client';
 import { useRouter } from 'next-nprogress-bar';
-import { useEffect, useState } from 'react';
 
 import ProofCardInfo from '@/app/(light)/dashboard/user/proof/[id]/components/proof-card-info';
 import ProofCardTitle from '@/app/(light)/dashboard/user/proof/[id]/components/proof-card-title';

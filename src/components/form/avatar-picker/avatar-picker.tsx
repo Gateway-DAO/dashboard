@@ -11,6 +11,7 @@ import GTWAvatar from '../../gtw-avatar/gtw-avatar';
 import { readImageFile } from './utils';
 
 type Props = {
+  id: string;
   name: string;
   username: string;
   value?: string | null;
@@ -21,7 +22,7 @@ type Props = {
 // TOOD: Reset when user selected an image
 
 function AvatarPickerField(
-  { name, username, value, onChange, isLoading }: Props,
+  { name, username, value, onChange, isLoading, id }: Props,
   ref: Ref<HTMLInputElement>
 ) {
   const [cropableImage, setCropableImage] = useState<string>();
@@ -54,7 +55,7 @@ function AvatarPickerField(
     onCloseModal();
   };
 
-  const [dropBond, { over: isOver }] = useDropArea({
+  const [_dropBond, { over: _isOver }] = useDropArea({
     onFiles: onReadFile,
   });
 
@@ -73,7 +74,7 @@ function AvatarPickerField(
         }}
       >
         <Box component="span" sx={{ cursor: 'pointer' }}>
-          <GTWAvatar name={username} src={value} size={80} />
+          <GTWAvatar alt={username} name={id} src={value} size={80} />
         </Box>
         <LoadingButton
           size="small"

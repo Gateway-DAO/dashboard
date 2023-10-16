@@ -4,6 +4,7 @@ import { DATE_FORMAT } from '@/constants/date';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
+import { Verified } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Paper, Stack, Typography } from '@mui/material';
 
@@ -14,9 +15,11 @@ type Props = {
   right?: boolean;
   picture?: string;
   name: string;
+  userId: string;
   username: string;
   issuance_date: string;
   isOrganization?: boolean;
+  verified?: boolean;
 };
 
 export function TooltipUser({
@@ -27,6 +30,8 @@ export function TooltipUser({
   username,
   issuance_date,
   isOrganization,
+  userId,
+  verified,
 }: Props) {
   const wrapperRef = useRef(null);
 
@@ -70,7 +75,7 @@ export function TooltipUser({
         gap={1}
         sx={{ mb: 2 }}
       >
-        <GTWAvatar src={picture} size={64} name={name!} />
+        <GTWAvatar src={picture} size={64} name={userId} alt={name!} />
         <CloseIcon
           sx={{
             cursor: 'pointer',
@@ -83,9 +88,20 @@ export function TooltipUser({
           onClick={onClose}
         />
       </Stack>
-      <Typography id="tooltip-name" fontSize={24}>
-        {limitCharsCentered(name as string, 16)}
-      </Typography>
+
+      <Stack direction="row" alignItems="center" gap={1}>
+        <Typography id="tooltip-name" fontSize={24}>
+          {limitCharsCentered(name as string, 20)}
+        </Typography>
+        {verified && (
+          <Verified
+            sx={{
+              fontSize: 16,
+              color: 'primary.main',
+            }}
+          />
+        )}
+      </Stack>
       <Typography
         id="tooltip-username"
         variant="body2"
@@ -94,13 +110,15 @@ export function TooltipUser({
       >
         {limitCharsCentered(username as string, 29)}
       </Typography>
+
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack>
           <Typography>
             {isOrganization ? 'Organization ID' : 'User ID'}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Joined in {dayjs(issuance_date).format(DATE_FORMAT)}
+            Joined in{' '}
+            {issuance_date ? dayjs(issuance_date).format(DATE_FORMAT) : ''}
           </Typography>
         </Stack>
         {/* <Link href="https://www.google.com" passHref target="_blank">

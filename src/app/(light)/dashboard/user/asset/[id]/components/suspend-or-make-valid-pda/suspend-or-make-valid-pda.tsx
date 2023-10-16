@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import Loading from '@/components/loadings/loading/loading';
@@ -11,22 +11,30 @@ import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import {
   ChangePdaStatusMutationVariables,
-  PdaQuery,
   PdaStatus,
 } from '@/services/protocol/types';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
-import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDA'] | null>;
+  pdaId: string | undefined;
+  pdaStatus: PdaStatus | undefined;
+  isValid: boolean;
+  isIssuer: any;
+  isSuspended: boolean;
 };
 
-export function SuspendOrMakeValidPDA({ pda }: Props) {
-  const { privateApi, session } = useGtwSession();
+export function SuspendOrMakeValidPDA({
+  pdaId,
+  pdaStatus,
+  isValid,
+  isIssuer,
+  isSuspended,
+}: Props) {
+  const { privateApi } = useGtwSession();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
@@ -43,19 +51,6 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
 
   const suspendPda = useMutation(mutationReq);
   const makeValidPda = useMutation(mutationReq);
-
-  const isValid = useMemo(() => pda?.status === PdaStatus.Valid, [pda]);
-  const isSuspended = useMemo(() => pda?.status === PdaStatus.Suspended, [pda]);
-  const isIssuer = useMemo(
-    () =>
-      session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId ||
-      session?.user?.accesses?.find(
-        (access) =>
-          pda?.dataAsset?.organization?.gatewayId ===
-          access?.organization?.gatewayId
-      ),
-    [pda, session]
-  );
 
   return (
     <>
@@ -112,10 +107,10 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
             negativeAnswer={common.actions.cancel}
             setOpen={setDialogConfirmation}
             onConfirm={() => {
-              if (pda?.status === PdaStatus.Valid) {
+              if (pdaStatus === PdaStatus.Valid) {
                 suspendPda
                   .mutateAsync({
-                    id: pda?.id as string,
+                    id: pdaId as string,
                     status: PdaStatus.Suspended,
                   })
                   .finally(() => {
@@ -123,10 +118,10 @@ export function SuspendOrMakeValidPDA({ pda }: Props) {
                     setTimeout(() => setLoadingAfter(false), 2000);
                   });
               }
-              if (pda?.status === PdaStatus.Suspended) {
+              if (pdaStatus === PdaStatus.Suspended) {
                 makeValidPda
                   .mutateAsync({
-                    id: pda?.id as string,
+                    id: pdaId as string,
                     status: PdaStatus.Valid,
                   })
                   .finally(() => {

@@ -8,12 +8,14 @@ import Sidebar from './sidebar/sidebar';
 
 type Props = {
   menuItems: ReactNode;
+  secondMenuItems?: ReactNode;
   mobileMenuItems: ReactNode;
 };
 
 export default function DashboardLayout({
   children,
   menuItems,
+  secondMenuItems,
   mobileMenuItems,
 }: PropsWithChildren<Props>) {
   return (
@@ -25,7 +27,7 @@ export default function DashboardLayout({
       alignItems="stretch"
       sx={{ minHeight: '100%' }}
     >
-      <Sidebar menuItems={menuItems}>
+      <Sidebar menuItems={menuItems} secondMenuItems={secondMenuItems}>
         <Logo />
       </Sidebar>
       <DashboardPage

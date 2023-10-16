@@ -1,3 +1,4 @@
+import { getErrorMessage } from '@/locale/en/errors';
 import { apiPublic } from '@/services/protocol/api';
 import { SessionToken } from '@/types/user';
 
@@ -24,6 +25,7 @@ export default async function loginWallet(
     const token = res.loginWallet;
     return token;
   } catch (error: any) {
+    console.error('Login with wallet error', getErrorMessage(error));
     throw new Error(error);
   }
 }

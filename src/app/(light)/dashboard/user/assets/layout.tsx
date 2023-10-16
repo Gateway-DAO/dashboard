@@ -10,10 +10,11 @@ import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
-import HelpMenu from './components/help-menu';
-import HelpContent from './components/help-content';
 
 import { Box } from '@mui/system';
+
+import HelpContent from './components/help-content';
+import HelpMenu from './components/help-menu';
 
 export default function DataAssetsLayout({ children }: PropsWithChildren) {
   return (

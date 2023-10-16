@@ -1,7 +1,5 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import WhiteList from '@/components/white-list/white-list';
 import { useGtwSession } from '@/context/gtw-session-provider';
@@ -12,21 +10,20 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
   Box,
-  Button,
   Chip,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Skeleton,
   Stack,
   Typography,
 } from '@mui/material';
 
+import AddMember from './add-member';
 import ManageMemberButton from './manage-member-button';
+import MembersAreaListSkeleton from './skeleton';
 
 export default function MembersArea() {
-  const { data: session } = useSession();
-  const { organization } = useOrganization();
+  const { organization, canEdit } = useOrganization();
   const { privateApi } = useGtwSession();
   const members = useQuery({
     queryKey: ['organization-members', organization?.id],
@@ -61,15 +58,6 @@ export default function MembersArea() {
       }),
   });
 
-  const canChangeRole = members.data?.some((member) => {
-    if (member.user.id === session?.user?.id) {
-      return (
-        member.role === OrganizationRole.Admin ||
-        member.role === OrganizationRole.Owner
-      );
-    }
-  });
-
   const onChangeRole = async (userId: string, role: OrganizationRole) => {
     await changeRole.mutateAsync({ userId, role });
     await members.refetch();
@@ -81,7 +69,10 @@ export default function MembersArea() {
   };
 
   const isMutating =
-    changeRole.isLoading || removeUser.isLoading || members.isRefetching;
+    changeRole.isLoading ||
+    removeUser.isLoading ||
+    members.isLoading ||
+    members.isRefetching;
 
   return (
     <Box sx={{ maxWidth: 1094 }}>
@@ -94,19 +85,19 @@ export default function MembersArea() {
       >
         <Stack gap={1}>
           <Typography variant="h5">{orgSettings.membersArea.title}</Typography>
-          <Typography color="text.secondary">
-            {orgSettings.membersArea.subtitle}
-          </Typography>
+          {canEdit && (
+            <Typography color="text.secondary">
+              {orgSettings.membersArea.subtitle}
+            </Typography>
+          )}
         </Stack>
-        <Button>Add member</Button>
+        {canEdit && (
+          <AddMember disabled={isMutating} onSuccess={members.refetch} />
+        )}
       </Stack>
 
       {members.isLoading ? (
-        <WhiteList>
-          <Skeleton sx={{ mx: 2, my: 1 }} />
-          <Skeleton sx={{ mx: 2, my: 1 }} />
-          <Skeleton sx={{ mx: 2, my: 1 }} />
-        </WhiteList>
+        <MembersAreaListSkeleton />
       ) : (
         <>
           {members.data?.length === 0 ? (
@@ -129,24 +120,22 @@ export default function MembersArea() {
                           size="small"
                           color="primary"
                           sx={{
-                            mr: () => {
-                              if (!canChangeRole) return 0;
-                              if (member.role === OrganizationRole.Owner)
-                                return 6;
-                              return 1;
-                            },
+                            mr: !canEdit
+                              ? 0
+                              : member.role === OrganizationRole.Owner
+                              ? 6
+                              : 1,
                           }}
                         />
                       )}
-                      {canChangeRole &&
-                        member.role !== OrganizationRole.Owner && (
-                          <ManageMemberButton
-                            userId={member.user.id}
-                            role={member.role}
-                            onChangeRole={onChangeRole}
-                            onRemoveUser={onRemoveUser}
-                          />
-                        )}
+                      {canEdit && member.role !== OrganizationRole.Owner && (
+                        <ManageMemberButton
+                          userId={member.user.id}
+                          role={member.role}
+                          onChangeRole={onChangeRole}
+                          onRemoveUser={onRemoveUser}
+                        />
+                      )}
                     </>
                   }
                 >

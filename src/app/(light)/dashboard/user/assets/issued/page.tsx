@@ -1,9 +1,17 @@
+import { Metadata } from 'next';
+
 import { pdas as pdasLocales } from '@/locale/en/pda';
 import { getPrivateApi } from '@/services/protocol/api';
 
 import { Typography } from '@mui/material';
 
 import IssuedPDAsList from './components/list';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Issued Data Assets - Gateway Network',
+  };
+}
 
 export default async function DataAssetsPage() {
   const privateApi = await getPrivateApi();

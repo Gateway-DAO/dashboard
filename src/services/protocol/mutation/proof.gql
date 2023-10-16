@@ -7,7 +7,7 @@ mutation create_proof($claims: JSON, $verifier: IdentificationInput) {
     dataRequest {
       id
     }
-    organization {
+    verifierOrganization {
       gatewayId
     }
     verifier {
@@ -28,7 +28,7 @@ mutation create_proof_from_request($requestId: String!) {
     dataRequest {
       id
     }
-    organization {
+    verifierOrganization {
       gatewayId
     }
     verifier {

@@ -5,10 +5,8 @@ import { AddOutlined, NotificationsOutlined } from '@mui/icons-material';
 import {
   Button,
   Chip,
-  Divider,
   ListItem,
   ListItemText,
-  Skeleton,
   Typography,
 } from '@mui/material';
 import { Stack } from '@mui/system';
@@ -20,6 +18,7 @@ type Props = {
   emails: any[];
   userEmail: string;
   onDisconnect: (address: string) => void;
+  onUpdateNotificationEmail: (address: string) => void;
   onAddEmail: () => void;
   isLoading: boolean;
 };
@@ -28,6 +27,7 @@ export default function EmailsSection({
   emails,
   userEmail,
   onDisconnect,
+  onUpdateNotificationEmail,
   onAddEmail,
   isLoading,
 }: Props) {
@@ -46,8 +46,9 @@ export default function EmailsSection({
       )}
       {emails &&
         emails.length > 0 &&
+        !isLoading &&
         emails.map(({ data }) => {
-          const primary = data.email === userEmail;
+          const primary = data.address === userEmail;
 
           return (
             <ListItem
@@ -55,6 +56,10 @@ export default function EmailsSection({
               secondaryAction={
                 <AliasMenuButton
                   onDisconnect={() => onDisconnect(data?.address as string)}
+                  {...(!primary && {
+                    onUpdateNotificationEmail: () =>
+                      onUpdateNotificationEmail(data?.address as string),
+                  })}
                 />
               }
             >
@@ -69,6 +74,7 @@ export default function EmailsSection({
                             size="small"
                             icon={<NotificationsOutlined />}
                             sx={{
+                              mr: 1,
                               '.MuiChip-icon': {
                                 marginRight: {
                                   xs: 0.5,

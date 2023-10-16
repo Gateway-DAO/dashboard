@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { proofs as proofsLocales } from '@/locale/en/proof';
 import { getPrivateApi } from '@/services/protocol/api';
 import { Proof } from '@/services/protocol/types';
@@ -7,10 +9,16 @@ import { Typography } from '@mui/material';
 
 import ProofsSentTable from './components/proofs-sent-table';
 
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Sent Data Requests - Gateway Network',
+  };
+}
+
 export default async function DashboardUserSentProofs() {
   const privateApi = await getPrivateApi();
 
-  const proofs = (await privateApi.sent_proofs({ take: 6, skip: 0 }))
+  const proofs = (await privateApi.sent_proofs({ take: 5, skip: 0 }))
     ?.sentProofs as PartialDeep<Proof>[];
   const count = (await privateApi.count_sent_proofs()).sentProofsCount;
 

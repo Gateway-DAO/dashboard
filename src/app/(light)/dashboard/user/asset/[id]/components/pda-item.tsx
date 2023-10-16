@@ -1,6 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
-
-import Image from 'next/image';
 
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import Tags from '@/components/tags/tags';
@@ -17,19 +16,18 @@ import { PartialDeep } from 'type-fest';
 import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
 import DataTable from './data-table';
+import IssuerPDAActions from './issuer-pda-actions';
 import ModalImage from './modal-image';
 import PdaCardInfo from './pda-card-info';
-import { RevokePDA } from './revoke-pda/revoke-pda';
 import ShareCopy from './share-copy/share-copy';
 import SharedWithCard from './shared-with-card';
-import { SuspendOrMakeValidPDA } from './suspend-or-make-valid-pda/suspend-or-make-valid-pda';
 
 type Props = {
   pda: PartialDeep<PdaQuery['PDA'] | null>;
-  viewOnly?: boolean;
+  isProofPda?: boolean;
 };
 
-export default function PDAItem({ pda, viewOnly = false }: Props) {
+export default function PDAItem({ pda, isProofPda = false }: Props) {
   const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
 
   return (
@@ -78,7 +76,7 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
           {pda?.dataAsset?.image && (
             <>
               <IconButton onClick={toggleShowImagePDAModal}>
-                <Image
+                <img
                   src={pda?.dataAsset?.image ?? ''}
                   alt={pda?.dataAsset?.title ?? ''}
                   width={96}
@@ -98,17 +96,12 @@ export default function PDAItem({ pda, viewOnly = false }: Props) {
         </Stack>
         <Tags tags={pda?.dataAsset?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.dataAsset?.description}</Typography>
-        <PdaCardInfo pda={pda} viewOnly={viewOnly} />
-        {!viewOnly && (
+        <PdaCardInfo pda={pda} isProofPda={isProofPda} />
+        {!isProofPda && (
           <>
-            <SharedWithCard pdaId={pda?.id as string} />
-
+            <SharedWithCard pda={pda} />
             <ShareCopy pda={pda} />
-            <Stack direction="row" gap={1}>
-              <SuspendOrMakeValidPDA pda={pda} />
-              <RevokePDA pda={pda} />
-            </Stack>
-
+            <IssuerPDAActions pda={pda} />
             {/* Activies backloged 09/02 */}
             {/* <Activities
               activities={pda.activities}

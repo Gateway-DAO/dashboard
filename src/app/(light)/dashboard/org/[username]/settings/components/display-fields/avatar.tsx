@@ -45,7 +45,8 @@ export default function Avatar() {
       </FormLabel>
       <AvatarPicker
         name="profilePicture"
-        username={organization!.gatewayId!}
+        id={organization?.id ?? ''}
+        username={organization?.gatewayId ?? ''}
         value={initialImage}
         onChange={onSubmit}
         isLoading={uploadImage.isLoading}

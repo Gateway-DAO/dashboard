@@ -3,6 +3,7 @@ import { signIn } from 'next-auth/react';
 
 import { useCountdown } from '@/hooks/use-countdown';
 import { auth } from '@/locale/en/auth';
+import { ErrorCode, getErrorFromCode } from '@/locale/en/errors';
 import { apiPublic } from '@/services/protocol/api';
 import { useToggle } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
@@ -50,12 +51,27 @@ export function VerifyEmailLoginToken() {
 
   const onSubmit = async (code: string) => {
     try {
-      await sendConfirmationToken.mutateAsync(code);
-      await onHandleSession();
-    } catch (e: any) {
-      enqueueSnackbar(e.message, {
+      const res = await sendConfirmationToken.mutateAsync(code);
+      if (!!res?.error) {
+        throw res.error;
+      }
+      const step = await onHandleSession();
+      if (step === 'completed') {
+        enqueueSnackbar(auth.connection_modal.success.description, {
+          variant: 'success',
+        });
+      }
+    } catch (error: any) {
+      const code: ErrorCode = (error as string).split(':')[0] as ErrorCode;
+      const message = getErrorFromCode(code);
+
+      enqueueSnackbar(message, {
         variant: 'error',
       });
+
+      if (code === 'MAXIMUM_ATTEMPTS_REACHED') {
+        setStepState({ step: 'initial' });
+      }
     }
   };
 

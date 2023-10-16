@@ -11,6 +11,8 @@ import GatewaySquaredIcon from './gateway-squared';
 import PassFilledIcon from './pass-filled';
 import SolanaIcon from './solana';
 import VerifiedFilledIcon from './verified-filled';
+import HomeOutlinedIcon from './home-outlined';
+import BannerIcon from './banner';
 
 const meta = {
   title: 'Gateway/Icons',
@@ -24,6 +26,8 @@ const meta = {
       <GatewaySquaredIcon />
       <GatewayIcon />
       <GatewayBrokenIcon />
+      <BannerIcon />
+      <HomeOutlinedIcon />
       <SolanaIcon />
     </>
   ),

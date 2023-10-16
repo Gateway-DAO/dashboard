@@ -34,3 +34,12 @@ mutation update_username($username: String!) {
     id
   }
 }
+
+mutation updateNotificationEmail($email: String!) {
+  updateNotificationEmail(email: $email) {
+    user {
+      gatewayId
+      email
+    }
+  }
+}

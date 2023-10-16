@@ -1,18 +1,20 @@
+import { usernameRegex } from '@/constants/username';
+import { auth } from '@/locale/en/auth';
 import zod from 'zod';
 
-const usernameRegex =
-  /^(?!.*\.\.)(?!.*\.\.$)(?!.*--)(?!.*--$)(?!.*__)(?!.*__$)[a-z0-9._-]{1,19}[a-z0-9]$/;
-
-export const usernameSchema = zod
-  .string({ required_error: 'Code is required' })
-  .min(2, "Username can't be less than 2 characters")
-  .max(20)
-  .refine(
-    (value) => usernameRegex.test(value),
-    'Only lowercase letters, numbers and ._-'
-  );
+export const usernameSchema = zod.preprocess(
+  (value: unknown) => (typeof value === 'string' ? value.trim() : value),
+  zod
+    .string({ required_error: 'Code is required' })
+    .min(2, "Username can't be less than 2 characters")
+    .max(20)
+    .refine(
+      (value) => usernameRegex.test(value),
+      auth.steps.choose_gateway_id.create_username_rules
+    )
+);
 
 export const displayNameSchema = zod.preprocess((value) => {
   if (!value || typeof value !== 'string') return undefined;
-  return value === '' ? undefined : value;
+  return value === '' ? undefined : value.trim();
 }, zod.string().min(2).optional());
