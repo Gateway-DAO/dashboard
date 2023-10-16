@@ -11,7 +11,7 @@ import { joinClasses } from '@/app/(landing)/utils/function';
 import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
 // import Link from '@/components/gtw-link';
 
-import { Box, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
