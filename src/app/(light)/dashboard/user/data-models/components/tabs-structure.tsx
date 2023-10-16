@@ -84,6 +84,13 @@ export default function TabsStructure({
             expirationDate: null,
             claim: {
             ${claimObj}
+            ${
+              !!organization &&
+              `organization: {
+                type: GATEWAY_ID,
+                value: "${organization?.gatewayId}"
+              }`
+            }
             }
         }) {
             id,

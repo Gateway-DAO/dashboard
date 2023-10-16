@@ -65,6 +65,13 @@ export default function TabsStructure({
                 type: GATEWAY_ID,
                 value: "ADD THE DATA OWNER"
             },
+            ${
+              !!organization &&
+              `organization: {
+                type: GATEWAY_ID,
+                value: "${organization?.gatewayId}"
+              }`
+            }
             dataUse: "ADD WHAT’S THE REASON TO REQUEST THE DATA"
         }) {
             arweaveUrl,
