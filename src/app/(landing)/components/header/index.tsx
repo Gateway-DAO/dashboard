@@ -44,7 +44,7 @@ export default function Header() {
       setVariant('light');
       lenis?.stop();
     } else {
-      setVariant(previousVariant.current || 'dark');
+      setVariant(previousVariant.current || 'light');
       lenis?.start();
     }
   }, [isFirstRender, burgerActive, lenis]);
