@@ -3,7 +3,7 @@ import Wrapper from '@/app/(landing)/components/wrapper';
 
 import Title from '../title';
 import styles from './our-protocol.module.scss';
-import { DOCS_BASE_URL } from '@/utils/docs';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 const protocols = [
   {

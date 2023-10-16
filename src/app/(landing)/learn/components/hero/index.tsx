@@ -8,7 +8,7 @@ import GTWLink from '@/components/gtw-link';
 import Slider from 'react-slick';
 
 import styles from './hero.module.scss';
-import { DOCS_BASE_URL } from '@/utils/docs';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 const conceptsCards = [
   {
@@ -24,7 +24,7 @@ const conceptsCards = [
   {
     title: 'API & SDK',
     description: 'Use the SDK from your applications',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/get-started-here`,
   },
 ];
 
@@ -37,7 +37,7 @@ const solutionsCards = [
   {
     title: 'Automate Issuance',
     description: 'SDK integration step-by-step',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/get-started-here`,
   },
 ];
 
@@ -124,10 +124,17 @@ export default function Hero() {
           </Slider>
 
           <div className={styles.mobile_comcepts_buttons}>
-            <GTWLink href="/" className={styles.concepts_link}>
+            <GTWLink
+              href="mailto:ayyan@mygateway.xyz"
+              className={styles.concepts_link}
+            >
               <Button variant="outlined">Open full documentation</Button>
             </GTWLink>
-            <GTWLink href="/" className={styles.concepts_link}>
+            <GTWLink
+              href={DOCS_BASE_URL}
+              target="_blank"
+              className={styles.concepts_link}
+            >
               <Button variant="outlined">Get a demo</Button>
             </GTWLink>
           </div>

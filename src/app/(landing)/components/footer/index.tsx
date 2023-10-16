@@ -15,6 +15,7 @@ import LogoSubstrack from '../icons/logo-substrack';
 import LogoTwitter from '../icons/logo-twitter';
 import Wrapper from '../wrapper';
 import styles from './footer.module.scss';
+import routes from '@/constants/routes';
 
 function splitElementByBrTag(element: HTMLElement): HTMLElement[] {
   // Split the innerHTML of the element using the <br/> tag as the delimiter
@@ -48,7 +49,7 @@ type Props = {
 const linksSocial = [
   {
     icon: LogoTwitter,
-    href: '/',
+    href: 'https://twitter.com/gateway_xyz',
   },
   {
     icon: LogoDiscord,
@@ -56,30 +57,30 @@ const linksSocial = [
   },
   {
     icon: LogoLinkedin,
-    href: '/',
+    href: 'https://www.linkedin.com/company/mygateway/',
   },
   {
     icon: LogoSubstrack,
-    href: '/',
+    href: 'https://mygateway.substack.com/',
   },
   {
     icon: LogoGithub,
-    href: '/',
+    href: 'https://github.com/Gateway-DAO',
   },
 ];
 
 const linksList = [
   {
     title: 'Learn',
-    href: '/',
+    href: routes.learn,
   },
   {
     title: 'Build',
-    href: '/',
+    href: routes.build,
   },
   {
     title: 'Explorer',
-    href: '/',
+    href: routes.explorer,
   },
   {
     title: 'Dashboard',
