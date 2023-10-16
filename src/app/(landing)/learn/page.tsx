@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 import { HeaderContextProvider } from '@/app/(landing)/contexts/header-context';
-import LenisManager, { initializeLenis } from '@/app/(landing)/utils/scroll';
+import LenisManager from '@/app/(landing)/utils/scroll';
 
 import Footer from '../components/footer';
 import Header from '../components/header';
@@ -28,10 +28,9 @@ import TemplateLearnSection from './components/template-learn-section';
 
 export default function BuildPage() {
   useEffect(() => {
-    initializeLenis();
     LenisManager?.start();
     return () => {
-      LenisManager?.destroy();
+      LenisManager?.stop();
     };
   }, []);
 
