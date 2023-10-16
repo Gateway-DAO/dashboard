@@ -8,8 +8,7 @@ import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
-import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
-// import Link from '@/components/gtw-link';
+import { useLenis } from '@studio-freight/react-lenis';
 
 import { Stack, Typography } from '@mui/material';
 
@@ -29,22 +28,13 @@ export default function Header() {
   const previousVariant = useRef<'light' | 'dark' | null>(null);
   const isFirstRender = useIsFirstRender();
 
-  useEffect(() => {
-    const handleScroll = ({ direction, scroll }: IInstanceOptions) => {
-      if (direction === 1 && scroll > 0) {
-        setScrollDirection('down');
-      } else if (direction === -1 || scroll === 0) {
-        setScrollDirection('top');
-      }
-    };
-
-    LenisManager?.on('scroll', handleScroll);
-
-    return () => {
-      LenisManager?.off('scroll', handleScroll);
-    };
-  }),
-    [];
+  const lenis = useLenis(({ direction, scroll }) => {
+    if (direction === 1 && scroll > 0) {
+      setScrollDirection('down');
+    } else if (direction === -1 || scroll === 0) {
+      setScrollDirection('top');
+    }
+  });
 
   useEffect(() => {
     if (isFirstRender) return;
@@ -52,12 +42,12 @@ export default function Header() {
     if (burgerActive) {
       previousVariant.current = variant;
       setVariant('light');
-      LenisManager?.stop();
+      lenis?.stop();
     } else {
       setVariant(previousVariant.current || 'dark');
-      LenisManager?.start();
+      lenis?.start();
     }
-  }, [burgerActive]);
+  }, [isFirstRender, burgerActive, lenis]);
 
   return (
     <>

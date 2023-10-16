@@ -1,9 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import { HeaderContextProvider } from '@/app/(landing)/contexts/header-context';
-import LenisManager from '@/app/(landing)/utils/scroll';
 
 import Footer from '../components/footer';
 import Header from '../components/header';
@@ -27,13 +24,6 @@ import OurProtocol from './components/our-protocol';
 import TemplateLearnSection from './components/template-learn-section';
 
 export default function BuildPage() {
-  useEffect(() => {
-    LenisManager?.start();
-    return () => {
-      LenisManager?.stop();
-    };
-  }, []);
-
   return (
     <HeaderContextProvider>
       <Header />
