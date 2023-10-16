@@ -11,6 +11,8 @@ import { joinClasses } from '@/app/(landing)/utils/function';
 import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
 // import Link from '@/components/gtw-link';
 
+import { Box, Stack, Typography } from '@mui/material';
+
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
 import styles from './header.module.scss';
@@ -67,6 +69,31 @@ export default function Header() {
       )}
       ref={navRef}
     >
+      <Stack
+        sx={{
+          width: '100%',
+          background: '#E6D5FA',
+          height: 40,
+          alignItems: 'center',
+          flexDirection: 'row',
+        }}
+      >
+        <Wrapper className={styles.wrapper}>
+          <Stack
+            direction="row"
+            gap={0.5}
+            sx={{ alignItems: 'center', '& a': { textDecoration: 'none' } }}
+          >
+            <Typography color="common.black">
+              Product Marketing Engagements can now be found at
+            </Typography>
+            <Link href="https://tryodyssey.xyz">
+              <Typography color="primary">tryodyssey.xyz</Typography>
+            </Link>
+          </Stack>
+        </Wrapper>
+      </Stack>
+
       <Wrapper className={styles.wrapper}>
         {isMobile || isTablet ? (
           <>
