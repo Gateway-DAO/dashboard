@@ -4,7 +4,6 @@ import { useRef, useEffect } from 'react';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import { splitSpans } from '@/app/(landing)/utils/dom';
 import { joinClasses } from '@/app/(landing)/utils/function';
-import LenisManager from '@/app/(landing)/utils/scroll';
 import { useLenis } from '@studio-freight/react-lenis';
 import gsap from 'gsap';
 
@@ -26,7 +25,7 @@ export default function Pdas() {
   const slashRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const tlRef = useRef<gsap.core.Timeline>();
 
-  useLenis(({ scroll }) => {
+  const lenis = useLenis(({ scroll }) => {
     if (firstRenderRef.current) {
       firstRenderRef.current = false;
 
@@ -90,7 +89,7 @@ export default function Pdas() {
     setLogoTextBounds();
     createAnimation();
     gsap.delayedCall(0.1, () => {
-      setTimelineProgress(LenisManager?.scroll || 0);
+      setTimelineProgress(lenis?.scroll || 0);
     });
   };
 

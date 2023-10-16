@@ -15,8 +15,6 @@ export default function useHeaderVariantDetection(
     // TODO: Improve it using IntersectionObserver
     const { top, bottom } = sectionRef.current.getBoundingClientRect();
 
-    console.log(top, bottom, variant);
-
     if (top <= 0 && bottom >= 100) {
       setVariant(variant);
     }

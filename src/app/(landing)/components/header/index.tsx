@@ -10,9 +10,6 @@ import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import { useLenis } from '@studio-freight/react-lenis';
 
-import { IInstanceOptions } from '../../utils/IInstanceOptions';
-// import Link from '@/components/gtw-link';
-
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
 import styles from './header.module.scss';
