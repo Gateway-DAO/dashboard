@@ -5,6 +5,7 @@ import Loading from '@/components/loadings/loading/loading';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { errorMessages } from '@/locale/en/errors';
 import { settings } from '@/locale/en/settings';
+import { Protocol_Add_EmailMutation } from '@/services/protocol/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
@@ -38,24 +39,9 @@ export default function AddEmail({ onSuccess }: Props) {
 
   const addEmail = useMutation({
     mutationFn: async (data: { email: string }) => {
-      try {
-        const res = await privateApi.protocol_add_email(data);
-        return res;
-      } catch (e: any) {
-        if (e?.response?.errors?.[0]?.message === 'EMAIL_ALREADY_REGISTERED') {
-          return privateApi.create_email_nonce(data);
-        }
-        throw e;
-      }
+      return await privateApi.protocol_add_email(data);
     },
-  });
-
-  const onSubmitEmail = async (data: EmailSchema) => {
-    try {
-      await addEmail.mutateAsync({ email: data.email_address });
-      setSentEmail(true);
-      setEmail(data.email_address);
-    } catch (e) {
+    onError: (e) => {
       (e as any)?.response?.errors?.forEach(({ message }: any) => {
         enqueueSnackbar(
           (errorMessages as any)[message] || errorMessages.UNEXPECTED_ERROR,
@@ -64,7 +50,15 @@ export default function AddEmail({ onSuccess }: Props) {
           }
         );
       });
-    }
+    },
+    onSuccess: (data: Protocol_Add_EmailMutation) => {
+      setSentEmail(true);
+      setEmail(data.addEmail.email);
+    },
+  });
+
+  const onSubmitEmail = async (data: EmailSchema) => {
+    addEmail.mutate({ email: data.email_address });
   };
 
   const confirmToken = useMutation({
@@ -73,14 +67,8 @@ export default function AddEmail({ onSuccess }: Props) {
         code: parseInt(code, 10),
         email: email as string,
       }),
-  });
-
-  const onSubmitConfirmToken = async (data: TokenConfirmationSchema) => {
-    try {
-      await confirmToken.mutateAsync(data);
-      onSuccess();
-    } catch (error: any) {
-      (error?.response as any)?.errors?.forEach(({ message }: any) => {
+    onError: (e: any) => {
+      (e?.response as any)?.errors?.forEach(({ message }: any) => {
         if (message === 'MAXIMUM_ATTEMPTS_REACHED') {
           setSentEmail(false);
         }
@@ -91,7 +79,14 @@ export default function AddEmail({ onSuccess }: Props) {
           }
         );
       });
-    }
+    },
+    onSuccess: () => {
+      onSuccess();
+    },
+  });
+
+  const onSubmitConfirmToken = async (data: TokenConfirmationSchema) => {
+    confirmToken.mutate(data);
   };
 
   return (
