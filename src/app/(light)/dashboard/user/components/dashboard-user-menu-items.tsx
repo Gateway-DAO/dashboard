@@ -1,4 +1,5 @@
 import { GTWMenuItemSettings } from '@/app/(light)/dashboard/components/menu-item/menu-item';
+import DataModelOutlinedIcon from '@/components/icons/data-model-outlined';
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
 import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
@@ -50,6 +51,12 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserProof(''),
     ],
     icon: DataProofOutlinedIcon,
+  },
+  {
+    name: 'Data models',
+    href: routes.dashboardUserDataModels,
+    activeHrefs: [routes.dashboardUserDataModels],
+    icon: DataModelOutlinedIcon,
   },
 ];
 
