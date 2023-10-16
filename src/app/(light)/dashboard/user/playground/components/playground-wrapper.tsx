@@ -24,7 +24,7 @@ const initialQuery = `mutation createPDA {
               type: GATEWAY_ID
               value: "sanket"
           }
-          dataModelId: ${currentDataModel}
+          dataModelId: ${currentDataModel ?? dataModelIdByEnv.development}
           image: "https://cdn.mygateway.xyz/logo.png"
           expirationDate: null
           claim: {gatewayUse: "To make data move with you"}
