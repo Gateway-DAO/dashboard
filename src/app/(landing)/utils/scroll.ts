@@ -8,21 +8,18 @@ function rAF(time: number) {
   requestAnimationFrame(rAF);
 }
 
-if (typeof window !== 'undefined') {
-  LenisManager = new Lenis({
+export function initLenis() {
+  const lenis = new Lenis({
     duration: 1,
     wheelMultiplier: 1,
   });
 
   requestAnimationFrame(rAF);
+  return lenis;
 }
 
-export interface IInstanceOptions {
-  direction: number;
-  limit: number;
-  progress: number;
-  scroll: number;
-  velocity: number;
+if (typeof window !== 'undefined') {
+  LenisManager = initLenis();
 }
 
 export default LenisManager;

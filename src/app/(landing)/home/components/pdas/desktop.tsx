@@ -2,9 +2,10 @@
 import { useRef, useEffect } from 'react';
 
 import Wrapper from '@/app/(landing)/components/wrapper';
+import { useLenisS } from '@/app/(landing)/libs/lenis-provider';
+import { IInstanceOptions } from '@/app/(landing)/utils/IInstanceOptions';
 import { splitSpans } from '@/app/(landing)/utils/dom';
 import { joinClasses } from '@/app/(landing)/utils/function';
-import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
 import gsap from 'gsap';
 
 import styles from './pdas.module.scss';
@@ -23,6 +24,7 @@ export default function Pdas() {
   const textPdasParagraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const slashRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const tlRef = useRef<gsap.core.Timeline>();
+  const lenis = useLenisS();
 
   // Animation setup using useEffect
   useEffect(() => {
@@ -51,14 +53,14 @@ export default function Pdas() {
     gsap.delayedCall(0.2, setLogoTextBounds);
 
     // Attach scroll event listener
-    LenisManager?.on('scroll', handleScroll);
+    lenis?.on('scroll', handleScroll);
 
     // Cleanup function
     return () => {
-      LenisManager?.off('scroll', handleScroll);
+      lenis?.off('scroll', handleScroll);
       window.removeEventListener('resize', reCalc);
     };
-  }, []);
+  }, [lenis]);
 
   const setTimelineProgress = (scroll: number) => {
     if (!sectionRef.current || !tlRef.current) return;
@@ -95,7 +97,7 @@ export default function Pdas() {
     setLogoTextBounds();
     createAnimation();
     gsap.delayedCall(0.1, () => {
-      setTimelineProgress(LenisManager?.scroll || 0);
+      setTimelineProgress(lenis?.scroll || 0);
     });
   };
 

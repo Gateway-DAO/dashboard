@@ -4,6 +4,7 @@ import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 import { PropsWithChildren } from 'react';
 
 import { ThemeProvider } from '@/theme';
+import { ReactLenis } from '@studio-freight/react-lenis';
 
 export default function Providers({ children }: PropsWithChildren) {
   return (
@@ -14,7 +15,7 @@ export default function Providers({ children }: PropsWithChildren) {
         options={{ showSpinner: false }}
         shallowRouting
       />
-      {children}
+      <ReactLenis root>{children}</ReactLenis>
     </ThemeProvider>
   );
 }
