@@ -16,7 +16,7 @@ export default async function DashboardUserDataRequestTemplatesPage() {
         take: 5,
       })
     )?.dataRequestTemplates ?? [];
-  const count = (await (await privateApi).myDataRequestTemplatesCount())
+  const count = (await privateApi.myDataRequestTemplatesCount())
     .myDataRequestTemplatesCount;
 
   return <RequestTemplatesTable data={requestsData} totalCount={count} />;

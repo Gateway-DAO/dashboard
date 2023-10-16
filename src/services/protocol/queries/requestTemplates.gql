@@ -21,3 +21,7 @@ query dataRequestTemplatesByOrg(
 query myDataRequestTemplatesCount {
   myDataRequestTemplatesCount
 }
+
+query myDataRequestTemplatesCountOrg($orgGatewayId: String) {
+  myDataRequestTemplatesCount(orgGatewayId: $orgGatewayId)
+}
