@@ -1,4 +1,9 @@
 import CopyButton from '@/components/copy-button/copy-button';
+import {
+  CONTAINER_PX,
+  NEGATIVE_CONTAINER_PX,
+} from '@/theme/config/style-tokens';
+import { CodeBlock, dracula } from 'react-code-blocks';
 
 import { Box, Button, Stack, Tab, Tabs, Typography } from '@mui/material';
 
@@ -36,9 +41,35 @@ function a11yProps(index: number) {
 }
 
 export default function TabsStructure() {
+  const codeProps = {
+    text: `mutation {
+            createDataRequest(input: {
+                dataRequestTemplateId: "6a659127-4c2d-40fe-a544-ec149b68ac18",
+                owner: {
+                    type: GATEWAY_ID,
+                    value: "ADD THE DATA OWNER"
+                },
+                dataUse: "ADD WHAT’S THE REASON TO REQUEST THE DATA"
+            }) {
+                arweaveUrl,
+                id,
+                status
+                dataUse
+            }
+        }`,
+    theme: dracula,
+    language: 'graphql',
+  };
   return (
     <Stack mt={3}>
-      <Stack>
+      <Stack
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          mx: NEGATIVE_CONTAINER_PX,
+          px: CONTAINER_PX,
+        }}
+      >
         <Tabs value={0}>
           <Tab label="Create data request" />
           <Tab label="Details" />
@@ -48,7 +79,7 @@ export default function TabsStructure() {
         <Typography variant="body1">
           Copy the mutation to create a data request using this template
         </Typography>
-        <Box sx={{ gap: 2, display: 'flex', mt: 2 }}>
+        <Box sx={{ gap: 2, display: 'flex', mt: 4, mb: 4 }}>
           <CopyButton
             variant="contained"
             customButtonText="Copy mutation"
@@ -56,21 +87,7 @@ export default function TabsStructure() {
           />
           <Button variant="outlined">Go to playground</Button>
         </Box>
-        <code>`mutation {
-	createDataRequest(input: {
-		dataRequestTemplateId: "6a659127-4c2d-40fe-a544-ec149b68ac18",
-		owner: {
-			type: GATEWAY_ID,
-			value: "ADD THE DATA OWNER"
-		},
-		dataUse: "ADD WHAT’S THE REASON TO REQUEST THE DATA"
-	}) {
-		arweaveUrl,
-		id,
-		status
-		dataUse
-	}
-}`</code>
+        <CodeBlock {...codeProps} />
       </CustomTabPanel>
     </Stack>
   );
