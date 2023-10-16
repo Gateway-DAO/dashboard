@@ -1,11 +1,22 @@
+import { useState } from 'react';
+
 import CopyButton from '@/components/copy-button/copy-button';
+import routes from '@/constants/routes';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
 import { CodeBlock, dracula } from 'react-code-blocks';
 
-import { Box, Button, Stack, Tab, Tabs, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Skeleton,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from '@mui/material';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -25,7 +36,7 @@ function CustomTabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ pt: 3 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -33,32 +44,50 @@ function CustomTabPanel(props: TabPanelProps) {
   );
 }
 
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+export default function TabsStructure({
+  isLoading,
+  id,
+  data,
+}: {
+  isLoading: boolean;
+  id: string;
+  data: any;
+}) {
+  const [currentTab, setTab] = useState(0);
 
-export default function TabsStructure() {
-  const codeProps = {
-    text: `mutation {
-            createDataRequest(input: {
-                dataRequestTemplateId: "6a659127-4c2d-40fe-a544-ec149b68ac18",
-                owner: {
-                    type: GATEWAY_ID,
-                    value: "ADD THE DATA OWNER"
-                },
-                dataUse: "ADD WHAT’S THE REASON TO REQUEST THE DATA"
-            }) {
-                arweaveUrl,
-                id,
-                status
-                dataUse
-            }
-        }`,
+  const mutation = `mutation {
+        createDataRequest(input: {
+            dataRequestTemplateId: "${id}",
+            owner: {
+                type: GATEWAY_ID,
+                value: "ADD THE DATA OWNER"
+            },
+            dataUse: "ADD WHAT’S THE REASON TO REQUEST THE DATA"
+        }) {
+            arweaveUrl,
+            id,
+            status
+            dataUse
+        }
+    }`;
+  const codeCreateRequestProps = {
+    text: mutation,
     theme: dracula,
     language: 'graphql',
+  };
+
+  const detailsTemplateProps = {
+    theme: dracula,
+    language: 'graphql',
+    text: `data: {
+      dataRequestTemplate: {
+        id: "${data?.id}",
+        name: "${data?.name}",
+        schema: ${JSON.stringify(data?.schema)},
+        organization: ${data?.organization},
+        createdAt: "${data?.createdAt}"
+      }
+    }`,
   };
   return (
     <Stack mt={3}>
@@ -70,12 +99,15 @@ export default function TabsStructure() {
           px: CONTAINER_PX,
         }}
       >
-        <Tabs value={0}>
+        <Tabs
+          onChange={(event, newValue: number) => setTab(newValue)}
+          value={currentTab}
+        >
           <Tab label="Create data request" />
           <Tab label="Details" />
         </Tabs>
       </Stack>
-      <CustomTabPanel value={0} index={0}>
+      <CustomTabPanel value={currentTab} index={0}>
         <Typography variant="body1">
           Copy the mutation to create a data request using this template
         </Typography>
@@ -83,11 +115,20 @@ export default function TabsStructure() {
           <CopyButton
             variant="contained"
             customButtonText="Copy mutation"
-            text="abuble"
+            text={mutation}
           />
-          <Button variant="outlined">Go to playground</Button>
+          <Button variant="outlined" href={routes.dashboardUserPlayground}>
+            Go to playground
+          </Button>
         </Box>
-        <CodeBlock {...codeProps} />
+        {isLoading ? (
+          <Skeleton width={100} height={300} />
+        ) : (
+          <CodeBlock {...codeCreateRequestProps} />
+        )}
+      </CustomTabPanel>
+      <CustomTabPanel value={currentTab} index={1}>
+        <CodeBlock {...detailsTemplateProps} />
       </CustomTabPanel>
     </Stack>
   );

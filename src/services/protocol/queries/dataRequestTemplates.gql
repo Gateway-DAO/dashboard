@@ -18,6 +18,20 @@ query dataRequestTemplatesByOrg(
   }
 }
 
+query dataRequestTemplateById($id: String!) {
+  dataRequestTemplate(id: $id) {
+    id
+    name
+    description
+    tags
+    organization {
+      ...org
+    }
+    createdAt
+    schema
+  }
+}
+
 query myDataRequestTemplatesCount {
   myDataRequestTemplatesCount
 }
