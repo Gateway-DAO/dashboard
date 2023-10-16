@@ -17,7 +17,12 @@ import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
 import { Typography } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridRowParams,
+} from '@mui/x-data-grid';
 
 import ModalDetail from './modal-detail';
 
