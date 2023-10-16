@@ -16,6 +16,7 @@ const routes = {
     `/dashboard/org/${org}/request/${requestId}`,
   dashboardUserRequests: '/dashboard/user/requests',
   dashboardUserRequestTemplates: '/dashboard/user/request-templates',
+  dashboardUserDataModels: '/dashboard/user/data-models',
   dashboardUserSettings: '/dashboard/user/settings',
   dashboardOrgRoot: '/dashboard/org',
   dashboardOrgHome: (organizationId) => `/dashboard/org/${organizationId}`,
@@ -25,6 +26,8 @@ const routes = {
     `/dashboard/org/${organizationId}/requests`,
   dashboardOrgRequestTemplates: (organizationId) =>
     `/dashboard/org/${organizationId}/request-templates`,
+  dashboardOrgDataModels: (organizationId) =>
+    `/dashboard/org/${organizationId}/data-models`,
   dashboardOrgReceivedProofs: (organizationId) =>
     `/dashboard/org/${organizationId}/proofs/received`,
   dashboardOrgSettings: (organizationId) =>
