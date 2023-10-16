@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import CopyButton from '@/components/copy-button/copy-button';
 import routes from '@/constants/routes';
+import { DataModelByIdQuery } from '@/services/protocol/types';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -51,23 +52,50 @@ export default function TabsStructure({
 }: {
   isLoading: boolean;
   id: string;
-  data: any;
+  data: DataModelByIdQuery['dataModel'];
 }) {
   const [currentTab, setTab] = useState(0);
 
-  const mutation = `mutation {
-        createDataRequest(input: {
-            dataRequestTemplateId: "${id}",
+  const claimObj = !!data
+    ? Object.keys(data?.schema.properties)
+        .map((propertyName) => {
+          const isRequired = data?.schema.required.includes(propertyName);
+          const propertyType = data?.schema.properties[propertyName].type;
+          const fieldRequired = isRequired ? 'FIELD REQUIRED' : '';
+
+          return ` ${propertyName}: "${fieldRequired}" # ${propertyType}`;
+        })
+        .join('\n\t\t')
+    : null;
+
+  const mutation = `mutation createPDA {
+        createPDA(
+          input: {
+            title: "Hello Gateway",
+            description: "This is the first PDA I have issued with Gateway!",
             owner: {
-                type: GATEWAY_ID,
-                value: "ADD THE DATA OWNER"
-            },
-            dataUse: "ADD WHAT’S THE REASON TO REQUEST THE DATA"
+              type: GATEWAY_ID,
+              value: "ADD OWNER ID HERE"
+            }
+            dataModelId: "${id}",
+            image: "https://cdn.mygateway.xyz/logo.png",
+            expirationDate: null,
+            claim: {
+            ${claimObj}
+            }
         }) {
-            arweaveUrl,
             id,
-            status
-            dataUse
+            arweaveUrl,
+            dataAsset {
+              owner {
+                id
+                gatewayId
+              }
+              issuer {
+                id
+                gatewayId
+              }
+            }
         }
     }`;
   const codeCreateRequestProps = {
@@ -76,20 +104,26 @@ export default function TabsStructure({
     language: 'graphql',
   };
 
-  const detailsTemplateProps = {
+  const detailsDataModelProps = {
     theme: dracula,
     language: 'graphql',
     text: `data: {
-      dataRequestTemplate: {
-        id: "${data?.id}",
-        name: "${data?.name}",
+      dataModel: {
+        id: "${id}",
+        title: "${data?.title}",
+        description: "${data?.description}",
         schema: ${JSON.stringify(data?.schema)},
         organization: {
           id: "${data?.organization?.id}",
           gatewayId: "${data?.organization?.gatewayId}"
           name: "${data?.organization?.name}"
-        },
-        createdAt: "${data?.createdAt}"
+        }
+        createdBy: {
+          id: "${data?.createdBy?.id}",
+          gatewayId: "${data?.createdBy?.gatewayId}",
+          displayName: "${data?.createdBy?.displayName}"
+        }
+        consumptionPrice: ${data?.consumptionPrice}
       }
     }`,
   };
@@ -107,13 +141,13 @@ export default function TabsStructure({
           onChange={(event, newValue: number) => setTab(newValue)}
           value={currentTab}
         >
-          <Tab label="Create data request" />
+          <Tab label="Issue PDA" />
           <Tab label="Details" />
         </Tabs>
       </Stack>
       <CustomTabPanel value={currentTab} index={0}>
         <Typography variant="body1">
-          Copy the mutation to create a data request using this template
+          Copy the mutation to issue a PDA using this data model.
         </Typography>
         <Box sx={{ gap: 2, display: 'flex', mt: 4, mb: 4 }}>
           <CopyButton
@@ -132,7 +166,7 @@ export default function TabsStructure({
         )}
       </CustomTabPanel>
       <CustomTabPanel value={currentTab} index={1}>
-        <CodeBlock {...detailsTemplateProps} />
+        <CodeBlock {...detailsDataModelProps} />
       </CustomTabPanel>
     </Stack>
   );
