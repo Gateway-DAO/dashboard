@@ -10,6 +10,22 @@ query dataModels($creatorUserId: String, $skip: Int, $take: Int) {
   }
 }
 
+query dataModelById($id: String!) {
+  dataModel(id: $id) {
+    title
+    description
+    tags
+    createdBy {
+      ...min_user
+    }
+    organization {
+      ...org
+    }
+    schema
+    consumptionPrice
+  }
+}
+
 query dataModelsByOrg($organizationId: String, $skip: Int, $take: Int) {
   dataModels(
     filter: { organizationId: $organizationId }

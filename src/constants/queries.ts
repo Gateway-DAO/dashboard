@@ -8,6 +8,7 @@ export const queries = {
   proofs_sent: 'proofs_sent',
   usage_limit: 'user_monthly_usage_limits',
   data_request_template: 'data_request_template',
+  data_model: 'data_model',
 };
 
 export const mutations = {
