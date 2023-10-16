@@ -16,8 +16,8 @@ export default async function DashboardUserDataModelsPage() {
         take: 5,
       })
     )?.dataModels ?? [];
-  // const count = (await (await privateApi).myDataRequestTemplatesCount())
-  //   .myDataRequestTemplatesCount;
 
-  return <DataModelsTable data={requestsData} totalCount={0} />;
+  const count = (await privateApi.myDataModelsCount()).myDataModelsCount;
+
+  return <DataModelsTable data={requestsData} totalCount={count} />;
 }
