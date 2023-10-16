@@ -24,6 +24,8 @@ import { PartialDeep } from 'type-fest';
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
+import ModalDetail from './modal-detail';
+
 const columns: GridColDef<PartialDeep<DataRequest>>[] = [
   {
     field: 'name',
@@ -98,16 +100,19 @@ export default function RequestTemplatesTable({
   };
 
   return (
-    <DataGrid
-      {...defaultGridConfiguration}
-      rows={data && data.length ? data : initialData}
-      columns={columns}
-      paginationModel={paginationModel}
-      onPaginationModelChange={setNewPage}
-      paginationMode="server"
-      loading={isLoading}
-      rowCount={totalCount}
-      sx={defaultGridCustomization}
-    />
+    <>
+      <DataGrid
+        {...defaultGridConfiguration}
+        rows={data && data.length ? data : initialData}
+        columns={columns}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setNewPage}
+        paginationMode="server"
+        loading={isLoading}
+        rowCount={totalCount}
+        sx={defaultGridCustomization}
+      />
+      <ModalDetail id="123" />
+    </>
   );
 }
