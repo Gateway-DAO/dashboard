@@ -30,9 +30,10 @@ const conceptsCards = [
 
 const solutionsCards = [
   {
-    title: 'Loyalty Programs',
-    description: 'Engage your community with our loyalty program protocol',
-    href: 'https://mygateway.substack.com/p/lifi-loyalty-pass-powered-by-gateway',
+    title: 'Sample Data Models',
+    description:
+      'Read through various data models we suggest you can build and use.',
+    href: `${DOCS_BASE_URL}docs/data-model`,
   },
   {
     title: 'Automate Issuance',
@@ -69,7 +70,7 @@ export default function Hero() {
 
           <div className={styles.concepts_buttons}>
             <GTWLink
-              href="mailto:ayyan@mygateway.xyz"
+              href="mailto:ayyan@mygateway.xyz?subject=Get a Demo"
               className={styles.concepts_link}
             >
               <Button variant="outlined">Get a demo</Button>
@@ -125,7 +126,7 @@ export default function Hero() {
 
           <div className={styles.mobile_comcepts_buttons}>
             <GTWLink
-              href="mailto:ayyan@mygateway.xyz"
+              href="mailto:ayyan@mygateway.xyz?subject=Get a Demo"
               className={styles.concepts_link}
             >
               <Button variant="outlined">Open full documentation</Button>

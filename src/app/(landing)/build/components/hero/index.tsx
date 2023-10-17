@@ -22,7 +22,7 @@ const journeySteps = [
   {
     title: 'API & SDK',
     description: 'Use the SDK from your applications',
-    href: '/',
+    href: `${DOCS_BASE_URL}graphql`,
   },
 ];
 
@@ -46,7 +46,11 @@ const Box = ({ type }: { type: 'desktop' | 'mobile' }) => {
           </Button>
         </GTWLink>
 
-        <GTWLink href="/" className={styles.box_link} target={'_blank'}>
+        <GTWLink
+          href={`${DOCS_BASE_URL}docs/get-started-here`}
+          className={styles.box_link}
+          target={'_blank'}
+        >
           <Button variant="outlined">
             <span>V2 API</span>
             <Link className={styles.box_button_icon} />
