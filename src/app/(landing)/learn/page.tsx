@@ -2,7 +2,6 @@
 
 import { HeaderContextProvider } from '@/app/(landing)/contexts/header-context';
 
-import Footer from '../components/footer';
 import Header from '../components/header';
 import Api from '../components/icons/api';
 import Criteria from '../components/icons/criteria';
@@ -15,6 +14,7 @@ import Ownership from '../components/icons/ownership';
 import Permission from '../components/icons/permission';
 import Share from '../components/icons/share';
 import Star from '../components/icons/star';
+import LandingFooter from '../components/landing-footer/landing-footer';
 import ForIssues from '../components/svgs/for-issues';
 import ForOwners from '../components/svgs/for-owners';
 import ForVerifies from '../components/svgs/for-verifies';
@@ -174,7 +174,7 @@ export default function BuildPage() {
       />
       <OurProtocol />
       <OurProducts />
-      <Footer variant="light" />
+      <LandingFooter variant="light" />
     </HeaderContextProvider>
   );
 }

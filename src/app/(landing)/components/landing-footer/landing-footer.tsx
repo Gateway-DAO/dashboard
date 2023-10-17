@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 import GTWLink from '@/components/gtw-link';
+import { DOCS_BASE_URL } from '@/constants/docs';
+import routes from '@/constants/routes';
 import gsap from 'gsap';
 import { InView } from 'react-intersection-observer';
 
@@ -14,9 +16,7 @@ import LogoLinkedin from '../icons/logo-linkedin';
 import LogoSubstrack from '../icons/logo-substrack';
 import LogoTwitter from '../icons/logo-twitter';
 import Wrapper from '../wrapper';
-import styles from './footer.module.scss';
-import routes from '@/constants/routes';
-import { DOCS_BASE_URL } from '@/constants/docs';
+import styles from './landing-footer.module.scss';
 
 function splitElementByBrTag(element: HTMLElement): HTMLElement[] {
   // Split the innerHTML of the element using the <br/> tag as the delimiter
@@ -104,7 +104,7 @@ const linksList = [
   },
 ];
 
-export default function Footer({ variant }: Props) {
+export default function LandingFooter({ variant }: Props) {
   const [email, setEmail] = useState<string>('');
   const textRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
