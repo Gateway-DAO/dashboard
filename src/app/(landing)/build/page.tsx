@@ -39,7 +39,7 @@ export default function BuildPage() {
           {
             title: 'Automate Issuance',
             description: 'SDK integration step-by-step',
-            href: '/',
+            href: `${DOCS_BASE_URL}docs/start-issuing`,
           },
           {
             title: 'Control PDA Status',
@@ -69,7 +69,7 @@ export default function BuildPage() {
           {
             title: 'Verification Widget Integration',
             description: 'How to integrate our widget into your platform',
-            href: '/',
+            href: `${DOCS_BASE_URL}docs/data-proof`,
           },
         ]}
       />

@@ -16,6 +16,7 @@ import LogoTwitter from '../icons/logo-twitter';
 import Wrapper from '../wrapper';
 import styles from './footer.module.scss';
 import routes from '@/constants/routes';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 function splitElementByBrTag(element: HTMLElement): HTMLElement[] {
   // Split the innerHTML of the element using the <br/> tag as the delimiter
@@ -53,7 +54,7 @@ const linksSocial = [
   },
   {
     icon: LogoDiscord,
-    href: '/',
+    href: 'https://discord.gg/tgt3KjcHGs',
   },
   {
     icon: LogoLinkedin,
@@ -79,16 +80,12 @@ const linksList = [
     href: routes.build,
   },
   {
-    title: 'Explorer',
-    href: routes.explorer,
-  },
-  {
     title: 'Dashboard',
     href: '/',
   },
   {
     title: 'Privacy',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
   },
   {
     title: 'Terms & Conditions',
@@ -96,11 +93,11 @@ const linksList = [
   },
   {
     title: 'Brand Kit',
-    href: '/',
+    href: 'https://live.standards.site/gateway',
   },
   {
     title: 'Contact',
-    href: '/',
+    href: 'mailto:ayyan@mygateway.xyz?subject=Contact Us',
   },
 ];
 
