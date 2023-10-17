@@ -377,9 +377,8 @@ export default function Pdas() {
               ref={(ref) => (textPdasParagraphRefs.current[1] = ref)}
             >
               <span ref={(ref) => (textPdasRefs.current[1] = ref)}>
-                The foundation for true data privacy, sovereignty, and
-                portability. Turn raw data into encrypted, secure, portable, and
-                publicly verifiable assets.
+                The key to sovereignty across the web. Turn raw data into
+                encrypted, secure, portable, and publicly verifiable assets.
               </span>
               <span
                 className={styles.type_slash}
