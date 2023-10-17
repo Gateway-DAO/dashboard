@@ -5,6 +5,7 @@ import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import { queries } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import { datamodel } from '@/locale/en/datamodel';
 import { DataModelByIdQuery } from '@/services/protocol/types';
 import { useQuery } from '@tanstack/react-query';
 
@@ -41,7 +42,7 @@ export default function ModalDetail({
       <Typography variant="body1" mb={3}>
         {isLoading ? <Skeleton /> : dataModel?.description}
       </Typography>
-      <CopyBox title="Data request template ID" value={id} />
+      <CopyBox title={datamodel.data_model_id} value={id} />
       <TabsStructure
         id={id}
         isLoading={isLoading}
