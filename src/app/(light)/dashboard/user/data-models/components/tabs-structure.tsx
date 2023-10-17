@@ -80,7 +80,6 @@ export default function TabsStructure({
             value: "ADD OWNER ID HERE"
           }
           dataModelId: "${id}",
-          image: "https://cdn.mygateway.xyz/logo.png",
           expirationDate: null,
           ${
             !!organization &&
