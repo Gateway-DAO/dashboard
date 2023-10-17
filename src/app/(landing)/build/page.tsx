@@ -22,7 +22,7 @@ export default function BuildPage() {
         cards={[
           {
             title: 'Create Unique Data-Models',
-            description: 'Easy create Data models that fits your needs',
+            description: 'Easily define and standardize data fields.',
             href: `${DOCS_BASE_URL}docs/data-model`,
           },
           {
@@ -52,7 +52,8 @@ export default function BuildPage() {
         cards={[
           {
             title: 'Creating a Data Request',
-            description: 'Easily create Data models that fits your needs',
+            description:
+              'How to create data models for requesting Data Assets.',
             href: `${DOCS_BASE_URL}docs/data-request`,
           },
           {
