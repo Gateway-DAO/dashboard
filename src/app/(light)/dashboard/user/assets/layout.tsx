@@ -13,9 +13,9 @@ import {
 
 import { Box } from '@mui/system';
 
-import SandboxAlert from '../../components/sandbox-alert';
 import HelpContent from './components/help-content';
 import HelpMenu from './components/help-menu';
+import SandboxAlert from './components/sandbox-alert';
 
 export default function DataAssetsLayout({ children }: PropsWithChildren) {
   return (
