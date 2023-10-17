@@ -66,11 +66,12 @@ export default function TabsStructure({
                 value: "ADD THE DATA OWNER"
             },
             ${
-              !!organization &&
-              `organization: {
+              !!organization
+                ? `organization: {
                 type: GATEWAY_ID,
                 value: "${organization?.gatewayId}"
               }`
+                : ``
             }
             dataUse: "ADD WHAT’S THE REASON TO REQUEST THE DATA"
         }) {

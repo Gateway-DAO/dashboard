@@ -82,11 +82,12 @@ export default function TabsStructure({
           dataModelId: "${id}",
           expirationDate: null,
           ${
-            !!organization &&
-            `organization: {
+            !!organization
+              ? `organization: {
               type: GATEWAY_ID,
               value: "${organization?.gatewayId}"
             }`
+              : ``
           }
           claim: {
             ${claimObj}
