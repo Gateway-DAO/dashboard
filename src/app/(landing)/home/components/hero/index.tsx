@@ -14,7 +14,7 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const refCurrentWordElement = useRef<HTMLSpanElement>(null);
   const wordsRef = useRef<(HTMLSpanElement | null)[]>([]);
-  const words = ['create', 'transfer', 'update'];
+  const words = ['Create', 'Own', 'Share'];
 
   useEffect(() => {
     if (!wordsRef.current.length) return;
