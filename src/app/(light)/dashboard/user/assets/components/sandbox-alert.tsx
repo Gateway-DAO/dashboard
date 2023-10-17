@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 
+import { common } from '@/locale/en/common';
+import { sandboxAlert } from '@/locale/en/pda';
+
 import { Button, Typography, Alert, AlertTitle } from '@mui/material';
 
 export default function SandboxAlert() {
@@ -18,16 +21,14 @@ export default function SandboxAlert() {
             size="small"
             onClick={() => setShowAlert(false)}
           >
-            Close
+            {common.actions.close}
           </Button>
         }
       >
         <AlertTitle>
-          <Typography fontWeight="bold">
-            You are on the Gateway Sandbox
-          </Typography>
+          <Typography fontWeight="bold">{sandboxAlert.title}</Typography>
         </AlertTitle>
-        The data is temporary and will gone in 60 days.
+        {sandboxAlert.description}
       </Alert>
     )
   );
