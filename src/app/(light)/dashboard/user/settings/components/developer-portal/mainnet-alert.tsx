@@ -8,6 +8,7 @@ import { mainnet_access } from '@/locale/en/developer-access';
 import { Button, Typography, AlertTitle } from '@mui/material';
 import { Stack } from '@mui/system';
 
+// TODO: avoid using hardcoded values for the colors and margins
 export default function MainnetAlert() {
   return (
     <Stack
