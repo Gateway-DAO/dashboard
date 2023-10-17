@@ -2,9 +2,10 @@
 import { useRef, useEffect } from 'react';
 
 import Wrapper from '@/app/(landing)/components/wrapper';
+import { useLenisS } from '@/app/(landing)/libs/lenis-provider';
 import { splitSpans } from '@/app/(landing)/utils/dom';
 import { joinClasses } from '@/app/(landing)/utils/function';
-import LenisManager, { IInstanceOptions } from '@/app/(landing)/utils/scroll';
+import { useLenis } from '@studio-freight/react-lenis';
 import gsap from 'gsap';
 
 import styles from './pdas.module.scss';
@@ -21,42 +22,36 @@ export default function Pdas() {
   const pdasLogoContainerRef = useRef<HTMLDivElement>(null);
   const textPdasParagraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const slashRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const lenis = useLenisS();
+  const tlRef = useRef<gsap.core.Timeline>();
+
+  useLenis(({ scroll }) => {
+    if (!sectionRef.current) return;
+
+    const offsetTop =
+      sectionRef.current.offsetTop - window.innerHeight / 2 + 200;
+    const sectionHeight = sectionRef.current.clientHeight;
+    const scrollSection = scroll - offsetTop;
+    const progress = scrollSection / (sectionHeight - window.innerHeight);
+
+    if (progress >= 0 && progress <= 1) {
+      tlRef.current?.progress(progress);
+    } else if (progress < 0) {
+      tlRef.current?.progress(0);
+    } else {
+      tlRef.current?.progress(1);
+    }
+  });
 
   // Animation setup using useEffect
   useEffect(() => {
-    const tl = createAnimation();
+    createAnimation();
 
     // Scroll event handling
-    const handleScroll = (e: IInstanceOptions) => {
-      if (!sectionRef.current) return;
-
-      const offsetTop =
-        sectionRef.current.offsetTop - window.innerHeight / 2 + 200;
-      const sectionHeight = sectionRef.current.clientHeight;
-      const scrollSection = e.scroll - offsetTop;
-      const progress = scrollSection / (sectionHeight - window.innerHeight);
-
-      if (progress >= 0 && progress <= 1) {
-        tl.progress(progress);
-      } else if (progress < 0) {
-        tl.progress(0);
-      } else {
-        tl.progress(1);
-      }
-    };
-
     // Set second logo text bounds
     gsap.delayedCall(0.3, setLogoTextBounds);
     gsap.to(sectionRef.current, { autoAlpha: 1 });
-
-    // Attach scroll event listener
-    LenisManager?.on('scroll', handleScroll);
-
-    // Cleanup function
-    return () => {
-      LenisManager?.off('scroll', handleScroll);
-    };
-  }, []);
+  }, [lenis]);
 
   const createAnimation = () => {
     if (!linesParentRef.current || !logoContainerRef.current)
@@ -65,32 +60,41 @@ export default function Pdas() {
     const lines = linesParentRef.current.querySelectorAll('path');
     const boundsLogo = logoContainerRef.current.getBoundingClientRect();
 
-    const tl = gsap.timeline({ paused: true });
+    tlRef.current = gsap.timeline({ paused: true });
 
-    tl.set(pdasLogoContainerRef.current, {
+    tlRef.current?.set(pdasLogoContainerRef.current, {
       position: 'absolute',
       xPercent: -50,
       yPercent: -50,
     });
-    tl.to(logoBackgroundRef.current, { autoAlpha: 1 });
-    tl.fromTo(logoRef.current, { y: '-1rek' }, { autoAlpha: 1, y: 0 }, '-=0.3');
-    tl.set(logoContainerRef.current, { autoAlpha: 0 });
-    tl.set(logoTextRef.current, { autoAlpha: 1 });
-    tl.to(lines, {
+    tlRef.current?.to(logoBackgroundRef.current, { autoAlpha: 1 });
+    tlRef.current?.fromTo(
+      logoRef.current,
+      { y: '-1rek' },
+      { autoAlpha: 1, y: 0 },
+      '-=0.3'
+    );
+    tlRef.current?.set(logoContainerRef.current, { autoAlpha: 0 });
+    tlRef.current?.set(logoTextRef.current, { autoAlpha: 1 });
+    tlRef.current?.to(lines, {
       transform: 'scale(1)',
       stagger: 0.1,
       ease: 'power4.out',
       delay: 0.6,
       duration: 1,
     });
-    tl.to(lines, {
+    tlRef.current?.to(lines, {
       autoAlpha: 0,
       stagger: 0.1,
       ease: 'power4.out',
       duration: 1,
     });
-    tl.to(logoTextRef.current, { scale: 98 / boundsLogo.width }, '-=1');
-    tl.to(pdasLogoContainerRef.current, { y: '-7.3rem' }, '<');
+    tlRef.current?.to(
+      logoTextRef.current,
+      { scale: 98 / boundsLogo.width },
+      '-=1'
+    );
+    tlRef.current?.to(pdasLogoContainerRef.current, { y: '-7.3rem' }, '<');
 
     textPdasRefs.current.forEach((element, index) => {
       if (!element) return;
@@ -107,10 +111,10 @@ export default function Pdas() {
       const texPdaBounds = element.getBoundingClientRect();
 
       if (index === 0) {
-        tl.set(slashRefs.current[0], { display: 'inline-block' });
-        tl.from(spans, { width: 0, display: 'none', stagger: 0.1 });
-        tl.set(logoTextRef.current, { transformOrigin: 'left' });
-        tl.to(
+        tlRef.current?.set(slashRefs.current[0], { display: 'inline-block' });
+        tlRef.current?.from(spans, { width: 0, display: 'none', stagger: 0.1 });
+        tlRef.current?.set(logoTextRef.current, { transformOrigin: 'left' });
+        tlRef.current?.to(
           logoTextRef.current,
           {
             scale: 43 / boundsLogo.width,
@@ -120,7 +124,7 @@ export default function Pdas() {
           },
           '<'
         );
-        tl.to(
+        tlRef.current?.to(
           pdasLogoContainerRef.current,
           {
             xPercent: 0,
@@ -134,23 +138,21 @@ export default function Pdas() {
         if (!paragraphBounds) return;
 
         const x = paragraphBounds.left - texPdaBounds.left;
-        tl.to(
+        tlRef.current?.to(
           textPdasParagraphRefs.current,
           { x, y: '-23rem', duration: 0.8 },
           '-=0.6'
         );
-        tl.set(textPdasParagraphRefs.current, {
+        tlRef.current?.set(textPdasParagraphRefs.current, {
           textAlign: 'left',
           x: 0,
         });
-        tl.set(slashRefs.current[0], { display: 'none' });
-        tl.set(slashRefs.current[1], { display: 'inline-block' });
+        tlRef.current?.set(slashRefs.current[0], { display: 'none' });
+        tlRef.current?.set(slashRefs.current[1], { display: 'inline-block' });
       } else {
-        tl.from(spans, { width: 0, display: 'none', stagger: 0.1 });
+        tlRef.current?.from(spans, { width: 0, display: 'none', stagger: 0.1 });
       }
     });
-
-    return tl;
   };
 
   // Function to set logo text bounds
@@ -375,9 +377,8 @@ export default function Pdas() {
               ref={(ref) => (textPdasParagraphRefs.current[1] = ref)}
             >
               <span ref={(ref) => (textPdasRefs.current[1] = ref)}>
-                The foundation for true data privacy, sovereignty, and
-                portability. Turn raw data into encrypted, secure, portable, and
-                publicly verifiable assets.
+                The key to sovereignty across the web. Turn raw data into
+                encrypted, secure, portable, and publicly verifiable assets.
               </span>
               <span
                 className={styles.type_slash}

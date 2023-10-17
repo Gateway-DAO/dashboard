@@ -1,4 +1,3 @@
-import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
 
 import { useGtwSession } from '@/context/gtw-session-provider';

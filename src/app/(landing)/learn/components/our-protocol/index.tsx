@@ -3,29 +3,30 @@ import Wrapper from '@/app/(landing)/components/wrapper';
 
 import Title from '../title';
 import styles from './our-protocol.module.scss';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 const protocols = [
   {
     title: 'Indexing practice',
     description:
       'How to organize your data and relay information from the API to storage',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/get-started-here`,
   },
   {
     title: 'Our encryption solution',
     description: 'Learn how to manage, authorize, and share your PDAs.',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/private-data-assets-pda`,
   },
   {
-    title: 'Using Ledger',
+    title: 'The Explorer',
     description:
-      'Learn how we keep track and ensure the verifiability of Private Data Assets and issuances.',
-    href: '/',
+      'Learn how we keep track and ensure the state of Private Data Assets.',
+    href: `${DOCS_BASE_URL}docs/data-proof`,
   },
   {
-    title: 'How we storage our data',
-    description: 'Why we use Arweave to storage our data',
-    href: '/',
+    title: 'How we store data',
+    description: 'Why we use Arweave to storage data',
+    href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
   },
 ];
 
@@ -38,16 +39,25 @@ export default function OurProtocol() {
         </Title>
 
         <Title className={styles.title_lg} size="lg">
-          We made it easy for you to build your solutions quickly and securely
+          We made it easy for you to build your data strategy
         </Title>
 
-        <Button variant="outlined" className={styles.buttom}>
+        <Button
+          variant="outlined"
+          onClick={() => window.open(DOCS_BASE_URL, '_blank')}
+          className={styles.buttom}
+        >
           Open full documentation
         </Button>
 
         <div className={styles.items_container}>
           {protocols.map((protocol, index) => (
-            <a className={styles.item} key={index} href={protocol.href}>
+            <a
+              className={styles.item}
+              key={index}
+              href={protocol.href}
+              target="_blank"
+            >
               <h4 className={styles.item_title}>{protocol.title}</h4>
               <p className={styles.item_description}>{protocol.description}</p>
             </a>

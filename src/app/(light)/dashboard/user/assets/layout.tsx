@@ -15,10 +15,12 @@ import { Box } from '@mui/system';
 
 import HelpContent from './components/help-content';
 import HelpMenu from './components/help-menu';
+import SandboxAlert from './components/sandbox-alert';
 
 export default function DataAssetsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
+      {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <SandboxAlert />}
       <TitleLayout
         title={pdas.my_data_assets}
         subtitle={pdas.data_assets_subtitle}

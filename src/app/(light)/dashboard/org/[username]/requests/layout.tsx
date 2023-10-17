@@ -9,7 +9,7 @@ export default function OrgDataRequestsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
       <TitleLayout
-        titleId={requests.title}
+        titleId={requests.id}
         title={requests.title}
         subtitle={requests.org_subtitle}
       />

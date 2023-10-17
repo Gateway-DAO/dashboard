@@ -1,11 +1,9 @@
 'use client';
 
 import { useMenu } from '@/hooks/use-menu';
-import { settings } from '@/locale/en/settings';
 import { OrganizationRole } from '@/services/protocol/types';
 
 import { MoreVert } from '@mui/icons-material';
-import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, ListItemButton, Menu } from '@mui/material';
 
 type Props = {

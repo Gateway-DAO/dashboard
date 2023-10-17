@@ -30,13 +30,13 @@ const steps = [
   },
   {
     icon: Own,
-    title: 'Own',
-    text: 'Your private date will be encrypted and you will have full control of it.',
+    title: 'PDA',
+    text: 'An encrypted, chain agnostic asset that enables compliant data-sharing and ownership.',
   },
   {
     icon: Manage,
-    title: 'Manage',
-    text: 'Your private date will be encrypted and you will have full control of it.',
+    title: 'Own',
+    text: 'Own Decentralized storage and key management to permission data .',
   },
   {
     icon: Verify,

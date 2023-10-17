@@ -26,7 +26,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const pda = await getPDA(params.id);
   return {
-    title: `${pda?.dataAsset?.title} PDA - Gateway Network`,
+    title: `${pda?.dataAsset?.title} | Data Asset - Gateway Network`,
     description: pda?.dataAsset?.description,
   };
 }

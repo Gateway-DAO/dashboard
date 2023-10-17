@@ -1,0 +1,47 @@
+query dataModels($creatorUserId: String, $skip: Int, $take: Int) {
+  dataModels(
+    filter: { creatorUserId: $creatorUserId }
+    skip: $skip
+    take: $take
+  ) {
+    id
+    title
+    createdAt
+  }
+}
+
+query dataModelById($id: String!) {
+  dataModel(id: $id) {
+    title
+    description
+    tags
+    createdBy {
+      ...min_user
+    }
+    organization {
+      ...org
+    }
+    schema
+    consumptionPrice
+  }
+}
+
+query dataModelsByOrg($organizationId: String, $skip: Int, $take: Int) {
+  dataModels(
+    filter: { organizationId: $organizationId }
+    skip: $skip
+    take: $take
+  ) {
+    id
+    title
+    createdAt
+  }
+}
+
+query myDataModelsCount {
+  myDataModelsCount
+}
+
+query myDataModelsCountOrg($orgGatewayId: String) {
+  myDataModelsCount(orgGatewayId: $orgGatewayId)
+}

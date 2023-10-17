@@ -8,35 +8,41 @@ import GTWLink from '@/components/gtw-link';
 import Slider from 'react-slick';
 
 import styles from './hero.module.scss';
+import { DOCS_BASE_URL } from '@/constants/docs';
+import routes from '@/constants/routes';
 
 const conceptsCards = [
   {
     title: 'Getting Started',
     description: 'Learn the basics of our protocol',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/what-is-the-gatewayprotocol`,
+    target: '_blank',
   },
   {
     title: 'Architecture',
     description: 'How the protocol is structured',
-    href: '/',
+    href: routes.build,
+    target: '_self',
   },
   {
-    title: 'API & SDK',
-    description: 'Use the SDK from your applications',
-    href: '/',
+    title: 'API',
+    description: 'Use GraphQL API to power your applications',
+    href: `${DOCS_BASE_URL}graphql`,
+    target: '_blank',
   },
 ];
 
 const solutionsCards = [
   {
-    title: 'Loyalty Programs',
-    description: 'Engage your community with our loyalty program protocol',
-    href: '/',
+    title: 'Sample Data Models',
+    description:
+      'Read through various data models we suggest you can build and use.',
+    href: `${DOCS_BASE_URL}docs/data-model`,
   },
   {
     title: 'Automate Issuance',
     description: 'SDK integration step-by-step',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/start-issuing`,
   },
 ];
 
@@ -67,11 +73,18 @@ export default function Hero() {
           </p>
 
           <div className={styles.concepts_buttons}>
-            <GTWLink href="/" className={styles.concepts_link}>
+            <GTWLink
+              href="mailto:ayyan@mygateway.xyz?subject=Get a Demo"
+              className={styles.concepts_link}
+            >
               <Button variant="outlined">Get a demo</Button>
             </GTWLink>
 
-            <GTWLink href="/" className={styles.concepts_link}>
+            <GTWLink
+              href={DOCS_BASE_URL}
+              className={styles.concepts_link}
+              target={'_blank'}
+            >
               <Button variant="outlined">Open full documentation</Button>
             </GTWLink>
           </div>
@@ -83,6 +96,7 @@ export default function Hero() {
               className={joinClasses(styles.card, styles['card--concept'])}
               key={index}
               href={card.href}
+              target={card.target}
             >
               <div className={styles.card_container}>
                 <h3 className={styles.card_title}>{card.title}</h3>
@@ -104,6 +118,7 @@ export default function Hero() {
                 className={joinClasses(styles.card, styles['card--concept'])}
                 key={index}
                 href={card.href}
+                target={'_blank'}
               >
                 <div className={styles.card_container}>
                   <h3 className={styles.card_title}>{card.title}</h3>
@@ -114,10 +129,17 @@ export default function Hero() {
           </Slider>
 
           <div className={styles.mobile_comcepts_buttons}>
-            <GTWLink href="/" className={styles.concepts_link}>
+            <GTWLink
+              href="mailto:ayyan@mygateway.xyz?subject=Get a Demo"
+              className={styles.concepts_link}
+            >
               <Button variant="outlined">Open full documentation</Button>
             </GTWLink>
-            <GTWLink href="/" className={styles.concepts_link}>
+            <GTWLink
+              href={DOCS_BASE_URL}
+              target="_blank"
+              className={styles.concepts_link}
+            >
               <Button variant="outlined">Get a demo</Button>
             </GTWLink>
           </div>
@@ -137,6 +159,7 @@ export default function Hero() {
                 className={joinClasses(styles.card, styles['card--solution'])}
                 key={index}
                 href={card.href}
+                target={'_blank'}
               >
                 <div className={styles.card_container}>
                   <h3 className={styles.card_title}>{card.title}</h3>
@@ -147,7 +170,7 @@ export default function Hero() {
           </div>
 
           <GTWLink href="/" className={styles.solutions_link}>
-            <Button variant="outlined">More use cases</Button>
+            <Button variant="outlined">Read more</Button>
           </GTWLink>
         </div>
       </Wrapper>

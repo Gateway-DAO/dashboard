@@ -1,11 +1,13 @@
 export const requests = {
   empty: 'No data requests yet',
   title: 'Data requests',
+  id: 'data-requests',
   subtitle: 'These are the requests to access your private data assets',
   org_subtitle: 'These are the requests to access private data assets',
 };
 
 export const request = {
+  title: 'Data request',
   label: {
     request_id: 'Request ID',
     request_template_id: 'Request template ID',

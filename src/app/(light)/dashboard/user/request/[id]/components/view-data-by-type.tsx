@@ -15,7 +15,9 @@ export default function ViewDataByType({
       JSON.stringify(currentProperties) === 'true') ||
     !valid
   ) {
-    return <Typography color="error">It doesn't met the criteria</Typography>;
+    return (
+      <Typography color="error">{`It doesn't met the criteria`}</Typography>
+    );
   }
 
   if (propertyType === 'boolean') {
