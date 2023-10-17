@@ -33,13 +33,13 @@ export default function OurNetwork() {
 
             <h2 className={styles.column_title}>
               Define, Issue and <br />
-              monetize data
+              Monetize data
             </h2>
 
             <ul className={styles.column_list}>
               <li>Standardize unique data-sets.</li>
-              <li>Programatically control PDA issuance and management.</li>
-              <li>Increase data interoperability and monetization. </li>
+              <li>Programatically issue, update, and revoke PDAs</li>
+              <li>Increase data usage, partnerships, and monetization. </li>
             </ul>
           </GTWLink>
 
@@ -84,14 +84,14 @@ export default function OurNetwork() {
             />
 
             <h2 className={styles.column_title}>
-              Verify information and
+              Request Data
               <br />
-              build better products
+              Build Better Products
             </h2>
 
             <ul className={styles.column_list}>
-              <li>A public ledger dedicated to PDA state authenticity.</li>
               <li>Encrypted requests to enable data-proofs.</li>
+              <li>Empower data driven user acquisition </li>
               <li>Unlock marketing partners and user experiences.</li>
             </ul>
           </div>

@@ -30,7 +30,7 @@ const cards = [
     ),
     text: (
       <>
-        Multiple accounts, one <strong>ID</strong>
+        Multiple aliases, one <strong>ID</strong>
       </>
     ),
   },
@@ -79,7 +79,7 @@ const cards = [
     ),
     text: (
       <>
-        Encrypted data <strong>verification</strong>, public authentication.
+        Encrypted data <strong>consumption</strong>, public authentication.
       </>
     ),
   },

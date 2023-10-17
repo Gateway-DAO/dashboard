@@ -169,10 +169,9 @@ export default function Footer({ variant }: Props) {
             </span>
           </h2>
           <p className={styles.text} ref={textRef}>
-            Natively integrate our products to enable a new paradigm <br />
-            in digital data. We have built the middleware needed to <br />
-            facilitate and manage data sharing, ownership, and usage <br />
-            that was never possible before.
+            We have built the technology needed to facilitate <br /> regulatory
+            compliant data sharing, ownership, and usage <br /> that was never
+            possible before.
           </p>
 
           <Button
