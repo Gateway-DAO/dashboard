@@ -71,40 +71,40 @@ export default function TabsStructure({
     : null;
 
   const mutation = `mutation createPDA {
-        createPDA(
-          input: {
-            title: "Hello Gateway",
-            description: "This is the first PDA I have issued with Gateway!",
-            owner: {
+      createPDA(
+        input: {
+          title: "${data?.title}",
+          description: "${data?.description}",
+          owner: {
+            type: GATEWAY_ID,
+            value: "ADD OWNER ID HERE"
+          }
+          dataModelId: "${id}",
+          image: "https://cdn.mygateway.xyz/logo.png",
+          expirationDate: null,
+          ${
+            !!organization &&
+            `organization: {
               type: GATEWAY_ID,
-              value: "ADD OWNER ID HERE"
-            }
-            dataModelId: "${id}",
-            image: "https://cdn.mygateway.xyz/logo.png",
-            expirationDate: null,
-            claim: {
+              value: "${organization?.gatewayId}"
+            }`
+          }
+          claim: {
             ${claimObj}
-            ${
-              !!organization &&
-              `organization: {
-                type: GATEWAY_ID,
-                value: "${organization?.gatewayId}"
-              }`
-            }
-            }
+          }
         }) {
-            id,
-            arweaveUrl,
-            dataAsset {
-              owner {
-                id
-                gatewayId
-              }
-              issuer {
-                id
-                gatewayId
-              }
+          id,
+          arweaveUrl,
+          dataAsset {
+            owner {
+              id
+              gatewayId
             }
+            issuer {
+              id
+              gatewayId
+            }
+          }
         }
     }`;
   const codeCreateRequestProps = {

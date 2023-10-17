@@ -8,10 +8,7 @@ import {
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import {
-  requestTemplate,
-  requestTemplates,
-} from '@/locale/en/request-template';
+import { requestTemplate } from '@/locale/en/request-template';
 import {
   DataRequest,
   DataRequestTemplatesQuery,
@@ -44,7 +41,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
   },
   {
     field: 'id',
-    headerName: requestTemplates.data_request_template_id,
+    headerName: requestTemplate.data_request_template_id,
     flex: 1.3,
     renderCell: (params: GridRenderCellParams) => {
       return (
