@@ -12,7 +12,13 @@ export default function Logo() {
     <Stack direction="row" alignItems="center">
       <LogoContainer>
         <GatewaySquaredIcon sx={{ fontSize: 40 }} />
-        <Typography component="h1" ml={1} color="black" fontWeight="bold">
+        <Typography
+          component="h1"
+          ml={1}
+          color="black"
+          fontWeight="bold"
+          sx={{ marginRight: [1, 1, 1, 0] }}
+        >
           {common.general.gateway}
         </Typography>
       </LogoContainer>
