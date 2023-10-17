@@ -4,25 +4,26 @@ import Slider from 'react-slick';
 
 import Title from '../title';
 import styles from './our-products.module.scss';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 const products = [
   {
     title: 'Dashboard',
     description:
-      'Issuers + Verifiers can  manage private data assets (PDAs). Recipients can view and share them.',
-    href: '/',
+      'Issuers + Verifiers can manage private data assets (PDAs). Recipients can view and share them.',
+    href: `${DOCS_BASE_URL}docs/private-data-assets-pda`,
   },
   {
     title: 'API',
     description:
-      'Integrate directly with your application  to issue, manage, and verify PDAs natively.',
-    href: '/',
+      'Integrate directly with your application to issue, manage, and verify PDAs natively.',
+    href: `${DOCS_BASE_URL}docs/get-started-here`,
   },
   {
     title: 'Widget (Coming Soon)',
     description:
-      'Verifiers can seamlessly request and consume PDAs  by Issuer or Dataset.',
-    href: '/',
+      'Verifiers can seamlessly request and consume PDAs by Issuer or Dataset.',
+    href: `${DOCS_BASE_URL}docs/data-request`,
   },
 ];
 
@@ -49,7 +50,12 @@ export default function OurProducts() {
 
         <div className={styles.products_container}>
           {products.map((product, index) => (
-            <a className={styles.product} key={index} href={product.href}>
+            <a
+              className={styles.product}
+              key={index}
+              href={product.href}
+              target={'_blank'}
+            >
               <h4 className={styles.product_title}>{product.title}</h4>
               <p className={styles.product_description}>
                 {product.description}
@@ -67,7 +73,11 @@ export default function OurProducts() {
           <Slider {...settings}>
             {products.map((product, index) => (
               <div key={index}>
-                <a className={styles.product} href={product.href}>
+                <a
+                  className={styles.product}
+                  href={product.href}
+                  target={'_blank'}
+                >
                   <h4 className={styles.product_title}>{product.title}</h4>
                   <p className={styles.product_description}>
                     {product.description}

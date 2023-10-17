@@ -22,6 +22,7 @@ import Hero from './components/hero';
 import OurProducts from './components/our-products';
 import OurProtocol from './components/our-protocol';
 import TemplateLearnSection from './components/template-learn-section';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 export default function BuildPage() {
   return (
@@ -72,10 +73,11 @@ export default function BuildPage() {
           info: {
             title: 'Loyalty Programs',
             description:
-              'Using our Loyalty program data model you can unleash New experiences in your community.',
-            href: '/',
+              'Organizing complex on-chain data  into a PDA to unlock unique experiences across the LiFi ecosystem.',
+            href: 'https://mygateway.substack.com/p/lifi-loyalty-pass-powered-by-gateway',
           },
         }}
+        href={`${DOCS_BASE_URL}docs/issuers-1`}
       />
 
       <TemplateLearnSection
@@ -83,8 +85,8 @@ export default function BuildPage() {
         primaryTitle={<>The owners</>}
         description={
           <>
-            Join a new era, using your private data assets to unlock <br />
-            fresh experiences and services.
+            Join a new era where you can finally own and share <br /> data
+            across the web.
           </>
         }
         buttonText="Own your data"
@@ -114,9 +116,10 @@ export default function BuildPage() {
           info: {
             title: 'Managing PDAs',
             description: 'Learn how to manage, authorize, and share your PDAs.',
-            href: '/',
+            href: `${DOCS_BASE_URL}docs/private-data-assets-pda`,
           },
         }}
+        href={`${DOCS_BASE_URL}docs/owners`}
       />
 
       <TemplateLearnSection
@@ -124,14 +127,14 @@ export default function BuildPage() {
         primaryTitle={
           <>
             Verifiers: <br />
-            Know the what, <br />
-            where, and when
+            Request User <br />
+            Data
           </>
         }
         description={
           <>
-            Verification revolutionizes data use, enabling inclusive <br />
-            monetization across all segments.
+            Verification of PDAs allows entities to request information <br />{' '}
+            and drive unique product experiences and acquisition.
           </>
         }
         buttonText="Become a verifier"
@@ -163,10 +166,11 @@ export default function BuildPage() {
             title: 'Verification Widget',
             description:
               'Seamless integration of our solution, ensuring user transparency on your platform.',
-            href: '/',
+            href: `${DOCS_BASE_URL}docs/data-request`,
           },
         }}
         firstColumnLarger
+        href={`${DOCS_BASE_URL}docs/verifiers`}
       />
       <OurProtocol />
       <OurProducts />
