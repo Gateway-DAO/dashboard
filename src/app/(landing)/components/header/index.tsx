@@ -107,12 +107,6 @@ export default function Header() {
             </div>
 
             <div className={styles.buttons_container}>
-              <Link href="/explorer">
-                <Button className={styles.button_outlined} variant="outlined">
-                  Explorer
-                </Button>
-              </Link>
-
               <Link href="/login">
                 <Button variant="contained" className={styles.button_contained}>
                   Open dashboard

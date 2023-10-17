@@ -85,7 +85,7 @@ export default function BuildPage() {
             title: 'Loyalty Programs',
             description:
               'Using our Loyalty program data model you can unleash New experiences in your community.',
-            href: '/',
+            href: 'https://mygateway.substack.com/p/lifi-loyalty-pass-powered-by-gateway',
           },
         }}
         href={`${DOCS_BASE_URL}docs/issuers-1`}

@@ -74,30 +74,33 @@ const linksList = [
   {
     title: 'Learn',
     href: routes.learn,
+    target: '_self',
   },
   {
     title: 'Build',
     href: routes.build,
+    target: '_self',
   },
   {
     title: 'Dashboard',
-    href: '/',
+    href: routes.auth,
+    target: '_self',
   },
   {
     title: 'Privacy',
     href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
+    target: '_blank',
   },
-  {
-    title: 'Terms & Conditions',
-    href: '/',
-  },
+
   {
     title: 'Brand Kit',
     href: 'https://live.standards.site/gateway',
+    target: '_blank',
   },
   {
     title: 'Contact',
     href: 'mailto:ayyan@mygateway.xyz?subject=Contact Us',
+    target: '',
   },
 ];
 
@@ -172,7 +175,14 @@ export default function Footer({ variant }: Props) {
             that was never possible before.
           </p>
 
-          <Button className={styles.button} variant="contained" ref={buttonRef}>
+          <Button
+            className={styles.button}
+            variant="contained"
+            onClick={() =>
+              window.open(`${DOCS_BASE_URL}docs/get-started-here`, '_blank')
+            }
+            ref={buttonRef}
+          >
             Start now
           </Button>
         </InView>
@@ -202,12 +212,12 @@ export default function Footer({ variant }: Props) {
 
             <div className={styles.column}>
               <ul className={styles.links_list}>
-                {linksList.map(({ title, href }, index) => (
+                {linksList.map(({ title, href, target }, index) => (
                   <li className={styles.links_item} key={index}>
                     <GTWLink
                       className={styles.links_link}
                       href={href}
-                      target="_blank"
+                      target={target}
                     >
                       {title}
                     </GTWLink>

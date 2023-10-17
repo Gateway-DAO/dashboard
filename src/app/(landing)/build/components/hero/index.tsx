@@ -17,7 +17,7 @@ const journeySteps = [
   {
     title: 'Architecture',
     description: 'How the protocol is structured',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/what-is-the-gatewayprotocol`,
   },
   {
     title: 'API & SDK',
