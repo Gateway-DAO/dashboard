@@ -2,19 +2,14 @@
 
 import { useState } from 'react';
 
-import ModalDetail from '@/app/(light)/dashboard/user/request-templates/components/modal-detail';
 import {
   defaultGridConfiguration,
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import useOrganization from '@/hooks/use-organization';
-import { requestTemplate } from '@/locale/en/request-template';
-import {
-  DataRequest,
-  DataRequestTemplatesQuery,
-} from '@/services/protocol/types';
+import { datamodel } from '@/locale/en/datamodel';
+import { DataModelsQuery, DataRequest } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
@@ -29,10 +24,12 @@ import {
   GridRowParams,
 } from '@mui/x-data-grid';
 
+import ModalDetail from './modal-detail';
+
 const columns: GridColDef<PartialDeep<DataRequest>>[] = [
   {
-    field: 'name',
-    headerName: requestTemplate.title,
+    field: 'title',
+    headerName: datamodel.title,
     flex: 1.2,
     valueFormatter: (params) => params.value,
     renderCell(params) {
@@ -41,7 +38,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
   },
   {
     field: 'id',
-    headerName: requestTemplate.data_request_template_id,
+    headerName: datamodel.data_model_id,
     flex: 1.3,
     renderCell: (params: GridRenderCellParams) => {
       return (
@@ -65,37 +62,36 @@ type Props = {
   totalCount: number;
 };
 
-export default function RequestTemplatesTable({
+export default function DataModelsTable({
   data: initialData,
   totalCount = 0,
 }: Props) {
+  const { session } = useGtwSession();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 5,
   });
-  const [openDetailModal, toggleDetailModal] = useToggle(false);
-  const [currentTemplate, setCurrentTemplate] = useState('');
 
-  const { organization } = useOrganization();
+  const [openDetailModal, toggleDetailModal] = useToggle(false);
+  const [currentDataModel, setCurrentDataModel] = useState('');
+
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
-      'data-request-templates',
-      organization?.gatewayId as string,
+      'data-models',
+      session?.user?.id,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
-      privateApi?.dataRequestTemplatesByOrg({
-        orgCreatorId: organization?.gatewayId as string,
+      privateApi?.dataModels({
+        creatorUserId: session?.user?.id,
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
-    select: (data: any) =>
-      (data as DataRequestTemplatesQuery)?.dataRequestTemplates,
+    select: (data: any) => (data as DataModelsQuery)?.dataModels,
     initialData: initialData && initialData.length ? initialData : null,
-    enabled: !!organization,
   });
 
   const setNewPage = ({ page }: { page: number }) => {
@@ -112,11 +108,11 @@ export default function RequestTemplatesTable({
         rows={data && data.length ? data : initialData}
         columns={columns}
         paginationModel={paginationModel}
+        onPaginationModelChange={setNewPage}
         onRowClick={(params: GridRowParams) => {
           toggleDetailModal(true);
-          setCurrentTemplate(params.id as string);
+          setCurrentDataModel(params.id as string);
         }}
-        onPaginationModelChange={setNewPage}
         paginationMode="server"
         loading={isLoading}
         rowCount={totalCount}
@@ -125,7 +121,7 @@ export default function RequestTemplatesTable({
       <ModalDetail
         open={openDetailModal}
         onClose={toggleDetailModal}
-        id={currentTemplate}
+        id={currentDataModel}
       />
     </>
   );
