@@ -18,14 +18,14 @@ const protocols = [
     href: `${DOCS_BASE_URL}docs/private-data-assets-pda`,
   },
   {
-    title: 'Using Ledger',
+    title: 'The Explorer',
     description:
-      'Learn how we keep track and ensure the verifiability of Private Data Assets and issuances.',
+      'Learn how we keep track and ensure the state of Private Data Assets.',
     href: `${DOCS_BASE_URL}docs/data-proof`,
   },
   {
-    title: 'How we storage our data',
-    description: 'Why we use Arweave to storage our data',
+    title: 'How we store data',
+    description: 'Why we use Arweave to storage data',
     href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
   },
 ];
@@ -39,7 +39,7 @@ export default function OurProtocol() {
         </Title>
 
         <Title className={styles.title_lg} size="lg">
-          We made it easy for you to build your solutions quickly and securely
+          We made it easy for you to build your data strategy
         </Title>
 
         <Button

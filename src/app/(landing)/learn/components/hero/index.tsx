@@ -25,9 +25,9 @@ const conceptsCards = [
     target: '_self',
   },
   {
-    title: 'API & SDK',
-    description: 'Use the SDK from your applications',
-    href: `${DOCS_BASE_URL}docs/get-started-here`,
+    title: 'API',
+    description: 'Use GraphQL API to power your applications',
+    href: `${DOCS_BASE_URL}graphql`,
     target: '_blank',
   },
 ];
@@ -170,7 +170,7 @@ export default function Hero() {
           </div>
 
           <GTWLink href="/" className={styles.solutions_link}>
-            <Button variant="outlined">More use cases</Button>
+            <Button variant="outlined">Read more</Button>
           </GTWLink>
         </div>
       </Wrapper>

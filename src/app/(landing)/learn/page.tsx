@@ -73,7 +73,7 @@ export default function BuildPage() {
           info: {
             title: 'Loyalty Programs',
             description:
-              'Using our Loyalty program data model you can unleash New experiences in your community.',
+              'Organizing complex on-chain data  into a PDA to unlock unique experiences across the LiFi ecosystem.',
             href: 'https://mygateway.substack.com/p/lifi-loyalty-pass-powered-by-gateway',
           },
         }}
@@ -85,8 +85,8 @@ export default function BuildPage() {
         primaryTitle={<>The owners</>}
         description={
           <>
-            Join a new era, using your private data assets to unlock <br />
-            fresh experiences and services.
+            Join a new era where you can finally own and share <br /> data
+            across the web.
           </>
         }
         buttonText="Own your data"
@@ -127,14 +127,14 @@ export default function BuildPage() {
         primaryTitle={
           <>
             Verifiers: <br />
-            Know the what, <br />
-            where, and when
+            Request User <br />
+            Data
           </>
         }
         description={
           <>
-            Verification revolutionizes data use, enabling inclusive <br />
-            monetization across all segments.
+            Verification of PDAs allows entities to request information <br />{' '}
+            and drive unique product experiences and acquisition.
           </>
         }
         buttonText="Become a verifier"
