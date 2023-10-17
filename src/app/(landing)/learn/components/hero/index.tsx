@@ -9,22 +9,26 @@ import Slider from 'react-slick';
 
 import styles from './hero.module.scss';
 import { DOCS_BASE_URL } from '@/constants/docs';
+import routes from '@/constants/routes';
 
 const conceptsCards = [
   {
     title: 'Getting Started',
     description: 'Learn the basics of our protocol',
     href: `${DOCS_BASE_URL}docs/what-is-the-gatewayprotocol`,
+    target: '_blank',
   },
   {
     title: 'Architecture',
     description: 'How the protocol is structured',
-    href: '/',
+    href: routes.build,
+    target: '_self',
   },
   {
     title: 'API & SDK',
     description: 'Use the SDK from your applications',
     href: `${DOCS_BASE_URL}docs/get-started-here`,
+    target: '_blank',
   },
 ];
 
@@ -38,7 +42,7 @@ const solutionsCards = [
   {
     title: 'Automate Issuance',
     description: 'SDK integration step-by-step',
-    href: `${DOCS_BASE_URL}docs/get-started-here`,
+    href: `${DOCS_BASE_URL}docs/start-issuing`,
   },
 ];
 
@@ -92,7 +96,7 @@ export default function Hero() {
               className={joinClasses(styles.card, styles['card--concept'])}
               key={index}
               href={card.href}
-              target={'_blank'}
+              target={card.target}
             >
               <div className={styles.card_container}>
                 <h3 className={styles.card_title}>{card.title}</h3>
