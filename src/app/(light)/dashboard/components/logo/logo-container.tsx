@@ -16,7 +16,12 @@ export default function LogoContainer({ children }: PropsWithChildren) {
   return (
     <Link
       component={NextLink}
-      sx={{ flexDirection: 'row', display: 'flex', textDecoration: 'none' }}
+      sx={{
+        flexDirection: 'row',
+        display: 'flex',
+        textDecoration: 'none',
+        flex: 1,
+      }}
       href={link}
       alignItems={'center'}
     >
