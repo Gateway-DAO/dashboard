@@ -1,4 +1,5 @@
 import { GTWMenuItemSettings } from '@/app/(light)/dashboard/components/menu-item/menu-item';
+import DataModelOutlinedIcon from '@/components/icons/data-model-outlined';
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
 import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
@@ -24,16 +25,22 @@ export const dashboardOrgMenuItems = (
     icon: DataRequestOutlinedIcon,
   },
   {
-    name: 'Request templates',
-    href: routes.dashboardOrgRequestTemplates(username),
-    activeHrefs: [routes.dashboardOrgRequestTemplates(username)],
-    icon: DataRequestTemplateOutlinedIcon,
-  },
-  {
     name: 'Received data proofs',
     href: routes.dashboardOrgReceivedProofs(username),
     activeHrefs: [routes.dashboardOrgReceivedProofs(username)],
     icon: DataProofOutlinedIcon,
+  },
+  {
+    name: 'Data models',
+    href: routes.dashboardOrgDataModels(username),
+    activeHrefs: [routes.dashboardOrgDataModels(username)],
+    icon: DataModelOutlinedIcon,
+  },
+  {
+    name: 'Request templates',
+    href: routes.dashboardOrgRequestTemplates(username),
+    activeHrefs: [routes.dashboardOrgRequestTemplates(username)],
+    icon: DataRequestTemplateOutlinedIcon,
   },
 ];
 
