@@ -39,6 +39,7 @@ export default function Sidebar({
           px: 2.5,
           position: 'fixed',
           height: '100%',
+          boxSizing: 'border-box',
         },
       })}
     >
@@ -46,9 +47,30 @@ export default function Sidebar({
       <Stack
         justifyContent="space-between"
         flexDirection="column"
-        height="100%"
+        sx={{
+          height: 'calc(100% - 40px)',
+        }}
       >
-        <Stack>
+        <Stack
+          sx={{
+            '@media screen and (max-height: 900px) and (min-width: 1200px)': {
+              overflowY: 'auto',
+              overflowX: 'hidden',
+              my: 2,
+              '&::-webkit-scrollbar': {
+                width: 5,
+              },
+              '&::-webkit-scrollbar-track': {
+                boxShadow: 'inset 0 0 5px #ddd',
+                borderRadius: 10,
+              },
+              '&::-webkit-scrollbar-thumb': {
+                borderRadius: 10,
+                backgroundColor: '#dcdcdc',
+              },
+            },
+          }}
+        >
           <Menu
             menuItems={menuItems}
             sx={{
@@ -56,6 +78,9 @@ export default function Sidebar({
               mx: -2.5,
               display: { xs: 'none', lg: 'block' },
               flexGrow: 1,
+              '@media screen and (max-height: 900px) and (min-width: 1200px)': {
+                mt: 2,
+              },
             }}
           />
           {secondMenuItems && (
@@ -66,6 +91,10 @@ export default function Sidebar({
                 mx: -2.5,
                 display: { xs: 'none', lg: 'block' },
                 flexGrow: 1,
+                '@media screen and (max-height: 900px) and (min-width: 700px)':
+                  {
+                    mt: 2,
+                  },
               }}
             />
           )}
