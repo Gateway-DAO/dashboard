@@ -15,6 +15,8 @@ import LogoSubstrack from '../icons/logo-substrack';
 import LogoTwitter from '../icons/logo-twitter';
 import Wrapper from '../wrapper';
 import styles from './footer.module.scss';
+import routes from '@/constants/routes';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 function splitElementByBrTag(element: HTMLElement): HTMLElement[] {
   // Split the innerHTML of the element using the <br/> tag as the delimiter
@@ -48,54 +50,57 @@ type Props = {
 const linksSocial = [
   {
     icon: LogoTwitter,
-    href: '/',
+    href: 'https://twitter.com/gateway_xyz',
   },
   {
     icon: LogoDiscord,
-    href: '/',
+    href: 'https://discord.gg/tgt3KjcHGs',
   },
   {
     icon: LogoLinkedin,
-    href: '/',
+    href: 'https://www.linkedin.com/company/mygateway/',
   },
   {
     icon: LogoSubstrack,
-    href: '/',
+    href: 'https://mygateway.substack.com/',
   },
   {
     icon: LogoGithub,
-    href: '/',
+    href: 'https://github.com/Gateway-DAO',
   },
 ];
 
 const linksList = [
   {
     title: 'Learn',
-    href: '/',
+    href: routes.learn,
+    target: '_self',
   },
   {
     title: 'Build',
-    href: '/',
+    href: routes.build,
+    target: '_self',
   },
   {
     title: 'Dashboard',
-    href: '/',
+    href: routes.auth,
+    target: '_self',
   },
   {
     title: 'Privacy',
-    href: '/',
+    href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
+    target: '_blank',
   },
-  {
-    title: 'Terms & Conditions',
-    href: '/',
-  },
+
   {
     title: 'Brand Kit',
-    href: '/',
+    href: 'https://live.standards.site/gateway',
+    target: '_blank',
   },
   {
     title: 'Contact',
-    href: '/',
+    href: 'mailto:ayyan@mygateway.xyz?subject=Contact Us',
+    target: '',
   },
 ];
 
@@ -164,13 +169,19 @@ export default function Footer({ variant }: Props) {
             </span>
           </h2>
           <p className={styles.text} ref={textRef}>
-            Natively integrate our products to enable a new paradigm <br />
-            in digital data. We have built the middleware needed to <br />
-            facilitate and manage data sharing, ownership, and usage <br />
-            that was never possible before.
+            We have built the technology needed to facilitate <br /> regulatory
+            compliant data sharing, ownership, and usage <br /> that was never
+            possible before.
           </p>
 
-          <Button className={styles.button} variant="contained" ref={buttonRef}>
+          <Button
+            className={styles.button}
+            variant="contained"
+            onClick={() =>
+              window.open(`${DOCS_BASE_URL}docs/get-started-here`, '_blank')
+            }
+            ref={buttonRef}
+          >
             Start now
           </Button>
         </InView>
@@ -200,12 +211,12 @@ export default function Footer({ variant }: Props) {
 
             <div className={styles.column}>
               <ul className={styles.links_list}>
-                {linksList.map(({ title, href }, index) => (
+                {linksList.map(({ title, href, target }, index) => (
                   <li className={styles.links_item} key={index}>
                     <GTWLink
                       className={styles.links_link}
                       href={href}
-                      target="_blank"
+                      target={target}
                     >
                       {title}
                     </GTWLink>

@@ -30,6 +30,7 @@ type Props = {
     };
   };
   firstColumnLarger?: boolean;
+  href: string;
 };
 
 export default function TemplateLearnSection({
@@ -42,6 +43,7 @@ export default function TemplateLearnSection({
   features,
   highlight,
   firstColumnLarger,
+  href,
 }: Props) {
   return (
     <section
@@ -67,7 +69,11 @@ export default function TemplateLearnSection({
 
             <Description className={styles.text}>{description}</Description>
 
-            <Button className={styles.button} variant="outlined">
+            <Button
+              className={styles.button}
+              onClick={() => window.open(href, '_blank')}
+              variant="outlined"
+            >
               {buttonText}
             </Button>
           </div>
@@ -109,6 +115,7 @@ export default function TemplateLearnSection({
               styles[`highlight_item--${variant}`]
             )}
             href={highlight.info.href}
+            target={'_blank'}
           >
             <h4 className={styles.highlight_item_title}>
               {highlight.info.title}
