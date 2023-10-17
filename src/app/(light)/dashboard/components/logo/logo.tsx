@@ -1,5 +1,4 @@
-import GatewaySquaredIcon from '@/components/icons/gateway-squared';
-import { common } from '@/locale/en/common';
+import GTWLogo from '@/components/gtw-logo/gtw-logo';
 
 import { Chip, Stack, Tooltip, Typography } from '@mui/material';
 
@@ -11,16 +10,7 @@ export default function Logo() {
   return (
     <Stack direction="row" alignItems="center">
       <LogoContainer>
-        <GatewaySquaredIcon sx={{ fontSize: 40 }} />
-        <Typography
-          component="h1"
-          ml={1}
-          color="black"
-          fontWeight="bold"
-          sx={{ marginRight: [1, 1, 1, 0] }}
-        >
-          {common.general.gateway}
-        </Typography>
+        <GTWLogo />
       </LogoContainer>
       {NEXT_PUBLIC_API_ENV === 'testnet' && (
         <Tooltip
