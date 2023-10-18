@@ -55,11 +55,11 @@ export default function HelpContentCard({
             height={112}
             alt="question mark image"
           />
-          <Stack width='100%'>
-            <Typography variant="subtitle1" color='#407077' gutterBottom>
+          <Stack width="100%">
+            <Typography variant="subtitle1" color="#407077" gutterBottom>
               {title}
             </Typography>
-            <Typography variant="body1" gutterBottom color='#407077'>
+            <Typography variant="body1" gutterBottom color="#407077">
               {desc}
             </Typography>
             <div style={{ marginTop: 20 }}>
