@@ -122,15 +122,23 @@ export default function TabsStructure({
         title: "${data?.title}",
         description: "${data?.description}",
         schema: ${JSON.stringify(data?.schema)},
-        organization: {
-          id: "${data?.organization?.id}",
-          gatewayId: "${data?.organization?.gatewayId}"
-          name: "${data?.organization?.name}"
+        ${
+          data?.organization
+            ? `organization: {
+                id: "${data?.organization?.id}",
+                gatewayId: "${data?.organization?.gatewayId}",
+                name: "${data?.organization?.name}"
+              }`
+            : `organization: null,`
         }
         createdBy: {
           id: "${data?.createdBy?.id}",
           gatewayId: "${data?.createdBy?.gatewayId}",
-          displayName: "${data?.createdBy?.displayName}"
+          displayName: ${
+            data?.createdBy?.displayName
+              ? `"${data?.createdBy?.displayName}"`
+              : null
+          },
         }
         consumptionPrice: ${data?.consumptionPrice}
       }
