@@ -4,8 +4,6 @@ import { datamodels } from '@/locale/en/datamodel';
 
 import { Box, Typography } from '@mui/material';
 
-import SandboxAlert from '../../components/alerts/sandbox-alert';
-
 export default function DataModelsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
@@ -18,7 +16,6 @@ export default function DataModelsLayout({ children }: PropsWithChildren) {
           },
         }}
       >
-        {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <SandboxAlert />}
         <Typography variant="h3" id="title-data-models" sx={{ mb: 1 }}>
           {datamodels.title}
         </Typography>

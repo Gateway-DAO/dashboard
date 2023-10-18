@@ -1,7 +1,21 @@
-import { PropsWithChildren, ReactNode } from 'react';
+'use client';
 
+import { PropsWithChildren, ReactNode, useState } from 'react';
+
+import { currentEnv } from '@/utils/env';
+
+import {
+  Alert,
+  AlertTitle,
+  Box,
+  Button,
+  Chip,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { Stack } from '@mui/system';
 
+import SandboxAlert from './alerts/sandbox-alert';
 import DashboardPage from './dashboard-page';
 import Logo from './logo/logo';
 import Sidebar from './sidebar/sidebar';
@@ -18,6 +32,15 @@ export default function DashboardLayout({
   secondMenuItems,
   mobileMenuItems,
 }: PropsWithChildren<Props>) {
+  const testnet = currentEnv() === 'testnet';
+  // const [showDisclaimer, toggleDisclaimer] = useState(false);
+
+  // useEffect(() => {
+  //   if (hasSeenTestnetDisclaimer && !hasSeenTestnetDisclaimer.hasOwnProperty(title)) {
+  //     toggleDisclaimer(true);
+  //   }
+  // }, []);
+
   return (
     <Stack
       direction={{
@@ -28,7 +51,29 @@ export default function DashboardLayout({
       sx={{ minHeight: '100%' }}
     >
       <Sidebar menuItems={menuItems} secondMenuItems={secondMenuItems}>
-        <Logo />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Logo />
+          {testnet && (
+            <Tooltip
+              title="You are on the Gateway Sandbox. The data is temporary and will expire in 60 days."
+              placement="right"
+              arrow
+            >
+              <Chip
+                color="warning"
+                size="small"
+                variant="filled"
+                label="Sandbox"
+              />
+            </Tooltip>
+          )}
+        </Box>
       </Sidebar>
       <DashboardPage
         sx={{
@@ -38,6 +83,34 @@ export default function DashboardLayout({
           },
         }}
       >
+        {testnet && (
+          <SandboxAlert />
+          // <Alert
+          //   sx={{
+          //     borderRadius: '16px',
+          //     mb: 4,
+          //     mt: 4,
+          //     alignItems: 'center',
+          //   }}
+          //   severity="warning"
+          //   action={
+          //     <Button
+          //       color="inherit"
+          //       size="small"
+          //       onClick={() => {
+          //         setTestnetDisclaimer('closed');
+          //       }}
+          //     >
+          //       Close
+          //     </Button>
+          //   }
+          // >
+          //   <AlertTitle>You are on the Gateway tet network</AlertTitle>
+          //   <Typography variant="body2">
+          //     The data is temporary and will expire in 60 days.
+          //   </Typography>
+          // </Alert>
+        )}
         {children}
       </DashboardPage>
       {mobileMenuItems}
