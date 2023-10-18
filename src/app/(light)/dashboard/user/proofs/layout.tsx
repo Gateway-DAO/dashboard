@@ -5,13 +5,14 @@ import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
-import { proofs } from '@/locale/en/proof';
+import { proofs, helperContent } from '@/locale/en/proof';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
 
 import { Box } from '@mui/system';
+import HelpContentCard from '@/components/help-content-card/help-content-card';
 
 export default function DataProofsLayout({ children }: PropsWithChildren) {
   return (
@@ -21,6 +22,14 @@ export default function DataProofsLayout({ children }: PropsWithChildren) {
         subtitle={proofs.data_proofs_subtitle}
         titleId="title-proofs"
       />
+
+      <HelpContentCard
+        title={helperContent.title}
+        desc={helperContent.desc}
+        btnText={helperContent.btnText}
+        btnLink={helperContent.btnLink}
+      />
+
       <Box
         sx={{
           borderBottom: 1,

@@ -5,7 +5,7 @@ import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
-import { pdas } from '@/locale/en/pda';
+import { pdas, helperContent } from '@/locale/en/pda';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -13,7 +13,7 @@ import {
 
 import { Box } from '@mui/system';
 
-import HelpContent from './components/help-content';
+import HelpContentCard from '@/components/help-content-card/help-content-card';
 import HelpMenu from './components/help-menu';
 import SandboxAlert from './components/sandbox-alert';
 
@@ -26,7 +26,12 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
         subtitle={pdas.data_assets_subtitle}
         titleId="title-assets"
       />
-      <HelpContent />
+      <HelpContentCard
+        title={helperContent.title}
+        desc={helperContent.desc}
+        btnText={helperContent.btnText}
+        btnLink={helperContent.btnLink}
+      />
       <Box
         sx={{
           borderBottom: 1,

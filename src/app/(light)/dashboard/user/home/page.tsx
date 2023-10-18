@@ -25,6 +25,7 @@ export default async function Home() {
         {home.greeting} {session?.user.displayName}
       </Typography>
       <Box
+        component={Link}
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
@@ -33,6 +34,9 @@ export default async function Home() {
         padding={2}
         bgcolor="primary.light"
         borderRadius={1}
+        href={home.main_banner.link}
+        target="_blank"
+        sx={{ textDecoration: 'none' }}
       >
         <BannerIcon
           sx={{
@@ -50,11 +54,8 @@ export default async function Home() {
           </Typography>
           <div>
             <Button
-              LinkComponent={Link}
               variant="text"
               size="large"
-              href={home.main_banner.link}
-              target="_blank"
               sx={{ color: 'common.white', paddingX: 0, borderRadius: 0 }}
             >
               {home.main_banner.btn_text}
@@ -70,7 +71,13 @@ export default async function Home() {
           marginTop: 25,
         }}
       >
-        <Paper variant="outlined" sx={{ padding: 1.5, width: '100%', mr: 3 }}>
+        <Paper
+          component={Link}
+          href={home.sub_banner[0].link}
+          target="_blank"
+          variant="outlined"
+          sx={{ padding: 1.5, width: '100%', mr: 3, textDecoration: 'none' }}
+        >
           <PDABannerIcon sx={{ width: 115.82, height: 72 }} />
           <Typography mt={2} variant="h5" width={222} gutterBottom>
             {home.sub_banner[0].title}
@@ -79,9 +86,6 @@ export default async function Home() {
             {home.sub_banner[0].subtitle}
           </Typography>
           <Button
-            LinkComponent={Link}
-            href={home.sub_banner[0].link}
-            target="_blank"
             variant="text"
             size="large"
             sx={{ paddingX: 0, borderRadius: 0, marginTop: 1 }}
@@ -89,7 +93,12 @@ export default async function Home() {
             {home.sub_banner[0].btn_text}
           </Button>
         </Paper>
-        <Paper variant="outlined" sx={{ padding: 1.5, width: '100%' }}>
+        <Paper
+          component={Link}
+          href={home.sub_banner[1].link}
+          variant="outlined"
+          sx={{ padding: 1.5, width: '100%', textDecoration: 'none' }}
+        >
           <PlaygroundIcon sx={{ width: 84, height: 72 }} />
           <Typography mt={2} variant="h5" width={222} gutterBottom>
             {home.sub_banner[1].title}
@@ -98,8 +107,6 @@ export default async function Home() {
             {home.sub_banner[1].subtitle}
           </Typography>
           <Button
-            LinkComponent={Link}
-            href={home.sub_banner[1].link}
             variant="text"
             size="large"
             sx={{ paddingX: 0, borderRadius: 0, marginTop: 1 }}
