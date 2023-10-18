@@ -60,7 +60,11 @@ query issued_pdas($take: Float!, $skip: Float!) {
 }
 
 query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
-  issuedPDAs(skip: $skip, take: $take, filter: { organizationId: $orgId }) {
+  issuedPDAs(
+    skip: $skip
+    take: $take
+    filter: { organization: { type: ORG_ID, value: $orgId } }
+  ) {
     id
     status
     issuanceDate
@@ -82,5 +86,5 @@ query issued_pdas_by_org($take: Float!, $skip: Float!, $orgId: String!) {
 }
 
 query countIssuedPdasByOrg($orgId: String!) {
-  issuedPDAsCount(orgId: $orgId)
+  issuedPDAsCount(filter: { organization: { type: ORG_ID, value: $orgId } })
 }

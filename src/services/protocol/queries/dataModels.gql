@@ -1,6 +1,6 @@
-query dataModels($creatorUserId: String, $skip: Int, $take: Int) {
+query dataModels($creatorUserId: String!, $skip: Int, $take: Int) {
   dataModels(
-    filter: { creatorUserId: $creatorUserId }
+    filter: { user: { type: USER_ID, value: $creatorUserId } }
     skip: $skip
     take: $take
   ) {
@@ -26,9 +26,9 @@ query dataModelById($id: String!) {
   }
 }
 
-query dataModelsByOrg($organizationId: String, $skip: Int, $take: Int) {
+query dataModelsByOrg($organizationId: String!, $skip: Int, $take: Int) {
   dataModels(
-    filter: { organizationId: $organizationId }
+    filter: { organization: { type: ORG_ID, value: $organizationId } }
     skip: $skip
     take: $take
   ) {
@@ -42,6 +42,8 @@ query myDataModelsCount {
   myDataModelsCount
 }
 
-query myDataModelsCountOrg($orgGatewayId: String) {
-  myDataModelsCount(orgGatewayId: $orgGatewayId)
+query myDataModelsCountOrg($orgGatewayId: String!) {
+  myDataModelsCount(
+    filter: { organization: { type: GATEWAY_ID, value: $orgGatewayId } }
+  )
 }
