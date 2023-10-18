@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 
+import HelpContentCard from '@/components/help-content-card/help-content-card';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
@@ -13,9 +14,7 @@ import {
 
 import { Box } from '@mui/system';
 
-import HelpContentCard from '@/components/help-content-card/help-content-card';
-
-import SandboxAlert from './components/sandbox-alert';
+import SandboxAlert from '../../components/alerts/sandbox-alert';
 
 export default function DataAssetsLayout({ children }: PropsWithChildren) {
   return (
@@ -52,7 +51,6 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
         </GTWTabs>
       </Box>
       <Box sx={{ pt: 5 }}>{children}</Box>
-     
     </Box>
   );
 }
