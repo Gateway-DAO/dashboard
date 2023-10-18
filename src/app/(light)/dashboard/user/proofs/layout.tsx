@@ -14,12 +14,9 @@ import {
 
 import { Box } from '@mui/system';
 
-import SandboxAlert from '../../components/alerts/sandbox-alert';
-
 export default function DataProofsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
-      {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <SandboxAlert />}
       <TitleLayout
         title={proofs.data_proofs}
         subtitle={proofs.data_proofs_subtitle}

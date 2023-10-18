@@ -4,8 +4,6 @@ import { requestTemplates } from '@/locale/en/request-template';
 
 import { Box, Typography } from '@mui/material';
 
-import SandboxAlert from '../../components/alerts/sandbox-alert';
-
 export default function DataRequestTeampltesLayout({
   children,
 }: PropsWithChildren) {
@@ -20,7 +18,6 @@ export default function DataRequestTeampltesLayout({
           },
         }}
       >
-        {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <SandboxAlert />}
         <Typography variant="h3" id="title-request-templates" sx={{ mb: 1 }}>
           {requestTemplates.title}
         </Typography>
