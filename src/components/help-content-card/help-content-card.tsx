@@ -24,7 +24,7 @@ export default function HelpContentCard({
   let hasSeenDialog: { [key: string]: boolean } | null = JSON.parse(
     localStorage.getItem('help-content-banner') || '{}'
   );
-  console.log(hasSeenDialog);
+
 
   useEffect(() => {
     if (hasSeenDialog && !hasSeenDialog.hasOwnProperty(title)) {
