@@ -1,6 +1,8 @@
 import { getPrivateApi } from '@/services/protocol/api';
 import { OrganizationIdentifierType } from '@/services/protocol/types';
 
+import { Typography } from '@mui/material';
+
 import DataModelsTable from './components/data-models-table';
 
 export default async function DashboardOrgDataModelsPage(props: any) {
@@ -28,5 +30,19 @@ export default async function DashboardOrgDataModelsPage(props: any) {
     })
   ).dataModelsCount;
 
-  return <DataModelsTable data={requestsData} totalCount={count} />;
+  return (
+    <>
+      {requestsData && requestsData.length > 0 ? (
+        <DataModelsTable data={requestsData} totalCount={count} />
+      ) : (
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ textAlign: 'center', width: '100%' }}
+        >
+          No data models yet
+        </Typography>
+      )}
+    </>
+  );
 }
