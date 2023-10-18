@@ -12,7 +12,7 @@ const dataModelIdByEnv = {
 };
 
 const currentDataModel = dataModelIdByEnv[
-  process.env.NEXT_PUBLIC_API_ENDPOINT as 'development' | 'staging' | 'testnet'
+  process.env.NEXT_PUBLIC_API_ENV as 'development' | 'staging' | 'testnet'
 ] as string;
 
 const initialQuery = `mutation createPDA {
@@ -24,7 +24,7 @@ const initialQuery = `mutation createPDA {
               type: GATEWAY_ID
               value: "sanket"
           }
-          dataModelId: ${currentDataModel ?? dataModelIdByEnv.development}
+          dataModelId: "${currentDataModel ?? dataModelIdByEnv.development}"
           image: "https://cdn.mygateway.xyz/logo.png"
           expirationDate: null
           claim: {gatewayUse: "To make data move with you"}
