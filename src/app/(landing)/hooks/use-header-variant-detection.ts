@@ -9,6 +9,7 @@ export default function useHeaderVariantDetection(
   variant: 'dark' | 'light'
 ) {
   const { setVariant } = useHeaderContext();
+
   useLenis(() => {
     if (!sectionRef.current) return;
 

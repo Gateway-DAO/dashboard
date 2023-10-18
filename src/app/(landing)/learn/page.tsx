@@ -1,6 +1,7 @@
 'use client';
 
 import { HeaderContextProvider } from '@/app/(landing)/contexts/header-context';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 import Header from '../components/header';
 import Api from '../components/icons/api';
@@ -22,11 +23,10 @@ import Hero from './components/hero';
 import OurProducts from './components/our-products';
 import OurProtocol from './components/our-protocol';
 import TemplateLearnSection from './components/template-learn-section';
-import { DOCS_BASE_URL } from '@/constants/docs';
 
 export default function BuildPage() {
   return (
-    <HeaderContextProvider>
+    <HeaderContextProvider initialVariant="dark">
       <Header />
       <Hero />
       <TemplateLearnSection
