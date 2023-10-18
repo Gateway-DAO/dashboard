@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import { getPrivateApi } from '@/services/protocol/api';
 import { getCurrentOrg } from '@/utils/currentOrg';
 
+import { Typography } from '@mui/material';
+
 import RequestsTable from './components/requests-table';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -29,5 +31,19 @@ export default async function OrganizationRequestsPage(props: any) {
     await privateApi.requestsByOrgCount({ orgId: organization?.id ?? '' })
   ).requestsSentCount;
 
-  return <RequestsTable data={requestsData} totalCount={count} />;
+  return (
+    <>
+      {requestsData && requestsData.length > 0 ? (
+        <RequestsTable data={requestsData} totalCount={count} />
+      ) : (
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ textAlign: 'center', width: '100%' }}
+        >
+          No data requests yet
+        </Typography>
+      )}
+    </>
+  );
 }
