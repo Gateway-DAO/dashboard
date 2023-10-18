@@ -1,12 +1,12 @@
 'use client';
 
 import { HeaderContextProvider } from '@/app/(landing)/contexts/header-context';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 import Hero from '../build/components/hero';
-import Footer from '../components/footer';
 import Header from '../components/header';
+import LandingFooter from '../components/landing-footer/landing-footer';
 import TemplateDocsSection from './components/template-docs-section';
-import { DOCS_BASE_URL } from '@/constants/docs';
 
 export default function BuildPage() {
   return (
@@ -63,7 +63,7 @@ export default function BuildPage() {
           },
         ]}
       />
-      <Footer variant="dark" />
+      <LandingFooter variant="dark" />
     </HeaderContextProvider>
   );
 }

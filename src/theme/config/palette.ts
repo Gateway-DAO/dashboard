@@ -1,11 +1,11 @@
 import { PaletteOptions } from '@mui/material';
 
 import { brandColors } from './brand';
-
 export const lightPalette: PaletteOptions = {
   mode: 'light',
   primary: {
     main: brandColors.primary,
+    light: brandColors.primaryLight,
   },
   secondary: {
     main: brandColors.secondary,

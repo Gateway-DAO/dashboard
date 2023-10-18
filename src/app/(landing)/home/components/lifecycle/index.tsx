@@ -36,7 +36,7 @@ const steps = [
   {
     icon: Manage,
     title: 'Own',
-    text: 'Own Decentralized storage and key management to permission data .',
+    text: 'Decentralized storage and key management to permission data.',
   },
   {
     icon: Verify,

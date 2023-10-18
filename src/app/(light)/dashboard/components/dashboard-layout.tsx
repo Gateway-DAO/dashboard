@@ -1,7 +1,14 @@
+'use client';
+
 import { PropsWithChildren, ReactNode } from 'react';
 
+import { sandboxAlert } from '@/locale/en/alert-messages';
+import { currentEnv } from '@/utils/env';
+
+import { Box, Chip, Tooltip } from '@mui/material';
 import { Stack } from '@mui/system';
 
+import SandboxAlert from './alerts/sandbox-alert';
 import DashboardPage from './dashboard-page';
 import Logo from './logo/logo';
 import Sidebar from './sidebar/sidebar';
@@ -18,6 +25,8 @@ export default function DashboardLayout({
   secondMenuItems,
   mobileMenuItems,
 }: PropsWithChildren<Props>) {
+  const testnet = currentEnv() === 'testnet';
+
   return (
     <Stack
       direction={{
@@ -28,7 +37,25 @@ export default function DashboardLayout({
       sx={{ minHeight: '100%' }}
     >
       <Sidebar menuItems={menuItems} secondMenuItems={secondMenuItems}>
-        <Logo />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Logo />
+          {testnet && (
+            <Tooltip title={sandboxAlert.tooltip} placement="right" arrow>
+              <Chip
+                color="warning"
+                size="small"
+                variant="filled"
+                label="Sandbox"
+              />
+            </Tooltip>
+          )}
+        </Box>
       </Sidebar>
       <DashboardPage
         sx={{
@@ -38,6 +65,7 @@ export default function DashboardLayout({
           },
         }}
       >
+        {testnet && <SandboxAlert />}
         {children}
       </DashboardPage>
       {mobileMenuItems}

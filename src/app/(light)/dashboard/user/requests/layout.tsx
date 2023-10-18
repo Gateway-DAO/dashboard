@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 
-import { requests } from '@/locale/en/request';
+import HelpContentCard from '@/components/help-content-card/help-content-card';
+import { requests, helperContent } from '@/locale/en/request';
 
 import { Box, Typography } from '@mui/material';
 
@@ -23,6 +24,12 @@ export default function DataRequestsLayout({ children }: PropsWithChildren) {
           {requests.subtitle}
         </Typography>
       </Box>
+      <HelpContentCard
+        title={helperContent.title}
+        desc={helperContent.desc}
+        btnText={helperContent.btnText}
+        btnLink={helperContent.btnLink}
+      />
       {children}
     </Box>
   );

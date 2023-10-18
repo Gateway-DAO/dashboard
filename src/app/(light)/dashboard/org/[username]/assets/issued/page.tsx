@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import { orgPdas } from '@/locale/en/pda';
 import { getPrivateApi } from '@/services/protocol/api';
-import { getCurrentOrg } from '@/utils/currentOrg';
+import { OrganizationIdentifierType } from '@/services/protocol/types';
 
 import { Typography } from '@mui/material';
 
@@ -16,7 +16,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function OrganizationIssuedAssetsPage(props: any) {
   const pathnameOrg = props.params?.username;
-  const organization = await getCurrentOrg(pathnameOrg);
 
   const privateApi = await getPrivateApi();
   const issuedPdas =
@@ -24,11 +23,19 @@ export default async function OrganizationIssuedAssetsPage(props: any) {
       await privateApi.issued_pdas_by_org({
         skip: 0,
         take: 5,
-        orgId: organization?.id || '',
+        organization: {
+          type: OrganizationIdentifierType.GatewayId,
+          value: pathnameOrg,
+        },
       })
     )?.issuedPDAs ?? [];
   const count = (
-    await privateApi.countIssuedPdasByOrg({ orgId: organization?.id || '' })
+    await privateApi.countIssuedPdasByOrg({
+      organization: {
+        type: OrganizationIdentifierType.GatewayId,
+        value: pathnameOrg,
+      },
+    })
   ).issuedPDAsCount;
 
   return (
