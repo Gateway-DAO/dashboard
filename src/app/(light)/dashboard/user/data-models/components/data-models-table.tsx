@@ -9,7 +9,11 @@ import {
 import { DATE_FORMAT } from '@/constants/date';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { datamodel } from '@/locale/en/datamodel';
-import { DataModelsQuery, DataRequest } from '@/services/protocol/types';
+import {
+  DataModelsQuery,
+  DataRequest,
+  UserIdentifierType,
+} from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
@@ -86,7 +90,10 @@ export default function DataModelsTable({
     ],
     queryFn: () =>
       privateApi?.dataModels({
-        creatorUserId: session?.user?.id,
+        user: {
+          type: UserIdentifierType.GatewayId,
+          value: session.user.gatewayId as string,
+        },
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
