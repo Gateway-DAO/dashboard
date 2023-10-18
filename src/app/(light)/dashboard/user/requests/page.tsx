@@ -1,9 +1,6 @@
 import { Metadata } from 'next';
-import { Session } from 'next-auth';
 
-import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
-import { UserIdentifierType } from '@/services/protocol/types';
 
 import RequestsTable from './components/requests-table';
 
@@ -15,7 +12,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function DashboardUserDataRequestsPage() {
   const privateApi = await getPrivateApi();
-  const session = (await getGtwServerSession()) as Session;
   const requestsData =
     (
       await privateApi.myRequestsReceived({
@@ -23,14 +19,7 @@ export default async function DashboardUserDataRequestsPage() {
         take: 5,
       })
     )?.requestsReceived ?? [];
-  const count = (
-    await privateApi.requestsCount({
-      verifier: {
-        type: UserIdentifierType.GatewayId,
-        value: session.user.gatewayId as string,
-      },
-    })
-  ).requestsReceivedCount;
+  const count = (await privateApi.requestsCount()).requestsReceivedCount;
 
   return <RequestsTable data={requestsData} totalCount={count} />;
 }

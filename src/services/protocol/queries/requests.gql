@@ -30,8 +30,8 @@ query myRequestsReceived($take: Float!, $skip: Float!) {
   }
 }
 
-query requestsCount($verifier: UserIdentificationInput) {
-  requestsReceivedCount(filter: { verifier: $verifier })
+query requestsCount {
+  requestsReceivedCount
 }
 
 query dataRequest($id: String!) {
