@@ -14,7 +14,7 @@ import {
 import { Box } from '@mui/system';
 
 import HelpContentCard from '@/components/help-content-card/help-content-card';
-import HelpMenu from './components/help-menu';
+
 import SandboxAlert from './components/sandbox-alert';
 
 export default function DataAssetsLayout({ children }: PropsWithChildren) {
@@ -52,7 +52,7 @@ export default function DataAssetsLayout({ children }: PropsWithChildren) {
         </GTWTabs>
       </Box>
       <Box sx={{ pt: 5 }}>{children}</Box>
-      <HelpMenu />
+     
     </Box>
   );
 }
