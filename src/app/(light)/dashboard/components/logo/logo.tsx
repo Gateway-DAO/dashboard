@@ -1,6 +1,6 @@
 import GTWLogo from '@/components/gtw-logo/gtw-logo';
 
-import { Chip, Stack, Tooltip, Typography } from '@mui/material';
+import { Chip, Stack, Tooltip } from '@mui/material';
 
 import LogoContainer from './logo-container';
 

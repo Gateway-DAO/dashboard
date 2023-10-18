@@ -38,8 +38,8 @@ query dataModelsByOrg($organizationId: String!, $skip: Int, $take: Int) {
   }
 }
 
-query myDataModelsCount {
-  myDataModelsCount
+query dataModelsCount($user: UserIdentificationInput) {
+  dataModelsCount(filter: { user: $user })
 }
 
 query myDataModelsCountOrg($orgGatewayId: String!) {

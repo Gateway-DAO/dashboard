@@ -1,9 +1,11 @@
 import { PropsWithChildren } from 'react';
 
+import HelpContentCard from '@/components/help-content-card/help-content-card';
 import { requests, helperContent } from '@/locale/en/request';
 
 import { Box, Typography } from '@mui/material';
-import HelpContentCard from '@/components/help-content-card/help-content-card';
+
+import SandboxAlert from '../../components/alerts/sandbox-alert';
 
 export default function DataRequestsLayout({ children }: PropsWithChildren) {
   return (
@@ -17,6 +19,7 @@ export default function DataRequestsLayout({ children }: PropsWithChildren) {
           },
         }}
       >
+        {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <SandboxAlert />}
         <Typography variant="h3" id="title-requests" sx={{ mb: 1 }}>
           {requests.title}
         </Typography>
