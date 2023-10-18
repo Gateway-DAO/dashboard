@@ -70,6 +70,8 @@ export default function Hero() {
     <section className={styles.element} ref={sectionRef}>
       <Wrapper className={styles.wrapper}>
         <h1 className={styles.title}>
+          The safer and faster <br />
+          way for you to&nbsp;
           <span
             className={styles.title_highlight}
             ref={refCurrentWordElement}
@@ -85,7 +87,9 @@ export default function Hero() {
               </span>
             ))}
           </span>
-          &nbsp; Private Data
+          &nbsp;
+          <br />
+          private data
         </h1>
         <p className={styles.text}>
           Gateway powers private data usage across the web <br />
