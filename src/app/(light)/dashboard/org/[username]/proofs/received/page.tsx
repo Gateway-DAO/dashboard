@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import SandboxAlert from '@/app/(light)/dashboard/components/alerts/sandbox-alert';
 import TitleLayout from '@/components/title-layout/title-layout';
 import { proofs as proofsLocales } from '@/locale/en/proof';
 import { getPrivateApi } from '@/services/protocol/api';
@@ -37,6 +38,7 @@ export default async function OrganizationReceivedProofsPage(props: any) {
 
   return (
     <Box sx={{ py: 2 }}>
+      {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <SandboxAlert />}
       <TitleLayout
         title={proofsLocales.received_proofs}
         subtitle={proofsLocales.received_proofs_subtitle}
