@@ -21,7 +21,7 @@ export default async function Home() {
   const session = (await getGtwServerSession()) as Session;
   return (
     <>
-      <Typography variant="h4" marginBottom={4} gutterBottom>
+      <Typography variant="h3" marginBottom={4} gutterBottom>
         {home.greeting} {session?.user.displayName}
       </Typography>
       <Box
@@ -32,7 +32,7 @@ export default async function Home() {
         width="100%"
         height="40%"
         padding={2}
-        bgcolor="primary.light"
+        bgcolor="primary.main"
         borderRadius={1}
         href={home.main_banner.link}
         target="_blank"
@@ -63,12 +63,11 @@ export default async function Home() {
           </div>
         </Stack>
       </Box>
-      <div
-        style={{
+      <Box
+        sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          flexDirection: 'row',
-          marginTop: 25,
+          flexDirection: { xs: 'column', md: 'row' },
         }}
       >
         <Paper
@@ -76,7 +75,13 @@ export default async function Home() {
           href={home.sub_banner[0].link}
           target="_blank"
           variant="outlined"
-          sx={{ padding: 1.5, width: '100%', mr: 3, textDecoration: 'none' }}
+          sx={{
+            padding: 1.5,
+            width: '100%',
+            mr: 3,
+            marginTop: 2,
+            textDecoration: 'none',
+          }}
         >
           <PDABannerIcon sx={{ width: 115.82, height: 72 }} />
           <Typography mt={2} variant="h5" width={222} gutterBottom>
@@ -97,7 +102,12 @@ export default async function Home() {
           component={Link}
           href={home.sub_banner[1].link}
           variant="outlined"
-          sx={{ padding: 1.5, width: '100%', textDecoration: 'none' }}
+          sx={{
+            padding: 1.5,
+            width: '100%',
+            marginTop: 2,
+            textDecoration: 'none',
+          }}
         >
           <PlaygroundIcon sx={{ width: 84, height: 72 }} />
           <Typography mt={2} variant="h5" width={222} gutterBottom>
@@ -114,7 +124,7 @@ export default async function Home() {
             {home.sub_banner[1].btn_text}
           </Button>
         </Paper>
-      </div>
+      </Box>
     </>
   );
 }
