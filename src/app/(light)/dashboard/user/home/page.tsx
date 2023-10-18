@@ -11,6 +11,8 @@ import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session
 import { Box } from '@mui/material';
 import { Button, Paper, Stack, Typography } from '@mui/material';
 
+import SandboxAlert from '../../components/alerts/sandbox-alert';
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `The Private Data Asset Network  - Gateway Network`,
@@ -21,6 +23,7 @@ export default async function Home() {
   const session = (await getGtwServerSession()) as Session;
   return (
     <>
+      {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <SandboxAlert />}
       <Typography variant="h3" marginBottom={4} gutterBottom>
         {home.greeting} {session?.user.displayName}
       </Typography>
