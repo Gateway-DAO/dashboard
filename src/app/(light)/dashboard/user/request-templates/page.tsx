@@ -2,6 +2,7 @@ import { Session } from 'next-auth';
 
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
+import { UserIdentifierType } from '@/services/protocol/types';
 
 import { Typography } from '@mui/material';
 
@@ -13,12 +14,15 @@ export default async function DashboardUserDataRequestTemplatesPage() {
   const requestsData =
     (
       await privateApi.dataRequestTemplates({
-        creatorID: session.user.gatewayId,
+        user: {
+          type: UserIdentifierType.GatewayId,
+          value: session.user.gatewayId as string,
+        },
         skip: 0,
         take: 5,
       })
     )?.dataRequestTemplates ?? [];
-  const count = (await privateApi.myDataRequestTemplatesCount())
+  const count = (await privateApi.dataRequestTemplatesCount())
     .myDataRequestTemplatesCount;
 
   return (

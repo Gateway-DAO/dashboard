@@ -23,12 +23,14 @@ export default async function OrganizationRequestsPage(props: any) {
       await privateApi.requestsByOrg({
         skip: 0,
         take: 5,
-        orgId: organization?.id || '',
+        verifierOrganization: organization?.id || '',
       })
     )?.requestsSent ?? [];
 
   const count = (
-    await privateApi.requestsByOrgCount({ orgId: organization?.id ?? '' })
+    await privateApi.requestsByOrgCount({
+      verifierOrganization: organization?.id ?? '',
+    })
   ).requestsSentCount;
 
   return (

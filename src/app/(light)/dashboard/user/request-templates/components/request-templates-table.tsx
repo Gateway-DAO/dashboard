@@ -12,6 +12,7 @@ import { requestTemplate } from '@/locale/en/request-template';
 import {
   DataRequest,
   DataRequestTemplatesQuery,
+  UserIdentifierType,
 } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
@@ -88,7 +89,10 @@ export default function RequestTemplatesTable({
     ],
     queryFn: () =>
       privateApi?.dataRequestTemplates({
-        creatorID: session?.user?.gatewayId,
+        user: {
+          type: UserIdentifierType.GatewayId,
+          value: session?.user?.gatewayId as string,
+        },
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),

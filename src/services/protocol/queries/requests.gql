@@ -80,8 +80,16 @@ query dataRequestValidData($requestId: String!) {
   }
 }
 
-query requestsByOrg($orgId: String!, $take: Float!, $skip: Float!) {
-  requestsSent(filter: { orgId: $orgId }, skip: $skip, take: $take) {
+query requestsByOrg(
+  $verifierOrganization: String!
+  $take: Float!
+  $skip: Float!
+) {
+  requestsSent(
+    filter: { verifierOrganization: $verifierOrganization }
+    skip: $skip
+    take: $take
+  ) {
     id
     createdAt
     status
@@ -97,6 +105,6 @@ query requestsByOrg($orgId: String!, $take: Float!, $skip: Float!) {
   }
 }
 
-query requestsByOrgCount($orgId: String!) {
-  requestsSentCount(filter: { orgId: $orgId })
+query requestsByOrgCount($verifierOrganization: String!) {
+  requestsSentCount(filter: { verifierOrganization: $verifierOrganization })
 }

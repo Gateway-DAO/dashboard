@@ -110,7 +110,7 @@ export default function OrgRequestsTable({
       privateApi?.requestsByOrg({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
-        orgId: organization?.id || '',
+        verifierOrganization: organization?.id || '',
       }),
     select: (data: any) => (data as RequestsByOrgQuery)?.requestsSent,
     initialData: initialData && initialData.length ? initialData : null,
