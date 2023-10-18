@@ -9,6 +9,7 @@ import GTWLink from '@/components/gtw-link';
 import gsap from 'gsap';
 
 import styles from './hero.module.scss';
+import routes from '@/constants/routes';
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -69,8 +70,6 @@ export default function Hero() {
     <section className={styles.element} ref={sectionRef}>
       <Wrapper className={styles.wrapper}>
         <h1 className={styles.title}>
-          The safer and faster <br />
-          way for you to&nbsp;
           <span
             className={styles.title_highlight}
             ref={refCurrentWordElement}
@@ -86,9 +85,7 @@ export default function Hero() {
               </span>
             ))}
           </span>
-          &nbsp;
-          <br />
-          private data
+          &nbsp; Private Data
         </h1>
         <p className={styles.text}>
           Gateway powers private data usage across the web <br />
@@ -96,12 +93,12 @@ export default function Hero() {
         </p>
 
         <div className={styles.buttons_container}>
-          <GTWLink href="/">
+          <GTWLink href={routes.auth}>
             <Button variant="contained">Try it now</Button>
           </GTWLink>
 
-          <GTWLink href="/">
-            <Button variant="text">See how it works</Button>
+          <GTWLink href={routes.learn}>
+            <Button variant="text">Learn More</Button>
           </GTWLink>
         </div>
       </Wrapper>
