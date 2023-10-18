@@ -2,10 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, Stack, Typography, IconButton } from '@mui/material';
-import { useEffect, useState } from 'react';
 
 type Props = {
   title: string;
@@ -21,10 +21,9 @@ export default function HelpContentCard({
   btnText,
 }: Props) {
   const [open, setOpen] = useState(false);
-  let hasSeenDialog: { [key: string]: boolean } | null = JSON.parse(
+  const hasSeenDialog: { [key: string]: boolean } | null = JSON.parse(
     localStorage.getItem('help-content-banner') || '{}'
   );
-
 
   useEffect(() => {
     if (hasSeenDialog && !hasSeenDialog.hasOwnProperty(title)) {
