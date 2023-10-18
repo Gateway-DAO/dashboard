@@ -22,8 +22,14 @@ export default async function DashboardUserDataRequestTemplatesPage() {
         take: 5,
       })
     )?.dataRequestTemplates ?? [];
-  const count = (await privateApi.dataRequestTemplatesCount())
-    .myDataRequestTemplatesCount;
+  const count = (
+    await privateApi.dataRequestTemplatesCount({
+      user: {
+        type: UserIdentifierType.GatewayId,
+        value: session.user.gatewayId as string,
+      },
+    })
+  ).myDataRequestTemplatesCount;
 
   return (
     <>
