@@ -32,3 +32,10 @@ export const proofs = {
   received_proofs_subtitle:
     'These are the copies of data assets that have been sent to you',
 };
+
+export const helperContent = {
+  title: 'Share your data with Data Proofs',
+  desc: 'To facilitate data exchange in a secure and privacy-preserving manner, Data Proofs are used to send data to verifiers.',
+  btnText: 'Learn how',
+  btnLink: 'https://docs.mygateway.xyz/docs/data-proof',
+};
