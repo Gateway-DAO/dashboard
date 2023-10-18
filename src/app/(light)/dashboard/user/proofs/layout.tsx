@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 
+import HelpContentCard from '@/components/help-content-card/help-content-card';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
@@ -12,11 +13,13 @@ import {
 } from '@/theme/config/style-tokens';
 
 import { Box } from '@mui/system';
-import HelpContentCard from '@/components/help-content-card/help-content-card';
+
+import SandboxAlert from '../../components/alerts/sandbox-alert';
 
 export default function DataProofsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
+      {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <SandboxAlert />}
       <TitleLayout
         title={proofs.data_proofs}
         subtitle={proofs.data_proofs_subtitle}
