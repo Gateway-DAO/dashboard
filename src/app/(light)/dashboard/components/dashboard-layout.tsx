@@ -1,18 +1,10 @@
 'use client';
 
-import { PropsWithChildren, ReactNode, useState } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
 import { currentEnv } from '@/utils/env';
 
-import {
-  Alert,
-  AlertTitle,
-  Box,
-  Button,
-  Chip,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { Box, Chip, Tooltip } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import SandboxAlert from './alerts/sandbox-alert';
@@ -33,13 +25,6 @@ export default function DashboardLayout({
   mobileMenuItems,
 }: PropsWithChildren<Props>) {
   const testnet = currentEnv() === 'testnet';
-  // const [showDisclaimer, toggleDisclaimer] = useState(false);
-
-  // useEffect(() => {
-  //   if (hasSeenTestnetDisclaimer && !hasSeenTestnetDisclaimer.hasOwnProperty(title)) {
-  //     toggleDisclaimer(true);
-  //   }
-  // }, []);
 
   return (
     <Stack
@@ -83,34 +68,7 @@ export default function DashboardLayout({
           },
         }}
       >
-        {testnet && (
-          <SandboxAlert />
-          // <Alert
-          //   sx={{
-          //     borderRadius: '16px',
-          //     mb: 4,
-          //     mt: 4,
-          //     alignItems: 'center',
-          //   }}
-          //   severity="warning"
-          //   action={
-          //     <Button
-          //       color="inherit"
-          //       size="small"
-          //       onClick={() => {
-          //         setTestnetDisclaimer('closed');
-          //       }}
-          //     >
-          //       Close
-          //     </Button>
-          //   }
-          // >
-          //   <AlertTitle>You are on the Gateway tet network</AlertTitle>
-          //   <Typography variant="body2">
-          //     The data is temporary and will expire in 60 days.
-          //   </Typography>
-          // </Alert>
-        )}
+        {testnet && <SandboxAlert />}
         {children}
       </DashboardPage>
       {mobileMenuItems}
