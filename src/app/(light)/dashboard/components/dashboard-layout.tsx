@@ -2,6 +2,7 @@
 
 import { PropsWithChildren, ReactNode } from 'react';
 
+import { sandboxAlert } from '@/locale/en/alert-messages';
 import { currentEnv } from '@/utils/env';
 
 import { Box, Chip, Tooltip } from '@mui/material';
@@ -45,11 +46,7 @@ export default function DashboardLayout({
         >
           <Logo />
           {testnet && (
-            <Tooltip
-              title="You are on the Gateway Sandbox. The data is temporary and will expire in 60 days."
-              placement="right"
-              arrow
-            >
+            <Tooltip title={sandboxAlert.tooltip} placement="right" arrow>
               <Chip
                 color="warning"
                 size="small"

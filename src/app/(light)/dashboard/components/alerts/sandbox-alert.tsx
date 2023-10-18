@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { sandboxAlert } from '@/locale/en/pda';
+import { sandboxAlert } from '@/locale/en/alert-messages';
 
 import { Button, Typography, AlertTitle, Alert } from '@mui/material';
 
