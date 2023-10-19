@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import { datamodels } from '@/locale/en/datamodel';
 import { getPrivateApi } from '@/services/protocol/api';
 import { OrganizationIdentifierType } from '@/services/protocol/types';
 
@@ -7,15 +8,16 @@ import { Typography } from '@mui/material';
 
 import DataModelsTable from './components/data-models-table';
 
-export const metadata: Metadata = {
-  title: 'Created Data Models - Gateway Network',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Created Data Models - Gateway Network',
+  };
+}
 
-export default async function DashboardOrgDataModelsPage(props: any) {
+export default async function DashboardOrgMyDataModels(props: any) {
   const privateApi = await getPrivateApi();
   const pathnameOrg = props.params?.username;
-
-  const requestsData =
+  const dataModelsData =
     (
       await privateApi.dataModelsByOrg({
         organization: {
@@ -28,7 +30,7 @@ export default async function DashboardOrgDataModelsPage(props: any) {
     )?.dataModels ?? [];
 
   const count = (
-    await privateApi.dataModelsCountOrg({
+    await privateApi.dataModelsByOrgCount({
       organization: {
         type: OrganizationIdentifierType.GatewayId,
         value: pathnameOrg,
@@ -38,15 +40,16 @@ export default async function DashboardOrgDataModelsPage(props: any) {
 
   return (
     <>
-      {requestsData && requestsData.length > 0 ? (
-        <DataModelsTable data={requestsData} totalCount={count} />
-      ) : (
+      {dataModelsData && dataModelsData.length > 0 && (
+        <DataModelsTable data={dataModelsData} totalCount={count} />
+      )}
+      {dataModelsData && dataModelsData.length === 0 && (
         <Typography
           variant="body1"
           color="text.secondary"
           sx={{ textAlign: 'center', width: '100%' }}
         >
-          No data models yet
+          {datamodels.empty}
         </Typography>
       )}
     </>

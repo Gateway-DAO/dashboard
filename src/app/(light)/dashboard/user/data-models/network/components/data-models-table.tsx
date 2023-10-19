@@ -2,20 +2,14 @@
 
 import { useState } from 'react';
 
-import ModalDetail from '@/app/(light)/dashboard/user/data-models/components/modal-detail';
 import {
   defaultGridConfiguration,
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import useOrganization from '@/hooks/use-organization';
 import { datamodel } from '@/locale/en/datamodel';
-import {
-  DataModelsQuery,
-  DataRequest,
-  OrganizationIdentifierType,
-} from '@/services/protocol/types';
+import { DataModel, DataModelsQuery } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
@@ -30,7 +24,9 @@ import {
   GridRowParams,
 } from '@mui/x-data-grid';
 
-const columns: GridColDef<PartialDeep<DataRequest>>[] = [
+import ModalDetail from '../../components/modal-detail';
+
+const columns: GridColDef<PartialDeep<DataModel>>[] = [
   {
     field: 'title',
     headerName: datamodel.title,
@@ -45,11 +41,33 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     headerName: datamodel.data_model_id,
     flex: 1.3,
     renderCell: (params: GridRenderCellParams) => {
+      return <Typography>{limitCharsCentered(params.row.id, 10)}</Typography>;
+    },
+  },
+  {
+    field: 'consumptionPrice',
+    headerName: datamodel.consumption_cost,
+    flex: 1.3,
+    renderCell: (params) => {
       return (
-        <Typography variant="body1">
-          {limitCharsCentered(params.row.id, 10)}
+        <Typography>
+          {params.value
+            ? params.value.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                currencyDisplay: 'symbol',
+              })
+            : '$0.00'}
         </Typography>
       );
+    },
+  },
+  {
+    field: 'pdasIssuedCount',
+    headerName: datamodel.issuances,
+    flex: 1.3,
+    renderCell: (params) => {
+      return <Typography>{params.value}</Typography>;
     },
   },
   {
@@ -62,7 +80,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
 ];
 
 type Props = {
-  data: PartialDeep<DataRequest>[];
+  data: PartialDeep<DataModel>[];
   totalCount: number;
 };
 
@@ -74,31 +92,25 @@ export default function DataModelsTable({
     page: 0,
     pageSize: 5,
   });
+
   const [openDetailModal, toggleDetailModal] = useToggle(false);
   const [currentDataModel, setCurrentDataModel] = useState('');
 
-  const { organization } = useOrganization();
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       'data-models',
-      organization?.id as string,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
-      privateApi?.dataModelsByOrg({
-        organization: {
-          type: OrganizationIdentifierType.OrgId,
-          value: organization?.id as string,
-        },
+      privateApi?.dataModels({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
     select: (data: any) => (data as DataModelsQuery)?.dataModels,
     initialData: initialData && initialData.length ? initialData : null,
-    enabled: !!organization,
   });
 
   const setNewPage = ({ page }: { page: number }) => {
@@ -115,11 +127,11 @@ export default function DataModelsTable({
         rows={data && data.length ? data : initialData}
         columns={columns}
         paginationModel={paginationModel}
+        onPaginationModelChange={setNewPage}
         onRowClick={(params: GridRowParams) => {
           toggleDetailModal(true);
           setCurrentDataModel(params.id as string);
         }}
-        onPaginationModelChange={setNewPage}
         paginationMode="server"
         loading={isLoading}
         rowCount={totalCount}
