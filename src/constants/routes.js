@@ -18,7 +18,9 @@ const routes = {
   dashboardOrgRequest: (org, requestId) =>
     `/dashboard/org/${org}/request/${requestId}`,
   dashboardUserRequests: '/dashboard/user/requests',
-  dashboardUserRequestTemplates: '/dashboard/user/request-templates',
+  dashboardUserMyRequestTemplates: '/dashboard/user/request-templates/my',
+  dashboardUserNetworkRequestTemplates:
+    '/dashboard/user/request-templates/network',
   dashboardUserMyDataModels: '/dashboard/user/data-models/my',
   dashboardUserNetworkDataModels: '/dashboard/user/data-models/network',
   dashboardUserSettings: '/dashboard/user/settings',
@@ -27,8 +29,10 @@ const routes = {
     `/dashboard/org/${organizationId}/assets/issued`,
   dashboardOrgRequests: (organizationId) =>
     `/dashboard/org/${organizationId}/requests`,
-  dashboardOrgRequestTemplates: (organizationId) =>
-    `/dashboard/org/${organizationId}/request-templates`,
+  dashboardOrgMyRequestTemplates: (organizationId) =>
+    `/dashboard/org/${organizationId}/request-templates/my`,
+  dashboardOrgNetworkRequestTemplates: (organizationId) =>
+    `/dashboard/org/${organizationId}/request-templates/network`,
   dashboardOrgMyDataModels: (organizationId) =>
     `/dashboard/org/${organizationId}/data-models/my`,
   dashboardOrgNetworkDataModels: (organizationId) =>
