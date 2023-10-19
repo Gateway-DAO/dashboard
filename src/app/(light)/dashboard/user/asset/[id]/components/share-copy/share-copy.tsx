@@ -51,7 +51,7 @@ export default function ShareCopy({ pda }: Props) {
     mode: 'all',
     defaultValues: {
       type: IdentifierType.GatewayId,
-      address: '',
+      value: '',
     },
   });
 
@@ -96,7 +96,8 @@ export default function ShareCopy({ pda }: Props) {
       router.refresh();
     } catch (e: any) {
       if (e?.response?.errors?.[0].message === 'VERIFIER_NOT_FOUND') {
-        methods.setError('address', {
+        methods.setError('value', {
+          type: 'manual',
           message: errorMessages.VERIFIER_NOT_FOUND,
         });
       } else {
