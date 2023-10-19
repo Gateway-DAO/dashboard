@@ -18,7 +18,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     icon: HomeOutlinedIcon,
   },
   {
-    name: 'Data assets',
+    name: 'Data Assets',
     href: routes.dashboardUserReceivedAssets,
     activeHrefs: [
       routes.dashboardUserReceivedAssets,
@@ -28,7 +28,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     icon: DataOutlinedIcon,
   },
   {
-    name: 'Data requests',
+    name: 'Data Requests',
     href: routes.dashboardUserRequests,
     activeHrefs: [
       routes.dashboardUserRequests,
@@ -37,7 +37,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     icon: DataRequestOutlinedIcon,
   },
   {
-    name: 'Data proofs',
+    name: 'Data Proofs',
     href: routes.dashboardUserReceivedProofs,
     activeHrefs: [
       routes.dashboardUserReceivedProofs,
@@ -47,13 +47,13 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     icon: DataProofOutlinedIcon,
   },
   {
-    name: 'Data models',
+    name: 'Data Models',
     href: routes.dashboardUserDataModels,
     activeHrefs: [routes.dashboardUserDataModels],
     icon: DataModelOutlinedIcon,
   },
   {
-    name: 'Request templates',
+    name: 'Request Templates',
     href: routes.dashboardUserRequestTemplates,
     activeHrefs: [routes.dashboardUserRequestTemplates],
     icon: DataRequestTemplateOutlinedIcon,

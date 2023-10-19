@@ -49,9 +49,9 @@ export const pda = {
 export const pdas = {
   empty: 'No data assets yet',
   load_more: 'load more',
-  my_data_assets: 'Data assets',
+  my_data_assets: 'Data Assets',
   data_assets_subtitle:
-    'These are the private data assets you have collected and sent',
+    'These are the private data assets you have earned and created.',
 };
 export const orgPdas = {
   empty: 'No issued Data Assets yet',
