@@ -14,10 +14,20 @@ query dataModelById($id: String!) {
   }
 }
 
-query dataModels($user: UserIdentificationInput, $skip: Int, $take: Int) {
+query dataModels($skip: Int, $take: Int) {
+  dataModels(skip: $skip, take: $take) {
+    id
+    title
+    consumptionPrice
+    createdAt
+  }
+}
+
+query dataModelsByUser($user: UserIdentificationInput, $skip: Int, $take: Int) {
   dataModels(filter: { user: $user }, skip: $skip, take: $take) {
     id
     title
+    consumptionPrice
     createdAt
   }
 }
@@ -34,14 +44,19 @@ query dataModelsByOrg(
   ) {
     id
     title
+    consumptionPrice
     createdAt
   }
 }
 
-query dataModelsCount($user: UserIdentificationInput) {
+query dataModelsCount {
+  dataModelsCount
+}
+
+query dataModelsByUserCount($user: UserIdentificationInput) {
   dataModelsCount(filter: { user: $user })
 }
 
-query dataModelsCountOrg($organization: OrganizationIdentificationInput) {
+query dataModelsByOrgCount($organization: OrganizationIdentificationInput) {
   dataModelsCount(filter: { organization: $organization })
 }

@@ -10,7 +10,7 @@ import { DATE_FORMAT } from '@/constants/date';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { datamodel } from '@/locale/en/datamodel';
 import {
-  DataModelsQuery,
+  DataModelsByUserQuery,
   DataRequest,
   UserIdentifierType,
 } from '@/services/protocol/types';
@@ -89,7 +89,7 @@ export default function DataModelsTable({
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
-      privateApi?.dataModels({
+      privateApi?.dataModelsByUser({
         user: {
           type: UserIdentifierType.GatewayId,
           value: session.user.gatewayId as string,
@@ -97,7 +97,7 @@ export default function DataModelsTable({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
-    select: (data: any) => (data as DataModelsQuery)?.dataModels,
+    select: (data: any) => (data as DataModelsByUserQuery)?.dataModels,
     initialData: initialData && initialData.length ? initialData : null,
   });
 

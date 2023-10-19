@@ -28,7 +28,7 @@ export default async function DashboardOrgDataModelsPage(props: any) {
     )?.dataModels ?? [];
 
   const count = (
-    await privateApi.dataModelsCountOrg({
+    await privateApi.dataModelsByOrgCount({
       organization: {
         type: OrganizationIdentifierType.GatewayId,
         value: pathnameOrg,

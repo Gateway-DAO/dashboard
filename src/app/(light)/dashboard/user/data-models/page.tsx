@@ -18,7 +18,7 @@ export default async function DashboardUserDataModelsPage() {
   const session = (await getGtwServerSession()) as Session;
   const requestsData =
     (
-      await privateApi.dataModels({
+      await privateApi.dataModelsByUser({
         user: {
           type: UserIdentifierType.GatewayId,
           value: session.user.gatewayId as string,
@@ -29,7 +29,7 @@ export default async function DashboardUserDataModelsPage() {
     )?.dataModels ?? [];
 
   const count = (
-    await privateApi.dataModelsCount({
+    await privateApi.dataModelsByUserCount({
       user: {
         type: UserIdentifierType.GatewayId,
         value: session.user.gatewayId as string,
