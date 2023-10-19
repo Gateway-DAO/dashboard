@@ -1,4 +1,5 @@
 import { getPrivateApi } from '@/services/protocol/api';
+import { OrganizationIdentifierType } from '@/services/protocol/types';
 
 import { Typography } from '@mui/material';
 
@@ -11,15 +12,21 @@ export default async function DashboardOrgDataRequestTemplatesPage(props: any) {
   const requestsData =
     (
       await privateApi.dataRequestTemplatesByOrg({
-        orgCreatorId: pathnameOrg,
+        organization: {
+          type: OrganizationIdentifierType.GatewayId,
+          value: pathnameOrg,
+        },
         skip: 0,
         take: 5,
       })
     )?.dataRequestTemplates ?? [];
 
   const count = (
-    await privateApi.myDataRequestTemplatesCountOrg({
-      orgGatewayId: pathnameOrg,
+    await privateApi.dataRequestTemplatesCountOrg({
+      organization: {
+        type: OrganizationIdentifierType.GatewayId,
+        value: pathnameOrg,
+      },
     })
   ).myDataRequestTemplatesCount;
 

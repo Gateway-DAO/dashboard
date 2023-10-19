@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 import { getPrivateApi } from '@/services/protocol/api';
-import { getCurrentOrg } from '@/utils/currentOrg';
+import { OrganizationIdentifierType } from '@/services/protocol/types';
 
 import { Typography } from '@mui/material';
 
@@ -17,18 +17,25 @@ export default async function OrganizationRequestsPage(props: any) {
   const privateApi = await getPrivateApi();
   const pathnameOrg = props.params?.username;
 
-  const organization = await getCurrentOrg(pathnameOrg);
   const requestsData =
     (
       await privateApi.requestsByOrg({
         skip: 0,
         take: 5,
-        orgId: organization?.id || '',
+        verifierOrganization: {
+          type: OrganizationIdentifierType.GatewayId,
+          value: pathnameOrg,
+        },
       })
     )?.requestsSent ?? [];
 
   const count = (
-    await privateApi.requestsByOrgCount({ orgId: organization?.id ?? '' })
+    await privateApi.requestsByOrgCount({
+      verifierOrganization: {
+        type: OrganizationIdentifierType.GatewayId,
+        value: pathnameOrg,
+      },
+    })
   ).requestsSentCount;
 
   return (

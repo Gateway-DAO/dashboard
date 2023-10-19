@@ -14,6 +14,7 @@ import { requestTemplate } from '@/locale/en/request-template';
 import {
   DataRequest,
   DataRequestTemplatesQuery,
+  OrganizationIdentifierType,
 } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
@@ -88,7 +89,10 @@ export default function RequestTemplatesTable({
     ],
     queryFn: () =>
       privateApi?.dataRequestTemplatesByOrg({
-        orgCreatorId: organization?.gatewayId as string,
+        organization: {
+          type: OrganizationIdentifierType.GatewayId,
+          value: organization?.gatewayId as string,
+        },
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
