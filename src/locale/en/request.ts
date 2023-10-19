@@ -1,3 +1,5 @@
+import documentationRoutes from '@/constants/documentationRoutes';
+
 export const requests = {
   empty: 'No data requests yet',
   title: 'Data requests',
@@ -62,8 +64,8 @@ export const request = {
 };
 
 export const helperContent = {
-  title: 'Become a verifier by creating your first Data Request',
-  desc: 'These requests specify the type of information sought and provide context, clarifying to the owner what specific data needs to be shared.',
+  title: 'Want to verify? Create your first Data Request',
+  desc: 'Requests specify the information you want to consume. Explaining to the Data Owner what specific data asset they need to share.',
   btnText: 'Start now',
-  btnLink: 'https://docs.mygateway.xyz/docs/data-request',
+  btnLink: documentationRoutes.dataRequest,
 };
