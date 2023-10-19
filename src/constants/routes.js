@@ -19,9 +19,8 @@ const routes = {
     `/dashboard/org/${org}/request/${requestId}`,
   dashboardUserRequests: '/dashboard/user/requests',
   dashboardUserRequestTemplates: '/dashboard/user/request-templates',
-  dashboardUserMyDataModels: '/dashboard/user/data-models/my-data-models',
-  dashboardUserNetworkDataModels:
-    '/dashboard/user/data-models/network-data-models',
+  dashboardUserMyDataModels: '/dashboard/user/data-models/my',
+  dashboardUserNetworkDataModels: '/dashboard/user/data-models/network',
   dashboardUserSettings: '/dashboard/user/settings',
   dashboardOrgRoot: '/dashboard/org',
   dashboardOrgIssuedAssets: (organizationId) =>
@@ -31,9 +30,9 @@ const routes = {
   dashboardOrgRequestTemplates: (organizationId) =>
     `/dashboard/org/${organizationId}/request-templates`,
   dashboardOrgMyDataModels: (organizationId) =>
-    `/dashboard/org/${organizationId}/data-models/my-data-models`,
+    `/dashboard/org/${organizationId}/data-models/my`,
   dashboardOrgNetworkDataModels: (organizationId) =>
-    `/dashboard/org/${organizationId}/data-models/network-data-models`,
+    `/dashboard/org/${organizationId}/data-models/network`,
   dashboardOrgReceivedProofs: (organizationId) =>
     `/dashboard/org/${organizationId}/proofs/received`,
   dashboardOrgSettings: (organizationId) =>

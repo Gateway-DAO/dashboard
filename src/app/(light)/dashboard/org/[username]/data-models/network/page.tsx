@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import DataModelsTable from '@/app/(light)/dashboard/user/data-models/network-data-models/components/data-models-table';
+import DataModelsTable from '@/app/(light)/dashboard/user/data-models/network/components/data-models-table';
 import { datamodels } from '@/locale/en/datamodel';
 import { getPrivateApi } from '@/services/protocol/api';
 
