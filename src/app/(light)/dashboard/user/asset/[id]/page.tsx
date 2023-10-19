@@ -9,7 +9,7 @@ import { getCurrentOrg } from '@/utils/currentOrg';
 
 import PDAItem from './components/pda-item';
 
-const getPDA = async (id: string): Promise<PdaQuery['PDA'] | null> => {
+export const getPDA = async (id: string): Promise<PdaQuery['PDA'] | null> => {
   const privateApi = await getPrivateApi();
   if (!privateApi) {
     return null;

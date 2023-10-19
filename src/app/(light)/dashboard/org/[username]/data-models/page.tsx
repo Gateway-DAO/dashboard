@@ -1,9 +1,15 @@
+import { Metadata } from 'next';
+
 import { getPrivateApi } from '@/services/protocol/api';
 import { OrganizationIdentifierType } from '@/services/protocol/types';
 
 import { Typography } from '@mui/material';
 
 import DataModelsTable from './components/data-models-table';
+
+export const metadata: Metadata = {
+  title: 'Created Data Models - Gateway Network',
+};
 
 export default async function DashboardOrgDataModelsPage(props: any) {
   const privateApi = await getPrivateApi();
