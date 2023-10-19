@@ -1,19 +1,57 @@
+'use client';
 import { PropsWithChildren } from 'react';
 
+import HelpContentCard from '@/components/help-content-card/help-content-card';
+import GTWTab from '@/components/tabs/gtw-tab';
+import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
-import { datamodels } from '@/locale/en/datamodel';
+import routes from '@/constants/routes';
+import useOrganization from '@/hooks/use-organization';
+import { datamodels, helperContent } from '@/locale/en/datamodel';
+import {
+  CONTAINER_PX,
+  NEGATIVE_CONTAINER_PX,
+} from '@/theme/config/style-tokens';
 
 import { Box } from '@mui/material';
 
 export default function OrgDataModelsLayout({ children }: PropsWithChildren) {
+  const { organization } = useOrganization();
   return (
     <Box sx={{ py: 2 }}>
       <TitleLayout
-        titleId={datamodels.id}
         title={datamodels.title}
-        subtitle={datamodels.org_subtitle}
+        subtitle={datamodels.subtitle}
+        titleId="title-data-models"
       />
-      {children}
+
+      <HelpContentCard
+        title={helperContent.title}
+        desc={helperContent.desc}
+        btnText={helperContent.btnText}
+        btnLink={helperContent.btnLink}
+      />
+
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          mx: NEGATIVE_CONTAINER_PX,
+          px: CONTAINER_PX,
+        }}
+      >
+        <GTWTabs>
+          <GTWTab
+            label={datamodels.my_data_models}
+            href={routes.dashboardOrgMyDataModels(organization?.gatewayId)}
+          />
+          <GTWTab
+            label={datamodels.network_data_models}
+            href={routes.dashboardOrgNetworkDataModels(organization?.gatewayId)}
+          />
+        </GTWTabs>
+      </Box>
+      <Box sx={{ pt: 5 }}>{children}</Box>
     </Box>
   );
 }

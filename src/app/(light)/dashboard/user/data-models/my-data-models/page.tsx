@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Session } from 'next-auth';
 
+import { datamodels } from '@/locale/en/datamodel';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
 import { UserIdentifierType } from '@/services/protocol/types';
@@ -9,14 +10,16 @@ import { Typography } from '@mui/material';
 
 import DataModelsTable from './components/data-models-table';
 
-export const metadata: Metadata = {
-  title: 'Created Data Models - Gateway Network',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Created Data Models - Gateway Network',
+  };
+}
 
-export default async function DashboardUserDataModelsPage() {
+export default async function DashboardUserMyDataModels() {
   const privateApi = await getPrivateApi();
   const session = (await getGtwServerSession()) as Session;
-  const requestsData =
+  const dataModelsData =
     (
       await privateApi.dataModelsByUser({
         user: {
@@ -39,15 +42,16 @@ export default async function DashboardUserDataModelsPage() {
 
   return (
     <>
-      {requestsData && requestsData.length > 0 ? (
-        <DataModelsTable data={requestsData} totalCount={count} />
-      ) : (
+      {dataModelsData && dataModelsData.length > 0 && (
+        <DataModelsTable data={dataModelsData} totalCount={count} />
+      )}
+      {dataModelsData && dataModelsData.length === 0 && (
         <Typography
           variant="body1"
           color="text.secondary"
           sx={{ textAlign: 'center', width: '100%' }}
         >
-          No data models yet
+          {datamodels.empty}
         </Typography>
       )}
     </>

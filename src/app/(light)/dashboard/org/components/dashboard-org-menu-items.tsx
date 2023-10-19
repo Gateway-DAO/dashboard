@@ -32,8 +32,11 @@ export const dashboardOrgMenuItems = (
   },
   {
     name: 'Data models',
-    href: routes.dashboardOrgDataModels(username),
-    activeHrefs: [routes.dashboardOrgDataModels(username)],
+    href: routes.dashboardOrgMyDataModels(username),
+    activeHrefs: [
+      routes.dashboardOrgMyDataModels(username),
+      routes.dashboardOrgNetworkDataModels(username),
+    ],
     icon: DataModelOutlinedIcon,
   },
   {
