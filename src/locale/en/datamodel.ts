@@ -1,6 +1,7 @@
 export const datamodel = {
   title: 'Data model',
   data_model_id: 'Data model ID',
+  consumption_cost: 'Consumption cost',
 };
 
 export const datamodels = {

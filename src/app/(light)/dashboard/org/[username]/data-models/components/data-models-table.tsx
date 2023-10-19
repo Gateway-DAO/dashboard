@@ -53,6 +53,24 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     },
   },
   {
+    field: 'consumptionPrice',
+    headerName: datamodel.consumption_cost,
+    flex: 1.3,
+    renderCell: (params) => {
+      return (
+        <Typography variant="body1">
+          {params.value
+            ? params.value.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                currencyDisplay: 'symbol',
+              })
+            : '$0.00'}
+        </Typography>
+      );
+    },
+  },
+  {
     field: 'createdAt',
     headerName: 'Created At',
     flex: 1.2,
