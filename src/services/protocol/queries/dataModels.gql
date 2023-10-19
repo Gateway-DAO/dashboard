@@ -19,6 +19,7 @@ query dataModels($skip: Int, $take: Int) {
     id
     title
     consumptionPrice
+    pdasIssuedCount
     createdAt
   }
 }
@@ -28,6 +29,7 @@ query dataModelsByUser($user: UserIdentificationInput, $skip: Int, $take: Int) {
     id
     title
     consumptionPrice
+    pdasIssuedCount
     createdAt
   }
 }
@@ -45,6 +47,7 @@ query dataModelsByOrg(
     id
     title
     consumptionPrice
+    pdasIssuedCount
     createdAt
   }
 }

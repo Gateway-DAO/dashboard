@@ -45,11 +45,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     headerName: datamodel.data_model_id,
     flex: 1.3,
     renderCell: (params: GridRenderCellParams) => {
-      return (
-        <Typography variant="body1">
-          {limitCharsCentered(params.row.id, 10)}
-        </Typography>
-      );
+      return <Typography>{limitCharsCentered(params.row.id, 10)}</Typography>;
     },
   },
   {
@@ -58,7 +54,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     flex: 1.3,
     renderCell: (params) => {
       return (
-        <Typography variant="body1">
+        <Typography>
           {params.value
             ? params.value.toLocaleString('en-US', {
                 style: 'currency',
@@ -68,6 +64,14 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
             : '$0.00'}
         </Typography>
       );
+    },
+  },
+  {
+    field: 'pdasIssuedCount',
+    headerName: datamodel.issuances,
+    flex: 1.3,
+    renderCell: (params) => {
+      return <Typography>{params.value}</Typography>;
     },
   },
   {
