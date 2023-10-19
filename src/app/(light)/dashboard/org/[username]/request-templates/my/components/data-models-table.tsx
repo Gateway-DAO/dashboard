@@ -12,7 +12,7 @@ import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
 import { requestTemplate } from '@/locale/en/request-template';
 import {
-  DataRequest,
+  DataRequestTemplate,
   DataRequestTemplatesByOrgQuery,
   OrganizationIdentifierType,
 } from '@/services/protocol/types';
@@ -30,7 +30,7 @@ import {
   GridRowParams,
 } from '@mui/x-data-grid';
 
-const columns: GridColDef<PartialDeep<DataRequest>>[] = [
+const columns: GridColDef<PartialDeep<DataRequestTemplate>>[] = [
   {
     field: 'name',
     headerName: requestTemplate.title,
@@ -62,7 +62,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
 ];
 
 type Props = {
-  data: PartialDeep<DataRequest>[];
+  data: PartialDeep<DataRequestTemplate>[];
   totalCount: number;
 };
 

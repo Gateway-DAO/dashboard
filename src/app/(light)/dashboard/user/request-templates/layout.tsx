@@ -20,7 +20,7 @@ export default function DataRequestTeampltesLayout({
       <TitleLayout
         title={requestTemplates.title}
         subtitle={requestTemplates.subtitle}
-        titleId="title-request-templates"
+        titleId="title-data-request-templates"
       />
 
       <Box
@@ -34,11 +34,11 @@ export default function DataRequestTeampltesLayout({
         <GTWTabs>
           <GTWTab
             label={requestTemplates.my_data_request_templates}
-            href={routes.dashboardUserMyDataModels}
+            href={routes.dashboardUserMyRequestTemplates}
           />
           <GTWTab
             label={requestTemplates.network_data_request_templates}
-            href={routes.dashboardUserNetworkDataModels}
+            href={routes.dashboardUserNetworkRequestTemplates}
           />
         </GTWTabs>
       </Box>
