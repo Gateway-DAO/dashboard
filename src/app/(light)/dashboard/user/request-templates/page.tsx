@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { Session } from 'next-auth';
 
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
@@ -7,6 +8,10 @@ import { UserIdentifierType } from '@/services/protocol/types';
 import { Typography } from '@mui/material';
 
 import RequestTemplatesTable from './components/request-templates-table';
+
+export const metadata: Metadata = {
+  title: 'Data Request Templates - Gateway Network',
+};
 
 export default async function DashboardUserDataRequestTemplatesPage() {
   const privateApi = await getPrivateApi();

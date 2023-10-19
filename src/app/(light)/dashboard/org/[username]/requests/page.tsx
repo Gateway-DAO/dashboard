@@ -9,7 +9,7 @@ import RequestsTable from './components/requests-table';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Issued Data Requests - Gateway Network',
+    title: 'Requested Data Requests - Gateway Network',
   };
 }
 
