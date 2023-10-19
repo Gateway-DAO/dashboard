@@ -1,12 +1,8 @@
-'use client';
-import { PropsWithChildren } from 'react';
-
 import HelpContentCard from '@/components/help-content-card/help-content-card';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
-import useOrganization from '@/hooks/use-organization';
 import { datamodels, helperContent } from '@/locale/en/datamodel';
 import {
   CONTAINER_PX,
@@ -15,8 +11,8 @@ import {
 
 import { Box } from '@mui/material';
 
-export default function OrgDataModelsLayout({ children }: PropsWithChildren) {
-  const { organization } = useOrganization();
+export default async function OrgDataModelsLayout({ children, params }: any) {
+  const pathnameOrg = await params?.username;
   return (
     <Box sx={{ py: 2 }}>
       <TitleLayout
@@ -43,11 +39,11 @@ export default function OrgDataModelsLayout({ children }: PropsWithChildren) {
         <GTWTabs>
           <GTWTab
             label={datamodels.my_data_models}
-            href={routes.dashboardOrgMyDataModels(organization?.gatewayId)}
+            href={routes.dashboardOrgMyDataModels(pathnameOrg)}
           />
           <GTWTab
             label={datamodels.network_data_models}
-            href={routes.dashboardOrgNetworkDataModels(organization?.gatewayId)}
+            href={routes.dashboardOrgNetworkDataModels(pathnameOrg)}
           />
         </GTWTabs>
       </Box>
