@@ -11,7 +11,7 @@ import ProofsSentTable from './components/proofs-sent-table';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Sent Data Requests - Gateway Network',
+    title: 'Sent Data Proofs - Gateway Network',
   };
 }
 
