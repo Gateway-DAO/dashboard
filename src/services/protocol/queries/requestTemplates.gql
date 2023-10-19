@@ -1,4 +1,12 @@
-query dataRequestTemplates(
+query dataRequestTemplates($skip: Float, $take: Float) {
+  dataRequestTemplates(skip: $skip, take: $take) {
+    id
+    name
+    createdAt
+  }
+}
+
+query dataRequestTemplatesByUser(
   $user: UserIdentificationInput
   $skip: Float
   $take: Float
@@ -40,11 +48,15 @@ query dataRequestTemplateById($id: String!) {
   }
 }
 
-query dataRequestTemplatesCount($user: UserIdentificationInput) {
+query dataRequestTemplatesCount {
+  myDataRequestTemplatesCount
+}
+
+query dataRequestTemplatesByUserCount($user: UserIdentificationInput) {
   myDataRequestTemplatesCount(filter: { user: $user })
 }
 
-query dataRequestTemplatesCountOrg(
+query dataRequestTemplatesByOrgCount(
   $organization: OrganizationIdentificationInput
 ) {
   myDataRequestTemplatesCount(filter: { organization: $organization })

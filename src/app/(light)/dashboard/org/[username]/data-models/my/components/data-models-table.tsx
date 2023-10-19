@@ -104,7 +104,7 @@ export default function DataModelsTable({
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
-      'data-models',
+      'my-data-models',
       organization?.id as string,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,

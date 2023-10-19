@@ -2,19 +2,17 @@
 
 import { useState } from 'react';
 
-import ModalDetail from '@/app/(light)/dashboard/user/request-templates/components/modal-detail';
 import {
   defaultGridConfiguration,
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import useOrganization from '@/hooks/use-organization';
 import { requestTemplate } from '@/locale/en/request-template';
 import {
-  DataRequest,
-  DataRequestTemplatesByOrgQuery,
-  OrganizationIdentifierType,
+  DataRequestTemplate,
+  DataRequestTemplatesByUserQuery,
+  UserIdentifierType,
 } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
@@ -30,7 +28,9 @@ import {
   GridRowParams,
 } from '@mui/x-data-grid';
 
-const columns: GridColDef<PartialDeep<DataRequest>>[] = [
+import ModalDetail from '../../components/modal-detail';
+
+const columns: GridColDef<PartialDeep<DataRequestTemplate>>[] = [
   {
     field: 'name',
     headerName: requestTemplate.title,
@@ -62,7 +62,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
 ];
 
 type Props = {
-  data: PartialDeep<DataRequest>[];
+  data: PartialDeep<DataRequestTemplate>[];
   totalCount: number;
 };
 
@@ -70,6 +70,7 @@ export default function RequestTemplatesTable({
   data: initialData,
   totalCount = 0,
 }: Props) {
+  const { session } = useGtwSession();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 5,
@@ -77,29 +78,27 @@ export default function RequestTemplatesTable({
   const [openDetailModal, toggleDetailModal] = useToggle(false);
   const [currentTemplate, setCurrentTemplate] = useState('');
 
-  const { organization } = useOrganization();
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
-      'data-request-templates',
-      organization?.gatewayId as string,
+      'my-data-request-templates',
+      session?.user?.gatewayId,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
-      privateApi?.dataRequestTemplatesByOrg({
-        organization: {
-          type: OrganizationIdentifierType.GatewayId,
-          value: organization?.gatewayId as string,
+      privateApi?.dataRequestTemplatesByUser({
+        user: {
+          type: UserIdentifierType.GatewayId,
+          value: session?.user?.gatewayId as string,
         },
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
     select: (data: any) =>
-      (data as DataRequestTemplatesByOrgQuery)?.dataRequestTemplates,
+      (data as DataRequestTemplatesByUserQuery)?.dataRequestTemplates,
     initialData: initialData && initialData.length ? initialData : null,
-    enabled: !!organization,
   });
 
   const setNewPage = ({ page }: { page: number }) => {
