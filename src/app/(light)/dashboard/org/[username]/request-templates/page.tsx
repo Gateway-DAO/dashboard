@@ -1,6 +1,15 @@
+import { Metadata } from 'next';
+
 import { getPrivateApi } from '@/services/protocol/api';
+import { OrganizationIdentifierType } from '@/services/protocol/types';
+
+import { Typography } from '@mui/material';
 
 import RequestTemplatesTable from './components/request-templates-table';
+
+export const metadata: Metadata = {
+  title: 'Data Request Templates - Gateway Network',
+};
 
 export default async function DashboardOrgDataRequestTemplatesPage(props: any) {
   const privateApi = await getPrivateApi();
@@ -9,17 +18,37 @@ export default async function DashboardOrgDataRequestTemplatesPage(props: any) {
   const requestsData =
     (
       await privateApi.dataRequestTemplatesByOrg({
-        orgCreatorId: pathnameOrg,
+        organization: {
+          type: OrganizationIdentifierType.GatewayId,
+          value: pathnameOrg,
+        },
         skip: 0,
         take: 5,
       })
     )?.dataRequestTemplates ?? [];
 
   const count = (
-    await privateApi.myDataRequestTemplatesCountOrg({
-      orgGatewayId: pathnameOrg,
+    await privateApi.dataRequestTemplatesCountOrg({
+      organization: {
+        type: OrganizationIdentifierType.GatewayId,
+        value: pathnameOrg,
+      },
     })
   ).myDataRequestTemplatesCount;
 
-  return <RequestTemplatesTable data={requestsData} totalCount={count} />;
+  return (
+    <>
+      {requestsData && requestsData.length > 0 ? (
+        <RequestTemplatesTable data={requestsData} totalCount={count} />
+      ) : (
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ textAlign: 'center', width: '100%' }}
+        >
+          No data request templates yet
+        </Typography>
+      )}
+    </>
+  );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import Footer from './components/footer';
+import LandingFooter from './components/landing-footer/landing-footer';
 import Header from './components/header';
 import { HeaderContextProvider } from './contexts/header-context';
 import Hero from './home/components/hero';
@@ -24,7 +24,7 @@ export default function IndexPage() {
       <OurNetwork />
       <Stats />
       <Investors />
-      <Footer variant="dark" />
+      <LandingFooter variant="dark" />
     </HeaderContextProvider>
   );
 }

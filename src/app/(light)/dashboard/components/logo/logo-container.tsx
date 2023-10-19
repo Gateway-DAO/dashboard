@@ -10,7 +10,7 @@ import { Link } from '@mui/material';
 export default function LogoContainer({ children }: PropsWithChildren) {
   const { isOrg, pathnameOrg } = useOrganization();
   const link = isOrg
-    ? routes.dashboardOrgHome(pathnameOrg)
+    ? routes.dashboardOrgIssuedAssets(pathnameOrg)
     : routes.dashboardUserHome;
 
   return (
@@ -21,6 +21,7 @@ export default function LogoContainer({ children }: PropsWithChildren) {
         display: 'flex',
         textDecoration: 'none',
         flex: 1,
+        marginRight: 1,
       }}
       href={link}
       alignItems={'center'}

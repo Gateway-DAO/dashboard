@@ -71,7 +71,7 @@ export default function TabsStructure({
                 type: GATEWAY_ID,
                 value: "${organization?.gatewayId}"
               }`
-                : ``
+                : `organization: null,`
             }
             dataUse: "ADD WHAT’S THE REASON TO REQUEST THE DATA"
         }) {

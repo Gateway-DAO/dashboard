@@ -29,7 +29,7 @@ import {
   GridRowParams,
 } from '@mui/x-data-grid';
 
-const columns: GridColDef<PartialDeep<DataRequest>>[] = [
+export const columns: GridColDef<PartialDeep<DataRequest>>[] = [
   {
     field: 'id',
     headerName: 'Request ID',
@@ -148,19 +148,31 @@ export default function RequestsTable({
   };
 
   return (
-    <DataGrid
-      {...defaultGridConfiguration}
-      rows={data && data.length ? data : initialData}
-      columns={columns}
-      paginationModel={paginationModel}
-      onPaginationModelChange={setNewPage}
-      paginationMode="server"
-      loading={isLoading}
-      rowCount={totalCount}
-      onRowClick={(params: GridRowParams) => {
-        router.push(routes.dashboardUserRequest(params.id));
-      }}
-      sx={defaultGridCustomization}
-    />
+    <>
+      {!initialData || initialData.length === 0 ? (
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ textAlign: 'center', width: '100%' }}
+        >
+          No data requests yet
+        </Typography>
+      ) : (
+        <DataGrid
+          {...defaultGridConfiguration}
+          rows={data && data.length ? data : initialData}
+          columns={columns}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setNewPage}
+          paginationMode="server"
+          loading={isLoading}
+          rowCount={totalCount}
+          onRowClick={(params: GridRowParams) => {
+            router.push(routes.dashboardUserRequest(params.id));
+          }}
+          sx={defaultGridCustomization}
+        />
+      )}
+    </>
   );
 }

@@ -59,11 +59,6 @@ export const orgPdas = {
   data_assets_subtitle: 'These are the private data assets you have issued',
 };
 
-export const sandboxAlert = {
-  title: 'You are on the Gateway Sandbox',
-  description: 'The data is temporary and will be gone in 60 days.',
-};
-
 export const helperContent = {
   title: 'What is a Private Data Asset',
   desc: 'Data Assets are the core asset of the protocol and the easiest way to hold and prove information verifiably about yourself.',
@@ -73,7 +68,7 @@ export const helperContent = {
 
 export const helpMenu = {
   docsTitle: 'Help & documentation',
-  docsLink: 'https://docs.mygateway.xyz/docs/private-data-assets-pda',
+  docsLink: 'https://docs.mygateway.xyz/docs',
   discordTitle: 'Support channel',
   discordLink: 'https://discord.com/invite/bxTaYsJ6WD',
 };

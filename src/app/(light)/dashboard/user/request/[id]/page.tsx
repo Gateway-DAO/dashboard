@@ -33,7 +33,7 @@ import RequestCardVerfierView from './components/request-card-verifier';
 import RequestDataTable from './components/request-data-table';
 import RequestDataTableVerifierView from './components/request-data-table-verifier';
 
-const getDataRequest = async (
+export const getDataRequest = async (
   id: string
 ): Promise<PartialDeep<DataRequestQuery['dataRequest']> | null> => {
   const privateApi = await getPrivateApi();

@@ -38,16 +38,15 @@ export default function Header() {
 
   useEffect(() => {
     if (isFirstRender) return;
-
     if (burgerActive) {
       previousVariant.current = variant;
       setVariant('light');
       lenis?.stop();
-    } else {
+    } else if (previousVariant.current) {
       setVariant(previousVariant.current || 'light');
       lenis?.start();
     }
-  }, [isFirstRender, burgerActive, lenis]);
+  }, [isFirstRender, burgerActive]);
 
   return (
     <>
