@@ -1,9 +1,8 @@
-import HelpContentCard from '@/components/help-content-card/help-content-card';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
-import { datamodels, helperContent } from '@/locale/en/datamodel';
+import { datamodels } from '@/locale/en/datamodel';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -19,13 +18,6 @@ export default async function OrgDataModelsLayout({ children, params }: any) {
         title={datamodels.title}
         subtitle={datamodels.subtitle}
         titleId="title-data-models"
-      />
-
-      <HelpContentCard
-        title={helperContent.title}
-        desc={helperContent.desc}
-        btnText={helperContent.btnText}
-        btnLink={helperContent.btnLink}
       />
 
       <Box
