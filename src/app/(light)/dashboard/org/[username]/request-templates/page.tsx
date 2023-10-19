@@ -1,9 +1,15 @@
+import { Metadata } from 'next';
+
 import { getPrivateApi } from '@/services/protocol/api';
 import { OrganizationIdentifierType } from '@/services/protocol/types';
 
 import { Typography } from '@mui/material';
 
 import RequestTemplatesTable from './components/request-templates-table';
+
+export const metadata: Metadata = {
+  title: 'Data Request Templates - Gateway Network',
+};
 
 export default async function DashboardOrgDataRequestTemplatesPage(props: any) {
   const privateApi = await getPrivateApi();
