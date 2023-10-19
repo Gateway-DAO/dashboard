@@ -22,7 +22,6 @@ const routes = {
   dashboardUserDataModels: '/dashboard/user/data-models',
   dashboardUserSettings: '/dashboard/user/settings',
   dashboardOrgRoot: '/dashboard/org',
-  dashboardOrgHome: (organizationId) => `/dashboard/org/${organizationId}`,
   dashboardOrgIssuedAssets: (organizationId) =>
     `/dashboard/org/${organizationId}/assets/issued`,
   dashboardOrgRequests: (organizationId) =>
