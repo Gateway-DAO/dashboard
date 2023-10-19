@@ -12,6 +12,7 @@ const config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testPathIgnorePatterns: ['<rootDir>/e2e/'],
   testEnvironment: 'jest-environment-jsdom',
+  preset: 'tj-jest',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
