@@ -5,7 +5,7 @@ import { Container } from '@mui/material';
 import ExplorerFooter from './components/footer/footer';
 import ExplorerNavbar from './components/navbar/navbar';
 
-export default function PublicLayout({ children }: PropsWithChildren) {
+export default function ExplorerLayout({ children }: PropsWithChildren) {
   return (
     <>
       <ExplorerNavbar />
