@@ -12,12 +12,14 @@ export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
     href: routes.dashboardUserDeveloperAccess,
     activeHrefs: [routes.dashboardUserDeveloperAccess],
     icon: CodeOutlined,
+    hamburger: true,
   },
   {
     name: 'Playground',
     href: routes.dashboardUserPlayground,
     activeHrefs: [routes.dashboardUserPlayground],
     icon: CodeBlocksOutlinedIcon,
+    hamburger: true,
   },
   {
     name: 'Documentation',
@@ -25,5 +27,6 @@ export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
     activeHrefs: [],
     icon: MenuBookOutlined,
     externalLink: true,
+    hamburger: true,
   },
 ];

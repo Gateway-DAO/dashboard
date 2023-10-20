@@ -13,12 +13,14 @@ export const dashboardOrgDevelopersMenuItems = (
     href: routes.dashboardOrgDeveloperAccess(username),
     activeHrefs: [routes.dashboardOrgDeveloperAccess(username)],
     icon: CodeOutlined,
+    hamburger: true,
   },
   {
     name: 'Playground',
     href: routes.dashboardOrgPlayground(username),
     activeHrefs: [routes.dashboardOrgPlayground(username)],
     icon: CodeBlocksOutlinedIcon,
+    hamburger: true,
   },
   {
     name: 'Documentation',
@@ -26,6 +28,7 @@ export const dashboardOrgDevelopersMenuItems = (
     activeHrefs: [],
     icon: MenuBookOutlined,
     externalLink: true,
+    hamburger: true,
   },
 ];
 
