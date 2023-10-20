@@ -12,7 +12,7 @@ import DataModelsTable from './components/request-templates-table';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Data Request Templates - Gateway Network',
+    title: 'Created Data Request Templates - Gateway Network',
   };
 }
 
