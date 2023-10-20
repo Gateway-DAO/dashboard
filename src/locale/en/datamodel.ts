@@ -1,3 +1,5 @@
+import documentationRoutes from '@/constants/documentationRoutes';
+
 export const datamodel = {
   title: 'Data model',
   data_model_id: 'Data model ID',
@@ -17,8 +19,8 @@ export const datamodels = {
 };
 
 export const helperContent = {
-  title: 'Share your data with Data Proofs',
-  desc: 'To facilitate data exchange in a secure and privacy-preserving manner, Data Proofs are used to send data to verifiers.',
+  title: 'How to Create Data Models',
+  desc: 'Data Models serve as foundational structures for Data Assets. Data Models streamline the process for developers and applications to issue or verify claims.',
   btnText: 'Learn how',
-  btnLink: 'https://docs.mygateway.xyz/docs/data-proof',
+  btnLink: documentationRoutes.dataModel,
 };
