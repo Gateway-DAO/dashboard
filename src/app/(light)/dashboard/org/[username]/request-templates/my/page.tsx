@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import { requestTemplates } from '@/locale/en/request-template';
 import { getPrivateApi } from '@/services/protocol/api';
 import { OrganizationIdentifierType } from '@/services/protocol/types';
 
@@ -7,17 +8,18 @@ import { Typography } from '@mui/material';
 
 import DataModelsTable from './components/data-models-table';
 
-export const metadata: Metadata = {
-  title: 'Created Data Models - Gateway Network',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Created Data Request Templates - Gateway Network',
+  };
+}
 
-export default async function DashboardOrgDataModelsPage(props: any) {
+export default async function DashboardOrgMyDataRequestTemplates(props: any) {
   const privateApi = await getPrivateApi();
   const pathnameOrg = props.params?.username;
-
   const requestsData =
     (
-      await privateApi.dataModelsByOrg({
+      await privateApi.dataRequestTemplatesByOrg({
         organization: {
           type: OrganizationIdentifierType.GatewayId,
           value: pathnameOrg,
@@ -25,28 +27,29 @@ export default async function DashboardOrgDataModelsPage(props: any) {
         skip: 0,
         take: 5,
       })
-    )?.dataModels ?? [];
+    )?.dataRequestTemplates ?? [];
 
   const count = (
-    await privateApi.dataModelsCountOrg({
+    await privateApi.dataRequestTemplatesByOrgCount({
       organization: {
         type: OrganizationIdentifierType.GatewayId,
         value: pathnameOrg,
       },
     })
-  ).dataModelsCount;
+  ).dataRequestTemplatesCount;
 
   return (
     <>
-      {requestsData && requestsData.length > 0 ? (
+      {requestsData && requestsData.length > 0 && (
         <DataModelsTable data={requestsData} totalCount={count} />
-      ) : (
+      )}
+      {requestsData && requestsData.length === 0 && (
         <Typography
           variant="body1"
           color="text.secondary"
           sx={{ textAlign: 'center', width: '100%' }}
         >
-          No data models yet
+          {requestTemplates.empty}
         </Typography>
       )}
     </>

@@ -4,6 +4,7 @@ import DataOutlinedIcon from '@/components/icons/data-outlined';
 import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
 import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
 import DataRequestTemplateOutlinedIcon from '@/components/icons/data-request-template-outlined';
+import HomeOutlinedIcon from '@/components/icons/home-outlined';
 import routes from '@/constants/routes';
 
 /**
@@ -12,6 +13,12 @@ import routes from '@/constants/routes';
 export const dashboardOrgMenuItems = (
   username: string
 ): GTWMenuItemSettings[] => [
+  {
+    name: 'Home',
+    href: routes.dashboardOrgHome(username),
+    activeHrefs: [routes.dashboardOrgHome(username)],
+    icon: HomeOutlinedIcon,
+  },
   {
     name: 'Issued data assets',
     href: routes.dashboardOrgIssuedAssets(username),
@@ -32,14 +39,20 @@ export const dashboardOrgMenuItems = (
   },
   {
     name: 'Data models',
-    href: routes.dashboardOrgDataModels(username),
-    activeHrefs: [routes.dashboardOrgDataModels(username)],
+    href: routes.dashboardOrgMyDataModels(username),
+    activeHrefs: [
+      routes.dashboardOrgMyDataModels(username),
+      routes.dashboardOrgNetworkDataModels(username),
+    ],
     icon: DataModelOutlinedIcon,
   },
   {
     name: 'Request templates',
-    href: routes.dashboardOrgRequestTemplates(username),
-    activeHrefs: [routes.dashboardOrgRequestTemplates(username)],
+    href: routes.dashboardOrgMyRequestTemplates(username),
+    activeHrefs: [
+      routes.dashboardOrgMyRequestTemplates(username),
+      routes.dashboardOrgNetworkRequestTemplates(username),
+    ],
     icon: DataRequestTemplateOutlinedIcon,
   },
 ];
