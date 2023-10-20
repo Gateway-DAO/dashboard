@@ -53,6 +53,12 @@ const columns: GridColDef<PartialDeep<DataRequestTemplate>>[] = [
     },
   },
   {
+    field: 'dataRequestsCount',
+    headerName: requestTemplate.requests,
+    flex: 1.3,
+    valueFormatter: (params) => params.value,
+  },
+  {
     field: 'createdAt',
     headerName: 'Created At',
     flex: 1.2,
