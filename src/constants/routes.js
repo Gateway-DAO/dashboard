@@ -18,19 +18,26 @@ const routes = {
   dashboardOrgRequest: (org, requestId) =>
     `/dashboard/org/${org}/request/${requestId}`,
   dashboardUserRequests: '/dashboard/user/requests',
-  dashboardUserRequestTemplates: '/dashboard/user/request-templates',
-  dashboardUserDataModels: '/dashboard/user/data-models',
+  dashboardUserMyRequestTemplates: '/dashboard/user/request-templates/my',
+  dashboardUserNetworkRequestTemplates:
+    '/dashboard/user/request-templates/network',
+  dashboardUserMyDataModels: '/dashboard/user/data-models/my',
+  dashboardUserNetworkDataModels: '/dashboard/user/data-models/network',
   dashboardUserSettings: '/dashboard/user/settings',
   dashboardOrgRoot: '/dashboard/org',
-  dashboardOrgHome: (organizationId) => `/dashboard/org/${organizationId}`,
+  dashboardOrgHome: (organizationId) => `/dashboard/org/${organizationId}/home`,
   dashboardOrgIssuedAssets: (organizationId) =>
     `/dashboard/org/${organizationId}/assets/issued`,
   dashboardOrgRequests: (organizationId) =>
     `/dashboard/org/${organizationId}/requests`,
-  dashboardOrgRequestTemplates: (organizationId) =>
-    `/dashboard/org/${organizationId}/request-templates`,
-  dashboardOrgDataModels: (organizationId) =>
-    `/dashboard/org/${organizationId}/data-models`,
+  dashboardOrgMyRequestTemplates: (organizationId) =>
+    `/dashboard/org/${organizationId}/request-templates/my`,
+  dashboardOrgNetworkRequestTemplates: (organizationId) =>
+    `/dashboard/org/${organizationId}/request-templates/network`,
+  dashboardOrgMyDataModels: (organizationId) =>
+    `/dashboard/org/${organizationId}/data-models/my`,
+  dashboardOrgNetworkDataModels: (organizationId) =>
+    `/dashboard/org/${organizationId}/data-models/network`,
   dashboardOrgReceivedProofs: (organizationId) =>
     `/dashboard/org/${organizationId}/proofs/received`,
   dashboardOrgSettings: (organizationId) =>

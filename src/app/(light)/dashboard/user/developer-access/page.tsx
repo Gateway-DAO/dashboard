@@ -7,7 +7,7 @@ import DeveloperPortal from '../settings/components/developer-portal/developer-p
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Developer Access - Gateway Network',
+    title: 'Get Started - Gateway Network',
   };
 }
 

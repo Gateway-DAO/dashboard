@@ -1,24 +1,27 @@
 import { Metadata } from 'next';
 import { Session } from 'next-auth';
 
+import { datamodels } from '@/locale/en/datamodel';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
 import { UserIdentifierType } from '@/services/protocol/types';
 
 import { Typography } from '@mui/material';
 
-import RequestTemplatesTable from './components/request-templates-table';
+import DataModelsTable from './components/data-models-table';
 
-export const metadata: Metadata = {
-  title: 'Data Request Templates - Gateway Network',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Created Data Models - Gateway Network',
+  };
+}
 
-export default async function DashboardUserDataRequestTemplatesPage() {
+export default async function DashboardUserMyDataModels() {
   const privateApi = await getPrivateApi();
   const session = (await getGtwServerSession()) as Session;
-  const requestsData =
+  const dataModelsData =
     (
-      await privateApi.dataRequestTemplates({
+      await privateApi.dataModelsByUser({
         user: {
           type: UserIdentifierType.GatewayId,
           value: session.user.gatewayId as string,
@@ -26,27 +29,29 @@ export default async function DashboardUserDataRequestTemplatesPage() {
         skip: 0,
         take: 5,
       })
-    )?.dataRequestTemplates ?? [];
+    )?.dataModels ?? [];
+
   const count = (
-    await privateApi.dataRequestTemplatesCount({
+    await privateApi.dataModelsByUserCount({
       user: {
         type: UserIdentifierType.GatewayId,
         value: session.user.gatewayId as string,
       },
     })
-  ).myDataRequestTemplatesCount;
+  ).dataModelsCount;
 
   return (
     <>
-      {requestsData && requestsData.length > 0 ? (
-        <RequestTemplatesTable data={requestsData} totalCount={count} />
-      ) : (
+      {dataModelsData && dataModelsData.length > 0 && (
+        <DataModelsTable data={dataModelsData} totalCount={count} />
+      )}
+      {dataModelsData && dataModelsData.length === 0 && (
         <Typography
           variant="body1"
           color="text.secondary"
           sx={{ textAlign: 'center', width: '100%' }}
         >
-          No data request templates yet
+          {datamodels.empty}
         </Typography>
       )}
     </>

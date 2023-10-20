@@ -28,7 +28,6 @@ export async function generateMetadata({
   const proof = await getProof(params.id);
   return {
     title: `Proof ${proof?.id} - Gateway Network`,
-    description: `Proof description`,
   };
 }
 
