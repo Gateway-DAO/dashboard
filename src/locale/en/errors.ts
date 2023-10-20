@@ -68,7 +68,7 @@ export const parseErrorObject = (
  * @returns { code: ErrorMessage, message: string }
  */
 export const getErrorMessage = (error: any): ErrorObject => {
-  const code = getCodeFromError(error);
+  const code = getCodeFromError(error?.response?.errors?.[0]);
 
   return parseErrorObject(code, error?.response?.errors?.[0]);
 };

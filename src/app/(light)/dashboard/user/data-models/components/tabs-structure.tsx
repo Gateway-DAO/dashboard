@@ -78,16 +78,16 @@ export default function TabsStructure({
           owner: {
             type: GATEWAY_ID,
             value: "ADD OWNER ID HERE"
-          }
+          },
           dataModelId: "${id}",
-          image: "https://cdn.mygateway.xyz/logo.png",
           expirationDate: null,
           ${
-            !!organization &&
-            `organization: {
+            !!organization
+              ? `organization: {
               type: GATEWAY_ID,
-              value: "${organization?.gatewayId}"
+              value: "${organization?.gatewayId}",
             }`
+              : `organization: null,`
           }
           claim: {
             ${claimObj}

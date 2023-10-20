@@ -60,3 +60,10 @@ export const request = {
     },
   },
 };
+
+export const helperContent = {
+  title: 'Become a verifier by creating your first Data Request',
+  desc: 'These requests specify the type of information sought and provide context, clarifying to the owner what specific data needs to be shared.',
+  btnText: 'Start now',
+  btnLink: 'https://docs.mygateway.xyz/docs/data-request',
+};

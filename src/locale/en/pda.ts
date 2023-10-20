@@ -68,7 +68,7 @@ export const helperContent = {
 
 export const helpMenu = {
   docsTitle: 'Help & documentation',
-  docsLink: 'https://docs.mygateway.xyz/docs/private-data-assets-pda',
+  docsLink: 'https://docs.mygateway.xyz/docs',
   discordTitle: 'Support channel',
   discordLink: 'https://discord.com/invite/bxTaYsJ6WD',
 };

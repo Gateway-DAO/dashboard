@@ -23,6 +23,7 @@ import {
 } from '@mui/material';
 
 import AuthenticationTokenSection from './authentication-token-section';
+import MainnetAlert from './mainnet-alert';
 
 export default function DeveloperPortal() {
   const { privateApi } = useGtwSession();
@@ -37,6 +38,7 @@ export default function DeveloperPortal() {
   return (
     <Stack spacing={3} alignItems="flex-start">
       <Stack direction="column" gap={2}>
+        {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <MainnetAlert />}
         <Card sx={{ width: '100%' }} variant="outlined">
           <CardHeader
             titleTypographyProps={{

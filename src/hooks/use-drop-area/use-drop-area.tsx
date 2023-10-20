@@ -11,6 +11,7 @@ import {
 
 import useMountedState from './use-mounted-state';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
 export interface DropAreaState {

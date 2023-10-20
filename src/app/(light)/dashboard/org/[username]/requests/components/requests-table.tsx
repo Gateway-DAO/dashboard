@@ -13,7 +13,11 @@ import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
-import { DataRequest, RequestsByOrgQuery } from '@/services/protocol/types';
+import {
+  DataRequest,
+  OrganizationIdentifierType,
+  RequestsByOrgQuery,
+} from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -110,7 +114,10 @@ export default function OrgRequestsTable({
       privateApi?.requestsByOrg({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
-        orgId: organization?.id || '',
+        verifierOrganization: {
+          type: OrganizationIdentifierType.GatewayId,
+          value: organization?.gatewayId as string,
+        },
       }),
     select: (data: any) => (data as RequestsByOrgQuery)?.requestsSent,
     initialData: initialData && initialData.length ? initialData : null,

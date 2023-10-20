@@ -1,15 +1,3 @@
-query dataModels($creatorUserId: String, $skip: Int, $take: Int) {
-  dataModels(
-    filter: { creatorUserId: $creatorUserId }
-    skip: $skip
-    take: $take
-  ) {
-    id
-    title
-    createdAt
-  }
-}
-
 query dataModelById($id: String!) {
   dataModel(id: $id) {
     title
@@ -26,22 +14,52 @@ query dataModelById($id: String!) {
   }
 }
 
-query dataModelsByOrg($organizationId: String, $skip: Int, $take: Int) {
+query dataModels($skip: Int, $take: Int) {
+  dataModels(skip: $skip, take: $take) {
+    id
+    title
+    consumptionPrice
+    pdasIssuedCount
+    createdAt
+  }
+}
+
+query dataModelsByUser($user: UserIdentificationInput, $skip: Int, $take: Int) {
+  dataModels(filter: { user: $user }, skip: $skip, take: $take) {
+    id
+    title
+    consumptionPrice
+    pdasIssuedCount
+    createdAt
+  }
+}
+
+query dataModelsByOrg(
+  $organization: OrganizationIdentificationInput
+  $skip: Int
+  $take: Int
+) {
   dataModels(
-    filter: { organizationId: $organizationId }
+    filter: { organization: $organization }
     skip: $skip
     take: $take
   ) {
     id
     title
+    consumptionPrice
+    pdasIssuedCount
     createdAt
   }
 }
 
-query myDataModelsCount {
-  myDataModelsCount
+query dataModelsCount {
+  dataModelsCount
 }
 
-query myDataModelsCountOrg($orgGatewayId: String) {
-  myDataModelsCount(orgGatewayId: $orgGatewayId)
+query dataModelsByUserCount($user: UserIdentificationInput) {
+  dataModelsCount(filter: { user: $user })
+}
+
+query dataModelsByOrgCount($organization: OrganizationIdentificationInput) {
+  dataModelsCount(filter: { organization: $organization })
 }

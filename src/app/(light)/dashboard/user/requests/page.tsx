@@ -13,8 +13,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DashboardUserDataRequestsPage() {
   const privateApi = await getPrivateApi();
   const requestsData =
-    (await privateApi.myRequestsReceived({ skip: 0, take: 5 }))
-      ?.requestsReceived ?? [];
+    (
+      await privateApi.myRequestsReceived({
+        skip: 0,
+        take: 5,
+      })
+    )?.requestsReceived ?? [];
   const count = (await privateApi.requestsCount()).requestsReceivedCount;
 
   return <RequestsTable data={requestsData} totalCount={count} />;
