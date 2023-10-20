@@ -134,25 +134,3 @@ export default function MenuBottomListItems({
     </>
   );
 }
-
-{
-  /* {hamburgerMenu.map(
-          ({ icon: Icon, activeIcon: ActiveIcon, activeHrefs, ...item }) => {
-            const isActive = activeHrefs.some((path) =>
-              activePath.includes(path)
-            );
-            return (
-              <BottomNavigationAction
-                key={item.name}
-                component={Link}
-                href={item.href}
-                label={item.name}
-                value={item.href}
-                aria-label={item.name}
-                icon={isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
-                onClick={onClose}
-              />
-            );
-          }
-        )} */
-}
