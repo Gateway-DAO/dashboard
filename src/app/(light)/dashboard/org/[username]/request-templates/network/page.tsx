@@ -8,7 +8,7 @@ import { Typography } from '@mui/material';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Created Data Models - Gateway Network',
+    title: 'Created Data Request Templates - Gateway Network',
   };
 }
 
@@ -23,7 +23,7 @@ export default async function DashboardOrgNetworkDataRequestTemplates() {
     )?.dataRequestTemplates ?? [];
 
   const count = (await privateApi.dataRequestTemplatesByOrgCount())
-    .myDataRequestTemplatesCount;
+    .dataRequestTemplatesCount;
 
   return (
     <>

@@ -37,7 +37,7 @@ export default async function DashboardUserMyRequestTemplates() {
         value: session.user.gatewayId as string,
       },
     })
-  ).myDataRequestTemplatesCount;
+  ).dataRequestTemplatesCount;
 
   return (
     <>

@@ -10,7 +10,7 @@ import DataModelsTable from './components/data-models-table';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Created Data Models - Gateway Network',
+    title: 'Created Data Request Templates - Gateway Network',
   };
 }
 
@@ -36,7 +36,7 @@ export default async function DashboardOrgMyDataRequestTemplates(props: any) {
         value: pathnameOrg,
       },
     })
-  ).myDataRequestTemplatesCount;
+  ).dataRequestTemplatesCount;
 
   return (
     <>

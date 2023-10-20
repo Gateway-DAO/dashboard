@@ -23,7 +23,7 @@ export default async function DashboardUserMyRequestTemplates() {
       })
     )?.dataRequestTemplates ?? [];
   const count = (await privateApi.dataRequestTemplatesCount())
-    .myDataRequestTemplatesCount;
+    .dataRequestTemplatesCount;
 
   return (
     <>
