@@ -48,8 +48,8 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
   },
   {
     name: 'Data Models',
-    href: routes.dashboardUserDataModels,
-    activeHrefs: [routes.dashboardUserDataModels],
+    href: routes.dashboardUserMyDataModels,
+    activeHrefs: [routes.dashboardUserMyDataModels],
     icon: DataModelOutlinedIcon,
   },
   {
