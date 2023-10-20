@@ -1,24 +1,27 @@
 import { Metadata } from 'next';
 import { Session } from 'next-auth';
 
+import { datamodels } from '@/locale/en/datamodel';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
 import { UserIdentifierType } from '@/services/protocol/types';
 
 import { Typography } from '@mui/material';
 
-import RequestTemplatesTable from './components/request-templates-table';
+import DataModelsTable from './components/request-templates-table';
 
-export const metadata: Metadata = {
-  title: 'Data Request Templates - Gateway Network',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Data Request Templates - Gateway Network',
+  };
+}
 
-export default async function DashboardUserDataRequestTemplatesPage() {
+export default async function DashboardUserMyRequestTemplates() {
   const privateApi = await getPrivateApi();
   const session = (await getGtwServerSession()) as Session;
   const requestsData =
     (
-      await privateApi.dataRequestTemplates({
+      await privateApi.dataRequestTemplatesByUser({
         user: {
           type: UserIdentifierType.GatewayId,
           value: session.user.gatewayId as string,
@@ -28,25 +31,26 @@ export default async function DashboardUserDataRequestTemplatesPage() {
       })
     )?.dataRequestTemplates ?? [];
   const count = (
-    await privateApi.dataRequestTemplatesCount({
+    await privateApi.dataRequestTemplatesByUserCount({
       user: {
         type: UserIdentifierType.GatewayId,
         value: session.user.gatewayId as string,
       },
     })
-  ).myDataRequestTemplatesCount;
+  ).dataRequestTemplatesCount;
 
   return (
     <>
-      {requestsData && requestsData.length > 0 ? (
-        <RequestTemplatesTable data={requestsData} totalCount={count} />
-      ) : (
+      {requestsData && requestsData.length > 0 && (
+        <DataModelsTable data={requestsData} totalCount={count} />
+      )}
+      {requestsData && requestsData.length === 0 && (
         <Typography
           variant="body1"
           color="text.secondary"
           sx={{ textAlign: 'center', width: '100%' }}
         >
-          No data request templates yet
+          {datamodels.empty}
         </Typography>
       )}
     </>

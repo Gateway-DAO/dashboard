@@ -41,8 +41,11 @@ export const dashboardOrgMenuItems = (
   },
   {
     name: 'Request templates',
-    href: routes.dashboardOrgRequestTemplates(username),
-    activeHrefs: [routes.dashboardOrgRequestTemplates(username)],
+    href: routes.dashboardOrgMyRequestTemplates(username),
+    activeHrefs: [
+      routes.dashboardOrgMyRequestTemplates(username),
+      routes.dashboardOrgNetworkRequestTemplates(username),
+    ],
     icon: DataRequestTemplateOutlinedIcon,
   },
 ];

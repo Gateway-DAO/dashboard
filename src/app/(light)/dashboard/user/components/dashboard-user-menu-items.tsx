@@ -57,8 +57,11 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
   },
   {
     name: 'Request templates',
-    href: routes.dashboardUserRequestTemplates,
-    activeHrefs: [routes.dashboardUserRequestTemplates],
+    href: routes.dashboardUserMyRequestTemplates,
+    activeHrefs: [
+      routes.dashboardUserMyRequestTemplates,
+      routes.dashboardUserNetworkRequestTemplates,
+    ],
     icon: DataRequestTemplateOutlinedIcon,
   },
 ];
