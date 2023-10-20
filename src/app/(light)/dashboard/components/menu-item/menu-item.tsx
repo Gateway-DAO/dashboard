@@ -23,6 +23,7 @@ type Props = {
 
 export type GTWMenuItemSettings = Props & {
   activeHrefs: string[];
+  hamburger?: boolean;
 };
 
 export default function GTWMenuItem({
