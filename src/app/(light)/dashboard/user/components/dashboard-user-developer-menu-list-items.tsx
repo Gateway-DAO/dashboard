@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 
 import { Typography } from '@mui/material';
 
-import GTWMenuItem from '../menu-item/menu-item';
+import GTWMenuItem from '../../components/menu-item/menu-item';
 import { dashboardDevelopersMenuItems } from './dashboard-user-developer-menu-items';
 
 export default function DashboardUserDeveloperMenuListItems() {

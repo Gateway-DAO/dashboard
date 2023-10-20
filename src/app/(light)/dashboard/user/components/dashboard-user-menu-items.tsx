@@ -45,6 +45,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserProof(''),
     ],
     icon: DataProofOutlinedIcon,
+    hamburger: true,
   },
   {
     name: 'Data models',
@@ -54,6 +55,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserNetworkDataModels,
     ],
     icon: DataModelOutlinedIcon,
+    hamburger: true,
   },
   {
     name: 'Request templates',
@@ -63,6 +65,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserNetworkRequestTemplates,
     ],
     icon: DataRequestTemplateOutlinedIcon,
+    hamburger: true,
   },
 ];
 
