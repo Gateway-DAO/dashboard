@@ -1,7 +1,7 @@
 import { Divider } from '@mui/material';
 
 import ExplorerHeader from '../components/header/header';
-import DataModelsExplorerFeatured from './featured';
+import DataModelsExplorerFeatured from './featured/featured';
 import DataModelsExplorerHeader from './header';
 import DataModelsExplorerSearch from './search/search';
 

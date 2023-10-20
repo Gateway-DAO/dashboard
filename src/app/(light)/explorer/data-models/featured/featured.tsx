@@ -1,6 +1,7 @@
 import { Box, Container, Typography } from '@mui/material';
 
-import DataModelExplorerCard from '../components/data-model-card';
+import DataModelExplorerCard from '../../components/data-model-card';
+import FeaturedCardsContainer from './cards-container';
 
 export default function DataModelsExplorerFeatured() {
   return (
@@ -28,12 +29,13 @@ export default function DataModelsExplorerFeatured() {
             lg: 'repeat(4, 1fr)',
           },
         }}
-      >
+      ></Box>
+      <FeaturedCardsContainer>
         <DataModelExplorerCard />
         <DataModelExplorerCard />
         <DataModelExplorerCard />
         <DataModelExplorerCard />
-      </Box>
+      </FeaturedCardsContainer>
     </Container>
   );
 }
