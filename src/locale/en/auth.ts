@@ -7,8 +7,8 @@ export const auth = {
     initial: {
       title: 'Enter the Gateway',
       title_email: 'Email',
-      caption_email: 'Get started without wallet',
-      connect_wallet: 'Connect Wallet',
+      caption_email: 'Get started without a wallet',
+      connect_wallet: 'Connect Wallet', 
       connect_google: 'Continue with Google',
       connect_twitter: 'Continue with Twitter',
       connect_discord: 'Continue with Discord',
@@ -20,7 +20,7 @@ export const auth = {
       continue: 'Continue',
     },
     choose_email: {
-      title: 'Receive Notifications from Gateway Protocol ',
+      title: 'Receive Notifications from Gateway Protocol', 
       subtitle: 'Email',
       description: 'By email you are notified when you receive a credential',
       label: 'E-mail',

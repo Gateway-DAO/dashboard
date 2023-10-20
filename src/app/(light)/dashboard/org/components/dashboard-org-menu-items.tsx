@@ -13,25 +13,25 @@ export const dashboardOrgMenuItems = (
   username: string
 ): GTWMenuItemSettings[] => [
   {
-    name: 'Issued data assets',
+    name: 'Issuances',
     href: routes.dashboardOrgIssuedAssets(username),
     activeHrefs: [routes.dashboardOrgIssuedAssets(username)],
     icon: DataOutlinedIcon,
   },
   {
-    name: 'Data requests',
+    name: 'Data Requests',
     href: routes.dashboardOrgRequests(username),
     activeHrefs: [routes.dashboardOrgRequests(username)],
     icon: DataRequestOutlinedIcon,
   },
   {
-    name: 'Received data proofs',
+    name: 'Received Data Proofs',
     href: routes.dashboardOrgReceivedProofs(username),
     activeHrefs: [routes.dashboardOrgReceivedProofs(username)],
     icon: DataProofOutlinedIcon,
   },
   {
-    name: 'Data models',
+    name: 'Data Models',
     href: routes.dashboardOrgMyDataModels(username),
     activeHrefs: [
       routes.dashboardOrgMyDataModels(username),
@@ -40,7 +40,7 @@ export const dashboardOrgMenuItems = (
     icon: DataModelOutlinedIcon,
   },
   {
-    name: 'Request templates',
+    name: 'Request Templates',
     href: routes.dashboardOrgRequestTemplates(username),
     activeHrefs: [routes.dashboardOrgRequestTemplates(username)],
     icon: DataRequestTemplateOutlinedIcon,
