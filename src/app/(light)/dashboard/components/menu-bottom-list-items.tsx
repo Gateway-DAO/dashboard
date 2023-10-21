@@ -150,7 +150,7 @@ export default function MenuBottomListItems({
               <Typography variant="caption" sx={{ mt: 2, px: 3 }}>
                 {common.general.developers}
               </Typography>
-              <List sx={{ py: 3 }}>
+              <List sx={{ pt: 1, pb: 3 }}>
                 {developerItems.map(
                   ({
                     icon: Icon,
