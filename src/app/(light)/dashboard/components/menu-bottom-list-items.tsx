@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 
+import { common } from '@/locale/en/common';
 import { useToggle } from '@react-hookz/web';
 
 import { MenuOutlined } from '@mui/icons-material';
@@ -138,7 +139,7 @@ export default function MenuBottomListItems({
         {developerItems && (
           <>
             <Typography variant="caption" sx={{ mt: 2, px: 3 }}>
-              Developers
+              {common.general.developers}
             </Typography>
             <List sx={{ py: 3 }}>
               {developerItems.map(
