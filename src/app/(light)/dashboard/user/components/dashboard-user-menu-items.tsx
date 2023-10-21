@@ -16,6 +16,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     href: routes.dashboardUserHome,
     activeHrefs: [routes.dashboardUserHome],
     icon: HomeOutlinedIcon,
+    navbar: true,
   },
   {
     name: 'Data assets',
@@ -26,6 +27,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserAsset(''),
     ],
     icon: DataOutlinedIcon,
+    navbar: true,
   },
   {
     name: 'Data requests',
@@ -35,6 +37,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserRequest(''),
     ],
     icon: DataRequestOutlinedIcon,
+    navbar: true,
   },
   {
     name: 'Data proofs',
@@ -45,7 +48,6 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserProof(''),
     ],
     icon: DataProofOutlinedIcon,
-    hamburger: true,
   },
   {
     name: 'Data models',
@@ -55,7 +57,6 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserNetworkDataModels,
     ],
     icon: DataModelOutlinedIcon,
-    hamburger: true,
   },
   {
     name: 'Request templates',
@@ -65,7 +66,6 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserNetworkRequestTemplates,
     ],
     icon: DataRequestTemplateOutlinedIcon,
-    hamburger: true,
   },
 ];
 

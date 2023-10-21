@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import useOrganization from '@/hooks/use-organization';
 
 import MenuBottomListItems from '../../components/menu-bottom-list-items';
+import dashboardOrgDevelopersMenuItems from './dashboard-org-developer-menu-items';
 import dashboardOrgMenuItems from './dashboard-org-menu-items';
 
 export default function DashboardOrgBottomBar() {
@@ -12,6 +13,16 @@ export default function DashboardOrgBottomBar() {
     () => (pathnameOrg ? dashboardOrgMenuItems(pathnameOrg) : undefined),
     [pathnameOrg]
   );
-  if (!menuItems) return null;
-  return <MenuBottomListItems menuItems={menuItems} />;
+  const developerItems = useMemo(
+    () =>
+      pathnameOrg ? dashboardOrgDevelopersMenuItems(pathnameOrg) : undefined,
+    [pathnameOrg]
+  );
+  if (!menuItems || !developerItems) return null;
+  return (
+    <MenuBottomListItems
+      menuItems={menuItems}
+      developerItems={developerItems}
+    />
+  );
 }

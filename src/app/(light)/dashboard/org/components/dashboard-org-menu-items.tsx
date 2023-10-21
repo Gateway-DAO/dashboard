@@ -18,18 +18,21 @@ export const dashboardOrgMenuItems = (
     href: routes.dashboardOrgHome(username),
     activeHrefs: [routes.dashboardOrgHome(username)],
     icon: HomeOutlinedIcon,
+    navbar: true,
   },
   {
     name: 'Issued data assets',
     href: routes.dashboardOrgIssuedAssets(username),
     activeHrefs: [routes.dashboardOrgIssuedAssets(username)],
     icon: DataOutlinedIcon,
+    navbar: true,
   },
   {
     name: 'Data requests',
     href: routes.dashboardOrgRequests(username),
     activeHrefs: [routes.dashboardOrgRequests(username)],
     icon: DataRequestOutlinedIcon,
+    navbar: true,
   },
   {
     name: 'Received data proofs',
