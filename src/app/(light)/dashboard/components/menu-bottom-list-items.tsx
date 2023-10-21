@@ -62,6 +62,8 @@ export default function MenuBottomListItems({
             lg: 'none',
           },
           zIndex: 1000,
+          borderTop: 1,
+          borderTopColor: 'divider',
         }}
       >
         {bottomBarMenu.map(
@@ -103,8 +105,6 @@ export default function MenuBottomListItems({
           '.MuiDrawer-paper': {
             borderRadius: '24px 24px 0 0',
             boxShadow: 'none',
-            borderBottom: 1,
-            borderBottomColor: 'divider',
           },
         }}
       >
