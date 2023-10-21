@@ -20,7 +20,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { GTWMenuItemSettings } from './menu-item/menu-item';
+import GTWMenuItem, { GTWMenuItemSettings } from './menu-item/menu-item';
 
 type Props = {
   menuItems: GTWMenuItemSettings[];

@@ -37,7 +37,7 @@ export const proofs = {
 
 export const helperContent = {
   title: 'Share your data with Data Proofs',
-  desc: 'Data Proofs facilitate daat exchange in a secure, user-consented, and privacy preserving manner. Proofs can be shared to Verifiers or anyone you want to have access to your information.',
+  desc: 'Data Proofs facilitate data exchange in a secure, user-consented, and privacy preserving manner. Proofs can be shared to Verifiers or anyone you want to have access to your information.',
   btnText: 'Learn how',
   btnLink: documentationRoutes.proof,
 };
