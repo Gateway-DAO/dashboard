@@ -1,8 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
+import useBreakpoints from '@/hooks/use-breakpoints';
 import { common } from '@/locale/en/common';
 import { useToggle } from '@react-hookz/web';
 
@@ -47,7 +48,9 @@ export default function MenuBottomListItems({
     [menuItems]
   );
 
-  const onClose = () => toggleHamburgerVisible(false);
+  const onClose = useCallback(() => toggleHamburgerVisible(false), []);
+
+  const { isDesktop } = useBreakpoints();
 
   return (
     <>
@@ -94,88 +97,95 @@ export default function MenuBottomListItems({
           value="hamburger"
         />
       </BottomNavigation>
-      <Drawer
-        anchor="bottom"
-        open={isHamburgerVisible}
-        onClose={onClose}
-        sx={{
-          '&, .MuiDrawer-paper, .MuiModal-backdrop': {
-            bottom: 56,
-            zIndex: 900,
-          },
-          '.MuiDrawer-paper': {
-            borderRadius: '24px 24px 0 0',
-            boxShadow: 'none',
-          },
-        }}
-      >
-        <List sx={{ py: 3 }}>
-          {hamburgerMenu.map(
-            ({ icon: Icon, activeIcon: ActiveIcon, activeHrefs, ...item }) => {
-              const isActive = activeHrefs.some((path) =>
-                activePath.includes(path)
-              );
-              return (
-                <ListItem key={item.name} disablePadding>
-                  <ListItemButton
-                    component={Link}
-                    href={item.href}
-                    onClick={onClose}
-                    sx={{
-                      color: isActive ? 'primary.main' : undefined,
-                      px: 3,
-                    }}
-                  >
-                    <ListItemIcon sx={{ color: 'inherit' }}>
-                      {isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
-                    </ListItemIcon>
-                    <ListItemText primary={item.name} />
-                  </ListItemButton>
-                </ListItem>
-              );
-            }
+      {!isDesktop && (
+        <Drawer
+          anchor="bottom"
+          open={isHamburgerVisible}
+          onClose={onClose}
+          sx={{
+            '&, .MuiDrawer-paper, .MuiModal-backdrop': {
+              bottom: 56,
+              zIndex: 900,
+            },
+            '.MuiDrawer-paper': {
+              borderRadius: '24px 24px 0 0',
+              boxShadow: 'none',
+            },
+          }}
+        >
+          <List sx={{ py: 3 }}>
+            {hamburgerMenu.map(
+              ({
+                icon: Icon,
+                activeIcon: ActiveIcon,
+                activeHrefs,
+                ...item
+              }) => {
+                const isActive = activeHrefs.some((path) =>
+                  activePath.includes(path)
+                );
+                return (
+                  <ListItem key={item.name} disablePadding>
+                    <ListItemButton
+                      component={Link}
+                      href={item.href}
+                      onClick={onClose}
+                      sx={{
+                        color: isActive ? 'primary.main' : undefined,
+                        px: 3,
+                      }}
+                    >
+                      <ListItemIcon sx={{ color: 'inherit' }}>
+                        {isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
+                      </ListItemIcon>
+                      <ListItemText primary={item.name} />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              }
+            )}
+          </List>
+          {developerItems && (
+            <>
+              <Typography variant="caption" sx={{ mt: 2, px: 3 }}>
+                {common.general.developers}
+              </Typography>
+              <List sx={{ py: 3 }}>
+                {developerItems.map(
+                  ({
+                    icon: Icon,
+                    activeIcon: ActiveIcon,
+                    activeHrefs,
+                    ...item
+                  }) => {
+                    const isActive = activeHrefs.some((path) =>
+                      activePath.includes(path)
+                    );
+                    return (
+                      <ListItem key={item.name} disablePadding>
+                        <ListItemButton
+                          component={Link}
+                          href={item.href}
+                          onClick={onClose}
+                          sx={{
+                            color: isActive ? 'primary.main' : undefined,
+                            px: 3,
+                          }}
+                        >
+                          <ListItemIcon sx={{ color: 'inherit' }}>
+                            {isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
+                          </ListItemIcon>
+                          <ListItemText primary={item.name} />
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  }
+                )}
+              </List>
+            </>
           )}
-        </List>
-        {developerItems && (
-          <>
-            <Typography variant="caption" sx={{ mt: 2, px: 3 }}>
-              {common.general.developers}
-            </Typography>
-            <List sx={{ py: 3 }}>
-              {developerItems.map(
-                ({
-                  icon: Icon,
-                  activeIcon: ActiveIcon,
-                  activeHrefs,
-                  ...item
-                }) => {
-                  const isActive = activeHrefs.some((path) =>
-                    activePath.includes(path)
-                  );
-                  return (
-                    <ListItem key={item.name} disablePadding>
-                      <ListItemButton
-                        component={Link}
-                        href={item.href}
-                        onClick={onClose}
-                        sx={{
-                          color: isActive ? 'primary.main' : undefined,
-                          px: 3,
-                        }}
-                      >
-                        <ListItemIcon sx={{ color: 'inherit' }}>
-                          {isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
-                        </ListItemIcon>
-                        <ListItemText primary={item.name} />
-                      </ListItemButton>
-                    </ListItem>
-                  );
-                }
-              )}
-            </List>
-          </>
-        )}
-      </Drawer>
+        </Drawer>
+      )}
     </>
   );
 }
