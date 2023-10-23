@@ -1,23 +1,25 @@
 import { Metadata } from 'next';
 
+import { datamodels } from '@/locale/en/datamodel';
 import { getPrivateApi } from '@/services/protocol/api';
 import { OrganizationIdentifierType } from '@/services/protocol/types';
 
 import { Typography } from '@mui/material';
 
-import RequestTemplatesTable from './components/request-templates-table';
+import DataModelsTable from './components/data-models-table';
 
-export const metadata: Metadata = {
-  title: 'Data Request Templates - Gateway Network',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Created Data Models - Gateway Network',
+  };
+}
 
-export default async function DashboardOrgDataRequestTemplatesPage(props: any) {
+export default async function DashboardOrgMyDataModels(props: any) {
   const privateApi = await getPrivateApi();
   const pathnameOrg = props.params?.username;
-
-  const requestsData =
+  const dataModelsData =
     (
-      await privateApi.dataRequestTemplatesByOrg({
+      await privateApi.dataModelsByOrg({
         organization: {
           type: OrganizationIdentifierType.GatewayId,
           value: pathnameOrg,
@@ -25,28 +27,29 @@ export default async function DashboardOrgDataRequestTemplatesPage(props: any) {
         skip: 0,
         take: 5,
       })
-    )?.dataRequestTemplates ?? [];
+    )?.dataModels ?? [];
 
   const count = (
-    await privateApi.dataRequestTemplatesCountOrg({
+    await privateApi.dataModelsByOrgCount({
       organization: {
         type: OrganizationIdentifierType.GatewayId,
         value: pathnameOrg,
       },
     })
-  ).myDataRequestTemplatesCount;
+  ).dataModelsCount;
 
   return (
     <>
-      {requestsData && requestsData.length > 0 ? (
-        <RequestTemplatesTable data={requestsData} totalCount={count} />
-      ) : (
+      {dataModelsData && dataModelsData.length > 0 && (
+        <DataModelsTable data={dataModelsData} totalCount={count} />
+      )}
+      {dataModelsData && dataModelsData.length === 0 && (
         <Typography
           variant="body1"
           color="text.secondary"
           sx={{ textAlign: 'center', width: '100%' }}
         >
-          No data request templates yet
+          {datamodels.empty}
         </Typography>
       )}
     </>

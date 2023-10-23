@@ -1,6 +1,6 @@
 export const settings = {
   title: 'Gateway ID',
-  subtitle: 'Edit your ID and manage connected accounts',
+  subtitle: 'Edit your ID and manage connected aliases',
   username: {
     can_edit: 'You can edit it once a month.',
     when_can_edit: (remainingDays: number) =>

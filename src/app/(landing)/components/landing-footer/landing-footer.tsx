@@ -97,11 +97,6 @@ const linksList = [
     href: 'https://live.standards.site/gateway',
     target: '_blank',
   },
-  {
-    title: 'Contact',
-    href: 'mailto:ayyan@mygateway.xyz?subject=Contact Us',
-    target: '',
-  },
 ];
 
 export default function LandingFooter({ variant }: Props) {
@@ -222,6 +217,14 @@ export default function LandingFooter({ variant }: Props) {
                     </GTWLink>
                   </li>
                 ))}
+                <li className={styles.links_item}>
+                  <a
+                    className={styles.links_link}
+                    href="mailto:ayyan@mygateway.xyz?subject=Contact Us"
+                  >
+                    Contact
+                  </a>
+                </li>
               </ul>
             </div>
 

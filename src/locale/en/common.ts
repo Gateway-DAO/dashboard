@@ -19,6 +19,7 @@ export const common = {
     optional: 'Optional',
     alert_important: 'This is extremely important',
     success: 'Success',
+    developers: 'Developers',
   },
   chain: {
     EVM: 'Ethereum',

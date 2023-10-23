@@ -1,3 +1,5 @@
+import documentationRoutes from '@/constants/documentationRoutes';
+
 export const pda = {
   status: {
     title: 'Status',
@@ -49,21 +51,21 @@ export const pda = {
 export const pdas = {
   empty: 'No data assets yet',
   load_more: 'load more',
-  my_data_assets: 'Data assets',
+  my_data_assets: 'Data Assets',
   data_assets_subtitle:
-    'These are the private data assets you have collected and sent',
+    'These are the private data assets you have earned and created.',
 };
 export const orgPdas = {
-  empty: 'No issued Data Assets yet',
-  data_assets_title: 'Issued data assets',
+  empty: 'No Issuances yet',
+  data_assets_title: 'Issuances',
   data_assets_subtitle: 'These are the private data assets you have issued',
 };
 
 export const helperContent = {
   title: 'What is a Private Data Asset',
-  desc: 'Data Assets are the core asset of the protocol and the easiest way to hold and prove information verifiably about yourself.',
+  desc: 'Data Assets allow users to become Data Owners. A secure, encrypted, and portable asset which users can consent to other applications, people, or institutions to verify their data.',
   btnText: 'Learn more',
-  btnLink: 'https://docs.mygateway.xyz/docs/private-data-assets-pda',
+  btnLink: documentationRoutes.pda,
 };
 
 export const helpMenu = {

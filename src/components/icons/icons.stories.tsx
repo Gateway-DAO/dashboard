@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { SvgIconProps } from '@mui/material';
 
+import BannerIcon from './banner';
 import DataOutlinedIcon from './data-outlined';
 import DataProofOutlinedIcon from './data-proof-outlined';
 import DataRequestOutlinedIcon from './data-request-outlined';
@@ -11,8 +12,6 @@ import GatewaySquaredIcon from './gateway-squared';
 import PassFilledIcon from './pass-filled';
 import SolanaIcon from './solana';
 import VerifiedFilledIcon from './verified-filled';
-import HomeOutlinedIcon from './home-outlined';
-import BannerIcon from './banner';
 
 const meta = {
   title: 'Gateway/Icons',
@@ -27,7 +26,6 @@ const meta = {
       <GatewayIcon />
       <GatewayBrokenIcon />
       <BannerIcon />
-      <HomeOutlinedIcon />
       <SolanaIcon />
     </>
   ),
