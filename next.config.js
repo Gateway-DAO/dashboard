@@ -36,6 +36,24 @@ const nextConfig = {
         destination: routes.dashboardUserReceivedAssets,
         permanent: true,
       },
+      {
+        source: '/loyalty/:id',
+        destination: 'https://tryodyssey.xyz/loyalty/:id',
+        permanent: true,
+        basePath: false,
+      },
+      {
+        source: '/credential/:id',
+        destination: 'https://tryodyssey.xyz/credential/:id',
+        permanent: true,
+        basePath: false,
+      },
+      {
+        source: '/protocol/credentials/:id/show',
+        destination: 'https://www.tryodyssey.xyz/protocol/credentials/:id/show',
+        permanent: true,
+        basePath: false,
+      },
     ];
   },
   webpack: (config) => {
