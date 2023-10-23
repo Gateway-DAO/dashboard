@@ -43,7 +43,7 @@ export const auth = {
       skip: 'Skip for now',
     },
     choose_gateway_id: {
-      title: 'Create your  Gateway ID',
+      title: 'Create your Gateway ID',
       subtitle:
         'Gateway ID constitutes a user or an organization on the Gateway Protocol. Additionally, it serves as a powerful solution that serves as a way of aggregating your other identities into a single identifier. ',
       create_username: 'Create your username',
