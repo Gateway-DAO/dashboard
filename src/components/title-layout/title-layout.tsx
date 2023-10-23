@@ -18,7 +18,11 @@ export default function TitleLayout({ title, subtitle, titleId }: Props) {
         },
       }}
     >
-      <Typography variant="h3" id={titleId} sx={{ mb: 1 }}>
+      <Typography
+        variant="h3"
+        id={titleId}
+        sx={{ mb: 1, textTransform: 'capitalize' }}
+      >
         {title}
       </Typography>
       <Typography variant="body1" color="text.secondary">

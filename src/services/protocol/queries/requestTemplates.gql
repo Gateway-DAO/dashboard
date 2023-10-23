@@ -1,19 +1,38 @@
-query dataRequestTemplates($creatorID: String, $skip: Float, $take: Float) {
-  dataRequestTemplates(creatorID: $creatorID, skip: $skip, take: $take) {
+query dataRequestTemplates($skip: Float, $take: Float) {
+  dataRequestTemplates(skip: $skip, take: $take) {
     id
     name
+    dataRequestsCount
+    createdAt
+  }
+}
+
+query dataRequestTemplatesByUser(
+  $user: UserIdentificationInput
+  $skip: Float
+  $take: Float
+) {
+  dataRequestTemplates(filter: { user: $user }, skip: $skip, take: $take) {
+    id
+    name
+    dataRequestsCount
     createdAt
   }
 }
 
 query dataRequestTemplatesByOrg(
-  $orgCreatorId: String
+  $organization: OrganizationIdentificationInput
   $skip: Float
   $take: Float
 ) {
-  dataRequestTemplates(orgCreatorId: $orgCreatorId, skip: $skip, take: $take) {
+  dataRequestTemplates(
+    filter: { organization: $organization }
+    skip: $skip
+    take: $take
+  ) {
     id
     name
+    dataRequestsCount
     createdAt
   }
 }
@@ -32,10 +51,16 @@ query dataRequestTemplateById($id: String!) {
   }
 }
 
-query myDataRequestTemplatesCount {
-  myDataRequestTemplatesCount
+query dataRequestTemplatesCount {
+  dataRequestTemplatesCount
 }
 
-query myDataRequestTemplatesCountOrg($orgGatewayId: String) {
-  myDataRequestTemplatesCount(orgGatewayId: $orgGatewayId)
+query dataRequestTemplatesByUserCount($user: UserIdentificationInput) {
+  dataRequestTemplatesCount(filter: { user: $user })
+}
+
+query dataRequestTemplatesByOrgCount(
+  $organization: OrganizationIdentificationInput
+) {
+  dataRequestTemplatesCount(filter: { organization: $organization })
 }

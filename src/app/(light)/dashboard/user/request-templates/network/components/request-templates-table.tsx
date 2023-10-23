@@ -2,17 +2,15 @@
 
 import { useState } from 'react';
 
-import ModalDetail from '@/app/(light)/dashboard/user/request-templates/components/modal-detail';
 import {
   defaultGridConfiguration,
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import useOrganization from '@/hooks/use-organization';
 import { requestTemplate } from '@/locale/en/request-template';
 import {
-  DataRequest,
+  DataRequestTemplate,
   DataRequestTemplatesQuery,
 } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
@@ -29,7 +27,9 @@ import {
   GridRowParams,
 } from '@mui/x-data-grid';
 
-const columns: GridColDef<PartialDeep<DataRequest>>[] = [
+import ModalDetail from '../../components/modal-detail';
+
+const columns: GridColDef<PartialDeep<DataRequestTemplate>>[] = [
   {
     field: 'name',
     headerName: requestTemplate.title,
@@ -52,6 +52,12 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     },
   },
   {
+    field: 'dataRequestsCount',
+    headerName: requestTemplate.requests,
+    flex: 1.3,
+    valueFormatter: (params) => params.value,
+  },
+  {
     field: 'createdAt',
     headerName: 'Created At',
     flex: 1.2,
@@ -61,7 +67,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
 ];
 
 type Props = {
-  data: PartialDeep<DataRequest>[];
+  data: PartialDeep<DataRequestTemplate>[];
   totalCount: number;
 };
 
@@ -76,26 +82,22 @@ export default function RequestTemplatesTable({
   const [openDetailModal, toggleDetailModal] = useToggle(false);
   const [currentTemplate, setCurrentTemplate] = useState('');
 
-  const { organization } = useOrganization();
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
-      'data-request-templates',
-      organization?.gatewayId as string,
+      'network-data-request-templates',
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
-      privateApi?.dataRequestTemplatesByOrg({
-        orgCreatorId: organization?.gatewayId as string,
+      privateApi?.dataRequestTemplates({
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
     select: (data: any) =>
       (data as DataRequestTemplatesQuery)?.dataRequestTemplates,
     initialData: initialData && initialData.length ? initialData : null,
-    enabled: !!organization,
   });
 
   const setNewPage = ({ page }: { page: number }) => {

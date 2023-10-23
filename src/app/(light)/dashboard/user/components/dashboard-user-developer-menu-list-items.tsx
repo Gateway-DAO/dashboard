@@ -2,9 +2,11 @@
 
 import { usePathname } from 'next/navigation';
 
+import { common } from '@/locale/en/common';
+
 import { Typography } from '@mui/material';
 
-import GTWMenuItem from '../menu-item/menu-item';
+import GTWMenuItem from '../../components/menu-item/menu-item';
 import { dashboardDevelopersMenuItems } from './dashboard-user-developer-menu-items';
 
 export default function DashboardUserDeveloperMenuListItems() {
@@ -13,7 +15,7 @@ export default function DashboardUserDeveloperMenuListItems() {
   return (
     <>
       <Typography variant="caption" sx={{ px: 3.5, mb: 2, display: 'block' }}>
-        Developers
+        {common.general.developers}
       </Typography>
       {dashboardDevelopersMenuItems.map(({ activeHrefs, ...item }) => (
         <GTWMenuItem

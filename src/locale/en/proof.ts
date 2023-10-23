@@ -1,3 +1,5 @@
+import documentationRoutes from '@/constants/documentationRoutes';
+
 export const proof = {
   status: {
     title: 'Status',
@@ -35,7 +37,7 @@ export const proofs = {
 
 export const helperContent = {
   title: 'Share your data with Data Proofs',
-  desc: 'To facilitate data exchange in a secure and privacy-preserving manner, Data Proofs are used to send data to verifiers.',
+  desc: 'Data Proofs facilitate data exchange in a secure, user-consented, and privacy preserving manner. Proofs can be shared to Verifiers or anyone you want to have access to your information.',
   btnText: 'Learn how',
-  btnLink: 'https://docs.mygateway.xyz/docs/data-proof',
+  btnLink: documentationRoutes.proof,
 };

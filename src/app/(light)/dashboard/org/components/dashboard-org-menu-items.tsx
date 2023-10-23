@@ -6,6 +6,8 @@ import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
 import DataRequestTemplateOutlinedIcon from '@/components/icons/data-request-template-outlined';
 import routes from '@/constants/routes';
 
+import { HomeOutlined } from '@mui/icons-material';
+
 /**
  * List all menu items of the user dashboard
  */
@@ -13,16 +15,25 @@ export const dashboardOrgMenuItems = (
   username: string
 ): GTWMenuItemSettings[] => [
   {
+    name: 'Home',
+    href: routes.dashboardOrgHome(username),
+    activeHrefs: [routes.dashboardOrgHome(username)],
+    icon: HomeOutlined,
+    navbar: true,
+  },
+  {
     name: 'Issued data assets',
     href: routes.dashboardOrgIssuedAssets(username),
     activeHrefs: [routes.dashboardOrgIssuedAssets(username)],
     icon: DataOutlinedIcon,
+    navbar: true,
   },
   {
     name: 'Data requests',
     href: routes.dashboardOrgRequests(username),
     activeHrefs: [routes.dashboardOrgRequests(username)],
     icon: DataRequestOutlinedIcon,
+    navbar: true,
   },
   {
     name: 'Received data proofs',
@@ -32,14 +43,20 @@ export const dashboardOrgMenuItems = (
   },
   {
     name: 'Data models',
-    href: routes.dashboardOrgDataModels(username),
-    activeHrefs: [routes.dashboardOrgDataModels(username)],
+    href: routes.dashboardOrgMyDataModels(username),
+    activeHrefs: [
+      routes.dashboardOrgMyDataModels(username),
+      routes.dashboardOrgNetworkDataModels(username),
+    ],
     icon: DataModelOutlinedIcon,
   },
   {
     name: 'Request templates',
-    href: routes.dashboardOrgRequestTemplates(username),
-    activeHrefs: [routes.dashboardOrgRequestTemplates(username)],
+    href: routes.dashboardOrgMyRequestTemplates(username),
+    activeHrefs: [
+      routes.dashboardOrgMyRequestTemplates(username),
+      routes.dashboardOrgNetworkRequestTemplates(username),
+    ],
     icon: DataRequestTemplateOutlinedIcon,
   },
 ];

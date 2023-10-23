@@ -10,8 +10,9 @@ import { DATE_FORMAT } from '@/constants/date';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { requestTemplate } from '@/locale/en/request-template';
 import {
-  DataRequest,
-  DataRequestTemplatesQuery,
+  DataRequestTemplate,
+  DataRequestTemplatesByUserQuery,
+  UserIdentifierType,
 } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
@@ -27,9 +28,9 @@ import {
   GridRowParams,
 } from '@mui/x-data-grid';
 
-import ModalDetail from './modal-detail';
+import ModalDetail from '../../components/modal-detail';
 
-const columns: GridColDef<PartialDeep<DataRequest>>[] = [
+const columns: GridColDef<PartialDeep<DataRequestTemplate>>[] = [
   {
     field: 'name',
     headerName: requestTemplate.title,
@@ -52,6 +53,12 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     },
   },
   {
+    field: 'dataRequestsCount',
+    headerName: requestTemplate.requests,
+    flex: 1.3,
+    valueFormatter: (params) => params.value,
+  },
+  {
     field: 'createdAt',
     headerName: 'Created At',
     flex: 1.2,
@@ -61,7 +68,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
 ];
 
 type Props = {
-  data: PartialDeep<DataRequest>[];
+  data: PartialDeep<DataRequestTemplate>[];
   totalCount: number;
 };
 
@@ -81,19 +88,22 @@ export default function RequestTemplatesTable({
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
-      'data-request-templates',
+      'my-data-request-templates',
       session?.user?.gatewayId,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
-      privateApi?.dataRequestTemplates({
-        creatorID: session?.user?.gatewayId,
+      privateApi?.dataRequestTemplatesByUser({
+        user: {
+          type: UserIdentifierType.GatewayId,
+          value: session?.user?.gatewayId as string,
+        },
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
     select: (data: any) =>
-      (data as DataRequestTemplatesQuery)?.dataRequestTemplates,
+      (data as DataRequestTemplatesByUserQuery)?.dataRequestTemplates,
     initialData: initialData && initialData.length ? initialData : null,
   });
 

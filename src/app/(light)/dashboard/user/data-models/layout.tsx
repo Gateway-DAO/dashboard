@@ -1,29 +1,54 @@
 import { PropsWithChildren } from 'react';
 
-import { datamodels } from '@/locale/en/datamodel';
+import HelpContentCard from '@/components/help-content-card/help-content-card';
+import GTWTab from '@/components/tabs/gtw-tab';
+import GTWTabs from '@/components/tabs/gtw-tabs-links';
+import TitleLayout from '@/components/title-layout/title-layout';
+import routes from '@/constants/routes';
+import { datamodels, helperContent } from '@/locale/en/datamodel';
+import {
+  CONTAINER_PX,
+  NEGATIVE_CONTAINER_PX,
+} from '@/theme/config/style-tokens';
 
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 export default function DataModelsLayout({ children }: PropsWithChildren) {
   return (
     <Box sx={{ py: 2 }}>
+      <TitleLayout
+        title={datamodels.title}
+        subtitle={datamodels.subtitle}
+        titleId="title-data-models"
+      />
+
+      <HelpContentCard
+        title={helperContent.title}
+        desc={helperContent.desc}
+        btnText={helperContent.btnText}
+        btnLink={helperContent.btnLink}
+      />
+
       <Box
         sx={{
-          mb: {
-            xs: 4,
-            md: 5,
-            lg: 6,
-          },
+          borderBottom: 1,
+          borderColor: 'divider',
+          mx: NEGATIVE_CONTAINER_PX,
+          px: CONTAINER_PX,
         }}
       >
-        <Typography variant="h3" id="title-data-models" sx={{ mb: 1 }}>
-          {datamodels.title}
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {datamodels.subtitle}
-        </Typography>
+        <GTWTabs>
+          <GTWTab
+            label={datamodels.my_data_models}
+            href={routes.dashboardUserMyDataModels}
+          />
+          <GTWTab
+            label={datamodels.network_data_models}
+            href={routes.dashboardUserNetworkDataModels}
+          />
+        </GTWTabs>
       </Box>
-      {children}
+      <Box sx={{ pt: 5 }}>{children}</Box>
     </Box>
   );
 }
