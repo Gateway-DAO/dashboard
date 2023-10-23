@@ -8,8 +8,12 @@ import {
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import { datamodel } from '@/locale/en/datamodel';
-import { DataModel, DataModelsQuery } from '@/services/protocol/types';
+import { requestTemplate } from '@/locale/en/request-template';
+import {
+  DataRequestTemplate,
+  DataRequestTemplatesByUserQuery,
+  UserIdentifierType,
+} from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
@@ -26,10 +30,10 @@ import {
 
 import ModalDetail from '../../components/modal-detail';
 
-const columns: GridColDef<PartialDeep<DataModel>>[] = [
+const columns: GridColDef<PartialDeep<DataRequestTemplate>>[] = [
   {
-    field: 'title',
-    headerName: datamodel.title,
+    field: 'name',
+    headerName: requestTemplate.title,
     flex: 1.2,
     valueFormatter: (params) => params.value,
     renderCell(params) {
@@ -38,37 +42,21 @@ const columns: GridColDef<PartialDeep<DataModel>>[] = [
   },
   {
     field: 'id',
-    headerName: datamodel.data_model_id,
+    headerName: requestTemplate.data_request_template_id,
     flex: 1.3,
     renderCell: (params: GridRenderCellParams) => {
-      return <Typography>{limitCharsCentered(params.row.id, 10)}</Typography>;
-    },
-  },
-  {
-    field: 'consumptionPrice',
-    headerName: datamodel.consumption_cost,
-    flex: 1.3,
-    renderCell: (params) => {
       return (
-        <Typography>
-          {params.value
-            ? params.value.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                currencyDisplay: 'symbol',
-              })
-            : '$0.00'}
+        <Typography variant="body1">
+          {limitCharsCentered(params.row.id, 10)}
         </Typography>
       );
     },
   },
   {
-    field: 'pdasIssuedCount',
-    headerName: datamodel.issuances,
+    field: 'dataRequestsCount',
+    headerName: requestTemplate.requests,
     flex: 1.3,
-    renderCell: (params) => {
-      return <Typography>{params.value}</Typography>;
-    },
+    valueFormatter: (params) => params.value,
   },
   {
     field: 'createdAt',
@@ -80,36 +68,42 @@ const columns: GridColDef<PartialDeep<DataModel>>[] = [
 ];
 
 type Props = {
-  data: PartialDeep<DataModel>[];
+  data: PartialDeep<DataRequestTemplate>[];
   totalCount: number;
 };
 
-export default function DataModelsTable({
+export default function RequestTemplatesTable({
   data: initialData,
   totalCount = 0,
 }: Props) {
+  const { session } = useGtwSession();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 5,
   });
-
   const [openDetailModal, toggleDetailModal] = useToggle(false);
-  const [currentDataModel, setCurrentDataModel] = useState('');
+  const [currentTemplate, setCurrentTemplate] = useState('');
 
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
-      'network-data-models',
+      'my-data-request-templates',
+      session?.user?.gatewayId,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
     ],
     queryFn: () =>
-      privateApi?.dataModels({
+      privateApi?.dataRequestTemplatesByUser({
+        user: {
+          type: UserIdentifierType.GatewayId,
+          value: session?.user?.gatewayId as string,
+        },
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
-    select: (data: any) => (data as DataModelsQuery)?.dataModels,
+    select: (data: any) =>
+      (data as DataRequestTemplatesByUserQuery)?.dataRequestTemplates,
     initialData: initialData && initialData.length ? initialData : null,
   });
 
@@ -127,11 +121,11 @@ export default function DataModelsTable({
         rows={data && data.length ? data : initialData}
         columns={columns}
         paginationModel={paginationModel}
-        onPaginationModelChange={setNewPage}
         onRowClick={(params: GridRowParams) => {
           toggleDetailModal(true);
-          setCurrentDataModel(params.id as string);
+          setCurrentTemplate(params.id as string);
         }}
+        onPaginationModelChange={setNewPage}
         paginationMode="server"
         loading={isLoading}
         rowCount={totalCount}
@@ -140,7 +134,7 @@ export default function DataModelsTable({
       <ModalDetail
         open={openDetailModal}
         onClose={toggleDetailModal}
-        id={currentDataModel}
+        id={currentTemplate}
       />
     </>
   );

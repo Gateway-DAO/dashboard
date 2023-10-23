@@ -4,8 +4,9 @@ import DataOutlinedIcon from '@/components/icons/data-outlined';
 import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
 import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
 import DataRequestTemplateOutlinedIcon from '@/components/icons/data-request-template-outlined';
-import HomeOutlinedIcon from '@/components/icons/home-outlined';
 import routes from '@/constants/routes';
+
+import { HomeOutlined } from '@mui/icons-material';
 
 /**
  * List all menu items of the user dashboard
@@ -15,7 +16,8 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     name: 'Home',
     href: routes.dashboardUserHome,
     activeHrefs: [routes.dashboardUserHome],
-    icon: HomeOutlinedIcon,
+    icon: HomeOutlined,
+    navbar: true,
   },
   {
     name: 'Data Assets',
@@ -26,6 +28,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserAsset(''),
     ],
     icon: DataOutlinedIcon,
+    navbar: true,
   },
   {
     name: 'Data Requests',
@@ -35,6 +38,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserRequest(''),
     ],
     icon: DataRequestOutlinedIcon,
+    navbar: true,
   },
   {
     name: 'Data Proofs',
@@ -54,8 +58,11 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
   },
   {
     name: 'Request Templates',
-    href: routes.dashboardUserRequestTemplates,
-    activeHrefs: [routes.dashboardUserRequestTemplates],
+    href: routes.dashboardUserMyRequestTemplates,
+    activeHrefs: [
+      routes.dashboardUserMyRequestTemplates,
+      routes.dashboardUserNetworkRequestTemplates,
+    ],
     icon: DataRequestTemplateOutlinedIcon,
   },
 ];

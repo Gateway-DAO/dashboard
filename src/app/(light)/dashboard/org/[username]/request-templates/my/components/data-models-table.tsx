@@ -12,8 +12,8 @@ import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
 import { requestTemplate } from '@/locale/en/request-template';
 import {
-  DataRequest,
-  DataRequestTemplatesQuery,
+  DataRequestTemplate,
+  DataRequestTemplatesByOrgQuery,
   OrganizationIdentifierType,
 } from '@/services/protocol/types';
 import { limitCharsCentered } from '@/utils/string';
@@ -30,7 +30,7 @@ import {
   GridRowParams,
 } from '@mui/x-data-grid';
 
-const columns: GridColDef<PartialDeep<DataRequest>>[] = [
+const columns: GridColDef<PartialDeep<DataRequestTemplate>>[] = [
   {
     field: 'name',
     headerName: requestTemplate.title,
@@ -53,6 +53,12 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
     },
   },
   {
+    field: 'dataRequestsCount',
+    headerName: requestTemplate.requests,
+    flex: 1.3,
+    valueFormatter: (params) => params.value,
+  },
+  {
     field: 'createdAt',
     headerName: 'Created At',
     flex: 1.2,
@@ -62,7 +68,7 @@ const columns: GridColDef<PartialDeep<DataRequest>>[] = [
 ];
 
 type Props = {
-  data: PartialDeep<DataRequest>[];
+  data: PartialDeep<DataRequestTemplate>[];
   totalCount: number;
 };
 
@@ -97,7 +103,7 @@ export default function RequestTemplatesTable({
         take: paginationModel.pageSize,
       }),
     select: (data: any) =>
-      (data as DataRequestTemplatesQuery)?.dataRequestTemplates,
+      (data as DataRequestTemplatesByOrgQuery)?.dataRequestTemplates,
     initialData: initialData && initialData.length ? initialData : null,
     enabled: !!organization,
   });

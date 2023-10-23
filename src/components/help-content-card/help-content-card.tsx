@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, Stack, Typography, IconButton } from '@mui/material';
 
+import styles from './styles.module.css';
+
 type Props = {
   title: string;
   desc: string;
@@ -42,19 +44,22 @@ export default function HelpContentCard({
     open && (
       <Box sx={{ width: '100%', mb: 3 }}>
         <Stack
-          spacing={2}
+          position={'relative'}
+          gap={2}
           direction="row"
           padding={3}
           sx={{ backgroundColor: '#69DCED26' }}
           borderRadius={1}
+          flexDirection={{ xs: 'column', md: 'row' }}
         >
           <Image
             src="/question.svg"
             width={112}
             height={112}
             alt="question mark image"
+            className={styles.image}
           />
-          <Stack width="100%">
+          <Stack width="100%" sx={{ alignSelf: 'flex-end' }}>
             <Typography variant="subtitle1" color="#407077" gutterBottom>
               {title}
             </Typography>
@@ -74,11 +79,11 @@ export default function HelpContentCard({
               </Button>
             </div>
           </Stack>
-          <div>
+          <span style={{ position: 'absolute', top: 20, right: 20 }}>
             <IconButton onClick={handleClick}>
               <CloseIcon />
             </IconButton>
-          </div>
+          </span>
         </Stack>
       </Box>
     )
