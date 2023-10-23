@@ -1,8 +1,10 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
+import useBreakpoints from '@/hooks/use-breakpoints';
+import { common } from '@/locale/en/common';
 import { useToggle } from '@react-hookz/web';
 
 import { MenuOutlined } from '@mui/icons-material';
@@ -10,7 +12,11 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   Drawer,
-  Stack,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Typography,
 } from '@mui/material';
 
@@ -18,7 +24,7 @@ import GTWMenuItem, { GTWMenuItemSettings } from './menu-item/menu-item';
 
 type Props = {
   menuItems: GTWMenuItemSettings[];
-  secondMenuItems?: GTWMenuItemSettings[];
+  developerItems?: GTWMenuItemSettings[];
 };
 
 /**
@@ -26,31 +32,30 @@ type Props = {
  */
 export default function MenuBottomListItems({
   menuItems,
-  secondMenuItems,
+  developerItems,
 }: Props) {
   const activePath = usePathname();
   const [isHamburgerVisible, toggleHamburgerVisible] = useToggle();
 
+  const activeTab = isHamburgerVisible ? 'hamburger' : activePath;
+
   const bottomBarMenu = useMemo(
-    () => menuItems.filter((item) => !item.hamburger),
+    () => menuItems.filter((item) => item.navbar),
     [menuItems]
   );
   const hamburgerMenu = useMemo(
-    () => menuItems.filter((item) => item.hamburger),
+    () => menuItems.filter((item) => !item.navbar),
     [menuItems]
   );
 
-  const secondHamburguerMenu = useMemo(
-    () => secondMenuItems?.filter((item) => item.hamburger),
-    [secondMenuItems]
-  );
+  const onClose = useCallback(() => toggleHamburgerVisible(false), []);
 
-  const onClose = () => toggleHamburgerVisible(false);
+  const { isDesktop } = useBreakpoints();
 
   return (
     <>
       <BottomNavigation
-        value={activePath}
+        value={activeTab}
         sx={{
           position: 'fixed',
           bottom: 0,
@@ -60,14 +65,16 @@ export default function MenuBottomListItems({
             xs: 'flex',
             lg: 'none',
           },
-          zIndex: 10,
+          zIndex: 1000,
+          borderTop: 1,
+          borderTopColor: 'divider',
         }}
       >
         {bottomBarMenu.map(
           ({ icon: Icon, activeIcon: ActiveIcon, activeHrefs, ...item }) => {
-            const isActive = activeHrefs.some((path) =>
-              activePath.includes(path)
-            );
+            const isActive =
+              !isHamburgerVisible &&
+              activeHrefs.some((path) => activePath.includes(path));
             return (
               <BottomNavigationAction
                 key={item.name}
@@ -87,50 +94,98 @@ export default function MenuBottomListItems({
           aria-label="More items"
           icon={<MenuOutlined />}
           onClick={toggleHamburgerVisible}
+          value="hamburger"
         />
       </BottomNavigation>
-      <Drawer
-        anchor="bottom"
-        open={isHamburgerVisible}
-        onClose={onClose}
-        sx={{
-          '&, .MuiDrawer-paper, .MuiModal-backdrop': { bottom: 56 },
-          '.MuiDrawer-paper': {
-            borderRadius: '24px 24px 0 0',
-            boxShadow: 'none',
-            borderBottom: 1,
-            borderBottomColor: 'divider',
-            py: 4,
-          },
-        }}
-      >
-        {hamburgerMenu.map(({ activeHrefs, ...item }) => (
-          <GTWMenuItem
-            key={item.name}
-            active={activeHrefs.some((path) => activePath.includes(path))}
-            onClick={onClose}
-            sx={{ mb: 1 }}
-            {...item}
-          />
-        ))}
-
-        {secondMenuItems && secondHamburguerMenu && (
-          <Stack mt={5}>
-            <Typography variant="caption" px={4} mb={1}>
-              Developers
-            </Typography>
-            {secondHamburguerMenu?.map(({ activeHrefs, ...item }) => (
-              <GTWMenuItem
-                key={item.name}
-                active={activeHrefs.some((path) => activePath.includes(path))}
-                onClick={onClose}
-                sx={{ mb: 1 }}
-                {...item}
-              />
-            ))}
-          </Stack>
-        )}
-      </Drawer>
+      {!isDesktop && (
+        <Drawer
+          anchor="bottom"
+          open={isHamburgerVisible}
+          onClose={onClose}
+          sx={{
+            '&, .MuiDrawer-paper, .MuiModal-backdrop': {
+              bottom: 56,
+              zIndex: 900,
+            },
+            '.MuiDrawer-paper': {
+              borderRadius: '24px 24px 0 0',
+              boxShadow: 'none',
+            },
+          }}
+        >
+          <List sx={{ py: 3 }}>
+            {hamburgerMenu.map(
+              ({
+                icon: Icon,
+                activeIcon: ActiveIcon,
+                activeHrefs,
+                ...item
+              }) => {
+                const isActive = activeHrefs.some((path) =>
+                  activePath.includes(path)
+                );
+                return (
+                  <ListItem key={item.name} disablePadding>
+                    <ListItemButton
+                      component={Link}
+                      href={item.href}
+                      onClick={onClose}
+                      sx={{
+                        color: isActive ? 'primary.main' : undefined,
+                        px: 3,
+                      }}
+                    >
+                      <ListItemIcon sx={{ color: 'inherit' }}>
+                        {isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
+                      </ListItemIcon>
+                      <ListItemText primary={item.name} />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              }
+            )}
+          </List>
+          {developerItems && (
+            <>
+              <Typography variant="caption" sx={{ mt: 2, px: 3 }}>
+                {common.general.developers}
+              </Typography>
+              <List sx={{ pt: 1, pb: 3 }}>
+                {developerItems.map(
+                  ({
+                    icon: Icon,
+                    activeIcon: ActiveIcon,
+                    activeHrefs,
+                    ...item
+                  }) => {
+                    const isActive = activeHrefs.some((path) =>
+                      activePath.includes(path)
+                    );
+                    return (
+                      <ListItem key={item.name} disablePadding>
+                        <ListItemButton
+                          component={Link}
+                          href={item.href}
+                          onClick={onClose}
+                          sx={{
+                            color: isActive ? 'primary.main' : undefined,
+                            px: 3,
+                          }}
+                        >
+                          <ListItemIcon sx={{ color: 'inherit' }}>
+                            {isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
+                          </ListItemIcon>
+                          <ListItemText primary={item.name} />
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  }
+                )}
+              </List>
+            </>
+          )}
+        </Drawer>
+      )}
     </>
   );
 }

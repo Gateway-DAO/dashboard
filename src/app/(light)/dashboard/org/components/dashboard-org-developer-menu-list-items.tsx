@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 
 import GTWMenuItem from '@/app/(light)/dashboard/components/menu-item/menu-item';
 import useOrganization from '@/hooks/use-organization';
+import { common } from '@/locale/en/common';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
 import { Typography } from '@mui/material';
@@ -31,7 +32,7 @@ export default function DashboardOrgDeveloperMenuListItems() {
             variant="caption"
             sx={{ px: CONTAINER_PX, mx: -2.5, mb: 2, display: 'block' }}
           >
-            Developers
+            {common.general.developers}
           </Typography>
           {menuItems?.map(({ activeHrefs, ...item }) => (
             <GTWMenuItem

@@ -7,8 +7,8 @@ export const auth = {
     initial: {
       title: 'Enter the Gateway',
       title_email: 'Email',
-      caption_email: 'Get started without wallet',
-      connect_wallet: 'Connect Wallet',
+      caption_email: 'Get started without a wallet',
+      connect_wallet: 'Connect Wallet', 
       connect_google: 'Continue with Google',
       connect_twitter: 'Continue with Twitter',
       connect_discord: 'Continue with Discord',
@@ -20,7 +20,7 @@ export const auth = {
       continue: 'Continue',
     },
     choose_email: {
-      title: 'Connect your email to be notified when you receive a credential',
+      title: 'Receive Notifications from Gateway Protocol', 
       subtitle: 'Email',
       description: 'By email you are notified when you receive a credential',
       label: 'E-mail',
@@ -29,7 +29,7 @@ export const auth = {
     },
     verify_token: {
       title: 'Verify your email',
-      description: 'Paste here the code sent to email address',
+      description: 'Enter the code sent to your email',
       caption: 'This code will expire in 30 minutes',
       label: 'Code',
       action: 'Verify',
@@ -43,7 +43,7 @@ export const auth = {
       skip: 'Skip for now',
     },
     choose_gateway_id: {
-      title: 'Create your personal Gateway ID',
+      title: 'Create your Gateway ID',
       subtitle:
         'Gateway ID constitutes a user or an organization on the Gateway Protocol. Additionally, it serves as a powerful solution that serves as a way of aggregating your other identities into a single identifier. ',
       create_username: 'Create your username',

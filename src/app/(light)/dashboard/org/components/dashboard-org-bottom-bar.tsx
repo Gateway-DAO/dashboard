@@ -13,17 +13,16 @@ export default function DashboardOrgBottomBar() {
     () => (pathnameOrg ? dashboardOrgMenuItems(pathnameOrg) : undefined),
     [pathnameOrg]
   );
-  const developerMenuItems = useMemo(
+  const developerItems = useMemo(
     () =>
       pathnameOrg ? dashboardOrgDevelopersMenuItems(pathnameOrg) : undefined,
     [pathnameOrg]
   );
-
-  if (!menuItems) return null;
+  if (!menuItems || !developerItems) return null;
   return (
     <MenuBottomListItems
       menuItems={menuItems}
-      secondMenuItems={developerMenuItems}
+      developerItems={developerItems}
     />
   );
 }

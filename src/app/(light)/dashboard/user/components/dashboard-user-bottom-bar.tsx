@@ -9,7 +9,7 @@ export default function DashboardUserBottomBar() {
   return (
     <MenuBottomListItems
       menuItems={dashboardUserMenuItems}
-      secondMenuItems={dashboardDevelopersMenuItems}
+      developerItems={dashboardDevelopersMenuItems}
     />
   );
 }
