@@ -15,13 +15,13 @@ export const home = {
     {
       title: 'How to issue Private Data Assets',
       subtitle: 'Read about how to issue with our API.',
-      btn_text: 'Read Now',
+      btn_text: 'Read now',
       link: `${DOCS_BASE_URL}docs/start-issuing`,
     },
     {
       title: 'Start building',
       subtitle: 'Jump  into our playground and use our API',
-      btn_text: 'Build Now',
+      btn_text: 'Build now',
       link: routes.dashboardUserPlayground,
     },
   ],
