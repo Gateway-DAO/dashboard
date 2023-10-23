@@ -31,10 +31,22 @@ export default function DataModelsExplorerFeatured() {
         }}
       ></Box>
       <FeaturedCardsContainer>
-        <DataModelExplorerCard />
-        <DataModelExplorerCard />
-        <DataModelExplorerCard />
-        <DataModelExplorerCard />
+        {[1, 2, 3, 4].map((_, index) => (
+          <Box
+            key={index}
+            sx={
+              index !== 0
+                ? {
+                    pl: 2,
+                  }
+                : {
+                    width: 'calc(100% - 16px)',
+                  }
+            }
+          >
+            <DataModelExplorerCard />
+          </Box>
+        ))}
       </FeaturedCardsContainer>
     </Container>
   );
