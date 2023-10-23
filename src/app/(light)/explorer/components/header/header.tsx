@@ -5,7 +5,7 @@ export default function ExplorerHeader({ sx, ...props }: BoxProps) {
     <Box
       {...props}
       sx={{
-        pt: 16,
+        pt: 21,
         pb: 6,
         ...sx,
       }}

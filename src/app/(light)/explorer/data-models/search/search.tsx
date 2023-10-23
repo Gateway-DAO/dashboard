@@ -1,9 +1,18 @@
+'use client';
+import { apiPublic } from '@/services/protocol/api';
+import { useQuery } from '@tanstack/react-query';
+
 import { Box, Container, Typography } from '@mui/material';
 
 import DataModelExplorerCard from '../../components/data-model-card';
 import DataModelsExplorerSearchFilters from './filters';
 
 export default function DataModelsExplorerSearch() {
+  const dataModels = useQuery({
+    queryKey: ['data-models'],
+    queryFn: () => apiPublic.explorer_data_models_list({ filter: {}, skip: 0 }),
+  });
+
   return (
     <Container
       sx={{
@@ -29,8 +38,8 @@ export default function DataModelsExplorerSearch() {
         }}
         gap={2}
       >
-        {Array.from({ length: 8 }).map((_, index) => (
-          <DataModelExplorerCard key={index} />
+        {dataModels.data?.dataModels.map((dataModel) => (
+          <DataModelExplorerCard dataModel={dataModel} key={dataModel.id} />
         ))}
       </Box>
     </Container>

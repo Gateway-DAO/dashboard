@@ -12,6 +12,8 @@ import {
   CardActionArea,
   SxProps,
   Typography,
+  CardProps,
+  Box,
 } from '@mui/material';
 
 type Props = {
@@ -28,8 +30,10 @@ function CardContainer({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
+    justifyContent: 'space-between',
     gap: 3,
     p: 2,
+    height: '100%',
   };
 
   if (withLink) {
@@ -50,31 +54,80 @@ function CardContainer({
 export default function DataModelExplorerCard({
   withLink = true,
   dataModel,
-}: Props) {
+  ...props
+}: Props & CardProps) {
+  let ownerImage = dataModel?.createdBy?.profilePicture;
+  let ownerName =
+    dataModel?.createdBy?.displayName ?? dataModel?.createdBy?.gatewayId;
+
+  if (dataModel?.organization) {
+    ownerImage = dataModel.organization.image;
+    ownerName = dataModel.organization.name ?? dataModel.organization.gatewayId;
+  }
+
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" {...props}>
       <CardContainer withLink={withLink} id={dataModel?.id}>
-        <Stack direction="row" gap={1} alignItems="center">
-          <GTWAvatar />
-          <Typography variant="body2">Gateway Network</Typography>
+        <Stack direction="column" gap={3}>
+          <Stack direction="row" gap={1} alignItems="center">
+            <GTWAvatar src={ownerImage} name={ownerName} />
+            <Typography variant="body2">{ownerName}</Typography>
+          </Stack>
+          <Stack direction="column" gap={0.5}>
+            <Typography variant="subtitle1" fontWeight="bold">
+              {dataModel?.title}
+            </Typography>
+            <Typography
+              color="text.secondary"
+              sx={{
+                display: '-webkit-box',
+                '-webkit-line-clamp': '2',
+                '-webkit-box-orient': 'vertical',
+                lineClamp: '2',
+                boxOrientation: 'vertical',
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+              }}
+            >
+              {dataModel?.description}
+            </Typography>
+          </Stack>
         </Stack>
-        <Stack direction="column" gap={0.5}>
-          <Typography variant="subtitle1" fontWeight="bold">
-            Credit Card Transactions
+        <Box
+          sx={{
+            display: 'grid',
+            gap: 1,
+            gridTemplateColumns: '1fr 0.8fr',
+          }}
+        >
+          {dataModel?.consumptionPrice ? (
+            <Typography variant="subtitle2" fontWeight="400">
+              <b>
+                {dataModel?.consumptionPrice?.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                })}
+              </b>{' '}
+              per consumption
+            </Typography>
+          ) : (
+            <span />
+          )}
+          <Typography
+            variant="subtitle2"
+            fontWeight="400"
+            justifySelf="flex-end"
+          >
+            <b>
+              {dataModel?.pdasIssuedCount
+                ? Intl.NumberFormat('en-US', { notation: 'compact' }).format(
+                    dataModel.pdasIssuedCount
+                  )
+                : 0}
+            </b>{' '}
+            issuances
           </Typography>
-          <Typography color="text.secondary">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor...
-          </Typography>
-        </Stack>
-        <Stack direction="row" gap={1} justifyContent="space-between">
-          <Typography variant="subtitle2" fontWeight="400">
-            <b>$0.01</b> per consumption
-          </Typography>
-          <Typography variant="subtitle2" fontWeight="400">
-            <b>90.5k</b> issuances
-          </Typography>
-        </Stack>
+        </Box>
       </CardContainer>
     </Card>
   );

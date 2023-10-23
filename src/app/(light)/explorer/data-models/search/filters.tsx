@@ -21,7 +21,7 @@ import {
 export default function DataModelsExplorerSearchFilters() {
   const [isVisible, toggleVisible] = useToggle(false);
 
-  const { isMobile, isTablet } = useBreakpoints();
+  const { isDesktop } = useBreakpoints();
 
   return (
     <Stack mb={2} direction="column" gap={2} justifyContent="stretch">
@@ -53,7 +53,7 @@ export default function DataModelsExplorerSearchFilters() {
           <FilterListOutlined />
         </IconButton>
       </Stack>
-      <Collapse in={(!isMobile && !isTablet) || isVisible}>
+      <Collapse in={isDesktop || isVisible}>
         <Box
           display={{
             xs: 'flex',
