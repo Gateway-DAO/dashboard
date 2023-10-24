@@ -56,7 +56,7 @@ export const common = {
     create_id: 'Create ID',
     continue: 'Continue',
     verify: 'Verify',
-    code_send_again: 'Send code again',
+    view_more: 'View more',
   },
   socials: {
     twitter: 'Twitter',
