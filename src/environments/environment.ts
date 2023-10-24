@@ -1,8 +1,10 @@
 import dotenv from 'dotenv';
 
-import { featureToggleDev } from './feature-toggle.dev';
-import { featureToggleProd } from './feature-toggle.prod';
-import { featureToggleQA } from './feature-toggle.qa';
+import {
+  featureToggleDev,
+  featureToggleProd,
+  featureToggleQA,
+} from './feature-toggle';
 dotenv.config();
 
 type EnvironmentData = {
