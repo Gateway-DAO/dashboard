@@ -56,6 +56,7 @@ export const common = {
     create_id: 'Create ID',
     continue: 'Continue',
     verify: 'Verify',
+    view_more: 'View more',
     code_send_again: 'Send code again',
   },
   socials: {
