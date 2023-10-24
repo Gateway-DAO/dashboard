@@ -25,7 +25,7 @@ query dataModels($skip: Int, $take: Int) {
 }
 
 query explorer_data_models_list($filter: FilterDataModelInput, $skip: Int = 0) {
-  dataModels(filter: $filter, skip: $skip, take: 15) {
+  dataModels(filter: $filter, skip: $skip, take: 12) {
     id
     title
     description

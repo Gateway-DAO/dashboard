@@ -54,16 +54,26 @@ export default function DataModelsExplorerSearchFilters() {
         </IconButton>
       </Stack>
       <Collapse in={isDesktop || isVisible}>
-        <Box
-          display={{
-            xs: 'flex',
-            lg: 'grid',
+        <Stack
+          flexDirection={{
+            xs: 'column',
+            lg: 'row',
           }}
-          flexDirection="column"
+          alignItems={{
+            xs: 'stretch',
+            lg: 'flex-start',
+          }}
           gap={1}
-          gridTemplateColumns={'repeat(5, 1fr)'}
         >
-          <FormControl fullWidth>
+          <FormControl
+            fullWidth
+            sx={{
+              maxWidth: {
+                xs: 'unset',
+                lg: 200,
+              },
+            }}
+          >
             <InputLabel id="tags-label">Tags</InputLabel>
             <Select labelId="tags-label" id="tags" label="Tags">
               <MenuItem value={10}>Ten</MenuItem>
@@ -71,7 +81,15 @@ export default function DataModelsExplorerSearchFilters() {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
-          <FormControl fullWidth>
+          <FormControl
+            fullWidth
+            sx={{
+              maxWidth: {
+                xs: 'unset',
+                lg: 200,
+              },
+            }}
+          >
             <InputLabel id="comsumption-price-label">
               Comsumption price
             </InputLabel>
@@ -85,7 +103,15 @@ export default function DataModelsExplorerSearchFilters() {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
-          <FormControl fullWidth>
+          <FormControl
+            fullWidth
+            sx={{
+              maxWidth: {
+                xs: 'unset',
+                lg: 200,
+              },
+            }}
+          >
             <InputLabel id="amount-of-issuances-label">
               Amount of issuances
             </InputLabel>
@@ -99,14 +125,26 @@ export default function DataModelsExplorerSearchFilters() {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
-          <FormControl fullWidth>
+          <FormControl
+            fullWidth
+            sx={{
+              maxWidth: {
+                xs: 'unset',
+                lg: 200,
+              },
+              marginLeft: {
+                xs: 'unset',
+                lg: 'auto',
+              },
+            }}
+          >
             <InputLabel id="sorting-label">Sort by</InputLabel>
             <Select labelId="sorting-label" id="sorting" label="Tags">
               <MenuItem value={10}>Newest</MenuItem>
               <MenuItem value={20}>Oldest</MenuItem>
             </Select>
           </FormControl>
-        </Box>
+        </Stack>
       </Collapse>
     </Stack>
   );

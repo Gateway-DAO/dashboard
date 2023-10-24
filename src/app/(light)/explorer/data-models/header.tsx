@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { explorerDataModels } from '@/locale/en/datamodel';
+
 import {
   Box,
   Container,
@@ -29,16 +31,13 @@ export default function DataModelsExplorerHeader() {
         }}
       >
         <Typography component="h1" variant="h2" fontWeight="300" mb={2}>
-          Data models
+          {explorerDataModels.title}
         </Typography>
         <Typography color="text.secondary" mb={3}>
-          Data models serve as foundational templates for Private Data Assets
-          (PDAs). Each PDA created using a data model adheres to a standardized
-          structure of claims, making these frameworks exceptionally reusable
-          for various related scenarios.
+          {explorerDataModels.subtitle}
         </Typography>
         <MuiLink component={Link} href="/" fontWeight="700" underline="hover">
-          How to use data models
+          {explorerDataModels.help}
         </MuiLink>
       </Box>
       <InfoCard

@@ -1,3 +1,5 @@
+import { explorerDataModels } from '@/locale/en/datamodel';
+
 import { Box, Container, Typography } from '@mui/material';
 
 import DataModelExplorerCard from '../../components/data-model-card';
@@ -17,7 +19,7 @@ export default function DataModelsExplorerFeatured() {
           mb: 2,
         }}
       >
-        Featured
+        {explorerDataModels.featureTitle}
       </Typography>
       <Box
         sx={{

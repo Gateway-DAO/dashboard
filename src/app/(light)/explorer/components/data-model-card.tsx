@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import routes from '@/constants/routes';
+import { explorerDataModelCard } from '@/locale/en/datamodel';
 import { DataModel } from '@/services/protocol/types';
 import { PartialDeep } from 'type-fest';
 
@@ -108,7 +109,7 @@ export default function DataModelExplorerCard({
                   currency: 'USD',
                 })}
               </b>{' '}
-              per consumption
+              {explorerDataModelCard.consumption}
             </Typography>
           ) : (
             <span />
@@ -116,6 +117,7 @@ export default function DataModelExplorerCard({
           <Typography
             variant="subtitle2"
             fontWeight="400"
+            alignSelf="flex-end"
             justifySelf="flex-end"
           >
             <b>
@@ -125,7 +127,7 @@ export default function DataModelExplorerCard({
                   )
                 : 0}
             </b>{' '}
-            issuances
+            {explorerDataModelCard.issuances(dataModel?.pdasIssuedCount ?? 0)}
           </Typography>
         </Box>
       </CardContainer>

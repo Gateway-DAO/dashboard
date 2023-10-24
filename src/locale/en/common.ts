@@ -57,6 +57,7 @@ export const common = {
     continue: 'Continue',
     verify: 'Verify',
     code_send_again: 'Send code again',
+    load_more: 'Load more',
   },
   socials: {
     twitter: 'Twitter',
