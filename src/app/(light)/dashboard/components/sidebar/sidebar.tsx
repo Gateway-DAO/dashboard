@@ -1,7 +1,7 @@
 'use client';
 import { PropsWithChildren, ReactNode } from 'react';
 
-import { featureToggle } from '@/environments/environment';
+import { featureToggle } from '@/environment/environment';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
 import { Box } from '@mui/material';

@@ -2,7 +2,7 @@
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 
-import { featureToggle } from '@/environments/environment';
+import { featureToggle } from '@/environment/environment';
 import { auth } from '@/locale/en/auth';
 
 import { LogoutOutlined } from '@mui/icons-material';
