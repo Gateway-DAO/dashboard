@@ -2,15 +2,17 @@
 
 import { useEffect, useState } from 'react';
 
-import { pageWithBackgroundColor } from '@/components/page-with-full-background';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { currentEnv } from '@/utils/env';
+import { useToggle } from '@react-hookz/web';
 
 import { Alert, AlertTitle, Button, Stack, Typography } from '@mui/material';
 
 import WalletBalance from './wallet-balance';
+import WalletStatement from './wallet-statement';
 
 export default function WalletHero(): JSX.Element {
+  const [valueVisible, setVisible] = useToggle(true);
   const [showAlert, toggleAlert] = useState(false);
   const storageKey = 'testnet-wallet-disclaimer';
   const testnet = currentEnv() === 'testnet' || 'development';
@@ -64,7 +66,12 @@ export default function WalletHero(): JSX.Element {
         </Alert>
       )}
       <Typography variant="h3">Wallet</Typography>
-      <WalletBalance value="$455.34" />
+      <WalletBalance
+        setVisible={setVisible}
+        valueVisible={valueVisible}
+        value="$455.34"
+      />
+      <WalletStatement showValues={valueVisible} />
     </Stack>
   );
 }

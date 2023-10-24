@@ -22,6 +22,7 @@ export default function BurgerButton({
   const tl = useRef<gsap.core.Timeline>();
   const refSpansOpen = useRef<(HTMLSpanElement | null)[]>([]);
   const refSpansClose = useRef<(HTMLSpanElement | null)[]>([]);
+  // eslint-disable-next-line testing-library/render-result-naming-convention
   const isFirstRender = useIsFirstRender();
 
   useEffect(() => {

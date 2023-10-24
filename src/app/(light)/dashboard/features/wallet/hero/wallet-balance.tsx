@@ -7,9 +7,17 @@ import {
 } from '@mui/icons-material';
 import { Box, IconButton, Stack, Typography } from '@mui/material';
 
-export default function WalletBalance({ value }: { value?: string }) {
-  const [valueVisible, setVisible] = useToggle(true);
+type Props = {
+  value?: string;
+  valueVisible: boolean;
+  setVisible: any;
+};
 
+export default function WalletBalance({
+  value,
+  valueVisible,
+  setVisible,
+}: Props) {
   return (
     <Stack data-testid="hero__wallet-balance" mt={5} gap={1}>
       <Box display="flex" gap={1}>

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import WalletBalance from './hero/wallet-balance';
+import WalletBalance from './wallet-balance';
 
 describe('Wallet balance on hero', () => {
   test('renders the component', () => {
