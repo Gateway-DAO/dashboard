@@ -2,6 +2,7 @@
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 
+import { featureToggle } from '@/environments/environment';
 import { auth } from '@/locale/en/auth';
 
 import { LogoutOutlined } from '@mui/icons-material';
@@ -31,9 +32,11 @@ export default function AuthDropdown({ onClose }: Props) {
   return (
     <>
       <AuthDropdownCurrent onClose={onClose} />
-      <Box sx={{ display: { xs: 'block', lg: 'none' }, px: 2, pt: 1 }}>
-        <WalletComponent id="wallet-button" />
-      </Box>
+      {featureToggle?.wallet && (
+        <Box sx={{ display: { xs: 'block', lg: 'none' }, px: 2, pt: 1 }}>
+          <WalletComponent id="wallet-button" />
+        </Box>
+      )}
       <Divider sx={{ my: 1 }} />
       <AuthDropdownProfilesList onClose={onClose} />
       <MenuItem onClick={onSignOut}>

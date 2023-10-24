@@ -42,7 +42,6 @@ export default function MenuContainer({
           mt: 5,
           mx: -2.5,
           display: { xs: 'none', lg: 'block' },
-          flexGrow: 1,
           '@media screen and (max-height: 900px) and (min-width: 1200px)': {
             mt: 2,
           },
