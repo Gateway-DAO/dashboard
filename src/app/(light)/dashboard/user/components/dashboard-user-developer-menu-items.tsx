@@ -4,11 +4,11 @@ import routes from '@/constants/routes';
 
 import { CodeOutlined, MenuBookOutlined } from '@mui/icons-material';
 
-import { GTWMenuItemSettings } from '../menu-item/menu-item';
+import { GTWMenuItemSettings } from '../../components/menu-item/menu-item';
 
 export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
   {
-    name: 'Developer access',
+    name: 'Developer Access',
     href: routes.dashboardUserDeveloperAccess,
     activeHrefs: [routes.dashboardUserDeveloperAccess],
     icon: CodeOutlined,

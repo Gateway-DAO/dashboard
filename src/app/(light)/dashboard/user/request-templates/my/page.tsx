@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { Session } from 'next-auth';
 
 import { datamodels } from '@/locale/en/datamodel';
+import { requestTemplates } from '@/locale/en/request-template';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
 import { UserIdentifierType } from '@/services/protocol/types';
@@ -48,7 +49,7 @@ export default async function DashboardUserDataRequestTemplatesPage() {
           color="text.secondary"
           sx={{ textAlign: 'center', width: '100%' }}
         >
-          {datamodels.empty}
+          {requestTemplates.empty}
         </Typography>
       )}
     </>

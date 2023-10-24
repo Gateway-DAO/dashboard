@@ -4,8 +4,9 @@ import DataOutlinedIcon from '@/components/icons/data-outlined';
 import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
 import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
 import DataRequestTemplateOutlinedIcon from '@/components/icons/data-request-template-outlined';
-import HomeOutlinedIcon from '@/components/icons/home-outlined';
 import routes from '@/constants/routes';
+
+import { HomeOutlined } from '@mui/icons-material';
 
 /**
  * List all menu items of the user dashboard
@@ -15,10 +16,11 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     name: 'Home',
     href: routes.dashboardUserHome,
     activeHrefs: [routes.dashboardUserHome],
-    icon: HomeOutlinedIcon,
+    icon: HomeOutlined,
+    navbar: true,
   },
   {
-    name: 'Data assets',
+    name: 'Data Assets',
     href: routes.dashboardUserReceivedAssets,
     activeHrefs: [
       routes.dashboardUserReceivedAssets,
@@ -26,18 +28,20 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboardUserAsset(''),
     ],
     icon: DataOutlinedIcon,
+    navbar: true,
   },
   {
-    name: 'Data requests',
+    name: 'Data Requests',
     href: routes.dashboardUserRequests,
     activeHrefs: [
       routes.dashboardUserRequests,
       routes.dashboardUserRequest(''),
     ],
     icon: DataRequestOutlinedIcon,
+    navbar: true,
   },
   {
-    name: 'Data proofs',
+    name: 'Data Proofs',
     href: routes.dashboardUserReceivedProofs,
     activeHrefs: [
       routes.dashboardUserReceivedProofs,
@@ -47,16 +51,13 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     icon: DataProofOutlinedIcon,
   },
   {
-    name: 'Data models',
+    name: 'Data Models',
     href: routes.dashboardUserMyDataModels,
-    activeHrefs: [
-      routes.dashboardUserMyDataModels,
-      routes.dashboardUserNetworkDataModels,
-    ],
+    activeHrefs: [routes.dashboardUserMyDataModels],
     icon: DataModelOutlinedIcon,
   },
   {
-    name: 'Request templates',
+    name: 'Request Templates',
     href: routes.dashboardUserMyRequestTemplates,
     activeHrefs: [
       routes.dashboardUserMyRequestTemplates,

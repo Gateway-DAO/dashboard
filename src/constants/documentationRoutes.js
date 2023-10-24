@@ -7,6 +7,7 @@ const documentationRoutes = {
   dataModel: 'https://docs.mygateway.xyz/docs/data-model',
   requestTemplate: 'https://docs.mygateway.xyz/docs/data-request-templates',
   dataRequest: 'https://docs.mygateway.xyz/docs/data-request',
+  startIssuing: 'https://docs.mygateway.xyz/docs/start-issuing',
 };
 
 module.exports = documentationRoutes;
