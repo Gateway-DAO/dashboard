@@ -9,7 +9,7 @@ export const dashboardOrgDevelopersMenuItems = (
   username: string
 ): GTWMenuItemSettings[] => [
   {
-    name: 'Developer access',
+    name: 'Developer Access',
     href: routes.dashboardOrgDeveloperAccess(username),
     activeHrefs: [routes.dashboardOrgDeveloperAccess(username)],
     icon: CodeOutlined,

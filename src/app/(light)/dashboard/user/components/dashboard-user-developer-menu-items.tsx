@@ -8,7 +8,7 @@ import { GTWMenuItemSettings } from '../../components/menu-item/menu-item';
 
 export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
   {
-    name: 'Developer access',
+    name: 'Developer Access',
     href: routes.dashboardUserDeveloperAccess,
     activeHrefs: [routes.dashboardUserDeveloperAccess],
     icon: CodeOutlined,
