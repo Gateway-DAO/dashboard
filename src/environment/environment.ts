@@ -1,3 +1,4 @@
+import { currentEnv } from '@/utils/env';
 import dotenv from 'dotenv';
 
 import {
@@ -47,8 +48,8 @@ const prod: EnvironmentData = {
 };
 
 export const environment = (): EnvironmentData => {
-  switch (process.env.NODE_ENV) {
-    case 'production':
+  switch (currentEnv()) {
+    case 'testnet':
       return prod;
     case 'test':
       return qa;
