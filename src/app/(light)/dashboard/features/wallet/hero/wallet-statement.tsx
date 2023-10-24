@@ -38,8 +38,8 @@ const WalletStatementList = ({
   list,
 }: PropsStatementList) => {
   return (
-    <Stack bgcolor="common.white" borderRadius="16px" flex={1} p={2}>
-      <Box gap={1}>
+    <Stack bgcolor="common.white" borderRadius="16px" flex={1} px={2} pt={2}>
+      <Box gap={1} pb={2}>
         <Typography variant="caption" color="text.secondary">
           {title}
         </Typography>
@@ -52,7 +52,7 @@ const WalletStatementList = ({
         </Typography>
       </Box>
       <Collapse in={showDetails && !!list?.length}>
-        <Stack mt={2} divider={<Divider />} mx={-2}>
+        <Stack divider={<Divider />} mx={-2}>
           {list?.map(({ name, value }) => (
             <Box key={name} display="flex" justifyContent="space-between" p={2}>
               <Typography variant="body2">{name}</Typography>
@@ -85,7 +85,15 @@ export default function WalletStatement({ showValues }: Props) {
 
   return (
     <>
-      <Box mt={5} display="flex" gap={2}>
+      <Box
+        mt={5}
+        display="flex"
+        flexDirection={{
+          xs: 'column',
+          lg: 'row',
+        }}
+        gap={2}
+      >
         <WalletStatementList
           showDetails={showDetails}
           showValues={showValues}
@@ -96,7 +104,7 @@ export default function WalletStatement({ showValues }: Props) {
         <WalletStatementList
           showDetails={showDetails}
           showValues={showValues}
-          value="$234.54"
+          value="$0.0"
           title="Money out"
         />
       </Box>
