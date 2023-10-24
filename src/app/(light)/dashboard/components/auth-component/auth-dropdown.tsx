@@ -5,8 +5,15 @@ import { useRouter } from 'next-nprogress-bar';
 import { auth } from '@/locale/en/auth';
 
 import { LogoutOutlined } from '@mui/icons-material';
-import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material';
+import {
+  Box,
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+} from '@mui/material';
 
+import WalletComponent from '../wallet-component/wallet-component';
 import AuthDropdownCurrent from './auth-dropdown-current';
 import AuthDropdownProfilesList from './auth-dropdown-profiles-list';
 
@@ -24,7 +31,10 @@ export default function AuthDropdown({ onClose }: Props) {
   return (
     <>
       <AuthDropdownCurrent onClose={onClose} />
-      <Divider />
+      <Box sx={{ display: { xs: 'block', lg: 'none' }, px: 2, pt: 1 }}>
+        <WalletComponent id="wallet-button" />
+      </Box>
+      <Divider sx={{ my: 1 }} />
       <AuthDropdownProfilesList onClose={onClose} />
       <MenuItem onClick={onSignOut}>
         <ListItemIcon>

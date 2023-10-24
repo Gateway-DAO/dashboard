@@ -36,20 +36,13 @@ export default function WalletComponent({ id }: Props) {
       <Box
         id={id}
         sx={(theme) => ({
-          backgroundColor: {
-            xs: 'transparent',
-            lg: alpha(
-              theme.palette.primary.main,
-              theme.palette.action.focusOpacity
-            ),
-          },
+          backgroundColor: alpha(
+            theme.palette.primary.main,
+            theme.palette.action.focusOpacity
+          ),
           borderRadius: theme.shape.borderRadius / 16, //Strange issue with MUI
           justifyContent: 'space-between',
           p: 2,
-          mr: {
-            xs: -2,
-            lg: 0,
-          },
           mb: 2,
           alignItems: 'flex-start',
           flexDirection: 'column',

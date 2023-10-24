@@ -3,6 +3,7 @@ import { PropsWithChildren, ReactNode } from 'react';
 
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
+import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import AuthComponent from '../auth-component/auth-component';
@@ -56,7 +57,9 @@ export default function Sidebar({
           menuItems={menuItems}
           secondMenuItems={secondMenuItems}
         />
-        <WalletComponent id="wallet-button" />
+        <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
+          <WalletComponent id="wallet-button" />
+        </Box>
         <AuthComponent id="profile-button" controlId="profile-menu" />
       </Stack>
     </Stack>
