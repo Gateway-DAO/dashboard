@@ -1,4 +1,3 @@
-import { settings } from '@/locale/en/settings';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Box } from '@mui/material';
@@ -19,9 +18,9 @@ type Story = StoryObj<typeof ConfirmDelete>;
 
 export const Playground: Story = {
   args: {
-    textKey: settings.connected_accounts.modal_confirm_delete.text_key,
-    buttonText: settings.connected_accounts.modal_confirm_delete.text_key,
-    checkText: settings.connected_accounts.modal_confirm_delete.checkbox,
+    textKey: 'deactivate my gateway id',
+    buttonText: 'deactivate my gateway id',
+    checkText: `I acknowledge that upon Gateway ID deactivation, I won't be able undo these actions`,
     onCancel: () => console.log('canceled'),
     onConfirm: () => console.log('confirmed'),
   },

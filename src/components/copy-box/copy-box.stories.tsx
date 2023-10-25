@@ -1,4 +1,3 @@
-import { settings } from '@/locale/en/settings';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Box } from '@mui/material';
