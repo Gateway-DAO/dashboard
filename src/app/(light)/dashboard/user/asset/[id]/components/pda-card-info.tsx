@@ -2,7 +2,7 @@
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
-import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
+import { TextStatusChip } from '@/components/text-status-chip/text-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import { datamodel } from '@/locale/en/datamodel';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -111,7 +111,7 @@ export default function PdaCardInfo({ pda, isProofPda = false }: Props) {
             : pdaLocale.indeterminate}
         </CardCell>
         <CardCell label={pdaLocale.status.title}>
-          <PDAStatusChip
+          <TextStatusChip
             status={pda?.status ?? PdaStatus.Valid}
             size="small"
             id="pda-status"
