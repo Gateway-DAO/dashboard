@@ -18,5 +18,6 @@ export const Playground: Story = {
   args: {
     text: 'Lorem ipsum',
     href: '',
+    size: 'small',
   },
 };
