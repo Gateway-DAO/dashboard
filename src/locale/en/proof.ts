@@ -30,7 +30,7 @@ export const proofs = {
   request_template_id: 'Request template ID',
   share_date: 'Share date',
   data_amount: 'Data amount',
-  received_proofs: 'Received data proofs',
+  received_proofs: 'Data Proofs Received',
   received_proofs_subtitle:
     'These are the copies of data assets that have been sent to you',
 };
