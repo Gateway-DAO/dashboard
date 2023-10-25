@@ -8,7 +8,7 @@ import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import AuthComponent from '../auth-component/auth-component';
-import WalletComponent from '../wallet-component/wallet-component';
+import WalletWidget from '../wallet/wallet-widget/wallet-widget';
 import MenuContainer from './menu-container';
 
 type Props = {
@@ -60,7 +60,7 @@ export default function Sidebar({
         />
         {featureToggle?.wallet && (
           <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
-            <WalletComponent id="wallet-button" />
+            <WalletWidget id="wallet-button" />
           </Box>
         )}
 

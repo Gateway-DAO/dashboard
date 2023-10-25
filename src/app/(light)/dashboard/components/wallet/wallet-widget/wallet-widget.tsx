@@ -14,18 +14,18 @@ import {
 } from '@mui/icons-material';
 import { Button, Box, Stack, Typography, alpha } from '@mui/material';
 
-import WalletComponentSkeleton from './wallet-component-skeleton';
+import WalletWidgetSkeleton from './wallet-widget-skeleton';
 
 type Props = {
   id: string;
 };
 
-export default function WalletComponent({ id }: Props) {
+export default function WalletWidget({ id }: Props) {
   const { data: session, status } = useSession();
   const [visible, setVisible] = useToggle(true);
 
   if (status === 'loading' || !session) {
-    return <WalletComponentSkeleton />;
+    return <WalletWidgetSkeleton />;
   }
 
   const walletData = {

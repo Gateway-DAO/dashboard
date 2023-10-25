@@ -2,7 +2,7 @@
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import ExternalLink from '@/components/external-link/external-link';
-import TransactionStatusChip from '@/components/transaction-status-chip/transaction-status-chip';
+import TransactionStatusChip from '@/app/(light)/dashboard/components/wallet/transaction/components/transaction-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import { common } from '@/locale/en/common';
 import { transaction } from '@/locale/en/transaction';
