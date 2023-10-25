@@ -1,6 +1,6 @@
 import { Box, Skeleton, alpha } from '@mui/material';
 
-export default function WalletComponentSkeleton() {
+export default function WalletWidgetSkeleton() {
   return (
     <Box
       sx={(theme) => ({
