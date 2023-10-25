@@ -2,6 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 
+import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
 import { useToggle } from '@react-hookz/web';
@@ -21,7 +22,7 @@ type Props = {
 
 export default function WalletComponent({ id }: Props) {
   const { data: session, status } = useSession();
-  const [visible, setVisible] = useToggle(false);
+  const [visible, setVisible] = useToggle(true);
 
   if (status === 'loading' || !session) {
     return <WalletComponentSkeleton />;
@@ -87,7 +88,12 @@ export default function WalletComponent({ id }: Props) {
             )}
           </Button>
         </Stack>
-        <Button variant="outlined" fullWidth size="small">
+        <Button
+          href={routes.dashboardUserWallet}
+          variant="outlined"
+          fullWidth
+          size="small"
+        >
           {common.actions.view_more}
         </Button>
       </Box>

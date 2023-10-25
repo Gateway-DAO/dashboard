@@ -48,6 +48,7 @@ const routes = {
   dashboardOrgPlayground: (organizationId) =>
     `/dashboard/org/${organizationId}/playground`,
   dashboardUserPlayground: '/dashboard/user/playground',
+  dashboardUserWallet: '/dashboard/user/wallet',
 };
 
 module.exports = routes;
