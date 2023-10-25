@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 
 import routes from '@/constants/routes';
+import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
 import { useToggle } from '@react-hookz/web';
@@ -23,6 +24,7 @@ type Props = {
 export default function WalletComponent({ id }: Props) {
   const { data: session, status } = useSession();
   const [visible, setVisible] = useToggle(true);
+  const { organization } = useOrganization();
 
   if (status === 'loading' || !session) {
     return <WalletComponentSkeleton />;
@@ -89,7 +91,11 @@ export default function WalletComponent({ id }: Props) {
           </Button>
         </Stack>
         <Button
-          href={routes.dashboardUserWallet}
+          href={
+            !!organization
+              ? routes.dashboardOrgWallet(organization.gatewayId)
+              : routes.dashboardUserWallet
+          }
           variant="outlined"
           fullWidth
           size="small"
