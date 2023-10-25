@@ -38,7 +38,14 @@ const WalletStatementList = ({
   list,
 }: PropsStatementList) => {
   return (
-    <Stack bgcolor="common.white" borderRadius="16px" flex={1} px={2} pt={2}>
+    <Stack
+      data-testid="wallet-statement__list"
+      bgcolor="common.white"
+      borderRadius="16px"
+      flex={1}
+      px={2}
+      pt={2}
+    >
       <Box gap={1} pb={2}>
         <Typography variant="caption" color="text.secondary">
           {title}
@@ -84,7 +91,7 @@ export default function WalletStatement({ showValues }: Props) {
   const [showDetails, toggleDetails] = useToggle(false);
 
   return (
-    <>
+    <Box data-testid="hero__wallet-statement">
       <Box
         mt={5}
         display="flex"
@@ -118,6 +125,6 @@ export default function WalletStatement({ showValues }: Props) {
           {!showDetails ? common.actions.more_info : common.actions.less_info}
         </Button>
       </Stack>
-    </>
+    </Box>
   );
 }
