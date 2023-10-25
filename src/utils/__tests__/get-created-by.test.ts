@@ -29,6 +29,11 @@ describe('Get "Created By" Helper', () => {
     const organization = null;
     const result = getCreatedBy(user, organization);
 
-    expect(result).toEqual(user);
+    expect(result).toEqual({
+      id: user.id,
+      gatewayId: user.gatewayId,
+      name: user.displayName,
+      image: user.profilePicture,
+    });
   });
 });
