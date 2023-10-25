@@ -1,16 +1,19 @@
+'use client';
+
 import { explorerDataModels } from '@/locale/en/datamodel';
 
 import { Box, Container, Typography } from '@mui/material';
 
-import DataModelExplorerCard from '../../components/data-model-card';
-import { PartialDeep } from 'type-fest';
-import { DataModel } from '@/services/protocol/types';
+import DataModelExplorerCard from '../../components/data-model-card/data-model-card';
+import { useQuery } from '@tanstack/react-query';
+import { apiPublic } from '@/services/protocol/api';
+import DataModelExplorerCardLoading from '../../components/data-model-card/data-model-card-loading';
 
-type Props = {
-  dataModels: PartialDeep<DataModel>[];
-};
-
-export default function DataModelsExplorerFeatured({ dataModels }: Props) {
+export default function DataModelsExplorerFeatured() {
+  const dataModels = useQuery({
+    queryKey: ['data-models-featured'],
+    queryFn: () => apiPublic.explorer_data_models_featured(),
+  });
   return (
     <Container
       sx={{
@@ -37,7 +40,15 @@ export default function DataModelsExplorerFeatured({ dataModels }: Props) {
           },
         }}
       >
-        {dataModels.map((dataModel) => (
+        {dataModels.isLoading && (
+          <>
+            <DataModelExplorerCardLoading />
+            <DataModelExplorerCardLoading />
+            <DataModelExplorerCardLoading />
+            <DataModelExplorerCardLoading />
+          </>
+        )}
+        {dataModels.data?.dataModels.map((dataModel) => (
           <DataModelExplorerCard dataModel={dataModel} key={dataModel.id} />
         ))}
       </Box>

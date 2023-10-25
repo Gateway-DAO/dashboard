@@ -16,6 +16,7 @@ import {
   CardProps,
   Box,
 } from '@mui/material';
+import getCreatedBy from '@/utils/get-created-by';
 
 type Props = {
   withLink?: boolean;
@@ -57,22 +58,18 @@ export default function DataModelExplorerCard({
   dataModel,
   ...props
 }: Props & CardProps) {
-  let ownerImage = dataModel?.createdBy?.profilePicture;
-  let ownerName =
-    dataModel?.createdBy?.displayName ?? dataModel?.createdBy?.gatewayId;
-
-  if (dataModel?.organization) {
-    ownerImage = dataModel.organization.image;
-    ownerName = dataModel.organization.name ?? dataModel.organization.gatewayId;
-  }
+  const { id, image, name, gatewayId } = getCreatedBy(
+    dataModel?.createdBy ?? {},
+    dataModel?.organization
+  );
 
   return (
     <Card variant="outlined" {...props}>
       <CardContainer withLink={withLink} id={dataModel?.id}>
         <Stack direction="column" gap={3}>
           <Stack direction="row" gap={1} alignItems="center">
-            <GTWAvatar src={ownerImage} name={ownerName} />
-            <Typography variant="body2">{ownerName}</Typography>
+            <GTWAvatar src={image} name={name ?? gatewayId} />
+            <Typography variant="body2">{name ?? gatewayId}</Typography>
           </Stack>
           <Stack direction="column" gap={0.5}>
             <Typography variant="subtitle1" fontWeight="bold">

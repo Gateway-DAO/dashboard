@@ -1,12 +1,12 @@
 import { Organization, User } from '@/services/protocol/types';
-import { Nullable } from '@/types/helpers';
+import { PartialDeep } from 'type-fest';
 
 export default function getCreatedBy(
-  user: Nullable<
+  user: PartialDeep<
     Pick<User, 'id' | 'gatewayId' | 'displayName' | 'profilePicture'>
   >,
   organization?:
-    | Nullable<Pick<Organization, 'id' | 'gatewayId' | 'name' | 'image'>>
+    | PartialDeep<Pick<Organization, 'id' | 'gatewayId' | 'name' | 'image'>>
     | null
     | undefined
 ) {
