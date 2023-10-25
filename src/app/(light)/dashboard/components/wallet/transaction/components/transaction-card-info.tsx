@@ -1,22 +1,22 @@
 'use client';
+import TransactionStatusChip from '@/app/(light)/dashboard/components/wallet/transaction/components/transaction-status-chip';
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import ExternalLink from '@/components/external-link/external-link';
-import TransactionStatusChip from '@/app/(light)/dashboard/components/wallet/transaction/components/transaction-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
+import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { transaction } from '@/locale/en/transaction';
 import dayjs from 'dayjs';
 
 import { Stack, Divider, Card, Typography, Button } from '@mui/material';
-import routes from '@/constants/routes';
 
 type Props = {
   id: string;
   title: string;
   date: string;
   type: string;
-  pdaId: string;
+  objectId: string;
 };
 
 export default function TransactionCardInfo({
@@ -24,7 +24,7 @@ export default function TransactionCardInfo({
   id,
   date,
   type,
-  pdaId,
+  objectId,
 }: Props) {
   return (
     <Stack
@@ -46,7 +46,7 @@ export default function TransactionCardInfo({
             <Button
               size="small"
               sx={{ marginTop: -2 }}
-              href={routes.dashboardUserAsset(pdaId)}
+              href={routes.dashboardUserAsset(objectId)}
             >
               {common.actions.view_pda}
             </Button>
@@ -65,7 +65,7 @@ export default function TransactionCardInfo({
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={type}>
-          <TransactionStatusChip status="earning" />
+          <TransactionStatusChip status={type} />
         </CardCell>
       </TableCellContainer>
     </Stack>

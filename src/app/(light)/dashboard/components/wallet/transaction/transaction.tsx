@@ -3,25 +3,24 @@ import TransactionCardTitle from './components/transaction-card-title';
 
 type Props = {
   id: string;
+  metadata: any;
+  type: string;
+  amount: number;
+  object_id: string;
 };
 
-export function Transaction({ id }: Props) {
-  // MOCK - GET TRANSACTION BY ID
-  const title = 'PDA consumption revenue';
-  const date = '2023-10-25T10:58:14Z';
-  const type = 'earning';
-  const value = 0.3;
-  const pdaId = 'asdw23-ascese-32dadcdf';
+export function Transaction({ id, metadata, type, amount, object_id }: Props) {
+  const { name, date } = metadata;
 
   return (
     <>
-      <TransactionCardTitle value={value} />
+      <TransactionCardTitle value={amount} />
       <TransactionCardInfo
-        title={title}
+        title={name}
         id={id}
         date={date}
         type={type}
-        pdaId={pdaId}
+        objectId={object_id}
       />
     </>
   );
