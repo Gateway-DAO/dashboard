@@ -1,0 +1,52 @@
+query explorer_data_models_list($filter: FilterDataModelInput, $skip: Int = 0) {
+  dataModels(filter: $filter, skip: $skip, take: 12) {
+    id
+    title
+    description
+    createdBy {
+      ...min_user
+    }
+    organization {
+      ...org
+    }
+    consumptionPrice
+    pdasIssuedCount
+  }
+}
+
+query explorer_data_model_detail_overview($id: String!) {
+  dataModel(id: $id) {
+    id
+    title
+    description
+    arweaveUrl
+    createdBy {
+      ...min_user
+    }
+    organization {
+      ...org
+    }
+    tags
+    consumptionPrice
+    pdasIssuedCount
+    uniqueIssuersCount
+    schema
+    createdAt
+  }
+}
+
+query explorer_data_model_detail_issuers($id: String!) {
+  dataModel(id: $id) {
+    id
+    title
+    tags
+  }
+}
+
+query explorer_data_model_detail_request_templates($id: String!) {
+  dataModel(id: $id) {
+    id
+    title
+    tags
+  }
+}

@@ -35,6 +35,30 @@ export const explorerDataModels = {
   listTitle: 'All data models',
 };
 
+export const explorerDataModelDetail = {
+  tabs: {
+    issuers: 'Issuers',
+    tied_request_templates: 'Tied Request Templates',
+  },
+};
+
+export const explorerDataModelDetailOverview = {
+  unique_issuers: 'Unique Issuers',
+  pdas_issued: 'PDAs Issued',
+  tied_request_templates: 'Tied Request Templates',
+  revenue_generated: 'Revenue Generated',
+  labels: {
+    signed_by: 'Signed by',
+    creation_date: 'Creation date',
+    last_update: 'Last update',
+    pda_comsumption_cost: 'PDA consumption cost',
+    data_model_id: 'Data model ID',
+  },
+  actions: {
+    copy_claim_structure: 'Copy claim structure',
+  },
+};
+
 export const explorerDataModelCard = {
   consumption: 'per consumption',
   issuances: (count: number) => `issuance${count > 0 ? 's' : ''}`,

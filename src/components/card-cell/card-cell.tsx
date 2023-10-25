@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, StackProps, Typography } from '@mui/material';
 
 type Props = {
   label: string;
@@ -9,21 +9,25 @@ type Props = {
   margin?: boolean;
   px?: number;
   py?: number;
+  pre?: boolean;
   disabled?: boolean;
 };
 
-export default function CardCell({
-  label,
+export function CardCellContainer({
   children,
   alignRight = false,
   margin = true,
   py = 2,
   px = 2,
-  disabled = false,
-}: Props) {
+  ...props
+}: PropsWithChildren<
+  Omit<StackProps, 'margin'> &
+    Pick<Props, 'margin' | 'px' | 'py' | 'alignRight'>
+>) {
   return (
     <Stack
       gap={margin ? 1 : 0}
+      {...props}
       sx={{
         px,
         py,
@@ -31,19 +35,37 @@ export default function CardCell({
         textAlign: { xs: 'left', md: alignRight ? 'right' : 'left' },
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
+        ...props.sx,
       }}
     >
+      {children}
+    </Stack>
+  );
+}
+
+export default function CardCell({
+  label,
+  children,
+  alignRight,
+  margin,
+  py,
+  px,
+  disabled = false,
+  pre = true,
+}: Props) {
+  return (
+    <CardCellContainer alignRight={alignRight} margin={margin} py={py} px={px}>
       <Typography variant="caption" color="text.secondary">
         {label}
       </Typography>
       <Box
         sx={{
-          whiteSpace: 'pre',
+          whiteSpace: pre ? 'pre' : undefined,
           color: disabled ? 'text.disabled' : 'text.primary',
         }}
       >
         {children}
       </Box>
-    </Stack>
+    </CardCellContainer>
   );
 }

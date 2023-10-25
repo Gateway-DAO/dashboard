@@ -7,6 +7,7 @@ export const common = {
     issued: 'Issued',
     status: 'Status',
     created_at: 'Created at',
+    created_by: 'Created by',
     updated_at: 'Updated at',
     sent: 'Sent',
     wallet: 'Wallet',
@@ -20,6 +21,7 @@ export const common = {
     alert_important: 'This is extremely important',
     success: 'Success',
     developers: 'Developers',
+    overview: 'Overview',
   },
   chain: {
     EVM: 'Ethereum',
