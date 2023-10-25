@@ -1,4 +1,3 @@
-import { DOCS_BASE_URL } from '@/constants/docs';
 import documentationRoutes from '@/constants/documentationRoutes';
 import routes from '@/constants/routes';
 

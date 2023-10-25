@@ -7,8 +7,8 @@ import {
   defaultGridConfiguration,
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
-import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
+import { TextStatusChip } from '@/components/text-status-chip/text-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
@@ -101,7 +101,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
       flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
-          <PDAStatusChip
+          <TextStatusChip
             status={params.row.status ?? PdaStatus.Valid}
             size="small"
             variant="outlined"
