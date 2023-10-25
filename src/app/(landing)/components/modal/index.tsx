@@ -20,6 +20,7 @@ export default function Modal({
   active,
   setActive,
 }: Props) {
+  // eslint-disable-next-line testing-library/render-result-naming-convention
   const isFirstRender = useIsFirstRender();
   const modalRef = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
