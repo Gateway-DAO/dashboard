@@ -1,15 +1,27 @@
 import TransactionCardInfo from './components/transaction-card-info';
 import TransactionCardTitle from './components/transaction-card-title';
 
-export function Transaction() {
+type Props = {
+  id: string;
+};
+
+export function Transaction({ id }: Props) {
+  // MOCK - GET TRANSACTION BY ID
+  const title = 'PDA consumption revenue';
+  const date = '2023-10-25T10:58:14Z';
+  const type = 'earning';
+  const value = 0.3;
+  const pdaId = 'asdw23-ascese-32dadcdf';
+
   return (
     <>
-      <TransactionCardTitle value={0.3} />
+      <TransactionCardTitle value={value} />
       <TransactionCardInfo
-        title="PDA consumption revenue"
-        id="hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVs"
-        date="2023-10-25T10:58:14Z"
-        type="earning"
+        title={title}
+        id={id}
+        date={date}
+        type={type}
+        pdaId={pdaId}
       />
     </>
   );

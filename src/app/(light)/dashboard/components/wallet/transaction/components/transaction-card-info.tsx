@@ -9,15 +9,23 @@ import { transaction } from '@/locale/en/transaction';
 import dayjs from 'dayjs';
 
 import { Stack, Divider, Card, Typography, Button } from '@mui/material';
+import routes from '@/constants/routes';
 
 type Props = {
   id: string;
   title: string;
   date: string;
   type: string;
+  pdaId: string;
 };
 
-export default function TransactionCardInfo({ title, id, date, type }: Props) {
+export default function TransactionCardInfo({
+  title,
+  id,
+  date,
+  type,
+  pdaId,
+}: Props) {
   return (
     <Stack
       component={Card}
@@ -35,7 +43,11 @@ export default function TransactionCardInfo({ title, id, date, type }: Props) {
             alignItems="flex-start"
           >
             <Typography>{title}</Typography>
-            <Button size="small" sx={{ marginTop: -2 }}>
+            <Button
+              size="small"
+              sx={{ marginTop: -2 }}
+              href={routes.dashboardUserAsset(pdaId)}
+            >
               {common.actions.view_pda}
             </Button>
           </Stack>

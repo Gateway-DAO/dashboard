@@ -30,7 +30,7 @@ export function TransactionModal() {
       <ModalRight open={openTransaction} onClose={toggleModal}>
         <ModalHeader onClose={toggleModal} />
         <Stack sx={{ pt: 3 }}>
-          <Transaction />
+          <Transaction id="hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVs" />
         </Stack>
       </ModalRight>
     </>
