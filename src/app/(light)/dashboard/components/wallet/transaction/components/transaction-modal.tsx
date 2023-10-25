@@ -17,7 +17,7 @@ export function TransactionModal() {
 
   const toggleModal = () => {
     if (openTransaction) {
-      router.push(routes.dashboardUserHome, { scroll: false });
+      router.push(routes.dashboardUserWallet, { scroll: false });
     } else {
       router.push('#transaction', { scroll: false });
     }
