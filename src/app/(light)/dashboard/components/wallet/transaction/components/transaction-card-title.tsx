@@ -4,9 +4,11 @@ import { transaction } from '@/locale/en/transaction';
 
 import { Stack, Typography, alpha } from '@mui/material';
 
-export default function TransactionCardTitle() {
-  const value = 0.3;
+type Props = {
+  value: number;
+};
 
+export default function TransactionCardTitle({ value }: Props) {
   return (
     <Stack
       sx={{

@@ -10,13 +10,14 @@ import dayjs from 'dayjs';
 
 import { Stack, Divider, Card, Typography, Button } from '@mui/material';
 
-export default function TransactionCardInfo() {
-  const data = {
-    title: 'PDA consumption revenue',
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVs',
-    date: '2023-10-25T10:58:14Z',
-    type: 'earning',
-  };
+type Props = {
+  id: string;
+  title: string;
+  date: string;
+  type: string;
+};
+
+export default function TransactionCardInfo({ title, id, date, type }: Props) {
   return (
     <Stack
       component={Card}
@@ -33,7 +34,7 @@ export default function TransactionCardInfo() {
             justifyContent="space-between"
             alignItems="flex-start"
           >
-            <Typography>{data.title}</Typography>
+            <Typography>{title}</Typography>
             <Button size="small" sx={{ marginTop: -2 }}>
               {common.actions.view_pda}
             </Button>
@@ -42,16 +43,16 @@ export default function TransactionCardInfo() {
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={transaction.detail_modal.transaction_id}>
-          <ExternalLink href="#" text={data.id} size="big" id={data.id} />
+          <ExternalLink href="#" text={id} size="big" id={id} />
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={transaction.detail_modal.date}>
-          {data.date ? dayjs(data.date).format(DATE_FORMAT) : ''}
+          {date ? dayjs(date).format(DATE_FORMAT) : ''}
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
-        <CardCell label={transaction.detail_modal.type}>
+        <CardCell label={type}>
           <TransactionStatusChip status="earning" />
         </CardCell>
       </TableCellContainer>
