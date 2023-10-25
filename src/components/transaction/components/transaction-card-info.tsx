@@ -8,8 +8,7 @@ import { common } from '@/locale/en/common';
 import { transaction } from '@/locale/en/transaction';
 import dayjs from 'dayjs';
 
-import { FileDownloadOutlined } from '@mui/icons-material';
-import { Stack, Divider, Card, Typography, Button, Chip } from '@mui/material';
+import { Stack, Divider, Card, Typography, Button } from '@mui/material';
 
 export default function TransactionCardInfo() {
   const data = {
