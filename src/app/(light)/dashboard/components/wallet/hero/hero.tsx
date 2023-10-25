@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { sandboxWalletAlert } from '@/locale/en/alert-messages';
+import { wallet } from '@/locale/en/wallet';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { currentEnv } from '@/utils/env';
 import { useToggle } from '@react-hookz/web';
@@ -11,7 +13,11 @@ import { Alert, AlertTitle, Button, Stack, Typography } from '@mui/material';
 import WalletBalance from './wallet-balance';
 import WalletStatement from './wallet-statement';
 
-export default function WalletHero(): JSX.Element {
+type Props = {
+  balance: string;
+};
+
+export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
   const [valueVisible, setVisible] = useToggle(true);
   const [showAlert, toggleAlert] = useState(false);
   const storageKey = 'testnet-wallet-disclaimer';
@@ -61,15 +67,15 @@ export default function WalletHero(): JSX.Element {
           }
         >
           <AlertTitle sx={{ marginBottom: 0 }}>
-            Be aware the money on Sandbox is fake and worthless
+            {sandboxWalletAlert.title}
           </AlertTitle>
         </Alert>
       )}
-      <Typography variant="h3">Wallet</Typography>
+      <Typography variant="h3">{wallet.page.title}</Typography>
       <WalletBalance
         setVisible={setVisible}
         valueVisible={valueVisible}
-        value="$455.34"
+        value={balance}
       />
       <WalletStatement showValues={valueVisible} />
     </Stack>

@@ -1,6 +1,7 @@
 'use client';
 
 import { common } from '@/locale/en/common';
+import { wallet } from '@/locale/en/wallet';
 import { useToggle } from '@react-hookz/web';
 
 import {
@@ -50,7 +51,7 @@ const WalletStatementList = ({
         <Typography variant="caption" color="text.secondary">
           {title}
         </Typography>
-        <Typography variant="h5">
+        <Typography variant="h5" data-testid="list__total-value">
           {showValues ? (
             <>{value}</>
           ) : (
@@ -59,11 +60,14 @@ const WalletStatementList = ({
         </Typography>
       </Box>
       <Collapse in={showDetails && !!list?.length}>
-        <Stack divider={<Divider />} mx={-2}>
+        <Stack data-testid="list__details-items" divider={<Divider />} mx={-2}>
           {list?.map(({ name, value }) => (
             <Box key={name} display="flex" justifyContent="space-between" p={2}>
               <Typography variant="body2">{name}</Typography>
-              <Typography variant="subtitle2">
+              <Typography
+                variant="subtitle2"
+                data-testid="list__register-value"
+              >
                 {showValues ? (
                   <>{value}</>
                 ) : (
@@ -105,14 +109,14 @@ export default function WalletStatement({ showValues }: Props) {
           showDetails={showDetails}
           showValues={showValues}
           value="$234.54"
-          title="Money in"
+          title={wallet.page.money_in}
           list={mockMoneyIn}
         />
         <WalletStatementList
           showDetails={showDetails}
           showValues={showValues}
           value="$0.0"
-          title="Money out"
+          title={wallet.page.money_out}
         />
       </Box>
       <Stack mt={2} gap={2}>

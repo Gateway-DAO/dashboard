@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import WalletBalance from './wallet-balance';
+import WalletBalance from '../wallet-balance';
 
 describe('Wallet balance on hero', () => {
   test('renders the component', () => {
