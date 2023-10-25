@@ -1,57 +1,48 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import WalletBalance from './wallet-balance';
 
 describe('Wallet balance on hero', () => {
   test('renders the component', () => {
-    render(<WalletBalance />);
+    render(<WalletBalance valueVisible={true} setVisible={undefined} />);
 
     const walletComponent = screen.getByTestId('hero__wallet-balance');
     expect(walletComponent).toBeInTheDocument();
   });
   test('Check empty balance', () => {
-    render(<WalletBalance />);
+    render(<WalletBalance valueVisible={true} setVisible={undefined} />);
     const balanceText = screen.getByTestId('wallet-balance__balance');
     expect(balanceText).toBeInTheDocument();
     const value = balanceText.textContent;
     expect(value).toEqual('$0');
   });
   test('Check pass a balance value', () => {
-    render(<WalletBalance value="$425.50" />);
+    render(
+      <WalletBalance
+        value="$425.50"
+        valueVisible={true}
+        setVisible={undefined}
+      />
+    );
 
     const balanceText = screen.getByTestId('wallet-balance__balance');
     expect(balanceText).toBeInTheDocument();
     const value = balanceText.textContent;
     expect(value).toEqual('$425.50');
   });
-  test('Hide value on click', async () => {
-    render(<WalletBalance value="$3227.25" />);
-    const button = screen.getByRole('button');
-    expect(button).toBeInTheDocument();
+  test('Hide value with false prop', async () => {
+    render(
+      <WalletBalance
+        value="$3227.25"
+        valueVisible={false}
+        setVisible={undefined}
+      />
+    );
 
-    await userEvent.click(button);
-
-    const balanceText = screen.getByTestId('wallet-balance__balance');
+    const balanceText = await screen.findByTestId('wallet-balance__balance');
     expect(balanceText).toBeInTheDocument();
     const value = balanceText.textContent;
     expect(value).toEqual('');
-  });
-
-  test('Display value after hide', async () => {
-    render(<WalletBalance value="$3227.25" />);
-    const button = screen.getByRole('button');
-    expect(button).toBeInTheDocument();
-
-    await userEvent.click(button);
-
-    const balanceText = screen.getByTestId('wallet-balance__balance');
-    expect(balanceText).toBeInTheDocument();
-    const value = balanceText.textContent;
-    expect(value).toEqual('');
-
-    await userEvent.click(button);
-    const valueAfter = balanceText.textContent;
-    expect(valueAfter).toEqual('$3227.25');
   });
 });
