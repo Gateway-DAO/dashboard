@@ -74,4 +74,5 @@ describe('Wallet page hero', () => {
     expect(listsTotalValues[0]).toHaveTextContent('$234.54');
     expect(listsTotalValues[1]).toHaveTextContent('$0.0');
   });
+  test.todo('Empty states');
 });
