@@ -3,9 +3,14 @@ import { explorerDataModels } from '@/locale/en/datamodel';
 import { Box, Container, Typography } from '@mui/material';
 
 import DataModelExplorerCard from '../../components/data-model-card';
-import FeaturedCardsContainer from './cards-container';
+import { PartialDeep } from 'type-fest';
+import { DataModel } from '@/services/protocol/types';
 
-export default function DataModelsExplorerFeatured() {
+type Props = {
+  dataModels: PartialDeep<DataModel>[];
+};
+
+export default function DataModelsExplorerFeatured({ dataModels }: Props) {
   return (
     <Container
       sx={{
@@ -31,25 +36,11 @@ export default function DataModelsExplorerFeatured() {
             lg: 'repeat(4, 1fr)',
           },
         }}
-      ></Box>
-      <FeaturedCardsContainer>
-        {[1, 2, 3, 4].map((_, index) => (
-          <Box
-            key={index}
-            sx={
-              index !== 0
-                ? {
-                    pl: 2,
-                  }
-                : {
-                    width: 'calc(100% - 16px)',
-                  }
-            }
-          >
-            <DataModelExplorerCard />
-          </Box>
+      >
+        {dataModels.map((dataModel) => (
+          <DataModelExplorerCard dataModel={dataModel} key={dataModel.id} />
         ))}
-      </FeaturedCardsContainer>
+      </Box>
     </Container>
   );
 }

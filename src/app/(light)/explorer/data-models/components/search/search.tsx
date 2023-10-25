@@ -7,7 +7,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
-import DataModelExplorerCard from '../../components/data-model-card';
+import DataModelExplorerCard from '../../../components/data-model-card';
 import DataModelsExplorerSearchFilters from './filters';
 
 export default function DataModelsExplorerSearch() {

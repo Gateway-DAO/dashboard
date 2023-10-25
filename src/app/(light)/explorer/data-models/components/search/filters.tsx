@@ -17,6 +17,7 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
+import { explorerDataModels } from '@/locale/en/datamodel';
 
 export default function DataModelsExplorerSearchFilters() {
   const [isVisible, toggleVisible] = useToggle(false);
@@ -74,7 +75,9 @@ export default function DataModelsExplorerSearchFilters() {
               },
             }}
           >
-            <InputLabel id="tags-label">Tags</InputLabel>
+            <InputLabel id="tags-label">
+              {explorerDataModels.filters.tags}
+            </InputLabel>
             <Select labelId="tags-label" id="tags" label="Tags">
               <MenuItem value={10}>Ten</MenuItem>
               <MenuItem value={20}>Twenty</MenuItem>
@@ -91,7 +94,7 @@ export default function DataModelsExplorerSearchFilters() {
             }}
           >
             <InputLabel id="comsumption-price-label">
-              Comsumption price
+              {explorerDataModels.filters.comsumption_price}
             </InputLabel>
             <Select
               labelId="comsumption-price-label"
@@ -113,7 +116,7 @@ export default function DataModelsExplorerSearchFilters() {
             }}
           >
             <InputLabel id="amount-of-issuances-label">
-              Amount of issuances
+              {explorerDataModels.filters.amount_of_issuances}
             </InputLabel>
             <Select
               labelId="amount-of-issuances-label"
@@ -138,7 +141,9 @@ export default function DataModelsExplorerSearchFilters() {
               },
             }}
           >
-            <InputLabel id="sorting-label">Sort by</InputLabel>
+            <InputLabel id="sorting-label">
+              {explorerDataModels.filters.sort_by}
+            </InputLabel>
             <Select labelId="sorting-label" id="sorting" label="Tags">
               <MenuItem value={10}>Newest</MenuItem>
               <MenuItem value={20}>Oldest</MenuItem>

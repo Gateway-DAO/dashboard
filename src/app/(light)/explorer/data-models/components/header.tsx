@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import InfoCard from '../components/info-card/info-card';
+import InfoCard from '../../components/info-card/info-card';
 
 export default function DataModelsExplorerHeader() {
   return (

@@ -1,3 +1,19 @@
+query explorer_data_models_featured {
+  dataModels(take: 4) {
+    id
+    title
+    description
+    createdBy {
+      ...min_user
+    }
+    organization {
+      ...org
+    }
+    consumptionPrice
+    pdasIssuedCount
+  }
+}
+
 query explorer_data_models_list($filter: FilterDataModelInput, $skip: Int = 0) {
   dataModels(filter: $filter, skip: $skip, take: 12) {
     id

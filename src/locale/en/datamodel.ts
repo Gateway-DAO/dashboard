@@ -33,6 +33,12 @@ export const explorerDataModels = {
   empty: 'No data models yet',
   featureTitle: 'Feature',
   listTitle: 'All data models',
+  filters: {
+    tags: 'Tags',
+    comsumption_price: 'Comsumption price',
+    amount_of_issuances: 'Amount of issuances',
+    sort_by: 'Sort by',
+  },
 };
 
 export const explorerDataModelDetail = {

@@ -1,9 +1,9 @@
 import { Divider } from '@mui/material';
 
 import ExplorerHeader from '../components/header/header';
-import DataModelsExplorerFeatured from './featured/featured';
-import DataModelsExplorerHeader from './header';
-import DataModelsExplorerSearch from './search/search';
+import DataModelsExplorerFeatured from './components/featured';
+import DataModelsExplorerHeader from './components/header';
+import DataModelsExplorerSearch from './components/search/search';
 
 export default function DataModelsExplorerPage() {
   return (

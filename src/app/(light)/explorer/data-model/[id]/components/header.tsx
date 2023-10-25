@@ -10,6 +10,10 @@ import { Stack } from '@mui/system';
 
 import ExplorerBreadcrumb from '../../../components/breadcrumb/breadcrumb';
 import ExplorerHeader from '../../../components/header/header';
+import {
+  explorerDataModels,
+  explorerDataModelDetail,
+} from '@/locale/en/datamodel';
 
 type Props = {
   dataModel: PartialDeep<DataModel>;
@@ -24,7 +28,7 @@ export default function DataModelDetailHeader({ dataModel }: Props) {
             paths={[
               {
                 route: routes.explorerDataModels,
-                label: 'Data models',
+                label: explorerDataModels.title,
               },
               {
                 label: dataModel.title!,
@@ -56,11 +60,11 @@ export default function DataModelDetailHeader({ dataModel }: Props) {
             href={routes.explorerDataModel(dataModel.id)}
           />
           <GTWTab
-            label={common.general.issued}
+            label={explorerDataModelDetail.tabs.issuers}
             href={routes.explorerDataModelIssuers(dataModel.id)}
           />
           <GTWTab
-            label={common.general.received}
+            label={explorerDataModelDetail.tabs.tied_request_templates}
             href={routes.explorerDataModelRequestTemplates(dataModel.id)}
           />
         </GTWTabs>
