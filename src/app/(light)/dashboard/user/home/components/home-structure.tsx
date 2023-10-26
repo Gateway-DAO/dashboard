@@ -82,8 +82,6 @@ export default function HomeStructure({ username }: Props) {
               mr: 3,
               marginTop: 2,
               textDecoration: 'none',
-              border: 1,
-              borderColor: 'red',
             }}
           >
             <Stack flexDirection={'column'} justifyContent={'space-between'}>
