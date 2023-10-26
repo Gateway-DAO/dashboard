@@ -1,10 +1,10 @@
 export const transaction = {
-  detail_modal: {
-    total_amount: 'Total amount',
-    detail: 'Detail',
-    transaction_id: 'Transaction ID',
-    date: 'Date',
-    type: 'Type',
-    earning: 'Earning',
-  },
+  title: 'Transactions',
+  total_amount: 'Total amount',
+  amount: 'Amount',
+  detail: 'Detail',
+  transaction_id: 'Transaction ID',
+  date: 'Date',
+  type: 'Type',
+  earning: 'Earning',
 };

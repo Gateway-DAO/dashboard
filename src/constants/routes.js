@@ -49,6 +49,8 @@ const routes = {
     `/dashboard/org/${organizationId}/playground`,
   dashboardUserPlayground: '/dashboard/user/playground',
   dashboardUserWallet: '/dashboard/user/wallet',
+  dashboardOrgWallet: (organizationId) =>
+    `/dashboard/org/${organizationId}/wallet`,
   explorer: '/explorer',
   explorerDataModels: '/explorer/data-models',
   explorerDataModel: (dataModelId) => `/explorer/data-model/${dataModelId}`,

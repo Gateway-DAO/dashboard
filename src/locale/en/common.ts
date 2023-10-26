@@ -62,6 +62,7 @@ export const common = {
     code_send_again: 'Send code again',
     load_more: 'Load more',
     view_pda: 'View PDA',
+    view_proof: 'View Proof',
   },
   socials: {
     twitter: 'Twitter',

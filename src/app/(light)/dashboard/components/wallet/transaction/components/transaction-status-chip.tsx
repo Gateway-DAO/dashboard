@@ -4,7 +4,7 @@ import { FileDownloadOutlined, FileUploadOutlined } from '@mui/icons-material';
 import { Chip, ChipProps } from '@mui/material';
 
 type Props = {
-  status: 'earning' | 'expense';
+  status: 'EARNING' | 'EXPENSE' | 'DEPOSIT' | 'WITHDRAWAL';
   variant?: 'filled' | 'outlined';
 } & Omit<ChipProps, 'label' | 'color' | 'icon'>;
 
@@ -19,7 +19,7 @@ export default function TransactionStatusChip({
     icon: <FileDownloadOutlined />,
     ...chipProps,
   };
-  if (status === 'expense') {
+  if (status === 'EXPENSE' || status === 'WITHDRAWAL') {
     props.color = 'error';
     props.icon = <FileUploadOutlined />;
   }
