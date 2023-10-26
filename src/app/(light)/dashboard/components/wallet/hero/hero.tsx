@@ -23,8 +23,11 @@ export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
   const storageKey = 'testnet-wallet-disclaimer';
   const testnet = currentEnv() === 'testnet' || 'development';
 
-  const hasSeenTestnetDisclaimer: string | null =
-    localStorage.getItem(storageKey) || null;
+  let hasSeenTestnetDisclaimer: string | null;
+
+  useEffect(() => {
+    hasSeenTestnetDisclaimer = localStorage.getItem(storageKey) || null;
+  }, []);
 
   useEffect(() => {
     if (!hasSeenTestnetDisclaimer || hasSeenTestnetDisclaimer !== 'closed') {
