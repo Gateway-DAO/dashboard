@@ -18,6 +18,7 @@ export const defaultGridConfiguration: Partial<DataGridProps> = {
 export const defaultGridCustomization: GatewaySxProps = {
   mx: NEGATIVE_CONTAINER_PX,
   border: 'none',
+  mb: 4,
   borderRadius: 0,
   '& .MuiDataGrid-cell:focus': {
     outline: 'none',
