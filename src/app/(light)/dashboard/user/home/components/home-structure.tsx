@@ -1,13 +1,13 @@
 'use client';
-import Link from 'next/link';
 
-import BannerIcon from '@/components/icons/banner';
 import PDABannerIcon from '@/components/icons/pda-banner';
-import PlaygroundIcon from '@/components/icons/playground';
 import { home } from '@/locale/en/home';
 
 import { Box } from '@mui/material';
-import { Button, Paper, Stack, Typography } from '@mui/material';
+import { Button, Paper, Stack, Typography, Link } from '@mui/material';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import GatewayDarkBanner from '@/components/icons/gateway-dark-banner';
+import HomeOrganizationIcon from '@/components/icons/home-organization';
 
 type Props = {
   username: string;
@@ -25,37 +25,45 @@ export default function HomeStructure({ username }: Props) {
         flexDirection="column"
         justifyContent="space-between"
         width="100%"
-        height="40%"
+        height="25%"
         padding={2}
-        bgcolor="primary.main"
+        bgcolor="#771AC91F"
         borderRadius={1}
-        href={home.main_banner.link}
-        target="_blank"
         sx={{ textDecoration: 'none' }}
       >
-        <BannerIcon
+        <GatewayDarkBanner
           sx={{
-            width: 246,
-            height: 106,
+            width: 50,
+            height: 54,
             justifySelf: 'flex-start',
           }}
         />
-        <Stack justifySelf="flex-end">
-          <Typography variant="h4" color="common.white" gutterBottom>
-            {home.main_banner.title}
-          </Typography>
-          <Typography variant="body2" color="common.white" gutterBottom>
-            {home.main_banner.subtitle}
-          </Typography>
+        <Stack
+          justifyContent="space-between"
+          sx={{ flexDirection: { xs: 'column', md: 'row' } }}
+        >
           <div>
+            <Typography variant="h5" color="common.dark" gutterBottom>
+              {home.main_banner.title}
+            </Typography>
+            <Typography variant="body2" color="common.dark" gutterBottom>
+              {home.main_banner.subtitle}
+            </Typography>
+          </div>
+          <Link href={home.main_banner.link} target="_blank">
             <Button
-              variant="text"
-              size="large"
-              sx={{ color: 'common.white', paddingX: 0, borderRadius: 0 }}
+              variant="outlined"
+              size="medium"
+              sx={{
+                color: 'common.dark',
+                paddingX: 1,
+                marginTop: { xs: 1, md: 3 },
+              }}
             >
               {home.main_banner.btn_text}
+              <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
             </Button>
-          </div>
+          </Link>
         </Stack>
       </Box>
       <Box
@@ -65,60 +73,50 @@ export default function HomeStructure({ username }: Props) {
           flexDirection: { xs: 'column', md: 'row' },
         }}
       >
-        <Paper
-          component={Link}
-          href={home.sub_banner[0].link}
-          target="_blank"
-          variant="outlined"
-          sx={{
-            padding: 1.5,
-            width: '100%',
-            mr: 3,
-            marginTop: 2,
-            textDecoration: 'none',
-          }}
-        >
-          <PDABannerIcon sx={{ width: 115.82, height: 72 }} />
-          <Typography mt={2} variant="h5" width={222} gutterBottom>
-            {home.sub_banner[0].title}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {home.sub_banner[0].subtitle}
-          </Typography>
-          <Button
-            variant="text"
-            size="large"
-            sx={{ paddingX: 0, borderRadius: 0, marginTop: 1 }}
+        {home.sub_banner.map((details) => (
+          <Paper
+            variant="outlined"
+            sx={{
+              padding: 1.5,
+              width: '342',
+              mr: 3,
+              marginTop: 2,
+              textDecoration: 'none',
+            }}
           >
-            {home.sub_banner[0].btn_text}
-          </Button>
-        </Paper>
-        <Paper
-          component={Link}
-          href={home.sub_banner[1].link}
-          variant="outlined"
-          sx={{
-            padding: 1.5,
-            width: '100%',
-            marginTop: 2,
-            textDecoration: 'none',
-          }}
-        >
-          <PlaygroundIcon sx={{ width: 84, height: 72 }} />
-          <Typography mt={2} variant="h5" width={222} gutterBottom>
-            {home.sub_banner[1].title}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {home.sub_banner[1].subtitle}
-          </Typography>
-          <Button
-            variant="text"
-            size="large"
-            sx={{ paddingX: 0, borderRadius: 0, marginTop: 1 }}
-          >
-            {home.sub_banner[1].btn_text}
-          </Button>
-        </Paper>
+            <Stack flexDirection={'column'} justifyContent={'space-between'}>
+              <HomeOrganizationIcon sx={{ width: 48, height: 48, mb: 2 }} />
+              <div>
+                <Typography mt={10} variant="body2" gutterBottom>
+                  {details.heading}
+                </Typography>
+                <Typography mt={2} variant="h5" width={222} gutterBottom>
+                  {details.title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  width={300}
+                  gutterBottom
+                  sx={{ mb: 2 }}
+                >
+                  {details.subtitle}
+                </Typography>
+                <Link href={details.link} target={details.target}>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    sx={{ paddingX: 1, marginTop: 1 }}
+                  >
+                    {details.btn_text}
+                    {details.target === '_blank' && (
+                      <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
+                    )}
+                  </Button>
+                </Link>
+              </div>
+            </Stack>
+          </Paper>
+        ))}
       </Box>
     </>
   );

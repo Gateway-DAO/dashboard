@@ -78,6 +78,7 @@ export default function BuildPage() {
           },
         }}
         href={`${DOCS_BASE_URL}docs/issuers-1`}
+        id="become-issuer"
       />
 
       <TemplateLearnSection
@@ -120,6 +121,7 @@ export default function BuildPage() {
           },
         }}
         href={`${DOCS_BASE_URL}docs/owners`}
+        id="the-owners"
       />
 
       <TemplateLearnSection
@@ -171,6 +173,7 @@ export default function BuildPage() {
         }}
         firstColumnLarger
         href={`${DOCS_BASE_URL}docs/verifiers`}
+        id="request-user-data"
       />
       <OurProtocol />
       <OurProducts />
