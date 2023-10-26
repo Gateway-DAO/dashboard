@@ -48,6 +48,14 @@ const routes = {
   dashboardOrgPlayground: (organizationId) =>
     `/dashboard/org/${organizationId}/playground`,
   dashboardUserPlayground: '/dashboard/user/playground',
+  dashboardUserWallet: '/dashboard/user/wallet',
+  explorer: '/explorer',
+  explorerDataModels: '/explorer/data-models',
+  explorerDataModel: (dataModelId) => `/explorer/data-model/${dataModelId}`,
+  explorerDataModelIssuers: (dataModelId) =>
+    `/explorer/data-model/${dataModelId}/issuers`,
+  explorerDataModelRequestTemplates: (dataModelId) =>
+    `/explorer/data-model/${dataModelId}/request-templates`,
 };
 
 module.exports = routes;

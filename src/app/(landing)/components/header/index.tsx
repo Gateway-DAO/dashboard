@@ -29,6 +29,7 @@ export default function Header() {
     'top'
   );
   const previousVariant = useRef<'light' | 'dark' | null>(null);
+  // eslint-disable-next-line testing-library/render-result-naming-convention
   const isFirstRender = useIsFirstRender();
   const isLearnPage = path === routes.learn;
 
