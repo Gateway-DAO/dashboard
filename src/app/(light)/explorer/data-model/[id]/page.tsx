@@ -52,7 +52,7 @@ export default async function DataModelPage({
       <DataModelDetailHeader dataModel={dataModel} />
       <Container sx={{ pb: 4 }}>
         <Box sx={{ maxWidth: 896 }}>
-          <Typography color="text.secondary">
+          <Typography color="text.secondary" whiteSpace="pre-wrap">
             {dataModel.description}
           </Typography>
           <Stack
