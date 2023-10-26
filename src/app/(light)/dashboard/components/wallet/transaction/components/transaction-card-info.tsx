@@ -1,10 +1,13 @@
 'use client';
+import { useMemo } from 'react';
+
 import TransactionStatusChip from '@/app/(light)/dashboard/components/wallet/transaction/components/transaction-status-chip';
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import ExternalLink from '@/components/external-link/external-link';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
+import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { transaction } from '@/locale/en/transaction';
 import dayjs from 'dayjs';
@@ -16,6 +19,7 @@ type Props = {
   title: string;
   date: string;
   type: string;
+  action: string;
   objectId: string;
 };
 
@@ -24,8 +28,33 @@ export default function TransactionCardInfo({
   id,
   date,
   type,
+  action,
   objectId,
 }: Props) {
+  const { organization } = useOrganization();
+
+  const dynamicRoute = useMemo(() => {
+    if (action === 'CREATE_PROOF') {
+      const obj = {
+        text: common.actions.view_proof,
+        url: '',
+      };
+      obj.url = !!organization
+        ? routes.dashboardOrgProof(organization.gatewayId, objectId)
+        : routes.dashboardUserProof(objectId);
+      return obj;
+    }
+    if (action === 'CREATE_PDA') {
+      const obj = {
+        text: common.actions.view_pda,
+        url: '',
+      };
+      obj.url = !!organization
+        ? routes.dashboardOrgAsset(organization.gatewayId, objectId)
+        : routes.dashboardUserAsset(objectId);
+      return obj;
+    }
+  }, [action]);
   return (
     <Stack
       component={Card}
@@ -46,9 +75,9 @@ export default function TransactionCardInfo({
             <Button
               size="small"
               sx={{ marginTop: -2 }}
-              href={routes.dashboardUserAsset(objectId)}
+              href={dynamicRoute?.url}
             >
-              {common.actions.view_pda}
+              {dynamicRoute?.text}
             </Button>
           </Stack>
         </CardCell>
@@ -64,7 +93,7 @@ export default function TransactionCardInfo({
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
-        <CardCell label={type}>
+        <CardCell label="Type">
           <TransactionStatusChip status={type} />
         </CardCell>
       </TableCellContainer>

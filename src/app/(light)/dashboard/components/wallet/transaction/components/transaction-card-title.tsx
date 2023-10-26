@@ -1,14 +1,24 @@
 'use client';
 
+import { useMemo } from 'react';
+
 import { transaction } from '@/locale/en/transaction';
+import { numberToMoneyString } from '@/utils/money';
 
 import { Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
   value: number;
+  type: string;
 };
 
-export default function TransactionCardTitle({ value }: Props) {
+export default function TransactionCardTitle({ value, type }: Props) {
+  const bgColor = useMemo(() => {
+    if (type === 'EXPENSE' || type === 'WITHDRAWAL') {
+      return 'error';
+    }
+    return 'success';
+  }, [type]);
   return (
     <Stack
       sx={{
@@ -16,7 +26,7 @@ export default function TransactionCardTitle({ value }: Props) {
         mb: 3,
         px: 2,
         py: 2,
-        backgroundColor: (theme) => alpha(theme.palette.success.light, 0.4),
+        backgroundColor: (theme) => alpha(theme.palette[bgColor].light, 0.4),
       }}
       direction="row"
       alignItems="flex-start"
@@ -27,13 +37,7 @@ export default function TransactionCardTitle({ value }: Props) {
         {transaction.detail_modal.total_amount}
       </Typography>
       <Typography variant="h3" id="total-amount-value">
-        {value
-          ? value.toLocaleString('en-US', {
-              style: 'currency',
-              currency: 'USD',
-              currencyDisplay: 'symbol',
-            })
-          : '$0.00'}
+        {numberToMoneyString(value)}
       </Typography>
     </Stack>
   );

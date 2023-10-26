@@ -7,17 +7,28 @@ type Props = {
   type: string;
   amount: number;
   object_id: string;
+  date: string;
+  action: string;
 };
 
-export function Transaction({ id, metadata, type, amount, object_id }: Props) {
-  const { name, date } = metadata;
+export function Transaction({
+  id,
+  metadata,
+  type,
+  action,
+  amount,
+  object_id,
+  date,
+}: Props) {
+  const { name } = metadata;
 
   return (
     <>
-      <TransactionCardTitle value={amount} />
+      <TransactionCardTitle value={amount} type={type} />
       <TransactionCardInfo
         title={name}
         id={id}
+        action={action}
         date={date}
         type={type}
         objectId={object_id}

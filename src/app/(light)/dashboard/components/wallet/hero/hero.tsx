@@ -34,6 +34,7 @@ export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
   return (
     <Stack
       bgcolor="primary.light"
+      width="100%"
       sx={{
         px: CONTAINER_PX,
         pt: {

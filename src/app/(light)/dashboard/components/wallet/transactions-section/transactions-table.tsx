@@ -38,7 +38,7 @@ const columns: GridColDef<any>[] = [
     field: 'metadata',
     headerName: 'Detail',
     flex: 1,
-    valueGetter: (params) => params.value.name,
+    valueFormatter: (params) => params.value.name,
   },
   {
     field: 'id',
@@ -46,11 +46,11 @@ const columns: GridColDef<any>[] = [
     headerName: 'Transaction ID',
   },
   {
-    field: 'metadata',
+    field: 'date',
     headerName: 'Date',
     flex: 1,
     valueFormatter: (params) =>
-      params.value.date ? dayjs(params.value.date).format(DATE_FORMAT) : '',
+      params.value ? dayjs(params.value).format(DATE_FORMAT) : '',
   },
   {
     field: 'type',

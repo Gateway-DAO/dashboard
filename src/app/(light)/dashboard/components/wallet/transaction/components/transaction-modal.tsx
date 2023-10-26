@@ -19,8 +19,6 @@ type Props = {
 export function TransactionModal({ open, onClose, transactionDetail }: Props) {
   const router = useRouter();
 
-  console.log(transactionDetail);
-
   useMemo(() => {
     if (open) {
       router.push(routes.dashboardUserWallet, { scroll: false });
