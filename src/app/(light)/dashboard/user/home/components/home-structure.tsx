@@ -28,6 +28,8 @@ export default function HomeStructure({ username }: Props) {
         padding={2}
         bgcolor="#771AC91F"
         borderRadius={1}
+        href={home.main_banner.link}
+        target="_blank"
         sx={{ textDecoration: 'none' }}
       >
         <GatewayDarkBanner
@@ -49,20 +51,18 @@ export default function HomeStructure({ username }: Props) {
               {home.main_banner.subtitle}
             </Typography>
           </div>
-          <Link href={home.main_banner.link} target="_blank">
-            <Button
-              variant="outlined"
-              size="medium"
-              sx={{
-                color: 'common.dark',
-                paddingX: 1,
-                marginTop: { xs: 1, md: 3 },
-              }}
-            >
-              {home.main_banner.btn_text}
-              <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
-            </Button>
-          </Link>
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{
+              color: 'common.dark',
+              paddingX: 1,
+              marginTop: { xs: 1, md: 3 },
+            }}
+          >
+            {home.main_banner.btn_text}
+            <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
+          </Button>
         </Stack>
       </Box>
       <Box
@@ -74,14 +74,18 @@ export default function HomeStructure({ username }: Props) {
       >
         {home.sub_banner.map((details, index) => (
           <Paper
+            component={Link}
+            href={details.link}
+            target={details.target}
             key={index}
             variant="outlined"
             sx={{
               padding: 1.5,
-              width: '342',
-              mr: 3,
+              width: '100%',
               marginTop: 2,
+              mr: 8,
               textDecoration: 'none',
+              '&:last-child': { mr: 0 },
             }}
           >
             <Stack flexDirection={'column'} justifyContent={'space-between'}>
@@ -90,7 +94,7 @@ export default function HomeStructure({ username }: Props) {
                 <Typography
                   sx={{ mt: { xs: 0, md: 10 } }}
                   variant="body2"
-                  color="common.secondary"
+                  color="text.secondary"
                 >
                   {details.heading}
                 </Typography>
@@ -105,18 +109,16 @@ export default function HomeStructure({ username }: Props) {
                 >
                   {details.subtitle}
                 </Typography>
-                <Link href={details.link} target={details.target}>
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    sx={{ paddingX: 1, marginTop: 1 }}
-                  >
-                    {details.btn_text}
-                    {details.target === '_blank' && (
-                      <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
-                    )}
-                  </Button>
-                </Link>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  sx={{ paddingX: 1, marginTop: 1 }}
+                >
+                  {details.btn_text}
+                  {details.target === '_blank' && (
+                    <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
+                  )}
+                </Button>
               </div>
             </Stack>
           </Paper>
