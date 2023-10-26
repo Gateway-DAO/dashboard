@@ -8,7 +8,6 @@ type Props = {
 };
 
 export default function ExplorerBreadcrumb({ paths }: Props) {
-  console.log(paths);
   return (
     <Stack
       direction="row"
