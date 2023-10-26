@@ -5,7 +5,7 @@ import { common } from '@/locale/en/common';
 import { DataModel } from '@/services/protocol/types';
 import { PartialDeep } from 'type-fest';
 
-import { Chip, Container, Typography } from '@mui/material';
+import { Chip, Container, Divider, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import ExplorerBreadcrumb from '../../../components/breadcrumb/breadcrumb';
@@ -47,13 +47,7 @@ export default function DataModelDetailHeader({ dataModel }: Props) {
           )}
         </Container>
       </ExplorerHeader>
-      <Container
-        sx={{
-          borderBottom: 1,
-          borderColor: 'divider',
-          mb: 5,
-        }}
-      >
+      <Container>
         <GTWTabs>
           <GTWTab
             label={common.general.overview}
@@ -69,6 +63,11 @@ export default function DataModelDetailHeader({ dataModel }: Props) {
           />
         </GTWTabs>
       </Container>
+      <Divider
+        sx={{
+          mb: 5,
+        }}
+      />
     </>
   );
 }
