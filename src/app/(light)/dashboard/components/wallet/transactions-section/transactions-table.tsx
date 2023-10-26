@@ -16,7 +16,7 @@ import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
 import { TransactionModal } from '../transaction/components/transaction-modal';
 import TransactionStatusChip from '../transaction/components/transaction-status-chip';
-import { Transaction } from '../transaction/transaction';
+import { transaction } from '@/locale/en/transaction';
 
 type Props = {
   initialData: any; //partialDeep somethig
@@ -26,7 +26,7 @@ type Props = {
 const columns: GridColDef<any>[] = [
   {
     field: 'amount',
-    headerName: 'Amount',
+    headerName: transaction.amount,
     flex: 1,
     renderCell: (params) => (
       <Typography variant="body1" fontWeight={700}>
@@ -36,25 +36,25 @@ const columns: GridColDef<any>[] = [
   },
   {
     field: 'metadata',
-    headerName: 'Detail',
+    headerName: transaction.detail,
     flex: 1,
     valueFormatter: (params) => params.value.name,
   },
   {
     field: 'id',
     flex: 1,
-    headerName: 'Transaction ID',
+    headerName: transaction.transaction_id,
   },
   {
     field: 'date',
-    headerName: 'Date',
+    headerName: transaction.date,
     flex: 1,
     valueFormatter: (params) =>
       params.value ? dayjs(params.value).format(DATE_FORMAT) : '',
   },
   {
     field: 'type',
-    headerName: 'Type',
+    headerName: transaction.type,
     flex: 1,
     renderCell: (params) => (
       <TransactionStatusChip variant="outlined" status={params.value} />

@@ -65,7 +65,7 @@ export default function TransactionCardInfo({
       divider={<Divider sx={{ width: '100%' }} />}
     >
       <TableCellContainer>
-        <CardCell label={transaction.detail_modal.detail}>
+        <CardCell label={transaction.detail}>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -83,18 +83,18 @@ export default function TransactionCardInfo({
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
-        <CardCell label={transaction.detail_modal.transaction_id}>
+        <CardCell label={transaction.transaction_id}>
           <ExternalLink href="#" text={id} size="big" id={id} />
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
-        <CardCell label={transaction.detail_modal.date}>
+        <CardCell label={transaction.date}>
           {date ? dayjs(date).format(DATE_FORMAT) : ''}
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label="Type">
-          <TransactionStatusChip status={type} />
+          <TransactionStatusChip status={type as any} />
         </CardCell>
       </TableCellContainer>
     </Stack>

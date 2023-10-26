@@ -34,7 +34,7 @@ export default function TransactionCardTitle({ value, type }: Props) {
       gap={1.5}
     >
       <Typography variant="caption" color="text.secondary">
-        {transaction.detail_modal.total_amount}
+        {transaction.total_amount}
       </Typography>
       <Typography variant="h3" id="total-amount-value">
         {numberToMoneyString(value)}

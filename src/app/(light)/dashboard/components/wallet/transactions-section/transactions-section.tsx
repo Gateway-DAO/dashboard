@@ -1,6 +1,7 @@
 import { Stack, Typography } from '@mui/material';
 
 import TransactionsTable from './transactions-table';
+import { transaction } from '@/locale/en/transaction';
 
 const mock = [
   {
@@ -52,7 +53,7 @@ const mock = [
 export default function TransactionsSection() {
   return (
     <Stack p={5} width="100%">
-      <Typography variant="h5">Transactions</Typography>
+      <Typography variant="h5">{transaction.title}</Typography>
       <TransactionsTable totalCount={9} initialData={mock} />
     </Stack>
   );
