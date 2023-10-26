@@ -12,6 +12,7 @@ import { Alert, AlertTitle, Button, Stack, Typography } from '@mui/material';
 
 import WalletBalance from './wallet-balance';
 import WalletStatement from './wallet-statement';
+import { common } from '@/locale/en/common';
 
 type Props = {
   balance: string;
@@ -34,6 +35,7 @@ export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
       toggleAlert(true);
     }
   }, []);
+
   return (
     <Stack
       bgcolor="primary.light"
@@ -66,7 +68,7 @@ export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
                 toggleAlert(false);
               }}
             >
-              Close
+              {common.actions.close}
             </Button>
           }
         >

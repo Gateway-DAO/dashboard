@@ -16,17 +16,11 @@ type Props = {
   transactionDetail: any;
 };
 
-export function TransactionModal({ open, onClose, transactionDetail }: Props) {
-  const router = useRouter();
-
-  useMemo(() => {
-    if (open) {
-      router.push(routes.dashboardUserWallet, { scroll: false });
-    } else {
-      router.push('#transaction', { scroll: false });
-    }
-  }, [open]);
-
+export function TransactionModal({
+  open = false,
+  onClose,
+  transactionDetail,
+}: Props) {
   return (
     <>
       <ModalRight open={open} onClose={onClose}>

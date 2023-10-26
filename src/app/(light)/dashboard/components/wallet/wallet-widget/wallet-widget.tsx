@@ -16,6 +16,7 @@ import {
 import { Button, Box, Stack, Typography, alpha } from '@mui/material';
 
 import WalletWidgetSkeleton from './wallet-widget-skeleton';
+import Link from 'next/link';
 
 type Props = {
   id: string;
@@ -90,18 +91,18 @@ export default function WalletWidget({ id }: Props) {
             )}
           </Button>
         </Stack>
-        <Button
+        <Link
           href={
             !!organization
               ? routes.dashboardOrgWallet(organization.gatewayId)
               : routes.dashboardUserWallet
           }
-          variant="outlined"
-          fullWidth
-          size="small"
+          passHref
         >
-          {common.actions.view_more}
-        </Button>
+          <Button variant="outlined" fullWidth size="small">
+            {common.actions.view_more}
+          </Button>
+        </Link>
       </Box>
     </>
   );

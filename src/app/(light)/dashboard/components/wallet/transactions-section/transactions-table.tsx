@@ -17,6 +17,8 @@ import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 import { TransactionModal } from '../transaction/components/transaction-modal';
 import TransactionStatusChip from '../transaction/components/transaction-status-chip';
 import { transaction } from '@/locale/en/transaction';
+import { useRouter } from 'next-nprogress-bar';
+import routes from '@/constants/routes';
 
 type Props = {
   initialData: any; //partialDeep somethig
@@ -66,6 +68,8 @@ export default function TransactionsTable({
   initialData,
   totalCount = 0,
 }: Props) {
+  const router = useRouter();
+
   const data: any = []; //usequery
   const isLoading = false; //usequery
   const [paginationModel, setPaginationModel] = useState({
@@ -76,12 +80,23 @@ export default function TransactionsTable({
   const [showTransactionDetail, toggleTransaction] = useToggle(false);
   const [currentTransaction, setCurrentTransaction] = useState({});
 
+  const toggleTransactionModal = (value: boolean) => {
+    if (!value) {
+      toggleTransaction(value);
+      router.push(routes.dashboardUserWallet, { scroll: false });
+    } else {
+      toggleTransaction(value);
+      router.push('#transaction', { scroll: false });
+    }
+  };
+
   const setNewPage = ({ page }: { page: number }) => {
     setPaginationModel((prev) => ({
       ...prev,
       page: page ? page : 0,
     }));
   };
+
   return (
     <>
       <DataGrid
@@ -90,7 +105,7 @@ export default function TransactionsTable({
         columns={columns}
         paginationModel={paginationModel}
         onRowClick={(params: GridRowParams) => {
-          toggleTransaction(true);
+          toggleTransactionModal(true);
           setCurrentTransaction(params.row);
         }}
         onPaginationModelChange={setNewPage}
@@ -102,7 +117,7 @@ export default function TransactionsTable({
       <TransactionModal
         open={showTransactionDetail}
         transactionDetail={currentTransaction}
-        onClose={() => toggleTransaction(false)}
+        onClose={() => toggleTransactionModal(false)}
       />
     </>
   );
