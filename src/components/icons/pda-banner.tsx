@@ -3,7 +3,7 @@ import { SvgIcon, SvgIconProps } from '@mui/material';
 export default function PDABannerIcon(props: SvgIconProps) {
   return (
     <SvgIcon
-      viewBox="0 0 116 72"
+      viewBox="0 0 95 74"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

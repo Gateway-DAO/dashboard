@@ -1,13 +1,12 @@
 'use client';
 
-import PDABannerIcon from '@/components/icons/pda-banner';
 import { home } from '@/locale/en/home';
 
 import { Box } from '@mui/material';
 import { Button, Paper, Stack, Typography, Link } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import GatewayDarkBanner from '@/components/icons/gateway-dark-banner';
-import HomeOrganizationIcon from '@/components/icons/home-organization';
+import GetIcon from './get-icon';
 
 type Props = {
   username: string;
@@ -73,8 +72,9 @@ export default function HomeStructure({ username }: Props) {
           flexDirection: { xs: 'column', md: 'row' },
         }}
       >
-        {home.sub_banner.map((details) => (
+        {home.sub_banner.map((details, index) => (
           <Paper
+            key={index}
             variant="outlined"
             sx={{
               padding: 1.5,
@@ -82,12 +82,18 @@ export default function HomeStructure({ username }: Props) {
               mr: 3,
               marginTop: 2,
               textDecoration: 'none',
+              border: 1,
+              borderColor: 'red',
             }}
           >
             <Stack flexDirection={'column'} justifyContent={'space-between'}>
-              <HomeOrganizationIcon sx={{ width: 48, height: 48, mb: 2 }} />
+              <GetIcon index={index} sx={{ width: 50, height: 50, mb: 2 }} />
               <div>
-                <Typography mt={10} variant="body2" gutterBottom>
+                <Typography
+                  sx={{ mt: { xs: 0, md: 10 } }}
+                  variant="body2"
+                  color="common.secondary"
+                >
                   {details.heading}
                 </Typography>
                 <Typography mt={2} variant="h5" width={222} gutterBottom>
