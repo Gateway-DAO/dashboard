@@ -1,7 +1,8 @@
+import { SessionProvider } from 'next-auth/react';
+
+import { session } from '@/mocks/session';
 import { render, screen } from '@testing-library/react';
 
-import { SessionProvider } from 'next-auth/react';
-import { session } from '@/mocks/session';
 import WalletWidget from '../wallet-widget';
 
 describe('Transaction', () => {

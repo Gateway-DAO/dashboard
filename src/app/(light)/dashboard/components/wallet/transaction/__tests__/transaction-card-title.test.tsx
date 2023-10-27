@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
-
 import { SessionProvider } from 'next-auth/react';
+
 import { session } from '@/mocks/session';
 import { transaction_default } from '@/mocks/transaction';
+import { render, screen } from '@testing-library/react';
+
 import TransactionCardTitle from '../transaction-card-title';
 
 describe('Transaction Card Title', () => {
