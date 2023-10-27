@@ -2,7 +2,7 @@
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
-import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
+import { TextStatusChip } from '@/components/text-status-chip/text-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import { pda } from '@/locale/en/pda';
 import { proof as proofLocale } from '@/locale/en/proof';
@@ -43,7 +43,7 @@ export default function ProofCardInfo({ proof }: Props) {
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={proofLocale.status.title}>
-          <PDAStatusChip status={proof?.status as ProofStatus} size="small" />
+          <TextStatusChip status={proof?.status as ProofStatus} size="small" />
         </CardCell>
       </TableCellContainer>
       {proof?.dataRequest && (

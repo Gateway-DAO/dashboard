@@ -24,3 +24,48 @@ export const helperContent = {
   btnText: 'Learn how',
   btnLink: documentationRoutes.dataModel,
 };
+
+export const explorerDataModels = {
+  title: 'Data Models',
+  subtitle:
+    'Data models serve as foundational templates for Private Data Assets (PDAs). Each PDA created using a data model adheres to a standardized structure of claims, making these frameworks exceptionally reusable for various related scenarios.',
+  help: 'How to use data models',
+  empty: 'No data models yet',
+  featureTitle: 'Feature',
+  listTitle: 'All data models',
+  filters: {
+    tags: 'Tags',
+    comsumption_price: 'Comsumption price',
+    amount_of_issuances: 'Amount of issuances',
+    sort_by: 'Sort by',
+  },
+};
+
+export const explorerDataModelDetail = {
+  tabs: {
+    issuers: 'Issuers',
+    tied_request_templates: 'Tied Request Templates',
+  },
+};
+
+export const explorerDataModelDetailOverview = {
+  unique_issuers: 'Unique Issuers',
+  pdas_issued: 'PDAs Issued',
+  tied_request_templates: 'Tied Request Templates',
+  revenue_generated: 'Revenue Generated',
+  labels: {
+    signed_by: 'Signed by',
+    creation_date: 'Creation date',
+    last_update: 'Last update',
+    pda_comsumption_cost: 'PDA consumption cost',
+    data_model_id: 'Data model ID',
+  },
+  actions: {
+    copy_claim_structure: 'Copy claim structure',
+  },
+};
+
+export const explorerDataModelCard = {
+  consumption: 'per consumption',
+  issuances: (count: number) => `issuance${count > 0 ? 's' : ''}`,
+};

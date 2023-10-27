@@ -63,6 +63,8 @@ export default function DashboardLayout({
             xs: 0,
             lg: '300px',
           },
+          width: { xs: '100%', lg: 'calc(100% - 300px)' },
+          overflow: 'hidden',
         }}
       >
         {testnet && <SandboxAlert />}

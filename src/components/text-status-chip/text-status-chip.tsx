@@ -8,7 +8,7 @@ type Props = {
   variant?: 'filled' | 'outlined';
 } & Omit<ChipProps, 'label' | 'color'>;
 
-export function PDAStatusChip({
+export function TextStatusChip({
   status,
   variant = 'filled',
   ...chipProps

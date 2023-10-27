@@ -23,9 +23,13 @@ export default function HelpContentCard({
   btnText,
 }: Props) {
   const [open, setOpen] = useState(false);
-  const hasSeenDialog: { [key: string]: boolean } | null = JSON.parse(
-    localStorage.getItem('help-content-banner') || '{}'
-  );
+  let hasSeenDialog: { [key: string]: boolean } | null;
+
+  useEffect(() => {
+    hasSeenDialog = JSON.parse(
+      localStorage.getItem('help-content-banner') || '{}'
+    );
+  }, []);
 
   useEffect(() => {
     if (hasSeenDialog && !hasSeenDialog.hasOwnProperty(title)) {
