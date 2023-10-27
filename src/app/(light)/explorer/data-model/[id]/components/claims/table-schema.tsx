@@ -43,7 +43,11 @@ export default function TableSchema({ properties }: Props) {
         </TableHead>
         <TableBody>
           {Object.keys(properties).map((item) => (
-            <Row property={properties[item]} showCollapse={hasExamples} />
+            <Row
+              key={item}
+              property={properties[item]}
+              showCollapse={hasExamples}
+            />
           ))}
         </TableBody>
       </Table>
