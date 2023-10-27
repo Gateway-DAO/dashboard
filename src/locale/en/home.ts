@@ -14,7 +14,7 @@ export const home = {
   sub_banner: [
     {
       heading: 'For organizations',
-      title: 'Create a Orgainzation',
+      title: 'Create an Orgainzation',
       subtitle:
         'To issue and verify on behalf of an organization, its essential to set up one.',
       btn_text: 'Create Organization ID',

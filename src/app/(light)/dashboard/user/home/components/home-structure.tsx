@@ -56,12 +56,12 @@ export default function HomeStructure({ username }: Props) {
             size="small"
             sx={{
               color: 'common.dark',
-              paddingX: 1,
-              marginTop: { xs: 1, md: 3 },
+              paddingX: 0.6,
+              marginTop: { xs: 1, md: 4 },
             }}
           >
             {home.main_banner.btn_text}
-            <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
+            <OpenInNewIcon sx={{ ml: 0.8, height: 16, width: 16 }} />
           </Button>
         </Stack>
       </Box>
@@ -83,37 +83,39 @@ export default function HomeStructure({ username }: Props) {
               padding: 1.5,
               width: '100%',
               marginTop: 2,
-              mr: 8,
+              mr: 1,
               textDecoration: 'none',
               '&:last-child': { mr: 0 },
             }}
           >
             <Stack flexDirection={'column'} justifyContent={'space-between'}>
-              <GetIcon index={index} sx={{ width: 50, height: 50, mb: 2 }} />
+              <GetIcon index={index} sx={{ width: 70, height: 55, mb: 2 }} />
               <div>
                 <Typography
-                  sx={{ mt: { xs: 0, md: 10 } }}
+                  sx={{ mt: { xs: 0, md: 10 }, paddingX: 1 }}
                   variant="body2"
                   color="text.secondary"
                 >
                   {details.heading}
                 </Typography>
-                <Typography mt={2} variant="h5" width={222} gutterBottom>
+                <Typography
+                  mt={2}
+                  variant="h5"
+                  width={250}
+                  gutterBottom
+                  sx={{ paddingX: 1 }}
+                >
                   {details.title}
                 </Typography>
                 <Typography
                   variant="body2"
                   width={300}
                   gutterBottom
-                  sx={{ mb: 2 }}
+                  sx={{ mb: 2, paddingX: 1 }}
                 >
                   {details.subtitle}
                 </Typography>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  sx={{ paddingX: 1, marginTop: 1 }}
-                >
+                <Button variant="outlined" size="small">
                   {details.btn_text}
                   {details.target === '_blank' && (
                     <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
