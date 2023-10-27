@@ -6,6 +6,6 @@ export const numberToMoneyString = (value: number) => {
       currencyDisplay: 'symbol',
     });
   } catch (error) {
-    return '$0';
+    return '$0.00';
   }
 };

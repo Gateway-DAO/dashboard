@@ -25,6 +25,7 @@ export default function ExternalLink({
       <Link id={id} passHref href={href} style={{ textDecoration: 'none' }}>
         <Typography
           variant="caption"
+          data-testid="external-link"
           sx={{
             color: 'text.secondary',
             fontWeight: 600,

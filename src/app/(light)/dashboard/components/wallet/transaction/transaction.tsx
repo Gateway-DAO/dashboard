@@ -1,5 +1,5 @@
-import TransactionCardInfo from './components/transaction-card-info';
-import TransactionCardTitle from './components/transaction-card-title';
+import TransactionCardInfo from './transaction-card-info';
+import TransactionCardTitle from './transaction-card-title';
 
 type Props = {
   id: string;
@@ -24,7 +24,7 @@ export function Transaction({
 
   return (
     <>
-      <TransactionCardTitle value={amount} type={type} />
+      <TransactionCardTitle amount={amount} type={type} />
       <TransactionCardInfo
         title={name}
         id={id}

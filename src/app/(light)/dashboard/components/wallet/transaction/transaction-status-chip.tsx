@@ -25,7 +25,12 @@ export default function TransactionStatusChip({
   }
   return (
     <>
-      <Chip variant={variant} sx={{ textTransform: 'capitalize' }} {...props} />
+      <Chip
+        variant={variant}
+        sx={{ textTransform: 'capitalize' }}
+        {...props}
+        data-testid="transaction-status-chip"
+      />
     </>
   );
 }

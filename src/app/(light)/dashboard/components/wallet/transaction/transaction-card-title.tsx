@@ -8,11 +8,11 @@ import { numberToMoneyString } from '@/utils/money';
 import { Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
-  value: number;
+  amount: number;
   type: string;
 };
 
-export default function TransactionCardTitle({ value, type }: Props) {
+export default function TransactionCardTitle({ amount, type }: Props) {
   const bgColor = useMemo(() => {
     if (type === 'EXPENSE' || type === 'WITHDRAWAL') {
       return 'error';
@@ -21,6 +21,7 @@ export default function TransactionCardTitle({ value, type }: Props) {
   }, [type]);
   return (
     <Stack
+      data-testid="transaction__title"
       sx={{
         borderRadius: 1,
         mb: 3,
@@ -36,8 +37,12 @@ export default function TransactionCardTitle({ value, type }: Props) {
       <Typography variant="caption" color="text.secondary">
         {transaction.total_amount}
       </Typography>
-      <Typography variant="h3" id="total-amount-value">
-        {numberToMoneyString(value)}
+      <Typography
+        variant="h3"
+        id="total-amount-value"
+        data-testid="transaction__title__amount"
+      >
+        {numberToMoneyString(amount)}
       </Typography>
     </Stack>
   );
