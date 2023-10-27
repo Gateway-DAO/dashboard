@@ -12,7 +12,11 @@ export default async function DataModelIssuersPage({
 
   return (
     <>
-      <DataModelDetailHeader dataModel={dataModel} />
+      <DataModelDetailHeader
+        id={dataModel.id}
+        title={dataModel.title}
+        tags={dataModel.tags!}
+      />
     </>
   );
 }

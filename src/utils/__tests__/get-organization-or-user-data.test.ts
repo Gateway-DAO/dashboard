@@ -1,5 +1,5 @@
 import { Organization, User } from '@/services/protocol/types';
-import getCreatedBy from '../get-created-by';
+import getOrganizationOrUserData from '../get-organization-or-user-data';
 
 const user: Required<
   Pick<User, 'id' | 'gatewayId' | 'displayName' | 'profilePicture'>
@@ -21,13 +21,13 @@ describe('Get "Created By" Helper', () => {
       image: 'organization-image',
     };
 
-    const result = getCreatedBy(user, organization);
+    const result = getOrganizationOrUserData(user, organization);
 
     expect(result).toEqual(organization);
   });
   test('return user if organization does not exist', () => {
     const organization = null;
-    const result = getCreatedBy(user, organization);
+    const result = getOrganizationOrUserData(user, organization);
 
     expect(result).toEqual({
       id: user.id,

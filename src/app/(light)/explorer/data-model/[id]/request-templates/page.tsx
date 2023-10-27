@@ -11,7 +11,11 @@ export default async function DataModelRequestTemplates({
 
   return (
     <>
-      <DataModelDetailHeader dataModel={dataModel} />
+      <DataModelDetailHeader
+        id={dataModel.id}
+        title={dataModel.title}
+        tags={dataModel.tags!}
+      />
     </>
   );
 }
