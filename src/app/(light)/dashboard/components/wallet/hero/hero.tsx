@@ -3,23 +3,24 @@
 import { useEffect, useState } from 'react';
 
 import { sandboxWalletAlert } from '@/locale/en/alert-messages';
+import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { currentEnv } from '@/utils/env';
-import { useToggle } from '@react-hookz/web';
 
 import { Alert, AlertTitle, Button, Stack, Typography } from '@mui/material';
 
+import { useWalletStore } from '../../../stores/wallet.store';
 import WalletBalance from './wallet-balance';
 import WalletStatement from './wallet-statement';
-import { common } from '@/locale/en/common';
 
 type Props = {
   balance: string;
 };
 
 export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
-  const [valueVisible, setVisible] = useToggle(true);
+  const { showValues: valueVisible, toggleShowValue: toggleVisible } =
+    useWalletStore((state) => state);
   const [showAlert, toggleAlert] = useState(false);
   const storageKey = 'testnet-wallet-disclaimer';
   const testnet = currentEnv() === 'testnet' || 'development';
@@ -79,7 +80,7 @@ export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
       )}
       <Typography variant="h3">{wallet.page.title}</Typography>
       <WalletBalance
-        setVisible={setVisible}
+        setVisible={toggleVisible}
         valueVisible={valueVisible}
         value={balance}
       />

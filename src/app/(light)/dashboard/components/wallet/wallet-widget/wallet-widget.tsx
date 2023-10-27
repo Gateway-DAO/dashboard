@@ -8,7 +8,6 @@ import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
 import { numberToMoneyString } from '@/utils/money';
-import { useToggle } from '@react-hookz/web';
 
 import {
   MoreHorizOutlined,
@@ -17,6 +16,7 @@ import {
 } from '@mui/icons-material';
 import { Button, Box, Stack, Typography, alpha } from '@mui/material';
 
+import { useWalletStore } from '../../../stores/wallet.store';
 import WalletWidgetSkeleton from './wallet-widget-skeleton';
 
 type Props = {
@@ -25,7 +25,9 @@ type Props = {
 
 export default function WalletWidget({ id }: Props) {
   const { data: session, status } = useSession();
-  const [visible, setVisible] = useToggle(true);
+  const { showValues: visible, toggleShowValue } = useWalletStore(
+    (state) => state
+  );
   const { organization } = useOrganization();
 
   const walletData = {
@@ -83,7 +85,7 @@ export default function WalletWidget({ id }: Props) {
           )}
         </Stack>
         <Button
-          onClick={setVisible}
+          onClick={toggleShowValue}
           size="small"
           sx={{ p: 0.5, m: 0, minWidth: 0 }}
         >
