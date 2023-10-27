@@ -1,7 +1,8 @@
+import { transaction } from '@/locale/en/transaction';
+
 import { Stack, Typography } from '@mui/material';
 
 import TransactionsTable from './transactions-table';
-import { transaction } from '@/locale/en/transaction';
 
 const mock = [
   {

@@ -1,7 +1,7 @@
 'use client';
 import { useMemo } from 'react';
 
-import TransactionStatusChip from '@/app/(light)/dashboard/components/wallet/transaction/components/transaction-status-chip';
+import TransactionStatusChip from '@/app/(light)/dashboard/components/wallet/transaction/transaction-status-chip';
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import ExternalLink from '@/components/external-link/external-link';
@@ -59,6 +59,7 @@ export default function TransactionCardInfo({
     <Stack
       component={Card}
       variant="outlined"
+      data-testid="transaction__card"
       sx={{
         mb: 3,
       }}
@@ -71,7 +72,9 @@ export default function TransactionCardInfo({
             justifyContent="space-between"
             alignItems="flex-start"
           >
-            <Typography>{title}</Typography>
+            <Typography data-testid="transaction__card__title">
+              {title}
+            </Typography>
             <Button
               size="small"
               sx={{ marginTop: -2 }}
@@ -89,7 +92,9 @@ export default function TransactionCardInfo({
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={transaction.date}>
-          {date ? dayjs(date).format(DATE_FORMAT) : ''}
+          <Typography data-testid="transaction__card__date">
+            {date ? dayjs(date).format(DATE_FORMAT) : ''}
+          </Typography>
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
