@@ -80,7 +80,8 @@ export default function HomeStructure({ username }: Props) {
             key={index}
             variant="outlined"
             sx={{
-              padding: 1.5,
+              padding: 2,
+              paddingLeft: 2,
               width: '100%',
               marginTop: 2,
               mr: 1,
@@ -89,33 +90,27 @@ export default function HomeStructure({ username }: Props) {
             }}
           >
             <Stack flexDirection={'column'} justifyContent={'space-between'}>
-              <GetIcon index={index} sx={{ width: 70, height: 55, mb: 2 }} />
+              <GetIcon index={index} sx={{ width: 60, height: 50, mb: 2 }} />
               <div>
                 <Typography
-                  sx={{ mt: { xs: 0, md: 10 }, paddingX: 1 }}
+                  sx={{ mt: { xs: 0, md: 10 } }}
                   variant="body2"
                   color="text.secondary"
                 >
                   {details.heading}
                 </Typography>
-                <Typography
-                  mt={2}
-                  variant="h5"
-                  width={250}
-                  gutterBottom
-                  sx={{ paddingX: 1 }}
-                >
+                <Typography mt={2} variant="h5" width={250} gutterBottom>
                   {details.title}
                 </Typography>
                 <Typography
                   variant="body2"
                   width={300}
                   gutterBottom
-                  sx={{ mb: 2, paddingX: 1 }}
+                  sx={{ mb: 2 }}
                 >
                   {details.subtitle}
                 </Typography>
-                <Button variant="outlined" size="small" sx={{ ml: 0.2 }}>
+                <Button variant="outlined" size="small">
                   {details.btn_text}
                   {details.target === '_blank' && (
                     <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
