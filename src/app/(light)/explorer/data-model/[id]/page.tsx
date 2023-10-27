@@ -5,7 +5,7 @@ import { Divider, Typography } from '@mui/material';
 import { Box, Container, Stack } from '@mui/system';
 
 import DataModelDetailHeader from './components/header';
-import DataModelClaims from './components/claims';
+import DataModelClaims from './components/claims/claims';
 import DataModelDetails from './components/details/details';
 
 export default async function DataModelPage({

@@ -8,6 +8,7 @@ import ProfileList from './profile-list';
 import { Button, Collapse, Typography } from '@mui/material';
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material';
 import { common } from '@/locale/en/common';
+import ToggleDropIcon from '@/components/toggle-drop-icon/toggle-drop-icon';
 
 type Props = {
   dataModel: PartialDeep<Explorer_Data_Model_Detail_OverviewQuery['dataModel']>;
@@ -38,7 +39,7 @@ export default function Profiles({ dataModel }: Props) {
         <>
           <Button
             onClick={toggleShowing}
-            endIcon={isShowing ? <ArrowDropUp /> : <ArrowDropDown />}
+            endIcon={<ToggleDropIcon active={isShowing} />}
             sx={{ mt: 2 }}
           >
             {common.general.show_more}
