@@ -30,10 +30,6 @@ export default function WalletWidget({ id }: Props) {
   const { organization } = useOrganization();
   const pathname = usePathname();
 
-  if (status === 'loading' || !session) {
-    return <WalletWidgetSkeleton />;
-  }
-
   const walletData = {
     value: 0.3,
   };
@@ -41,6 +37,10 @@ export default function WalletWidget({ id }: Props) {
   const walletPage = !!organization
     ? routes.dashboardOrgWallet(organization.gatewayId)
     : routes.dashboardUserWallet;
+
+  if ((status === 'loading' || !session) && pathname !== walletPage) {
+    return <WalletWidgetSkeleton />;
+  }
 
   return (
     <>
