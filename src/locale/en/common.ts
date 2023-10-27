@@ -22,6 +22,7 @@ export const common = {
     success: 'Success',
     developers: 'Developers',
     overview: 'Overview',
+    show_more: 'Show more',
   },
   chain: {
     EVM: 'Ethereum',

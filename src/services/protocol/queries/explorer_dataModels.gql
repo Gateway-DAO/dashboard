@@ -48,6 +48,13 @@ query explorer_data_model_detail_overview($id: String!) {
     uniqueIssuersCount
     schema
     createdAt
+    permissioning
+    allowedUsers {
+      ...min_user
+    }
+    allowedOrganizations {
+      ...org
+    }
   }
 }
 

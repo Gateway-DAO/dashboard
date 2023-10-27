@@ -16,7 +16,7 @@ import {
   CardProps,
   Box,
 } from '@mui/material';
-import getCreatedBy from '@/utils/get-created-by';
+import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 
 type Props = {
   withLink?: boolean;
@@ -58,7 +58,7 @@ export default function DataModelExplorerCard({
   dataModel,
   ...props
 }: Props & CardProps) {
-  const { id, image, name, gatewayId } = getCreatedBy(
+  const { id, image, name, gatewayId } = getOrganizationOrUserData(
     dataModel?.createdBy ?? {},
     dataModel?.organization
   );

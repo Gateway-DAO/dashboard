@@ -16,10 +16,12 @@ import {
 } from '@/locale/en/datamodel';
 
 type Props = {
-  dataModel: PartialDeep<DataModel>;
+  id: string;
+  title: string;
+  tags: string[];
 };
 
-export default function DataModelDetailHeader({ dataModel }: Props) {
+export default function DataModelDetailHeader({ id, title, tags }: Props) {
   return (
     <>
       <ExplorerHeader sx={{ pb: 5 }}>
@@ -31,16 +33,16 @@ export default function DataModelDetailHeader({ dataModel }: Props) {
                 label: explorerDataModels.title,
               },
               {
-                label: dataModel.title!,
+                label: title,
               },
             ]}
           />
           <Typography component="h1" variant="h2" fontWeight="300" mb={2}>
-            {dataModel.title}
+            {title}
           </Typography>
-          {dataModel.tags && (
+          {tags && (
             <Stack direction="row" gap={1}>
-              {dataModel.tags.map((tag) => (
+              {tags.map((tag) => (
                 <Chip key={tag} label={tag} />
               ))}
             </Stack>
@@ -51,15 +53,15 @@ export default function DataModelDetailHeader({ dataModel }: Props) {
         <GTWTabs>
           <GTWTab
             label={common.general.overview}
-            href={routes.explorerDataModel(dataModel.id)}
+            href={routes.explorerDataModel(id)}
           />
           <GTWTab
             label={explorerDataModelDetail.tabs.issuers}
-            href={routes.explorerDataModelIssuers(dataModel.id)}
+            href={routes.explorerDataModelIssuers(id)}
           />
           <GTWTab
             label={explorerDataModelDetail.tabs.tied_request_templates}
-            href={routes.explorerDataModelRequestTemplates(dataModel.id)}
+            href={routes.explorerDataModelRequestTemplates(id)}
           />
         </GTWTabs>
       </Container>
