@@ -31,6 +31,7 @@ type Props = {
   };
   firstColumnLarger?: boolean;
   href: string;
+  id: string;
 };
 
 export default function TemplateLearnSection({
@@ -44,10 +45,12 @@ export default function TemplateLearnSection({
   highlight,
   firstColumnLarger,
   href,
+  id,
 }: Props) {
   return (
     <section
       className={joinClasses(styles.element, styles[`element--${variant}`])}
+      id={id}
     >
       <Wrapper>
         {secondaryTitle && (

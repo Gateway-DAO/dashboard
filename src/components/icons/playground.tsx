@@ -3,7 +3,7 @@ import { SvgIcon, SvgIconProps } from '@mui/material';
 export default function PlaygroundIcon(props: SvgIconProps) {
   return (
     <SvgIcon
-      viewBox="0 0 84 72"
+      viewBox="0 0 80 72"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

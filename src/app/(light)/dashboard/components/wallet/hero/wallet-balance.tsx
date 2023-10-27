@@ -34,7 +34,7 @@ export default function WalletBalance({
       </Box>
       <Typography variant="h4" data-testid="wallet-balance__balance">
         {valueVisible ? (
-          <>{value ?? '$0'}</>
+          <>{value ? value : '$0'}</>
         ) : (
           <MoreHorizOutlined sx={{ fontSize: 'inherit' }} />
         )}

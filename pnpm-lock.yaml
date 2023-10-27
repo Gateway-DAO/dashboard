@@ -164,6 +164,9 @@ dependencies:
   zod:
     specifier: ^3.22.4
     version: 3.22.4
+  zustand:
+    specifier: ^4.4.4
+    version: 4.4.4(@types/react@18.2.20)(react@18.2.0)
 
 devDependencies:
   '@graphql-codegen/add':
@@ -7917,7 +7920,7 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      zustand: 4.4.3(@types/react@18.2.20)(react@18.2.0)
+      zustand: 4.4.4(@types/react@18.2.20)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - immer
@@ -9255,7 +9258,7 @@ packages:
       eventemitter3: 4.0.7
       typescript: 5.1.6
       viem: 1.16.2(typescript@5.1.6)(zod@3.22.4)
-      zustand: 4.4.3(@types/react@18.2.20)(react@18.2.0)
+      zustand: 4.4.4(@types/react@18.2.20)(react@18.2.0)
     transitivePeerDependencies:
       - '@react-native-async-storage/async-storage'
       - '@types/react'
@@ -22985,8 +22988,8 @@ packages:
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
 
-  /zustand@4.4.3(@types/react@18.2.20)(react@18.2.0):
-    resolution: {integrity: sha512-oRy+X3ZazZvLfmv6viIaQmtLOMeij1noakIsK/Y47PWYhT8glfXzQ4j0YcP5i0P0qI1A4rIB//SGROGyZhx91A==}
+  /zustand@4.4.4(@types/react@18.2.20)(react@18.2.0):
+    resolution: {integrity: sha512-5UTUIAiHMNf5+mFp7/AnzJXS7+XxktULFN0+D1sCiZWyX7ZG+AQpqs2qpYrynRij4QvoDdCD+U+bmg/cG3Ucxw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@types/react': '>=16.8'

@@ -21,7 +21,7 @@ export default function OurNetwork() {
         <h2 className={styles.title}>Our Network</h2>
 
         <div className={styles.columns}>
-          <GTWLink href="/" className={styles.column}>
+          <GTWLink href="/learn#become-issuer" className={styles.column}>
             <h3 className={styles.column_label}>For Issuers</h3>
 
             <ForIssues
@@ -43,7 +43,7 @@ export default function OurNetwork() {
             </ul>
           </GTWLink>
 
-          <GTWLink href="/" className={styles.column}>
+          <GTWLink href="/learn#the-owners" className={styles.column}>
             <h3 className={styles.column_label}>For Owners</h3>
 
             <ForOwners className={styles.column_vector} />
@@ -62,7 +62,10 @@ export default function OurNetwork() {
           </GTWLink>
         </div>
 
-        <GTWLink href="/" className={styles.column_large}>
+        <GTWLink
+          href="/learn#request-user-data"
+          className={styles.column_large}
+        >
           <div className={styles.column_large_vector}>
             <ForVerifies className={styles.column_vector} />
           </div>

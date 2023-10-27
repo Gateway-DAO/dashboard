@@ -14,8 +14,8 @@ import dayjs from 'dayjs';
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
-import { TransactionModal } from '../transaction/components/transaction-modal';
-import TransactionStatusChip from '../transaction/components/transaction-status-chip';
+import { TransactionModal } from '../transaction/transaction-modal';
+import TransactionStatusChip from '../transaction/transaction-status-chip';
 import { transaction } from '@/locale/en/transaction';
 import { useRouter } from 'next-nprogress-bar';
 import routes from '@/constants/routes';

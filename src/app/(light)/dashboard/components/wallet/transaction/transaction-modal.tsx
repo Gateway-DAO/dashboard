@@ -8,7 +8,7 @@ import routes from '@/constants/routes';
 
 import { Stack } from '@mui/system';
 
-import { Transaction } from '../transaction';
+import { Transaction } from './transaction';
 
 type Props = {
   open: boolean;
