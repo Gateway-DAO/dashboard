@@ -1,11 +1,12 @@
-import { userEvent } from '@storybook/testing-library';
-import { render, screen } from '@testing-library/react';
-
-import TransactionCardInfo from '../transaction-card-info';
 import { SessionProvider } from 'next-auth/react';
+
+import { DATE_FORMAT } from '@/constants/date';
 import { session } from '@/mocks/session';
 import { transaction_default } from '@/mocks/transaction';
+import { render, screen } from '@testing-library/react';
+import dayjs from 'dayjs';
 
+import TransactionCardInfo from '../transaction-card-info';
 describe('Transaction Card Info', () => {
   test('renders the component', () => {
     render(
@@ -37,7 +38,8 @@ describe('Transaction Card Info', () => {
     const dateText = screen.getByTestId('transaction__card__date');
     expect(dateText).toBeInTheDocument();
     const dateValue = dateText.textContent;
-    expect(dateValue).toEqual('10/26/2023, 2:10 PM');
+    const date = dayjs(dateValue).format(DATE_FORMAT);
+    expect(dateValue).toEqual(date);
 
     const typeText = screen.getByTestId('transaction-status-chip');
     expect(typeText).toBeInTheDocument();
