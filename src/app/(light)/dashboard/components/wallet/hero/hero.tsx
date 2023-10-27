@@ -12,6 +12,7 @@ import { Alert, AlertTitle, Button, Stack, Typography } from '@mui/material';
 
 import WalletBalance from './wallet-balance';
 import WalletStatement from './wallet-statement';
+import { common } from '@/locale/en/common';
 
 type Props = {
   balance: string;
@@ -23,17 +24,22 @@ export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
   const storageKey = 'testnet-wallet-disclaimer';
   const testnet = currentEnv() === 'testnet' || 'development';
 
-  const hasSeenTestnetDisclaimer: string | null =
-    localStorage.getItem(storageKey) || null;
+  let hasSeenTestnetDisclaimer: string | null;
+
+  useEffect(() => {
+    hasSeenTestnetDisclaimer = localStorage.getItem(storageKey) || null;
+  }, []);
 
   useEffect(() => {
     if (!hasSeenTestnetDisclaimer || hasSeenTestnetDisclaimer !== 'closed') {
       toggleAlert(true);
     }
   }, []);
+
   return (
     <Stack
       bgcolor="primary.light"
+      width="100%"
       sx={{
         px: CONTAINER_PX,
         pt: {
@@ -62,7 +68,7 @@ export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
                 toggleAlert(false);
               }}
             >
-              Close
+              {common.actions.close}
             </Button>
           }
         >
