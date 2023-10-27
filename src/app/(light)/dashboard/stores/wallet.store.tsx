@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 type WalletState = {
   showValues: boolean;
-  toggleShowValue: (status?: boolean) => void;
+  toggleShowValue: () => void;
 };
 
 export const useWalletStore = create<WalletState>((set) => ({
