@@ -1,4 +1,5 @@
 import documentationRoutes from '@/constants/documentationRoutes';
+import { PermissionType } from '@/services/protocol/types';
 
 export const datamodel = {
   title: 'Data model',
@@ -59,10 +60,16 @@ export const explorerDataModelDetailOverview = {
     last_update: 'Last update',
     pda_comsumption_cost: 'PDA consumption cost',
     data_model_id: 'Data model ID',
+    allowed_to_issue: 'Allowed to issue',
   },
   actions: {
     copy_claim_structure: 'Copy claim structure',
   },
+  permissions: {
+    ALL: 'Anyone',
+    ORGANIZATIONS: 'Organizations only',
+    SPECIFIC_IDS: 'Specific IDs',
+  } as Record<PermissionType, string>,
 };
 
 export const explorerDataModelCard = {

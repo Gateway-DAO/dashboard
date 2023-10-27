@@ -5,7 +5,7 @@ import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Stack, Typography, Divider, Card } from '@mui/material';
 
-import { claimFields, getClaimType } from './ClaimTypes';
+import getClaimType, { claimFields } from '@/utils/get-claim-type';
 import { CurrencyView } from './currency-view';
 import { ImageView } from './image-view';
 import { LinkView } from './link-view';
@@ -17,12 +17,12 @@ type Props = {
 };
 
 function ClaimView(fieldData: CredentialData) {
-  const type = getClaimType(
-    fieldData.type,
-    fieldData.metadata?.contentMediaType,
-    fieldData.metadata?.format,
-    fieldData.metadata?.currency
-  );
+  const type = getClaimType({
+    type: fieldData.type,
+    contentMediaType: fieldData.metadata?.contentMediaType,
+    currency: fieldData.metadata?.currency,
+    format: fieldData.metadata?.format,
+  });
 
   if (!fieldData.value || fieldData.value === '')
     return <span>{pdaLocale.unfilled}</span>;
