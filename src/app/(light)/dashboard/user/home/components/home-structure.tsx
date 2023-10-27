@@ -115,7 +115,7 @@ export default function HomeStructure({ username }: Props) {
                 >
                   {details.subtitle}
                 </Typography>
-                <Button variant="outlined" size="small" sx={{ paddingX: 1 }}>
+                <Button variant="outlined" size="small" sx={{ ml: 0.2 }}>
                   {details.btn_text}
                   {details.target === '_blank' && (
                     <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
