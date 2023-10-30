@@ -2,13 +2,13 @@ import { explorerRequestTemplates } from '@/locale/en/request-template';
 
 import { Divider } from '@mui/material';
 
-import ExplorerHeader from '../components/header/header';
+import ExplorerHero from '../components/hero/hero';
 import RequestTemplatesExplorerFeatured from './components/featured';
 
 export default function RequestTemplatesExplorerPage() {
   return (
     <>
-      <ExplorerHeader
+      <ExplorerHero
         title={explorerRequestTemplates.title}
         subtitle={explorerRequestTemplates.subtitle}
         help={explorerRequestTemplates.help}
