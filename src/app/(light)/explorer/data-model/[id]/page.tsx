@@ -4,9 +4,9 @@ import { PageProps } from '@/types/next';
 import { Divider, Typography } from '@mui/material';
 import { Box, Container, Stack } from '@mui/system';
 
-import DataModelDetailHeader from './components/header';
 import DataModelClaims from './components/claims/claims';
 import DataModelDetails from './components/details/details';
+import DataModelDetailHeader from './components/header';
 
 export default async function DataModelPage({
   params: { id },

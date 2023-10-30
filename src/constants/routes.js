@@ -58,6 +58,9 @@ const routes = {
     `/explorer/data-model/${dataModelId}/issuers`,
   explorerDataModelRequestTemplates: (dataModelId) =>
     `/explorer/data-model/${dataModelId}/request-templates`,
+  explorerRequestTemplates: '/explorer/request-templates',
+  explorerRequestTemplate: (requestTemplateId) =>
+    `/explorer/request-template/${requestTemplateId}`,
 };
 
 module.exports = routes;

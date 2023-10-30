@@ -1,0 +1,8 @@
+query explorer_request_templates_featured {
+  dataRequestTemplates(take: 4) {
+    id
+    name
+    dataRequestsCount
+    createdAt
+  }
+}
