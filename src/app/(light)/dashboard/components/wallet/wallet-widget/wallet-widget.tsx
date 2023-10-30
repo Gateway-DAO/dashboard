@@ -35,8 +35,8 @@ export default function WalletWidget({ id }: Props) {
   };
 
   const walletPage = !!organization
-    ? routes.dashboardOrgWallet(organization.gatewayId)
-    : routes.dashboardUserWallet;
+    ? routes.dashboard.org.wallet(organization.gatewayId)
+    : routes.dashboard.user.wallet;
 
   if (status === 'loading' || !session) {
     return <WalletWidgetSkeleton />;

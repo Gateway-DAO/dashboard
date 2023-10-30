@@ -40,8 +40,8 @@ export default function TransactionCardInfo({
         url: '',
       };
       obj.url = !!organization
-        ? routes.dashboardOrgProof(organization.gatewayId, objectId)
-        : routes.dashboardUserProof(objectId);
+        ? routes.dashboard.org.proof(organization.gatewayId, objectId)
+        : routes.dashboard.user.proof(objectId);
       return obj;
     }
     if (action === 'CREATE_PDA') {
@@ -50,8 +50,8 @@ export default function TransactionCardInfo({
         url: '',
       };
       obj.url = !!organization
-        ? routes.dashboardOrgAsset(organization.gatewayId, objectId)
-        : routes.dashboardUserAsset(objectId);
+        ? routes.dashboard.org.asset(organization.gatewayId, objectId)
+        : routes.dashboard.user.asset(objectId);
       return obj;
     }
   }, [action]);

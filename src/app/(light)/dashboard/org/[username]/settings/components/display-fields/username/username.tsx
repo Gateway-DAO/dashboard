@@ -76,7 +76,7 @@ export default function Username() {
     try {
       await updateUsername.mutateAsync(data.username);
       await update();
-      router.push(routes.dashboardOrgSettings(data.username));
+      router.push(routes.dashboard.org.settings(data.username));
     } catch {
       enqueueSnackbar('Failed to update display name', { variant: 'error' });
     }

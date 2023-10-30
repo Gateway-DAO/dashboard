@@ -83,8 +83,8 @@ export default function AuthDropdownCurrent({ onClose }: Props) {
           onClick={onClose}
           href={
             isOrg
-              ? routes.dashboardOrgSettings(pathnameOrg)
-              : routes.dashboardUserSettings
+              ? routes.dashboard.org.settings(pathnameOrg)
+              : routes.dashboard.user.settings
           }
           fullWidth
           variant="outlined"

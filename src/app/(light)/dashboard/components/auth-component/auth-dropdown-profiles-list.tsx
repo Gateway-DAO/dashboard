@@ -40,7 +40,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
     <>
       {accessess?.map(({ organization }) => (
         <MenuItemLink
-          href={routes.dashboardOrgHome(organization.gatewayId)}
+          href={routes.dashboard.org.home(organization.gatewayId)}
           key={organization.id}
           onClick={onClose}
         >
@@ -69,7 +69,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
       ))}
       {isOrg && (
         <MenuItemLink
-          href={routes.dashboardUserHome}
+          href={routes.dashboard.user.home}
           key={user.id}
           onClick={onClose}
         >

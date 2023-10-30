@@ -9,14 +9,14 @@ import { GTWMenuItemSettings } from '../../components/menu-item/menu-item';
 export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
   {
     name: 'Developer Access',
-    href: routes.dashboardUserDeveloperAccess,
-    activeHrefs: [routes.dashboardUserDeveloperAccess],
+    href: routes.dashboard.user.developerAccess,
+    activeHrefs: [routes.dashboard.user.developerAccess],
     icon: CodeOutlined,
   },
   {
     name: 'Playground',
-    href: routes.dashboardUserPlayground,
-    activeHrefs: [routes.dashboardUserPlayground],
+    href: routes.dashboard.user.playground,
+    activeHrefs: [routes.dashboard.user.playground],
     icon: CodeBlocksOutlinedIcon,
   },
   {

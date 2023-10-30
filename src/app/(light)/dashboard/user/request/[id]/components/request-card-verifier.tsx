@@ -90,11 +90,11 @@ export default function RequestCardVerfierView({
                 component={Link}
                 href={
                   !!organization
-                    ? routes.dashboardOrgProof(
+                    ? routes.dashboard.org.proof(
                         organization?.gatewayId,
                         proofId ?? ''
                       )
-                    : routes.dashboardUserProof(proofId ?? '')
+                    : routes.dashboard.user.proof(proofId ?? '')
                 }
                 variant="contained"
                 color="primary"

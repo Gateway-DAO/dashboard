@@ -94,7 +94,7 @@ export function useDisconnectAlias() {
   };
 
   const closeModal = () => {
-    router.push(routes.dashboardUserSettings, { scroll: false });
+    router.push(routes.dashboard.user.settings, { scroll: false });
     setModalDeactivateGatewayId(false);
     setDataToDisconnect(null);
   };

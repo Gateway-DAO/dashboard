@@ -180,7 +180,7 @@ export default function ProofsReceivedTable({
       onPaginationModelChange={setNewPage}
       sx={defaultGridCustomization}
       onRowClick={(value) => {
-        router.push(routes.dashboardUserProof(value?.id));
+        router.push(routes.dashboard.user.proof(value?.id));
       }}
     />
   );

@@ -31,7 +31,7 @@ export default function useOrganization():
   | UseOrganizationFalsyResponse {
   const { data: session } = useSession();
   const pathname = usePathname();
-  const isOrg = pathname?.includes(routes.dashboardOrgRoot);
+  const isOrg = pathname?.includes(routes.dashboard.org.root);
   const pathnameOrg = isOrg ? pathname?.split('/')[3] : undefined;
   const access = session?.user?.accesses?.find(
     (access) => access.organization?.gatewayId === pathnameOrg

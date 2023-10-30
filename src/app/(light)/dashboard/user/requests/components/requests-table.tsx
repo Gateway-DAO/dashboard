@@ -168,7 +168,7 @@ export default function RequestsTable({
           loading={isLoading}
           rowCount={totalCount}
           onRowClick={(params: GridRowParams) => {
-            router.push(routes.dashboardUserRequest(params.id));
+            router.push(routes.dashboard.user.request(params.id));
           }}
           sx={defaultGridCustomization}
         />

@@ -110,11 +110,11 @@ export default function SharedWithCard({ pda }: Props) {
                       onClick={() =>
                         router.push(
                           !!organization
-                            ? routes.dashboardOrgProof(
+                            ? routes.dashboard.org.proof(
                                 organization.gatewayId,
                                 proof.id
                               )
-                            : routes.dashboardUserProof(proof.id)
+                            : routes.dashboard.user.proof(proof.id)
                         )
                       }
                     >

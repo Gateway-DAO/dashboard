@@ -12,6 +12,7 @@ export default function RequestTemplatesExplorerPage() {
         title={explorerRequestTemplates.title}
         subtitle={explorerRequestTemplates.subtitle}
         help={explorerRequestTemplates.help}
+        infoCard
         sx={{
           backgroundColor: 'primary.light',
         }}

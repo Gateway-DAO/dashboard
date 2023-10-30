@@ -5,6 +5,7 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import routes from '@/constants/routes';
 import { explorerDataModelCard } from '@/locale/en/datamodel';
 import { DataModel } from '@/services/protocol/types';
+import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { PartialDeep } from 'type-fest';
 
 import {
@@ -16,7 +17,6 @@ import {
   CardProps,
   Box,
 } from '@mui/material';
-import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 
 type Props = {
   withLink?: boolean;
@@ -42,7 +42,7 @@ function CardContainer({
     return (
       <CardActionArea
         component={Link}
-        href={routes.explorerDataModel(id)}
+        href={routes.explorer.dataModel(id)}
         sx={style}
       >
         {children}

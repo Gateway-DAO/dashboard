@@ -42,7 +42,7 @@ function CardContainer({
     return (
       <CardActionArea
         component={Link}
-        href={routes.explorerRequestTemplate(id)}
+        href={routes.explorer.requestTemplate(id)}
         sx={style}
       >
         {children}
