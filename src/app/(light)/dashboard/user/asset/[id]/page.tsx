@@ -34,8 +34,8 @@ export default async function PDAPage({
         <BackButton
           href={
             !!org
-              ? routes.dashboardOrgIssuedAssets(org?.gatewayId)
-              : routes.dashboardUserReceivedAssets
+              ? routes.dashboard.org.issuedAssets(org?.gatewayId)
+              : routes.dashboard.user.receivedAssets
           }
         />
       </TopBarContainer>

@@ -34,11 +34,11 @@ export default async function OrgDataRequestTemplatesLayout({
         <GTWTabs>
           <GTWTab
             label={requestTemplates.my_data_request_templates}
-            href={routes.dashboardOrgMyRequestTemplates(pathnameOrg)}
+            href={routes.dashboard.org.myRequestTemplates(pathnameOrg)}
           />
           <GTWTab
             label={requestTemplates.network_data_request_templates}
-            href={routes.dashboardOrgNetworkRequestTemplates(pathnameOrg)}
+            href={routes.dashboard.org.networkRequestTemplates(pathnameOrg)}
           />
         </GTWTabs>
       </Box>

@@ -50,7 +50,7 @@ export default function PDAsList({ pdas, issuedPdas }: Props) {
               <PdaCard
                 userId={user.id as string}
                 key={pda.id}
-                href={routes.dashboardUserAsset(pda.id!)}
+                href={routes.dashboard.user.asset(pda.id!)}
                 name={pda.dataAsset?.title ?? 'PDA name'}
                 userImage={user.image}
                 userName={user.name ?? 'Issuer'}

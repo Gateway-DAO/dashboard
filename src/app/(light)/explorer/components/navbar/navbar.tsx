@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import GTWLogo from '@/components/gtw-logo/gtw-logo';
+import routes from '@/constants/routes';
 
 import { OpenInNew } from '@mui/icons-material';
 import { Box, Link as MuiLink, Chip, Container, Stack } from '@mui/material';
@@ -58,8 +59,7 @@ export default function ExplorerNavbar() {
           >
             <MuiLink
               component={Link}
-              href="/explorer/"
-              target="_blank"
+              href={routes.explorer.transactions}
               color="black"
               underline="hover"
               fontWeight="700"
@@ -68,8 +68,7 @@ export default function ExplorerNavbar() {
             </MuiLink>
             <MuiLink
               component={Link}
-              href="/explorer/"
-              target="_blank"
+              href={routes.explorer.dataModels}
               color="black"
               underline="hover"
               fontWeight="700"
@@ -78,8 +77,7 @@ export default function ExplorerNavbar() {
             </MuiLink>
             <MuiLink
               component={Link}
-              href="/explorer/"
-              target="_blank"
+              href={routes.explorer.dataRequestTemplates}
               color="black"
               underline="hover"
               fontWeight="700"

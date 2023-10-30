@@ -29,7 +29,7 @@ export default function DataModelDetailHeader({ id, title, tags }: Props) {
           <ExplorerBreadcrumb
             paths={[
               {
-                route: routes.explorerDataModels,
+                route: routes.explorer.dataModels,
                 label: explorerDataModels.title,
               },
               {
@@ -53,15 +53,15 @@ export default function DataModelDetailHeader({ id, title, tags }: Props) {
         <GTWTabs>
           <GTWTab
             label={common.general.overview}
-            href={routes.explorerDataModel(id)}
+            href={routes.explorer.dataModel(id)}
           />
           <GTWTab
             label={explorerDataModelDetail.tabs.issuers}
-            href={routes.explorerDataModelIssuers(id)}
+            href={routes.explorer.dataModelIssuers(id)}
           />
           <GTWTab
             label={explorerDataModelDetail.tabs.tied_request_templates}
-            href={routes.explorerDataModelRequestTemplates(id)}
+            href={routes.explorer.dataModelRequestTemplates(id)}
           />
         </GTWTabs>
       </Container>

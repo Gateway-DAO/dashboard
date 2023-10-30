@@ -13,6 +13,7 @@ export default function DataModelsExplorerPage() {
         title={explorerDataModels.title}
         subtitle={explorerDataModels.subtitle}
         help={explorerDataModels.help}
+        infoCard
         sx={{
           backgroundColor: 'primary.light',
         }}

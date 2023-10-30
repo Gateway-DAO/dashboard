@@ -13,12 +13,19 @@ import InfoCard from '../info-card/info-card';
 
 type Props = {
   title: string;
-  subtitle: string;
-  help: string;
+  subtitle?: string;
+  help?: string;
+  infoCard?: boolean;
   sx?: SxProps;
 };
 
-export default function ExplorerHero({ title, subtitle, help, sx }: Props) {
+export default function ExplorerHero({
+  title,
+  subtitle,
+  help,
+  infoCard,
+  sx,
+}: Props) {
   return (
     <Box
       sx={{
@@ -49,22 +56,31 @@ export default function ExplorerHero({ title, subtitle, help, sx }: Props) {
           <Typography color="text.secondary" mb={3}>
             {subtitle}
           </Typography>
-          <MuiLink component={Link} href="/" fontWeight="700" underline="hover">
-            {help}
-          </MuiLink>
+          {help && (
+            <MuiLink
+              component={Link}
+              href="/"
+              fontWeight="700"
+              underline="hover"
+            >
+              {help}
+            </MuiLink>
+          )}
         </Box>
-        <InfoCard
-          sx={{
-            width: {
-              md: 'calc(50% - 16px)',
-              lg: 'calc(25% - 16px)',
-            },
-            display: {
-              xs: 'none',
-              md: 'flex',
-            },
-          }}
-        />
+        {infoCard && (
+          <InfoCard
+            sx={{
+              width: {
+                md: 'calc(50% - 16px)',
+                lg: 'calc(25% - 16px)',
+              },
+              display: {
+                xs: 'none',
+                md: 'flex',
+              },
+            }}
+          />
+        )}
       </Stack>
     </Box>
   );

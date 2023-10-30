@@ -16,47 +16,46 @@ export const dashboardOrgMenuItems = (
 ): GTWMenuItemSettings[] => [
   {
     name: 'Home',
-    href: routes.dashboardOrgHome(username),
-    activeHrefs: [routes.dashboardOrgHome(username)],
+    href: routes.dashboard.org.home(username),
+    activeHrefs: [routes.dashboard.org.home(username)],
     icon: HomeOutlined,
     navbar: true,
   },
   {
     name: 'Issuances',
-    href: routes.dashboardOrgIssuedAssets(username),
-    activeHrefs: [routes.dashboardOrgIssuedAssets(username)],
+    href: routes.dashboard.org.issuedAssets(username),
+    activeHrefs: [routes.dashboard.org.issuedAssets(username)],
     icon: DataOutlinedIcon,
     navbar: true,
   },
   {
     name: 'Data Requests',
-    href: routes.dashboardOrgRequests(username),
-    activeHrefs: [routes.dashboardOrgRequests(username)],
+    href: routes.dashboard.org.requests(username),
+    activeHrefs: [routes.dashboard.org.requests(username)],
     icon: DataRequestOutlinedIcon,
     navbar: true,
   },
   {
     name: 'Received Data Proofs',
-    href: routes.dashboardOrgReceivedProofs(username),
-    activeHrefs: [routes.dashboardOrgReceivedProofs(username)],
+    href: routes.dashboard.org.receivedProofs(username),
+    activeHrefs: [routes.dashboard.org.receivedProofs(username)],
     icon: DataProofOutlinedIcon,
   },
   {
     name: 'Data Models',
-    href: routes.dashboardOrgMyDataModels(username),
+    href: routes.dashboard.org.myDataModels(username),
     activeHrefs: [
-      routes.dashboardOrgMyDataModels(username),
-      routes.dashboardOrgNetworkDataModels(username),
+      routes.dashboard.org.myDataModels(username),
+      routes.dashboard.org.networkDataModels(username),
     ],
     icon: DataModelOutlinedIcon,
   },
   {
-
     name: 'Request Templates',
-    href: routes.dashboardOrgMyRequestTemplates(username),
+    href: routes.dashboard.org.myRequestTemplates(username),
     activeHrefs: [
-      routes.dashboardOrgMyRequestTemplates(username),
-      routes.dashboardOrgNetworkRequestTemplates(username),
+      routes.dashboard.org.myRequestTemplates(username),
+      routes.dashboard.org.networkRequestTemplates(username),
     ],
 
     icon: DataRequestTemplateOutlinedIcon,

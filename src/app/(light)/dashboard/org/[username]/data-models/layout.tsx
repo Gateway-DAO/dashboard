@@ -31,11 +31,11 @@ export default async function OrgDataModelsLayout({ children, params }: any) {
         <GTWTabs>
           <GTWTab
             label={datamodels.my_data_models}
-            href={routes.dashboardOrgMyDataModels(pathnameOrg)}
+            href={routes.dashboard.org.myDataModels(pathnameOrg)}
           />
           <GTWTab
             label={datamodels.network_data_models}
-            href={routes.dashboardOrgNetworkDataModels(pathnameOrg)}
+            href={routes.dashboard.org.networkDataModels(pathnameOrg)}
           />
         </GTWTabs>
       </Box>

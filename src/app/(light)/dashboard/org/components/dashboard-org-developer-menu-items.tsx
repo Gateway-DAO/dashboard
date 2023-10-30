@@ -10,14 +10,14 @@ export const dashboardOrgDevelopersMenuItems = (
 ): GTWMenuItemSettings[] => [
   {
     name: 'Developer Access',
-    href: routes.dashboardOrgDeveloperAccess(username),
-    activeHrefs: [routes.dashboardOrgDeveloperAccess(username)],
+    href: routes.dashboard.org.developerAccess(username),
+    activeHrefs: [routes.dashboard.org.developerAccess(username)],
     icon: CodeOutlined,
   },
   {
     name: 'Playground',
-    href: routes.dashboardOrgPlayground(username),
-    activeHrefs: [routes.dashboardOrgPlayground(username)],
+    href: routes.dashboard.org.playground(username),
+    activeHrefs: [routes.dashboard.org.playground(username)],
     icon: CodeBlocksOutlinedIcon,
   },
   {

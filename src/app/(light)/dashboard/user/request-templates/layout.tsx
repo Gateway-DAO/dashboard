@@ -42,11 +42,11 @@ export default function DataRequestTeampltesLayout({
         <GTWTabs>
           <GTWTab
             label={requestTemplates.my_data_request_templates}
-            href={routes.dashboardUserMyRequestTemplates}
+            href={routes.dashboard.user.myRequestTemplates}
           />
           <GTWTab
             label={requestTemplates.network_data_request_templates}
-            href={routes.dashboardUserNetworkRequestTemplates}
+            href={routes.dashboard.user.networkRequestTemplates}
           />
         </GTWTabs>
       </Box>
