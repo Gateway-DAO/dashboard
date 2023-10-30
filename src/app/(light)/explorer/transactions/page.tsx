@@ -1,23 +1,26 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Container, Stack, Typography } from '@mui/material';
 
-import ExplorerHero from '../components/hero/hero';
+import TransactionsNumbers from './components/transactions-numbers';
 
 export default function Transaction() {
   return (
-    <ExplorerHero
-      title="Transactions"
-      sx={{
-        backgroundColor: 'primary.light',
-      }}
-    />
-    // <Stack>
-    //   <Typography variant="h2">Transactions</Typography>
-    //   <Stack>
-    //     <Box>
-    //       <Typography variant="subtitle1">Transactions</Typography>
-    //       <Typography variant="h5">88043405</Typography>
-    //     </Box>
-    //   </Stack>
-    // </Stack>
+    <>
+      <Box
+        sx={{
+          pt: 21,
+          pb: 6,
+          bgcolor: 'primary.light',
+        }}
+      >
+        <Stack
+          component={Container}
+          maxWidth="xl"
+          justifyContent="space-between"
+        >
+          <Typography variant="h2">Transactions</Typography>
+          <TransactionsNumbers />
+        </Stack>
+      </Box>
+    </>
   );
 }

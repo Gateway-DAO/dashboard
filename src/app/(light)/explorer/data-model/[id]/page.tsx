@@ -4,6 +4,7 @@ import { PageProps } from '@/types/next';
 import { Divider, Typography } from '@mui/material';
 import { Box, Container, Stack } from '@mui/system';
 
+import NumberCard from '../../components/number-card/number-card';
 import DataModelClaims from './components/claims/claims';
 import DataModelDetails from './components/details/details';
 import DataModelDetailHeader from './components/header';
@@ -58,24 +59,11 @@ export default async function DataModelPage({
             sx={{ mt: 4, mb: 3 }}
           >
             {stats.map((stat) => (
-              <Stack
+              <NumberCard
                 key={stat.label}
-                gap={2}
-                justifyContent="space-between"
-                sx={{
-                  backgroundColor: 'primary.light',
-                  p: 2,
-                  borderRadius: 1,
-                  flex: 1,
-                }}
-              >
-                <Typography variant="subtitle1" color="#9247D3">
-                  {stat.label}
-                </Typography>
-                <Typography variant="h5" color="#53128C">
-                  {stat.value}
-                </Typography>
-              </Stack>
+                label={stat.label}
+                value={stat.value}
+              />
             ))}
           </Stack>
           <DataModelDetails dataModel={dataModel} />
