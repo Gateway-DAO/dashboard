@@ -7,8 +7,12 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
 import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
-import DataModelsExplorerSearchFilters from './filters';
 import DataModelExplorerCardLoading from '../../../components/data-model-card/data-model-card-loading';
+import AmountOfIssuancesField from './fields/amount-of-issuances-field';
+import ConsumpitonPriceField from './fields/consumpiton-price-field';
+import SortByField from './fields/sort-by-field';
+import TagsField from './fields/tags-field';
+import DataModelsExplorerSearchFilters from './filters';
 
 export default function DataModelsExplorerSearch() {
   const dataModels = useInfiniteQuery({
@@ -36,8 +40,15 @@ export default function DataModelsExplorerSearch() {
       >
         {explorerDataModels.listTitle}
       </Typography>
-      <DataModelsExplorerSearchFilters />
-
+      <DataModelsExplorerSearchFilters
+        onSearch={() => {}}
+        isSearching={dataModels.isFetching}
+      >
+        <TagsField />
+        <ConsumpitonPriceField />
+        <AmountOfIssuancesField />
+        <SortByField />
+      </DataModelsExplorerSearchFilters>
       <Box
         display="grid"
         gridTemplateColumns={{

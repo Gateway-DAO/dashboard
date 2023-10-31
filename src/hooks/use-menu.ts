@@ -1,5 +1,5 @@
 'use client';
-import { MouseEvent, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 /**
  * Helper hook for managing the state of the MUI menu
@@ -9,9 +9,12 @@ import { MouseEvent, useCallback, useMemo, useState } from 'react';
 export function useMenu() {
   const [element, setElement] = useState<null | HTMLElement>(null);
   const isOpen = useMemo(() => !!element, [element]);
-  const onOpen = useCallback((event: MouseEvent<HTMLElement>) => {
-    setElement(event.currentTarget);
-  }, []);
+  const onOpen = useCallback(
+    (event: { currentTarget: EventTarget & HTMLElement }) => {
+      setElement(event.currentTarget);
+    },
+    []
+  );
   const onClose = useCallback(() => {
     setElement(null);
   }, []);
