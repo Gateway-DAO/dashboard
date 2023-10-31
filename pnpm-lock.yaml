@@ -262,6 +262,12 @@ devDependencies:
   '@types/react-slick':
     specifier: ^0.23.10
     version: 0.23.10
+  '@types/react-window':
+    specifier: ^1.8.7
+    version: 1.8.7
+  '@types/react-window-infinite-loader':
+    specifier: ^1.0.8
+    version: 1.0.8
   '@types/testing-library__cypress':
     specifier: ^5.0.10
     version: 5.0.10
@@ -8808,6 +8814,19 @@ packages:
     dependencies:
       '@types/react': 18.2.20
     dev: false
+
+  /@types/react-window-infinite-loader@1.0.8:
+    resolution: {integrity: sha512-3nejrLXFA8fl9QfrzqL2L5/fMYgj8bDM/lWGcKKOJnaLQ6cbzRYFXDy6lUGnBon2lAC6fSwNMvu4YxieJppr1g==}
+    dependencies:
+      '@types/react': 18.2.20
+      '@types/react-window': 1.8.7
+    dev: true
+
+  /@types/react-window@1.8.7:
+    resolution: {integrity: sha512-FpPHEhmGVOBKomuR4LD2nvua1Ajcw6PfnfbDysuCwwPae3JNulcq3+uZIpQNbDN2AI1z+Y4tKj2xQ4ELiQ4QDw==}
+    dependencies:
+      '@types/react': 18.2.20
+    dev: true
 
   /@types/react@18.2.20:
     resolution: {integrity: sha512-WKNtmsLWJM/3D5mG4U84cysVY31ivmyw85dE84fOCk5Hx78wezB/XEjVPWl2JTZ5FkEeaTJf+VgUAUn3PE7Isw==}

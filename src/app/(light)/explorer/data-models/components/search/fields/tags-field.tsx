@@ -2,6 +2,8 @@
 import { useState } from 'react';
 
 import { explorerDataModels } from '@/locale/en/datamodel';
+import { FixedSizeList } from 'react-window';
+import { PartialDeep } from 'type-fest';
 
 import {
   Box,
@@ -11,6 +13,7 @@ import {
   InputLabel,
   ListItemText,
   MenuItem,
+  MenuProps,
   OutlinedInput,
   Select,
   SelectChangeEvent,
@@ -20,16 +23,18 @@ import useMetadata from '../use-metadata';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-const MenuProps = {
+const menuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 250,
     },
   },
+  MenuListProps: {
+    style: {
+      padding: 0,
+    },
+  },
 };
-
-// TODO: Handle massive amount of tags
 
 export default function TagsField() {
   const [selectedTags, setTags] = useState<string[]>([]);
@@ -64,14 +69,27 @@ export default function TagsField() {
         onChange={handleChange}
         input={<OutlinedInput id="tags-chip" label="Tags" />}
         renderValue={(selectedTags) => selectedTags.join(', ')}
-        MenuProps={MenuProps}
+        MenuProps={menuProps}
       >
-        {metadata.data?.filteredDataModels.metadata.tags.map((tag) => (
-          <MenuItem key={tag} value={tag}>
-            <Checkbox checked={selectedTags.indexOf(tag) > -1} />
-            <ListItemText primary={tag} />
-          </MenuItem>
-        ))}
+        <FixedSizeList
+          height={ITEM_HEIGHT * 4.5}
+          itemCount={
+            metadata.data?.filteredDataModels.metadata.tags.length ?? 0
+          }
+          itemSize={ITEM_HEIGHT}
+          itemData={metadata.data?.filteredDataModels.metadata.tags ?? []}
+          width={menuProps.PaperProps.style.width}
+        >
+          {({ data, index, style }) => {
+            const tag = data[index];
+            return (
+              <MenuItem key={tag} value={tag} style={style}>
+                <Checkbox checked={selectedTags.indexOf(tag) > -1} />
+                <ListItemText primary={tag} />
+              </MenuItem>
+            );
+          }}
+        </FixedSizeList>
       </Select>
     </FormControl>
   );
