@@ -1,19 +1,15 @@
 'use client';
-import { useState } from 'react';
+
+import { useCallback } from 'react';
 
 import { explorerDataModels } from '@/locale/en/datamodel';
-import { FixedSizeList } from 'react-window';
-import { PartialDeep } from 'type-fest';
 
 import {
-  Box,
   Checkbox,
-  Chip,
   FormControl,
   InputLabel,
   ListItemText,
   MenuItem,
-  MenuProps,
   OutlinedInput,
   Select,
   SelectChangeEvent,
@@ -21,8 +17,6 @@ import {
 
 import useMetadata from '../use-metadata';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
 const menuProps = {
   PaperProps: {
     style: {
@@ -45,15 +39,19 @@ export default function TagsField({ setTags, selectedTags }: Props) {
   const metadata = useMetadata();
   const tags = metadata.data?.dataModelsMetadata.tags ?? [];
 
-  const handleChange = (event: SelectChangeEvent<typeof selectedTags>) => {
-    const {
-      target: { value },
-    } = event;
-    setTags(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value ?? []
-    );
-  };
+  const handleChange = useCallback(
+    (event: SelectChangeEvent<typeof selectedTags>) => {
+      const {
+        target: { value },
+      } = event;
+
+      setTags(
+        // On autofill we get a stringified value.
+        typeof value === 'string' ? value.split(',') : value ?? []
+      );
+    },
+    []
+  );
 
   return (
     <FormControl
@@ -73,30 +71,17 @@ export default function TagsField({ setTags, selectedTags }: Props) {
         value={selectedTags}
         onChange={handleChange}
         input={<OutlinedInput id="tags-chip" label="Tags" />}
-        renderValue={(selectedTags) => selectedTags.join(', ')}
+        renderValue={(value) => value.join(', ')}
         MenuProps={menuProps}
       >
-        <FixedSizeList
-          height={ITEM_HEIGHT * 4.5}
-          itemCount={tags.length ?? 0}
-          itemSize={ITEM_HEIGHT}
-          itemData={tags ?? []}
-          width={menuProps.PaperProps.style.width}
-        >
-          {({ data, index, style }) => {
-            const tag = data[index];
-            return (
-              <MenuItem key={tag} value={tag} style={style}>
-                <Checkbox
-                  checked={
-                    selectedTags ? selectedTags.indexOf(tag) > -1 : false
-                  }
-                />
-                <ListItemText primary={tag} />
-              </MenuItem>
-            );
-          }}
-        </FixedSizeList>
+        {tags.map((tag) => (
+          <MenuItem key={tag} value={tag}>
+            <Checkbox
+              checked={selectedTags ? selectedTags.indexOf(tag) > -1 : false}
+            />
+            <ListItemText primary={tag} />
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );

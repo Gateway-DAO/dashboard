@@ -17,7 +17,7 @@ import TagsField from './fields/tags-field';
 import DataModelsExplorerSearchFilters from './filters';
 
 export default function DataModelsExplorerSearch() {
-  const [selectedTags, setSelectedTags] = useState<string[]>();
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedConsumptionPrice, setSelectedConsumptionPrice] = useState<
     number[]
   >([]);
@@ -39,7 +39,7 @@ export default function DataModelsExplorerSearch() {
     queryFn: ({ pageParam = 0 }) =>
       apiPublic.explorer_data_models_list({
         filter: {
-          tags: selectedTags,
+          tags: selectedTags.length > 0 ? selectedTags : undefined,
           consumptionPrice:
             selectedConsumptionPrice.length > 0
               ? {
