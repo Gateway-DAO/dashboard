@@ -31,14 +31,12 @@ const menuProps = {
 };
 
 type Props = {
+  tags: string[];
   selectedTags?: string[];
   setTags: (tags: string[]) => void;
 };
 
-export default function TagsField({ setTags, selectedTags }: Props) {
-  const metadata = useMetadata();
-  const tags = metadata.data?.dataModelsMetadata.tags ?? [];
-
+export default function TagsField({ tags, setTags, selectedTags }: Props) {
   const handleChange = useCallback(
     (event: SelectChangeEvent<typeof selectedTags>) => {
       const {

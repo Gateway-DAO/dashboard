@@ -15,8 +15,10 @@ import ConsumpitonPriceField from './fields/consumpiton-price-field';
 import SortByField from './fields/sort-by-field';
 import TagsField from './fields/tags-field';
 import DataModelsExplorerSearchFilters from './filters';
+import useMetadata from './use-metadata';
 
 export default function DataModelsExplorerSearch() {
+  const metadata = useMetadata();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedConsumptionPrice, setSelectedConsumptionPrice] = useState<
     number[]
@@ -24,6 +26,10 @@ export default function DataModelsExplorerSearch() {
   const [selectedAmountOfIssuances, setSelectedAmountOfIssuances] = useState<
     number[]
   >([]);
+  const tags = metadata.data?.dataModelsMetadata.tags ?? [];
+  const consumptionPrice =
+    metadata.data?.dataModelsMetadata.consumptionPrice ?? 0;
+  const issuedCount = metadata.data?.dataModelsMetadata.issuedCount ?? 0;
 
   const dataModels = useInfiniteQuery({
     queryKey: [
@@ -61,6 +67,8 @@ export default function DataModelsExplorerSearch() {
       lastPage.dataModels.length === 12 ? allPages.length * 12 : undefined,
   });
 
+  console.log(selectedConsumptionPrice);
+
   return (
     <Container
       component={Stack}
@@ -78,21 +86,35 @@ export default function DataModelsExplorerSearch() {
       >
         {explorerDataModels.listTitle}
       </Typography>
-      <DataModelsExplorerSearchFilters
-        onSearch={() => {}}
-        isSearching={dataModels.isFetching}
-      >
-        <TagsField selectedTags={selectedTags} setTags={setSelectedTags} />
-        <ConsumpitonPriceField
-          selectedConsumptionPrice={selectedConsumptionPrice}
-          setConsumptionPrice={setSelectedConsumptionPrice}
-        />
-        <AmountOfIssuancesField
-          selectedAmountOfIssuances={selectedAmountOfIssuances}
-          setAmountOfIssuances={setSelectedAmountOfIssuances}
-        />
-        <SortByField />
-      </DataModelsExplorerSearchFilters>
+      {metadata.isSuccess && (
+        <DataModelsExplorerSearchFilters
+          onSearch={() => {}}
+          isSearching={dataModels.isFetching}
+        >
+          <TagsField
+            tags={tags}
+            selectedTags={selectedTags}
+            setTags={setSelectedTags}
+          />
+          <ConsumpitonPriceField
+            min={consumptionPrice.min}
+            max={consumptionPrice.max}
+            selectedConsumptionPrice={selectedConsumptionPrice}
+            setConsumptionPrice={(value: number[]) => {
+              console.log(value);
+              setSelectedConsumptionPrice(value);
+            }}
+          />
+          <AmountOfIssuancesField
+            min={issuedCount.min}
+            max={issuedCount.max}
+            selectedAmountOfIssuances={selectedAmountOfIssuances}
+            setAmountOfIssuances={setSelectedAmountOfIssuances}
+          />
+          <SortByField />
+        </DataModelsExplorerSearchFilters>
+      )}
+
       <Box
         display="grid"
         gridTemplateColumns={{
