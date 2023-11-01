@@ -161,7 +161,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
       sx={defaultGridCustomization}
       onRowClick={(params: GridRowParams) => {
         router.push(
-          routes.dashboardOrgAsset(organization?.gatewayId, params.id)
+          routes.dashboard.org.asset(organization?.gatewayId, params.id)
         );
       }}
     />

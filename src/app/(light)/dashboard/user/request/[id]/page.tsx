@@ -133,8 +133,8 @@ export default async function DashboardUserDataRequest({
         <BackButton
           href={
             !!organization?.id
-              ? routes.dashboardOrgRequests(organization?.gatewayId)
-              : routes.dashboardUserRequests
+              ? routes.dashboard.org.requests(organization?.gatewayId)
+              : routes.dashboard.user.requests
           }
         />
       </TopBarContainer>

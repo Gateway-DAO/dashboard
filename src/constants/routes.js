@@ -1,63 +1,75 @@
+const dashboardUser = '/dashboard/user';
+const dashboardOrg = '/dashboard/org';
+const explorer = '/explorer';
 const routes = {
   home: '/',
   auth: '/login',
   learn: '/learn',
   build: '/build',
-  explorer: '/explorer',
-  dashboardUserHome: '/dashboard/user/home',
-  dashboardUserAsset: (pdaId) => `/dashboard/user/asset/${pdaId}`,
-  dashboardOrgAsset: (org, pdaId) => `/dashboard/org/${org}/asset/${pdaId}`,
-  dashboardUserIssuedAssets: '/dashboard/user/assets/issued',
-  dashboardUserReceivedAssets: '/dashboard/user/assets/received',
-  dashboardUserProofs: `/dashboard/user/proofs`,
-  dashboardUserProof: (proofId) => `/dashboard/user/proof/${proofId}`,
-  dashboardOrgProof: (org, proofId) => `/dashboard/org/${org}/proof/${proofId}`,
-  dashboardUserSentProofs: '/dashboard/user/proofs/sent',
-  dashboardUserReceivedProofs: '/dashboard/user/proofs/received',
-  dashboardUserRequest: (requestId) => `/dashboard/user/request/${requestId}`,
-  dashboardOrgRequest: (org, requestId) =>
-    `/dashboard/org/${org}/request/${requestId}`,
-  dashboardUserRequests: '/dashboard/user/requests',
-  dashboardUserMyRequestTemplates: '/dashboard/user/request-templates/my',
-  dashboardUserNetworkRequestTemplates:
-    '/dashboard/user/request-templates/network',
-  dashboardUserMyDataModels: '/dashboard/user/data-models/my',
-  dashboardUserNetworkDataModels: '/dashboard/user/data-models/network',
-  dashboardUserSettings: '/dashboard/user/settings',
-  dashboardOrgRoot: '/dashboard/org',
-  dashboardOrgHome: (organizationId) => `/dashboard/org/${organizationId}/home`,
-  dashboardOrgIssuedAssets: (organizationId) =>
-    `/dashboard/org/${organizationId}/assets/issued`,
-  dashboardOrgRequests: (organizationId) =>
-    `/dashboard/org/${organizationId}/requests`,
-  dashboardOrgMyRequestTemplates: (organizationId) =>
-    `/dashboard/org/${organizationId}/request-templates/my`,
-  dashboardOrgNetworkRequestTemplates: (organizationId) =>
-    `/dashboard/org/${organizationId}/request-templates/network`,
-  dashboardOrgMyDataModels: (organizationId) =>
-    `/dashboard/org/${organizationId}/data-models/my`,
-  dashboardOrgNetworkDataModels: (organizationId) =>
-    `/dashboard/org/${organizationId}/data-models/network`,
-  dashboardOrgReceivedProofs: (organizationId) =>
-    `/dashboard/org/${organizationId}/proofs/received`,
-  dashboardOrgSettings: (organizationId) =>
-    `/dashboard/org/${organizationId}/settings`,
-  dashboardUserDeveloperAccess: '/dashboard/user/developer-access',
-  dashboardOrgDeveloperAccess: (organizationId) =>
-    `/dashboard/org/${organizationId}/developer-access`,
-  dashboardOrgPlayground: (organizationId) =>
-    `/dashboard/org/${organizationId}/playground`,
-  dashboardUserPlayground: '/dashboard/user/playground',
-  dashboardUserWallet: '/dashboard/user/wallet',
-  dashboardOrgWallet: (organizationId) =>
-    `/dashboard/org/${organizationId}/wallet`,
-  explorer: '/explorer',
-  explorerDataModels: '/explorer/data-models',
-  explorerDataModel: (dataModelId) => `/explorer/data-model/${dataModelId}`,
-  explorerDataModelIssuers: (dataModelId) =>
-    `/explorer/data-model/${dataModelId}/issuers`,
-  explorerDataModelRequestTemplates: (dataModelId) =>
-    `/explorer/data-model/${dataModelId}/request-templates`,
+  dashboard: {
+    org: {
+      asset: (org, pdaId) => `${dashboardOrg}/${org}/asset/${pdaId}`,
+      proof: (org, proofId) => `${dashboardOrg}/${org}/proof/${proofId}`,
+      request: (org, requestId) =>
+        `${dashboardOrg}/${org}/request/${requestId}`,
+      home: (organizationId) => `${dashboardOrg}/${organizationId}/home`,
+      issuedAssets: (organizationId) =>
+        `${dashboardOrg}/${organizationId}/assets/issued`,
+      requests: (organizationId) =>
+        `${dashboardOrg}/${organizationId}/requests`,
+      myRequestTemplates: (organizationId) =>
+        `${dashboardOrg}/${organizationId}/request-templates/my`,
+      networkRequestTemplates: (organizationId) =>
+        `${dashboardOrg}/${organizationId}/request-templates/network`,
+      myDataModels: (organizationId) =>
+        `${dashboardOrg}/${organizationId}/data-models/my`,
+      networkDataModels: (organizationId) =>
+        `${dashboardOrg}/${organizationId}/data-models/network`,
+      receivedProofs: (organizationId) =>
+        `${dashboardOrg}/${organizationId}/proofs/received`,
+      settings: (organizationId) =>
+        `${dashboardOrg}/${organizationId}/settings`,
+      developerAccess: (organizationId) =>
+        `${dashboardOrg}/${organizationId}/developer-access`,
+      playground: (organizationId) =>
+        `${dashboardOrg}/${organizationId}/playground`,
+      wallet: (organizationId) => `${dashboardOrg}/${organizationId}/wallet`,
+      root: dashboardOrg,
+    },
+    user: {
+      home: `${dashboardUser}/home`,
+      asset: (pdaId) => `${dashboardUser}/asset/${pdaId}`,
+      issuedAssets: `${dashboardUser}/assets/issued`,
+      receivedAssets: `${dashboardUser}/assets/received`,
+      proofs: `${dashboardUser}/proofs`,
+      proof: (proofId) => `${dashboardUser}/proof/${proofId}`,
+      sentProofs: `${dashboardUser}/proofs/sent`,
+      receivedProofs: `${dashboardUser}/proofs/received`,
+      request: (requestId) => `${dashboardUser}/request/${requestId}`,
+      requests: `${dashboardUser}/requests`,
+      myRequestTemplates: `${dashboardUser}/request-templates/my`,
+      networkRequestTemplates: `${dashboardUser}/request-templates/network`,
+      myDataModels: `${dashboardUser}/data-models/my`,
+      networkDataModels: `${dashboardUser}/data-models/network`,
+      settings: `${dashboardUser}/settings`,
+      developerAccess: `${dashboardUser}/developer-access`,
+      playground: `${dashboardUser}/playground`,
+      wallet: `${dashboardUser}/wallet`,
+    },
+  },
+  explorer: {
+    root: explorer,
+    transactions: `${explorer}/transactions`,
+    dataModels: `${explorer}/data-models`,
+    dataRequestTemplates: '${explorer}/request-templates',
+    dataModel: (dataModelId) => `${explorer}/data-model/${dataModelId}`,
+    dataModelIssuers: (dataModelId) =>
+      `${explorer}/data-model/${dataModelId}/issuers`,
+    dataModelRequestTemplates: (dataModelId) =>
+      `${explorer}/data-model/${dataModelId}/request-templates`,
+    requestTemplate: (requestTemplateId) =>
+      `${explorer}/request-template/${requestTemplateId}`,
+  },
 };
 
 module.exports = routes;

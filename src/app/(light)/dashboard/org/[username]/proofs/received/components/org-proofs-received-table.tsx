@@ -138,7 +138,7 @@ export default function OrganizationProofsReceivedTable({
       sx={defaultGridCustomization}
       onRowClick={(value) => {
         router.push(
-          routes.dashboardOrgProof(organization?.gatewayId, value?.id)
+          routes.dashboard.org.proof(organization?.gatewayId, value?.id)
         );
       }}
     />

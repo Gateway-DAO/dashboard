@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import {
@@ -7,6 +8,7 @@ import {
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
+import { transaction } from '@/locale/en/transaction';
 import { numberToMoneyString } from '@/utils/money';
 import { useToggle } from '@react-hookz/web';
 import dayjs from 'dayjs';
@@ -16,9 +18,6 @@ import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
 import { TransactionModal } from '../transaction/transaction-modal';
 import TransactionStatusChip from '../transaction/transaction-status-chip';
-import { transaction } from '@/locale/en/transaction';
-import { useRouter } from 'next-nprogress-bar';
-import routes from '@/constants/routes';
 
 type Props = {
   initialData: any; //partialDeep somethig
@@ -83,7 +82,7 @@ export default function TransactionsTable({
   const toggleTransactionModal = (value: boolean) => {
     if (!value) {
       toggleTransaction(value);
-      router.push(routes.dashboardUserWallet, { scroll: false });
+      router.push('', { scroll: false });
     } else {
       toggleTransaction(value);
       router.push('#transaction', { scroll: false });

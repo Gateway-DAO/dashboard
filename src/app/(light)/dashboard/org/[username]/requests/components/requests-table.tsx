@@ -142,7 +142,7 @@ export default function OrgRequestsTable({
       rowCount={totalCount}
       onRowClick={(params: GridRowParams) => {
         router.push(
-          routes.dashboardOrgRequest(organization?.gatewayId, params.id)
+          routes.dashboard.org.request(organization?.gatewayId, params.id)
         );
       }}
       sx={defaultGridCustomization}
