@@ -17,7 +17,15 @@ import {
   InputAdornment,
 } from '@mui/material';
 
-export default function AmountOfIssuancesField() {
+type Props = {
+  selectedAmountOfIssuances: number[];
+  setAmountOfIssuances: (amountOfIssuances: number[]) => void;
+};
+
+export default function AmountOfIssuancesField({
+  selectedAmountOfIssuances,
+  setAmountOfIssuances,
+}: Props) {
   const [values, setValues] = useState<number[]>([0, 1000]);
   const [isOpen, setOpen] = useState(false);
   const onOpen = () => setOpen(true);

@@ -1,4 +1,6 @@
 'use client';
+import { useState } from 'react';
+
 import { common } from '@/locale/en/common';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
@@ -15,10 +17,46 @@ import TagsField from './fields/tags-field';
 import DataModelsExplorerSearchFilters from './filters';
 
 export default function DataModelsExplorerSearch() {
+  const [selectedTags, setSelectedTags] = useState<string[]>();
+  const [selectedConsumptionPrice, setSelectedConsumptionPrice] = useState<
+    number[]
+  >([]);
+  const [selectedAmountOfIssuances, setSelectedAmountOfIssuances] = useState<
+    number[]
+  >([]);
+
   const dataModels = useInfiniteQuery({
-    queryKey: ['data-models'],
+    queryKey: [
+      'data-models',
+      selectedTags,
+      selectedConsumptionPrice,
+      selectedConsumptionPrice[0],
+      selectedConsumptionPrice[1],
+      selectedAmountOfIssuances,
+      selectedAmountOfIssuances[0],
+      selectedAmountOfIssuances[1],
+    ],
     queryFn: ({ pageParam = 0 }) =>
-      apiPublic.explorer_data_models_list({ filter: {}, skip: pageParam }),
+      apiPublic.explorer_data_models_list({
+        filter: {
+          tags: selectedTags,
+          consumptionPrice:
+            selectedConsumptionPrice.length > 0
+              ? {
+                  min: selectedConsumptionPrice[0],
+                  max: selectedConsumptionPrice[1],
+                }
+              : undefined,
+          issuedCount:
+            selectedAmountOfIssuances.length > 0
+              ? {
+                  min: selectedAmountOfIssuances[0],
+                  max: selectedAmountOfIssuances[1],
+                }
+              : undefined,
+        },
+        skip: pageParam,
+      }),
     getNextPageParam: (lastPage, allPages) =>
       lastPage.dataModels.length === 12 ? allPages.length * 12 : undefined,
   });
@@ -44,9 +82,15 @@ export default function DataModelsExplorerSearch() {
         onSearch={() => {}}
         isSearching={dataModels.isFetching}
       >
-        <TagsField />
-        <ConsumpitonPriceField />
-        <AmountOfIssuancesField />
+        <TagsField selectedTags={selectedTags} setTags={setSelectedTags} />
+        <ConsumpitonPriceField
+          selectedConsumptionPrice={selectedConsumptionPrice}
+          setConsumptionPrice={setSelectedConsumptionPrice}
+        />
+        <AmountOfIssuancesField
+          selectedAmountOfIssuances={selectedAmountOfIssuances}
+          setAmountOfIssuances={setSelectedAmountOfIssuances}
+        />
         <SortByField />
       </DataModelsExplorerSearchFilters>
       <Box

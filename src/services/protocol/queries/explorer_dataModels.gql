@@ -31,11 +31,10 @@ query explorer_data_models_list($filter: FilterDataModelInput, $skip: Int = 0) {
 }
 
 query explorer_data_models_metadata {
-  filteredDataModels {
-    metadata {
-      tags
-      consumptionPrice
-    }
+  dataModelsMetadata {
+    tags
+    consumptionPrice
+    issuedCount
   }
 }
 

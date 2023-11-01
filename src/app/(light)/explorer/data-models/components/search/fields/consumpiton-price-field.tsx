@@ -17,7 +17,15 @@ import {
   InputAdornment,
 } from '@mui/material';
 
-export default function ConsumpitonPriceField() {
+type Props = {
+  selectedConsumptionPrice: number[];
+  setConsumptionPrice: (consumptionPrice: number[]) => void;
+};
+
+export default function ConsumpitonPriceField({
+  selectedConsumptionPrice,
+  setConsumptionPrice,
+}: Props) {
   const [values, setValues] = useState<number[]>([0, 1000]);
   const [isOpen, setOpen] = useState(false);
   const onOpen = () => setOpen(true);

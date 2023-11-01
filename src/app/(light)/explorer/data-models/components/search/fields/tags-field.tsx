@@ -36,9 +36,14 @@ const menuProps = {
   },
 };
 
-export default function TagsField() {
-  const [selectedTags, setTags] = useState<string[]>([]);
+type Props = {
+  selectedTags?: string[];
+  setTags: (tags: string[]) => void;
+};
+
+export default function TagsField({ setTags, selectedTags }: Props) {
   const metadata = useMetadata();
+  const tags = metadata.data?.dataModelsMetadata.tags ?? [];
 
   const handleChange = (event: SelectChangeEvent<typeof selectedTags>) => {
     const {
@@ -46,7 +51,7 @@ export default function TagsField() {
     } = event;
     setTags(
       // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
+      typeof value === 'string' ? value.split(',') : value ?? []
     );
   };
 
@@ -73,18 +78,20 @@ export default function TagsField() {
       >
         <FixedSizeList
           height={ITEM_HEIGHT * 4.5}
-          itemCount={
-            metadata.data?.filteredDataModels.metadata.tags.length ?? 0
-          }
+          itemCount={tags.length ?? 0}
           itemSize={ITEM_HEIGHT}
-          itemData={metadata.data?.filteredDataModels.metadata.tags ?? []}
+          itemData={tags ?? []}
           width={menuProps.PaperProps.style.width}
         >
           {({ data, index, style }) => {
             const tag = data[index];
             return (
               <MenuItem key={tag} value={tag} style={style}>
-                <Checkbox checked={selectedTags.indexOf(tag) > -1} />
+                <Checkbox
+                  checked={
+                    selectedTags ? selectedTags.indexOf(tag) > -1 : false
+                  }
+                />
                 <ListItemText primary={tag} />
               </MenuItem>
             );
