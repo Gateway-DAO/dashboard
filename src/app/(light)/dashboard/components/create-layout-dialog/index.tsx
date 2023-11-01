@@ -34,7 +34,6 @@ import CreateOrgLayout from './create-org-layout';
 type Props = {
   open: boolean;
   onClose: () => void;
-  // setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 type UploadImageProps = {
