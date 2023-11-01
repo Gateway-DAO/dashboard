@@ -1,12 +1,14 @@
 'use client';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import MenuItemLink from '@/components/menu-item-link/menu-item-link';
 import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 import { auth } from '@/locale/en/auth';
+import { useToggle } from '@react-hookz/web';
 
 import AddIcon from '@mui/icons-material/Add';
 import {
@@ -20,17 +22,30 @@ import {
   alpha,
 } from '@mui/material';
 
-import CreateOrgDialog from '../create-layout-dialog';
+const CreateOrgDialog = dynamic(() => import('../create-layout-dialog'), {
+  ssr: false,
+});
 
 type Props = {
   onClose: () => void;
 };
 
 export default function AuthDropdownProfilesList({ onClose }: Props) {
+  const router = useRouter();
   const { data: session } = useSession();
 
   const { isOrg, organization } = useOrganization();
-  const [isCreateOrgDialog, setCreateOrgDialog] = useState(false);
+  const [isCreateOrgDialog, toggleDialog] = useToggle(false);
+
+  const toggleCreateOrgDialog = (value: boolean) => {
+    if (!value) {
+      toggleDialog(value);
+      router.push('');
+    } else {
+      router.push('#create-org');
+      toggleDialog(value);
+    }
+  };
 
   if (!session) return null;
 
@@ -47,7 +62,10 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
 
   return (
     <>
-      <CreateOrgDialog open={isCreateOrgDialog} setOpen={setCreateOrgDialog} />
+      <CreateOrgDialog
+        open={isCreateOrgDialog}
+        onClose={() => toggleCreateOrgDialog(false)}
+      />
       {accessess?.map(({ organization }) => (
         <MenuItemLink
           href={routes.dashboard.org.home(organization.gatewayId)}
@@ -93,7 +111,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
       )}
       <MenuItem
         onClick={() => {
-          setCreateOrgDialog(true);
+          toggleCreateOrgDialog(true);
         }}
       >
         <ListItemIcon>

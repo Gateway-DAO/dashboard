@@ -1,7 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import AvatarPicker from '@/components/form/avatar-picker/avatar-picker';
@@ -33,7 +33,7 @@ import CreateOrgLayout from './create-org-layout';
 
 type Props = {
   open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  onClose: () => void;
 };
 
 type UploadImageProps = {
@@ -41,7 +41,7 @@ type UploadImageProps = {
   org_id: string;
 };
 
-export default function CreateOrgDialog({ open, setOpen }: Props) {
+export default function CreateOrgDialog({ open, onClose }: Props) {
   const { update } = useSession();
   const { enqueueSnackbar } = useSnackbar();
   const [image, setImage] = useState<Blob | null>(null);
@@ -103,7 +103,7 @@ export default function CreateOrgDialog({ open, setOpen }: Props) {
     if (avaibility !== 'success') return;
     try {
       await createOrg.mutateAsync(data);
-      setOpen(false);
+      onClose();
       enqueueSnackbar(org.success, {
         variant: 'success',
       });
@@ -124,7 +124,7 @@ export default function CreateOrgDialog({ open, setOpen }: Props) {
     <Dialog fullScreen open={open}>
       <CreateOrgLayout
         closeButonProps={{
-          onClick: () => setOpen(false),
+          onClick: () => onClose(),
         }}
       >
         <Stack

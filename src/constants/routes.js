@@ -1,5 +1,5 @@
 const dashboardUser = '/dashboard/user';
-const dashboardOrg = 'dashboard/org';
+const dashboardOrg = '/dashboard/org';
 const explorer = '/explorer';
 const routes = {
   home: '/',
