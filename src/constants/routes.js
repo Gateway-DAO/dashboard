@@ -69,6 +69,10 @@ const routes = {
       `${explorer}/data-model/${dataModelId}/request-templates`,
     requestTemplate: (requestTemplateId) =>
       `${explorer}/request-template/${requestTemplateId}`,
+    requestTemplateVerifiers: (requestTemplateId) =>
+      `${explorer}/request-template/${requestTemplateId}/verifiers`,
+    requestTemplatePlayground: (requestTemplateId) =>
+      `${explorer}/request-template/${requestTemplateId}/playground`,
   },
 };
 

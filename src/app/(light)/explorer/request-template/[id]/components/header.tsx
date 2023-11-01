@@ -59,11 +59,11 @@ export default function RequestTemplateDetailHeader({
           />
           <GTWTab
             label={explorerRequestTemplateDetail.tabs.verifiers}
-            href={routes.explorer.requestTemplate(id)}
+            href={routes.explorer.requestTemplateVerifiers(id)}
           />
           <GTWTab
             label={explorerRequestTemplateDetail.tabs.playground}
-            href={routes.explorer.requestTemplate(id)}
+            href={routes.explorer.requestTemplatePlayground(id)}
           />
         </GTWTabs>
       </Container>

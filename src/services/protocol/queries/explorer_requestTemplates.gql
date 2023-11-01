@@ -40,3 +40,18 @@ query explorer_request_template_detail_overview($id: String!) {
     createdAt
   }
 }
+
+query explorer_request_template_detail_verifiers($id: String!) {
+  dataRequestTemplate(id: $id) {
+    id
+    name
+    tags
+    dataRequestsCount
+    user {
+      id
+      gatewayId
+      displayName
+      profilePicture
+    }
+  }
+}
