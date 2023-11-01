@@ -62,3 +62,22 @@ mutation add_org_user(
     role
   }
 }
+
+mutation create_org(
+  $name: String!
+  $username: String!
+  $description: String!
+  $website: String
+) {
+  createOrganization(
+    input: {
+      username: $username
+      name: $name
+      description: $description
+      website: $website
+    }
+  ) {
+    id
+    gatewayId
+  }
+}

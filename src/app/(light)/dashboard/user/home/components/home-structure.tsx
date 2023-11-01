@@ -1,11 +1,15 @@
 'use client';
 
+import { useState } from 'react';
+
+import GatewayDarkBanner from '@/components/icons/gateway-dark-banner';
 import { home } from '@/locale/en/home';
 
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Box } from '@mui/material';
 import { Button, Paper, Stack, Typography, Link } from '@mui/material';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import GatewayDarkBanner from '@/components/icons/gateway-dark-banner';
+
+import CreateOrgDialog from '../../../components/create-layout-dialog';
 import GetIcon from './get-icon';
 
 type Props = {
@@ -13,8 +17,10 @@ type Props = {
 };
 
 export default function HomeStructure({ username }: Props) {
+  const [isCreateOrgDialog, setCreateOrgDialog] = useState(false);
   return (
     <>
+      <CreateOrgDialog open={isCreateOrgDialog} setOpen={setCreateOrgDialog} />
       <Typography variant="h3" marginBottom={4} gutterBottom>
         {home.greeting} {username}
       </Typography>
@@ -87,6 +93,11 @@ export default function HomeStructure({ username }: Props) {
               mr: 1,
               textDecoration: 'none',
               '&:last-child': { mr: 0 },
+            }}
+            onClick={() => {
+              if (details.title == home.sub_banner[0].title) {
+                setCreateOrgDialog(true);
+              }
             }}
           >
             <Stack flexDirection={'column'} justifyContent={'space-between'}>

@@ -3,12 +3,17 @@ export const auth = {
     gatewayId: 'Manage Gateway ID',
     disconnect: 'Disconnect',
   },
+
+  create_org: {
+    title: 'Create an organization',
+    desc: 'Issue and verify on behalf of an organization',
+  },
   steps: {
     initial: {
       title: 'Enter the Gateway',
       title_email: 'Email',
       caption_email: 'Get started without a wallet',
-      connect_wallet: 'Connect Wallet', 
+      connect_wallet: 'Connect Wallet',
       connect_google: 'Continue with Google',
       connect_twitter: 'Continue with Twitter',
       connect_discord: 'Continue with Discord',
@@ -20,7 +25,7 @@ export const auth = {
       continue: 'Continue',
     },
     choose_email: {
-      title: 'Receive Notifications from Gateway Protocol', 
+      title: 'Receive Notifications from Gateway Protocol',
       subtitle: 'Email',
       description: 'By email you are notified when you receive a credential',
       label: 'E-mail',
