@@ -16,6 +16,7 @@ query explorer_request_template_detail_overview($id: String!) {
     uniqueVerifiersCount
     dataRequestsCount
     dataModels {
+      id
       title
       arweaveUrl
       schema

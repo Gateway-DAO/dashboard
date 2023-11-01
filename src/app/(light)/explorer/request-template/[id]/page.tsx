@@ -1,3 +1,4 @@
+import { explorerRequestTemplateDetailOverview } from '@/locale/en/request-template';
 import { apiPublic } from '@/services/protocol/api';
 import { PageProps } from '@/types/next';
 import { numberToMoneyString } from '@/utils/money';
@@ -5,8 +6,9 @@ import { numberToMoneyString } from '@/utils/money';
 import { Divider, Typography } from '@mui/material';
 import { Box, Container, Stack } from '@mui/system';
 
-import RequestTemplateDetails from './components/details/details';
+import RequestTemplateDetails from './components/details';
 import RequestTemplateDetailHeader from './components/header';
+import RequestedData from './components/requested-data';
 
 export default async function RequestTemplatePage({
   params: { id },
@@ -77,7 +79,20 @@ export default async function RequestTemplatePage({
       </Container>
       <Divider />
       <Container sx={{ pt: 4 }}>
-        <Box sx={{ maxWidth: 896 }}>test</Box>
+        <Box sx={{ maxWidth: 896 }}>
+          <Typography variant="h5" sx={{ mb: 3 }}>
+            {explorerRequestTemplateDetailOverview.data_request}
+          </Typography>
+          <Stack direction="column" gap={2} mt={2} mb={3}>
+            {dataRequestTemplate?.dataModels.map((dataModel: any) => (
+              <RequestedData
+                key={dataModel.id}
+                dataModel={dataModel}
+                raw={dataRequestTemplate}
+              />
+            ))}
+          </Stack>
+        </Box>
       </Container>
     </>
   );

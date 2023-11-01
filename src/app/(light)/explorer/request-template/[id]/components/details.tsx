@@ -7,6 +7,8 @@ import { common } from '@/locale/en/common';
 import { explorerRequestTemplateDetailOverview } from '@/locale/en/request-template';
 import { Explorer_Request_Template_Detail_OverviewQuery } from '@/services/protocol/types';
 import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
+import { numberToMoneyString } from '@/utils/money';
+import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
@@ -88,7 +90,7 @@ export default function DataModelDetails({ requestTemplate }: Props) {
             explorerRequestTemplateDetailOverview.labels.average_request_cost
           }
         >
-          <Typography>test</Typography>
+          <Typography>{numberToMoneyString(0)}</Typography>
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
@@ -106,7 +108,9 @@ export default function DataModelDetails({ requestTemplate }: Props) {
                 .data_request_template_id
             }
           >
-            <Typography>{requestTemplate?.id}</Typography>
+            <Typography>
+              {limitCharsCentered(requestTemplate?.id as string, 8)}
+            </Typography>
           </CardCell>
           <CopyButton size="small" variant="text" text={requestTemplate!.id!} />
         </Stack>

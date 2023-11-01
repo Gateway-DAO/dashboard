@@ -52,7 +52,10 @@ export const explorerRequestTemplateDetail = {
 export const explorerRequestTemplateDetailOverview = {
   unique_verifiers: 'Unique Verifiers',
   data_requests: 'Data requests',
+  data_request: 'Data request',
+  request: 'Request',
   revenue_generated: 'Revenue Generated',
+  see_data_model: 'See data model',
   labels: {
     signed_by: 'Signed by',
     creation_date: 'Creation date',
