@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import GatewayDarkBanner from '@/components/icons/gateway-dark-banner';
 import { home } from '@/locale/en/home';
+import { useToggle } from '@react-hookz/web';
 
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Box } from '@mui/material';
@@ -17,10 +18,24 @@ type Props = {
 };
 
 export default function HomeStructure({ username }: Props) {
-  const [isCreateOrgDialog, setCreateOrgDialog] = useState(false);
+  const [isCreateOrgDialog, toggleDialog] = useToggle(false);
+  const router = useRouter();
+
+  const toggleCreateOrgDialog = (value: boolean) => {
+    if (!value) {
+      toggleDialog(value);
+      router.push('');
+    } else {
+      router.push('#create-org');
+      toggleDialog(value);
+    }
+  };
   return (
     <>
-      <CreateOrgDialog open={isCreateOrgDialog} setOpen={setCreateOrgDialog} />
+      <CreateOrgDialog
+        open={isCreateOrgDialog}
+        onClose={() => toggleCreateOrgDialog(false)}
+      />
       <Typography variant="h3" marginBottom={4} gutterBottom>
         {home.greeting} {username}
       </Typography>
@@ -96,7 +111,7 @@ export default function HomeStructure({ username }: Props) {
             }}
             onClick={() => {
               if (details.title == home.sub_banner[0].title) {
-                setCreateOrgDialog(true);
+                toggleCreateOrgDialog(true);
               }
             }}
           >
