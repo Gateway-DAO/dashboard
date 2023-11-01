@@ -1,5 +1,6 @@
 'use client';
 import { useSession } from 'next-auth/react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
@@ -21,7 +22,9 @@ import {
   alpha,
 } from '@mui/material';
 
-import CreateOrgDialog from '../create-layout-dialog';
+const CreateOrgDialog = dynamic(() => import('../create-layout-dialog'), {
+  ssr: false,
+});
 
 type Props = {
   onClose: () => void;
