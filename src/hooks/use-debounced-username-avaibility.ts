@@ -4,12 +4,12 @@ import { getClientPrivateApi } from '@/services/protocol/api';
 import { useDebouncedCallback } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 
-export type AvaibilityState = 'idle' | 'loading' | 'success' | 'invalid';
+export type AvailabilityState = 'idle' | 'loading' | 'success' | 'invalid';
 
-export default function useDebouncedUsernameAvaibility() {
-  const [avaibility, setAvaibility] = useState<AvaibilityState>('idle');
+export default function useDebouncedUsernameAvailability() {
+  const [availability, setAvailability] = useState<AvailabilityState>('idle');
 
-  const checkAvaibility = useMutation({
+  const checkAvailability = useMutation({
     mutationKey: ['check-avaibility'],
     mutationFn: async (username: string) => {
       const { checkUsernameAvailability } = await (
@@ -18,35 +18,35 @@ export default function useDebouncedUsernameAvaibility() {
       return checkUsernameAvailability;
     },
     onSuccess: (valid) => {
-      if (avaibility !== 'idle') {
-        setAvaibility(valid ? 'success' : 'invalid');
+      if (availability !== 'idle') {
+        setAvailability(valid ? 'success' : 'invalid');
       }
     },
     onError: () => {
-      if (avaibility !== 'idle') {
-        setAvaibility('invalid');
+      if (availability !== 'idle') {
+        setAvailability('invalid');
       }
     },
   });
 
-  const onCheckAvaibility = useDebouncedCallback(
-    checkAvaibility.mutate,
-    [checkAvaibility.mutate],
+  const onCheckAvailability = useDebouncedCallback(
+    checkAvailability.mutate,
+    [checkAvailability.mutate],
     1000
   );
 
-  const onStartCheckAvaibility = () => {
-    setAvaibility('loading');
+  const onStartCheckAvailability = () => {
+    setAvailability('loading');
   };
 
   const onResetAvaibility = () => {
-    setAvaibility('idle');
+    setAvailability('idle');
   };
 
   return {
-    avaibility,
-    onStartCheckAvaibility,
-    onCheckAvaibility,
+    availability,
+    onStartCheckAvailability,
+    onCheckAvailability,
     onResetAvaibility,
   };
 }

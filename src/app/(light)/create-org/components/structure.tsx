@@ -1,12 +1,13 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import AvatarPicker from '@/components/form/avatar-picker/avatar-picker';
 import { TitleSubtitleField } from '@/components/title-field/title-field';
-import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
+import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';
 import { org } from '@/locale/en/org';
 import { usernameSchema } from '@/schemas/profile';
 import { getClientPrivateApi } from '@/services/protocol/api';
@@ -24,15 +25,16 @@ import {
   Typography,
 } from '@mui/material';
 
-import { CreateOrganisationSchema, createOrganisationSchema } from './schema';
+import { CreateOrganizationSchema, createOrganizationSchema } from './schema';
 
 type UploadImageProps = {
   profilePictureUrl: Blob | null;
   org_id: string;
 };
 
-export default function Structure() {
+export default function CreateOrgStructure() {
   const { update } = useSession();
+  const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [image, setImage] = useState<Blob | null>(null);
 
@@ -40,21 +42,21 @@ export default function Structure() {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm<CreateOrganisationSchema>({
-    resolver: zodResolver(createOrganisationSchema),
+  } = useForm<CreateOrganizationSchema>({
+    resolver: zodResolver(createOrganizationSchema),
     mode: 'all',
   });
 
   const {
-    avaibility,
-    onStartCheckAvaibility,
-    onCheckAvaibility,
+    availability,
+    onStartCheckAvailability,
+    onCheckAvailability,
     onResetAvaibility,
-  } = useDebouncedUsernameAvaibility();
+  } = useDebouncedUsernameAvailability();
 
   const createOrg = useMutation({
     mutationKey: ['createOrg'],
-    mutationFn: async (data: CreateOrganisationSchema) =>
+    mutationFn: async (data: CreateOrganizationSchema) =>
       (await getClientPrivateApi()).create_org({
         username: data.username,
         name: data.name,
@@ -89,15 +91,15 @@ export default function Structure() {
     },
   });
 
-  const onSubmit = async (data: CreateOrganisationSchema) => {
-    if (avaibility !== 'success') return;
+  const onSubmit = async (data: CreateOrganizationSchema) => {
+    if (availability !== 'success') return;
     try {
       await createOrg.mutateAsync(data);
-      // setOpen(false);
       enqueueSnackbar(org.success, {
         variant: 'success',
       });
       await update();
+      router.back();
     } catch (error) {
       enqueueSnackbar(org.error, {
         variant: 'error',
@@ -105,14 +107,15 @@ export default function Structure() {
     }
   };
 
-  const avaibilityText =
-    avaibility === 'invalid'
+  const availabilityText =
+    availability === 'invalid'
       ? org.form.username.not_available
       : org.form.username.can_edit;
   return (
     <Stack
       component={'form'}
       gap={4}
+      pb={8}
       direction={'column'}
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -135,23 +138,23 @@ export default function Structure() {
               const value = event.target.value;
               const { success } = usernameSchema.safeParse(value);
               if (success) {
-                onStartCheckAvaibility();
-                return onCheckAvaibility(value);
+                onStartCheckAvailability();
+                return onCheckAvailability(value);
               }
-              if (avaibility !== 'idle') {
+              if (availability !== 'idle') {
                 onResetAvaibility();
               }
             },
           })}
-          error={!!errors.username || avaibility === 'invalid'}
-          helperText={errors.username?.message ?? avaibilityText}
+          error={!!errors.username || availability === 'invalid'}
+          helperText={errors.username?.message ?? availabilityText}
           InputProps={{
             startAdornment: <InputAdornment position="start">@</InputAdornment>,
             endAdornment: (
               <InputAdornment position="end">
-                {avaibility === 'loading' && <CircularProgress size={16} />}
-                {avaibility === 'success' && <Check color="success" />}
-                {avaibility === 'invalid' && <Close color="error" />}
+                {availability === 'loading' && <CircularProgress size={16} />}
+                {availability === 'success' && <Check color="success" />}
+                {availability === 'invalid' && <Close color="error" />}
               </InputAdornment>
             ),
           }}
@@ -221,7 +224,7 @@ export default function Structure() {
         type="submit"
         size="large"
         isLoading={createOrg.isLoading}
-        disabled={!isValid || avaibility !== 'success' || createOrg.isSuccess}
+        disabled={!isValid || availability !== 'success' || createOrg.isSuccess}
       >
         {org.btnText}
       </LoadingButton>

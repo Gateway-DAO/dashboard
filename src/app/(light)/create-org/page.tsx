@@ -2,7 +2,7 @@
 import { useRouter } from 'next-nprogress-bar';
 
 import AuthenticationLayout from '../login/components/authentication-layout';
-import Structure from './components/structure';
+import CreateOrgStructure from './components/structure';
 
 export default function CreateOrg() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function CreateOrg() {
         onClick: () => router.back(),
       }}
     >
-      <Structure />
+      <CreateOrgStructure />
     </AuthenticationLayout>
   );
 }

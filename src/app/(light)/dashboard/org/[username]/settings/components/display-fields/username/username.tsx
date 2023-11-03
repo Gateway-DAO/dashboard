@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import UsernameField from '@/app/(light)/dashboard/components/forms/username-field';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
+import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';
 import useOrganization from '@/hooks/use-organization';
 import { settings } from '@/locale/en/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -42,7 +42,7 @@ export default function Username() {
     onStartCheckAvaibility,
     onCheckAvaibility,
     onResetAvaibility,
-  } = useDebouncedUsernameAvaibility();
+  } = useDebouncedUsernameAvailability();
 
   const updateUsername = useMutation({
     mutationKey: ['updateUsername'],

@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import { TitleSubtitleField } from '@/components/title-field/title-field';
-import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
+import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
 import { settings } from '@/locale/en/settings';
@@ -54,7 +54,7 @@ export function ChooseGatewayId() {
     onStartCheckAvaibility,
     onCheckAvaibility,
     onResetAvaibility,
-  } = useDebouncedUsernameAvaibility();
+  } = useDebouncedUsernameAvailability();
 
   const onSubmit = async (data: CreateProfileSchema) => {
     if (avaibility !== 'success') return;
