@@ -70,7 +70,7 @@ export default function DataModelsExplorerSearch() {
                   max: selectedAmountOfIssuances[1],
                 }
               : undefined,
-          search: search.length > 0 ? search : undefined,
+          // search: search.length > 0 ? search : undefined,
         },
         skip: pageParam,
         order: selectedSort?.value,
