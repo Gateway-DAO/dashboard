@@ -1,6 +1,5 @@
 'use client';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import MenuItemLink from '@/components/menu-item-link/menu-item-link';
@@ -15,12 +14,9 @@ import {
   IconButton,
   ListItemIcon,
   ListItemText,
-  MenuItem,
   Typography,
   alpha,
 } from '@mui/material';
-
-import CreateOrgDialog from '../create-layout-dialog';
 
 type Props = {
   onClose: () => void;
@@ -30,7 +26,6 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
   const { data: session } = useSession();
 
   const { isOrg, organization } = useOrganization();
-  const [isCreateOrgDialog, setCreateOrgDialog] = useState(false);
 
   if (!session) return null;
 
@@ -47,7 +42,6 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
 
   return (
     <>
-      <CreateOrgDialog open={isCreateOrgDialog} setOpen={setCreateOrgDialog} />
       {accessess?.map(({ organization }) => (
         <MenuItemLink
           href={routes.dashboard.org.home(organization.gatewayId)}
@@ -91,11 +85,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
           </ListItemText>
         </MenuItemLink>
       )}
-      <MenuItem
-        onClick={() => {
-          setCreateOrgDialog(true);
-        }}
-      >
+      <MenuItemLink href={routes.dashboard.createOrg}>
         <ListItemIcon>
           <IconButton
             sx={{
@@ -108,7 +98,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
         <ListItemText secondary={auth.create_org.desc}>
           <Typography variant="subtitle1">{auth.create_org.title}</Typography>
         </ListItemText>
-      </MenuItem>
+      </MenuItemLink>
       <Divider />
     </>
   );

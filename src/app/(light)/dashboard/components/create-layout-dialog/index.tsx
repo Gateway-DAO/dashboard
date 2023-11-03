@@ -28,7 +28,7 @@ import Dialog from '@mui/material/Dialog';
 import {
   CreateOrganisationSchema,
   createOrganisationSchema,
-} from './components/schema';
+} from '../../../create-org/components/schema';
 import CreateOrgLayout from './create-org-layout';
 
 type Props = {

@@ -7,13 +7,16 @@ import { common } from '@/locale/en/common';
 
 import { Box, Stack, Typography, alpha } from '@mui/material';
 
-import Background from '../../../create-org/components/background';
-import CloseButton, {
-  CloseButtonProps,
-} from '../../../create-org/components/close-button';
+import Background from './background';
+import CloseButton, { CloseButtonProps } from './close-button';
 
-export default function CreateOrgLayout({
+type Props = {
+  closeButonProps?: CloseButtonProps;
+};
+
+export default function Wrapper({
   children,
+  closeButonProps,
 }: PropsWithChildren<Props>) {
   return (
     <Stack direction="row">
@@ -59,14 +62,17 @@ export default function CreateOrgLayout({
               {common.general.gateway}
             </Typography>
           </Stack>
-          <CloseButton
-            sx={{
-              display: {
-                xs: 'flex',
-                lg: 'none',
-              },
-            }}
-          />
+          {closeButonProps && (
+            <CloseButton
+              {...closeButonProps}
+              sx={{
+                display: {
+                  xs: 'flex',
+                  lg: 'none',
+                },
+              }}
+            />
+          )}
         </Stack>
         <Box
           sx={{
@@ -97,14 +103,17 @@ export default function CreateOrgLayout({
           position: 'relative',
         }}
       >
-        <CloseButton
-          sx={{
-            position: 'absolute',
-            top: { xs: 10, lg: 48 },
-            right: { xs: 20, lg: 48 },
-            zIndex: 1,
-          }}
-        />
+        {closeButonProps && (
+          <CloseButton
+            {...closeButonProps}
+            sx={{
+              position: 'absolute',
+              top: { xs: 10, lg: 48 },
+              right: { xs: 20, lg: 48 },
+              zIndex: 1,
+            }}
+          />
+        )}
         <Background sx={{ flex: 1, height: '100%' }} />
       </Box>
     </Stack>

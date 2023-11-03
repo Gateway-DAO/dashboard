@@ -1,4 +1,5 @@
 import documentationRoutes from '@/constants/documentationRoutes';
+import routes from '@/constants/routes';
 
 export const home = {
   greeting: 'Hello',
@@ -13,11 +14,11 @@ export const home = {
   sub_banner: [
     {
       heading: 'For organizations',
-      title: 'Create an Orgainzation',
+      title: 'Create an Organization',
       subtitle:
         'To issue and verify on behalf of an organization, its essential to set up one.',
       btn_text: 'Create Organization ID',
-      link: '#create-org',
+      link: routes.dashboard.createOrg,
       target: '_self',
     },
     {
