@@ -1,13 +1,7 @@
-import { PartialDeep } from 'type-fest/source/partial-deep';
+import { ClaimFieldProps } from '@/utils/get-claim-type';
 
 import {
-  Stack,
   Paper,
-  Typography,
-  alpha,
-  Divider,
-  List,
-  ListItem,
   TableContainer,
   Table,
   TableHead,
@@ -16,9 +10,6 @@ import {
   TableBody,
 } from '@mui/material';
 
-import getClaimType, { ClaimFieldProps } from '@/utils/get-claim-type';
-import { CredentialData } from '@/services/protocol/types';
-import ChipInputType from '@/components/chip-input-type/chip-input-type';
 import Row from './row';
 
 type Props = {
