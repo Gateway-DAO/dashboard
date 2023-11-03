@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next-nprogress-bar';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import {
@@ -8,7 +8,6 @@ import {
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
-import routes from '@/constants/routes';
 import { transaction } from '@/locale/en/transaction';
 import { numberToMoneyString } from '@/utils/money';
 import { useToggle } from '@react-hookz/web';
@@ -83,7 +82,7 @@ export default function TransactionsTable({
   const toggleTransactionModal = (value: boolean) => {
     if (!value) {
       toggleTransaction(value);
-      router.push(routes.dashboard.user.wallet, { scroll: false });
+      router.push('', { scroll: false });
     } else {
       toggleTransaction(value);
       router.push('#transaction', { scroll: false });

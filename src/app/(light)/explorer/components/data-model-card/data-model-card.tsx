@@ -79,8 +79,8 @@ export default function DataModelExplorerCard({
               color="text.secondary"
               sx={{
                 display: '-webkit-box',
-                '-webkit-line-clamp': '2',
-                '-webkit-box-orient': 'vertical',
+                WebkitLineClamp: '2',
+                WebkitBoxOrient: 'vertical',
                 lineClamp: '2',
                 boxOrientation: 'vertical',
                 textOverflow: 'ellipsis',
