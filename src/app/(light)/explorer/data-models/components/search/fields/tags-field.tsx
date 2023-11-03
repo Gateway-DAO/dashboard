@@ -15,8 +15,6 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 
-import useMetadata from '../use-metadata';
-
 const menuProps = {
   PaperProps: {
     style: {
@@ -33,10 +31,16 @@ const menuProps = {
 type Props = {
   tags: string[];
   selectedTags?: string[];
+  isLoading?: boolean;
   setTags: (tags: string[]) => void;
 };
 
-export default function TagsField({ tags, setTags, selectedTags }: Props) {
+export default function TagsField({
+  tags,
+  setTags,
+  isLoading,
+  selectedTags,
+}: Props) {
   const handleChange = useCallback(
     (event: SelectChangeEvent<typeof selectedTags>) => {
       const {
@@ -71,6 +75,7 @@ export default function TagsField({ tags, setTags, selectedTags }: Props) {
         input={<OutlinedInput id="tags-chip" label="Tags" />}
         renderValue={(value) => value.join(', ')}
         MenuProps={menuProps}
+        disabled={isLoading}
       >
         {tags.map((tag) => (
           <MenuItem key={tag} value={tag}>

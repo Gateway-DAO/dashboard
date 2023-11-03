@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
 import useBreakpoints from '@/hooks/use-breakpoints';
 import { useToggle } from '@react-hookz/web';

@@ -1,20 +1,21 @@
 'use client';
 
-import RangeField from '@/components/form/range-field/range-field';
+import RangeField, {
+  RangeFieldProps,
+} from '@/components/form/range-field/range-field';
 import { explorerDataModels } from '@/locale/en/datamodel';
 
 import { InputAdornment } from '@mui/material';
 
 type Props = {
-  min?: number;
-  max: number;
   selectedConsumptionPrice: number[];
   setConsumptionPrice: (consumptionPrice: number[]) => void;
-};
+} & Pick<RangeFieldProps, 'min' | 'max' | 'isLoading'>;
 
 export default function ConsumpitonPriceField({
   min = 0,
   max,
+  isLoading,
   selectedConsumptionPrice,
   setConsumptionPrice,
 }: Props) {
@@ -32,6 +33,7 @@ export default function ConsumpitonPriceField({
       step={0.01}
       min={min}
       max={max}
+      isLoading={isLoading}
     />
   );
 }

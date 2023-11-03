@@ -5,7 +5,7 @@ import { common } from '@/locale/en/common';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
 import { useDebouncedState } from '@react-hookz/web';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
@@ -16,11 +16,9 @@ import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
 import SortByField, { DataModelSortOption } from './fields/sort-by-field';
 import TagsField from './fields/tags-field';
-import useMetadata from './use-metadata';
 
 export default function DataModelsExplorerSearch() {
-  const metadata = useMetadata();
-  const [_search, setSearch] = useDebouncedState('', 500);
+  const [search, setSearch] = useDebouncedState('', 500);
   const [selectedSort, setSort] = useState<DataModelSortOption>();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedConsumptionPrice, setSelectedConsumptionPrice] = useState<
@@ -29,6 +27,12 @@ export default function DataModelsExplorerSearch() {
   const [selectedAmountOfIssuances, setSelectedAmountOfIssuances] = useState<
     number[]
   >([]);
+
+  const metadata = useQuery({
+    queryKey: ['data-models-metadata'],
+    queryFn: () => apiPublic.explorer_data_models_metadata(),
+  });
+
   const tags = metadata.data?.dataModelsMetadata.tags ?? [];
   const consumptionPrice =
     metadata.data?.dataModelsMetadata.consumptionPrice ?? 0;
@@ -45,6 +49,7 @@ export default function DataModelsExplorerSearch() {
       selectedAmountOfIssuances[0],
       selectedAmountOfIssuances[1],
       selectedSort?.value,
+      search,
     ],
     queryFn: ({ pageParam = 0 }) =>
       apiPublic.explorer_data_models_list({
@@ -64,6 +69,7 @@ export default function DataModelsExplorerSearch() {
                   max: selectedAmountOfIssuances[1],
                 }
               : undefined,
+          search: search.length > 0 ? search : undefined,
         },
         skip: pageParam,
         order: selectedSort?.value,
@@ -89,28 +95,29 @@ export default function DataModelsExplorerSearch() {
       >
         {explorerDataModels.listTitle}
       </Typography>
-      {metadata.isSuccess && (
-        <SearchFilters onSearch={setSearch}>
-          <TagsField
-            tags={tags}
-            selectedTags={selectedTags}
-            setTags={setSelectedTags}
-          />
-          <ConsumpitonPriceField
-            min={consumptionPrice.min}
-            max={consumptionPrice.max}
-            selectedConsumptionPrice={selectedConsumptionPrice}
-            setConsumptionPrice={setSelectedConsumptionPrice}
-          />
-          <AmountOfIssuancesField
-            min={issuedCount.min}
-            max={issuedCount.max}
-            selectedAmountOfIssuances={selectedAmountOfIssuances}
-            setAmountOfIssuances={setSelectedAmountOfIssuances}
-          />
-          <SortByField selectedSort={selectedSort} onSort={setSort} />
-        </SearchFilters>
-      )}
+      <SearchFilters onSearch={setSearch}>
+        <TagsField
+          tags={tags}
+          selectedTags={selectedTags}
+          setTags={setSelectedTags}
+          isLoading={metadata.isLoading}
+        />
+        <ConsumpitonPriceField
+          min={consumptionPrice.min}
+          max={consumptionPrice.max}
+          selectedConsumptionPrice={selectedConsumptionPrice}
+          setConsumptionPrice={setSelectedConsumptionPrice}
+          isLoading={metadata.isLoading}
+        />
+        <AmountOfIssuancesField
+          min={issuedCount.min}
+          max={issuedCount.max}
+          selectedAmountOfIssuances={selectedAmountOfIssuances}
+          setAmountOfIssuances={setSelectedAmountOfIssuances}
+          isLoading={metadata.isLoading}
+        />
+        <SortByField selectedSort={selectedSort} onSort={setSort} />
+      </SearchFilters>
 
       <Box
         display="grid"
