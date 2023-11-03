@@ -51,7 +51,7 @@ export default function CreateOrgStructure() {
     availability,
     onStartCheckAvailability,
     onCheckAvailability,
-    onResetAvaibility,
+    onResetAvailability,
   } = useDebouncedUsernameAvailability();
 
   const createOrg = useMutation({
@@ -142,7 +142,7 @@ export default function CreateOrgStructure() {
                 return onCheckAvailability(value);
               }
               if (availability !== 'idle') {
-                onResetAvaibility();
+                onResetAvailability();
               }
             },
           })}

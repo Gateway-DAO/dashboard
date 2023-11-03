@@ -39,7 +39,7 @@ export default function useDebouncedUsernameAvailability() {
     setAvailability('loading');
   };
 
-  const onResetAvaibility = () => {
+  const onResetAvailability = () => {
     setAvailability('idle');
   };
 
@@ -47,6 +47,6 @@ export default function useDebouncedUsernameAvailability() {
     availability,
     onStartCheckAvailability,
     onCheckAvailability,
-    onResetAvaibility,
+    onResetAvailability,
   };
 }

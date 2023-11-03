@@ -33,10 +33,10 @@ export default function Username() {
   const canUpdateUsername = diffUpdateDays > 30;
 
   const {
-    avaibility,
-    onStartCheckAvaibility,
-    onCheckAvaibility,
-    onResetAvaibility,
+    availability,
+    onStartCheckAvailability,
+    onCheckAvailability,
+    onResetAvailability,
   } = useDebouncedUsernameAvailability();
 
   const updateUsername = useMutation({
@@ -62,12 +62,12 @@ export default function Username() {
 
   const onCancel = () => {
     reset();
-    onResetAvaibility();
+    onResetAvailability();
     setValue('username', initialUsername);
   };
 
   const onSubmit = async (data: { username: string }) => {
-    if (avaibility !== 'success' || !canUpdateUsername) return;
+    if (availability !== 'success' || !canUpdateUsername) return;
     try {
       await updateUsername.mutateAsync(data.username);
       await update();
@@ -79,30 +79,35 @@ export default function Username() {
 
   const helperText = useMemo(() => {
     if (errors.username?.message) return errors.username.message;
-    if (avaibility === 'invalid') return settings.username.not_available;
+    if (availability === 'invalid') return settings.username.not_available;
     return canUpdateUsername
       ? settings.username.can_edit
       : settings.username.when_can_edit(30 - diffUpdateDays);
-  }, [errors.username?.message, avaibility, canUpdateUsername, diffUpdateDays]);
+  }, [
+    errors.username?.message,
+    availability,
+    canUpdateUsername,
+    diffUpdateDays,
+  ]);
 
   const onSameUsername = () => {
     reset();
-    onResetAvaibility();
+    onResetAvailability();
   };
 
   const onInvalidUsername = () => {
-    onResetAvaibility();
+    onResetAvailability();
   };
 
   const onValidUsername = (value: string) => {
-    onStartCheckAvaibility();
-    onCheckAvaibility(value);
+    onStartCheckAvailability();
+    onCheckAvailability(value);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <UsernameField
-        avaibility={avaibility}
+        avaibility={availability}
         canUpdateUsername={canUpdateUsername}
         control={control}
         helperText={helperText}
