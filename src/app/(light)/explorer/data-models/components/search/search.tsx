@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { common } from '@/locale/en/common';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
-import { UserIdentifierType } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -12,17 +11,17 @@ import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
 import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
 import DataModelExplorerCardLoading from '../../../components/data-model-card/data-model-card-loading';
-import SearchField from '../../../components/search-filters/search-field';
 import SearchFilters from '../../../components/search-filters/search-filters';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
-import SortByField from './fields/sort-by-field';
+import SortByField, { DataModelSortOption } from './fields/sort-by-field';
 import TagsField from './fields/tags-field';
 import useMetadata from './use-metadata';
 
 export default function DataModelsExplorerSearch() {
   const metadata = useMetadata();
   const [_search, setSearch] = useDebouncedState('', 500);
+  const [selectedSort, setSort] = useState<DataModelSortOption>();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedConsumptionPrice, setSelectedConsumptionPrice] = useState<
     number[]
@@ -45,6 +44,7 @@ export default function DataModelsExplorerSearch() {
       selectedAmountOfIssuances,
       selectedAmountOfIssuances[0],
       selectedAmountOfIssuances[1],
+      selectedSort?.value,
     ],
     queryFn: ({ pageParam = 0 }) =>
       apiPublic.explorer_data_models_list({
@@ -66,6 +66,7 @@ export default function DataModelsExplorerSearch() {
               : undefined,
         },
         skip: pageParam,
+        order: selectedSort?.value,
       }),
     getNextPageParam: (lastPage, allPages) =>
       lastPage.dataModels.length === 12 ? allPages.length * 12 : undefined,
@@ -107,7 +108,7 @@ export default function DataModelsExplorerSearch() {
             selectedAmountOfIssuances={selectedAmountOfIssuances}
             setAmountOfIssuances={setSelectedAmountOfIssuances}
           />
-          <SortByField />
+          <SortByField selectedSort={selectedSort} onSort={setSort} />
         </SearchFilters>
       )}
 

@@ -14,8 +14,12 @@ query explorer_data_models_featured {
   }
 }
 
-query explorer_data_models_list($filter: FilterDataModelInput, $skip: Int = 0) {
-  dataModels(filter: $filter, skip: $skip, take: 12) {
+query explorer_data_models_list(
+  $filter: FilterDataModelInput
+  $skip: Int = 0
+  $order: JSON
+) {
+  dataModels(filter: $filter, skip: $skip, take: 12, order: $order) {
     id
     title
     description
