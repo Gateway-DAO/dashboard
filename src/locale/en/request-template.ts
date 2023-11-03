@@ -40,3 +40,30 @@ export const explorerRequestTemplates = {
     sort_by: 'Sort by',
   },
 };
+
+export const explorerRequestTemplateDetail = {
+  tabs: {
+    overview: 'Overview',
+    verifiers: 'Verifiers',
+    playground: 'Playground',
+  },
+};
+
+export const explorerRequestTemplateDetailOverview = {
+  unique_verifiers: 'Unique Verifiers',
+  data_requests: 'Data requests',
+  data_request: 'Data request',
+  request: 'Request',
+  revenue_generated: 'Revenue Generated',
+  see_data_model: 'See data model',
+  labels: {
+    signed_by: 'Signed by',
+    creation_date: 'Creation date',
+    last_update: 'Last update',
+    average_request_cost: 'Average request cost',
+    data_request_template_id: 'Data request template ID',
+  },
+  actions: {
+    copy: 'Copy',
+  },
+};
