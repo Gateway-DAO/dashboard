@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 
+import DefaultError from '@/components/default-error/default-error';
 import { common } from '@/locale/en/common';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
@@ -38,7 +39,7 @@ export default function DataModelsExplorerSearch() {
     metadata.data?.dataModelsMetadata.consumptionPrice ?? 0;
   const issuedCount = metadata.data?.dataModelsMetadata.issuedCount ?? 0;
 
-  const dataModels = useInfiniteQuery({
+  const dataModelsQuery = useInfiniteQuery({
     queryKey: [
       'data-models',
       selectedTags,
@@ -77,6 +78,9 @@ export default function DataModelsExplorerSearch() {
     getNextPageParam: (lastPage, allPages) =>
       lastPage.dataModels.length === 12 ? allPages.length * 12 : undefined,
   });
+
+  const dataModels =
+    dataModelsQuery.data?.pages?.flatMap(({ dataModels }) => dataModels) ?? [];
 
   return (
     <Container
@@ -128,7 +132,7 @@ export default function DataModelsExplorerSearch() {
         }}
         gap={3}
       >
-        {dataModels.isLoading && (
+        {dataModelsQuery.isLoading && (
           <>
             <DataModelExplorerCardLoading />
             <DataModelExplorerCardLoading />
@@ -138,12 +142,17 @@ export default function DataModelsExplorerSearch() {
             <DataModelExplorerCardLoading />
           </>
         )}
-        {dataModels.data?.pages?.flatMap(({ dataModels }) =>
+        {dataModelsQuery.isSuccess && dataModels.length === 0 && (
+          <Typography component="p" variant="body1">
+            No results
+          </Typography>
+        )}
+        {dataModelsQuery.isSuccess &&
+          dataModels.length > 0 &&
           dataModels.map((dataModel) => (
             <DataModelExplorerCard dataModel={dataModel} key={dataModel.id} />
-          ))
-        )}
-        {dataModels.isFetchingNextPage && (
+          ))}
+        {dataModelsQuery.isFetchingNextPage && (
           <>
             <DataModelExplorerCardLoading />
             <DataModelExplorerCardLoading />
@@ -152,11 +161,20 @@ export default function DataModelsExplorerSearch() {
           </>
         )}
       </Box>
-      {!dataModels.isFetchingNextPage && dataModels.hasNextPage && (
+      {dataModelsQuery.isError && (
+        <Stack justifyContent="center">
+          <DefaultError
+            isModal={false}
+            hasLink={false}
+            message="Error on searching for data models"
+          />
+        </Stack>
+      )}
+      {!dataModelsQuery.isFetchingNextPage && dataModelsQuery.hasNextPage && (
         <Button
           type="button"
           variant="contained"
-          onClick={() => dataModels.fetchNextPage()}
+          onClick={() => dataModelsQuery.fetchNextPage()}
           sx={{ my: 6, alignSelf: 'center' }}
         >
           {common.actions.load_more}
