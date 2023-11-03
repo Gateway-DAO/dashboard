@@ -4,28 +4,27 @@ import CopyButton from '@/components/copy-button/copy-button';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { DATE_FORMAT } from '@/constants/date';
 import { common } from '@/locale/en/common';
-import { explorerDataModelDetailOverview } from '@/locale/en/datamodel';
-import {
-  Explorer_Data_Model_Detail_OverviewQuery,
-  PermissionType,
-} from '@/services/protocol/types';
+import { explorerRequestTemplateDetailOverview } from '@/locale/en/request-template';
+import { Explorer_Request_Template_Detail_OverviewQuery } from '@/services/protocol/types';
 import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
+import { numberToMoneyString } from '@/utils/money';
+import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
 import { Card, Divider, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
-import Profiles from './profiles';
-
 type Props = {
-  dataModel: PartialDeep<Explorer_Data_Model_Detail_OverviewQuery['dataModel']>;
+  requestTemplate: PartialDeep<
+    Explorer_Request_Template_Detail_OverviewQuery['dataRequestTemplate']
+  >;
 };
 
-export default function DataModelDetails({ dataModel }: Props) {
+export default function DataModelDetails({ requestTemplate }: Props) {
   const createdBy = getOrganizationOrUserData(
-    dataModel.createdBy!,
-    dataModel.organization
+    requestTemplate!.user!,
+    requestTemplate!.organization
   );
 
   return (
@@ -60,32 +59,38 @@ export default function DataModelDetails({ dataModel }: Props) {
           </Stack>
         </CardCellContainer>
         <CardCell
-          label={explorerDataModelDetailOverview.labels.signed_by}
+          label={explorerRequestTemplateDetailOverview.labels.signed_by}
           margin={false}
         >
           <Typography>
             <b>
-              {dataModel.createdBy?.displayName ??
-                dataModel.createdBy?.gatewayId}
+              {requestTemplate?.user?.displayName ??
+                requestTemplate?.user?.gatewayId}
             </b>
           </Typography>
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
-        <CardCell label={explorerDataModelDetailOverview.labels.creation_date}>
+        <CardCell
+          label={explorerRequestTemplateDetailOverview.labels.creation_date}
+        >
           <Typography>
-            {dayjs(dataModel.createdAt).format(DATE_FORMAT)}
+            {dayjs(requestTemplate?.createdAt).format(DATE_FORMAT)}
           </Typography>
         </CardCell>
         <CardCell
-          label={explorerDataModelDetailOverview.labels.pda_comsumption_cost}
+          label={explorerRequestTemplateDetailOverview.labels.last_update}
         >
           <Typography>
-            {Intl.NumberFormat('en-US', {
-              style: 'currency',
-              currency: 'USD',
-            }).format(dataModel.consumptionPrice ?? 0)}
+            {dayjs(requestTemplate?.createdAt).format(DATE_FORMAT)}
           </Typography>
+        </CardCell>
+        <CardCell
+          label={
+            explorerRequestTemplateDetailOverview.labels.average_request_cost
+          }
+        >
+          <Typography>{numberToMoneyString(0)}</Typography>
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
@@ -98,28 +103,17 @@ export default function DataModelDetails({ dataModel }: Props) {
           width="100%"
         >
           <CardCell
-            label={explorerDataModelDetailOverview.labels.data_model_id}
-          >
-            <Typography>{dataModel.id}</Typography>
-          </CardCell>
-          <CopyButton size="small" variant="text" text={dataModel.id!} />
-        </Stack>
-      </TableCellContainer>
-      <TableCellContainer>
-        <CardCell
-          label={explorerDataModelDetailOverview.labels.allowed_to_issue}
-        >
-          <Typography>
-            {
-              explorerDataModelDetailOverview.permissions[
-                dataModel.permissioning!
-              ]
+            label={
+              explorerRequestTemplateDetailOverview.labels
+                .data_request_template_id
             }
-          </Typography>
-          {dataModel.permissioning === PermissionType.SpecificIds && (
-            <Profiles dataModel={dataModel} />
-          )}
-        </CardCell>
+          >
+            <Typography>
+              {limitCharsCentered(requestTemplate?.id as string, 8)}
+            </Typography>
+          </CardCell>
+          <CopyButton size="small" variant="text" text={requestTemplate!.id!} />
+        </Stack>
       </TableCellContainer>
     </Stack>
   );
