@@ -1,10 +1,18 @@
+'use client';
+import { useRouter } from 'next-nprogress-bar';
+
+import AuthenticationLayout from '../login/components/authentication-layout';
 import Structure from './components/structure';
-import Wrapper from './components/wrapper';
 
 export default function CreateOrg() {
+  const router = useRouter();
   return (
-    <Wrapper>
+    <AuthenticationLayout
+      closeButonProps={{
+        onClick: () => router.back(),
+      }}
+    >
       <Structure />
-    </Wrapper>
+    </AuthenticationLayout>
   );
 }
