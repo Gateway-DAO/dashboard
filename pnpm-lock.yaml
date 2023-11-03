@@ -146,9 +146,6 @@ dependencies:
   react-slick:
     specifier: ^0.29.0
     version: 0.29.0(react-dom@18.2.0)(react@18.2.0)
-  react-window-infinite-loader:
-    specifier: ^1.0.9
-    version: 1.0.9(react-dom@18.2.0)(react@18.2.0)
   sass:
     specifier: ^1.69.1
     version: 1.69.1
@@ -259,12 +256,6 @@ devDependencies:
   '@types/react-slick':
     specifier: ^0.23.10
     version: 0.23.10
-  '@types/react-window':
-    specifier: ^1.8.7
-    version: 1.8.7
-  '@types/react-window-infinite-loader':
-    specifier: ^1.0.8
-    version: 1.0.8
   '@types/testing-library__cypress':
     specifier: ^5.0.10
     version: 5.0.10
@@ -8811,19 +8802,6 @@ packages:
     dependencies:
       '@types/react': 18.2.20
     dev: false
-
-  /@types/react-window-infinite-loader@1.0.8:
-    resolution: {integrity: sha512-3nejrLXFA8fl9QfrzqL2L5/fMYgj8bDM/lWGcKKOJnaLQ6cbzRYFXDy6lUGnBon2lAC6fSwNMvu4YxieJppr1g==}
-    dependencies:
-      '@types/react': 18.2.20
-      '@types/react-window': 1.8.7
-    dev: true
-
-  /@types/react-window@1.8.7:
-    resolution: {integrity: sha512-FpPHEhmGVOBKomuR4LD2nvua1Ajcw6PfnfbDysuCwwPae3JNulcq3+uZIpQNbDN2AI1z+Y4tKj2xQ4ELiQ4QDw==}
-    dependencies:
-      '@types/react': 18.2.20
-    dev: true
 
   /@types/react@18.2.20:
     resolution: {integrity: sha512-WKNtmsLWJM/3D5mG4U84cysVY31ivmyw85dE84fOCk5Hx78wezB/XEjVPWl2JTZ5FkEeaTJf+VgUAUn3PE7Isw==}
@@ -19852,17 +19830,6 @@ packages:
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
-  /react-window-infinite-loader@1.0.9(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-5Hg89IdU4Vrp0RT8kZYKeTIxWZYhNkVXeI1HbKo01Vm/Z7qztDvXljwx16sMzsa9yapRJQW3ODZfMUw38SOWHw==}
-    engines: {node: '>8.0.0'}
-    peerDependencies:
-      react: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0
-      react-dom: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0
-    dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
