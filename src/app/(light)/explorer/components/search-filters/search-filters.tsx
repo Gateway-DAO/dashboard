@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
 import useBreakpoints from '@/hooks/use-breakpoints';
 import { useToggle } from '@react-hookz/web';
@@ -8,13 +8,15 @@ import { Collapse, IconButton } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import SearchField from './search-field';
-import { SerchFiltersProps } from './types';
+
+type Props = {
+  onSearch: (value: string) => void;
+};
 
 export default function SearchFilters({
-  isSearching,
-  onSearch,
   children,
-}: PropsWithChildren<SerchFiltersProps>) {
+  onSearch,
+}: PropsWithChildren<Props>) {
   const [isVisible, toggleVisible] = useToggle(false);
 
   const { isDesktop } = useBreakpoints();
@@ -22,7 +24,7 @@ export default function SearchFilters({
   return (
     <Stack mb={2} direction="column" gap={2} justifyContent="stretch">
       <Stack flexDirection="row" gap={1}>
-        <SearchField onSearch={onSearch} isSearching={isSearching} />
+        <SearchField onChange={onSearch} />
         <IconButton
           type="button"
           onClick={toggleVisible}

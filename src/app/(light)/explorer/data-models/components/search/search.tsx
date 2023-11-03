@@ -4,21 +4,25 @@ import { useState } from 'react';
 import { common } from '@/locale/en/common';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
+import { UserIdentifierType } from '@/services/protocol/types';
+import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
 import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
 import DataModelExplorerCardLoading from '../../../components/data-model-card/data-model-card-loading';
+import SearchField from '../../../components/search-filters/search-field';
+import SearchFilters from '../../../components/search-filters/search-filters';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
 import SortByField from './fields/sort-by-field';
 import TagsField from './fields/tags-field';
-import DataModelsExplorerSearchFilters from './filters';
 import useMetadata from './use-metadata';
 
 export default function DataModelsExplorerSearch() {
   const metadata = useMetadata();
+  const [_search, setSearch] = useDebouncedState('', 500);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedConsumptionPrice, setSelectedConsumptionPrice] = useState<
     number[]
@@ -67,8 +71,6 @@ export default function DataModelsExplorerSearch() {
       lastPage.dataModels.length === 12 ? allPages.length * 12 : undefined,
   });
 
-  console.log(selectedConsumptionPrice);
-
   return (
     <Container
       component={Stack}
@@ -87,10 +89,7 @@ export default function DataModelsExplorerSearch() {
         {explorerDataModels.listTitle}
       </Typography>
       {metadata.isSuccess && (
-        <DataModelsExplorerSearchFilters
-          onSearch={() => {}}
-          isSearching={dataModels.isFetching}
-        >
+        <SearchFilters onSearch={setSearch}>
           <TagsField
             tags={tags}
             selectedTags={selectedTags}
@@ -100,10 +99,7 @@ export default function DataModelsExplorerSearch() {
             min={consumptionPrice.min}
             max={consumptionPrice.max}
             selectedConsumptionPrice={selectedConsumptionPrice}
-            setConsumptionPrice={(value: number[]) => {
-              console.log(value);
-              setSelectedConsumptionPrice(value);
-            }}
+            setConsumptionPrice={setSelectedConsumptionPrice}
           />
           <AmountOfIssuancesField
             min={issuedCount.min}
@@ -112,7 +108,7 @@ export default function DataModelsExplorerSearch() {
             setAmountOfIssuances={setSelectedAmountOfIssuances}
           />
           <SortByField />
-        </DataModelsExplorerSearchFilters>
+        </SearchFilters>
       )}
 
       <Box
