@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import { TitleSubtitleField } from '@/components/title-field/title-field';
-import useDebouncedUsernameAvaibility from '@/hooks/use-debounced-username-avaibility';
+import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
 import { settings } from '@/locale/en/settings';
@@ -50,14 +50,14 @@ export function ChooseGatewayId() {
   });
 
   const {
-    avaibility,
-    onStartCheckAvaibility,
-    onCheckAvaibility,
-    onResetAvaibility,
-  } = useDebouncedUsernameAvaibility();
+    availability,
+    onStartCheckAvailability,
+    onCheckAvailability,
+    onResetAvailability,
+  } = useDebouncedUsernameAvailability();
 
   const onSubmit = async (data: CreateProfileSchema) => {
-    if (avaibility !== 'success') return;
+    if (availability !== 'success') return;
     try {
       const {
         updateUser: { displayName, gatewayId },
@@ -78,7 +78,7 @@ export function ChooseGatewayId() {
   };
 
   const avaibilityText =
-    avaibility === 'invalid'
+    availability === 'invalid'
       ? settings.username.not_available
       : settings.username.can_edit;
 
@@ -114,23 +114,23 @@ export function ChooseGatewayId() {
               const value = event.target.value;
               const { success } = usernameSchema.safeParse(value);
               if (success) {
-                onStartCheckAvaibility();
-                return onCheckAvaibility(value);
+                onStartCheckAvailability();
+                return onCheckAvailability(value);
               }
-              if (avaibility !== 'idle') {
-                onResetAvaibility();
+              if (availability !== 'idle') {
+                onResetAvailability();
               }
             },
           })}
-          error={!!errors.username || avaibility === 'invalid'}
+          error={!!errors.username || availability === 'invalid'}
           helperText={errors.username?.message ?? avaibilityText}
           InputProps={{
             startAdornment: <InputAdornment position="start">@</InputAdornment>,
             endAdornment: (
               <InputAdornment position="end">
-                {avaibility === 'loading' && <CircularProgress size={16} />}
-                {avaibility === 'success' && <Check color="success" />}
-                {avaibility === 'invalid' && <Close color="error" />}
+                {availability === 'loading' && <CircularProgress size={16} />}
+                {availability === 'success' && <Check color="success" />}
+                {availability === 'invalid' && <Close color="error" />}
               </InputAdornment>
             ),
           }}
@@ -154,7 +154,7 @@ export function ChooseGatewayId() {
           sx={{ mt: 2, height: 48 }}
           isLoading={updateUser.isLoading}
           disabled={
-            !isValid || avaibility !== 'success' || updateUser.isSuccess
+            !isValid || availability !== 'success' || updateUser.isSuccess
           }
         >
           {updateUser.isSuccess

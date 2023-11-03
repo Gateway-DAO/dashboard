@@ -1,23 +1,86 @@
 'use client';
+import { useState } from 'react';
+
+import DefaultError from '@/components/default-error/default-error';
 import { common } from '@/locale/en/common';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useDebouncedState } from '@react-hookz/web';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
 import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
-import DataModelsExplorerSearchFilters from './filters';
 import DataModelExplorerCardLoading from '../../../components/data-model-card/data-model-card-loading';
+import SearchFilters from '../../../components/search-filters/search-filters';
+import AmountOfIssuancesField from './fields/amount-of-issuances-field';
+import ConsumpitonPriceField from './fields/consumpiton-price-field';
+import SortByField, { DataModelSortOption } from './fields/sort-by-field';
+import TagsField from './fields/tags-field';
 
 export default function DataModelsExplorerSearch() {
-  const dataModels = useInfiniteQuery({
-    queryKey: ['data-models'],
+  const [search, setSearch] = useDebouncedState('', 500);
+  const [selectedSort, setSort] = useState<DataModelSortOption>();
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedConsumptionPrice, setSelectedConsumptionPrice] = useState<
+    number[]
+  >([]);
+  const [selectedAmountOfIssuances, setSelectedAmountOfIssuances] = useState<
+    number[]
+  >([]);
+
+  const metadata = useQuery({
+    queryKey: ['data-models-metadata'],
+    queryFn: () => apiPublic.explorer_data_models_metadata(),
+  });
+
+  const tags = metadata.data?.dataModelsMetadata.tags ?? [];
+  const consumptionPrice =
+    metadata.data?.dataModelsMetadata.consumptionPrice ?? 0;
+  const issuedCount = metadata.data?.dataModelsMetadata.issuedCount ?? 0;
+
+  const dataModelsQuery = useInfiniteQuery({
+    queryKey: [
+      'data-models',
+      selectedTags,
+      selectedConsumptionPrice,
+      selectedConsumptionPrice[0],
+      selectedConsumptionPrice[1],
+      selectedAmountOfIssuances,
+      selectedAmountOfIssuances[0],
+      selectedAmountOfIssuances[1],
+      selectedSort?.value,
+      search,
+    ],
     queryFn: ({ pageParam = 0 }) =>
-      apiPublic.explorer_data_models_list({ filter: {}, skip: pageParam }),
+      apiPublic.explorer_data_models_list({
+        filter: {
+          tags: selectedTags.length > 0 ? selectedTags : undefined,
+          consumptionPrice:
+            selectedConsumptionPrice.length > 0
+              ? {
+                  min: selectedConsumptionPrice[0],
+                  max: selectedConsumptionPrice[1],
+                }
+              : undefined,
+          issuedCount:
+            selectedAmountOfIssuances.length > 0
+              ? {
+                  min: selectedAmountOfIssuances[0],
+                  max: selectedAmountOfIssuances[1],
+                }
+              : undefined,
+          search: search.length > 0 ? search : undefined,
+        },
+        skip: pageParam,
+        order: selectedSort?.value,
+      }),
     getNextPageParam: (lastPage, allPages) =>
       lastPage.dataModels.length === 12 ? allPages.length * 12 : undefined,
   });
+
+  const dataModels =
+    dataModelsQuery.data?.pages?.flatMap(({ dataModels }) => dataModels) ?? [];
 
   return (
     <Container
@@ -36,7 +99,29 @@ export default function DataModelsExplorerSearch() {
       >
         {explorerDataModels.listTitle}
       </Typography>
-      <DataModelsExplorerSearchFilters />
+      <SearchFilters onSearch={setSearch}>
+        <TagsField
+          tags={tags}
+          selectedTags={selectedTags}
+          setTags={setSelectedTags}
+          isLoading={metadata.isLoading}
+        />
+        <ConsumpitonPriceField
+          min={consumptionPrice.min}
+          max={consumptionPrice.max}
+          selectedConsumptionPrice={selectedConsumptionPrice}
+          setConsumptionPrice={setSelectedConsumptionPrice}
+          isLoading={metadata.isLoading}
+        />
+        <AmountOfIssuancesField
+          min={issuedCount.min}
+          max={issuedCount.max}
+          selectedAmountOfIssuances={selectedAmountOfIssuances}
+          setAmountOfIssuances={setSelectedAmountOfIssuances}
+          isLoading={metadata.isLoading}
+        />
+        <SortByField selectedSort={selectedSort} onSort={setSort} />
+      </SearchFilters>
 
       <Box
         display="grid"
@@ -47,7 +132,7 @@ export default function DataModelsExplorerSearch() {
         }}
         gap={3}
       >
-        {dataModels.isLoading && (
+        {dataModelsQuery.isLoading && (
           <>
             <DataModelExplorerCardLoading />
             <DataModelExplorerCardLoading />
@@ -57,12 +142,17 @@ export default function DataModelsExplorerSearch() {
             <DataModelExplorerCardLoading />
           </>
         )}
-        {dataModels.data?.pages?.flatMap(({ dataModels }) =>
+        {dataModelsQuery.isSuccess && dataModels.length === 0 && (
+          <Typography component="p" variant="body1">
+            No results
+          </Typography>
+        )}
+        {dataModelsQuery.isSuccess &&
+          dataModels.length > 0 &&
           dataModels.map((dataModel) => (
             <DataModelExplorerCard dataModel={dataModel} key={dataModel.id} />
-          ))
-        )}
-        {dataModels.isFetchingNextPage && (
+          ))}
+        {dataModelsQuery.isFetchingNextPage && (
           <>
             <DataModelExplorerCardLoading />
             <DataModelExplorerCardLoading />
@@ -71,11 +161,20 @@ export default function DataModelsExplorerSearch() {
           </>
         )}
       </Box>
-      {!dataModels.isFetchingNextPage && dataModels.hasNextPage && (
+      {dataModelsQuery.isError && (
+        <Stack justifyContent="center">
+          <DefaultError
+            isModal={false}
+            hasLink={false}
+            message="Error on searching for data models"
+          />
+        </Stack>
+      )}
+      {!dataModelsQuery.isFetchingNextPage && dataModelsQuery.hasNextPage && (
         <Button
           type="button"
           variant="contained"
-          onClick={() => dataModels.fetchNextPage()}
+          onClick={() => dataModelsQuery.fetchNextPage()}
           sx={{ my: 6, alignSelf: 'center' }}
         >
           {common.actions.load_more}

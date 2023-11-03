@@ -8,16 +8,23 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 import GatewayBrokenIcon from '../icons/gateway-broken';
 
 type Props = {
-  href?: string;
+  title?: string;
   message?: string;
+  href?: string;
+  hrefMessage?: string;
+  hasLink?: boolean;
   isModal?: boolean;
 };
 
 export default function DefaultError({
-  href = '/',
+  title = errorMessages.SOMETHING_WENT_WRONG,
   message = errorMessages.PAGE_NOT_FOUND,
+  href = '/',
+  hrefMessage = common.actions.back_to_home,
+  hasLink = true,
   isModal = false,
 }: Props): JSX.Element {
+  console.log(href);
   return (
     <Stack
       sx={{
@@ -34,15 +41,13 @@ export default function DefaultError({
           }}
         />
         <Box>
-          <Typography variant={isModal ? 'h4' : 'h3'}>
-            {errorMessages.SOMETHING_WENT_WRONG}
-          </Typography>
+          <Typography variant={isModal ? 'h4' : 'h3'}>{title}</Typography>
           <Typography variant="body1">{message}</Typography>
         </Box>
-        {!isModal && (
+        {!isModal && hasLink && (
           <Link passHref href={href}>
             <Button size="large" variant="contained">
-              {common.actions.back_to_home}
+              {hrefMessage}
             </Button>
           </Link>
         )}
