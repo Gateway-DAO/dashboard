@@ -56,6 +56,7 @@ const routes = {
       playground: `${dashboardUser}/playground`,
       wallet: `${dashboardUser}/wallet`,
     },
+    createOrg: '/create-org',
   },
   explorer: {
     root: explorer,

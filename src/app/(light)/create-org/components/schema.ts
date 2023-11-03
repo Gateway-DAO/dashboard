@@ -1,7 +1,7 @@
 import { usernameSchema } from '@/schemas/profile';
 import { string, z } from 'zod';
 
-export const createOrganisationSchema = z.object({
+export const createOrganizationSchema = z.object({
   username: usernameSchema,
   name: string({
     required_error: 'Name is required',
@@ -13,4 +13,4 @@ export const createOrganisationSchema = z.object({
   website: z.string().url().optional(),
 });
 
-export type CreateOrganisationSchema = z.infer<typeof createOrganisationSchema>;
+export type CreateOrganizationSchema = z.infer<typeof createOrganizationSchema>;
