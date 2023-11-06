@@ -130,7 +130,7 @@ export default function DataModelsExplorerSearch() {
           md: 'repeat(2, 1fr)',
           lg: 'repeat(4, 1fr)',
         }}
-        gap={3}
+        gap={2}
       >
         {dataModelsQuery.isLoading && (
           <>
