@@ -1,5 +1,5 @@
 const dashboardUser = '/dashboard/user';
-const dashboardOrg = 'dashboard/org';
+const dashboardOrg = '/dashboard/org';
 const explorer = '/explorer';
 const routes = {
   home: '/',
@@ -56,6 +56,7 @@ const routes = {
       playground: `${dashboardUser}/playground`,
       wallet: `${dashboardUser}/wallet`,
     },
+    createOrg: '/create-org',
   },
   explorer: {
     root: explorer,
@@ -69,6 +70,10 @@ const routes = {
       `${explorer}/data-model/${dataModelId}/request-templates`,
     requestTemplate: (requestTemplateId) =>
       `${explorer}/request-template/${requestTemplateId}`,
+    requestTemplateVerifiers: (requestTemplateId) =>
+      `${explorer}/request-template/${requestTemplateId}/verifiers`,
+    requestTemplatePlayground: (requestTemplateId) =>
+      `${explorer}/request-template/${requestTemplateId}/playground`,
   },
 };
 

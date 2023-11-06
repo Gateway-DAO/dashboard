@@ -5,12 +5,17 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import MenuItemLink from '@/components/menu-item-link/menu-item-link';
 import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
+import { auth } from '@/locale/en/auth';
+import { useToggle } from '@react-hookz/web';
 
+import AddIcon from '@mui/icons-material/Add';
 import {
   Chip,
   Divider,
+  IconButton,
   ListItemIcon,
   ListItemText,
+  Typography,
   alpha,
 } from '@mui/material';
 
@@ -81,6 +86,20 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
           </ListItemText>
         </MenuItemLink>
       )}
+      <MenuItemLink href={routes.dashboard.createOrg}>
+        <ListItemIcon>
+          <IconButton
+            sx={{
+              backgroundColor: 'primary.light',
+            }}
+          >
+            <AddIcon htmlColor="#771AC9" />
+          </IconButton>
+        </ListItemIcon>
+        <ListItemText secondary={auth.create_org.desc}>
+          <Typography variant="subtitle1">{auth.create_org.title}</Typography>
+        </ListItemText>
+      </MenuItemLink>
       <Divider />
     </>
   );

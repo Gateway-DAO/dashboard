@@ -1,11 +1,13 @@
 'use client';
 
+import GatewayDarkBanner from '@/components/icons/gateway-dark-banner';
 import { home } from '@/locale/en/home';
+import { useToggle } from '@react-hookz/web';
 
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Box } from '@mui/material';
 import { Button, Paper, Stack, Typography, Link } from '@mui/material';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import GatewayDarkBanner from '@/components/icons/gateway-dark-banner';
+
 import GetIcon from './get-icon';
 
 type Props = {
