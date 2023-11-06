@@ -10,11 +10,14 @@ type SerchFiltersProps = {
 export default function SearchField({ onChange }: SerchFiltersProps) {
   return (
     <TextField
-      label="Search"
+      id="search"
+      hiddenLabel
+      aria-label="Search"
       sx={{
         flex: 1,
       }}
       onChange={({ target: { value } }) => onChange(value.trim())}
+      placeholder="Search"
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
