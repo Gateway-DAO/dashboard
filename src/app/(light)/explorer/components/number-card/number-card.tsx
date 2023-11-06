@@ -16,6 +16,7 @@ export default function NumberCard({ label, value, dark }: Props) {
         p: 2,
         borderRadius: 1,
         flex: 1,
+        minWidth: '243px',
       }}
     >
       <Typography

@@ -4,7 +4,7 @@ import NumberCard from '../../components/number-card/number-card';
 
 export default function TransactionsNumbers() {
   return (
-    <Stack direction="row" gap={2} mt={4}>
+    <Stack direction="row" gap={2} mt={4} overflow="auto">
       <NumberCard dark label="Transactions" value={88043405} />
       <NumberCard label="PDAs issued" value={10403405} />
       <NumberCard label="Unique issuers" value={432} />
