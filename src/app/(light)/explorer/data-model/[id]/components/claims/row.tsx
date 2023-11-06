@@ -1,90 +1,77 @@
-'use client';
-import {
-  TableRow,
-  TableCell,
-  Collapse,
-  Box,
-  Typography,
-  List,
-  ListItem,
-  IconButton,
-} from '@mui/material';
-import { useToggle } from '@react-hookz/web';
 import ChipInputType from '@/components/chip-input-type/chip-input-type';
 import getClaimType, { ClaimFieldProps } from '@/utils/get-claim-type';
-import { grey } from '@mui/material/colors';
-import ToggleDropIcon from '@/components/toggle-drop-icon/toggle-drop-icon';
+import { titleCase } from 'title-case';
+
+import { TableRow, TableCell, Typography } from '@mui/material';
 
 export default function Row({
+  id,
   property,
-  showCollapse,
 }: {
+  id?: string;
   property: ClaimFieldProps;
-  showCollapse: boolean;
 }) {
-  console.log(property);
-  const [showExamples, toggleShowExamples] = useToggle(false);
-  const hasExample =
-    property.type !== 'boolean' && (property.examples ?? []).length > 0;
+  let title = property.title;
+  if (!title && id) {
+    title = titleCase(id);
+  }
+
+  let example: string | undefined = undefined;
+  if (property.examples?.length) {
+    example = property.examples!.join(', ');
+  } else if (property.items?.examples?.length) {
+    example = property.items.examples!.join(', ');
+  }
+
+  const defaultValue = property.default ?? property.items?.default;
+
+  const hasDescription = !!example || !!defaultValue;
 
   return (
-    <>
-      <TableRow
-        key={property.title}
-        sx={{
-          '&:last-child td, &:last-child th': { border: 0 },
-          ...(hasExample && {
-            '& > *': {
-              borderBottom: 'unset',
-            },
-          }),
-        }}
+    <TableRow key={property.title}>
+      <TableCell
+        scope="row"
+        sx={
+          hasDescription
+            ? {
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 0.2,
+              }
+            : undefined
+        }
       >
-        {showCollapse && !hasExample && <TableCell />}
-        {showCollapse && hasExample && (
-          <TableCell>
-            <IconButton onClick={toggleShowExamples}>
-              <ToggleDropIcon active={showExamples} />
-            </IconButton>
-          </TableCell>
+        {hasDescription ? <Typography>{title}</Typography> : title}
+        {!!example && (
+          <Typography variant="caption" color="text.secondary">
+            Eg. {example}
+          </Typography>
         )}
-        <TableCell scope="row">{property.title}</TableCell>
-        <TableCell align="right">
+        {defaultValue && (
+          <Typography variant="caption" color="text.secondary">
+            Default: {defaultValue}
+          </Typography>
+        )}
+      </TableCell>
+      <TableCell align="right" sx={{ gap: 3 }}>
+        {property.items?.type && (
           <ChipInputType
             type={getClaimType({
-              type: property.type,
-              contentMediaType: property.contentMediaType,
-              format: property.format,
+              type: property.items.type,
+              contentMediaType: property.items.contentMediaType,
+              format: property.items.format,
             })}
+            sx={{ mr: 1 }}
           />
-        </TableCell>
-      </TableRow>
-      {hasExample && (
-        <TableRow>
-          <TableCell colSpan={3} sx={{ p: 0 }}>
-            <Collapse in={showExamples} timeout="auto" unmountOnExit>
-              <Box
-                sx={{
-                  py: 1,
-                  pl: '88px',
-                  backgroundColor: grey['100'],
-                }}
-              >
-                <Typography variant="caption" color="text.secondary">
-                  Examples
-                </Typography>
-                <List>
-                  {property.examples?.map((example, index) => (
-                    <ListItem disableGutters key={index}>
-                      {example}
-                    </ListItem>
-                  ))}
-                </List>
-              </Box>
-            </Collapse>
-          </TableCell>
-        </TableRow>
-      )}
-    </>
+        )}
+        <ChipInputType
+          type={getClaimType({
+            type: property.type,
+            contentMediaType: property.contentMediaType,
+            format: property.format,
+          })}
+        />
+      </TableCell>
+    </TableRow>
   );
 }

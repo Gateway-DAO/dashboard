@@ -1,11 +1,12 @@
 import { ClaimField } from '@/utils/get-claim-type';
+
 import { CheckBox } from '@mui/icons-material';
 import DataArrayIcon from '@mui/icons-material/DataArray';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import PhotoIcon from '@mui/icons-material/Photo';
 import PinIcon from '@mui/icons-material/Pin';
 import TextFieldsIcon from '@mui/icons-material/TextFields';
-import { Chip, Stack, Typography, SvgIcon } from '@mui/material';
+import { Chip, Stack, Typography, SvgIcon, ChipProps } from '@mui/material';
 
 type Props = {
   type: string;
@@ -22,7 +23,7 @@ const FieldsIcon: Partial<Record<ClaimField, typeof SvgIcon>> = {
 
 type FieldType = keyof typeof FieldsIcon;
 
-export default function ChipInputType({ type }: Props) {
+export default function ChipInputType({ type, ...props }: Props & ChipProps) {
   const FieldIcon = FieldsIcon[type as FieldType] ?? TextFieldsIcon;
   return (
     <Chip
@@ -40,6 +41,7 @@ export default function ChipInputType({ type }: Props) {
           </Typography>
         </Stack>
       }
+      {...props}
     />
   );
 }

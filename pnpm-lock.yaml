@@ -155,6 +155,9 @@ dependencies:
   slick-carousel:
     specifier: ^1.8.1
     version: 1.8.1(jquery@3.7.1)
+  title-case:
+    specifier: ^4.1.2
+    version: 4.1.2
   viem:
     specifier: ^1.16.2
     version: 1.16.2(typescript@5.1.6)(zod@3.22.4)
@@ -21526,6 +21529,10 @@ packages:
     dependencies:
       tslib: 2.6.2
     dev: true
+
+  /title-case@4.1.2:
+    resolution: {integrity: sha512-K9Mmf3WWSF0DCAMLk6so4EFyxhh9puTZSnfkpFnp+EGLewLQTYOeYKDXE4PCFU5dUmrqXwSVzZXbpJ6gFIm9Ow==}
+    dev: false
 
   /tmp-promise@3.0.3:
     resolution: {integrity: sha512-RwM7MoPojPxsOBYnyd2hy0bxtIlVrihNs9pj5SUvY8Zz1sQcQG2tG1hSr8PDxfgEB8RNKDhqbIlroIarSNDNsQ==}
