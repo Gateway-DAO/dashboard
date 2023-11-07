@@ -21,9 +21,7 @@ export default async function RequestTemplatesVerifiersPage({
       })
     )?.verifiersByDataRequestTemplate ?? [];
 
-  const count = 56;
-
-  console.log('test', verifiersByDataRequestTemplate, dataRequestTemplate?.id);
+  const count = 0;
 
   return (
     <>

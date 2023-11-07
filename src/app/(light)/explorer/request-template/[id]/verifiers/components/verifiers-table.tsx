@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import {
   defaultGridConfiguration,
-  defaultGridCustomization,
+  gridWithoutNegativeMargin,
 } from '@/components/data-grid/grid-default';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { useGtwSession } from '@/context/gtw-session-provider';
@@ -51,7 +51,7 @@ export const columns: GridColDef<
     },
   },
   {
-    field: 'dataRequests',
+    field: 'count',
     headerName: explorerVerifiers.data_requests,
     flex: 1,
     valueGetter: (params) => params.row.count,
@@ -112,7 +112,12 @@ export default function VerifiersTable({
         onPaginationModelChange={setNewPage}
         loading={isLoading}
         rowCount={totalCount}
-        sx={defaultGridCustomization}
+        sx={{
+          ...gridWithoutNegativeMargin,
+          '.MuiDataGrid-row': {
+            cursor: 'default',
+          },
+        }}
       />
     </>
   );
