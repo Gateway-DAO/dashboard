@@ -20,3 +20,7 @@ export const mutations = {
   disconnect_wallet: 'disconnect_wallet',
   update_notification_email: 'update_notification_email',
 };
+
+export const explorerQueries = {
+  transaction: 'transaction',
+};

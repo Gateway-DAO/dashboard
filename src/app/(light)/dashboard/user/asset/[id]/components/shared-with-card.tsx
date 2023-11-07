@@ -29,7 +29,6 @@ export default function SharedWithCard({ pda }: Props) {
   const { organization } = useOrganization();
   const router = useRouter();
   const { data, isFetching, isLoading } = useQuery({
-    // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [queries.proofs_by_pdas_id, [pda?.id]],
     queryFn: () =>
       privateApi?.proofsByPDAIds({
