@@ -85,3 +85,23 @@ query explorer_data_model_detail_request_templates($id: String!) {
     tags
   }
 }
+
+query explorer_issuers_by_data_model($id: String!) {
+  issuersByDataModel(id: $id) {
+    issuer {
+      ... on User {
+        id
+        displayName
+        gatewayId
+        profilePicture
+      }
+      ... on Organization {
+        id
+        name
+        gatewayId
+        image
+      }
+    }
+    count
+  }
+}
