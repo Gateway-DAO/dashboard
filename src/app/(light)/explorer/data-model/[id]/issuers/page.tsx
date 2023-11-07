@@ -1,9 +1,8 @@
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
-import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { PageProps } from '@/types/next';
 
-import { Stack, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { Container } from '@mui/system';
 
 import DataModelDetailHeader from '../components/header';
