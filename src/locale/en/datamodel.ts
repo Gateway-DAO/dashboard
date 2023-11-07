@@ -34,6 +34,8 @@ export const explorerDataModels = {
   empty: 'No data models found',
   featureTitle: 'Feature',
   listTitle: 'All data models',
+  issuers: 'Issuers',
+  pdas_issued: 'PDAs issued',
   filters: {
     tags: 'Tags',
     comsumption_price: 'Comsumption price',
