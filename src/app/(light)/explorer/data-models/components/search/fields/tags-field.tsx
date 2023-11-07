@@ -73,7 +73,11 @@ export default function TagsField({
         value={selectedTags}
         onChange={handleChange}
         input={<OutlinedInput id="tags-chip" label="Tags" />}
-        renderValue={(value) => value.join(', ')}
+        renderValue={() =>
+          (selectedTags || [])?.length > 0
+            ? `${(selectedTags || []).length} selected`
+            : undefined
+        }
         MenuProps={menuProps}
         disabled={isLoading}
       >

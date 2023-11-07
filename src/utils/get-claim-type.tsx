@@ -20,6 +20,7 @@ export type ClaimFieldProps = {
   format?: string;
   subType?: string;
   examples?: Array<string | boolean>;
+  items?: ClaimFieldProps;
 };
 
 // List all claim fields

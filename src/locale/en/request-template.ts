@@ -67,3 +67,9 @@ export const explorerRequestTemplateDetailOverview = {
     copy: 'Copy',
   },
 };
+
+export const explorerVerifiers = {
+  empty: 'No verifiers yet',
+  verifiers: 'Verifiers',
+  data_requests: 'Data requests',
+};

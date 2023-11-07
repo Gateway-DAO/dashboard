@@ -130,7 +130,7 @@ export default function DataModelsExplorerSearch() {
           md: 'repeat(2, 1fr)',
           lg: 'repeat(4, 1fr)',
         }}
-        gap={3}
+        gap={2}
       >
         {dataModelsQuery.isLoading && (
           <>
@@ -141,11 +141,6 @@ export default function DataModelsExplorerSearch() {
             <DataModelExplorerCardLoading />
             <DataModelExplorerCardLoading />
           </>
-        )}
-        {dataModelsQuery.isSuccess && dataModels.length === 0 && (
-          <Typography component="p" variant="body1">
-            No results
-          </Typography>
         )}
         {dataModelsQuery.isSuccess &&
           dataModels.length > 0 &&
@@ -161,6 +156,15 @@ export default function DataModelsExplorerSearch() {
           </>
         )}
       </Box>
+      {dataModelsQuery.isSuccess && dataModels.length === 0 && (
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ textAlign: 'center', width: '100%', py: 4 }}
+        >
+          {explorerDataModels.empty}
+        </Typography>
+      )}
       {dataModelsQuery.isError && (
         <Stack justifyContent="center">
           <DefaultError
