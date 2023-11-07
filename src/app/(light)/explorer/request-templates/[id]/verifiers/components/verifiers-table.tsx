@@ -7,8 +7,8 @@ import {
   gridWithoutNegativeMargin,
 } from '@/components/data-grid/grid-default';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import { useGtwSession } from '@/context/gtw-session-provider';
 import { explorerVerifiers } from '@/locale/en/request-template';
+import { apiPublic } from '@/services/protocol/api';
 import {
   Explorer_Verifiers_By_Data_Request_TemplateQuery,
   Organization,
@@ -76,12 +76,11 @@ export default function VerifiersTable({
     pageSize: 5,
   });
 
-  const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: ['verifiersByDataRequestTemplate', id],
     queryFn: () =>
-      privateApi?.explorer_verifiers_by_data_request_template({
+      apiPublic?.explorer_verifiers_by_data_request_template({
         id,
       }),
     select: (data: any) =>

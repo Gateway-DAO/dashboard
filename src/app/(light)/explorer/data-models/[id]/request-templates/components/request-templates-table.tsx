@@ -7,8 +7,8 @@ import {
   gridWithoutNegativeMargin,
 } from '@/components/data-grid/grid-default';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import { useGtwSession } from '@/context/gtw-session-provider';
 import { explorerDataModelRequestTemplates } from '@/locale/en/datamodel';
+import { apiPublic } from '@/services/protocol/api';
 import {
   Explorer_Issuers_By_Data_ModelQuery,
   Organization,
@@ -81,12 +81,11 @@ export default function RequestTemplatesTable({
     pageSize: 5,
   });
 
-  const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: ['requestTemplatesByDataModel', id],
     queryFn: () =>
-      privateApi?.explorer_issuers_by_data_model({
+      apiPublic?.explorer_issuers_by_data_model({
         id,
       }),
     select: (data: any) =>
