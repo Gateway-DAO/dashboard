@@ -10,7 +10,7 @@ export default async function RequestTemplatesPlaygroundPage({
   params: { id },
 }: PageProps<{ id: string }>) {
   const { dataRequestTemplate } =
-    await apiPublic.explorer_request_template_detail_verifiers({
+    await apiPublic.explorer_request_template_detail_overview({
       id,
     });
 

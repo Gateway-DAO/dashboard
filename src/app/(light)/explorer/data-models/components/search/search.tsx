@@ -142,11 +142,6 @@ export default function DataModelsExplorerSearch() {
             <DataModelExplorerCardLoading />
           </>
         )}
-        {dataModelsQuery.isSuccess && dataModels.length === 0 && (
-          <Typography component="p" variant="body1">
-            No results
-          </Typography>
-        )}
         {dataModelsQuery.isSuccess &&
           dataModels.length > 0 &&
           dataModels.map((dataModel) => (
@@ -161,6 +156,15 @@ export default function DataModelsExplorerSearch() {
           </>
         )}
       </Box>
+      {dataModelsQuery.isSuccess && dataModels.length === 0 && (
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ textAlign: 'center', width: '100%', py: 4 }}
+        >
+          {explorerDataModels.empty}
+        </Typography>
+      )}
       {dataModelsQuery.isError && (
         <Stack justifyContent="center">
           <DefaultError

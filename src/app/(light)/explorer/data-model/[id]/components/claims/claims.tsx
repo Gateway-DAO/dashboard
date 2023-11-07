@@ -1,8 +1,10 @@
 import CopyButton from '@/components/copy-button/copy-button';
 import { explorerDataModelDetailOverview } from '@/locale/en/datamodel';
 import { pda } from '@/locale/en/pda';
+
 import { Typography } from '@mui/material';
 import { Stack } from '@mui/system';
+
 import TableSchema from './table-schema';
 
 type Props = {
