@@ -27,7 +27,7 @@ export default function NumberCard({ label, value, dark }: Props) {
         {label}
       </Typography>
       <Typography variant="h5" color={dark ? 'common.white' : 'primary.dark'}>
-        {value}
+        {typeof value === 'number' ? value.toLocaleString() : value}
       </Typography>
     </Stack>
   );

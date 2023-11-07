@@ -1,8 +1,9 @@
 import { Box, Container, Stack, Typography } from '@mui/material';
 
 import TransactionsNumbers from './components/transactions-numbers';
+import TransactionsTableSection from './components/transactions-table-section';
 
-export default function Transaction() {
+export default function TransactionPage() {
   return (
     <>
       <Box
@@ -21,6 +22,7 @@ export default function Transaction() {
           <TransactionsNumbers />
         </Stack>
       </Box>
+      <TransactionsTableSection />
     </>
   );
 }
