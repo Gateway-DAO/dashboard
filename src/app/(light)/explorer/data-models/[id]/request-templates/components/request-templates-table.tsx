@@ -27,7 +27,7 @@ export const columns: GridColDef<
   {
     field: 'issuer',
     headerName: explorerDataModelRequestTemplates.data_request_template,
-    flex: 2,
+    flex: 1.3,
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" spacing={1.5}>
@@ -53,13 +53,14 @@ export const columns: GridColDef<
   {
     field: 'id',
     headerName: explorerDataModelRequestTemplates.data_request_template_id,
-    flex: 1,
+    flex: 1.2,
     valueGetter: (params) => params.row.count,
+    valueFormatter: (params) => limitCharsCentered(params.value, 15),
   },
   {
     field: 'count',
     headerName: explorerDataModelRequestTemplates.data_requests,
-    flex: 1,
+    flex: 1.2,
     valueGetter: (params) => params.row.count,
   },
 ];
