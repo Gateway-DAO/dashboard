@@ -61,6 +61,7 @@ const routes = {
   explorer: {
     root: explorer,
     transactions: `${explorer}/transactions`,
+    transaction: (transactionId) => `${explorer}/transactions/${transactionId}`,
     dataModels: `${explorer}/data-models`,
     dataRequestTemplates: '${explorer}/request-templates',
     dataModel: (dataModelId) => `${explorer}/data-model/${dataModelId}`,
