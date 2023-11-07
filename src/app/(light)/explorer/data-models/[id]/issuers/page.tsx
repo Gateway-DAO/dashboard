@@ -1,4 +1,4 @@
-import { explorerDataModels } from '@/locale/en/datamodel';
+import { explorerIssuersByDataModel } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
 import { PageProps } from '@/types/next';
 
@@ -45,7 +45,7 @@ export default async function DataModelIssuersPage({
             color="text.secondary"
             sx={{ textAlign: 'center', width: '100%' }}
           >
-            {explorerDataModels.empty}
+            {explorerIssuersByDataModel.empty}
           </Typography>
         )}
       </Container>

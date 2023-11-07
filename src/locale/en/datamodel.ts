@@ -78,3 +78,16 @@ export const explorerDataModelCard = {
   consumption: 'per consumption',
   issuances: (count: number) => `issuance${count > 0 ? 's' : ''}`,
 };
+
+export const explorerIssuersByDataModel = {
+  empty: 'No issuers found',
+  issuers: 'Issuers',
+  pdas_issued: 'PDAs issued',
+};
+
+export const explorerDataModelRequestTemplates = {
+  empty: 'No request templates found',
+  data_request_template: 'Data request template',
+  data_request_template_id: 'Data request template ID',
+  data_requests: 'Data requests',
+};

@@ -8,7 +8,7 @@ import {
 } from '@/components/data-grid/grid-default';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import { explorerIssuersByDataModel } from '@/locale/en/datamodel';
+import { explorerDataModelRequestTemplates } from '@/locale/en/datamodel';
 import {
   Explorer_Issuers_By_Data_ModelQuery,
   Organization,
@@ -26,7 +26,7 @@ export const columns: GridColDef<
 >[] = [
   {
     field: 'issuer',
-    headerName: explorerIssuersByDataModel.issuers,
+    headerName: explorerDataModelRequestTemplates.data_request_template,
     flex: 2,
     renderCell(params) {
       return (
@@ -51,8 +51,14 @@ export const columns: GridColDef<
     },
   },
   {
+    field: 'id',
+    headerName: explorerDataModelRequestTemplates.data_request_template_id,
+    flex: 1,
+    valueGetter: (params) => params.row.count,
+  },
+  {
     field: 'count',
-    headerName: explorerIssuersByDataModel.pdas_issued,
+    headerName: explorerDataModelRequestTemplates.data_requests,
     flex: 1,
     valueGetter: (params) => params.row.count,
   },
@@ -64,7 +70,7 @@ type Props = {
   totalCount: number;
 };
 
-export default function IssuersTable({
+export default function RequestTemplatesTable({
   id,
   data: initialData,
   totalCount = 0,
@@ -77,7 +83,7 @@ export default function IssuersTable({
   const { privateApi } = useGtwSession();
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
-    queryKey: ['issuersByDataModel', id],
+    queryKey: ['requestTemplatesByDataModel', id],
     queryFn: () =>
       privateApi?.explorer_issuers_by_data_model({
         id,
