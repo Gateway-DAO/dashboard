@@ -19,4 +19,5 @@ export const transaction_detail = {
   created_at: 'Created at',
   cost: 'Cost',
   status: 'Status',
+  transaction_data: 'Transaction data',
 };

@@ -2,6 +2,7 @@ import { PageProps } from '@/types/next';
 
 import TransactionDetails from './components/details';
 import TransactionHeader from './components/header';
+import TransactionData from './components/transaction-data';
 
 export default function TransactionPage({
   params: { id },
@@ -10,6 +11,7 @@ export default function TransactionPage({
     <>
       <TransactionHeader />
       <TransactionDetails id={id} />
+      <TransactionData />
     </>
   );
 }
