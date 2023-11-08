@@ -20,7 +20,7 @@ query explorer_request_templates_featured {
 
 query explorer_request_templates_list(
   $filter: FilterDataRequestTemplateInput
-  $skip: Float = 0
+  $skip: Int = 0
   $order: JSON = {}
 ) {
   dataRequestTemplates(filter: $filter, skip: $skip, take: 12, order: $order) {
