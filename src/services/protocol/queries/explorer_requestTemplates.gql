@@ -2,8 +2,43 @@ query explorer_request_templates_featured {
   dataRequestTemplates(take: 4) {
     id
     name
+    description
     dataRequestsCount
     createdAt
+    organization {
+      id
+      image
+      gatewayId
+    }
+    user {
+      id
+      profilePicture
+      gatewayId
+    }
+  }
+}
+
+query explorer_request_templates_list(
+  $filter: FilterDataRequestTemplateInput
+  $skip: Float = 0
+  $order: JSON = {}
+) {
+  dataRequestTemplates(filter: $filter, skip: $skip, take: 12, order: $order) {
+    id
+    name
+    description
+    dataRequestsCount
+    createdAt
+    organization {
+      id
+      image
+      gatewayId
+    }
+    user {
+      id
+      profilePicture
+      gatewayId
+    }
   }
 }
 
