@@ -6,23 +6,23 @@ export const explorer_home = {
     {
       title: 'Check a transaction',
       description:
-        'Transactions function as a comprehensive audit trail, meticulously recording all activities executed on the protocol layer. This ensures transparency and traceability, allowing for a detailed review of interactions within the system. The integrity and security of the protocol are bolstered by this immutable record, which is crucial for maintaining user trust and facilitating regulatory compliance.',
+        'Transactions serve as a comprehensive audit trail, meticulously recording all activities performed at the protocol layer.',
       link_text: 'Check out it',
       link: routes.explorer.transactions,
       target: '_self',
     },
     {
-      title: 'Explore data models',
+      title: 'Explore Data Models',
       description:
-        'Data models serve as foundational templates for Private Data Assets (PDAs). Each PDA created using a data model adheres to a standardized structure of claims, making these frameworks exceptionally reusable for various related scenarios.',
+        'Each PDA issued using a data model adheres to a standardized structure of claims, making these frameworks exceptionally reusable for various related scenarios.',
       link_text: 'Check out it',
       link: routes.explorer.dataModels,
       target: '_self',
     },
     {
-      title: `Start to verify user's data`,
+      title: 'Explore Data Request Templates',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna',
+        'Data Request Templates serve as the foundational blueprint for each Data Request, ensuring a uniform structure and standardized format for each inquiry.',
       link_text: 'Check out it',
       link: routes.explorer.dataRequestTemplates,
       target: '_self',
