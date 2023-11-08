@@ -22,7 +22,13 @@ export default function ExternalLink({
 }: Props) {
   return (
     <Stack sx={{ pr: 1 }}>
-      <Link id={id} passHref href={href} style={{ textDecoration: 'none' }}>
+      <Link
+        id={id}
+        target="_blank"
+        passHref
+        href={href}
+        style={{ textDecoration: 'none' }}
+      >
         <Typography
           variant="caption"
           data-testid="external-link"
