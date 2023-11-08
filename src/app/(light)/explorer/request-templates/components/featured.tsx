@@ -6,8 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Box, Container, Typography } from '@mui/material';
 
+import ExplorerDataCardLoading from '../../components/data-card/data-card-loading';
 import RequestTemplateExplorerCard from '../../components/request-template-card/request-template-card';
-import RequestTemplateExplorerCardLoading from '../../components/request-template-card/request-template-card-loading';
 
 export default function RequestTemplatesExplorerFeatured() {
   const requestTemplates = useQuery({
@@ -42,10 +42,10 @@ export default function RequestTemplatesExplorerFeatured() {
       >
         {requestTemplates.isLoading && (
           <>
-            <RequestTemplateExplorerCardLoading />
-            <RequestTemplateExplorerCardLoading />
-            <RequestTemplateExplorerCardLoading />
-            <RequestTemplateExplorerCardLoading />
+            <ExplorerDataCardLoading />
+            <ExplorerDataCardLoading />
+            <ExplorerDataCardLoading />
+            <ExplorerDataCardLoading />
           </>
         )}
         {requestTemplates.data?.dataRequestTemplates.map((requestTemplate) => (
