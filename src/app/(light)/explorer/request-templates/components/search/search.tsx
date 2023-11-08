@@ -5,27 +5,27 @@ import { common } from '@/locale/en/common';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
 import { useDebouncedState } from '@react-hookz/web';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
 import ExplorerDataCardLoading from '../../../components/data-card/data-card-loading';
 import RequestTemplateExplorerCard from '../../../components/request-template-card/request-template-card';
 import SearchFilters from '../../../components/search-filters/search-filters';
+import AmountOfDataRequestsField from './filters/amount-of-data-requests-field';
+import AverageCostField from './filters/average-cost-field';
+import SortByField from './filters/sort-by-field';
+import TagsField from './filters/tags-field';
 
 export default function DataModelsRequestExplorerSearch() {
   const [search, setSearch] = useDebouncedState('', 500);
-
-  // const metadata = useQuery({
-  //   queryKey: ['data-models-metadata'],
-  //   queryFn: () => apiPublic.explorer_data_models_metadata(),
-  // });
 
   const requestTemplatesQuery = useInfiniteQuery({
     queryKey: ['data-model-templates', search],
     queryFn: ({ pageParam = 0 }) =>
       apiPublic.explorer_request_templates_list({
         filter: {},
+        skip: pageParam,
       }),
     getNextPageParam: (lastPage, allPages) =>
       lastPage.dataRequestTemplates.length === 12
@@ -55,8 +55,22 @@ export default function DataModelsRequestExplorerSearch() {
       >
         {explorerDataModels.listTitle}
       </Typography>
-      <SearchFilters onSearch={setSearch}></SearchFilters>
-
+      <SearchFilters onSearch={setSearch}>
+        <TagsField tags={[]} setTags={() => {}} />
+        <AverageCostField
+          selectedAverageCost={[]}
+          setAverageCost={() => {}}
+          min={0}
+          max={100}
+        />
+        <AmountOfDataRequestsField
+          selectedAmountOfDataRequests={[]}
+          setAmountOfDataRequests={() => {}}
+          min={0}
+          max={100}
+        />
+        <SortByField selectedSort={undefined} onSort={() => {}} />
+      </SearchFilters>
       <Box
         display="grid"
         gridTemplateColumns={{
@@ -107,7 +121,7 @@ export default function DataModelsRequestExplorerSearch() {
           <DefaultError
             isModal={false}
             hasLink={false}
-            message="Error on searching for data models"
+            message="Error on searching for data model request templates"
           />
         </Stack>
       )}
