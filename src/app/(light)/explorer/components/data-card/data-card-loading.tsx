@@ -1,6 +1,6 @@
 import { Stack, Card, CardProps, Box, Skeleton } from '@mui/material';
 
-export default function RequestTemplateExplorerCardLoading(props: CardProps) {
+export default function ExplorerDataCardLoading(props: CardProps) {
   return (
     <Card variant="outlined" {...props}>
       <Stack
@@ -35,7 +35,6 @@ export default function RequestTemplateExplorerCardLoading(props: CardProps) {
             gridTemplateColumns: '1fr 0.8fr',
           }}
         >
-          <Skeleton variant="text" />
           <Skeleton variant="text" />
         </Box>
       </Stack>

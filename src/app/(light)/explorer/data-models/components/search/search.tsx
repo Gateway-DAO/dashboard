@@ -10,8 +10,8 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
+import DataCardExplorerLoading from '../../../components/data-card/data-card-loading';
 import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
-import DataModelExplorerCardLoading from '../../../components/data-model-card/data-model-card-loading';
 import SearchFilters from '../../../components/search-filters/search-filters';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
@@ -134,12 +134,12 @@ export default function DataModelsExplorerSearch() {
       >
         {dataModelsQuery.isLoading && (
           <>
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
           </>
         )}
         {dataModelsQuery.isSuccess &&
@@ -149,10 +149,10 @@ export default function DataModelsExplorerSearch() {
           ))}
         {dataModelsQuery.isFetchingNextPage && (
           <>
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
           </>
         )}
       </Box>
