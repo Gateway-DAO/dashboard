@@ -7,10 +7,10 @@ import {
   gridWithoutNegativeMargin,
 } from '@/components/data-grid/grid-default';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import { explorerVerifiers } from '@/locale/en/request-template';
+import { explorerIssuersByDataModel } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
 import {
-  Explorer_Verifiers_By_Data_Request_TemplateQuery,
+  Explorer_Issuers_By_Data_ModelQuery,
   Organization,
   User,
 } from '@/services/protocol/types';
@@ -22,29 +22,29 @@ import { Stack, Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 export const columns: GridColDef<
-  PartialDeep<{ count: number; verifier: any }>
+  PartialDeep<{ count: number; issuer: any }>
 >[] = [
   {
-    field: 'verifier',
-    headerName: explorerVerifiers.verifiers,
+    field: 'issuer',
+    headerName: explorerIssuersByDataModel.issuers,
     flex: 2,
     renderCell(params) {
       return (
         <Stack direction="row" alignItems="center" spacing={1.5}>
           <GTWAvatar
-            name={params.row.verifier?.id}
-            alt={params.row.verifier!.gatewayId}
+            name={params.row.issuer?.id}
+            alt={params.row.issuer!.gatewayId}
             src={
-              (params.row.verifier as User)?.profilePicture ??
-              (params.row.verifier as Organization)?.image
+              (params.row.issuer as User)?.profilePicture ??
+              (params.row.issuer as Organization)?.image
             }
             size={32}
           />
           <Typography variant="body2">
-            {(params.row.verifier as User)?.displayName ??
-              (params.row.verifier as Organization)?.name ??
-              params.row.verifier?.gatewayId ??
-              limitCharsCentered(params.row.verifier?.id as string, 12)}
+            {(params.row.issuer as User)?.displayName ??
+              (params.row.issuer as Organization)?.name ??
+              params.row.issuer?.gatewayId ??
+              limitCharsCentered(params.row.issuer?.id as string, 12)}
           </Typography>
         </Stack>
       );
@@ -52,7 +52,7 @@ export const columns: GridColDef<
   },
   {
     field: 'count',
-    headerName: explorerVerifiers.data_requests,
+    headerName: explorerIssuersByDataModel.pdas_issued,
     flex: 1,
     valueGetter: (params) => params.row.count,
   },
@@ -60,13 +60,11 @@ export const columns: GridColDef<
 
 type Props = {
   id: string;
-  data: PartialDeep<
-    Explorer_Verifiers_By_Data_Request_TemplateQuery['verifiersByDataRequestTemplate']
-  >;
+  data: PartialDeep<Explorer_Issuers_By_Data_ModelQuery['issuersByDataModel']>;
   totalCount: number;
 };
 
-export default function VerifiersTable({
+export default function IssuersTable({
   id,
   data: initialData,
   totalCount = 0,
@@ -78,14 +76,13 @@ export default function VerifiersTable({
 
   const { data, isLoading } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
-    queryKey: ['verifiersByDataRequestTemplate', id],
+    queryKey: ['issuersByDataModel', id],
     queryFn: () =>
-      apiPublic?.explorer_verifiers_by_data_request_template({
+      apiPublic?.explorer_issuers_by_data_model({
         id,
       }),
     select: (data: any) =>
-      (data as Explorer_Verifiers_By_Data_Request_TemplateQuery)
-        ?.verifiersByDataRequestTemplate,
+      (data as Explorer_Issuers_By_Data_ModelQuery)?.issuersByDataModel,
     initialData: initialData && initialData.length ? initialData : null,
   });
 
@@ -97,7 +94,7 @@ export default function VerifiersTable({
   };
 
   const getRowId = (row: any) => {
-    return row.verifier?.id;
+    return row.issuer?.id;
   };
 
   return (

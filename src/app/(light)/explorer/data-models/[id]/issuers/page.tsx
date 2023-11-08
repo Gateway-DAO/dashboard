@@ -1,7 +1,12 @@
+import { explorerIssuersByDataModel } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
 import { PageProps } from '@/types/next';
 
+import { Typography } from '@mui/material';
+import { Container } from '@mui/system';
+
 import DataModelDetailHeader from '../components/header';
+import IssuersTable from './components/issuers-table';
 
 export default async function DataModelIssuersPage({
   params: { id },
@@ -10,6 +15,15 @@ export default async function DataModelIssuersPage({
     id,
   });
 
+  const issuersByDataModel =
+    (
+      await apiPublic.explorer_issuers_by_data_model({
+        id,
+      })
+    )?.issuersByDataModel ?? [];
+
+  const count = 0;
+
   return (
     <>
       <DataModelDetailHeader
@@ -17,6 +31,24 @@ export default async function DataModelIssuersPage({
         title={dataModel.title}
         tags={dataModel.tags!}
       />
+      <Container sx={{ pb: 4 }}>
+        {issuersByDataModel && issuersByDataModel.length > 0 && (
+          <IssuersTable
+            id={dataModel?.id as string}
+            data={issuersByDataModel}
+            totalCount={count}
+          />
+        )}
+        {issuersByDataModel && issuersByDataModel.length === 0 && (
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{ textAlign: 'center', width: '100%' }}
+          >
+            {explorerIssuersByDataModel.empty}
+          </Typography>
+        )}
+      </Container>
     </>
   );
 }
