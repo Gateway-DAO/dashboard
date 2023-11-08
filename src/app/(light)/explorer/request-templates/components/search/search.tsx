@@ -4,6 +4,7 @@ import DefaultError from '@/components/default-error/default-error';
 import { common } from '@/locale/en/common';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
+import { DataRequestTemplate } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -12,10 +13,31 @@ import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import ExplorerDataCardLoading from '../../../components/data-card/data-card-loading';
 import RequestTemplateExplorerCard from '../../../components/request-template-card/request-template-card';
 import SearchFilters from '../../../components/search-filters/search-filters';
+import SortByField, {
+  SortByOption,
+} from '../../../components/search-filters/sort-by-field';
 import TagsField from '../../../components/search-filters/tags-field';
 import AmountOfDataRequestsField from './filters/amount-of-data-requests-field';
 import AverageCostField from './filters/average-cost-field';
-import SortByField from './filters/sort-by-field';
+
+const sortOptions: SortByOption<DataRequestTemplate>[] = [
+  {
+    key: 'newest',
+    label: 'Newest',
+    value: undefined,
+  },
+  { key: 'oldest', label: 'Oldest', value: { createdAt: 'ASC' } },
+  {
+    key: 'requests-high-to-low',
+    label: 'Requests high to low',
+    value: { dataRequestsCount: 'DESC' },
+  },
+  {
+    key: 'requests-low-to-high',
+    label: 'Requests low to high',
+    value: { dataRequestsCount: 'ASC' },
+  },
+];
 
 export default function DataModelsRequestExplorerSearch() {
   const [search, setSearch] = useDebouncedState('', 500);
@@ -69,7 +91,11 @@ export default function DataModelsRequestExplorerSearch() {
           min={0}
           max={100}
         />
-        <SortByField selectedSort={undefined} onSort={() => {}} />
+        <SortByField
+          selectedSort={undefined}
+          onSort={() => {}}
+          options={sortOptions}
+        />
       </SearchFilters>
       <Box
         display="grid"
