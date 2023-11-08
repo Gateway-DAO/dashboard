@@ -12,10 +12,10 @@ import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import ExplorerDataCardLoading from '../../../components/data-card/data-card-loading';
 import RequestTemplateExplorerCard from '../../../components/request-template-card/request-template-card';
 import SearchFilters from '../../../components/search-filters/search-filters';
+import TagsField from '../../../components/search-filters/tags-field';
 import AmountOfDataRequestsField from './filters/amount-of-data-requests-field';
 import AverageCostField from './filters/average-cost-field';
 import SortByField from './filters/sort-by-field';
-import TagsField from './filters/tags-field';
 
 export default function DataModelsRequestExplorerSearch() {
   const [search, setSearch] = useDebouncedState('', 500);

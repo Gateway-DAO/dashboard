@@ -13,10 +13,10 @@ import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import DataCardExplorerLoading from '../../../components/data-card/data-card-loading';
 import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
 import SearchFilters from '../../../components/search-filters/search-filters';
+import TagsField from '../../../components/search-filters/tags-field';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
 import SortByField, { DataModelSortOption } from './fields/sort-by-field';
-import TagsField from './fields/tags-field';
 
 export default function DataModelsExplorerSearch() {
   const [search, setSearch] = useDebouncedState('', 500);

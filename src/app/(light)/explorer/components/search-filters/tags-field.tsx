@@ -2,7 +2,7 @@
 
 import { useCallback } from 'react';
 
-import { explorerDataModelRequestTemplates } from '@/locale/en/datamodel';
+import { common } from '@/locale/en/common';
 
 import {
   Checkbox,
@@ -65,9 +65,7 @@ export default function TagsField({
         },
       }}
     >
-      <InputLabel id="tags-label">
-        {explorerDataModelRequestTemplates.filters.tags}
-      </InputLabel>
+      <InputLabel id="tags-label">{common.general.tags}</InputLabel>
       <Select
         labelId="tags-label"
         id="tags"
