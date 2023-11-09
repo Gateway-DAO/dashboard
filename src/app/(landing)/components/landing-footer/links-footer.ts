@@ -1,3 +1,4 @@
+'use client';
 import { DOCS_BASE_URL } from '@/constants/docs';
 import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';

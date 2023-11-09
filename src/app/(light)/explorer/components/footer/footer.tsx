@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 
 import GatewayIcon from '@/components/icons/gateway-squared';
