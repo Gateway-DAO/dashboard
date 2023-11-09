@@ -7,6 +7,21 @@ export const transaction = {
   date: 'Date',
   type: 'Type',
   earning: 'Earning',
+  cards: {
+    pdas: 'PDAs issued',
+    issuers: 'Unique issuers',
+    data_requests: 'Data requests created',
+    fees: 'Fees generated for issuers',
+  },
+  last_transactions: 'Last transactions',
+  home_table: {
+    columns: {
+      id: 'Txn ID',
+      action: 'Action',
+      date: 'Date',
+    },
+    view_more: 'View all transactions',
+  },
 };
 
 export const transaction_detail = {
