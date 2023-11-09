@@ -41,6 +41,10 @@ export const explorerRequestTemplates = {
   },
 };
 
+export const explorerRequestTemplateCard = {
+  requests: (plural?: boolean) => `data request${plural ? 's' : ''}`,
+};
+
 export const explorerRequestTemplateDetail = {
   tabs: {
     overview: 'Overview',
