@@ -1,4 +1,5 @@
 import { DOCS_BASE_URL } from '@/constants/docs';
+import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
 import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
 import { SiSubstack } from 'react-icons/si';
@@ -8,27 +9,27 @@ import { LinkedIn } from '@mui/icons-material';
 export const socialsLinks = [
   {
     icon: FaTwitter,
-    href: 'https://twitter.com/gateway_xyz',
+    href: externalLinks.gateway_twitter,
     name: 'Twitter',
   },
   {
     icon: FaDiscord,
-    href: 'https://discord.gg/tgt3KjcHGs',
+    href: externalLinks.gateway_discord,
     name: 'Discord',
   },
   {
     icon: LinkedIn,
-    href: 'https://www.linkedin.com/company/mygateway/',
+    href: externalLinks.gateway_linkedin,
     name: 'LinkedIn',
   },
   {
     icon: SiSubstack,
-    href: 'https://mygateway.substack.com/',
+    href: externalLinks.gateway_substack,
     name: 'Substack',
   },
   {
     icon: FaGithub,
-    href: 'https://github.com/Gateway-DAO',
+    href: externalLinks.gateway_github,
     name: 'Github',
   },
 ];
@@ -60,7 +61,7 @@ export const listLinks = [
   },
   {
     title: 'Brand Kit',
-    href: 'https://live.standards.site/gateway',
+    href: externalLinks.gateway_brandkit,
   },
   {
     title: 'Contact',

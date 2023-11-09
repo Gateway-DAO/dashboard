@@ -1,4 +1,5 @@
 import { DOCS_BASE_URL } from '@/constants/docs';
+import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
 
 import LogoDiscord from '../icons/logo-discord';
@@ -10,23 +11,23 @@ import LogoTwitter from '../icons/logo-twitter';
 export const linksSocial = [
   {
     icon: LogoTwitter,
-    href: 'https://twitter.com/gateway_xyz',
+    href: externalLinks.gateway_twitter,
   },
   {
     icon: LogoDiscord,
-    href: 'https://discord.gg/tgt3KjcHGs',
+    href: externalLinks.gateway_discord,
   },
   {
     icon: LogoLinkedin,
-    href: 'https://www.linkedin.com/company/mygateway/',
+    href: externalLinks.gateway_linkedin,
   },
   {
     icon: LogoSubstrack,
-    href: 'https://mygateway.substack.com/',
+    href: externalLinks.gateway_substack,
   },
   {
     icon: LogoGithub,
-    href: 'https://github.com/Gateway-DAO',
+    href: externalLinks.gateway_github,
   },
 ];
 
@@ -54,7 +55,7 @@ export const linksList = [
 
   {
     title: 'Brand Kit',
-    href: 'https://live.standards.site/gateway',
+    href: externalLinks.gateway_brandkit,
     target: '_blank',
   },
 ];
