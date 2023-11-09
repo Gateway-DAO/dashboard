@@ -36,6 +36,7 @@ export const explorerDataModels = {
   listTitle: 'All data models',
   issuers: 'Issuers',
   pdas_issued: 'PDAs issued',
+  view_more: 'View all data models',
   filters: {
     comsumption_price: 'Comsumption price',
     amount_of_issuances: 'Amount of issuances',

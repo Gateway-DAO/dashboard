@@ -1,15 +1,21 @@
 'use client';
 
+import routes from '@/constants/routes';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
 import { useQuery } from '@tanstack/react-query';
 
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 
-import DataCardExplorerLoading from '../../components/data-card/data-card-loading';
-import DataModelExplorerCard from '../../components/data-model-card/data-model-card';
+import DataCardExplorerLoading from '../data-card/data-card-loading';
+import DataModelExplorerCard from '../data-model-card/data-model-card';
 
-export default function DataModelsExplorerFeatured() {
+type Props = {
+  title?: string;
+  viewMore?: boolean;
+};
+
+export default function DataModelsExplorerFeatured({ title, viewMore }: Props) {
   const dataModels = useQuery({
     queryKey: ['data-models-featured'],
     queryFn: () => apiPublic.explorer_data_models_featured(),
@@ -20,15 +26,29 @@ export default function DataModelsExplorerFeatured() {
         py: 3,
       }}
     >
-      <Typography
-        component="h3"
-        variant="h5"
+      <Box
         sx={{
-          mb: 2,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: viewMore ? 4 : 0,
         }}
       >
-        {explorerDataModels.featureTitle}
-      </Typography>
+        <Typography
+          component="h3"
+          variant="h5"
+          sx={{
+            mb: !viewMore ? 2 : 0,
+          }}
+        >
+          {title ?? explorerDataModels.featureTitle}
+        </Typography>
+        {viewMore && (
+          <Button variant="text" href={routes.explorer.dataModels}>
+            {explorerDataModels.view_more}
+          </Button>
+        )}
+      </Box>
       <Box
         sx={{
           gap: 2,
