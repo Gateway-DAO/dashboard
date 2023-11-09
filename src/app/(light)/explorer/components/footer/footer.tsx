@@ -2,10 +2,7 @@ import Link from 'next/link';
 
 import GatewayIcon from '@/components/icons/gateway-squared';
 import { brandColors } from '@/theme/config/brand';
-import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
-import { SiSubstack } from 'react-icons/si';
 
-import { LinkedIn } from '@mui/icons-material';
 import {
   Avatar,
   Box,
@@ -16,33 +13,7 @@ import {
   Link as MuiLink,
 } from '@mui/material';
 
-const socials = [
-  {
-    icon: FaTwitter,
-    href: '/',
-    name: 'Twitter',
-  },
-  {
-    icon: FaDiscord,
-    href: '/',
-    name: 'Discord',
-  },
-  {
-    icon: LinkedIn,
-    href: '/',
-    name: 'LinkedIn',
-  },
-  {
-    icon: SiSubstack,
-    href: '/',
-    name: 'Substack',
-  },
-  {
-    icon: FaGithub,
-    href: '/',
-    name: 'Github',
-  },
-];
+import { listLinks, socialsLinks } from './list-links';
 
 export default function ExplorerFooter() {
   return (
@@ -92,7 +63,7 @@ export default function ExplorerFooter() {
               m: 0,
             }}
           >
-            {socials.map(({ icon: Icon, href, name }) => (
+            {socialsLinks.map(({ icon: Icon, href, name }) => (
               <li key={name}>
                 <Avatar
                   component={Link}
@@ -120,48 +91,11 @@ export default function ExplorerFooter() {
             m: 0,
           }}
         >
-          {[
-            {
-              title: 'Home',
-              href: '/',
-            },
-            {
-              title: 'Learn',
-              href: '/',
-            },
-            {
-              title: 'Build',
-              href: '/',
-            },
-            {
-              title: 'Explorer',
-              href: '/',
-            },
-            {
-              title: 'Dashboard',
-              href: '/',
-            },
-            {
-              title: 'Privacy',
-              href: '/',
-            },
-            {
-              title: 'Terms & Conditions',
-              href: '/',
-            },
-            {
-              title: 'Brand Kit',
-              href: '/',
-            },
-            {
-              title: 'Contact',
-              href: '/',
-            },
-          ].map(({ title, href }) => (
+          {listLinks.map(({ title, href }) => (
             <Box key={title} component="li">
               <MuiLink
                 component={Link}
-                href={href}
+                href={href as string}
                 color="black"
                 underline="hover"
               >
