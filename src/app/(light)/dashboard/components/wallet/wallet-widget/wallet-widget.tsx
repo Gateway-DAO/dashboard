@@ -30,10 +30,6 @@ export default function WalletWidget({ id }: Props) {
   );
   const { organization } = useOrganization();
 
-  const walletData = {
-    value: 0.3,
-  };
-
   const walletPage = !!organization
     ? routes.dashboard.org.wallet(organization.gatewayId)
     : routes.dashboard.user.wallet;
@@ -74,7 +70,7 @@ export default function WalletWidget({ id }: Props) {
               color="primary"
               data-testid="wallet-widget__value"
             >
-              {numberToMoneyString(walletData.value)}
+              {numberToMoneyString(session?.user?.balance ?? 0)}
             </Typography>
           ) : (
             <Stack sx={{ overflow: 'hidden', height: 24 }}>
