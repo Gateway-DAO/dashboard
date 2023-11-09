@@ -60,6 +60,10 @@ export const listLinks = [
     href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
   },
   {
+    title: 'Terms & Conditions',
+    href: `${DOCS_BASE_URL}docs/terms-of-service`,
+  },
+  {
     title: 'Brand Kit',
     href: externalLinks.gateway_brandkit,
   },
