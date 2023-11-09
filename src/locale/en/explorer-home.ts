@@ -28,4 +28,5 @@ export const explorer_home = {
       target: '_self',
     },
   ],
+  data_models: 'Featured data models',
 };
