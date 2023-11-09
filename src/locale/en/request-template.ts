@@ -39,6 +39,7 @@ export const explorerRequestTemplates = {
     amount_of_issuances: 'Amount of data requests',
     sort_by: 'Sort by',
   },
+  view_more: 'View all request templates',
 };
 
 export const explorerRequestTemplateCard = {
