@@ -35,6 +35,7 @@ export default function ExplorerFooter() {
         justifyContent="space-between"
         sx={{
           mt: 3,
+          px: { xs: 0, md: 3 },
           flexDirection: {
             xs: 'column',
             lg: 'row',
@@ -80,8 +81,8 @@ export default function ExplorerFooter() {
             gridTemplateRows: 'repeat(5, 1fr)',
             gridAutoFlow: 'column',
             listStyle: 'none',
-            flexGrow: 1,
             columnGap: 5,
+            flexGrow: 1,
             p: 0,
             m: 0,
           }}
@@ -99,7 +100,7 @@ export default function ExplorerFooter() {
             </Box>
           ))}
         </Box>
-        <Newsletter />
+        <Stack flexGrow={1}>{/* <Newsletter /> */}</Stack>
       </Stack>
     </Stack>
   );
