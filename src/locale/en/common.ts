@@ -23,6 +23,8 @@ export const common = {
     developers: 'Developers',
     overview: 'Overview',
     show_more: 'Show more',
+    tags: 'Tags',
+    sort_by: 'Sort by',
   },
   chain: {
     EVM: 'Ethereum',

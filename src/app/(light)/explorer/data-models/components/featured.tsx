@@ -1,13 +1,13 @@
 'use client';
 
 import { explorerDataModels } from '@/locale/en/datamodel';
+import { apiPublic } from '@/services/protocol/api';
+import { useQuery } from '@tanstack/react-query';
 
 import { Box, Container, Typography } from '@mui/material';
 
+import DataCardExplorerLoading from '../../components/data-card/data-card-loading';
 import DataModelExplorerCard from '../../components/data-model-card/data-model-card';
-import { useQuery } from '@tanstack/react-query';
-import { apiPublic } from '@/services/protocol/api';
-import DataModelExplorerCardLoading from '../../components/data-model-card/data-model-card-loading';
 
 export default function DataModelsExplorerFeatured() {
   const dataModels = useQuery({
@@ -42,10 +42,10 @@ export default function DataModelsExplorerFeatured() {
       >
         {dataModels.isLoading && (
           <>
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
           </>
         )}
         {dataModels.data?.dataModels.map((dataModel) => (

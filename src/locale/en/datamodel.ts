@@ -37,10 +37,8 @@ export const explorerDataModels = {
   issuers: 'Issuers',
   pdas_issued: 'PDAs issued',
   filters: {
-    tags: 'Tags',
     comsumption_price: 'Comsumption price',
     amount_of_issuances: 'Amount of issuances',
-    sort_by: 'Sort by',
   },
 };
 
@@ -90,4 +88,8 @@ export const explorerDataModelRequestTemplates = {
   data_request_template: 'Data request template',
   data_request_template_id: 'Data request template ID',
   data_requests: 'Data requests',
+  filters: {
+    amount_of_data_requests: 'Amount of data requests',
+    average_cost: 'Average cost',
+  },
 };

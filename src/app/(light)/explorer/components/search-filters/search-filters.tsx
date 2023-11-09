@@ -25,37 +25,41 @@ export default function SearchFilters({
     <Stack mb={2} direction="column" gap={2} justifyContent="stretch">
       <Stack flexDirection="row" gap={1}>
         <SearchField onChange={onSearch} />
-        <IconButton
-          type="button"
-          onClick={toggleVisible}
-          sx={{
-            display: {
-              xs: 'block',
-              lg: 'none',
-            },
-            border: 1,
-            px: 2,
-            borderRadius: 1,
-          }}
-        >
-          <FilterListOutlined />
-        </IconButton>
+        {children && (
+          <IconButton
+            type="button"
+            onClick={toggleVisible}
+            sx={{
+              display: {
+                xs: 'block',
+                lg: 'none',
+              },
+              border: 1,
+              px: 2,
+              borderRadius: 1,
+            }}
+          >
+            <FilterListOutlined />
+          </IconButton>
+        )}
       </Stack>
-      <Collapse in={isDesktop || isVisible}>
-        <Stack
-          flexDirection={{
-            xs: 'column',
-            lg: 'row',
-          }}
-          alignItems={{
-            xs: 'stretch',
-            lg: 'flex-start',
-          }}
-          gap={1}
-        >
-          {children}
-        </Stack>
-      </Collapse>
+      {children && (
+        <Collapse in={isDesktop || isVisible}>
+          <Stack
+            flexDirection={{
+              xs: 'column',
+              lg: 'row',
+            }}
+            alignItems={{
+              xs: 'stretch',
+              lg: 'flex-start',
+            }}
+            gap={1}
+          >
+            {children}
+          </Stack>
+        </Collapse>
+      )}
     </Stack>
   );
 }
