@@ -29,4 +29,5 @@ export const explorer_home = {
     },
   ],
   data_models: 'Featured data models',
+  request_templates: 'Featured data request templates',
 };
