@@ -28,7 +28,7 @@ export const explorerMenuItems: GTWMenuItemSettings[] = [
     activeHrefs: [routes.explorer.dataRequestTemplates],
   },
   {
-    name: 'Open docs',
+    name: 'Docs',
     href: `${DOCS_BASE_URL}docs/get-started-here`,
     activeHrefs: [],
     icon: OpenInNew,
