@@ -24,7 +24,7 @@ export const explorerMenuItems: GTWMenuItemSettings[] = [
   },
   {
     name: 'Data request templates',
-    href: routes.dashboard.user.requests,
+    href: routes.explorer.requestTemplates,
     activeHrefs: [routes.explorer.requestTemplates],
   },
   {
