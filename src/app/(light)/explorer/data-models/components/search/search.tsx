@@ -18,6 +18,7 @@ import SortByField, {
   SortByOption,
 } from '../../../components/search-filters/sort-by-field';
 import TagsField from '../../../components/search-filters/tags-field';
+import ExplorerSearchSection from '../../../components/search-section/search-section';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
 
@@ -114,112 +115,56 @@ export default function DataModelsExplorerSearch() {
   const dataModels =
     dataModelsQuery.data?.pages?.flatMap(({ dataModels }) => dataModels) ?? [];
 
-  return (
-    <Container
-      component={Stack}
-      sx={{
-        display: 'flex',
-        py: 3,
-      }}
-    >
-      <Typography
-        component="h3"
-        variant="h5"
-        sx={{
-          mb: 2,
-        }}
-      >
-        {explorerDataModels.listTitle}
-      </Typography>
-      <SearchFilters onSearch={setSearch}>
-        <TagsField
-          tags={tags}
-          selectedTags={selectedTags}
-          setTags={setSelectedTags}
-          isLoading={metadata.isLoading}
-        />
-        <ConsumpitonPriceField
-          min={consumptionPrice.min}
-          max={consumptionPrice.max}
-          selectedConsumptionPrice={selectedConsumptionPrice}
-          setConsumptionPrice={setSelectedConsumptionPrice}
-          isLoading={metadata.isLoading}
-        />
-        <AmountOfIssuancesField
-          min={issuedCount.min}
-          max={issuedCount.max}
-          selectedAmountOfIssuances={selectedAmountOfIssuances}
-          setAmountOfIssuances={setSelectedAmountOfIssuances}
-          isLoading={metadata.isLoading}
-        />
-        <SortByField
-          selectedSort={undefined}
-          onSort={() => {}}
-          options={sortOptions}
-        />
-      </SearchFilters>
+  const filters = (
+    <>
+      <TagsField
+        tags={tags}
+        selectedTags={selectedTags}
+        setTags={setSelectedTags}
+        isLoading={metadata.isLoading}
+      />
+      <ConsumpitonPriceField
+        min={consumptionPrice.min}
+        max={consumptionPrice.max}
+        selectedConsumptionPrice={selectedConsumptionPrice}
+        setConsumptionPrice={setSelectedConsumptionPrice}
+        isLoading={metadata.isLoading}
+      />
+      <AmountOfIssuancesField
+        min={issuedCount.min}
+        max={issuedCount.max}
+        selectedAmountOfIssuances={selectedAmountOfIssuances}
+        setAmountOfIssuances={setSelectedAmountOfIssuances}
+        isLoading={metadata.isLoading}
+      />
+      <SortByField
+        selectedSort={undefined}
+        onSort={() => {}}
+        options={sortOptions}
+      />
+    </>
+  );
 
-      <Box
-        display="grid"
-        gridTemplateColumns={{
-          xs: '1fr',
-          md: 'repeat(2, 1fr)',
-          lg: 'repeat(4, 1fr)',
-        }}
-        gap={2}
-      >
-        {dataModelsQuery.isLoading && (
-          <>
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-          </>
-        )}
-        {dataModelsQuery.isSuccess &&
-          dataModels.length > 0 &&
-          dataModels.map((dataModel) => (
-            <DataModelExplorerCard dataModel={dataModel} key={dataModel.id} />
-          ))}
-        {dataModelsQuery.isFetchingNextPage && (
-          <>
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-          </>
-        )}
-      </Box>
-      {dataModelsQuery.isSuccess && dataModels.length === 0 && (
-        <Typography
-          variant="body1"
-          color="text.secondary"
-          sx={{ textAlign: 'center', width: '100%', py: 4 }}
-        >
-          {explorerDataModels.empty}
-        </Typography>
-      )}
-      {dataModelsQuery.isError && (
-        <Stack justifyContent="center">
-          <DefaultError
-            isModal={false}
-            hasLink={false}
-            message="Error on searching for data models"
-          />
-        </Stack>
-      )}
-      {!dataModelsQuery.isFetchingNextPage && dataModelsQuery.hasNextPage && (
-        <Button
-          type="button"
-          variant="contained"
-          onClick={() => dataModelsQuery.fetchNextPage()}
-          sx={{ my: 6, alignSelf: 'center' }}
-        >
-          {common.actions.load_more}
-        </Button>
-      )}
-    </Container>
+  return (
+    <ExplorerSearchSection
+      title={explorerDataModels.listTitle}
+      emptyText={explorerDataModels.empty}
+      errorMessage="Error on searching for data models"
+      isEmpty={dataModelsQuery.isSuccess && dataModels.length === 0}
+      isError={dataModelsQuery.isError}
+      isLoading={dataModelsQuery.isLoading}
+      isFetchingMore={dataModelsQuery.isFetchingNextPage}
+      hasMore={dataModelsQuery.hasNextPage}
+      onSearch={setSearch}
+      fetchMore={() => dataModelsQuery.fetchNextPage()}
+      filters={filters}
+      cards={
+        dataModelsQuery.isSuccess &&
+        dataModels.length > 0 &&
+        dataModels.map((dataModel) => (
+          <DataModelExplorerCard dataModel={dataModel} key={dataModel.id} />
+        ))
+      }
+    />
   );
 }
