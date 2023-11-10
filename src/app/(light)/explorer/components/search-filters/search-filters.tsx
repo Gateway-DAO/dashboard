@@ -22,7 +22,7 @@ export default function SearchFilters({
   const { isDesktop } = useBreakpoints();
 
   return (
-    <Stack mb={2} direction="column" gap={2} justifyContent="stretch">
+    <Stack mb={3} direction="column" gap={2} justifyContent="stretch">
       <Stack flexDirection="row" gap={1}>
         <SearchField onChange={onSearch} />
         {children && (

@@ -68,7 +68,7 @@ const routes = {
       `${explorer}/data-models/${dataModelId}/issuers`,
     dataModelRequestTemplates: (dataModelId) =>
       `${explorer}/data-models/${dataModelId}/request-templates`,
-    dataRequestTemplates: `${explorer}/request-templates`,
+    requestTemplates: `${explorer}/request-templates`,
     requestTemplate: (requestTemplateId) =>
       `${explorer}/request-templates/${requestTemplateId}`,
     requestTemplateVerifiers: (requestTemplateId) =>
