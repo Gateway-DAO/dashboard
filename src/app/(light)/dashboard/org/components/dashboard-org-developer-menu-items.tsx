@@ -1,5 +1,5 @@
-import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
 import CodeBlocksOutlinedIcon from '@/components/icons/code-blocks-outlined';
+import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
 import documentationRoutes from '@/constants/documentationRoutes';
 import routes from '@/constants/routes';
 

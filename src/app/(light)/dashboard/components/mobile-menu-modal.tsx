@@ -1,5 +1,7 @@
 'use client';
-import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
+import GTWMenuItem, {
+  GTWMenuItemSettings,
+} from '@/components/menu-item/menu-item';
 
 import { List, Modal, Stack } from '@mui/material';
 
