@@ -2,8 +2,8 @@ import { explorerRequestTemplates } from '@/locale/en/request-template';
 
 import { Divider } from '@mui/material';
 
-import RequestTemplatesExplorerFeatured from '../components/featured-data-request-templates-row/featured';
 import ExplorerHero from '../components/hero/hero';
+import RequestTemplatesExplorerFeatured from './components/featured';
 import DataModelsRequestExplorerSearch from './components/search/search';
 
 export default function RequestTemplatesExplorerPage() {
@@ -15,7 +15,7 @@ export default function RequestTemplatesExplorerPage() {
         help={explorerRequestTemplates.help}
         infoCard
         sx={{
-          backgroundColor: 'primary.light',
+          backgroundColor: 'primary.50',
         }}
       />
       <RequestTemplatesExplorerFeatured />

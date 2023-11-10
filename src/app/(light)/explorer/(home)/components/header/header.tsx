@@ -17,7 +17,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import ExplorerHeader from '../components/header/header';
+import ExplorerHeader from '../../../components/header/header';
 
 const GetIcon = ({ index, sx }: { index: number; sx: SxProps<Theme> }) => {
   return (

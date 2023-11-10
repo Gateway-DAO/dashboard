@@ -9,8 +9,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Box, Container, Stack, Typography } from '@mui/material';
 
-import NumberCard from '../components/number-card/number-card';
-import LastTransactionsTable from './last-transactions-table';
+import NumberCard from '../../../components/number-card/number-card';
+import LastTransactionsTable from '../last-transactions-table/last-transactions-table';
 
 export default function LastTransactionsSection() {
   const { data, isLoading } = useQuery({

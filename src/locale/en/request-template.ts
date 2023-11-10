@@ -31,7 +31,7 @@ export const explorerRequestTemplates = {
     'Data Request Templates serve as the foundational blueprint for each Data Request, ensuring a uniform structure and standardized format for each inquiry. To initiate a Data Request, one must select an appropriate Data Request Template.',
   help: 'How to use request templates',
   empty: 'No data request templates yet',
-  featureTitle: 'Feature',
+  featuredTitle: 'Featured',
   listTitle: 'All data request templates',
   filters: {
     tags: 'Tags',
