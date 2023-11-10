@@ -44,10 +44,10 @@ export default function RequestTemplatesExplorerFeatured({
             mb: !viewMore ? 2 : 0,
           }}
         >
-          {title ?? explorerRequestTemplates.featureTitle}
+          {title ?? explorerRequestTemplates.featuredTitle}
         </Typography>
         {viewMore && (
-          <Button variant="text" href={routes.explorer.dataRequestTemplates}>
+          <Button variant="text" href={routes.explorer.requestTemplates}>
             {explorerRequestTemplates.view_more}
           </Button>
         )}
