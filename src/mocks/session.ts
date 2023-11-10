@@ -13,5 +13,6 @@ export const session: Session = {
     authentications: null,
     gatewayIdLastupdate: null,
     accesses: null,
+    balance: 5,
   },
 };

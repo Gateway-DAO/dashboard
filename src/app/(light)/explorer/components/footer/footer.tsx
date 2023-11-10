@@ -4,15 +4,7 @@ import Link from 'next/link';
 import GatewayIcon from '@/components/icons/gateway-squared';
 import { brandColors } from '@/theme/config/brand';
 
-import {
-  Avatar,
-  Box,
-  Button,
-  Stack,
-  TextField,
-  Typography,
-  Link as MuiLink,
-} from '@mui/material';
+import { Avatar, Box, Stack, Typography, Link as MuiLink } from '@mui/material';
 
 import { listLinks, socialsLinks } from './list-links';
 
@@ -42,6 +34,7 @@ export default function ExplorerFooter() {
         justifyContent="space-between"
         sx={{
           mt: 3,
+          px: { xs: 0, md: 3 },
           flexDirection: {
             xs: 'column',
             lg: 'row',
@@ -52,7 +45,7 @@ export default function ExplorerFooter() {
           },
         }}
       >
-        <Stack direction="column" gap={3}>
+        <Stack direction="column" gap={3} flexGrow={1}>
           <Typography>© 2023 Gateway Inc. All rights reserved.</Typography>
           <Stack
             component="ul"
@@ -88,6 +81,7 @@ export default function ExplorerFooter() {
             gridAutoFlow: 'column',
             listStyle: 'none',
             columnGap: 5,
+            flexGrow: 1,
             p: 0,
             m: 0,
           }}
@@ -105,21 +99,7 @@ export default function ExplorerFooter() {
             </Box>
           ))}
         </Box>
-        <Stack direction="column" gap={1}>
-          <Typography variant="body1" fontWeight="700" sx={{ mb: 1 }}>
-            Subscribe to our newsletter
-          </Typography>
-          <Typography>Receive news about developments and updates.</Typography>
-          <TextField placeholder="Email" label="Email"></TextField>
-          <Button
-            type="button"
-            variant="contained"
-            sx={{ alignSelf: 'flex-start' }}
-            size="large"
-          >
-            Subscribe
-          </Button>
-        </Stack>
+        <Stack flexGrow={1}>{/* <Newsletter /> */}</Stack>
       </Stack>
     </Stack>
   );
