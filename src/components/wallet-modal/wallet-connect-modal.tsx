@@ -14,6 +14,7 @@ import {
 
 import EvmWalletConnect from './evm-wallet-connect';
 import SolanaWalletConnect from './solana-wallet-connect';
+import PoktWalletConnect from './pokt-wallet-connect';
 
 type Props = {
   title: string;
@@ -35,7 +36,7 @@ export default function WalletConnectModal({
       <DialogTitle id="title-modal" sx={{ textAlign: 'left', mt: 1 }}>
         {title}
       </DialogTitle>
-      <DialogContent sx={{ maxWidth: 444 }}>
+      <DialogContent sx={{ maxWidth: 500 }}>
         <Typography variant="body1">{description}</Typography>
         <Stack mt={2.5}>
           <Typography variant="subtitle1" sx={{ mb: 2 }}>
@@ -51,6 +52,7 @@ export default function WalletConnectModal({
               <>
                 <EvmWalletConnect onConnect={onConnect} onClose={onCancel} />
                 <SolanaWalletConnect onConnect={onConnect} />
+                <PoktWalletConnect onConnect={onConnect} />
               </>
             )}
           </Stack>
