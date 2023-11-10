@@ -77,7 +77,7 @@ export default function ExplorerNavbar() {
             </MuiLink>
             <MuiLink
               component={Link}
-              href={routes.explorer.dataRequestTemplates}
+              href={routes.explorer.requestTemplates}
               color="black"
               underline="hover"
               fontWeight="700"

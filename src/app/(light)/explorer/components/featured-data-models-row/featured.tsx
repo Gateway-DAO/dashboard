@@ -23,7 +23,7 @@ export default function DataModelsExplorerFeatured({ title, viewMore }: Props) {
   return (
     <Container
       sx={{
-        py: 3,
+        py: 4,
       }}
     >
       <Box
@@ -38,10 +38,10 @@ export default function DataModelsExplorerFeatured({ title, viewMore }: Props) {
           component="h3"
           variant="h5"
           sx={{
-            mb: !viewMore ? 2 : 0,
+            mb: !viewMore ? 3 : 0,
           }}
         >
-          {title ?? explorerDataModels.featureTitle}
+          {title ?? explorerDataModels.featuredTitle}
         </Typography>
         {viewMore && (
           <Button variant="text" href={routes.explorer.dataModels}>

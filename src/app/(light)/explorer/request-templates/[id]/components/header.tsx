@@ -31,7 +31,7 @@ export default function RequestTemplateDetailHeader({
           <ExplorerBreadcrumb
             paths={[
               {
-                route: routes.explorer.dataRequestTemplates,
+                route: routes.explorer.requestTemplates,
                 label: explorerRequestTemplates.title,
               },
               {
