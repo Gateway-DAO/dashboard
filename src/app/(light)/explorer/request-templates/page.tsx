@@ -2,7 +2,7 @@ import { explorerRequestTemplates } from '@/locale/en/request-template';
 
 import { Divider } from '@mui/material';
 
-import RequestTemplatesExplorerFeatured from '../components/featured-daat-request-templates-row/featured';
+import RequestTemplatesExplorerFeatured from '../components/featured-data-request-templates-row/featured';
 import ExplorerHero from '../components/hero/hero';
 import DataModelsRequestExplorerSearch from './components/search/search';
 

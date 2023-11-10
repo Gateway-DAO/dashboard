@@ -1,12 +1,13 @@
-import { Stack, Typography } from '@mui/material';
+import { Skeleton, Stack, Typography } from '@mui/material';
 
 type Props = {
   label: string;
   value: string | number;
   dark?: boolean;
+  isLoading?: boolean;
 };
 
-export default function NumberCard({ label, value, dark }: Props) {
+export default function NumberCard({ label, value, dark, isLoading }: Props) {
   return (
     <Stack
       gap={2}
@@ -27,7 +28,13 @@ export default function NumberCard({ label, value, dark }: Props) {
         {label}
       </Typography>
       <Typography variant="h5" color={dark ? 'common.white' : 'primary.dark'}>
-        {typeof value === 'number' ? value.toLocaleString() : value}
+        {isLoading ? (
+          <Skeleton width={100} />
+        ) : typeof value === 'number' ? (
+          value.toLocaleString()
+        ) : (
+          value
+        )}
       </Typography>
     </Stack>
   );

@@ -23,4 +23,5 @@ export const mutations = {
 
 export const explorerQueries = {
   transaction: 'transaction',
+  home_stats: 'home_stats',
 };
