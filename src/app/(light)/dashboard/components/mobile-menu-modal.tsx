@@ -1,7 +1,8 @@
 'use client';
+import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
+
 import { List, Modal, Stack } from '@mui/material';
 
-import GTWMenuItem, { GTWMenuItemSettings } from './menu-item/menu-item';
 import MobileHeader from './mobile-header';
 
 type Props = {

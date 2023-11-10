@@ -1,4 +1,4 @@
-import { GTWMenuItemSettings } from '@/app/(light)/dashboard/components/menu-item/menu-item';
+import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
 import DataModelOutlinedIcon from '@/components/icons/data-model-outlined';
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';

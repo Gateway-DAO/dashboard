@@ -1,4 +1,4 @@
-import { GTWMenuItemSettings } from '@/app/(light)/dashboard/components/menu-item/menu-item';
+import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
 import CodeBlocksOutlinedIcon from '@/components/icons/code-blocks-outlined';
 import documentationRoutes from '@/constants/documentationRoutes';
 import routes from '@/constants/routes';
