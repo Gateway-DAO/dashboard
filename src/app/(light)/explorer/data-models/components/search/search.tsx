@@ -1,19 +1,13 @@
 'use client';
 import { useState } from 'react';
 
-import DefaultError from '@/components/default-error/default-error';
-import { common } from '@/locale/en/common';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
 import { DataModel } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
-
-import DataCardExplorerLoading from '../../../components/data-card/data-card-loading';
 import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
-import SearchFilters from '../../../components/search-filters/search-filters';
 import SortByField, {
   SortByOption,
 } from '../../../components/search-filters/sort-by-field';
