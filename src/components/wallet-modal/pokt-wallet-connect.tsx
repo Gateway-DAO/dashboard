@@ -7,6 +7,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
 import WalletModalButton from './wallet-modal-button';
+import PoktIcon from '../icons/pokt';
 
 declare global {
   interface Window {
@@ -89,7 +90,7 @@ export default function PoktWalletConnect({ onConnect }: Props) {
 
   return (
     <WalletModalButton
-      startIcon={<SolanaIcon sx={{ fontSize: '24' }} />}
+      startIcon={<PoktIcon sx={{ fontSize: '24' }} />}
       onClick={() => {
         requestAccounts();
       }}
