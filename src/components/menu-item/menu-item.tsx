@@ -16,7 +16,7 @@ type Props = {
   name: string;
   href: string;
   active?: boolean;
-  icon: FC<SvgIconProps>;
+  icon?: FC<SvgIconProps>;
   activeIcon?: FC<SvgIconProps>;
   externalLink?: boolean;
 };
@@ -75,7 +75,7 @@ export default function GTWMenuItem({
         {active && ActiveIcon ? (
           <ActiveIcon sx={{ fontSize: 32 }} />
         ) : (
-          <Icon sx={{ fontSize: 32 }} />
+          Icon && <Icon sx={{ fontSize: 32 }} />
         )}
         <Typography
           component={'span'}

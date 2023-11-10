@@ -2,11 +2,11 @@
 
 import { usePathname } from 'next/navigation';
 
+import GTWMenuItem from '@/components/menu-item/menu-item';
 import { common } from '@/locale/en/common';
 
 import { Typography } from '@mui/material';
 
-import GTWMenuItem from '../../components/menu-item/menu-item';
 import { dashboardDevelopersMenuItems } from './dashboard-user-developer-menu-items';
 
 export default function DashboardUserDeveloperMenuListItems() {

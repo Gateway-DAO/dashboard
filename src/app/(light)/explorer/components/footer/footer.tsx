@@ -2,7 +2,6 @@
 import Link from 'next/link';
 
 import GatewayIcon from '@/components/icons/gateway-squared';
-import Newsletter from '@/components/newsletter/newsletter';
 import { brandColors } from '@/theme/config/brand';
 
 import { Avatar, Box, Stack, Typography, Link as MuiLink } from '@mui/material';

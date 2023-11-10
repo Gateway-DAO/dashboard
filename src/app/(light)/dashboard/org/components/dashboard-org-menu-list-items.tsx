@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 
-import GTWMenuItem from '@/app/(light)/dashboard/components/menu-item/menu-item';
+import GTWMenuItem from '@/components/menu-item/menu-item';
 import useOrganization from '@/hooks/use-organization';
 
 import dashboardOrgMenuItems from './dashboard-org-menu-items';
