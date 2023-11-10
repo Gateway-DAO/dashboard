@@ -1,24 +1,27 @@
 'use client';
 
 import routes from '@/constants/routes';
-import { explorerDataModels } from '@/locale/en/datamodel';
+import { explorerRequestTemplates } from '@/locale/en/request-template';
 import { apiPublic } from '@/services/protocol/api';
 import { useQuery } from '@tanstack/react-query';
 
 import { Box, Button, Container, Typography } from '@mui/material';
 
-import DataCardExplorerLoading from '../data-card/data-card-loading';
-import DataModelExplorerCard from '../data-model-card/data-model-card';
+import ExplorerDataCardLoading from '../data-card/data-card-loading';
+import RequestTemplateExplorerCard from '../request-template-card/request-template-card';
 
 type Props = {
   title?: string;
   viewMore?: boolean;
 };
 
-export default function DataModelsExplorerFeatured({ title, viewMore }: Props) {
-  const dataModels = useQuery({
-    queryKey: ['data-models-featured'],
-    queryFn: () => apiPublic.explorer_data_models_featured(),
+export default function RequestTemplatesExplorerFeatured({
+  title,
+  viewMore,
+}: Props) {
+  const requestTemplates = useQuery({
+    queryKey: ['request-templates-featured'],
+    queryFn: () => apiPublic.explorer_request_templates_featured(),
   });
   return (
     <Container
@@ -41,11 +44,11 @@ export default function DataModelsExplorerFeatured({ title, viewMore }: Props) {
             mb: !viewMore ? 2 : 0,
           }}
         >
-          {title ?? explorerDataModels.featureTitle}
+          {title ?? explorerRequestTemplates.featuredTitle}
         </Typography>
         {viewMore && (
-          <Button variant="text" href={routes.explorer.dataModels}>
-            {explorerDataModels.view_more}
+          <Button variant="text" href={routes.explorer.requestTemplates}>
+            {explorerRequestTemplates.view_more}
           </Button>
         )}
       </Box>
@@ -60,16 +63,19 @@ export default function DataModelsExplorerFeatured({ title, viewMore }: Props) {
           },
         }}
       >
-        {dataModels.isLoading && (
+        {requestTemplates.isLoading && (
           <>
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
+            <ExplorerDataCardLoading />
+            <ExplorerDataCardLoading />
+            <ExplorerDataCardLoading />
+            <ExplorerDataCardLoading />
           </>
         )}
-        {dataModels.data?.dataModels.map((dataModel) => (
-          <DataModelExplorerCard dataModel={dataModel} key={dataModel.id} />
+        {requestTemplates.data?.dataRequestTemplates.map((requestTemplate) => (
+          <RequestTemplateExplorerCard
+            requestTemplate={requestTemplate}
+            key={requestTemplate.id}
+          />
         ))}
       </Box>
     </Container>

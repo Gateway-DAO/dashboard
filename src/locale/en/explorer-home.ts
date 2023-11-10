@@ -24,7 +24,7 @@ export const explorer_home = {
       description:
         'Data Request Templates serve as the foundational blueprint for each Data Request, ensuring a uniform structure and standardized format for each inquiry.',
       link_text: 'Check out it',
-      link: routes.explorer.dataRequestTemplates,
+      link: routes.explorer.requestTemplates,
       target: '_self',
     },
   ],
