@@ -15,7 +15,7 @@ export default function RequestTemplatesExplorerPage() {
         help={explorerRequestTemplates.help}
         infoCard
         sx={{
-          backgroundColor: 'primary.light',
+          backgroundColor: 'primary.50',
         }}
       />
       <RequestTemplatesExplorerFeatured />
