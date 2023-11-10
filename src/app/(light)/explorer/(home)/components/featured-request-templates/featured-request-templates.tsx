@@ -1,4 +1,5 @@
 'use client';
+import { explorerQueries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { explorer_home } from '@/locale/en/explorer-home';
 import { explorerRequestTemplates } from '@/locale/en/request-template';
@@ -10,7 +11,7 @@ import RequestTemplateExplorerCard from '../../../components/request-template-ca
 
 export default function FeaturedRequestTemplates() {
   const requestTemplates = useQuery({
-    queryKey: ['request-templates-featured'],
+    queryKey: [explorerQueries.featured_data_requests_templates],
     queryFn: () => apiPublic.explorer_request_templates_featured(),
   });
   return (
@@ -22,7 +23,7 @@ export default function FeaturedRequestTemplates() {
       }}
       isLoading={requestTemplates.isLoading}
     >
-      {requestTemplates.data?.dataRequestTemplates.map((requestTemplate) => (
+      {requestTemplates.data?.dataRequestTemplates?.map((requestTemplate) => (
         <RequestTemplateExplorerCard
           key={requestTemplate.id}
           requestTemplate={requestTemplate}

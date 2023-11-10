@@ -1,4 +1,5 @@
 'use client';
+import { explorerQueries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { explorer_home } from '@/locale/en/explorer-home';
@@ -10,7 +11,7 @@ import ExplorerFeaturedSection from '../../../components/featured-section/featur
 
 export default function FeaturedDataModels() {
   const dataModels = useQuery({
-    queryKey: ['request-templates-featured'],
+    queryKey: [explorerQueries.featured_data_models],
     queryFn: () => apiPublic.explorer_data_models_featured(),
   });
   return (
