@@ -28,7 +28,9 @@ export default function RequestTemplateExplorerCard({
       title={requestTemplate!.name!}
       description={requestTemplate!.description!}
       href={
-        withLink ? routes.explorer.dataModel(requestTemplate!.id) : undefined
+        withLink
+          ? routes.explorer.requestTemplate(requestTemplate!.id)
+          : undefined
       }
       profile={profile}
       bottom={
