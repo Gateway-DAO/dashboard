@@ -23,6 +23,8 @@ export const common = {
     developers: 'Developers',
     overview: 'Overview',
     show_more: 'Show more',
+    tags: 'Tags',
+    sort_by: 'Sort by',
   },
   chain: {
     EVM: 'Ethereum',
@@ -64,12 +66,18 @@ export const common = {
     load_more: 'Load more',
     view_pda: 'View PDA',
     view_proof: 'View Proof',
+    subscribe: 'Subscribe',
   },
   socials: {
     twitter: 'Twitter',
     google: 'Google',
     github: 'Github',
     discord: 'Discord',
+  },
+  newsletter: {
+    title: 'Subscribe to our newsletter',
+    subtitle: 'Receive news about developments and updates.',
+    label: 'Email',
   },
   identifier: {
     type: 'Account type',

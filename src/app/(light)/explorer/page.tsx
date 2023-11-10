@@ -1,11 +1,20 @@
-import Link from 'next/link';
+import { explorer_home } from '@/locale/en/explorer-home';
 
-import routes from '@/constants/routes';
+import RequestTemplatesExplorerFeatured from './components/featured-daat-request-templates-row/featured';
+import DataModelsExplorerFeatured from './components/featured-data-models-row/featured';
+import Header from './home-components/header';
+import LastTransactionsSection from './home-components/last-transactions-section';
 
 export default function ExplorerHome() {
   return (
     <>
-      <Link href={routes.dashboard.user.home}>Go to dashboard</Link>
+      <Header />
+      <LastTransactionsSection />
+      <DataModelsExplorerFeatured title={explorer_home.data_models} viewMore />
+      <RequestTemplatesExplorerFeatured
+        title={explorer_home.request_templates}
+        viewMore
+      />
     </>
   );
 }

@@ -25,6 +25,9 @@ query me {
       }
     }
   }
+  myWallet {
+    balance
+  }
 }
 
 query monthlyUserUsage {

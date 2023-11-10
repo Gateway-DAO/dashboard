@@ -5,22 +5,54 @@ import DefaultError from '@/components/default-error/default-error';
 import { common } from '@/locale/en/common';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
+import { DataModel } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
+import DataCardExplorerLoading from '../../../components/data-card/data-card-loading';
 import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
-import DataModelExplorerCardLoading from '../../../components/data-model-card/data-model-card-loading';
 import SearchFilters from '../../../components/search-filters/search-filters';
+import SortByField, {
+  SortByOption,
+} from '../../../components/search-filters/sort-by-field';
+import TagsField from '../../../components/search-filters/tags-field';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
-import SortByField, { DataModelSortOption } from './fields/sort-by-field';
-import TagsField from './fields/tags-field';
+
+const sortOptions: SortByOption<DataModel>[] = [
+  {
+    key: 'newest',
+    label: 'Newest',
+    value: undefined,
+  },
+  { key: 'oldest', label: 'Oldest', value: { createdAt: 'ASC' } },
+  {
+    key: 'price-high-to-low',
+    label: 'Price high to low',
+    value: { consumptionPrice: 'DESC' },
+  },
+  {
+    key: 'price-low-to-high',
+    label: 'Price low to high',
+    value: { consumptionPrice: 'ASC' },
+  },
+  {
+    key: 'issuances-high-to-low',
+    label: 'Issuances high to low',
+    value: { pdasIssuedCount: 'DESC' },
+  },
+  {
+    key: 'issuances-low-to-high',
+    label: 'Issuances low to high',
+    value: { pdasIssuedCount: 'ASC' },
+  },
+];
 
 export default function DataModelsExplorerSearch() {
   const [search, setSearch] = useDebouncedState('', 500);
-  const [selectedSort, setSort] = useState<DataModelSortOption>();
+  const [selectedSort, setSort] = useState<SortByOption<DataModel>>();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedConsumptionPrice, setSelectedConsumptionPrice] = useState<
     number[]
@@ -120,7 +152,11 @@ export default function DataModelsExplorerSearch() {
           setAmountOfIssuances={setSelectedAmountOfIssuances}
           isLoading={metadata.isLoading}
         />
-        <SortByField selectedSort={selectedSort} onSort={setSort} />
+        <SortByField
+          selectedSort={undefined}
+          onSort={() => {}}
+          options={sortOptions}
+        />
       </SearchFilters>
 
       <Box
@@ -134,12 +170,12 @@ export default function DataModelsExplorerSearch() {
       >
         {dataModelsQuery.isLoading && (
           <>
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
           </>
         )}
         {dataModelsQuery.isSuccess &&
@@ -149,10 +185,10 @@ export default function DataModelsExplorerSearch() {
           ))}
         {dataModelsQuery.isFetchingNextPage && (
           <>
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
-            <DataModelExplorerCardLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
+            <DataCardExplorerLoading />
           </>
         )}
       </Box>

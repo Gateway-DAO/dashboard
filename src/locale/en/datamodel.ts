@@ -34,11 +34,12 @@ export const explorerDataModels = {
   empty: 'No data models found',
   featureTitle: 'Feature',
   listTitle: 'All data models',
+  issuers: 'Issuers',
+  pdas_issued: 'PDAs issued',
+  view_more: 'View all data models',
   filters: {
-    tags: 'Tags',
     comsumption_price: 'Comsumption price',
     amount_of_issuances: 'Amount of issuances',
-    sort_by: 'Sort by',
   },
 };
 
@@ -75,4 +76,21 @@ export const explorerDataModelDetailOverview = {
 export const explorerDataModelCard = {
   consumption: 'per consumption',
   issuances: (count: number) => `issuance${count > 0 ? 's' : ''}`,
+};
+
+export const explorerIssuersByDataModel = {
+  empty: 'No issuers found',
+  issuers: 'Issuers',
+  pdas_issued: 'PDAs issued',
+};
+
+export const explorerDataModelRequestTemplates = {
+  empty: 'No request templates found',
+  data_request_template: 'Data request template',
+  data_request_template_id: 'Data request template ID',
+  data_requests: 'Data requests',
+  filters: {
+    amount_of_data_requests: 'Amount of data requests',
+    average_cost: 'Average cost',
+  },
 };

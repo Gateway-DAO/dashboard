@@ -39,3 +39,21 @@ export const defaultGridCustomization: GatewaySxProps = {
     cursor: 'pointer',
   },
 };
+
+export const gridWithoutNegativeMargin: GatewaySxProps = {
+  border: 'none',
+  mb: 4,
+  borderRadius: 0,
+  '& .MuiDataGrid-cell:focus': {
+    outline: 'none',
+  },
+  '& .MuiDataGrid-footerContainer': {
+    paddingRight: CONTAINER_PX,
+  },
+  '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
+    border: 'none',
+  },
+  '.MuiDataGrid-row': {
+    cursor: 'pointer',
+  },
+};

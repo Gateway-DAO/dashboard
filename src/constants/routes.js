@@ -61,19 +61,20 @@ const routes = {
   explorer: {
     root: explorer,
     transactions: `${explorer}/transactions`,
+    transaction: (transactionId) => `${explorer}/transactions/${transactionId}`,
     dataModels: `${explorer}/data-models`,
-    dataRequestTemplates: '${explorer}/request-templates',
-    dataModel: (dataModelId) => `${explorer}/data-model/${dataModelId}`,
+    dataModel: (dataModelId) => `${explorer}/data-models/${dataModelId}`,
     dataModelIssuers: (dataModelId) =>
-      `${explorer}/data-model/${dataModelId}/issuers`,
+      `${explorer}/data-models/${dataModelId}/issuers`,
     dataModelRequestTemplates: (dataModelId) =>
-      `${explorer}/data-model/${dataModelId}/request-templates`,
+      `${explorer}/data-models/${dataModelId}/request-templates`,
+    dataRequestTemplates: `${explorer}/request-templates`,
     requestTemplate: (requestTemplateId) =>
-      `${explorer}/request-template/${requestTemplateId}`,
+      `${explorer}/request-templates/${requestTemplateId}`,
     requestTemplateVerifiers: (requestTemplateId) =>
-      `${explorer}/request-template/${requestTemplateId}/verifiers`,
+      `${explorer}/request-templates/${requestTemplateId}/verifiers`,
     requestTemplatePlayground: (requestTemplateId) =>
-      `${explorer}/request-template/${requestTemplateId}/playground`,
+      `${explorer}/request-templates/${requestTemplateId}/playground`,
   },
 };
 

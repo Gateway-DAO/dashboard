@@ -28,8 +28,6 @@ export default function RangeField({
   const onOpen = () => setOpen(true);
   const onClose = () => setOpen(false);
 
-  console.log('field', value);
-
   return (
     <FormControl
       fullWidth

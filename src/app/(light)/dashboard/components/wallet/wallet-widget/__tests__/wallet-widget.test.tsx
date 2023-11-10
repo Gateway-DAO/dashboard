@@ -26,7 +26,7 @@ describe('Transaction', () => {
     const valueText = screen.getByTestId('wallet-widget__value');
     expect(valueText).toBeInTheDocument();
     const value = valueText.textContent;
-    expect(value).toEqual('$0.30');
+    expect(value).toEqual('$5.00');
   });
   test('Display button', async () => {
     render(

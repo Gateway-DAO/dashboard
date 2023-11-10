@@ -2,8 +2,9 @@ import { explorerRequestTemplates } from '@/locale/en/request-template';
 
 import { Divider } from '@mui/material';
 
+import RequestTemplatesExplorerFeatured from '../components/featured-daat-request-templates-row/featured';
 import ExplorerHero from '../components/hero/hero';
-import RequestTemplatesExplorerFeatured from './components/featured';
+import DataModelsRequestExplorerSearch from './components/search/search';
 
 export default function RequestTemplatesExplorerPage() {
   return (
@@ -19,7 +20,7 @@ export default function RequestTemplatesExplorerPage() {
       />
       <RequestTemplatesExplorerFeatured />
       <Divider />
-      Test
+      <DataModelsRequestExplorerSearch />
     </>
   );
 }

@@ -7,7 +7,7 @@ export const home = {
     title: 'Learn about Gateway',
     subtitle:
       'Our guide to learn about the Gateway architecture, mission, and set up process.',
-    btn_text: 'Check out it',
+    btn_text: 'Check it out',
     link: documentationRoutes.home,
   },
 
