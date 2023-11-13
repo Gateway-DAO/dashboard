@@ -52,7 +52,7 @@ export default function SearchFilters({
             }}
             alignItems={{
               xs: 'stretch',
-              lg: 'flex-start',
+              lg: 'center',
             }}
             gap={1}
           >

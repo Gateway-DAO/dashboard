@@ -67,6 +67,7 @@ export const common = {
     view_pda: 'View PDA',
     view_proof: 'View Proof',
     subscribe: 'Subscribe',
+    clear_filters: 'Clear filters',
   },
   socials: {
     twitter: 'Twitter',
