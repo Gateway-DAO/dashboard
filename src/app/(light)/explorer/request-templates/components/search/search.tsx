@@ -7,6 +7,7 @@ import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import RequestTemplateExplorerCard from '../../../components/request-template-card/request-template-card';
+import ClearFiltersButton from '../../../components/search-filters/clear-filters-button';
 import SortByField, {
   SortByOption,
 } from '../../../components/search-filters/sort-by-field';
@@ -55,6 +56,9 @@ export default function DataModelsRequestExplorerSearch() {
       ({ dataRequestTemplates }) => dataRequestTemplates
     ) ?? [];
 
+  const isFiltering = false;
+  const onClearFilters = () => {};
+
   const filters = (
     <>
       <TagsField tags={[]} setTags={() => {}} />
@@ -70,6 +74,7 @@ export default function DataModelsRequestExplorerSearch() {
         min={0}
         max={100}
       />
+      {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
       <SortByField
         selectedSort={undefined}
         onSort={() => {}}
