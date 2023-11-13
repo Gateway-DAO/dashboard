@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { apiPublic } from '@/services/protocol/api';
 import { PageProps } from '@/types/next';
 
@@ -8,6 +10,17 @@ import NumberCard from '../../components/number-card/number-card';
 import DataModelClaims from './components/claims/claims';
 import DataModelDetails from './components/details/details';
 import DataModelDetailHeader from './components/header';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  return {
+    title: `Gateway Data Model - ${params.id}`,
+    description: `Details and stats from how users are using this data model.`,
+  };
+}
 
 export default async function DataModelPage({
   params: { id },
