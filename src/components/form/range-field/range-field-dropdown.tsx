@@ -107,6 +107,8 @@ export default function RangeFieldDropdown({
         disableSwap
         sx={{
           my: 3,
+          ml: 1,
+          width: 'calc(100% - 16px)',
         }}
         onChange={handleSliderChange}
       />
