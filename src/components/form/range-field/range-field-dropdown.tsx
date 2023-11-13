@@ -63,6 +63,10 @@ export default function RangeFieldDropdown({
       sx={{
         p: 2,
         pt: 3,
+        maxWidth: {
+          xs: 'unset',
+          lg: 320,
+        },
       }}
     >
       <Stack
