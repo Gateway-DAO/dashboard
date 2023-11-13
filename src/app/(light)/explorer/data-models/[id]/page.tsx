@@ -16,8 +16,11 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
+  const { dataModel } = await apiPublic.explorer_data_model_detail_overview({
+    id: params.id,
+  });
   return {
-    title: `Gateway Data Model - ${params.id}`,
+    title: `Gateway Data Model - ${dataModel?.title ?? params.id}`,
     description: `Details and stats from how users are using this data model.`,
   };
 }

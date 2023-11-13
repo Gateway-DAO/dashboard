@@ -8,12 +8,10 @@ import ExplorerHero from '../components/hero/hero';
 import DataModelsExplorerFeatured from './components/featured';
 import DataModelsExplorerSearch from './components/search/search';
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: `Gateway Data Models`,
-    description: `Discover a diverse range of data models on Gateway Platform. Find the perfect solution for your business needs.`,
-  };
-}
+export const metadata: Metadata = {
+  title: `Gateway Data Models`,
+  description: `Discover a diverse range of data models on Gateway Platform. Find the perfect solution for your business needs.`,
+};
 
 export default function DataModelsExplorerPage() {
   return (

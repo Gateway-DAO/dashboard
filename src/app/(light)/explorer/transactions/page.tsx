@@ -5,12 +5,10 @@ import { Box, Container, Stack, Typography } from '@mui/material';
 import TransactionsNumbers from './components/transactions-numbers';
 import TransactionsTableSection from './components/transactions-table-section';
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: `Gateway Transactions`,
-    description: `Discover user activities at a glance on our transaction page – from issuances and requests to verifications. Stay informed with real-time insights from Gateway Network.`,
-  };
-}
+export const metadata: Metadata = {
+  title: `Gateway Transactions`,
+  description: `Discover user activities at a glance on our transaction page – from issuances and requests to verifications. Stay informed with real-time insights from Gateway Network.`,
+};
 
 export default function TransactionPage() {
   return (
