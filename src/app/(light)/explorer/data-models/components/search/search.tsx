@@ -145,8 +145,8 @@ export default function DataModelsExplorerSearch() {
       />
       {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
       <SortByField
-        selectedSort={undefined}
-        onSort={() => {}}
+        selectedSort={selectedSort}
+        onSort={setSort}
         options={sortOptions}
       />
     </>
