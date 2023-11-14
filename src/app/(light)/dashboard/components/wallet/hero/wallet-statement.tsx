@@ -2,6 +2,8 @@
 
 import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
+import { My_BalanceQuery } from '@/services/protocol/types';
+import { numberToMoneyString } from '@/utils/money';
 import { useToggle } from '@react-hookz/web';
 
 import {
@@ -14,6 +16,7 @@ import {
   Button,
   Collapse,
   Divider,
+  Skeleton,
   Stack,
   Typography,
 } from '@mui/material';
@@ -25,10 +28,11 @@ type listItem = {
 
 type PropsStatementList = {
   title: string;
-  value: string;
+  value: number;
   showValues: boolean;
   showDetails: boolean;
   list?: listItem[];
+  isLoading?: boolean;
 };
 
 const WalletStatementList = ({
@@ -37,6 +41,7 @@ const WalletStatementList = ({
   showValues,
   showDetails,
   list,
+  isLoading,
 }: PropsStatementList) => {
   return (
     <Stack
@@ -52,10 +57,16 @@ const WalletStatementList = ({
           {title}
         </Typography>
         <Typography variant="h5" data-testid="list__total-value">
-          {showValues ? (
-            <>{value}</>
+          {isLoading ? (
+            <Skeleton width={100} />
           ) : (
-            <MoreHorizOutlined sx={{ fontSize: 'inherit' }} />
+            <>
+              {showValues ? (
+                <>{numberToMoneyString(value)}</>
+              ) : (
+                <MoreHorizOutlined sx={{ fontSize: 'inherit' }} />
+              )}
+            </>
           )}
         </Typography>
       </Box>
@@ -84,6 +95,8 @@ const WalletStatementList = ({
 
 type Props = {
   showValues: boolean;
+  isLoading?: boolean;
+  myWallet?: My_BalanceQuery['myWallet'];
 };
 
 const mockMoneyIn = [
@@ -91,7 +104,11 @@ const mockMoneyIn = [
   { name: 'PDA consumption revenue', value: '$84.54' },
 ];
 
-export default function WalletStatement({ showValues }: Props) {
+export default function WalletStatement({
+  showValues,
+  myWallet,
+  isLoading,
+}: Props) {
   const [showDetails, toggleDetails] = useToggle(false);
 
   return (
@@ -108,14 +125,16 @@ export default function WalletStatement({ showValues }: Props) {
         <WalletStatementList
           showDetails={showDetails}
           showValues={showValues}
-          value="$234.54"
+          isLoading={isLoading}
+          value={myWallet?.moneyIn as number}
           title={wallet.page.money_in}
           list={mockMoneyIn}
         />
         <WalletStatementList
           showDetails={showDetails}
+          isLoading={isLoading}
           showValues={showValues}
-          value="$0.0"
+          value={myWallet?.moneyOut as number}
           title={wallet.page.money_out}
         />
       </Box>

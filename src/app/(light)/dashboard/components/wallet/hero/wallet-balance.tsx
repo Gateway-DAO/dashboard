@@ -1,22 +1,25 @@
 import { wallet } from '@/locale/en/wallet';
+import { numberToMoneyString } from '@/utils/money';
 
 import {
   MoreHorizOutlined,
   VisibilityOffOutlined,
   VisibilityOutlined,
 } from '@mui/icons-material';
-import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { Box, IconButton, Skeleton, Stack, Typography } from '@mui/material';
 
 type Props = {
-  value?: string;
+  value?: number;
   valueVisible: boolean;
   setVisible: any;
+  isLoading?: boolean;
 };
 
 export default function WalletBalance({
   value,
   valueVisible,
   setVisible,
+  isLoading,
 }: Props) {
   return (
     <Stack data-testid="hero__wallet-balance" mt={5} gap={1}>
@@ -33,10 +36,16 @@ export default function WalletBalance({
         </IconButton>
       </Box>
       <Typography variant="h4" data-testid="wallet-balance__balance">
-        {valueVisible ? (
-          <>{value ? value : '$0'}</>
+        {isLoading ? (
+          <Skeleton width={150} />
         ) : (
-          <MoreHorizOutlined sx={{ fontSize: 'inherit' }} />
+          <>
+            {valueVisible ? (
+              <>{value ? numberToMoneyString(value) : '$0'}</>
+            ) : (
+              <MoreHorizOutlined sx={{ fontSize: 'inherit' }} />
+            )}
+          </>
         )}
       </Typography>
       <Typography variant="caption" color="text.secondary">

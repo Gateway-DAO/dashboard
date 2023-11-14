@@ -1,12 +1,18 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
+import { queries } from '@/constants/queries';
+import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { sandboxWalletAlert } from '@/locale/en/alert-messages';
 import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
+import { My_BalanceQuery } from '@/services/protocol/types';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { currentEnv } from '@/utils/env';
+import { useQuery } from '@tanstack/react-query';
 
 import { Alert, AlertTitle, Button, Stack, Typography } from '@mui/material';
 
@@ -24,6 +30,21 @@ export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
   const [showAlert, toggleAlert] = useState(false);
   const storageKey = 'testnet-wallet-disclaimer';
   const testnet = currentEnv() === 'testnet' || 'development';
+  const { data: session } = useSession();
+  const { privateApi } = useGtwSession();
+  const { organization } = useOrganization();
+  const { data: myWallet, isLoading } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: [
+      queries.my_wallet,
+      organization ? organization.id : session?.user.id,
+    ],
+    queryFn: () =>
+      privateApi.my_balance({
+        organizationId: organization?.id as string,
+      }),
+    select: (data: My_BalanceQuery) => data.myWallet,
+  });
 
   let hasSeenTestnetDisclaimer: string | null;
 
@@ -82,9 +103,14 @@ export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
       <WalletBalance
         setVisible={toggleVisible}
         valueVisible={valueVisible}
-        value={balance}
+        value={myWallet?.balance as number}
+        isLoading={isLoading}
       />
-      <WalletStatement showValues={valueVisible} />
+      <WalletStatement
+        isLoading={isLoading}
+        myWallet={myWallet}
+        showValues={valueVisible}
+      />
     </Stack>
   );
 }
