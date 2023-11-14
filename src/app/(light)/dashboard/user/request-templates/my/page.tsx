@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { Session } from 'next-auth';
 
-import { datamodels } from '@/locale/en/datamodel';
 import { requestTemplates } from '@/locale/en/request-template';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
