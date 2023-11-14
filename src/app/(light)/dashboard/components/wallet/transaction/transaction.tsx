@@ -1,37 +1,24 @@
 import TransactionCardInfo from './transaction-card-info';
 import TransactionCardTitle from './transaction-card-title';
+import { TransactionDetail } from './transaction-modal';
 
 type Props = {
-  id: string;
-  metadata: any;
-  type: string;
-  amount: number;
-  object_id: string;
-  date: string;
-  action: string;
+  transaction: TransactionDetail;
 };
 
-export function Transaction({
-  id,
-  metadata,
-  type,
-  action,
-  amount,
-  object_id,
-  date,
-}: Props) {
-  const { name } = metadata;
+export function Transaction({ transaction }: Props) {
+  const { id, value, type, action, createdAt } = transaction;
 
   return (
     <>
-      <TransactionCardTitle amount={amount} type={type} />
+      <TransactionCardTitle amount={value} type={type} />
       <TransactionCardInfo
-        title={name}
+        title={action}
         id={id}
         action={action}
-        date={date}
+        date={createdAt}
         type={type}
-        objectId={object_id}
+        objectId={id}
       />
     </>
   );

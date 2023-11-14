@@ -20,7 +20,7 @@ type Props = {
   date: string;
   type: string;
   action: string;
-  objectId: string;
+  objectId?: string;
 };
 
 export default function TransactionCardInfo({

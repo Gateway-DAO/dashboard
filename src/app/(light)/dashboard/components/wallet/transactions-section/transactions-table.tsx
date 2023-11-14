@@ -22,7 +22,11 @@ import dayjs from 'dayjs';
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
-import { TransactionModal } from '../transaction/transaction-modal';
+import ActionDetail from '../action-detail';
+import {
+  TransactionDetail,
+  TransactionModal,
+} from '../transaction/transaction-modal';
 import TransactionStatusChip from '../transaction/transaction-status-chip';
 
 type Props = {
@@ -45,7 +49,7 @@ const columns: GridColDef<My_TransactionsQuery['myFinancialTransactions']>[] = [
     field: 'action',
     headerName: transaction.detail,
     flex: 1,
-    valueFormatter: (params) => params.value.name,
+    renderCell: (params) => <ActionDetail action={params.value} />,
   },
   {
     field: 'id',
@@ -96,7 +100,8 @@ export default function TransactionsTable({ totalCount = 0 }: Props) {
   });
 
   const [showTransactionDetail, toggleTransaction] = useToggle(false);
-  const [currentTransaction, setCurrentTransaction] = useState({});
+  const [currentTransaction, setCurrentTransaction] =
+    useState<TransactionDetail>();
 
   const toggleTransactionModal = (value: boolean) => {
     if (!value) {
@@ -128,13 +133,12 @@ export default function TransactionsTable({ totalCount = 0 }: Props) {
         }}
         onPaginationModelChange={setNewPage}
         paginationMode="server"
-        loading={isLoading}
         rowCount={totalCount}
         sx={defaultGridCustomization}
       />
       <TransactionModal
         open={showTransactionDetail}
-        transactionDetail={currentTransaction}
+        transactionDetail={currentTransaction as TransactionDetail}
         onClose={() => toggleTransactionModal(false)}
       />
     </>
