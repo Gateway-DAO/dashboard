@@ -113,12 +113,14 @@ export default function DataModelsExplorerSearch() {
   const isFiltering =
     selectedTags.length > 0 ||
     selectedConsumptionPrice.length > 0 ||
-    selectedAmountOfIssuances.length > 0;
+    selectedAmountOfIssuances.length > 0 ||
+    !!selectedSort;
 
   const onClearFilters = () => {
     setSelectedTags([]);
     setSelectedConsumptionPrice([]);
     setSelectedAmountOfIssuances([]);
+    setSort(undefined);
   };
 
   const filters = (
@@ -145,8 +147,8 @@ export default function DataModelsExplorerSearch() {
       />
       {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
       <SortByField
-        selectedSort={undefined}
-        onSort={() => {}}
+        selectedSort={selectedSort}
+        onSort={setSort}
         options={sortOptions}
       />
     </>
