@@ -20,11 +20,7 @@ import { useWalletStore } from '../../../stores/wallet.store';
 import WalletBalance from './wallet-balance';
 import WalletStatement from './wallet-statement';
 
-type Props = {
-  balance: string;
-};
-
-export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
+export default function WalletHero(): JSX.Element {
   const { showValues: valueVisible, toggleShowValue: toggleVisible } =
     useWalletStore((state) => state);
   const [showAlert, toggleAlert] = useState(false);

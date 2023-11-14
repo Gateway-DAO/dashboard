@@ -46,6 +46,7 @@ export default function WalletWidget({ id }: Props) {
         organizationId: organization?.id as string,
       }),
     select: (data: My_BalanceQuery) => data.myWallet,
+    refetchInterval: 60 * 1000,
   });
 
   const walletPage = !!organization
