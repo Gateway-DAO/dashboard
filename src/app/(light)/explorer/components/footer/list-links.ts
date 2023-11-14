@@ -49,7 +49,7 @@ export const listLinks = [
   },
   {
     title: 'Explorer',
-    href: routes.explorer,
+    href: routes.explorer.root,
   },
   {
     title: 'Dashboard',
