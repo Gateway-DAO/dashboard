@@ -15,7 +15,7 @@ export default async function getMe(token: string): Promise<SessionUser> {
       throw new Error("Couldn't login");
     }
 
-    return { ...res.me, ...res.myWallet };
+    return res.me;
   } catch (error: any) {
     throw error;
   }

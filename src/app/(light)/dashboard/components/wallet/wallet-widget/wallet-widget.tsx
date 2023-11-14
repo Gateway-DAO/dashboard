@@ -3,11 +3,15 @@
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
+import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
+import { My_BalanceQuery } from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
+import { useQuery } from '@tanstack/react-query';
 
 import {
   MoreHorizOutlined,
@@ -25,16 +29,30 @@ type Props = {
 
 export default function WalletWidget({ id }: Props) {
   const { data: session, status } = useSession();
+  const { privateApi } = useGtwSession();
   const { showValues: visible, toggleShowValue } = useWalletStore(
     (state) => state
   );
   const { organization } = useOrganization();
 
+  const { data: myWallet, isLoading } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: [
+      queries.my_wallet,
+      organization ? organization.id : session?.user.id,
+    ],
+    queryFn: () =>
+      privateApi.my_balance({
+        organizationId: organization?.id as string,
+      }),
+    select: (data: My_BalanceQuery) => data.myWallet,
+  });
+
   const walletPage = !!organization
     ? routes.dashboard.org.wallet(organization.gatewayId)
     : routes.dashboard.user.wallet;
 
-  if (status === 'loading' || !session) {
+  if (status === 'loading' || !session || isLoading) {
     return <WalletWidgetSkeleton />;
   }
 
@@ -70,7 +88,7 @@ export default function WalletWidget({ id }: Props) {
               color="primary"
               data-testid="wallet-widget__value"
             >
-              {numberToMoneyString(session?.user?.balance ?? 0)}
+              {numberToMoneyString(myWallet?.balance as number)}
             </Typography>
           ) : (
             <Stack sx={{ overflow: 'hidden', height: 24 }}>
