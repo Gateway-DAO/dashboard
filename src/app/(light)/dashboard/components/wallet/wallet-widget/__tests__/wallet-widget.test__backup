@@ -1,0 +1,63 @@
+import { SessionProvider } from 'next-auth/react';
+
+import { session } from '@/mocks/session';
+import { ThemeProvider } from '@/theme';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen } from '@testing-library/react';
+
+import WalletWidget from '../wallet-widget';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
+
+describe('Transaction', () => {
+  test('renders the component', () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <SessionProvider session={session}>
+          <ThemeProvider>
+            <WalletWidget id="12345" />
+          </ThemeProvider>
+        </SessionProvider>
+      </QueryClientProvider>
+    );
+
+    const walletComponentComponent = screen.getByTestId('wallet-widget');
+    expect(walletComponentComponent).toBeInTheDocument();
+  });
+  test('Display value', async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <SessionProvider session={session}>
+          <ThemeProvider>
+            <WalletWidget id="12345" />
+          </ThemeProvider>
+        </SessionProvider>
+      </QueryClientProvider>
+    );
+
+    const valueText = screen.getByTestId('wallet-widget__value');
+    expect(valueText).toBeInTheDocument();
+    const value = valueText.textContent;
+    expect(value).toEqual('$5.00');
+  });
+  test('Display button', async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <SessionProvider session={session}>
+          <ThemeProvider>
+            <WalletWidget id="12345" />
+          </ThemeProvider>
+        </SessionProvider>
+      </QueryClientProvider>
+    );
+
+    const valueText = screen.getByTestId('wallet-widget__view-more');
+    expect(valueText).toBeInTheDocument();
+  });
+});

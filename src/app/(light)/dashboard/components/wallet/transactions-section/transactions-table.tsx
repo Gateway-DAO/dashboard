@@ -83,7 +83,7 @@ export default function TransactionsTable({ totalCount = 0 }: Props) {
     pageSize: 10,
   });
 
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       queries.my_transactions,
@@ -138,7 +138,9 @@ export default function TransactionsTable({ totalCount = 0 }: Props) {
       />
       <TransactionModal
         open={showTransactionDetail}
-        transactionDetail={currentTransaction as TransactionDetail}
+        transactionDetail={
+          currentTransaction as My_TransactionsQuery['myFinancialTransactions'][0]
+        }
         onClose={() => toggleTransactionModal(false)}
       />
     </>

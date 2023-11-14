@@ -1,9 +1,10 @@
+import { My_TransactionsQuery } from '@/services/protocol/types';
+
 import TransactionCardInfo from './transaction-card-info';
 import TransactionCardTitle from './transaction-card-title';
-import { TransactionDetail } from './transaction-modal';
 
 type Props = {
-  transaction: TransactionDetail;
+  transaction: My_TransactionsQuery['myFinancialTransactions'][0];
 };
 
 export function Transaction({ transaction }: Props) {
@@ -15,7 +16,6 @@ export function Transaction({ transaction }: Props) {
       <TransactionCardInfo
         title={action}
         id={id}
-        action={action}
         date={createdAt}
         type={type}
         objectId={id}
