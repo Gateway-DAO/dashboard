@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { explorerRequestTemplates } from '@/locale/en/request-template';
 import { apiPublic } from '@/services/protocol/api';
 import { DataRequestTemplate } from '@/services/protocol/types';
@@ -7,6 +9,7 @@ import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import RequestTemplateExplorerCard from '../../../components/request-template-card/request-template-card';
+import ClearFiltersButton from '../../../components/search-filters/clear-filters-button';
 import SortByField, {
   SortByOption,
 } from '../../../components/search-filters/sort-by-field';
@@ -37,11 +40,36 @@ const sortOptions: SortByOption<DataRequestTemplate>[] = [
 export default function DataModelsRequestExplorerSearch() {
   const [search, setSearch] = useDebouncedState('', 500);
 
+  const [selectedSort, setSort] = useState<SortByOption<DataRequestTemplate>>();
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedAverageCost, setSelectedAverageCost] = useState<number[]>([]);
+  const [selectedAmountOfRequests, setSelectedAmountOfRequests] = useState<
+    number[]
+  >([]);
+
   const requestTemplatesQuery = useInfiniteQuery({
-    queryKey: ['data-model-templates', search],
+    queryKey: ['data-model-templates', search, selectedSort?.value],
     queryFn: ({ pageParam = 0 }) =>
       apiPublic.explorer_request_templates_list({
-        filter: {},
+        filter: {
+          // tags: selectedTags.length > 0 ? selectedTags : undefined,
+          // averageCost:
+          //   selectedAverageCost.length > 0
+          //     ? {
+          //         min: selectedAverageCost[0],
+          //         max: selectedAverageCost[1],
+          //       }
+          //     : undefined,
+          // amountOfDataRequests:
+          //   selectedAmountOfRequests.length > 0
+          //     ? {
+          //         min: selectedAmountOfRequests[0],
+          //         max: selectedAmountOfRequests[1],
+          //       }
+          //     : undefined,
+          // search: search.length > 0 ? search : undefined,
+        },
+        order: selectedSort?.value,
         skip: pageParam,
       }),
     getNextPageParam: (lastPage, allPages) =>
@@ -55,24 +83,38 @@ export default function DataModelsRequestExplorerSearch() {
       ({ dataRequestTemplates }) => dataRequestTemplates
     ) ?? [];
 
+  const isFiltering =
+    selectedTags.length > 0 ||
+    selectedAverageCost.length > 0 ||
+    selectedAmountOfRequests.length > 0 ||
+    !!selectedSort;
+
+  const onClearFilters = () => {
+    setSelectedTags([]);
+    setSelectedAverageCost([]);
+    setSelectedAmountOfRequests([]);
+    setSort(undefined);
+  };
+
   const filters = (
     <>
-      <TagsField tags={[]} setTags={() => {}} />
+      <TagsField tags={selectedTags} setTags={setSelectedTags} />
       <AverageCostField
-        selectedAverageCost={[]}
-        setAverageCost={() => {}}
+        selectedAverageCost={selectedAverageCost}
+        setAverageCost={setSelectedAverageCost}
         min={0}
         max={100}
       />
       <AmountOfDataRequestsField
-        selectedAmountOfDataRequests={[]}
-        setAmountOfDataRequests={() => {}}
+        selectedAmountOfDataRequests={selectedAmountOfRequests}
+        setAmountOfDataRequests={setSelectedAmountOfRequests}
         min={0}
         max={100}
       />
+      {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
       <SortByField
-        selectedSort={undefined}
-        onSort={() => {}}
+        selectedSort={selectedSort}
+        onSort={setSort}
         options={sortOptions}
       />
     </>

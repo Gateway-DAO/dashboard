@@ -8,6 +8,7 @@ import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
+import ClearFiltersButton from '../../../components/search-filters/clear-filters-button';
 import SortByField, {
   SortByOption,
 } from '../../../components/search-filters/sort-by-field';
@@ -109,6 +110,19 @@ export default function DataModelsExplorerSearch() {
   const dataModels =
     dataModelsQuery.data?.pages?.flatMap(({ dataModels }) => dataModels) ?? [];
 
+  const isFiltering =
+    selectedTags.length > 0 ||
+    selectedConsumptionPrice.length > 0 ||
+    selectedAmountOfIssuances.length > 0 ||
+    !!selectedSort;
+
+  const onClearFilters = () => {
+    setSelectedTags([]);
+    setSelectedConsumptionPrice([]);
+    setSelectedAmountOfIssuances([]);
+    setSort(undefined);
+  };
+
   const filters = (
     <>
       <TagsField
@@ -131,9 +145,10 @@ export default function DataModelsExplorerSearch() {
         setAmountOfIssuances={setSelectedAmountOfIssuances}
         isLoading={metadata.isLoading}
       />
+      {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
       <SortByField
-        selectedSort={undefined}
-        onSort={() => {}}
+        selectedSort={selectedSort}
+        onSort={setSort}
         options={sortOptions}
       />
     </>

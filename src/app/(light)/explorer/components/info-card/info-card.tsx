@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import routes from '@/constants/routes';
+
 import { OpenInNew } from '@mui/icons-material';
 import {
   Card,
@@ -23,7 +25,7 @@ export default function InfoCard(props: Props) {
     >
       <CardActionArea
         component={Link}
-        href="/explorer"
+        href={routes.build}
         sx={{ height: '100%', p: 2 }}
       >
         <Stack

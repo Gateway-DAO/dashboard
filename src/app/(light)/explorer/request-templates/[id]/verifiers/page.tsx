@@ -21,7 +21,12 @@ export default async function RequestTemplatesVerifiersPage({
       })
     )?.verifiersByDataRequestTemplate ?? [];
 
-  const count = 0;
+  const count =
+    (
+      await apiPublic.explorer_verifiers_by_data_request_template_count({
+        id,
+      })
+    ).verifiersByDataRequestTemplateCount ?? 0;
 
   return (
     <>

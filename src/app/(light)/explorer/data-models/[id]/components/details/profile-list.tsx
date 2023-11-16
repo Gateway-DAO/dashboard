@@ -1,5 +1,6 @@
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { GatewayProfile } from '@/utils/get-organization-or-user-data';
+
 import {
   List,
   ListItem,

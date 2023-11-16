@@ -95,3 +95,7 @@ query explorer_verifiers_by_data_request_template($id: String!) {
     count
   }
 }
+
+query explorer_verifiers_by_data_request_template_count($id: String!) {
+  verifiersByDataRequestTemplateCount(id: $id)
+}

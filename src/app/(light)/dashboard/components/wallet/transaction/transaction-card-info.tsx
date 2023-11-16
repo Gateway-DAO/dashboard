@@ -10,17 +10,19 @@ import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { transaction } from '@/locale/en/transaction';
+import { FinancialTransactionAction } from '@/services/protocol/types';
 import dayjs from 'dayjs';
 
 import { Stack, Divider, Card, Typography, Button } from '@mui/material';
 
+import ActionDetail from '../action-detail';
+
 type Props = {
   id: string;
-  title: string;
+  title: FinancialTransactionAction;
   date: string;
   type: string;
-  action: string;
-  objectId: string;
+  objectId?: string;
 };
 
 export default function TransactionCardInfo({
@@ -28,13 +30,12 @@ export default function TransactionCardInfo({
   id,
   date,
   type,
-  action,
   objectId,
 }: Props) {
   const { organization } = useOrganization();
 
   const dynamicRoute = useMemo(() => {
-    if (action === 'CREATE_PROOF') {
+    if (title === FinancialTransactionAction.ProofCreate) {
       const obj = {
         text: common.actions.view_proof,
         url: '',
@@ -44,7 +45,7 @@ export default function TransactionCardInfo({
         : routes.dashboard.user.proof(objectId);
       return obj;
     }
-    if (action === 'CREATE_PDA') {
+    if (title === FinancialTransactionAction.PdaIssuance) {
       const obj = {
         text: common.actions.view_pda,
         url: '',
@@ -54,7 +55,7 @@ export default function TransactionCardInfo({
         : routes.dashboard.user.asset(objectId);
       return obj;
     }
-  }, [action]);
+  }, [title]);
   return (
     <Stack
       component={Card}
@@ -73,7 +74,7 @@ export default function TransactionCardInfo({
             alignItems="flex-start"
           >
             <Typography data-testid="transaction__card__title">
-              {title}
+              <ActionDetail action={title} />
             </Typography>
             <Button
               size="small"

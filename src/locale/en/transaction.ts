@@ -36,3 +36,20 @@ export const transaction_detail = {
   status: 'Status',
   transaction_data: 'Transaction data',
 };
+
+export const transaction_actions = {
+  in: {
+    deposit: 'Money deposit',
+    pda_revenue: 'PDA consumption revenue',
+  },
+  out: {
+    request_cost: 'Request cost',
+    withdraw: 'Money withdraw',
+    proof_share: 'Data proof sharing',
+    pda_issuance: 'PDA issuance cost',
+    pda_update: 'PDA update cost',
+    pda_status_change: 'PDA status change cost',
+    data_model: 'Data model created',
+    data_request: 'Data Request Template created',
+  },
+};

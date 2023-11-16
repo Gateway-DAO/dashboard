@@ -9,6 +9,8 @@ export const queries = {
   usage_limit: 'user_monthly_usage_limits',
   data_request_template: 'data_request_template',
   data_model: 'data_model',
+  my_wallet: 'my_wallet',
+  my_transactions: 'my_transactions',
 };
 
 export const mutations = {
@@ -24,6 +26,7 @@ export const mutations = {
 export const explorerQueries = {
   transaction: 'transaction',
   home_stats: 'home_stats',
+  transactions_stats: 'transactions_stats',
   featured_data_models: 'data-models-featured',
   featured_data_requests_templates: 'request-templates-featured',
 };

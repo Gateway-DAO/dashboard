@@ -34,20 +34,18 @@ export default function RequestTemplateExplorerCard({
       }
       profile={profile}
       bottom={
-        <>
-          {requestTemplate?.dataRequestsCount && (
-            <Typography variant="subtitle2" fontWeight="400">
-              <b>
-                {requestTemplate?.dataRequestsCount?.toLocaleString('en-US', {
-                  notation: 'compact',
-                })}
-              </b>{' '}
-              {explorerRequestTemplateCard.requests(
-                requestTemplate.dataRequestsCount > 1
-              )}
-            </Typography>
-          )}
-        </>
+        requestTemplate?.dataRequestsCount ? (
+          <Typography variant="subtitle2" fontWeight="400">
+            <b>
+              {requestTemplate?.dataRequestsCount?.toLocaleString('en-US', {
+                notation: 'compact',
+              })}
+            </b>{' '}
+            {explorerRequestTemplateCard.requests(
+              requestTemplate.dataRequestsCount > 1
+            )}
+          </Typography>
+        ) : undefined
       }
       {...props}
     />

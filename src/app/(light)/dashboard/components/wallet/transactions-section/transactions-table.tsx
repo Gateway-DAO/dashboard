@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -8,25 +9,31 @@ import {
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
+import { queries } from '@/constants/queries';
+import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { transaction } from '@/locale/en/transaction';
+import { My_TransactionsQuery } from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
 import { useToggle } from '@react-hookz/web';
+import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
+import ActionDetail from '../action-detail';
 import { TransactionModal } from '../transaction/transaction-modal';
 import TransactionStatusChip from '../transaction/transaction-status-chip';
 
 type Props = {
-  initialData: any; //partialDeep somethig
+  initialData: My_TransactionsQuery['myFinancialTransactions'];
   totalCount: number;
 };
 
-const columns: GridColDef<any>[] = [
+const columns: GridColDef<My_TransactionsQuery['myFinancialTransactions']>[] = [
   {
-    field: 'amount',
+    field: 'value',
     headerName: transaction.amount,
     flex: 1,
     renderCell: (params) => (
@@ -36,10 +43,10 @@ const columns: GridColDef<any>[] = [
     ),
   },
   {
-    field: 'metadata',
+    field: 'action',
     headerName: transaction.detail,
     flex: 1,
-    valueFormatter: (params) => params.value.name,
+    renderCell: (params) => <ActionDetail action={params.value} />,
   },
   {
     field: 'id',
@@ -47,7 +54,7 @@ const columns: GridColDef<any>[] = [
     headerName: transaction.transaction_id,
   },
   {
-    field: 'date',
+    field: 'createdAt',
     headerName: transaction.date,
     flex: 1,
     valueFormatter: (params) =>
@@ -63,21 +70,35 @@ const columns: GridColDef<any>[] = [
   },
 ];
 
-export default function TransactionsTable({
-  initialData,
-  totalCount = 0,
-}: Props) {
+export default function TransactionsTable({ totalCount = 0 }: Props) {
   const router = useRouter();
-
-  const data: any = []; //usequery
-  const isLoading = false; //usequery
+  const { data: session } = useSession();
+  const { organization } = useOrganization();
+  const { privateApi } = useGtwSession();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
-    pageSize: 5,
+    pageSize: 10,
+  });
+
+  const { data } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: [
+      queries.my_transactions,
+      organization ? organization.id : session?.user.id,
+      paginationModel ? paginationModel.page : 0,
+      paginationModel ? paginationModel.pageSize : 10,
+    ],
+    queryFn: () =>
+      privateApi?.my_transactions({
+        skip: paginationModel.page * paginationModel.pageSize,
+        take: paginationModel.pageSize,
+      }),
+    select: (data: My_TransactionsQuery) => data.myFinancialTransactions,
   });
 
   const [showTransactionDetail, toggleTransaction] = useToggle(false);
-  const [currentTransaction, setCurrentTransaction] = useState({});
+  const [currentTransaction, setCurrentTransaction] =
+    useState<My_TransactionsQuery['myFinancialTransactions'][0]>();
 
   const toggleTransactionModal = (value: boolean) => {
     if (!value) {
@@ -100,7 +121,7 @@ export default function TransactionsTable({
     <>
       <DataGrid
         {...defaultGridConfiguration}
-        rows={data && data.length ? data : initialData}
+        rows={data && data.length ? data : []}
         columns={columns}
         paginationModel={paginationModel}
         onRowClick={(params: GridRowParams) => {
@@ -109,13 +130,14 @@ export default function TransactionsTable({
         }}
         onPaginationModelChange={setNewPage}
         paginationMode="server"
-        loading={isLoading}
         rowCount={totalCount}
         sx={defaultGridCustomization}
       />
       <TransactionModal
         open={showTransactionDetail}
-        transactionDetail={currentTransaction}
+        transactionDetail={
+          currentTransaction as My_TransactionsQuery['myFinancialTransactions'][0]
+        }
         onClose={() => toggleTransactionModal(false)}
       />
     </>

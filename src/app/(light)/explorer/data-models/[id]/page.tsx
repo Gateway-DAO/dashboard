@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { apiPublic } from '@/services/protocol/api';
 import { PageProps } from '@/types/next';
 
@@ -8,6 +10,20 @@ import NumberCard from '../../components/number-card/number-card';
 import DataModelClaims from './components/claims/claims';
 import DataModelDetails from './components/details/details';
 import DataModelDetailHeader from './components/header';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const { dataModel } = await apiPublic.explorer_data_model_detail_overview({
+    id: params.id,
+  });
+  return {
+    title: `Gateway Data Model - ${dataModel?.title ?? params.id}`,
+    description: `Details and stats from how users are using this data model.`,
+  };
+}
 
 export default async function DataModelPage({
   params: { id },
@@ -24,10 +40,6 @@ export default async function DataModelPage({
     {
       label: 'PDAs issued',
       value: dataModel.pdasIssuedCount,
-    },
-    {
-      label: 'Tied request templates',
-      value: 200,
     },
     {
       label: 'Revenue generated',

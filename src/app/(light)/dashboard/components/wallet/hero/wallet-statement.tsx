@@ -2,6 +2,11 @@
 
 import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
+import {
+  FinancialTransactionAction,
+  My_BalanceQuery,
+} from '@/services/protocol/types';
+import { numberToMoneyString } from '@/utils/money';
 import { useToggle } from '@react-hookz/web';
 
 import {
@@ -14,21 +19,25 @@ import {
   Button,
   Collapse,
   Divider,
+  Skeleton,
   Stack,
   Typography,
 } from '@mui/material';
 
+import ActionDetail from '../action-detail';
+
 type listItem = {
-  name: string;
-  value: string;
+  action: FinancialTransactionAction;
+  amount: number;
 };
 
 type PropsStatementList = {
   title: string;
-  value: string;
+  value: number;
   showValues: boolean;
   showDetails: boolean;
   list?: listItem[];
+  isLoading?: boolean;
 };
 
 const WalletStatementList = ({
@@ -37,6 +46,7 @@ const WalletStatementList = ({
   showValues,
   showDetails,
   list,
+  isLoading,
 }: PropsStatementList) => {
   return (
     <Stack
@@ -52,24 +62,37 @@ const WalletStatementList = ({
           {title}
         </Typography>
         <Typography variant="h5" data-testid="list__total-value">
-          {showValues ? (
-            <>{value}</>
+          {isLoading ? (
+            <Skeleton width={100} />
           ) : (
-            <MoreHorizOutlined sx={{ fontSize: 'inherit' }} />
+            <>
+              {showValues ? (
+                <>{numberToMoneyString(value)}</>
+              ) : (
+                <MoreHorizOutlined sx={{ fontSize: 'inherit' }} />
+              )}
+            </>
           )}
         </Typography>
       </Box>
       <Collapse in={showDetails && !!list?.length}>
         <Stack data-testid="list__details-items" divider={<Divider />} mx={-2}>
-          {list?.map(({ name, value }) => (
-            <Box key={name} display="flex" justifyContent="space-between" p={2}>
-              <Typography variant="body2">{name}</Typography>
+          {list?.map(({ action, amount }) => (
+            <Box
+              key={action}
+              display="flex"
+              justifyContent="space-between"
+              p={2}
+            >
+              <Typography variant="body2">
+                <ActionDetail action={action} />
+              </Typography>
               <Typography
                 variant="subtitle2"
                 data-testid="list__register-value"
               >
                 {showValues ? (
-                  <>{value}</>
+                  <>{numberToMoneyString(amount)}</>
                 ) : (
                   <MoreHorizOutlined sx={{ fontSize: 'inherit' }} />
                 )}
@@ -84,14 +107,15 @@ const WalletStatementList = ({
 
 type Props = {
   showValues: boolean;
+  isLoading?: boolean;
+  myWallet?: My_BalanceQuery['myWallet'];
 };
 
-const mockMoneyIn = [
-  { name: 'Deposits', value: '$150.00' },
-  { name: 'PDA consumption revenue', value: '$84.54' },
-];
-
-export default function WalletStatement({ showValues }: Props) {
+export default function WalletStatement({
+  showValues,
+  myWallet,
+  isLoading,
+}: Props) {
   const [showDetails, toggleDetails] = useToggle(false);
 
   return (
@@ -108,15 +132,18 @@ export default function WalletStatement({ showValues }: Props) {
         <WalletStatementList
           showDetails={showDetails}
           showValues={showValues}
-          value="$234.54"
+          isLoading={isLoading}
+          value={myWallet?.moneyIn as number}
           title={wallet.page.money_in}
-          list={mockMoneyIn}
+          list={myWallet?.moneyInSummary}
         />
         <WalletStatementList
           showDetails={showDetails}
+          isLoading={isLoading}
           showValues={showValues}
-          value="$0.0"
+          value={myWallet?.moneyOut as number}
           title={wallet.page.money_out}
+          list={myWallet?.moneyOutSummary}
         />
       </Box>
       <Stack mt={2} gap={2}>
