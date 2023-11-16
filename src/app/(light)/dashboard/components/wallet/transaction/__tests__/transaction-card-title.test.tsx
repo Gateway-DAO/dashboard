@@ -10,7 +10,10 @@ describe('Transaction Card Title', () => {
   test('renders the component', () => {
     render(
       <SessionProvider session={session}>
-        <TransactionCardTitle {...transaction_default} />
+        <TransactionCardTitle
+          amount={transaction_default.value}
+          type={transaction_default.type}
+        />
       </SessionProvider>
     );
 
@@ -20,7 +23,10 @@ describe('Transaction Card Title', () => {
   test('Display value', async () => {
     render(
       <SessionProvider session={session}>
-        <TransactionCardTitle {...transaction_default} />
+        <TransactionCardTitle
+          amount={transaction_default.value}
+          type={transaction_default.type}
+        />
       </SessionProvider>
     );
 

@@ -36,3 +36,11 @@ export const transaction_detail = {
   status: 'Status',
   transaction_data: 'Transaction data',
 };
+
+export const transaction_actions = {
+  out: {
+    pda_issuance: 'PDA issuance cost',
+    pda_update: 'PDA update cost',
+    pda_status_change: 'PDA status change cost',
+  },
+};

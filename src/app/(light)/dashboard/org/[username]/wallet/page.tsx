@@ -18,7 +18,7 @@ export default function WalletOrgPage() {
         ...pageWithBackgroundColor,
       }}
     >
-      <WalletHero balance="" />
+      <WalletHero />
       <TransactionsSection />
     </Stack>
   );

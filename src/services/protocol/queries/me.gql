@@ -25,9 +25,6 @@ query me {
       }
     }
   }
-  myWallet {
-    balance
-  }
 }
 
 query monthlyUserUsage {
@@ -36,5 +33,13 @@ query monthlyUserUsage {
     credentialsUsageAllowedByMonth
     monthlyDatamodels
     monthlyCredentials
+  }
+}
+
+query my_balance($organizationId: String) {
+  myWallet(organizationId: $organizationId) {
+    balance
+    moneyIn
+    moneyOut
   }
 }

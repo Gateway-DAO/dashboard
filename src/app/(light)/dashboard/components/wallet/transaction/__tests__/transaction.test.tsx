@@ -10,7 +10,7 @@ describe('Transaction', () => {
   test('renders the component', () => {
     render(
       <SessionProvider session={session}>
-        <Transaction {...transaction_default} />
+        <Transaction transaction={transaction_default} />
       </SessionProvider>
     );
 

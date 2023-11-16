@@ -1,0 +1,10 @@
+query my_transactions($skip: Int, $take: Int) {
+  myFinancialTransactions(skip: $skip, take: $take) {
+    id
+    value
+    type
+    transactionId
+    createdAt
+    action
+  }
+}
