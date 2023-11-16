@@ -1,3 +1,4 @@
+import { FinancialTransactionAction } from '@/services/protocol/types';
 import { userEvent } from '@storybook/testing-library';
 import { render, screen } from '@testing-library/react';
 
@@ -12,7 +13,20 @@ describe('Wallet statement', () => {
   });
   test.todo('Check display values dinamically');
   test('Check collapse details', async () => {
-    render(<WalletStatement showValues />);
+    render(
+      <WalletStatement
+        myWallet={{
+          moneyInSummary: [
+            { action: FinancialTransactionAction.PdaStatusChange, amount: 1 },
+          ],
+          moneyOutSummary: [],
+          balance: 1,
+          moneyIn: 1,
+          moneyOut: 0,
+        }}
+        showValues
+      />
+    );
 
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
