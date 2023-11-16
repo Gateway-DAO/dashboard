@@ -23,10 +23,7 @@ import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
 import ActionDetail from '../action-detail';
-import {
-  TransactionDetail,
-  TransactionModal,
-} from '../transaction/transaction-modal';
+import { TransactionModal } from '../transaction/transaction-modal';
 import TransactionStatusChip from '../transaction/transaction-status-chip';
 
 type Props = {
@@ -101,7 +98,7 @@ export default function TransactionsTable({ totalCount = 0 }: Props) {
 
   const [showTransactionDetail, toggleTransaction] = useToggle(false);
   const [currentTransaction, setCurrentTransaction] =
-    useState<TransactionDetail>();
+    useState<My_TransactionsQuery['myFinancialTransactions'][0]>();
 
   const toggleTransactionModal = (value: boolean) => {
     if (!value) {
