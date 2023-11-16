@@ -2,7 +2,10 @@
 
 import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
-import { My_BalanceQuery } from '@/services/protocol/types';
+import {
+  FinancialTransactionAction,
+  My_BalanceQuery,
+} from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
 import { useToggle } from '@react-hookz/web';
 
@@ -21,9 +24,11 @@ import {
   Typography,
 } from '@mui/material';
 
+import ActionDetail from '../action-detail';
+
 type listItem = {
-  name: string;
-  value: string;
+  action: FinancialTransactionAction;
+  amount: number;
 };
 
 type PropsStatementList = {
@@ -72,15 +77,22 @@ const WalletStatementList = ({
       </Box>
       <Collapse in={showDetails && !!list?.length}>
         <Stack data-testid="list__details-items" divider={<Divider />} mx={-2}>
-          {list?.map(({ name, value }) => (
-            <Box key={name} display="flex" justifyContent="space-between" p={2}>
-              <Typography variant="body2">{name}</Typography>
+          {list?.map(({ action, amount }) => (
+            <Box
+              key={action}
+              display="flex"
+              justifyContent="space-between"
+              p={2}
+            >
+              <Typography variant="body2">
+                <ActionDetail action={action} />
+              </Typography>
               <Typography
                 variant="subtitle2"
                 data-testid="list__register-value"
               >
                 {showValues ? (
-                  <>{value}</>
+                  <>{numberToMoneyString(amount)}</>
                 ) : (
                   <MoreHorizOutlined sx={{ fontSize: 'inherit' }} />
                 )}
@@ -98,11 +110,6 @@ type Props = {
   isLoading?: boolean;
   myWallet?: My_BalanceQuery['myWallet'];
 };
-
-const mockMoneyIn = [
-  { name: 'Deposits', value: '$150.00' },
-  { name: 'PDA consumption revenue', value: '$84.54' },
-];
 
 export default function WalletStatement({
   showValues,
@@ -128,7 +135,7 @@ export default function WalletStatement({
           isLoading={isLoading}
           value={myWallet?.moneyIn as number}
           title={wallet.page.money_in}
-          list={mockMoneyIn}
+          list={myWallet?.moneyInSummary}
         />
         <WalletStatementList
           showDetails={showDetails}
@@ -136,6 +143,7 @@ export default function WalletStatement({
           showValues={showValues}
           value={myWallet?.moneyOut as number}
           title={wallet.page.money_out}
+          list={myWallet?.moneyOutSummary}
         />
       </Box>
       <Stack mt={2} gap={2}>

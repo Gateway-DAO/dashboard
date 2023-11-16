@@ -41,5 +41,13 @@ query my_balance($organizationId: String) {
     balance
     moneyIn
     moneyOut
+    moneyInSummary {
+      action
+      amount
+    }
+    moneyOutSummary {
+      action
+      amount
+    }
   }
 }
