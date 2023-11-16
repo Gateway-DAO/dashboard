@@ -42,10 +42,6 @@ export default async function DataModelPage({
       value: dataModel.pdasIssuedCount,
     },
     {
-      label: 'Tied request templates',
-      value: 200,
-    },
-    {
       label: 'Revenue generated',
       value: Intl.NumberFormat('en-US', {
         style: 'currency',

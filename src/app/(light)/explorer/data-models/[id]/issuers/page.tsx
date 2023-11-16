@@ -22,7 +22,12 @@ export default async function DataModelIssuersPage({
       })
     )?.issuersByDataModel ?? [];
 
-  const count = 0;
+  const count =
+    (
+      await apiPublic.explorer_issuers_by_data_model_count({
+        id,
+      })
+    ).issuersByDataModelCount ?? 0;
 
   return (
     <>

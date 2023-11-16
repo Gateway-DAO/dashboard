@@ -1,14 +1,16 @@
 'use client';
-import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
-import { PartialDeep } from 'type-fest';
-import { Explorer_Data_Model_Detail_OverviewQuery } from '@/services/protocol/types';
 import { useMemo } from 'react';
-import { useToggle } from '@react-hookz/web';
-import ProfileList from './profile-list';
-import { Button, Collapse, Typography } from '@mui/material';
-import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material';
-import { common } from '@/locale/en/common';
+
 import ToggleDropIcon from '@/components/toggle-drop-icon/toggle-drop-icon';
+import { common } from '@/locale/en/common';
+import { Explorer_Data_Model_Detail_OverviewQuery } from '@/services/protocol/types';
+import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
+import { useToggle } from '@react-hookz/web';
+import { PartialDeep } from 'type-fest';
+
+import { Button, Collapse } from '@mui/material';
+
+import ProfileList from './profile-list';
 
 type Props = {
   dataModel: PartialDeep<Explorer_Data_Model_Detail_OverviewQuery['dataModel']>;
