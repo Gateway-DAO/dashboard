@@ -9,7 +9,7 @@ import { Stack, Typography } from '@mui/material';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Issue a Data Asset - Gateway Network',
+    title: 'Issue a Private Data Asset - Gateway Network',
   };
 }
 
