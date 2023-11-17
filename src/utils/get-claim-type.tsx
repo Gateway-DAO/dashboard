@@ -1,3 +1,4 @@
+import { titleCase } from 'title-case';
 export const claimFields = {
   boolean: 'boolean',
   image: 'image',
@@ -10,7 +11,7 @@ export const claimFields = {
 
 export type ClaimField = keyof typeof claimFields;
 
-export type ClaimFieldProps = {
+export type SchemaProperty = {
   label?: string;
   fieldName?: string;
   title?: string;
@@ -20,7 +21,7 @@ export type ClaimFieldProps = {
   format?: string;
   subType?: string;
   examples?: Array<string | boolean>;
-  items?: ClaimFieldProps;
+  items?: SchemaProperty;
 };
 
 // List all claim fields
@@ -58,3 +59,25 @@ const getClaimType = ({
 };
 
 export default getClaimType;
+
+export const getClaimTitle = (property: SchemaProperty, id?: string) => {
+  let title = property.title;
+  if (!title && id) {
+    title = titleCase(id);
+  }
+
+  return title;
+};
+
+export const getClaimExample = (property: SchemaProperty) => {
+  let example: string | undefined = undefined;
+  if (property.examples?.length) {
+    example = property.examples!.join(', ');
+  } else if (property.items?.examples?.length) {
+    example = property.items.examples!.join(', ');
+  }
+  return example;
+};
+
+export const getClaimDefaultValue = (property: SchemaProperty) =>
+  property.default ?? property.items?.default;

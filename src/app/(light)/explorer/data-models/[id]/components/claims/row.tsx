@@ -1,6 +1,10 @@
 import ChipInputType from '@/components/chip-input-type/chip-input-type';
-import getClaimType, { ClaimFieldProps } from '@/utils/get-claim-type';
-import { titleCase } from 'title-case';
+import getClaimType, {
+  SchemaProperty,
+  getClaimDefaultValue,
+  getClaimExample,
+  getClaimTitle,
+} from '@/utils/get-claim-type';
 
 import { TableRow, TableCell, Typography } from '@mui/material';
 
@@ -9,21 +13,11 @@ export default function Row({
   property,
 }: {
   id?: string;
-  property: ClaimFieldProps;
+  property: SchemaProperty;
 }) {
-  let title = property.title;
-  if (!title && id) {
-    title = titleCase(id);
-  }
-
-  let example: string | undefined = undefined;
-  if (property.examples?.length) {
-    example = property.examples!.join(', ');
-  } else if (property.items?.examples?.length) {
-    example = property.items.examples!.join(', ');
-  }
-
-  const defaultValue = property.default ?? property.items?.default;
+  const title = getClaimTitle(property, id);
+  const example = getClaimExample(property);
+  const defaultValue = getClaimDefaultValue(property);
 
   const hasDescription = !!example || !!defaultValue;
 
