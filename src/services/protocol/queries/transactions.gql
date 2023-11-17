@@ -8,3 +8,7 @@ query my_transactions($skip: Int, $take: Int) {
     action
   }
 }
+
+query my_transactions_count {
+  myFinancialTransactionsCount
+}
