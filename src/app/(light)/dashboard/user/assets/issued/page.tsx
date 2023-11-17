@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 import DataOutlinedIcon from '@/components/icons/data-outlined';
+import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';
 import { getPrivateApi } from '@/services/protocol/api';
 
@@ -23,7 +24,12 @@ export default async function DataAssetsPage() {
   return (
     <>
       <AssetsHeader>
-        <Button variant="contained" endIcon={<DataOutlinedIcon />}>
+        <Button
+          variant="contained"
+          size="large"
+          endIcon={<DataOutlinedIcon />}
+          href={routes.dashboard.user.issue}
+        >
           {pdasLocales.issue_a_pda}
         </Button>
       </AssetsHeader>

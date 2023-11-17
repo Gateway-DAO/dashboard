@@ -86,3 +86,9 @@ export const helpMenu = {
   discordTitle: 'Support channel',
   discordLink: 'https://discord.com/invite/bxTaYsJ6WD',
 };
+
+export const issuePda = {
+  title: 'Issue a Private Data Asset',
+  subtitle: 'Select a Data Model',
+  featured: 'Featured',
+};
