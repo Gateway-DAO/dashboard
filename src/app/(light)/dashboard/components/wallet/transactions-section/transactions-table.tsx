@@ -13,10 +13,7 @@ import { queries } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
 import { transaction } from '@/locale/en/transaction';
-import {
-  My_TransactionsQuery,
-  My_Transactions_CountQuery,
-} from '@/services/protocol/types';
+import { My_TransactionsQuery } from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
 import { useToggle } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
@@ -68,7 +65,13 @@ const columns: GridColDef<My_TransactionsQuery['myFinancialTransactions']>[] = [
   },
 ];
 
-export default function TransactionsTable() {
+export default function TransactionsTable({
+  totalCount,
+  initialData,
+}: {
+  totalCount: number;
+  initialData: My_TransactionsQuery['myFinancialTransactions'];
+}) {
   const router = useRouter();
   const { data: session } = useSession();
   const { organization } = useOrganization();
@@ -76,16 +79,6 @@ export default function TransactionsTable() {
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 10,
-  });
-
-  const { data: totalCount } = useQuery({
-    queryKey: [
-      queries.my_transactions_count,
-      organization ? organization.id : session?.user.id,
-    ],
-    queryFn: () => privateApi.my_transactions_count(),
-    select: (data: My_Transactions_CountQuery) =>
-      data.myFinancialTransactionsCount,
   });
 
   const { data } = useQuery({
@@ -129,7 +122,7 @@ export default function TransactionsTable() {
     <>
       <DataGrid
         {...defaultGridConfiguration}
-        rows={data && data.length ? data : []}
+        rows={data && data.length ? data : initialData}
         columns={columns}
         paginationModel={paginationModel}
         onRowClick={(params: GridRowParams) => {
