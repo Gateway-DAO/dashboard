@@ -26,11 +26,6 @@ import ActionDetail from '../action-detail';
 import { TransactionModal } from '../transaction/transaction-modal';
 import TransactionStatusChip from '../transaction/transaction-status-chip';
 
-type Props = {
-  initialData: My_TransactionsQuery['myFinancialTransactions'];
-  totalCount: number;
-};
-
 const columns: GridColDef<My_TransactionsQuery['myFinancialTransactions']>[] = [
   {
     field: 'value',
@@ -70,7 +65,13 @@ const columns: GridColDef<My_TransactionsQuery['myFinancialTransactions']>[] = [
   },
 ];
 
-export default function TransactionsTable({ totalCount = 0 }: Props) {
+export default function TransactionsTable({
+  totalCount,
+  initialData,
+}: {
+  totalCount: number;
+  initialData: My_TransactionsQuery['myFinancialTransactions'];
+}) {
   const router = useRouter();
   const { data: session } = useSession();
   const { organization } = useOrganization();
@@ -121,7 +122,7 @@ export default function TransactionsTable({ totalCount = 0 }: Props) {
     <>
       <DataGrid
         {...defaultGridConfiguration}
-        rows={data && data.length ? data : []}
+        rows={data && data.length ? data : initialData}
         columns={columns}
         paginationModel={paginationModel}
         onRowClick={(params: GridRowParams) => {

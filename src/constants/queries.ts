@@ -11,6 +11,7 @@ export const queries = {
   data_model: 'data_model',
   my_wallet: 'my_wallet',
   my_transactions: 'my_transactions',
+  my_transactions_count: 'my_transactions_count',
 };
 
 export const mutations = {
