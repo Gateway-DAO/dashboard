@@ -4,6 +4,8 @@ import { issuePda } from '@/locale/en/pda';
 
 import { Stack, Typography } from '@mui/material';
 
+import DataModelsFeatured from './featured-data-models/featured';
+
 export default function IssuePdaContent() {
   return (
     <>
@@ -29,7 +31,7 @@ export default function IssuePdaContent() {
           </Typography>
         </Stack>
       </Stack>
-      <Typography variant="h5">{issuePda.featured}</Typography>
+      <DataModelsFeatured />
     </>
   );
 }

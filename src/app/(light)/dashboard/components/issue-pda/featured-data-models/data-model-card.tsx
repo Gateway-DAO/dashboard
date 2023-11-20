@@ -1,4 +1,4 @@
-import DataCard from '@/components/data-card/data-card';
+import DataImageCard from '@/components/data-image-card/data-image-card';
 import routes from '@/constants/routes';
 import { dataModelCard } from '@/locale/en/datamodel';
 import { DataModel } from '@/services/protocol/types';
@@ -10,11 +10,13 @@ import { Typography, CardProps, Box } from '@mui/material';
 type Props = {
   withLink?: boolean;
   dataModel?: PartialDeep<DataModel>;
+  image: string;
 };
 
-export default function DataModelExplorerCard({
+export default function DataModelCard({
   withLink = true,
   dataModel,
+  image,
   ...props
 }: Props & CardProps) {
   const profile = getOrganizationOrUserData(
@@ -23,17 +25,18 @@ export default function DataModelExplorerCard({
   );
 
   return (
-    <DataCard
+    <DataImageCard
       title={dataModel!.title!}
       description={dataModel!.description!}
       href={withLink ? routes.explorer.dataModel(dataModel!.id) : undefined}
       profile={profile}
+      image={image}
       bottom={
         <Box
           sx={{
             display: 'grid',
             gap: 1,
-            gridTemplateColumns: '1fr 0.8fr',
+            gridTemplateColumns: '1fr 0.6fr',
           }}
         >
           {dataModel?.consumptionPrice ? (

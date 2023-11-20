@@ -1,6 +1,6 @@
 import { Stack, Card, CardProps, Box, Skeleton } from '@mui/material';
 
-export default function ExplorerDataCardLoading(props: CardProps) {
+export default function DataCardLoading(props: CardProps) {
   return (
     <Card variant="outlined" {...props}>
       <Stack
