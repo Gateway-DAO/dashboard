@@ -1,15 +1,14 @@
 import { titleCase } from 'title-case';
-export const claimFields = {
-  boolean: 'boolean',
-  image: 'image',
-  text: 'text',
-  number: 'number',
-  array: 'array',
-  link: 'link',
-  currency: 'currency',
-};
 
-export type ClaimField = keyof typeof claimFields;
+export enum ClaimField {
+  Boolean = 'boolean',
+  Image = 'image',
+  Text = 'text',
+  Number = 'number',
+  Array = 'array',
+  Link = 'link',
+  Currency = 'currency',
+}
 
 export type SchemaProperty = {
   label?: string;
@@ -22,40 +21,31 @@ export type SchemaProperty = {
   subType?: string;
   examples?: Array<string | boolean>;
   items?: SchemaProperty;
-};
-
-// List all claim fields
-
-// List all backend Types
-export const maptypes = {
-  boolean: claimFields.boolean,
-  integer: claimFields.number,
-  float: claimFields.number,
-  string: claimFields.text,
-};
-
-type type = keyof typeof maptypes;
-
-type GetClaimTypeProps = {
-  type: string;
-  contentMediaType?: string | null;
-  format?: string | null;
   currency?: string | null;
 };
 
-const getClaimType = ({
+export const getClaimType = ({
   type,
   contentMediaType,
   currency,
   format,
-}: GetClaimTypeProps) => {
-  if (contentMediaType) return claimFields.image;
-  if (format === 'uri') return claimFields.link;
-  if (currency) return claimFields.currency;
-  if (maptypes[type as type]) {
-    type = maptypes[type as type];
+}: SchemaProperty): ClaimField => {
+  if (contentMediaType) return ClaimField.Image;
+  if (format === 'uri') return ClaimField.Link;
+  if (currency) return ClaimField.Currency;
+
+  switch (type) {
+    case 'integer':
+      return ClaimField.Number;
+    case 'float':
+      return ClaimField.Number;
+    case 'boolean':
+      return ClaimField.Boolean;
+    case 'array':
+      return ClaimField.Array;
+    default:
+      return ClaimField.Text;
   }
-  return claimFields[type as keyof typeof claimFields];
 };
 
 export default getClaimType;
