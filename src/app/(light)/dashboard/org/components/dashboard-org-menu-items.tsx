@@ -24,7 +24,10 @@ export const dashboardOrgMenuItems = (
   {
     name: 'Issuances',
     href: routes.dashboard.org.issuedAssets(username),
-    activeHrefs: [routes.dashboard.org.issuedAssets(username)],
+    activeHrefs: [
+      routes.dashboard.org.issuedAssets(username),
+      routes.dashboard.org.issue(username),
+    ],
     icon: DataOutlinedIcon,
     navbar: true,
   },
