@@ -37,7 +37,7 @@ export default async function DataAssetsPage() {
         {pdas && pdas.length > 0 && <IssuedPDAsList pdas={pdas} />}
         {pdas && pdas.length === 0 && (
           <>
-            <PdasHelpCards />
+            <PdasHelpCards issueLink={routes.dashboard.user.issue} />
             <Typography
               variant="body1"
               color="text.secondary"

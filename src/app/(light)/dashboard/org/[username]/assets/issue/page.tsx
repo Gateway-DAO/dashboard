@@ -11,11 +11,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function IssuePage() {
+export default async function OrgIssuePage(props: any) {
+  const pathnameOrg = props.params?.username;
   return (
     <>
       <TopBarContainer>
-        <BackButton href={routes.dashboard.user.issuedAssets} />
+        <BackButton href={routes.dashboard.org.issuedAssets(pathnameOrg)} />
       </TopBarContainer>
       <IssuePdaContent />
     </>

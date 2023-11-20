@@ -53,7 +53,7 @@ export default async function OrganizationIssuedAssetsPage(props: any) {
           variant="contained"
           size="large"
           endIcon={<DataOutlinedIcon />}
-          href={routes.dashboard.user.issue}
+          href={routes.dashboard.org.issue(pathnameOrg)}
         >
           {pdas.issue_a_pda}
         </Button>
@@ -63,7 +63,7 @@ export default async function OrganizationIssuedAssetsPage(props: any) {
       )}
       {issuedPdas && issuedPdas.length === 0 && (
         <>
-          <PdasHelpCards />
+          <PdasHelpCards issueLink={routes.dashboard.org.issue(pathnameOrg)} />
           <Typography
             variant="body1"
             color="text.secondary"
