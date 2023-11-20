@@ -16,9 +16,10 @@ import { Box } from '@mui/material';
 
 type Props = {
   children?: ReactNode;
+  helpContent?: boolean;
 };
 
-export default function PdasHeader({ children }: Props) {
+export default function PdasHeader({ children, helpContent = true }: Props) {
   return (
     <>
       <TitleLayout
@@ -28,12 +29,14 @@ export default function PdasHeader({ children }: Props) {
       >
         {children && children}
       </TitleLayout>
-      <HelpContentCard
-        title={helperContent.title}
-        desc={helperContent.desc}
-        btnText={helperContent.btnText}
-        btnLink={helperContent.btnLink}
-      />
+      {helpContent && (
+        <HelpContentCard
+          title={helperContent.title}
+          desc={helperContent.desc}
+          btnText={helperContent.btnText}
+          btnLink={helperContent.btnLink}
+        />
+      )}
       <Box
         sx={{
           borderBottom: 1,
