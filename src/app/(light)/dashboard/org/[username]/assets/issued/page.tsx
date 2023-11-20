@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import PdasHelpCards from '@/app/(light)/dashboard/components/pdas-help-cards';
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
@@ -53,7 +52,7 @@ export default async function OrganizationIssuedAssetsPage(props: any) {
           variant="contained"
           size="large"
           endIcon={<DataOutlinedIcon />}
-          href={routes.dashboard.user.issue}
+          href={routes.dashboard.org.issue(pathnameOrg)}
         >
           {pdas.issue_a_pda}
         </Button>
@@ -62,16 +61,13 @@ export default async function OrganizationIssuedAssetsPage(props: any) {
         <PDAsTable data={issuedPdas} totalCount={count} />
       )}
       {issuedPdas && issuedPdas.length === 0 && (
-        <>
-          <PdasHelpCards />
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ textAlign: 'center', width: '100%' }}
-          >
-            {orgPdas.empty}
-          </Typography>
-        </>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ textAlign: 'center', width: '100%' }}
+        >
+          {orgPdas.empty}
+        </Typography>
       )}
     </>
   );

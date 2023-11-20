@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Issue a Private Data Asset - Gateway Network',
 };
 
-export default async function IssuePage() {
+export default async function OrgIssuePage() {
   return (
     <>
       <TopBarContainer>

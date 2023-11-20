@@ -25,6 +25,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     activeHrefs: [
       routes.dashboard.user.receivedAssets,
       routes.dashboard.user.issuedAssets,
+      routes.dashboard.user.issue,
       routes.dashboard.user.asset(''),
     ],
     icon: DataOutlinedIcon,
