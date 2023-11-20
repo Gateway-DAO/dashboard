@@ -5,7 +5,7 @@ import { getPrivateApi } from '@/services/protocol/api';
 
 import { Box, Typography } from '@mui/material';
 
-import AssetsHeader from '../components/assets-header';
+import PdasHeader from '../components/pdas-header';
 import ReceivedPDAsList from './components/list';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -20,7 +20,7 @@ export default async function DataAssetsPage() {
 
   return (
     <>
-      <AssetsHeader />
+      <PdasHeader />
       <Box sx={{ pt: 5 }}>
         {pdas && pdas.length > 0 && <ReceivedPDAsList pdas={pdas} />}
         {pdas && pdas.length === 0 && (

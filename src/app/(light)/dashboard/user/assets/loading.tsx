@@ -2,7 +2,7 @@ import PdaCardSkeleton from '@/components/pda-card/pda-card-skeleton';
 
 import { Box } from '@mui/material';
 
-import AssetsHeader from './components/assets-header';
+import AssetsHeader from './components/pdas-header';
 import PDAsListContainer from './components/pdas-list-container';
 
 export default function DataAssetsLoadingPage() {

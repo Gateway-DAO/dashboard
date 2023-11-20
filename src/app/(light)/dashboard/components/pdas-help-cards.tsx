@@ -8,7 +8,7 @@ import { pdas } from '@/locale/en/pda';
 
 import { Stack } from '@mui/material';
 
-export default function HelpCards() {
+export default function PdasHelpCards() {
   return (
     <Stack gap={2} sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
       <HelpCtaCard

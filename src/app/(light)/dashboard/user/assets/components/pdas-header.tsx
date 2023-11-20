@@ -18,7 +18,7 @@ type Props = {
   children?: ReactNode;
 };
 
-export default function AssetsHeader({ children }: Props) {
+export default function PdasHeader({ children }: Props) {
   return (
     <>
       <TitleLayout
