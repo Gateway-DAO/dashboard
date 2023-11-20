@@ -76,13 +76,13 @@ export default function TransactionCardInfo({
             <Typography data-testid="transaction__card__title">
               <ActionDetail action={title} />
             </Typography>
-            <Button
+            {/* <Button
               size="small"
               sx={{ marginTop: -2 }}
               href={dynamicRoute?.url}
             >
               {dynamicRoute?.text}
-            </Button>
+            </Button> */}
           </Stack>
         </CardCell>
       </TableCellContainer>
