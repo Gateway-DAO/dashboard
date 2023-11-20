@@ -23,7 +23,7 @@ export default async function DataAssetsPage() {
 
   return (
     <>
-      <PdasHeader helpContent={false}>
+      <PdasHeader>
         <Button
           variant="contained"
           size="large"

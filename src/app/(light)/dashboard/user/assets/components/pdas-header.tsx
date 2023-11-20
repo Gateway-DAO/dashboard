@@ -1,12 +1,11 @@
 import { ReactNode } from 'react';
 
-import HelpContentCard from '@/components/help-content-card/help-content-card';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
-import { pdas, helperContent } from '@/locale/en/pda';
+import { pdas } from '@/locale/en/pda';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -16,10 +15,9 @@ import { Box } from '@mui/material';
 
 type Props = {
   children?: ReactNode;
-  helpContent?: boolean;
 };
 
-export default function PdasHeader({ children, helpContent = true }: Props) {
+export default function PdasHeader({ children }: Props) {
   return (
     <>
       <TitleLayout
@@ -29,14 +27,6 @@ export default function PdasHeader({ children, helpContent = true }: Props) {
       >
         {children && children}
       </TitleLayout>
-      {helpContent && (
-        <HelpContentCard
-          title={helperContent.title}
-          desc={helperContent.desc}
-          btnText={helperContent.btnText}
-          btnLink={helperContent.btnLink}
-        />
-      )}
       <Box
         sx={{
           borderBottom: 1,
