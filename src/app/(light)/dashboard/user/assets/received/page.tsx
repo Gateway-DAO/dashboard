@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import PdasHelpCards from '@/app/(light)/dashboard/components/pdas-help-cards';
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';
@@ -34,7 +33,6 @@ export default async function DataAssetsPage() {
         </Button>
       </PdasHeader>
       <Box sx={{ pt: 5 }}>
-        <PdasHelpCards />
         {pdas && pdas.length > 0 && <ReceivedPDAsList pdas={pdas} />}
         {pdas && pdas.length === 0 && (
           <Typography

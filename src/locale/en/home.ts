@@ -10,7 +10,13 @@ export const home = {
     btn_text: 'Check it out',
     link: documentationRoutes.home,
   },
-
+  issue_banner: {
+    title: 'Start issuing a Private Data Asset',
+    subtitle:
+      'Select a data model, fill the details and just send to the user all under 30 seconds',
+    btn_text: 'Issue now',
+    target: '_blank',
+  },
   sub_banner: [
     {
       heading: 'For organizations',
@@ -30,11 +36,12 @@ export const home = {
       target: '_blank',
     },
     {
-      heading: 'For issuers',
-      title: 'Start issuing a Private Data Asset',
-      subtitle: 'Step-by-step guide for issuing PDA and become an issuer.',
+      heading: 'About',
+      title: 'Learn about Gateway Network',
+      subtitle:
+        'Our guide to learn about the Gateway architecture, mission, and set up process.',
       btn_text: 'Learn more',
-      link: documentationRoutes.startIssuing,
+      link: documentationRoutes.home,
       target: '_blank',
     },
   ],

@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
 
+import HelpContentCard from '@/components/help-content-card/help-content-card';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
-import { pdas } from '@/locale/en/pda';
+import { pdas, helperContent } from '@/locale/en/pda';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -27,6 +28,12 @@ export default function PdasHeader({ children }: Props) {
       >
         {children && children}
       </TitleLayout>
+      <HelpContentCard
+        title={helperContent.title}
+        desc={helperContent.desc}
+        btnText={helperContent.btnText}
+        btnLink={helperContent.btnLink}
+      />
       <Box
         sx={{
           borderBottom: 1,

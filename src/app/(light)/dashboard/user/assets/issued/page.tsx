@@ -36,16 +36,13 @@ export default async function DataAssetsPage() {
       <Box sx={{ pt: 5 }}>
         {pdas && pdas.length > 0 && <IssuedPDAsList pdas={pdas} />}
         {pdas && pdas.length === 0 && (
-          <>
-            <PdasHelpCards issueLink={routes.dashboard.user.issue} />
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              sx={{ textAlign: 'center', width: '100%' }}
-            >
-              {pdasLocales.empty}
-            </Typography>
-          </>
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{ textAlign: 'center', width: '100%' }}
+          >
+            {pdasLocales.empty}
+          </Typography>
         )}
       </Box>
     </>

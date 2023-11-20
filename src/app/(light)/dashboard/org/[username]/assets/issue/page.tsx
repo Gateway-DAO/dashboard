@@ -3,7 +3,6 @@ import { Metadata } from 'next';
 import IssuePdaContent from '@/app/(light)/dashboard/components/issue-pda-content';
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
-import routes from '@/constants/routes';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -11,12 +10,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function OrgIssuePage(props: any) {
-  const pathnameOrg = props.params?.username;
+export default async function OrgIssuePage() {
   return (
     <>
       <TopBarContainer>
-        <BackButton href={routes.dashboard.org.issuedAssets(pathnameOrg)} />
+        <BackButton />
       </TopBarContainer>
       <IssuePdaContent />
     </>
