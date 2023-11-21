@@ -1,5 +1,13 @@
+import { useFormContext } from 'react-hook-form';
+
 import { TextField } from '@mui/material';
 
-export default function TextProperty() {
-  return <TextField multiline maxRows={4} fullWidth />;
+import { PropertyField } from './type';
+
+export default function TextProperty({ id }: PropertyField) {
+  const { register } = useFormContext();
+
+  return (
+    <TextField multiline maxRows={4} fullWidth {...register(`claims.${id}`)} />
+  );
 }

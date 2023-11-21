@@ -38,11 +38,11 @@ export default function Property({
   const field = useMemo(() => {
     switch (type) {
       case ClaimField.Text:
-        return <TextProperty />;
+        return <TextProperty id={id} />;
       case ClaimField.Boolean:
-        return <BooleanProperty />;
+        return <BooleanProperty id={id} />;
       case ClaimField.Number:
-        return <NumberProperty />;
+        return <NumberProperty id={id} />;
       default:
         return null;
     }
