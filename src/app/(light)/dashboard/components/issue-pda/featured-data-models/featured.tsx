@@ -47,20 +47,10 @@ export default function DataModelsFeatured() {
       }),
   });
   return (
-    <>
-      <FeaturedSection
-        title={issuePda.featured}
-        isLoading={dataModels.isLoading}
-      >
-        {dataModels.data?.dataModels.map((dataModel) => (
-          <DataModelCard dataModel={dataModel} key={dataModel.id} />
-        ))}
-      </FeaturedSection>
-      <Box sx={{ mt: 4, textAlign: 'center' }}>
-        <LoadingButton variant="outlined">
-          {common.actions.load_more}
-        </LoadingButton>
-      </Box>
-    </>
+    <FeaturedSection title={issuePda.featured} isLoading={dataModels.isLoading}>
+      {dataModels.data?.dataModels.map((dataModel) => (
+        <DataModelCard dataModel={dataModel} key={dataModel.id} />
+      ))}
+    </FeaturedSection>
   );
 }
