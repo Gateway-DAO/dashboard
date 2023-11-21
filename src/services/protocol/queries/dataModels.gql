@@ -63,3 +63,19 @@ query dataModelsByUserCount($user: UserIdentificationInput) {
 query dataModelsByOrgCount($organization: OrganizationIdentificationInput) {
   dataModelsCount(filter: { organization: $organization })
 }
+
+query data_models_featured {
+  dataModels(take: 3) {
+    id
+    title
+    description
+    createdBy {
+      ...min_user
+    }
+    organization {
+      ...org
+    }
+    consumptionPrice
+    pdasIssuedCount
+  }
+}
