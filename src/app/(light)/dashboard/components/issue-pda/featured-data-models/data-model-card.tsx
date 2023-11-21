@@ -57,10 +57,10 @@ export default function DataModelCard({
           </Box>
           <Stack direction="row" gap={1}>
             <Button size="small" variant="contained">
-              Issue
+              {dataModelCard.issue}
             </Button>
             <Button size="small" variant="outlined">
-              Learn more
+              {dataModelCard.learn_more}
             </Button>
           </Stack>
         </>
