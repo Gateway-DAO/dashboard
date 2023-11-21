@@ -10,7 +10,7 @@ import DataModelCard from './data-model-card';
 export default function DataModelsFeatured() {
   const dataModels = useQuery({
     queryKey: ['data-models-featured'],
-    queryFn: () => apiPublic.explorer_data_models_featured(),
+    queryFn: () => apiPublic.data_models_featured(),
   });
   return (
     <ExplorerFeaturedSection

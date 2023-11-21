@@ -6,7 +6,7 @@ import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { numberToMoneyString } from '@/utils/money';
 import { PartialDeep } from 'type-fest';
 
-import { Typography, CardProps, Box } from '@mui/material';
+import { Typography, CardProps, Box, Stack, Button } from '@mui/material';
 
 type Props = {
   withLink?: boolean;
@@ -31,31 +31,42 @@ export default function DataModelCard({
       profile={profile}
       image={dataModel!.image as string}
       bottom={
-        <Box
-          sx={{
-            display: 'grid',
-            gap: 1,
-            gridTemplateColumns: '1fr 0.8fr',
-          }}
-        >
-          {dataModel?.consumptionPrice ? (
-            <Typography variant="subtitle2" fontWeight="400">
-              <b>{numberToMoneyString(dataModel?.consumptionPrice)}</b>{' '}
-              {dataModelCard.consumption}
-            </Typography>
-          ) : (
-            <span />
-          )}
-          <Typography
-            variant="subtitle2"
-            fontWeight="400"
-            alignSelf="flex-end"
-            justifySelf="flex-end"
+        <>
+          <Box
+            sx={{
+              display: 'grid',
+              gap: 1,
+              gridTemplateColumns: '1fr 0.8fr',
+              mb: 3,
+            }}
           >
-            <b>{numberToMoneyString(dataModel?.pdasIssuedCount ?? 0)}</b>{' '}
-            {dataModelCard.issuances(dataModel?.pdasIssuedCount ?? 0)}
-          </Typography>
-        </Box>
+            {dataModel?.consumptionPrice ? (
+              <Typography variant="subtitle2" fontWeight="400">
+                <b>{numberToMoneyString(dataModel?.consumptionPrice)}</b>{' '}
+                {dataModelCard.consumption}
+              </Typography>
+            ) : (
+              <span />
+            )}
+            <Typography
+              variant="subtitle2"
+              fontWeight="400"
+              alignSelf="flex-end"
+              justifySelf="flex-end"
+            >
+              <b>{numberToMoneyString(dataModel?.pdasIssuedCount ?? 0)}</b>{' '}
+              {dataModelCard.issuances(dataModel?.pdasIssuedCount ?? 0)}
+            </Typography>
+          </Box>
+          <Stack direction="row" gap={1}>
+            <Button size="small" variant="contained">
+              Issue
+            </Button>
+            <Button size="small" variant="outlined">
+              Learn more
+            </Button>
+          </Stack>
+        </>
       }
       {...props}
     />
