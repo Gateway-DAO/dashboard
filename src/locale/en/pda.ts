@@ -92,3 +92,16 @@ export const issuePda = {
   subtitle: 'Select a Data Model',
   featured: 'Featured',
 };
+
+export const issuePdaForm = {
+  title: 'Issue a Private Data Asset',
+  subtitle: 'Complete your PDA details',
+  issue_to: {
+    title: 'Issue to',
+    description: 'Add who will be the owner of this PDA',
+  },
+  claim: {
+    description:
+      'The claim define what the PDA represents about a user or how it relates to the user',
+  },
+};
