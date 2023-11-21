@@ -1,6 +1,5 @@
 'use client';
 
-import ExplorerFeaturedSection from '@/app/(light)/explorer/components/featured-section/featured-section';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import { queries } from '@/constants/queries';
 import { common } from '@/locale/en/common';
@@ -11,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Box } from '@mui/material';
 
 import DataModelCard from './data-model-card';
+import FeaturedSection from './featured-section';
 
 export default function DataModelsFeatured() {
   const dataModels = useQuery({
@@ -19,14 +19,14 @@ export default function DataModelsFeatured() {
   });
   return (
     <>
-      <ExplorerFeaturedSection
+      <FeaturedSection
         title={issuePda.featured}
         isLoading={dataModels.isLoading}
       >
         {dataModels.data?.dataModels.map((dataModel) => (
           <DataModelCard dataModel={dataModel} key={dataModel.id} />
         ))}
-      </ExplorerFeaturedSection>
+      </FeaturedSection>
       <Box sx={{ mt: 4, textAlign: 'center' }}>
         <LoadingButton variant="outlined">
           {common.actions.load_more}
