@@ -18,11 +18,7 @@ export default function DataModelsFeatured() {
       isLoading={dataModels.isLoading}
     >
       {dataModels.data?.dataModels.map((dataModel) => (
-        <DataModelCard
-          dataModel={dataModel}
-          image="/images/signup-background.png"
-          key={dataModel.id}
-        />
+        <DataModelCard dataModel={dataModel} key={dataModel.id} />
       ))}
     </ExplorerFeaturedSection>
   );

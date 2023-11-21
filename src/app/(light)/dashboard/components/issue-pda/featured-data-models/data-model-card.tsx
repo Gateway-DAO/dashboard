@@ -11,13 +11,11 @@ import { Typography, CardProps, Box } from '@mui/material';
 type Props = {
   withLink?: boolean;
   dataModel?: PartialDeep<DataModel>;
-  image: string;
 };
 
 export default function DataModelCard({
   withLink = true,
   dataModel,
-  image,
   ...props
 }: Props & CardProps) {
   const profile = getOrganizationOrUserData(
@@ -31,7 +29,7 @@ export default function DataModelCard({
       description={dataModel!.description!}
       href={withLink ? routes.explorer.dataModel(dataModel!.id) : undefined}
       profile={profile}
-      image={image}
+      image={dataModel!.image!}
       bottom={
         <Box
           sx={{
