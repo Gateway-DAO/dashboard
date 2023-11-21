@@ -76,6 +76,8 @@ export const explorerDataModelDetailOverview = {
 export const dataModelCard = {
   consumption: 'per consumption',
   issuances: (count: number) => `issuance${count > 0 ? 's' : ''}`,
+  learn_more: 'Learn more',
+  issue: 'Issue',
 };
 
 export const explorerIssuersByDataModel = {

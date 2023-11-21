@@ -9,12 +9,10 @@ import { PartialDeep } from 'type-fest';
 import { Typography, CardProps, Box, Stack, Button } from '@mui/material';
 
 type Props = {
-  withLink?: boolean;
   dataModel?: PartialDeep<DataModel>;
 };
 
 export default function DataModelCard({
-  withLink = true,
   dataModel,
   ...props
 }: Props & CardProps) {
@@ -27,7 +25,6 @@ export default function DataModelCard({
     <DataImageCard
       title={dataModel!.title!}
       description={dataModel!.description!}
-      href={withLink ? routes.explorer.dataModel(dataModel!.id) : undefined}
       profile={profile}
       image={dataModel!.image as string}
       bottom={
@@ -60,10 +57,10 @@ export default function DataModelCard({
           </Box>
           <Stack direction="row" gap={1}>
             <Button size="small" variant="contained">
-              Issue
+              {dataModelCard.issue}
             </Button>
             <Button size="small" variant="outlined">
-              Learn more
+              {dataModelCard.learn_more}
             </Button>
           </Stack>
         </>
