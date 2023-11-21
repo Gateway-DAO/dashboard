@@ -8,7 +8,7 @@ import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { numberToMoneyString } from '@/utils/money';
 import { PartialDeep } from 'type-fest';
 
-import { Typography, CardProps, Box, Stack, Button } from '@mui/material';
+import { Typography, CardProps, Box } from '@mui/material';
 
 type Props = {
   withLink?: boolean;
