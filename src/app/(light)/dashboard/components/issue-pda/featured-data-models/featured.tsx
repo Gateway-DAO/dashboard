@@ -15,7 +15,14 @@ import FeaturedSection from './featured-section';
 export default function DataModelsFeatured() {
   const dataModels = useQuery({
     queryKey: [queries.featured_data_models],
-    queryFn: () => apiPublic.data_models_featured(),
+    queryFn: () =>
+      apiPublic.data_models_featured({
+        ids: [
+          '6cae6620-42bd-4a12-a1f8-6ceec2847cc5',
+          '2cc6e362-c146-40c8-b1b8-6eace653121d',
+          'ddfbbcca-7b84-43be-92b9-405194a8d682',
+        ],
+      }),
   });
   return (
     <>
