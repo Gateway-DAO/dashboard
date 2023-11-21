@@ -1,5 +1,5 @@
 'use client';
-import ActionDetail from '@/app/(light)/dashboard/components/wallet/action-detail';
+import FinancialActionDetail from '@/app/(light)/dashboard/components/wallet/action-detail';
 import { CardCellContainer } from '@/components/card-cell/card-cell';
 import { DATE_FORMAT } from '@/constants/date';
 import { explorerQueries } from '@/constants/queries';
@@ -20,6 +20,8 @@ import {
   Box,
   Skeleton,
 } from '@mui/material';
+
+import ActionDetail from '../../../components/transactions/action-detail';
 
 export default function LastTransactionsTable() {
   const { data: transactions, isLoading } = useQuery({

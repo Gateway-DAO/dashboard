@@ -24,3 +24,11 @@ query last_transactions {
     createdAt
   }
 }
+
+query explorer_transactions($skip: Int, $take: Int) {
+  transactions(filter: { skip: $skip, take: $take }) {
+    id
+    action
+    createdAt
+  }
+}
