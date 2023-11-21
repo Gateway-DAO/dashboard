@@ -25,7 +25,9 @@ export default function ActionDetail({
       case FinancialTransactionAction.DatamodelCreate:
         return transaction_actions.out.data_model;
       case FinancialTransactionAction.RequestTemplateCreate:
-        return transaction_actions.out.data_request;
+        return transaction_actions.out.data_request_template;
+      case FinancialTransactionAction.RequestCreate:
+        return transaction_actions.out.request_cost;
       default:
         return action;
     }

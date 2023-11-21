@@ -5,7 +5,9 @@ import { Stack, CardActionArea, SxProps } from '@mui/material';
 
 type Props = {
   href?: string;
+  sx?: SxProps;
 };
+
 const style: SxProps = {
   display: 'flex',
   flexDirection: 'column',
@@ -18,11 +20,13 @@ const style: SxProps = {
 
 export default function CardContainer({
   href,
+  sx,
   children,
 }: PropsWithChildren<Props>) {
+  const sxProps = { ...style, ...(sx && sx) };
   if (!!href) {
     return (
-      <CardActionArea component={Link} href={href} sx={style}>
+      <CardActionArea component={Link} href={href} sx={sxProps}>
         {children}
       </CardActionArea>
     );

@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 
+import DataCardLoading from '@/components/data-card/data-card-loading';
 import DefaultError from '@/components/default-error/default-error';
 import { common } from '@/locale/en/common';
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
-import ExplorerDataCardLoading from '../data-card/data-card-loading';
 import SearchFilters from '../search-filters/search-filters';
 
 type Props = {
@@ -66,21 +66,21 @@ export default function ExplorerSearchSection({
       >
         {isLoading && (
           <>
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
           </>
         )}
         {cards}
         {isFetchingMore && (
           <>
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
           </>
         )}
       </Box>

@@ -1,10 +1,13 @@
 import { Metadata } from 'next';
 
-import { orgPdas } from '@/locale/en/pda';
+import DataOutlinedIcon from '@/components/icons/data-outlined';
+import TitleLayout from '@/components/title-layout/title-layout';
+import routes from '@/constants/routes';
+import { orgPdas, pdas } from '@/locale/en/pda';
 import { getPrivateApi } from '@/services/protocol/api';
 import { OrganizationIdentifierType } from '@/services/protocol/types';
 
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 import PDAsTable from './components/pdas-table';
 
@@ -40,6 +43,20 @@ export default async function OrganizationIssuedAssetsPage(props: any) {
 
   return (
     <>
+      <TitleLayout
+        title={orgPdas.data_assets_title}
+        subtitle={orgPdas.data_assets_subtitle}
+        titleId="title-org-assets"
+      >
+        <Button
+          variant="contained"
+          size="large"
+          endIcon={<DataOutlinedIcon />}
+          href={routes.dashboard.org.issue(pathnameOrg)}
+        >
+          {pdas.issue_a_pda}
+        </Button>
+      </TitleLayout>
       {issuedPdas && issuedPdas.length > 0 && (
         <PDAsTable data={issuedPdas} totalCount={count} />
       )}
