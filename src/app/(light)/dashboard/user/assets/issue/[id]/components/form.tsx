@@ -2,7 +2,7 @@
 
 import UserIdentityField from '@/components/form/user-identification-field/user-identifier-field';
 import { UserIdentifierType } from '@/services/protocol/types';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import { Box, Paper, Stack, TextField, Typography } from '@mui/material';
 
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function Form({ schema }: Props) {
-  const { control } = useForm({
+  const methods = useForm({
     values: {
       user: {
         type: UserIdentifierType.Solana,
@@ -21,6 +21,8 @@ export default function Form({ schema }: Props) {
       },
     },
   });
+
+  console.log(methods.watch());
 
   return (
     <Stack gap={2}>
@@ -37,7 +39,7 @@ export default function Form({ schema }: Props) {
           </Typography>
         </Box>
         <UserIdentityField
-          control={control}
+          control={methods.control}
           names={{
             type: 'user.type',
             value: 'user.value',
@@ -69,7 +71,9 @@ export default function Form({ schema }: Props) {
             relates to the user
           </Typography>
         </Box>
-        <Properties schema={schema} />
+        <FormProvider {...methods}>
+          <Properties schema={schema} />
+        </FormProvider>
       </Paper>
     </Stack>
   );
