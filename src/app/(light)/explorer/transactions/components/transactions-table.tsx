@@ -63,11 +63,10 @@ export default function TransactionsTable({ initialData, totalCount }: Props) {
   });
 
   const { data, isLoading } = useQuery({
-    // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       explorerQueries.transactions,
-      paginationModel ? paginationModel.page : 0,
-      paginationModel ? paginationModel.pageSize : 20,
+      paginationModel.page,
+      paginationModel.pageSize,
     ],
     queryFn: () =>
       apiPublic.explorer_transactions({
@@ -75,7 +74,6 @@ export default function TransactionsTable({ initialData, totalCount }: Props) {
         take: paginationModel.pageSize,
       }),
     select: (data: Explorer_TransactionsQuery) => data.transactions,
-    initialData: initialData,
   });
 
   const setNewPage = ({ page }: { page: number }) => {

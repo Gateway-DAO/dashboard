@@ -19,7 +19,7 @@ import TransactionsTable from './transactions-table';
 
 export default function TransactionsTableSection() {
   const { data: transactions, isLoading } = useQuery({
-    queryKey: [explorerQueries.transactions],
+    queryKey: [explorerQueries.transactions, 0, 20],
     queryFn: () => apiPublic.explorer_transactions({ skip: 0, take: 20 }),
     select: (data) => data.transactions,
   });
