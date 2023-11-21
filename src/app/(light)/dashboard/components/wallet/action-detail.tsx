@@ -1,10 +1,13 @@
 import { transaction_actions } from '@/locale/en/transaction';
-import { FinancialTransactionAction } from '@/services/protocol/types';
+import {
+  FinancialTransactionAction,
+  TransactionAction,
+} from '@/services/protocol/types';
 
 export default function ActionDetail({
   action,
 }: {
-  action: FinancialTransactionAction;
+  action: FinancialTransactionAction | TransactionAction;
 }) {
   const getDetail = (): string => {
     switch (action) {
