@@ -69,6 +69,7 @@ query data_models_featured($ids: [String!]) {
     id
     title
     description
+    image
     createdBy {
       ...min_user
     }

@@ -51,7 +51,13 @@ export default function DataModelExplorerCard({
             alignSelf="flex-end"
             justifySelf="flex-end"
           >
-            <b>{numberToMoneyString(dataModel?.pdasIssuedCount ?? 0)}</b>{' '}
+            <b>
+              {dataModel?.pdasIssuedCount
+                ? dataModel.pdasIssuedCount.toLocaleString('en-US', {
+                    notation: 'compact',
+                  })
+                : 0}
+            </b>{' '}
             {dataModelCard.issuances(dataModel?.pdasIssuedCount ?? 0)}
           </Typography>
         </Box>
