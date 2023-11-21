@@ -1,3 +1,4 @@
+import { issuePdaForm } from '@/locale/en/pda';
 import { apiPublic } from '@/services/protocol/api';
 
 import { Stack, Typography } from '@mui/material';
@@ -17,10 +18,10 @@ export default async function IssueDataAsset() {
           fontWeight: 600,
         }}
       >
-        Issue a Private Data Asset
+        {issuePdaForm.title}
       </Typography>
       <Typography variant="h3" component="h1">
-        Complete your PDA details
+        {issuePdaForm.subtitle}
       </Typography>
       <Form schema={dataModel.schema} />
     </Stack>
