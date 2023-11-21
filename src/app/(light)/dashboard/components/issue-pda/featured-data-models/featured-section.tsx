@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react';
 
 import DataCardLoading from '@/components/data-card/data-card-loading';
 
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 
 type Props = {
   title: string;
@@ -15,14 +15,18 @@ type Props = {
   isLoading?: boolean;
 };
 
-export default function ExplorerFeaturedSection({
+export default function FeaturedSection({
   title,
   viewMore,
   isLoading,
   children,
 }: PropsWithChildren<Props>) {
   return (
-    <>
+    <Container
+      sx={{
+        py: 6,
+      }}
+    >
       <Box
         sx={{
           display: 'flex',
@@ -47,7 +51,7 @@ export default function ExplorerFeaturedSection({
           gridTemplateColumns: {
             xs: '1fr',
             md: 'repeat(2, 1fr)',
-            lg: 'repeat(3, 1fr)',
+            lg: 'repeat(4, 1fr)',
           },
         }}
       >
@@ -56,10 +60,11 @@ export default function ExplorerFeaturedSection({
             <DataCardLoading />
             <DataCardLoading />
             <DataCardLoading />
+            <DataCardLoading />
           </>
         )}
         {children}
       </Box>
-    </>
+    </Container>
   );
 }

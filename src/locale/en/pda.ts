@@ -54,6 +54,18 @@ export const pdas = {
   my_data_assets: 'Data Assets',
   data_assets_subtitle:
     'These are the private data assets you have earned and created.',
+  issue_a_pda: 'Issue a PDA',
+  help_card: {
+    title: 'Issue a PDA now!',
+    description: 'Quick, non-code feature for issuing PDAs in a few steps.',
+    text_button: 'Issue Now',
+  },
+  help_video_card: {
+    title: 'How to issue a PDA',
+    description:
+      'We will show you step by step how to send a PDA with our non code application',
+    text_button: 'Play video',
+  },
 };
 export const orgPdas = {
   empty: 'No Issuances yet',
@@ -73,4 +85,10 @@ export const helpMenu = {
   docsLink: 'https://docs.mygateway.xyz/docs',
   discordTitle: 'Support channel',
   discordLink: 'https://discord.com/invite/bxTaYsJ6WD',
+};
+
+export const issuePda = {
+  title: 'Issue a Private Data Asset',
+  subtitle: 'Select a Data Model',
+  featured: 'Featured',
 };

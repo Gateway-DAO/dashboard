@@ -1,5 +1,6 @@
 'use client';
 
+import DataCardLoading from '@/components/data-card/data-card-loading';
 import routes from '@/constants/routes';
 import { explorerRequestTemplates } from '@/locale/en/request-template';
 import { apiPublic } from '@/services/protocol/api';
@@ -7,7 +8,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Box, Button, Container, Typography } from '@mui/material';
 
-import ExplorerDataCardLoading from '../data-card/data-card-loading';
 import RequestTemplateExplorerCard from '../request-template-card/request-template-card';
 
 type Props = {
@@ -65,10 +65,10 @@ export default function RequestTemplatesExplorerFeatured({
       >
         {requestTemplates.isLoading && (
           <>
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
+            <DataCardLoading />
           </>
         )}
         {requestTemplates.data?.dataRequestTemplates.map((requestTemplate) => (

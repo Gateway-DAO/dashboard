@@ -20,11 +20,12 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     navbar: true,
   },
   {
-    name: 'Data Assets',
+    name: 'Issuances',
     href: routes.dashboard.user.receivedAssets,
     activeHrefs: [
       routes.dashboard.user.receivedAssets,
       routes.dashboard.user.issuedAssets,
+      routes.dashboard.user.issue,
       routes.dashboard.user.asset(''),
     ],
     icon: DataOutlinedIcon,

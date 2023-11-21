@@ -50,6 +50,6 @@ export const transaction_actions = {
     pda_update: 'PDA update cost',
     pda_status_change: 'PDA status change cost',
     data_model: 'Data model created',
-    data_request: 'Data Request Template created',
+    data_request_template: 'Data Request Template created',
   },
 };

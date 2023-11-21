@@ -1,3 +1,4 @@
+import DataCard from '@/components/data-card/data-card';
 import routes from '@/constants/routes';
 import { explorerRequestTemplateCard } from '@/locale/en/request-template';
 import { DataRequestTemplate } from '@/services/protocol/types';
@@ -5,8 +6,6 @@ import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { PartialDeep } from 'type-fest';
 
 import { Typography, CardProps } from '@mui/material';
-
-import ExplorerDataCard from '../data-card/data-card';
 
 type Props = {
   withLink?: boolean;
@@ -24,7 +23,7 @@ export default function RequestTemplateExplorerCard({
   );
 
   return (
-    <ExplorerDataCard
+    <DataCard
       title={requestTemplate!.name!}
       description={requestTemplate!.description!}
       href={

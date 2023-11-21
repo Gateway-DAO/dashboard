@@ -15,7 +15,7 @@ type Props = {
   bottom?: ReactNode;
 };
 
-export default function ExplorerDataCard({
+export default function DataCard({
   href,
   profile,
   title,
