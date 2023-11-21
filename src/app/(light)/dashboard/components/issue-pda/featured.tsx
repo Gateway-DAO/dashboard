@@ -51,7 +51,11 @@ export default function DataModelsFeatured() {
       columns={3}
     >
       {dataModels.data?.dataModels.map((dataModel) => (
-        <DataModelImageCard dataModel={dataModel} key={dataModel.id}>
+        <DataModelImageCard
+          dataModel={dataModel}
+          key={dataModel.id}
+          withLink={false}
+        >
           <CardButtons
             issueHref=""
             learnMoreAction={() => console.log('learn more')}
