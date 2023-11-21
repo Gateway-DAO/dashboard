@@ -1,4 +1,4 @@
-import { ClaimFieldProps } from '@/utils/get-claim-type';
+import { SchemaProperty } from '@/utils/get-claim-type';
 
 import {
   Paper,
@@ -13,7 +13,7 @@ import {
 import Row from './row';
 
 type Props = {
-  properties: Record<string, ClaimFieldProps>;
+  properties: Record<string, SchemaProperty>;
 };
 
 export default function TableSchema({ properties }: Props) {

@@ -2,7 +2,7 @@ import CardCell from '@/components/card-cell/card-cell';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { CredentialData } from '@/services/protocol/types';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
-import getClaimType, { claimFields } from '@/utils/get-claim-type';
+import getClaimType, { ClaimField } from '@/utils/get-claim-type';
 
 import { Stack, Typography, Divider, Card } from '@mui/material';
 
@@ -27,13 +27,13 @@ function ClaimView(fieldData: CredentialData) {
   if (!fieldData.value || fieldData.value === '')
     return <span>{pdaLocale.unfilled}</span>;
   switch (type) {
-    case claimFields.image:
+    case ClaimField.Image:
       return <ImageView src={fieldData?.value} alt={fieldData?.label} />;
-    case claimFields.array:
+    case ClaimField.Array:
       return <ListView value={fieldData?.value} />;
-    case claimFields.link:
+    case ClaimField.Link:
       return <LinkView href={fieldData?.value} />;
-    case claimFields.currency:
+    case ClaimField.Currency:
       return (
         <CurrencyView
           currency={fieldData?.metadata?.currency}
