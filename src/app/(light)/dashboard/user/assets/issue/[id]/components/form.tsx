@@ -1,6 +1,8 @@
 'use client';
 
 import UserIdentityField from '@/components/form/user-identification-field/user-identifier-field';
+import { common } from '@/locale/en/common';
+import { issuePdaForm } from '@/locale/en/pda';
 import { UserIdentifierType } from '@/services/protocol/types';
 import { useForm } from 'react-hook-form';
 
@@ -31,9 +33,9 @@ export default function Form({ schema }: Props) {
         gap={4}
       >
         <Box>
-          <Typography variant="h5">Issue To</Typography>
+          <Typography variant="h5">{issuePdaForm.issue_to.title}</Typography>
           <Typography variant="body2" color="text.secondary">
-            Add who will be the owner of this PDA
+            {issuePdaForm.issue_to.description}
           </Typography>
         </Box>
         <UserIdentityField
@@ -50,7 +52,7 @@ export default function Form({ schema }: Props) {
         sx={{ p: 3, border: 1, borderColor: 'divider' }}
         gap={4}
       >
-        <Typography variant="h5">Details</Typography>
+        <Typography variant="h5">{common.general.details}</Typography>
         <Stack gap={3}>
           <TextField label="Title" fullWidth />
           <TextField label="Description" multiline rows={4} fullWidth />
@@ -63,10 +65,9 @@ export default function Form({ schema }: Props) {
         gap={4}
       >
         <Box>
-          <Typography variant="h5">Claim</Typography>
+          <Typography variant="h5">{common.general.claim}</Typography>
           <Typography variant="body2" color="text.secondary">
-            The claim define what the PDA represents about a user or how it
-            relates to the user
+            {issuePdaForm.claim.description}
           </Typography>
         </Box>
         <Properties schema={schema} />

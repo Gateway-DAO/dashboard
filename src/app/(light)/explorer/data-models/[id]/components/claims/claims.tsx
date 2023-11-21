@@ -1,6 +1,6 @@
 import CopyButton from '@/components/copy-button/copy-button';
+import { common } from '@/locale/en/common';
 import { explorerDataModelDetailOverview } from '@/locale/en/datamodel';
-import { pda } from '@/locale/en/pda';
 
 import { Typography } from '@mui/material';
 import { Stack } from '@mui/system';
@@ -21,7 +21,7 @@ export default function DataModelClaims({ schema }: Props) {
         direction="row"
         mb={4}
       >
-        <Typography variant="h5">{pda.claim}</Typography>
+        <Typography variant="h5">{common.general.claim}</Typography>
         <CopyButton
           size="small"
           variant="text"
