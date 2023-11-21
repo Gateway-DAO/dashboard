@@ -1,11 +1,10 @@
 'use client';
 
+import SearchField from '@/components/search-filters/search-field';
 import dayjs from 'dayjs';
 
 import { RefreshOutlined } from '@mui/icons-material';
 import { Box, Button, Stack, Typography } from '@mui/material';
-
-import SearchField from '../../components/search-filters/search-field';
 
 type Props = {
   totalTransactions?: number;

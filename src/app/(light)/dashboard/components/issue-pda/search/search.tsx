@@ -14,6 +14,7 @@ import { DataModel } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
+import CardButtons from '../card-buttons';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
 
@@ -46,7 +47,7 @@ const sortOptions: SortByOption<DataModel>[] = [
   },
 ];
 
-export default function DataModelsExplorerSearch() {
+export default function DataModelsSearch() {
   const [search, setSearch] = useDebouncedState('', 500);
   const [selectedSort, setSort] = useState<SortByOption<DataModel>>();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -156,6 +157,7 @@ export default function DataModelsExplorerSearch() {
 
   return (
     <SearchSection
+      withContainer={false}
       title={explorerDataModels.listTitle}
       emptyText={explorerDataModels.empty}
       errorMessage="Error on searching for data models"
@@ -171,7 +173,16 @@ export default function DataModelsExplorerSearch() {
         dataModelsQuery.isSuccess &&
         dataModels.length > 0 &&
         dataModels.map((dataModel) => (
-          <DataModelCard dataModel={dataModel} key={dataModel.id} />
+          <DataModelCard
+            dataModel={dataModel}
+            key={dataModel.id}
+            withLink={false}
+          >
+            <CardButtons
+              issueHref=""
+              learnMoreAction={() => console.log('learn more')}
+            />
+          </DataModelCard>
         ))
       }
     />

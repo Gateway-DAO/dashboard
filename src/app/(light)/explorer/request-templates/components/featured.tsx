@@ -1,10 +1,10 @@
 'use client';
 
+import FeaturedSection from '@/components/featured-section/featured-section';
 import { explorerRequestTemplates } from '@/locale/en/request-template';
 import { apiPublic } from '@/services/protocol/api';
 import { useQuery } from '@tanstack/react-query';
 
-import ExplorerFeaturedSection from '../../components/featured-section/featured-section';
 import RequestTemplateExplorerCard from '../../components/request-template-card/request-template-card';
 
 export default function RequestTemplatesExplorerFeatured() {
@@ -13,7 +13,7 @@ export default function RequestTemplatesExplorerFeatured() {
     queryFn: () => apiPublic.explorer_request_templates_featured(),
   });
   return (
-    <ExplorerFeaturedSection
+    <FeaturedSection
       title={explorerRequestTemplates.featuredTitle}
       isLoading={requestTemplates.isLoading}
     >
@@ -23,6 +23,6 @@ export default function RequestTemplatesExplorerFeatured() {
           key={requestTemplate.id}
         />
       ))}
-    </ExplorerFeaturedSection>
+    </FeaturedSection>
   );
 }
