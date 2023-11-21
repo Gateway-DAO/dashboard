@@ -29,13 +29,13 @@ export default function DataModelCard({
       description={dataModel!.description!}
       href={withLink ? routes.explorer.dataModel(dataModel!.id) : undefined}
       profile={profile}
-      image={dataModel!.image!}
+      image={dataModel!.image as string}
       bottom={
         <Box
           sx={{
             display: 'grid',
             gap: 1,
-            gridTemplateColumns: '1fr 0.6fr',
+            gridTemplateColumns: '1fr 0.8fr',
           }}
         >
           {dataModel?.consumptionPrice ? (

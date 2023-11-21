@@ -7,7 +7,6 @@ import { GatewayProfile } from '@/utils/get-organization-or-user-data';
 import { Stack, Card, Typography, CardProps } from '@mui/material';
 
 import CardContainer from '../data-card/data-card-container';
-
 type Props = {
   href?: string;
   profile: GatewayProfile;
@@ -29,16 +28,27 @@ export default function DataImageCard({
   const { image: avatar, name, gatewayId } = profile;
 
   return (
-    <Card variant="outlined" {...props}>
+    <Card variant="outlined" sx={{ height: 500 }} {...props}>
       <CardContainer href={href} sx={{ p: 0, gap: 2 }}>
-        <Image
-          src={image}
-          alt={title}
-          width={343}
-          height={230}
-          style={{ width: '100%', height: 230 }}
-        />
-        <Stack sx={{ px: 2, pb: 2, height: '100%' }}>
+        {image ? (
+          <Image
+            src={image}
+            alt={title}
+            width={343}
+            height={230}
+            style={{ width: '100%', height: 230 }}
+          />
+        ) : (
+          <Stack
+            sx={{
+              width: '100%',
+              height: 230,
+              background:
+                'linear-gradient(242deg, rgba(35,34,157,1) 0%, rgba(83,18,140,1) 54%, rgba(141,77,181,1) 100%)',
+            }}
+          />
+        )}
+        <Stack sx={{ px: 2, pb: 2, height: 270 }}>
           <Stack direction="column" gap={3} sx={{ height: '100%' }}>
             <Stack direction="row" gap={1} alignItems="center">
               <GTWAvatar src={avatar} name={name ?? gatewayId} size={32} />
