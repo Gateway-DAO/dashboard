@@ -28,6 +28,7 @@ export const mutations = {
 export const explorerQueries = {
   transaction: 'transaction',
   home_stats: 'home_stats',
+  last_transactions: 'last_transactions',
   transactions_stats: 'transactions_stats',
   featured_data_models: 'data-models-featured',
   featured_data_requests_templates: 'request-templates-featured',

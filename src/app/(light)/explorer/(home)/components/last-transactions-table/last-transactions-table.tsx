@@ -1,7 +1,13 @@
+'use client';
+import ActionDetail from '@/app/(light)/dashboard/components/wallet/action-detail';
 import { CardCellContainer } from '@/components/card-cell/card-cell';
 import { DATE_FORMAT } from '@/constants/date';
+import { explorerQueries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { transaction } from '@/locale/en/transaction';
+import { apiPublic } from '@/services/protocol/api';
+import { Last_TransactionsQuery } from '@/services/protocol/types';
+import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
 import {
@@ -12,52 +18,15 @@ import {
   Button,
   Stack,
   Box,
+  Skeleton,
 } from '@mui/material';
 
-const mock = [
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVs',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVa',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVb',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVc',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVd',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVe',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVf',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVg',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-];
-
 export default function LastTransactionsTable() {
+  const { data: transactions, isLoading } = useQuery({
+    queryKey: [explorerQueries.last_transactions],
+    queryFn: () => apiPublic.last_transactions(),
+    select: (data: Last_TransactionsQuery) => data.transactions,
+  });
   return (
     <Stack
       component={Card}
@@ -88,19 +57,44 @@ export default function LastTransactionsTable() {
           />
         }
       >
-        {mock.map((transaction) => (
-          <CardCellContainer key={transaction.id}>
-            <Box display="flex">
-              <Typography flex={3}>{transaction.id}</Typography>
-              <Box flex={1}>
-                <Chip label={transaction.type} />
-              </Box>
-              <Typography flex={1}>
-                {dayjs(transaction.date).format(DATE_FORMAT)}
-              </Typography>
-            </Box>
-          </CardCellContainer>
-        ))}
+        {isLoading ? (
+          <>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+              <CardCellContainer key={value}>
+                <Box display="flex" gap={4}>
+                  <Typography flex={3}>
+                    <Skeleton />
+                  </Typography>
+                  <Box flex={1}>
+                    <Skeleton />
+                  </Box>
+                  <Typography flex={1}>
+                    <Skeleton />
+                  </Typography>
+                </Box>
+              </CardCellContainer>
+            ))}
+          </>
+        ) : (
+          <>
+            {transactions?.map((transaction) => (
+              <CardCellContainer key={transaction.id}>
+                <Box display="flex">
+                  <Typography flex={3}>{transaction.id}</Typography>
+                  <Box flex={1}>
+                    <Chip
+                      label={<ActionDetail action={transaction.action} />}
+                    />
+                  </Box>
+                  <Typography flex={1}>
+                    {dayjs(transaction.createdAt).format(DATE_FORMAT)}
+                  </Typography>
+                </Box>
+              </CardCellContainer>
+            ))}
+          </>
+        )}
+
         <CardCellContainer alignItems="flex-start">
           <Button variant="text" href={routes.explorer.transactions}>
             {transaction.home_table.view_more}
