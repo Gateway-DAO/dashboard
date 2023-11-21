@@ -1,5 +1,6 @@
 'use client';
 
+import { explorerQueries } from '@/constants/queries';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
 import { useQuery } from '@tanstack/react-query';
@@ -9,7 +10,7 @@ import ExplorerFeaturedSection from '../../components/featured-section/featured-
 
 export default function DataModelsExplorerFeatured() {
   const dataModels = useQuery({
-    queryKey: ['data-models-featured'],
+    queryKey: [explorerQueries.featured_data_models],
     queryFn: () => apiPublic.explorer_data_models_featured(),
   });
   return (

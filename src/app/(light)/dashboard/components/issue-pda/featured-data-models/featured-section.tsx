@@ -4,29 +4,20 @@ import { PropsWithChildren } from 'react';
 
 import DataCardLoading from '@/components/data-card/data-card-loading';
 
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 type Props = {
   title: string;
-  viewMore?: {
-    href: string;
-    label: string;
-  };
   isLoading?: boolean;
 };
 
 export default function FeaturedSection({
   title,
-  viewMore,
   isLoading,
   children,
 }: PropsWithChildren<Props>) {
   return (
-    <Container
-      sx={{
-        py: 6,
-      }}
-    >
+    <>
       <Box
         sx={{
           display: 'flex',
@@ -38,11 +29,6 @@ export default function FeaturedSection({
         <Typography component="h3" variant="h5">
           {title}
         </Typography>
-        {viewMore && (
-          <Button variant="text" href={viewMore.href}>
-            {viewMore.label}
-          </Button>
-        )}
       </Box>
       <Box
         sx={{
@@ -51,7 +37,7 @@ export default function FeaturedSection({
           gridTemplateColumns: {
             xs: '1fr',
             md: 'repeat(2, 1fr)',
-            lg: 'repeat(4, 1fr)',
+            lg: 'repeat(3, 1fr)',
           },
         }}
       >
@@ -60,11 +46,10 @@ export default function FeaturedSection({
             <DataCardLoading />
             <DataCardLoading />
             <DataCardLoading />
-            <DataCardLoading />
           </>
         )}
         {children}
       </Box>
-    </Container>
+    </>
   );
 }

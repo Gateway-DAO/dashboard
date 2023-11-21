@@ -12,6 +12,7 @@ export const queries = {
   my_wallet: 'my_wallet',
   my_transactions: 'my_transactions',
   my_transactions_count: 'my_transactions_count',
+  featured_data_models: 'featured_data_models',
 };
 
 export const mutations = {
