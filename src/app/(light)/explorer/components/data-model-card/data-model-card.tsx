@@ -3,6 +3,7 @@ import routes from '@/constants/routes';
 import { dataModelCard } from '@/locale/en/datamodel';
 import { DataModel } from '@/services/protocol/types';
 import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
+import { numberToMoneyString } from '@/utils/money';
 import { PartialDeep } from 'type-fest';
 
 import { Typography, CardProps, Box } from '@mui/material';
@@ -38,12 +39,7 @@ export default function DataModelExplorerCard({
         >
           {dataModel?.consumptionPrice ? (
             <Typography variant="subtitle2" fontWeight="400">
-              <b>
-                {dataModel?.consumptionPrice?.toLocaleString('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                })}
-              </b>{' '}
+              <b>{numberToMoneyString(dataModel?.consumptionPrice)}</b>{' '}
               {dataModelCard.consumption}
             </Typography>
           ) : (
@@ -55,13 +51,7 @@ export default function DataModelExplorerCard({
             alignSelf="flex-end"
             justifySelf="flex-end"
           >
-            <b>
-              {dataModel?.pdasIssuedCount
-                ? dataModel.pdasIssuedCount.toLocaleString('en-US', {
-                    notation: 'compact',
-                  })
-                : 0}
-            </b>{' '}
+            <b>{numberToMoneyString(dataModel?.pdasIssuedCount ?? 0)}</b>{' '}
             {dataModelCard.issuances(dataModel?.pdasIssuedCount ?? 0)}
           </Typography>
         </Box>
