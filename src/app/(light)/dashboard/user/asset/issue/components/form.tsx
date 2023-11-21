@@ -1,6 +1,7 @@
 'use client';
 
 import UserIdentityField from '@/components/form/user-identification-field/user-identifier-field';
+import { UserIdentifierType } from '@/services/protocol/types';
 import { useForm } from 'react-hook-form';
 
 import { Box, Paper, Stack, TextField, Typography } from '@mui/material';
@@ -14,8 +15,10 @@ type Props = {
 export default function Form({ schema }: Props) {
   const { control } = useForm({
     values: {
-      type: 'GatewayId',
-      value: 'test',
+      user: {
+        type: UserIdentifierType.Solana,
+        value: 'testeeee',
+      },
     },
   });
 
@@ -33,7 +36,13 @@ export default function Form({ schema }: Props) {
             Add who will be the owner of this PDA
           </Typography>
         </Box>
-        <UserIdentityField control={control as any} />
+        <UserIdentityField
+          control={control}
+          names={{
+            type: 'user.type',
+            value: 'user.value',
+          }}
+        />
       </Paper>
       <Paper
         component={Stack}

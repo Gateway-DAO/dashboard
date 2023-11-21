@@ -18,24 +18,39 @@ import {
 import { useIdentifierTypes } from './use-identifier-types';
 
 type Props = {
-  control: Control<IdentifierValueSchema>;
+  control: Control<any>;
   clearErrors?: () => void;
   sx?: SxProps;
+  // Maps to react-hook-form names
+  names?: {
+    type?: string;
+    value?: string;
+  };
+  defaultValues?: {
+    type?: UserIdentifierType;
+    value?: string;
+  };
 };
 
-export default function UserIdentityField({ control, clearErrors, sx }: Props) {
+export default function UserIdentityField({
+  control,
+  clearErrors,
+  sx,
+  names,
+  defaultValues,
+}: Props) {
   const identifierTypes = useIdentifierTypes();
 
   const typeField = useController({
     control,
-    name: 'type',
-    defaultValue: UserIdentifierType.GatewayId,
+    name: names?.type ?? 'type',
+    defaultValue: defaultValues?.type ?? UserIdentifierType.GatewayId,
   });
 
   const addressField = useController({
     control,
-    name: 'value',
-    defaultValue: '',
+    name: names?.value ?? 'value',
+    defaultValue: defaultValues?.value ?? '',
   });
 
   return (
