@@ -1,5 +1,9 @@
-query my_transactions($skip: Int, $take: Int) {
-  myFinancialTransactions(skip: $skip, take: $take) {
+query my_transactions($skip: Int, $take: Int, $organizationId: String) {
+  myFinancialTransactions(
+    skip: $skip
+    take: $take
+    organizationId: $organizationId
+  ) {
     id
     value
     type
@@ -9,6 +13,6 @@ query my_transactions($skip: Int, $take: Int) {
   }
 }
 
-query my_transactions_count {
-  myFinancialTransactionsCount
+query my_transactions_count($organizationId: String) {
+  myFinancialTransactionsCount(organizationId: $organizationId)
 }
