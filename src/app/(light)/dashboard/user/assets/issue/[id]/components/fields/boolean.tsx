@@ -12,7 +12,7 @@ export default function BooleanProperty({ id }: PropertyField) {
       control={control}
       render={({ field: { onChange, value } }) => (
         <RadioGroup
-          value={(value as boolean).toString()}
+          value={(value as boolean)?.toString()}
           onChange={(_e, v) => onChange(v === 'true')}
         >
           <FormControlLabel value="true" control={<Radio />} label="True" />
