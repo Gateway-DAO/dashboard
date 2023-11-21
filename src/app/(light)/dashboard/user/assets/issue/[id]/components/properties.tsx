@@ -1,4 +1,4 @@
-import { Divider, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 
 import Property from './property';
 
