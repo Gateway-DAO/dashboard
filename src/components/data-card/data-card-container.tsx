@@ -32,5 +32,5 @@ export default function CardContainer({
     );
   }
 
-  return <Stack sx={style}>{children}</Stack>;
+  return <Stack sx={sxProps}>{children}</Stack>;
 }
