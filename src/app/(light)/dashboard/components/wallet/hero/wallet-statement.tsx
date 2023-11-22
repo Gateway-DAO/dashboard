@@ -24,7 +24,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import ActionDetail from '../action-detail';
+import FinancialActionDetail from '../action-detail';
 
 type listItem = {
   action: FinancialTransactionAction;
@@ -85,7 +85,7 @@ const WalletStatementList = ({
               p={2}
             >
               <Typography variant="body2">
-                <ActionDetail action={action} />
+                <FinancialActionDetail action={action} />
               </Typography>
               <Typography
                 variant="subtitle2"

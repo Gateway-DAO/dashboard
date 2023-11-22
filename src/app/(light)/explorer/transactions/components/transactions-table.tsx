@@ -8,15 +8,21 @@ import {
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
+import { explorerQueries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { transaction } from '@/locale/en/transaction';
+import { apiPublic } from '@/services/protocol/api';
+import { Explorer_TransactionsQuery } from '@/services/protocol/types';
+import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
 import { Chip, Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
+import ActionDetail from '../../components/transactions/action-detail';
+
 type Props = {
-  initialData: any[];
+  initialData: Explorer_TransactionsQuery['transactions'];
   totalCount: number;
 };
 
@@ -32,13 +38,15 @@ const columns: GridColDef<any>[] = [
     ),
   },
   {
-    field: 'type',
+    field: 'action',
     headerName: transaction.type,
     flex: 1,
-    renderCell: (params) => <Chip label={params.value} />,
+    renderCell: (params) => (
+      <Chip label={<ActionDetail action={params.value} />} />
+    ),
   },
   {
-    field: 'date',
+    field: 'createdAt',
     headerName: transaction.date,
     flex: 1.5,
     valueFormatter: (params) =>
@@ -49,11 +57,23 @@ const columns: GridColDef<any>[] = [
 export default function TransactionsTable({ initialData, totalCount }: Props) {
   const router = useRouter();
 
-  const data: any = []; //usequery
-  const isLoading = false; //usequery
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 20,
+  });
+
+  const { data, isLoading } = useQuery({
+    queryKey: [
+      explorerQueries.transactions,
+      paginationModel.page,
+      paginationModel.pageSize,
+    ],
+    queryFn: () =>
+      apiPublic.explorer_transactions({
+        skip: paginationModel.page * paginationModel.pageSize,
+        take: paginationModel.pageSize,
+      }),
+    select: (data: Explorer_TransactionsQuery) => data.transactions,
   });
 
   const setNewPage = ({ page }: { page: number }) => {
