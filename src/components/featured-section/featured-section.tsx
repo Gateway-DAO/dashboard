@@ -59,7 +59,7 @@ export default function FeaturedSection({
       >
         {isLoading && (
           <>
-            {Array(columns).map((_item, index) => (
+            {Array.from(Array(columns).keys()).map((_item, index) => (
               <DataCardLoading key={index} />
             ))}
           </>

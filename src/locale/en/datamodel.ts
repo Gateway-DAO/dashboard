@@ -80,6 +80,11 @@ export const dataModelCard = {
   issue: 'Issue',
 };
 
+export const issuePda = {
+  view_on_explorer: 'View onExplorer',
+  issue: 'Issue now',
+};
+
 export const explorerIssuersByDataModel = {
   empty: 'No issuers found',
   issuers: 'Issuers',

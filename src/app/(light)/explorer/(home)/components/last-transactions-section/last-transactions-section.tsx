@@ -1,5 +1,6 @@
 'use client';
 
+import NumberCard from '@/components/number-card/number-card';
 import { explorerQueries } from '@/constants/queries';
 import { transaction } from '@/locale/en/transaction';
 import { apiPublic } from '@/services/protocol/api';
@@ -9,7 +10,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Box, Container, Stack, Typography } from '@mui/material';
 
-import NumberCard from '../../../components/number-card/number-card';
 import LastTransactionsTable from '../last-transactions-table/last-transactions-table';
 
 export default function LastTransactionsSection() {

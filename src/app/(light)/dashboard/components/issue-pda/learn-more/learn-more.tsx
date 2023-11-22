@@ -1,14 +1,12 @@
 'use client';
-import CopyBox from '@/components/copy-box/copy-box';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import { queries } from '@/constants/queries';
-import { useGtwSession } from '@/context/gtw-session-provider';
-import { datamodel } from '@/locale/en/datamodel';
-import { DataModelByIdQuery } from '@/services/protocol/types';
+import { apiPublic } from '@/services/protocol/api';
+import { Explorer_Data_Model_Detail_OverviewQuery } from '@/services/protocol/types';
 import { useQuery } from '@tanstack/react-query';
 
-import { Skeleton, Typography } from '@mui/material';
+import LearnMoreContent from './learn-more-content';
 
 type Props = {
   open: boolean;
@@ -17,27 +15,18 @@ type Props = {
 };
 
 export default function LearnMore({ open, id, onClose }: Props) {
-  const { privateApi } = useGtwSession();
-
   const { data: dataModel, isLoading } = useQuery({
     queryKey: [queries.data_model, id],
-    queryFn: () => privateApi?.dataModelById({ id }),
+    queryFn: async () => apiPublic.explorer_data_model_detail_overview({ id }),
     select: (data: any) =>
-      (data as DataModelByIdQuery)
-        ?.dataModel as DataModelByIdQuery['dataModel'],
+      (data as Explorer_Data_Model_Detail_OverviewQuery)
+        ?.dataModel as Explorer_Data_Model_Detail_OverviewQuery['dataModel'],
   });
 
   return (
     <ModalRight open={open} onClose={onClose}>
       <ModalHeader onClose={onClose} />
-
-      <Typography variant="h4" mb={3}>
-        {isLoading ? <Skeleton /> : dataModel?.title}
-      </Typography>
-      <Typography variant="body1" mb={3}>
-        {isLoading ? <Skeleton /> : dataModel?.description}
-      </Typography>
-      <CopyBox title={datamodel.data_model_id} value={id} />
+      <LearnMoreContent dataModel={dataModel!} isLoading={isLoading} />
     </ModalRight>
   );
 }

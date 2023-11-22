@@ -9,9 +9,10 @@ import TableSchema from './table-schema';
 
 type Props = {
   schema: any;
+  hasCopyButton?: boolean;
 };
 
-export default function DataModelClaims({ schema }: Props) {
+export default function Claims({ schema, hasCopyButton = true }: Props) {
   return (
     <>
       <Stack
@@ -22,14 +23,16 @@ export default function DataModelClaims({ schema }: Props) {
         mb={4}
       >
         <Typography variant="h5">{common.general.claim}</Typography>
-        <CopyButton
-          size="small"
-          variant="text"
-          customButtonText={
-            explorerDataModelDetailOverview.actions.copy_claim_structure
-          }
-          text={JSON.stringify(schema, null, 2)}
-        />
+        {hasCopyButton && (
+          <CopyButton
+            size="small"
+            variant="text"
+            customButtonText={
+              explorerDataModelDetailOverview.actions.copy_claim_structure
+            }
+            text={JSON.stringify(schema, null, 2)}
+          />
+        )}
       </Stack>
       <TableSchema properties={schema.properties} />
     </>
