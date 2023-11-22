@@ -14,7 +14,7 @@ import { DataModel } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import CardButtons from '../card-buttons';
+import IssuePdaActions from '../issue-pda-actions';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
 
@@ -178,10 +178,7 @@ export default function DataModelsSearch() {
             key={dataModel.id}
             withLink={false}
           >
-            <CardButtons
-              issueHref=""
-              learnMoreAction={() => console.log('learn more')}
-            />
+            <IssuePdaActions id={dataModel.id} />
           </DataModelCard>
         ))
       }
