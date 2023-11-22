@@ -2,6 +2,7 @@ import CardCell, { CardCellContainer } from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import CopyButton from '@/components/copy-button/copy-button';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import Profiles from '@/components/profiles/profiles';
 import { DATE_FORMAT } from '@/constants/date';
 import { common } from '@/locale/en/common';
 import { explorerDataModelDetailOverview } from '@/locale/en/datamodel';
@@ -10,13 +11,12 @@ import {
   PermissionType,
 } from '@/services/protocol/types';
 import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
+import { numberToMoneyString } from '@/utils/money';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
 import { Card, Divider, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
-
-import Profiles from './profiles';
 
 type Props = {
   dataModel: PartialDeep<Explorer_Data_Model_Detail_OverviewQuery['dataModel']>;
@@ -81,10 +81,7 @@ export default function DataModelDetails({ dataModel }: Props) {
           label={explorerDataModelDetailOverview.labels.pda_comsumption_cost}
         >
           <Typography>
-            {Intl.NumberFormat('en-US', {
-              style: 'currency',
-              currency: 'USD',
-            }).format(dataModel.consumptionPrice ?? 0)}
+            {numberToMoneyString(dataModel.consumptionPrice ?? 0)}
           </Typography>
         </CardCell>
       </TableCellContainer>

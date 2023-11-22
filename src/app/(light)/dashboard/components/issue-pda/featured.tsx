@@ -7,7 +7,7 @@ import { issuePda } from '@/locale/en/pda';
 import { apiPublic } from '@/services/protocol/api';
 import { useQuery } from '@tanstack/react-query';
 
-import CardButtons from './card-buttons';
+import IssuePdaActions from './issue-pda-actions';
 
 export default function DataModelsFeatured() {
   const dataModelsIdByEnv = {
@@ -43,6 +43,7 @@ export default function DataModelsFeatured() {
         ids: featuredDataModels as string[],
       }),
   });
+
   return (
     <FeaturedSection
       title={issuePda.featured}
@@ -56,10 +57,7 @@ export default function DataModelsFeatured() {
           key={dataModel.id}
           withLink={false}
         >
-          <CardButtons
-            issueHref=""
-            learnMoreAction={() => console.log('learn more')}
-          />
+          <IssuePdaActions id={dataModel.id} />
         </DataModelImageCard>
       ))}
     </FeaturedSection>
