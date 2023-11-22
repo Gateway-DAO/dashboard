@@ -20,6 +20,7 @@ import { Chip, Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
 import ActionDetail from '../../components/transactions/action-detail';
+import Search from './search';
 
 type Props = {
   initialData: Explorer_TransactionsQuery['transactions'];
@@ -62,7 +63,7 @@ export default function TransactionsTable({ initialData, totalCount }: Props) {
     pageSize: 20,
   });
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: [
       explorerQueries.transactions,
       paginationModel.page,
@@ -83,20 +84,28 @@ export default function TransactionsTable({ initialData, totalCount }: Props) {
     }));
   };
 
+  const refreshList = () => {
+    setNewPage({ page: 0 });
+    refetch();
+  };
+
   return (
-    <DataGrid
-      {...defaultGridConfiguration}
-      rows={data && data.length ? data : initialData}
-      columns={columns}
-      paginationModel={paginationModel}
-      onRowClick={(params: GridRowParams) => {
-        router.push(routes.explorer.transaction(params.id));
-      }}
-      onPaginationModelChange={setNewPage}
-      paginationMode="server"
-      loading={isLoading}
-      rowCount={totalCount}
-      sx={{ marginTop: 3, ...defaultGridCustomization }}
-    />
+    <>
+      <Search refreshAction={refreshList} totalTransactions={totalCount} />
+      <DataGrid
+        {...defaultGridConfiguration}
+        rows={data && data.length ? data : initialData}
+        columns={columns}
+        paginationModel={paginationModel}
+        onRowClick={(params: GridRowParams) => {
+          router.push(routes.explorer.transaction(params.id));
+        }}
+        onPaginationModelChange={setNewPage}
+        paginationMode="server"
+        loading={isLoading}
+        rowCount={totalCount}
+        sx={{ marginTop: 3, ...defaultGridCustomization }}
+      />
+    </>
   );
 }
