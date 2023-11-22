@@ -25,7 +25,7 @@ import dayjs from 'dayjs';
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
-import ActionDetail from '../action-detail';
+import FinancialActionDetail from '../action-detail';
 import { TransactionModal } from '../transaction/transaction-modal';
 import TransactionStatusChip from '../transaction/transaction-status-chip';
 
@@ -44,7 +44,7 @@ const columns: GridColDef<My_TransactionsQuery['myFinancialTransactions']>[] = [
     field: 'action',
     headerName: transaction.detail,
     flex: 1,
-    renderCell: (params) => <ActionDetail action={params.value} />,
+    renderCell: (params) => <FinancialActionDetail action={params.value} />,
   },
   {
     field: 'id',

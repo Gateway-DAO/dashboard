@@ -1,112 +1,41 @@
-import { Container, Stack } from '@mui/material';
+'use client';
+import { CardCellContainer } from '@/components/card-cell/card-cell';
+import { explorerQueries } from '@/constants/queries';
+import { apiPublic } from '@/services/protocol/api';
+import { numberToMoneyString } from '@/utils/money';
+import { useQuery } from '@tanstack/react-query';
+
+import {
+  Box,
+  Container,
+  Divider,
+  Skeleton,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 import Search from './search';
 import TransactionsTable from './transactions-table';
 
-const dataMock = [
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVs',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVa',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVb',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVc',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVd',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVe',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVf',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVg',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVh',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVi',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVj',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVk',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVl',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVm',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVn',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVo',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVp',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVq',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVr',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-  {
-    id: 'hBJgUy-PENp984SYvTB282Z_loIlTqo3774cU0NPpVt',
-    type: 'PDA issuance',
-    date: '2023-10-10T18:51:29.941Z',
-  },
-];
-
 export default function TransactionsTableSection() {
+  const { data: transactions, isLoading } = useQuery({
+    queryKey: [explorerQueries.transactions, 0, 20],
+    queryFn: () => apiPublic.explorer_transactions({ skip: 0, take: 20 }),
+    select: (data) => data.transactions,
+  });
+
+  const { data: numbers } = useQuery({
+    queryKey: [explorerQueries.transactions_stats],
+    queryFn: () => apiPublic.explorer_transactions_stats(),
+    select: (data) => {
+      return {
+        ...data.getTransactionsExplorerStats,
+        totalEarnings: numberToMoneyString(
+          data.getTransactionsExplorerStats.totalEarnings
+        ),
+      };
+    },
+  });
   return (
     <Stack
       p={3}
@@ -114,8 +43,39 @@ export default function TransactionsTableSection() {
       maxWidth="xl"
       justifyContent="space-between"
     >
-      <Search totalTransactions={8734782389} />
-      <TransactionsTable initialData={dataMock} totalCount={20} />
+      <Search totalTransactions={numbers?.totalTransactions} />
+      {isLoading ? (
+        <Stack
+          divider={
+            <Divider
+              sx={{
+                width: '100%',
+              }}
+            />
+          }
+        >
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+            <CardCellContainer key={value}>
+              <Box display="flex" gap={4}>
+                <Typography flex={3}>
+                  <Skeleton />
+                </Typography>
+                <Box flex={1}>
+                  <Skeleton />
+                </Box>
+                <Typography flex={1}>
+                  <Skeleton />
+                </Typography>
+              </Box>
+            </CardCellContainer>
+          ))}
+        </Stack>
+      ) : (
+        <TransactionsTable
+          initialData={transactions ?? []}
+          totalCount={numbers?.totalTransactions as number}
+        />
+      )}
     </Stack>
   );
 }
