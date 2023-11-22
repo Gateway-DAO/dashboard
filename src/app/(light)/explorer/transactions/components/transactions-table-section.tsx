@@ -36,6 +36,7 @@ export default function TransactionsTableSection() {
       };
     },
   });
+
   return (
     <Stack
       p={3}
@@ -43,7 +44,6 @@ export default function TransactionsTableSection() {
       maxWidth="xl"
       justifyContent="space-between"
     >
-      <Search totalTransactions={numbers?.totalTransactions} />
       {isLoading ? (
         <Stack
           divider={

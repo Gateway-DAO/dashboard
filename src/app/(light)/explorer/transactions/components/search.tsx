@@ -8,9 +8,10 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 
 type Props = {
   totalTransactions?: number;
+  refreshAction: () => void;
 };
 
-export default function Search({ totalTransactions }: Props) {
+export default function Search({ totalTransactions, refreshAction }: Props) {
   return (
     <Stack borderBottom="1px solid" borderColor="divider" pb={3}>
       <SearchField onChange={(value: string) => console.log(value)} />
@@ -30,7 +31,7 @@ export default function Search({ totalTransactions }: Props) {
               Showing the last 20 records
             </Typography>
           </Box>
-          <Box component={Button} onClick={() => console.log('refresh list')}>
+          <Box component={Button} onClick={refreshAction}>
             <RefreshOutlined />
             Refresh list
           </Box>
