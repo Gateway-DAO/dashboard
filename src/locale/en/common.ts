@@ -26,7 +26,9 @@ export const common = {
     tags: 'Tags',
     sort_by: 'Sort by',
     claim: 'Claim',
+    cancel: 'Cancel',
     details: 'Details',
+    review: 'Review',
   },
   chain: {
     EVM: 'Ethereum',

@@ -10,7 +10,7 @@ export default async function IssueDataAsset() {
   });
 
   return (
-    <Stack sx={{ my: 2 }}>
+    <Stack sx={{ my: 2, maxWidth: 660, margin: '0 auto' }}>
       <Typography
         variant="body2"
         sx={{
