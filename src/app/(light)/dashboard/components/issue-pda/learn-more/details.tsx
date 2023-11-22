@@ -11,6 +11,7 @@ import {
   PermissionType,
 } from '@/services/protocol/types';
 import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
+import { numberToMoneyString } from '@/utils/money';
 import { useToggle } from '@react-hookz/web';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
@@ -57,10 +58,7 @@ export default function DataModelDetails({ dataModel }: Props) {
             label={explorerDataModelDetailOverview.labels.pda_comsumption_cost}
           >
             <Typography>
-              {Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-              }).format(dataModel.consumptionPrice ?? 0)}
+              {numberToMoneyString(dataModel.consumptionPrice ?? 0)}
             </Typography>
           </CardCell>
         </TableCellContainer>

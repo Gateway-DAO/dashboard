@@ -4,6 +4,7 @@ import Claims from '@/components/claims/claims';
 import NumberCard from '@/components/number-card/number-card';
 import { Explorer_Data_Model_Detail_OverviewQuery } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
+import { numberToMoneyString } from '@/utils/money';
 
 import { Divider } from '@mui/material';
 import { Stack } from '@mui/system';
@@ -24,10 +25,7 @@ export default function LearnMoreContent({ dataModel, isLoading }: Props) {
     },
     {
       label: 'Revenue generated',
-      value: Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(27453.45),
+      value: numberToMoneyString(27453.45),
     },
   ];
 

@@ -14,6 +14,7 @@ import {
   DataModelsByUserQuery,
   UserIdentifierType,
 } from '@/services/protocol/types';
+import { numberToMoneyString } from '@/utils/money';
 import { limitCharsCentered } from '@/utils/string';
 import { useToggle } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
@@ -53,17 +54,7 @@ const columns: GridColDef<PartialDeep<DataModel>>[] = [
     headerName: datamodel.consumption_cost,
     flex: 1.3,
     renderCell: (params) => {
-      return (
-        <Typography>
-          {params.value
-            ? params.value.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                currencyDisplay: 'symbol',
-              })
-            : '$0.00'}
-        </Typography>
-      );
+      return <Typography>{numberToMoneyString(params.value)}</Typography>;
     },
   },
   {

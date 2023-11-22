@@ -3,6 +3,7 @@
 import Claims from '@/components/claims/claims';
 import NumberCard from '@/components/number-card/number-card';
 import { Explorer_Data_Model_Detail_OverviewQuery } from '@/services/protocol/types';
+import { numberToMoneyString } from '@/utils/money';
 
 import { Divider, Typography } from '@mui/material';
 import { Box, Container, Stack } from '@mui/system';
@@ -26,10 +27,7 @@ export default function DataModelContent({ dataModel }: Props) {
     },
     {
       label: 'Revenue generated',
-      value: Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(27453.45),
+      value: numberToMoneyString(27453.45),
     },
   ];
 
