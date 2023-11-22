@@ -2,7 +2,7 @@
 
 import { PropsWithChildren } from 'react';
 
-import DataCardLoading from '@/components/data-card/data-card-loading';
+import DataImageCardLoading from '@/components/data-image-card/data-image-card-loading';
 
 import { Box, Button, Typography } from '@mui/material';
 
@@ -60,7 +60,7 @@ export default function FeaturedSection({
         {isLoading && (
           <>
             {Array.from(Array(columns).keys()).map((_item, index) => (
-              <DataCardLoading key={index} />
+              <DataImageCardLoading key={index} />
             ))}
           </>
         )}
