@@ -1,25 +1,26 @@
 'use client';
 
 import { issuePda } from '@/locale/en/pda';
+import {
+  CONTAINER_PX,
+  NEGATIVE_CONTAINER_PX,
+} from '@/theme/config/style-tokens';
 
-import { Stack, Typography } from '@mui/material';
+import { Divider, Stack, Typography } from '@mui/material';
 
-import DataModelsFeatured from './featured-data-models/featured';
+import DataModelsFeatured from './featured';
+import DataModelsSearch from './search/search';
 
 export default function IssuePdaContent() {
   return (
-    <>
+    <Stack sx={{ mx: NEGATIVE_CONTAINER_PX }}>
       <Stack
         direction="row"
         justifyContent="space-between"
         alignItems="center"
         sx={{
           mt: 4,
-          mb: {
-            xs: 4,
-            md: 5,
-            lg: 6,
-          },
+          px: CONTAINER_PX,
         }}
       >
         <Stack>
@@ -32,6 +33,8 @@ export default function IssuePdaContent() {
         </Stack>
       </Stack>
       <DataModelsFeatured />
-    </>
+      <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, px: CONTAINER_PX }} />
+      <DataModelsSearch />
+    </Stack>
   );
 }
