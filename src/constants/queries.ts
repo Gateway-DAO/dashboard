@@ -13,6 +13,7 @@ export const queries = {
   my_transactions: 'my_transactions',
   my_transactions_count: 'my_transactions_count',
   featured_data_models: 'featured_data_models',
+  pdas: 'pdas',
 };
 
 export const mutations = {
