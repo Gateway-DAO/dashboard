@@ -35,6 +35,8 @@ export const getClaimType = ({
   if (currency) return ClaimField.Currency;
 
   switch (type) {
+    case 'number':
+      return ClaimField.Number;
     case 'integer':
       return ClaimField.Number;
     case 'float':

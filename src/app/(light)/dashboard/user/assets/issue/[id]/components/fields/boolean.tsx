@@ -11,14 +11,21 @@ export default function BooleanProperty({ id, defaultValue }: PropertyField) {
       name={`claim.${id}`}
       control={control}
       defaultValue={(defaultValue as boolean)?.toString()}
-      render={({ field: { onChange, value } }) => (
-        <RadioGroup
-          value={(value as boolean)?.toString()}
-          onChange={(_e, v) => onChange(v === 'true')}
-        >
-          <FormControlLabel value="true" control={<Radio />} label="True" />
-          <FormControlLabel value="false" control={<Radio />} label="False" />
-        </RadioGroup>
+      render={({
+        field: { onChange, value, ...field },
+        fieldState: { error },
+      }) => (
+        <>
+          <RadioGroup
+            value={(value as boolean)?.toString()}
+            onChange={(_e, v) => onChange(v === 'true')}
+            {...field}
+          >
+            <FormControlLabel value="true" control={<Radio />} label="True" />
+            <FormControlLabel value="false" control={<Radio />} label="False" />
+          </RadioGroup>
+          {error && <p>{error.message}</p>}
+        </>
       )}
     />
   );

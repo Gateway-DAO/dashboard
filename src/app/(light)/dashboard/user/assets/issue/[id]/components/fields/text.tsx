@@ -1,19 +1,28 @@
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { TextField } from '@mui/material';
 
 import { PropertyField } from './type';
 
 export default function TextProperty({ id, defaultValue }: PropertyField) {
-  const { register } = useFormContext();
-
+  const { control } = useFormContext();
   return (
-    <TextField
-      multiline
-      maxRows={4}
-      fullWidth
+    <Controller
+      name={`claim.${id}`}
+      control={control}
       defaultValue={defaultValue}
-      {...register(`claim.${id}`)}
+      render={({ field, fieldState: { error } }) => (
+        <>
+          <TextField
+            multiline
+            maxRows={4}
+            fullWidth
+            defaultValue={defaultValue}
+            {...field}
+          />
+          {error && <p>{error.message}</p>}
+        </>
+      )}
     />
   );
 }
