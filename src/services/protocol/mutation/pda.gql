@@ -9,3 +9,9 @@ mutation changePDAStatus($id: String!, $status: PDAStatus!) {
     status
   }
 }
+
+mutation issuePDA($input: CreatePDAInput!) {
+  createPDA(input: $input) {
+    id
+  }
+}
