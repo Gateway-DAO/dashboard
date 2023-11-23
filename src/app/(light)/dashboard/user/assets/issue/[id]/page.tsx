@@ -17,10 +17,11 @@ export default async function IssueDataAsset() {
           color: 'text.secondary',
           fontWeight: 600,
         }}
+        mb={1}
       >
         {issuePdaForm.title}
       </Typography>
-      <Typography variant="h3" component="h1">
+      <Typography variant="h3" component="h1" mb={6}>
         {issuePdaForm.subtitle}
       </Typography>
       <Form schema={dataModel.schema} />

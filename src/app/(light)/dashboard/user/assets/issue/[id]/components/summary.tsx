@@ -11,11 +11,11 @@ import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 
 type Props = {
   amount: number;
-  price: number;
-  onSubmit: () => void;
+  total: string;
+  onReview: () => void;
 };
 
-export default function Summary({ amount, price, onSubmit }: Props) {
+export default function Summary({ amount, total, onReview }: Props) {
   return (
     <Box
       sx={{
@@ -52,12 +52,7 @@ export default function Summary({ amount, price, onSubmit }: Props) {
           <Typography variant="subtitle1">
             {issuePdaForm.summary.title}
           </Typography>
-          <Typography>
-            {issuePdaForm.summary.total(
-              numberToMoneyString(amount * price),
-              amount
-            )}
-          </Typography>
+          <Typography>{issuePdaForm.summary.total(total, amount)}</Typography>
         </Box>
         <Stack direction="row" gap={1}>
           <Button
@@ -70,7 +65,7 @@ export default function Summary({ amount, price, onSubmit }: Props) {
           <Button
             variant="contained"
             endIcon={<ChevronRight />}
-            onClick={onSubmit}
+            onClick={onReview}
           >
             {common.general.review}
           </Button>

@@ -3,11 +3,15 @@
 import UserIdentityField from '@/components/form/user-identification-field/user-identifier-field';
 import { common } from '@/locale/en/common';
 import { issuePdaForm } from '@/locale/en/pda';
-import { UserIdentifierType } from '@/services/protocol/types';
+import { CreatePdaInput, UserIdentifierType } from '@/services/protocol/types';
+import { numberToMoneyString } from '@/utils/money';
+import { useToggle } from '@react-hookz/web';
 import { FormProvider, useForm } from 'react-hook-form';
+import { PartialDeep } from 'type-fest';
 
 import { Box, Paper, Stack, TextField, Typography } from '@mui/material';
 
+import Preview from './preview';
 import Properties from './properties';
 import Summary from './summary';
 
@@ -16,16 +20,22 @@ type Props = {
 };
 
 export default function Form({ schema }: Props) {
-  const methods = useForm({
+  const [isVisible, toggleVisible] = useToggle(false);
+  const methods = useForm<PartialDeep<CreatePdaInput>>({
     values: {
-      user: {
+      owner: {
         type: UserIdentifierType.Solana,
         value: 'testeeee',
       },
       title: '',
       description: '',
+      claim: {},
     },
   });
+
+  const amount = 1;
+  const price = 0.05;
+  const total = numberToMoneyString(amount * price);
 
   return (
     <>
@@ -45,8 +55,8 @@ export default function Form({ schema }: Props) {
           <UserIdentityField
             control={methods.control}
             names={{
-              type: 'user.type',
-              value: 'user.value',
+              type: 'owner.type',
+              value: 'owner.value',
             }}
           />
         </Paper>
@@ -85,7 +95,14 @@ export default function Form({ schema }: Props) {
           </FormProvider>
         </Paper>
       </Stack>
-      <Summary amount={1} price={0.05} onSubmit={() => console.log('submit')} />
+      <Summary amount={amount} total={total} onReview={toggleVisible} />
+      <Preview
+        amount={amount}
+        price={price}
+        total={total}
+        isOpen={isVisible}
+        onClose={toggleVisible}
+      />
     </>
   );
 }

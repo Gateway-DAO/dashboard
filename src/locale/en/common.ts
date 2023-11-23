@@ -72,6 +72,7 @@ export const common = {
     view_proof: 'View Proof',
     subscribe: 'Subscribe',
     clear_filters: 'Clear filters',
+    edit: 'Edit',
   },
   socials: {
     twitter: 'Twitter',
