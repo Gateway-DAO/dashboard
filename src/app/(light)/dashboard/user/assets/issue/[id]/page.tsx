@@ -1,12 +1,16 @@
 import { issuePdaForm } from '@/locale/en/pda';
 import { apiPublic } from '@/services/protocol/api';
+import { PageProps } from '@/types/next';
 
 import { Stack, Typography } from '@mui/material';
 
 import Form from './components/form';
-export default async function IssueDataAsset() {
+export default async function IssueDataAsset({
+  params: { id },
+}: PageProps<{ id: string }>) {
+  console.log(id);
   const { dataModel } = await apiPublic.dataModelById({
-    id: '1062d449-4ace-49d1-9b3b-1a8490ec89bf',
+    id,
   });
 
   return (

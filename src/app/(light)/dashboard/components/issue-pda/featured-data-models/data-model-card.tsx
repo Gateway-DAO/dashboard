@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import DataImageCard from '@/components/data-image-card/data-image-card';
 import routes from '@/constants/routes';
 import { dataModelCard } from '@/locale/en/datamodel';
@@ -56,7 +58,12 @@ export default function DataModelCard({
             </Typography>
           </Box>
           <Stack direction="row" gap={1}>
-            <Button size="small" variant="contained">
+            <Button
+              component={Link}
+              href={routes.dashboard.user.issuePda(dataModel?.id)}
+              size="small"
+              variant="contained"
+            >
               {dataModelCard.issue}
             </Button>
             <Button size="small" variant="outlined">
