@@ -3,7 +3,7 @@
 import { queries } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { issuePda } from '@/locale/en/pda';
-import { Issued_PdasQuery, PdasQuery } from '@/services/protocol/types';
+import { Issued_PdasQuery } from '@/services/protocol/types';
 import { useQuery } from '@tanstack/react-query';
 
 import { CheckOutlined } from '@mui/icons-material';
