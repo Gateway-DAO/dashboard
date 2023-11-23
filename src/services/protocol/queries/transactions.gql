@@ -32,3 +32,21 @@ query explorer_transactions($skip: Int, $take: Int) {
     createdAt
   }
 }
+
+query transaction_detail($id: String!) {
+  transaction(id: $id) {
+    id
+    action
+    arweaveUrl
+    createdAt
+    cost
+    from {
+      id
+      type
+    }
+    to {
+      id
+      type
+    }
+  }
+}
