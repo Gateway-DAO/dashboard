@@ -12,10 +12,9 @@ import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 type Props = {
   amount: number;
   total: string;
-  onReview: () => void;
 };
 
-export default function Summary({ amount, total, onReview }: Props) {
+export default function Summary({ amount, total }: Props) {
   return (
     <Box
       sx={{
@@ -62,11 +61,7 @@ export default function Summary({ amount, total, onReview }: Props) {
           >
             {common.general.cancel}
           </Button>
-          <Button
-            variant="contained"
-            endIcon={<ChevronRight />}
-            onClick={onReview}
-          >
+          <Button type="submit" variant="contained" endIcon={<ChevronRight />}>
             {common.general.review}
           </Button>
         </Stack>

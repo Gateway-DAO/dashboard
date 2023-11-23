@@ -4,12 +4,13 @@ import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 
 import { PropertyField } from './type';
 
-export default function BooleanProperty({ id }: PropertyField) {
+export default function BooleanProperty({ id, defaultValue }: PropertyField) {
   const { control } = useFormContext();
   return (
     <Controller
-      name={`claims.${id}`}
+      name={`claim.${id}`}
       control={control}
+      defaultValue={(defaultValue as boolean)?.toString()}
       render={({ field: { onChange, value } }) => (
         <RadioGroup
           value={(value as boolean)?.toString()}

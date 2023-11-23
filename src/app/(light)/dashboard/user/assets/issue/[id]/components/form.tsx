@@ -3,16 +3,16 @@
 import UserIdentityField from '@/components/form/user-identification-field/user-identifier-field';
 import { common } from '@/locale/en/common';
 import { issuePdaForm } from '@/locale/en/pda';
-import { CreatePdaInput, UserIdentifierType } from '@/services/protocol/types';
+import { UserIdentifierType } from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
 import { useToggle } from '@react-hookz/web';
 import { FormProvider, useForm } from 'react-hook-form';
-import { PartialDeep } from 'type-fest';
 
 import { Box, Paper, Stack, TextField, Typography } from '@mui/material';
 
 import Preview from './preview';
 import Properties from './properties';
+import { IssuePdaSchema, issuePdaValidator } from './schema';
 import Summary from './summary';
 
 type Props = {
@@ -21,25 +21,36 @@ type Props = {
 
 export default function Form({ schema }: Props) {
   const [isVisible, toggleVisible] = useToggle(false);
-  const methods = useForm<PartialDeep<CreatePdaInput>>({
+  const methods = useForm<IssuePdaSchema>({
     values: {
       owner: {
-        type: UserIdentifierType.Solana,
-        value: 'testeeee',
+        type: UserIdentifierType.GatewayId,
+        value: '',
       },
       title: '',
       description: '',
       claim: {},
     },
+    resolver: async (value, context, options) =>
+      issuePdaValidator(value, schema, context, options),
   });
 
   const amount = 1;
   const price = 0.05;
   const total = numberToMoneyString(amount * price);
 
+  const onSubmit = async (data: IssuePdaSchema) => {
+    toggleVisible();
+  };
+
   return (
     <>
-      <Stack gap={2} mb={14}>
+      <Stack
+        component="form"
+        gap={2}
+        mb={14}
+        onSubmit={methods.handleSubmit(onSubmit)}
+      >
         <Paper
           component={Stack}
           elevation={0}
@@ -94,8 +105,8 @@ export default function Form({ schema }: Props) {
             <Properties schema={schema} />
           </FormProvider>
         </Paper>
+        <Summary amount={amount} total={total} />
       </Stack>
-      <Summary amount={amount} total={total} onReview={toggleVisible} />
       <Preview
         amount={amount}
         price={price}

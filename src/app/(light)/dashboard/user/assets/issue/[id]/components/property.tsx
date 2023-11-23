@@ -29,6 +29,8 @@ export default function Property({
   const defaultValue = getClaimDefaultValue(property);
   const type = getClaimType(property);
 
+  console.log(id, property);
+
   const titleText = (
     <Typography variant="subtitle1">
       {required ? title : `${title} (optional)`}
@@ -38,11 +40,11 @@ export default function Property({
   const field = useMemo(() => {
     switch (type) {
       case ClaimField.Text:
-        return <TextProperty id={id} />;
+        return <TextProperty id={id} defaultValue={defaultValue} />;
       case ClaimField.Boolean:
-        return <BooleanProperty id={id} />;
+        return <BooleanProperty id={id} defaultValue={defaultValue} />;
       case ClaimField.Number:
-        return <NumberProperty id={id} />;
+        return <NumberProperty id={id} defaultValue={defaultValue} />;
       default:
         return null;
     }
