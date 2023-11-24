@@ -14,7 +14,6 @@ import {
   Typography,
 } from '@mui/material';
 
-import Search from './search';
 import TransactionsTable from './transactions-table';
 
 export default function TransactionsTableSection() {

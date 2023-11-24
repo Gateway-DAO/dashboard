@@ -2,15 +2,18 @@
 import React from 'react';
 
 import ExternalLink from '@/components/external-link/external-link';
-import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import { DATE_FORMAT } from '@/constants/date';
+// import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+// import { DATE_FORMAT } from '@/constants/date';
 import { explorerQueries } from '@/constants/queries';
 import { transaction_detail } from '@/locale/en/transaction';
 import { apiPublic } from '@/services/protocol/api';
-import { TransactionAction } from '@/services/protocol/types';
+import {
+  TransactionAction,
+  Transaction_DetailQuery,
+} from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
 import { useQuery } from '@tanstack/react-query';
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 
 import {
   Box,
@@ -25,51 +28,10 @@ import {
 
 import ActionDetail from '../../../components/transactions/action-detail';
 import CardRow from './card-row';
+import UserCreation from './types/user-creation';
 
 type Props = {
   id: string;
-};
-
-type User = {
-  id: string;
-  gatewayId?: string;
-  name?: string;
-  image?: string;
-};
-
-type UserColum = {
-  isLoading: boolean;
-  user: User | { id: string; type: string } | undefined;
-};
-
-const UserColumn = ({ user, isLoading = true }: UserColum) => {
-  return (
-    <Stack direction="row" gap={1.5} alignItems="center">
-      {isLoading ? (
-        <Skeleton variant="circular" width={40} height={40} />
-      ) : (
-        <GTWAvatar name={user?.id} src={user?.image} />
-      )}
-      <Box>
-        <Typography variant="subtitle1" lineHeight={1}>
-          {isLoading ? (
-            <Skeleton width={200} />
-          ) : (
-            user?.name ?? user?.gatewayId ?? user?.id
-          )}
-        </Typography>
-        <Typography variant="caption" color="text.secondary">
-          {isLoading ? (
-            <Skeleton width={100} />
-          ) : user?.name ? (
-            `@${user?.gatewayId}`
-          ) : (
-            ''
-          )}
-        </Typography>
-      </Box>
-    </Stack>
-  );
 };
 
 export default function TransactionDetails({ id }: Props) {
@@ -78,6 +40,41 @@ export default function TransactionDetails({ id }: Props) {
     queryFn: () => apiPublic.transaction_detail({ id }),
     select: (data) => data.transaction,
   });
+
+  const displayDetails = (data: Transaction_DetailQuery['transaction']) => {
+    switch (data.action) {
+      case TransactionAction.UserCreate:
+        return <UserCreation data={data} />;
+      // case TransactionAction.PdaIssuance:
+      //   return transaction_actions.pda_issuance;
+      // case TransactionAction.PdaUpdate:
+      //   return transaction_actions.pda_update;
+      // case TransactionAction.PdaStatusChange:
+      //   return transaction_actions.pda_status_change;
+      // case TransactionAction.DatamodelCreate:
+      //   return transaction_actions.data_model;
+      // case TransactionAction.OrganizationCreate:
+      //   return transaction_actions.org_create;
+      // case TransactionAction.OrganizationUpdate:
+      //   return transaction_actions.org_update;
+      // case TransactionAction.ProofCreate:
+      //   return transaction_actions.proof_create;
+      // case TransactionAction.ProofStatusChange:
+      //   return transaction_actions.proof_status_change;
+      // case TransactionAction.RequestCreate:
+      //   return transaction_actions.request_create;
+      // case TransactionAction.RequestStatusChange:
+      //   return transaction_actions.request_status_change;
+      // case TransactionAction.RequestTemplateCreate:
+      //   return transaction_actions.request_template;
+      // case TransactionAction.MoneyDeposit:
+      //   return transaction_actions.money_deposit;
+      // case TransactionAction.IssuerEarnings:
+      //   return transaction_actions.issuers_earnings;
+      // default:
+      //   return action;
+    }
+  };
 
   return (
     <Container sx={{ pb: 4 }}>
@@ -120,6 +117,7 @@ export default function TransactionDetails({ id }: Props) {
               />
             )}
           </CardRow>
+          {data && displayDetails(data)}
           {/* <CardRow title={transaction_detail.pda_id}>
             <Typography variant="body1">
               {isLoading ? (
@@ -129,12 +127,12 @@ export default function TransactionDetails({ id }: Props) {
               )}
             </Typography>
           </CardRow> */}
-          <CardRow title={transaction_detail.issuer}>
+          {/* <CardRow title={transaction_detail.issuer}>
             <UserColumn user={data?.from} isLoading={isLoading} />
           </CardRow>
           <CardRow title={transaction_detail.signed_by}>
             <UserColumn user={data?.to} isLoading={isLoading} />
-          </CardRow>
+          </CardRow> */}
           {/* <CardRow title={transaction_detail.data_model_id}>
             <Typography variant="body1">
               {isLoading ? (
@@ -151,22 +149,14 @@ export default function TransactionDetails({ id }: Props) {
               />
             )}
           </CardRow> */}
-          <CardRow title={transaction_detail.created_at}>
-            <Typography variant="body1">
-              {isLoading ? (
-                <Skeleton variant="text" width={200} />
-              ) : (
-                dayjs(data?.createdAt).format(DATE_FORMAT)
-              )}
-            </Typography>
-          </CardRow>
-          <CardRow title={transaction_detail.cost}>
+
+          {/* <CardRow title={transaction_detail.cost}>
             {isLoading ? (
               <Skeleton variant="text" width={100} />
             ) : (
               numberToMoneyString(data?.cost ?? 0)
             )}
-          </CardRow>
+          </CardRow> */}
           {/* <CardRow title={transaction_detail.status}>
             {isLoading ? (
               <Skeleton width={30} />

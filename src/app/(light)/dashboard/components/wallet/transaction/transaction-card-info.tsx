@@ -88,7 +88,12 @@ export default function TransactionCardInfo({
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={transaction.transaction_id}>
-          <ExternalLink href="#" text={id} size="big" id={id} />
+          <ExternalLink
+            href={routes.explorer.transaction(id)}
+            text={id}
+            size="big"
+            id={id}
+          />
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>

@@ -42,11 +42,23 @@ query transaction_detail($id: String!) {
     cost
     from {
       id
-      type
+    }
+    metadata {
+      __typename
+      ... on OrganizationMetadata {
+        organization
+      }
+      ... on ProofMetadata {
+        owner
+        status
+      }
+      ... on PDAMetadata {
+        pda
+        expirationDate
+      }
     }
     to {
       id
-      type
     }
   }
 }
