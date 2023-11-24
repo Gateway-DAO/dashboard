@@ -36,9 +36,7 @@ export const getClaimType = ({
 
   switch (type) {
     case 'number':
-      return ClaimField.Number;
     case 'integer':
-      return ClaimField.Number;
     case 'float':
       return ClaimField.Number;
     case 'boolean':
