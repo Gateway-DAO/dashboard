@@ -21,21 +21,16 @@ export const issuePdaValidator = async (
 ): Promise<ResolverResult<IssuePdaSchema>> => {
   const { claim, ...data } = values;
 
-  console.log('values', values);
-
   const zodResult = await zodResolver(issuePdaSchema.omit({ claim: true }))(
     data,
     context,
     formsOptions
   );
-  console.log('zodResult', zodResult);
   const claimResult = await ajvResolver(
     schema,
     { allErrors: true },
     { mode: 'sync' }
   )(claim, context, formsOptions);
-
-  console.log('claimResult', claimResult);
 
   return {
     values: {
