@@ -2,6 +2,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import { TextField } from '@mui/material';
 
+import ErrorMessage from './error';
 import { PropertyField } from './type';
 
 export default function NumberProperty({ id, defaultValue }: PropertyField) {
@@ -22,9 +23,10 @@ export default function NumberProperty({ id, defaultValue }: PropertyField) {
             defaultValue={defaultValue}
             value={(value as number)?.toString()}
             onChange={(_e) => onChange(Number(_e.target.value))}
+            error={!!error}
             {...field}
           />
-          {error && <p>{error.message}</p>}
+          {error && <ErrorMessage>{error.message}</ErrorMessage>}
         </>
       )}
     />

@@ -2,6 +2,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import { TextField } from '@mui/material';
 
+import ErrorMessage from './error';
 import { PropertyField } from './type';
 
 export default function TextProperty({ id, defaultValue }: PropertyField) {
@@ -18,12 +19,13 @@ export default function TextProperty({ id, defaultValue }: PropertyField) {
             maxRows={4}
             fullWidth
             defaultValue={defaultValue}
+            error={!!error}
             onChange={(_e) =>
               onChange(_e.target.value?.length ? _e.target.value : undefined)
             }
             {...field}
           />
-          {error && <p>{error.message}</p>}
+          {error && <ErrorMessage>{error.message}</ErrorMessage>}
         </>
       )}
     />
