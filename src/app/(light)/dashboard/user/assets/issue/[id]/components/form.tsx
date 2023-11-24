@@ -1,12 +1,13 @@
 'use client';
 
+import ErrorMessage from '@/components/form/error-message/error-message';
 import UserIdentityField from '@/components/form/user-identification-field/user-identifier-field';
 import { common } from '@/locale/en/common';
 import { issuePdaForm } from '@/locale/en/pda';
 import { UserIdentifierType } from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
 import { useToggle } from '@react-hookz/web';
-import { FormProvider, useForm } from 'react-hook-form';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 import { Box, Paper, Stack, TextField, Typography } from '@mui/material';
 
@@ -79,13 +80,37 @@ export default function Form({ schema }: Props) {
         >
           <Typography variant="h5">{common.general.details}</Typography>
           <Stack gap={3}>
-            <TextField label="Title" fullWidth {...methods.register('title')} />
-            <TextField
-              label="Description"
-              multiline
-              rows={4}
-              fullWidth
-              {...methods.register('description')}
+            <Controller
+              control={methods.control}
+              name="title"
+              render={({ field, fieldState: { error } }) => (
+                <>
+                  <TextField
+                    label="Title"
+                    fullWidth
+                    {...field}
+                    error={!!error}
+                  />
+                  {error && <ErrorMessage>{error.message}</ErrorMessage>}
+                </>
+              )}
+            />
+            <Controller
+              control={methods.control}
+              name="description"
+              render={({ field, fieldState: { error } }) => (
+                <>
+                  <TextField
+                    label="Description"
+                    multiline
+                    rows={4}
+                    fullWidth
+                    error={!!error}
+                    {...field}
+                  />
+                  {error && <ErrorMessage>{error.message}</ErrorMessage>}
+                </>
+              )}
             />
           </Stack>
         </Paper>

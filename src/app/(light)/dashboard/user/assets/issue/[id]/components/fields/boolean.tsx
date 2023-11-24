@@ -1,8 +1,8 @@
+import ErrorMessage from '@/components/form/error-message/error-message';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 
-import ErrorMessage from './error';
 import { PropertyField } from './type';
 
 export default function BooleanProperty({ id, defaultValue }: PropertyField) {
