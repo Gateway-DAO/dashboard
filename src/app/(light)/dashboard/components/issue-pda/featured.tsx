@@ -1,16 +1,13 @@
 'use client';
 
-import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import DataModelImageCard from '@/components/data-model-image-card/data-model-image-card';
+import FeaturedSection from '@/components/featured-section/featured-section';
 import { queries } from '@/constants/queries';
-import { common } from '@/locale/en/common';
 import { issuePda } from '@/locale/en/pda';
 import { apiPublic } from '@/services/protocol/api';
 import { useQuery } from '@tanstack/react-query';
 
-import { Box } from '@mui/material';
-
-import DataModelCard from './data-model-card';
-import FeaturedSection from './featured-section';
+import IssuePdaActions from './issue-pda-actions';
 
 export default function DataModelsFeatured() {
   const dataModelsIdByEnv = {
@@ -46,10 +43,22 @@ export default function DataModelsFeatured() {
         ids: featuredDataModels as string[],
       }),
   });
+
   return (
-    <FeaturedSection title={issuePda.featured} isLoading={dataModels.isLoading}>
+    <FeaturedSection
+      title={issuePda.featured}
+      isLoading={dataModels.isLoading}
+      withContainer={false}
+      columns={3}
+    >
       {dataModels.data?.dataModels.map((dataModel) => (
-        <DataModelCard dataModel={dataModel} key={dataModel.id} />
+        <DataModelImageCard
+          dataModel={dataModel}
+          key={dataModel.id}
+          withLink={false}
+        >
+          <IssuePdaActions id={dataModel.id} />
+        </DataModelImageCard>
       ))}
     </FeaturedSection>
   );

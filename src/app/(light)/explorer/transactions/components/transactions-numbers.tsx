@@ -1,5 +1,6 @@
 'use client';
 
+import NumberCard from '@/components/number-card/number-card';
 import { explorerQueries } from '@/constants/queries';
 import { transaction } from '@/locale/en/transaction';
 import { apiPublic } from '@/services/protocol/api';
@@ -8,8 +9,6 @@ import { numberToMoneyString } from '@/utils/money';
 import { useQuery } from '@tanstack/react-query';
 
 import { Stack } from '@mui/material';
-
-import NumberCard from '../../components/number-card/number-card';
 
 export default function TransactionsNumbers() {
   const { data, isLoading } = useQuery({
