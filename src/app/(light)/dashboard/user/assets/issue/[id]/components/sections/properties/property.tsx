@@ -29,6 +29,8 @@ export default function Property({
   const defaultValue = getClaimDefaultValue(property);
   const type = getClaimType(property);
 
+  console.log(id, property);
+
   const titleText = (
     <Typography variant="subtitle1">
       {required ? title : `${title} (optional)`}

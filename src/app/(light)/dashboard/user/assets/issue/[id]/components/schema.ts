@@ -44,7 +44,9 @@ export const issuePdaValidator = async (
     },
     errors: {
       ...zodResult.errors,
-      claim: claimResult.errors as any,
+      ...(Object.keys(claimResult.errors).length > 0 && {
+        claim: claimResult.errors as any,
+      }),
     },
   };
 };

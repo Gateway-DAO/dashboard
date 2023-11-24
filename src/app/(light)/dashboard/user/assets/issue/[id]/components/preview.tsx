@@ -7,10 +7,13 @@ import { numberToMoneyString } from '@/utils/money';
 import { EditOutlined } from '@mui/icons-material';
 import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 
+import { IssuePdaSchema } from './schema';
+
 type Props = {
   amount: number;
   price: number;
   total: string;
+  data?: IssuePdaSchema;
   isOpen: boolean;
   onClose: () => void;
 };
@@ -20,8 +23,10 @@ export default function Preview({
   price,
   total,
   isOpen,
+  data,
   onClose,
 }: Props) {
+  if (!data) return null;
   return (
     <ModalRight open={isOpen} onClose={onClose}>
       <ModalTitle onClose={onClose} />
@@ -72,18 +77,12 @@ export default function Preview({
           justifyContent="space-between"
           gap={1}
         >
-          <Typography variant="h5">Owner</Typography>
+          <Typography variant="h5">{data.title}</Typography>
           <Button onClick={onClose} endIcon={<EditOutlined />}>
             {common.actions.edit}
           </Button>
         </Stack>
-        <Typography mt={2}>
-          This PDA is designed to provide a secure and reliable way to verify an
-          individual's achievement in a specific skill or subject area. It can
-          be used by learners to demonstrate their knowledge and skills to
-          potential employers or educational institutions, or by organizations
-          to track the progress and success of their training programs.
-        </Typography>
+        <Typography mt={2}>{data.description}</Typography>
         <Box mt={2}>OWNERSHIP</Box>
         <Divider sx={{ mx: -3, my: 4 }} />
         <Typography variant="subtitle1">Claim</Typography>

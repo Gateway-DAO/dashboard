@@ -8,7 +8,6 @@ import Form from './components/form';
 export default async function IssueDataAsset({
   params: { id },
 }: PageProps<{ id: string }>) {
-  console.log(id);
   const { dataModel } = await apiPublic.dataModelById({
     id,
   });

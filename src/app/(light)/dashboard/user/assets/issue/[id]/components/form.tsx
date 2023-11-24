@@ -1,27 +1,30 @@
 'use client';
 
-import ErrorMessage from '@/components/form/error-message/error-message';
-import UserIdentityField from '@/components/form/user-identification-field/user-identifier-field';
-import { common } from '@/locale/en/common';
-import { issuePdaForm } from '@/locale/en/pda';
+import { useState } from 'react';
+
 import { UserIdentifierType } from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
-import { useToggle } from '@react-hookz/web';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
-import { Box, Paper, Stack, TextField, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 
 import Preview from './preview';
-import Properties from './properties';
 import { IssuePdaSchema, issuePdaValidator } from './schema';
-import Summary from './summary';
+import OwnerSection from './sections/owner/owner';
+import PropertiesSection from './sections/properties/properties';
+import Summary from './sections/summary';
+import TitleDescriptionSection from './sections/title-description';
 
 type Props = {
   schema: any;
 };
 
 export default function Form({ schema }: Props) {
-  const [isVisible, toggleVisible] = useToggle(false);
+  const [previewModalState, setPreviewModalState] = useState<{
+    isOpen: boolean;
+    data?: IssuePdaSchema;
+  }>({ isOpen: false });
+
   const methods = useForm<IssuePdaSchema>({
     values: {
       owner: {
@@ -41,103 +44,31 @@ export default function Form({ schema }: Props) {
   const total = numberToMoneyString(amount * price);
 
   const onSubmit = async (data: IssuePdaSchema) => {
-    toggleVisible();
+    setPreviewModalState({ isOpen: true, data });
+  };
+
+  const onClosePreview = () => {
+    setPreviewModalState((oldState) => ({ ...oldState, isOpen: false }));
   };
 
   return (
     <>
-      <Stack
-        component="form"
-        gap={2}
-        mb={14}
-        onSubmit={methods.handleSubmit(onSubmit)}
-      >
-        <Paper
-          component={Stack}
-          elevation={0}
-          sx={{ p: 3, border: 1, borderColor: 'divider' }}
-          gap={4}
-        >
-          <Box>
-            <Typography variant="h5">{issuePdaForm.issue_to.title}</Typography>
-            <Typography variant="body2" color="text.secondary">
-              {issuePdaForm.issue_to.description}
-            </Typography>
-          </Box>
-          <UserIdentityField
-            control={methods.control}
-            names={{
-              type: 'owner.type',
-              value: 'owner.value',
-            }}
-          />
-        </Paper>
-        <Paper
-          component={Stack}
-          elevation={0}
-          sx={{ p: 3, border: 1, borderColor: 'divider' }}
-          gap={4}
-        >
-          <Typography variant="h5">{common.general.details}</Typography>
-          <Stack gap={3}>
-            <Controller
-              control={methods.control}
-              name="title"
-              render={({ field, fieldState: { error } }) => (
-                <>
-                  <TextField
-                    label="Title"
-                    fullWidth
-                    {...field}
-                    error={!!error}
-                  />
-                  {error && <ErrorMessage>{error.message}</ErrorMessage>}
-                </>
-              )}
-            />
-            <Controller
-              control={methods.control}
-              name="description"
-              render={({ field, fieldState: { error } }) => (
-                <>
-                  <TextField
-                    label="Description"
-                    multiline
-                    rows={4}
-                    fullWidth
-                    error={!!error}
-                    {...field}
-                  />
-                  {error && <ErrorMessage>{error.message}</ErrorMessage>}
-                </>
-              )}
-            />
+      <FormProvider {...methods}>
+        <Stack gap={2} mb={14} onSubmit={methods.handleSubmit(onSubmit)}>
+          <OwnerSection />
+          <Stack component="form" gap={2}>
+            <TitleDescriptionSection />
+            <PropertiesSection schema={schema} />
+            <Summary amount={amount} total={total} />
           </Stack>
-        </Paper>
-        <Paper
-          component={Stack}
-          elevation={0}
-          sx={{ p: 3, border: 1, borderColor: 'divider' }}
-          gap={4}
-        >
-          <Box>
-            <Typography variant="h5">{common.general.claim}</Typography>
-            <Typography variant="body2" color="text.secondary">
-              {issuePdaForm.claim.description}
-            </Typography>
-          </Box>
-          <FormProvider {...methods}>
-            <Properties schema={schema} />
-          </FormProvider>
-        </Paper>
-        <Summary amount={amount} total={total} />
-      </Stack>
+        </Stack>
+      </FormProvider>
       <Preview
         amount={amount}
         price={price}
         total={total}
-        isOpen={isVisible}
-        onClose={toggleVisible}
+        onClose={onClosePreview}
+        {...previewModalState}
       />
     </>
   );
