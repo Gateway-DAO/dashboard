@@ -110,4 +110,8 @@ export const issuePdaForm = {
     description:
       'The claim define what the PDA represents about a user or how it relates to the user',
   },
+  summary: {
+    title: 'Issuance Summary',
+    total: (price: string, amount: number) => `${price} (Qty: ${amount})`,
+  },
 };

@@ -38,6 +38,7 @@ const routes = {
     user: {
       home: `${dashboardUser}/home`,
       issue: `${dashboardUser}/assets/issue`,
+      issuePda: (id) => `${dashboardUser}/assets/issue/${id}`,
       asset: (pdaId) => `${dashboardUser}/asset/${pdaId}`,
       issuedAssets: `${dashboardUser}/assets/issued`,
       receivedAssets: `${dashboardUser}/assets/received`,

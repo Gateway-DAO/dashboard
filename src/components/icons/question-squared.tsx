@@ -19,8 +19,8 @@ export default function QuestionSquaredIcon(props: SvgIconProps) {
         fill="#771AC9"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M28 6H12C8.13401 6 5 9.13401 5 13V27C5 30.866 8.13401 34 12 34H28C31.866 34 35 30.866 35 27V13C35 9.13401 31.866 6 28 6ZM12 1C5.37258 1 0 6.37258 0 13V27C0 33.6274 5.37258 39 12 39H28C34.6274 39 40 33.6274 40 27V13C40 6.37258 34.6274 1 28 1H12Z"
         fill="#F5B5FF"
       />

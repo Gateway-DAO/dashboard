@@ -26,7 +26,9 @@ export const common = {
     tags: 'Tags',
     sort_by: 'Sort by',
     claim: 'Claim',
+    cancel: 'Cancel',
     details: 'Details',
+    review: 'Review',
   },
   chain: {
     EVM: 'Ethereum',
@@ -70,6 +72,7 @@ export const common = {
     view_proof: 'View Proof',
     subscribe: 'Subscribe',
     clear_filters: 'Clear filters',
+    edit: 'Edit',
   },
   socials: {
     twitter: 'Twitter',
