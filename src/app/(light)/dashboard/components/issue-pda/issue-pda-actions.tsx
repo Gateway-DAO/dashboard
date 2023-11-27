@@ -27,7 +27,7 @@ export default function IssuePdaActions({ id }: Props) {
           href={
             isOrg
               ? routes.dashboard.org.issue(organization.gatewayId)
-              : routes.dashboard.user.issue
+              : routes.dashboard.user.issuePda(id)
           }
         >
           {dataModelCard.issue}
