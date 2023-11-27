@@ -10,7 +10,7 @@ import { PartialDeep } from 'type-fest';
 
 import { Button, Collapse } from '@mui/material';
 
-import ProfileList from './profile-list';
+import ProfileList from '../profile-list/profile-list';
 
 type Props = {
   dataModel: PartialDeep<Explorer_Data_Model_Detail_OverviewQuery['dataModel']>;

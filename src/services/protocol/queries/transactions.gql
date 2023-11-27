@@ -16,3 +16,19 @@ query my_transactions($skip: Int, $take: Int, $organizationId: String) {
 query my_transactions_count($organizationId: String) {
   myFinancialTransactionsCount(organizationId: $organizationId)
 }
+
+query last_transactions {
+  transactions(filter: { skip: 0, take: 10 }) {
+    id
+    action
+    createdAt
+  }
+}
+
+query explorer_transactions($skip: Int, $take: Int) {
+  transactions(filter: { skip: $skip, take: $take }) {
+    id
+    action
+    createdAt
+  }
+}

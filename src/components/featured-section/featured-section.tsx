@@ -2,9 +2,11 @@
 
 import { PropsWithChildren } from 'react';
 
-import DataCardLoading from '@/components/data-card/data-card-loading';
+import DataImageCardLoading from '@/components/data-image-card/data-image-card-loading';
 
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
+
+import { SectionContainer } from '../section-container/section-container';
 
 type Props = {
   title: string;
@@ -13,20 +15,20 @@ type Props = {
     label: string;
   };
   isLoading?: boolean;
+  withContainer?: boolean;
+  columns?: number;
 };
 
-export default function ExplorerFeaturedSection({
+export default function FeaturedSection({
   title,
   viewMore,
   isLoading,
   children,
+  withContainer = true,
+  columns = 4,
 }: PropsWithChildren<Props>) {
   return (
-    <Container
-      sx={{
-        py: 6,
-      }}
-    >
+    <SectionContainer withContainer={withContainer}>
       <Box
         sx={{
           display: 'flex',
@@ -51,20 +53,19 @@ export default function ExplorerFeaturedSection({
           gridTemplateColumns: {
             xs: '1fr',
             md: 'repeat(2, 1fr)',
-            lg: 'repeat(4, 1fr)',
+            lg: `repeat(${columns}, 1fr)`,
           },
         }}
       >
         {isLoading && (
           <>
-            <DataCardLoading />
-            <DataCardLoading />
-            <DataCardLoading />
-            <DataCardLoading />
+            {Array.from(Array(columns).keys()).map((_item, index) => (
+              <DataImageCardLoading key={index} />
+            ))}
           </>
         )}
         {children}
       </Box>
-    </Container>
+    </SectionContainer>
   );
 }

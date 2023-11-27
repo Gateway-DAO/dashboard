@@ -52,6 +52,11 @@ export const pdas = {
   empty: 'No data assets yet',
   load_more: 'load more',
   my_data_assets: 'Data Assets',
+  data_asset: 'Data asset',
+  recipient: 'Recipient',
+  status: 'Status',
+  data_model_id: 'Data model ID',
+  issuance_date: 'Issuance date',
   data_assets_subtitle:
     'These are the private data assets you have earned and created.',
   issue_a_pda: 'Issue a PDA',
@@ -91,6 +96,7 @@ export const issuePda = {
   title: 'Issue a Private Data Asset',
   subtitle: 'Select a Data Model',
   featured: 'Featured',
+  success_title: 'Private Data Asset issued successfully',
 };
 
 export const issuePdaForm = {

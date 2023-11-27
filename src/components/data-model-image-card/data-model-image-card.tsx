@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { ReactNode } from 'react';
 
 import DataImageCard from '@/components/data-image-card/data-image-card';
 import routes from '@/constants/routes';
@@ -8,14 +8,18 @@ import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { numberToMoneyString } from '@/utils/money';
 import { PartialDeep } from 'type-fest';
 
-import { Typography, CardProps, Box, Stack, Button } from '@mui/material';
+import { Typography, CardProps, Box } from '@mui/material';
 
 type Props = {
+  withLink?: boolean;
   dataModel?: PartialDeep<DataModel>;
+  children?: ReactNode;
 };
 
-export default function DataModelCard({
+export default function DataModelImageCard({
+  withLink = true,
   dataModel,
+  children,
   ...props
 }: Props & CardProps) {
   const profile = getOrganizationOrUserData(
@@ -27,6 +31,7 @@ export default function DataModelCard({
     <DataImageCard
       title={dataModel!.title!}
       description={dataModel!.description!}
+      href={withLink ? routes.explorer.dataModel(dataModel!.id) : undefined}
       profile={profile}
       image={dataModel!.image as string}
       bottom={
@@ -53,23 +58,17 @@ export default function DataModelCard({
               alignSelf="flex-end"
               justifySelf="flex-end"
             >
-              <b>{numberToMoneyString(dataModel?.pdasIssuedCount ?? 0)}</b>{' '}
+              <b>
+                {dataModel?.pdasIssuedCount
+                  ? dataModel.pdasIssuedCount.toLocaleString('en-US', {
+                      notation: 'compact',
+                    })
+                  : 0}
+              </b>{' '}
               {dataModelCard.issuances(dataModel?.pdasIssuedCount ?? 0)}
             </Typography>
           </Box>
-          <Stack direction="row" gap={1}>
-            <Button
-              component={Link}
-              href={routes.dashboard.user.issuePda(dataModel?.id)}
-              size="small"
-              variant="contained"
-            >
-              {dataModelCard.issue}
-            </Button>
-            <Button size="small" variant="outlined">
-              {dataModelCard.learn_more}
-            </Button>
-          </Stack>
+          {children}
         </>
       }
       {...props}

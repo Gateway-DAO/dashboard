@@ -15,7 +15,7 @@ import dayjs from 'dayjs';
 
 import { Stack, Divider, Card, Typography, Button } from '@mui/material';
 
-import ActionDetail from '../action-detail';
+import FinancialActionDetail from '../action-detail';
 
 type Props = {
   id: string;
@@ -74,7 +74,7 @@ export default function TransactionCardInfo({
             alignItems="flex-start"
           >
             <Typography data-testid="transaction__card__title">
-              <ActionDetail action={title} />
+              <FinancialActionDetail action={title} />
             </Typography>
             {/* <Button
               size="small"

@@ -2,11 +2,12 @@ import { ReactNode } from 'react';
 
 import DataCardLoading from '@/components/data-card/data-card-loading';
 import DefaultError from '@/components/default-error/default-error';
+import SearchFilters from '@/components/search-filters/search-filters';
 import { common } from '@/locale/en/common';
 
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 
-import SearchFilters from '../search-filters/search-filters';
+import { SectionContainer } from '../section-container/section-container';
 
 type Props = {
   title: string;
@@ -21,9 +22,10 @@ type Props = {
   hasMore?: boolean;
   onSearch: (search: string) => void;
   fetchMore: () => void;
+  withContainer?: boolean;
 };
 
-export default function ExplorerSearchSection({
+export default function SearchSection({
   title,
   emptyText,
   errorMessage,
@@ -36,15 +38,10 @@ export default function ExplorerSearchSection({
   onSearch,
   fetchMore,
   hasMore,
+  withContainer = true,
 }: Props) {
   return (
-    <Container
-      component={Stack}
-      sx={{
-        display: 'flex',
-        py: 6,
-      }}
-    >
+    <SectionContainer withContainer={withContainer}>
       <Typography
         component="h3"
         variant="h5"
@@ -113,6 +110,6 @@ export default function ExplorerSearchSection({
           {common.actions.load_more}
         </Button>
       )}
-    </Container>
+    </SectionContainer>
   );
 }
