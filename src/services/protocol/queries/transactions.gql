@@ -10,6 +10,8 @@ query my_transactions($skip: Int, $take: Int, $organizationId: String) {
     createdAt
     action
     total
+    fee
+    value
   }
 }
 
@@ -41,7 +43,16 @@ query transaction_detail($id: String!) {
     createdAt
     cost
     from {
-      id
+      ... on Organization {
+        id
+        image
+        gatewayId
+      }
+      ... on User {
+        id
+        gatewayId
+        displayName
+      }
     }
     # metadata {
     #   __typename
@@ -64,7 +75,16 @@ query transaction_detail($id: String!) {
     #   }
     # }
     to {
-      id
+      ... on Organization {
+        id
+        image
+        gatewayId
+      }
+      ... on User {
+        id
+        gatewayId
+        displayName
+      }
     }
   }
 }

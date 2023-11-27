@@ -34,28 +34,28 @@ export default function TransactionCardInfo({
 }: Props) {
   const { organization } = useOrganization();
 
-  const dynamicRoute = useMemo(() => {
-    if (title === FinancialTransactionAction.ProofCreate) {
-      const obj = {
-        text: common.actions.view_proof,
-        url: '',
-      };
-      obj.url = !!organization
-        ? routes.dashboard.org.proof(organization.gatewayId, objectId)
-        : routes.dashboard.user.proof(objectId);
-      return obj;
-    }
-    if (title === FinancialTransactionAction.PdaIssuance) {
-      const obj = {
-        text: common.actions.view_pda,
-        url: '',
-      };
-      obj.url = !!organization
-        ? routes.dashboard.org.asset(organization.gatewayId, objectId)
-        : routes.dashboard.user.asset(objectId);
-      return obj;
-    }
-  }, [title]);
+  // const dynamicRoute = useMemo(() => {
+  //   if (title === FinancialTransactionAction.ProofCreate) {
+  //     const obj = {
+  //       text: common.actions.view_proof,
+  //       url: '',
+  //     };
+  //     obj.url = !!organization
+  //       ? routes.dashboard.org.proof(organization.gatewayId, objectId)
+  //       : routes.dashboard.user.proof(objectId);
+  //     return obj;
+  //   }
+  //   if (title === FinancialTransactionAction.PdaIssuance) {
+  //     const obj = {
+  //       text: common.actions.view_pda,
+  //       url: '',
+  //     };
+  //     obj.url = !!organization
+  //       ? routes.dashboard.org.asset(organization.gatewayId, objectId)
+  //       : routes.dashboard.user.asset(objectId);
+  //     return obj;
+  //   }
+  // }, [title]);
   return (
     <Stack
       component={Card}
