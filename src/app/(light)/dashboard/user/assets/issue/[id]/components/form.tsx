@@ -8,7 +8,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { Stack } from '@mui/material';
 
-import Preview from './preview';
+import Preview from './preview/preview';
 import { IssuePdaSchema, issuePdaValidator } from './schema';
 import OwnerSection from './sections/owner/owner';
 import PropertiesSection from './sections/properties/properties';
@@ -87,6 +87,7 @@ export default function Form({ schema }: Props) {
         price={price}
         total={total}
         onClose={onClosePreview}
+        schema={schema}
         {...previewModalState}
       />
     </>
