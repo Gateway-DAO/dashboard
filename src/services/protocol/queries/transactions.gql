@@ -5,11 +5,11 @@ query my_transactions($skip: Int, $take: Int, $organizationId: String) {
     organizationId: $organizationId
   ) {
     id
-    value
     type
     transactionId
     createdAt
     action
+    total
   }
 }
 
@@ -43,20 +43,26 @@ query transaction_detail($id: String!) {
     from {
       id
     }
-    metadata {
-      __typename
-      ... on OrganizationMetadata {
-        organization
-      }
-      ... on ProofMetadata {
-        owner
-        status
-      }
-      ... on PDAMetadata {
-        pda
-        expirationDate
-      }
-    }
+    # metadata {
+    #   __typename
+    #   ... on UserMetadata {
+    #     user
+    #   }
+    #   ... on OrganizationMetadata {
+    #     organization
+    #     usersAdmin
+    #     users
+    #     verified
+    #   }
+    #   ... on ProofMetadata {
+    #     owner
+    #     status
+    #   }
+    #   ... on PDAMetadata {
+    #     pda
+    #     expirationDate
+    #   }
+    # }
     to {
       id
     }

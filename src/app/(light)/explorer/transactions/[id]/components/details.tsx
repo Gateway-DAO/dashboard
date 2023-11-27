@@ -28,6 +28,9 @@ import {
 
 import ActionDetail from '../../../components/transactions/action-detail';
 import CardRow from './card-row';
+import OrgCreation from './types/org-creation';
+import PDA from './types/pda';
+import RequestCreation from './types/request-creation';
 import UserCreation from './types/user-creation';
 
 type Props = {
@@ -45,6 +48,16 @@ export default function TransactionDetails({ id }: Props) {
     switch (data.action) {
       case TransactionAction.UserCreate:
         return <UserCreation data={data} />;
+      case TransactionAction.OrganizationCreate:
+        return <OrgCreation data={data} />;
+      case TransactionAction.PdaIssuance:
+        return <PDA data={data} />;
+      case TransactionAction.PdaUpdate:
+        return <PDA data={data} />;
+      case TransactionAction.PdaStatusChange:
+        return <PDA data={data} />;
+      case TransactionAction.RequestCreate:
+        return <RequestCreation data={data} />;
       // case TransactionAction.PdaIssuance:
       //   return transaction_actions.pda_issuance;
       // case TransactionAction.PdaUpdate:

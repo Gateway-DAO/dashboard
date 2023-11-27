@@ -36,6 +36,9 @@ export const transaction_detail = {
   status: 'Status',
   transaction_data: 'Transaction data',
   gateway_id: 'Gateway ID',
+  request_id: 'Request ID',
+  owner: 'Owner',
+  verifier: 'Verifier',
 };
 
 export const financial_transaction_actions = {

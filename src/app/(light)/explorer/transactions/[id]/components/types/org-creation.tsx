@@ -8,7 +8,7 @@ import { Typography, Stack, Divider } from '@mui/material';
 import CardRow from '../card-row';
 import UserColumn from '../user-column';
 
-export default function UserCreation({
+export default function OrgCreation({
   data,
 }: {
   data: Transaction_DetailQuery['transaction'];

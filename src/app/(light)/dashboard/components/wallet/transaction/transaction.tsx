@@ -8,11 +8,11 @@ type Props = {
 };
 
 export function Transaction({ transaction }: Props) {
-  const { id, value, type, action, createdAt } = transaction;
+  const { id, total, type, action, createdAt } = transaction;
 
   return (
     <>
-      <TransactionCardTitle amount={value} type={type} />
+      <TransactionCardTitle amount={total} type={type} />
       <TransactionCardInfo
         title={action}
         id={id}
