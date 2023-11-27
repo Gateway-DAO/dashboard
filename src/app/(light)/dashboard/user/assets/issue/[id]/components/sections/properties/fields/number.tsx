@@ -11,24 +11,26 @@ export default function NumberProperty({ id, defaultValue }: PropertyField) {
     <Controller
       name={`claim.${id}`}
       control={control}
-      defaultValue={(defaultValue as boolean)?.toString()}
       render={({
         field: { onChange, value, ...field },
         fieldState: { error },
-      }) => (
-        <>
-          <TextField
-            type="number"
-            fullWidth
-            defaultValue={defaultValue}
-            value={(value as number)?.toString()}
-            onChange={(_e) => onChange(Number(_e.target.value))}
-            error={!!error}
-            {...field}
-          />
-          {error && <ErrorMessage>{error.message}</ErrorMessage>}
-        </>
-      )}
+      }) => {
+        return (
+          <>
+            <TextField
+              fullWidth
+              value={(value as number)?.toString()}
+              onChange={(_e) => {
+                const value = _e.target.value;
+                value.length ? onChange(Number(value)) : onChange('');
+              }}
+              error={!!error}
+              {...field}
+            />
+            {error && <ErrorMessage>{error.message}</ErrorMessage>}
+          </>
+        );
+      }}
     />
   );
 }

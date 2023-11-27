@@ -11,14 +11,12 @@ export default function TextProperty({ id, defaultValue }: PropertyField) {
     <Controller
       name={`claim.${id}`}
       control={control}
-      defaultValue={defaultValue}
       render={({ field: { onChange, ...field }, fieldState: { error } }) => (
         <>
           <TextField
             multiline
             maxRows={4}
             fullWidth
-            defaultValue={defaultValue}
             error={!!error}
             onChange={(_e) =>
               onChange(_e.target.value?.length ? _e.target.value : undefined)

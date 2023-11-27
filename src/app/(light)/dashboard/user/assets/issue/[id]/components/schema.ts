@@ -26,6 +26,14 @@ export const issuePdaValidator = async (
     context,
     formsOptions
   );
+
+  // Set all values from object 'claim' that are empty strings to undefined
+  Object.keys(claim as any).forEach((key) => {
+    if ((claim as any)[key] === '') {
+      (claim as any)[key] = undefined;
+    }
+  });
+
   const claimResult = await ajvResolver(
     schema,
     { allErrors: true },

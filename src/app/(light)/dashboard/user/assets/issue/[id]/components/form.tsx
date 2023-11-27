@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { UserIdentifierType } from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
@@ -25,6 +25,19 @@ export default function Form({ schema }: Props) {
     data?: IssuePdaSchema;
   }>({ isOpen: false });
 
+  const schemaDefaultValues = useMemo(
+    () =>
+      Object.keys(schema.properties).reduce((acc, key) => {
+        const property = schema.properties[key];
+        const defaultValue = property.default;
+        if (typeof defaultValue !== 'undefined') {
+          (acc as any)[key] = defaultValue;
+        }
+        return acc;
+      }, {} as IssuePdaSchema),
+    [schema]
+  );
+
   const methods = useForm<IssuePdaSchema>({
     values: {
       owner: {
@@ -33,7 +46,7 @@ export default function Form({ schema }: Props) {
       },
       title: '',
       description: '',
-      claim: {},
+      claim: schemaDefaultValues,
     },
     resolver: async (value, context, options) =>
       issuePdaValidator(value, schema, context, options),
@@ -54,7 +67,13 @@ export default function Form({ schema }: Props) {
   return (
     <>
       <FormProvider {...methods}>
-        <Stack gap={2} mb={14} onSubmit={methods.handleSubmit(onSubmit)}>
+        <Stack
+          gap={2}
+          mb={14}
+          onSubmit={methods.handleSubmit(onSubmit, (error) => {
+            console.log('error', error);
+          })}
+        >
           <OwnerSection />
           <Stack component="form" gap={2}>
             <TitleDescriptionSection />
