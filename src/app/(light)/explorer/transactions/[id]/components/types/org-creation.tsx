@@ -31,14 +31,10 @@ export default function OrgCreation({
         <UserColumn isLoading={false} user={data.from} />
       </CardRow>
       <CardRow title={transaction_detail.verified}>
-        <Typography variant="body1">
-          {data.from?.verified ? 'Verified' : 'Not verified'}
-        </Typography>
+        {data.from?.verified ? 'Verified' : 'Not verified'}
       </CardRow>
       <CardRow title={transaction_detail.created_at}>
-        <Typography variant="body1">
-          {dayjs(data?.createdAt).format(DATE_FORMAT)}
-        </Typography>
+        {dayjs(data?.createdAt).format(DATE_FORMAT)}
       </CardRow>
     </Stack>
   );

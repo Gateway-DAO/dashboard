@@ -31,9 +31,7 @@ export default function UserCreation({
         <UserColumn isLoading={false} user={data.to} />
       </CardRow>
       <CardRow title={transaction_detail.created_at}>
-        <Typography variant="body1">
-          {dayjs(data?.createdAt).format(DATE_FORMAT)}
-        </Typography>
+        {dayjs(data?.createdAt).format(DATE_FORMAT)}
       </CardRow>
     </Stack>
   );

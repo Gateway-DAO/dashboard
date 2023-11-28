@@ -28,22 +28,16 @@ export default function PDA({
         />
       }
     >
-      <CardRow title={transaction_detail.pda_id}>
-        <Typography variant="body1">id</Typography>
-      </CardRow>
+      <CardRow title={transaction_detail.pda_id}>id</CardRow>
       <CardRow title={transaction_detail.issuer}>
         <UserColumn isLoading={false} user={data.from} />
       </CardRow>
       <CardRow title={transaction_detail.signed_by}>
         <UserColumn isLoading={false} user={data.to} />
       </CardRow>
-      <CardRow title={transaction_detail.data_model_id}>
-        <Typography variant="body1">data model id</Typography>
-      </CardRow>
+      <CardRow title={transaction_detail.data_model_id}>data model id</CardRow>
       <CardRow title={transaction_detail.created_at}>
-        <Typography variant="body1">
-          {dayjs(data?.createdAt).format(DATE_FORMAT)}
-        </Typography>
+        {dayjs(data?.createdAt).format(DATE_FORMAT)}
       </CardRow>
       <CardRow title={transaction_detail.cost}>
         {numberToMoneyString(data?.cost ?? 0)}

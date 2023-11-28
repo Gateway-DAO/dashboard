@@ -48,6 +48,7 @@ query transaction_detail($id: String!) {
         image
         gatewayId
         image
+        name
       }
       ... on User {
         id
@@ -78,6 +79,10 @@ query transaction_detail($id: String!) {
         request
         requestTemplate
         status
+      }
+      ... on RequestTemplateMetadata {
+        dataModels
+        requestTemplate
       }
     }
     to {

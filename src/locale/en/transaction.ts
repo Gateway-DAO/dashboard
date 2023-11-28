@@ -41,6 +41,8 @@ export const transaction_detail = {
   verifier: 'Verifier',
   verified: 'Verification',
   request_template: 'Request Template ID',
+  creator: 'Creator',
+  data_models: 'Data Models',
 };
 
 export const financial_transaction_actions = {
