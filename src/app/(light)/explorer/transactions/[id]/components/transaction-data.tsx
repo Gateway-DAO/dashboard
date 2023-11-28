@@ -22,11 +22,7 @@ import {
 export default function TransactionData({ data }: { data: string }) {
   const [displayData, toggleData] = useToggle(false);
 
-  const result = data
-    .replaceAll(`","`, `",\n"`)
-    .replaceAll(`{"`, `{\n"`)
-    .replaceAll(`},"`, `},\n"`)
-    .replaceAll(`],"`, `],\n"`);
+  const result = JSON.stringify(JSON.parse(data), null, 2);
 
   const codeResultArweaveProps = {
     text: result,
