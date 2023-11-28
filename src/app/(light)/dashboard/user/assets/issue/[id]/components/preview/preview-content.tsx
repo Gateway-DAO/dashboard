@@ -1,35 +1,43 @@
+import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import IssuanceIcon from '@/components/icons/issuance';
-import ModalTitle from '@/components/modal/modal-header/modal-header';
-import ModalRight from '@/components/modal/modal-right/modal-right';
 import { common } from '@/locale/en/common';
+import { CredentialData } from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
 
 import { EditOutlined } from '@mui/icons-material';
 import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 
-import { IssuePdaSchema } from './schema';
+import ClaimList from './claim-list';
+import { PreviewModalProps } from './type';
 
-type Props = {
-  amount: number;
-  price: number;
-  total: string;
-  data?: IssuePdaSchema;
-  isOpen: boolean;
-  onClose: () => void;
+type Props = Omit<PreviewModalProps, 'isOpen'> & {
+  isLoading: boolean;
+  onSubmit: () => void;
 };
 
-export default function Preview({
+export default function PreviewContent({
   amount,
+  data,
   price,
   total,
-  isOpen,
-  data,
+  schema,
+  isLoading,
+  onSubmit,
   onClose,
 }: Props) {
-  if (!data) return null;
+  const claims: CredentialData[] = data?.claim
+    ? Object.keys(schema.properties).map((key) => {
+        const property = schema.properties[key];
+        const value = (data.claim as any)[key];
+        return {
+          ...property,
+          value,
+        };
+      })
+    : [];
+
   return (
-    <ModalRight open={isOpen} onClose={onClose}>
-      <ModalTitle onClose={onClose} />
+    <>
       <Typography variant="h5">Issuance Summary</Typography>
       <Box mt={4} sx={{ p: 3, backgroundColor: 'primary.50', borderRadius: 1 }}>
         {[
@@ -54,16 +62,17 @@ export default function Preview({
           <Typography variant="h5">{total}</Typography>
         </Stack>
         <Stack direction="row" justifyContent="flex-end" mt={4} gap={1}>
-          <Button variant="outlined" onClick={onClose}>
+          <Button disabled={isLoading} variant="outlined" onClick={onClose}>
             Cancel
           </Button>
-          <Button
+          <LoadingButton
+            isLoading={isLoading}
             variant="contained"
-            onClick={onClose}
+            onClick={onSubmit}
             endIcon={<IssuanceIcon />}
           >
             Issue now
-          </Button>
+          </LoadingButton>
         </Stack>
       </Box>
 
@@ -78,15 +87,19 @@ export default function Preview({
           gap={1}
         >
           <Typography variant="h5">{data.title}</Typography>
-          <Button onClick={onClose} endIcon={<EditOutlined />}>
+          <Button
+            disabled={isLoading}
+            onClick={onClose}
+            endIcon={<EditOutlined />}
+          >
             {common.actions.edit}
           </Button>
         </Stack>
         <Typography mt={2}>{data.description}</Typography>
         <Box mt={2}>OWNERSHIP</Box>
         <Divider sx={{ mx: -3, my: 4 }} />
-        <Typography variant="subtitle1">Claim</Typography>
+        <ClaimList data={claims} />
       </Box>
-    </ModalRight>
+    </>
   );
 }

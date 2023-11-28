@@ -82,14 +82,17 @@ export default function Form({ schema }: Props) {
           </Stack>
         </Stack>
       </FormProvider>
-      <Preview
-        amount={amount}
-        price={price}
-        total={total}
-        onClose={onClosePreview}
-        schema={schema}
-        {...previewModalState}
-      />
+      {!!previewModalState.data && (
+        <Preview
+          amount={amount}
+          price={price}
+          total={total}
+          onClose={onClosePreview}
+          schema={schema}
+          isOpen={previewModalState.isOpen}
+          data={previewModalState.data}
+        />
+      )}
     </>
   );
 }
