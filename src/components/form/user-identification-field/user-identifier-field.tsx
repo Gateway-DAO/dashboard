@@ -30,6 +30,7 @@ type Props = {
     type?: UserIdentifierType;
     value?: string;
   };
+  disabled?: boolean;
 };
 
 export default function UserIdentityField({
@@ -38,6 +39,7 @@ export default function UserIdentityField({
   sx,
   names,
   defaultValues,
+  disabled = false,
 }: Props) {
   const identifierTypes = useIdentifierTypes();
 
@@ -69,6 +71,7 @@ export default function UserIdentityField({
             addressField.field.onChange('');
             clearErrors?.();
           }}
+          disabled={disabled}
         >
           {identifierTypes.map((type) => (
             <MenuItem
@@ -108,6 +111,7 @@ export default function UserIdentityField({
             : 'text'
         }
         sx={{ flexGrow: 1 }}
+        disabled={disabled}
       />
     </Stack>
   );

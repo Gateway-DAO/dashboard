@@ -73,6 +73,7 @@ export const common = {
     subscribe: 'Subscribe',
     clear_filters: 'Clear filters',
     edit: 'Edit',
+    add: 'Add',
   },
   socials: {
     twitter: 'Twitter',
