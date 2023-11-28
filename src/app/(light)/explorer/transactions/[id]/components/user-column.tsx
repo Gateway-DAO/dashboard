@@ -1,15 +1,6 @@
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import { Organization, User } from '@/services/protocol/types';
 
 import { Box, Skeleton, Stack, Typography } from '@mui/material';
-
-// type User = {
-//   id: string;
-//   gatewayId: string;
-//   name?: string;
-//   image?: string;
-//   profilePicture?: string;
-// };
 
 type UserColum = {
   isLoading: boolean;
