@@ -67,6 +67,9 @@ query transaction_detail($id: String!) {
         dataModels
         requestTemplate
       }
+      ... on DataModelMetadata {
+        dataModel
+      }
     }
     to {
       ... on Organization {

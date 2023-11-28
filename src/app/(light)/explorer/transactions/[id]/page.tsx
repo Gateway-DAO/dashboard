@@ -4,7 +4,6 @@ import { PageProps } from '@/types/next';
 
 import TransactionDetails from './components/details';
 import TransactionHeader from './components/header';
-import TransactionData from './components/transaction-data';
 
 export async function generateMetadata({
   params,
@@ -24,7 +23,6 @@ export default function TransactionPage({
     <>
       <TransactionHeader />
       <TransactionDetails id={id} />
-      <TransactionData />
     </>
   );
 }
