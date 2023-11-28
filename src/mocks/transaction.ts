@@ -10,7 +10,8 @@ export const transaction_default: My_TransactionsQuery['myFinancialTransactions'
     createdAt: '2023-10-26T17:10:44Z',
     type: FinancialTransactionType.Withdraw,
     action: FinancialTransactionAction.PdaIssuance,
-    // objectId: '12345',
     value: 0.3,
     transactionId: '12345',
+    fee: 0,
+    total: 0.3,
   };

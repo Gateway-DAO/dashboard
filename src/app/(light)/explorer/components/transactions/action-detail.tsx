@@ -34,6 +34,8 @@ export default function ActionDetail({
         return transaction_actions.request_template;
       case TransactionAction.MoneyDeposit:
         return transaction_actions.money_deposit;
+      case TransactionAction.IssuerEarnings:
+        return transaction_actions.issuers_earnings;
       default:
         return action;
     }
