@@ -42,7 +42,9 @@ export default async function RequestTemplatePage({
     },
     {
       label: 'Revenue generated',
-      value: numberToMoneyString(2044300),
+      value: numberToMoneyString(
+        dataRequestTemplate?.revenueGenerated as number
+      ),
     },
   ];
 
