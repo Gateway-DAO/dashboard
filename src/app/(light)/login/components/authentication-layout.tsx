@@ -2,13 +2,15 @@
 
 import { PropsWithChildren } from 'react';
 
+import CloseButton, {
+  CloseButtonProps,
+} from '@/components/close-button/close-button';
 import GatewaySquaredIcon from '@/components/icons/gateway-squared';
 import { common } from '@/locale/en/common';
 
 import { Box, Stack, Typography, alpha } from '@mui/material';
 
 import Background from './background';
-import CloseButton, { CloseButtonProps } from './close-button';
 
 type Props = {
   closeButonProps?: CloseButtonProps;
