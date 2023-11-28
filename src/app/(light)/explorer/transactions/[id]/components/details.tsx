@@ -25,6 +25,7 @@ import {
 import ActionDetail from '../../../components/transactions/action-detail';
 import CardRow from './card-row';
 import TransactionData from './transaction-data';
+import DataModelCreation from './types/data-model-creation';
 import OrgCreation from './types/org-creation';
 import PDA from './types/pda';
 import RequestCreation from './types/request-creation';
@@ -75,8 +76,8 @@ export default function TransactionDetails({ id }: Props) {
         return <RequestCreation data={data} />;
       case TransactionAction.RequestTemplateCreate:
         return <RequestTemplateCreation data={data} />;
-      // case TransactionAction.DatamodelCreate:
-      //   return transaction_actions.data_model;
+      case TransactionAction.DatamodelCreate:
+        return <DataModelCreation data={data} />;
       // case TransactionAction.ProofCreate:
       //   return transaction_actions.proof_create;
       // case TransactionAction.ProofStatusChange:
