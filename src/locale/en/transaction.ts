@@ -35,6 +35,14 @@ export const transaction_detail = {
   cost: 'Cost',
   status: 'Status',
   transaction_data: 'Transaction data',
+  gateway_id: 'Gateway ID',
+  request_id: 'Request ID',
+  owner: 'Owner',
+  verifier: 'Verifier',
+  verified: 'Verification',
+  request_template: 'Request Template ID',
+  creator: 'Creator',
+  data_models: 'Data Models',
 };
 
 export const financial_transaction_actions = {
@@ -68,4 +76,5 @@ export const transaction_actions = {
   request_status_change: 'Request status change',
   request_template: 'Request Template creation',
   money_deposit: 'Money deposit',
+  issuers_earnings: 'PDA consumption revenue',
 };
