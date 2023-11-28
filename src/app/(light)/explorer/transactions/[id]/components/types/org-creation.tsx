@@ -28,7 +28,12 @@ export default function OrgCreation({
       }
     >
       <CardRow title={transaction_detail.gateway_id}>
-        <UserColumn isLoading={false} user={data.to} />
+        <UserColumn isLoading={false} user={data.from} />
+      </CardRow>
+      <CardRow title={transaction_detail.verified}>
+        <Typography variant="body1">
+          {data.from?.verified ? 'Verified' : 'Not verified'}
+        </Typography>
       </CardRow>
       <CardRow title={transaction_detail.created_at}>
         <Typography variant="body1">

@@ -4,9 +4,10 @@ import { Box, Skeleton, Stack, Typography } from '@mui/material';
 
 type User = {
   id: string;
-  gatewayId?: string;
+  gatewayId: string;
   name?: string;
   image?: string;
+  profilePicture?: string;
 };
 
 type UserColum = {
@@ -20,14 +21,14 @@ export default function UserColumn({ user, isLoading = true }: UserColum) {
       {isLoading ? (
         <Skeleton variant="circular" width={40} height={40} />
       ) : (
-        <GTWAvatar name={user?.id} src={user?.image} />
+        <GTWAvatar name={user?.id} src={user?.profilePicture ?? user?.image} />
       )}
       <Box>
         <Typography variant="subtitle1" lineHeight={1}>
           {isLoading ? (
             <Skeleton width={200} />
           ) : (
-            user?.name ?? user?.gatewayId ?? user?.id
+            user?.name ?? user?.displayName ?? user?.gatewayId ?? user?.id
           )}
         </Typography>
         <Typography variant="caption" color="text.secondary">

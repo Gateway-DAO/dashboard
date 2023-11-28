@@ -39,6 +39,8 @@ export const transaction_detail = {
   request_id: 'Request ID',
   owner: 'Owner',
   verifier: 'Verifier',
+  verified: 'Verification',
+  request_template: 'Request Template ID',
 };
 
 export const financial_transaction_actions = {

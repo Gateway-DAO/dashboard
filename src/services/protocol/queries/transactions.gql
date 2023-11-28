@@ -47,43 +47,61 @@ query transaction_detail($id: String!) {
         id
         image
         gatewayId
+        image
       }
       ... on User {
         id
         gatewayId
         displayName
+        profilePicture
       }
     }
-    # metadata {
-    #   __typename
-    #   ... on UserMetadata {
-    #     user
-    #   }
-    #   ... on OrganizationMetadata {
-    #     organization
-    #     usersAdmin
-    #     users
-    #     verified
-    #   }
-    #   ... on ProofMetadata {
-    #     owner
-    #     status
-    #   }
-    #   ... on PDAMetadata {
-    #     pda
-    #     expirationDate
-    #   }
-    # }
+    metadata {
+      # ... on UserMetadata {
+      #   user
+      # }
+      # ... on OrganizationMetadata {
+      #   organization
+      #   usersAdmin
+      #   users
+      #   verified
+      # }
+      # ... on ProofMetadata {
+      #   owner
+      #   status
+      # }
+      # ... on PDAMetadata {
+      #   pda
+      #   expirationDate
+      # }
+      ... on RequestMetadata {
+        request
+        requestTemplate
+        status
+      }
+    }
     to {
       ... on Organization {
         id
         image
         gatewayId
+        name
+        verified
+        accesses {
+          role
+          user {
+            id
+            gatewayId
+            displayName
+            profilePicture
+          }
+        }
       }
       ... on User {
         id
         gatewayId
         displayName
+        profilePicture
       }
     }
   }
