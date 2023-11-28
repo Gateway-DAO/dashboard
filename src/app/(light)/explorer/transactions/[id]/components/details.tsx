@@ -24,6 +24,7 @@ import {
 
 import ActionDetail from '../../../components/transactions/action-detail';
 import CardRow from './card-row';
+import TransactionData from './transaction-data';
 import OrgCreation from './types/org-creation';
 import PDA from './types/pda';
 import RequestCreation from './types/request-creation';
@@ -39,6 +40,19 @@ export default function TransactionDetails({ id }: Props) {
     queryKey: [explorerQueries.transaction, id],
     queryFn: () => apiPublic.transaction_detail({ id }),
     select: (data) => data.transaction,
+  });
+
+  const { data: transactionData } = useQuery({
+    queryKey: [explorerQueries.transaction_arweave, data?.arweaveUrl],
+    queryFn: async () => {
+      const response = await fetch(data?.arweaveUrl as string);
+      if (!response.ok) {
+        throw new Error('Network error to get arweave data');
+      }
+
+      return response.json();
+    },
+    enabled: !!data?.arweaveUrl,
   });
 
   const displayDetails = (data: Transaction_DetailQuery['transaction']) => {
@@ -77,49 +91,54 @@ export default function TransactionDetails({ id }: Props) {
   };
 
   return (
-    <Container sx={{ pb: 4 }}>
-      <Box sx={{ maxWidth: 777 }}>
-        <Stack
-          component={Card}
-          variant="outlined"
-          sx={{
-            mb: 3,
-            overflow: 'visible',
-          }}
-          divider={
-            <Divider
-              sx={{
-                width: '100%',
-              }}
-            />
-          }
-        >
-          <CardRow title={transaction_detail.transaction_id}>
-            <Typography variant="body1">
-              {isLoading ? <Skeleton variant="text" width={400} /> : id}
-            </Typography>
-            {data && (
-              <ExternalLink
-                iconSxProps={{ fontSize: 20, color: 'text.primary' }}
-                href={data?.arweaveUrl as string}
-                text=""
+    <>
+      <Container sx={{ pb: 4 }}>
+        <Box sx={{ maxWidth: 777 }}>
+          <Stack
+            component={Card}
+            variant="outlined"
+            sx={{
+              mb: 3,
+              overflow: 'visible',
+            }}
+            divider={
+              <Divider
+                sx={{
+                  width: '100%',
+                }}
               />
-            )}
-          </CardRow>
-          <CardRow title={transaction_detail.action}>
-            {isLoading ? (
-              <Skeleton width={100} />
-            ) : (
-              <Chip
-                label={
-                  <ActionDetail action={data?.action as TransactionAction} />
-                }
-              />
-            )}
-          </CardRow>
-          {data && displayDetails(data)}
-        </Stack>
-      </Box>
-    </Container>
+            }
+          >
+            <CardRow title={transaction_detail.transaction_id}>
+              <Typography variant="body1">
+                {isLoading ? <Skeleton variant="text" width={400} /> : id}
+              </Typography>
+              {data && (
+                <ExternalLink
+                  iconSxProps={{ fontSize: 20, color: 'text.primary' }}
+                  href={data?.arweaveUrl as string}
+                  text=""
+                />
+              )}
+            </CardRow>
+            <CardRow title={transaction_detail.action}>
+              {isLoading ? (
+                <Skeleton width={100} />
+              ) : (
+                <Chip
+                  label={
+                    <ActionDetail action={data?.action as TransactionAction} />
+                  }
+                />
+              )}
+            </CardRow>
+            {data && displayDetails(data)}
+          </Stack>
+        </Box>
+      </Container>
+      {transactionData && (
+        <TransactionData data={JSON.stringify(transactionData)} />
+      )}
+    </>
   );
 }

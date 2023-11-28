@@ -54,7 +54,7 @@ export default function RequestTemplateCreation({
         {numberToMoneyString(data.cost as number)}
       </CardRow>
       <CardRow title={transaction_detail.data_models}>
-        {metadata.dataModels.map((item: string, index: number) => (
+        {metadata?.dataModels?.map((item: string, index: number) => (
           <Box key={index} display="flex">
             {item}
             <ExternalLink

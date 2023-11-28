@@ -29,6 +29,7 @@ export const mutations = {
 
 export const explorerQueries = {
   transaction: 'transaction',
+  transaction_arweave: 'transaction_arweave',
   home_stats: 'home_stats',
   transactions: 'transactions',
   last_transactions: 'last_transactions',
