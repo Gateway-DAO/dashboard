@@ -8,6 +8,7 @@ const issuePdaSchema = zod.object({
   title: zod.string().min(2).max(100),
   description: zod.string().min(2),
   claim: zod.object({}),
+  ownerDraft: identifierValueSchema,
   owner: identifierValueSchema,
 });
 
