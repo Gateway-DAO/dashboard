@@ -1,18 +1,19 @@
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { Organization, User } from '@/services/protocol/types';
 
 import { Box, Skeleton, Stack, Typography } from '@mui/material';
 
-type User = {
-  id: string;
-  gatewayId: string;
-  name?: string;
-  image?: string;
-  profilePicture?: string;
-};
+// type User = {
+//   id: string;
+//   gatewayId: string;
+//   name?: string;
+//   image?: string;
+//   profilePicture?: string;
+// };
 
 type UserColum = {
   isLoading: boolean;
-  user: User | { id: string; type: string } | undefined;
+  user: any;
 };
 
 export default function UserColumn({ user, isLoading = true }: UserColum) {

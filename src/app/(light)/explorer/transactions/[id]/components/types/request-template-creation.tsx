@@ -16,6 +16,7 @@ export default function RequestTemplateCreation({
 }: {
   data: Transaction_DetailQuery['transaction'];
 }) {
+  const metadata: any = data.metadata;
   return (
     <Stack
       sx={{
@@ -31,11 +32,11 @@ export default function RequestTemplateCreation({
       }
     >
       <CardRow title={transaction_detail.request_template}>
-        {data.metadata.requestTemplate}
+        {metadata.requestTemplate}
         <ExternalLink
           iconSxProps={{ fontSize: 20, color: 'text.primary' }}
           href={routes.explorer.requestTemplate(
-            data.metadata.requestTemplate as string
+            metadata.requestTemplate as string
           )}
           text=""
         />
@@ -53,7 +54,7 @@ export default function RequestTemplateCreation({
         {numberToMoneyString(data.cost as number)}
       </CardRow>
       <CardRow title={transaction_detail.data_models}>
-        {data.metadata.dataModels.map((item: string, index: number) => (
+        {metadata.dataModels.map((item: string, index: number) => (
           <Box key={index} display="flex">
             {item}
             <ExternalLink

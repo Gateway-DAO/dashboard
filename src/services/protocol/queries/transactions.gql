@@ -58,23 +58,6 @@ query transaction_detail($id: String!) {
       }
     }
     metadata {
-      # ... on UserMetadata {
-      #   user
-      # }
-      # ... on OrganizationMetadata {
-      #   organization
-      #   usersAdmin
-      #   users
-      #   verified
-      # }
-      # ... on ProofMetadata {
-      #   owner
-      #   status
-      # }
-      # ... on PDAMetadata {
-      #   pda
-      #   expirationDate
-      # }
       ... on RequestMetadata {
         request
         requestTemplate
