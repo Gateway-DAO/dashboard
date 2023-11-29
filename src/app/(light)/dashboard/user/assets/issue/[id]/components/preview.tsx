@@ -1,7 +1,14 @@
+'use client';
 import IssuanceIcon from '@/components/icons/issuance';
 import ModalTitle from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
+import UsersFromTo from '@/components/users-from-to/users-from-to';
+import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
+import { pda } from '@/locale/en/pda';
+import { User } from '@/services/protocol/types';
+import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { numberToMoneyString } from '@/utils/money';
 
 import { EditOutlined } from '@mui/icons-material';
@@ -26,6 +33,16 @@ export default function Preview({
   data,
   onClose,
 }: Props) {
+  const { session } = useGtwSession();
+  const { organization } = useOrganization();
+  const from = getOrganizationOrUserData(session.user as User, organization);
+  const to = getOrganizationOrUserData({
+    id: '',
+    gatewayId: 'joaozinho',
+    displayName: 'Joao Conserva',
+    profilePicture: '',
+    createdAt: '',
+  });
   if (!data) return null;
   return (
     <ModalRight open={isOpen} onClose={onClose}>
@@ -83,7 +100,14 @@ export default function Preview({
           </Button>
         </Stack>
         <Typography mt={2}>{data.description}</Typography>
-        <Box mt={2}>OWNERSHIP</Box>
+        <Box mt={2}>
+          <UsersFromTo
+            from={from}
+            to={to}
+            fromLabel={pda.issuer}
+            toLabel={pda.owner}
+          />
+        </Box>
         <Divider sx={{ mx: -3, my: 4 }} />
         <Typography variant="subtitle1">Claim</Typography>
       </Box>

@@ -6,14 +6,25 @@ export type GatewayProfile = {
   gatewayId: string;
   name?: string | null;
   image?: string | null;
+  verified?: boolean | null;
+  createdAt?: string | null;
+  isOrganization: boolean;
 };
 
 export default function getOrganizationOrUserData(
   user: PartialDeep<
-    Pick<User, 'id' | 'gatewayId' | 'displayName' | 'profilePicture'>
+    Pick<
+      User,
+      'id' | 'gatewayId' | 'displayName' | 'profilePicture' | 'createdAt'
+    >
   >,
   organization?:
-    | PartialDeep<Pick<Organization, 'id' | 'gatewayId' | 'name' | 'image'>>
+    | PartialDeep<
+        Pick<
+          Organization,
+          'id' | 'gatewayId' | 'name' | 'image' | 'verified' | 'createdAt'
+        >
+      >
     | null
     | undefined
 ): GatewayProfile {
@@ -23,6 +34,9 @@ export default function getOrganizationOrUserData(
       gatewayId: organization.gatewayId!,
       name: organization.name,
       image: organization.image,
+      verified: organization.verified,
+      createdAt: organization.createdAt,
+      isOrganization: true,
     };
   }
 
@@ -31,5 +45,7 @@ export default function getOrganizationOrUserData(
     gatewayId: user.gatewayId!,
     name: user.displayName,
     image: user.profilePicture,
+    createdAt: user.createdAt,
+    isOrganization: false,
   };
 }
