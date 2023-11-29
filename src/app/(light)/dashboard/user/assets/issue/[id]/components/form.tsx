@@ -2,7 +2,10 @@
 
 import { useMemo, useState } from 'react';
 
-import { UserIdentifierType } from '@/services/protocol/types';
+import {
+  UserIdentificationInput,
+  UserIdentifierType,
+} from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -50,8 +53,20 @@ export default function Form({ schema }: Props) {
     },
     resolver: async (value, context, options) =>
       issuePdaValidator(value, schema, context, options),
-    reValidateMode: 'onSubmit',
+    mode: 'onSubmit',
   });
+
+  const owner = methods.watch('owner');
+  const { error: ownerError } = methods.getFieldState('owner');
+  const setOwner = (values: UserIdentificationInput) => {
+    methods.setValue('owner', values);
+  };
+  const resetOwner = () => {
+    methods.setValue('owner', {
+      type: UserIdentifierType.GatewayId,
+      value: '',
+    });
+  };
 
   const amount = 1;
   const price = 0.05;
@@ -67,22 +82,27 @@ export default function Form({ schema }: Props) {
 
   return (
     <>
-      <FormProvider {...methods}>
-        <Stack
-          gap={2}
-          mb={14}
-          onSubmit={methods.handleSubmit(onSubmit, (error) => {
-            console.log('error', error);
-          })}
-        >
-          <OwnerSection />
+      <Stack
+        gap={2}
+        mb={14}
+        onSubmit={methods.handleSubmit(onSubmit, (error) => {
+          console.log('error', error);
+        })}
+      >
+        <OwnerSection
+          owner={owner}
+          ownerError={ownerError?.message}
+          setOwner={setOwner}
+          resetOwner={resetOwner}
+        />
+        <FormProvider {...methods}>
           <Stack component="form" gap={2}>
             <TitleDescriptionSection />
             <PropertiesSection schema={schema} />
             <Summary amount={amount} total={total} />
           </Stack>
-        </Stack>
-      </FormProvider>
+        </FormProvider>
+      </Stack>
       {!!previewModalState.data && (
         <Preview
           amount={amount}

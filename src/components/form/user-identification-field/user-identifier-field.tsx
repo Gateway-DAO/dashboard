@@ -31,6 +31,7 @@ type Props = {
     value?: string;
   };
   disabled?: boolean;
+  onSubmit?: (data: IdentifierValueSchema) => void;
 };
 
 export default function UserIdentityField({

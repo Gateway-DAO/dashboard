@@ -20,25 +20,28 @@ import { useForm, useFormContext } from 'react-hook-form';
 import { Add } from '@mui/icons-material';
 import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 
-import { IssuePdaSchema } from '../../schema';
 import OwnerPreview from './owner-preview';
 
-export default function OwnerSection() {
-  const { control, handleSubmit, setError, reset } = useForm({
+type Props = {
+  owner: UserIdentificationInput;
+  ownerError?: string;
+  setOwner: (owner: UserIdentificationInput) => void;
+  resetOwner: () => void;
+};
+
+export default function OwnerSection({
+  owner,
+  ownerError,
+  setOwner,
+  resetOwner,
+}: Props) {
+  const { control, handleSubmit, setError, setValue } = useForm({
     values: {
       type: UserIdentifierType.GatewayId,
       value: '',
     },
     resolver: zodResolver(identifierValueSchema),
   });
-  const {
-    getFieldState,
-    watch,
-    setValue: setIssueValue,
-  } = useFormContext<IssuePdaSchema>();
-  const owner: UserIdentificationInput = watch('owner');
-
-  const { error: issueError } = getFieldState('owner');
 
   const [ownerPreview, setOwnerPreview] = useState<{
     name: string;
@@ -77,15 +80,15 @@ export default function OwnerSection() {
           picture,
           type: data.type,
         });
-        return setIssueValue('owner', data);
+      } else {
+        setOwnerPreview({
+          name: data.value,
+          type: data.type,
+        });
       }
-      setOwnerPreview({
-        name: data.value,
-        type: data.type,
-      });
-      reset();
+      setOwner(data);
+      setValue('value', '');
     } catch (error) {
-      console.log(error);
       setError('value', {
         type: 'manual',
         message: 'Error',
@@ -94,11 +97,7 @@ export default function OwnerSection() {
   };
 
   const onRemove = () => {
-    reset();
-    setIssueValue('owner', {
-      type: UserIdentifierType.GatewayId,
-      value: '',
-    });
+    resetOwner();
     setOwnerPreview(undefined);
   };
 
@@ -118,11 +117,16 @@ export default function OwnerSection() {
       <Box>
         <Stack
           component="form"
+          onSubmit={(e) => {
+            // Stops triggering the other form validation on submit
+            e.stopPropagation();
+            e.preventDefault();
+            handleSubmit(onAdd)(e);
+          }}
           direction="row"
           gap={1}
           width="100%"
           alignItems="flex-start"
-          onSubmit={handleSubmit(onAdd)}
         >
           <UserIdentityField
             control={control}
@@ -139,7 +143,7 @@ export default function OwnerSection() {
             {common.actions.add}
           </Button>
         </Stack>
-        {issueError && <ErrorMessage>{issueError.message}</ErrorMessage>}
+        {ownerError && <ErrorMessage>{ownerError}</ErrorMessage>}
       </Box>
       {!!owner.value.length && !!ownerPreview && (
         <OwnerPreview
