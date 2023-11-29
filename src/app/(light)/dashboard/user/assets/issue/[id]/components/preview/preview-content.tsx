@@ -100,8 +100,12 @@ export default function PreviewContent({
         </Stack>
         <Typography mt={2}>{data.description}</Typography>
         <Box mt={2}>OWNERSHIP</Box>
-        <Divider sx={{ mx: -3, my: 4 }} />
-        <ClaimValuesList title="Claims" data={claims} />
+        {claims.length > 0 && (
+          <>
+            <Divider sx={{ mx: -3, my: 4 }} />
+            <ClaimValuesList title="Claims" data={claims} />
+          </>
+        )}
       </Box>
     </>
   );
