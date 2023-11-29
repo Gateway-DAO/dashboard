@@ -46,20 +46,6 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
           </Typography>
           <CopyTextButton text={pda?.id as string} limit={12} size={14} />
         </Stack>
-        {/* <Typography
-          variant="caption"
-          sx={{
-            color: 'text.secondary',
-            fontWeight: 600,
-            textDecoration: 'none',
-          }}
-        >
-          {`ID ${limitCharsCentered(pda?.id ?? 'id', 8)}`}
-        </Typography> */}
-        {/* <ExternalLink
-          text={`ID ${limitCharsCentered(pda?.id, 8)}`}
-          href="https://www.google.com"
-        /> */}
         <Stack
           direction="row"
           justifyContent="space-between"
