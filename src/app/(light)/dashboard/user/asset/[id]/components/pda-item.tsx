@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
+import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import Tags from '@/components/tags/tags';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -15,7 +16,6 @@ import { PartialDeep } from 'type-fest';
 
 import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
-import DataTable from './data-table';
 import IssuerPDAActions from './issuer-pda-actions';
 import ModalImage from './modal-image';
 import PdaCardInfo from './pda-card-info';
@@ -125,7 +125,10 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
         }}
       />
 
-      <DataTable title={pdaLocale.claim} data={pda?.dataAsset?.claimArray} />
+      <ClaimValuesList
+        title={pdaLocale.claim}
+        data={pda?.dataAsset?.claimArray}
+      />
     </>
   );
 }

@@ -19,6 +19,13 @@ import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 
 import OwnerPreview from './owner-preview';
 
+/**
+ * TODO: We should create a local `useForm` to handle the local state of the form and its validation
+ * Only when the user clicks on the Add button it should
+ * send the data to the useFormContext
+ * @returns
+ */
+
 export default function OwnerSection() {
   const { control, getFieldState, watch, setError, clearErrors, setValue } =
     useFormContext();
@@ -42,7 +49,7 @@ export default function OwnerSection() {
 
   const setOwnerPreviewGatewayId = (userData: Get_User_InfoQuery) => {
     setValue('owner', ownerDraft);
-    setValue('ownerDraft.value', '');
+    // setValue('ownerDraft.value', '');
     const name =
       userData.user?.displayName ??
       userData.user?.gatewayId ??
@@ -63,7 +70,7 @@ export default function OwnerSection() {
       name: ownerDraft.value ?? '',
     });
     setValue('owner', ownerDraft);
-    setValue('ownerDraft.value', '');
+    // setValue('ownerDraft.value', '');
   };
 
   const userGatewayId = useMutation({

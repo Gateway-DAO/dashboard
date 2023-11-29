@@ -11,7 +11,8 @@ import { TextStatusChip } from '@/components/text-status-chip/text-status-chip';
 import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 import { pdas } from '@/locale/en/pda';
-import { Issued_PdasQuery, PdaStatus } from '@/services/protocol/types';
+import { PdaStatus, PrivateDataAsset } from '@/services/protocol/types';
+import { PartialDeep } from 'type-fest';
 
 import { Typography } from '@mui/material';
 import {
@@ -22,7 +23,7 @@ import {
 } from '@mui/x-data-grid';
 
 type Props = {
-  data: Issued_PdasQuery['issuedPDAs'];
+  data: PartialDeep<PrivateDataAsset>[];
   totalCount: number;
 };
 
