@@ -8,8 +8,6 @@ const issuePdaSchema = zod.object({
   title: zod.string().min(2).max(100),
   description: zod.string().min(2),
   claim: zod.object({}),
-  // TODO: Remove this line when refactoring the owner field ((light)\dashboard\user\assets\issue\[id]\components\sections\owner\owner.tsx)
-  ownerDraft: identifierValueSchema.optional(),
   owner: identifierValueSchema,
 });
 
