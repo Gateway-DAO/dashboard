@@ -50,6 +50,7 @@ query explorer_request_template_detail_overview($id: String!) {
     tags
     uniqueVerifiersCount
     dataRequestsCount
+    revenueGenerated
     dataModels {
       id
       title
