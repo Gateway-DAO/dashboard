@@ -27,7 +27,7 @@ export default function DataModelContent({ dataModel }: Props) {
     },
     {
       label: 'Revenue generated',
-      value: numberToMoneyString(27453.45),
+      value: numberToMoneyString(dataModel.revenueGenerated),
     },
   ];
 
