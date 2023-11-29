@@ -27,7 +27,7 @@ export default function IssuePdaActions({ id }: Props) {
           variant="contained"
           href={
             isOrg
-              ? routes.dashboard.org.issue(organization.gatewayId)
+              ? routes.dashboard.org.issuePda(organization.gatewayId, id)
               : routes.dashboard.user.issuePda(id)
           }
         >

@@ -40,6 +40,10 @@ export default function Form({ schema }: Props) {
 
   const methods = useForm<IssuePdaSchema>({
     values: {
+      ownerDraft: {
+        type: UserIdentifierType.GatewayId,
+        value: '',
+      },
       owner: {
         type: UserIdentifierType.GatewayId,
         value: '',

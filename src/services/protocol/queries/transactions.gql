@@ -5,11 +5,13 @@ query my_transactions($skip: Int, $take: Int, $organizationId: String) {
     organizationId: $organizationId
   ) {
     id
-    value
     type
     transactionId
     createdAt
     action
+    total
+    fee
+    value
   }
 }
 
@@ -30,5 +32,68 @@ query explorer_transactions($skip: Int, $take: Int) {
     id
     action
     createdAt
+  }
+}
+
+query transaction_detail($id: String!) {
+  transaction(id: $id) {
+    id
+    action
+    arweaveUrl
+    createdAt
+    cost
+    from {
+      ... on Organization {
+        id
+        image
+        gatewayId
+        image
+        name
+      }
+      ... on User {
+        id
+        gatewayId
+        displayName
+        profilePicture
+      }
+    }
+    metadata {
+      ... on RequestMetadata {
+        request
+        requestTemplate
+        status
+      }
+      ... on RequestTemplateMetadata {
+        dataModels
+        requestTemplate
+      }
+      ... on DataModelMetadata {
+        dataModel
+      }
+    }
+    to {
+      ... on Organization {
+        id
+        image
+        gatewayId
+        name
+        verified
+        accesses {
+          role
+          user {
+            id
+            gatewayId
+            displayName
+            profilePicture
+          }
+        }
+      }
+      ... on User {
+        id
+        gatewayId
+        displayName
+        profilePicture
+      }
+    }
   }
 }

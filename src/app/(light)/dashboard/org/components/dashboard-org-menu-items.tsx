@@ -27,6 +27,7 @@ export const dashboardOrgMenuItems = (
     activeHrefs: [
       routes.dashboard.org.issuedAssets(username),
       routes.dashboard.org.issue(username),
+      routes.dashboard.org.issuePda(username, ''),
     ],
     icon: DataOutlinedIcon,
     navbar: true,

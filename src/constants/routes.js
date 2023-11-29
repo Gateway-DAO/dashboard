@@ -10,6 +10,7 @@ const routes = {
     org: {
       asset: (org, pdaId) => `${dashboardOrg}/${org}/asset/${pdaId}`,
       issue: (org) => `${dashboardOrg}/${org}/assets/issue`,
+      issuePda: (org, id) => `${dashboardOrg}/${org}/assets/issue/${id}`,
       proof: (org, proofId) => `${dashboardOrg}/${org}/proof/${proofId}`,
       request: (org, requestId) =>
         `${dashboardOrg}/${org}/request/${requestId}`,

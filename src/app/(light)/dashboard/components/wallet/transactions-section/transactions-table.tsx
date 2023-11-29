@@ -31,7 +31,7 @@ import TransactionStatusChip from '../transaction/transaction-status-chip';
 
 const columns: GridColDef<My_TransactionsQuery['myFinancialTransactions']>[] = [
   {
-    field: 'value',
+    field: 'total',
     headerName: transaction.amount,
     flex: 1,
     renderCell: (params) => (
