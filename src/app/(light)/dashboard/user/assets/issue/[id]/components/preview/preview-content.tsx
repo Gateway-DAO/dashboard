@@ -1,13 +1,14 @@
+import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import IssuanceIcon from '@/components/icons/issuance';
 import { common } from '@/locale/en/common';
 import { CredentialData } from '@/services/protocol/types';
+import { getClaimTitle } from '@/utils/get-claim-type';
 import { numberToMoneyString } from '@/utils/money';
 
 import { EditOutlined } from '@mui/icons-material';
 import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 
-import ClaimList from './claim-list';
 import { PreviewModalProps } from './type';
 
 type Props = Omit<PreviewModalProps, 'isOpen'> & {
@@ -25,16 +26,18 @@ export default function PreviewContent({
   onSubmit,
   onClose,
 }: Props) {
-  const claims: CredentialData[] = data?.claim
-    ? Object.keys(schema.properties).map((key) => {
-        const property = schema.properties[key];
-        const value = (data.claim as any)[key];
-        return {
-          ...property,
-          value,
-        };
-      })
-    : [];
+  const schemaProperties = schema.properties;
+
+  const claims: CredentialData[] = Object.keys(data.claim).map((key) => {
+    const label = getClaimTitle(schemaProperties[key]);
+    return {
+      ...schemaProperties[key],
+      label,
+      value: (data.claim as any)[key],
+    } as CredentialData;
+  });
+
+  console.log(claims, data.claim, schema);
 
   return (
     <>
@@ -98,7 +101,7 @@ export default function PreviewContent({
         <Typography mt={2}>{data.description}</Typography>
         <Box mt={2}>OWNERSHIP</Box>
         <Divider sx={{ mx: -3, my: 4 }} />
-        <ClaimList data={claims} />
+        <ClaimValuesList title="Claims" data={claims} />
       </Box>
     </>
   );

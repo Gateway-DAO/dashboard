@@ -1,16 +1,17 @@
-import ClaimView from '@/app/(light)/dashboard/components/claim-view/claim-view';
 import CardCell from '@/components/card-cell/card-cell';
 import { CredentialData } from '@/services/protocol/types';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Stack, Typography, Divider, Card } from '@mui/material';
 
+import ClaimView from './claim-view';
+
 type Props = {
   title: string;
   data: CredentialData[] | undefined;
 };
 
-export default function DataTable({ title, data }: Props) {
+export default function ClaimValuesList({ title, data }: Props) {
   return (
     <Stack sx={{ ...WIDTH_CENTERED }}>
       <Typography sx={{ fontWeight: 700, mb: 3 }}>{title}</Typography>
