@@ -2,9 +2,11 @@
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
+import ExternalLink from '@/components/external-link/external-link';
 import { TextStatusChip } from '@/components/text-status-chip/text-status-chip';
 import UsersFromTo from '@/components/users-from-to/users-from-to';
 import { DATE_FORMAT } from '@/constants/date';
+import routes from '@/constants/routes';
 import { datamodel } from '@/locale/en/datamodel';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import {
@@ -90,18 +92,20 @@ export default function PdaCardInfo({ pda, isProofPda = false }: Props) {
           </CardCell>
         )}
         <CardCell label={datamodel.data_model_id} margin={false}>
-          {
-            <CopyTextButton
-              text={pda?.dataAsset?.dataModel?.id as string}
-              limit={6}
+          <Stack direction="row" justifyContent="space-between">
+            {
+              <CopyTextButton
+                text={pda?.dataAsset?.dataModel?.id as string}
+                limit={6}
+              />
+            }
+            <ExternalLink
+              text=""
+              textSxProps={{ fontSize: 16, fontWeight: 400 }}
+              iconSxProps={{ fontSize: 18, top: 4, color: 'text.primary' }}
+              href={routes.explorer.dataModel(pda?.dataAsset?.dataModel?.id)}
             />
-          }
-          {/* <ExternalLink
-            text={}
-            textSxProps={{ fontSize: 16, fontWeight: 400 }}
-            iconSxProps={{ fontSize: 18, top: 4, color: 'text.primary' }}
-            href="https://www.google.com"
-          /> */}
+          </Stack>
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
