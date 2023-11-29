@@ -1,6 +1,8 @@
 import { Organization, User } from '@/services/protocol/types';
 import { PartialDeep } from 'type-fest';
 
+import { limitCharsCentered } from './string';
+
 export type GatewayProfile = {
   id: string;
   gatewayId: string;
@@ -31,8 +33,11 @@ export default function getOrganizationOrUserData(
   if (organization) {
     return {
       id: organization.id!,
-      gatewayId: organization.gatewayId!,
-      name: organization.name,
+      gatewayId: organization.gatewayId! ?? limitCharsCentered(user.id!, 10),
+      name:
+        organization.name ??
+        user.gatewayId ??
+        limitCharsCentered(organization.id!, 10),
       image: organization.image,
       verified: organization.verified,
       createdAt: organization.createdAt,
@@ -42,8 +47,9 @@ export default function getOrganizationOrUserData(
 
   return {
     id: user.id!,
-    gatewayId: user.gatewayId!,
-    name: user.displayName,
+    gatewayId: user.gatewayId! ?? limitCharsCentered(user.id!, 10),
+    name:
+      user.displayName ?? user.gatewayId ?? limitCharsCentered(user.id!, 10),
     image: user.profilePicture,
     createdAt: user.createdAt,
     isOrganization: false,

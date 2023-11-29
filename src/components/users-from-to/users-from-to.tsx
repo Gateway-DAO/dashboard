@@ -28,6 +28,7 @@ export default function UsersFromTo({
   const [tooltipIssuer, setTooltipIssuer] = useState<boolean>(false);
   const [tooltipRecipient, setTooltipRecipient] = useState<boolean>(false);
 
+  console.log('asdfa', from, to);
   return (
     <Stack
       justifyContent="space-between"
