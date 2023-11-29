@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { ReactNode } from 'react';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
@@ -28,26 +27,20 @@ export default function DataImageCard({
   const { image: avatar, name, gatewayId } = profile;
 
   return (
-    <Card variant="outlined" sx={{ height: 500 }} {...props}>
+    <Card variant="outlined" sx={{ height: 500, p: 0 }} {...props}>
       <CardContainer href={href} sx={{ p: 0, gap: 2 }}>
-        {image ? (
-          <Image
-            src={image}
-            alt={title}
-            width={343}
-            height={230}
-            style={{ width: '100%', height: 230 }}
-          />
-        ) : (
-          <Stack
-            sx={{
-              width: '100%',
-              height: 230,
-              background:
-                'linear-gradient(242deg, rgba(35,34,157,1) 0%, rgba(83,18,140,1) 54%, rgba(141,77,181,1) 100%)',
-            }}
-          />
-        )}
+        <Stack
+          sx={{
+            width: '100%',
+            height: 230,
+            overflow: 'hidden',
+            background: image
+              ? `url(${image}) no-repeat`
+              : 'linear-gradient(242deg, rgba(35,34,157,1) 0%, rgba(83,18,140,1) 54%, rgba(141,77,181,1) 100%)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
         <Stack sx={{ px: 2, pb: 2, height: 270 }}>
           <Stack direction="column" gap={3} sx={{ height: '100%' }}>
             <Stack direction="row" gap={1} alignItems="center">

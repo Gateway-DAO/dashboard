@@ -1,16 +1,16 @@
-export const claimFields = {
-  boolean: 'boolean',
-  image: 'image',
-  text: 'text',
-  number: 'number',
-  array: 'array',
-  link: 'link',
-  currency: 'currency',
-};
+import { titleCase } from 'title-case';
 
-export type ClaimField = keyof typeof claimFields;
+export enum ClaimField {
+  Boolean = 'boolean',
+  Image = 'image',
+  Text = 'text',
+  Number = 'number',
+  Array = 'array',
+  Link = 'link',
+  Currency = 'currency',
+}
 
-export type ClaimFieldProps = {
+export type SchemaProperty = {
   label?: string;
   fieldName?: string;
   title?: string;
@@ -20,41 +20,54 @@ export type ClaimFieldProps = {
   format?: string;
   subType?: string;
   examples?: Array<string | boolean>;
-  items?: ClaimFieldProps;
-};
-
-// List all claim fields
-
-// List all backend Types
-export const maptypes = {
-  boolean: claimFields.boolean,
-  integer: claimFields.number,
-  float: claimFields.number,
-  string: claimFields.text,
-};
-
-type type = keyof typeof maptypes;
-
-type GetClaimTypeProps = {
-  type: string;
-  contentMediaType?: string | null;
-  format?: string | null;
+  items?: SchemaProperty;
   currency?: string | null;
 };
 
-const getClaimType = ({
+export const getClaimType = ({
   type,
   contentMediaType,
   currency,
   format,
-}: GetClaimTypeProps) => {
-  if (contentMediaType) return claimFields.image;
-  if (format === 'uri') return claimFields.link;
-  if (currency) return claimFields.currency;
-  if (maptypes[type as type]) {
-    type = maptypes[type as type];
+}: SchemaProperty): ClaimField => {
+  if (contentMediaType) return ClaimField.Image;
+  if (format === 'uri') return ClaimField.Link;
+  if (currency) return ClaimField.Currency;
+
+  switch (type) {
+    case 'number':
+    case 'integer':
+    case 'float':
+      return ClaimField.Number;
+    case 'boolean':
+      return ClaimField.Boolean;
+    case 'array':
+      return ClaimField.Array;
+    default:
+      return ClaimField.Text;
   }
-  return claimFields[type as keyof typeof claimFields];
 };
 
 export default getClaimType;
+
+export const getClaimTitle = (property: SchemaProperty, id?: string) => {
+  let title = property.title;
+  if (!title && id) {
+    title = titleCase(id);
+  }
+
+  return title;
+};
+
+export const getClaimExample = (property: SchemaProperty) => {
+  let example: string | undefined = undefined;
+  if (property.examples?.length) {
+    example = property.examples!.join(', ');
+  } else if (property.items?.examples?.length) {
+    example = property.items.examples!.join(', ');
+  }
+  return example;
+};
+
+export const getClaimDefaultValue = (property: SchemaProperty) =>
+  property.default ?? property.items?.default;

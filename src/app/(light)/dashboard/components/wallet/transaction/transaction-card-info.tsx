@@ -15,7 +15,7 @@ import dayjs from 'dayjs';
 
 import { Stack, Divider, Card, Typography, Button } from '@mui/material';
 
-import ActionDetail from '../action-detail';
+import FinancialActionDetail from '../action-detail';
 
 type Props = {
   id: string;
@@ -34,28 +34,28 @@ export default function TransactionCardInfo({
 }: Props) {
   const { organization } = useOrganization();
 
-  const dynamicRoute = useMemo(() => {
-    if (title === FinancialTransactionAction.ProofCreate) {
-      const obj = {
-        text: common.actions.view_proof,
-        url: '',
-      };
-      obj.url = !!organization
-        ? routes.dashboard.org.proof(organization.gatewayId, objectId)
-        : routes.dashboard.user.proof(objectId);
-      return obj;
-    }
-    if (title === FinancialTransactionAction.PdaIssuance) {
-      const obj = {
-        text: common.actions.view_pda,
-        url: '',
-      };
-      obj.url = !!organization
-        ? routes.dashboard.org.asset(organization.gatewayId, objectId)
-        : routes.dashboard.user.asset(objectId);
-      return obj;
-    }
-  }, [title]);
+  // const dynamicRoute = useMemo(() => {
+  //   if (title === FinancialTransactionAction.ProofCreate) {
+  //     const obj = {
+  //       text: common.actions.view_proof,
+  //       url: '',
+  //     };
+  //     obj.url = !!organization
+  //       ? routes.dashboard.org.proof(organization.gatewayId, objectId)
+  //       : routes.dashboard.user.proof(objectId);
+  //     return obj;
+  //   }
+  //   if (title === FinancialTransactionAction.PdaIssuance) {
+  //     const obj = {
+  //       text: common.actions.view_pda,
+  //       url: '',
+  //     };
+  //     obj.url = !!organization
+  //       ? routes.dashboard.org.asset(organization.gatewayId, objectId)
+  //       : routes.dashboard.user.asset(objectId);
+  //     return obj;
+  //   }
+  // }, [title]);
   return (
     <Stack
       component={Card}
@@ -74,7 +74,7 @@ export default function TransactionCardInfo({
             alignItems="flex-start"
           >
             <Typography data-testid="transaction__card__title">
-              <ActionDetail action={title} />
+              <FinancialActionDetail action={title} />
             </Typography>
             {/* <Button
               size="small"
@@ -88,7 +88,12 @@ export default function TransactionCardInfo({
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={transaction.transaction_id}>
-          <ExternalLink href="#" text={id} size="big" id={id} />
+          <ExternalLink
+            href={routes.explorer.transaction(id)}
+            text={id}
+            size="big"
+            id={id}
+          />
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>

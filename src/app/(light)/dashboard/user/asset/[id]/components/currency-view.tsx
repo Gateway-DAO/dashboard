@@ -1,4 +1,6 @@
 'use client';
+import { numberToMoneyString } from '@/utils/money';
+
 import { Typography } from '@mui/material';
 
 type Props = {
@@ -9,12 +11,7 @@ type Props = {
 export function CurrencyView({ value = 0, currency = 'USD' }: Props) {
   return (
     <Typography>
-      {currency}{' '}
-      {`${value.toLocaleString('en-US', {
-        style: 'currency',
-        currency,
-        currencyDisplay: 'symbol',
-      })}`}
+      {currency} {numberToMoneyString(value)}
     </Typography>
   );
 }

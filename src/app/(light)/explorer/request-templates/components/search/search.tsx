@@ -2,6 +2,12 @@
 
 import { useState } from 'react';
 
+import ClearFiltersButton from '@/components/search-filters/clear-filters-button';
+import SortByField, {
+  SortByOption,
+} from '@/components/search-filters/sort-by-field';
+import TagsField from '@/components/search-filters/tags-field';
+import SearchSection from '@/components/search-section/search-section';
 import { explorerRequestTemplates } from '@/locale/en/request-template';
 import { apiPublic } from '@/services/protocol/api';
 import { DataRequestTemplate } from '@/services/protocol/types';
@@ -9,12 +15,6 @@ import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import RequestTemplateExplorerCard from '../../../components/request-template-card/request-template-card';
-import ClearFiltersButton from '../../../components/search-filters/clear-filters-button';
-import SortByField, {
-  SortByOption,
-} from '../../../components/search-filters/sort-by-field';
-import TagsField from '../../../components/search-filters/tags-field';
-import ExplorerSearchSection from '../../../components/search-section/search-section';
 import AmountOfDataRequestsField from './filters/amount-of-data-requests-field';
 import AverageCostField from './filters/average-cost-field';
 
@@ -121,7 +121,7 @@ export default function DataModelsRequestExplorerSearch() {
   );
 
   return (
-    <ExplorerSearchSection
+    <SearchSection
       title={explorerRequestTemplates.listTitle}
       emptyText={explorerRequestTemplates.empty}
       errorMessage="Error on searching for data model request templates"

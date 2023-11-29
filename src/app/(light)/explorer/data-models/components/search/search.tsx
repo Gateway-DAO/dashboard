@@ -1,19 +1,19 @@
 'use client';
 import { useState } from 'react';
 
+import DataModelCard from '@/components/data-model-card/data-model-card';
+import ClearFiltersButton from '@/components/search-filters/clear-filters-button';
+import SortByField, {
+  SortByOption,
+} from '@/components/search-filters/sort-by-field';
+import TagsField from '@/components/search-filters/tags-field';
+import SearchSection from '@/components/search-section/search-section';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
 import { DataModel } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
-import ClearFiltersButton from '../../../components/search-filters/clear-filters-button';
-import SortByField, {
-  SortByOption,
-} from '../../../components/search-filters/sort-by-field';
-import TagsField from '../../../components/search-filters/tags-field';
-import ExplorerSearchSection from '../../../components/search-section/search-section';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
 
@@ -155,7 +155,7 @@ export default function DataModelsExplorerSearch() {
   );
 
   return (
-    <ExplorerSearchSection
+    <SearchSection
       title={explorerDataModels.listTitle}
       emptyText={explorerDataModels.empty}
       errorMessage="Error on searching for data models"
@@ -171,7 +171,7 @@ export default function DataModelsExplorerSearch() {
         dataModelsQuery.isSuccess &&
         dataModels.length > 0 &&
         dataModels.map((dataModel) => (
-          <DataModelExplorerCard dataModel={dataModel} key={dataModel.id} />
+          <DataModelCard dataModel={dataModel} key={dataModel.id} />
         ))
       }
     />
