@@ -129,7 +129,7 @@ export default function OwnerSection() {
                 setOwnerPreviewOthers();
               }
             }}
-            disabled={!ownerDraft.value}
+            disabled={!!owner.value}
             sx={{ height: 57 }}
           >
             {common.actions.add}
