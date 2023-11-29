@@ -46,8 +46,8 @@ export default function DataModelDetailHeader({
           variant="contained"
           href={
             isOrg
-              ? routes.dashboard.org.issue(organization.gatewayId)
-              : routes.dashboard.user.issue
+              ? routes.dashboard.org.issuePda(organization.gatewayId, id)
+              : routes.dashboard.user.issuePda(id)
           }
         >
           {issuePda.issue}
