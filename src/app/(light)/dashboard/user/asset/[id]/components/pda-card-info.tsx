@@ -3,6 +3,7 @@ import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import { TextStatusChip } from '@/components/text-status-chip/text-status-chip';
+import UsersFromTo from '@/components/users-from-to/users-from-to';
 import { DATE_FORMAT } from '@/constants/date';
 import { datamodel } from '@/locale/en/datamodel';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -10,16 +11,14 @@ import {
   PdaStatus,
   PdaQuery,
   DecryptedProofPda,
+  User,
 } from '@/services/protocol/types';
+import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import WalletIcon from '@mui/icons-material/Wallet';
 import { Stack, Divider, Typography, Card } from '@mui/material';
-
-import CardUsers from './card-users';
 
 type Props = {
   pda: PartialDeep<PdaQuery['PDA'] | null>;
@@ -27,6 +26,12 @@ type Props = {
 };
 
 export default function PdaCardInfo({ pda, isProofPda = false }: Props) {
+  const from = getOrganizationOrUserData(
+    pda?.dataAsset?.issuer as User,
+    pda?.dataAsset?.organization
+  );
+  const to = getOrganizationOrUserData(pda?.dataAsset?.owner as User);
+
   return (
     <Stack
       component={Card}
@@ -34,7 +39,12 @@ export default function PdaCardInfo({ pda, isProofPda = false }: Props) {
       sx={{ mb: 3, overflow: 'visible' }}
       divider={<Divider sx={{ width: '100%' }} />}
     >
-      <CardUsers pda={pda} />
+      <UsersFromTo
+        from={from}
+        to={to}
+        fromLabel={pdaLocale.issuer}
+        toLabel={pdaLocale.owner}
+      />
       {/* {!isProofPda && (
         <TableCellContainer>
           <CardCell label={pdaLocale.received_at}>

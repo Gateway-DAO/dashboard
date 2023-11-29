@@ -8,5 +8,6 @@ query get_user_info($identification: UserIdentificationInput!) {
     displayName
     gatewayId
     profilePicture
+    createdAt
   }
 }

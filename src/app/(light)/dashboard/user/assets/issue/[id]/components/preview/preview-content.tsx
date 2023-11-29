@@ -1,13 +1,27 @@
+'use client';
 import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
+import CardCell from '@/components/card-cell/card-cell';
+import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import IssuanceIcon from '@/components/icons/issuance';
+import UsersFromTo from '@/components/users-from-to/users-from-to';
+import { DATE_FORMAT } from '@/constants/date';
+import { queries } from '@/constants/queries';
+import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
+import { pda } from '@/locale/en/pda';
+import { apiPublic } from '@/services/protocol/api';
+import { User, UserIdentifierType } from '@/services/protocol/types';
 import { CredentialData } from '@/services/protocol/types';
 import { getClaimTitle } from '@/utils/get-claim-type';
+import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { numberToMoneyString } from '@/utils/money';
+import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 
 import { EditOutlined } from '@mui/icons-material';
-import { Box, Button, Divider, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, Divider, Stack, Typography } from '@mui/material';
 
 import { PreviewModalProps } from './type';
 
@@ -26,6 +40,37 @@ export default function PreviewContent({
   onSubmit,
   onClose,
 }: Props) {
+  const { session } = useGtwSession();
+  const { organization } = useOrganization();
+
+  const { data: userData } = useQuery({
+    queryKey: [queries.user_info, data.owner?.type, data.owner?.value],
+    queryFn: async () =>
+      apiPublic.get_user_info({
+        identification: {
+          type: data.owner?.type,
+          value: data.owner?.value,
+        },
+      }),
+    select: (data) => data.user,
+    enabled: !!data && data.owner.type === UserIdentifierType.GatewayId,
+  });
+
+  if (!data) return null;
+
+  const from = getOrganizationOrUserData(session.user as User, organization);
+  const to = getOrganizationOrUserData(
+    !!userData
+      ? userData
+      : {
+          id: '',
+          gatewayId: data.owner.value,
+          displayName: data.owner.value,
+          profilePicture: '',
+          createdAt: '',
+        }
+  );
+
   const schemaProperties = schema.properties;
 
   const claims: CredentialData[] = Object.keys(data.claim).map((key) => {
@@ -36,8 +81,6 @@ export default function PreviewContent({
       value: (data.claim as any)[key],
     } as CredentialData;
   });
-
-  console.log(claims, data.claim, schema);
 
   return (
     <>
@@ -99,7 +142,26 @@ export default function PreviewContent({
           </Button>
         </Stack>
         <Typography mt={2}>{data.description}</Typography>
-        <Box mt={2}>OWNERSHIP</Box>
+        <Stack
+          component={Card}
+          variant="outlined"
+          sx={{ mt: 2, overflow: 'visible' }}
+          divider={<Divider sx={{ width: '100%' }} />}
+        >
+          <UsersFromTo
+            from={from}
+            to={to}
+            fromLabel={pda.issuer}
+            toLabel={pda.owner}
+            isVertical
+          />
+          <TableCellContainer>
+            <CardCell label={pda.issuance_date}>
+              {dayjs(new Date()).format(DATE_FORMAT)}
+            </CardCell>
+            <CardCell label={pda.expiration_date}>{pda.indeterminate}</CardCell>
+          </TableCellContainer>
+        </Stack>
         {claims.length > 0 && (
           <>
             <Divider sx={{ mx: -3, my: 4 }} />
