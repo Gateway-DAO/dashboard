@@ -70,6 +70,13 @@ query transaction_detail($id: String!) {
       ... on DataModelMetadata {
         dataModel
       }
+      ... on ProofMetadata {
+        proof
+        status
+        owner
+        request
+        verifier
+      }
     }
     to {
       ... on Organization {
