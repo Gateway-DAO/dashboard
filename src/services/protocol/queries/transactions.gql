@@ -77,6 +77,13 @@ query transaction_detail($id: String!) {
         request
         verifier
       }
+      ... on PDAMetadata {
+        expirationDate
+        issuer
+        pda
+        signedBy
+        pdaStatus: status
+      }
     }
     to {
       ... on Organization {
