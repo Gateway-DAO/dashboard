@@ -70,6 +70,20 @@ query transaction_detail($id: String!) {
       ... on DataModelMetadata {
         dataModel
       }
+      ... on ProofMetadata {
+        proof
+        status
+        owner
+        request
+        verifier
+      }
+      ... on PDAMetadata {
+        expirationDate
+        issuer
+        pda
+        signedBy
+        pdaStatus: status
+      }
     }
     to {
       ... on Organization {

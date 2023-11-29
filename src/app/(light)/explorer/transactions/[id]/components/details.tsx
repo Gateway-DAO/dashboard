@@ -28,6 +28,7 @@ import TransactionData from './transaction-data';
 import DataModelCreation from './types/data-model-creation';
 import OrgCreation from './types/org-creation';
 import PDA from './types/pda';
+import ProofCreation from './types/proof-creation';
 import RequestCreation from './types/request-creation';
 import RequestTemplateCreation from './types/request-template-creation';
 import UserCreation from './types/user-creation';
@@ -78,16 +79,10 @@ export default function TransactionDetails({ id }: Props) {
         return <RequestTemplateCreation data={data} />;
       case TransactionAction.DatamodelCreate:
         return <DataModelCreation data={data} />;
-      // case TransactionAction.ProofCreate:
-      //   return transaction_actions.proof_create;
-      // case TransactionAction.ProofStatusChange:
-      //   return transaction_actions.proof_status_change;
-      // case TransactionAction.MoneyDeposit:
-      //   return transaction_actions.money_deposit;
-      // case TransactionAction.IssuerEarnings:
-      //   return transaction_actions.issuers_earnings;
-      // default:
-      //   return action;
+      case TransactionAction.ProofCreate:
+        return <ProofCreation data={data} />;
+      case TransactionAction.ProofStatusChange:
+        return <ProofCreation data={data} />;
     }
   };
 
