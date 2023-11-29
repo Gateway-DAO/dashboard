@@ -67,7 +67,7 @@ export default function DataModelsRequestExplorerSearch() {
           //         max: selectedAmountOfRequests[1],
           //       }
           //     : undefined,
-          // search: search.length > 0 ? search : undefined,
+          search: search.length > 0 ? search : undefined,
         },
         order: selectedSort?.value,
         skip: pageParam,
