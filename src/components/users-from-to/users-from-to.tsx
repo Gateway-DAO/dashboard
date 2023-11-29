@@ -15,18 +15,27 @@ type Props = {
   fromLabel: string;
   to: GatewayProfile;
   toLabel: string;
+  isVertical?: boolean;
 };
 
-export default function UsersFromTo({ from, fromLabel, to, toLabel }: Props) {
+export default function UsersFromTo({
+  from,
+  fromLabel,
+  to,
+  toLabel,
+  isVertical = false,
+}: Props) {
   const [tooltipIssuer, setTooltipIssuer] = useState<boolean>(false);
   const [tooltipRecipient, setTooltipRecipient] = useState<boolean>(false);
+
+  console.log(from, to);
 
   return (
     <Stack
       justifyContent="space-between"
       sx={{
-        flexDirection: { xs: 'column', md: 'row' },
-        alignItems: { xs: 'baseline', md: 'stretch' },
+        flexDirection: isVertical ? 'column' : { xs: 'column', md: 'row' },
+        alignItems: isVertical ? 'baseline' : { xs: 'baseline', md: 'stretch' },
       }}
     >
       <Stack sx={{ position: 'relative' }}>
@@ -55,13 +64,14 @@ export default function UsersFromTo({ from, fromLabel, to, toLabel }: Props) {
       </Stack>
       <Box
         sx={{
-          alignSelf: { md: 'center' },
-          pt: { xs: 0, md: 2.5 },
-          pb: { xs: 0, md: 1.5 },
-          px: { xs: 3, md: 2 },
-          transform: { xs: 'rotate(90deg)', md: 'none' },
+          alignSelf: isVertical ? 'flex-start' : { md: 'center' },
+          pt: isVertical ? 0 : { xs: 0, md: 2.5 },
+          pb: isVertical ? 0 : { xs: 0, md: 1.5 },
+          px: isVertical ? 3 : { xs: 3, md: 2 },
+          transform: isVertical
+            ? 'rotate(90deg)'
+            : { xs: 'rotate(90deg)', md: 'none' },
           flexGrow: 0,
-          width: 20,
         }}
       >
         <FromToIcon />
@@ -71,7 +81,7 @@ export default function UsersFromTo({ from, fromLabel, to, toLabel }: Props) {
           label={toLabel}
           picture={to.image}
           name={limitCharsCentered(to.name as string, 15)}
-          alignRight={true}
+          alignRight={isVertical ? false : true}
           userId={to.id as string}
           id={`to-${to.gatewayId}`}
           onClick={() => setTooltipRecipient(true)}
@@ -84,7 +94,7 @@ export default function UsersFromTo({ from, fromLabel, to, toLabel }: Props) {
             username={to.gatewayId}
             picture={to.image as string}
             issuance_date={to.createdAt as string}
-            right={true}
+            right={isVertical ? false : true}
             onClose={() => setTooltipRecipient(false)}
           />
         )}
