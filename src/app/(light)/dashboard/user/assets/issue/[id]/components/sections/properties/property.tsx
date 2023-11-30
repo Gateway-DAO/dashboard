@@ -16,6 +16,7 @@ import BooleanProperty from './fields/boolean';
 import CurrencyProperty from './fields/currency';
 import NumberProperty from './fields/number';
 import TextProperty from './fields/text';
+import UnknownProperty from './fields/unknown';
 
 export default function Property({
   id,
@@ -38,6 +39,7 @@ export default function Property({
 
   const field = useMemo(() => {
     switch (type) {
+      case ClaimField.Image:
       case ClaimField.Text:
         return <TextProperty id={id} {...property} />;
       case ClaimField.Boolean:
@@ -54,6 +56,8 @@ export default function Property({
         );
       case ClaimField.Currency:
         return <CurrencyProperty id={id} {...property} />;
+      case ClaimField.Unknown:
+        return <UnknownProperty id={id} {...property} />;
       default:
         return null;
     }
