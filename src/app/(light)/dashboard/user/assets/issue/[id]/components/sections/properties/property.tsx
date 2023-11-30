@@ -11,6 +11,7 @@ import getClaimType, {
 
 import { Stack, Typography } from '@mui/material';
 
+import ArrayProperty from './fields/array';
 import BooleanProperty from './fields/boolean';
 import NumberProperty from './fields/number';
 import TextProperty from './fields/text';
@@ -43,6 +44,14 @@ export default function Property({
         return <BooleanProperty id={id} defaultValue={defaultValue} />;
       case ClaimField.Number:
         return <NumberProperty id={id} defaultValue={defaultValue} />;
+      case ClaimField.Array:
+        return (
+          <ArrayProperty
+            id={id}
+            defaultValue={defaultValue}
+            subType={property?.items?.type}
+          />
+        );
       default:
         return null;
     }
