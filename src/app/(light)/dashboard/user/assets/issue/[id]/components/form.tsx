@@ -2,14 +2,21 @@
 
 import { useMemo, useState } from 'react';
 
-import { UserIdentifierType } from '@/services/protocol/types';
+import {
+  UserIdentificationInput,
+  UserIdentifierType,
+} from '@/services/protocol/types';
 import { numberToMoneyString } from '@/utils/money';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Stack } from '@mui/material';
 
 import Preview from './preview/preview';
-import { IssuePdaSchema, issuePdaValidator } from './schema';
+import {
+  IssuePdaSchema,
+  getSchemaDefaultValues,
+  issuePdaValidator,
+} from './schema';
 import OwnerSection from './sections/owner/owner';
 import PropertiesSection from './sections/properties/properties';
 import Summary from './sections/summary';
@@ -26,24 +33,12 @@ export default function Form({ schema }: Props) {
   }>({ isOpen: false });
 
   const schemaDefaultValues = useMemo(
-    () =>
-      Object.keys(schema.properties).reduce((acc, key) => {
-        const property = schema.properties[key];
-        const defaultValue = property.default;
-        if (typeof defaultValue !== 'undefined') {
-          (acc as any)[key] = defaultValue;
-        }
-        return acc;
-      }, {} as IssuePdaSchema),
+    () => getSchemaDefaultValues(schema),
     [schema]
   );
 
   const methods = useForm<IssuePdaSchema>({
     values: {
-      ownerDraft: {
-        type: UserIdentifierType.GatewayId,
-        value: '',
-      },
       owner: {
         type: UserIdentifierType.GatewayId,
         value: '',
@@ -54,7 +49,23 @@ export default function Form({ schema }: Props) {
     },
     resolver: async (value, context, options) =>
       issuePdaValidator(value, schema, context, options),
+    mode: 'onSubmit',
   });
+
+  const owner = methods.watch('owner');
+  const { error: ownerError } = methods.getFieldState('owner.value');
+
+  const setOwner = (values: UserIdentificationInput) => {
+    methods.setValue('owner', values);
+    methods.trigger('owner');
+  };
+  const resetOwner = () => {
+    methods.setValue('owner', {
+      type: UserIdentifierType.GatewayId,
+      value: '',
+    });
+    methods.trigger('owner');
+  };
 
   const amount = 1;
   const price = 0.05;
@@ -70,22 +81,27 @@ export default function Form({ schema }: Props) {
 
   return (
     <>
-      <FormProvider {...methods}>
-        <Stack
-          gap={2}
-          mb={14}
-          onSubmit={methods.handleSubmit(onSubmit, (error) => {
-            console.log('error', error);
-          })}
-        >
-          <OwnerSection />
+      <Stack
+        gap={2}
+        mb={14}
+        onSubmit={methods.handleSubmit(onSubmit, (error) => {
+          console.log('error', error);
+        })}
+      >
+        <OwnerSection
+          owner={owner}
+          ownerError={ownerError?.message}
+          setOwner={setOwner}
+          resetOwner={resetOwner}
+        />
+        <FormProvider {...methods}>
           <Stack component="form" gap={2}>
             <TitleDescriptionSection />
             <PropertiesSection schema={schema} />
             <Summary amount={amount} total={total} />
           </Stack>
-        </Stack>
-      </FormProvider>
+        </FormProvider>
+      </Stack>
       {!!previewModalState.data && (
         <Preview
           amount={amount}

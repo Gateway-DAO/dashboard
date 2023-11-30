@@ -22,7 +22,7 @@ export default function Preview({
 
   const { mutateAsync, isLoading, isSuccess, data } = useMutation({
     mutationKey: ['issue-pda', props.data],
-    mutationFn: async ({ ownerDraft, ...pda }: IssuePdaSchema) =>
+    mutationFn: async (pda: IssuePdaSchema) =>
       privateApi.issue_pda({
         input: {
           dataModelId: id as string,

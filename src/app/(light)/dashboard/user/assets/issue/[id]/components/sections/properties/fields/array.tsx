@@ -1,93 +1,62 @@
-import { useEffect, useState } from 'react';
-
 import ErrorMessage from '@/components/form/error-message/error-message';
 import { common } from '@/locale/en/common';
-import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
+import getClaimType from '@/utils/get-claim-type';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 
+import { Add } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button, Divider, IconButton, Stack, TextField } from '@mui/material';
+import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 
+import PropertyItem from '../property-item';
 import { PropertyField } from './type';
+import { getArrayHelperText, getClaimHelperText } from './utils';
 
 export default function ArrayProperty({
   id,
-  defaultValue,
-  subType,
+  subType: subTypeString,
+  ...property
 }: PropertyField) {
-  const { trigger, getValues, control } = useFormContext();
+  const minAmountOfFields = property.minItems || 1;
+  const maxAmountOfFields = property.maxItems;
+
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     name: `claim.${id}`,
     control,
+    rules: {
+      minLength: minAmountOfFields,
+      maxLength: maxAmountOfFields,
+      required: property.required,
+    },
   });
 
-  const [addFieldIsVisible, setAddFieldIsVisible] = useState(false);
-  const checkIfIsEmpty = () => {
-    if (
-      getValues()?.claim &&
-      getValues()?.claim[id] &&
-      getValues()?.claim[id][fields.length - 1] !== ''
-    ) {
-      setAddFieldIsVisible(true);
-    } else {
-      setAddFieldIsVisible(false);
-    }
-  };
+  const addFieldIsVisible =
+    typeof maxAmountOfFields !== 'undefined'
+      ? fields.length < maxAmountOfFields
+      : true;
 
-  useEffect(() => {
-    append('');
-  }, []);
+  const removeFieldIsVisible = fields.length > minAmountOfFields;
+  const error = (errors?.claim as any)?.[id]?.message;
+  const helper = getArrayHelperText(property);
+  const subType = getClaimType({ type: subTypeString! });
+  const subTypeHelper = getClaimHelperText(subType, property.items!);
 
   return (
-    <>
-      {fields.map((field, index: number) => (
-        <Stack
-          direction="row"
-          alignItems="center"
-          key={field.id}
-          sx={{ mb: 2 }}
-        >
-          <Controller
-            key={index}
-            name={`claim.${id}.${index}`}
-            control={control}
-            render={({
-              field: { onChange, value, ...field },
-              fieldState: { error },
-            }) => {
-              return (
-                <>
-                  <TextField
-                    fullWidth
-                    value={(value as number)?.toString()}
-                    autoFocus={addFieldIsVisible}
-                    inputProps={
-                      subType == 'number'
-                        ? {
-                            step: '0.01',
-                            valueAsNumber: true,
-                            required: true,
-                            minLength: 2,
-                          }
-                        : {
-                            required: true,
-                            minLength: 2,
-                          }
-                    }
-                    type={subType}
-                    onChange={(_e) => {
-                      checkIfIsEmpty();
-                      const value = _e.target.value;
-                      value.length ? onChange(Number(value)) : onChange('');
-                    }}
-                    error={!!error}
-                    {...field}
-                  />
-                  {error && <ErrorMessage>{error.message}</ErrorMessage>}
-                </>
-              );
-            }}
-          />
-          {fields.length > 1 && (
+    <Stack direction="column" gap={2}>
+      {fields.map((item, index: number) => (
+        <Stack direction="row" alignItems="center" key={item.id}>
+          <Box sx={{ flexGrow: 1 }}>
+            <PropertyItem
+              id={`${id}.${index}`}
+              type={subType}
+              property={property.items!}
+              hideHelperText
+            />
+          </Box>
+          {removeFieldIsVisible && (
             <IconButton
               sx={{
                 ml: { xs: 0.5, md: 1 },
@@ -102,22 +71,29 @@ export default function ArrayProperty({
           )}
         </Stack>
       ))}
+      {!!subTypeHelper?.length && (
+        <Typography variant="body2" color="text.secondary">
+          {subTypeHelper}
+        </Typography>
+      )}
+      {!!helper.length && (
+        <Typography variant="body2" color="text.secondary" mt={-1}>
+          {helper}
+        </Typography>
+      )}
       {addFieldIsVisible && (
         <>
-          <Divider sx={{ mx: -3, mt: 1, mb: 3 }} />
           <Button
             variant="text"
-            onClick={async () => {
-              const isValid = await trigger(`claim.${id}.${fields.length - 1}`);
-              if (isValid) {
-                return append(' ');
-              }
-            }}
+            onClick={async () => append(' ')}
+            startIcon={<Add />}
+            sx={{ alignSelf: 'flex-start' }}
           >
-            {common.actions.add_field}
+            {common.actions.add_row}
           </Button>
         </>
       )}
-    </>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+    </Stack>
   );
 }

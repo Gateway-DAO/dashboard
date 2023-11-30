@@ -19,6 +19,7 @@ import { useIdentifierTypes } from './use-identifier-types';
 
 type Props = {
   control: Control<any>;
+  error?: boolean;
   clearErrors?: () => void;
   sx?: SxProps;
   // Maps to react-hook-form names
@@ -31,10 +32,12 @@ type Props = {
     value?: string;
   };
   disabled?: boolean;
+  onSubmit?: (data: IdentifierValueSchema) => void;
 };
 
 export default function UserIdentityField({
   control,
+  error,
   clearErrors,
   sx,
   names,
@@ -61,7 +64,7 @@ export default function UserIdentityField({
         <InputLabel htmlFor="type">{common.identifier.type}</InputLabel>
         <Select
           label={common.identifier.type}
-          error={!!typeField.fieldState.error}
+          error={!!typeField.fieldState.error || !!error}
           id="field-identifier-type"
           sx={{ mb: { xs: 1, md: 0 } }}
           inputProps={{ defaultValue: UserIdentifierType.GatewayId }}
@@ -98,7 +101,7 @@ export default function UserIdentityField({
         required
         id="field-address"
         {...addressField.field}
-        error={!!addressField.fieldState.error}
+        error={!!addressField.fieldState.error || !!error}
         helperText={addressField.fieldState.error?.message}
         type={
           addressField.field.value === UserIdentifierType.Email
