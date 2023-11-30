@@ -20,8 +20,7 @@ type Story = StoryObj<typeof SharingCost>;
 export const Playground: Story = {
   args: {
     label: 'Label',
-    prefix: '$',
-    value: '0.02',
+    value: '$ 0.02',
     chip: pda.share.free,
     helperText: pda.share.sharing_cost_helper,
   },
@@ -35,7 +34,6 @@ export const Playground: Story = {
     >
       <SharingCost
         label={props.label}
-        prefix={props.prefix}
         value={props.value}
         chip={props.chip}
         helperText={props.helperText}
