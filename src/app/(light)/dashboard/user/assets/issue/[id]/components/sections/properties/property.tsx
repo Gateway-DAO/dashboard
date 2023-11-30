@@ -77,7 +77,20 @@ export default function Property({
         ) : (
           titleText
         )}
-        <ChipInputType type={type} />
+        {type === ClaimField.Array && property.items ? (
+          <Stack direction="row" alignItems="center" gap={1}>
+            <ChipInputType type={type} />
+            <ChipInputType
+              type={getClaimType({
+                type: property.items.type,
+                contentMediaType: property.items.contentMediaType,
+                format: property.items.format,
+              })}
+            />
+          </Stack>
+        ) : (
+          <ChipInputType type={type} />
+        )}
       </Stack>
       {field}
     </div>
