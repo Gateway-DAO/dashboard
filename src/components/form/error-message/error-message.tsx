@@ -1,10 +1,13 @@
 import { PropsWithChildren } from 'react';
 
-import { Typography } from '@mui/material';
+import { Typography, TypographyProps } from '@mui/material';
 
-export default function ErrorMessage({ children }: PropsWithChildren) {
+export default function ErrorMessage({
+  children,
+  ...props
+}: PropsWithChildren<TypographyProps>) {
   return (
-    <Typography color="error" mt={1}>
+    <Typography color="error" mt={1} {...props}>
       {children}
     </Typography>
   );

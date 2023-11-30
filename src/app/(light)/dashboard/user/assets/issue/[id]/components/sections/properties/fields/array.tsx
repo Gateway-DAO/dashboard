@@ -5,7 +5,14 @@ import { common } from '@/locale/en/common';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 
 import CloseIcon from '@mui/icons-material/Close';
-import { Button, Divider, IconButton, Stack, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Stack,
+  TextField,
+} from '@mui/material';
 
 import { PropertyField } from './type';
 
@@ -23,24 +30,19 @@ export default function ArrayProperty({ id, subType }: PropertyField) {
   const addFieldIsVisible = true;
 
   return (
-    <>
-      {fields.map((field, index: number) => (
-        <Stack
-          direction="row"
-          alignItems="center"
-          key={field.id}
-          sx={{ mb: 2 }}
-        >
-          <Controller
-            key={index}
-            name={`claim.${id}.${index}`}
-            control={control}
-            render={({
-              field: { onChange, value, ...field },
-              fieldState: { error },
-            }) => {
-              return (
-                <>
+    <Stack direction="column" gap={2}>
+      {fields.map((item, index: number) => (
+        <Controller
+          key={index}
+          name={`claim.${id}.${index}`}
+          control={control}
+          render={({
+            field: { onChange, value, ...field },
+            fieldState: { error },
+          }) => {
+            return (
+              <Box>
+                <Stack direction="row" alignItems="center" key={item.id}>
                   <TextField
                     fullWidth
                     value={(value as number)?.toString()}
@@ -66,42 +68,34 @@ export default function ArrayProperty({ id, subType }: PropertyField) {
                     error={!!error}
                     {...field}
                   />
-                  {error && <ErrorMessage>{error.message}</ErrorMessage>}
-                </>
-              );
-            }}
-          />
-          {fields.length > 1 && (
-            <IconButton
-              sx={{
-                ml: { xs: 0.5, md: 1 },
-                cursor: 'pointer',
-              }}
-              onClick={() => {
-                remove(index);
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-          )}
-        </Stack>
+                  {fields.length > 1 && (
+                    <IconButton
+                      sx={{
+                        ml: { xs: 0.5, md: 1 },
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => {
+                        remove(index);
+                      }}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  )}
+                </Stack>
+                {error && <ErrorMessage ml={1}>{error.message}</ErrorMessage>}
+              </Box>
+            );
+          }}
+        />
       ))}
       {addFieldIsVisible && (
         <>
           <Divider sx={{ mx: -3, mt: 1, mb: 3 }} />
-          <Button
-            variant="text"
-            onClick={async () => {
-              const isValid = await trigger(`claim.${id}.${fields.length - 1}`);
-              if (isValid) {
-                return append(' ');
-              }
-            }}
-          >
+          <Button variant="text" onClick={async () => append(' ')}>
             {common.actions.add_field}
           </Button>
         </>
       )}
-    </>
+    </Stack>
   );
 }
