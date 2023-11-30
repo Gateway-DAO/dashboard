@@ -153,7 +153,9 @@ export default function ShareCopy({ pda }: Props) {
                   <Typography sx={{ mb: 6 }}>
                     {pdaLocale.share.share_a_copy_description}
                   </Typography>
-                  <ShareCopyFormField />
+                  <ShareCopyFormField
+                    cost={pda.dataAsset?.dataModel?.consumptionPrice ?? 0}
+                  />
                   <LoadingButton
                     variant="contained"
                     type="submit"
