@@ -37,4 +37,5 @@ export const explorerQueries = {
   featured_data_models: 'data-models-featured',
   featured_data_requests_templates: 'request-templates-featured',
   request_templates_metadata: 'request_templates_metadata',
+  request_templates: 'request_templates',
 };

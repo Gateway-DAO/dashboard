@@ -51,20 +51,23 @@ export default function DataModelsRequestExplorerSearch() {
   const { data: metadata, isLoading: metadataLoading } = useQuery({
     queryKey: [explorerQueries.request_templates_metadata],
     queryFn: () => apiPublic.explorer_request_templates_metadata(),
-    // select: (data) => data.dataRequestTemplatesMetadata,
+    select: (data) => data.dataRequestTemplatesMetadata,
   });
 
-  const tags = metadata?.dataRequestTemplatesMetadata.tags ?? [];
-  const amountRequests =
-    metadata?.dataRequestTemplatesMetadata.dataRequestsCount ?? 0;
+  const tags = metadata?.tags ?? [];
+  const amountRequests = metadata?.dataRequestsCount ?? 0;
 
   const requestTemplatesQuery = useInfiniteQuery({
     queryKey: [
-      'data-model-templates',
+      explorerQueries.request_templates,
       search,
       selectedSort?.value,
       selectedTags.length,
       selectedTags,
+      ,
+      selectedAmountOfRequests.length,
+      selectedAmountOfRequests[0],
+      selectedAmountOfRequests[1],
     ],
     queryFn: ({ pageParam = 0 }) =>
       apiPublic.explorer_request_templates_list({
@@ -77,13 +80,13 @@ export default function DataModelsRequestExplorerSearch() {
           //         max: selectedAverageCost[1],
           //       }
           //     : undefined,
-          // amountOfDataRequests:
-          //   selectedAmountOfRequests.length > 0
-          //     ? {
-          //         min: selectedAmountOfRequests[0],
-          //         max: selectedAmountOfRequests[1],
-          //       }
-          //     : undefined,
+          dataRequestsCount:
+            selectedAmountOfRequests.length > 0
+              ? {
+                  min: selectedAmountOfRequests[0],
+                  max: selectedAmountOfRequests[1],
+                }
+              : undefined,
           search: search.length > 0 ? search : undefined,
         },
         order: selectedSort?.value,
@@ -112,7 +115,6 @@ export default function DataModelsRequestExplorerSearch() {
     setSelectedAmountOfRequests([]);
     setSort(undefined);
   };
-  console.log(tags);
 
   const filters = (
     <>
@@ -133,6 +135,7 @@ export default function DataModelsRequestExplorerSearch() {
         setAmountOfDataRequests={setSelectedAmountOfRequests}
         min={amountRequests.min}
         max={amountRequests.max}
+        isLoading={metadataLoading}
       />
       {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
       <SortByField
