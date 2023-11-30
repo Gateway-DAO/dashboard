@@ -33,3 +33,18 @@ export const getNumberHelperText = ({
       typeof multipleOf !== 'undefined' && `Multiple of: ${multipleOf}`,
     ].filter(Boolean) as string[]
   ).join(', ');
+
+export const getArrayHelperText = ({
+  description,
+  minItems,
+  maxItems,
+  uniqueItems,
+}: PartialProperty) =>
+  (
+    [
+      typeof description !== 'undefined' && description,
+      typeof minItems !== 'undefined' && `Minimum items: ${minItems}`,
+      typeof maxItems !== 'undefined' && `Maximum items: ${maxItems}`,
+      typeof uniqueItems !== 'undefined' && `Unique items: ${uniqueItems}`,
+    ].filter(Boolean) as string[]
+  ).join(', ');

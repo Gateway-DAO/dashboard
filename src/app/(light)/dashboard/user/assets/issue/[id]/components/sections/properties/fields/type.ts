@@ -5,6 +5,7 @@ export type PropertyField = {
   subType?: string;
   metadata?: any;
   description?: string;
+  required?: boolean;
 
   // Number validations
   minimum?: number;

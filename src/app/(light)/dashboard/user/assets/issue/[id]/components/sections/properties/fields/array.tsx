@@ -4,6 +4,7 @@ import ErrorMessage from '@/components/form/error-message/error-message';
 import { common } from '@/locale/en/common';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 
+import { Add } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import {
   Box,
@@ -12,25 +13,47 @@ import {
   IconButton,
   Stack,
   TextField,
+  Typography,
 } from '@mui/material';
 
 import { PropertyField } from './type';
+import { getArrayHelperText } from './utils';
 
-export default function ArrayProperty({ id, subType }: PropertyField) {
-  const { trigger, getValues, control } = useFormContext();
+export default function ArrayProperty({
+  id,
+  subType,
+  ...property
+}: PropertyField) {
+  const {
+    trigger,
+    getValues,
+    control,
+    formState: { errors },
+  } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     name: `claim.${id}`,
     control,
+    rules: {
+      minLength: property.minItems || 1,
+      maxLength: property.maxItems,
+      required: property.required,
+    },
   });
 
-  useEffect(() => {
-    append('');
-  }, []);
+  const minAmountOfFields = property.minItems || 1;
+  const maxAmountOfFields = property.maxItems || 1;
 
-  const addFieldIsVisible = true;
+  const addFieldIsVisible = fields.length < maxAmountOfFields;
+
+  const removeFieldIsVisible = fields.length > minAmountOfFields;
+  const error = (errors?.claim as any)?.[id]?.message;
+  const helper = getArrayHelperText(property);
 
   return (
     <Stack direction="column" gap={2}>
+      <Typography variant="body2" color="text.secondary">
+        {helper}
+      </Typography>
       {fields.map((item, index: number) => (
         <Controller
           key={index}
@@ -68,7 +91,7 @@ export default function ArrayProperty({ id, subType }: PropertyField) {
                     error={!!error}
                     {...field}
                   />
-                  {fields.length > 1 && (
+                  {removeFieldIsVisible && (
                     <IconButton
                       sx={{
                         ml: { xs: 0.5, md: 1 },
@@ -90,12 +113,17 @@ export default function ArrayProperty({ id, subType }: PropertyField) {
       ))}
       {addFieldIsVisible && (
         <>
-          <Divider sx={{ mx: -3, mt: 1, mb: 3 }} />
-          <Button variant="text" onClick={async () => append(' ')}>
-            {common.actions.add_field}
+          <Button
+            variant="text"
+            onClick={async () => append(' ')}
+            startIcon={<Add />}
+            sx={{ alignSelf: 'flex-start' }}
+          >
+            {common.actions.add_row}
           </Button>
         </>
       )}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </Stack>
   );
 }

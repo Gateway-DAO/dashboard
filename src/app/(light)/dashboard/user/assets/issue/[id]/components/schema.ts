@@ -1,4 +1,8 @@
 import identifierValueSchema from '@/schemas/identifier-value';
+import getClaimType, {
+  ClaimField,
+  getClaimDefaultValue,
+} from '@/utils/get-claim-type';
 import { ajvResolver } from '@hookform/resolvers/ajv';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ResolverResult } from 'react-hook-form';
@@ -52,4 +56,23 @@ export const issuePdaValidator = async (
       }),
     },
   };
+};
+
+export const getSchemaDefaultValues = (schema: any) => {
+  return Object.keys(schema.properties).reduce((acc, key) => {
+    const property = schema.properties[key];
+    const type = getClaimType(property);
+    const defaultValue = getClaimDefaultValue(property);
+    if (typeof defaultValue !== 'undefined') {
+      (acc as any)[key] = defaultValue;
+    } else if (type === ClaimField.Array) {
+      (acc as any)[key] = Array(property.minItems || 1)
+        .fill('')
+        .map((v, index) => ({
+          id: index,
+          value: '',
+        }));
+    }
+    return acc;
+  }, {} as IssuePdaSchema);
 };

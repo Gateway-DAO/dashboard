@@ -6,14 +6,17 @@ import {
   UserIdentificationInput,
   UserIdentifierType,
 } from '@/services/protocol/types';
-import { getClaimDefaultValue } from '@/utils/get-claim-type';
 import { numberToMoneyString } from '@/utils/money';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Stack } from '@mui/material';
 
 import Preview from './preview/preview';
-import { IssuePdaSchema, issuePdaValidator } from './schema';
+import {
+  IssuePdaSchema,
+  getSchemaDefaultValues,
+  issuePdaValidator,
+} from './schema';
 import OwnerSection from './sections/owner/owner';
 import PropertiesSection from './sections/properties/properties';
 import Summary from './sections/summary';
@@ -30,15 +33,7 @@ export default function Form({ schema }: Props) {
   }>({ isOpen: false });
 
   const schemaDefaultValues = useMemo(
-    () =>
-      Object.keys(schema.properties).reduce((acc, key) => {
-        const property = schema.properties[key];
-        const defaultValue = getClaimDefaultValue(property);
-        if (typeof defaultValue !== 'undefined') {
-          (acc as any)[key] = defaultValue;
-        }
-        return acc;
-      }, {} as IssuePdaSchema),
+    () => getSchemaDefaultValues(schema),
     [schema]
   );
 

@@ -74,7 +74,7 @@ export const common = {
     clear_filters: 'Clear filters',
     edit: 'Edit',
     add: 'Add',
-    add_field: 'Add field',
+    add_row: 'Add row',
   },
   socials: {
     twitter: 'Twitter',
