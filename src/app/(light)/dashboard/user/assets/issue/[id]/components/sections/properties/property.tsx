@@ -13,6 +13,7 @@ import { Stack, Typography } from '@mui/material';
 
 import ArrayProperty from './fields/array';
 import BooleanProperty from './fields/boolean';
+import CurrencyProperty from './fields/currency';
 import NumberProperty from './fields/number';
 import TextProperty from './fields/text';
 
@@ -27,7 +28,6 @@ export default function Property({
 }) {
   const title = getClaimTitle(property, id);
   const example = getClaimExample(property);
-  const defaultValue = getClaimDefaultValue(property);
   const type = getClaimType(property);
 
   const titleText = (
@@ -39,19 +39,21 @@ export default function Property({
   const field = useMemo(() => {
     switch (type) {
       case ClaimField.Text:
-        return <TextProperty id={id} defaultValue={defaultValue} />;
+        return <TextProperty id={id} {...property} />;
       case ClaimField.Boolean:
-        return <BooleanProperty id={id} defaultValue={defaultValue} />;
+        return <BooleanProperty id={id} {...property} />;
       case ClaimField.Number:
-        return <NumberProperty id={id} defaultValue={defaultValue} />;
+        return <NumberProperty id={id} {...property} />;
       case ClaimField.Array:
         return (
           <ArrayProperty
             id={id}
-            defaultValue={defaultValue}
+            {...property}
             subType={property?.items?.type}
           />
         );
+      case ClaimField.Currency:
+        return <CurrencyProperty id={id} {...property} />;
       default:
         return null;
     }

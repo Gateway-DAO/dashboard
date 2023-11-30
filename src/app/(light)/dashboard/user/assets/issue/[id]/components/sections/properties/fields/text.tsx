@@ -5,7 +5,7 @@ import { TextField } from '@mui/material';
 
 import { PropertyField } from './type';
 
-export default function TextProperty({ id, defaultValue }: PropertyField) {
+export default function TextProperty({ id }: PropertyField) {
   const { control } = useFormContext();
   return (
     <Controller

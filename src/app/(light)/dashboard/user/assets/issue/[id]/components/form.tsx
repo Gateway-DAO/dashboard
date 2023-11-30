@@ -6,6 +6,7 @@ import {
   UserIdentificationInput,
   UserIdentifierType,
 } from '@/services/protocol/types';
+import { getClaimDefaultValue } from '@/utils/get-claim-type';
 import { numberToMoneyString } from '@/utils/money';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -32,7 +33,7 @@ export default function Form({ schema }: Props) {
     () =>
       Object.keys(schema.properties).reduce((acc, key) => {
         const property = schema.properties[key];
-        const defaultValue = property.default;
+        const defaultValue = getClaimDefaultValue(property);
         if (typeof defaultValue !== 'undefined') {
           (acc as any)[key] = defaultValue;
         }

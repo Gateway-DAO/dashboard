@@ -9,33 +9,18 @@ import { Button, Divider, IconButton, Stack, TextField } from '@mui/material';
 
 import { PropertyField } from './type';
 
-export default function ArrayProperty({
-  id,
-  defaultValue,
-  subType,
-}: PropertyField) {
+export default function ArrayProperty({ id, subType }: PropertyField) {
   const { trigger, getValues, control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     name: `claim.${id}`,
     control,
   });
 
-  const [addFieldIsVisible, setAddFieldIsVisible] = useState(false);
-  const checkIfIsEmpty = () => {
-    if (
-      getValues()?.claim &&
-      getValues()?.claim[id] &&
-      getValues()?.claim[id][fields.length - 1] !== ''
-    ) {
-      setAddFieldIsVisible(true);
-    } else {
-      setAddFieldIsVisible(false);
-    }
-  };
-
   useEffect(() => {
     append('');
   }, []);
+
+  const addFieldIsVisible = true;
 
   return (
     <>
@@ -75,7 +60,6 @@ export default function ArrayProperty({
                     }
                     type={subType}
                     onChange={(_e) => {
-                      checkIfIsEmpty();
                       const value = _e.target.value;
                       value.length ? onChange(Number(value)) : onChange('');
                     }}
