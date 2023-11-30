@@ -25,16 +25,23 @@ export const issuePdaValidator = async (
 ): Promise<ResolverResult<IssuePdaSchema>> => {
   const { claim, ...data } = values;
 
+  // Validate all values except 'claim'
   const zodResult = await zodResolver(issuePdaSchema.omit({ claim: true }))(
     data,
     context,
     formsOptions
   );
 
-  // Set all values from object 'claim' that are empty strings to undefined
   Object.keys(claim as any).forEach((key) => {
+    // Set all values from object 'claim' that are empty strings to undefined
     if ((claim as any)[key] === '') {
       (claim as any)[key] = undefined;
+      return;
+    }
+    const type = getClaimType(schema.properties[key]);
+    // Treat string as float
+    if (type === ClaimField.Number) {
+      (claim as any)[key] = parseFloat((claim as any)[key]);
     }
   });
 

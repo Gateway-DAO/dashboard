@@ -24,10 +24,13 @@ export default function NumberProperty({ id, ...property }: PropertyField) {
               value={(value as number)?.toString()}
               onChange={(_e) => {
                 const value = _e.target.value;
-                value.length ? onChange(Number(value)) : onChange('');
+                onChange(value);
               }}
               error={!!error}
               helperText={helper}
+              inputProps={{
+                valueAsNumber: true,
+              }}
               {...field}
             />
             {error && <ErrorMessage>{error.message}</ErrorMessage>}
