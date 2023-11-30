@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import AvatarPicker from '@/components/form/avatar-picker/avatar-picker';
 import { TitleSubtitleField } from '@/components/title-field/title-field';
+import routes from '@/constants/routes';
 import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';
 import { org } from '@/locale/en/org';
 import { usernameSchema } from '@/schemas/profile';
@@ -99,7 +100,7 @@ export default function CreateOrgStructure() {
         variant: 'success',
       });
       await update();
-      router.back();
+      router.push(routes.dashboard.org.home(data.username));
     } catch (error) {
       enqueueSnackbar(org.error, {
         variant: 'error',
