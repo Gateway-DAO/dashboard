@@ -11,6 +11,7 @@ export type RangeFieldProps = {
   label: string;
   value: number[];
   isLoading?: boolean;
+  width?: number;
 } & Omit<RangeFieldDropdownProps, 'onClose' | 'currentValue'>;
 
 export default function RangeField({
@@ -23,6 +24,7 @@ export default function RangeField({
   InputProps,
   onApply,
   onClear,
+  width,
 }: RangeFieldProps) {
   const [isOpen, setOpen] = useState(false);
   const onOpen = () => setOpen(true);
@@ -34,7 +36,7 @@ export default function RangeField({
       sx={{
         maxWidth: {
           xs: 'unset',
-          lg: 200,
+          lg: width ?? 200,
         },
       }}
     >

@@ -100,3 +100,10 @@ query explorer_verifiers_by_data_request_template($id: String!) {
 query explorer_verifiers_by_data_request_template_count($id: String!) {
   verifiersByDataRequestTemplateCount(id: $id)
 }
+
+query explorer_request_templates_metadata {
+  dataRequestTemplatesMetadata {
+    dataRequestsCount
+    tags
+  }
+}
