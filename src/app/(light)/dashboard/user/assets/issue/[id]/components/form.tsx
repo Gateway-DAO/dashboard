@@ -53,15 +53,18 @@ export default function Form({ schema }: Props) {
   });
 
   const owner = methods.watch('owner');
-  const { error: ownerError } = methods.getFieldState('owner');
+  const { error: ownerError } = methods.getFieldState('owner.value');
+
   const setOwner = (values: UserIdentificationInput) => {
     methods.setValue('owner', values);
+    methods.trigger('owner');
   };
   const resetOwner = () => {
     methods.setValue('owner', {
       type: UserIdentifierType.GatewayId,
       value: '',
     });
+    methods.trigger('owner');
   };
 
   const amount = 1;

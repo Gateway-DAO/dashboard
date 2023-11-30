@@ -24,9 +24,10 @@ export default function ArrayProperty({
   subType,
   ...property
 }: PropertyField) {
+  const minAmountOfFields = property.minItems || 1;
+  const maxAmountOfFields = property.maxItems;
+
   const {
-    trigger,
-    getValues,
     control,
     formState: { errors },
   } = useFormContext();
@@ -34,16 +35,16 @@ export default function ArrayProperty({
     name: `claim.${id}`,
     control,
     rules: {
-      minLength: property.minItems || 1,
-      maxLength: property.maxItems,
+      minLength: minAmountOfFields,
+      maxLength: maxAmountOfFields,
       required: property.required,
     },
   });
 
-  const minAmountOfFields = property.minItems || 1;
-  const maxAmountOfFields = property.maxItems || 1;
-
-  const addFieldIsVisible = fields.length < maxAmountOfFields;
+  const addFieldIsVisible =
+    typeof maxAmountOfFields !== 'undefined'
+      ? fields.length < maxAmountOfFields
+      : true;
 
   const removeFieldIsVisible = fields.length > minAmountOfFields;
   const error = (errors?.claim as any)?.[id]?.message;

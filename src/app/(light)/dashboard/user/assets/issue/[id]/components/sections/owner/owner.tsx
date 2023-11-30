@@ -132,6 +132,7 @@ export default function OwnerSection({
             control={control}
             disabled={!!owner.value.length}
             sx={{ flexGrow: 1 }}
+            error={!!ownerError}
           />
           <Button
             variant="outlined"
