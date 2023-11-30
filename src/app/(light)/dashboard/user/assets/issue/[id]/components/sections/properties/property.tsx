@@ -3,30 +3,16 @@ import { useMemo } from 'react';
 import ChipInputType from '@/components/chip-input-type/chip-input-type';
 import getClaimType, {
   ClaimField,
-  SchemaProperty,
-  getClaimDefaultValue,
   getClaimExample,
   getClaimTitle,
 } from '@/utils/get-claim-type';
 
 import { Stack, Typography } from '@mui/material';
 
-import ArrayProperty from './fields/array';
-import BooleanProperty from './fields/boolean';
-import CurrencyProperty from './fields/currency';
-import NumberProperty from './fields/number';
-import TextProperty from './fields/text';
-import UnknownProperty from './fields/unknown';
+import PropertyItem from './property-item';
+import { PropertyProps } from './type';
 
-export default function Property({
-  id,
-  property,
-  required,
-}: {
-  id: string;
-  property: SchemaProperty;
-  required?: boolean;
-}) {
+export default function Property({ id, property, required }: PropertyProps) {
   const title = getClaimTitle(property, id);
   const example = getClaimExample(property);
   const type = getClaimType(property);
@@ -37,31 +23,10 @@ export default function Property({
     </Typography>
   );
 
-  const field = useMemo(() => {
-    switch (type) {
-      case ClaimField.Image:
-      case ClaimField.Text:
-        return <TextProperty id={id} {...property} />;
-      case ClaimField.Boolean:
-        return <BooleanProperty id={id} {...property} />;
-      case ClaimField.Number:
-        return <NumberProperty id={id} {...property} />;
-      case ClaimField.Array:
-        return (
-          <ArrayProperty
-            id={id}
-            {...property}
-            subType={property?.items?.type}
-          />
-        );
-      case ClaimField.Currency:
-        return <CurrencyProperty id={id} {...property} />;
-      case ClaimField.Unknown:
-        return <UnknownProperty id={id} {...property} />;
-      default:
-        return null;
-    }
-  }, [type]);
+  const field = useMemo(
+    () => <PropertyItem id={id} property={property} type={type} />,
+    [type]
+  );
 
   return (
     <div>
