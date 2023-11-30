@@ -6,10 +6,14 @@ import { TextField } from '@mui/material';
 import { PropertyField } from './type';
 import { getStringHelperText } from './utils';
 
-export default function TextProperty({ id, ...property }: PropertyField) {
+export default function TextProperty({
+  id,
+  hideHelperText,
+  ...property
+}: PropertyField) {
   const { control } = useFormContext();
 
-  const helper = getStringHelperText(property);
+  const helper = !hideHelperText ? getStringHelperText(property) : undefined;
 
   return (
     <Controller

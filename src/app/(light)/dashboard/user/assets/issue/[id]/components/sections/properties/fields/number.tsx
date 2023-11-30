@@ -6,9 +6,13 @@ import { TextField } from '@mui/material';
 import { PropertyField } from './type';
 import { getNumberHelperText } from './utils';
 
-export default function NumberProperty({ id, ...property }: PropertyField) {
+export default function NumberProperty({
+  id,
+  hideHelperText,
+  ...property
+}: PropertyField) {
   const { control } = useFormContext();
-  const helper = getNumberHelperText(property);
+  const helper = !hideHelperText ? getNumberHelperText(property) : undefined;
   return (
     <Controller
       name={`claim.${id}`}

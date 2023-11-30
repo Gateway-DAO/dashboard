@@ -8,8 +8,10 @@ export enum ClaimField {
   Array = 'array',
   Link = 'link',
   Currency = 'currency',
+  Unknown = 'unknown',
 }
 
+// JSON Schema draft 7 property types and validations
 export type SchemaProperty = {
   label?: string;
   fieldName?: string;
@@ -20,8 +22,26 @@ export type SchemaProperty = {
   format?: string;
   subType?: string;
   examples?: Array<string | boolean>;
-  items?: SchemaProperty;
   currency?: string | null;
+  metadata?: any;
+  description?: string;
+  required?: boolean;
+
+  // Number validations
+  minimum?: number;
+  maximum?: number;
+  multipleOf?: number;
+
+  // String validations
+  minLength?: number;
+  maxLength?: number;
+  pattern?: string;
+
+  // Array validations
+  minItems?: number;
+  maxItems?: number;
+  uniqueItems?: boolean;
+  items?: SchemaProperty;
 };
 
 export const getClaimType = ({
@@ -43,8 +63,10 @@ export const getClaimType = ({
       return ClaimField.Boolean;
     case 'array':
       return ClaimField.Array;
-    default:
+    case 'string':
       return ClaimField.Text;
+    default:
+      return ClaimField.Unknown;
   }
 };
 
