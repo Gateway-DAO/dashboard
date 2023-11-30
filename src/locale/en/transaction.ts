@@ -43,6 +43,8 @@ export const transaction_detail = {
   request_template: 'Request Template ID',
   creator: 'Creator',
   data_models: 'Data Models',
+  proof_id: 'Proof ID',
+  expiration: 'Expiration',
 };
 
 export const financial_transaction_actions = {
