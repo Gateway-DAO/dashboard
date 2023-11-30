@@ -40,6 +40,8 @@ function ClaimView(fieldData: CredentialData) {
           value={parseFloat(fieldData?.value) as number}
         />
       );
+    case ClaimField.Text:
+      return <span style={{ whiteSpace: 'normal' }}>{fieldData.value}</span>;
     default: {
       return <span>{fieldData.value}</span>;
     }
