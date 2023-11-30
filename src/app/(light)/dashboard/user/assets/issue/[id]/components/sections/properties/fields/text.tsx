@@ -4,9 +4,13 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { TextField } from '@mui/material';
 
 import { PropertyField } from './type';
+import { getStringHelperText } from './utils';
 
-export default function TextProperty({ id }: PropertyField) {
+export default function TextProperty({ id, ...property }: PropertyField) {
   const { control } = useFormContext();
+
+  const helper = getStringHelperText(property);
+
   return (
     <Controller
       name={`claim.${id}`}
@@ -21,6 +25,12 @@ export default function TextProperty({ id }: PropertyField) {
             onChange={(_e) =>
               onChange(_e.target.value?.length ? _e.target.value : undefined)
             }
+            helperText={helper}
+            inputProps={{
+              maxLength: property.maxLength,
+              minLength: property.minLength,
+              pattern: property.pattern,
+            }}
             {...field}
           />
           {error && <ErrorMessage>{error.message}</ErrorMessage>}
