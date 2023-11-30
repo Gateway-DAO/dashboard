@@ -1,27 +1,19 @@
-import { useEffect, useState } from 'react';
-
 import ErrorMessage from '@/components/form/error-message/error-message';
 import { common } from '@/locale/en/common';
-import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
+import getClaimType from '@/utils/get-claim-type';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 
 import { Add } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
-import {
-  Box,
-  Button,
-  Divider,
-  IconButton,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 
+import PropertyItem from '../property-item';
 import { PropertyField } from './type';
-import { getArrayHelperText } from './utils';
+import { getArrayHelperText, getClaimHelperText } from './utils';
 
 export default function ArrayProperty({
   id,
-  subType,
+  subType: subTypeString,
   ...property
 }: PropertyField) {
   const minAmountOfFields = property.minItems || 1;
@@ -49,69 +41,46 @@ export default function ArrayProperty({
   const removeFieldIsVisible = fields.length > minAmountOfFields;
   const error = (errors?.claim as any)?.[id]?.message;
   const helper = getArrayHelperText(property);
+  const subType = getClaimType({ type: subTypeString! });
+  const subTypeHelper = getClaimHelperText(subType, property.items!);
 
   return (
     <Stack direction="column" gap={2}>
-      <Typography variant="body2" color="text.secondary">
-        {helper}
-      </Typography>
       {fields.map((item, index: number) => (
-        <Controller
-          key={index}
-          name={`claim.${id}.${index}`}
-          control={control}
-          render={({
-            field: { onChange, value, ...field },
-            fieldState: { error },
-          }) => {
-            return (
-              <Box>
-                <Stack direction="row" alignItems="center" key={item.id}>
-                  <TextField
-                    fullWidth
-                    value={(value as number)?.toString()}
-                    autoFocus={addFieldIsVisible}
-                    inputProps={
-                      subType == 'number'
-                        ? {
-                            step: '0.01',
-                            valueAsNumber: true,
-                            required: true,
-                            minLength: 2,
-                          }
-                        : {
-                            required: true,
-                            minLength: 2,
-                          }
-                    }
-                    type={subType}
-                    onChange={(_e) => {
-                      const value = _e.target.value;
-                      value.length ? onChange(Number(value)) : onChange('');
-                    }}
-                    error={!!error}
-                    {...field}
-                  />
-                  {removeFieldIsVisible && (
-                    <IconButton
-                      sx={{
-                        ml: { xs: 0.5, md: 1 },
-                        cursor: 'pointer',
-                      }}
-                      onClick={() => {
-                        remove(index);
-                      }}
-                    >
-                      <CloseIcon />
-                    </IconButton>
-                  )}
-                </Stack>
-                {error && <ErrorMessage ml={1}>{error.message}</ErrorMessage>}
-              </Box>
-            );
-          }}
-        />
+        <Stack direction="row" alignItems="center" key={item.id}>
+          <Box sx={{ flexGrow: 1 }}>
+            <PropertyItem
+              id={`${id}.${index}`}
+              type={subType}
+              property={property.items!}
+              hideHelperText
+            />
+          </Box>
+          {removeFieldIsVisible && (
+            <IconButton
+              sx={{
+                ml: { xs: 0.5, md: 1 },
+                cursor: 'pointer',
+              }}
+              onClick={() => {
+                remove(index);
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          )}
+        </Stack>
       ))}
+      {!!subTypeHelper?.length && (
+        <Typography variant="body2" color="text.secondary">
+          {subTypeHelper}
+        </Typography>
+      )}
+      {!!helper.length && (
+        <Typography variant="body2" color="text.secondary" mt={-1}>
+          {helper}
+        </Typography>
+      )}
       {addFieldIsVisible && (
         <>
           <Button
