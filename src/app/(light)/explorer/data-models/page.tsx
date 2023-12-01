@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import documentationRoutes from '@/constants/documentationRoutes';
 import { explorerDataModels } from '@/locale/en/datamodel';
 
 import { Divider } from '@mui/material';
@@ -20,6 +21,7 @@ export default function DataModelsExplorerPage() {
         title={explorerDataModels.title}
         subtitle={explorerDataModels.subtitle}
         help={explorerDataModels.help}
+        helpLink={documentationRoutes.dataModel}
         infoCard
         sx={{
           backgroundColor: 'primary.50',
