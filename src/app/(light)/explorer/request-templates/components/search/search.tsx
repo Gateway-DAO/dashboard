@@ -16,7 +16,7 @@ import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import RequestTemplateExplorerCard from '../../../components/request-template-card/request-template-card';
-import AmountOfDataRequestsField from './filters/amount-of-data-requests-field';
+// import AmountOfDataRequestsField from './filters/amount-of-data-requests-field';
 // import AverageCostField from './filters/average-cost-field';
 
 const sortOptions: SortByOption<DataRequestTemplate>[] = [
@@ -26,16 +26,16 @@ const sortOptions: SortByOption<DataRequestTemplate>[] = [
     value: undefined,
   },
   { key: 'oldest', label: 'Oldest', value: { createdAt: 'ASC' } },
-  {
-    key: 'requests-high-to-low',
-    label: 'Requests high to low',
-    value: { dataRequestsCount: 'DESC' },
-  },
-  {
-    key: 'requests-low-to-high',
-    label: 'Requests low to high',
-    value: { dataRequestsCount: 'ASC' },
-  },
+  // {
+  //   key: 'requests-high-to-low',
+  //   label: 'Requests high to low',
+  //   value: { dataRequestsCount: 'DESC' },
+  // },
+  // {
+  //   key: 'requests-low-to-high',
+  //   label: 'Requests low to high',
+  //   value: { dataRequestsCount: 'ASC' },
+  // },
 ];
 
 export default function DataModelsRequestExplorerSearch() {
@@ -55,7 +55,6 @@ export default function DataModelsRequestExplorerSearch() {
   });
 
   const tags = metadata?.tags ?? [];
-  const amountRequests = metadata?.dataRequestsCount ?? 0;
 
   const requestTemplatesQuery = useInfiniteQuery({
     queryKey: [
@@ -80,13 +79,13 @@ export default function DataModelsRequestExplorerSearch() {
           //         max: selectedAverageCost[1],
           //       }
           //     : undefined,
-          dataRequestsCount:
-            selectedAmountOfRequests.length > 0
-              ? {
-                  min: selectedAmountOfRequests[0],
-                  max: selectedAmountOfRequests[1],
-                }
-              : undefined,
+          // dataRequestsCount:
+          //   selectedAmountOfRequests.length > 0
+          //     ? {
+          //         min: selectedAmountOfRequests[0],
+          //         max: selectedAmountOfRequests[1],
+          //       }
+          //     : undefined,
           search: search.length > 0 ? search : undefined,
         },
         order: selectedSort?.value,
@@ -130,13 +129,13 @@ export default function DataModelsRequestExplorerSearch() {
         min={0}
         max={100}
       /> */}
-      <AmountOfDataRequestsField
+      {/* <AmountOfDataRequestsField
         selectedAmountOfDataRequests={selectedAmountOfRequests}
         setAmountOfDataRequests={setSelectedAmountOfRequests}
         min={amountRequests.min}
         max={amountRequests.max}
         isLoading={metadataLoading}
-      />
+      /> */}
       {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
       <SortByField
         selectedSort={selectedSort}
