@@ -11,11 +11,9 @@ import { Button, Typography } from '@mui/material';
 
 import PDAsTable from './components/pdas-table';
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: 'Issued Data Assets - Gateway Network',
-  };
-}
+export const metadata: Metadata = {
+  title: 'Issued Data Assets - Gateway Network',
+};
 
 export default async function OrganizationIssuedAssetsPage(props: any) {
   const pathnameOrg = props.params?.username;
