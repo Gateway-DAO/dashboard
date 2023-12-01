@@ -8,15 +8,16 @@ import SortByField, {
 } from '@/components/search-filters/sort-by-field';
 import TagsField from '@/components/search-filters/tags-field';
 import SearchSection from '@/components/search-section/search-section';
+import { explorerQueries } from '@/constants/queries';
 import { explorerRequestTemplates } from '@/locale/en/request-template';
 import { apiPublic } from '@/services/protocol/api';
 import { DataRequestTemplate } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import RequestTemplateExplorerCard from '../../../components/request-template-card/request-template-card';
-import AmountOfDataRequestsField from './filters/amount-of-data-requests-field';
-import AverageCostField from './filters/average-cost-field';
+// import AmountOfDataRequestsField from './filters/amount-of-data-requests-field';
+// import AverageCostField from './filters/average-cost-field';
 
 const sortOptions: SortByOption<DataRequestTemplate>[] = [
   {
@@ -25,16 +26,16 @@ const sortOptions: SortByOption<DataRequestTemplate>[] = [
     value: undefined,
   },
   { key: 'oldest', label: 'Oldest', value: { createdAt: 'ASC' } },
-  {
-    key: 'requests-high-to-low',
-    label: 'Requests high to low',
-    value: { dataRequestsCount: 'DESC' },
-  },
-  {
-    key: 'requests-low-to-high',
-    label: 'Requests low to high',
-    value: { dataRequestsCount: 'ASC' },
-  },
+  // {
+  //   key: 'requests-high-to-low',
+  //   label: 'Requests high to low',
+  //   value: { dataRequestsCount: 'DESC' },
+  // },
+  // {
+  //   key: 'requests-low-to-high',
+  //   label: 'Requests low to high',
+  //   value: { dataRequestsCount: 'ASC' },
+  // },
 ];
 
 export default function DataModelsRequestExplorerSearch() {
@@ -42,17 +43,35 @@ export default function DataModelsRequestExplorerSearch() {
 
   const [selectedSort, setSort] = useState<SortByOption<DataRequestTemplate>>();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [selectedAverageCost, setSelectedAverageCost] = useState<number[]>([]);
+  // const [selectedAverageCost, setSelectedAverageCost] = useState<number[]>([]);
   const [selectedAmountOfRequests, setSelectedAmountOfRequests] = useState<
     number[]
   >([]);
 
+  const { data: metadata, isLoading: metadataLoading } = useQuery({
+    queryKey: [explorerQueries.request_templates_metadata],
+    queryFn: () => apiPublic.explorer_request_templates_metadata(),
+    select: (data) => data.dataRequestTemplatesMetadata,
+  });
+
+  const tags = metadata?.tags ?? [];
+
   const requestTemplatesQuery = useInfiniteQuery({
-    queryKey: ['data-model-templates', search, selectedSort?.value],
+    queryKey: [
+      explorerQueries.request_templates,
+      search,
+      selectedSort?.value,
+      selectedTags.length,
+      selectedTags,
+      ,
+      selectedAmountOfRequests.length,
+      selectedAmountOfRequests[0],
+      selectedAmountOfRequests[1],
+    ],
     queryFn: ({ pageParam = 0 }) =>
       apiPublic.explorer_request_templates_list({
         filter: {
-          // tags: selectedTags.length > 0 ? selectedTags : undefined,
+          tags: selectedTags.length > 0 ? selectedTags : undefined,
           // averageCost:
           //   selectedAverageCost.length > 0
           //     ? {
@@ -60,14 +79,14 @@ export default function DataModelsRequestExplorerSearch() {
           //         max: selectedAverageCost[1],
           //       }
           //     : undefined,
-          // amountOfDataRequests:
+          // dataRequestsCount:
           //   selectedAmountOfRequests.length > 0
           //     ? {
           //         min: selectedAmountOfRequests[0],
           //         max: selectedAmountOfRequests[1],
           //       }
           //     : undefined,
-          // search: search.length > 0 ? search : undefined,
+          search: search.length > 0 ? search : undefined,
         },
         order: selectedSort?.value,
         skip: pageParam,
@@ -85,32 +104,38 @@ export default function DataModelsRequestExplorerSearch() {
 
   const isFiltering =
     selectedTags.length > 0 ||
-    selectedAverageCost.length > 0 ||
+    // selectedAverageCost.length > 0 ||
     selectedAmountOfRequests.length > 0 ||
     !!selectedSort;
 
   const onClearFilters = () => {
     setSelectedTags([]);
-    setSelectedAverageCost([]);
+    // setSelectedAverageCost([]);
     setSelectedAmountOfRequests([]);
     setSort(undefined);
   };
 
   const filters = (
     <>
-      <TagsField tags={selectedTags} setTags={setSelectedTags} />
-      <AverageCostField
+      <TagsField
+        tags={tags}
+        selectedTags={selectedTags}
+        setTags={setSelectedTags}
+        isLoading={metadataLoading}
+      />
+      {/* <AverageCostField
         selectedAverageCost={selectedAverageCost}
         setAverageCost={setSelectedAverageCost}
         min={0}
         max={100}
-      />
-      <AmountOfDataRequestsField
+      /> */}
+      {/* <AmountOfDataRequestsField
         selectedAmountOfDataRequests={selectedAmountOfRequests}
         setAmountOfDataRequests={setSelectedAmountOfRequests}
-        min={0}
-        max={100}
-      />
+        min={amountRequests.min}
+        max={amountRequests.max}
+        isLoading={metadataLoading}
+      /> */}
       {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
       <SortByField
         selectedSort={selectedSort}

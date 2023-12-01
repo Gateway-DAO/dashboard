@@ -1,6 +1,6 @@
 import { ClaimField } from '@/utils/get-claim-type';
 
-import { CheckBox } from '@mui/icons-material';
+import { CheckBox, QuestionMarkRounded } from '@mui/icons-material';
 import DataArrayIcon from '@mui/icons-material/DataArray';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import PhotoIcon from '@mui/icons-material/Photo';
@@ -19,6 +19,7 @@ const FieldsIcon: Partial<Record<ClaimField, typeof SvgIcon>> = {
   link: InsertLinkIcon,
   array: DataArrayIcon,
   boolean: CheckBox,
+  unknown: QuestionMarkRounded,
 };
 
 type FieldType = keyof typeof FieldsIcon;

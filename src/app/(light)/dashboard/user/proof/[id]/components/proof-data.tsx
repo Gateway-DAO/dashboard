@@ -1,6 +1,9 @@
 'use client';
 import { useRouter } from 'next-nprogress-bar';
 
+import ExternalLink from '@/components/external-link/external-link';
+import routes from '@/constants/routes';
+import { datamodel } from '@/locale/en/datamodel';
 import { proof as proofLocale } from '@/locale/en/proof';
 import { DataModel, DecryptedProofPda } from '@/services/protocol/types';
 import {
@@ -49,7 +52,10 @@ export default function ProofData({ dataModels, pdas }: Props) {
               <Typography fontWeight={600} color="text.secondary">
                 {dataModel?.title}
               </Typography>
-              {/* <ExternalLink text={datamodel.data_model_id} href="#" /> */}
+              <ExternalLink
+                text={datamodel.data_model_id}
+                href={routes.explorer.dataModel(dataModel.id)}
+              />
             </Stack>
             <Stack
               component={Card}

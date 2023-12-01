@@ -25,7 +25,7 @@ export default function TitleDescriptionSection() {
           render={({ field, fieldState: { error } }) => (
             <>
               <TextField label="Title" fullWidth {...field} error={!!error} />
-              {error && <ErrorMessage>{error.message}</ErrorMessage>}
+              {error && <ErrorMessage mt={-2}>{error.message}</ErrorMessage>}
             </>
           )}
         />
@@ -42,7 +42,7 @@ export default function TitleDescriptionSection() {
                 error={!!error}
                 {...field}
               />
-              {error && <ErrorMessage>{error.message}</ErrorMessage>}
+              {error && <ErrorMessage mt={-2}>{error.message}</ErrorMessage>}
             </>
           )}
         />

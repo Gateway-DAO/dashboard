@@ -15,6 +15,7 @@ type Props = {
   title: string;
   subtitle?: string;
   help?: string;
+  helpLink?: string;
   infoCard?: boolean;
   sx?: SxProps;
 };
@@ -23,6 +24,7 @@ export default function ExplorerHero({
   title,
   subtitle,
   help,
+  helpLink,
   infoCard,
   sx,
 }: Props) {
@@ -59,9 +61,10 @@ export default function ExplorerHero({
           {help && (
             <MuiLink
               component={Link}
-              href="/"
+              href={helpLink ?? '/'}
               fontWeight="700"
               underline="hover"
+              target="_blank"
             >
               {help}
             </MuiLink>

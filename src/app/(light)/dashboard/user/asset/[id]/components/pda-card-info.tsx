@@ -2,24 +2,25 @@
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
+import ExternalLink from '@/components/external-link/external-link';
 import { TextStatusChip } from '@/components/text-status-chip/text-status-chip';
+import UsersFromTo from '@/components/users-from-to/users-from-to';
 import { DATE_FORMAT } from '@/constants/date';
+import routes from '@/constants/routes';
 import { datamodel } from '@/locale/en/datamodel';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import {
   PdaStatus,
   PdaQuery,
   DecryptedProofPda,
+  User,
 } from '@/services/protocol/types';
+import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import WalletIcon from '@mui/icons-material/Wallet';
 import { Stack, Divider, Typography, Card } from '@mui/material';
-
-import CardUsers from './card-users';
 
 type Props = {
   pda: PartialDeep<PdaQuery['PDA'] | null>;
@@ -27,6 +28,12 @@ type Props = {
 };
 
 export default function PdaCardInfo({ pda, isProofPda = false }: Props) {
+  const from = getOrganizationOrUserData(
+    pda?.dataAsset?.issuer as User,
+    pda?.dataAsset?.organization
+  );
+  const to = getOrganizationOrUserData(pda?.dataAsset?.owner as User);
+
   return (
     <Stack
       component={Card}
@@ -34,7 +41,12 @@ export default function PdaCardInfo({ pda, isProofPda = false }: Props) {
       sx={{ mb: 3, overflow: 'visible' }}
       divider={<Divider sx={{ width: '100%' }} />}
     >
-      <CardUsers pda={pda} />
+      <UsersFromTo
+        from={from}
+        to={to}
+        fromLabel={pdaLocale.issuer}
+        toLabel={pdaLocale.owner}
+      />
       {/* {!isProofPda && (
         <TableCellContainer>
           <CardCell label={pdaLocale.received_at}>
@@ -80,18 +92,20 @@ export default function PdaCardInfo({ pda, isProofPda = false }: Props) {
           </CardCell>
         )}
         <CardCell label={datamodel.data_model_id} margin={false}>
-          {
-            <CopyTextButton
-              text={pda?.dataAsset?.dataModel?.id as string}
-              limit={6}
+          <Stack direction="row" justifyContent="space-between">
+            {
+              <CopyTextButton
+                text={pda?.dataAsset?.dataModel?.id as string}
+                limit={6}
+              />
+            }
+            <ExternalLink
+              text=""
+              textSxProps={{ fontSize: 16, fontWeight: 400 }}
+              iconSxProps={{ fontSize: 18, top: 4, color: 'text.primary' }}
+              href={routes.explorer.dataModel(pda?.dataAsset?.dataModel?.id)}
             />
-          }
-          {/* <ExternalLink
-            text={}
-            textSxProps={{ fontSize: 16, fontWeight: 400 }}
-            iconSxProps={{ fontSize: 18, top: 4, color: 'text.primary' }}
-            href="https://www.google.com"
-          /> */}
+          </Stack>
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>

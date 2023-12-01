@@ -18,7 +18,7 @@ type Props = {
   onClick: () => void;
 };
 
-export default function CardUserCell({
+export default function UserCell({
   label,
   name,
   userId,

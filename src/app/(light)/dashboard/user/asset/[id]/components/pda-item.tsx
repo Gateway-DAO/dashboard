@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
+import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import Tags from '@/components/tags/tags';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -15,7 +16,6 @@ import { PartialDeep } from 'type-fest';
 
 import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
-import DataTable from './data-table';
 import IssuerPDAActions from './issuer-pda-actions';
 import ModalImage from './modal-image';
 import PdaCardInfo from './pda-card-info';
@@ -46,20 +46,6 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
           </Typography>
           <CopyTextButton text={pda?.id as string} limit={12} size={14} />
         </Stack>
-        {/* <Typography
-          variant="caption"
-          sx={{
-            color: 'text.secondary',
-            fontWeight: 600,
-            textDecoration: 'none',
-          }}
-        >
-          {`ID ${limitCharsCentered(pda?.id ?? 'id', 8)}`}
-        </Typography> */}
-        {/* <ExternalLink
-          text={`ID ${limitCharsCentered(pda?.id, 8)}`}
-          href="https://www.google.com"
-        /> */}
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -125,7 +111,10 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
         }}
       />
 
-      <DataTable title={pdaLocale.claim} data={pda?.dataAsset?.claimArray} />
+      <ClaimValuesList
+        title={pdaLocale.claim}
+        data={pda?.dataAsset?.claimArray}
+      />
     </>
   );
 }

@@ -21,7 +21,8 @@ export default function AmountOfDataRequestsField({
 
   return (
     <RangeField
-      label={explorerDataModelRequestTemplates.filters.average_cost}
+      width={250}
+      label={explorerDataModelRequestTemplates.filters.amount_of_data_requests}
       onClear={onClear}
       onApply={setAmountOfDataRequests}
       value={selectedAmountOfDataRequests}

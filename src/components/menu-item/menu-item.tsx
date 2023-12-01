@@ -18,12 +18,12 @@ type Props = {
   active?: boolean;
   icon?: FC<SvgIconProps>;
   activeIcon?: FC<SvgIconProps>;
+  navbar?: boolean;
   externalLink?: boolean;
 };
 
 export type GTWMenuItemSettings = Props & {
   activeHrefs: string[];
-  navbar?: boolean;
 };
 
 export default function GTWMenuItem({
@@ -33,6 +33,7 @@ export default function GTWMenuItem({
   active,
   externalLink,
   activeIcon: ActiveIcon,
+  navbar: _navbar,
   ...props
 }: Props & ListItemButtonProps) {
   return (

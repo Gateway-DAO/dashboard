@@ -4,9 +4,15 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { TextField } from '@mui/material';
 
 import { PropertyField } from './type';
+import { getNumberHelperText } from './utils';
 
-export default function NumberProperty({ id, defaultValue }: PropertyField) {
+export default function NumberProperty({
+  id,
+  hideHelperText,
+  ...property
+}: PropertyField) {
   const { control } = useFormContext();
+  const helper = !hideHelperText ? getNumberHelperText(property) : undefined;
   return (
     <Controller
       name={`claim.${id}`}
@@ -22,9 +28,13 @@ export default function NumberProperty({ id, defaultValue }: PropertyField) {
               value={(value as number)?.toString()}
               onChange={(_e) => {
                 const value = _e.target.value;
-                value.length ? onChange(Number(value)) : onChange('');
+                onChange(value);
               }}
               error={!!error}
+              helperText={helper}
+              inputProps={{
+                valueAsNumber: true,
+              }}
               {...field}
             />
             {error && <ErrorMessage>{error.message}</ErrorMessage>}

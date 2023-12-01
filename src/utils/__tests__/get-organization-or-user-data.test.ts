@@ -1,4 +1,5 @@
 import { Organization, User } from '@/services/protocol/types';
+
 import getOrganizationOrUserData from '../get-organization-or-user-data';
 
 const user: Required<
@@ -13,17 +14,22 @@ const user: Required<
 describe('Get "Created By" Helper', () => {
   test('return organization if exists', () => {
     const organization: Required<
-      Pick<Organization, 'id' | 'gatewayId' | 'name' | 'image'>
+      Pick<
+        Organization,
+        'id' | 'gatewayId' | 'name' | 'image' | 'verified' | 'createdAt'
+      >
     > = {
       id: 'organization-id',
       gatewayId: 'organization-gateway-id',
       name: 'organization-name',
       image: 'organization-image',
+      verified: false,
+      createdAt: 'organization-date',
     };
 
     const result = getOrganizationOrUserData(user, organization);
 
-    expect(result).toEqual(organization);
+    expect(result).toEqual({ ...organization, isOrganization: true });
   });
   test('return user if organization does not exist', () => {
     const organization = null;
@@ -34,6 +40,8 @@ describe('Get "Created By" Helper', () => {
       gatewayId: user.gatewayId,
       name: user.displayName,
       image: user.profilePicture,
+      createdAt: undefined,
+      isOrganization: false,
     });
   });
 });

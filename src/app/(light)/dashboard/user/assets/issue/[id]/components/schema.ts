@@ -1,4 +1,8 @@
 import identifierValueSchema from '@/schemas/identifier-value';
+import getClaimType, {
+  ClaimField,
+  getClaimDefaultValue,
+} from '@/utils/get-claim-type';
 import { ajvResolver } from '@hookform/resolvers/ajv';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ResolverResult } from 'react-hook-form';
@@ -8,7 +12,6 @@ const issuePdaSchema = zod.object({
   title: zod.string().min(2).max(100),
   description: zod.string().min(2),
   claim: zod.object({}),
-  ownerDraft: identifierValueSchema,
   owner: identifierValueSchema,
 });
 
@@ -22,16 +25,23 @@ export const issuePdaValidator = async (
 ): Promise<ResolverResult<IssuePdaSchema>> => {
   const { claim, ...data } = values;
 
+  // Validate all values except 'claim'
   const zodResult = await zodResolver(issuePdaSchema.omit({ claim: true }))(
     data,
     context,
     formsOptions
   );
 
-  // Set all values from object 'claim' that are empty strings to undefined
   Object.keys(claim as any).forEach((key) => {
+    // Set all values from object 'claim' that are empty strings to undefined
     if ((claim as any)[key] === '') {
       (claim as any)[key] = undefined;
+      return;
+    }
+    const type = getClaimType(schema.properties[key]);
+    // Treat string as float
+    if (type === ClaimField.Number) {
+      (claim as any)[key] = parseFloat((claim as any)[key]);
     }
   });
 
@@ -53,4 +63,23 @@ export const issuePdaValidator = async (
       }),
     },
   };
+};
+
+export const getSchemaDefaultValues = (schema: any) => {
+  return Object.keys(schema.properties).reduce((acc, key) => {
+    const property = schema.properties[key];
+    const type = getClaimType(property);
+    const defaultValue = getClaimDefaultValue(property);
+    if (typeof defaultValue !== 'undefined') {
+      (acc as any)[key] = defaultValue;
+    } else if (type === ClaimField.Array) {
+      (acc as any)[key] = Array(property.minItems || 1)
+        .fill('')
+        .map((v, index) => ({
+          id: index,
+          value: '',
+        }));
+    }
+    return acc;
+  }, {} as IssuePdaSchema);
 };
