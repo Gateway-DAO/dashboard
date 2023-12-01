@@ -22,6 +22,25 @@ type Props = {
   onClose: () => void;
 };
 
+const CreateOrgLink = () => {
+  return (
+    <MenuItemLink href={routes.dashboard.createOrg}>
+      <ListItemIcon>
+        <IconButton
+          sx={{
+            backgroundColor: 'primary.light',
+          }}
+        >
+          <AddIcon htmlColor="#771AC9" />
+        </IconButton>
+      </ListItemIcon>
+      <ListItemText secondary={auth.create_org.desc}>
+        <Typography variant="subtitle1">{auth.create_org.title}</Typography>
+      </ListItemText>
+    </MenuItemLink>
+  );
+};
+
 export default function AuthDropdownProfilesList({ onClose }: Props) {
   const { data: session } = useSession();
 
@@ -38,7 +57,13 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
       )
     : user.accesses;
 
-  if (!user.accesses?.length) return null;
+  if (!user.accesses?.length)
+    return (
+      <>
+        <CreateOrgLink />
+        <Divider />
+      </>
+    );
 
   return (
     <>
@@ -85,20 +110,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
           </ListItemText>
         </MenuItemLink>
       )}
-      <MenuItemLink href={routes.dashboard.createOrg}>
-        <ListItemIcon>
-          <IconButton
-            sx={{
-              backgroundColor: 'primary.light',
-            }}
-          >
-            <AddIcon htmlColor="#771AC9" />
-          </IconButton>
-        </ListItemIcon>
-        <ListItemText secondary={auth.create_org.desc}>
-          <Typography variant="subtitle1">{auth.create_org.title}</Typography>
-        </ListItemText>
-      </MenuItemLink>
+      <CreateOrgLink />
       <Divider />
     </>
   );
