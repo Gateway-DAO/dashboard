@@ -92,13 +92,13 @@ export default function DataModelsSearch() {
                   max: selectedConsumptionPrice[1],
                 }
               : undefined,
-          issuedCount:
-            selectedAmountOfIssuances.length > 0
-              ? {
-                  min: selectedAmountOfIssuances[0],
-                  max: selectedAmountOfIssuances[1],
-                }
-              : undefined,
+          // issuedCount:
+          //   selectedAmountOfIssuances.length > 0
+          //     ? {
+          //         min: selectedAmountOfIssuances[0],
+          //         max: selectedAmountOfIssuances[1],
+          //       }
+          //     : undefined,
           search: search.length > 0 ? search : undefined,
         },
         skip: pageParam,
