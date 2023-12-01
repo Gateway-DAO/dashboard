@@ -47,6 +47,8 @@ export const pda = {
   issuance_date: 'Issuance date',
   expiration_date: 'Expiration date',
   indeterminate: 'Indeterminate',
+  issuance_summary: 'Issuance Summary',
+  total: 'Total',
 };
 export const pdas = {
   empty: 'No data assets yet',

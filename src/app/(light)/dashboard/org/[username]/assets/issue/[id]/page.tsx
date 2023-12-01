@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   title: 'Issue a Private Data Asset - Gateway Network',
 };
 
-export default async function IssueDataAsset({
-  params: { id },
-}: PageProps<{ id: string }>) {
+export default async function OrgIssueDataAsset({
+  params: { id, username },
+}: PageProps<{ id: string; username: string }>) {
   const { dataModel } = await apiPublic.dataModelById({
     id,
   });
@@ -21,7 +21,7 @@ export default async function IssueDataAsset({
   return (
     <>
       <TopBarContainer>
-        <BackButton href={routes.dashboard.user.issue} />
+        <BackButton href={routes.dashboard.org.issue(username)} />
       </TopBarContainer>
       <IssuePdaForm dataModel={dataModel} />
     </>

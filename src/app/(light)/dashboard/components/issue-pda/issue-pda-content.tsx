@@ -6,7 +6,7 @@ import {
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
 
-import { Divider, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 import DataModelsFeatured from './featured';
 import DataModelsSearch from './search/search';
@@ -33,7 +33,6 @@ export default function IssuePdaContent() {
         </Stack>
       </Stack>
       <DataModelsFeatured />
-      <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, px: CONTAINER_PX }} />
       <DataModelsSearch />
     </Stack>
   );
