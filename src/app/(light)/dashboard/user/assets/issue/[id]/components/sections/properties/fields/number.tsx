@@ -13,6 +13,7 @@ export default function NumberProperty({
 }: PropertyField) {
   const { control } = useFormContext();
   const helper = !hideHelperText ? getNumberHelperText(property) : undefined;
+
   return (
     <Controller
       name={`claim.${id}`}
@@ -25,15 +26,19 @@ export default function NumberProperty({
           <>
             <TextField
               fullWidth
-              value={(value as number)?.toString()}
+              value={
+                typeof value === 'object'
+                  ? value.value?.toString()
+                  : (value as number)?.toString()
+              }
               onChange={(_e) => {
                 const value = _e.target.value;
-                onChange(value);
+                onChange(Number(value));
               }}
               error={!!error}
               helperText={helper}
               inputProps={{
-                valueAsNumber: true,
+                valueAsNumber: true, // TODO: Warning: React does not recognize the `valueAsNumber` prop on a DOM element.
               }}
               {...field}
             />

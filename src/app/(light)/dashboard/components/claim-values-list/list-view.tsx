@@ -9,6 +9,7 @@ type Props = {
 
 export function ListView({ value }: Props) {
   const items = useMemo(() => {
+    if (Array.isArray(value)) return value;
     let list: string[] = [];
     if (value?.indexOf(',') > -1) {
       list = value.split(',');

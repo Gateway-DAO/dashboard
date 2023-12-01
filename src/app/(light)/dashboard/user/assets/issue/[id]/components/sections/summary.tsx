@@ -4,7 +4,6 @@ import Link from 'next/link';
 import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 import { issuePdaForm } from '@/locale/en/pda';
-import { numberToMoneyString } from '@/utils/money';
 
 import { ChevronRight } from '@mui/icons-material';
 import { Box, Button, Paper, Stack, Typography } from '@mui/material';
