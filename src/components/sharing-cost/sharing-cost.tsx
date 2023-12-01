@@ -3,12 +3,11 @@ import { Chip, Stack, Tooltip, Typography } from '@mui/material';
 type Props = {
   label: string;
   value: string;
-  prefix: string;
   helperText?: string;
   chip?: string;
 };
 
-export function SharingCost({ label, value, prefix, helperText, chip }: Props) {
+export function SharingCost({ label, value, helperText, chip }: Props) {
   return (
     <Stack
       direction="row"
@@ -30,7 +29,6 @@ export function SharingCost({ label, value, prefix, helperText, chip }: Props) {
           fontSize={24}
           sx={{ textDecoration: chip && helperText ? 'line-through' : 'none' }}
         >
-          {prefix}
           {value}
         </Typography>
       </Stack>
