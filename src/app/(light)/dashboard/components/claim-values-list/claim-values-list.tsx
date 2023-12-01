@@ -27,7 +27,7 @@ export default function ClaimValuesList({ title, data }: Props) {
           {data?.map((fieldData: any, index: number) => (
             <Stack key={index} direction="row" justifyContent="space-between">
               <CardCell
-                label={fieldData?.label}
+                label={fieldData?.property}
                 margin={false}
                 py={3}
                 disabled={!fieldData.value || fieldData.value === ''}

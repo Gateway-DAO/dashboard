@@ -84,7 +84,7 @@ export default function PreviewContent({
 
   return (
     <>
-      <Typography variant="h5">Issuance Summary</Typography>
+      <Typography variant="h5">{pda.issuance_summary}</Typography>
       <Box mt={4} sx={{ p: 3, backgroundColor: 'primary.50', borderRadius: 1 }}>
         {[
           { label: 'PDA quantity', value: amount },
@@ -104,12 +104,12 @@ export default function PreviewContent({
           </Stack>
         ))}
         <Stack direction="row" justifyContent="space-between" gap={1} mt={2}>
-          <Typography>Total</Typography>
+          <Typography>{pda.total}</Typography>
           <Typography variant="h5">{total}</Typography>
         </Stack>
         <Stack direction="row" justifyContent="flex-end" mt={4} gap={1}>
           <Button disabled={isLoading} variant="outlined" onClick={onClose}>
-            Cancel
+            {common.actions.cancel}
           </Button>
           <LoadingButton
             isLoading={isLoading}
@@ -117,7 +117,7 @@ export default function PreviewContent({
             onClick={onSubmit}
             endIcon={<IssuanceIcon />}
           >
-            Issue now
+            {common.actions.issue_now}
           </LoadingButton>
         </Stack>
       </Box>
