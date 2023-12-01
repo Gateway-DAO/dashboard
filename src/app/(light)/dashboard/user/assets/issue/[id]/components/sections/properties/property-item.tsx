@@ -24,6 +24,7 @@ export default function PropertyItem({
     case ClaimField.Boolean:
       return <BooleanProperty {...props} />;
     case ClaimField.Number:
+    case ClaimField.Integer:
       return <NumberProperty {...props} />;
     case ClaimField.Array:
       return <ArrayProperty {...props} />;

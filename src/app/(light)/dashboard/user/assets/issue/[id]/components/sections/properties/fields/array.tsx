@@ -9,11 +9,11 @@ import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 
 import PropertyItem from '../property-item';
 import { PropertyField } from './type';
-import { getArrayHelperText, getClaimHelperText } from './utils';
+import { getClaimHelperText, getNumberHelperText } from './utils';
 
 export default function ArrayProperty({
   id,
-  subType: subTypeString,
+  hideHelperText,
   ...property
 }: PropertyField) {
   const minAmountOfFields = property.minItems || 1;
@@ -40,8 +40,8 @@ export default function ArrayProperty({
 
   const removeFieldIsVisible = fields.length > minAmountOfFields;
   const error = (errors?.claim as any)?.[id]?.message;
-  const helper = getArrayHelperText(property);
-  const subType = getClaimType({ type: subTypeString! });
+  const helper = !hideHelperText ? getNumberHelperText(property) : undefined;
+  const subType = getClaimType({ type: property!.items!.type! });
   const subTypeHelper = getClaimHelperText(subType, property.items!);
 
   return (
@@ -76,7 +76,7 @@ export default function ArrayProperty({
           {subTypeHelper}
         </Typography>
       )}
-      {!!helper.length && (
+      {!!helper?.length && (
         <Typography variant="body2" color="text.secondary" mt={-1}>
           {helper}
         </Typography>
