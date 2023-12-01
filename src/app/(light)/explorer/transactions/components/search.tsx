@@ -14,7 +14,7 @@ type Props = {
 export default function Search({ totalTransactions, refreshAction }: Props) {
   return (
     <Stack borderBottom="1px solid" borderColor="divider" pb={3}>
-      <SearchField onChange={(value: string) => console.log(value)} />
+      {/* <SearchField onChange={(value: string) => console.log(value)} /> */}
       {totalTransactions && (
         <Box
           display="flex"

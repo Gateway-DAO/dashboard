@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import documentationRoutes from '@/constants/documentationRoutes';
 import { explorerRequestTemplates } from '@/locale/en/request-template';
 
 import { Divider } from '@mui/material';
@@ -20,6 +21,7 @@ export default function RequestTemplatesExplorerPage() {
         title={explorerRequestTemplates.title}
         subtitle={explorerRequestTemplates.subtitle}
         help={explorerRequestTemplates.help}
+        helpLink={documentationRoutes.requestTemplate}
         infoCard
         sx={{
           backgroundColor: 'primary.50',

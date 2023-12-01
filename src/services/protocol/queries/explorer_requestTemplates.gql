@@ -103,7 +103,6 @@ query explorer_verifiers_by_data_request_template_count($id: String!) {
 
 query explorer_request_templates_metadata {
   dataRequestTemplatesMetadata {
-    dataRequestsCount
     tags
   }
 }

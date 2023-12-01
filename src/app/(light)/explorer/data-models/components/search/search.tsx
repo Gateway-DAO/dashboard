@@ -14,7 +14,7 @@ import { DataModel } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import AmountOfIssuancesField from './fields/amount-of-issuances-field';
+// import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
 
 const sortOptions: SortByOption<DataModel>[] = [
@@ -34,16 +34,16 @@ const sortOptions: SortByOption<DataModel>[] = [
     label: 'Price low to high',
     value: { consumptionPrice: 'ASC' },
   },
-  {
-    key: 'issuances-high-to-low',
-    label: 'Issuances high to low',
-    value: { pdasIssuedCount: 'DESC' },
-  },
-  {
-    key: 'issuances-low-to-high',
-    label: 'Issuances low to high',
-    value: { pdasIssuedCount: 'ASC' },
-  },
+  // {
+  //   key: 'issuances-high-to-low',
+  //   label: 'Issuances high to low',
+  //   value: { pdasIssuedCount: 'DESC' },
+  // },
+  // {
+  //   key: 'issuances-low-to-high',
+  //   label: 'Issuances low to high',
+  //   value: { pdasIssuedCount: 'ASC' },
+  // },
 ];
 
 export default function DataModelsExplorerSearch() {
@@ -65,7 +65,7 @@ export default function DataModelsExplorerSearch() {
   const tags = metadata.data?.dataModelsMetadata.tags ?? [];
   const consumptionPrice =
     metadata.data?.dataModelsMetadata.consumptionPrice ?? 0;
-  const issuedCount = metadata.data?.dataModelsMetadata.issuedCount ?? 0;
+  // const issuedCount = metadata.data?.dataModelsMetadata.issuedCount ?? 0;
 
   const dataModelsQuery = useInfiniteQuery({
     queryKey: [
@@ -91,13 +91,13 @@ export default function DataModelsExplorerSearch() {
                   max: selectedConsumptionPrice[1],
                 }
               : undefined,
-          issuedCount:
-            selectedAmountOfIssuances.length > 0
-              ? {
-                  min: selectedAmountOfIssuances[0],
-                  max: selectedAmountOfIssuances[1],
-                }
-              : undefined,
+          // issuedCount:
+          //   selectedAmountOfIssuances.length > 0
+          //     ? {
+          //         min: selectedAmountOfIssuances[0],
+          //         max: selectedAmountOfIssuances[1],
+          //       }
+          //     : undefined,
           search: search.length > 0 ? search : undefined,
         },
         skip: pageParam,
@@ -138,13 +138,13 @@ export default function DataModelsExplorerSearch() {
         setConsumptionPrice={setSelectedConsumptionPrice}
         isLoading={metadata.isLoading}
       />
-      <AmountOfIssuancesField
+      {/* <AmountOfIssuancesField
         min={issuedCount.min}
         max={issuedCount.max}
         selectedAmountOfIssuances={selectedAmountOfIssuances}
         setAmountOfIssuances={setSelectedAmountOfIssuances}
         isLoading={metadata.isLoading}
-      />
+      /> */}
       {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
       <SortByField
         selectedSort={selectedSort}
