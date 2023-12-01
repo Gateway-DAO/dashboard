@@ -23,9 +23,9 @@ export default function DataModelsFeatured() {
       '5748a261-b6b8-491e-8bd6-5f6d1a73f525',
     ],
     staging: [
-      '6cae6620-42bd-4a12-a1f8-6ceec2847cc5',
-      '2cc6e362-c146-40c8-b1b8-6eace653121d',
-      'd00f5a65-86b3-4ccc-ac71-2f310cce5583',
+      'c22d65f0-b7b1-48a9-8c13-a01e32df1f1f',
+      'd1dd60e2-ea35-4359-bb49-fce76d25a55d',
+      'd156ac9f-087c-4680-98d4-97fc49351208',
     ],
     testnet: [
       '6cae6620-42bd-4a12-a1f8-6ceec2847cc5',
