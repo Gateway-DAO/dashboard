@@ -74,7 +74,7 @@ export default function PreviewContent({
   const schemaProperties = schema.properties;
 
   const claims: CredentialData[] = Object.keys(data.claim).map((key) => {
-    const label = getClaimTitle(schemaProperties[key]);
+    const label = getClaimTitle(schemaProperties[key], key);
     return {
       ...schemaProperties[key],
       label,
