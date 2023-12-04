@@ -7,7 +7,6 @@ import { Paper, Stack, TextField, Typography } from '@mui/material';
 
 export default function TitleDescriptionSection() {
   const { control } = useFormContext();
-
   return (
     <Paper
       component={Stack}
