@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 
 import {
+  DataModelByIdQuery,
   UserIdentificationInput,
   UserIdentifierType,
 } from '@/services/protocol/types';
@@ -23,18 +24,18 @@ import Summary from './sections/summary';
 import TitleDescriptionSection from './sections/title-description';
 
 type Props = {
-  schema: any;
+  dataModel: DataModelByIdQuery['dataModel'];
 };
 
-export default function Form({ schema }: Props) {
+export default function Form({ dataModel }: Props) {
   const [previewModalState, setPreviewModalState] = useState<{
     isOpen: boolean;
     data?: IssuePdaSchema;
   }>({ isOpen: false });
 
   const schemaDefaultValues = useMemo(
-    () => getSchemaDefaultValues(schema),
-    [schema]
+    () => getSchemaDefaultValues(dataModel.schema),
+    [dataModel.schema]
   );
 
   const methods = useForm<IssuePdaSchema>({
@@ -43,12 +44,12 @@ export default function Form({ schema }: Props) {
         type: UserIdentifierType.GatewayId,
         value: '',
       },
-      title: '',
-      description: '',
+      title: dataModel.title,
+      description: dataModel.description,
       claim: schemaDefaultValues,
     },
     resolver: async (value, context, options) =>
-      issuePdaValidator(value, schema, context, options),
+      issuePdaValidator(value, dataModel.schema, context, options),
     mode: 'onSubmit',
   });
 
@@ -97,7 +98,7 @@ export default function Form({ schema }: Props) {
         <FormProvider {...methods}>
           <Stack component="form" gap={2}>
             <TitleDescriptionSection />
-            <PropertiesSection schema={schema} />
+            <PropertiesSection schema={dataModel.schema} />
             <Summary amount={amount} total={total} />
           </Stack>
         </FormProvider>
@@ -108,7 +109,7 @@ export default function Form({ schema }: Props) {
           price={price}
           total={total}
           onClose={onClosePreview}
-          schema={schema}
+          schema={dataModel.schema}
           isOpen={previewModalState.isOpen}
           data={previewModalState.data}
         />

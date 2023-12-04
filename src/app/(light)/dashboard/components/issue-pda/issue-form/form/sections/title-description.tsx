@@ -1,11 +1,13 @@
 import ErrorMessage from '@/components/form/error-message/error-message';
 import { common } from '@/locale/en/common';
+import { issuePdaForm } from '@/locale/en/pda';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { Paper, Stack, TextField, Typography } from '@mui/material';
 
 export default function TitleDescriptionSection() {
   const { control } = useFormContext();
+
   return (
     <Paper
       component={Stack}
@@ -24,7 +26,12 @@ export default function TitleDescriptionSection() {
           name="title"
           render={({ field, fieldState: { error } }) => (
             <>
-              <TextField label="Title" fullWidth {...field} error={!!error} />
+              <TextField
+                label={issuePdaForm.details.title}
+                fullWidth
+                {...field}
+                error={!!error}
+              />
               {error && <ErrorMessage mt={-2}>{error.message}</ErrorMessage>}
             </>
           )}
@@ -35,7 +42,7 @@ export default function TitleDescriptionSection() {
           render={({ field, fieldState: { error } }) => (
             <>
               <TextField
-                label="Description"
+                label={issuePdaForm.details.description}
                 multiline
                 rows={4}
                 fullWidth
