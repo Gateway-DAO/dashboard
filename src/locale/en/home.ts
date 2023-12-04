@@ -45,4 +45,22 @@ export const home = {
       target: '_blank',
     },
   ],
+  instrunction_banner: [
+    {
+      title: 'How to use your PDA',
+      description: 'Explore the potential of your Data Assets',
+      link: 'https://www.youtube.com/embed/GwIFrE0MQLc',
+    },
+    {
+      title: 'How to issue a PDA',
+      description: 'How to issue a PDA using a Data Model',
+      link: 'https://www.youtube.com/embed/GwIFrE0MQLc',
+    },
+    {
+      title: 'How to create a a Request',
+      description: 'How to create a request from a template',
+      link: 'https://www.youtube.com/embed/GwIFrE0MQLc',
+    },
+  ],
+  play_video: 'Play video',
 };
