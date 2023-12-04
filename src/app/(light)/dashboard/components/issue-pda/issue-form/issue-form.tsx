@@ -27,7 +27,7 @@ export default function IssuePdaForm({ dataModel }: Props) {
       <Typography variant="h3" component="h1" mb={6}>
         {issuePdaForm.subtitle}
       </Typography>
-      <Form schema={dataModel.schema} />
+      <Form dataModel={dataModel} />
     </Stack>
   );
 }

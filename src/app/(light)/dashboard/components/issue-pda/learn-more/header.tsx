@@ -57,6 +57,7 @@ export default function DataModelDetailHeader({
           size="large"
           endIcon={<LaunchIcon />}
           href={routes.explorer.dataModel(id)}
+          target="_blank"
         >
           {issuePda.view_on_explorer}
         </Button>

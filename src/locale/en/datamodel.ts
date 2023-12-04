@@ -81,7 +81,7 @@ export const dataModelCard = {
 };
 
 export const issuePda = {
-  view_on_explorer: 'View onExplorer',
+  view_on_explorer: 'View on Explorer',
   issue: 'Issue now',
 };
 
