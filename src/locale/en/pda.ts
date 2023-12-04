@@ -104,6 +104,10 @@ export const issuePda = {
 export const issuePdaForm = {
   title: 'Issue a Private Data Asset',
   subtitle: 'Complete your PDA details',
+  details: {
+    title: 'Title',
+    description: 'Description',
+  },
   issue_to: {
     title: 'Issue to',
     description: 'Add who will be the owner of this PDA',
