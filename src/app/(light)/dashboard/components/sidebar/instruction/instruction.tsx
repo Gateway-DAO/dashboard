@@ -27,11 +27,7 @@ export default function Instrunction({
     <ModalRight open={open} onClose={onClose}>
       <ModalHeader
         onClose={onClose}
-        children={
-          <>
-            <QuestionSquaredIcon sx={{ width: 38, height: 40 }} />
-          </>
-        }
+        children={<QuestionSquaredIcon sx={{ width: 38, height: 40 }} />}
       />
       <InstructionHeader title={title} link={link} description={description} />
     </ModalRight>

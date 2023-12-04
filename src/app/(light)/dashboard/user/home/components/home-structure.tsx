@@ -66,6 +66,7 @@ export default function HomeStructure({ username }: Props) {
             index={index}
             link={details.link}
             play_video={home.play_video}
+            key={index}
           />
         ))}
       </Box>
