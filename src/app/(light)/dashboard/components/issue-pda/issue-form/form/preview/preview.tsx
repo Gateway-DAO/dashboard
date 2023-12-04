@@ -5,6 +5,8 @@ import IssuanceSuccess from '@/app/(light)/dashboard/components/issue-pda/succes
 import ModalTitle from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
+import { OrganizationIdentifierType } from '@/services/protocol/types';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
@@ -19,13 +21,19 @@ export default function Preview({
 }: PreviewModalProps) {
   const { id } = useParams();
   const { privateApi } = useGtwSession();
-
+  const { organization } = useOrganization();
   const { mutateAsync, isLoading, isSuccess, data } = useMutation({
     mutationKey: ['issue-pda', props.data],
     mutationFn: async (pda: IssuePdaSchema) =>
       privateApi.issue_pda({
         input: {
           dataModelId: id as string,
+          organization: !!organization
+            ? {
+                type: OrganizationIdentifierType.OrgId,
+                value: organization.id!,
+              }
+            : undefined,
           ...pda,
         },
       }),
