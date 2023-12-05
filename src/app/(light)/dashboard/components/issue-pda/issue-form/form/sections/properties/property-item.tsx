@@ -4,6 +4,7 @@ import ArrayProperty from './fields/array';
 import BooleanProperty from './fields/boolean';
 import CurrencyProperty from './fields/currency';
 import NumberProperty from './fields/number';
+import SchemaErrorProperty from './fields/schema-error';
 import TextProperty from './fields/text';
 import UnknownProperty from './fields/unknown';
 import { PropertyProps } from './type';
@@ -32,6 +33,8 @@ export default function PropertyItem({
       return <CurrencyProperty {...props} />;
     case ClaimField.Unknown:
       return <UnknownProperty {...props} />;
+    case ClaimField.SchemaError:
+      return <SchemaErrorProperty {...props} />;
     default:
       return null;
   }

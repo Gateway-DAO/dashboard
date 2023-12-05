@@ -10,6 +10,7 @@ export enum ClaimField {
   Link = 'link',
   Currency = 'currency',
   Unknown = 'unknown',
+  SchemaError = 'schema_error',
 }
 
 // JSON Schema draft 7 property types and validations

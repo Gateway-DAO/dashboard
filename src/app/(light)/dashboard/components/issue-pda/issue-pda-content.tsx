@@ -8,7 +8,7 @@ import {
 
 import { Stack, Typography } from '@mui/material';
 
-import DataModelsFeatured from './featured';
+import DataModelsFeatured from './featured/featured';
 import DataModelsSearch from './search/search';
 
 export default function IssuePdaContent() {
