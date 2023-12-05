@@ -13,7 +13,7 @@ import routes from '@/constants/routes';
 import { transaction } from '@/locale/en/transaction';
 import { apiPublic } from '@/services/protocol/api';
 import { Explorer_TransactionsQuery } from '@/services/protocol/types';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
 import { Chip, Typography } from '@mui/material';
@@ -57,6 +57,7 @@ const columns: GridColDef<any>[] = [
 
 export default function TransactionsTable({ initialData, totalCount }: Props) {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
@@ -85,6 +86,7 @@ export default function TransactionsTable({ initialData, totalCount }: Props) {
   };
 
   const refreshList = () => {
+    queryClient.invalidateQueries([explorerQueries.transactions_stats]);
     setNewPage({ page: 0 });
     refetch();
   };

@@ -84,6 +84,9 @@ query transaction_detail($id: String!) {
         signedBy
         pdaStatus: status
       }
+      ...on OrganizationMetadata {
+        usersAdmin
+        organization
     }
     to {
       ... on Organization {
