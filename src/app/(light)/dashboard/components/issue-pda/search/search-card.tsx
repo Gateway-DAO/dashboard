@@ -21,6 +21,7 @@ export default function SearchCard({ dataModel }: Props) {
         dataModel={dataModel}
         withLink={false}
         onClick={toggleDetailModal}
+        sx={{ cursor: 'pointer' }}
       >
         <IssuePdaActions id={dataModel.id!} />
       </DataModelCard>

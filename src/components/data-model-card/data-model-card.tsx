@@ -14,14 +14,12 @@ type Props = {
   withLink?: boolean;
   dataModel?: PartialDeep<DataModel>;
   children?: ReactNode;
-  onClick?: () => void;
 };
 
 export default function DataModelCard({
   withLink = true,
   dataModel,
   children,
-  onClick,
   ...props
 }: Props & CardProps) {
   const profile = getOrganizationOrUserData(
@@ -34,7 +32,6 @@ export default function DataModelCard({
       title={dataModel!.title!}
       description={dataModel!.description!}
       href={withLink ? routes.explorer.dataModel(dataModel!.id) : undefined}
-      onClick={onClick}
       profile={profile}
       bottom={
         <>

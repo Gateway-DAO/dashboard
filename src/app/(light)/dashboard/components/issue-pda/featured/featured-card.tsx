@@ -22,6 +22,7 @@ export default function FeaturedCard({ dataModel }: Props) {
         key={dataModel.id}
         withLink={false}
         onClick={toggleDetailModal}
+        sx={{ cursor: 'pointer' }}
       >
         <IssuePdaActions id={dataModel.id!} />
       </DataModelImageCard>
