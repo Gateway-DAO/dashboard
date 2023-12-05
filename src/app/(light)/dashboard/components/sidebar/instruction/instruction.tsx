@@ -25,10 +25,9 @@ export default function Instrunction({
 }: Props) {
   return (
     <ModalRight open={open} onClose={onClose}>
-      <ModalHeader
-        onClose={onClose}
-        children={<QuestionSquaredIcon sx={{ width: 38, height: 40 }} />}
-      />
+      <ModalHeader onClose={onClose}>
+        <QuestionSquaredIcon sx={{ width: 38, height: 40 }} />
+      </ModalHeader>
       <InstructionHeader title={title} link={link} description={description} />
     </ModalRight>
   );

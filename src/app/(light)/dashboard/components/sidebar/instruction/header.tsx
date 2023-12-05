@@ -12,7 +12,7 @@ type Props = {
 export default function InstructionHeader({ link, title, description }: Props) {
   return (
     <Stack sx={{ height: '100%' }}>
-      <Stack mt={3} mb={5} sx={{ height: '100%' }}>
+      <Stack mt={3} mb={5}>
         <Typography variant="h4" mb={1}>
           {title}
         </Typography>

@@ -63,7 +63,6 @@ export default function HomeStructure({ username }: Props) {
           <HomeInstructionCard
             title={details.title}
             description={details.description}
-            index={index}
             link={details.link}
             play_video={home.play_video}
             key={index}
