@@ -69,7 +69,7 @@ export default function Form({ dataModel }: Props) {
   };
 
   const amount = 1;
-  const price = 0.05;
+  const price = 0.01;
   const total = numberToMoneyString(amount * price);
 
   const onSubmit = async (data: IssuePdaSchema) => {
