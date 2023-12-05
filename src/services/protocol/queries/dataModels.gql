@@ -80,3 +80,23 @@ query data_models_featured($ids: [String!]) {
     pdasIssuedCount
   }
 }
+
+query data_models_list_to_issue(
+  $filter: FilterDataModelInput
+  $skip: Int = 0
+  $order: JSON
+) {
+  dataModels(filter: $filter, skip: $skip, take: 12, order: $order) {
+    id
+    title
+    description
+    createdBy {
+      ...min_user
+    }
+    organization {
+      ...org
+    }
+    consumptionPrice
+    pdasIssuedCount
+  }
+}
