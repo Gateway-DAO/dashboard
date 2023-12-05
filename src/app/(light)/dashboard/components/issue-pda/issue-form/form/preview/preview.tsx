@@ -1,10 +1,12 @@
 'use client';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import IssuanceSuccess from '@/app/(light)/dashboard/components/issue-pda/success/success';
 import ModalTitle from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
+import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
@@ -20,6 +22,8 @@ export default function Preview({
   const { id } = useParams();
   const { privateApi } = useGtwSession();
 
+  const { organization } = useOrganization();
+  const router = useRouter();
   const { mutateAsync, isLoading, isSuccess, data } = useMutation({
     mutationKey: ['issue-pda', props.data],
     mutationFn: async (pda: IssuePdaSchema) =>
@@ -43,7 +47,16 @@ export default function Preview({
     }
   };
 
-  const close = !isLoading ? onClose : () => {};
+  const close = () => {
+    if (isSuccess) {
+      const target = organization
+        ? routes.dashboard.org.issuedAssets(organization.id)
+        : routes.dashboard.user.issuedAssets;
+      router.push(target);
+    } else if (!isLoading) {
+      onClose();
+    }
+  };
 
   return (
     <ModalRight open={isOpen} onClose={close}>
