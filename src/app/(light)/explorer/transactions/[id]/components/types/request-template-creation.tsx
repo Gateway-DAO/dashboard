@@ -54,16 +54,18 @@ export default function RequestTemplateCreation({
         {numberToMoneyString(data.cost as number)}
       </CardRow>
       <CardRow title={transaction_detail.data_models}>
-        {metadata?.dataModels?.map((item: string, index: number) => (
-          <Box key={index} display="flex">
-            {item}
-            <ExternalLink
-              iconSxProps={{ fontSize: 20, color: 'text.primary' }}
-              href={routes.explorer.dataModel(item as string)}
-              text=""
-            />
-          </Box>
-        ))}
+        <Box display="flex" flexDirection="column">
+          {metadata?.dataModels?.map((item: string, index: number) => (
+            <Box key={index} display="flex">
+              {item}
+              <ExternalLink
+                iconSxProps={{ fontSize: 20, color: 'text.primary' }}
+                href={routes.explorer.dataModel(item as string)}
+                text=""
+              />
+            </Box>
+          ))}
+        </Box>
       </CardRow>
     </Stack>
   );
