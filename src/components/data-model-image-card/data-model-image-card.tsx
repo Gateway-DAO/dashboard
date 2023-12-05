@@ -14,12 +14,14 @@ type Props = {
   withLink?: boolean;
   dataModel?: PartialDeep<DataModel>;
   children?: ReactNode;
+  onClick?: () => void;
 };
 
 export default function DataModelImageCard({
   withLink = true,
   dataModel,
   children,
+  onClick,
   ...props
 }: Props & CardProps) {
   const profile = getOrganizationOrUserData(
@@ -33,6 +35,7 @@ export default function DataModelImageCard({
       description={dataModel!.description!}
       href={withLink ? routes.explorer.dataModel(dataModel!.id) : undefined}
       profile={profile}
+      onClick={onClick}
       image={dataModel!.image as string}
       bottom={
         <>

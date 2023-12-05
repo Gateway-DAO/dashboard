@@ -21,11 +21,11 @@ export default function LearnMoreContent({ dataModel, isLoading }: Props) {
   const stats = [
     {
       label: 'PDAs issued',
-      value: dataModel.pdasIssuedCount,
+      value: dataModel?.pdasIssuedCount,
     },
     {
       label: 'Revenue generated',
-      value: numberToMoneyString(dataModel.revenueGenerated),
+      value: numberToMoneyString(dataModel?.revenueGenerated),
     },
   ];
 
