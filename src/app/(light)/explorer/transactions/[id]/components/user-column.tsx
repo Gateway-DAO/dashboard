@@ -26,7 +26,7 @@ export default function UserColumn({ user, isLoading = true }: UserColum) {
         <Typography variant="caption" color="text.secondary">
           {isLoading ? (
             <Skeleton width={100} />
-          ) : user?.name ? (
+          ) : user?.name || user?.displayName ? (
             `@${user?.gatewayId}`
           ) : (
             ''
