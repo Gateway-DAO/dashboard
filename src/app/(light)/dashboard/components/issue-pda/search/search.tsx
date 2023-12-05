@@ -9,7 +9,7 @@ import TagsField from '@/components/search-filters/tags-field';
 import SearchSection from '@/components/search-section/search-section';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
-import { DataModel } from '@/services/protocol/types';
+import { DataModel, PermissionType } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
@@ -81,7 +81,7 @@ export default function DataModelsSearch() {
       search,
     ],
     queryFn: ({ pageParam = 0 }) =>
-      apiPublic.explorer_data_models_list({
+      apiPublic.data_models_list_to_issue({
         filter: {
           tags: selectedTags.length > 0 ? selectedTags : undefined,
           consumptionPrice:
@@ -91,6 +91,7 @@ export default function DataModelsSearch() {
                   max: selectedConsumptionPrice[1],
                 }
               : undefined,
+          permissioning: PermissionType.All,
           // issuedCount:
           //   selectedAmountOfIssuances.length > 0
           //     ? {
