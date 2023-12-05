@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 
-import DataModelCard from '@/components/data-model-card/data-model-card';
 import ClearFiltersButton from '@/components/search-filters/clear-filters-button';
 import SortByField, {
   SortByOption,
@@ -14,9 +13,9 @@ import { DataModel } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import IssuePdaActions from '../issue-pda-actions';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
+import SearchCard from './search-card';
 
 const sortOptions: SortByOption<DataModel>[] = [
   {
@@ -173,13 +172,7 @@ export default function DataModelsSearch() {
         dataModelsQuery.isSuccess &&
         dataModels.length > 0 &&
         dataModels.map((dataModel) => (
-          <DataModelCard
-            dataModel={dataModel}
-            key={dataModel.id}
-            withLink={false}
-          >
-            <IssuePdaActions id={dataModel.id} />
-          </DataModelCard>
+          <SearchCard key={dataModel.id} dataModel={dataModel} />
         ))
       }
     />
