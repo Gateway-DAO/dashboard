@@ -8,6 +8,7 @@ import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
+import { OrganizationIdentifierType } from '@/services/protocol/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
@@ -31,6 +32,12 @@ export default function Preview({
       privateApi.issue_pda({
         input: {
           dataModelId: id as string,
+          organization: !!organization
+            ? {
+                type: OrganizationIdentifierType.OrgId,
+                value: organization.id!,
+              }
+            : undefined,
           ...pda,
         },
       }),
