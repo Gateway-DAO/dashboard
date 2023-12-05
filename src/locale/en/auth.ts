@@ -35,7 +35,8 @@ export const auth = {
     verify_token: {
       title: 'Verify your email',
       description: 'Enter the code sent to your email',
-      caption: 'This code will expire in 30 minutes',
+      caption:
+        "If you haven't received the verification code in your inbox within a few minutes, please check your Spam or Junk Mail folder.",
       label: 'Code',
       action: 'Verify',
       send_code_again: 'Send code again in',
