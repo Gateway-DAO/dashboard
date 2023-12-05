@@ -85,13 +85,14 @@ export default function DataModelDetails({ requestTemplate }: Props) {
             {dayjs(requestTemplate?.createdAt).format(DATE_FORMAT)}
           </Typography>
         </CardCell>
-        <CardCell
+        {/* Backlogged */}
+        {/* <CardCell
           label={
             explorerRequestTemplateDetailOverview.labels.average_request_cost
           }
         >
           <Typography>{numberToMoneyString(0)}</Typography>
-        </CardCell>
+        </CardCell> */}
       </TableCellContainer>
       <TableCellContainer>
         <Stack
