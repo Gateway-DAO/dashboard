@@ -1,3 +1,4 @@
+import { REQUIRED_MAX_LENGTH, REQUIRED_MIN_LENGTH } from '@/constants/zod';
 import identifierValueSchema from '@/schemas/identifier-value';
 import getClaimType, {
   ClaimField,
@@ -9,8 +10,11 @@ import { ResolverResult } from 'react-hook-form';
 import zod from 'zod';
 
 const issuePdaSchema = zod.object({
-  title: zod.string().min(2).max(100),
-  description: zod.string().min(2),
+  title: zod
+    .string()
+    .min(2, REQUIRED_MIN_LENGTH(2))
+    .max(100, REQUIRED_MAX_LENGTH(100)),
+  description: zod.string().min(2, REQUIRED_MIN_LENGTH(2)),
   claim: zod.object({}),
   owner: identifierValueSchema,
 });
