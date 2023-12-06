@@ -66,6 +66,7 @@ query transaction_detail($id: String!) {
       ... on RequestTemplateMetadata {
         dataModels
         requestTemplate
+        signedBy
       }
       ... on DataModelMetadata {
         dataModel
