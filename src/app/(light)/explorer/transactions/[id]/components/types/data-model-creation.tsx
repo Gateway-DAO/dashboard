@@ -43,7 +43,7 @@ export default function DataModelCreation({
         <UserColumn isLoading={false} user={data.from} />
       </CardRow>
       <CardRow title={transaction_detail.signed_by}>
-        {metadata.signedBy}
+        <UserColumn isLoading={false} user={{ id: metadata.signedBy }} />
       </CardRow>
       <CardRow title={transaction_detail.created_at}>
         {dayjs(data.createdAt).format(DATE_FORMAT)}
