@@ -2,12 +2,13 @@ import { Metadata } from 'next';
 
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import routes from '@/constants/routes';
-import { pdas as pdasLocales } from '@/locale/en/pda';
+import { pdas as pdasLocales, coachMarkGuide } from '@/locale/en/pda';
 import { getPrivateApi } from '@/services/protocol/api';
 
 import { Box, Button, Typography } from '@mui/material';
 
 import PdasHeader from '../components/pdas-header';
+import InstructionGuide from './components/coach-guide';
 import ReceivedPDAsList from './components/list';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -33,6 +34,13 @@ export default async function DataAssetsPage() {
         </Button>
       </PdasHeader>
       <Box sx={{ pt: 5 }}>
+        <InstructionGuide
+          title={coachMarkGuide.title}
+          desc={coachMarkGuide.description}
+          btnLink={coachMarkGuide.btn_link}
+          btnText={coachMarkGuide.btn_text}
+          videoUrl={coachMarkGuide.video_link}
+        />
         {pdas && pdas.length > 0 && <ReceivedPDAsList pdas={pdas} />}
         {pdas && pdas.length === 0 && (
           <Typography
