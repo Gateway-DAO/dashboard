@@ -62,7 +62,7 @@ export default function Preview({
   const close = () => {
     if (isSuccess) {
       const target = organization
-        ? routes.dashboard.org.issuedAssets(organization.id)
+        ? routes.dashboard.org.issuedAssets(organization.gatewayId)
         : routes.dashboard.user.issuedAssets;
       router.push(target);
     } else if (!isLoading) {
