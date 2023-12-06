@@ -7,9 +7,15 @@ import SortByField, {
 } from '@/components/search-filters/sort-by-field';
 import TagsField from '@/components/search-filters/tags-field';
 import SearchSection from '@/components/search-section/search-section';
+import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
-import { DataModel, PermissionType } from '@/services/protocol/types';
+import {
+  DataModel,
+  IdentifierType,
+  PermissionType,
+} from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
@@ -47,6 +53,8 @@ const sortOptions: SortByOption<DataModel>[] = [
 ];
 
 export default function DataModelsSearch() {
+  const { organization } = useOrganization();
+  const { session } = useGtwSession();
   const [search, setSearch] = useDebouncedState('', 500);
   const [selectedSort, setSort] = useState<SortByOption<DataModel>>();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -79,6 +87,9 @@ export default function DataModelsSearch() {
       selectedAmountOfIssuances[1],
       selectedSort?.value,
       search,
+      organization,
+      organization?.gatewayId,
+      session.user.gatewayId,
     ],
     queryFn: ({ pageParam = 0 }) =>
       apiPublic.data_models_list_to_issue({
@@ -91,7 +102,15 @@ export default function DataModelsSearch() {
                   max: selectedConsumptionPrice[1],
                 }
               : undefined,
-          permissioning: PermissionType.All,
+          permissioning: [PermissionType.All, PermissionType.SpecificIds],
+          allowedIssuers: [
+            {
+              type: IdentifierType.GatewayId,
+              value: (organization
+                ? organization.gatewayId
+                : session.user.gatewayId) as string,
+            },
+          ],
           // issuedCount:
           //   selectedAmountOfIssuances.length > 0
           //     ? {
