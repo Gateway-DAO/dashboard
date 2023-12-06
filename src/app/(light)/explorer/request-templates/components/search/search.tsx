@@ -105,8 +105,7 @@ export default function DataModelsRequestExplorerSearch() {
   const isFiltering =
     selectedTags.length > 0 ||
     // selectedAverageCost.length > 0 ||
-    selectedAmountOfRequests.length > 0 ||
-    !!selectedSort;
+    selectedAmountOfRequests.length > 0;
 
   const onClearFilters = () => {
     setSelectedTags([]);
