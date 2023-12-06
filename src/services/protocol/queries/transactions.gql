@@ -69,6 +69,7 @@ query transaction_detail($id: String!) {
       }
       ... on DataModelMetadata {
         dataModel
+        signedBy
       }
       ... on ProofMetadata {
         proof

@@ -42,6 +42,9 @@ export default function DataModelCreation({
       <CardRow title={transaction_detail.creator}>
         <UserColumn isLoading={false} user={data.from} />
       </CardRow>
+      <CardRow title={transaction_detail.signed_by}>
+        <UserColumn isLoading={false} user={{ id: metadata.signedBy }} />
+      </CardRow>
       <CardRow title={transaction_detail.created_at}>
         {dayjs(data.createdAt).format(DATE_FORMAT)}
       </CardRow>
