@@ -20,7 +20,12 @@ export default function InstructionHeader({ link, title, description }: Props) {
         <Typography variant="body1">{description}</Typography>
       </Stack>
       <Stack direction="column" sx={{ height: '100%' }}>
-        <iframe src={link} width={'100%'} height={'100%'}></iframe>
+        <iframe
+          src={link}
+          width={'100%'}
+          height={'70%'}
+          allowFullScreen
+        ></iframe>
       </Stack>
     </Stack>
   );
