@@ -8,6 +8,7 @@ import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
+import { errorMessages } from '@/locale/en/errors';
 import { OrganizationIdentifierType } from '@/services/protocol/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
@@ -53,16 +54,17 @@ export default function Preview({
         organization ? organization.id : session?.user.id,
       ]);
     } catch (error: any) {
-      if (error?.response?.data?.message) {
-        enqueueSnackbar(error.response.data.message, { variant: 'error' });
-      }
+      enqueueSnackbar(
+        error?.response?.data?.message ?? errorMessages.UNEXPECTED_ERROR,
+        { variant: 'error' }
+      );
     }
   };
 
   const close = () => {
     if (isSuccess) {
       const target = organization
-        ? routes.dashboard.org.issuedAssets(organization.id)
+        ? routes.dashboard.org.issuedAssets(organization.gatewayId)
         : routes.dashboard.user.issuedAssets;
       router.push(target);
     } else if (!isLoading) {
