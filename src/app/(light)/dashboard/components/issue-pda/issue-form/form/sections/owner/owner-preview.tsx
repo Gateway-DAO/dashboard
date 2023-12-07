@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { useIdentifierTypes } from '@/components/form/user-identification-field/use-identifier-types';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { UserIdentificationInput } from '@/services/protocol/types';
+import { limitCharsCentered } from '@/utils/string';
 
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Chip, IconButton, Stack, Typography } from '@mui/material';
@@ -38,7 +39,7 @@ export default function OwnerPreview({
       <GTWAvatar src={picture} size={40} name={name} alt={gatewayId} />
       <Stack flexGrow={1}>
         <Typography variant="body1" fontWeight={700}>
-          {name}
+          {limitCharsCentered(name, 20)}
         </Typography>
         {gatewayId && <Typography variant="caption">@{gatewayId}</Typography>}
       </Stack>

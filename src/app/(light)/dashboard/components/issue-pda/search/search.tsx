@@ -1,22 +1,27 @@
 'use client';
 import { useState } from 'react';
 
-import DataModelCard from '@/components/data-model-card/data-model-card';
 import ClearFiltersButton from '@/components/search-filters/clear-filters-button';
 import SortByField, {
   SortByOption,
 } from '@/components/search-filters/sort-by-field';
 import TagsField from '@/components/search-filters/tags-field';
 import SearchSection from '@/components/search-section/search-section';
+import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
-import { DataModel } from '@/services/protocol/types';
+import {
+  DataModel,
+  IdentifierType,
+  PermissionType,
+} from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import IssuePdaActions from '../issue-pda-actions';
 import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
+import SearchCard from './search-card';
 
 const sortOptions: SortByOption<DataModel>[] = [
   {
@@ -48,6 +53,8 @@ const sortOptions: SortByOption<DataModel>[] = [
 ];
 
 export default function DataModelsSearch() {
+  const { organization } = useOrganization();
+  const { session } = useGtwSession();
   const [search, setSearch] = useDebouncedState('', 500);
   const [selectedSort, setSort] = useState<SortByOption<DataModel>>();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -80,9 +87,12 @@ export default function DataModelsSearch() {
       selectedAmountOfIssuances[1],
       selectedSort?.value,
       search,
+      organization,
+      organization?.gatewayId,
+      session.user.gatewayId,
     ],
     queryFn: ({ pageParam = 0 }) =>
-      apiPublic.explorer_data_models_list({
+      apiPublic.data_models_list_to_issue({
         filter: {
           tags: selectedTags.length > 0 ? selectedTags : undefined,
           consumptionPrice:
@@ -92,6 +102,15 @@ export default function DataModelsSearch() {
                   max: selectedConsumptionPrice[1],
                 }
               : undefined,
+          permissioning: [PermissionType.All, PermissionType.SpecificIds],
+          allowedIssuers: [
+            {
+              type: IdentifierType.GatewayId,
+              value: (organization
+                ? organization.gatewayId
+                : session.user.gatewayId) as string,
+            },
+          ],
           // issuedCount:
           //   selectedAmountOfIssuances.length > 0
           //     ? {
@@ -173,13 +192,7 @@ export default function DataModelsSearch() {
         dataModelsQuery.isSuccess &&
         dataModels.length > 0 &&
         dataModels.map((dataModel) => (
-          <DataModelCard
-            dataModel={dataModel}
-            key={dataModel.id}
-            withLink={false}
-          >
-            <IssuePdaActions id={dataModel.id} />
-          </DataModelCard>
+          <SearchCard key={dataModel.id} dataModel={dataModel} />
         ))
       }
     />

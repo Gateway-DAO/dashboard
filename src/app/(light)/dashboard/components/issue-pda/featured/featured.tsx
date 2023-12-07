@@ -1,6 +1,5 @@
 'use client';
 
-import DataModelImageCard from '@/components/data-model-image-card/data-model-image-card';
 import FeaturedSection from '@/components/featured-section/featured-section';
 import { queries } from '@/constants/queries';
 import { issuePda } from '@/locale/en/pda';
@@ -13,7 +12,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Divider } from '@mui/material';
 
-import IssuePdaActions from './issue-pda-actions';
+import FeaturedCard from './featured-card';
 
 export default function DataModelsFeatured() {
   const dataModelsIdByEnv = {
@@ -62,13 +61,7 @@ export default function DataModelsFeatured() {
               columns={3}
             >
               {dataModels.data?.dataModels.map((dataModel) => (
-                <DataModelImageCard
-                  dataModel={dataModel}
-                  key={dataModel.id}
-                  withLink={false}
-                >
-                  <IssuePdaActions id={dataModel.id} />
-                </DataModelImageCard>
+                <FeaturedCard key={dataModel.id} dataModel={dataModel} />
               ))}
             </FeaturedSection>
             <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, px: CONTAINER_PX }} />

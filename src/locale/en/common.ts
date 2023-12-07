@@ -75,7 +75,7 @@ export const common = {
     edit: 'Edit',
     add: 'Add',
     add_row: 'Add row',
-    issue_now: 'Issue row',
+    issue_now: 'Issue now',
   },
   socials: {
     twitter: 'Twitter',

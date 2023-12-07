@@ -1,6 +1,6 @@
 import ErrorMessage from '@/components/form/error-message/error-message';
 import { common } from '@/locale/en/common';
-import getClaimType from '@/utils/get-claim-type';
+import getClaimType, { ClaimField } from '@/utils/get-claim-type';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
 import { Add } from '@mui/icons-material';
@@ -41,8 +41,13 @@ export default function ArrayProperty({
   const removeFieldIsVisible = fields.length > minAmountOfFields;
   const error = (errors?.claim as any)?.[id]?.message;
   const helper = !hideHelperText ? getNumberHelperText(property) : undefined;
-  const subType = getClaimType({ type: property!.items!.type! });
-  const subTypeHelper = getClaimHelperText(subType, property.items!);
+
+  const subType = property!.items
+    ? getClaimType({ type: property!.items!.type! })
+    : ClaimField.SchemaError;
+  const subTypeHelper = subType
+    ? getClaimHelperText(subType, property.items!)
+    : undefined;
 
   return (
     <Stack direction="column" gap={2}>
