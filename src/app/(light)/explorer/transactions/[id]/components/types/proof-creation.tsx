@@ -42,7 +42,7 @@ export default function ProofCreation({
         <UserColumn isLoading={false} user={data.to} />
       </CardRow> */}
       <CardRow title={transaction_detail.request_id}>
-        {metadata.request}
+        {metadata?.proofRequest}
       </CardRow>
       <CardRow title={transaction_detail.created_at}>
         {dayjs(data.createdAt).format(DATE_FORMAT)}

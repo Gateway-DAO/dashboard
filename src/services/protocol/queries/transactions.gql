@@ -76,7 +76,7 @@ query transaction_detail($id: String!) {
         proof
         status
         owner
-        request
+        proofRequest: request
         verifier
       }
       ... on PDAMetadata {
