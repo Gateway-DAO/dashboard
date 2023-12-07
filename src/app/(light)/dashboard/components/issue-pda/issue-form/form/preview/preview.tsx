@@ -4,13 +4,13 @@ import { useParams, useRouter } from 'next/navigation';
 import IssuanceSuccess from '@/app/(light)/dashboard/components/issue-pda/success/success';
 import ModalTitle from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
-import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useMyWallet from '@/hooks/use-my-wallet';
 import useOrganization from '@/hooks/use-organization';
 import { errorMessages } from '@/locale/en/errors';
 import { OrganizationIdentifierType } from '@/services/protocol/types';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
 import { IssuePdaSchema } from '../schema';
@@ -23,8 +23,7 @@ export default function Preview({
   ...props
 }: PreviewModalProps) {
   const { id } = useParams();
-  const { privateApi, session } = useGtwSession();
-  const queryClient = useQueryClient();
+  const { privateApi } = useGtwSession();
   const { organization } = useOrganization();
   const router = useRouter();
   const { mutateAsync, isLoading, isSuccess, data } = useMutation({
@@ -45,14 +44,12 @@ export default function Preview({
   });
 
   const { enqueueSnackbar } = useSnackbar();
+  const { onRefresh } = useMyWallet();
 
   const onSubmit = async () => {
     try {
       await mutateAsync(props.data);
-      await queryClient.invalidateQueries([
-        queries.my_wallet,
-        organization ? organization.id : session?.user.id,
-      ]);
+      onRefresh();
     } catch (error: any) {
       enqueueSnackbar(
         error?.response?.data?.message ?? errorMessages.UNEXPECTED_ERROR,
