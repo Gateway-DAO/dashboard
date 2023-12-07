@@ -42,6 +42,11 @@ query transaction_detail($id: String!) {
     arweaveUrl
     createdAt
     cost
+    financialTransactions {
+      action
+      fee
+      total
+    }
     from {
       ... on Organization {
         id

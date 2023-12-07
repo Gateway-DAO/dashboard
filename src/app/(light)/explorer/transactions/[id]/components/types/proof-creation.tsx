@@ -8,7 +8,7 @@ import {
 import { numberToMoneyString } from '@/utils/money';
 import dayjs from 'dayjs';
 
-import { Divider, Stack } from '@mui/material';
+import { Divider, Stack, Typography } from '@mui/material';
 
 import CardRow from '../card-row';
 import UserColumn from '../user-column';
@@ -41,14 +41,25 @@ export default function ProofCreation({
       {/* <CardRow title={transaction_detail.verifier}>
         <UserColumn isLoading={false} user={data.to} />
       </CardRow> */}
-      <CardRow title={transaction_detail.request_id}>
-        {metadata?.proofRequest}
-      </CardRow>
+      {metadata?.proofRequest && (
+        <CardRow title={transaction_detail.request_id}>
+          {metadata?.proofRequest}
+        </CardRow>
+      )}
       <CardRow title={transaction_detail.created_at}>
         {dayjs(data.createdAt).format(DATE_FORMAT)}
       </CardRow>
       <CardRow title={transaction_detail.cost}>
-        {numberToMoneyString(data.cost as number)}
+        <Typography variant="subtitle1">
+          {numberToMoneyString(data.cost as number)}
+          <Typography color="text.secondary">
+            {/* here is the fee  */}
+            {numberToMoneyString(metadata?.fees)} Transaction fee
+          </Typography>
+          <Typography color="text.secondary">
+            {numberToMoneyString(metadata?.earnings)} PDA consumption revenue
+          </Typography>
+        </Typography>
       </CardRow>
       <CardRow title={transaction_detail.status}>
         <TextStatusChip status={metadata?.status as ProofStatus} size="small" />
