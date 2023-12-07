@@ -84,7 +84,7 @@ query transaction_detail($id: String!) {
         proofRequest: request
         verifier
         fees
-        consumptionPrice
+        earnings
       }
       ... on PDAMetadata {
         expirationDate
