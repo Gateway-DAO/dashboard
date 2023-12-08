@@ -1,3 +1,4 @@
+export * from './alert';
 export * from './chip';
 export * from './container';
 export * from './bottom-navigation-action';
