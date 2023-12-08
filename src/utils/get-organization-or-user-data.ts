@@ -36,7 +36,7 @@ export default function getOrganizationOrUserData(
       gatewayId: organization.gatewayId! ?? limitCharsCentered(user.id!, 10),
       name:
         organization.name ??
-        user.gatewayId ??
+        organization.gatewayId ??
         limitCharsCentered(organization.id!, 10),
       image: organization.image,
       verified: organization.verified,
