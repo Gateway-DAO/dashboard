@@ -42,6 +42,11 @@ query transaction_detail($id: String!) {
     arweaveUrl
     createdAt
     cost
+    financialTransactions {
+      action
+      fee
+      total
+    }
     from {
       ... on Organization {
         id
@@ -78,6 +83,8 @@ query transaction_detail($id: String!) {
         owner
         proofRequest: request
         verifier
+        fees
+        earnings
       }
       ... on PDAMetadata {
         expirationDate
