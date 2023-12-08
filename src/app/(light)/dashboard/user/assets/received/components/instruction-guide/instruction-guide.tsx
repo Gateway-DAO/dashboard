@@ -24,17 +24,20 @@ type Props = {
   btnLink: string;
   btnText: string;
   videoUrl: string;
+  toggleCoachMarkGuide: () => void;
 };
 
-export default function InstructionGuide({
+export function InstructionGuide({
   title,
   desc,
   btnLink,
   btnText,
   videoUrl,
+  toggleCoachMarkGuide,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [openVideoPlayer, toggleVideoPlayer] = useToggle(false);
+
   let hasSeenDialog: { [key: string]: boolean } | null;
 
   useEffect(() => {
@@ -124,6 +127,7 @@ export default function InstructionGuide({
           description={desc}
           onClose={toggleVideoPlayer}
           handleClick={handleClick}
+          toggleCoachMarkGuide={toggleCoachMarkGuide}
         />
       </>
     )

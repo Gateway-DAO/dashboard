@@ -8,7 +8,6 @@ import { getPrivateApi } from '@/services/protocol/api';
 import { Box, Button, Typography } from '@mui/material';
 
 import PdasHeader from '../components/pdas-header';
-import InstructionGuide from './components/coach-guide';
 import ReceivedPDAsList from './components/list';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -19,6 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function DataAssetsPage() {
   const privateApi = await getPrivateApi();
+
+
   const pdas = (await privateApi.received_pdas({ take: 6, skip: 0 }))?.myPDAs;
 
   return (
@@ -34,13 +35,6 @@ export default async function DataAssetsPage() {
         </Button>
       </PdasHeader>
       <Box sx={{ pt: 5 }}>
-        <InstructionGuide
-          title={coachMarkGuide.title}
-          desc={coachMarkGuide.description}
-          btnLink={coachMarkGuide.btn_link}
-          btnText={coachMarkGuide.btn_text}
-          videoUrl={coachMarkGuide.video_link}
-        />
         {pdas && pdas.length > 0 && <ReceivedPDAsList pdas={pdas} />}
         {pdas && pdas.length === 0 && (
           <Typography
