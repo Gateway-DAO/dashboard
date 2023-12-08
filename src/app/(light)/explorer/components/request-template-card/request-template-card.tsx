@@ -24,7 +24,7 @@ export default function RequestTemplateExplorerCard({
 
   return (
     <DataCard
-      title={requestTemplate!.name!}
+      title={profile!.name!}
       description={requestTemplate!.description!}
       href={
         withLink
