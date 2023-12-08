@@ -46,7 +46,7 @@ export default function Summary({ amount, total, canIssue }: Props) {
           maxWidth: 660,
         }}
       >
-        {!canIssue && (
+        {!canIssue && !isLoading && (
           <Alert severity="error">
             {errorMessages.INSUFFICIENT_BALANCE_TO_PROCEED}
           </Alert>
