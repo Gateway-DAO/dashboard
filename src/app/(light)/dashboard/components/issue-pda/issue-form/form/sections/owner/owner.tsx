@@ -15,7 +15,7 @@ import {
 } from '@/services/protocol/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { useForm, useFormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { Add } from '@mui/icons-material';
 import { Box, Button, Paper, Stack, Typography } from '@mui/material';
@@ -118,6 +118,12 @@ export default function OwnerSection({
         <Stack
           component="form"
           onSubmit={(e) => {
+            // Stops triggering the other form validation on submit
+            e.stopPropagation();
+            e.preventDefault();
+            handleSubmit(onAdd)(e);
+          }}
+          onBlur={(e) => {
             // Stops triggering the other form validation on submit
             e.stopPropagation();
             e.preventDefault();

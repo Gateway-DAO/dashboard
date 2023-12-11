@@ -68,7 +68,6 @@ export default function Form({ dataModel }: Props) {
       type: UserIdentifierType.GatewayId,
       value: '',
     });
-    methods.trigger('owner');
   };
 
   const amount = 1;
