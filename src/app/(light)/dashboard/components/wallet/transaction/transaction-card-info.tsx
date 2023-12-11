@@ -18,7 +18,7 @@ import { Stack, Divider, Card, Typography, Button } from '@mui/material';
 import FinancialActionDetail from '../action-detail';
 
 type Props = {
-  id: string;
+  transactionId: string;
   title: FinancialTransactionAction;
   date: string;
   type: string;
@@ -27,7 +27,7 @@ type Props = {
 
 export default function TransactionCardInfo({
   title,
-  id,
+  transactionId: id,
   date,
   type,
   objectId,
