@@ -72,7 +72,7 @@ export default function Form({ dataModel }: Props) {
   };
 
   const amount = 1;
-  const price = dataModel.consumptionPrice ?? 0;
+  const price = 0.01;
   const total = numberToMoneyString(amount * price);
   const canIssue = !!(myWallet && myWallet.balance - price >= 0);
 
