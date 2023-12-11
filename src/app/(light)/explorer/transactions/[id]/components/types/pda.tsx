@@ -36,9 +36,11 @@ export default function PDA({
       <CardRow title={transaction_detail.issuer}>
         <UserColumn isLoading={false} user={data.from} />
       </CardRow>
-      <CardRow title={transaction_detail.signed_by}>
-        <UserColumn isLoading={false} user={{ id: metadata.signedBy }} />
-      </CardRow>
+      {data.from?.__typename === 'Organization' && (
+        <CardRow title={transaction_detail.signed_by}>
+          <UserColumn isLoading={false} user={{ id: metadata.signedBy }} />
+        </CardRow>
+      )}
       <CardRow title={transaction_detail.data_model_id}>
         {metadata.dataModel}
         <ExternalLink
