@@ -52,15 +52,15 @@ export const getArrayHelperText = ({
 
 export const getClaimHelperText = (
   type: ClaimField,
-  property: PartialProperty
+  property?: PartialProperty
 ) => {
   switch (type) {
     case ClaimField.Text:
-      return getStringHelperText(property);
+      return getStringHelperText(property ?? {});
     case ClaimField.Number:
-      return getNumberHelperText(property);
+      return getNumberHelperText(property ?? {});
     case ClaimField.Array:
-      return getArrayHelperText(property);
+      return getArrayHelperText(property ?? {});
     default:
       return undefined;
   }

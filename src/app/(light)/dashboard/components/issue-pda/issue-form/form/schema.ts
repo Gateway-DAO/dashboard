@@ -2,6 +2,7 @@ import { REQUIRED_MAX_LENGTH, REQUIRED_MIN_LENGTH } from '@/constants/zod';
 import identifierValueSchema from '@/schemas/identifier-value';
 import getClaimType, {
   ClaimField,
+  SchemaProperty,
   getClaimDefaultValue,
 } from '@/utils/get-claim-type';
 import { ajvResolver } from '@hookform/resolvers/ajv';
@@ -71,18 +72,24 @@ export const issuePdaValidator = async (
 
 export const getSchemaDefaultValues = (schema: any) => {
   return Object.keys(schema.properties).reduce((acc, key) => {
-    const property = schema.properties[key];
+    const property = schema.properties[key] as SchemaProperty;
     const type = getClaimType(property);
     const defaultValue = getClaimDefaultValue(property);
     if (typeof defaultValue !== 'undefined') {
       (acc as any)[key] = defaultValue;
     } else if (type === ClaimField.Array) {
-      (acc as any)[key] = Array(property.minItems || 1)
-        .fill('')
-        .map((v, index) => ({
-          id: index,
-          value: '',
-        }));
+      const subtype = property.items
+        ? getClaimType(property.items)
+        : ClaimField.Text;
+      (acc as any)[key] = Array(property.minItems || 1).fill(' ');
+      if (subtype === ClaimField.Number) {
+        (acc as any)[key] = (acc as any)[key].map(
+          (v: string, index: number) => ({
+            id: index,
+            value: ' ',
+          })
+        );
+      }
     }
     return acc;
   }, {} as IssuePdaSchema);

@@ -5,7 +5,6 @@ export enum ClaimField {
   Image = 'image',
   Text = 'text',
   Number = 'number',
-  Integer = 'integer',
   Array = 'array',
   Link = 'link',
   Currency = 'currency',
