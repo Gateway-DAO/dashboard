@@ -8,6 +8,7 @@ const documentationRoutes = {
   requestTemplate: 'https://docs.mygateway.xyz/docs/data-request-templates',
   dataRequest: 'https://docs.mygateway.xyz/docs/data-request',
   startIssuing: 'https://docs.mygateway.xyz/docs/start-issuing',
+  startVerifying: 'https://docs.mygateway.xyz/docs/start-verifying',
 };
 
 module.exports = documentationRoutes;

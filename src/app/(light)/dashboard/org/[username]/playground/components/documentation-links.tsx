@@ -42,9 +42,12 @@ export default function DocumentationLinks() {
       <BoxButton text={playground.button1} href={documentationRoutes.home} />
       <BoxButton
         text={playground.button2}
-        href={documentationRoutes.createPDA}
+        href={documentationRoutes.startIssuing}
       />
-      <BoxButton text={playground.button3} href={documentationRoutes.me} />
+      <BoxButton
+        text={playground.button3}
+        href={documentationRoutes.startVerifying}
+      />
     </Stack>
   );
 }
