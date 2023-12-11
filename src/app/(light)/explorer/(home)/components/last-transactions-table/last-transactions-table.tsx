@@ -1,4 +1,6 @@
 'use client';
+import Link from 'next/link';
+
 import FinancialActionDetail from '@/app/(light)/dashboard/components/wallet/action-detail';
 import { CardCellContainer } from '@/components/card-cell/card-cell';
 import { DATE_FORMAT } from '@/constants/date';
@@ -81,7 +83,17 @@ export default function LastTransactionsTable() {
           <>
             {transactions?.map((transaction) => (
               <CardCellContainer key={transaction.id}>
-                <Box display="flex">
+                <Box
+                  component={Link}
+                  href={routes.explorer.transaction(transaction.id)}
+                  display="flex"
+                  sx={{
+                    '&': {
+                      textDecoration: 'none',
+                      color: 'inherit',
+                    },
+                  }}
+                >
                   <Typography flex={3}>{transaction.id}</Typography>
                   <Box flex={1}>
                     <Chip

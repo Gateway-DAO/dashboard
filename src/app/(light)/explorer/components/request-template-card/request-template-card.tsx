@@ -22,12 +22,9 @@ export default function RequestTemplateExplorerCard({
     requestTemplate?.organization
   );
 
-  // console.log('user', requestTemplate?.user);
-  // console.log('org', requestTemplate?.organization);
-
   return (
     <DataCard
-      title={profile!.name!}
+      title={requestTemplate!.name!}
       description={requestTemplate!.description!}
       href={
         withLink
