@@ -54,8 +54,10 @@ query transaction_detail($id: String!) {
         gatewayId
         image
         name
+        __typename
       }
       ... on User {
+        __typename
         id
         gatewayId
         displayName
