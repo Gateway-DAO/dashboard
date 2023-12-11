@@ -9,11 +9,13 @@ query explorer_request_templates_featured {
       id
       image
       gatewayId
+      name
     }
     user {
       id
       profilePicture
       gatewayId
+      displayName
     }
   }
 }
@@ -33,11 +35,13 @@ query explorer_request_templates_list(
       id
       image
       gatewayId
+      name
     }
     user {
       id
       profilePicture
       gatewayId
+      displayName
     }
   }
 }
