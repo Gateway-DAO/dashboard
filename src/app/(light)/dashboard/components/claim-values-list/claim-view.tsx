@@ -15,7 +15,11 @@ export default function ClaimView(fieldData: CredentialData) {
     format: fieldData.metadata?.format,
   });
 
-  if (!fieldData.value || fieldData.value === '')
+  if (
+    fieldData.value === undefined ||
+    fieldData.value === null ||
+    fieldData.value === ''
+  )
     return <span>{pdaLocale.unfilled}</span>;
   switch (type) {
     case ClaimField.Image:
@@ -30,6 +34,10 @@ export default function ClaimView(fieldData: CredentialData) {
           currency={fieldData?.metadata?.currency}
           value={parseFloat(fieldData?.value) as number}
         />
+      );
+    case ClaimField.Boolean:
+      return (
+        <span style={{ whiteSpace: 'normal' }}>{`${fieldData.value}`}</span>
       );
     case ClaimField.Text:
       return <span style={{ whiteSpace: 'normal' }}>{fieldData.value}</span>;
