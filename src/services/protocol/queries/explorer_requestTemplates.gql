@@ -71,11 +71,13 @@ query explorer_request_template_detail_overview($id: String!) {
       id
       gatewayId
       displayName
+      profilePicture
     }
     organization {
       id
       gatewayId
       name
+      image
     }
     createdAt
   }

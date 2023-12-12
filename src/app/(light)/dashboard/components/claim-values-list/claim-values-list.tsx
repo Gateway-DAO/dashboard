@@ -30,7 +30,11 @@ export default function ClaimValuesList({ title, data }: Props) {
                 label={fieldData?.property ?? fieldData?.label}
                 margin={false}
                 py={3}
-                disabled={!fieldData.value || fieldData.value === ''}
+                disabled={
+                  fieldData.value === undefined ||
+                  fieldData.value === null ||
+                  fieldData.value === ''
+                }
               >
                 <ClaimView {...fieldData} />
               </CardCell>
