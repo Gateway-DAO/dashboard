@@ -90,7 +90,7 @@ export default function ArrayProperty({
         <>
           <Button
             variant="text"
-            onClick={async () => append(' ')}
+            onClick={async () => append('')}
             startIcon={<Add />}
             sx={{ alignSelf: 'flex-start' }}
           >
