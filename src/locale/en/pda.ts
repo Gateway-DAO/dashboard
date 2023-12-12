@@ -120,4 +120,9 @@ export const issuePdaForm = {
     title: 'Issuance Summary',
     total: (price: string, amount: number) => `${price} (Qty: ${amount})`,
   },
+  helpers: {
+    date: 'Date in UTC timezone',
+    datetime: 'Date Time in UTC timezone',
+    time: 'Time in UTC timezone',
+  },
 };
