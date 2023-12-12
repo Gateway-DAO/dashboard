@@ -7,6 +7,7 @@ import getClaimType, {
 } from '@/utils/get-claim-type';
 import { ajvResolver } from '@hookform/resolvers/ajv';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { fullFormats } from 'ajv-formats/dist/formats';
 import { ResolverResult } from 'react-hook-form';
 import zod from 'zod';
 
@@ -52,7 +53,10 @@ export const issuePdaValidator = async (
 
   const claimResult = await ajvResolver(
     schema,
-    { allErrors: true },
+    {
+      allErrors: true,
+      formats: fullFormats,
+    },
     { mode: 'sync' }
   )(claim, context, formsOptions);
 
@@ -81,12 +85,12 @@ export const getSchemaDefaultValues = (schema: any) => {
       const subtype = property.items
         ? getClaimType(property.items)
         : ClaimField.Text;
-      (acc as any)[key] = Array(property.minItems || 1).fill(' ');
+      (acc as any)[key] = Array(property.minItems || 1).fill('');
       if (subtype === ClaimField.Number) {
         (acc as any)[key] = (acc as any)[key].map(
           (v: string, index: number) => ({
             id: index,
-            value: ' ',
+            value: '',
           })
         );
       }
