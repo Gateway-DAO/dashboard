@@ -2,6 +2,8 @@ import { pda as pdaLocale } from '@/locale/en/pda';
 import { CredentialData } from '@/services/protocol/types';
 import getClaimType, { ClaimField } from '@/utils/get-claim-type';
 
+import { Typography } from '@mui/material';
+
 import { CurrencyView } from './currency-view';
 import { ImageView } from './image-view';
 import { LinkView } from './link-view';
@@ -21,6 +23,7 @@ export default function ClaimView(fieldData: CredentialData) {
     fieldData.value === ''
   )
     return <span>{pdaLocale.unfilled}</span>;
+
   switch (type) {
     case ClaimField.Image:
       return <ImageView src={fieldData?.value} alt={fieldData?.label} />;
@@ -36,9 +39,7 @@ export default function ClaimView(fieldData: CredentialData) {
         />
       );
     case ClaimField.Boolean:
-      return (
-        <span style={{ whiteSpace: 'normal' }}>{`${fieldData.value}`}</span>
-      );
+      return <span>{`${fieldData.value}`}</span>;
     case ClaimField.Text:
       return <span style={{ whiteSpace: 'normal' }}>{fieldData.value}</span>;
     default: {
