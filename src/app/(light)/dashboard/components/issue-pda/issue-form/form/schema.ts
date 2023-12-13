@@ -8,8 +8,12 @@ import getClaimType, {
 import { ajvResolver } from '@hookform/resolvers/ajv';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { fullFormats } from 'ajv-formats/dist/formats';
+import dayjs, { Dayjs } from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { ResolverResult } from 'react-hook-form';
 import zod from 'zod';
+
+dayjs.extend(utc);
 
 const issuePdaSchema = zod.object({
   title: zod
@@ -29,7 +33,7 @@ export const issuePdaValidator = async (
   context: any,
   formsOptions: any
 ): Promise<ResolverResult<IssuePdaSchema>> => {
-  const { claim, ...data } = values;
+  const { claim: oldClaim, ...data } = values;
 
   // Validate all values except 'claim'
   const zodResult = await zodResolver(issuePdaSchema.omit({ claim: true }))(
@@ -38,6 +42,8 @@ export const issuePdaValidator = async (
     formsOptions
   );
 
+  const claim = { ...oldClaim };
+
   Object.keys(claim as any).forEach((key) => {
     // Set all values from object 'claim' that are empty strings to undefined
     if ((claim as any)[key] === '') {
@@ -45,9 +51,29 @@ export const issuePdaValidator = async (
       return;
     }
     const type = getClaimType(schema.properties[key]);
+
     // Treat string as float
     if (type === ClaimField.Number) {
-      (claim as any)[key] = parseFloat((claim as any)[key]);
+      const value = (claim as any)[key];
+      (claim as any)[key] = parseFloat(value);
+    }
+
+    // Treat datetime as UTC ISO string
+    if (type === ClaimField.DateTime) {
+      const value = (claim as any)[key] as Dayjs;
+      (claim as any)[key] = value.utc(true).toISOString();
+    }
+
+    // Treat date as UTC ISO string
+    if (type === ClaimField.Date) {
+      const value = (claim as any)[key] as Dayjs;
+      (claim as any)[key] = value.utc(true).format('YYYY-MM-DD');
+    }
+
+    // Treat time as UTC ISO string
+    if (type === ClaimField.Time) {
+      const value = (claim as any)[key] as Dayjs;
+      (claim as any)[key] = value.utc(true).format('hh:mm');
     }
   });
 

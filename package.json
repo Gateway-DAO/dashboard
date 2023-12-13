@@ -28,6 +28,7 @@
     "@mui/material": "^5.14.12",
     "@mui/system": "^5.14.12",
     "@mui/x-data-grid": "^6.16.1",
+    "@mui/x-date-pickers": "^6.18.4",
     "@prisma/client": "5.1.1",
     "@rainbow-me/rainbowkit": "^1.1.1",
     "@react-hookz/web": "^23.1.0",
