@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { PropsWithChildren, ReactNode } from 'react';
 
 import { sandboxAlert } from '@/locale/en/alert-messages';
@@ -26,6 +27,10 @@ export default function DashboardLayout({
   mobileMenuItems,
 }: PropsWithChildren<Props>) {
   const testnet = currentEnv() === 'testnet';
+  const pathname = usePathname();
+
+  const isNotWalletPage = !pathname.includes('wallet');
+  console.log(!pathname.includes('wallet'));
 
   return (
     <Stack
@@ -67,7 +72,7 @@ export default function DashboardLayout({
           overflow: 'hidden',
         }}
       >
-        {testnet && <SandboxAlert />}
+        {testnet && isNotWalletPage && <SandboxAlert />}
         {children}
       </DashboardPage>
       {mobileMenuItems}
