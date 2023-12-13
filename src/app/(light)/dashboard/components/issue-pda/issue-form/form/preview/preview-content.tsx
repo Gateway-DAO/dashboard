@@ -13,7 +13,7 @@ import { common } from '@/locale/en/common';
 import { pda } from '@/locale/en/pda';
 import { apiPublic } from '@/services/protocol/api';
 import { User, UserIdentifierType } from '@/services/protocol/types';
-import { CredentialData } from '@/services/protocol/types';
+import { PdaClaim } from '@/services/protocol/types';
 import { getClaimTitle } from '@/utils/get-claim-type';
 import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { numberToMoneyString } from '@/utils/money';
@@ -73,13 +73,13 @@ export default function PreviewContent({
 
   const schemaProperties = schema.properties;
 
-  const claims: CredentialData[] = Object.keys(data.claim).map((key) => {
+  const claims: PdaClaim[] = Object.keys(data.claim).map((key) => {
     const label = getClaimTitle(schemaProperties[key], key);
     return {
       ...schemaProperties[key],
       label,
       value: (data.claim as any)[key],
-    } as CredentialData;
+    } as PdaClaim;
   });
 
   return (

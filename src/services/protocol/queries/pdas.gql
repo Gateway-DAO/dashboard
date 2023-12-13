@@ -1,12 +1,3 @@
-query pdas {
-  credentials {
-    id
-    title
-    image
-    status
-  }
-}
-
 query pda($id: String!) {
   PDA(id: $id) {
     ...pda

@@ -1,15 +1,13 @@
 import { pda as pdaLocale } from '@/locale/en/pda';
-import { CredentialData } from '@/services/protocol/types';
+import { PdaClaim } from '@/services/protocol/types';
 import getClaimType, { ClaimField } from '@/utils/get-claim-type';
-
-import { Typography } from '@mui/material';
 
 import { CurrencyView } from './currency-view';
 import { ImageView } from './image-view';
 import { LinkView } from './link-view';
 import { ListView } from './list-view';
 
-export default function ClaimView(fieldData: CredentialData) {
+export default function ClaimView(fieldData: PdaClaim) {
   const type = getClaimType({
     type: fieldData.type,
     contentMediaType: fieldData.metadata?.contentMediaType,
