@@ -28,9 +28,7 @@ export default function DashboardLayout({
 }: PropsWithChildren<Props>) {
   const testnet = currentEnv() === 'testnet';
   const pathname = usePathname();
-
   const isNotWalletPage = !pathname.includes('wallet');
-  console.log(!pathname.includes('wallet'));
 
   return (
     <Stack
