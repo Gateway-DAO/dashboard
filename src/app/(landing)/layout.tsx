@@ -26,8 +26,12 @@ export default function RootLayout({
       {process.env.NEXT_PUBLIC_GTM_TAG && (
         <>
           <Script
-            id="ga-landing"
             strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GTM_TAG}`}
+          />
+          <Script
+            strategy="afterInteractive"
+            id="ga-landing"
             dangerouslySetInnerHTML={{
               __html: `  
                 window.dataLayer = window.dataLayer || [];
