@@ -5,11 +5,11 @@ import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import GTWLink from '@/components/gtw-link';
+import { DOCS_BASE_URL } from '@/constants/docs';
+import routes from '@/constants/routes';
 import Slider from 'react-slick';
 
 import styles from './hero.module.scss';
-import { DOCS_BASE_URL } from '@/constants/docs';
-import routes from '@/constants/routes';
 
 const conceptsCards = [
   {

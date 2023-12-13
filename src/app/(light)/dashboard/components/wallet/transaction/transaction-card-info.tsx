@@ -1,5 +1,4 @@
 'use client';
-import { useMemo } from 'react';
 
 import TransactionStatusChip from '@/app/(light)/dashboard/components/wallet/transaction/transaction-status-chip';
 import CardCell from '@/components/card-cell/card-cell';
@@ -7,13 +6,11 @@ import { TableCellContainer } from '@/components/containers/table-cell-container
 import ExternalLink from '@/components/external-link/external-link';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
-import useOrganization from '@/hooks/use-organization';
-import { common } from '@/locale/en/common';
 import { transaction } from '@/locale/en/transaction';
 import { FinancialTransactionAction } from '@/services/protocol/types';
 import dayjs from 'dayjs';
 
-import { Stack, Divider, Card, Typography, Button } from '@mui/material';
+import { Stack, Divider, Card, Typography } from '@mui/material';
 
 import FinancialActionDetail from '../action-detail';
 
@@ -30,9 +27,8 @@ export default function TransactionCardInfo({
   transactionId: id,
   date,
   type,
-  objectId,
 }: Props) {
-  const { organization } = useOrganization();
+  // const { organization } = useOrganization();
 
   // const dynamicRoute = useMemo(() => {
   //   if (title === FinancialTransactionAction.ProofCreate) {

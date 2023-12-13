@@ -1,7 +1,7 @@
 'use client';
 
-import LandingFooter from './components/landing-footer/landing-footer';
 import Header from './components/header';
+import LandingFooter from './components/landing-footer/landing-footer';
 import { HeaderContextProvider } from './contexts/header-context';
 import Hero from './home/components/hero';
 import Info from './home/components/info';

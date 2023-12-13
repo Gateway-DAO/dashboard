@@ -1,9 +1,8 @@
-import type { Metadata } from 'next';
-
 import './styles/global.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import type { Metadata } from 'next';
 import Script from 'next/script';
 
 import Main from './components/Main';
@@ -33,7 +32,7 @@ export default function RootLayout({
             strategy="afterInteractive"
             id="ga-landing"
             dangerouslySetInnerHTML={{
-              __html: `  
+              __html: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());

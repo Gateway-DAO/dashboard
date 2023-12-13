@@ -4,7 +4,7 @@ import HelpContentCard from '@/components/help-content-card/help-content-card';
 import TitleLayout from '@/components/title-layout/title-layout';
 import { requests, helperContent } from '@/locale/en/request';
 
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 export default function DataRequestsLayout({ children }: PropsWithChildren) {
   return (

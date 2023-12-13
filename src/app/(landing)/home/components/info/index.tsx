@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
-import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import {
   calculateLines,
   findClosestNumbersWithIndices,
@@ -16,7 +15,6 @@ import styles from './info.module.scss';
 export default function Info() {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
-  const { isMobile } = useMobileDetect();
 
   const splitTextintoLines = (parent: HTMLElement) => {
     // Step 1: Calculate lines and split the text into spans

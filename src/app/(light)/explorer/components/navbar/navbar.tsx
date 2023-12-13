@@ -1,7 +1,7 @@
 'use client';
 import useBreakpoints from '@/hooks/use-breakpoints';
 
-import { Box, Container, Stack } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 import Logo from './logo';
 import ExplorerNavbarDesktop from './navbar-desktop';
