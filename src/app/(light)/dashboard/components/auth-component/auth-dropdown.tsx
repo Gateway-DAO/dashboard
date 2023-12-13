@@ -32,11 +32,9 @@ export default function AuthDropdown({ onClose }: Props) {
   return (
     <>
       <AuthDropdownCurrent onClose={onClose} />
-      {featureToggle?.wallet && (
         <Box sx={{ display: { xs: 'block', lg: 'none' }, px: 2, pt: 1 }}>
           <WalletWidget id="wallet-button" />
         </Box>
-      )}
       <Divider sx={{ my: 1 }} />
       <AuthDropdownProfilesList onClose={onClose} />
       <MenuItem onClick={onSignOut}>
