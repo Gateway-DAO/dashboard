@@ -86,9 +86,12 @@ export default function Form({ dataModel }: Props) {
     setPreviewModalState((oldState) => ({ ...oldState, isOpen: false }));
   };
 
+  const onError =
+    process.env.NODE_ENV === 'development' ? console.error : undefined;
+
   return (
     <>
-      <Stack gap={2} mb={14} onSubmit={methods.handleSubmit(onSubmit)}>
+      <Stack gap={2} mb={14} onSubmit={methods.handleSubmit(onSubmit, onError)}>
         <OwnerSection
           owner={owner}
           ownerError={ownerError?.message}
