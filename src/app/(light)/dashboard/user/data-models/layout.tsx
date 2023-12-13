@@ -40,11 +40,11 @@ export default function DataModelsLayout({ children }: PropsWithChildren) {
         <GTWTabs>
           <GTWTab
             label={datamodels.my_data_models}
-            href={routes.dashboardUserMyDataModels}
+            href={routes.dashboard.user.myDataModels}
           />
           <GTWTab
             label={datamodels.network_data_models}
-            href={routes.dashboardUserNetworkDataModels}
+            href={routes.dashboard.user.networkDataModels}
           />
         </GTWTabs>
       </Box>

@@ -1,4 +1,4 @@
-query dataRequestTemplates($skip: Float, $take: Float) {
+query dataRequestTemplates($skip: Int, $take: Float) {
   dataRequestTemplates(skip: $skip, take: $take) {
     id
     name
@@ -9,7 +9,7 @@ query dataRequestTemplates($skip: Float, $take: Float) {
 
 query dataRequestTemplatesByUser(
   $user: UserIdentificationInput
-  $skip: Float
+  $skip: Int
   $take: Float
 ) {
   dataRequestTemplates(filter: { user: $user }, skip: $skip, take: $take) {
@@ -22,7 +22,7 @@ query dataRequestTemplatesByUser(
 
 query dataRequestTemplatesByOrg(
   $organization: OrganizationIdentificationInput
-  $skip: Float
+  $skip: Int
   $take: Float
 ) {
   dataRequestTemplates(

@@ -18,24 +18,44 @@ import {
 import { useIdentifierTypes } from './use-identifier-types';
 
 type Props = {
-  control: Control<IdentifierValueSchema>;
+  control: Control<any>;
+  error?: boolean;
   clearErrors?: () => void;
   sx?: SxProps;
+  // Maps to react-hook-form names
+  names?: {
+    type?: string;
+    value?: string;
+  };
+  defaultValues?: {
+    type?: UserIdentifierType;
+    value?: string;
+  };
+  disabled?: boolean;
+  onSubmit?: (data: IdentifierValueSchema) => void;
 };
 
-export default function UserIdentityField({ control, clearErrors, sx }: Props) {
+export default function UserIdentityField({
+  control,
+  error,
+  clearErrors,
+  sx,
+  names,
+  defaultValues,
+  disabled = false,
+}: Props) {
   const identifierTypes = useIdentifierTypes();
 
   const typeField = useController({
     control,
-    name: 'type',
-    defaultValue: UserIdentifierType.GatewayId,
+    name: names?.type ?? 'type',
+    defaultValue: defaultValues?.type ?? UserIdentifierType.GatewayId,
   });
 
   const addressField = useController({
     control,
-    name: 'value',
-    defaultValue: '',
+    name: names?.value ?? 'value',
+    defaultValue: defaultValues?.value ?? '',
   });
 
   return (
@@ -44,7 +64,7 @@ export default function UserIdentityField({ control, clearErrors, sx }: Props) {
         <InputLabel htmlFor="type">{common.identifier.type}</InputLabel>
         <Select
           label={common.identifier.type}
-          error={!!typeField.fieldState.error}
+          error={!!typeField.fieldState.error || !!error}
           id="field-identifier-type"
           sx={{ mb: { xs: 1, md: 0 } }}
           inputProps={{ defaultValue: UserIdentifierType.GatewayId }}
@@ -54,6 +74,7 @@ export default function UserIdentityField({ control, clearErrors, sx }: Props) {
             addressField.field.onChange('');
             clearErrors?.();
           }}
+          disabled={disabled}
         >
           {identifierTypes.map((type) => (
             <MenuItem
@@ -80,7 +101,7 @@ export default function UserIdentityField({ control, clearErrors, sx }: Props) {
         required
         id="field-address"
         {...addressField.field}
-        error={!!addressField.fieldState.error}
+        error={!!addressField.fieldState.error || !!error}
         helperText={addressField.fieldState.error?.message}
         type={
           addressField.field.value === UserIdentifierType.Email
@@ -93,6 +114,7 @@ export default function UserIdentityField({ control, clearErrors, sx }: Props) {
             : 'text'
         }
         sx={{ flexGrow: 1 }}
+        disabled={disabled}
       />
     </Stack>
   );

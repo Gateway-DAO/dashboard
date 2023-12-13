@@ -3,13 +3,13 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { Box, Stack, Typography } from '@mui/material';
 
 type Props = {
+  id?: string | null;
   image?: string | null;
   name?: string | null;
   gatewayId: string;
-  id: string;
 };
 
-export default function UserOrgInfo({ image, name, gatewayId, id }: Props) {
+export default function UserOrgInfo({ id, image, name, gatewayId }: Props) {
   const hasName = name && name.length > 0;
   return (
     <Stack
@@ -28,7 +28,7 @@ export default function UserOrgInfo({ image, name, gatewayId, id }: Props) {
           zIndex: 1,
         }}
       >
-        <GTWAvatar src={image ?? undefined} name={id} />
+        <GTWAvatar src={image ?? undefined} name={id} alt={gatewayId} />
       </Box>
       <Stack
         direction="column"

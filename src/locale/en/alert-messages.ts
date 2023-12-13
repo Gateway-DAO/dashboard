@@ -4,3 +4,7 @@ export const sandboxAlert = {
   tooltip:
     'You are on the Gateway Sandbox. The data is temporary and will expire in 60 days.',
 };
+
+export const sandboxWalletAlert = {
+  title: 'Be aware the money on Sandbox is fake and worthless',
+};

@@ -1,8 +1,8 @@
+'use client';
 import { useEffect, useRef, useState } from 'react';
 
 import GTWLink from '@/components/gtw-link';
 import { DOCS_BASE_URL } from '@/constants/docs';
-import routes from '@/constants/routes';
 import gsap from 'gsap';
 import { InView } from 'react-intersection-observer';
 
@@ -10,13 +10,9 @@ import { spliWordsBySpan } from '../../utils/dom';
 import { joinClasses } from '../../utils/function';
 import Button from '../button';
 import GatewayLogo from '../gateway-logo';
-import LogoDiscord from '../icons/logo-discord';
-import LogoGithub from '../icons/logo-github';
-import LogoLinkedin from '../icons/logo-linkedin';
-import LogoSubstrack from '../icons/logo-substrack';
-import LogoTwitter from '../icons/logo-twitter';
 import Wrapper from '../wrapper';
 import styles from './landing-footer.module.scss';
+import { linksList, linksSocial } from './links-footer';
 
 function splitElementByBrTag(element: HTMLElement): HTMLElement[] {
   // Split the innerHTML of the element using the <br/> tag as the delimiter
@@ -46,58 +42,6 @@ function splitElementByBrTag(element: HTMLElement): HTMLElement[] {
 type Props = {
   variant: 'dark' | 'light';
 };
-
-const linksSocial = [
-  {
-    icon: LogoTwitter,
-    href: 'https://twitter.com/gateway_xyz',
-  },
-  {
-    icon: LogoDiscord,
-    href: 'https://discord.gg/tgt3KjcHGs',
-  },
-  {
-    icon: LogoLinkedin,
-    href: 'https://www.linkedin.com/company/mygateway/',
-  },
-  {
-    icon: LogoSubstrack,
-    href: 'https://mygateway.substack.com/',
-  },
-  {
-    icon: LogoGithub,
-    href: 'https://github.com/Gateway-DAO',
-  },
-];
-
-const linksList = [
-  {
-    title: 'Learn',
-    href: routes.learn,
-    target: '_self',
-  },
-  {
-    title: 'Build',
-    href: routes.build,
-    target: '_self',
-  },
-  {
-    title: 'Dashboard',
-    href: routes.auth,
-    target: '_self',
-  },
-  {
-    title: 'Privacy',
-    href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
-    target: '_blank',
-  },
-
-  {
-    title: 'Brand Kit',
-    href: 'https://live.standards.site/gateway',
-    target: '_blank',
-  },
-];
 
 export default function LandingFooter({ variant }: Props) {
   const [email, setEmail] = useState<string>('');

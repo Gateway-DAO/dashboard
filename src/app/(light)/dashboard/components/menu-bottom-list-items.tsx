@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 
+import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
 import useBreakpoints from '@/hooks/use-breakpoints';
 import { common } from '@/locale/en/common';
 import { useToggle } from '@react-hookz/web';
@@ -19,8 +20,6 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material';
-
-import GTWMenuItem, { GTWMenuItemSettings } from './menu-item/menu-item';
 
 type Props = {
   menuItems: GTWMenuItemSettings[];
@@ -83,7 +82,9 @@ export default function MenuBottomListItems({
                 label={item.name}
                 value={item.href}
                 aria-label={item.name}
-                icon={isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
+                icon={
+                  isActive && ActiveIcon ? <ActiveIcon /> : Icon && <Icon />
+                }
                 onClick={onClose}
               />
             );
@@ -136,7 +137,11 @@ export default function MenuBottomListItems({
                       }}
                     >
                       <ListItemIcon sx={{ color: 'inherit' }}>
-                        {isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
+                        {isActive && ActiveIcon ? (
+                          <ActiveIcon />
+                        ) : (
+                          Icon && <Icon />
+                        )}
                       </ListItemIcon>
                       <ListItemText primary={item.name} />
                     </ListItemButton>
@@ -173,7 +178,11 @@ export default function MenuBottomListItems({
                           }}
                         >
                           <ListItemIcon sx={{ color: 'inherit' }}>
-                            {isActive && ActiveIcon ? <ActiveIcon /> : <Icon />}
+                            {isActive && ActiveIcon ? (
+                              <ActiveIcon />
+                            ) : (
+                              Icon && <Icon />
+                            )}
                           </ListItemIcon>
                           <ListItemText primary={item.name} />
                         </ListItemButton>

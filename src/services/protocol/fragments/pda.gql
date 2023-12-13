@@ -9,6 +9,10 @@ fragment pda on PrivateDataAsset {
     expirationDate
     image
 
+    dataModel {
+      consumptionPrice
+    }
+
     organization {
       id
       image

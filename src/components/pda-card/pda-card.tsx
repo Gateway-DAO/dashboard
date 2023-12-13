@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Card, CardActionArea, Stack, Typography } from '@mui/material';
 
 import GTWAvatar from '../gtw-avatar/gtw-avatar';
-import { PDAStatusChip } from './pda-status-chip';
+import { TextStatusChip } from '../text-status-chip/text-status-chip';
 import { PdaCardProps } from './type';
 
 export default function PdaCard({
@@ -60,7 +60,7 @@ export default function PdaCard({
             {name}
           </Typography>
         </Stack>
-        <PDAStatusChip variant="outlined" status={status} size="small" />
+        <TextStatusChip variant="outlined" status={status} size="small" />
       </CardActionArea>
     </Stack>
   );

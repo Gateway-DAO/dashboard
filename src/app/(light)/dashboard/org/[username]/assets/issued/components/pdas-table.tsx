@@ -7,12 +7,13 @@ import {
   defaultGridConfiguration,
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
-import { PDAStatusChip } from '@/components/pda-card/pda-status-chip';
 import AvatarTextCell from '@/components/table-cells/avatar-text-cell';
+import { TextStatusChip } from '@/components/text-status-chip/text-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
+import { pdas } from '@/locale/en/pda';
 import {
   Issued_Pdas_By_OrgQuery,
   OrganizationIdentifierType,
@@ -41,7 +42,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
   const columns: GridColDef[] = [
     {
       field: 'dataAsset',
-      headerName: 'Data asset',
+      headerName: pdas.data_asset,
       flex: 1.3,
       renderCell: (params: GridRenderCellParams) => {
         return (
@@ -53,7 +54,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
     },
     {
       field: 'owner',
-      headerName: 'Recipient',
+      headerName: pdas.recipient,
       flex: 1.3,
       renderCell: (params: GridRenderCellParams) => {
         return (
@@ -71,7 +72,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
     },
     {
       field: 'dataModelId',
-      headerName: 'Data model ID',
+      headerName: pdas.data_model_id,
       flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
@@ -83,7 +84,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
     },
     {
       field: 'issuanceDate',
-      headerName: 'Issuance date',
+      headerName: pdas.issuance_date,
       flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
@@ -97,11 +98,11 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
     },
     {
       field: 'status',
-      headerName: 'Status',
+      headerName: pdas.status,
       flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
-          <PDAStatusChip
+          <TextStatusChip
             status={params.row.status ?? PdaStatus.Valid}
             size="small"
             variant="outlined"
@@ -161,7 +162,7 @@ export default function PDAsTable({ data: initialData, totalCount }: Props) {
       sx={defaultGridCustomization}
       onRowClick={(params: GridRowParams) => {
         router.push(
-          routes.dashboardOrgAsset(organization?.gatewayId, params.id)
+          routes.dashboard.org.asset(organization?.gatewayId, params.id)
         );
       }}
     />

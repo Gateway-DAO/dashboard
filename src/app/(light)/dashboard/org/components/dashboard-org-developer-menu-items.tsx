@@ -1,5 +1,5 @@
-import { GTWMenuItemSettings } from '@/app/(light)/dashboard/components/menu-item/menu-item';
 import CodeBlocksOutlinedIcon from '@/components/icons/code-blocks-outlined';
+import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
 import documentationRoutes from '@/constants/documentationRoutes';
 import routes from '@/constants/routes';
 
@@ -9,15 +9,15 @@ export const dashboardOrgDevelopersMenuItems = (
   username: string
 ): GTWMenuItemSettings[] => [
   {
-    name: 'Developer access',
-    href: routes.dashboardOrgDeveloperAccess(username),
-    activeHrefs: [routes.dashboardOrgDeveloperAccess(username)],
+    name: 'Developer Access',
+    href: routes.dashboard.org.developerAccess(username),
+    activeHrefs: [routes.dashboard.org.developerAccess(username)],
     icon: CodeOutlined,
   },
   {
     name: 'Playground',
-    href: routes.dashboardOrgPlayground(username),
-    activeHrefs: [routes.dashboardOrgPlayground(username)],
+    href: routes.dashboard.org.playground(username),
+    activeHrefs: [routes.dashboard.org.playground(username)],
     icon: CodeBlocksOutlinedIcon,
   },
   {

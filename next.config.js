@@ -23,17 +23,17 @@ const nextConfig = {
     return [
       {
         source: '/dashboard/user',
-        destination: routes.dashboardUserReceivedAssets,
+        destination: routes.dashboard.user.receivedAssets,
         permanent: true,
       },
       {
         source: '/dashboard',
-        destination: routes.dashboardUserReceivedAssets,
+        destination: routes.dashboard.user.receivedAssets,
         permanent: true,
       },
       {
         source: '/dashboard/org',
-        destination: routes.dashboardUserReceivedAssets,
+        destination: routes.dashboard.user.receivedAssets,
         permanent: true,
       },
       {

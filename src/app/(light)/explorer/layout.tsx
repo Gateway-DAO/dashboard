@@ -3,14 +3,14 @@ import { PropsWithChildren } from 'react';
 import { Container } from '@mui/material';
 
 import ExplorerFooter from './components/footer/footer';
-import Header from './components/header/header';
+import ExplorerNavbar from './components/navbar/navbar';
 
-export default function PublicLayout({ children }: PropsWithChildren) {
+export default function ExplorerLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <Header />
+      <ExplorerNavbar />
       {children}
-      <Container maxWidth="xl">
+      <Container sx={{ py: 3 }}>
         <ExplorerFooter />
       </Container>
     </>

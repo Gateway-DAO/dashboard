@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { Session } from 'next-auth';
 
-import { datamodels } from '@/locale/en/datamodel';
 import { requestTemplates } from '@/locale/en/request-template';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
@@ -11,13 +10,11 @@ import { Typography } from '@mui/material';
 
 import DataModelsTable from './components/request-templates-table';
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: 'Created Data Request Templates - Gateway Network',
-  };
-}
+export const metadata: Metadata = {
+  title: 'Data Request Templates - Gateway Network',
+};
 
-export default async function DashboardUserMyRequestTemplates() {
+export default async function DashboardUserDataRequestTemplatesPage() {
   const privateApi = await getPrivateApi();
   const session = (await getGtwServerSession()) as Session;
   const requestsData =

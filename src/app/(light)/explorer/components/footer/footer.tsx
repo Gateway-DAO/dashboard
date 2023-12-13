@@ -1,48 +1,12 @@
+'use client';
 import Link from 'next/link';
 
 import GatewayIcon from '@/components/icons/gateway-squared';
 import { brandColors } from '@/theme/config/brand';
-import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
-import { SiSubstack } from 'react-icons/si';
 
-import { LinkedIn } from '@mui/icons-material';
-import {
-  Avatar,
-  Box,
-  Button,
-  Stack,
-  TextField,
-  Typography,
-  Link as MuiLink,
-} from '@mui/material';
+import { Avatar, Box, Stack, Typography, Link as MuiLink } from '@mui/material';
 
-const socials = [
-  {
-    icon: FaTwitter,
-    href: '/',
-    name: 'Twitter',
-  },
-  {
-    icon: FaDiscord,
-    href: '/',
-    name: 'Discord',
-  },
-  {
-    icon: LinkedIn,
-    href: '/',
-    name: 'LinkedIn',
-  },
-  {
-    icon: SiSubstack,
-    href: '/',
-    name: 'Substack',
-  },
-  {
-    icon: FaGithub,
-    href: '/',
-    name: 'Github',
-  },
-];
+import { listLinks, socialsLinks } from './list-links';
 
 export default function ExplorerFooter() {
   return (
@@ -70,6 +34,7 @@ export default function ExplorerFooter() {
         justifyContent="space-between"
         sx={{
           mt: 3,
+          px: { xs: 0, md: 3 },
           flexDirection: {
             xs: 'column',
             lg: 'row',
@@ -80,7 +45,7 @@ export default function ExplorerFooter() {
           },
         }}
       >
-        <Stack direction="column" gap={3}>
+        <Stack direction="column" gap={3} flexGrow={1}>
           <Typography>© 2023 Gateway Inc. All rights reserved.</Typography>
           <Stack
             component="ul"
@@ -92,7 +57,7 @@ export default function ExplorerFooter() {
               m: 0,
             }}
           >
-            {socials.map(({ icon: Icon, href, name }) => (
+            {socialsLinks.map(({ icon: Icon, href, name }) => (
               <li key={name}>
                 <Avatar
                   component={Link}
@@ -116,52 +81,16 @@ export default function ExplorerFooter() {
             gridAutoFlow: 'column',
             listStyle: 'none',
             columnGap: 5,
+            flexGrow: 1,
             p: 0,
             m: 0,
           }}
         >
-          {[
-            {
-              title: 'Home',
-              href: '/',
-            },
-            {
-              title: 'Learn',
-              href: '/',
-            },
-            {
-              title: 'Build',
-              href: '/',
-            },
-            {
-              title: 'Explorer',
-              href: '/',
-            },
-            {
-              title: 'Dashboard',
-              href: '/',
-            },
-            {
-              title: 'Privacy',
-              href: '/',
-            },
-            {
-              title: 'Terms & Conditions',
-              href: '/',
-            },
-            {
-              title: 'Brand Kit',
-              href: '/',
-            },
-            {
-              title: 'Contact',
-              href: '/',
-            },
-          ].map(({ title, href }) => (
+          {listLinks.map(({ title, href }) => (
             <Box key={title} component="li">
               <MuiLink
                 component={Link}
-                href={href}
+                href={href as string}
                 color="black"
                 underline="hover"
               >
@@ -170,21 +99,7 @@ export default function ExplorerFooter() {
             </Box>
           ))}
         </Box>
-        <Stack direction="column" gap={1}>
-          <Typography variant="body1" fontWeight="700" sx={{ mb: 1 }}>
-            Subscribe to our newsletter
-          </Typography>
-          <Typography>Receive news about developments and updates.</Typography>
-          <TextField placeholder="Email" label="Email"></TextField>
-          <Button
-            type="button"
-            variant="contained"
-            sx={{ alignSelf: 'flex-start' }}
-            size="large"
-          >
-            Subscribe
-          </Button>
-        </Stack>
+        <Stack flexGrow={1}>{/* <Newsletter /> */}</Stack>
       </Stack>
     </Stack>
   );

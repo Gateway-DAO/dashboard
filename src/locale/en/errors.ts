@@ -32,6 +32,7 @@ export const errorMessages = {
   VERIFIER_NOT_FOUND: `Verifier doesn't exists`,
   USER_NOT_FOUND: `User doesn't exists`,
   DUPLICATED_MEMBERS: `Duplicated members`,
+  INSUFFICIENT_BALANCE_TO_PROCEED: `You don't have enough balance to proceed`,
 };
 
 export type ErrorCode = keyof typeof errorMessages;

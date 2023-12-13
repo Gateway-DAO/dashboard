@@ -58,7 +58,7 @@ export default function ShareCopy({ pda }: Props) {
   const toggleModal = () => {
     if (openShareCopy) {
       methods.reset();
-      router.push(routes.dashboardUserAsset(pda?.id), { scroll: false });
+      router.push(routes.dashboard.user.asset(pda?.id), { scroll: false });
       setPdaIssued(undefined);
     } else {
       router.push('#share-copy', { scroll: false });
@@ -153,7 +153,9 @@ export default function ShareCopy({ pda }: Props) {
                   <Typography sx={{ mb: 6 }}>
                     {pdaLocale.share.share_a_copy_description}
                   </Typography>
-                  <ShareCopyFormField />
+                  <ShareCopyFormField
+                    cost={pda.dataAsset?.dataModel?.consumptionPrice ?? 0}
+                  />
                   <LoadingButton
                     variant="contained"
                     type="submit"

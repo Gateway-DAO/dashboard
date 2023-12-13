@@ -136,8 +136,8 @@ export default function TabsStructure({
             variant="outlined"
             href={
               !!organization
-                ? routes.dashboardOrgPlayground(organization.gatewayId)
-                : routes.dashboardUserPlayground
+                ? routes.dashboard.org.playground(organization.gatewayId)
+                : routes.dashboard.user.playground
             }
           >
             Go to playground

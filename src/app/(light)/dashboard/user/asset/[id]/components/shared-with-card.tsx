@@ -29,7 +29,6 @@ export default function SharedWithCard({ pda }: Props) {
   const { organization } = useOrganization();
   const router = useRouter();
   const { data, isFetching, isLoading } = useQuery({
-    // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [queries.proofs_by_pdas_id, [pda?.id]],
     queryFn: () =>
       privateApi?.proofsByPDAIds({
@@ -110,11 +109,11 @@ export default function SharedWithCard({ pda }: Props) {
                       onClick={() =>
                         router.push(
                           !!organization
-                            ? routes.dashboardOrgProof(
+                            ? routes.dashboard.org.proof(
                                 organization.gatewayId,
                                 proof.id
                               )
-                            : routes.dashboardUserProof(proof.id)
+                            : routes.dashboard.user.proof(proof.id)
                         )
                       }
                     >

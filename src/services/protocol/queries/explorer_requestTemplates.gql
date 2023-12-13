@@ -1,0 +1,114 @@
+query explorer_request_templates_featured {
+  dataRequestTemplates(take: 4) {
+    id
+    name
+    description
+    dataRequestsCount
+    createdAt
+    organization {
+      id
+      image
+      gatewayId
+      name
+    }
+    user {
+      id
+      profilePicture
+      gatewayId
+      displayName
+    }
+  }
+}
+
+query explorer_request_templates_list(
+  $filter: FilterDataRequestTemplateInput
+  $skip: Int = 0
+  $order: JSON = {}
+) {
+  dataRequestTemplates(filter: $filter, skip: $skip, take: 12, order: $order) {
+    id
+    name
+    description
+    dataRequestsCount
+    createdAt
+    organization {
+      id
+      image
+      gatewayId
+      name
+    }
+    user {
+      id
+      profilePicture
+      gatewayId
+      displayName
+    }
+  }
+}
+
+query explorer_request_template_detail_overview($id: String!) {
+  dataRequestTemplate(id: $id) {
+    id
+    name
+    description
+    tags
+    uniqueVerifiersCount
+    dataRequestsCount
+    revenueGenerated
+    dataModels {
+      id
+      title
+      arweaveUrl
+      schema
+      pdasIssuedCount
+    }
+    dataRequests {
+      id
+      status
+    }
+    schema
+    user {
+      id
+      gatewayId
+      displayName
+      profilePicture
+    }
+    organization {
+      id
+      gatewayId
+      name
+      image
+    }
+    createdAt
+  }
+}
+
+query explorer_verifiers_by_data_request_template($id: String!) {
+  verifiersByDataRequestTemplate(id: $id) {
+    verifier {
+      ... on User {
+        id
+        displayName
+        gatewayId
+        profilePicture
+      }
+      ... on Organization {
+        id
+        name
+        gatewayId
+        image
+      }
+    }
+    count
+  }
+}
+
+query explorer_verifiers_by_data_request_template_count($id: String!) {
+  verifiersByDataRequestTemplateCount(id: $id)
+}
+
+query explorer_request_templates_metadata {
+  dataRequestTemplatesMetadata {
+    tags
+  }
+}

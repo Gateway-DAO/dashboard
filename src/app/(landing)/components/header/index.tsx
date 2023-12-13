@@ -15,8 +15,11 @@ import { Stack, Typography } from '@mui/material';
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
 import styles from './header.module.scss';
+import routes from '@/constants/routes';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
+  const path = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const { variant, setVariant } = useHeaderContext();
   const { isMobile, isTablet } = useMobileDetect();
@@ -26,7 +29,9 @@ export default function Header() {
     'top'
   );
   const previousVariant = useRef<'light' | 'dark' | null>(null);
+  // eslint-disable-next-line testing-library/render-result-naming-convention
   const isFirstRender = useIsFirstRender();
+  const isLearnPage = path === routes.learn;
 
   const lenis = useLenis(({ direction, scroll }) => {
     if (direction === 1 && scroll > 0) {
@@ -56,7 +61,7 @@ export default function Header() {
         sx={{
           justifyContent: 'center',
           alignItems: 'center',
-          background: '#E6D5FA',
+          background: isLearnPage ? '#771AC9' : '#E6D5FA',
           height: 40,
           flexDirection: 'row',
           position: 'relative',
@@ -64,11 +69,13 @@ export default function Header() {
           zIndex: 10,
         }}
       >
-        <Typography color="common.black">
+        <Typography color={isLearnPage ? 'common.white' : 'common.black'}>
           Product Marketing Engagements can now be found at
         </Typography>
         <Link href="https://tryodyssey.xyz">
-          <Typography color="primary">tryodyssey.xyz</Typography>
+          <Typography color={isLearnPage ? '#69DCED' : 'primary'}>
+            tryodyssey.xyz
+          </Typography>
         </Link>
       </Stack>
 

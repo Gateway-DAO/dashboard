@@ -3,14 +3,14 @@ import { SvgIcon, SvgIconProps } from '@mui/material';
 export default function PlaygroundIcon(props: SvgIconProps) {
   return (
     <SvgIcon
-      viewBox="0 0 84 72"
+      viewBox="0 0 80 72"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M10.6793 0C4.78127 0 0 4.78128 0 10.6793V61.3207C0 67.2187 4.78127 72 10.6793 72H73.3207C79.2187 72 84 67.2187 84 61.3207V10.6793C84 4.78127 79.2187 0 73.3207 0H10.6793ZM12 14C8.68629 14 6 16.6863 6 20V60C6 63.3137 8.68629 66 12 66H72C75.3137 66 78 63.3137 78 60V20C78 16.6863 75.3137 14 72 14H12Z"
         fill="#771AC9"
       />
