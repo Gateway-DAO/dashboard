@@ -86,7 +86,7 @@ export default function Info() {
         }
       });
     } else {
-      lines.forEach((line, index) => {
+      lines.forEach((line) => {
         const letters = line.querySelectorAll('[data-word]');
 
         if (window.innerWidth <= 1199) {
