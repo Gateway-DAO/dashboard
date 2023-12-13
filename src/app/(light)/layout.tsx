@@ -20,11 +20,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isTesnet = currentEnv() === 'testnet';
+  const env = currentEnv();
+  const isTesnetOrProd = env === 'testnet' || env === 'production';
   return (
     <html lang="en">
       {/* <!-- Hotjar Tracking Code for Gateway Network --> */}
-      {isTesnet && (
+      {isTesnetOrProd && (
         <Script
           id="hotjar"
           strategy="afterInteractive"
