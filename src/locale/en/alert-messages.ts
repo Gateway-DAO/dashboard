@@ -6,5 +6,5 @@ export const sandboxAlert = {
 };
 
 export const sandboxWalletAlert = {
-  title: 'Be aware the money on Sandbox is fake and worthless',
+  title: `Just a heads-up, the money on Sandbox is not real and doesn't hold any value.`,
 };
