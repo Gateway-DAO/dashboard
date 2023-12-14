@@ -29,7 +29,7 @@ describe('Transaction Card Info', () => {
         <TransactionCardInfo
           title={transaction_default.action}
           type={transaction_default.type}
-          id={transaction_default.id}
+          transactionId={transaction_default.id}
           date={transaction_default.createdAt}
         />
       </SessionProvider>

@@ -1,6 +1,6 @@
 {
   "name": "network-ui",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 4400",
@@ -28,6 +28,7 @@
     "@mui/material": "^5.14.12",
     "@mui/system": "^5.14.12",
     "@mui/x-data-grid": "^6.16.1",
+    "@mui/x-date-pickers": "^6.18.4",
     "@prisma/client": "5.1.1",
     "@rainbow-me/rainbowkit": "^1.1.1",
     "@react-hookz/web": "^23.1.0",
@@ -42,6 +43,7 @@
     "@tanstack/react-query-devtools": "^4.36.1",
     "@vercel/analytics": "^1.1.0",
     "ajv-errors": "^3.0.0",
+    "ajv-formats": "^2.1.1",
     "boring-avatars": "^1.10.1",
     "bs58": "^5.0.0",
     "dayjs": "^1.11.10",

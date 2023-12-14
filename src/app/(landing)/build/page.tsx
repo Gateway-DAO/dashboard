@@ -52,13 +52,12 @@ export default function BuildPage() {
         cards={[
           {
             title: 'Creating a Data Request',
-            description:
-              'How to create data models for requesting Data Assets.',
+            description: 'How to create data request templates',
             href: `${DOCS_BASE_URL}docs/data-request`,
           },
           {
-            title: 'Verification Widget Integration',
-            description: 'How to integrate our widget into your platform',
+            title: 'Website Integration',
+            description: 'How to integrate Gateway into your website',
             href: `${DOCS_BASE_URL}docs/data-proof`,
           },
         ]}

@@ -64,8 +64,8 @@ query dataModelsByOrgCount($organization: OrganizationIdentificationInput) {
   dataModelsCount(filter: { organization: $organization })
 }
 
-query data_models_featured($ids: [String!]) {
-  dataModels(filter: { ids: $ids }) {
+query data_models_featured {
+  dataModels(filter: { featured: true }, skip: 0, take: 4) {
     id
     title
     description

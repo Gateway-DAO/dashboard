@@ -1,8 +1,6 @@
 import TitleLayout from '@/components/title-layout/title-layout';
 import { playground } from '@/locale/en/playground';
 
-import { Alert, Typography } from '@mui/material';
-
 import DocumentationLinks from './components/documentation-links';
 import PlaygroundWrapper from './components/playground-wrapper';
 import UsageAlert from './components/usage-alert';

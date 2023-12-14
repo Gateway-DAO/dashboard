@@ -27,8 +27,11 @@ export const createPropertiesArray = (
   for (const propertyName in dataModel.claimValidations?.properties) {
     const propertyObj = dataModel.claimValidations?.properties[propertyName];
     const validations = Object.keys(propertyObj)
-      .filter((key) => key !== 'type' && key !== 'title')
-      .map((key) => `${key} ${propertyObj[key]}`)
+      .filter((key) => key !== 'type' && key !== 'title' && key !== 'items')
+      .map((key) => {
+        if (propertyObj[key]?.const) return `${key} ${propertyObj[key].const}`;
+        return `${key} ${propertyObj[key]}`;
+      })
       .join(', ');
 
     propertiesArray.push({

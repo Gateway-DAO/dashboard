@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 
+import useMyWallet from '@/hooks/use-my-wallet';
 import {
   DataModelByIdQuery,
   UserIdentificationInput,
@@ -28,6 +29,8 @@ type Props = {
 };
 
 export default function Form({ dataModel }: Props) {
+  const { myWallet } = useMyWallet();
+
   const [previewModalState, setPreviewModalState] = useState<{
     isOpen: boolean;
     data?: IssuePdaSchema;
@@ -65,14 +68,17 @@ export default function Form({ dataModel }: Props) {
       type: UserIdentifierType.GatewayId,
       value: '',
     });
-    methods.trigger('owner');
   };
 
   const amount = 1;
   const price = 0.01;
   const total = numberToMoneyString(amount * price);
+  const canIssue = !!(myWallet && myWallet.balance - price >= 0);
 
   const onSubmit = async (data: IssuePdaSchema) => {
+    if (!canIssue) {
+      return;
+    }
     setPreviewModalState({ isOpen: true, data });
   };
 
@@ -80,15 +86,12 @@ export default function Form({ dataModel }: Props) {
     setPreviewModalState((oldState) => ({ ...oldState, isOpen: false }));
   };
 
+  const onError =
+    process.env.NODE_ENV === 'development' ? console.error : undefined;
+
   return (
     <>
-      <Stack
-        gap={2}
-        mb={14}
-        onSubmit={methods.handleSubmit(onSubmit, (error) => {
-          console.log('error', error);
-        })}
-      >
+      <Stack gap={2} mb={14} onSubmit={methods.handleSubmit(onSubmit, onError)}>
         <OwnerSection
           owner={owner}
           ownerError={ownerError?.message}
@@ -99,7 +102,7 @@ export default function Form({ dataModel }: Props) {
           <Stack component="form" gap={2}>
             <TitleDescriptionSection />
             <PropertiesSection schema={dataModel.schema} />
-            <Summary amount={amount} total={total} />
+            <Summary amount={amount} total={total} canIssue={canIssue} />
           </Stack>
         </FormProvider>
       </Stack>

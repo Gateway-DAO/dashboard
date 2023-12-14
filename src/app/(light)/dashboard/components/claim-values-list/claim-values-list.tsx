@@ -1,5 +1,5 @@
 import CardCell from '@/components/card-cell/card-cell';
-import { CredentialData } from '@/services/protocol/types';
+import { PdaClaim } from '@/services/protocol/types';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Stack, Typography, Divider, Card } from '@mui/material';
@@ -8,7 +8,7 @@ import ClaimView from './claim-view';
 
 type Props = {
   title: string;
-  data: CredentialData[] | undefined;
+  data: PdaClaim[] | undefined;
 };
 
 export default function ClaimValuesList({ title, data }: Props) {
@@ -30,7 +30,11 @@ export default function ClaimValuesList({ title, data }: Props) {
                 label={fieldData?.property ?? fieldData?.label}
                 margin={false}
                 py={3}
-                disabled={!fieldData.value || fieldData.value === ''}
+                disabled={
+                  fieldData.value === undefined ||
+                  fieldData.value === null ||
+                  fieldData.value === ''
+                }
               >
                 <ClaimView {...fieldData} />
               </CardCell>

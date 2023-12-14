@@ -20,11 +20,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isTesnet = currentEnv() === 'testnet';
+  const env = currentEnv();
+  const isTesnetOrProd = env === 'testnet' || env === 'production';
   return (
     <html lang="en">
       {/* <!-- Hotjar Tracking Code for Gateway Network --> */}
-      {isTesnet && (
+      {isTesnetOrProd && (
         <Script
           id="hotjar"
           strategy="afterInteractive"
@@ -45,6 +46,10 @@ export default function RootLayout({
       {/* <!-- Google tag (gtag.js) --> */}
       {process.env.NEXT_PUBLIC_GTM_TAG && (
         <>
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GTM_TAG}`}
+          />
           <Script
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{

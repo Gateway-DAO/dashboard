@@ -6,10 +6,10 @@ import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 import { splitSpans } from '@/app/(landing)/utils/dom';
 import GTWLink from '@/components/gtw-link';
+import routes from '@/constants/routes';
 import gsap from 'gsap';
 
 import styles from './hero.module.scss';
-import routes from '@/constants/routes';
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);

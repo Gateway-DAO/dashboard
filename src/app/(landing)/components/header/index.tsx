@@ -1,3 +1,4 @@
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import Link from '@/app/(landing)/components/Link';
@@ -8,6 +9,7 @@ import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import routes from '@/constants/routes';
 import { useLenis } from '@studio-freight/react-lenis';
 
 import { Stack, Typography } from '@mui/material';
@@ -15,8 +17,6 @@ import { Stack, Typography } from '@mui/material';
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
 import styles from './header.module.scss';
-import routes from '@/constants/routes';
-import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const path = usePathname();

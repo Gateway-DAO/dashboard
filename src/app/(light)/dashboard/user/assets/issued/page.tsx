@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import PdasHelpCards from '@/app/(light)/dashboard/components/pdas-help-cards';
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';

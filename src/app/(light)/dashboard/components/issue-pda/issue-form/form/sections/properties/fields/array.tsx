@@ -43,10 +43,10 @@ export default function ArrayProperty({
   const helper = !hideHelperText ? getNumberHelperText(property) : undefined;
 
   const subType = property!.items
-    ? getClaimType({ type: property!.items!.type! })
-    : ClaimField.SchemaError;
+    ? getClaimType({ type: property!.items!.type })
+    : ClaimField.Text;
   const subTypeHelper = subType
-    ? getClaimHelperText(subType, property.items!)
+    ? getClaimHelperText(subType, property.items)
     : undefined;
 
   return (
@@ -57,7 +57,7 @@ export default function ArrayProperty({
             <PropertyItem
               id={`${id}.${index}`}
               type={subType}
-              property={property.items!}
+              property={property.items ?? { type: subType }}
               hideHelperText
             />
           </Box>
@@ -90,7 +90,7 @@ export default function ArrayProperty({
         <>
           <Button
             variant="text"
-            onClick={async () => append(' ')}
+            onClick={async () => append('')}
             startIcon={<Add />}
             sx={{ alignSelf: 'flex-start' }}
           >
