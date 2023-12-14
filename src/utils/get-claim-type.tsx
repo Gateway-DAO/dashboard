@@ -10,6 +10,10 @@ export enum ClaimField {
   Currency = 'currency',
   Unknown = 'unknown',
   SchemaError = 'schema_error',
+  Select = 'select',
+  Date = 'date',
+  DateTime = 'datetime',
+  Time = 'time',
 }
 
 // JSON Schema draft 7 property types and validations
@@ -37,6 +41,7 @@ export type SchemaProperty = {
   minLength?: number;
   maxLength?: number;
   pattern?: string;
+  enum?: string[];
 
   // Array validations
   minItems?: number;
@@ -50,10 +55,24 @@ export const getClaimType = ({
   contentMediaType,
   currency,
   format,
+  enum: enumValues,
 }: SchemaProperty): ClaimField => {
   if (contentMediaType) return ClaimField.Image;
-  if (format === 'uri') return ClaimField.Link;
   if (currency) return ClaimField.Currency;
+  if (enumValues) return ClaimField.Select;
+
+  switch (format) {
+    case 'date':
+      return ClaimField.Date;
+    case 'date-time':
+      return ClaimField.DateTime;
+    case 'time':
+      return ClaimField.Time;
+    case 'uri':
+      return ClaimField.Link;
+    default:
+      break;
+  }
 
   switch (type) {
     case 'number':

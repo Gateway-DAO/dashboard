@@ -1,10 +1,10 @@
 import Wrapper from '@/app/(landing)/components/wrapper';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import { DOCS_BASE_URL } from '@/constants/docs';
 import Slider from 'react-slick';
 
 import Title from '../title';
 import styles from './our-products.module.scss';
-import { DOCS_BASE_URL } from '@/constants/docs';
 
 const products = [
   {

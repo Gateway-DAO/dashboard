@@ -6,10 +6,7 @@ import { Link as MuiLink, Typography } from '@mui/material';
 
 import { PropertyField } from './type';
 
-export default function SchemaErrorProperty({
-  id,
-  ...property
-}: PropertyField) {
+export default function SchemaErrorProperty(_props: PropertyField) {
   return (
     <Typography variant="body2">
       There is a problem with the schema of the selected data model. Please use

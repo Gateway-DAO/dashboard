@@ -7,7 +7,6 @@ import { common } from '@/locale/en/common';
 import { explorerRequestTemplateDetailOverview } from '@/locale/en/request-template';
 import { Explorer_Request_Template_Detail_OverviewQuery } from '@/services/protocol/types';
 import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
-import { numberToMoneyString } from '@/utils/money';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';

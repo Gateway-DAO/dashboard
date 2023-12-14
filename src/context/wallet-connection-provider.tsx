@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
 export type WalletLoadingStep =
