@@ -1,5 +1,5 @@
 'use client';
-import { createPropertiesArray } from '@/app/(light)/dashboard/user/request/[id]/components/utils';
+import { createPropertiesArray } from '@/app/(light)/app/(dashboard)/user/request/[id]/components/utils';
 import ExternalLink from '@/components/external-link/external-link';
 import routes from '@/constants/routes';
 import { explorerRequestTemplateDetailOverview } from '@/locale/en/request-template';
