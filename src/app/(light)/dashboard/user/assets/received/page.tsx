@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import routes from '@/constants/routes';
-import { pdas as pdasLocales, coachMarkGuide } from '@/locale/en/pda';
+import { pdas as pdasLocales } from '@/locale/en/pda';
 import { getPrivateApi } from '@/services/protocol/api';
 
 import { Box, Button, Typography } from '@mui/material';
@@ -28,6 +28,7 @@ export default async function DataAssetsPage() {
         <Button
           variant="contained"
           size="large"
+          className='hello'
           endIcon={<DataOutlinedIcon />}
           href={routes.dashboard.user.issue}
         >

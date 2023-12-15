@@ -1,11 +1,14 @@
 import { PropsWithChildren } from 'react';
 
-import HelpContentCard from '@/components/help-content-card/help-content-card';
+import { InstructionGuide } from '@/components/instruction-guide';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
-import { helperContent, requestTemplates } from '@/locale/en/request-template';
+import {
+  requestTemplates,
+  instructionGuide,
+} from '@/locale/en/request-template';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -22,13 +25,6 @@ export default function DataRequestTeampltesLayout({
         title={requestTemplates.title}
         subtitle={requestTemplates.subtitle}
         titleId="title-data-request-templates"
-      />
-
-      <HelpContentCard
-        title={helperContent.title}
-        desc={helperContent.desc}
-        btnText={helperContent.btnText}
-        btnLink={helperContent.btnLink}
       />
 
       <Box
@@ -50,6 +46,15 @@ export default function DataRequestTeampltesLayout({
           />
         </GTWTabs>
       </Box>
+      <div style={{ marginTop: 20, marginBottom: 10 }}>
+        <InstructionGuide
+          title={instructionGuide.title}
+          desc={instructionGuide.description}
+          btnLink={instructionGuide.btn_link}
+          btnText={instructionGuide.btn_text}
+          videoUrl={instructionGuide.video_link}
+        />
+      </div>
       <Box sx={{ pt: 5 }}>{children}</Box>
     </Box>
   );

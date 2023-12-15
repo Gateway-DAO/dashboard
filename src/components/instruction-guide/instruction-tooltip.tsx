@@ -2,11 +2,12 @@ import { Step, TooltipRenderProps } from 'react-joyride';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, IconButton, Typography } from '@mui/material';
+import { ButtonProps } from '@mui/material';
 import { Stack } from '@mui/system';
 
 export interface InstructionToolTipProps
   extends Omit<TooltipRenderProps, 'step'> {
-  step: Step & { customData?: any };
+  step: Step & { btnProps?: ButtonProps };
 }
 
 export function InstructionToolTip({
@@ -43,22 +44,24 @@ export function InstructionToolTip({
       >
         {step.content && step.content}
       </Typography>
-
-      <Button
-        variant="outlined"
-        size="small"
-        sx={{
-          '&:hover': {
-            backgroundColor: 'lightgray',
+      {step?.btnProps && (
+        <Button
+          variant="outlined"
+          size="small"
+          href={step.btnProps.href}
+          sx={{
+            '&:hover': {
+              backgroundColor: 'lightgray',
+              border: 0,
+            },
+            color: '#499AA5',
+            backgroundColor: 'white',
             border: 0,
-          },
-          color: '#499AA5',
-          backgroundColor: 'white',
-          border: 0,
-        }}
-      >
-        Open now
-      </Button>
+          }}
+        >
+          {step.btnProps.title}
+        </Button>
+      )}
     </Box>
   );
 }

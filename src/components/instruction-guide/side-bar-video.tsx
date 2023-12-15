@@ -14,7 +14,7 @@ type Props = {
   title: string;
   description: string;
   handleClick: () => void;
-  toggleCoachMarkGuide: () => void;
+  onSideDialogClose?: () => void;
 };
 
 export default function SideBarVideoInstruction({
@@ -24,12 +24,14 @@ export default function SideBarVideoInstruction({
   description,
   onClose,
   handleClick,
-  toggleCoachMarkGuide,
+  onSideDialogClose,
 }: Props) {
   function sideBarClose() {
     onClose();
     handleClick();
-    toggleCoachMarkGuide();
+    if (onSideDialogClose) {
+      onSideDialogClose();
+    }
   }
 
   return (

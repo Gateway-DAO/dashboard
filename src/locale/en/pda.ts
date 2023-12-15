@@ -118,7 +118,7 @@ export const issuePdaForm = {
   },
 };
 
-export const coachMarkGuide = {
+export const instructionGuide = {
   title: 'How to use your PDA',
   description: 'Explore the potential of your Data Assets',
   video_link: 'https://www.youtube.com/embed/GwIFrE0MQLc',

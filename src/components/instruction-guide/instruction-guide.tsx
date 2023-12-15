@@ -7,14 +7,7 @@ import VideoSquaredIcon from '@/components/icons/video-squared';
 import { useToggle } from '@react-hookz/web';
 
 import CloseIcon from '@mui/icons-material/Close';
-import {
-  Box,
-  Button,
-  Stack,
-  Typography,
-  IconButton,
-  Card,
-} from '@mui/material';
+import { Button, Stack, Typography, IconButton, Card } from '@mui/material';
 
 import SideBarVideoInstruction from './side-bar-video';
 
@@ -24,7 +17,7 @@ type Props = {
   btnLink: string;
   btnText: string;
   videoUrl: string;
-  toggleCoachMarkGuide: () => void;
+  onSideDialogClose?: () => void;
 };
 
 export function InstructionGuide({
@@ -33,7 +26,7 @@ export function InstructionGuide({
   btnLink,
   btnText,
   videoUrl,
-  toggleCoachMarkGuide,
+  onSideDialogClose,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [openVideoPlayer, toggleVideoPlayer] = useToggle(false);
@@ -101,7 +94,7 @@ export function InstructionGuide({
               >
                 <Button
                   color="info"
-                  size="small"
+                  size="medium"
                   variant="outlined"
                   href={btnLink}
                   onClick={toggleVideoPlayer}
@@ -127,7 +120,7 @@ export function InstructionGuide({
           description={desc}
           onClose={toggleVideoPlayer}
           handleClick={handleClick}
-          toggleCoachMarkGuide={toggleCoachMarkGuide}
+          onSideDialogClose={onSideDialogClose}
         />
       </>
     )
