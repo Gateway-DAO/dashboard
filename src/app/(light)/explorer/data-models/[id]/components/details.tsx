@@ -87,7 +87,8 @@ export default function DataModelDetails({ dataModel }: Props) {
             </Typography>
             <TooltipInfo
               title={
-                explorerDataModelDetailOverview.tooltip.pda_comsumption_cost
+                explorerDataModelDetailOverview.tooltip
+                  .pda_consumption_cost_explorer
               }
             />
           </Stack>
