@@ -6,6 +6,7 @@ import { queries } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { settings } from '@/locale/en/settings';
 import { MonthlyUserUsageQuery } from '@/services/protocol/types';
+import { currentEnv } from '@/utils/env';
 import { useQuery } from '@tanstack/react-query';
 
 import {
@@ -38,7 +39,7 @@ export default function DeveloperPortal() {
   return (
     <Stack spacing={3} alignItems="flex-start">
       <Stack direction="column" gap={2}>
-        {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <MainnetAlert />}
+        {currentEnv === 'testnet' && <MainnetAlert />}
         <Card sx={{ width: '100%' }} variant="outlined">
           <CardHeader
             titleTypographyProps={{

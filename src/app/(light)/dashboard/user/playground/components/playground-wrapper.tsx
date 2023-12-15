@@ -1,6 +1,7 @@
 'use client';
 
 import { useGtwSession } from '@/context/gtw-session-provider';
+import { currentEnv } from '@/utils/env';
 import { ApolloSandbox } from '@apollo/sandbox/react';
 
 import { Stack } from '@mui/material';
@@ -12,7 +13,7 @@ const dataModelIdByEnv = {
 };
 
 const currentDataModel = dataModelIdByEnv[
-  process.env.NEXT_PUBLIC_API_ENV as 'development' | 'staging' | 'testnet'
+  currentEnv as keyof typeof dataModelIdByEnv
 ] as string;
 
 const initialQuery = `mutation createPDA {

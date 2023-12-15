@@ -55,9 +55,9 @@ export const linksList: { title: string; href: string; target: string }[] = [
     target: '_self',
   },
   {
-    title: currentEnv() === 'production' ? 'Sandbox' : 'MainNet',
+    title: currentEnv === 'production' ? 'Sandbox' : 'MainNet',
     href:
-      currentEnv() === 'production'
+      currentEnv === 'production'
         ? externalLinks.gateway_sandbox
         : externalLinks.gateway,
     target: '_blank',

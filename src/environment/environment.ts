@@ -48,7 +48,7 @@ const prod: EnvironmentData = {
 };
 
 export const environment = (): EnvironmentData => {
-  switch (currentEnv()) {
+  switch (currentEnv) {
     case 'testnet':
       return prod;
     case 'test':

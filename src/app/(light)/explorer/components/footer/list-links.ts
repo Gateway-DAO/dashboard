@@ -57,9 +57,9 @@ export const listLinks = [
     href: routes.auth,
   },
   {
-    title: currentEnv() === 'production' ? 'Sandbox' : 'MainNet',
+    title: currentEnv === 'production' ? 'Sandbox' : 'MainNet',
     href:
-      currentEnv() === 'production'
+      currentEnv === 'production'
         ? externalLinks.gateway_sandbox
         : externalLinks.gateway,
     target: '_blank',

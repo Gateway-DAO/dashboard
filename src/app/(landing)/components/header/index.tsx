@@ -130,13 +130,13 @@ export default function Header() {
                 <Link
                   className={styles.link}
                   href={
-                    currentEnv() === 'production'
+                    currentEnv === 'production'
                       ? externalLinks.gateway_sandbox
                       : externalLinks.gateway
                   }
                 >
                   <Button variant="text">
-                    {currentEnv() === 'production' ? 'Sandbox' : 'Mainnet'}
+                    {currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}
                   </Button>
                 </Link>
               </div>
@@ -189,7 +189,7 @@ export default function Header() {
             <Link
               className={styles.mobile_link}
               href={
-                currentEnv() === 'production'
+                currentEnv === 'production'
                   ? externalLinks.gateway_sandbox
                   : externalLinks.gateway
               }
@@ -197,7 +197,7 @@ export default function Header() {
             >
               <Button variant="text">
                 <span>
-                  {currentEnv() === 'production' ? 'Sandbox' : 'Mainnet'}
+                  {currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}
                 </span>
                 <ArrowRight2 className={styles.mobile_link_arrow} />
               </Button>
