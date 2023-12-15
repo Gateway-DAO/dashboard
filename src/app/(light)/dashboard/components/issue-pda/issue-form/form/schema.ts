@@ -55,6 +55,18 @@ export const issuePdaValidator = async (
       (claim as any)[key] = value.length > 0 ? value : undefined;
     }
 
+    // Trim array of strings
+    if (type === ClaimField.Array) {
+      const value = (claim as any)[key] as any[];
+      (claim as any)[key] = value.map((v) => {
+        if (typeof v === 'string') {
+          const trimmed = v.trim();
+          return trimmed.length > 0 ? trimmed : undefined;
+        }
+        return v;
+      });
+    }
+
     // Treat string as float
     if (type === ClaimField.Number) {
       const value = (claim as any)[key];
