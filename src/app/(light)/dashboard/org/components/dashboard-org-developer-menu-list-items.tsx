@@ -49,16 +49,14 @@ export default function DashboardOrgDeveloperMenuListItems() {
             />
           ))}
           <GTWMenuItem
-            name={currentEnv() === 'production' ? 'Sandbox' : 'MainNet'}
+            name={currentEnv === 'production' ? 'Sandbox' : 'MainNet'}
             href={
-              currentEnv() === 'production'
+              currentEnv === 'production'
                 ? `${externalLinks.gateway_sandbox}${activePath}`
                 : `${externalLinks.gateway}${activePath}`
             }
             icon={
-              currentEnv() === 'production'
-                ? ExpirementOutlined
-                : MainnetOutlined
+              currentEnv === 'production' ? ExpirementOutlined : MainnetOutlined
             }
             externalLink={true}
           />
