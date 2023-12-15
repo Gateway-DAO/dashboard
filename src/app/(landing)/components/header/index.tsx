@@ -9,7 +9,9 @@ import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
+import { currentEnv } from '@/utils/env';
 import { useLenis } from '@studio-freight/react-lenis';
 
 import { Stack, Typography } from '@mui/material';
@@ -125,9 +127,24 @@ export default function Header() {
                 <Link className={styles.link} href="/build">
                   <Button variant="text">Build</Button>
                 </Link>
+                <Link
+                  className={styles.link}
+                  href={
+                    currentEnv() === 'production'
+                      ? externalLinks.gateway_sandbox
+                      : externalLinks.gateway
+                  }
+                >
+                  <Button variant="text">
+                    {currentEnv() === 'production' ? 'Sandbox' : 'Mainnet'}
+                  </Button>
+                </Link>
               </div>
 
               <div className={styles.buttons_container}>
+                <Link href="/explorer">
+                  <Button variant="outlined">Explorer</Button>
+                </Link>
                 <Link href="/login">
                   <Button
                     variant="contained"
@@ -166,6 +183,32 @@ export default function Header() {
             >
               <Button variant="text">
                 <span>Build</span>
+                <ArrowRight2 className={styles.mobile_link_arrow} />
+              </Button>
+            </Link>
+            <Link
+              className={styles.mobile_link}
+              href={
+                currentEnv() === 'production'
+                  ? externalLinks.gateway_sandbox
+                  : externalLinks.gateway
+              }
+              onClick={() => setBurgerActive(false)}
+            >
+              <Button variant="text">
+                <span>
+                  {currentEnv() === 'production' ? 'Sandbox' : 'Mainnet'}
+                </span>
+                <ArrowRight2 className={styles.mobile_link_arrow} />
+              </Button>
+            </Link>
+            <Link
+              className={styles.mobile_link}
+              href="/explorer"
+              onClick={() => setBurgerActive(false)}
+            >
+              <Button variant="text">
+                <span>Explorer</span>
                 <ArrowRight2 className={styles.mobile_link_arrow} />
               </Button>
             </Link>

@@ -33,7 +33,7 @@ export const linksSocial = [
   },
 ];
 
-export const linksList = [
+export const linksList: { title: string; href: string; target: string }[] = [
   {
     title: 'Learn',
     href: routes.learn,
@@ -42,6 +42,11 @@ export const linksList = [
   {
     title: 'Build',
     href: routes.build,
+    target: '_self',
+  },
+  {
+    title: 'Explorer',
+    href: routes.explorer.root,
     target: '_self',
   },
   {
@@ -62,7 +67,6 @@ export const linksList = [
     href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
     target: '_blank',
   },
-
   {
     title: 'Brand Kit',
     href: externalLinks.gateway_brandkit,
