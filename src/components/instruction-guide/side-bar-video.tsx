@@ -40,7 +40,7 @@ export default function SideBarVideoInstruction({
         <QuestionSquaredIcon sx={{ width: 38, height: 40 }} />
       </ModalHeader>
       <Stack sx={{ height: '100%' }}>
-        <Stack mt={3} mb={5} sx={{ height: '100%' }}>
+        <Stack mt={3} mb={5}>
           <Typography variant="h4" mb={1}>
             {title}
           </Typography>
