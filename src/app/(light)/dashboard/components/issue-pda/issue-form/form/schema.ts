@@ -50,7 +50,7 @@ export const issuePdaValidator = async (
     const type = getClaimType(schema.properties[key]);
 
     // Trim string
-    if (type === ClaimField.Text && typeof (claim as any)[key] === 'string') {
+    if (typeof (claim as any)[key] === 'string') {
       const value = (claim as any)[key].trim();
       (claim as any)[key] = value.length > 0 ? value : undefined;
     }
