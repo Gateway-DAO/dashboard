@@ -128,6 +128,9 @@ export default function Header() {
               </div>
 
               <div className={styles.buttons_container}>
+                <Link href="/explorer">
+                  <Button variant="outlined">Explorer</Button>
+                </Link>
                 <Link href="/login">
                   <Button
                     variant="contained"
@@ -166,6 +169,16 @@ export default function Header() {
             >
               <Button variant="text">
                 <span>Build</span>
+                <ArrowRight2 className={styles.mobile_link_arrow} />
+              </Button>
+            </Link>
+            <Link
+              className={styles.mobile_link}
+              href="/explorer"
+              onClick={() => setBurgerActive(false)}
+            >
+              <Button variant="text">
+                <span>Explorer</span>
                 <ArrowRight2 className={styles.mobile_link_arrow} />
               </Button>
             </Link>
