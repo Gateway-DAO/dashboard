@@ -3,6 +3,7 @@ import { TableCellContainer } from '@/components/containers/table-cell-container
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import Profiles from '@/components/profiles/profiles';
 import ToggleDropIcon from '@/components/toggle-drop-icon/toggle-drop-icon';
+import TooltipInfo from '@/components/tooltip-info/tooltip-info';
 import { DATE_FORMAT } from '@/constants/date';
 import { common } from '@/locale/en/common';
 import { explorerDataModelDetailOverview } from '@/locale/en/datamodel';
@@ -57,9 +58,16 @@ export default function DataModelDetails({ dataModel }: Props) {
           <CardCell
             label={explorerDataModelDetailOverview.labels.pda_comsumption_cost}
           >
-            <Typography>
-              {numberToMoneyString(dataModel.consumptionPrice ?? 0)}
-            </Typography>
+            <Stack direction="row" alignItems="center" gap={1}>
+              <Typography>
+                {numberToMoneyString(dataModel.consumptionPrice ?? 0)}
+              </Typography>
+              <TooltipInfo
+                title={
+                  explorerDataModelDetailOverview.tooltip.pda_comsumption_cost
+                }
+              />
+            </Stack>
           </CardCell>
         </TableCellContainer>
         <Collapse in={isShowing}>
