@@ -2,8 +2,12 @@
 
 import { usePathname } from 'next/navigation';
 
+import ExpirementOutlined from '@/components/icons/expirement-outlined';
+import MainnetOutlined from '@/components/icons/mainnet-outlined';
 import GTWMenuItem from '@/components/menu-item/menu-item';
+import externalLinks from '@/constants/externalLinks';
 import { common } from '@/locale/en/common';
+import { currentEnv } from '@/utils/env';
 
 import { Typography } from '@mui/material';
 
@@ -24,6 +28,18 @@ export default function DashboardUserDeveloperMenuListItems() {
           {...item}
         />
       ))}
+      <GTWMenuItem
+        name={currentEnv() === 'production' ? 'Sandbox' : 'MainNet'}
+        href={
+          currentEnv() === 'production'
+            ? `${externalLinks.gateway_sandbox}${activePath}`
+            : `${externalLinks.gateway}${activePath}`
+        }
+        icon={
+          currentEnv() === 'production' ? ExpirementOutlined : MainnetOutlined
+        }
+        externalLink={true}
+      />
     </>
   );
 }
