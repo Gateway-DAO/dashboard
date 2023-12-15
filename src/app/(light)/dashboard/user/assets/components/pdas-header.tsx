@@ -28,12 +28,12 @@ export default function PdasHeader({ children }: Props) {
       >
         {children && children}
       </TitleLayout>
-      <HelpContentCard
+      {/* <HelpContentCard
         title={helperContent.title}
         desc={helperContent.desc}
         btnText={helperContent.btnText}
         btnLink={helperContent.btnLink}
-      />
+      /> */}
       <Box
         sx={{
           borderBottom: 1,
