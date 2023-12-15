@@ -1,6 +1,7 @@
 import { DOCS_BASE_URL } from '@/constants/docs';
 import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
+import { currentEnv } from '@/utils/env';
 import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
 import { SiSubstack } from 'react-icons/si';
 
@@ -54,6 +55,14 @@ export const listLinks = [
   {
     title: 'Dashboard',
     href: routes.auth,
+  },
+  {
+    title: currentEnv() === 'production' ? 'Sandbox' : 'Mainnet',
+    href:
+      currentEnv() === 'production'
+        ? externalLinks.gateway_sandbox
+        : externalLinks.gateway,
+    target: '_blank',
   },
   {
     title: 'Privacy',

@@ -2,6 +2,7 @@
 import { DOCS_BASE_URL } from '@/constants/docs';
 import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
+import { currentEnv } from '@/utils/env';
 
 import LogoDiscord from '../icons/logo-discord';
 import LogoGithub from '../icons/logo-github';
@@ -47,6 +48,14 @@ export const linksList = [
     title: 'Dashboard',
     href: routes.auth,
     target: '_self',
+  },
+  {
+    title: currentEnv() === 'production' ? 'Sandbox' : 'Mainnet',
+    href:
+      currentEnv() === 'production'
+        ? externalLinks.gateway_sandbox
+        : externalLinks.gateway,
+    target: '_blank',
   },
   {
     title: 'Privacy',
