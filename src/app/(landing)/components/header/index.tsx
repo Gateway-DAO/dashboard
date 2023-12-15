@@ -11,6 +11,7 @@ import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
+import { currentEnv } from '@/utils/env';
 import { useLenis } from '@studio-freight/react-lenis';
 
 import { Stack, Typography } from '@mui/material';
@@ -128,9 +129,15 @@ export default function Header() {
                 </Link>
                 <Link
                   className={styles.link}
-                  href={externalLinks.gateway_sandbox}
+                  href={
+                    currentEnv() === 'production'
+                      ? externalLinks.gateway_sandbox
+                      : externalLinks.gateway
+                  }
                 >
-                  <Button variant="text">Sandbox</Button>
+                  <Button variant="text">
+                    {currentEnv() === 'production' ? 'Sandbox' : 'Mainnet'}
+                  </Button>
                 </Link>
               </div>
 
@@ -181,11 +188,17 @@ export default function Header() {
             </Link>
             <Link
               className={styles.mobile_link}
-              href={externalLinks.gateway_sandbox}
+              href={
+                currentEnv() === 'production'
+                  ? externalLinks.gateway_sandbox
+                  : externalLinks.gateway
+              }
               onClick={() => setBurgerActive(false)}
             >
               <Button variant="text">
-                <span>Sandbox</span>
+                <span>
+                  {currentEnv() === 'production' ? 'Sandbox' : 'Mainnet'}
+                </span>
                 <ArrowRight2 className={styles.mobile_link_arrow} />
               </Button>
             </Link>
