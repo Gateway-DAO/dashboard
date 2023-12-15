@@ -9,6 +9,7 @@ import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
 import { useLenis } from '@studio-freight/react-lenis';
 
@@ -125,6 +126,12 @@ export default function Header() {
                 <Link className={styles.link} href="/build">
                   <Button variant="text">Build</Button>
                 </Link>
+                <Link
+                  className={styles.link}
+                  href={externalLinks.gateway_sandbox}
+                >
+                  <Button variant="text">Sandbox</Button>
+                </Link>
               </div>
 
               <div className={styles.buttons_container}>
@@ -169,6 +176,16 @@ export default function Header() {
             >
               <Button variant="text">
                 <span>Build</span>
+                <ArrowRight2 className={styles.mobile_link_arrow} />
+              </Button>
+            </Link>
+            <Link
+              className={styles.mobile_link}
+              href={externalLinks.gateway_sandbox}
+              onClick={() => setBurgerActive(false)}
+            >
+              <Button variant="text">
+                <span>Sandbox</span>
                 <ArrowRight2 className={styles.mobile_link_arrow} />
               </Button>
             </Link>
