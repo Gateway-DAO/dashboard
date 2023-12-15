@@ -81,11 +81,11 @@ export default function GTWMenuItem({
         <Typography
           component={'span'}
           variant="subtitle1"
-          sx={{ fontSize: '1rem' }}
+          sx={{ fontSize: '1rem', flexGrow: 1 }}
         >
           {name}
         </Typography>
-        {externalLink && <OpenInNew sx={{ ml: 2 }} />}
+        {externalLink && <OpenInNew sx={{ ml: 2, mr: 1 }} />}
       </ListItemButton>
     </ListItem>
   );

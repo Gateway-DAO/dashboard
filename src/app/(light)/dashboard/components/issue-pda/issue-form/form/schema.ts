@@ -18,9 +18,10 @@ dayjs.extend(utc);
 const issuePdaSchema = zod.object({
   title: zod
     .string()
+    .trim()
     .min(2, REQUIRED_MIN_LENGTH(2))
     .max(100, REQUIRED_MAX_LENGTH(100)),
-  description: zod.string().min(2, REQUIRED_MIN_LENGTH(2)),
+  description: zod.string().trim().min(2, REQUIRED_MIN_LENGTH(2)),
   claim: zod.object({}),
   owner: identifierValueSchema,
 });
@@ -46,11 +47,25 @@ export const issuePdaValidator = async (
 
   Object.keys(claim as any).forEach((key) => {
     // Set all values from object 'claim' that are empty strings to undefined
-    if ((claim as any)[key] === '') {
-      (claim as any)[key] = undefined;
-      return;
-    }
     const type = getClaimType(schema.properties[key]);
+
+    // Trim string
+    if (typeof (claim as any)[key] === 'string') {
+      const value = (claim as any)[key].trim();
+      (claim as any)[key] = value.length > 0 ? value : undefined;
+    }
+
+    // Trim array of strings
+    if (type === ClaimField.Array) {
+      const value = (claim as any)[key] as any[];
+      (claim as any)[key] = value.map((v) => {
+        if (typeof v === 'string') {
+          const trimmed = v.trim();
+          return trimmed.length > 0 ? trimmed : undefined;
+        }
+        return v;
+      });
+    }
 
     // Treat string as float
     if (type === ClaimField.Number) {
