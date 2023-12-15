@@ -1,22 +1,9 @@
 import { InfoOutlined } from '@mui/icons-material';
-import { Tooltip } from '@mui/material';
+import { Tooltip, TooltipProps } from '@mui/material';
 
 type Props = {
   title: string;
-  placement?:
-    | 'bottom'
-    | 'left'
-    | 'right'
-    | 'top'
-    | 'bottom-end'
-    | 'bottom-start'
-    | 'left-end'
-    | 'left-start'
-    | 'right-end'
-    | 'right-start'
-    | 'top-end'
-    | 'top-start'
-    | undefined;
+  placement?: TooltipProps['placement'];
 };
 
 export default function TooltipInfo({ title, placement = 'bottom' }: Props) {
