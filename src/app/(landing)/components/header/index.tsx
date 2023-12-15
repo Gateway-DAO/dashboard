@@ -143,7 +143,9 @@ export default function Header() {
 
               <div className={styles.buttons_container}>
                 <Link href="/explorer">
-                  <Button variant="outlined">Explorer</Button>
+                  <Button variant="outlined" className={styles.button_outlined}>
+                    Explorer
+                  </Button>
                 </Link>
                 <Link href="/login">
                   <Button
