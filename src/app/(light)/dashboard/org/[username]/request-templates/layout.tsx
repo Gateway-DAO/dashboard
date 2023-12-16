@@ -3,10 +3,8 @@ import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
-import {
-  instructionGuide,
-  requestTemplates,
-} from '@/locale/en/request-template';
+import { instructionGuide } from '@/locale/en/educational';
+import { requestTemplates } from '@/locale/en/request-template';
 import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
@@ -46,15 +44,16 @@ export default async function OrgDataRequestTemplatesLayout({
           />
         </GTWTabs>
       </Box>
-      <div style={{ marginTop: 20, marginBottom: 10 }}>
+      <Box marginY={2}>
         <InstructionGuide
-          title={instructionGuide.title}
-          desc={instructionGuide.description}
-          btnLink={instructionGuide.btn_link}
-          btnText={instructionGuide.btn_text}
-          videoUrl={instructionGuide.video_link}
+          id="org-request-templates"
+          title={instructionGuide.createRequest.title}
+          desc={instructionGuide.createRequest.description}
+          btnLink={instructionGuide.createRequest.btn_link}
+          btnText={instructionGuide.createRequest.btn_text}
+          videoUrl={instructionGuide.createRequest.video_link}
         />
-      </div>
+      </Box>
       <Box sx={{ pt: 5 }}>{children}</Box>
     </Box>
   );

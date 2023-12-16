@@ -3,7 +3,7 @@ import QuestionSquaredIcon from '@/components/icons/question-squared';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 
-import { Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 
 import styles from './styles.module.css';
 
@@ -47,7 +47,7 @@ export default function SideBarVideoInstruction({
 
           <Typography variant="body1">{description}</Typography>
         </Stack>
-        <div className={styles.container}>
+        <Box className={styles.container}>
           <iframe
             id="ytplayer"
             width="550"
@@ -57,7 +57,7 @@ export default function SideBarVideoInstruction({
               '?controls=0&loop=1&modestbranding=1&playsinline=1&color=white&iv_load_policy=3'
             }
           ></iframe>
-        </div>
+        </Box>
       </Stack>
     </ModalRight>
   );

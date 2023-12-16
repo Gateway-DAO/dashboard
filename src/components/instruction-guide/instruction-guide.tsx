@@ -1,17 +1,24 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import QuestionSquaredIcon from '@/components/icons/question-squared';
 import VideoSquaredIcon from '@/components/icons/video-squared';
 import { useToggle } from '@react-hookz/web';
+import { useLocalStorageValue } from '@react-hookz/web';
 
 import CloseIcon from '@mui/icons-material/Close';
-import { Button, Stack, Typography, IconButton, Card } from '@mui/material';
+import {
+  Box,
+  Button,
+  Stack,
+  Typography,
+  IconButton,
+  Card,
+} from '@mui/material';
 
 import SideBarVideoInstruction from './side-bar-video';
 
 type Props = {
+  id: string;
   title: string;
   desc: string;
   btnLink: string;
@@ -21,6 +28,7 @@ type Props = {
 };
 
 export function InstructionGuide({
+  id,
   title,
   desc,
   btnLink,
@@ -28,28 +36,16 @@ export function InstructionGuide({
   videoUrl,
   onSideDialogClose,
 }: Props) {
-  const [open, setOpen] = useState(false);
+  const { value: coachMark, set: setCoachMark } = useLocalStorageValue<{
+    [key: string]: boolean;
+  } | null>('coach-mark-guide');
+  const open = !coachMark?.[id];
   const [openVideoPlayer, toggleVideoPlayer] = useToggle(false);
-
-  let hasSeenDialog: { [key: string]: boolean } | null;
-
-  useEffect(() => {
-    hasSeenDialog = JSON.parse(
-      localStorage.getItem('coach-mark-guide') || '{}'
-    );
-  }, []);
-
-  useEffect(() => {
-    if (hasSeenDialog && !hasSeenDialog.hasOwnProperty(title)) {
-      setOpen(true);
-    }
-  }, []);
-
   const handleClick = () => {
-    const updatedDialog = { ...hasSeenDialog, [title]: true };
-
-    localStorage.setItem('coach-mark-guide', JSON.stringify(updatedDialog));
-    setOpen(false);
+    setCoachMark({
+      ...coachMark,
+      [id]: true,
+    });
   };
 
   return (
@@ -73,18 +69,17 @@ export function InstructionGuide({
             <CloseIcon />
           </IconButton>
           <QuestionSquaredIcon sx={{ width: 40, height: 40, mb: 1 }} />
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginTop: 20,
-            }}
+          <Stack
+            display="flex"
+            justifyContent="space-between"
+            marginTop={2}
+            direction={'row'}
           >
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <Stack display="flex" direction="column">
               <Typography variant="h5" gutterBottom>
                 {title}
               </Typography>
-              <Typography variant="body1" sx={{ mb: 3, flexGrow: 1 }}>
+              <Typography variant="body1" sx={{ mb: 2, flexGrow: 1 }}>
                 {desc}
               </Typography>
               <span
@@ -102,16 +97,16 @@ export function InstructionGuide({
                   {btnText}
                 </Button>
               </span>
-            </div>
-            <div style={{ marginRight: 15 }}>
+            </Stack>
+            <Box display={{ xs: 'none', md: 'inline' }}>
               <VideoSquaredIcon
                 sx={{
                   width: { xs: '100%', md: 220 },
                   height: { xs: 'auto', md: 128 },
                 }}
               />
-            </div>
-          </div>
+            </Box>
+          </Stack>
         </Stack>
         <SideBarVideoInstruction
           open={openVideoPlayer}

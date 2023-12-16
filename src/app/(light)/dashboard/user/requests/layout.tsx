@@ -2,7 +2,8 @@ import { PropsWithChildren } from 'react';
 
 import { InstructionGuide } from '@/components/instruction-guide';
 import TitleLayout from '@/components/title-layout/title-layout';
-import { requests, instructionGuide } from '@/locale/en/request';
+import { instructionGuide } from '@/locale/en/educational';
+import { requests } from '@/locale/en/request';
 
 import { Box } from '@mui/material';
 
@@ -16,11 +17,12 @@ export default function DataRequestsLayout({ children }: PropsWithChildren) {
       />
       <div>
         <InstructionGuide
-          title={instructionGuide.title}
-          desc={instructionGuide.description}
-          btnLink={instructionGuide.btn_link}
-          btnText={instructionGuide.btn_text}
-          videoUrl={instructionGuide.video_link}
+          id="user-requests"
+          title={instructionGuide.createRequest.title}
+          desc={instructionGuide.createRequest.description}
+          btnLink={instructionGuide.createRequest.btn_link}
+          btnText={instructionGuide.createRequest.btn_text}
+          videoUrl={instructionGuide.createRequest.video_link}
         />
       </div>
       {children}

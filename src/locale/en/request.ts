@@ -70,10 +70,4 @@ export const helperContent = {
   btnLink: documentationRoutes.dataRequest,
 };
 
-export const instructionGuide = {
-  title: 'How to create a Request',
-  description: 'How to create a request from a template',
-  video_link: 'https://youtube.com/embed/7ihrltA9McM',
-  btn_text: 'Play video',
-  btn_link: '#guide',
-};
+

@@ -17,28 +17,28 @@ export function InstructionToolTip({
   return (
     <Box
       sx={{
-        backgroundColor: '#499AA5',
+        backgroundColor: 'info.dark',
         borderRadius: 1,
         padding: 2,
       }}
     >
       <Stack
-        direction={'row'}
-        justifyContent={'space-between'}
-        alignItems={'center'}
+        direction='row'
+        justifyContent='space-between'
+        alignItems='center'
         marginBottom={0.8}
       >
-        <Typography variant="subtitle1" color={'white'}>
+        <Typography variant="subtitle1" color='white'>
           {step.title && step.title}
         </Typography>
         <IconButton onClick={closeProps.onClick}>
-          <CloseIcon htmlColor="#FFFFFF" />
+          <CloseIcon htmlColor="white" />
         </IconButton>
       </Stack>
       <Typography
-        width={'16.5em'}
+        width="16.5em"
         variant="body1"
-        color={'#FFFFFF'}
+        color="white"
         gutterBottom
         marginBottom={2}
       >
@@ -54,7 +54,7 @@ export function InstructionToolTip({
               backgroundColor: 'lightgray',
               border: 0,
             },
-            color: '#499AA5',
+            color: 'info.dark',
             backgroundColor: 'white',
             border: 0,
           }}

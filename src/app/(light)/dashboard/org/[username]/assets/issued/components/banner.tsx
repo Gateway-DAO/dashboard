@@ -5,9 +5,11 @@ import {
   InstructionToolTip,
 } from '@/components/instruction-guide';
 import routes from '@/constants/routes';
-import { instructionGuide } from '@/locale/en/pda';
+import { instructionGuide } from '@/locale/en/educational';
 import { useToggle } from '@react-hookz/web';
 import Joyride from 'react-joyride';
+
+import { useTheme } from '@mui/material';
 
 type Props = {
   pathnameOrg: string;
@@ -15,6 +17,7 @@ type Props = {
 
 export default function Banner({ pathnameOrg }: Props) {
   const [openCoachMarkGuide, toggleCoachMarkGuide] = useToggle(false);
+  const theme = useTheme();
 
   const handleJoyrideCallback = (data: any) => {
     if (data.status === 'finished') {
@@ -39,11 +42,12 @@ export default function Banner({ pathnameOrg }: Props) {
   return (
     <>
       <InstructionGuide
-        title={instructionGuide.title}
-        desc={instructionGuide.description}
-        btnLink={instructionGuide.btn_link}
-        btnText={instructionGuide.btn_text}
-        videoUrl={instructionGuide.video_link}
+        id={'org-assests-issued'}
+        title={instructionGuide.issuePda.title}
+        desc={instructionGuide.issuePda.description}
+        btnLink={instructionGuide.issuePda.btn_link}
+        btnText={instructionGuide.issuePda.btn_text}
+        videoUrl={instructionGuide.issuePda.video_link}
         onSideDialogClose={toggleCoachMarkGuide}
       />
       <Joyride
@@ -51,7 +55,7 @@ export default function Banner({ pathnameOrg }: Props) {
         run={openCoachMarkGuide}
         callback={handleJoyrideCallback}
         tooltipComponent={InstructionToolTip}
-        styles={{ options: { arrowColor: '#499AA5' } }}
+        styles={{ options: { arrowColor: theme.palette.info.dark } }}
       />
     </>
   );

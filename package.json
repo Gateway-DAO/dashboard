@@ -56,7 +56,6 @@
     "gsap": "^3.12.2",
     "jsonwebtoken": "^9.0.2",
     "lottie-web": "^5.12.2",
-    "network-ui": "link:",
     "next": "13.4.13",
     "next-auth": "^4.23.2",
     "next-nprogress-bar": "^2.1.2",

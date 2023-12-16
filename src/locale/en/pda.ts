@@ -126,11 +126,3 @@ export const issuePdaForm = {
     time: 'Time in UTC timezone',
   },
 };
-
-export const instructionGuide = {
-  title: 'How to use your PDA',
-  description: 'Explore the potential of your Data Assets',
-  video_link: 'https://www.youtube.com/embed/GwIFrE0MQLc',
-  btn_text: 'Play video',
-  btn_link: '#guide',
-};
