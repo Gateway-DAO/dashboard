@@ -19,7 +19,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DataAssetsPage() {
   const privateApi = await getPrivateApi();
 
-
   const pdas = (await privateApi.received_pdas({ take: 6, skip: 0 }))?.myPDAs;
 
   return (
@@ -28,7 +27,6 @@ export default async function DataAssetsPage() {
         <Button
           variant="contained"
           size="large"
-          className='hello'
           endIcon={<DataOutlinedIcon />}
           href={routes.dashboard.user.issue}
         >

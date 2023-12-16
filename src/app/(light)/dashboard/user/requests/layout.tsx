@@ -15,16 +15,16 @@ export default function DataRequestsLayout({ children }: PropsWithChildren) {
         subtitle={requests.subtitle}
         titleId="title-data-request-templates"
       />
-      <div>
-        <InstructionGuide
-          id="user-requests"
-          title={instructionGuide.createRequest.title}
-          desc={instructionGuide.createRequest.description}
-          btnLink={instructionGuide.createRequest.btn_link}
-          btnText={instructionGuide.createRequest.btn_text}
-          videoUrl={instructionGuide.createRequest.video_link}
-        />
-      </div>
+
+      <InstructionGuide
+        id="user-requests"
+        title={instructionGuide.createRequest.title}
+        desc={instructionGuide.createRequest.description}
+        btnLink={instructionGuide.createRequest.btn_link}
+        btnText={instructionGuide.createRequest.btn_text}
+        videoUrl={instructionGuide.createRequest.video_link}
+      />
+
       {children}
     </Box>
   );
