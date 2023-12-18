@@ -58,6 +58,7 @@ export default function DataModelDetailHeader({ id, title, tags }: Props) {
             sx={{ mt: 4 }}
             variant="contained"
             size="large"
+            target="_blank"
             endIcon={<DataOutlinedIcon />}
             href={routes.dashboard.user.issuePda(id)}
           >
