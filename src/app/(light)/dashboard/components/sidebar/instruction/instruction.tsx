@@ -2,6 +2,7 @@
 import QuestionSquaredIcon from '@/components/icons/question-squared';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
+
 import InstructionHeader from './header';
 
 type Props = {
