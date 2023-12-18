@@ -22,22 +22,17 @@ export default function DataModelsFeatured() {
 
   return (
     <>
-      {dataModels.data?.dataModels &&
-        dataModels.data?.dataModels?.length > 0 && (
-          <>
-            <FeaturedSection
-              title={issuePda.featured}
-              isLoading={dataModels.isLoading}
-              withContainer={false}
-              columns={3}
-            >
-              {dataModels.data?.dataModels.map((dataModel) => (
-                <FeaturedCard key={dataModel.id} dataModel={dataModel} />
-              ))}
-            </FeaturedSection>
-            <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, px: CONTAINER_PX }} />
-          </>
-        )}
+      <FeaturedSection
+        title={issuePda.featured}
+        isLoading={dataModels.isLoading}
+        withContainer={false}
+        columns={3}
+      >
+        {dataModels.data?.dataModels.map((dataModel) => (
+          <FeaturedCard key={dataModel.id} dataModel={dataModel} />
+        ))}
+      </FeaturedSection>
+      <Divider sx={{ mx: NEGATIVE_CONTAINER_PX, px: CONTAINER_PX }} />
     </>
   );
 }
