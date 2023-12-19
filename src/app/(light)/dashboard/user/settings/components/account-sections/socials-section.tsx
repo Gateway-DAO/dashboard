@@ -1,4 +1,4 @@
-import ListSection from '@/app/(light)/dashboard/components/list-section';
+import ListSection from '@/app/(light)/dashboard/components/list-section/list-section';
 import { common } from '@/locale/en/common';
 import { FaDiscord, FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 

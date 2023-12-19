@@ -2,8 +2,8 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
 import { Stack } from '@mui/material';
 
-import AuthComponent from './auth-component/auth-component';
-import Logo from './logo/logo';
+import AuthComponent from '../auth-component/auth-component';
+import Logo from '../logo/logo';
 
 export default function MobileHeader() {
   return (

@@ -5,7 +5,7 @@ import GTWMenuItem, {
 
 import { List, Modal, Stack } from '@mui/material';
 
-import MobileHeader from './mobile-header';
+import MobileHeader from '../header/mobile-header';
 
 type Props = {
   isMenuOpen: boolean;
