@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { sandboxAlert } from '@/locale/en/alert-messages';
+import { common } from '@/locale/en/common';
 
 import { Button, Typography, AlertTitle, Alert } from '@mui/material';
 
@@ -38,7 +39,7 @@ export default function SandboxAlert() {
               toggleAlert(false);
             }}
           >
-            Close
+            {common.actions.close}
           </Button>
         }
       >

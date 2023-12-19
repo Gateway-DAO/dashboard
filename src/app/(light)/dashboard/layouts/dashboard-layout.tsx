@@ -4,15 +4,15 @@ import { usePathname } from 'next/navigation';
 import { PropsWithChildren, ReactNode } from 'react';
 
 import { sandboxAlert } from '@/locale/en/alert-messages';
+import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { currentEnv } from '@/utils/env';
 
 import { Box, Chip, Tooltip } from '@mui/material';
 import { Stack } from '@mui/system';
 
-import SandboxAlert from './alerts/sandbox-alert';
-import DashboardPage from './dashboard-page';
-import Logo from './logo/logo';
-import Sidebar from './sidebar/sidebar';
+import SandboxAlert from '../components/alerts/sandbox-alert';
+import Logo from '../components/logo/logo';
+import Sidebar from '../features/sidebar/sidebar';
 
 type Props = {
   menuItems: ReactNode;
@@ -60,9 +60,19 @@ export default function DashboardLayout({
           )}
         </Box>
       </Sidebar>
-      <DashboardPage
+      <Box
+        width="100%"
         sx={{
-          marginLeft: {
+          px: CONTAINER_PX,
+          pt: {
+            xs: 2,
+            lg: 5,
+          },
+          pb: {
+            xs: 10,
+            lg: 4,
+          },
+          ml: {
             xs: 0,
             lg: '300px',
           },
@@ -72,7 +82,7 @@ export default function DashboardLayout({
       >
         {testnet && isNotWalletPage && <SandboxAlert />}
         {children}
-      </DashboardPage>
+      </Box>
       {mobileMenuItems}
     </Stack>
   );

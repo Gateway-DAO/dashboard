@@ -1,6 +1,6 @@
 'use client';
 
-import TransactionStatusChip from '@/app/(light)/dashboard/components/wallet/transaction/transaction-status-chip';
+import TransactionStatusChip from '@/app/(light)/dashboard/features/wallet/transaction/transaction-status-chip';
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 import ExternalLink from '@/components/external-link/external-link';
