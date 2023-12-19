@@ -29,6 +29,8 @@ export const common = {
     cancel: 'Cancel',
     details: 'Details',
     review: 'Review',
+    sandbox: 'Sandbox',
+    mainnet: 'MainNet',
   },
   chain: {
     EVM: 'Ethereum',

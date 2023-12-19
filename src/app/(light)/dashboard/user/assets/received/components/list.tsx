@@ -17,6 +17,7 @@ type Props = {
 
 export default function ReceivedPDAsList({ pdas: initialPdas }: Props) {
   const { privateApi } = useGtwSession();
+
   const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery({
       queryKey: ['pdas', privateApi],
@@ -35,20 +36,22 @@ export default function ReceivedPDAsList({ pdas: initialPdas }: Props) {
   const pdas = data?.pages.flat().filter(Boolean);
 
   return (
-    <Stack gap={1}>
-      <PDAsList pdas={pdas ?? []} />
-      {privateApi && hasNextPage && (
-        <InfiniteLoadMore
-          isLoading={isFetchingNextPage}
-          onLoadMore={() => fetchNextPage()}
-        >
-          <PDAsListContainer>
-            <PdaCardSkeleton />
-            <PdaCardSkeleton />
-            <PdaCardSkeleton />
-          </PDAsListContainer>
-        </InfiniteLoadMore>
-      )}
-    </Stack>
+    <>
+      <Stack gap={1}>
+        <PDAsList pdas={pdas ?? []} />
+        {privateApi && hasNextPage && (
+          <InfiniteLoadMore
+            isLoading={isFetchingNextPage}
+            onLoadMore={() => fetchNextPage()}
+          >
+            <PDAsListContainer>
+              <PdaCardSkeleton />
+              <PdaCardSkeleton />
+              <PdaCardSkeleton />
+            </PDAsListContainer>
+          </InfiniteLoadMore>
+        )}
+      </Stack>
+    </>
   );
 }

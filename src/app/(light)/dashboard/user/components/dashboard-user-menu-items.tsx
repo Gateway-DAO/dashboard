@@ -6,7 +6,7 @@ import DataRequestTemplateOutlinedIcon from '@/components/icons/data-request-tem
 import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
 import routes from '@/constants/routes';
 
-import { HomeOutlined } from '@mui/icons-material';
+import { ExploreOutlined, HomeOutlined } from '@mui/icons-material';
 
 /**
  * List all menu items of the user dashboard
@@ -66,6 +66,13 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboard.user.networkRequestTemplates,
     ],
     icon: DataRequestTemplateOutlinedIcon,
+  },
+  {
+    name: 'Explorer',
+    href: routes.explorer.root,
+    activeHrefs: [],
+    icon: ExploreOutlined,
+    externalLink: true,
   },
 ];
 

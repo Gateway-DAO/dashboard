@@ -20,7 +20,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const env = currentEnv();
+  const env = currentEnv;
   const isTesnetOrProd = env === 'testnet' || env === 'production';
   return (
     <html lang="en">
@@ -53,7 +53,7 @@ export default function RootLayout({
           <Script
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
-              __html: `  
+              __html: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());

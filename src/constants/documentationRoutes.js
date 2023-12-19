@@ -9,6 +9,7 @@ const documentationRoutes = {
   dataRequest: 'https://docs.mygateway.xyz/docs/data-request',
   startIssuing: 'https://docs.mygateway.xyz/docs/start-issuing',
   startVerifying: 'https://docs.mygateway.xyz/docs/start-verifying',
+  termsOfService: 'https://docs.mygateway.xyz/docs/terms-of-service',
 };
 
 module.exports = documentationRoutes;

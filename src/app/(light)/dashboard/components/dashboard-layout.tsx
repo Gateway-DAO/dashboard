@@ -26,7 +26,7 @@ export default function DashboardLayout({
   secondMenuItems,
   mobileMenuItems,
 }: PropsWithChildren<Props>) {
-  const testnet = currentEnv() === 'testnet';
+  const testnet = currentEnv === 'testnet';
   const pathname = usePathname();
   const isNotWalletPage = !pathname.includes('wallet');
 

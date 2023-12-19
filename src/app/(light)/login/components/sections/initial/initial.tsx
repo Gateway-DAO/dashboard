@@ -1,4 +1,5 @@
 import { TitleSubtitleField } from '@/components/title-field/title-field';
+import documentationRoutes from '@/constants/documentationRoutes';
 import EvmProvider from '@/context/evm-provider/evm-provider';
 import SolanaProvider from '@/context/solana-provider';
 import { auth } from '@/locale/en/auth';
@@ -26,7 +27,11 @@ export function AuthenticationInitial() {
       </EvmProvider>
       <Typography color="text.secondary" variant="caption">
         {auth.steps.initial.terms_info}{' '}
-        <Link href="/terms" underline="none">
+        <Link
+          href={documentationRoutes.termsOfService}
+          target="_blank"
+          underline="none"
+        >
           {auth.steps.initial.terms_of_service}{' '}
         </Link>
       </Typography>
