@@ -24,13 +24,18 @@ export default function Logo({ theme = 'light' }: Props) {
     >
       <GTWLogo theme={theme} />
       {currentEnv === 'production' ? (
-        <Chip size="small" color="primary" label="Explorer" sx={{ ml: 1 }} />
+        <Chip
+          size="small"
+          color="primary"
+          label="Explorer"
+          sx={{ ml: 1, fontWeight: 700 }}
+        />
       ) : (
         <Chip
           size="small"
           color="warning"
           label="Sandbox Explorer"
-          sx={{ ml: 1 }}
+          sx={{ ml: 1, fontWeight: 700 }}
         />
       )}
     </Box>
