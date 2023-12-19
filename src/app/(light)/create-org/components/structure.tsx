@@ -9,6 +9,7 @@ import AvatarPicker from '@/components/form/avatar-picker/avatar-picker';
 import { TitleSubtitleField } from '@/components/title-field/title-field';
 import routes from '@/constants/routes';
 import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';
+import useGaEvent from '@/hooks/use-ga-event';
 import { org } from '@/locale/en/org';
 import { usernameSchema } from '@/schemas/profile';
 import { getClientPrivateApi } from '@/services/protocol/api';
@@ -35,6 +36,7 @@ type UploadImageProps = {
 
 export default function CreateOrgStructure() {
   const { update } = useSession();
+  const { sendEvent } = useGaEvent();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [image, setImage] = useState<Blob | null>(null);
@@ -96,6 +98,7 @@ export default function CreateOrgStructure() {
     if (availability !== 'success') return;
     try {
       await createOrg.mutateAsync(data);
+      sendEvent('create_org');
       enqueueSnackbar(org.success, {
         variant: 'success',
       });

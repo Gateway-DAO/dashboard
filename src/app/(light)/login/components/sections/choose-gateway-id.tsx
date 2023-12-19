@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import { TitleSubtitleField } from '@/components/title-field/title-field';
 import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';
+import useGaEvent from '@/hooks/use-ga-event';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';
 import { settings } from '@/locale/en/settings';
@@ -38,6 +39,7 @@ export function ChooseGatewayId() {
     resolver: zodResolver(createProfileSchema as any), // TODO: Add a right types
     mode: 'onChange',
   });
+  const { sendEvent } = useGaEvent();
 
   const updateUser = useMutation({
     mutationKey: ['updateUser'],
@@ -70,6 +72,7 @@ export function ChooseGatewayId() {
           displayName: displayName,
         },
       });
+      sendEvent('user_signup');
       enqueueSnackbar(auth.steps.choose_gateway_id.success, {
         variant: 'success',
       });

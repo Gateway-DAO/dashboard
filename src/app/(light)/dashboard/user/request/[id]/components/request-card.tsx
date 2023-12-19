@@ -9,6 +9,7 @@ import Loading from '@/components/loadings/loading/loading';
 import { mutations } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useGaEvent from '@/hooks/use-ga-event';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { request } from '@/locale/en/request';
@@ -50,6 +51,7 @@ export default function RequestCard({
   const router = useRouter();
   const [loadingAfter, setLoadingAfter] = useState(false);
   const [loadingText, setLoadingText] = useState('');
+  const { sendEvent } = useGaEvent();
 
   const acceptDataRequest = useMutation({
     mutationKey: [mutations.create_proof_from_request],
@@ -57,7 +59,10 @@ export default function RequestCard({
       return privateApi?.create_proof_from_request(data);
     },
     onMutate: () => setLoadingText('Data Proof is being processed...'),
-    onSuccess: () => router.refresh(),
+    onSuccess: () => {
+      sendEvent('accept_request');
+      router.refresh();
+    },
     onError: () => enqueueSnackbar(errorMessages.ERROR_TRYING_TO_ISSUE_A_PROOF),
     onSettled: () => {
       setLoadingAfter(true);
