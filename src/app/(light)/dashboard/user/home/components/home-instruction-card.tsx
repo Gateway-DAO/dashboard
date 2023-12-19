@@ -5,7 +5,7 @@ import { Button, Paper, Stack, Typography, Link } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import QuestionSquaredIcon from '@/components/icons/question-squared';
 import { useToggle } from '@react-hookz/web';
-import Instrunction from '../../../components/sidebar/instruction/instruction';
+import Instrunction from '../../../features/sidebar/instruction/instruction';
 import { useEffect, useState } from 'react';
 
 type Props = {
