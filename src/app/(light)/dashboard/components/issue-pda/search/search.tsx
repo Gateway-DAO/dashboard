@@ -40,16 +40,6 @@ const sortOptions: SortByOption<DataModel>[] = [
     label: 'Price low to high',
     value: { consumptionPrice: 'ASC' },
   },
-  {
-    key: 'issuances-high-to-low',
-    label: 'Issuances high to low',
-    value: { pdasIssuedCount: 'DESC' },
-  },
-  {
-    key: 'issuances-low-to-high',
-    label: 'Issuances low to high',
-    value: { pdasIssuedCount: 'ASC' },
-  },
 ];
 
 export default function DataModelsSearch() {
@@ -73,7 +63,6 @@ export default function DataModelsSearch() {
   const tags = metadata.data?.dataModelsMetadata.tags ?? [];
   const consumptionPrice =
     metadata.data?.dataModelsMetadata.consumptionPrice ?? 0;
-  const issuedCount = metadata.data?.dataModelsMetadata.issuedCount ?? 0;
 
   const dataModelsQuery = useInfiniteQuery({
     queryKey: [
@@ -156,13 +145,6 @@ export default function DataModelsSearch() {
         max={consumptionPrice.max}
         selectedConsumptionPrice={selectedConsumptionPrice}
         setConsumptionPrice={setSelectedConsumptionPrice}
-        isLoading={metadata.isLoading}
-      />
-      <AmountOfIssuancesField
-        min={issuedCount.min}
-        max={issuedCount.max}
-        selectedAmountOfIssuances={selectedAmountOfIssuances}
-        setAmountOfIssuances={setSelectedAmountOfIssuances}
         isLoading={metadata.isLoading}
       />
       {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
