@@ -32,7 +32,7 @@ export default function DataModelDetailHeader({ id, title, tags }: Props) {
   return (
     <>
       <ExplorerHeader sx={{ pb: 5 }}>
-        <Container sx={{ maxWidth: 896, marginLeft: 'unset' }}>
+        <Container>
           <ExplorerBreadcrumb
             paths={[
               {
