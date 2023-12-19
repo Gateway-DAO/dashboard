@@ -18,9 +18,7 @@ const config: StorybookConfig = {
     name: '@storybook/nextjs',
     options: {},
   },
-  core: {
-    builder: '@storybook/builder-webpack5',
-  },
+  core: {},
   docs: {
     autodocs: 'tag',
   },
