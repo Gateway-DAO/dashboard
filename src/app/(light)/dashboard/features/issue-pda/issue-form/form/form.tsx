@@ -14,15 +14,12 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { Stack } from '@mui/material';
 
 import Preview from './preview/preview';
-import {
-  IssuePdaSchema,
-  getSchemaDefaultValues,
-  issuePdaValidator,
-} from './schema';
+import { IssuePdaSchema } from './schema';
 import OwnerSection from './sections/owner/owner';
 import PropertiesSection from './sections/properties/properties';
 import Summary from './sections/summary';
 import TitleDescriptionSection from './sections/title-description';
+import { getSchemaDefaultValues, issuePdaValidator } from './validators';
 
 type Props = {
   dataModel: DataModelByIdQuery['dataModel'];
