@@ -30,6 +30,9 @@ export default function TitleDescriptionSection() {
                 fullWidth
                 {...field}
                 error={!!error}
+                inputProps={{
+                  'data-testid': 'title',
+                }}
               />
               {error && <ErrorMessage mt={-2}>{error.message}</ErrorMessage>}
             </>
@@ -47,6 +50,9 @@ export default function TitleDescriptionSection() {
                 fullWidth
                 error={!!error}
                 {...field}
+                inputProps={{
+                  'data-testid': 'description',
+                }}
               />
               {error && <ErrorMessage mt={-2}>{error.message}</ErrorMessage>}
             </>

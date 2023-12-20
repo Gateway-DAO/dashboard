@@ -1,7 +1,5 @@
-import { SessionProvider } from 'next-auth/react';
-
 import { DATE_FORMAT } from '@/constants/date';
-import { session } from '@/mocks/session';
+import { MockSession } from '@/mocks/session';
 import { transaction_default } from '@/mocks/transaction';
 import { render, screen } from '@testing-library/react';
 import dayjs from 'dayjs';
@@ -10,14 +8,14 @@ import TransactionCardInfo from '../transaction-card-info';
 describe('Transaction Card Info', () => {
   test('renders the component', () => {
     render(
-      <SessionProvider session={session}>
+      <MockSession>
         <TransactionCardInfo
           title={transaction_default.action}
           type={transaction_default.type}
-          id={transaction_default.id}
+          transactionId={transaction_default.id}
           date={transaction_default.createdAt}
         />
-      </SessionProvider>
+      </MockSession>
     );
 
     const cardComponent = screen.getByTestId('transaction__card');
@@ -25,14 +23,14 @@ describe('Transaction Card Info', () => {
   });
   test('Display values', async () => {
     render(
-      <SessionProvider session={session}>
+      <MockSession>
         <TransactionCardInfo
           title={transaction_default.action}
           type={transaction_default.type}
           transactionId={transaction_default.id}
           date={transaction_default.createdAt}
         />
-      </SessionProvider>
+      </MockSession>
     );
 
     const titleText = screen.getByTestId('transaction__card__title');
