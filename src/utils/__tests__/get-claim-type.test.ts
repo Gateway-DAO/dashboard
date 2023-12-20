@@ -1,5 +1,3 @@
-import { titleCase } from 'title-case';
-
 import getClaimType, {
   ClaimField,
   getClaimDefaultValue,
