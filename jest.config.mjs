@@ -16,8 +16,9 @@ const config = {
     '<rootDir>/node_modules/',
     '<rootDir>/.next/',
     '<rootDir>/src/services',
+    '<rootDir>/src/theme',
   ],
-  coveragePathIgnorePatterns: ['<rootDir>/src/services'],
+  coveragePathIgnorePatterns: ['<rootDir>/src/services', '<rootDir>/src/theme'],
   // preset: 'ts-jest',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
