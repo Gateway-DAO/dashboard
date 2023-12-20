@@ -50,7 +50,7 @@ export type SchemaProperty = {
   items?: SchemaProperty;
 };
 
-export const getClaimType = ({
+const getClaimType = ({
   type,
   contentMediaType,
   currency,
