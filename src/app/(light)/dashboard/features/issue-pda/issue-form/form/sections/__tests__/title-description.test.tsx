@@ -17,11 +17,7 @@ const Wrapper = ({
     },
   });
 
-  return (
-    <FormProvider {...form}>
-      <form>{children}</form>
-    </FormProvider>
-  );
+  return <FormProvider {...form}>{children}</FormProvider>;
 };
 
 describe('Issue Fom Title and Description Fields', () => {
