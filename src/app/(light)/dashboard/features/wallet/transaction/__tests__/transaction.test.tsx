@@ -1,6 +1,4 @@
-import { SessionProvider } from 'next-auth/react';
-
-import { session } from '@/mocks/session';
+import { MockSession } from '@/mocks/session';
 import { transaction_default } from '@/mocks/transaction';
 import { render, screen } from '@testing-library/react';
 
@@ -9,9 +7,9 @@ import { Transaction } from '../transaction';
 describe('Transaction', () => {
   test('renders the component', () => {
     render(
-      <SessionProvider session={session}>
+      <MockSession>
         <Transaction transaction={transaction_default} />
-      </SessionProvider>
+      </MockSession>
     );
 
     const titleComponent = screen.getByTestId('transaction__title');
