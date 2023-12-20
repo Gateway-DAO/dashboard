@@ -20,9 +20,9 @@ export const session: Session = {
       {
         organization: {
           id: '12345',
-          name: 'Carl Terry',
+          name: 'gateway',
           image: '',
-          gatewayId: '',
+          gatewayId: 'gateway',
           usernameUpdatedAt: '',
           verified: true,
         },
