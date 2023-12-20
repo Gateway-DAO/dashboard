@@ -8,8 +8,8 @@ import { Box } from '@mui/material';
 import { Typography } from '@mui/material';
 
 import HomeCard from './home-card';
-import IssueNowCard from './issue-now-card';
 import HomeInstructionCard from './home-instruction-card';
+import IssueNowCard from './issue-now-card';
 
 type Props = {
   username: string;

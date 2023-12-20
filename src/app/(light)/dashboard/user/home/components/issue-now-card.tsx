@@ -1,6 +1,7 @@
 'use client';
 
 import DataSquaredIcon from '@/components/icons/data-squared';
+import useGaEvent from '@/hooks/use-ga-event';
 
 import { Box, Button, Stack, Typography, Link } from '@mui/material';
 
@@ -12,6 +13,8 @@ type Props = {
 };
 
 export default function IssueNowCard({ title, desc, btnLink, btnText }: Props) {
+  const { sendEvent } = useGaEvent();
+
   return (
     <Stack
       component={Link}
@@ -40,6 +43,7 @@ export default function IssueNowCard({ title, desc, btnLink, btnText }: Props) {
       <Box>
         <Button
           variant="contained"
+          onClick={() => sendEvent('click_issue_now_home')}
           sx={{
             backgroundColor: 'common.white',
             color: 'primary.main',
