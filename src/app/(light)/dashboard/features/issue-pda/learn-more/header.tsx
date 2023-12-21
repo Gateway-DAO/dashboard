@@ -25,18 +25,26 @@ export default function DataModelDetailHeader({
   const { isOrg, organization } = useOrganization();
   return (
     <>
-      <Stack mb={3}>
-        <Typography variant="h4" mb={1}>
+      <Stack mb={3} data-testid="data_model__header">
+        <Typography variant="h4" mb={1} data-testid="data_model__header__title">
           {isLoading ? <Skeleton /> : title}
         </Typography>
         {tags && tags.length > 0 && (
           <Stack direction="row" gap={1}>
-            {tags.map((tag) => (
-              <Chip key={tag} label={tag} />
+            {tags.map((tag, i) => (
+              <Chip
+                key={tag}
+                label={tag}
+                data-testid={`data_model__header__tag__${i}`}
+              />
             ))}
           </Stack>
         )}
-        <Typography variant="body1" mt={5}>
+        <Typography
+          variant="body1"
+          mt={5}
+          data-testid="data_model__header__description"
+        >
           {isLoading ? <Skeleton /> : description}
         </Typography>
       </Stack>

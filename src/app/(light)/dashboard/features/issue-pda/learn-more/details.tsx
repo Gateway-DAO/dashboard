@@ -39,6 +39,7 @@ export default function DataModelDetails({ dataModel }: Props) {
         sx={{
           overflow: 'visible',
         }}
+        data-testid="data_model__details"
       >
         <TableCellContainer>
           <CardCellContainer direction="row" alignItems="center" gap={2}>
@@ -50,7 +51,7 @@ export default function DataModelDetails({ dataModel }: Props) {
               <Typography variant="caption" color="text.secondary">
                 {common.general.created_by}
               </Typography>
-              <Typography>
+              <Typography data-testid="created_by">
                 <b>{createdBy.name ?? createdBy.gatewayId}</b>
               </Typography>
             </Stack>
@@ -59,7 +60,7 @@ export default function DataModelDetails({ dataModel }: Props) {
             label={explorerDataModelDetailOverview.labels.pda_comsumption_cost}
           >
             <Stack direction="row" alignItems="center" gap={1}>
-              <Typography>
+              <Typography data-testid="consumption_price">
                 {numberToMoneyString(dataModel.consumptionPrice ?? 0)}
               </Typography>
               <TooltipInfo
@@ -80,7 +81,7 @@ export default function DataModelDetails({ dataModel }: Props) {
             <CardCell
               label={explorerDataModelDetailOverview.labels.creation_date}
             >
-              <Typography>
+              <Typography data-testid="creation_date">
                 {dayjs(dataModel.createdAt).format(DATE_FORMAT)}
               </Typography>
             </CardCell>
