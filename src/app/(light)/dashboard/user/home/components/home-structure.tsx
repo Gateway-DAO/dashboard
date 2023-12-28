@@ -72,7 +72,7 @@ export default function HomeStructure({ username }: Props) {
       </Box>
       <span>
         a -{' '}
-        {`var: ${process.env.NEXT_PUBLIC_POC_WIDGET}, ${process.env.POC_WIDGET}}`}{' '}
+        {`var: ${process.env.NEXT_PUBLIC_POC_WIDGET}, ${process.env.POC_WIDGET}`}{' '}
         - b
       </span>
       {process.env.NEXT_PUBLIC_POC_WIDGET === 'true' && (
