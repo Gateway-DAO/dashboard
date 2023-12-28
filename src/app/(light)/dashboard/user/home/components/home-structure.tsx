@@ -3,8 +3,9 @@
 import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 import { home } from '@/locale/en/home';
+import { currentEnv } from '@/utils/env';
 
-import { Box } from '@mui/material';
+import { Box, Button, Card } from '@mui/material';
 import { Typography } from '@mui/material';
 
 import HomeCard from './home-card';
@@ -69,6 +70,19 @@ export default function HomeStructure({ username }: Props) {
           />
         ))}
       </Box>
+      {process.env.NEXT_PUBLIC_POC_WIDGET && currentEnv === 'development' && (
+        <Card sx={{ p: 2, mt: 3, alignSelf: 'center', width: 300 }}>
+          <Typography variant="h6" mb={1}>
+            POC Widget
+          </Typography>
+          <Button
+            variant="contained"
+            href="https://widget-poc-one.vercel.app/issue?access=12345&gtwid=joao&owner=kbooz&datamodel=12345-12345-12345-12345&claim={value:1,name:%20%27junior%27}&callback=https://mygateway.xyz/"
+          >
+            Issue
+          </Button>
+        </Card>
+      )}
     </>
   );
 }
