@@ -70,7 +70,7 @@ export default function HomeStructure({ username }: Props) {
           />
         ))}
       </Box>
-      {process.env.NEXT_PUBLIC_POC_WIDGET && (
+      {process.env.NEXT_PUBLIC_POC_WIDGET === 'true' && (
         <Card sx={{ p: 2, mt: 3, alignSelf: 'center', width: 300 }}>
           <Typography variant="h6" mb={1}>
             POC Widget
