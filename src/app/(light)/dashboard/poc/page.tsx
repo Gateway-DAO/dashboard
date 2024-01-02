@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
+import DefaultError from '@/components/default-error/default-error';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import { currentEnv } from '@/utils/env';
 
 import { Button, Card, Typography } from '@mui/material';
 
@@ -20,23 +20,25 @@ export default function POCHome() {
   const [callback, _setCallback] = useState(
     'https://mygateway.xyz/dashboard/poc'
   );
+
+  if (!process.env.NEXT_PUBLIC_POC_WIDGET_KEY) {
+    return <DefaultError />;
+  }
+
   return (
     <Card sx={{ p: 2, m: 3, alignSelf: 'center', width: 400 }}>
-      <Typography variant="caption">
-        ENV: {currentEnv}, POC: {process.env.NEXT_PUBLIC_POC_WIDGET_KEY}
-      </Typography>
+      <Typography variant="caption">ENJOY ALL BENEFITS</Typography>
       <Typography variant="h6" mb={1}>
-        POC Widget
+        Hi {session.user.displayName ?? session.user.gatewayId}!
       </Typography>
       <Typography mb={2}>
-        Hello {session.user.displayName ?? session.user.gatewayId}, Share and
-        Unlock Experiences with our partners today.
+        Share and Unlock Experiences with our partners today.
       </Typography>
       <Button
         variant="contained"
         href={`${pathname}?access=${access}&gtwid=${gtwid}&owner=${owner}&datamodel=${datamodel}&claim=${claim}&callback=${callback}`}
       >
-        Claim Now
+        Claim Now (redirect)
       </Button>
     </Card>
   );
