@@ -7,22 +7,30 @@ import { useGtwSession } from '@/context/gtw-session-provider';
 
 import { Button, Card, Typography } from '@mui/material';
 
-export default function POCHome() {
+export default function POCIssueHome() {
   const { session } = useGtwSession();
+  const auths = session.user.authentications;
+  const wallets = auths?.filter((item) => item.type === 'WALLET') ?? [];
+  const emails = auths?.filter((item) => item.type === 'EMAIL') ?? [];
+
   const [pathname, _setPathname] = useState(
     'https://widget-poc-one.vercel.app/issue'
   );
-  const [access, _setAccess] = useState('28730e40-9bb6-485b-83a2-68812580ff22');
-  const [gtwid, _setGtwid] = useState('gateway');
-  const [owner, _setOwner] = useState('kbooz%40gmail.com');
+  const [owner, _setOwner] = useState(
+    wallets[0]?.data?.address ??
+      emails[0]?.data?.address ??
+      'tullio%40mygateway.xyz'
+  );
+  const [access, _setAccess] = useState('d2825602-b23f-4e8b-acf6-588dd6b53138');
+  const [gtwid, _setGtwid] = useState('thenorthface');
   const [datamodel, _setDatamodel] = useState(
-    'a00d9a3b-6884-400d-b9ca-8d091a9e1f81'
+    '6f61ccb0-85e0-47b3-879d-f197c04c4f9e'
   );
   const [claim, _setClaim] = useState(
-    '%7B"city_names"%3A%5B"Rio+de+Janeiro"%2C"Juiz+de+Fora"%5D%7D'
+    '%7B%22tier%22%3A%22Gold%22%2C%22points%22%3A1000%2C%22type%22%3A%22Adventure+Expert%22%7D'
   );
   const [callback, _setCallback] = useState(
-    'https://mygateway.xyz/dashboard/poc'
+    'https://dev.mygateway.xyz/dashboard/poc/issue'
   );
 
   if (!process.env.NEXT_PUBLIC_POC_WIDGET_KEY) {
