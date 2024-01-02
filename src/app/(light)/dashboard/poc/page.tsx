@@ -38,7 +38,7 @@ export default function POCHome() {
         variant="contained"
         href={`${pathname}?access=${access}&gtwid=${gtwid}&owner=${owner}&datamodel=${datamodel}&claim=${claim}&callback=${callback}`}
       >
-        Claim Now (redirect)
+        Claim Now
       </Button>
     </Card>
   );
