@@ -1,16 +1,42 @@
+'use client';
+
+import { useState } from 'react';
+
+import { useGtwSession } from '@/context/gtw-session-provider';
+import { currentEnv } from '@/utils/env';
+
 import { Button, Card, Typography } from '@mui/material';
 
 export default function POCHome() {
+  const { session } = useGtwSession();
+  const [pathname, _setPathname] = useState(
+    'https://widget-poc-one.vercel.app/issue'
+  );
+  const [access, _setAccess] = useState('5263b875-a216-473b-b4da-d674313c6642');
+  const [gtwid, _setGtwid] = useState('visajames');
+  const [owner, _setOwner] = useState('kbooz');
+  const [datamodel, _setDatamodel] = useState('12345-12345-12345-12345');
+  const [claim, _setClaim] = useState('{value:1,name:%20%27junior%27}');
+  const [callback, _setCallback] = useState(
+    'https://mygateway.xyz/dashboard/poc'
+  );
   return (
-    <Card sx={{ p: 2, m: 3, alignSelf: 'center', width: 300 }}>
+    <Card sx={{ p: 2, m: 3, alignSelf: 'center', width: 400 }}>
+      <Typography variant="caption">
+        ENV: {currentEnv}, POC: {process.env.NEXT_PUBLIC_POC_WIDGET_KEY}
+      </Typography>
       <Typography variant="h6" mb={1}>
         POC Widget
       </Typography>
+      <Typography mb={2}>
+        Hello {session.user.displayName ?? session.user.gatewayId}, Share and
+        Unlock Experiences with our partners today.
+      </Typography>
       <Button
         variant="contained"
-        href="https://widget-poc-one.vercel.app/issue?access=5263b875-a216-473b-b4da-d674313c6642&gtwid=visajames&owner=kbooz&datamodel=12345-12345-12345-12345&claim={value:1,name:%20%27junior%27}&callback=https://mygateway.xyz/dashboard/poc"
+        href={`${pathname}?access=${access}&gtwid=${gtwid}&owner=${owner}&datamodel=${datamodel}&claim=${claim}&callback=${callback}`}
       >
-        Issue
+        Claim Now
       </Button>
     </Card>
   );
