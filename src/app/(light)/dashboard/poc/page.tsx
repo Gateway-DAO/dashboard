@@ -16,7 +16,7 @@ export default function POCHome() {
   const [gtwid, _setGtwid] = useState('visajames');
   const [owner, _setOwner] = useState('kbooz');
   const [datamodel, _setDatamodel] = useState('12345-12345-12345-12345');
-  const [claim, _setClaim] = useState('{value:1,name:%20%27junior%27}');
+  const [claim, _setClaim] = useState('{value:1,name:"junior"}');
   const [callback, _setCallback] = useState(
     'https://mygateway.xyz/dashboard/poc'
   );
