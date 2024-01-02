@@ -12,11 +12,15 @@ export default function POCHome() {
   const [pathname, _setPathname] = useState(
     'https://widget-poc-one.vercel.app/issue'
   );
-  const [access, _setAccess] = useState('5263b875-a216-473b-b4da-d674313c6642');
-  const [gtwid, _setGtwid] = useState('visajames');
-  const [owner, _setOwner] = useState('kbooz');
-  const [datamodel, _setDatamodel] = useState('12345-12345-12345-12345');
-  const [claim, _setClaim] = useState('{value:1,name:"junior"}');
+  const [access, _setAccess] = useState('28730e40-9bb6-485b-83a2-68812580ff22');
+  const [gtwid, _setGtwid] = useState('gateway');
+  const [owner, _setOwner] = useState('kbooz%40gmail.com');
+  const [datamodel, _setDatamodel] = useState(
+    'a00d9a3b-6884-400d-b9ca-8d091a9e1f81'
+  );
+  const [claim, _setClaim] = useState(
+    '%7B"city_names"%3A%5B"Rio+de+Janeiro"%2C"Juiz+de+Fora"%5D%7D'
+  );
   const [callback, _setCallback] = useState(
     'https://mygateway.xyz/dashboard/poc'
   );
