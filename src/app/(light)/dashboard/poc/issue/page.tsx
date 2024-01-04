@@ -16,8 +16,8 @@ export default function POCIssueHome() {
   const wallets = auths?.filter((item) => item.type === 'WALLET') ?? [];
   const emails = auths?.filter((item) => item.type === 'EMAIL') ?? [];
   const params = {
-    key: 'd2825602-b23f-4e8b-acf6-588dd6b53138',
-    issuer: 'lagunitas',
+    key: '5263b875-a216-473b-b4da-d674313c6642',
+    issuer: 'visajames',
     owner:
       wallets[0]?.data?.address ??
       emails[0]?.data?.address ??
@@ -36,7 +36,7 @@ export default function POCIssueHome() {
     mutationKey: ['generate-session', { ...params }],
     mutationFn: async () => {
       const response = await fetch(
-        'https://widget-poc-one.vercel.app/api/issue/generate-session',
+        'http://localhost:3000/api/issue/generate-session',
         {
           method: 'POST',
           body: JSON.stringify({
