@@ -48,12 +48,12 @@ export default function POCIssueHome() {
     },
     onSuccess: (data) => {
       console.log('success', data);
-      // router.push(data?.session?.url);
-      window.open(
-        data?.session?.url,
-        'Issue a Private Data Asset',
-        'height=800,width=460,toolbar=no,directories=no,status=no,linemenubar=no,scrollbars=no,resizable=no,modal=yes'
-      );
+      router.push(data?.session?.url);
+      // window.open(
+      //   data?.session?.url,
+      //   'Issue a Private Data Asset',
+      //   'height=800,width=460,toolbar=no,directories=no,status=no,linemenubar=no,scrollbars=no,resizable=no,modal=yes'
+      // );
     },
     onError: (error: any) => {
       console.log('error', error);
