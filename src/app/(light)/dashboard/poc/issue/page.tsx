@@ -1,37 +1,62 @@
 'use client';
 
-import { useState } from 'react';
+import { useRouter } from 'next-nprogress-bar';
 
+import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import DefaultError from '@/components/default-error/default-error';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import { useMutation } from '@tanstack/react-query';
 
-import { Button, Card, Typography } from '@mui/material';
+import { Card, Typography } from '@mui/material';
 
 export default function POCIssueHome() {
   const { session } = useGtwSession();
+  const router = useRouter();
   const auths = session.user.authentications;
   const wallets = auths?.filter((item) => item.type === 'WALLET') ?? [];
   const emails = auths?.filter((item) => item.type === 'EMAIL') ?? [];
-
-  const [pathname, _setPathname] = useState(
-    'https://widget-poc-one.vercel.app/issue'
-  );
-  const [owner, _setOwner] = useState(
-    wallets[0]?.data?.address ??
+  const params = {
+    key: 'd2825602-b23f-4e8b-acf6-588dd6b53138',
+    issuer: 'lagunitas',
+    owner:
+      wallets[0]?.data?.address ??
       emails[0]?.data?.address ??
-      'tullio%40mygateway.xyz'
-  );
-  const [access, _setAccess] = useState('d2825602-b23f-4e8b-acf6-588dd6b53138');
-  const [gtwid, _setGtwid] = useState('thenorthface');
-  const [datamodel, _setDatamodel] = useState(
-    '6f61ccb0-85e0-47b3-879d-f197c04c4f9e'
-  );
-  const [claim, _setClaim] = useState(
-    '%7B%22tier%22%3A%22Gold%22%2C%22points%22%3A1000%2C%22type%22%3A%22Adventure+Expert%22%7D'
-  );
-  const [callback, _setCallback] = useState(
-    'https://dev.mygateway.xyz/dashboard/poc/issue'
-  );
+      'tullio%40mygateway.xyz',
+    dataModel: 'ba3e9255-d5f2-47eb-8829-24daf5a90ba2',
+    claim: 'test',
+    callback: 'https://dev.mygateway.xyz/dashboard/poc/issue',
+  };
+
+  const {
+    mutateAsync: generateSession,
+    data,
+    isLoading,
+  } = useMutation({
+    mutationKey: ['generate-session', { ...params }],
+    mutationFn: async () => {
+      const response = await fetch(
+        'https://widget-poc-one.vercel.app/api/issue/generate-session',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            ...params,
+          }),
+        }
+      );
+      const data = await response.json();
+      if (data.error) {
+        throw new Error('Failed to generate session');
+      }
+      return data;
+    },
+    onSuccess: (data) => {
+      console.log('success', data);
+      router.push(data?.session?.url);
+    },
+    onError: (error: any) => {
+      console.log('error', error);
+    },
+  });
 
   if (!process.env.NEXT_PUBLIC_POC_WIDGET_KEY) {
     return <DefaultError />;
@@ -46,12 +71,13 @@ export default function POCIssueHome() {
       <Typography mb={2}>
         Share and Unlock Experiences with our partners today.
       </Typography>
-      <Button
+      <LoadingButton
         variant="contained"
-        href={`${pathname}?access=${access}&gtwid=${gtwid}&owner=${owner}&datamodel=${datamodel}&claim=${claim}&callback=${callback}`}
+        isLoading={isLoading}
+        onClick={() => generateSession()}
       >
         Claim Now
-      </Button>
+      </LoadingButton>
     </Card>
   );
 }
