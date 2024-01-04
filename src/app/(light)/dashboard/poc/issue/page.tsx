@@ -32,7 +32,7 @@ export default function POCIssueHome() {
     mutationKey: ['generate-session', { ...params }],
     mutationFn: async () => {
       const response = await fetch(
-        'http://localhost:3000/api/issue/generate-session',
+        'https://widget-poc-gateway-dao.vercel.app/api/issue/generate-session',
         {
           method: 'POST',
           body: JSON.stringify({
