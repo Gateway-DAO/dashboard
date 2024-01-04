@@ -26,7 +26,7 @@ export default function POCIssueHome() {
     claim: {
       topArtists: ['Bruno Mars'],
     },
-    callback: 'https://dev.mygateway.xyz/dashboard/poc/issue',
+    callbackUrl: 'https://dev.mygateway.xyz/dashboard/poc/issue',
   };
 
   const { mutateAsync: generateSession, isLoading } = useMutation({
