@@ -22,8 +22,9 @@ export default function POCIssueHome() {
       wallets[0]?.data?.address ??
       emails[0]?.data?.address ??
       'tullio%40mygateway.xyz',
-    dataModel: 'ba3e9255-d5f2-47eb-8829-24daf5a90ba2',
-    claim: 'test',
+    dataModel: '6f61ccb0-85e0-47b3-879d-f197c04c4f9e',
+    claim:
+      '%7B%22tier%22%3A%22Gold%22%2C%22points%22%3A1000%2C%22type%22%3A%22Adventure+Expert%22%7D',
     callback: 'https://dev.mygateway.xyz/dashboard/poc/issue',
   };
 
