@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import { useLoginStepState } from '@/app/(light)/login/providers/step-provider/step-provider';
 import routes from '@/constants/routes';
 
+import { useLoginStepState } from '../providers/step-provider/step-provider';
 import AuthenticationLayout from './authentication-layout';
 import AddEmail from './sections/add-email';
 import { ChooseGatewayId } from './sections/choose-gateway-id';
@@ -15,9 +16,11 @@ import { VerifyEmailLoginToken } from './sections/verify-email-login-token';
 
 export function Authentication() {
   const { step, setStepState } = useLoginStepState();
+  const searchParams = useSearchParams();
 
   if (step === 'completed') {
-    redirect(routes.dashboard.user.home);
+    const callbackUrl = searchParams.get('callbackUrl');
+    redirect(callbackUrl ?? routes.dashboard.user.home);
   }
 
   if (step === 'verify-email-login-code') {
