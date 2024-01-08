@@ -25,6 +25,7 @@ import {
 
 import AuthenticationTokenSection from './authentication-token-section';
 import MainnetAlert from './mainnet-alert';
+import WidgetKey from './widget-key';
 
 export default function DeveloperPortal() {
   const { privateApi } = useGtwSession();
@@ -36,6 +37,7 @@ export default function DeveloperPortal() {
       data.getMonthlyUserUsage as MonthlyUserUsageQuery['getMonthlyUserUsage'],
   });
 
+  const isTestnet = currentEnv() === 'testnet';
   return (
     <Stack spacing={3} alignItems="flex-start">
       <Stack direction="column" gap={2}>
@@ -58,6 +60,7 @@ export default function DeveloperPortal() {
           </CardContent>
         </Card>
         <AuthenticationTokenSection />
+        {isTestnet && <WidgetKey />}
         <Card sx={{ width: '100%' }} variant="outlined">
           <CardHeader
             titleTypographyProps={{
