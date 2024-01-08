@@ -103,7 +103,7 @@ export default function CreateOrgStructure() {
       orgId: string;
       session: string;
     }) => {
-      const response = await fetch('/api/create-org-key', {
+      const response = await fetch('/api/org-widget-key/generate', {
         method: 'POST',
         body: JSON.stringify({ session, orgId }),
       });

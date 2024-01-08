@@ -15,6 +15,7 @@ export const queries = {
   featured_data_models: 'featured_data_models',
   user_info: 'user_info',
   pdas: 'pdas',
+  get_widget_key: 'get_widget_key',
 };
 
 export const mutations = {
