@@ -58,6 +58,7 @@ query explorer_data_model_detail_overview($id: String!) {
     consumptionPrice
     pdasIssuedCount
     uniqueIssuersCount
+    revenueGenerated
     schema
     createdAt
     permissioning
@@ -104,4 +105,8 @@ query explorer_issuers_by_data_model($id: String!) {
     }
     count
   }
+}
+
+query explorer_issuers_by_data_model_count($id: String!) {
+  issuersByDataModelCount(id: $id)
 }

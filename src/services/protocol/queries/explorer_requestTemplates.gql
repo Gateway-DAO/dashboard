@@ -9,11 +9,13 @@ query explorer_request_templates_featured {
       id
       image
       gatewayId
+      name
     }
     user {
       id
       profilePicture
       gatewayId
+      displayName
     }
   }
 }
@@ -33,11 +35,13 @@ query explorer_request_templates_list(
       id
       image
       gatewayId
+      name
     }
     user {
       id
       profilePicture
       gatewayId
+      displayName
     }
   }
 }
@@ -50,6 +54,7 @@ query explorer_request_template_detail_overview($id: String!) {
     tags
     uniqueVerifiersCount
     dataRequestsCount
+    revenueGenerated
     dataModels {
       id
       title
@@ -66,11 +71,13 @@ query explorer_request_template_detail_overview($id: String!) {
       id
       gatewayId
       displayName
+      profilePicture
     }
     organization {
       id
       gatewayId
       name
+      image
     }
     createdAt
   }
@@ -93,5 +100,15 @@ query explorer_verifiers_by_data_request_template($id: String!) {
       }
     }
     count
+  }
+}
+
+query explorer_verifiers_by_data_request_template_count($id: String!) {
+  verifiersByDataRequestTemplateCount(id: $id)
+}
+
+query explorer_request_templates_metadata {
+  dataRequestTemplatesMetadata {
+    tags
   }
 }

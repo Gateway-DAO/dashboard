@@ -11,7 +11,12 @@ describe('Transaction Card Info', () => {
   test('renders the component', () => {
     render(
       <SessionProvider session={session}>
-        <TransactionCardInfo {...transaction_default} />
+        <TransactionCardInfo
+          title={transaction_default.action}
+          type={transaction_default.type}
+          id={transaction_default.id}
+          date={transaction_default.createdAt}
+        />
       </SessionProvider>
     );
 
@@ -21,14 +26,19 @@ describe('Transaction Card Info', () => {
   test('Display values', async () => {
     render(
       <SessionProvider session={session}>
-        <TransactionCardInfo {...transaction_default} />
+        <TransactionCardInfo
+          title={transaction_default.action}
+          type={transaction_default.type}
+          transactionId={transaction_default.id}
+          date={transaction_default.createdAt}
+        />
       </SessionProvider>
     );
 
     const titleText = screen.getByTestId('transaction__card__title');
     expect(titleText).toBeInTheDocument();
     const titleValue = titleText.textContent;
-    expect(titleValue).toEqual('title');
+    expect(titleValue).toEqual('PDA issuance cost');
 
     const idText = screen.getByTestId('external-link');
     expect(idText).toBeInTheDocument();
@@ -44,7 +54,7 @@ describe('Transaction Card Info', () => {
     const typeText = screen.getByTestId('transaction-status-chip');
     expect(typeText).toBeInTheDocument();
     const typeValue = typeText.textContent;
-    expect(typeValue).toEqual('withdrawal');
+    expect(typeValue).toEqual('withdraw');
   });
 
   test.todo('Empty states');

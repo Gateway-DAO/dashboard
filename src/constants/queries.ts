@@ -9,6 +9,12 @@ export const queries = {
   usage_limit: 'user_monthly_usage_limits',
   data_request_template: 'data_request_template',
   data_model: 'data_model',
+  my_wallet: 'my_wallet',
+  my_transactions: 'my_transactions',
+  my_transactions_count: 'my_transactions_count',
+  featured_data_models: 'featured_data_models',
+  user_info: 'user_info',
+  pdas: 'pdas',
 };
 
 export const mutations = {
@@ -23,4 +29,13 @@ export const mutations = {
 
 export const explorerQueries = {
   transaction: 'transaction',
+  transaction_arweave: 'transaction_arweave',
+  home_stats: 'home_stats',
+  transactions: 'transactions',
+  last_transactions: 'last_transactions',
+  transactions_stats: 'transactions_stats',
+  featured_data_models: 'data-models-featured',
+  featured_data_requests_templates: 'request-templates-featured',
+  request_templates_metadata: 'request_templates_metadata',
+  request_templates: 'request_templates',
 };

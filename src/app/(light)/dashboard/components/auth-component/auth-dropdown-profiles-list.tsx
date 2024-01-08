@@ -6,7 +6,6 @@ import MenuItemLink from '@/components/menu-item-link/menu-item-link';
 import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 import { auth } from '@/locale/en/auth';
-import { useToggle } from '@react-hookz/web';
 
 import AddIcon from '@mui/icons-material/Add';
 import {
@@ -21,6 +20,25 @@ import {
 
 type Props = {
   onClose: () => void;
+};
+
+const CreateOrgLink = () => {
+  return (
+    <MenuItemLink href={routes.dashboard.createOrg}>
+      <ListItemIcon>
+        <IconButton
+          sx={{
+            backgroundColor: 'primary.light',
+          }}
+        >
+          <AddIcon htmlColor="#771AC9" />
+        </IconButton>
+      </ListItemIcon>
+      <ListItemText secondary={auth.create_org.desc}>
+        <Typography variant="subtitle1">{auth.create_org.title}</Typography>
+      </ListItemText>
+    </MenuItemLink>
+  );
 };
 
 export default function AuthDropdownProfilesList({ onClose }: Props) {
@@ -39,7 +57,13 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
       )
     : user.accesses;
 
-  if (!user.accesses?.length) return null;
+  if (!user.accesses?.length)
+    return (
+      <>
+        <CreateOrgLink />
+        <Divider />
+      </>
+    );
 
   return (
     <>
@@ -86,20 +110,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
           </ListItemText>
         </MenuItemLink>
       )}
-      <MenuItemLink href={routes.dashboard.createOrg}>
-        <ListItemIcon>
-          <IconButton
-            sx={{
-              backgroundColor: 'primary.light',
-            }}
-          >
-            <AddIcon htmlColor="#771AC9" />
-          </IconButton>
-        </ListItemIcon>
-        <ListItemText secondary={auth.create_org.desc}>
-          <Typography variant="subtitle1">{auth.create_org.title}</Typography>
-        </ListItemText>
-      </MenuItemLink>
+      <CreateOrgLink />
       <Divider />
     </>
   );

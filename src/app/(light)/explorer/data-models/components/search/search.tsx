@@ -1,24 +1,20 @@
 'use client';
 import { useState } from 'react';
 
-import DefaultError from '@/components/default-error/default-error';
-import { common } from '@/locale/en/common';
+import DataModelCard from '@/components/data-model-card/data-model-card';
+import ClearFiltersButton from '@/components/search-filters/clear-filters-button';
+import SortByField, {
+  SortByOption,
+} from '@/components/search-filters/sort-by-field';
+import TagsField from '@/components/search-filters/tags-field';
+import SearchSection from '@/components/search-section/search-section';
 import { explorerDataModels } from '@/locale/en/datamodel';
 import { apiPublic } from '@/services/protocol/api';
 import { DataModel } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
-
-import DataCardExplorerLoading from '../../../components/data-card/data-card-loading';
-import DataModelExplorerCard from '../../../components/data-model-card/data-model-card';
-import SearchFilters from '../../../components/search-filters/search-filters';
-import SortByField, {
-  SortByOption,
-} from '../../../components/search-filters/sort-by-field';
-import TagsField from '../../../components/search-filters/tags-field';
-import AmountOfIssuancesField from './fields/amount-of-issuances-field';
+// import AmountOfIssuancesField from './fields/amount-of-issuances-field';
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
 
 const sortOptions: SortByOption<DataModel>[] = [
@@ -38,16 +34,16 @@ const sortOptions: SortByOption<DataModel>[] = [
     label: 'Price low to high',
     value: { consumptionPrice: 'ASC' },
   },
-  {
-    key: 'issuances-high-to-low',
-    label: 'Issuances high to low',
-    value: { pdasIssuedCount: 'DESC' },
-  },
-  {
-    key: 'issuances-low-to-high',
-    label: 'Issuances low to high',
-    value: { pdasIssuedCount: 'ASC' },
-  },
+  // {
+  //   key: 'issuances-high-to-low',
+  //   label: 'Issuances high to low',
+  //   value: { pdasIssuedCount: 'DESC' },
+  // },
+  // {
+  //   key: 'issuances-low-to-high',
+  //   label: 'Issuances low to high',
+  //   value: { pdasIssuedCount: 'ASC' },
+  // },
 ];
 
 export default function DataModelsExplorerSearch() {
@@ -69,7 +65,7 @@ export default function DataModelsExplorerSearch() {
   const tags = metadata.data?.dataModelsMetadata.tags ?? [];
   const consumptionPrice =
     metadata.data?.dataModelsMetadata.consumptionPrice ?? 0;
-  const issuedCount = metadata.data?.dataModelsMetadata.issuedCount ?? 0;
+  // const issuedCount = metadata.data?.dataModelsMetadata.issuedCount ?? 0;
 
   const dataModelsQuery = useInfiniteQuery({
     queryKey: [
@@ -95,13 +91,13 @@ export default function DataModelsExplorerSearch() {
                   max: selectedConsumptionPrice[1],
                 }
               : undefined,
-          issuedCount:
-            selectedAmountOfIssuances.length > 0
-              ? {
-                  min: selectedAmountOfIssuances[0],
-                  max: selectedAmountOfIssuances[1],
-                }
-              : undefined,
+          // issuedCount:
+          //   selectedAmountOfIssuances.length > 0
+          //     ? {
+          //         min: selectedAmountOfIssuances[0],
+          //         max: selectedAmountOfIssuances[1],
+          //       }
+          //     : undefined,
           search: search.length > 0 ? search : undefined,
         },
         skip: pageParam,
@@ -114,112 +110,69 @@ export default function DataModelsExplorerSearch() {
   const dataModels =
     dataModelsQuery.data?.pages?.flatMap(({ dataModels }) => dataModels) ?? [];
 
-  return (
-    <Container
-      component={Stack}
-      sx={{
-        display: 'flex',
-        py: 3,
-      }}
-    >
-      <Typography
-        component="h3"
-        variant="h5"
-        sx={{
-          mb: 2,
-        }}
-      >
-        {explorerDataModels.listTitle}
-      </Typography>
-      <SearchFilters onSearch={setSearch}>
-        <TagsField
-          tags={tags}
-          selectedTags={selectedTags}
-          setTags={setSelectedTags}
-          isLoading={metadata.isLoading}
-        />
-        <ConsumpitonPriceField
-          min={consumptionPrice.min}
-          max={consumptionPrice.max}
-          selectedConsumptionPrice={selectedConsumptionPrice}
-          setConsumptionPrice={setSelectedConsumptionPrice}
-          isLoading={metadata.isLoading}
-        />
-        <AmountOfIssuancesField
-          min={issuedCount.min}
-          max={issuedCount.max}
-          selectedAmountOfIssuances={selectedAmountOfIssuances}
-          setAmountOfIssuances={setSelectedAmountOfIssuances}
-          isLoading={metadata.isLoading}
-        />
-        <SortByField
-          selectedSort={undefined}
-          onSort={() => {}}
-          options={sortOptions}
-        />
-      </SearchFilters>
+  const isFiltering =
+    selectedTags.length > 0 ||
+    selectedConsumptionPrice.length > 0 ||
+    selectedAmountOfIssuances.length > 0;
 
-      <Box
-        display="grid"
-        gridTemplateColumns={{
-          xs: '1fr',
-          md: 'repeat(2, 1fr)',
-          lg: 'repeat(4, 1fr)',
-        }}
-        gap={2}
-      >
-        {dataModelsQuery.isLoading && (
-          <>
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-          </>
-        )}
-        {dataModelsQuery.isSuccess &&
-          dataModels.length > 0 &&
-          dataModels.map((dataModel) => (
-            <DataModelExplorerCard dataModel={dataModel} key={dataModel.id} />
-          ))}
-        {dataModelsQuery.isFetchingNextPage && (
-          <>
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-            <DataCardExplorerLoading />
-          </>
-        )}
-      </Box>
-      {dataModelsQuery.isSuccess && dataModels.length === 0 && (
-        <Typography
-          variant="body1"
-          color="text.secondary"
-          sx={{ textAlign: 'center', width: '100%', py: 4 }}
-        >
-          {explorerDataModels.empty}
-        </Typography>
-      )}
-      {dataModelsQuery.isError && (
-        <Stack justifyContent="center">
-          <DefaultError
-            isModal={false}
-            hasLink={false}
-            message="Error on searching for data models"
-          />
-        </Stack>
-      )}
-      {!dataModelsQuery.isFetchingNextPage && dataModelsQuery.hasNextPage && (
-        <Button
-          type="button"
-          variant="contained"
-          onClick={() => dataModelsQuery.fetchNextPage()}
-          sx={{ my: 6, alignSelf: 'center' }}
-        >
-          {common.actions.load_more}
-        </Button>
-      )}
-    </Container>
+  const onClearFilters = () => {
+    setSelectedTags([]);
+    setSelectedConsumptionPrice([]);
+    setSelectedAmountOfIssuances([]);
+    setSort(undefined);
+  };
+
+  const filters = (
+    <>
+      <TagsField
+        tags={tags}
+        selectedTags={selectedTags}
+        setTags={setSelectedTags}
+        isLoading={metadata.isLoading}
+      />
+      <ConsumpitonPriceField
+        min={consumptionPrice.min}
+        max={consumptionPrice.max}
+        selectedConsumptionPrice={selectedConsumptionPrice}
+        setConsumptionPrice={setSelectedConsumptionPrice}
+        isLoading={metadata.isLoading}
+      />
+      {/* <AmountOfIssuancesField
+        min={issuedCount.min}
+        max={issuedCount.max}
+        selectedAmountOfIssuances={selectedAmountOfIssuances}
+        setAmountOfIssuances={setSelectedAmountOfIssuances}
+        isLoading={metadata.isLoading}
+      /> */}
+      {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
+      <SortByField
+        selectedSort={selectedSort}
+        onSort={setSort}
+        options={sortOptions}
+      />
+    </>
+  );
+
+  return (
+    <SearchSection
+      title={explorerDataModels.listTitle}
+      emptyText={explorerDataModels.empty}
+      errorMessage="Error on searching for data models"
+      isEmpty={dataModelsQuery.isSuccess && dataModels.length === 0}
+      isError={dataModelsQuery.isError}
+      isLoading={dataModelsQuery.isLoading}
+      isFetchingMore={dataModelsQuery.isFetchingNextPage}
+      hasMore={dataModelsQuery.hasNextPage}
+      onSearch={setSearch}
+      fetchMore={() => dataModelsQuery.fetchNextPage()}
+      filters={filters}
+      cards={
+        dataModelsQuery.isSuccess &&
+        dataModels.length > 0 &&
+        dataModels.map((dataModel) => (
+          <DataModelCard dataModel={dataModel} key={dataModel.id} />
+        ))
+      }
+    />
   );
 }

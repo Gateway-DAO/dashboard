@@ -7,7 +7,7 @@ export const explorer_home = {
       title: 'Check a transaction',
       description:
         'Transactions serve as a comprehensive audit trail, meticulously recording all activities performed at the protocol layer.',
-      link_text: 'Check out it',
+      link_text: 'Check it out',
       link: routes.explorer.transactions,
       target: '_self',
     },
@@ -15,7 +15,7 @@ export const explorer_home = {
       title: 'Explore Data Models',
       description:
         'Each PDA issued using a data model adheres to a standardized structure of claims, making these frameworks exceptionally reusable for various related scenarios.',
-      link_text: 'Check out it',
+      link_text: 'Check it out',
       link: routes.explorer.dataModels,
       target: '_self',
     },
@@ -23,8 +23,8 @@ export const explorer_home = {
       title: 'Explore Data Request Templates',
       description:
         'Data Request Templates serve as the foundational blueprint for each Data Request, ensuring a uniform structure and standardized format for each inquiry.',
-      link_text: 'Check out it',
-      link: routes.explorer.dataRequestTemplates,
+      link_text: 'Check it out',
+      link: routes.explorer.requestTemplates,
       target: '_self',
     },
   ],

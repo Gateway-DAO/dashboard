@@ -1,0 +1,129 @@
+query my_transactions($skip: Int, $take: Int, $organizationId: String) {
+  myFinancialTransactions(
+    skip: $skip
+    take: $take
+    organizationId: $organizationId
+  ) {
+    id
+    type
+    transactionId
+    createdAt
+    action
+    total
+    fee
+    value
+  }
+}
+
+query my_transactions_count($organizationId: String) {
+  myFinancialTransactionsCount(organizationId: $organizationId)
+}
+
+query last_transactions {
+  transactions(filter: { skip: 0, take: 10 }) {
+    id
+    action
+    createdAt
+  }
+}
+
+query explorer_transactions($skip: Int, $take: Int) {
+  transactions(filter: { skip: $skip, take: $take }) {
+    id
+    action
+    createdAt
+  }
+}
+
+query transaction_detail($id: String!) {
+  transaction(id: $id) {
+    id
+    action
+    arweaveUrl
+    createdAt
+    cost
+    financialTransactions {
+      action
+      fee
+      total
+    }
+    from {
+      ... on Organization {
+        id
+        image
+        gatewayId
+        image
+        name
+        __typename
+      }
+      ... on User {
+        __typename
+        id
+        gatewayId
+        displayName
+        profilePicture
+      }
+    }
+    metadata {
+      ... on RequestMetadata {
+        request
+        requestTemplate
+        status
+      }
+      ... on RequestTemplateMetadata {
+        dataModels
+        requestTemplate
+        signedBy
+      }
+      ... on DataModelMetadata {
+        dataModel
+        signedBy
+      }
+      ... on ProofMetadata {
+        proof
+        status
+        owner
+        proofRequest: request
+        verifier
+        fees
+        earnings
+      }
+      ... on PDAMetadata {
+        expirationDate
+        issuer
+        pda
+        signedBy
+        pdaStatus: status
+        dataModel
+      }
+      ... on OrganizationMetadata {
+        usersAdmin
+        organization
+      }
+    }
+    to {
+      ... on Organization {
+        id
+        image
+        gatewayId
+        name
+        verified
+        accesses {
+          role
+          user {
+            id
+            gatewayId
+            displayName
+            profilePicture
+          }
+        }
+      }
+      ... on User {
+        id
+        gatewayId
+        displayName
+        profilePicture
+      }
+    }
+  }
+}

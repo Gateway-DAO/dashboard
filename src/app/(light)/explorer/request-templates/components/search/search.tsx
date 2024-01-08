@@ -1,24 +1,23 @@
 'use client';
 
-import DefaultError from '@/components/default-error/default-error';
-import { common } from '@/locale/en/common';
-import { explorerDataModels } from '@/locale/en/datamodel';
+import { useState } from 'react';
+
+import ClearFiltersButton from '@/components/search-filters/clear-filters-button';
+import SortByField, {
+  SortByOption,
+} from '@/components/search-filters/sort-by-field';
+import TagsField from '@/components/search-filters/tags-field';
+import SearchSection from '@/components/search-section/search-section';
+import { explorerQueries } from '@/constants/queries';
+import { explorerRequestTemplates } from '@/locale/en/request-template';
 import { apiPublic } from '@/services/protocol/api';
 import { DataRequestTemplate } from '@/services/protocol/types';
 import { useDebouncedState } from '@react-hookz/web';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
-
-import ExplorerDataCardLoading from '../../../components/data-card/data-card-loading';
 import RequestTemplateExplorerCard from '../../../components/request-template-card/request-template-card';
-import SearchFilters from '../../../components/search-filters/search-filters';
-import SortByField, {
-  SortByOption,
-} from '../../../components/search-filters/sort-by-field';
-import TagsField from '../../../components/search-filters/tags-field';
-import AmountOfDataRequestsField from './filters/amount-of-data-requests-field';
-import AverageCostField from './filters/average-cost-field';
+// import AmountOfDataRequestsField from './filters/amount-of-data-requests-field';
+// import AverageCostField from './filters/average-cost-field';
 
 const sortOptions: SortByOption<DataRequestTemplate>[] = [
   {
@@ -27,26 +26,69 @@ const sortOptions: SortByOption<DataRequestTemplate>[] = [
     value: undefined,
   },
   { key: 'oldest', label: 'Oldest', value: { createdAt: 'ASC' } },
-  {
-    key: 'requests-high-to-low',
-    label: 'Requests high to low',
-    value: { dataRequestsCount: 'DESC' },
-  },
-  {
-    key: 'requests-low-to-high',
-    label: 'Requests low to high',
-    value: { dataRequestsCount: 'ASC' },
-  },
+  // {
+  //   key: 'requests-high-to-low',
+  //   label: 'Requests high to low',
+  //   value: { dataRequestsCount: 'DESC' },
+  // },
+  // {
+  //   key: 'requests-low-to-high',
+  //   label: 'Requests low to high',
+  //   value: { dataRequestsCount: 'ASC' },
+  // },
 ];
 
 export default function DataModelsRequestExplorerSearch() {
   const [search, setSearch] = useDebouncedState('', 500);
 
+  const [selectedSort, setSort] = useState<SortByOption<DataRequestTemplate>>();
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  // const [selectedAverageCost, setSelectedAverageCost] = useState<number[]>([]);
+  const [selectedAmountOfRequests, setSelectedAmountOfRequests] = useState<
+    number[]
+  >([]);
+
+  const { data: metadata, isLoading: metadataLoading } = useQuery({
+    queryKey: [explorerQueries.request_templates_metadata],
+    queryFn: () => apiPublic.explorer_request_templates_metadata(),
+    select: (data) => data.dataRequestTemplatesMetadata,
+  });
+
+  const tags = metadata?.tags ?? [];
+
   const requestTemplatesQuery = useInfiniteQuery({
-    queryKey: ['data-model-templates', search],
+    queryKey: [
+      explorerQueries.request_templates,
+      search,
+      selectedSort?.value,
+      selectedTags.length,
+      selectedTags,
+      ,
+      selectedAmountOfRequests.length,
+      selectedAmountOfRequests[0],
+      selectedAmountOfRequests[1],
+    ],
     queryFn: ({ pageParam = 0 }) =>
       apiPublic.explorer_request_templates_list({
-        filter: {},
+        filter: {
+          tags: selectedTags.length > 0 ? selectedTags : undefined,
+          // averageCost:
+          //   selectedAverageCost.length > 0
+          //     ? {
+          //         min: selectedAverageCost[0],
+          //         max: selectedAverageCost[1],
+          //       }
+          //     : undefined,
+          // dataRequestsCount:
+          //   selectedAmountOfRequests.length > 0
+          //     ? {
+          //         min: selectedAmountOfRequests[0],
+          //         max: selectedAmountOfRequests[1],
+          //       }
+          //     : undefined,
+          search: search.length > 0 ? search : undefined,
+        },
+        order: selectedSort?.value,
         skip: pageParam,
       }),
     getNextPageParam: (lastPage, allPages) =>
@@ -60,108 +102,73 @@ export default function DataModelsRequestExplorerSearch() {
       ({ dataRequestTemplates }) => dataRequestTemplates
     ) ?? [];
 
+  const isFiltering =
+    selectedTags.length > 0 ||
+    // selectedAverageCost.length > 0 ||
+    selectedAmountOfRequests.length > 0;
+
+  const onClearFilters = () => {
+    setSelectedTags([]);
+    // setSelectedAverageCost([]);
+    setSelectedAmountOfRequests([]);
+    setSort(undefined);
+  };
+
+  const filters = (
+    <>
+      <TagsField
+        tags={tags}
+        selectedTags={selectedTags}
+        setTags={setSelectedTags}
+        isLoading={metadataLoading}
+      />
+      {/* <AverageCostField
+        selectedAverageCost={selectedAverageCost}
+        setAverageCost={setSelectedAverageCost}
+        min={0}
+        max={100}
+      /> */}
+      {/* <AmountOfDataRequestsField
+        selectedAmountOfDataRequests={selectedAmountOfRequests}
+        setAmountOfDataRequests={setSelectedAmountOfRequests}
+        min={amountRequests.min}
+        max={amountRequests.max}
+        isLoading={metadataLoading}
+      /> */}
+      {isFiltering && <ClearFiltersButton onClear={onClearFilters} />}
+      <SortByField
+        selectedSort={selectedSort}
+        onSort={setSort}
+        options={sortOptions}
+      />
+    </>
+  );
+
   return (
-    <Container
-      component={Stack}
-      sx={{
-        display: 'flex',
-        py: 3,
-      }}
-    >
-      <Typography
-        component="h3"
-        variant="h5"
-        sx={{
-          mb: 2,
-        }}
-      >
-        {explorerDataModels.listTitle}
-      </Typography>
-      <SearchFilters onSearch={setSearch}>
-        <TagsField tags={[]} setTags={() => {}} />
-        <AverageCostField
-          selectedAverageCost={[]}
-          setAverageCost={() => {}}
-          min={0}
-          max={100}
-        />
-        <AmountOfDataRequestsField
-          selectedAmountOfDataRequests={[]}
-          setAmountOfDataRequests={() => {}}
-          min={0}
-          max={100}
-        />
-        <SortByField
-          selectedSort={undefined}
-          onSort={() => {}}
-          options={sortOptions}
-        />
-      </SearchFilters>
-      <Box
-        display="grid"
-        gridTemplateColumns={{
-          xs: '1fr',
-          md: 'repeat(2, 1fr)',
-          lg: 'repeat(4, 1fr)',
-        }}
-        gap={2}
-      >
-        {requestTemplatesQuery.isLoading && (
-          <>
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-          </>
-        )}
-        {requestTemplatesQuery.isSuccess &&
-          dataRequestTemplates.length > 0 &&
-          dataRequestTemplates.map((requestTemplate) => (
-            <RequestTemplateExplorerCard
-              key={requestTemplate.id}
-              requestTemplate={requestTemplate}
-            />
-          ))}
-        {requestTemplatesQuery.isFetchingNextPage && (
-          <>
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-            <ExplorerDataCardLoading />
-          </>
-        )}
-      </Box>
-      {requestTemplatesQuery.isSuccess && dataRequestTemplates.length === 0 && (
-        <Typography
-          variant="body1"
-          color="text.secondary"
-          sx={{ textAlign: 'center', width: '100%', py: 4 }}
-        >
-          {explorerDataModels.empty}
-        </Typography>
-      )}
-      {requestTemplatesQuery.isError && (
-        <Stack justifyContent="center">
-          <DefaultError
-            isModal={false}
-            hasLink={false}
-            message="Error on searching for data model request templates"
+    <SearchSection
+      title={explorerRequestTemplates.listTitle}
+      emptyText={explorerRequestTemplates.empty}
+      errorMessage="Error on searching for data model request templates"
+      isEmpty={
+        requestTemplatesQuery.isSuccess && dataRequestTemplates.length === 0
+      }
+      isError={requestTemplatesQuery.isError}
+      isLoading={requestTemplatesQuery.isLoading}
+      isFetchingMore={requestTemplatesQuery.isFetchingNextPage}
+      hasMore={requestTemplatesQuery.hasNextPage}
+      onSearch={setSearch}
+      fetchMore={() => requestTemplatesQuery.fetchNextPage()}
+      filters={filters}
+      cards={
+        requestTemplatesQuery.isSuccess &&
+        dataRequestTemplates.length > 0 &&
+        dataRequestTemplates.map((requestTemplate) => (
+          <RequestTemplateExplorerCard
+            key={requestTemplate.id}
+            requestTemplate={requestTemplate}
           />
-        </Stack>
-      )}
-      {!requestTemplatesQuery.isFetchingNextPage &&
-        requestTemplatesQuery.hasNextPage && (
-          <Button
-            type="button"
-            variant="contained"
-            onClick={() => requestTemplatesQuery.fetchNextPage()}
-            sx={{ my: 6, alignSelf: 'center' }}
-          >
-            {common.actions.load_more}
-          </Button>
-        )}
-    </Container>
+        ))
+      }
+    />
   );
 }

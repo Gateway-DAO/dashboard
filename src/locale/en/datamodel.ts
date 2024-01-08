@@ -32,13 +32,13 @@ export const explorerDataModels = {
     'Data models serve as foundational templates for Private Data Assets (PDAs). Each PDA created using a data model adheres to a standardized structure of claims, making these frameworks exceptionally reusable for various related scenarios.',
   help: 'How to use data models',
   empty: 'No data models found',
-  featureTitle: 'Feature',
+  featuredTitle: 'Featured',
   listTitle: 'All data models',
   issuers: 'Issuers',
   pdas_issued: 'PDAs issued',
   view_more: 'View all data models',
   filters: {
-    comsumption_price: 'Comsumption price',
+    comsumption_price: 'Consumption price',
     amount_of_issuances: 'Amount of issuances',
   },
 };
@@ -73,9 +73,16 @@ export const explorerDataModelDetailOverview = {
   } as Record<PermissionType, string>,
 };
 
-export const explorerDataModelCard = {
+export const dataModelCard = {
   consumption: 'per consumption',
   issuances: (count: number) => `issuance${count > 0 ? 's' : ''}`,
+  learn_more: 'Learn more',
+  issue: 'Issue',
+};
+
+export const issuePda = {
+  view_on_explorer: 'View on Explorer',
+  issue: 'Issue now',
 };
 
 export const explorerIssuersByDataModel = {

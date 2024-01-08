@@ -10,51 +10,52 @@ import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { transaction } from '@/locale/en/transaction';
+import { FinancialTransactionAction } from '@/services/protocol/types';
 import dayjs from 'dayjs';
 
 import { Stack, Divider, Card, Typography, Button } from '@mui/material';
 
+import FinancialActionDetail from '../action-detail';
+
 type Props = {
-  id: string;
-  title: string;
+  transactionId: string;
+  title: FinancialTransactionAction;
   date: string;
   type: string;
-  action: string;
-  objectId: string;
+  objectId?: string;
 };
 
 export default function TransactionCardInfo({
   title,
-  id,
+  transactionId: id,
   date,
   type,
-  action,
   objectId,
 }: Props) {
   const { organization } = useOrganization();
 
-  const dynamicRoute = useMemo(() => {
-    if (action === 'CREATE_PROOF') {
-      const obj = {
-        text: common.actions.view_proof,
-        url: '',
-      };
-      obj.url = !!organization
-        ? routes.dashboard.org.proof(organization.gatewayId, objectId)
-        : routes.dashboard.user.proof(objectId);
-      return obj;
-    }
-    if (action === 'CREATE_PDA') {
-      const obj = {
-        text: common.actions.view_pda,
-        url: '',
-      };
-      obj.url = !!organization
-        ? routes.dashboard.org.asset(organization.gatewayId, objectId)
-        : routes.dashboard.user.asset(objectId);
-      return obj;
-    }
-  }, [action]);
+  // const dynamicRoute = useMemo(() => {
+  //   if (title === FinancialTransactionAction.ProofCreate) {
+  //     const obj = {
+  //       text: common.actions.view_proof,
+  //       url: '',
+  //     };
+  //     obj.url = !!organization
+  //       ? routes.dashboard.org.proof(organization.gatewayId, objectId)
+  //       : routes.dashboard.user.proof(objectId);
+  //     return obj;
+  //   }
+  //   if (title === FinancialTransactionAction.PdaIssuance) {
+  //     const obj = {
+  //       text: common.actions.view_pda,
+  //       url: '',
+  //     };
+  //     obj.url = !!organization
+  //       ? routes.dashboard.org.asset(organization.gatewayId, objectId)
+  //       : routes.dashboard.user.asset(objectId);
+  //     return obj;
+  //   }
+  // }, [title]);
   return (
     <Stack
       component={Card}
@@ -73,21 +74,26 @@ export default function TransactionCardInfo({
             alignItems="flex-start"
           >
             <Typography data-testid="transaction__card__title">
-              {title}
+              <FinancialActionDetail action={title} />
             </Typography>
-            <Button
+            {/* <Button
               size="small"
               sx={{ marginTop: -2 }}
               href={dynamicRoute?.url}
             >
               {dynamicRoute?.text}
-            </Button>
+            </Button> */}
           </Stack>
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>
         <CardCell label={transaction.transaction_id}>
-          <ExternalLink href="#" text={id} size="big" id={id} />
+          <ExternalLink
+            href={routes.explorer.transaction(id)}
+            text={id}
+            size="big"
+            id={id}
+          />
         </CardCell>
       </TableCellContainer>
       <TableCellContainer>

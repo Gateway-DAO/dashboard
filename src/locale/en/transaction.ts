@@ -35,4 +35,48 @@ export const transaction_detail = {
   cost: 'Cost',
   status: 'Status',
   transaction_data: 'Transaction data',
+  gateway_id: 'Gateway ID',
+  request_id: 'Request ID',
+  owner: 'Owner',
+  verifier: 'Verifier',
+  verified: 'Verification',
+  request_template: 'Request Template ID',
+  creator: 'Creator',
+  data_models: 'Data Models',
+  proof_id: 'Proof ID',
+  expiration: 'Expiration',
+};
+
+export const financial_transaction_actions = {
+  in: {
+    deposit: 'Money deposit',
+    pda_revenue: 'PDA consumption revenue',
+  },
+  out: {
+    request_cost: 'Request cost',
+    withdraw: 'Money withdraw',
+    proof_share: 'Data proof sharing',
+    pda_issuance: 'PDA issuance cost',
+    pda_update: 'PDA update cost',
+    pda_status_change: 'PDA status change cost',
+    data_model: 'Data model created',
+    data_request_template: 'Data Request Template created',
+  },
+};
+
+export const transaction_actions = {
+  user_create: 'User creation',
+  pda_issuance: 'PDA issuance',
+  pda_update: 'PDA update',
+  pda_status_change: 'PDA status change',
+  data_model: 'Data Model creation',
+  org_create: 'Organization creation',
+  org_update: 'Organization update',
+  proof_create: 'Proof creation',
+  proof_status_change: 'Proof status change',
+  request_create: 'Request creation',
+  request_status_change: 'Request status change',
+  request_template: 'Request Template creation',
+  money_deposit: 'Money deposit',
+  issuers_earnings: 'PDA consumption revenue',
 };

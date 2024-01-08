@@ -4,6 +4,7 @@ export const numberToMoneyString = (value: number) => {
       style: 'currency',
       currency: 'USD',
       currencyDisplay: 'symbol',
+      maximumFractionDigits: 3,
     });
   } catch (error) {
     return '$0.00';

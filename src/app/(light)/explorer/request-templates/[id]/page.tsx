@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { explorerRequestTemplateDetailOverview } from '@/locale/en/request-template';
 import { apiPublic } from '@/services/protocol/api';
 import { PageProps } from '@/types/next';
@@ -9,6 +11,17 @@ import { Box, Container, Stack } from '@mui/system';
 import RequestTemplateDetails from './components/details';
 import RequestTemplateDetailHeader from './components/header';
 import RequestedData from './components/requested-data';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  return {
+    title: `Gateway Request Template - ${params.id}`,
+    description: `Details on how verifiers are using this request template and stats about its performance`,
+  };
+}
 
 export default async function RequestTemplatePage({
   params: { id },
@@ -29,7 +42,9 @@ export default async function RequestTemplatePage({
     },
     {
       label: 'Revenue generated',
-      value: numberToMoneyString(2044300),
+      value: numberToMoneyString(
+        dataRequestTemplate?.revenueGenerated as number
+      ),
     },
   ];
 

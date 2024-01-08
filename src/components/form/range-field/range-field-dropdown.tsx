@@ -63,6 +63,10 @@ export default function RangeFieldDropdown({
       sx={{
         p: 2,
         pt: 3,
+        maxWidth: {
+          xs: 'unset',
+          lg: 320,
+        },
       }}
     >
       <Stack
@@ -103,6 +107,8 @@ export default function RangeFieldDropdown({
         disableSwap
         sx={{
           my: 3,
+          ml: 1,
+          width: 'calc(100% - 16px)',
         }}
         onChange={handleSliderChange}
       />

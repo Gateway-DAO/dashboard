@@ -7,6 +7,7 @@ import { DATE_FORMAT } from '@/constants/date';
 import { pda } from '@/locale/en/pda';
 import { proof as proofLocale } from '@/locale/en/proof';
 import { ProofQuery, ProofStatus } from '@/services/protocol/types';
+import { numberToMoneyString } from '@/utils/money';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
 
@@ -33,11 +34,7 @@ export default function ProofCardInfo({ proof }: Props) {
         {!isNaN(proof?.facilitationFee as number) &&
           proof?.facilitationFee !== 0 && (
             <CardCell label={pda.share.sharing_cost}>
-              {`${(proof?.facilitationFee ?? 0).toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                currencyDisplay: 'symbol',
-              })}`}
+              {numberToMoneyString(proof?.facilitationFee ?? 0)}
             </CardCell>
           )}
       </TableCellContainer>

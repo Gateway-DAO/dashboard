@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import GTWMenuItem from '@/app/(light)/dashboard/components/menu-item/menu-item';
+import GTWMenuItem from '@/components/menu-item/menu-item';
 
 import dashboardUserMenuItems from './dashboard-user-menu-items';
 

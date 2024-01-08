@@ -1,37 +1,31 @@
+import { My_TransactionsQuery } from '@/services/protocol/types';
+
 import TransactionCardInfo from './transaction-card-info';
 import TransactionCardTitle from './transaction-card-title';
 
 type Props = {
-  id: string;
-  metadata: any;
-  type: string;
-  amount: number;
-  object_id: string;
-  date: string;
-  action: string;
+  transaction: My_TransactionsQuery['myFinancialTransactions'][0];
 };
 
-export function Transaction({
-  id,
-  metadata,
-  type,
-  action,
-  amount,
-  object_id,
-  date,
-}: Props) {
-  const { name } = metadata;
+export function Transaction({ transaction }: Props) {
+  const { transactionId, total, type, action, createdAt, fee, value } =
+    transaction;
 
   return (
     <>
-      <TransactionCardTitle amount={amount} type={type} />
-      <TransactionCardInfo
-        title={name}
-        id={id}
-        action={action}
-        date={date}
+      <TransactionCardTitle
+        amount={total}
         type={type}
-        objectId={object_id}
+        action={action}
+        value={value}
+        fee={fee}
+      />
+      <TransactionCardInfo
+        title={action}
+        transactionId={transactionId as string}
+        date={createdAt}
+        type={type}
+        objectId={transactionId as string}
       />
     </>
   );

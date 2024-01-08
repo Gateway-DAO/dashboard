@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 import routes from '@/constants/routes';
+import useMyWallet from '@/hooks/use-my-wallet';
 import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
@@ -30,11 +31,13 @@ export default function WalletWidget({ id }: Props) {
   );
   const { organization } = useOrganization();
 
+  const { myWallet, isLoading } = useMyWallet();
+
   const walletPage = !!organization
     ? routes.dashboard.org.wallet(organization.gatewayId)
     : routes.dashboard.user.wallet;
 
-  if (status === 'loading' || !session) {
+  if (status === 'loading' || !session || isLoading) {
     return <WalletWidgetSkeleton />;
   }
 
@@ -70,7 +73,7 @@ export default function WalletWidget({ id }: Props) {
               color="primary"
               data-testid="wallet-widget__value"
             >
-              {numberToMoneyString(session?.user?.balance ?? 0)}
+              {numberToMoneyString(myWallet?.balance as number)}
             </Typography>
           ) : (
             <Stack sx={{ overflow: 'hidden', height: 24 }}>

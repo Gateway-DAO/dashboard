@@ -34,7 +34,7 @@ export default function useOrganization():
   const isOrg = pathname?.includes(routes.dashboard.org.root);
   const pathnameOrg = isOrg ? pathname?.split('/')[3] : undefined;
   const access = session?.user?.accesses?.find(
-    (access) => access.organization?.gatewayId === pathnameOrg
+    (access: any) => access.organization?.gatewayId === pathnameOrg
   );
   const organization = access?.organization;
 

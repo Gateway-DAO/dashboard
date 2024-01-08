@@ -2,18 +2,16 @@ import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
-import { DataModel } from '@/services/protocol/types';
-import { PartialDeep } from 'type-fest';
+import {
+  explorerDataModels,
+  explorerDataModelDetail,
+} from '@/locale/en/datamodel';
 
 import { Chip, Container, Divider, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import ExplorerBreadcrumb from '../../../components/breadcrumb/breadcrumb';
 import ExplorerHeader from '../../../components/header/header';
-import {
-  explorerDataModels,
-  explorerDataModelDetail,
-} from '@/locale/en/datamodel';
 
 type Props = {
   id: string;
@@ -58,10 +56,6 @@ export default function DataModelDetailHeader({ id, title, tags }: Props) {
           <GTWTab
             label={explorerDataModelDetail.tabs.issuers}
             href={routes.explorer.dataModelIssuers(id)}
-          />
-          <GTWTab
-            label={explorerDataModelDetail.tabs.tied_request_templates}
-            href={routes.explorer.dataModelRequestTemplates(id)}
           />
         </GTWTabs>
       </Container>

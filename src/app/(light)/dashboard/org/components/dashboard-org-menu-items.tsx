@@ -1,9 +1,9 @@
-import { GTWMenuItemSettings } from '@/app/(light)/dashboard/components/menu-item/menu-item';
 import DataModelOutlinedIcon from '@/components/icons/data-model-outlined';
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
 import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
 import DataRequestTemplateOutlinedIcon from '@/components/icons/data-request-template-outlined';
+import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
 import routes from '@/constants/routes';
 
 import { HomeOutlined } from '@mui/icons-material';
@@ -24,7 +24,11 @@ export const dashboardOrgMenuItems = (
   {
     name: 'Issuances',
     href: routes.dashboard.org.issuedAssets(username),
-    activeHrefs: [routes.dashboard.org.issuedAssets(username)],
+    activeHrefs: [
+      routes.dashboard.org.issuedAssets(username),
+      routes.dashboard.org.issue(username),
+      routes.dashboard.org.issuePda(username, ''),
+    ],
     icon: DataOutlinedIcon,
     navbar: true,
   },

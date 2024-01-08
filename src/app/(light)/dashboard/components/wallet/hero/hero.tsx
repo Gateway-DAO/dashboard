@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import useMyWallet from '@/hooks/use-my-wallet';
 import { sandboxWalletAlert } from '@/locale/en/alert-messages';
 import { common } from '@/locale/en/common';
 import { wallet } from '@/locale/en/wallet';
@@ -14,16 +15,13 @@ import { useWalletStore } from '../../../stores/wallet.store';
 import WalletBalance from './wallet-balance';
 import WalletStatement from './wallet-statement';
 
-type Props = {
-  balance: string;
-};
-
-export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
+export default function WalletHero(): JSX.Element {
   const { showValues: valueVisible, toggleShowValue: toggleVisible } =
     useWalletStore((state) => state);
   const [showAlert, toggleAlert] = useState(false);
   const storageKey = 'testnet-wallet-disclaimer';
   const testnet = currentEnv() === 'testnet' || 'development';
+  const { isLoading, myWallet } = useMyWallet();
 
   let hasSeenTestnetDisclaimer: string | null;
 
@@ -82,9 +80,14 @@ export default function WalletHero({ balance = '$0' }: Props): JSX.Element {
       <WalletBalance
         setVisible={toggleVisible}
         valueVisible={valueVisible}
-        value={balance}
+        value={myWallet?.balance as number}
+        isLoading={isLoading}
       />
-      <WalletStatement showValues={valueVisible} />
+      <WalletStatement
+        isLoading={isLoading}
+        myWallet={myWallet}
+        showValues={valueVisible}
+      />
     </Stack>
   );
 }

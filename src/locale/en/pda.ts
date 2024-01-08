@@ -10,7 +10,7 @@ export const pda = {
   share: {
     share_a_copy_with: 'Share a copy with',
     share_a_copy_description: 'Fill a Gateway ID, email or wallet',
-    sharing_cost: 'Sharing cost',
+    sharing_cost: 'Proof sharing cost',
     sharing_cost_helper: 'For now Gateway is covering sharing costs',
     free: 'Free',
     successfully_title: 'Copy shared successfully',
@@ -47,13 +47,32 @@ export const pda = {
   issuance_date: 'Issuance date',
   expiration_date: 'Expiration date',
   indeterminate: 'Indeterminate',
+  issuance_summary: 'Issuance Summary',
+  total: 'Total',
 };
 export const pdas = {
   empty: 'No data assets yet',
   load_more: 'load more',
   my_data_assets: 'Data Assets',
+  data_asset: 'Data asset',
+  recipient: 'Recipient',
+  status: 'Status',
+  data_model_id: 'Data model ID',
+  issuance_date: 'Issuance date',
   data_assets_subtitle:
     'These are the private data assets you have earned and created.',
+  issue_a_pda: 'Issue a PDA',
+  help_card: {
+    title: 'Issue a PDA now!',
+    description: 'Quick, non-code feature for issuing PDAs in a few steps.',
+    text_button: 'Issue Now',
+  },
+  help_video_card: {
+    title: 'How to issue a PDA',
+    description:
+      'We will show you step by step how to send a PDA with our non code application',
+    text_button: 'Play video',
+  },
 };
 export const orgPdas = {
   empty: 'No Issuances yet',
@@ -73,4 +92,37 @@ export const helpMenu = {
   docsLink: 'https://docs.mygateway.xyz/docs',
   discordTitle: 'Support channel',
   discordLink: 'https://discord.com/invite/bxTaYsJ6WD',
+};
+
+export const issuePda = {
+  title: 'Issue a Private Data Asset',
+  subtitle: 'Select a Data Model',
+  featured: 'Featured',
+  success_title: 'Private Data Asset issued successfully',
+};
+
+export const issuePdaForm = {
+  title: 'Issue a Private Data Asset',
+  subtitle: 'Complete your PDA details',
+  details: {
+    title: 'Title',
+    description: 'Description',
+  },
+  issue_to: {
+    title: 'Issue to',
+    description: 'Add who will be the owner of this PDA',
+  },
+  claim: {
+    description:
+      'The claim define what the PDA represents about a user or how it relates to the user',
+  },
+  summary: {
+    title: 'Issuance Summary',
+    total: (price: string, amount: number) => `${price} (Qty: ${amount})`,
+  },
+  helpers: {
+    date: 'Date in UTC timezone',
+    datetime: 'Date Time in UTC timezone',
+    time: 'Time in UTC timezone',
+  },
 };

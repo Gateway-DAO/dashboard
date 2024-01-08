@@ -113,7 +113,6 @@ export default function ProofCardTitle({ proof, isOwner }: Props) {
         )}
       </Stack>
       <Stack sx={{ position: 'absolute', top: 10, right: 12 }}>
-        {/* <ExternalLink text={`ID ${limitCharsCentered(proof?.id, 8)}`} href="#" /> */}
         <CopyTextButton text={proof?.id as string} limit={12} size={14} />
       </Stack>
     </Stack>

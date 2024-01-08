@@ -1,3 +1,4 @@
+import DataCard from '@/components/data-card/data-card';
 import routes from '@/constants/routes';
 import { explorerRequestTemplateCard } from '@/locale/en/request-template';
 import { DataRequestTemplate } from '@/services/protocol/types';
@@ -5,8 +6,6 @@ import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
 import { PartialDeep } from 'type-fest';
 
 import { Typography, CardProps } from '@mui/material';
-
-import ExplorerDataCard from '../data-card/data-card';
 
 type Props = {
   withLink?: boolean;
@@ -24,28 +23,28 @@ export default function RequestTemplateExplorerCard({
   );
 
   return (
-    <ExplorerDataCard
+    <DataCard
       title={requestTemplate!.name!}
       description={requestTemplate!.description!}
       href={
-        withLink ? routes.explorer.dataModel(requestTemplate!.id) : undefined
+        withLink
+          ? routes.explorer.requestTemplate(requestTemplate!.id)
+          : undefined
       }
       profile={profile}
       bottom={
-        <>
-          {requestTemplate?.dataRequestsCount && (
-            <Typography variant="subtitle2" fontWeight="400">
-              <b>
-                {requestTemplate?.dataRequestsCount?.toLocaleString('en-US', {
-                  notation: 'compact',
-                })}
-              </b>{' '}
-              {explorerRequestTemplateCard.requests(
-                requestTemplate.dataRequestsCount > 1
-              )}
-            </Typography>
-          )}
-        </>
+        requestTemplate?.dataRequestsCount ? (
+          <Typography variant="subtitle2" fontWeight="400">
+            <b>
+              {requestTemplate?.dataRequestsCount?.toLocaleString('en-US', {
+                notation: 'compact',
+              })}
+            </b>{' '}
+            {explorerRequestTemplateCard.requests(
+              requestTemplate.dataRequestsCount > 1
+            )}
+          </Typography>
+        ) : undefined
       }
       {...props}
     />
