@@ -25,6 +25,7 @@ export const mutations = {
   disconnect_email: 'disconnect_email',
   disconnect_wallet: 'disconnect_wallet',
   update_notification_email: 'update_notification_email',
+  create_org_key: 'create_org_key',
 };
 
 export const explorerQueries = {
