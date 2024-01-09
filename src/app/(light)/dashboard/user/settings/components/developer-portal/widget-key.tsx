@@ -31,21 +31,25 @@ export default function WidgetKey({ orgId }: { orgId: string }) {
 
   return (
     <>
-      {widgetKeyMutation.isSuccess && widgetKeyMutation.data && (
-        <Card sx={{ width: '100%' }} variant="outlined">
-          <CardHeader
-            titleTypographyProps={{
-              variant: 'subtitle1',
-              fontWeight: 'bold',
-            }}
-            title={settings.developer_portal.widget_key}
-            action={<CopyButton text={widgetKeyMutation.data.item.accessId} />}
-          />
-          <CardContent>
-            <Typography>{widgetKeyMutation.data.item.accessId}</Typography>
-          </CardContent>
-        </Card>
-      )}
+      {widgetKeyMutation.isSuccess &&
+        widgetKeyMutation.data &&
+        widgetKeyMutation.data.item && (
+          <Card sx={{ width: '100%' }} variant="outlined">
+            <CardHeader
+              titleTypographyProps={{
+                variant: 'subtitle1',
+                fontWeight: 'bold',
+              }}
+              title={settings.developer_portal.widget_key}
+              action={
+                <CopyButton text={widgetKeyMutation.data.item.accessId} />
+              }
+            />
+            <CardContent>
+              <Typography>{widgetKeyMutation.data.item.accessId}</Typography>
+            </CardContent>
+          </Card>
+        )}
     </>
   );
 }
