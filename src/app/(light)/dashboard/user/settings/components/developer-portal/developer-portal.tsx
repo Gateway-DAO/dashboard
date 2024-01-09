@@ -4,8 +4,10 @@ import CopyButton from '@/components/copy-button/copy-button';
 import externalLinks from '@/constants/externalLinks';
 import { queries } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useOrganization from '@/hooks/use-organization';
 import { settings } from '@/locale/en/settings';
 import { MonthlyUserUsageQuery } from '@/services/protocol/types';
+import { currentEnv } from '@/utils/env';
 import { useQuery } from '@tanstack/react-query';
 
 import {
@@ -24,9 +26,11 @@ import {
 
 import AuthenticationTokenSection from './authentication-token-section';
 import MainnetAlert from './mainnet-alert';
+import WidgetKey from './widget-key';
 
 export default function DeveloperPortal() {
   const { privateApi } = useGtwSession();
+  const { organization, isOrg } = useOrganization();
 
   const usageLimits = useQuery({
     queryKey: [queries.usage_limit],
@@ -35,6 +39,7 @@ export default function DeveloperPortal() {
       data.getMonthlyUserUsage as MonthlyUserUsageQuery['getMonthlyUserUsage'],
   });
 
+  const isTestnet = currentEnv() === 'testnet';
   return (
     <Stack spacing={3} alignItems="flex-start">
       <Stack direction="column" gap={2}>
@@ -57,6 +62,7 @@ export default function DeveloperPortal() {
           </CardContent>
         </Card>
         <AuthenticationTokenSection />
+        {isTestnet && isOrg && <WidgetKey orgId={organization?.id as string} />}
         <Card sx={{ width: '100%' }} variant="outlined">
           <CardHeader
             titleTypographyProps={{
