@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     if (!body.session || !body.orgId) {
-      return Response.json(
+      return NextResponse.json(
         {
           error: 'Missing parameters',
         },
