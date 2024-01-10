@@ -1,0 +1,112 @@
+query requests {
+  dataRequests {
+    id
+    status
+    verifier {
+      id
+      gatewayId
+    }
+    createdAt
+    dataRequestTemplate {
+      id
+    }
+  }
+}
+
+query myRequestsReceived($take: Float!, $skip: Float!) {
+  requestsReceived(skip: $skip, take: $take) {
+    id
+    status
+    verifierOrganization {
+      ...org
+    }
+    verifier {
+      ...min_user
+    }
+    createdAt
+    dataRequestTemplate {
+      id
+    }
+  }
+}
+
+query requestsCount {
+  requestsReceivedCount
+}
+
+query dataRequest($id: String!) {
+  dataRequest(requestId: $id) {
+    id
+    dataUse
+    status
+    createdAt
+
+    proof {
+      id
+    }
+    owner {
+      id
+      gatewayId
+      profilePicture
+      displayName
+    }
+    verifier {
+      id
+      gatewayId
+      profilePicture
+      displayName
+    }
+    verifierOrganization {
+      ...org
+    }
+    dataRequestTemplate {
+      id
+      schema
+      dataModels {
+        id
+        title
+        schema
+      }
+    }
+  }
+}
+
+query dataRequestValidData($requestId: String!) {
+  findValidPDAsForRequest(requestId: $requestId) {
+    required
+    validData {
+      provided
+    }
+  }
+}
+
+query requestsByOrg(
+  $verifierOrganization: OrganizationIdentificationInput!
+  $take: Float!
+  $skip: Float!
+) {
+  requestsSent(
+    filter: { verifierOrganization: $verifierOrganization }
+    skip: $skip
+    take: $take
+  ) {
+    id
+    createdAt
+    status
+    owner {
+      id
+      gatewayId
+      displayName
+      profilePicture
+    }
+    dataRequestTemplate {
+      id
+    }
+  }
+}
+
+query requestsByOrgCount(
+  $verifierOrganization: OrganizationIdentificationInput!
+) {
+  requestsSentCount(filter: { verifierOrganization: $verifierOrganization })
+}

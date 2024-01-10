@@ -56,8 +56,12 @@ src/services/**/**/validation.ts
 screenshots/
 test-results/
 storageState.json
+.swc
+playwright-report/
 
 .next
 .vscode/settings.json
 src/pages/dev.tsx
 TODO
+
+storybook-static

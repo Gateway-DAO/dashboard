@@ -1,0 +1,45 @@
+mutation update_display_name($displayName: String!) {
+  updateMyDisplayName(displayName: $displayName)
+}
+
+mutation update_user(
+  $username: String
+  $displayName: String
+  $profilePicture: String
+) {
+  updateUser(
+    input: {
+      gatewayId: $username
+      displayName: $displayName
+      profilePicture: $profilePicture
+    }
+  ) {
+    id
+    gatewayId
+    displayName
+    profilePicture
+  }
+}
+mutation update_profile_picture_url($profilePicture: String) {
+  updateUser(input: { profilePicture: $profilePicture }) {
+    id
+    gatewayId
+    displayName
+    profilePicture
+  }
+}
+
+mutation update_username($username: String!) {
+  updateMyGatewayId(gatewayId: $username) {
+    id
+  }
+}
+
+mutation updateNotificationEmail($email: String!) {
+  updateNotificationEmail(email: $email) {
+    user {
+      gatewayId
+      email
+    }
+  }
+}

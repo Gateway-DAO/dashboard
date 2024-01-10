@@ -1,10 +1,14 @@
-import {
-  LoginOutput,
-} from '@/services/protocol/types';
-import { PartialDeep } from 'type-fest';
+import { Login_DataFragment, MeQuery } from '@/services/protocol/types';
 
-export type SessionToken = Omit<LoginOutput, 'user'> & {
+export type SessionUser = MeQuery['me'];
+
+export type SessionToken = Login_DataFragment & {
   error?: any;
-  user: PartialDeep<LoginOutput["user"]>;
+  skipEmail?: boolean;
 };
 
+export type Session = Login_DataFragment & {
+  error?: any;
+  user: SessionUser;
+  skipEmail?: boolean;
+};

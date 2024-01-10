@@ -2,16 +2,18 @@ import Link from 'next/link';
 
 import { Card, CardActionArea, Stack, Typography } from '@mui/material';
 
-import { AvatarFile } from '../avatar-file/avatar-file';
-import { PDAStatusChip } from './pda-status-chip';
+import GTWAvatar from '../gtw-avatar/gtw-avatar';
+import { TextStatusChip } from '../text-status-chip/text-status-chip';
 import { PdaCardProps } from './type';
 
 export default function PdaCard({
   name,
-  issuerImage,
-  issuerName,
+  userId,
+  userImage,
+  userName,
   dashed,
   href,
+  onClick,
   status,
 }: PdaCardProps) {
   return (
@@ -28,8 +30,12 @@ export default function PdaCard({
       }}
     >
       <CardActionArea
-        component={Link}
-        href={href}
+        className="pda-card"
+        {...(href && {
+          component: Link,
+          href: href,
+        })}
+        onClick={onClick}
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -45,14 +51,16 @@ export default function PdaCard({
       >
         <Stack alignItems="flex-start">
           <Stack direction="row" alignItems="center" gap={1.5} sx={{ mb: 3 }}>
-            <AvatarFile file={issuerImage} sx={{ width: 32, height: 32 }} />
+            <GTWAvatar src={userImage} size={32} name={userId} alt={userName} />
             <Typography variant="body2" sx={{ flexGrow: 1 }} noWrap>
-              {issuerName}
+              {userName}
             </Typography>
           </Stack>
-          <Typography fontWeight={700}>{name}</Typography>
+          <Typography fontWeight={700} className="pda-card-name">
+            {name}
+          </Typography>
         </Stack>
-        <PDAStatusChip variant="outlined" status={status} size="small" />
+        <TextStatusChip variant="outlined" status={status} size="small" />
       </CardActionArea>
     </Stack>
   );

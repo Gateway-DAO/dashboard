@@ -1,98 +1,85 @@
-query pdas {
-  credentials {
-    id
-    title
-    image
-    status
+query pda($id: String!) {
+  PDA(id: $id) {
+    ...pda
   }
 }
 
-query pda($id: String!) {
-  credential(id: $id) {
+query received_pdas($take: Float!, $skip: Float!) {
+  myPDAs(skip: $skip, take: $take) {
     id
-    title
-    description
-    image
-    expirationDate
     status
-    tags
-    claim
-    arweaveInfo
+    dataAsset {
+      title
+      image
+      organization {
+        id
+        image
+        name
+        gatewayId
+      }
+      owner {
+        ...min_user
+      }
+      issuer {
+        ...min_user
+      }
+    }
+  }
+}
 
-    activities {
-      newStatus
-      oldStatus
-      type
-      oldUrl
-      newUrl
-      timestamp
-      txHash
-      credential {
+query issued_pdas($take: Float!, $skip: Float!) {
+  issuedPDAs(skip: $skip, take: $take) {
+    id
+    status
+    dataAsset {
+      title
+      image
+      organization {
+        id
+        image
+        name
+        gatewayId
+      }
+      issuer {
+        ...min_user
+      }
+      owner {
+        ...min_user
+      }
+    }
+  }
+}
+
+query issued_pdas_by_org(
+  $take: Float!
+  $skip: Float!
+  $organization: OrganizationIdentificationInput!
+) {
+  issuedPDAs(
+    skip: $skip
+    take: $take
+    filter: { organization: $organization }
+  ) {
+    id
+    status
+    issuanceDate
+    status
+
+    dataAsset {
+      title
+      organization {
+        gatewayId
+      }
+      owner {
+        ...min_user
+      }
+      dataModel {
         id
       }
     }
-
-    claimArray {
-      description
-      type
-      property
-      label
-      value
-      metadata
-    }
-
-    issuerAuth {
-      id
-      data
-    }
-
-    issuerOrganization {
-      gatewayId
-    }
-
-    issuerUser {
-      gatewayId
-      primaryWallet {
-        address
-      }
-    }
-
-    recipientUser {
-      gatewayId
-      primaryWallet {
-        address
-      }
-    }
-
-    recipientAuth {
-      id
-      data
-    }
-
-    dataModel {
-      id
-      title
-      tags
-      schema
-      arweaveInfo
-      createdAt
-    }
-
-    activities {
-      type
-      oldStatus
-      newStatus
-      txHash
-      timestamp
-    }
-
-    nft {
-      chain
-      txHash
-      minted
-    }
-
-    createdAt
-    updatedAt
   }
+}
+
+query countIssuedPdasByOrg($organization: OrganizationIdentificationInput!) {
+  issuedPDAsCount(filter: { organization: $organization })
 }

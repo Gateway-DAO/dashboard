@@ -2,16 +2,17 @@
 
 import React, { ReactNode } from 'react';
 
-import { theme } from '@/theme';
 import { SnackbarProvider, closeSnackbar } from 'notistack';
 
 import CloseIcon from '@mui/icons-material/Close';
+import { useTheme } from '@mui/material';
 
 type Props = {
   children: ReactNode;
 };
 
 const Notistack = ({ children }: Props) => {
+  const theme = useTheme();
   const notistackRef = React.useRef<SnackbarProvider>();
 
   return (
@@ -26,9 +27,10 @@ const Notistack = ({ children }: Props) => {
       }}
       autoHideDuration={4000}
       style={{
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: '#323232',
         color: theme.palette.common.white,
         position: 'relative',
+        borderRadius: 2,
       }}
       action={(snackbarId) => (
         <CloseIcon

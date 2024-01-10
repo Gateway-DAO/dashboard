@@ -1,0 +1,14 @@
+query organization_members($id: String!) {
+  organization(input: { type: ORG_ID, value: $id }) {
+    accesses {
+      id
+      role
+      user {
+        id
+        gatewayId
+        profilePicture
+        displayName
+      }
+    }
+  }
+}

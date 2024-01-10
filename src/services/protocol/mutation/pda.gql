@@ -1,0 +1,34 @@
+mutation changePDAStatus($id: String!, $status: PDAStatus!) {
+  changePDAStatus(input: { id: $id, status: $status }) {
+    id
+    arweaveUrl
+    dataAsset {
+      title
+      claim
+    }
+    status
+  }
+}
+
+mutation issue_pda($input: CreatePDAInput!) {
+  createPDA(input: $input) {
+    id
+    status
+    dataAsset {
+      title
+      image
+      organization {
+        id
+        image
+        name
+        gatewayId
+      }
+      issuer {
+        ...min_user
+      }
+      owner {
+        ...min_user
+      }
+    }
+  }
+}

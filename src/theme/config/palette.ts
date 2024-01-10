@@ -1,27 +1,55 @@
 import { PaletteOptions } from '@mui/material';
 
-export const palette: PaletteOptions = {
+import { brandColors } from './brand';
+export const lightPalette: PaletteOptions = {
   mode: 'light',
   primary: {
-    main: '#771AC9',
+    main: brandColors.primary,
+    light: brandColors.primaryLight,
+    50: brandColors.primaryLighter,
   },
   secondary: {
-    main: "#70ECFE"
+    main: brandColors.secondary,
   },
   error: {
-    main: "#FF7D6B"
+    main: brandColors.error,
   },
   warning: {
-    main: "#F9C235"
+    main: brandColors.warning,
   },
   info: {
-    main: "#69DCED"
+    main: brandColors.info,
   },
   success: {
-    main: "#CDDA05"
+    main: brandColors.success,
   },
   background: {
     default: '#F6F4FA',
     paper: '#fff',
-  }
+  },
+};
+
+export const darkPalette: PaletteOptions = {
+  mode: 'dark',
+  primary: {
+    main: brandColors.primary,
+  },
+  secondary: {
+    main: brandColors.secondary,
+  },
+  error: {
+    main: brandColors.error,
+  },
+  warning: {
+    main: brandColors.warning,
+  },
+  info: {
+    main: brandColors.info,
+  },
+  success: {
+    main: brandColors.success,
+  },
+  background: {
+    default: '#212121',
+  },
 };

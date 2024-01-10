@@ -6,7 +6,9 @@
     "plugin:editorconfig/noconflict",
     "plugin:@tanstack/eslint-plugin-query/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
   ],
   "plugins": [
     "editorconfig",
@@ -16,6 +18,7 @@
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
+    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
@@ -56,5 +59,5 @@
       }
     }
   ],
-  "ignorePatterns": ["./src/services/protocol/types.ts"]
+  "ignorePatterns": ["src/services/protocol/types.ts"]
 }

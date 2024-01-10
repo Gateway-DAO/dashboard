@@ -1,0 +1,44 @@
+fragment pda on PrivateDataAsset {
+  id
+  status
+  issuanceDate
+
+  dataAsset {
+    title
+    description
+    expirationDate
+    image
+
+    dataModel {
+      consumptionPrice
+    }
+
+    organization {
+      id
+      image
+      name
+      gatewayId
+      verified
+    }
+    issuer {
+      ...user
+    }
+    owner {
+      ...user
+    }
+    dataModel {
+      id
+      createdAt
+      tags
+    }
+    claim
+    claimArray {
+      label
+      metadata
+      property
+      description
+      type
+      value
+    }
+  }
+}

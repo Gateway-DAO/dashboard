@@ -1,0 +1,9 @@
+.element {
+  margin: auto;
+  position: relative;
+  width: 1152px;
+
+  @media (max-width: 1199px) {
+    width: 90%;
+  }
+}

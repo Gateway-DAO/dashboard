@@ -1,0 +1,107 @@
+query received_proofs($take: Float!, $skip: Float!) {
+  receivedProofs(skip: $skip, take: $take) {
+    id
+    createdAt
+
+    owner {
+      ...min_user
+    }
+
+    data {
+      PDAs {
+        id
+      }
+    }
+  }
+}
+
+query received_proofs_by_org(
+  $take: Float!
+  $skip: Float!
+  $organizationId: String!
+) {
+  receivedProofs(organizationId: $organizationId, skip: $skip, take: $take) {
+    id
+    dataRequest {
+      id
+      dataRequestTemplate {
+        id
+      }
+    }
+    createdAt
+    owner {
+      ...min_user
+    }
+
+    data {
+      PDAs {
+        id
+      }
+    }
+  }
+}
+
+query countReceivedProofs {
+  receivedProofsCount
+}
+
+query countReceivedProofsByOrg($organizationId: String!) {
+  receivedProofsCount(organizationId: $organizationId)
+}
+
+query sent_proofs($take: Float!, $skip: Float!) {
+  sentProofs(skip: $skip, take: $take) {
+    id
+    createdAt
+    data {
+      PDAs {
+        id
+      }
+    }
+
+    verifier {
+      ...min_user
+    }
+
+    verifierOrganization {
+      ...org
+    }
+
+    dataRequest {
+      id
+      dataRequestTemplate {
+        id
+      }
+    }
+  }
+}
+
+query count_sent_proofs {
+  sentProofsCount
+}
+
+query proof($id: String!) {
+  proof(id: $id) {
+    ...proof
+  }
+}
+
+query proofsByPDAIds($pdaIds: [String!]!) {
+  proofsByPDAIds(pdaIds: $pdaIds) {
+    id
+
+    verifierOrganization {
+      id
+      name
+      gatewayId
+      image
+    }
+
+    verifier {
+      id
+      gatewayId
+      profilePicture
+      displayName
+    }
+  }
+}

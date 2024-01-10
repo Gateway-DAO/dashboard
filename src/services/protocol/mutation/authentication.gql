@@ -13,23 +13,9 @@ mutation create_email_nonce($email: String!) {
 }
 
 fragment login_data on LoginOutput {
-  hasura_id
   protocol_id
   refresh_token
   token
-  user {
-    id
-    gatewayId
-    # accesses {
-    #   role
-    #   organization {
-    #     id
-    #     image
-    #     name
-    #     gatewayId
-    #   }
-    # }
-  }
 }
 
 mutation login_wallet($signature: String!, $wallet: String!) {
@@ -51,7 +37,7 @@ mutation refresh($refresh_token: String!) {
 }
 
 mutation protocol_add_email($email: String!) {
-  addEmail(email: $email) {
+  addEmail(input: { email: $email }) {
     #REMOVELINE
     code
     email
@@ -63,12 +49,6 @@ mutation protocol_add_email_confirmation($email: String!, $code: Float!) {
     user {
       id
     }
-  }
-}
-
-mutation protocol_remove_email($email: String!) {
-  removeEmail(email: $email) {
-    email
   }
 }
 
@@ -90,8 +70,8 @@ mutation protocol_add_wallet_confirmation(
   }
 }
 
-mutation protocol_remove_auth_method($id: String!) {
-  unregisterAuthMethod(input: { id: $id })
+mutation protocol_unregister_auth_method($data: JSON!, $type: AuthType!) {
+  unregisterAuthMethod(input: { data: $data, type: $type })
 }
 
 mutation protocol_migrate_auth($authId: String!, $ownerJwt: String!) {

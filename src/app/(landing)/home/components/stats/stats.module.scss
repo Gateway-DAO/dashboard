@@ -1,0 +1,157 @@
+.element {
+  background-color: #212121;
+  padding-top: 211px;
+  padding-bottom: 24px;
+  overflow: hidden;
+
+  @media (max-width: 1199px) {
+    padding-top: 73px;
+  }
+}
+
+.title {
+  color: #f5b5ff;
+  font-size: 82px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 82px;
+  letter-spacing: 0.412px;
+  margin-bottom: 140px;
+
+  @media (max-width: 1199px) {
+    font-size: 36px;
+    font-style: normal;
+    line-height: 50.4px;
+    letter-spacing: 0.412px;
+    margin-bottom: 80px;
+  }
+}
+
+.stats {
+  display: flex;
+  position: relative;
+  width: 100%;
+
+  @media (max-width: 1199px) {
+    flex-direction: column;
+  }
+}
+
+.small_boxes_container {
+  position: relative;
+
+  @media (max-width: 1199px) {
+    margin: 24px 0;
+  }
+}
+
+.box {
+  background-color: #f5b5ff;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 19px 20px 24px;
+
+  &--lg {
+    height: 400px;
+    margin-right: 24px;
+    width: 564px;
+  }
+
+  &--sm {
+    height: 188px;
+    width: 270px;
+
+    &:first-child {
+      margin-bottom: 24px;
+    }
+  }
+
+  &--md {
+    height: 400px;
+    margin-left: 24px;
+    width: 270px;
+  }
+
+  @media (max-width: 1199px) and (min-width: 600px) {
+    // &--lg {
+    //   height: 400px;
+    //   margin-right: 24px;
+    //   width: 564px;
+    // }
+
+    // &--sm {
+    //   height: 188px;
+    //   width: 270px;
+
+    //   &:first-child {
+    //     margin-bottom: 24px;
+    //   }
+    // }
+
+    // &--md {
+    //   height: 400px;
+    //   margin-left: 24px;
+    //   width: 270px;
+    // }
+  }
+
+  @media (max-width: 1199px) {
+    &--lg,
+    &--sm,
+    &--md {
+      height: 249px;
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+}
+
+.box_title {
+  color: #212121;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.46px;
+}
+
+.box_value {
+  color: var(--primary-main, #771ac9);
+  display: flex;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 45px; /* 4 */
+  letter-spacing: -5px;
+  overflow: hidden;
+  max-height: 45px;
+
+  &--lg {
+    font-size: 82px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -8px;
+    line-height: 82px;
+    max-height: 82px;
+  }
+
+  @media (max-width: 1199px) and (min-width: 600px) {
+    font-size: 85px;
+    font-style: normal;
+    line-height: 85px;
+    max-height: initial;
+  }
+
+  @media (max-width: 599px) {
+    font-size: 60px;
+    font-style: normal;
+    line-height: 60px;
+    max-height: initial;
+  }
+}
+
+.letter_container {
+  display: block;
+}

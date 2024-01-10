@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react';
 
-import { theme } from '../src/theme/theme';
+import { lightTheme, darkTheme } from '../src/theme/theme';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { withThemeFromJSXProvider } from '@storybook/addon-styling';
 
@@ -10,7 +10,8 @@ export const decorators = [
     // Uncomment for theme switching
     Provider: ThemeProvider,
     themes: {
-      light: theme,
+      light: lightTheme,
+      dark: darkTheme,
     },
     defaultTheme: 'light',
   }),
@@ -26,8 +27,13 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        pathname: '#',
+      },
+    },
   },
 };
 
 export default preview;
-

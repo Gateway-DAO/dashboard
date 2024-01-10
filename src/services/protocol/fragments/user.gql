@@ -1,0 +1,17 @@
+fragment user on User {
+  id
+  gatewayId
+  profilePicture
+  displayName
+  email
+  createdAt
+  updatedAt
+}
+
+fragment min_user on User {
+  id
+  gatewayId
+  profilePicture
+  createdAt
+  displayName
+}
