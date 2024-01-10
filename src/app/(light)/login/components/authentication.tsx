@@ -1,12 +1,11 @@
 'use client';
 
 import { signOut } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import { redirect, useSearchParams } from 'next/navigation';
 
 import { useLoginStepState } from '@/app/(light)/login/providers/step-provider/step-provider';
 import routes from '@/constants/routes';
 
-import { useLoginStepState } from '../providers/step-provider/step-provider';
 import AuthenticationLayout from './authentication-layout';
 import AddEmail from './sections/add-email';
 import { ChooseGatewayId } from './sections/choose-gateway-id';
