@@ -6,7 +6,6 @@ export const instructionGuide = {
     btn_text: 'Play video',
     btn_link: '#guide',
   },
-
   issuePda: {
     title: 'How to issue a PDA',
     description: 'How to issue a PDA using a Data Model',
@@ -14,12 +13,17 @@ export const instructionGuide = {
     btn_text: 'Play video',
     btn_link: '#guide',
   },
-
   createRequest: {
     title: 'How to create a Request',
     description: 'How to create a request from a template',
     video_link: 'https://youtube.com/embed/7ihrltA9McM',
     btn_text: 'Play video',
     btn_link: '#guide',
+  },
+  start_usign_now: {
+    title: 'Start using now',
+    description:
+      'This your first Private Data Asset issued by Gateway. Open and discover where you can use it.',
+    btn_text: 'Open now',
   },
 };

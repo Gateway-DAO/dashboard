@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Chip, Skeleton, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
 type Props = {
@@ -16,7 +16,6 @@ export default function InstructionHeader({ link, title, description }: Props) {
         <Typography variant="h4" mb={1}>
           {title}
         </Typography>
-
         <Typography variant="body1">{description}</Typography>
       </Stack>
       <Stack direction="column" sx={{ height: '100%' }}>

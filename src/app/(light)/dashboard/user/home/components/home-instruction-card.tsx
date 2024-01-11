@@ -1,12 +1,14 @@
 'use client';
 
-import { Button, Paper, Stack, Typography, Link } from '@mui/material';
+import { useEffect, useState } from 'react';
 
-import CloseIcon from '@mui/icons-material/Close';
 import QuestionSquaredIcon from '@/components/icons/question-squared';
 import { useToggle } from '@react-hookz/web';
-import Instrunction from '../../../features/sidebar/instruction/instruction';
-import { useEffect, useState } from 'react';
+
+import CloseIcon from '@mui/icons-material/Close';
+import { Button, Paper, Stack, Typography } from '@mui/material';
+
+import Instruction from '../../../../../../components/instruction/instruction';
 
 type Props = {
   title: string;
@@ -88,7 +90,7 @@ export default function HomeInstructionCard({
               </Button>
             </Stack>
           </Stack>
-          <Instrunction
+          <Instruction
             description={description}
             title={title}
             link={link}

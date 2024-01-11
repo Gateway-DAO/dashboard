@@ -18,14 +18,14 @@ import VideoSquaredIcon from '../icons/video-squared';
 type Props = {
   title: string;
   desc: string;
-  btnLink: string;
+  onClickVideo: () => void;
   btnText: string;
 };
 
 export default function HelpCtaVideoCard({
   title,
   desc,
-  btnLink,
+  onClickVideo,
   btnText,
 }: Props) {
   const [open, setOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function HelpCtaVideoCard({
 
   useEffect(() => {
     hasSeenDialog = JSON.parse(
-      localStorage.getItem('help-cta-video-card') || '{}'
+      localStorage.getItem('help-cta-video-how-to-use-pda') || '{}'
     );
   }, []);
 
@@ -45,7 +45,10 @@ export default function HelpCtaVideoCard({
 
   const handleClick = () => {
     const updatedDialog = { ...hasSeenDialog, [title]: true };
-    localStorage.setItem('help-cta-video-card', JSON.stringify(updatedDialog));
+    localStorage.setItem(
+      'help-cta-video-how-to-use-pda',
+      JSON.stringify(updatedDialog)
+    );
     setOpen(false);
   };
 
@@ -54,6 +57,7 @@ export default function HelpCtaVideoCard({
       <Stack
         component={Card}
         position={'relative'}
+        onClick={onClickVideo}
         sx={{
           mb: 3,
           p: 2,
@@ -61,10 +65,15 @@ export default function HelpCtaVideoCard({
           width: '100%',
           justifyContent: 'space-between',
           backgroundColor: '#69DCED26',
+          cursor: 'pointer',
         }}
       >
         <IconButton
-          onClick={handleClick}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleClick();
+          }}
           sx={{ position: 'absolute', top: 20, right: 20 }}
         >
           <CloseIcon />
@@ -83,7 +92,7 @@ export default function HelpCtaVideoCard({
               {desc}
             </Typography>
             <Box>
-              <Button variant="outlined" href={btnLink} color="info">
+              <Button variant="outlined" color="info">
                 {btnText}
               </Button>
             </Box>
