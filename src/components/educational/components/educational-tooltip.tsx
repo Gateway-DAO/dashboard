@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, Card, IconButton, Typography } from '@mui/material';
 
@@ -5,6 +7,7 @@ type Props = {
   title: string;
   description: string;
   textBtn: string;
+  href?: string;
   onClickCard?: () => void;
   onClose: () => void;
 };
@@ -13,11 +16,16 @@ export default function EducationalTooltip({
   title,
   description,
   textBtn,
+  href,
   onClickCard,
   onClose,
 }: Props) {
   return (
     <Card
+      {...(href && {
+        component: Link,
+        href: href,
+      })}
       onClick={onClickCard}
       sx={{
         position: 'absolute',
@@ -30,6 +38,7 @@ export default function EducationalTooltip({
         color: 'common.white',
         overflow: 'visible',
         cursor: 'pointer',
+        textDecoration: 'none',
         '&::before': {
           content: '""',
           width: 10,

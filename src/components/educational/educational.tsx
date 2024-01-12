@@ -11,6 +11,7 @@ type Props = {
   textBtn: string;
   open: boolean;
   onClose: () => void;
+  href?: string;
   onClickCard?: () => void;
 };
 
@@ -21,6 +22,7 @@ export default function Educational({
   textBtn,
   open,
   onClose,
+  href,
   onClickCard,
 }: Props) {
   return (
@@ -33,6 +35,7 @@ export default function Educational({
             description={description}
             textBtn={textBtn}
             onClickCard={onClickCard}
+            href={href}
             onClose={onClose}
           />
         )}

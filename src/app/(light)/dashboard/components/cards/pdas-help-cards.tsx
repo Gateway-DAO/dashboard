@@ -7,6 +7,8 @@ import QuestionSquaredIcon from '@/components/icons/question-squared';
 import VerifyPdaIcon from '@/components/icons/verify-pda';
 import VideoSquaredIcon from '@/components/icons/video-squared';
 import Instruction from '@/components/instruction/instruction';
+import { educationalsKeys } from '@/constants/educational';
+import useHelpCard from '@/hooks/use-help-card';
 import { pdas } from '@/locale/en/pda';
 import { useToggle } from '@react-hookz/web';
 
@@ -15,6 +17,11 @@ import { Stack } from '@mui/material';
 export default function PdasHelpCards() {
   const [videoPlayer, setVideoPlayer] = useToggle(false);
   const [claimFirstPdaModal, setClaimFirstPdaModal] = useToggle(false);
+
+  const { onRemoveStorage } = useHelpCard({
+    storageKey: educationalsKeys.help_cta_video_how_to_use_pda,
+  });
+
   return (
     <Stack gap={2} sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
       <HelpCtaCard
@@ -23,7 +30,7 @@ export default function PdasHelpCards() {
         image={AssetTemplateImage}
         btnText={pdas.help_claim_first_pda_card.text_button}
         onClick={() => setClaimFirstPdaModal(true)}
-        key="help-cta-claim-your-first-pda"
+        storageKey={educationalsKeys.help_cta_claim_your_first_pda}
       />
       <HelpCtaCard
         icon={QuestionSquaredIcon}
@@ -32,7 +39,7 @@ export default function PdasHelpCards() {
         image={VideoSquaredIcon}
         btnText={pdas.help_video_card.text_button}
         onClick={() => setVideoPlayer(true)}
-        key="help-cta-video-how-to-use-pda"
+        storageKey={educationalsKeys.help_cta_video_how_to_use_pda}
         color="blue"
       />
       <EducationalModal
@@ -43,7 +50,10 @@ export default function PdasHelpCards() {
         title={pdas.help_video_card.title}
         description={pdas.help_video_card.description}
         link={pdas.help_video_card.link}
-        onClose={() => setVideoPlayer(false)}
+        onClose={() => {
+          onRemoveStorage();
+          setVideoPlayer(false);
+        }}
         open={videoPlayer}
       />
     </Stack>

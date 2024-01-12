@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import QuestionSquaredIcon from '@/components/icons/question-squared';
 import Instruction from '@/components/instruction/instruction';
+import useHelpCard from '@/hooks/use-help-card';
 import { useToggle } from '@react-hookz/web';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -23,27 +22,11 @@ export default function HomeInstructionCard({
   play_video,
 }: Props) {
   const [openVideoPlayer, toggleVideoPlayer] = useToggle(false);
-  const [open, setOpen] = useState(false);
-  let hasSeenDialog: { [key: string]: boolean } | null;
 
-  useEffect(() => {
-    hasSeenDialog = JSON.parse(
-      localStorage.getItem(title.toLowerCase()) || '{}'
-    );
-  }, []);
+  const { visible, onRemoveStorage } = useHelpCard({
+    storageKey: title.toLowerCase(),
+  });
 
-  useEffect(() => {
-    if (hasSeenDialog && !hasSeenDialog.hasOwnProperty(title)) {
-      setOpen(true);
-    }
-  }, []);
-
-  const handleClick = () => {
-    const updatedDialog = { ...hasSeenDialog, [title]: true };
-
-    localStorage.setItem(title.toLowerCase(), JSON.stringify(updatedDialog));
-    setOpen(false);
-  };
   return (
     <Paper
       variant={'outlined'}
@@ -55,17 +38,20 @@ export default function HomeInstructionCard({
         mr: 1,
         textDecoration: 'none',
         '&:last-child': { mr: 0 },
-        backgroundColor: open ? '#69DCED33' : '#f6f4f9',
-        border: open ? 1 : 0,
+        backgroundColor: visible ? '#69DCED33' : '#f6f4f9',
+        border: visible ? 1 : 0,
         borderColor: '#69DCED33',
       }}
     >
-      {open && (
+      {visible && (
         <>
           <Stack flexDirection={'column'} justifyContent={'space-between'}>
             <Stack flexDirection={'row'} justifyContent={'space-between'}>
               <QuestionSquaredIcon sx={{ width: 45, height: 40, mb: 2 }} />
-              <CloseIcon sx={{ mt: 1 }} onClick={handleClick} />
+              <CloseIcon
+                sx={{ mt: 1, cursor: 'pointer' }}
+                onClick={onRemoveStorage}
+              />
             </Stack>
             <Stack>
               <Typography mt={2} variant="h5" width={300} gutterBottom>
