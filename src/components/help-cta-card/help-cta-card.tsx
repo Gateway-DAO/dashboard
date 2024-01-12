@@ -14,8 +14,6 @@ import {
   alpha,
 } from '@mui/material';
 
-import QuestionSquaredIcon from '../icons/question-squared';
-
 type Props = {
   key: string;
   icon: FC<SvgIconProps>;
