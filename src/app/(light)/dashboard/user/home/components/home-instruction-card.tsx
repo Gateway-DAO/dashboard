@@ -3,12 +3,11 @@
 import { useEffect, useState } from 'react';
 
 import QuestionSquaredIcon from '@/components/icons/question-squared';
+import Instruction from '@/components/instruction/instruction';
 import { useToggle } from '@react-hookz/web';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, Paper, Stack, Typography } from '@mui/material';
-
-import Instruction from '../../../../../../components/instruction/instruction';
 
 type Props = {
   title: string;
