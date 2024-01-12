@@ -1,11 +1,9 @@
 import Link from 'next/link';
-import { useEffect } from 'react';
 
-import { useEducationalStore } from '@/app/(light)/dashboard/stores/educational.store';
+import { educationalsKeys } from '@/constants/educational';
 import useEducational from '@/hooks/use-educational';
+import useHelpCard from '@/hooks/use-help-card';
 import { instructionGuide } from '@/locale/en/educational';
-import { pdas } from '@/locale/en/pda';
-import { useToggle } from '@react-hookz/web';
 
 import { Card, CardActionArea, Stack, Typography } from '@mui/material';
 
@@ -30,28 +28,26 @@ export default function PdaCard({
     value: id,
   });
 
-  let hasSeenDialog: { [key: string]: boolean } | null;
-
-  useEffect(() => {
-    hasSeenDialog = JSON.parse(localStorage.getItem('help-cta-card') || '{}');
-  }, []);
-
-  const handleCloseClick = () => {
-    const updatedDialog = {
-      ...hasSeenDialog,
-      [pdas.help_claim_first_pda_card.title]: true,
-    };
-    localStorage.setItem('help-cta-card', JSON.stringify(updatedDialog));
-    setEducational(null);
-  };
+  const { onRemoveStorage } = useHelpCard({
+    storageKey: educationalsKeys.help_cta_claim_your_first_pda,
+  });
 
   return (
     <Educational
       title={instructionGuide.start_usign_now.title}
       description={instructionGuide.start_usign_now.description}
       textBtn={instructionGuide.start_usign_now.btn_text}
-      onClickCard={onClick}
-      onClose={handleCloseClick}
+      href={href}
+      onClickCard={() => {
+        onRemoveStorage();
+        if (onClick) {
+          onClick();
+        }
+      }}
+      onClose={() => {
+        onRemoveStorage();
+        setEducational(null);
+      }}
       open={showEducational}
     >
       <Stack

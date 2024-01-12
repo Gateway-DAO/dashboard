@@ -2,6 +2,8 @@
 
 import { FC, useEffect, useState } from 'react';
 
+import useHelpCard from '@/hooks/use-help-card';
+
 import CloseIcon from '@mui/icons-material/Close';
 import {
   Box,
@@ -15,7 +17,7 @@ import {
 } from '@mui/material';
 
 type Props = {
-  key: string;
+  storageKey: string;
   icon: FC<SvgIconProps>;
   title: string;
   desc?: string;
@@ -26,7 +28,7 @@ type Props = {
 };
 
 export default function HelpCtaCard({
-  key,
+  storageKey,
   icon,
   title,
   desc,
@@ -35,30 +37,13 @@ export default function HelpCtaCard({
   btnText,
   color = 'purple',
 }: Props) {
-  const [open, setOpen] = useState(false);
-  let hasSeenDialog: { [key: string]: boolean } | null;
-
-  useEffect(() => {
-    hasSeenDialog = JSON.parse(localStorage.getItem(key) || '{}');
-  }, []);
-
-  useEffect(() => {
-    if (hasSeenDialog && !hasSeenDialog.hasOwnProperty(title)) {
-      setOpen(true);
-    }
-  }, []);
-
-  const handleClick = () => {
-    const updatedDialog = { ...hasSeenDialog, [title]: true };
-    localStorage.setItem(key, JSON.stringify(updatedDialog));
-    setOpen(false);
-  };
+  const { visible, onRemoveStorage } = useHelpCard({ storageKey });
 
   const ImageCard = image;
   const IconCard = icon;
 
   return (
-    open && (
+    visible && (
       <Stack
         component={Card}
         position={'relative'}
@@ -83,7 +68,7 @@ export default function HelpCtaCard({
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            handleClick();
+            onRemoveStorage();
           }}
           sx={{ position: 'absolute', top: 20, right: 20 }}
         >
