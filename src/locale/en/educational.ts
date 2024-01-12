@@ -26,4 +26,16 @@ export const instructionGuide = {
       'This your first Private Data Asset issued by Gateway. Open and discover where you can use it.',
     btn_text: 'Open now',
   },
+  claim_your_first_pda: {
+    title: 'Claim your first PDA',
+    description:
+      'This is your first Private Data Asset issued by Gateway. It is a record containing your Gateway ID data.',
+    cards: {
+      title: 'You can use it for:',
+      unlock_benefits: 'Unlock benefits from partners',
+      join_other_platforms: 'Join other platforms with a single click',
+      win_prizes_with_pool_together: 'Win prizes with Pool Together',
+    },
+    textBtn: 'Claim now',
+  },
 };

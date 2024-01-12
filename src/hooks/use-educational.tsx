@@ -1,24 +1,27 @@
 import { useEffect } from 'react';
 
+import { useEducationalStore } from '@/app/(light)/dashboard/stores/educational.store';
 import { useToggle } from '@react-hookz/web';
 
 type Props = {
-  key: string;
-  value: string;
-};
+  key?: string;
+  value?: string;
+} | null;
 
-export default function useEducational({ key, value }: Props) {
+export default function useEducational(props?: Props) {
   const [showEducational, setShowEducational] = useToggle(false);
+  const { educational, setEducational } = useEducationalStore((state) => state);
 
   useEffect(() => {
-    const hash =
-      window?.location?.hash && window?.location?.hash.indexOf(`#${key}=`) > -1
-        ? window?.location?.hash.replace(`#${key}=`, '')
-        : '';
-    if (hash === value) {
+    if (
+      educational?.key === props?.key &&
+      educational?.value === props?.value
+    ) {
       setShowEducational(true);
+    } else {
+      setShowEducational(false);
     }
-  }, []);
+  }, [educational, showEducational]);
 
-  return { showEducational, setShowEducational };
+  return { showEducational, setEducational };
 }

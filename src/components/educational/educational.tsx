@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { Box, Stack } from '@mui/material';
 
-import EducationalTooltip from './educational-tooltip';
+import EducationalTooltip from './components/educational-tooltip';
 
 type Props = {
   children: ReactNode;

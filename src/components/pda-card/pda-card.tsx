@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 
+import { useEducationalStore } from '@/app/(light)/dashboard/stores/educational.store';
 import useEducational from '@/hooks/use-educational';
 import { instructionGuide } from '@/locale/en/educational';
 import { pdas } from '@/locale/en/pda';
+import { useToggle } from '@react-hookz/web';
 
 import { Card, CardActionArea, Stack, Typography } from '@mui/material';
 
@@ -23,7 +25,7 @@ export default function PdaCard({
   onClick,
   status,
 }: PdaCardProps) {
-  const { showEducational, setShowEducational } = useEducational({
+  const { showEducational, setEducational } = useEducational({
     key: 'start-using-pda',
     value: id,
   });
@@ -40,7 +42,7 @@ export default function PdaCard({
       [pdas.help_claim_first_pda_card.title]: true,
     };
     localStorage.setItem('help-cta-card', JSON.stringify(updatedDialog));
-    setShowEducational(false);
+    setEducational(null);
   };
 
   return (

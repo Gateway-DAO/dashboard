@@ -22,6 +22,7 @@ export default function EducationalTooltip({
       sx={{
         position: 'absolute',
         left: '103%',
+        bottom: 0,
         p: 2,
         width: 260,
         border: 0,

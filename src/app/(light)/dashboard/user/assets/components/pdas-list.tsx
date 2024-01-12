@@ -1,7 +1,6 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect, useMemo } from 'react';
 
 import routes from '@/constants/routes';
 import {
