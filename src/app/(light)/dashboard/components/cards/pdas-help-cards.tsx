@@ -1,9 +1,11 @@
 'use client';
 
 import EducationalModal from '@/components/educational/components/educational-modal';
-import HelpClaimFirstPdaCard from '@/components/help-claim-first-pda-card/help-claim-first-pda-card';
-import HelpCtaVideoCard from '@/components/help-cta-video-card/help-cta-video-card';
-import DataSquaredIcon from '@/components/icons/data-squared';
+import HelpCtaCard from '@/components/help-cta-card/help-cta-card';
+import AssetTemplateImage from '@/components/icons/asset-template';
+import QuestionSquaredIcon from '@/components/icons/question-squared';
+import VerifyPdaIcon from '@/components/icons/verify-pda';
+import VideoSquaredIcon from '@/components/icons/video-squared';
 import Instruction from '@/components/instruction/instruction';
 import { pdas } from '@/locale/en/pda';
 import { useToggle } from '@react-hookz/web';
@@ -15,17 +17,23 @@ export default function PdasHelpCards() {
   const [claimFirstPdaModal, setClaimFirstPdaModal] = useToggle(false);
   return (
     <Stack gap={2} sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
-      <HelpClaimFirstPdaCard
+      <HelpCtaCard
+        icon={VerifyPdaIcon}
         title={pdas.help_claim_first_pda_card.title}
+        image={AssetTemplateImage}
         btnText={pdas.help_claim_first_pda_card.text_button}
-        onClickCard={() => setClaimFirstPdaModal(true)}
-        icon={DataSquaredIcon}
+        onClick={() => setClaimFirstPdaModal(true)}
+        key="help-cta-claim-your-first-pda"
       />
-      <HelpCtaVideoCard
+      <HelpCtaCard
+        icon={QuestionSquaredIcon}
         title={pdas.help_video_card.title}
         desc={pdas.help_video_card.description}
+        image={VideoSquaredIcon}
         btnText={pdas.help_video_card.text_button}
-        onClickVideo={() => setVideoPlayer(true)}
+        onClick={() => setVideoPlayer(true)}
+        key="help-cta-video-how-to-use-pda"
+        color="blue"
       />
       <EducationalModal
         open={claimFirstPdaModal}

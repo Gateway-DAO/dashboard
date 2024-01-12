@@ -11,28 +11,37 @@ import {
   IconButton,
   Card,
   SvgIconProps,
+  alpha,
 } from '@mui/material';
 
+import QuestionSquaredIcon from '../icons/question-squared';
+
 type Props = {
-  title: string;
-  desc: string;
-  btnLink: string;
-  btnText: string;
+  key: string;
   icon: FC<SvgIconProps>;
+  title: string;
+  desc?: string;
+  image: FC<SvgIconProps>;
+  onClick: () => void;
+  btnText: string;
+  color?: 'purple' | 'blue';
 };
 
 export default function HelpCtaCard({
+  key,
+  icon,
   title,
   desc,
-  btnLink,
+  image,
+  onClick,
   btnText,
-  icon: Icon,
+  color = 'purple',
 }: Props) {
   const [open, setOpen] = useState(false);
   let hasSeenDialog: { [key: string]: boolean } | null;
 
   useEffect(() => {
-    hasSeenDialog = JSON.parse(localStorage.getItem('help-cta-card') || '{}');
+    hasSeenDialog = JSON.parse(localStorage.getItem(key) || '{}');
   }, []);
 
   useEffect(() => {
@@ -43,43 +52,82 @@ export default function HelpCtaCard({
 
   const handleClick = () => {
     const updatedDialog = { ...hasSeenDialog, [title]: true };
-    localStorage.setItem('help-cta-card', JSON.stringify(updatedDialog));
+    localStorage.setItem(key, JSON.stringify(updatedDialog));
     setOpen(false);
   };
+
+  const ImageCard = image;
+  const IconCard = icon;
 
   return (
     open && (
       <Stack
         component={Card}
         position={'relative'}
-        sx={{
+        onClick={onClick}
+        sx={(theme) => ({
           mb: 3,
           p: 2,
           boxShadow: 'none',
-          border: '1px solid',
-          borderColor: 'divider',
           width: '100%',
-          maxWidth: { xs: '100%', md: 342 },
-        }}
+          justifyContent: 'space-between',
+          backgroundColor:
+            color === 'purple'
+              ? alpha(
+                  theme.palette.primary.main,
+                  theme.palette.action.focusOpacity
+                )
+              : '#69DCED26',
+          cursor: 'pointer',
+        })}
       >
         <IconButton
-          onClick={handleClick}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleClick();
+          }}
           sx={{ position: 'absolute', top: 20, right: 20 }}
         >
           <CloseIcon />
         </IconButton>
-        <Icon sx={{ width: 40, height: 40, mb: 1 }} />
-        <Typography variant="h5" gutterBottom>
-          {title}
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 3, flexGrow: 1 }}>
-          {desc}
-        </Typography>
-        <Box>
-          <Button variant="contained" href={btnLink}>
-            {btnText}
-          </Button>
-        </Box>
+        <IconCard sx={{ width: 40, height: 40, mb: 1 }} />
+        <Stack
+          alignItems="stretch"
+          gap={2}
+          sx={{ flexDirection: { xs: 'column-reverse', md: 'row' } }}
+        >
+          <Stack width="100%">
+            <Typography
+              variant="h5"
+              gutterBottom
+              sx={{ flexGrow: desc ? 0 : 1 }}
+            >
+              {title}
+            </Typography>
+            {desc && (
+              <Typography variant="body1" sx={{ mb: 3, flexGrow: 1 }}>
+                {desc}
+              </Typography>
+            )}
+            <Box>
+              <Button
+                variant="outlined"
+                color={color === 'purple' ? 'primary' : 'info'}
+              >
+                {btnText}
+              </Button>
+            </Box>
+          </Stack>
+          <Box>
+            <ImageCard
+              sx={{
+                width: { xs: '100%', md: 220 },
+                height: { xs: 'auto', md: 128 },
+              }}
+            />
+          </Box>
+        </Stack>
       </Stack>
     )
   );
