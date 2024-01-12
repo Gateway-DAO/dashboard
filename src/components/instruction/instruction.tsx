@@ -13,7 +13,7 @@ type Props = {
   description: string;
 };
 
-export default function Instrunction({
+export default function Instruction({
   open,
   link,
   title,

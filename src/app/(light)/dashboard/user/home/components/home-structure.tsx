@@ -3,9 +3,8 @@
 import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
 import { home } from '@/locale/en/home';
-import { currentEnv } from '@/utils/env';
 
-import { Box, Button, Card } from '@mui/material';
+import { Box } from '@mui/material';
 import { Typography } from '@mui/material';
 
 import HomeCard from './home-card';

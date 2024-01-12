@@ -12,7 +12,7 @@ import { Stack } from '@mui/system';
 
 import SandboxAlert from '../components/alerts/sandbox-alert';
 import Logo from '../components/logo/logo';
-import Sidebar from '../features/sidebar/sidebar';
+import Sidebar from '../components/sidebar/sidebar';
 
 type Props = {
   menuItems: ReactNode;
