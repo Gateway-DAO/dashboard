@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import { educationalsKeys } from '@/constants/educational';
+import { educationalKeys, helpStorageKeys } from '@/constants/educational';
 import useEducational from '@/hooks/use-educational';
-import useHelpCard from '@/hooks/use-help-card';
+import useLocalStorageHelpCard from '@/hooks/use-help-card';
 import { instructionGuide } from '@/locale/en/educational';
 
 import { Card, CardActionArea, Stack, Typography } from '@mui/material';
@@ -24,12 +24,12 @@ export default function PdaCard({
   status,
 }: PdaCardProps) {
   const { showEducational, setEducational } = useEducational({
-    key: 'start-using-pda',
+    key: educationalKeys.start_using_pda,
     value: id,
   });
 
-  const { onRemoveStorage } = useHelpCard({
-    storageKey: educationalsKeys.help_cta_claim_your_first_pda,
+  const { onRemoveStorage } = useLocalStorageHelpCard({
+    storageKey: helpStorageKeys.help_cta_claim_your_first_pda,
   });
 
   return (
@@ -40,6 +40,7 @@ export default function PdaCard({
       href={href}
       onClickCard={() => {
         onRemoveStorage();
+        setEducational(null);
         if (onClick) {
           onClick();
         }

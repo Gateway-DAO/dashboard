@@ -2,7 +2,7 @@
 
 import QuestionSquaredIcon from '@/components/icons/question-squared';
 import Instruction from '@/components/instruction/instruction';
-import useHelpCard from '@/hooks/use-help-card';
+import useLocalStorageHelpCard from '@/hooks/use-help-card';
 import { useToggle } from '@react-hookz/web';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -23,7 +23,7 @@ export default function HomeInstructionCard({
 }: Props) {
   const [openVideoPlayer, toggleVideoPlayer] = useToggle(false);
 
-  const { visible, onRemoveStorage } = useHelpCard({
+  const { visible, onRemoveStorage } = useLocalStorageHelpCard({
     storageKey: title.toLowerCase(),
   });
 

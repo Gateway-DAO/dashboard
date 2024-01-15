@@ -13,6 +13,9 @@ type Props = {
   onClose: () => void;
   href?: string;
   onClickCard?: () => void;
+  position?: 'right' | 'bottom';
+  alignX?: 'center' | 'left' | 'right';
+  alignY?: 'top' | 'bottom';
 };
 
 export default function Educational({
@@ -24,6 +27,9 @@ export default function Educational({
   onClose,
   href,
   onClickCard,
+  position = 'right',
+  alignX = 'right',
+  alignY = 'bottom',
 }: Props) {
   return (
     <Stack>
@@ -37,6 +43,9 @@ export default function Educational({
             onClickCard={onClickCard}
             href={href}
             onClose={onClose}
+            position={position}
+            alignX={alignX}
+            alignY={alignY}
           />
         )}
       </Stack>

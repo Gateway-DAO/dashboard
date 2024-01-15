@@ -26,6 +26,11 @@ export const instructionGuide = {
       'This your first Private Data Asset issued by Gateway. Open and discover where you can use it.',
     btn_text: 'Open now',
   },
+  start_issuing_now: {
+    title: 'Start issuing now',
+    description: 'Quick, non-code feature for issuing PDAs in a few steps. ',
+    btn_text: 'Issue now',
+  },
   claim_your_first_pda: {
     title: 'Claim your first PDA',
     description:
@@ -36,6 +41,6 @@ export const instructionGuide = {
       join_other_platforms: 'Join other platforms with a single click',
       win_prizes_with_pool_together: 'Win prizes with Pool Together',
     },
-    textBtn: 'Claim now',
+    btn_text: 'Claim now',
   },
 };

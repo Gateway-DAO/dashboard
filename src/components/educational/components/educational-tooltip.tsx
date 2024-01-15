@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { useRouter } from 'next-nprogress-bar';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, Card, IconButton, Typography } from '@mui/material';
@@ -10,6 +10,9 @@ type Props = {
   href?: string;
   onClickCard?: () => void;
   onClose: () => void;
+  position: 'right' | 'bottom';
+  alignX: 'center' | 'left' | 'right';
+  alignY: 'top' | 'bottom';
 };
 
 export default function EducationalTooltip({
@@ -19,18 +22,44 @@ export default function EducationalTooltip({
   href,
   onClickCard,
   onClose,
+  position,
+  alignX,
+  alignY,
 }: Props) {
+  const router = useRouter();
   return (
     <Card
-      {...(href && {
-        component: Link,
-        href: href,
-      })}
-      onClick={onClickCard}
+      onClick={() => {
+        if (!!onClickCard) {
+          onClickCard();
+        }
+        if (!!href) {
+          router.push(href);
+        }
+      }}
       sx={{
         position: 'absolute',
-        left: '103%',
-        bottom: 0,
+        left:
+          position === 'right'
+            ? 'calc(100% + 10px)'
+            : alignX === 'left'
+            ? 0
+            : alignX === 'center'
+            ? 'calc(-100% + 110px)'
+            : 'auto',
+        right:
+          position === 'right'
+            ? 'auto'
+            : alignX === 'left' || alignX === 'center'
+            ? 'auto'
+            : 0,
+        bottom: position === 'right' && alignY === 'bottom' ? 0 : 'auto',
+        top:
+          position === 'right' && alignY === 'top'
+            ? 0
+            : position === 'bottom'
+            ? 'calc(100% + 10px)'
+            : 'auto',
         p: 2,
         width: 260,
         border: 0,
@@ -46,8 +75,8 @@ export default function EducationalTooltip({
           transform: 'rotate(45deg)',
           backgroundColor: 'info.dark',
           position: 'absolute',
-          left: '-5px',
-          top: 'calc(50% - 5px)',
+          left: position === 'right' ? '-5px' : 'calc(50% - 5px)',
+          top: position === 'right' ? 'calc(50% - 5px)' : '-5px',
         },
       }}
     >

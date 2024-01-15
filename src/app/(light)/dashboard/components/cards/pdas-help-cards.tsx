@@ -7,8 +7,9 @@ import QuestionSquaredIcon from '@/components/icons/question-squared';
 import VerifyPdaIcon from '@/components/icons/verify-pda';
 import VideoSquaredIcon from '@/components/icons/video-squared';
 import Instruction from '@/components/instruction/instruction';
-import { educationalsKeys } from '@/constants/educational';
-import useHelpCard from '@/hooks/use-help-card';
+import { educationalKeys, helpStorageKeys } from '@/constants/educational';
+import useEducational from '@/hooks/use-educational';
+import useLocalStorageHelpCard from '@/hooks/use-help-card';
 import { pdas } from '@/locale/en/pda';
 import { useToggle } from '@react-hookz/web';
 
@@ -18,9 +19,11 @@ export default function PdasHelpCards() {
   const [videoPlayer, setVideoPlayer] = useToggle(false);
   const [claimFirstPdaModal, setClaimFirstPdaModal] = useToggle(false);
 
-  const { onRemoveStorage } = useHelpCard({
-    storageKey: educationalsKeys.help_cta_video_how_to_use_pda,
+  const { onRemoveStorage } = useLocalStorageHelpCard({
+    storageKey: helpStorageKeys.help_cta_video_how_to_use_pda,
   });
+
+  const { setEducational } = useEducational();
 
   return (
     <Stack gap={2} sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
@@ -30,7 +33,7 @@ export default function PdasHelpCards() {
         image={AssetTemplateImage}
         btnText={pdas.help_claim_first_pda_card.text_button}
         onClick={() => setClaimFirstPdaModal(true)}
-        storageKey={educationalsKeys.help_cta_claim_your_first_pda}
+        storageKey={helpStorageKeys.help_cta_claim_your_first_pda}
       />
       <HelpCtaCard
         icon={QuestionSquaredIcon}
@@ -39,7 +42,7 @@ export default function PdasHelpCards() {
         image={VideoSquaredIcon}
         btnText={pdas.help_video_card.text_button}
         onClick={() => setVideoPlayer(true)}
-        storageKey={educationalsKeys.help_cta_video_how_to_use_pda}
+        storageKey={helpStorageKeys.help_cta_video_how_to_use_pda}
         color="blue"
       />
       <EducationalModal
@@ -53,6 +56,10 @@ export default function PdasHelpCards() {
         onClose={() => {
           onRemoveStorage();
           setVideoPlayer(false);
+          setEducational({
+            key: educationalKeys.start_issuing_now,
+            value: true,
+          });
         }}
         open={videoPlayer}
       />
