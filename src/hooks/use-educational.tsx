@@ -5,7 +5,7 @@ import { useToggle } from '@react-hookz/web';
 
 type Props = {
   key?: string;
-  value?: string;
+  value?: string | boolean;
 } | null;
 
 export default function useEducational(props?: Props) {

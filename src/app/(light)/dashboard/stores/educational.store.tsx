@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type EducationalType = { key: string; value: string } | null;
+type EducationalType = { key: string; value: string | boolean } | null;
 
 type EducationalState = {
   educational: EducationalType;
