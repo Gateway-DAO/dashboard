@@ -4,7 +4,7 @@ type Props = {
   storageKey: string;
 };
 
-export default function useHelpCard({ storageKey }: Props) {
+export default function useLocalStorageHelpCard({ storageKey }: Props) {
   const [visible, setVisible] = useState(false);
   let hasSeenDialog: { [storageKey: string]: boolean } | null;
 

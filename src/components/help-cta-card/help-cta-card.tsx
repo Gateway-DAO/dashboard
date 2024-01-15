@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useState } from 'react';
 
-import useHelpCard from '@/hooks/use-help-card';
+import useLocalStorageHelpCard from '@/hooks/use-help-card';
 
 import CloseIcon from '@mui/icons-material/Close';
 import {
@@ -37,7 +37,7 @@ export default function HelpCtaCard({
   btnText,
   color = 'purple',
 }: Props) {
-  const { visible, onRemoveStorage } = useHelpCard({ storageKey });
+  const { visible, onRemoveStorage } = useLocalStorageHelpCard({ storageKey });
 
   const ImageCard = image;
   const IconCard = icon;

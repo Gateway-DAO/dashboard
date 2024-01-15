@@ -5,6 +5,7 @@ import { FC } from 'react';
 import BenefitsIcon from '@/components/icons/benefits';
 import JoinClickIcon from '@/components/icons/join-click';
 import PoolTogetherIcon from '@/components/icons/pool-together';
+import { educationalKeys } from '@/constants/educational';
 import useEducational from '@/hooks/use-educational';
 import { instructionGuide } from '@/locale/en/educational';
 
@@ -56,13 +57,13 @@ export default function EducationalModalContent({ onClose }: Props) {
         variant="contained"
         onClick={() => {
           setEducational({
-            key: 'start-using-pda',
+            key: educationalKeys.start_using_pda,
             value: '31181920-6eff-4314-a8ea-0177a848ebca',
           });
           onClose();
         }}
       >
-        {instructionGuide.claim_your_first_pda.textBtn}
+        {instructionGuide.claim_your_first_pda.btn_text}
       </Button>
     </Stack>
   );
