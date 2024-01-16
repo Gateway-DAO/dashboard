@@ -57,6 +57,7 @@ export const settings = {
     title: 'Developer portal',
     description: "Here's all the info needed to connect to our API.",
     api_key: 'API key',
+    widget_key: 'Widget Key',
     auth_token: 'Authentication token',
     auth_token_warning:
       'By sharing your authentication token, you assume all responsibility for any actions performed using your token, whether authorized or unauthorized.',
