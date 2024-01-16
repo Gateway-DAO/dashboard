@@ -39,7 +39,6 @@ export default function DeveloperPortal() {
       data.getMonthlyUserUsage as MonthlyUserUsageQuery['getMonthlyUserUsage'],
   });
 
-  const isTestnet = currentEnv() === 'testnet';
   return (
     <Stack spacing={3} alignItems="flex-start">
       <Stack direction="column" gap={2}>
@@ -62,7 +61,7 @@ export default function DeveloperPortal() {
           </CardContent>
         </Card>
         <AuthenticationTokenSection />
-        {isTestnet && isOrg && <WidgetKey orgId={organization?.id as string} />}
+        {isOrg && <WidgetKey orgId={organization?.id as string} />}
         <Card sx={{ width: '100%' }} variant="outlined">
           <CardHeader
             titleTypographyProps={{

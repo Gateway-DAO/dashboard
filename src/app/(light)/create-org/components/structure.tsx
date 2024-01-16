@@ -42,7 +42,6 @@ export default function CreateOrgStructure() {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [image, setImage] = useState<Blob | null>(null);
-  const isTestnet = currentEnv() === 'testnet';
 
   const {
     register,
@@ -71,15 +70,13 @@ export default function CreateOrgStructure() {
       }),
     async onSuccess(data) {
       const org_id = data?.createOrganization?.id;
-      if (isTestnet) {
-        try {
-          await createOrgKey.mutateAsync({
-            orgId: org_id,
-            session: session.token,
-          });
-        } catch (error) {
-          enqueueSnackbar('Failed to create key', { variant: 'error' });
-        }
+      try {
+        await createOrgKey.mutateAsync({
+          orgId: org_id,
+          session: session.token,
+        });
+      } catch (error) {
+        enqueueSnackbar('Failed to create key', { variant: 'error' });
       }
       if (image) {
         try {
