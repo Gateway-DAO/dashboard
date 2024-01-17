@@ -5,6 +5,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
+import DOMPurify from 'isomorphic-dompurify';
+
 import Main from './components/Main';
 import SetSizes from './components/set-sizes';
 import Providers from './providers';
@@ -19,6 +21,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const gaLandingScript = DOMPurify.sanitize(`
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N32L27DH');
+`);
   return (
     <html lang="en" className="lenis lenis-smooth">
       {/* <!-- Google tag (gtag.js) --> */}
@@ -28,13 +37,7 @@ export default function RootLayout({
             strategy="afterInteractive"
             id="ga-landing"
             dangerouslySetInnerHTML={{
-              __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-N32L27DH');
-          `,
+              __html: gaLandingScript,
             }}
           />
           {/* <Script
