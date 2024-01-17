@@ -4,7 +4,7 @@ import Script from 'next/script';
 
 import { currentEnv } from '@/utils/env';
 import { Analytics } from '@vercel/analytics/react';
-import DOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 
 import Providers from './providers';
 

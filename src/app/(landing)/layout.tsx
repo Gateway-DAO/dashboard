@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
-import DOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 
 import Main from './components/Main';
 import SetSizes from './components/set-sizes';
