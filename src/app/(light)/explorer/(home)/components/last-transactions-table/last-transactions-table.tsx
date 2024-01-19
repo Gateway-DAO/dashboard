@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
 
-import FinancialActionDetail from '@/app/(light)/dashboard/components/wallet/action-detail';
 import { CardCellContainer } from '@/components/card-cell/card-cell';
 import { DATE_FORMAT } from '@/constants/date';
 import { explorerQueries } from '@/constants/queries';

@@ -1,12 +1,13 @@
 'use client';
 import useBreakpoints from '@/hooks/use-breakpoints';
 
-import { Box, Container, Stack } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 import Logo from './logo';
 import ExplorerNavbarDesktop from './navbar-desktop';
 import ExplorerNavbarMobile from './navbar-mobile';
 import ToDashboardLink from './to-dashboard-link';
+import ToSandboxOrMainnetLink from './to-sandbox-or-mainnet-link';
 
 export default function ExplorerNavbar() {
   const { isDesktop } = useBreakpoints();
@@ -32,6 +33,7 @@ export default function ExplorerNavbar() {
       >
         <Logo />
         <ExplorerNavbarDesktop />
+        {isDesktop && <ToSandboxOrMainnetLink />}
         {isDesktop && <ToDashboardLink />}
         <ExplorerNavbarMobile />
       </Container>

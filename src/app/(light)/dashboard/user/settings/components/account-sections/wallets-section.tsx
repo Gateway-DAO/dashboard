@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 
-import ListSection from '@/app/(light)/dashboard/components/list-section';
+import ListSection from '@/app/(light)/dashboard/components/list-section/list-section';
 import WalletConnectModal from '@/components/wallet-modal/wallet-connect-modal';
 import WalletLoadingModal from '@/components/wallet-modal/wallet-loading-modal';
 import { useGtwSession } from '@/context/gtw-session-provider';

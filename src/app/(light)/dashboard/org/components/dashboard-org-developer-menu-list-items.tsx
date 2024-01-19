@@ -3,10 +3,16 @@
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 
+import ExpirementOutlined from '@/components/icons/expirement-outlined';
+import MainnetOutlined from '@/components/icons/mainnet-outlined';
 import GTWMenuItem from '@/components/menu-item/menu-item';
+import externalLinks from '@/constants/externalLinks';
+import routes from '@/constants/routes';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
+import { currentEnv } from '@/utils/env';
 
 import { Typography } from '@mui/material';
 
@@ -18,6 +24,7 @@ import dashboardOrgDevelopersMenuItems from './dashboard-org-developer-menu-item
 export default function DashboardOrgDeveloperMenuListItems() {
   const activePath = usePathname();
   const { pathnameOrg } = useOrganization();
+
   const menuItems = useMemo(
     () =>
       pathnameOrg ? dashboardOrgDevelopersMenuItems(pathnameOrg) : undefined,
@@ -41,6 +48,18 @@ export default function DashboardOrgDeveloperMenuListItems() {
               {...item}
             />
           ))}
+          <GTWMenuItem
+            name={currentEnv === 'production' ? 'Sandbox' : 'MainNet'}
+            href={
+              currentEnv === 'production'
+                ? `${externalLinks.gateway_sandbox}${activePath}`
+                : `${externalLinks.gateway}${activePath}`
+            }
+            icon={
+              currentEnv === 'production' ? ExpirementOutlined : MainnetOutlined
+            }
+            externalLink={true}
+          />
         </>
       )}
     </>

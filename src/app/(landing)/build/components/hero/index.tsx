@@ -3,10 +3,10 @@ import Link from '@/app/(landing)/components/icons/link';
 import Wrapper from '@/app/(landing)/components/wrapper';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import GTWLink from '@/components/gtw-link';
+import { DOCS_BASE_URL } from '@/constants/docs';
 import Slider from 'react-slick';
 
 import styles from './hero.module.scss';
-import { DOCS_BASE_URL } from '@/constants/docs';
 
 const journeySteps = [
   {

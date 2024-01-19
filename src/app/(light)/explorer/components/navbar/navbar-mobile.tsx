@@ -23,6 +23,7 @@ import { TransitionProps } from '@mui/material/transitions';
 import Logo from './logo';
 import explorerMenuItems from './menu-items';
 import ToDashboardLink from './to-dashboard-link';
+import ToSandboxOrMainnetLink from './to-sandbox-or-mainnet-link';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -114,7 +115,8 @@ export default function ExplorerNavbarMobile() {
                   );
                 })}
               </Stack>
-              <Stack sx={{ mx: 3, mb: 2 }}>
+              <Stack sx={{ mx: 3, mb: 2 }} gap={2}>
+                <ToSandboxOrMainnetLink />
                 <ToDashboardLink />
               </Stack>
             </Stack>

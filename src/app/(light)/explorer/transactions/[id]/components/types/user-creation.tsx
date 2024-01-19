@@ -3,7 +3,7 @@ import { transaction_detail } from '@/locale/en/transaction';
 import { Transaction_DetailQuery } from '@/services/protocol/types';
 import dayjs from 'dayjs';
 
-import { Typography, Stack, Divider } from '@mui/material';
+import { Stack, Divider } from '@mui/material';
 
 import CardRow from '../card-row';
 import UserColumn from '../user-column';

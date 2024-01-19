@@ -2,7 +2,6 @@
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 
-import { featureToggle } from '@/environment/environment';
 import { auth } from '@/locale/en/auth';
 
 import { LogoutOutlined } from '@mui/icons-material';
@@ -14,7 +13,7 @@ import {
   MenuItem,
 } from '@mui/material';
 
-import WalletWidget from '../wallet/wallet-widget/wallet-widget';
+import WalletWidget from '../../features/wallet/wallet-widget/wallet-widget';
 import AuthDropdownCurrent from './auth-dropdown-current';
 import AuthDropdownProfilesList from './auth-dropdown-profiles-list';
 
@@ -32,11 +31,9 @@ export default function AuthDropdown({ onClose }: Props) {
   return (
     <>
       <AuthDropdownCurrent onClose={onClose} />
-      {featureToggle?.wallet && (
-        <Box sx={{ display: { xs: 'block', lg: 'none' }, px: 2, pt: 1 }}>
-          <WalletWidget id="wallet-button" />
-        </Box>
-      )}
+      <Box sx={{ display: { xs: 'block', lg: 'none' }, px: 2, pt: 1 }}>
+        <WalletWidget id="wallet-button" />
+      </Box>
       <Divider sx={{ my: 1 }} />
       <AuthDropdownProfilesList onClose={onClose} />
       <MenuItem onClick={onSignOut}>
