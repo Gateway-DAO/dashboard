@@ -18,8 +18,14 @@ fragment login_data on LoginOutput {
   token
 }
 
-mutation login_wallet($signature: String!, $wallet: String!) {
-  loginWallet(input: { signature: $signature, wallet: $wallet }) {
+mutation login_wallet(
+  $signature: String!
+  $wallet: String!
+  $publicKey: String
+) {
+  loginWallet(
+    input: { signature: $signature, wallet: $wallet, publicKey: $publicKey }
+  ) {
     ...login_data
   }
 }
@@ -62,9 +68,15 @@ mutation protocol_add_wallet_confirmation(
   $wallet: String!
   $chain: Chain
   $signature: String!
+  $publicKey: String
 ) {
   addWalletConfirmation(
-    input: { wallet: $wallet, chain: $chain, signature: $signature }
+    input: {
+      wallet: $wallet
+      chain: $chain
+      signature: $signature
+      publicKey: $publicKey
+    }
   ) {
     id
   }
