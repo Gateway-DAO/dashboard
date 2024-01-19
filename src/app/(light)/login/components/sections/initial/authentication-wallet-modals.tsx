@@ -25,11 +25,12 @@ export default function AuthenticationWalletModals({
       return (await apiPublic.get_nonce({ wallet, chain })).createWalletNonce
         .message;
     },
-    async onSignedMessage({ signature, wallet }) {
+    async onSignedMessage({ signature, wallet, publicKey }) {
       const res = await signIn('credential-wallet', {
         redirect: false,
         wallet,
         signature,
+        publicKey,
       });
 
       if (!res || (res && !res.ok)) {
@@ -44,9 +45,13 @@ export default function AuthenticationWalletModals({
     statesHandler: connectionStep,
   });
 
-  const onConnectWallet = (address: string, chain: Chain) => {
+  const onConnectWallet = (
+    address: string,
+    chain: Chain,
+    publicKey?: string
+  ) => {
     onCancel();
-    onConnect(address, chain);
+    onConnect(address, chain, publicKey);
   };
 
   return (
