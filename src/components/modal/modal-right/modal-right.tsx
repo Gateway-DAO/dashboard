@@ -44,6 +44,7 @@ export default function ModalRight({ children, open, onClose }: Props) {
         sx={{
           px: { xs: 3, md: 6 },
           pb: { xs: 3, md: 6 },
+          height: '100%',
         }}
       >
         {children}
