@@ -7,12 +7,15 @@ import { useState } from 'react';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import AvatarPicker from '@/components/form/avatar-picker/avatar-picker';
 import { TitleSubtitleField } from '@/components/title-field/title-field';
+import { mutations } from '@/constants/queries';
 import routes from '@/constants/routes';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';
 import useGaEvent from '@/hooks/use-ga-event';
 import { org } from '@/locale/en/org';
 import { usernameSchema } from '@/schemas/profile';
 import { getClientPrivateApi } from '@/services/protocol/api';
+import { currentEnv } from '@/utils/env';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
@@ -37,6 +40,7 @@ type UploadImageProps = {
 export default function CreateOrgStructure() {
   const { update } = useSession();
   const { sendEvent } = useGaEvent();
+  const { session } = useGtwSession();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [image, setImage] = useState<Blob | null>(null);
@@ -68,6 +72,14 @@ export default function CreateOrgStructure() {
       }),
     async onSuccess(data) {
       const org_id = data?.createOrganization?.id;
+      try {
+        await createOrgKey.mutateAsync({
+          orgId: org_id,
+          session: session.token,
+        });
+      } catch (error) {
+        enqueueSnackbar('Failed to create key', { variant: 'error' });
+      }
       if (image) {
         try {
           await uploadImage.mutateAsync({
@@ -78,6 +90,27 @@ export default function CreateOrgStructure() {
           enqueueSnackbar('Failed to update avatar', { variant: 'error' });
         }
       }
+    },
+  });
+
+  const createOrgKey = useMutation({
+    mutationKey: [mutations.create_org_key],
+    mutationFn: async ({
+      orgId,
+      session,
+    }: {
+      orgId: string;
+      session: string;
+    }) => {
+      const response = await fetch('/api/org-widget-key/generate', {
+        method: 'POST',
+        body: JSON.stringify({ session, orgId }),
+      });
+      const data = await response.json();
+      if (!data) {
+        throw new Error('Failed to create key');
+      }
+      return data;
     },
   });
 

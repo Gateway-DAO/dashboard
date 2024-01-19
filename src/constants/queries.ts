@@ -15,6 +15,7 @@ export const queries = {
   featured_data_models: 'featured_data_models',
   user_info: 'user_info',
   pdas: 'pdas',
+  get_widget_key: 'get_widget_key',
 };
 
 export const mutations = {
@@ -25,6 +26,7 @@ export const mutations = {
   disconnect_email: 'disconnect_email',
   disconnect_wallet: 'disconnect_wallet',
   update_notification_email: 'update_notification_email',
+  create_org_key: 'create_org_key',
 };
 
 export const explorerQueries = {

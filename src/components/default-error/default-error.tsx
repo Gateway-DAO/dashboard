@@ -24,7 +24,6 @@ export default function DefaultError({
   hasLink = true,
   isModal = false,
 }: Props): JSX.Element {
-  console.log(href);
   return (
     <Stack
       sx={{

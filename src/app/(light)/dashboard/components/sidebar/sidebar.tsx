@@ -6,8 +6,8 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
+import WalletWidget from '../../features/wallet/wallet-widget/wallet-widget';
 import AuthComponent from '../auth-component/auth-component';
-import WalletWidget from '../wallet/wallet-widget/wallet-widget';
 import MenuContainer from './menu-container';
 
 type Props = {

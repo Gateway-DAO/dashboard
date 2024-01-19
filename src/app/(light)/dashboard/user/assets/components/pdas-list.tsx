@@ -1,6 +1,7 @@
 'use client';
 
-import PdaCard from '@/components/pda-card/pda-card';
+import dynamic from 'next/dynamic';
+
 import routes from '@/constants/routes';
 import {
   Issued_PdasQuery,
@@ -10,6 +11,13 @@ import {
 import { limitCharsCentered } from '@/utils/string';
 
 import PDAsListContainer from './pdas-list-container';
+
+const PdaCard = dynamic(
+  () => {
+    return import('@/components/pda-card/pda-card');
+  },
+  { ssr: false }
+);
 
 type Props = {
   pdas: Received_PdasQuery['myPDAs'] | Issued_PdasQuery['issuedPDAs'];
@@ -48,6 +56,7 @@ export default function PDAsList({ pdas, issuedPdas }: Props) {
                 };
             return (
               <PdaCard
+                id={pda.id}
                 userId={user.id as string}
                 key={pda.id}
                 href={routes.dashboard.user.asset(pda.id!)}
