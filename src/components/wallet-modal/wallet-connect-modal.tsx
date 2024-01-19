@@ -13,8 +13,8 @@ import {
 } from '@mui/material';
 
 import EvmWalletConnect from './evm-wallet-connect';
-import SolanaWalletConnect from './solana-wallet-connect';
 import PoktWalletConnect from './pokt-wallet-connect';
+import SolanaWalletConnect from './solana-wallet-connect';
 
 type Props = {
   title: string;
