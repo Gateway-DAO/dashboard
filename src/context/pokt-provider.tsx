@@ -1,5 +1,4 @@
 'use client';
-import { Session } from 'next-auth';
 import {
   PropsWithChildren,
   createContext,
@@ -16,6 +15,8 @@ enum poktMessageType {
   HEIGHT = 'pokt_height',
   BLOCK = 'pokt_block',
   CHAIN = 'pokt_chain',
+  SIGN_MESSAGE = 'pokt_signMessage',
+  RPC_REQUEST = 'pokt_rpcRequest',
 }
 
 type PoktType = {
@@ -23,8 +24,10 @@ type PoktType = {
   balance: number;
   height: number;
   chain: string;
+  publicKey: string;
   isConnected: boolean;
   connect: () => void;
+  signMessage: (message: string) => Promise<string>;
 };
 
 export const PoktContext = createContext<PoktType>({
@@ -37,6 +40,7 @@ export const PoktContext = createContext<PoktType>({
 
 export function PoktProvider({ children }: PropsWithChildren<{}>) {
   const [address, setAddress] = useState<string>('');
+  const [publicKey, setPublicKey] = useState<string>('');
   const [balance, setBalance] = useState<number>(0);
   const [height, setHeight] = useState(0);
   const [chain, setChain] = useState<string>('');
@@ -48,6 +52,20 @@ export function PoktProvider({ children }: PropsWithChildren<{}>) {
       poktMessageType.REQUEST_ACCOUNTS
     );
     setAddress(address);
+
+    const { publicKey: pubKey }: { publicKey: string } =
+      await window.pocketNetwork.send('pokt_publicKey', [{ address }]);
+
+    setPublicKey(pubKey);
+  };
+
+  const signMessage = async (message: string) => {
+    const res: { signature: string } = await window.pocketNetwork.send(
+      poktMessageType.SIGN_MESSAGE,
+      [{ message, address }]
+    );
+
+    return res.signature;
   };
 
   useEffect(() => {
@@ -89,6 +107,8 @@ export function PoktProvider({ children }: PropsWithChildren<{}>) {
         height,
         chain,
         connect,
+        signMessage,
+        publicKey,
         isConnected: !!address,
       }}
     >
