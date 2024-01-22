@@ -9,6 +9,7 @@ import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import { mutations } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import { PoktProvider } from '@/context/pokt-provider';
 import WalletConnectionProvider from '@/context/wallet-connection-provider';
 import { useDisconnectAlias } from '@/hooks/use-disconnect-alias';
 import { errorMessages } from '@/locale/en/errors';
@@ -119,19 +120,21 @@ export default function ConnectedAccounts() {
           />
           <EvmProvider>
             <SolanaProvider>
-              <WalletConnectionProvider>
-                <WalletsSection
-                  wallets={wallets}
-                  onDisconnect={(address, chain) =>
-                    handleDisconnectAlias({
-                      type: AuthType.Wallet,
-                      address,
-                      chain,
-                    })
-                  }
-                  isLoading={status === 'loading'}
-                />
-              </WalletConnectionProvider>
+              <PoktProvider>
+                <WalletConnectionProvider>
+                  <WalletsSection
+                    wallets={wallets}
+                    onDisconnect={(address, chain) =>
+                      handleDisconnectAlias({
+                        type: AuthType.Wallet,
+                        address,
+                        chain,
+                      })
+                    }
+                    isLoading={status === 'loading'}
+                  />
+                </WalletConnectionProvider>
+              </PoktProvider>
             </SolanaProvider>
           </EvmProvider>
 
