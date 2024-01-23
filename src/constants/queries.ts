@@ -27,6 +27,8 @@ export const mutations = {
   disconnect_wallet: 'disconnect_wallet',
   update_notification_email: 'update_notification_email',
   create_org_key: 'create_org_key',
+  generate_issue_session_educational: 'generate_issue_session_educational',
+  get_issued_session_educational: 'get_issued_session_educational',
 };
 
 export const explorerQueries = {
