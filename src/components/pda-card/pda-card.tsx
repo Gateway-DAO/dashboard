@@ -41,6 +41,7 @@ export default function PdaCard({
       onClickCard={() => {
         onRemoveStorage();
         setEducational(null);
+        localStorage.removeItem('widget-educational-session');
         if (onClick) {
           onClick();
         }
@@ -48,6 +49,7 @@ export default function PdaCard({
       onClose={() => {
         onRemoveStorage();
         setEducational(null);
+        localStorage.removeItem('widget-educational-session');
       }}
       open={showEducational}
     >
