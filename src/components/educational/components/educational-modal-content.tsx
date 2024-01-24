@@ -11,6 +11,8 @@ import PoolTogetherIcon from '@/components/icons/pool-together';
 import { mutations } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { instructionGuide } from '@/locale/en/educational';
+import { Chain } from '@/services/protocol/types';
+import { getWalletFromAuthenticationsByChain } from '@/utils/wallet';
 import { useMutation } from '@tanstack/react-query';
 
 import { Stack, SvgIconProps, Typography } from '@mui/material';
@@ -26,13 +28,20 @@ export default function EducationalModalContent({ onClose }: Props) {
   const router = useRouter();
 
   const sessionProps: GenerateIssueBody = {
+    origin: window.location.origin,
     claim: {
       avatar: session.user.profilePicture ?? '',
-      name: session.user.displayName,
-      username: session.user.gatewayId,
-      email: session.user.email,
-      evmWallet: 'evmWallet',
-      solanaWallet: 'solanaWallet',
+      name: session.user.displayName ?? '',
+      username: session.user.gatewayId ?? '',
+      email: session.user.email ?? '',
+      evmWallet: getWalletFromAuthenticationsByChain(
+        session?.user?.authentications,
+        Chain.Evm
+      ),
+      solanaWallet: getWalletFromAuthenticationsByChain(
+        session?.user?.authentications,
+        Chain.Sol
+      ),
     },
   };
 
