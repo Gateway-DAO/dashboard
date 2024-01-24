@@ -8,6 +8,7 @@ import { Link, Stack, Typography } from '@mui/material';
 
 import { AuthenticationOptions } from './authentication-options';
 import { LoginEmail } from './login-email';
+import { PoktProvider } from '@/context/pokt-provider';
 
 export function AuthenticationInitial() {
   return (
@@ -22,7 +23,9 @@ export function AuthenticationInitial() {
       <LoginEmail />
       <EvmProvider>
         <SolanaProvider>
-          <AuthenticationOptions />
+          <PoktProvider>
+            <AuthenticationOptions />
+          </PoktProvider>
         </SolanaProvider>
       </EvmProvider>
       <Typography color="text.secondary" variant="caption">

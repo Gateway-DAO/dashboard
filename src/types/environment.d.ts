@@ -13,5 +13,9 @@ declare global {
       SECURE_API_KEY: string;
     }
   }
+
+  interface Window {
+    pocketNetwork: any;
+  }
 }
 export {};
