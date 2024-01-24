@@ -5,7 +5,7 @@ import { getPrivateApi } from '@/services/protocol/api';
 
 import { Box, Typography } from '@mui/material';
 
-import PdasHelpCards from '../../../components/cards/pdas-help-cards';
+import HelpCards from '../components/help-cards';
 import PdasHeader from '../components/pdas-header';
 import IssuePdaAction from './components/issue-pda-action';
 import ReceivedPDAsList from './components/list';
@@ -27,7 +27,7 @@ export default async function DataAssetsPage() {
         <IssuePdaAction />
       </PdasHeader>
       <Box sx={{ pt: 5 }}>
-        <PdasHelpCards />
+        <HelpCards />
         {pdas && pdas.length > 0 && <ReceivedPDAsList pdas={pdas} />}
         {pdas && pdas.length === 0 && (
           <Typography
