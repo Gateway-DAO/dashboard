@@ -32,6 +32,12 @@ export default function PdaCard({
     storageKey: helpStorageKeys.help_cta_claim_your_first_pda,
   });
 
+  const onFinishEducational = () => {
+    onRemoveStorage();
+    setEducational(null);
+    localStorage.removeItem('widget-educational-session');
+  };
+
   return (
     <Educational
       title={instructionGuide.start_usign_now.title}
@@ -39,18 +45,12 @@ export default function PdaCard({
       textBtn={instructionGuide.start_usign_now.btn_text}
       href={href}
       onClickCard={() => {
-        onRemoveStorage();
-        setEducational(null);
-        localStorage.removeItem('widget-educational-session');
+        onFinishEducational();
         if (onClick) {
           onClick();
         }
       }}
-      onClose={() => {
-        onRemoveStorage();
-        setEducational(null);
-        localStorage.removeItem('widget-educational-session');
-      }}
+      onClose={onFinishEducational}
       open={showEducational}
     >
       <Stack
@@ -72,7 +72,12 @@ export default function PdaCard({
             component: Link,
             href: href,
           })}
-          onClick={onClick}
+          onClick={() => {
+            onFinishEducational();
+            if (onClick) {
+              onClick();
+            }
+          }}
           sx={{
             display: 'flex',
             flexDirection: 'column',
