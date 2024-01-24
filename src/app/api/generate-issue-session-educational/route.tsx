@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import routes from '@/constants/routes';
-import { appendHttps } from '@/utils/https';
 
 export type GenerateIssueBody = {
+  origin: string;
   claim: {
     avatar?: string | null;
     name?: string | null;
@@ -17,10 +17,10 @@ export type GenerateIssueBody = {
 export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as GenerateIssueBody;
-    if (!body.claim) {
+    if (!body.claim || !body.origin) {
       return NextResponse.json(
         {
-          error: 'Missing claim',
+          error: 'Missing claim or origin parameter',
         },
         {
           status: 400,
@@ -30,9 +30,7 @@ export async function POST(req: NextRequest) {
     const params = {
       widgetKey: process.env.WIDGET_KEY,
       dataModelId: process.env.DATA_MODEL_EDUCATIONAL,
-      callbackUrl:
-        (appendHttps(process.env.NEXT_PUBLIC_VERCEL_URL) ??
-          'http://localhost:4400') + routes.dashboard.user.receivedAssets,
+      callbackUrl: body.origin + routes.dashboard.user.receivedAssets,
       claim: body.claim,
     };
 

@@ -28,6 +28,7 @@ export default function EducationalModalContent({ onClose }: Props) {
   const router = useRouter();
 
   const sessionProps: GenerateIssueBody = {
+    origin: window.location.origin,
     claim: {
       avatar: session.user.profilePicture ?? '',
       name: session.user.displayName ?? '',
