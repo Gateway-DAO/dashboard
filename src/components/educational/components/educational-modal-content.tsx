@@ -11,7 +11,7 @@ import PoolTogetherIcon from '@/components/icons/pool-together';
 import { mutations } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { instructionGuide } from '@/locale/en/educational';
-import { AuthType, Chain } from '@/services/protocol/types';
+import { Chain } from '@/services/protocol/types';
 import { getWalletFromAuthenticationsByChain } from '@/utils/wallet';
 import { useMutation } from '@tanstack/react-query';
 
