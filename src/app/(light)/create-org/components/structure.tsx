@@ -44,7 +44,7 @@ export default function CreateOrgStructure() {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [image, setImage] = useState<Blob | null>(null);
-  const isTestnet = currentEnv() === 'testnet';
+  const isTestnet = currentEnv === 'testnet';
 
   const {
     register,
@@ -73,7 +73,7 @@ export default function CreateOrgStructure() {
       }),
     async onSuccess(data) {
       const org_id = data?.createOrganization?.id;
-      
+
       try {
         await createOrgKey.mutateAsync({
           orgId: org_id,
