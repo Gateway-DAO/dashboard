@@ -4,12 +4,14 @@ import { SessionToken } from '@/types/user';
 
 export default async function loginWallet(
   signature: string,
-  wallet: string
+  wallet: string,
+  publicKey?: string
 ): Promise<SessionToken> {
   try {
     const res = await apiPublic.login_wallet({
       signature,
       wallet,
+      publicKey: publicKey || null,
     });
 
     const { error } = (res as any) ?? {};

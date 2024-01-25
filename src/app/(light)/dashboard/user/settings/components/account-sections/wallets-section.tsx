@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 
-import ListSection from '@/app/(light)/dashboard/components/list-section';
+import ListSection from '@/app/(light)/dashboard/components/list-section/list-section';
 import WalletConnectModal from '@/components/wallet-modal/wallet-connect-modal';
 import WalletLoadingModal from '@/components/wallet-modal/wallet-loading-modal';
 import { useGtwSession } from '@/context/gtw-session-provider';
@@ -38,11 +38,12 @@ export default function WalletsSection({
       const res = await privateApi.protocol_add_wallet({ wallet, chain });
       return res.addWallet.message;
     },
-    async onSignedMessage({ chain, signature, wallet }) {
+    async onSignedMessage({ chain, signature, wallet, publicKey }) {
       const res = await privateApi.protocol_add_wallet_confirmation({
         signature,
         wallet,
         chain,
+        publicKey: publicKey || null,
       });
 
       if (!res || (res && !res.addWalletConfirmation.id)) {
@@ -67,9 +68,13 @@ export default function WalletsSection({
     setModalWallet(true);
   };
 
-  const onConnectWallet = (address: string, chain: Chain) => {
+  const onConnectWallet = (
+    address: string,
+    chain: Chain,
+    publicKey?: string
+  ) => {
     setModalWallet(false);
-    onConnect(address, chain);
+    onConnect(address, chain, publicKey);
   };
 
   const onCancel = async () => {

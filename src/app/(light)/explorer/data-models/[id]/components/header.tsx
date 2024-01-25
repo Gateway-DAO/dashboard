@@ -1,3 +1,4 @@
+import DataOutlinedIcon from '@/components/icons/data-outlined';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import routes from '@/constants/routes';
@@ -6,8 +7,16 @@ import {
   explorerDataModels,
   explorerDataModelDetail,
 } from '@/locale/en/datamodel';
+import { pdas } from '@/locale/en/pda';
 
-import { Chip, Container, Divider, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Chip,
+  Container,
+  Divider,
+  Typography,
+} from '@mui/material';
 import { Stack } from '@mui/system';
 
 import ExplorerBreadcrumb from '../../../components/breadcrumb/breadcrumb';
@@ -45,6 +54,16 @@ export default function DataModelDetailHeader({ id, title, tags }: Props) {
               ))}
             </Stack>
           )}
+          <Button
+            sx={{ mt: 4 }}
+            variant="contained"
+            size="large"
+            target="_blank"
+            endIcon={<DataOutlinedIcon />}
+            href={routes.dashboard.user.issuePda(id)}
+          >
+            {pdas.issue_a_pda}
+          </Button>
         </Container>
       </ExplorerHeader>
       <Container>

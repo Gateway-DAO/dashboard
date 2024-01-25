@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import IssuePdaForm from '@/app/(light)/dashboard/components/issue-pda/issue-form/issue-form';
+import IssuePdaForm from '@/app/(light)/dashboard/features/issue-pda/issue-form/issue-form';
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
 import routes from '@/constants/routes';

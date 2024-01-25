@@ -1,6 +1,5 @@
 'use client';
 
-import SearchField from '@/components/search-filters/search-field';
 import dayjs from 'dayjs';
 
 import { RefreshOutlined } from '@mui/icons-material';

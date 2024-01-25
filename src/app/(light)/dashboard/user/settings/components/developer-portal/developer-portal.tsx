@@ -43,7 +43,7 @@ export default function DeveloperPortal() {
   return (
     <Stack spacing={3} alignItems="flex-start">
       <Stack direction="column" gap={2}>
-        {process.env.NEXT_PUBLIC_API_ENV === 'testnet' && <MainnetAlert />}
+        {currentEnv === 'testnet' && <MainnetAlert />}
         <Card sx={{ width: '100%' }} variant="outlined">
           <CardHeader
             titleTypographyProps={{
@@ -62,7 +62,7 @@ export default function DeveloperPortal() {
           </CardContent>
         </Card>
         <AuthenticationTokenSection />
-        {isTestnet && isOrg && <WidgetKey orgId={organization?.id as string} />}
+        {isOrg && <WidgetKey orgId={organization?.id as string} />}
         <Card sx={{ width: '100%' }} variant="outlined">
           <CardHeader
             titleTypographyProps={{

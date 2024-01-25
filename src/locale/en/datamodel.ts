@@ -63,6 +63,12 @@ export const explorerDataModelDetailOverview = {
     data_model_id: 'Data model ID',
     allowed_to_issue: 'Allowed to issue',
   },
+  tooltip: {
+    pda_comsumption_cost:
+      'When a verifier consume a PDA from this Data Model, the issuer receives this value per consumption.',
+    pda_consumption_cost_explorer:
+      'When a verifier successfully requests and receives a Proof containing a PDA from this Data Model, the issuer receives this much money.',
+  },
   actions: {
     copy_claim_structure: 'Copy claim structure',
   },

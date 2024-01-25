@@ -1,5 +1,6 @@
 'use client';
 
+import { usePokt } from '@/context/pokt-provider';
 import { WalletConnectionStateHandlers } from '@/context/wallet-connection-provider';
 import { getErrorMessage } from '@/locale/en/errors';
 import { Chain } from '@/services/protocol/types';
@@ -12,6 +13,7 @@ import useDisconnectWallets from './use-disconnect-wallets';
 type OnSignedMessage = {
   signature: string;
   wallet: string;
+  publicKey?: string;
   chain: Chain;
 };
 
@@ -33,6 +35,7 @@ export default function useConnectWallet({
 }: Props) {
   const { signMessage: signMessageSolana } = useWallet();
   const { signMessageAsync: signMessageEvm } = useSignMessage();
+  const { signMessage: signMessagePokt } = usePokt();
 
   const onSigneMessageSolana = async (message: string) => {
     if (!signMessageSolana) {
@@ -69,6 +72,8 @@ export default function useConnectWallet({
           return signMessageEvm({ message: nonce });
         case Chain.Sol:
           return onSigneMessageSolana(nonce);
+        case Chain.Pokt:
+          return signMessagePokt(nonce);
         default:
           throw new Error('Invalid chain');
       }
@@ -85,16 +90,23 @@ export default function useConnectWallet({
     onError: onDisconnectWallets,
   });
 
-  const onConnect = async (wallet: string, chain: Chain) => {
+  const onConnect = async (
+    wallet: string,
+    chain: Chain,
+    publicKey?: string
+  ) => {
     try {
       statesHandler?.onSigning?.();
-      const nonce = await getNonce({ wallet, chain });
+      const nonce = await getNonce({
+        wallet,
+        chain,
+      });
       const signature = await getSignature({
         nonce,
         chain,
       });
       statesHandler?.onLoading?.();
-      await connectWallet({ signature, wallet, chain });
+      await connectWallet({ signature, wallet, publicKey, chain });
       resetNonce();
       resetSignature();
       resetWallet();

@@ -9,6 +9,7 @@ import { OrganizationIdentifierType } from '@/services/protocol/types';
 
 import { Button, Typography } from '@mui/material';
 
+import Banner from './components/banner';
 import PDAsTable from './components/pdas-table';
 
 export const metadata: Metadata = {
@@ -51,10 +52,12 @@ export default async function OrganizationIssuedAssetsPage(props: any) {
           size="large"
           endIcon={<DataOutlinedIcon />}
           href={routes.dashboard.org.issue(pathnameOrg)}
+          className="issueBtn"
         >
           {pdas.issue_a_pda}
         </Button>
       </TitleLayout>
+      <Banner pathnameOrg={pathnameOrg} />
       {issuedPdas && issuedPdas.length > 0 && (
         <PDAsTable data={issuedPdas} totalCount={count} />
       )}

@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 import useOrganization from '@/hooks/use-organization';
 
-import MenuBottomListItems from '../../components/menu-bottom-list-items';
+import MenuBottomListItems from '../../components/menu/menu-bottom-list-items';
 import dashboardOrgDevelopersMenuItems from './dashboard-org-developer-menu-items';
 import dashboardOrgMenuItems from './dashboard-org-menu-items';
 

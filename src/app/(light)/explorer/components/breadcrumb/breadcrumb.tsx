@@ -23,7 +23,7 @@ export default function ExplorerBreadcrumb({ paths }: Props) {
       >
         Home
       </GTWLink>
-      {paths.map(({ route, label }, index) =>
+      {paths.map(({ route, label }) =>
         route ? (
           <GTWLink
             underline="hover"
@@ -41,8 +41,3 @@ export default function ExplorerBreadcrumb({ paths }: Props) {
     </Stack>
   );
 }
-
-/**
- *
- *
- */

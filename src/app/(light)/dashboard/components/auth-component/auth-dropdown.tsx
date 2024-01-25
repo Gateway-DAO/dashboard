@@ -13,7 +13,7 @@ import {
   MenuItem,
 } from '@mui/material';
 
-import WalletWidget from '../wallet/wallet-widget/wallet-widget';
+import WalletWidget from '../../features/wallet/wallet-widget/wallet-widget';
 import AuthDropdownCurrent from './auth-dropdown-current';
 import AuthDropdownProfilesList from './auth-dropdown-profiles-list';
 

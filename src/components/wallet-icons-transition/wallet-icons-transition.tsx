@@ -5,9 +5,12 @@ import { FaEthereum } from 'react-icons/fa';
 import { IconBaseProps } from 'react-icons/lib';
 import { TbCurrencySolana } from 'react-icons/tb';
 
+import PoktIcon from '../icons/pokt';
+
 const icons = {
   [Chain.Evm]: FaEthereum,
   [Chain.Sol]: TbCurrencySolana,
+  [Chain.Pokt]: PoktIcon,
 };
 
 type Props = {

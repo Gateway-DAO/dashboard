@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject } from 'react';
 
 import { useLenis } from '@studio-freight/react-lenis';
 
