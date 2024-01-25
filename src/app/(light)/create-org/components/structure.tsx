@@ -44,7 +44,6 @@ export default function CreateOrgStructure() {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [image, setImage] = useState<Blob | null>(null);
-  const isTestnet = currentEnv === 'testnet';
 
   const {
     register,
