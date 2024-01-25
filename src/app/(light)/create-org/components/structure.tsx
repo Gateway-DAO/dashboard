@@ -15,7 +15,6 @@ import useGaEvent from '@/hooks/use-ga-event';
 import { org } from '@/locale/en/org';
 import { usernameSchema } from '@/schemas/profile';
 import { getClientPrivateApi } from '@/services/protocol/api';
-import { currentEnv } from '@/utils/env';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
@@ -44,7 +43,6 @@ export default function CreateOrgStructure() {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [image, setImage] = useState<Blob | null>(null);
-  const isTestnet = currentEnv() === 'testnet';
 
   const {
     register,
@@ -73,7 +71,7 @@ export default function CreateOrgStructure() {
       }),
     async onSuccess(data) {
       const org_id = data?.createOrganization?.id;
-      
+
       try {
         await createOrgKey.mutateAsync({
           orgId: org_id,
