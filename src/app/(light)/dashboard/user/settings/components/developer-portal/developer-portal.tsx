@@ -39,6 +39,7 @@ export default function DeveloperPortal() {
       data.getMonthlyUserUsage as MonthlyUserUsageQuery['getMonthlyUserUsage'],
   });
 
+  const isTestnet = currentEnv() === 'testnet';
   return (
     <Stack spacing={3} alignItems="flex-start">
       <Stack direction="column" gap={2}>
