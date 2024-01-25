@@ -7,8 +7,8 @@ import { getPrivateApi } from '@/services/protocol/api';
 
 import { Box, Button, Typography } from '@mui/material';
 
-import HelpCards from '../components/help-cards';
 import PdasHeader from '../components/pdas-header';
+import HelpCards from './components/help-cards';
 import IssuedPDAsList from './components/list';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,7 +34,7 @@ export default async function DataAssetsPage() {
         </Button>
       </PdasHeader>
       <Box sx={{ pt: 5 }}>
-        <HelpCards claimFirstPda={false} />
+        <HelpCards />
         {pdas && pdas.length > 0 && <IssuedPDAsList pdas={pdas} />}
         {pdas && pdas.length === 0 && (
           <Typography

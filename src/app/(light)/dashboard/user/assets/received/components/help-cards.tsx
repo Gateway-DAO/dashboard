@@ -19,15 +19,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { Stack } from '@mui/material';
 
-type Props = {
-  claimFirstPda?: boolean;
-  howToUsePda?: boolean;
-};
-
-export default function HelpCards({
-  claimFirstPda = true,
-  howToUsePda = true,
-}: Props) {
+export default function HelpCards() {
   const [videoPlayer, setVideoPlayer] = useToggle(false);
   const [claimFirstPdaModal, setClaimFirstPdaModal] = useToggle(false);
 
@@ -73,50 +65,38 @@ export default function HelpCards({
 
   return (
     <Stack gap={2} sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
-      {claimFirstPda && (
-        <>
-          <HelpCtaCard
-            icon={VerifyPdaIcon}
-            title={pdas.help_claim_first_pda_card.title}
-            image={AssetTemplateImage}
-            btnText={pdas.help_claim_first_pda_card.text_button}
-            onClick={() => setClaimFirstPdaModal(true)}
-            storageKey={helpStorageKeys.help_cta_claim_your_first_pda}
-          />
-          <EducationalModal
-            open={claimFirstPdaModal}
-            onClose={() => setClaimFirstPdaModal(false)}
-          />
-        </>
-      )}
-      {howToUsePda && (
-        <>
-          <HelpCtaCard
-            icon={QuestionSquaredIcon}
-            title={pdas.help_video_card.title}
-            desc={pdas.help_video_card.description}
-            image={VideoSquaredIcon}
-            btnText={pdas.help_video_card.text_button}
-            onClick={() => setVideoPlayer(true)}
-            storageKey={helpStorageKeys.help_cta_video_how_to_use_pda}
-            color="blue"
-          />
-          <Instruction
-            title={pdas.help_video_card.title}
-            description={pdas.help_video_card.description}
-            link={pdas.help_video_card.link}
-            onClose={() => {
-              onRemoveStorage();
-              setVideoPlayer(false);
-              setEducational({
-                key: educationalKeys.start_issuing_now,
-                value: true,
-              });
-            }}
-            open={videoPlayer}
-          />
-        </>
-      )}
+      <HelpCtaCard
+        icon={VerifyPdaIcon}
+        title={pdas.help_claim_first_pda_card.title}
+        image={AssetTemplateImage}
+        btnText={pdas.help_claim_first_pda_card.text_button}
+        onClick={() => setClaimFirstPdaModal(true)}
+        storageKey={helpStorageKeys.help_cta_claim_your_first_pda}
+      />
+      <EducationalModal
+        open={claimFirstPdaModal}
+        onClose={() => setClaimFirstPdaModal(false)}
+      />
+      <HelpCtaCard
+        icon={QuestionSquaredIcon}
+        title={pdas.help_how_to_use_your_pda.title}
+        desc={pdas.help_how_to_use_your_pda.description}
+        image={VideoSquaredIcon}
+        btnText={pdas.help_how_to_use_your_pda.text_button}
+        onClick={() => setVideoPlayer(true)}
+        storageKey={helpStorageKeys.help_cta_video_how_to_use_pda}
+        color="blue"
+      />
+      <Instruction
+        title={pdas.help_how_to_use_your_pda.title}
+        description={pdas.help_how_to_use_your_pda.description}
+        link={pdas.help_how_to_use_your_pda.link}
+        onClose={() => {
+          onRemoveStorage();
+          setVideoPlayer(false);
+        }}
+        open={videoPlayer}
+      />
     </Stack>
   );
 }
