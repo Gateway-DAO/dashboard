@@ -5,8 +5,8 @@ import { getPrivateApi } from '@/services/protocol/api';
 
 import { Box, Typography } from '@mui/material';
 
-import HelpCards from '../components/help-cards';
 import PdasHeader from '../components/pdas-header';
+import HelpCards from './components/help-cards';
 import IssuePdaAction from './components/issue-pda-action';
 import ReceivedPDAsList from './components/list';
 

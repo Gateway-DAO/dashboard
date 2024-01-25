@@ -71,12 +71,19 @@ export const pdas = {
     description: 'Quick, non-code feature for issuing PDAs in a few steps.',
     text_button: 'Issue Now',
   },
-  help_video_card: {
+  help_how_to_use_your_pda: {
     title: 'How to use your PDA',
     description:
       'Explore the potential of your Data Assets with a step-by-step walkthrough.',
     text_button: 'Play video',
     link: 'https://youtube.com/embed/GwIFrE0MQLc',
+  },
+  help_how_to_issue_a_pda: {
+    title: 'How to issue a PDA',
+    description:
+      'We will show you step by step how to send a PDA with our non code application.',
+    text_button: 'Play video',
+    link: 'https://youtube.com/embed/_2_HmB76d40?si=KM1WRbg5fivORYPr',
   },
 };
 export const orgPdas = {
