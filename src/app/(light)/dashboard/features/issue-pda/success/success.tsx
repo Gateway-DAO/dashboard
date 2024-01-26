@@ -1,5 +1,6 @@
 'use client';
 
+import useGaEvent from '@/hooks/use-ga-event';
 import { issuePda } from '@/locale/en/pda';
 import { PrivateDataAsset } from '@/services/protocol/types';
 import { PartialDeep } from 'type-fest';
@@ -14,6 +15,8 @@ type Props = {
 };
 
 export default function IssuanceSuccess({ pdas }: Props) {
+  const { sendEvent } = useGaEvent();
+  sendEvent('issue_pda');
   return (
     <>
       <Stack sx={{ position: 'absolute', top: { xs: 24, md: 48 } }}>

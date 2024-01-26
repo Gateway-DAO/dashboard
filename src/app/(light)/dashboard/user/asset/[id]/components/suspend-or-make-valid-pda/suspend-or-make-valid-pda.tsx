@@ -6,6 +6,7 @@ import Loading from '@/components/loadings/loading/loading';
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
 import { mutations } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useGaEvent from '@/hooks/use-ga-event';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
@@ -39,13 +40,20 @@ export function SuspendOrMakeValidPDA({
   const { enqueueSnackbar } = useSnackbar();
   const [dialogConfirmation, setDialogConfirmation] = useState(false);
   const [loadingAfter, setLoadingAfter] = useState(false);
+  const { sendEvent } = useGaEvent();
 
   const mutationReq = {
     mutationKey: [mutations.change_pda_status],
     mutationFn: (data: ChangePdaStatusMutationVariables) => {
       return privateApi?.changePDAStatus(data);
     },
-    onSuccess: () => router.refresh(),
+    onSuccess: () => {
+      sendEvent('handle_pda', {
+        event_category: 'update_pda_status',
+        event_label: 'suspend_or_make_valid',
+      });
+      router.refresh();
+    },
     onError: () => enqueueSnackbar(errorMessages.STATUS_CHANGE_ERROR),
   };
 

@@ -8,6 +8,7 @@ import ModalRight from '@/components/modal/modal-right/modal-right';
 import { mutations, queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
+import useGaEvent from '@/hooks/use-ga-event';
 import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
@@ -45,6 +46,7 @@ export default function ShareCopy({ pda }: Props) {
   const { privateApi, session } = useGtwSession();
   const queryClient = useQueryClient();
   const { organization } = useOrganization();
+  const { sendEvent } = useGaEvent();
 
   const methods = useForm({
     resolver: zodResolver(shareCopySchema),
@@ -92,6 +94,7 @@ export default function ShareCopy({ pda }: Props) {
       });
       setPdaIssued(res?.createProof?.id);
       methods.reset();
+      sendEvent('share_pda_copy');
       queryClient.refetchQueries([queries.proofs_by_pdas_id, [pda?.id]]);
       router.refresh();
     } catch (e: any) {

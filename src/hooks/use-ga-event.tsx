@@ -4,10 +4,15 @@ declare global {
   }
 }
 
+type EventConfig = {
+  event_category: string;
+  event_label: string;
+};
+
 export default function useGaEvent() {
-  const sendEvent = (eventName: string) => {
+  const sendEvent = (eventName: string, eventConfig?: EventConfig) => {
     if (typeof window.gtag === 'function') {
-      window.gtag('event', eventName);
+      window.gtag('event', eventName, eventConfig);
     }
   };
 
