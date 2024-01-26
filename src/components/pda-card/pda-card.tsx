@@ -1,13 +1,14 @@
 import Link from 'next/link';
 
-import { educationalKeys, helpStorageKeys } from '@/constants/educational';
-import useEducational from '@/hooks/use-educational';
-import useLocalStorageHelpCard from '@/hooks/use-help-card';
-import { instructionGuide } from '@/locale/en/educational';
+import { coachMarkKeys } from '@/constants/coach-mark';
+import { instructionGuideKeys } from '@/constants/instruction-guide';
+import useCoachMarkal from '@/hooks/use-coach-mark';
+import useLocalStorageInstructionGuide from '@/hooks/use-instruction-guide';
+import { coachMark } from '@/locale/en/coach-mark';
 
 import { Card, CardActionArea, Stack, Typography } from '@mui/material';
 
-import Educational from '../educational/educational';
+import CoachMark from '../coach-mark/coach-mark';
 import GTWAvatar from '../gtw-avatar/gtw-avatar';
 import { TextStatusChip } from '../text-status-chip/text-status-chip';
 import { PdaCardProps } from './type';
@@ -23,35 +24,35 @@ export default function PdaCard({
   onClick,
   status,
 }: PdaCardProps) {
-  const { showEducational, setEducational } = useEducational({
-    key: educationalKeys.start_using_pda,
+  const { showCoachMark, setCoachMark } = useCoachMarkal({
+    key: coachMarkKeys.start_using_pda,
     value: id,
   });
 
-  const { onRemoveStorage } = useLocalStorageHelpCard({
-    storageKey: helpStorageKeys.help_cta_claim_your_first_pda,
+  const { onSaveStorage } = useLocalStorageInstructionGuide({
+    storageKey: instructionGuideKeys.claim_your_first_pda,
   });
 
-  const onFinishEducational = () => {
-    onRemoveStorage();
-    setEducational(null);
+  const onFinishCoachMark = () => {
+    onSaveStorage();
+    setCoachMark(null);
     localStorage.removeItem('widget-educational-session');
   };
 
   return (
-    <Educational
-      title={instructionGuide.start_usign_now.title}
-      description={instructionGuide.start_usign_now.description}
-      textBtn={instructionGuide.start_usign_now.btn_text}
+    <CoachMark
+      title={coachMark.start_usign_now.title}
+      description={coachMark.start_usign_now.description}
+      textBtn={coachMark.start_usign_now.btn_text}
       href={href}
       onClickCard={() => {
-        onFinishEducational();
+        onFinishCoachMark();
         if (onClick) {
           onClick();
         }
       }}
-      onClose={onFinishEducational}
-      open={showEducational}
+      onClose={onFinishCoachMark}
+      open={showCoachMark}
     >
       <Stack
         component={Card}
@@ -73,7 +74,7 @@ export default function PdaCard({
             href: href,
           })}
           onClick={() => {
-            onFinishEducational();
+            onFinishCoachMark();
             if (onClick) {
               onClick();
             }
@@ -111,6 +112,6 @@ export default function PdaCard({
           <TextStatusChip variant="outlined" status={status} size="small" />
         </CardActionArea>
       </Stack>
-    </Educational>
+    </CoachMark>
   );
 }

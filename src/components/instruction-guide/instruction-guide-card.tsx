@@ -1,8 +1,7 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
-
-import useLocalStorageHelpCard from '@/hooks/use-help-card';
+import Link from 'next/link';
+import { FC } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
 import {
@@ -17,42 +16,48 @@ import {
 } from '@mui/material';
 
 type Props = {
-  storageKey: string;
   icon: FC<SvgIconProps>;
+  image: FC<SvgIconProps>;
   title: string;
   desc?: string;
-  image: FC<SvgIconProps>;
   onClick: () => void;
+  onCloseCard: () => void;
   btnText: string;
   color?: 'purple' | 'blue';
 };
 
-export default function HelpCtaCard({
-  storageKey,
+export default function InstructionGuideCard({
   icon,
   title,
   desc,
   image,
   onClick,
+  onCloseCard,
   btnText,
-  color = 'purple',
+  color = 'blue',
 }: Props) {
-  const { visible, onRemoveStorage } = useLocalStorageHelpCard({ storageKey });
-
   const ImageCard = image;
   const IconCard = icon;
 
   return (
-    visible && (
+    <Stack
+      component={Link}
+      href="#guide"
+      onClick={onClick}
+      sx={{
+        cursor: 'pointer',
+        textDecoration: 'none',
+        width: '100%',
+        mb: 3,
+      }}
+    >
       <Stack
         component={Card}
         position={'relative'}
-        onClick={onClick}
         sx={(theme) => ({
-          mb: 3,
           p: 2,
+          height: '100%',
           boxShadow: 'none',
-          width: '100%',
           justifyContent: 'space-between',
           backgroundColor:
             color === 'purple'
@@ -61,14 +66,13 @@ export default function HelpCtaCard({
                   theme.palette.action.focusOpacity
                 )
               : '#69DCED26',
-          cursor: 'pointer',
         })}
       >
         <IconButton
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            onRemoveStorage();
+            onCloseCard();
           }}
           sx={{ position: 'absolute', top: 20, right: 20 }}
         >
@@ -78,6 +82,7 @@ export default function HelpCtaCard({
         <Stack
           alignItems="stretch"
           gap={2}
+          flexGrow={1}
           sx={{ flexDirection: { xs: 'column-reverse', md: 'row' } }}
         >
           <Stack width="100%">
@@ -112,6 +117,6 @@ export default function HelpCtaCard({
           </Box>
         </Stack>
       </Stack>
-    )
+    </Stack>
   );
 }
