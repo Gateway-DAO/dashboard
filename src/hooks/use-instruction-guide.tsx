@@ -21,7 +21,7 @@ export default function useLocalStorageInstructionGuide({ storageKey }: Props) {
     }
   }, []);
 
-  const onRemoveStorage = () => {
+  const onSaveStorage = () => {
     hasSeenDialog = JSON.parse(
       localStorage.getItem('instruction-guide') || '{}'
     );
@@ -30,5 +30,5 @@ export default function useLocalStorageInstructionGuide({ storageKey }: Props) {
     setVisible(false);
   };
 
-  return { visible, onRemoveStorage };
+  return { visible, onSaveStorage };
 }

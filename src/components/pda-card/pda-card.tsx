@@ -29,12 +29,12 @@ export default function PdaCard({
     value: id,
   });
 
-  const { onRemoveStorage } = useLocalStorageInstructionGuide({
+  const { onSaveStorage } = useLocalStorageInstructionGuide({
     storageKey: instructionGuideKeys.claim_your_first_pda,
   });
 
   const onFinishCoachMark = () => {
-    onRemoveStorage();
+    onSaveStorage();
     setCoachMark(null);
     localStorage.removeItem('widget-educational-session');
   };

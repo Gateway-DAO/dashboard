@@ -23,7 +23,7 @@ export default function HelpContentCard({
   btnLink,
   btnText,
 }: Props) {
-  const { visible, onRemoveStorage } = useLocalStorageInstructionGuide({
+  const { visible, onSaveStorage } = useLocalStorageInstructionGuide({
     storageKey: title.toLowerCase(),
   });
 
@@ -67,7 +67,7 @@ export default function HelpContentCard({
             </div>
           </Stack>
           <span style={{ position: 'absolute', top: 20, right: 20 }}>
-            <IconButton onClick={onRemoveStorage} sx={{ cursor: 'pointer' }}>
+            <IconButton onClick={onSaveStorage} sx={{ cursor: 'pointer' }}>
               <CloseIcon />
             </IconButton>
           </span>

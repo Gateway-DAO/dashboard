@@ -23,7 +23,7 @@ export default function HomeInstructionCard({
 }: Props) {
   const [openVideoPlayer, toggleVideoPlayer] = useToggle(false);
 
-  const { visible, onRemoveStorage } = useLocalStorageInstructionGuide({
+  const { visible, onSaveStorage } = useLocalStorageInstructionGuide({
     storageKey: title.toLowerCase(),
   });
 
@@ -70,7 +70,7 @@ export default function HomeInstructionCard({
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
-                  onRemoveStorage();
+                  onSaveStorage();
                 }}
               />
             </Stack>
@@ -99,7 +99,7 @@ export default function HomeInstructionCard({
         videoUrl={link}
         onClose={() => {
           toggleVideoPlayer();
-          onRemoveStorage();
+          onSaveStorage();
         }}
         open={openVideoPlayer}
       />

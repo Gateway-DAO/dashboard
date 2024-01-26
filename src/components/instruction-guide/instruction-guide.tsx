@@ -44,13 +44,13 @@ export function InstructionGuide({
   const router = useRouter();
   const [openModal, toggleModal] = useToggle(false);
 
-  const { visible, onRemoveStorage } = useLocalStorageInstructionGuide({
+  const { visible, onSaveStorage } = useLocalStorageInstructionGuide({
     storageKey,
   });
 
   const closeModal = () => {
     if (removeStorageOnClose) {
-      onRemoveStorage();
+      onSaveStorage();
     }
     if (onCloseModal) {
       onCloseModal();
@@ -71,7 +71,7 @@ export function InstructionGuide({
           image={image}
           btnText={btnText}
           onClick={toggleModal}
-          onCloseCard={onRemoveStorage}
+          onCloseCard={onSaveStorage}
           color={color}
         />
         {videoUrl && (

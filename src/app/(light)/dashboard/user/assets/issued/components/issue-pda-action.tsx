@@ -13,7 +13,7 @@ import { pdas } from '@/locale/en/pda';
 import { Button } from '@mui/material';
 
 export default function IssuePdaAction() {
-  const { onRemoveStorage } = useLocalStorageInstructionGuide({
+  const { onSaveStorage } = useLocalStorageInstructionGuide({
     storageKey: instructionGuideKeys.how_to_use_pda,
   });
 
@@ -29,11 +29,11 @@ export default function IssuePdaAction() {
       textBtn={coachMark.start_issuing_now.btn_text}
       href={routes.dashboard.user.issue}
       onClickCard={() => {
-        onRemoveStorage();
+        onSaveStorage();
         setCoachMark(null);
       }}
       onClose={() => {
-        onRemoveStorage();
+        onSaveStorage();
         setCoachMark(null);
       }}
       open={showCoachMark}
