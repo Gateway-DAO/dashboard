@@ -4,12 +4,15 @@ type Props = {
   storageKey: string;
 };
 
-export default function useLocalStorageHelpCard({ storageKey }: Props) {
+export default function useLocalStorageInstructionGuide({ storageKey }: Props) {
   const [visible, setVisible] = useState(false);
+
   let hasSeenDialog: { [storageKey: string]: boolean } | null;
 
   useEffect(() => {
-    hasSeenDialog = JSON.parse(localStorage.getItem('help-card') || '{}');
+    hasSeenDialog = JSON.parse(
+      localStorage.getItem('instruction-guide') || '{}'
+    );
   }, []);
 
   useEffect(() => {
@@ -18,12 +21,14 @@ export default function useLocalStorageHelpCard({ storageKey }: Props) {
     }
   }, []);
 
-  const onRemoveStorage = () => {
-    hasSeenDialog = JSON.parse(localStorage.getItem('help-card') || '{}');
+  const onSaveStorage = () => {
+    hasSeenDialog = JSON.parse(
+      localStorage.getItem('instruction-guide') || '{}'
+    );
     const updated = { ...hasSeenDialog, [storageKey]: true };
-    localStorage.setItem('help-card', JSON.stringify(updated));
+    localStorage.setItem('instruction-guide', JSON.stringify(updated));
     setVisible(false);
   };
 
-  return { visible, onRemoveStorage };
+  return { visible, onSaveStorage };
 }

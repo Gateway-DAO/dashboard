@@ -1,7 +1,8 @@
 import { PropsWithChildren } from 'react';
 
-import { InstructionGuide } from '@/components/instruction-guide';
+import { InstructionGuide } from '@/components/instruction-guide/instruction-guide';
 import TitleLayout from '@/components/title-layout/title-layout';
+import { instructionGuideKeys } from '@/constants/instruction-guide';
 import { instructionGuide } from '@/locale/en/educational';
 import { requests } from '@/locale/en/request';
 
@@ -17,10 +18,9 @@ export default function DataRequestsLayout({ children }: PropsWithChildren) {
       />
 
       <InstructionGuide
-        id="user-requests"
+        storageKey={instructionGuideKeys.user_requests}
         title={instructionGuide.createRequest.title}
         desc={instructionGuide.createRequest.description}
-        btnLink={instructionGuide.createRequest.btn_link}
         btnText={instructionGuide.createRequest.btn_text}
         videoUrl={instructionGuide.createRequest.video_link}
       />
