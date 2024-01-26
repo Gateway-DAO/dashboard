@@ -12,7 +12,11 @@ import { pdas } from '@/locale/en/pda';
 
 import { Button } from '@mui/material';
 
-export default function IssuePdaAction() {
+type Props = {
+  pathnameOrg: string;
+};
+
+export default function IssuePdaAction({ pathnameOrg }: Props) {
   const { onRemoveStorage } = useLocalStorageInstructionGuide({
     storageKey: instructionGuideKeys.how_to_use_pda,
   });
@@ -43,7 +47,8 @@ export default function IssuePdaAction() {
         variant="contained"
         size="large"
         endIcon={<DataOutlinedIcon />}
-        href={routes.dashboard.user.issue}
+        href={routes.dashboard.org.issue(pathnameOrg)}
+        className="issueBtn"
       >
         {pdas.issue_a_pda}
       </Button>
