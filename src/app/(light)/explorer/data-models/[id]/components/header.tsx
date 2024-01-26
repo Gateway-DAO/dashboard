@@ -32,7 +32,7 @@ export default function DataModelDetailHeader({ id, title, tags }: Props) {
   return (
     <>
       <ExplorerHeader sx={{ pb: 5 }}>
-        <Container sx={{ maxWidth: 896, marginLeft: 'unset' }}>
+        <Container>
           <ExplorerBreadcrumb
             paths={[
               {
@@ -44,25 +44,9 @@ export default function DataModelDetailHeader({ id, title, tags }: Props) {
               },
             ]}
           />
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <Typography component="h1" variant="h2" fontWeight="300" mb={2}>
-              {title}
-            </Typography>
-            <Button
-              variant="contained"
-              size="large"
-              endIcon={<DataOutlinedIcon />}
-              href={routes.dashboard.user.issuePda(id)}
-            >
-              {pdas.issue_a_pda}
-            </Button>
-          </Box>
+          <Typography component="h1" variant="h2" fontWeight="300" mb={2}>
+            {title}
+          </Typography>
           {tags && (
             <Stack direction="row" gap={1}>
               {tags.map((tag) => (
@@ -70,6 +54,16 @@ export default function DataModelDetailHeader({ id, title, tags }: Props) {
               ))}
             </Stack>
           )}
+          <Button
+            sx={{ mt: 4 }}
+            variant="contained"
+            size="large"
+            target="_blank"
+            endIcon={<DataOutlinedIcon />}
+            href={routes.dashboard.user.issuePda(id)}
+          >
+            {pdas.issue_a_pda}
+          </Button>
         </Container>
       </ExplorerHeader>
       <Container>

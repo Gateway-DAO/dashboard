@@ -11,10 +11,10 @@ import { mutations } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';
+import useGaEvent from '@/hooks/use-ga-event';
 import { org } from '@/locale/en/org';
 import { usernameSchema } from '@/schemas/profile';
 import { getClientPrivateApi } from '@/services/protocol/api';
-import { currentEnv } from '@/utils/env';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
@@ -38,6 +38,7 @@ type UploadImageProps = {
 
 export default function CreateOrgStructure() {
   const { update } = useSession();
+  const { sendEvent } = useGaEvent();
   const { session } = useGtwSession();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
@@ -70,6 +71,7 @@ export default function CreateOrgStructure() {
       }),
     async onSuccess(data) {
       const org_id = data?.createOrganization?.id;
+
       try {
         await createOrgKey.mutateAsync({
           orgId: org_id,
@@ -129,6 +131,7 @@ export default function CreateOrgStructure() {
     if (availability !== 'success') return;
     try {
       await createOrg.mutateAsync(data);
+      sendEvent('create_org');
       enqueueSnackbar(org.success, {
         variant: 'success',
       });
