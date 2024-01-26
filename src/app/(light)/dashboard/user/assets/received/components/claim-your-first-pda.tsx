@@ -17,13 +17,9 @@ import { useMutation } from '@tanstack/react-query';
 
 import { Stack, SvgIconProps, Typography } from '@mui/material';
 
-import EducationalModalCards from './educational-modal-cards';
+import ClaimYourFirstPdaCards from './claim-your-first-pda-cards';
 
-type Props = {
-  onClose: () => void;
-};
-
-export default function EducationalModalContent({ onClose }: Props) {
+export default function ClaimYourFirstPda() {
   const { session } = useGtwSession();
   const router = useRouter();
 
@@ -67,22 +63,22 @@ export default function EducationalModalContent({ onClose }: Props) {
   const generateSession = async () => {
     const { session } = await onGenerateSession();
     localStorage.setItem('widget-educational-session', session.sessionId);
-    onClose();
     router.push(session.url);
   };
 
   const cards: { title: string; icon: FC<SvgIconProps> }[] = [
     {
-      title: instructionGuide.claim_your_first_pda.cards.unlock_benefits,
+      title: instructionGuide.claim_your_first_pda.modal.cards.unlock_benefits,
       icon: BenefitsIcon,
     },
     {
-      title: instructionGuide.claim_your_first_pda.cards.join_other_platforms,
+      title:
+        instructionGuide.claim_your_first_pda.modal.cards.join_other_platforms,
       icon: JoinClickIcon,
     },
     {
       title:
-        instructionGuide.claim_your_first_pda.cards
+        instructionGuide.claim_your_first_pda.modal.cards
           .win_prizes_with_pool_together,
       icon: PoolTogetherIcon,
     },
@@ -92,24 +88,24 @@ export default function EducationalModalContent({ onClose }: Props) {
     <Stack sx={{ height: '100%' }}>
       <Stack mt={3} mb={5}>
         <Typography variant="h4" mb={1}>
-          {instructionGuide.claim_your_first_pda.title}
+          {instructionGuide.claim_your_first_pda.modal.title}
         </Typography>
         <Typography variant="body1">
-          {instructionGuide.claim_your_first_pda.description}
+          {instructionGuide.claim_your_first_pda.modal.description}
         </Typography>
       </Stack>
       <Typography mb={3}>
-        {instructionGuide.claim_your_first_pda.cards.title}
+        {instructionGuide.claim_your_first_pda.modal.cards.title}
       </Typography>
       <Stack direction="row" gap={1} mb={5}>
-        <EducationalModalCards cards={cards} />
+        <ClaimYourFirstPdaCards cards={cards} />
       </Stack>
       <LoadingButton
         variant="contained"
         isLoading={isLoading}
         onClick={generateSession}
       >
-        {instructionGuide.claim_your_first_pda.btn_text}
+        {instructionGuide.claim_your_first_pda.modal.btn_text}
       </LoadingButton>
     </Stack>
   );
