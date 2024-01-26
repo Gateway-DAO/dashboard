@@ -1,8 +1,8 @@
 'use client';
 
 import QuestionSquaredIcon from '@/components/icons/question-squared';
-import Instruction from '@/components/instruction/instruction';
-import useLocalStorageHelpCard from '@/hooks/use-help-card';
+import InstructionGuideModalVideo from '@/components/instruction-guide/instruction-guide-modal-video';
+import useLocalStorageInstructionGuide from '@/hooks/use-instruction-guide';
 import { useToggle } from '@react-hookz/web';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -23,7 +23,7 @@ export default function HomeInstructionCard({
 }: Props) {
   const [openVideoPlayer, toggleVideoPlayer] = useToggle(false);
 
-  const { visible, onRemoveStorage } = useLocalStorageHelpCard({
+  const { visible, onSaveStorage } = useLocalStorageInstructionGuide({
     storageKey: title.toLowerCase(),
   });
 
@@ -41,19 +41,40 @@ export default function HomeInstructionCard({
         backgroundColor: visible ? '#69DCED33' : '#f6f4f9',
         border: visible ? 1 : 0,
         borderColor: '#69DCED33',
+        cursor: 'pointer',
       }}
     >
-      {visible && (
-        <>
-          <Stack flexDirection={'column'} justifyContent={'space-between'}>
-            <Stack flexDirection={'row'} justifyContent={'space-between'}>
+      <>
+        {visible && (
+          <Stack
+            sx={{
+              justifyContent: 'space-between',
+              flexDirection: 'column',
+              height: 184,
+            }}
+            onClick={toggleVideoPlayer}
+          >
+            <Stack
+              flexDirection={'row'}
+              justifyContent={'space-between'}
+              height={40}
+            >
               <QuestionSquaredIcon sx={{ width: 45, height: 40, mb: 2 }} />
               <CloseIcon
-                sx={{ mt: 1, cursor: 'pointer' }}
-                onClick={onRemoveStorage}
+                sx={{
+                  mt: 1,
+                  cursor: 'pointer',
+                  position: 'relative',
+                  zIndex: 1,
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  onSaveStorage();
+                }}
               />
             </Stack>
-            <Stack>
+            <Stack flexGrow={1}>
               <Typography mt={2} variant="h5" width={300} gutterBottom>
                 {title}
               </Typography>
@@ -61,29 +82,27 @@ export default function HomeInstructionCard({
                 variant="body2"
                 width={300}
                 gutterBottom
-                sx={{ mb: 2 }}
+                sx={{ mb: 2, flexGrow: 1 }}
               >
                 {description}
               </Typography>
-              <Button
-                variant="outlined"
-                size="small"
-                color="info"
-                onClick={toggleVideoPlayer}
-              >
+              <Button variant="outlined" size="small" color="info">
                 {play_video}
               </Button>
             </Stack>
           </Stack>
-          <Instruction
-            description={description}
-            title={title}
-            link={link}
-            onClose={toggleVideoPlayer}
-            open={openVideoPlayer}
-          />
-        </>
-      )}
+        )}
+      </>
+      <InstructionGuideModalVideo
+        description={description}
+        title={title}
+        videoUrl={link}
+        onClose={() => {
+          toggleVideoPlayer();
+          onSaveStorage();
+        }}
+        open={openVideoPlayer}
+      />
     </Paper>
   );
 }
