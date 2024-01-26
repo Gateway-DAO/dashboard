@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { Box, Stack } from '@mui/material';
 
-import EducationalTooltip from './components/educational-tooltip';
+import CoachMarkTooltip from './components/coach-mark-tooltip';
 
 type Props = {
   children: ReactNode;
@@ -18,7 +18,7 @@ type Props = {
   alignY?: 'top' | 'bottom';
 };
 
-export default function Educational({
+export default function CoachMark({
   children,
   title,
   description,
@@ -36,7 +36,7 @@ export default function Educational({
       <Stack sx={{ position: 'relative', zIndex: open ? 2 : 0 }}>
         {children}
         {open && (
-          <EducationalTooltip
+          <CoachMarkTooltip
             title={title}
             description={description}
             textBtn={textBtn}

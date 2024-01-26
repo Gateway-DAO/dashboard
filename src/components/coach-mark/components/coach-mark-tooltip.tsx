@@ -15,7 +15,7 @@ type Props = {
   alignY: 'top' | 'bottom';
 };
 
-export default function EducationalTooltip({
+export default function CoachMarkTooltip({
   title,
   description,
   textBtn,

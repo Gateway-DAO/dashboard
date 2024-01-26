@@ -1,7 +1,8 @@
-import { InstructionGuide } from '@/components/instruction-guide';
+import { InstructionGuide } from '@/components/instruction-guide/instruction-guide';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
+import { instructionGuideKeys } from '@/constants/instruction-guide';
 import routes from '@/constants/routes';
 import { instructionGuide } from '@/locale/en/educational';
 import { requestTemplates } from '@/locale/en/request-template';
@@ -46,10 +47,9 @@ export default async function OrgDataRequestTemplatesLayout({
       </Box>
       <Box marginY={2}>
         <InstructionGuide
-          id="org-request-templates"
+          storageKey={instructionGuideKeys.org_request_templates}
           title={instructionGuide.createRequest.title}
           desc={instructionGuide.createRequest.description}
-          btnLink={instructionGuide.createRequest.btn_link}
           btnText={instructionGuide.createRequest.btn_text}
           videoUrl={instructionGuide.createRequest.video_link}
         />
