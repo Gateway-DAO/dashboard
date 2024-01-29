@@ -20,6 +20,7 @@ import { useForm } from 'react-hook-form';
 import { Add } from '@mui/icons-material';
 import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 
+import CsvUpload from './csv-upload';
 import OwnerPreview from './owner-preview';
 
 type Props = {
@@ -161,6 +162,7 @@ export default function OwnerSection({
           owner={owner}
         />
       )}
+      <CsvUpload />
     </Paper>
   );
 }
