@@ -90,6 +90,31 @@ export const issuePda = {
   success_title: 'Private Data Asset issued successfully',
 };
 
+export const csvUpload = {
+  title: 'Issue to multiple owners',
+  subtitle: 'Follow the instructions',
+  steps: {
+    download: {
+      title: 'Download CSV template',
+      description: 'This is the file template you should fill and upload.',
+      text_btn: 'Download',
+      link: 'https://docs.google.com/spreadsheets/d/1uNh_-tRNteXhfjGyeNULrpT8eZRBZOrrZVdWnmmBASQ/edit#gid=0',
+    },
+    fill_csv: {
+      title: 'Fill the CSV template',
+      description:
+        'Follow the instructions inside the file for a successful issuance.',
+    },
+    upload: {
+      title: 'Upload CSV template',
+      description:
+        'Upload and await an email from the Gateway team confirming completion.',
+      text_btn: 'Upload',
+      link: 'https://mygateway.typeform.com/to/gIgrdXIK',
+    },
+  },
+};
+
 export const issuePdaForm = {
   title: 'Issue a Private Data Asset',
   subtitle: 'Complete your PDA details',
