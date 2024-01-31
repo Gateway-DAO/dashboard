@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import useLocalStorageHelpCard from '@/hooks/use-help-card';
+import useLocalStorageInstructionGuide from '@/hooks/use-instruction-guide';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, Stack, Typography, IconButton } from '@mui/material';
@@ -23,7 +23,7 @@ export default function HelpContentCard({
   btnLink,
   btnText,
 }: Props) {
-  const { visible, onRemoveStorage } = useLocalStorageHelpCard({
+  const { visible, onSaveStorage } = useLocalStorageInstructionGuide({
     storageKey: title.toLowerCase(),
   });
 
@@ -67,7 +67,7 @@ export default function HelpContentCard({
             </div>
           </Stack>
           <span style={{ position: 'absolute', top: 20, right: 20 }}>
-            <IconButton onClick={onRemoveStorage} sx={{ cursor: 'pointer' }}>
+            <IconButton onClick={onSaveStorage} sx={{ cursor: 'pointer' }}>
               <CloseIcon />
             </IconButton>
           </span>

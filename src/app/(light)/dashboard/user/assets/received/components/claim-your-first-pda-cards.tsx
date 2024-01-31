@@ -8,7 +8,7 @@ type Props = {
   cards: { title: string; icon: FC<SvgIconProps> }[];
 };
 
-export default function EducationalModalCards({ cards }: Props) {
+export default function ClaimYourFirstPdaCards({ cards }: Props) {
   return (
     <>
       {cards?.map((card, i) => {

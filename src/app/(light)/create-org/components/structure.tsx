@@ -15,7 +15,6 @@ import useGaEvent from '@/hooks/use-ga-event';
 import { org } from '@/locale/en/org';
 import { usernameSchema } from '@/schemas/profile';
 import { getClientPrivateApi } from '@/services/protocol/api';
-import { currentEnv } from '@/utils/env';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';

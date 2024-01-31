@@ -24,7 +24,7 @@ export default async function DashboardUserMyDataModels() {
       await privateApi.dataModelsByUser({
         user: {
           type: UserIdentifierType.GatewayId,
-          value: session.user.gatewayId as string,
+          value: session?.user?.gatewayId as string,
         },
         skip: 0,
         take: 5,

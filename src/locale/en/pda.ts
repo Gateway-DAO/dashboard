@@ -62,29 +62,6 @@ export const pdas = {
   data_assets_subtitle:
     'These are the private data assets you have earned and created.',
   issue_a_pda: 'Issue a PDA',
-  help_claim_first_pda_card: {
-    title: 'Claim your first PDA issued by Gateway',
-    text_button: 'Claim here',
-  },
-  help_card: {
-    title: 'Issue a PDA now!',
-    description: 'Quick, non-code feature for issuing PDAs in a few steps.',
-    text_button: 'Issue Now',
-  },
-  help_how_to_use_your_pda: {
-    title: 'How to use your PDA',
-    description:
-      'Explore the potential of your Data Assets with a step-by-step walkthrough.',
-    text_button: 'Play video',
-    link: 'https://youtube.com/embed/GwIFrE0MQLc',
-  },
-  help_how_to_issue_a_pda: {
-    title: 'How to issue a PDA',
-    description:
-      'We will show you step by step how to send a PDA with our non code application.',
-    text_button: 'Play video',
-    link: 'https://youtube.com/embed/_2_HmB76d40?si=KM1WRbg5fivORYPr',
-  },
 };
 export const orgPdas = {
   empty: 'No Issuances yet',
@@ -111,6 +88,31 @@ export const issuePda = {
   subtitle: 'Select a Data Model',
   featured: 'Featured',
   success_title: 'Private Data Asset issued successfully',
+};
+
+export const csvUpload = {
+  title: 'Issue to multiple owners',
+  subtitle: 'Follow the instructions',
+  steps: {
+    download: {
+      title: 'Download CSV template',
+      description: 'This is the file template you should fill and upload.',
+      text_btn: 'Download',
+      link: 'https://docs.google.com/spreadsheets/d/1uNh_-tRNteXhfjGyeNULrpT8eZRBZOrrZVdWnmmBASQ/edit#gid=0',
+    },
+    fill_csv: {
+      title: 'Fill the CSV template',
+      description:
+        'Follow the instructions inside the file for a successful issuance.',
+    },
+    upload: {
+      title: 'Upload CSV template',
+      description:
+        'Upload and await an email from the Gateway team confirming completion.',
+      text_btn: 'Upload',
+      link: 'https://mygateway.typeform.com/to/gIgrdXIK',
+    },
+  },
 };
 
 export const issuePdaForm = {

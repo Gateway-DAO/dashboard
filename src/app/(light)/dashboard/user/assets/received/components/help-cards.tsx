@@ -2,27 +2,21 @@
 
 import { useEffect } from 'react';
 
-import EducationalModal from '@/components/educational/components/educational-modal';
-import HelpCtaCard from '@/components/help-cta-card/help-cta-card';
 import AssetTemplateImage from '@/components/icons/asset-template';
-import QuestionSquaredIcon from '@/components/icons/question-squared';
 import VerifyPdaIcon from '@/components/icons/verify-pda';
-import VideoSquaredIcon from '@/components/icons/video-squared';
-import Instruction from '@/components/instruction/instruction';
-import { educationalKeys, helpStorageKeys } from '@/constants/educational';
+import { InstructionGuide } from '@/components/instruction-guide/instruction-guide';
+import { coachMarkKeys } from '@/constants/coach-mark';
+import { instructionGuideKeys } from '@/constants/instruction-guide';
 import { mutations } from '@/constants/queries';
-import useEducational from '@/hooks/use-educational';
-import useLocalStorageHelpCard from '@/hooks/use-help-card';
-import { pdas } from '@/locale/en/pda';
-import { useToggle } from '@react-hookz/web';
+import useCoachMark from '@/hooks/use-coach-mark';
+import { instructionGuide } from '@/locale/en/educational';
 import { useMutation } from '@tanstack/react-query';
 
 import { Stack } from '@mui/material';
 
-export default function HelpCards() {
-  const [videoPlayer, setVideoPlayer] = useToggle(false);
-  const [claimFirstPdaModal, setClaimFirstPdaModal] = useToggle(false);
+import ClaimYourFirstPda from './claim-your-first-pda';
 
+export default function HelpCards() {
   useEffect(() => {
     const storageSession = localStorage.getItem('widget-educational-session');
     if (storageSession) {
@@ -30,17 +24,10 @@ export default function HelpCards() {
     }
   }, []);
 
-  const { onRemoveStorage } = useLocalStorageHelpCard({
-    storageKey: helpStorageKeys.help_cta_video_how_to_use_pda,
-  });
-
-  const { setEducational } = useEducational();
+  const { setCoachMark } = useCoachMark();
 
   const { mutateAsync: onGetSession } = useMutation({
-    mutationKey: [
-      mutations.get_issued_session_educational,
-      'widgetEducational',
-    ],
+    mutationKey: [mutations.get_issued_session_educational, 'widgetCoachMark'],
     mutationFn: async (sessionId: string) => {
       const response = await fetch('/api/get-issued-session-educational', {
         method: 'POST',
@@ -57,45 +44,32 @@ export default function HelpCards() {
 
   const getSession = async (sessionId: string) => {
     const { session } = await onGetSession(sessionId);
-    setEducational({
-      key: educationalKeys.start_using_pda,
+    setCoachMark({
+      key: coachMarkKeys.start_using_pda,
       value: session.pdaId,
     });
   };
 
   return (
     <Stack gap={2} sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
-      <HelpCtaCard
+      <InstructionGuide
+        storageKey={instructionGuideKeys.claim_your_first_pda}
+        title={instructionGuide.claim_your_first_pda.title}
         icon={VerifyPdaIcon}
-        title={pdas.help_claim_first_pda_card.title}
         image={AssetTemplateImage}
-        btnText={pdas.help_claim_first_pda_card.text_button}
-        onClick={() => setClaimFirstPdaModal(true)}
-        storageKey={helpStorageKeys.help_cta_claim_your_first_pda}
-      />
-      <EducationalModal
-        open={claimFirstPdaModal}
-        onClose={() => setClaimFirstPdaModal(false)}
-      />
-      <HelpCtaCard
-        icon={QuestionSquaredIcon}
-        title={pdas.help_how_to_use_your_pda.title}
-        desc={pdas.help_how_to_use_your_pda.description}
-        image={VideoSquaredIcon}
-        btnText={pdas.help_how_to_use_your_pda.text_button}
-        onClick={() => setVideoPlayer(true)}
-        storageKey={helpStorageKeys.help_cta_video_how_to_use_pda}
-        color="blue"
-      />
-      <Instruction
-        title={pdas.help_how_to_use_your_pda.title}
-        description={pdas.help_how_to_use_your_pda.description}
-        link={pdas.help_how_to_use_your_pda.link}
-        onClose={() => {
-          onRemoveStorage();
-          setVideoPlayer(false);
-        }}
-        open={videoPlayer}
+        btnText={instructionGuide.claim_your_first_pda.btn_text}
+        color="purple"
+        removeStorageOnClose={false}
+      >
+        <ClaimYourFirstPda />
+      </InstructionGuide>
+
+      <InstructionGuide
+        storageKey={instructionGuideKeys.how_to_use_pda}
+        title={instructionGuide.useYourPda.title}
+        desc={instructionGuide.useYourPda.description}
+        btnText={instructionGuide.useYourPda.btn_text}
+        videoUrl={instructionGuide.useYourPda.video_link}
       />
     </Stack>
   );
