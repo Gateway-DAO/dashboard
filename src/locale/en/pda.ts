@@ -110,7 +110,7 @@ export const csvUpload = {
       description:
         'Upload and await an email from the Gateway team confirming completion.',
       text_btn: 'Upload',
-      link: 'https://mygateway.typeform.com/to/gIgrdXIK',
+      link: 'https://mygateway.typeform.com/to/eYjp0a8S',
     },
   },
 };
