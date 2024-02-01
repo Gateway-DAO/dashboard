@@ -17,12 +17,7 @@ export async function GET(req: NextRequest) {
         }
       );
     }
-    try {
-      return NextResponse.redirect(url);
-    } catch (error: any) {
-      console.error(error.code);
-      return NextResponse.json('Error on redirect', { status: 500 });
-    }
+    return NextResponse.redirect(url);
   } catch (error) {
     return NextResponse.json('Error on redirect', { status: 500 });
   }
