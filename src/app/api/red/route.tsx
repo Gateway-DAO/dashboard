@@ -25,19 +25,7 @@ export async function GET(req: NextRequest) {
 
     /* The code is checking if the domain extracted from the provided URL is allowed for redirection. */
     const urlDomain =
-      /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n]+)/.exec(url);
-
-    if (!urlDomain || !urlDomain[1]) {
-      return NextResponse.json(
-        {
-          error: 'Invalid url',
-        },
-        {
-          status: 400,
-        }
-      );
-    }
-
+      /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n]+)/.exec(url) ?? [];
     const isAllowed = !!allowedRedirectDomains.find(
       (domain) => domain === urlDomain[1]
     );
