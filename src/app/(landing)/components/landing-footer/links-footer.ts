@@ -2,6 +2,7 @@
 import { DOCS_BASE_URL } from '@/constants/docs';
 import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
+import { currentEnv } from '@/utils/env';
 
 import LogoDiscord from '../icons/logo-discord';
 import LogoGithub from '../icons/logo-github';
@@ -32,7 +33,7 @@ export const linksSocial = [
   },
 ];
 
-export const linksList = [
+export const linksList: { title: string; href: string; target: string }[] = [
   {
     title: 'Learn',
     href: routes.learn,
@@ -44,16 +45,28 @@ export const linksList = [
     target: '_self',
   },
   {
+    title: 'Explorer',
+    href: routes.explorer.root,
+    target: '_self',
+  },
+  {
     title: 'Dashboard',
     href: routes.auth,
     target: '_self',
+  },
+  {
+    title: currentEnv === 'production' ? 'Sandbox' : 'MainNet',
+    href:
+      currentEnv === 'production'
+        ? externalLinks.gateway_sandbox
+        : externalLinks.gateway,
+    target: '_blank',
   },
   {
     title: 'Privacy',
     href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
     target: '_blank',
   },
-
   {
     title: 'Brand Kit',
     href: externalLinks.gateway_brandkit,

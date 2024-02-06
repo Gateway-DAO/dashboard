@@ -1,10 +1,12 @@
 import { PropsWithChildren } from 'react';
 
-import HelpContentCard from '@/components/help-content-card/help-content-card';
+import { InstructionGuide } from '@/components/instruction-guide/instruction-guide';
 import TitleLayout from '@/components/title-layout/title-layout';
-import { requests, helperContent } from '@/locale/en/request';
+import { instructionGuideKeys } from '@/constants/instruction-guide';
+import { instructionGuide } from '@/locale/en/educational';
+import { requests } from '@/locale/en/request';
 
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 export default function DataRequestsLayout({ children }: PropsWithChildren) {
   return (
@@ -14,12 +16,15 @@ export default function DataRequestsLayout({ children }: PropsWithChildren) {
         subtitle={requests.subtitle}
         titleId="title-data-request-templates"
       />
-      <HelpContentCard
-        title={helperContent.title}
-        desc={helperContent.desc}
-        btnText={helperContent.btnText}
-        btnLink={helperContent.btnLink}
+
+      <InstructionGuide
+        storageKey={instructionGuideKeys.user_requests}
+        title={instructionGuide.createRequest.title}
+        desc={instructionGuide.createRequest.description}
+        btnText={instructionGuide.createRequest.btn_text}
+        videoUrl={instructionGuide.createRequest.video_link}
       />
+
       {children}
     </Box>
   );

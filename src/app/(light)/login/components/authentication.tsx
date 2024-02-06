@@ -1,7 +1,7 @@
 'use client';
 
 import { signOut } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import { redirect, useSearchParams } from 'next/navigation';
 
 import { useLoginStepState } from '@/app/(light)/login/providers/step-provider/step-provider';
 import routes from '@/constants/routes';
@@ -15,9 +15,11 @@ import { VerifyEmailLoginToken } from './sections/verify-email-login-token';
 
 export function Authentication() {
   const { step, setStepState } = useLoginStepState();
+  const searchParams = useSearchParams();
 
   if (step === 'completed') {
-    redirect(routes.dashboard.user.home);
+    const callbackUrl = searchParams.get('callbackUrl');
+    redirect(callbackUrl ?? routes.dashboard.user.home);
   }
 
   if (step === 'verify-email-login-code') {

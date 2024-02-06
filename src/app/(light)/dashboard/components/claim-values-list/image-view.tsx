@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import { Maybe } from 'graphql/jsutils/Maybe';
 
 import { Stack } from '@mui/material';
@@ -23,7 +21,7 @@ export function ImageView({ src, alt }: Props) {
         },
       }}
     >
-      <Image src={src} alt={alt ?? ''} style={{ width: '100%' }} />
+      <img src={src} alt={alt ?? ''} style={{ width: '100%' }} />
     </Stack>
   );
 }

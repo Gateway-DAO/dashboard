@@ -1,7 +1,10 @@
+import { InstructionGuide } from '@/components/instruction-guide/instruction-guide';
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
+import { instructionGuideKeys } from '@/constants/instruction-guide';
 import routes from '@/constants/routes';
+import { instructionGuide } from '@/locale/en/educational';
 import { requestTemplates } from '@/locale/en/request-template';
 import {
   CONTAINER_PX,
@@ -41,6 +44,15 @@ export default async function OrgDataRequestTemplatesLayout({
             href={routes.dashboard.org.networkRequestTemplates(pathnameOrg)}
           />
         </GTWTabs>
+      </Box>
+      <Box marginY={2}>
+        <InstructionGuide
+          storageKey={instructionGuideKeys.org_request_templates}
+          title={instructionGuide.createRequest.title}
+          desc={instructionGuide.createRequest.description}
+          btnText={instructionGuide.createRequest.btn_text}
+          videoUrl={instructionGuide.createRequest.video_link}
+        />
       </Box>
       <Box sx={{ pt: 5 }}>{children}</Box>
     </Box>

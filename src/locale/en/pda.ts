@@ -62,17 +62,6 @@ export const pdas = {
   data_assets_subtitle:
     'These are the private data assets you have earned and created.',
   issue_a_pda: 'Issue a PDA',
-  help_card: {
-    title: 'Issue a PDA now!',
-    description: 'Quick, non-code feature for issuing PDAs in a few steps.',
-    text_button: 'Issue Now',
-  },
-  help_video_card: {
-    title: 'How to issue a PDA',
-    description:
-      'We will show you step by step how to send a PDA with our non code application',
-    text_button: 'Play video',
-  },
 };
 export const orgPdas = {
   empty: 'No Issuances yet',
@@ -99,6 +88,31 @@ export const issuePda = {
   subtitle: 'Select a Data Model',
   featured: 'Featured',
   success_title: 'Private Data Asset issued successfully',
+};
+
+export const csvUpload = {
+  title: 'Issue to multiple owners',
+  subtitle: 'Follow the instructions',
+  steps: {
+    download: {
+      title: 'Download CSV template',
+      description: 'This is the file template you should fill and upload.',
+      text_btn: 'Download',
+      link: 'https://docs.google.com/spreadsheets/d/1uNh_-tRNteXhfjGyeNULrpT8eZRBZOrrZVdWnmmBASQ/edit#gid=0',
+    },
+    fill_csv: {
+      title: 'Fill the CSV template',
+      description:
+        'Follow the instructions inside the file for a successful issuance.',
+    },
+    upload: {
+      title: 'Upload CSV template',
+      description:
+        'Upload and await an email from the Gateway team confirming completion.',
+      text_btn: 'Upload',
+      link: 'https://mygateway.typeform.com/to/eYjp0a8S',
+    },
+  },
 };
 
 export const issuePdaForm = {

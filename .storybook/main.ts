@@ -18,9 +18,7 @@ const config: StorybookConfig = {
     name: '@storybook/nextjs',
     options: {},
   },
-  core: {
-    builder: '@storybook/builder-webpack5',
-  },
+  core: {},
   docs: {
     autodocs: 'tag',
   },
@@ -33,6 +31,16 @@ const config: StorybookConfig = {
         configFile: path.resolve(__dirname, '../tsconfig.json'),
       })
     );
+
+    /*
+     * This is a workaround for
+     * adding support for aliases of ".js" files
+     */
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@/constants': path.resolve(__dirname, '../src/constants'),
+    };
+
     return config;
   },
   typescript: {

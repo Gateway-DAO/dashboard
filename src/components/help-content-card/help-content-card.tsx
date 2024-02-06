@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+
+import useLocalStorageInstructionGuide from '@/hooks/use-instruction-guide';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Button, Stack, Typography, IconButton } from '@mui/material';
@@ -22,30 +23,12 @@ export default function HelpContentCard({
   btnLink,
   btnText,
 }: Props) {
-  const [open, setOpen] = useState(false);
-  let hasSeenDialog: { [key: string]: boolean } | null;
-
-  useEffect(() => {
-    hasSeenDialog = JSON.parse(
-      localStorage.getItem('help-content-banner') || '{}'
-    );
-  }, []);
-
-  useEffect(() => {
-    if (hasSeenDialog && !hasSeenDialog.hasOwnProperty(title)) {
-      setOpen(true);
-    }
-  }, []);
-
-  const handleClick = () => {
-    const updatedDialog = { ...hasSeenDialog, [title]: true };
-
-    localStorage.setItem('help-content-banner', JSON.stringify(updatedDialog));
-    setOpen(false);
-  };
+  const { visible, onSaveStorage } = useLocalStorageInstructionGuide({
+    storageKey: title.toLowerCase(),
+  });
 
   return (
-    open && (
+    visible && (
       <Box sx={{ width: '100%', mb: 3 }}>
         <Stack
           position={'relative'}
@@ -84,7 +67,7 @@ export default function HelpContentCard({
             </div>
           </Stack>
           <span style={{ position: 'absolute', top: 20, right: 20 }}>
-            <IconButton onClick={handleClick}>
+            <IconButton onClick={onSaveStorage} sx={{ cursor: 'pointer' }}>
               <CloseIcon />
             </IconButton>
           </span>

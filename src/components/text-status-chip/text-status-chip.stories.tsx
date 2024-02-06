@@ -18,7 +18,7 @@ export default meta;
 type Story = StoryObj<typeof TextStatusChip>;
 
 export const Playground: Story = {
-  render: (props) => (
+  render: () => (
     <Box sx={{ width: 500 }}>
       <TextStatusChip status={PdaStatus.Valid} />
     </Box>

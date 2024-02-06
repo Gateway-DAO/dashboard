@@ -1,14 +1,14 @@
 import { Metadata } from 'next';
 
-import DataOutlinedIcon from '@/components/icons/data-outlined';
+import InstructionGuideHowToIssue from '@/app/(light)/dashboard/components/cards/instruction-guide-how-to-issue';
 import TitleLayout from '@/components/title-layout/title-layout';
-import routes from '@/constants/routes';
-import { orgPdas, pdas } from '@/locale/en/pda';
+import { orgPdas } from '@/locale/en/pda';
 import { getPrivateApi } from '@/services/protocol/api';
 import { OrganizationIdentifierType } from '@/services/protocol/types';
 
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
+import IssuePdaAction from './components/issue-pda-action';
 import PDAsTable from './components/pdas-table';
 
 export const metadata: Metadata = {
@@ -46,15 +46,9 @@ export default async function OrganizationIssuedAssetsPage(props: any) {
         subtitle={orgPdas.data_assets_subtitle}
         titleId="title-org-assets"
       >
-        <Button
-          variant="contained"
-          size="large"
-          endIcon={<DataOutlinedIcon />}
-          href={routes.dashboard.org.issue(pathnameOrg)}
-        >
-          {pdas.issue_a_pda}
-        </Button>
+        <IssuePdaAction pathnameOrg={pathnameOrg} />
       </TitleLayout>
+      <InstructionGuideHowToIssue />
       {issuedPdas && issuedPdas.length > 0 && (
         <PDAsTable data={issuedPdas} totalCount={count} />
       )}

@@ -1,4 +1,4 @@
-import ListSection from '@/app/(light)/dashboard/components/list-section';
+import ListSection from '@/app/(light)/dashboard/components/list-section/list-section';
 import { settings } from '@/locale/en/settings';
 
 import { AddOutlined, NotificationsOutlined } from '@mui/icons-material';

@@ -1,9 +1,9 @@
 import Button from '@/app/(landing)/components/button';
 import Wrapper from '@/app/(landing)/components/wrapper';
+import { DOCS_BASE_URL } from '@/constants/docs';
 
 import Title from '../title';
 import styles from './our-protocol.module.scss';
-import { DOCS_BASE_URL } from '@/constants/docs';
 
 const protocols = [
   {

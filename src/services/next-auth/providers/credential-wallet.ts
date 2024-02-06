@@ -15,9 +15,18 @@ const credentialWallet = CredentialsProvider({
       type: 'text',
       placeholder: '0x0',
     },
+    publicKey: {
+      label: 'signature',
+      type: 'text',
+      placeholder: '0x0',
+    },
   },
   async authorize(credentials) {
-    return loginWallet(credentials!.signature, credentials!.wallet);
+    return loginWallet(
+      credentials!.signature,
+      credentials!.wallet,
+      credentials?.publicKey
+    );
   },
 });
 

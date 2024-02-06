@@ -1,14 +1,13 @@
 import { Metadata } from 'next';
 
-import PdasHelpCards from '@/app/(light)/dashboard/components/pdas-help-cards';
-import DataOutlinedIcon from '@/components/icons/data-outlined';
-import routes from '@/constants/routes';
+import InstructionGuideHowToIssue from '@/app/(light)/dashboard/components/cards/instruction-guide-how-to-issue';
 import { pdas as pdasLocales } from '@/locale/en/pda';
 import { getPrivateApi } from '@/services/protocol/api';
 
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import PdasHeader from '../components/pdas-header';
+import IssuePdaAction from './components/issue-pda-action';
 import IssuedPDAsList from './components/list';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -24,16 +23,10 @@ export default async function DataAssetsPage() {
   return (
     <>
       <PdasHeader>
-        <Button
-          variant="contained"
-          size="large"
-          endIcon={<DataOutlinedIcon />}
-          href={routes.dashboard.user.issue}
-        >
-          {pdasLocales.issue_a_pda}
-        </Button>
+        <IssuePdaAction />
       </PdasHeader>
       <Box sx={{ pt: 5 }}>
+        <InstructionGuideHowToIssue />
         {pdas && pdas.length > 0 && <IssuedPDAsList pdas={pdas} />}
         {pdas && pdas.length === 0 && (
           <Typography

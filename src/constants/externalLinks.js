@@ -6,6 +6,8 @@ const externalLinks = {
   gateway_substack: 'https://mygateway.substack.com/',
   gateway_github: 'https://github.com/Gateway-DAO',
   gateway_brandkit: 'https://live.standards.site/gateway',
+  gateway: 'https://mygateway.xyz',
+  gateway_sandbox: 'https://sandbox.mygateway.xyz',
 };
 
 module.exports = externalLinks;
