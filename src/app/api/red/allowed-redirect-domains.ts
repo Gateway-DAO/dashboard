@@ -2,6 +2,7 @@ export const allowedRedirectDomains = [
   'dev.mygateway.xyz',
   'v2.mygateway.xyz',
   'mygateway.xyz',
+  'docs.mygateway.xyz',
   'youtube.com',
   'twitter.com',
   'discord.gg',
