@@ -11,6 +11,7 @@ declare global {
         | string;
       NEXTAUTH_SECRET: string;
       SECURE_API_KEY: string;
+      VERCEL_ENV: 'production' | 'preview' | 'development';
     }
   }
 
