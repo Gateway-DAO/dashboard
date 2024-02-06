@@ -9,8 +9,6 @@ import refreshToken from './libs/refresh-token';
 import credentialEmail from './providers/credential-email';
 import credentialWallet from './providers/credential-wallet';
 
-const useSecureCookies = !!process.env.VERCEL_URL;
-
 export const nextAuthConfig: NextAuthOptions = {
   providers: [credentialEmail, credentialWallet],
   session: {
@@ -46,20 +44,6 @@ export const nextAuthConfig: NextAuthOptions = {
       };
     },
   },
-  ...(process.env.VERCEL_ENV !== 'preview' && {
-    cookies: {
-      sessionToken: {
-        name: `${useSecureCookies ? '__Secure-' : ''}next-auth.session-token`,
-        options: {
-          httpOnly: true,
-          sameSite: 'lax',
-          path: '/',
-          domain: '.mygateway.xyz',
-          secure: useSecureCookies,
-        },
-      },
-    },
-  }),
   pages: {
     signIn: routes.auth,
   },
