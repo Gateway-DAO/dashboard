@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import { PageWithParams } from '@/types/next';
 import { getCurrentOrg } from '@/utils/currentOrg';
 
 import HomeStructure from '../../../user/home/components/home-structure';
@@ -10,7 +11,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function Home(props: any) {
+export default async function Home(
+  props: PageWithParams<{ username: string }>
+) {
   const pathnameOrg = await props.params?.username;
   const organization = await getCurrentOrg(pathnameOrg);
   return (
