@@ -3,25 +3,18 @@ import Link from 'next/link';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Button, Paper, Typography, Box } from '@mui/material';
 
-type Props = {
-  icon: (props: any) => JSX.Element;
-  heading: string;
-  title: string;
-  subtitle: string;
-  link: string;
-  btn_text: string;
-  target: string;
-};
+import { HomeCardProps } from './types';
 
 export default function HomeCard({
   icon: Icon,
+  iconStyle,
   heading,
   title,
   subtitle,
   link,
   btn_text,
   target,
-}: Props) {
+}: HomeCardProps) {
   return (
     <Paper
       component={Link}
@@ -39,9 +32,10 @@ export default function HomeCard({
     >
       <Icon
         sx={{
-          width: 60,
-          height: 50,
+          width: 40,
+          height: 40,
           mb: 11,
+          ...iconStyle,
         }}
       />
 

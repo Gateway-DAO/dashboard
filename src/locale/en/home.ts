@@ -1,3 +1,4 @@
+import { HomeCardProps } from '@/app/(light)/dashboard/components/home/types';
 import { DataModelsBoxIcon, DataProofBoxIcon } from '@/components/icons';
 import DataAssetIcon from '@/components/icons/data-asset-box';
 import GatewayDarkSquaredIcon from '@/components/icons/gateway-dark-squared';
@@ -53,10 +54,11 @@ export const home = {
       link: routes.dashboard.user.proofs,
       target: '_self',
     },
-  ],
+  ] satisfies HomeCardProps[],
   sandbox_sub_banner: [
     {
       icon: DataModelsBoxIcon,
+      iconStyle: { width: 55 },
       heading: 'Create',
       title: 'Define a Data Model',
       subtitle:
@@ -85,7 +87,7 @@ export const home = {
       link: documentationRoutes.home,
       target: '_blank',
     },
-  ],
+  ] satisfies HomeCardProps[],
   instrunction_banner: [
     {
       title: 'How to use your PDA',

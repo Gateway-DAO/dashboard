@@ -1,7 +1,5 @@
 'use client';
 
-import { Metadata } from 'next';
-
 import routes from '@/constants/routes';
 import { home } from '@/locale/en/home';
 import { currentEnv } from '@/utils/env';
