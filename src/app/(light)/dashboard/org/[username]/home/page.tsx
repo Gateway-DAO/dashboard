@@ -1,24 +1,23 @@
 import { Metadata } from 'next';
+import { Session } from 'next-auth';
 
+import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { PageWithParams } from '@/types/next';
-import { getCurrentOrg } from '@/utils/currentOrg';
 
-import HomeStructure from '../../../user/home/components/home-structure';
+import HomeStructure from './structure';
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: `The Private Data Asset Network  - Gateway Network`,
-  };
-}
+export const metadata: Metadata = {
+  title: `The Private Data Asset Network  - Gateway Network`,
+};
 
-export default async function Home(
-  props: PageWithParams<{ username: string }>
-) {
-  const pathnameOrg = await props.params?.username;
-  const organization = await getCurrentOrg(pathnameOrg);
+export default async function Home({
+  params: { username },
+}: PageWithParams<{ username: string }>) {
+  const session = (await getGtwServerSession()) as Session;
   return (
     <HomeStructure
-      username={organization?.name ?? organization?.gatewayId ?? ''}
+      username={session?.user?.displayName ?? session?.user?.gatewayId ?? ''}
+      organization={username}
     />
   );
 }

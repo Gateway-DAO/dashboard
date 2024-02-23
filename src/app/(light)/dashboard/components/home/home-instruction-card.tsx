@@ -27,6 +27,8 @@ export default function HomeInstructionCard({
     storageKey: title.toLowerCase(),
   });
 
+  // TODO: return null if !visible
+
   return (
     <Paper
       variant={'outlined'}

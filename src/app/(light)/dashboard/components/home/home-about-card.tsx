@@ -1,6 +1,4 @@
-'use client';
-
-import GatewayDarkBanner from '@/components/icons/gateway-dark-banner';
+import GatewayDarkSquaredIcon from '@/components/icons/gateway-dark-squared';
 import { home } from '@/locale/en/home';
 
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -22,7 +20,7 @@ export default function HomeAboutCard() {
       target="_blank"
       sx={{ textDecoration: 'none' }}
     >
-      <GatewayDarkBanner
+      <GatewayDarkSquaredIcon
         sx={{
           width: 50,
           height: 54,
