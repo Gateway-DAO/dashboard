@@ -7,20 +7,21 @@ import useGaEvent from '@/hooks/use-ga-event';
 
 import { Box, Button, Stack, Typography } from '@mui/material';
 
-type Props = {
-  title: string;
-  desc: string;
-  btnLink: string;
-  btnText: string;
-};
+import { HomeBannerProps } from './types';
 
-export default function IssueNowCard({ title, desc, btnLink, btnText }: Props) {
+export default function HomeBanner({
+  icon: Icon,
+  title,
+  subtitle,
+  btn_link,
+  btn_text,
+}: HomeBannerProps) {
   const { sendEvent } = useGaEvent();
 
   return (
     <Stack
       component={Link}
-      href={btnLink}
+      href={btn_link}
       direction={{
         xs: 'column',
         lg: 'row',
@@ -37,12 +38,12 @@ export default function IssueNowCard({ title, desc, btnLink, btnText }: Props) {
       }}
     >
       <Box>
-        <DataSquaredIcon sx={{ width: 40, height: 40, mb: 3 }} />
+        <Icon sx={{ width: 40, height: 40, mb: 3 }} />
         <Typography variant="h5" color="common.white" gutterBottom>
           {title}
         </Typography>
         <Typography variant="body1" color="common.white" sx={{ flexGrow: 1 }}>
-          {desc}
+          {subtitle}
         </Typography>
       </Box>
       <Button
@@ -59,7 +60,7 @@ export default function IssueNowCard({ title, desc, btnLink, btnText }: Props) {
           alignSelf: 'flex-end',
         }}
       >
-        {btnText}
+        {btn_text}
       </Button>
     </Stack>
   );

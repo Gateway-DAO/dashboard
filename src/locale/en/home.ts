@@ -1,10 +1,14 @@
-import { HomeCardProps } from '@/app/(light)/dashboard/components/home/types';
-import { DataModelsBoxIcon, DataProofBoxIcon } from '@/components/icons';
+import {
+  HomeBannerProps,
+  HomeCardProps,
+} from '@/app/(light)/dashboard/components/home/types';
+import { DataModelsBoxIcon, GatewaySquaredLightIcon } from '@/components/icons';
 import DataAssetIcon from '@/components/icons/data-asset-box';
 import GatewayDarkSquaredIcon from '@/components/icons/gateway-dark-squared';
 import PlaygroundIcon from '@/components/icons/playground';
 import SDKIcon from '@/components/icons/sdk';
 import documentationRoutes from '@/constants/documentationRoutes';
+import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
 
 export const home = {
@@ -16,14 +20,25 @@ export const home = {
     btn_text: 'Check it out',
     link: documentationRoutes.home,
   },
-  issue_banner: {
-    title: 'Start issuing a Private Data Asset',
+  testnet_user_banner: {
+    icon: GatewaySquaredLightIcon,
+    title: 'Want to use Gateway for your Business or App?',
     subtitle:
-      'Select a data model, fill the details and just send to the user all under 30 seconds',
-    btn_text: 'Issue now',
+      'Please fill out the contact form with the necessary information and our team will reach out to you!',
+    btn_text: 'Contact Us',
+    btn_link: routes.dashboard.user.issue,
     target: '_blank',
-  },
-  sub_banner: [
+  } satisfies HomeBannerProps,
+  sandbox_user_banner: {
+    icon: GatewaySquaredLightIcon,
+    title: 'Ready to Enter the Gateway?',
+    subtitle:
+      'TestNet is open for approved teams and businesses looking to build with Gateway. Fill out the form and get access.',
+    btn_text: 'Join TestNet',
+    btn_link: externalLinks.gateway,
+    target: '_self',
+  } satisfies HomeBannerProps,
+  testnet_user_cards: [
     {
       icon: GatewayDarkSquaredIcon,
       heading: 'Education',
@@ -41,7 +56,7 @@ export const home = {
       subtitle:
         'Selected a Peer-to-Peer data model, fill out the information, and send a PDA to a peer!',
       btn_text: 'Create Now',
-      link: documentationRoutes.home,
+      link: routes.dashboard.user.issue,
       target: '_self',
     },
     {
@@ -55,7 +70,7 @@ export const home = {
       target: '_self',
     },
   ] satisfies HomeCardProps[],
-  sandbox_sub_banner: [
+  sandbox_user_cards: [
     {
       icon: DataModelsBoxIcon,
       iconStyle: { width: 55 },

@@ -36,6 +36,8 @@ export { default as GatewayBrokenIcon } from './gateway-broken';
 
 export { default as GatewayDarkSquaredIcon } from './gateway-dark-squared';
 
+export { default as GatewaySquaredLightIcon } from './gateway-squared-light';
+
 export { default as GatewaySquaredIcon } from './gateway-squared';
 
 export { default as GatewayIcon } from './gateway';
