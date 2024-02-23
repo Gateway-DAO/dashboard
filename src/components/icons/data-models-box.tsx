@@ -1,6 +1,6 @@
 import { SvgIcon, SvgIconProps } from '@mui/material';
 
-export default function HomeDataModelsIcon(props: SvgIconProps) {
+export default function DataModelsBoxIcon(props: SvgIconProps) {
   return (
     <SvgIcon
       viewBox="0 0 117 72"
