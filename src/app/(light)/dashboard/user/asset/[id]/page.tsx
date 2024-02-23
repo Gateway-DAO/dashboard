@@ -4,7 +4,7 @@ import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
 import routes from '@/constants/routes';
 import { getPDA } from '@/services/server-functions/pda';
-import { getCurrentOrg } from '@/utils/currentOrg';
+import { getSessionOrg } from '@/utils/currentOrg';
 
 import PDAItem from './components/pda-item';
 
@@ -26,7 +26,7 @@ export default async function PDAPage({
   params: { id: string; username: string };
 }) {
   const pda = await getPDA(params.id);
-  const org = await getCurrentOrg(params.username);
+  const org = await getSessionOrg(params.username);
 
   return (
     <>

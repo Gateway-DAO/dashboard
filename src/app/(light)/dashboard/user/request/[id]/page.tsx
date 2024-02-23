@@ -21,7 +21,7 @@ import {
 } from '@/services/protocol/types';
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { PageProps } from '@/types/next';
-import { getCurrentOrg } from '@/utils/currentOrg';
+import { getSessionOrg } from '@/utils/currentOrg';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
@@ -89,7 +89,7 @@ export default async function DashboardUserDataRequest({
   const userId = session.user.id;
   const dataRequest = await getDataRequest(id);
   const pathnameOrg = username;
-  const organization = await getCurrentOrg(pathnameOrg || '');
+  const organization = await getSessionOrg(pathnameOrg || '');
 
   if (!dataRequest || !dataRequest.id) {
     return <h1>Error</h1>;

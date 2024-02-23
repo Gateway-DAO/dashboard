@@ -1,6 +1,6 @@
 import { session } from '@/mocks/session';
 
-import { getCurrentOrg } from '../currentOrg';
+import { getSessionOrg } from '../currentOrg';
 
 jest.mock('@/services/next-auth/get-gtw-server-session', () => ({
   getGtwServerSession: jest.fn(async () => session),
@@ -9,7 +9,7 @@ jest.mock('@/services/next-auth/get-gtw-server-session', () => ({
 describe('currentOrg test', () => {
   it('shoud get current org from session', async () => {
     const organization = session.user.accesses![0].organization;
-    const currentOrg = await getCurrentOrg(organization.gatewayId!);
+    const currentOrg = await getSessionOrg(organization.gatewayId!);
     expect(currentOrg?.gatewayId).toBe(organization.gatewayId);
   });
 });
