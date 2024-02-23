@@ -1,3 +1,8 @@
+import { DataModelsBoxIcon, DataProofBoxIcon } from '@/components/icons';
+import DataAssetIcon from '@/components/icons/data-asset-box';
+import GatewayDarkSquaredIcon from '@/components/icons/gateway-dark-squared';
+import PlaygroundIcon from '@/components/icons/playground';
+import SDKIcon from '@/components/icons/sdk';
 import documentationRoutes from '@/constants/documentationRoutes';
 import routes from '@/constants/routes';
 
@@ -19,28 +24,64 @@ export const home = {
   },
   sub_banner: [
     {
-      heading: 'For organizations',
-      title: 'Create an Organization',
+      icon: GatewayDarkSquaredIcon,
+      heading: 'Education',
+      title: 'Why Gateway Matters',
       subtitle:
-        'To issue and verify on behalf of an organization, its essential to set up one.',
-      btn_text: 'Create Organization ID',
+        'Learn how Gateway is building the sovereign web and how you can join the movement. ',
+      btn_text: 'Learn more',
       link: routes.dashboard.createOrg,
       target: '_self',
     },
     {
-      heading: 'For developers',
-      title: 'Getting started using the protocol',
-      subtitle: 'Find out what you need to know to start using the API.',
-      btn_text: 'Get started',
+      icon: PlaygroundIcon,
+      heading: 'Contribute',
+      title: 'Send a Data Asset',
+      subtitle:
+        'Selected a Peer-to-Peer data model, fill out the information, and send a PDA to a peer!',
+      btn_text: 'Create Now',
+      link: documentationRoutes.home,
+      target: '_self',
+    },
+    {
+      icon: DataAssetIcon,
+      heading: 'Manage',
+      title: 'Check Your Data Proofs',
+      subtitle:
+        'Review what data assets you have shared, to who, and if you want to remove access.',
+      btn_text: 'View All',
+      link: routes.dashboard.user.proofs,
+      target: '_self',
+    },
+  ],
+  sandbox_sub_banner: [
+    {
+      icon: DataModelsBoxIcon,
+      heading: 'Create',
+      title: 'Define a Data Model',
+      subtitle:
+        'Define a standard of information by creating your own schema for a dataset.',
+      btn_text: 'Build Now',
+      link: documentationRoutes.dataModel,
+      target: '_blank',
+    },
+    {
+      icon: PlaygroundIcon,
+      heading: 'Protocol API',
+      title: 'Use our Protocol',
+      subtitle:
+        'Learn and implement our API directly into your product for custom and automated  actions.',
+      btn_text: 'Documentation',
       link: documentationRoutes.home,
       target: '_blank',
     },
     {
-      heading: 'About',
-      title: 'Learn about Gateway Network',
+      icon: SDKIcon,
+      heading: 'SDK',
+      title: 'Gateway Widget',
       subtitle:
-        'Our guide to learn about the Gateway architecture, mission, and set up process.',
-      btn_text: 'Learn more',
+        'Integrate in less than 30 minutes! Seamless data requests and user claiming process.',
+      btn_text: 'Plug and Play',
       link: documentationRoutes.home,
       target: '_blank',
     },
