@@ -2,7 +2,11 @@ import {
   HomeBannerProps,
   HomeCardProps,
 } from '@/app/(light)/dashboard/components/home/types';
-import { DataModelsBoxIcon, GatewaySquaredLightIcon } from '@/components/icons';
+import {
+  DataModelsBoxIcon,
+  DataSquaredIcon,
+  GatewaySquaredLightIcon,
+} from '@/components/icons';
 import DataAssetIcon from '@/components/icons/data-asset-box';
 import GatewayDarkSquaredIcon from '@/components/icons/gateway-dark-squared';
 import PlaygroundIcon from '@/components/icons/playground';
@@ -38,13 +42,22 @@ export const home = {
     btn_link: externalLinks.gateway,
     target: '_self',
   } satisfies HomeBannerProps,
+  testnet_org_banner: {
+    icon: DataSquaredIcon,
+    title: 'Contribute Data and Issue PDAs to your Users',
+    subtitle:
+      'Copy and paste our easy to use “Get Started” code and issue with Gateway',
+    btn_text: 'Get Started',
+    btn_link: documentationRoutes.startIssuing,
+    target: '_blank',
+  } satisfies HomeBannerProps,
   testnet_user_cards: [
     {
       icon: GatewayDarkSquaredIcon,
       heading: 'Education',
       title: 'Why Gateway Matters',
       subtitle:
-        'Learn how Gateway is building the sovereign web and how you can join the movement. ',
+        'Learn how Gateway is building the sovereign web and how you can join the movement.',
       btn_text: 'Learn more',
       link: routes.dashboard.createOrg,
       target: '_self',
@@ -101,6 +114,38 @@ export const home = {
       btn_text: 'Plug and Play',
       link: documentationRoutes.home,
       target: '_blank',
+    },
+  ] satisfies HomeCardProps[],
+  testnet_org_cards: [
+    {
+      icon: GatewayDarkSquaredIcon,
+      heading: 'Create',
+      title: 'Define a Data Model',
+      subtitle:
+        'Define a standard of information by creating your own schema for a dataset.',
+      btn_text: 'Build Now',
+      link: documentationRoutes.dataModel,
+      target: '_self',
+    },
+    {
+      icon: PlaygroundIcon,
+      heading: 'Protocol API',
+      title: 'Use our Protocol',
+      subtitle:
+        'Learn and implement our API directly into your product for custom and automated actions.',
+      btn_text: 'Documentation',
+      link: documentationRoutes.home,
+      target: '_self',
+    },
+    {
+      icon: DataAssetIcon,
+      heading: 'SDK',
+      title: 'Gateway Widget',
+      subtitle:
+        'Integrate in less than 30 minutes! Seamless data requests and user claiming process.',
+      btn_text: 'Plug and Play',
+      link: documentationRoutes.home,
+      target: '_self',
     },
   ] satisfies HomeCardProps[],
   instrunction_banner: [

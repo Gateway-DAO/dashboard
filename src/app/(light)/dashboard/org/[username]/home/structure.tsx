@@ -1,8 +1,6 @@
 'use client';
 
-import routes from '@/constants/routes';
 import { home } from '@/locale/en/home';
-import { currentEnv } from '@/utils/env';
 
 import HomeBanner from '../../../components/home/home-banner';
 import HomeCard from '../../../components/home/home-card';
@@ -16,15 +14,9 @@ export default function HomeStructure({
   username: string;
   organization: string;
 }) {
-  const banner =
-    currentEnv === 'testnet'
-      ? home.sandbox_user_banner
-      : home.testnet_user_banner;
+  const banner = home.testnet_org_banner;
+  const cards = home.testnet_org_cards;
 
-  const cards =
-    currentEnv === 'testnet'
-      ? home.sandbox_user_cards
-      : home.testnet_user_cards;
   return (
     <HomeTemplate
       username={username}
