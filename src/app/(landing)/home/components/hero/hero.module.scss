@@ -18,7 +18,8 @@
   display: flex;
   height: 100%;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-bottom: 115px;
 
   @media (max-width: 969px) {
     justify-content: flex-end;
@@ -28,12 +29,12 @@
 
 .title {
   color: #fff;
-  font-size: 82px;
-  font-weight: 400;
-  letter-spacing: 0.412px;
-  line-height: 82px;
+  font-weight: 300;
+  font-size: 96px;
+  line-height: 116.7%;
+  letter-spacing: -1.5px;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 0;
   width: 100%;
 
   @media (max-width: 1199px) and (min-width: 970px) {
@@ -43,45 +44,14 @@
   }
 
   @media (max-width: 969px) {
-    font-size: 3.5rem;
-    line-height: 3.5rem;
-
-    br {
-      display: none;
-    }
+    font-size: 4rem;
+    font-weight: 400;
+    line-height: 4.6rem;
   }
 }
 
-.title_highlight {
-  display: inline-block;
-  position: relative;
-  height: 69px;
-
-  @media (max-width: 1199px) and (min-width: 970px) {
-    height: 50px;
-  }
-
-  @media (max-width: 969px) {
-    height: 2.45rem;
-  }
-}
-
-.word {
-  display: flex;
-  left: 0;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-
-  &:nth-child(1) {
-    span {
-      opacity: 1;
-    }
-  }
-  span {
-    opacity: 0;
-    will-change: transform, opacity;
-  }
+.highlight {
+  color: #70ECFE;
 }
 
 .title_line {
@@ -90,11 +60,11 @@
 
 .text {
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
-  margin-bottom: 31px;
+  margin-bottom: 48px;
 
   @media (max-width: 1199px) and (min-width: 970px) {
     font-size: 16px;
@@ -110,15 +80,69 @@
       display: none;
     }
   }
+
+  &--dark {
+    opacity: 0.7;
+  }
 }
 
 .buttons_container {
   align-items: center;
   display: flex;
+  margin-bottom: 72px;
 
   a {
     &:not(:first-child) {
       margin-left: 10px;
     }
+  }
+}
+
+.button {
+  @media (max-width: 969px) {
+    background-color: #fff;
+    color: #771AC9;
+  }
+}
+
+.logos {
+  position: relative;
+  width: 100%;
+}
+
+.logos_container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+
+
+  &--desktop {
+    display: block;
+
+    @media (max-width: 969px) {
+      display: none;
+    }
+  }
+
+  &--mobile {
+    display: none;
+
+    @media (max-width: 969px) {
+      display: block;
+    }
+  }
+}
+
+.logo {
+  display: block;
+  flex-shrink: 0;
+  margin-right: 126px;
+  margin-bottom: 2.3rem;
+
+  @media (max-width: 969px) {
+    height: 2.9rem;
+    margin-right: 2.3rem;
   }
 }
