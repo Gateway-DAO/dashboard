@@ -103,7 +103,7 @@ export default function Header() {
                     variant="contained"
                     className={styles.mobile_button_head_dashboard}
                   >
-                    Open dashboard
+                    Claim Gateway ID
                   </Button>
                 </Link>
                 <BurgerButton
@@ -121,11 +121,11 @@ export default function Header() {
               </Link>
 
               <div className={styles.links}>
-                <Link className={styles.link} href="/learn">
-                  <Button variant="text">Learn</Button>
+                <Link className={styles.link} href="https://docs.mygateway.xyz">
+                  <Button variant="text">Docs</Button>
                 </Link>
-                <Link className={styles.link} href="/build">
-                  <Button variant="text">Build</Button>
+                <Link className={styles.link} href="/explorer">
+                  <Button variant="text">Explorer</Button>
                 </Link>
                 <Link
                   className={styles.link}
@@ -142,17 +142,13 @@ export default function Header() {
               </div>
 
               <div className={styles.buttons_container}>
-                <Link href="/explorer">
-                  <Button variant="outlined" className={styles.button_outlined}>
-                    Explorer
-                  </Button>
-                </Link>
+
                 <Link href="/login">
                   <Button
                     variant="contained"
                     className={styles.button_contained}
                   >
-                    Open dashboard
+                    Claim Gateway ID
                   </Button>
                 </Link>
               </div>
@@ -170,21 +166,21 @@ export default function Header() {
           <Wrapper className={styles.mobile_wrapper}>
             <Link
               className={styles.mobile_link}
-              href="/learn"
+              href="https://docs.mygateway.xyz"
               onClick={() => setBurgerActive(false)}
             >
               <Button variant="text">
-                <span>Learn</span>
+                <span>Docs</span>
                 <ArrowRight2 className={styles.mobile_link_arrow} />
               </Button>
             </Link>
             <Link
               className={styles.mobile_link}
-              href="/build"
+              href="/explorer"
               onClick={() => setBurgerActive(false)}
             >
               <Button variant="text">
-                <span>Build</span>
+                <span>Explorer</span>
                 <ArrowRight2 className={styles.mobile_link_arrow} />
               </Button>
             </Link>
@@ -204,16 +200,6 @@ export default function Header() {
                 <ArrowRight2 className={styles.mobile_link_arrow} />
               </Button>
             </Link>
-            <Link
-              className={styles.mobile_link}
-              href="/explorer"
-              onClick={() => setBurgerActive(false)}
-            >
-              <Button variant="text">
-                <span>Explorer</span>
-                <ArrowRight2 className={styles.mobile_link_arrow} />
-              </Button>
-            </Link>
 
             <div className={styles.mobile_menu_buttons}>
               <Link
@@ -225,7 +211,7 @@ export default function Header() {
                   variant="contained"
                   className={styles.mobile_menu_button_link_contained}
                 >
-                  Open dashboard
+                  Claim Gateway ID
                 </Button>
               </Link>
             </div>

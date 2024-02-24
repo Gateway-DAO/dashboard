@@ -113,6 +113,29 @@
   }
 }
 
+.button_contained {
+  transition: color 0.8s ease, background-color 0.8s ease;
+
+  .element--light & {
+    background-color: #fff;
+    color: #771ac9;
+
+    &:hover {
+      background-color: #53128c;
+      color: #fff;
+    }
+  }
+
+  .element--dark & {
+    background-color: #771ac9;
+    color: #fff;
+
+    &:hover {
+      background-color: #53128c;
+    }
+  }
+}
+
 .mobile_buttons {
   align-items: center;
   display: flex;
