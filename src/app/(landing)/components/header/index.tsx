@@ -66,8 +66,9 @@ export default function Header() {
           background: isLearnPage ? '#771AC9' : '#E6D5FA',
           height: 40,
           flexDirection: 'row',
-          position: 'relative',
+          position: 'absolute',
           '& a': { textDecoration: 'none' },
+          width: '100%',
           zIndex: 10,
         }}
       >
