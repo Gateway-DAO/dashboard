@@ -56,6 +56,7 @@ export default function Cta() {
   }, []);
 
   const handleInview = (inView: boolean) => {
+    if (!titleLineRef?.current?.length || !wordsRef?.current?.length || !buttonRef.current) return;
     gsap.killTweensOf([
       titleLineRef.current,
       wordsRef.current,
