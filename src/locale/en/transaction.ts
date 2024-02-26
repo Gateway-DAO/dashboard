@@ -9,9 +9,9 @@ export const transaction = {
   earning: 'Earning',
   cards: {
     pdas: 'PDAs issued',
-    issuers: 'Unique issuers',
+    data_contributors: 'Data Contributors',
     data_requests: 'Data requests created',
-    fees: 'Fees generated for issuers',
+    fees: 'Fees generated for Data Contributors',
   },
   last_transactions: 'Last transactions',
   home_table: {

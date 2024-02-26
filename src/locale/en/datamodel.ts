@@ -34,7 +34,6 @@ export const explorerDataModels = {
   empty: 'No data models found',
   featuredTitle: 'Featured',
   listTitle: 'All data models',
-  issuers: 'Issuers',
   pdas_issued: 'PDAs issued',
   view_more: 'View all data models',
   filters: {
@@ -45,13 +44,12 @@ export const explorerDataModels = {
 
 export const explorerDataModelDetail = {
   tabs: {
-    issuers: 'Issuers',
+    data_contributors: 'Data Contributors',
     tied_request_templates: 'Tied Request Templates',
   },
 };
 
 export const explorerDataModelDetailOverview = {
-  unique_issuers: 'Unique Issuers',
   pdas_issued: 'PDAs Issued',
   tied_request_templates: 'Tied Request Templates',
   revenue_generated: 'Revenue Generated',
@@ -92,8 +90,8 @@ export const issuePda = {
 };
 
 export const explorerIssuersByDataModel = {
-  empty: 'No issuers found',
-  issuers: 'Issuers',
+  empty: 'No data contributors found',
+  data_contributors: 'Data Contributors',
   pdas_issued: 'PDAs issued',
 };
 
