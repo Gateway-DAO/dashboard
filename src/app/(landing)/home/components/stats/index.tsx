@@ -139,7 +139,7 @@ export default function Stats() {
 
           <div className={styles.small_boxes_container}>
             <div className={joinClasses(styles.box, styles['box--sm'])}>
-              <h3 className={styles.box_title}>Unique Issuers</h3>
+              <h3 className={styles.box_title}>Unique Data Contributors</h3>
               <span
                 className={styles.box_value}
                 ref={(ref) =>
