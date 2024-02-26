@@ -32,38 +32,14 @@ const data = [
     icon: Portable,
     title: 'Native User Control',
     text: 'Gateway is building Private Data Assets which turns random datastreams into a contextualized and user-controlled asset.'
-  },
-  // {
-  //   icon: 'consumer-loyalty',
-  //   title: 'Consumer Loyalty',
-  //   text: 'Power unique loyalty experiences, perks, and partnerships.'
-  // },
-  // {
-  //   icon: 'education',
-  //   title: 'Education',
-  //   text: 'Prove your knowledge and education across hiring platforms.'
-  // },
-  // {
-  //   icon: 'financial-history',
-  //   title: 'Financial History',
-  //   text: 'Control access to your data for custom loans or product access.'
-  // },
-  // {
-  //   icon: 'gaming',
-  //   title: 'Gaming',
-  //   text: 'Build and share your gaming reputation to unlock experiences.'
-  // }
+  }
 ]
 
 export default function ForBusiness() {
   return (
     <section className={styles.element}>
       <Wrapper>
-        <SectionLabel
-          className={styles.label}
-          variant='purple'
-          text='For Businesses'
-        />
+        <SectionLabel variant='purple' text='For Businesses' />
 
         <h2 className={styles.title}>
           Build apps and services <br/>
