@@ -9,7 +9,7 @@ export const transaction = {
   earning: 'Earning',
   cards: {
     pdas: 'PDAs issued',
-    data_contributors: 'Data Contributors',
+    data_contributors: 'Unique Data Contributors',
     data_requests: 'Data requests created',
     fees: 'Fees generated for Data Contributors',
   },
