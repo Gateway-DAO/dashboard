@@ -2,7 +2,6 @@
 
 import { usePathname } from 'next/navigation';
 
-import ExpirementOutlined from '@/components/icons/expirement-outlined';
 import MainnetOutlined from '@/components/icons/mainnet-outlined';
 import GTWMenuItem from '@/components/menu-item/menu-item';
 import externalLinks from '@/constants/externalLinks';
@@ -16,6 +15,10 @@ import { dashboardDevelopersMenuItems } from './dashboard-user-developer-menu-it
 export default function DashboardUserDeveloperMenuListItems() {
   const activePath = usePathname();
 
+  if (currentEnv === 'production') {
+    return null;
+  }
+
   return (
     <>
       <Typography variant="caption" sx={{ px: 3.5, mb: 2, display: 'block' }}>
@@ -28,16 +31,11 @@ export default function DashboardUserDeveloperMenuListItems() {
           {...item}
         />
       ))}
+
       <GTWMenuItem
-        name={currentEnv === 'production' ? 'Sandbox' : 'MainNet'}
-        href={
-          currentEnv === 'production'
-            ? `${externalLinks.gateway_sandbox}${activePath}`
-            : `${externalLinks.gateway}${activePath}`
-        }
-        icon={
-          currentEnv === 'production' ? ExpirementOutlined : MainnetOutlined
-        }
+        name="MainNet"
+        href={`${externalLinks.gateway}${activePath}`}
+        icon={MainnetOutlined}
         externalLink={true}
       />
     </>
