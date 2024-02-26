@@ -11,7 +11,7 @@ const logos = [
   '/images/logo-redbeard-ventures.png',
   '/images/logo-figment.png',
   '/images/logo-spartan.png',
-  '/images/logo-6th-man.png',
+  '/images/logo-vector.png',
   '/images/logo-visary.png',
 ];
 
