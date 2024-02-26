@@ -8,6 +8,9 @@ import gsap from 'gsap';
 import { InView } from 'react-intersection-observer';
 
 import styles from './stats.module.scss';
+import SectionLabel from '@/app/(landing)/components/section-label';
+import Link from '@/app/(landing)/components/Link';
+import Button from '@/app/(landing)/components/button';
 
 export default function Stats() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -122,53 +125,50 @@ export default function Stats() {
   return (
     <section className={styles.element} ref={sectionRef}>
       <Wrapper>
+        <SectionLabel
+          className={styles.label}
+          variant='white'
+          text='The data driven pioneers'
+        />
+
         <h2 className={styles.title}>
-          Join the growing network solving data privacy and usage
+          Join the Gateway Network and build the data economy with us.
         </h2>
+
+        <Link className={styles.link} href='/'>
+          <Button variant='contained' className={styles.button}>
+            Build Now
+          </Button>
+        </Link>
 
         <InView className={styles.stats} onChange={onChangeInview}>
           <div className={joinClasses(styles.box, styles['box--lg'])}>
-            <h3 className={styles.box_title}>Private Data Assets Created</h3>
+            <h3 className={styles.box_title}>Private Data Assets Issued</h3>
             <span
               className={joinClasses(styles.box_value, styles['box_value--lg'])}
               ref={(ref) => (spinNumbersAnimationElementsRef.current[0] = ref)}
             >
-              3,000,000
+              2,500,000+
             </span>
           </div>
 
-          <div className={styles.small_boxes_container}>
-            <div className={joinClasses(styles.box, styles['box--sm'])}>
-              <h3 className={styles.box_title}>Unique Issuers</h3>
-              <span
-                className={styles.box_value}
-                ref={(ref) =>
-                  (spinNumbersAnimationElementsRef.current[1] = ref)
-                }
-              >
-                200
-              </span>
-            </div>
-            <div className={joinClasses(styles.box, styles['box--sm'])}>
-              <h3 className={styles.box_title}>Users Empowered</h3>
-              <span
-                className={styles.box_value}
-                ref={(ref) =>
-                  (spinNumbersAnimationElementsRef.current[2] = ref)
-                }
-              >
-                400,000
-              </span>
-            </div>
+          <div className={joinClasses(styles.box, styles['box--md'])}>
+            <h3 className={styles.box_title}>Users Empowered</h3>
+            <span
+              className={styles.box_value}
+              ref={(ref) => (spinNumbersAnimationElementsRef.current[1] = ref)}
+            >
+              500,000+
+            </span>
           </div>
 
           <div className={joinClasses(styles.box, styles['box--md'])}>
-            <h3 className={styles.box_title}>Verifications</h3>
+            <h3 className={styles.box_title}>Data Contributors</h3>
             <span
               className={styles.box_value}
-              ref={(ref) => (spinNumbersAnimationElementsRef.current[3] = ref)}
+              ref={(ref) => (spinNumbersAnimationElementsRef.current[2] = ref)}
             >
-              2,000,000
+              20+
             </span>
           </div>
         </InView>
