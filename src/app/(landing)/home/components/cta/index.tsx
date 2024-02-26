@@ -8,6 +8,7 @@ import { DOCS_BASE_URL } from '@/constants/docs';
 import gsap from 'gsap';
 import Link from '@/app/(landing)/components/Link';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 
 function splitElementByBrTag(element: HTMLElement): HTMLElement[] {
   // Split the innerHTML of the element using the <br/> tag as the delimiter
@@ -39,6 +40,7 @@ export default function Cta() {
   const buttonRef = useRef<HTMLDivElement>(null);
   const wordsRef = useRef<HTMLSpanElement[]>([]);
   const titleLineRef = useRef<HTMLSpanElement[] | null[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!textRef.current || !buttonRef.current) return;
@@ -79,8 +81,10 @@ export default function Cta() {
     }
   };
 
+  useHeaderVariantDetection(sectionRef, 'light');
+
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper>
         <InView onChange={handleInview}>
           <h2 className={styles.title}>

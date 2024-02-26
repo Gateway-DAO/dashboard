@@ -11,9 +11,11 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './for-developers.module.scss';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import gsap from 'gsap';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 
 export default function ForDevelopers() {
   const refCodes = useRef<HTMLDivElement[] | null[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -31,9 +33,10 @@ export default function ForDevelopers() {
     });
   }, [active])
 
+  useHeaderVariantDetection(sectionRef, 'dark');
 
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper>
         <SectionLabel
           className={styles.label}

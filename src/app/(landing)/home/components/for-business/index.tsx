@@ -11,6 +11,8 @@ import UserPrivacy from '@/app/(landing)/components/icons/user-privacy';
 import DataVerifiability from '@/app/(landing)/components/icons/data-verifiability';
 import Scalable from '@/app/(landing)/components/icons/scalable';
 import Portable from '@/app/(landing)/components/icons/portable';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
+import { useRef } from 'react';
 
 const data = [
   {
@@ -36,8 +38,12 @@ const data = [
 ]
 
 export default function ForBusiness() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useHeaderVariantDetection(sectionRef, 'dark');
+
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper>
         <SectionLabel variant='purple' text='For Businesses' />
 

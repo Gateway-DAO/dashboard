@@ -6,6 +6,8 @@ import FinancialHistory from '@/app/(landing)/components/icons/financial-history
 import Gaming from '@/app/(landing)/components/icons/gaming';
 
 import styles from './use-cases.module.scss';
+import { useRef } from 'react';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 
 
 const data = [
@@ -32,8 +34,12 @@ const data = [
 ]
 
 export default function UseCases() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useHeaderVariantDetection(sectionRef, 'dark');
+
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper>
         <SectionLabel
           className={styles.label}

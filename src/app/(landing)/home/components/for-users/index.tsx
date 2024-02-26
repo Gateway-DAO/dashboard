@@ -10,6 +10,7 @@ import styles from './for-users.module.scss';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import { InView } from 'react-intersection-observer';
 import { useLenis } from '@studio-freight/react-lenis';
+import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 
 const data = [
   {
@@ -27,6 +28,7 @@ export default function ForUsers() {
   const refProgressBars = useRef<(SVGElement | null)[]>([]);
   const refMockupContainer = useRef<HTMLDivElement>(null);
   const refFirstTimeViewed = useRef(false);
+  const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -81,8 +83,10 @@ export default function ForUsers() {
 
   const lenis = useLenis();
 
+  useHeaderVariantDetection(sectionRef, 'light');
+
   return (
-    <section className={styles.element}>
+    <section className={styles.element} ref={sectionRef}>
       <Wrapper>
         <div className={styles.columns}>
           <div className={styles.content}>
