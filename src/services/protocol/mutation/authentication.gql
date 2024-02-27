@@ -6,8 +6,6 @@ mutation get_nonce($wallet: String!, $chain: Chain) {
 
 mutation create_email_nonce($email: String!) {
   createEmailNonce(input: { email: $email }) {
-    #REMOVELINE
-    code
     email
   }
 }
@@ -44,8 +42,6 @@ mutation refresh($refresh_token: String!) {
 
 mutation protocol_add_email($email: String!) {
   addEmail(input: { email: $email }) {
-    #REMOVELINE
-    code
     email
   }
 }
