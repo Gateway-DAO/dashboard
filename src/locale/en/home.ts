@@ -8,7 +8,7 @@ export const home = {
     subtitle:
       'Our guide to learn about the Gateway architecture, mission, and set up process.',
     btn_text: 'Check it out',
-    link: documentationRoutes.contributors,
+    link: documentationRoutes.home,
   },
   issue_banner: {
     title: 'Start issuing a Personal Data Asset',
@@ -41,7 +41,7 @@ export const home = {
       subtitle:
         'Our guide to learn about the Gateway architecture, mission, and set up process.',
       btn_text: 'Learn more',
-      link: documentationRoutes.home,
+      link: documentationRoutes.contributors,
       target: '_blank',
     },
   ],
