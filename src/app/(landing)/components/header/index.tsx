@@ -95,10 +95,10 @@ export default function Header() {
             </Link>
 
             <div className={styles.links}>
-              <a className={styles.link} href="https://docs.mygateway.xyz">
+              <a className={styles.link} href="https://docs.mygateway.xyz" target='_blank'>
                 <Button variant="text">Docs</Button>
               </a>
-              <a className={styles.link} href="/explorer">
+              <a className={styles.link} href="/explorer" target='_blank'>
                 <Button variant="text">Explorer</Button>
               </a>
               <a
@@ -108,6 +108,7 @@ export default function Header() {
                     ? externalLinks.gateway_sandbox
                     : externalLinks.gateway
                 }
+                target='_blank'
               >
                 <Button variant="text">
                   {currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}
@@ -142,6 +143,7 @@ export default function Header() {
             className={styles.mobile_link}
             href="https://docs.mygateway.xyz"
             onClick={() => setBurgerActive(false)}
+            target='_blank'
           >
             <Button variant="text">
               <span>Docs</span>
@@ -152,6 +154,7 @@ export default function Header() {
             className={styles.mobile_link}
             href="/explorer"
             onClick={() => setBurgerActive(false)}
+            target='_blank'
           >
             <Button variant="text">
               <span>Explorer</span>
@@ -166,6 +169,7 @@ export default function Header() {
                 : externalLinks.gateway
             }
             onClick={() => setBurgerActive(false)}
+            target='_blank'
           >
             <Button variant="text">
               <span>
@@ -176,7 +180,7 @@ export default function Header() {
           </a>
 
           <div className={styles.mobile_menu_buttons}>
-            <a
+            <Link
               className={styles.mobile_menu_button_link}
               href="/login"
               onClick={() => setBurgerActive(false)}
@@ -187,7 +191,7 @@ export default function Header() {
               >
                 Claim Gateway ID
               </Button>
-            </a>
+            </Link>
           </div>
         </Wrapper>
       </div>
