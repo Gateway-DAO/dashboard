@@ -22,55 +22,31 @@ const data = [
         </Button>
       </a>
     ],
-    code: `const data = {
-      query: \`
-      mutation createPDA($title: String!, $description: String!,
-  $owner: String!, $dataModelId: String!, $claim: JSON!) {
-        createPDA(
-            input: {
-                title: $title,
-                description: $description,
-                owner: {
-                    type: EVM
-                    value: $owner
-                }
-                dataModelId: $dataModelId
-                claim: $claim
-            }
-        ) {
-            id
-            arweaveUrl
-            dataAsset {
-                owner {
-                    id
-                    gatewayId
-                }
-                issuer {
-                    id
-                    gatewayId
-                }
-            }
-        }
-    }
-    \`,
-    variables: {
-      title: body.title,
-      description: body.description,
-      owner: body.address,
-      dataModelId: process.env.DATA_MODEL_ID,
-      claim: body.claim,
-    },
-  };
+    code: `import { Gateway } from "@gateway-dao/sdk";
 
-  const api = await fetch(process.env.API_URL as string, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": "<your API key>",
-      Authorization: "Bearer <your Authorization key>",
-    },
-    body: JSON.stringify(data),
-  });`
+const gateway = new Gateway({
+  url: "https://protocol.mygateway.xyz/graphql",
+  apiKey: process.env.API_KEY || "YOUR_API_KEY", // keep these protected in env files
+  token: process.env.TOKEN || "Bearer YOUR_TOKEN", // keep these protected in env files
+});
+
+let pda = {
+  dataModelId: "9f27397e-27f2-4c30-b1b7-829371de4df5",
+  description: "Description of the PDA",
+  title: "Favorite Person on Crypto Twitter",
+  claim: {
+    handleName: "@gateway_xyz",
+    favoritePosts: ["awesome"],
+        },
+  owner: {
+    type: UserIdentifierType.GATEWAY_ID,
+    value: "saviour1002",
+        },
+};
+
+const { createPDA } = await gatewayInstance.pda.createPDA(pda);
+
+console.log(createPDA);`
   },
   {
     icon: RequestData,
@@ -83,55 +59,38 @@ const data = [
         </Button>
       </a>
     ],
-    code: `const data2 = {
-      query: \`
-      mutation createPDA($title: String!, $description: String!,
-  $owner: String!, $dataModelId: String!, $claim: JSON!) {
-        createPDA(
-            input: {
-                title: $title,
-                description: $description,
-                owner: {
-                    type: EVM
-                    value: $owner
-                }
-                dataModelId: $dataModelId
-                claim: $claim
-            }
-        ) {
-            id
-            arweaveUrl
-            dataAsset {
-                owner {
-                    id
-                    gatewayId
-                }
-                issuer {
-                    id
-                    gatewayId
-                }
-            }
-        }
-    }
-    \`,
-    variables: {
-      title: body.title,
-      description: body.description,
-      owner: body.address,
-      dataModelId: process.env.DATA_MODEL_ID,
-      claim: body.claim,
-    },
-  };
+    code: `import { Gateway } from "@gateway-dao/sdk";
 
-  const api = await fetch(process.env.API_URL as string, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": "<your API key>",
-      Authorization: "Bearer <your Authorization key>",
-    },
-    body: JSON.stringify(data),
-  });`
+const gateway = new Gateway({
+  url: "https://protocol.mygateway.xyz/graphql",
+  apiKey: process.env.API_KEY || "YOUR_API_KEY", // keep these protected in env files
+  token: process.env.TOKEN || "Bearer YOUR_TOKEN", // keep these protected in env files
+});
+
+let pda = {
+  dataModelId: "9f27397e-27f2-4c30-b1b7-829371de4df5",
+  description: "Description of the PDA",
+  title: "Favorite Person on Crypto Twitter",
+  claim: {
+    handleName: "@gateway_xyz",
+    favoritePosts: ["awesome"],
+        },
+  owner: {
+    type: UserIdentifierType.GATEWAY_ID,
+    value: "gateway",
+        },
+};
+
+const { createDataRequest } = await gateway.request.createDataRequest(
+    {
+    dataRequestTemplateId: "60e369b3-4400-4e9b-840b-78de91274895",
+    dataUse:
+      "Web3 is an idea for a new iteration of the World Wide Web which incorporates concepts such as decentralization, blockchain technologies, and token-based economics.",
+    owner: { type: "GATEWAY_ID", value: "gateway" },
+    }
+);
+
+console.log(createDataRequest);`
   }
 ]
 
