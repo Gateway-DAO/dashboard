@@ -33,7 +33,7 @@ export default function PDA({
       }
     >
       <CardRow title={transaction_detail.pda_id}>{metadata.pda}</CardRow>
-      <CardRow title={transaction_detail.issuer}>
+      <CardRow title={transaction_detail.data_contributor}>
         <UserColumn isLoading={false} user={data.from} />
       </CardRow>
       {data.from?.__typename === 'Organization' && (

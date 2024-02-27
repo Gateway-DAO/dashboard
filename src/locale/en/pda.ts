@@ -39,7 +39,7 @@ export const pda = {
       'After changing the status of this PDA, you can change to the previous state.',
   },
   claim: 'Claim',
-  issuer: 'Issuer',
+  data_contributor: 'Data Contributor',
   owner: 'Owner',
   unfilled: 'Unfilled',
   received_at: 'Received at',

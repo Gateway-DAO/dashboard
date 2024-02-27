@@ -151,7 +151,7 @@ export default function PreviewContent({
           <UsersFromTo
             from={from}
             to={to}
-            fromLabel={pda.issuer}
+            fromLabel={pda.data_contributor}
             toLabel={pda.owner}
             isVertical
           />
