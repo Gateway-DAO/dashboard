@@ -11,7 +11,7 @@ export const home = {
     link: documentationRoutes.contributors,
   },
   issue_banner: {
-    title: 'Start issuing a Private Data Asset',
+    title: 'Start issuing a Personal Data Asset',
     subtitle:
       'Select a data model, fill the details and just send to the user all under 30 seconds',
     btn_text: 'Issue now',

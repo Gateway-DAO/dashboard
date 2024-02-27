@@ -7,7 +7,7 @@ import HomeStructure from '../../../user/home/components/home-structure';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `The Private Data Asset Network  - Gateway Network`,
+    title: `The Personal Data Asset Network  - Gateway Network`,
   };
 }
 

@@ -48,7 +48,7 @@ export default function InfoCard(props: Props) {
           </Stack>
           <Typography variant="body2">
             Gateway is the foundation to securely create, own, manage, and
-            verify private data assets (PDAs) across the digital world.
+            verify personal data assets (PDAs) across the digital world.
           </Typography>
         </Stack>
       </CardActionArea>

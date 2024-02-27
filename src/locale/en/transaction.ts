@@ -27,7 +27,7 @@ export const transaction = {
 export const transaction_detail = {
   transaction_id: 'Transaction ID',
   action: 'Action',
-  pda_id: 'Private Data Asset ID',
+  pda_id: 'Personal Data Asset ID',
   data_contributor: 'Data Contributor',
   signed_by: 'Signed by',
   data_model_id: 'Data model ID',

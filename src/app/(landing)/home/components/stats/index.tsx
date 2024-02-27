@@ -128,7 +128,7 @@ export default function Stats() {
 
         <InView className={styles.stats} onChange={onChangeInview}>
           <div className={joinClasses(styles.box, styles['box--lg'])}>
-            <h3 className={styles.box_title}>Private Data Assets Created</h3>
+            <h3 className={styles.box_title}>Personal Data Assets Created</h3>
             <span
               className={joinClasses(styles.box_value, styles['box_value--lg'])}
               ref={(ref) => (spinNumbersAnimationElementsRef.current[0] = ref)}

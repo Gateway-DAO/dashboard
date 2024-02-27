@@ -12,7 +12,7 @@ export const settings = {
   connected_accounts: {
     title: 'Connected accounts',
     description:
-      'These are the accounts you connected to your Gateway ID to log in and receive private data assets. You can disconnect or connect more accounts here.',
+      'These are the accounts you connected to your Gateway ID to log in and receive personal data assets. You can disconnect or connect more accounts here.',
     wallet: 'Wallet',
     add_email: {
       card_summary_title: 'Your account',

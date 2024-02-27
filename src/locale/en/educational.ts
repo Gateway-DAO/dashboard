@@ -25,7 +25,7 @@ export const instructionGuide = {
     modal: {
       title: 'Claim your first PDA',
       description:
-        'This is your first Private Data Asset issued by Gateway. It is a record containing your Gateway ID data.',
+        'This is your first Personal Data Asset issued by Gateway. It is a record containing your Gateway ID data.',
       cards: {
         title: 'You can use it for:',
         unlock_benefits: 'Unlock benefits from partners',

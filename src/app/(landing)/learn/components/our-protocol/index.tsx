@@ -20,7 +20,7 @@ const protocols = [
   {
     title: 'The Explorer',
     description:
-      'Learn how we keep track and ensure the state of Private Data Assets.',
+      'Learn how we keep track and ensure the state of Personal Data Assets.',
     href: `${DOCS_BASE_URL}docs/data-proof`,
   },
   {
