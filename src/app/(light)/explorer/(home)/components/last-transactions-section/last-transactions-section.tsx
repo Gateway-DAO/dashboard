@@ -47,7 +47,7 @@ export default function LastTransactionsSection() {
           />
           <NumberCard
             dark
-            label={transaction.cards.issuers}
+            label={transaction.cards.data_contributors}
             value={data?.uniqueIssuers as number}
             isLoading={isLoading}
           />

@@ -1,10 +1,11 @@
 const documentationRoutes = {
   home: 'https://docs.mygateway.xyz/docs/get-started-here',
+  contributors: 'https://docs.mygateway.xyz/gateway-network/contributors',
   createPDA: 'https://apidocs.mygateway.xyz/#mutation-createPDA',
   pda: 'https://docs.mygateway.xyz/docs/private-data-assets-pda',
-  proof: 'https://docs.mygateway.xyz/docs/data-proof',
+  proof: 'https://docs.mygateway.xyz/core-concepts/data-proofs',
   me: 'https://apidocs.mygateway.xyz/#query-me',
-  dataModel: 'https://docs.mygateway.xyz/docs/data-model',
+  dataModel: 'https://docs.mygateway.xyz/core-concepts/data-models',
   requestTemplate: 'https://docs.mygateway.xyz/docs/data-request-templates',
   dataRequest: 'https://docs.mygateway.xyz/docs/data-request',
   startIssuing: 'https://docs.mygateway.xyz/docs/start-issuing',

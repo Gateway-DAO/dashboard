@@ -73,7 +73,7 @@ export default function DataModelDetailHeader({ id, title, tags }: Props) {
             href={routes.explorer.dataModel(id)}
           />
           <GTWTab
-            label={explorerDataModelDetail.tabs.issuers}
+            label={explorerDataModelDetail.tabs.data_contributors}
             href={routes.explorer.dataModelIssuers(id)}
           />
         </GTWTabs>
