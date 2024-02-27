@@ -53,10 +53,10 @@ export default function ForDevelopers() {
           more time on your product, less on integration hassles.
         </p>
 
-        <Link className={styles.link} href='/'>
+        <a className={styles.link} href='https://docs.mygateway.xyz/api-reference/introduction' target='_blank'>
           View API documentation
           <ExternalLink className={styles.externalLink} />
-        </Link>
+        </a>
 
         <div className={styles.columns}>
           <div className={styles.boxes}>

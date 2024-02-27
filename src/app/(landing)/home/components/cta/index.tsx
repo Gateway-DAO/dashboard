@@ -4,9 +4,7 @@ import { InView } from 'react-intersection-observer';
 import Button from '@/app/(landing)/components/button';
 import { useEffect, useRef } from 'react';
 import { spliWordsBySpan } from '@/app/(landing)/utils/dom';
-import { DOCS_BASE_URL } from '@/constants/docs';
 import gsap from 'gsap';
-import Link from '@/app/(landing)/components/Link';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 
@@ -106,16 +104,16 @@ export default function Cta() {
           </p>
 
           <div className={styles.buttons} ref={buttonRef}>
-            <Link className={styles.button_link} href='/'>
+            <a className={styles.button_link} href='https://sandbox.mygateway.xyz/' target='_blank'>
               <Button className={joinClasses(styles.button, styles['button--contained'])} variant='contained'>
-                Sandbox
+                Start now
               </Button>
-            </Link>
-            <Link className={styles.button_link} href='/'>
+            </a>
+            <a className={styles.button_link} href='https://sandbox.mygateway.xyz/' target='_blank'>
               <Button className={styles.button} variant='text'>
                 Get in Touch
               </Button>
-            </Link>
+            </a>
           </div>
 
         </InView>

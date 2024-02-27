@@ -202,7 +202,8 @@
   }
 }
 
-.subscribe_text {
+.subscribe_text,
+.subscribe_link {
   color: #212121;
   font-size: 16px;
   font-style: normal;
@@ -211,8 +212,21 @@
   letter-spacing: 0.15px;
   max-width: 294px;
   margin-top: 0;
+
   strong {
     font-weight: 600;
+  }
+}
+
+.subscribe_link {
+  display: block;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  margin-bottom: 15px;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.6;
   }
 }
 

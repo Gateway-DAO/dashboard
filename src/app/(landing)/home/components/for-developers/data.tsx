@@ -1,5 +1,4 @@
 
-import Link from '@/app/(landing)/components/Link';
 import ContributeData from '@/app/(landing)/components/svgs/contribute-data';
 import Button from '@/app/(landing)/components/button';
 import RequestData from '@/app/(landing)/components/svgs/request-data';
@@ -12,16 +11,16 @@ const data = [
     title: 'Contribute Data',
     description: 'Begin contributing data and empowering users to claim their data directly from your application.',
     buttons: [
-      <Link className={styles.button_link} href='/' key={0}>
+      <a className={styles.button_link} href='https://docs.mygateway.xyz/sdk/introduction' key={0} target='_blank'>
         <Button className={joinClasses(styles.button, styles['button--outlined'])} variant='outlined'>
           Integrate SDK
         </Button>
-      </Link>,
-      <Link className={styles.button_link} href='/' key={1}>
+      </a>,
+      <a className={styles.button_link} href='https://mygateway.xyz/dashboard/user/assets/issue' key={1} target='_blank'>
         <Button className={styles.button}  variant='text'>
           Try no-code issuance
         </Button>
-      </Link>
+      </a>
     ],
     code: `const data = {
       query: \`
@@ -78,11 +77,11 @@ const data = [
     title: 'Request Data',
     description: 'Begin issuing your first Private Data Assets to your users and unlock a world of possibilities.',
     buttons: [
-      <Link className={styles.button_link} href='/' key={0}>
+      <a className={styles.button_link} href='https://docs.mygateway.xyz/sdk/introduction' key={0} target='_blank'>
         <Button className={joinClasses(styles.button, styles['button--outlined'])} variant='outlined'>
           Integrate SDK
         </Button>
-      </Link>
+      </a>
     ],
     code: `const data2 = {
       query: \`

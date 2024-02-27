@@ -73,7 +73,12 @@
   justify-content: center;
   line-height: 26px;
   letter-spacing: 0.46px;
+  transition: opacity 0.8s ease;
   text-decoration: none;
+
+  &:hover {
+    opacity: 0.8;
+  }
 
   @media (max-width: 969px) {
     width: fit-content;

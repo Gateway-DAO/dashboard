@@ -18,22 +18,26 @@ const data = [
   {
     icon: UserPrivacy,
     title: 'Compliant Identity Management',
-    text: 'Gateway ensures secure data facilitation and consensual verification with advanced encryption and  transparent auditing.'
+    text: 'Gateway ensures secure data facilitation and consensual verification with advanced encryption and  transparent auditing.',
+    href: 'https://docs.mygateway.xyz/core-concepts/gateway-id'
   },
   {
     icon: DataVerifiability,
     title: 'Distributed Trust',
-    text: 'Gateway is welcoming operators to secure the network to ensure data integrity, censorship resistance, and verifiability.'
+    text: 'Gateway is welcoming operators to secure the network to ensure data integrity, censorship resistance, and verifiability.',
+    href: 'https://docs.mygateway.xyz/architecture/overview'
   },
   {
     icon: Scalable,
     title: 'True Data Interoperability',
-    text: 'Gateway is building a suite of products to make it easy to verify and consume user data across platforms.'
+    text: 'Gateway is building a suite of products to make it easy to verify and consume user data across platforms.',
+    href: 'https://docs.mygateway.xyz/core-concepts/personal-data-assets'
   },
   {
     icon: Portable,
     title: 'Native User Control',
-    text: 'Gateway is building Private Data Assets which turns random datastreams into a contextualized and user-controlled asset.'
+    text: 'Gateway is building Private Data Assets which turns random datastreams into a contextualized and user-controlled asset.',
+    href: 'https://docs.mygateway.xyz/core-concepts/data-proofs'
   }
 ]
 
@@ -65,16 +69,16 @@ export default function ForBusiness() {
           </p>
 
           <div className={styles.buttons}>
-            <Link className={styles.button_link} href='/'>
+            <a className={styles.button_link} href='https://mygateway.xyz/login' target='_blank'>
               <Button className={joinClasses(styles.button, styles['button--contained'])} variant='contained'>
                 Start Building
               </Button>
-            </Link>
-            <Link className={styles.button_link} href='/'>
+            </a>
+            <a className={styles.button_link} href='https://mygateway.typeform.com/to/glphnWOS'>
               <Button className={styles.button} variant='text'>
                 Get in Touch
               </Button>
-            </Link>
+            </a>
           </div>
 
           <Fingerprint className={styles.fingerprint} />
@@ -92,6 +96,8 @@ export default function ForBusiness() {
               <p className={styles.item_text}>
                 {item.text}
               </p>
+
+              <a className={styles.link} href={item.href}></a>
             </div>
           ))}
         </div>

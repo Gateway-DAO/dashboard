@@ -102,11 +102,11 @@ export default function ForUsers() {
               across the web.
             </p>
 
-            <Link href='/'>
+            <a href='https://mygateway.xyz/login' target='_blank'>
               <Button variant='contained' className={styles.button}>
                 Control Your Identity
               </Button>
-            </Link>
+            </a>
 
             <InView onChange={onChangeInview}>
               <div className={styles.controls}>

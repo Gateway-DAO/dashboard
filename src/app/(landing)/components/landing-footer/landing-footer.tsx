@@ -61,7 +61,8 @@ export default function LandingFooter({ variant }: Props) {
                 <li className={styles.links_item}>
                   <a
                     className={styles.links_link}
-                    href="mailto:ayyan@mygateway.xyz?subject=Contact Us"
+                    href="https://mygateway.typeform.com/to/glphnWOS"
+                    target='_blank'
                   >
                     Contact
                   </a>
@@ -70,9 +71,9 @@ export default function LandingFooter({ variant }: Props) {
             </div>
 
             <div className={styles.column}>
-              <p className={styles.subscribe_text}>
+              <a className={styles.subscribe_link} href='https://mygateway.substack.com/subscribe?utm_source=menu&simple=true&next=https%3A%2F%2Fmygateway.substack.com%2F' target='_blank'>
                 <strong>Subscribe to our newsletter</strong>
-              </p>
+              </a>
               <p className={styles.subscribe_text}>
                 Receive news about developments and updates.
               </p>

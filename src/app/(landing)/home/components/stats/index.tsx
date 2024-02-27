@@ -135,11 +135,11 @@ export default function Stats() {
           Join the Gateway Network and build the data economy with us.
         </h2>
 
-        <Link className={styles.link} href='/'>
+        <a className={styles.link} href='https://sandbox.mygateway.xyz/' target='_blank'>
           <Button variant='contained' className={styles.button}>
             Build Now
           </Button>
-        </Link>
+        </a>
 
         <InView className={styles.stats} onChange={onChangeInview}>
           <div className={joinClasses(styles.box, styles['box--lg'])}>

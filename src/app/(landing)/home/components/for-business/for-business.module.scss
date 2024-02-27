@@ -81,6 +81,7 @@
   background-color: #fff;
   border-radius: 16px;
   padding: 32px;
+  position: relative;
   margin-bottom: 24px;
   width: calc(50% - 12px);
 
@@ -168,5 +169,20 @@
 
   @media (max-width: 969px) {
     display: none;
+  }
+}
+
+
+.link {
+  box-shadow: transparent;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: box-shadow 0.4s ease;
+  width: 100%;
+
+  &:hover {
+    box-shadow: 6px 8px 20px rgba(119, 26, 201, 0.1);
   }
 }
