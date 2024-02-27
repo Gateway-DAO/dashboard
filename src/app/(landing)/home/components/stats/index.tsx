@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
@@ -21,7 +21,7 @@ export default function Stats() {
 
   useHeaderVariantDetection(sectionRef, 'light');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!spinNumbersAnimationElementsRef.current.length) return;
 
     spinNumbersAnimationElementsRef.current.forEach((spanRef, indexSpanRef) => {
