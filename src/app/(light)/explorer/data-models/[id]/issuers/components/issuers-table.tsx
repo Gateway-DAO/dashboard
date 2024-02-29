@@ -26,7 +26,7 @@ export const columns: GridColDef<
 >[] = [
   {
     field: 'issuer',
-    headerName: explorerIssuersByDataModel.issuers,
+    headerName: explorerIssuersByDataModel.data_contributors,
     flex: 2,
     renderCell(params) {
       return (

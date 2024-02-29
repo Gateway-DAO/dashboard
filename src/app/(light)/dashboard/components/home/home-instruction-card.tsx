@@ -27,6 +27,9 @@ export default function HomeInstructionCard({
     storageKey: title.toLowerCase(),
   });
 
+  // TODO: return null if !visible
+  if (!visible) return null;
+
   return (
     <Paper
       variant={'outlined'}
@@ -44,55 +47,51 @@ export default function HomeInstructionCard({
         cursor: 'pointer',
       }}
     >
-      <>
-        {visible && (
-          <Stack
+      <Stack
+        sx={{
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+          height: 184,
+        }}
+        onClick={toggleVideoPlayer}
+      >
+        <Stack
+          flexDirection={'row'}
+          justifyContent={'space-between'}
+          height={40}
+        >
+          <QuestionSquaredIcon sx={{ width: 45, height: 40, mb: 2 }} />
+          <CloseIcon
             sx={{
-              justifyContent: 'space-between',
-              flexDirection: 'column',
-              height: 184,
+              mt: 1,
+              cursor: 'pointer',
+              position: 'relative',
+              zIndex: 1,
             }}
-            onClick={toggleVideoPlayer}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              onSaveStorage();
+            }}
+          />
+        </Stack>
+        <Stack flexGrow={1}>
+          <Typography mt={2} variant="h5" width={300} gutterBottom>
+            {title}
+          </Typography>
+          <Typography
+            variant="body2"
+            width={300}
+            gutterBottom
+            sx={{ mb: 2, flexGrow: 1 }}
           >
-            <Stack
-              flexDirection={'row'}
-              justifyContent={'space-between'}
-              height={40}
-            >
-              <QuestionSquaredIcon sx={{ width: 45, height: 40, mb: 2 }} />
-              <CloseIcon
-                sx={{
-                  mt: 1,
-                  cursor: 'pointer',
-                  position: 'relative',
-                  zIndex: 1,
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  onSaveStorage();
-                }}
-              />
-            </Stack>
-            <Stack flexGrow={1}>
-              <Typography mt={2} variant="h5" width={300} gutterBottom>
-                {title}
-              </Typography>
-              <Typography
-                variant="body2"
-                width={300}
-                gutterBottom
-                sx={{ mb: 2, flexGrow: 1 }}
-              >
-                {description}
-              </Typography>
-              <Button variant="outlined" size="small" color="info">
-                {play_video}
-              </Button>
-            </Stack>
-          </Stack>
-        )}
-      </>
+            {description}
+          </Typography>
+          <Button variant="outlined" size="small" color="info">
+            {play_video}
+          </Button>
+        </Stack>
+      </Stack>
       <InstructionGuideModalVideo
         description={description}
         title={title}

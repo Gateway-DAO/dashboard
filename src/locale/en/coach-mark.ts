@@ -2,7 +2,7 @@ export const coachMark = {
   start_usign_now: {
     title: 'Start using now',
     description:
-      'This your first Private Data Asset issued by Gateway. Open and discover where you can use it.',
+      'This your first Personal Data Asset issued by Gateway. Open and discover where you can use it.',
     btn_text: 'Open now',
   },
   start_issuing_now: {

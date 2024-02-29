@@ -360,7 +360,7 @@ export default function Pdas() {
               ref={(ref) => (textPdasParagraphRefs.current[0] = ref)}
             >
               <span ref={(ref) => (textPdasRefs.current[0] = ref)}>
-                Private Data Assets (PDAs)
+                Personal Data Assets (PDAs)
               </span>
               <span
                 className={styles.type_slash}

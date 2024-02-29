@@ -2,10 +2,17 @@ import { Session } from 'next-auth';
 
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 
-export const getCurrentOrg = async (pathName: string) => {
+export function getOrg(session: Session | null, username: string | null) {
+  const access = session?.user?.accesses?.find(
+    (access: any) => access.organization?.gatewayId === username
+  );
+  const organization = access?.organization;
+
+  return { access, organization };
+}
+
+export const getSessionOrg = async (pathName: string) => {
   const session = (await getGtwServerSession()) as Session;
-  const organization = session?.user?.accesses?.find(
-    (access) => access.organization?.gatewayId === pathName
-  )?.organization;
+  const { organization } = getOrg(session, pathName);
   return organization;
 };

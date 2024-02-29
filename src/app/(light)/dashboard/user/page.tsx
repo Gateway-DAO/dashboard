@@ -1,3 +1,7 @@
+import { redirect } from 'next/navigation';
+
+import routes from '@/constants/routes';
+
 export default function DashboardUser() {
-  return <>User</>;
+  redirect(routes.dashboard.user.home);
 }

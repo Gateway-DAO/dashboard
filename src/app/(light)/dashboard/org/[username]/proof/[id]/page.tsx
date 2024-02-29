@@ -6,7 +6,7 @@ import TopBarContainer from '@/components/containers/top-bar-container/top-bar-c
 import routes from '@/constants/routes';
 import { getPrivateApi } from '@/services/protocol/api';
 import { Proof } from '@/services/protocol/types';
-import { getCurrentOrg } from '@/utils/currentOrg';
+import { getSessionOrg } from '@/utils/currentOrg';
 
 const getProof = async (id: string): Promise<Proof | null> => {
   const privateApi = await getPrivateApi();
@@ -35,7 +35,7 @@ export default async function OrgProofPage({
   params: { id: string; username: string };
 }) {
   const proof = await getProof(params.id);
-  const organization = await getCurrentOrg(params.username || '');
+  const organization = await getSessionOrg(params.username || '');
 
   return (
     <>

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import HomeDataModelsIcon from '@/components/icons/home-data-models';
-import HomeDataRequestTemplatesIcon from '@/components/icons/home-templates';
+import DataModelsBoxIcon from '@/components/icons/data-models-box';
+import HomeDataRequestTemplatesIcon from '@/components/icons/data-request-template-box';
 import HomeTransactionIcon from '@/components/icons/home-transaction';
 import { explorer_home } from '@/locale/en/explorer-home';
 
@@ -23,7 +23,7 @@ const GetIcon = ({ index, sx }: { index: number; sx: SxProps<Theme> }) => {
   return (
     <>
       {index === 0 && <HomeTransactionIcon sx={sx} />}
-      {index === 1 && <HomeDataModelsIcon sx={sx} />}
+      {index === 1 && <DataModelsBoxIcon sx={sx} />}
       {index === 2 && <HomeDataRequestTemplatesIcon sx={sx} />}
     </>
   );

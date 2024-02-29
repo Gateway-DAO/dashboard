@@ -8,9 +8,10 @@ declare global {
         | 'staging'
         | 'testnet'
         | 'production'
-        | string;
+        | 'test';
       NEXTAUTH_SECRET: string;
       SECURE_API_KEY: string;
+      VERCEL_ENV: 'production' | 'preview' | 'development';
     }
   }
 

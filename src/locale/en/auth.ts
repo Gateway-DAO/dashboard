@@ -20,7 +20,7 @@ export const auth = {
       terms_info: 'By continuing you agree to our',
       terms_of_service: 'Terms of Service',
       term_email:
-        "By continuing with email, you'll receive email notifications about your account, including private data assets and other relevant information.",
+        "By continuing with email, you'll receive email notifications about your account, including personal data assets and other relevant information.",
       or: 'or',
       continue: 'Continue',
     },
@@ -43,9 +43,9 @@ export const auth = {
     },
     add_email: {
       title:
-        'Connect your email to be notified when you receive a private data asset',
+        'Connect your email to be notified when you receive a personal data asset',
       subtitle:
-        "You'll receive email updates for your account, including PDAs (private data assets) and other relevant information.",
+        "You'll receive email updates for your account, including PDAs (personal data assets) and other relevant information.",
       skip: 'Skip for now',
     },
     choose_gateway_id: {

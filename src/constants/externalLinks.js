@@ -8,6 +8,7 @@ const externalLinks = {
   gateway_brandkit: 'https://live.standards.site/gateway',
   gateway: 'https://mygateway.xyz',
   gateway_sandbox: 'https://sandbox.mygateway.xyz',
+  join_testnet: 'https://mygateway.typeform.com/to/glphnWOS',
 };
 
 module.exports = externalLinks;

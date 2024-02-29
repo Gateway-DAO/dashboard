@@ -81,7 +81,7 @@ export default function Hero() {
 
           <p className={styles.description}>
             Gateway is the foundation to securely create, own, manage, <br />
-            and verify private data assets (PDAs) across the digital world.
+            and verify personal data assets (PDAs) across the digital world.
           </p>
         </div>
 

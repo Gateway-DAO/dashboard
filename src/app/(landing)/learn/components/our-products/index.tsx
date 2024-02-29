@@ -10,7 +10,7 @@ const products = [
   {
     title: 'Dashboard',
     description:
-      'Issuers + Verifiers can manage private data assets (PDAs). Recipients can view and share them.',
+      'Data Contributors + Verifiers can manage personal data assets (PDAs). Recipients can view and share them.',
     href: `${DOCS_BASE_URL}docs/private-data-assets-pda`,
   },
   {

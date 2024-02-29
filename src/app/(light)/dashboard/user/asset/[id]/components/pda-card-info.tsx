@@ -44,7 +44,7 @@ export default function PdaCardInfo({ pda, isProofPda = false }: Props) {
       <UsersFromTo
         from={from}
         to={to}
-        fromLabel={pdaLocale.issuer}
+        fromLabel={pdaLocale.data_contributor}
         toLabel={pdaLocale.owner}
       />
       {/* {!isProofPda && (

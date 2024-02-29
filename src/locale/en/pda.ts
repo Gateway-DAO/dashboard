@@ -39,7 +39,7 @@ export const pda = {
       'After changing the status of this PDA, you can change to the previous state.',
   },
   claim: 'Claim',
-  issuer: 'Issuer',
+  data_contributor: 'Data Contributor',
   owner: 'Owner',
   unfilled: 'Unfilled',
   received_at: 'Received at',
@@ -60,17 +60,17 @@ export const pdas = {
   data_model_id: 'Data model ID',
   issuance_date: 'Issuance date',
   data_assets_subtitle:
-    'These are the private data assets you have earned and created.',
+    'These are the personal data assets you have earned and created.',
   issue_a_pda: 'Issue a PDA',
 };
 export const orgPdas = {
   empty: 'No Issuances yet',
   data_assets_title: 'Issuances',
-  data_assets_subtitle: 'These are the private data assets you have issued',
+  data_assets_subtitle: 'These are the personal data assets you have issued',
 };
 
 export const helperContent = {
-  title: 'What is a Private Data Asset',
+  title: 'What is a Personal Data Asset',
   desc: 'Data Assets allow users to become Data Owners. A secure, encrypted, and portable asset which users can consent to other applications, people, or institutions to verify their data.',
   btnText: 'Learn more',
   btnLink: documentationRoutes.pda,
@@ -84,10 +84,10 @@ export const helpMenu = {
 };
 
 export const issuePda = {
-  title: 'Issue a Private Data Asset',
+  title: 'Issue a Personal Data Asset',
   subtitle: 'Select a Data Model',
   featured: 'Featured',
-  success_title: 'Private Data Asset issued successfully',
+  success_title: 'Personal Data Asset issued successfully',
 };
 
 export const csvUpload = {
@@ -116,7 +116,7 @@ export const csvUpload = {
 };
 
 export const issuePdaForm = {
-  title: 'Issue a Private Data Asset',
+  title: 'Issue a Personal Data Asset',
   subtitle: 'Complete your PDA details',
   details: {
     title: 'Title',
