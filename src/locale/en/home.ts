@@ -22,7 +22,7 @@ export const home = {
     subtitle:
       'Our guide to learn about the Gateway architecture, mission, and set up process.',
     btn_text: 'Check it out',
-    link: documentationRoutes.contributors,
+    link: documentationRoutes.home,
   },
   testnet_user_banner: {
     icon: GatewaySquaredLightIcon,

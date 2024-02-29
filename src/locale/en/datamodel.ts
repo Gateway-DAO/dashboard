@@ -29,7 +29,7 @@ export const helperContent = {
 export const explorerDataModels = {
   title: 'Data Models',
   subtitle:
-    'Data models serve as foundational templates for Private Data Assets (PDAs). Each PDA created using a data model adheres to a standardized structure of claims, making these frameworks exceptionally reusable for various related scenarios.',
+    'Data models serve as foundational templates for Personal Data Assets (PDAs). Each PDA created using a data model adheres to a standardized structure of claims, making these frameworks exceptionally reusable for various related scenarios.',
   help: 'How to use data models',
   empty: 'No data models found',
   featuredTitle: 'Featured',

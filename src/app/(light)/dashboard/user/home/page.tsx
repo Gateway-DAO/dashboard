@@ -6,7 +6,7 @@ import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session
 import HomeStructure from './structure';
 
 export const metadata: Metadata = {
-  title: `The Private Data Asset Network  - Gateway Network`,
+  title: `The Personal Data Asset Network  - Gateway Network`,
 };
 
 export default async function Home() {

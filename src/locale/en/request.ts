@@ -4,8 +4,8 @@ export const requests = {
   empty: 'No data requests yet',
   title: 'Data requests',
   id: 'data-requests',
-  subtitle: 'These are the requests to access your private data assets',
-  org_subtitle: 'These are the requests to access private data assets',
+  subtitle: 'These are the requests to access your personal data assets',
+  org_subtitle: 'These are the requests to access personal data assets',
 };
 
 export const request = {
@@ -27,22 +27,22 @@ export const request = {
       pending: {
         title: "You're ready to proceed",
         description: (requester: string) =>
-          `${requester} is requesting to access your private data assets`,
+          `${requester} is requesting to access your personal data assets`,
       },
       notAcceptable: {
         title: "You don't met the criteria",
         description: (requester: string) =>
-          `${requester} is requested your private data assets, but you don’t meet the criterias requested.`,
+          `${requester} is requested your personal data assets, but you don’t meet the criterias requested.`,
       },
       rejected: {
         title: 'Request rejected',
         description: (requester: string) =>
-          `You didn't authorize ${requester} to access your private data assets.`,
+          `You didn't authorize ${requester} to access your personal data assets.`,
       },
       accepted: {
         title: 'Request accepted',
         description: (requester: string) =>
-          `You authorized ${requester} to access your private data assets.`,
+          `You authorized ${requester} to access your personal data assets.`,
       },
     },
   },
@@ -52,12 +52,12 @@ export const request = {
       rejected: {
         title: 'Request rejected',
         description: (recipient: string) =>
-          `${recipient} didn't authorize you to access their private data assets.`,
+          `${recipient} didn't authorize you to access their personal data assets.`,
       },
       accepted: {
         title: 'Request accepted',
         description: (recipient: string) =>
-          `${recipient} authorized you to access their private data assets.`,
+          `${recipient} authorized you to access their personal data assets.`,
       },
     },
   },
@@ -69,5 +69,3 @@ export const helperContent = {
   btnText: 'Start now',
   btnLink: documentationRoutes.dataRequest,
 };
-
-

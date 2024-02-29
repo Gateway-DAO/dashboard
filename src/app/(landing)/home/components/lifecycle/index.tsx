@@ -26,7 +26,7 @@ const steps = [
   {
     icon: Issue,
     title: 'Issue',
-    text: 'Entities and users can issue you private data assets (PDAs). ',
+    text: 'Entities and users can issue you personal data assets (PDAs). ',
   },
   {
     icon: Own,
@@ -105,7 +105,7 @@ export default function Lifecycle() {
           <div className={styles.title_container}>
             <Fingerprint className={styles.icon} />
             <h2 className={styles.title_text}>
-              Private Data Assets — LifeCycle
+              Personal Data Assets — LifeCycle
             </h2>
           </div>
 

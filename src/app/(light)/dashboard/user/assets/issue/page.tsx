@@ -5,7 +5,7 @@ import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
 
 export const metadata: Metadata = {
-  title: 'Issue a Private Data Asset - Gateway Network',
+  title: 'Issue a Personal Data Asset - Gateway Network',
 };
 
 export default async function IssuePage() {
