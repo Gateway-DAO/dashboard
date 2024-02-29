@@ -1,37 +1,31 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { SvgIconProps } from '@mui/material';
+import { Box, Stack, SvgIconProps, Typography } from '@mui/material';
 
-import BannerIcon from './banner';
-import DataOutlinedIcon from './data-outlined';
-import DataProofOutlinedIcon from './data-proof-outlined';
-import DataRequestOutlinedIcon from './data-request-outlined';
-import GatewayIcon from './gateway';
-import GatewayBrokenIcon from './gateway-broken';
-import GatewaySquaredIcon from './gateway-squared';
-import PassFilledIcon from './pass-filled';
-import SolanaIcon from './solana';
-import VerifiedFilledIcon from './verified-filled';
+import * as Icons from './index';
 
 const meta = {
   title: 'Gateway/Icons',
   component: () => (
-    <>
-      <DataOutlinedIcon />
-      <DataProofOutlinedIcon />
-      <DataRequestOutlinedIcon />
-      <VerifiedFilledIcon />
-      <PassFilledIcon />
-      <GatewaySquaredIcon />
-      <GatewayIcon />
-      <GatewayBrokenIcon />
-      <BannerIcon />
-      <SolanaIcon />
-    </>
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+        gap: 2.5,
+      }}
+    >
+      {Object.keys(Icons).map((icon, index) => {
+        const Icon = Icons[icon as keyof typeof Icons];
+        return (
+          <Stack alignItems="center" key={index}>
+            <Icon sx={{ width: 60, height: 60, mb: 1 }} />{' '}
+            <Typography variant="caption">{icon}</Typography>
+          </Stack>
+        );
+      })}
+    </Box>
   ),
-  parameters: {
-    layout: 'centered',
-  },
+
   tags: ['autodocs'],
 } satisfies Meta<SvgIconProps>;
 

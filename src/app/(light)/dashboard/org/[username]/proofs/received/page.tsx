@@ -4,7 +4,7 @@ import TitleLayout from '@/components/title-layout/title-layout';
 import { proofs as proofsLocales } from '@/locale/en/proof';
 import { getPrivateApi } from '@/services/protocol/api';
 import { Proof } from '@/services/protocol/types';
-import { getCurrentOrg } from '@/utils/currentOrg';
+import { getSessionOrg } from '@/utils/currentOrg';
 import { PartialDeep } from 'type-fest';
 
 import { Box, Typography } from '@mui/material';
@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function OrganizationReceivedProofsPage(props: any) {
   const privateApi = await getPrivateApi();
   const pathnameOrg = await props.params?.username;
-  const organization = await getCurrentOrg(pathnameOrg);
+  const organization = await getSessionOrg(pathnameOrg);
 
   const proofs = (
     await privateApi.received_proofs_by_org({

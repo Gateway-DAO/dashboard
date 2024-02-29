@@ -1,4 +1,18 @@
+import {
+  HomeBannerProps,
+  HomeCardProps,
+} from '@/app/(light)/dashboard/components/home/types';
+import {
+  DataModelsBoxIcon,
+  DataSquaredIcon,
+  GatewaySquaredLightIcon,
+} from '@/components/icons';
+import DataAssetIcon from '@/components/icons/data-asset-box';
+import GatewayDarkSquaredIcon from '@/components/icons/gateway-dark-squared';
+import PlaygroundIcon from '@/components/icons/playground';
+import SDKIcon from '@/components/icons/sdk';
 import documentationRoutes from '@/constants/documentationRoutes';
+import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
 
 export const home = {
@@ -10,41 +24,130 @@ export const home = {
     btn_text: 'Check it out',
     link: documentationRoutes.home,
   },
-  issue_banner: {
-    title: 'Start issuing a Personal Data Asset',
+  testnet_user_banner: {
+    icon: GatewaySquaredLightIcon,
+    title: 'Want to use Gateway for your Business or App?',
     subtitle:
-      'Select a data model, fill the details and just send to the user all under 30 seconds',
-    btn_text: 'Issue now',
+      'Please fill out the contact form with the necessary information and our team will reach out to you!',
+    btn_text: 'Contact Us',
+    btn_link: externalLinks.join_testnet,
     target: '_blank',
-  },
-  sub_banner: [
+  } satisfies HomeBannerProps,
+  testnet_user_cards: [
     {
-      heading: 'For organizations',
-      title: 'Create an Organization',
+      icon: GatewayDarkSquaredIcon,
+      heading: 'Education',
+      title: 'Why Gateway Matters',
       subtitle:
-        'To issue and verify on behalf of an organization, its essential to set up one.',
-      btn_text: 'Create Organization ID',
-      link: routes.dashboard.createOrg,
+        'Learn how Gateway is building the sovereign web and how you can join the movement.',
+      btn_text: 'Learn more',
+      link: documentationRoutes.home,
       target: '_self',
     },
     {
-      heading: 'For developers',
-      title: 'Getting started using the protocol',
-      subtitle: 'Find out what you need to know to start using the API.',
-      btn_text: 'Get started',
+      icon: PlaygroundIcon,
+      heading: 'Contribute',
+      title: 'Send a Data Asset',
+      subtitle:
+        'Selected a Peer-to-Peer data model, fill out the information, and send a PDA to a peer!',
+      btn_text: 'Create Now',
+      link: routes.dashboard.user.issue,
+      target: '_self',
+    },
+    {
+      icon: DataAssetIcon,
+      heading: 'Manage',
+      title: 'Check Your Data Proofs',
+      subtitle:
+        'Review what data assets you have shared, to who, and if you want to remove access.',
+      btn_text: 'View All',
+      link: routes.dashboard.user.receivedProofs,
+      target: '_self',
+    },
+  ] satisfies HomeCardProps[],
+  sandbox_user_banner: {
+    icon: GatewaySquaredLightIcon,
+    title: 'Ready to Enter the Gateway?',
+    subtitle:
+      'TestNet is open for approved teams and businesses looking to build with Gateway. Fill out the form and get access.',
+    btn_text: 'Join TestNet',
+    btn_link: externalLinks.join_testnet,
+    target: '_self',
+  } satisfies HomeBannerProps,
+  sandbox_user_cards: [
+    {
+      icon: DataModelsBoxIcon,
+      iconStyle: { width: 55 },
+      heading: 'Create',
+      title: 'Define a Data Model',
+      subtitle:
+        'Define a standard of information by creating your own schema for a dataset.',
+      btn_text: 'Build Now',
+      link: documentationRoutes.dataModel,
+      target: '_blank',
+    },
+    {
+      icon: PlaygroundIcon,
+      heading: 'Protocol API',
+      title: 'Use our Protocol',
+      subtitle:
+        'Learn and implement our API directly into your product for custom and automated  actions.',
+      btn_text: 'Documentation',
       link: documentationRoutes.home,
       target: '_blank',
     },
     {
-      heading: 'About',
-      title: 'Learn about Gateway Network',
+      icon: SDKIcon,
+      heading: 'SDK',
+      title: 'Gateway Widget',
       subtitle:
-        'Our guide to learn about the Gateway architecture, mission, and set up process.',
-      btn_text: 'Learn more',
-      link: documentationRoutes.contributors,
+        'Integrate in less than 30 minutes! Seamless data requests and user claiming process.',
+      btn_text: 'Plug and Play',
+      link: documentationRoutes.sdk,
       target: '_blank',
     },
-  ],
+  ] satisfies HomeCardProps[],
+  testnet_org_banner: {
+    icon: DataSquaredIcon,
+    title: 'Contribute Data and Issue PDAs to your Users',
+    subtitle:
+      'Copy and paste our easy to use “Get Started” code and issue with Gateway',
+    btn_text: 'Get Started',
+    btn_link: documentationRoutes.quickstart,
+    target: '_blank',
+  } satisfies HomeBannerProps,
+  testnet_org_cards: [
+    {
+      icon: GatewayDarkSquaredIcon,
+      heading: 'Create',
+      title: 'Define a Data Model',
+      subtitle:
+        'Define a standard of information by creating your own schema for a dataset.',
+      btn_text: 'Build Now',
+      link: documentationRoutes.dataModel,
+      target: '_self',
+    },
+    {
+      icon: PlaygroundIcon,
+      heading: 'Protocol API',
+      title: 'Use our Protocol',
+      subtitle:
+        'Learn and implement our API directly into your product for custom and automated actions.',
+      btn_text: 'Documentation',
+      link: documentationRoutes.home,
+      target: '_self',
+    },
+    {
+      icon: DataAssetIcon,
+      heading: 'SDK',
+      title: 'Gateway Widget',
+      subtitle:
+        'Integrate in less than 30 minutes! Seamless data requests and user claiming process.',
+      btn_text: 'Plug and Play',
+      link: documentationRoutes.sdk,
+      target: '_self',
+    },
+  ] satisfies HomeCardProps[],
   instrunction_banner: [
     {
       title: 'How to use your PDA',
