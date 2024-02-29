@@ -30,25 +30,7 @@ export const home = {
     subtitle:
       'Please fill out the contact form with the necessary information and our team will reach out to you!',
     btn_text: 'Contact Us',
-    btn_link: routes.dashboard.user.issue,
-    target: '_blank',
-  } satisfies HomeBannerProps,
-  sandbox_user_banner: {
-    icon: GatewaySquaredLightIcon,
-    title: 'Ready to Enter the Gateway?',
-    subtitle:
-      'TestNet is open for approved teams and businesses looking to build with Gateway. Fill out the form and get access.',
-    btn_text: 'Join TestNet',
-    btn_link: externalLinks.gateway,
-    target: '_self',
-  } satisfies HomeBannerProps,
-  testnet_org_banner: {
-    icon: DataSquaredIcon,
-    title: 'Contribute Data and Issue PDAs to your Users',
-    subtitle:
-      'Copy and paste our easy to use “Get Started” code and issue with Gateway',
-    btn_text: 'Get Started',
-    btn_link: documentationRoutes.startIssuing,
+    btn_link: externalLinks.join_testnet,
     target: '_blank',
   } satisfies HomeBannerProps,
   testnet_user_cards: [
@@ -59,7 +41,7 @@ export const home = {
       subtitle:
         'Learn how Gateway is building the sovereign web and how you can join the movement.',
       btn_text: 'Learn more',
-      link: routes.dashboard.createOrg,
+      link: documentationRoutes.home,
       target: '_self',
     },
     {
@@ -79,10 +61,19 @@ export const home = {
       subtitle:
         'Review what data assets you have shared, to who, and if you want to remove access.',
       btn_text: 'View All',
-      link: routes.dashboard.user.proofs,
+      link: routes.dashboard.user.receivedProofs,
       target: '_self',
     },
   ] satisfies HomeCardProps[],
+  sandbox_user_banner: {
+    icon: GatewaySquaredLightIcon,
+    title: 'Ready to Enter the Gateway?',
+    subtitle:
+      'TestNet is open for approved teams and businesses looking to build with Gateway. Fill out the form and get access.',
+    btn_text: 'Join TestNet',
+    btn_link: externalLinks.join_testnet,
+    target: '_self',
+  } satisfies HomeBannerProps,
   sandbox_user_cards: [
     {
       icon: DataModelsBoxIcon,
@@ -112,10 +103,19 @@ export const home = {
       subtitle:
         'Integrate in less than 30 minutes! Seamless data requests and user claiming process.',
       btn_text: 'Plug and Play',
-      link: documentationRoutes.home,
+      link: documentationRoutes.sdk,
       target: '_blank',
     },
   ] satisfies HomeCardProps[],
+  testnet_org_banner: {
+    icon: DataSquaredIcon,
+    title: 'Contribute Data and Issue PDAs to your Users',
+    subtitle:
+      'Copy and paste our easy to use “Get Started” code and issue with Gateway',
+    btn_text: 'Get Started',
+    btn_link: documentationRoutes.quickstart,
+    target: '_blank',
+  } satisfies HomeBannerProps,
   testnet_org_cards: [
     {
       icon: GatewayDarkSquaredIcon,
@@ -144,7 +144,7 @@ export const home = {
       subtitle:
         'Integrate in less than 30 minutes! Seamless data requests and user claiming process.',
       btn_text: 'Plug and Play',
-      link: documentationRoutes.home,
+      link: documentationRoutes.sdk,
       target: '_self',
     },
   ] satisfies HomeCardProps[],

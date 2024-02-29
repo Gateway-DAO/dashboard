@@ -1,5 +1,6 @@
 const documentationRoutes = {
-  home: 'https://docs.mygateway.xyz/docs/get-started-here',
+  home: 'https://docs.mygateway.xyz/introduction',
+  quickstart: 'https://docs.mygateway.xyz/quickstart',
   contributors: 'https://docs.mygateway.xyz/gateway-network/contributors',
   createPDA: 'https://apidocs.mygateway.xyz/#mutation-createPDA',
   pda: 'https://docs.mygateway.xyz/docs/private-data-assets-pda',
@@ -11,6 +12,7 @@ const documentationRoutes = {
   startIssuing: 'https://docs.mygateway.xyz/docs/start-issuing',
   startVerifying: 'https://docs.mygateway.xyz/docs/start-verifying',
   termsOfService: 'https://docs.mygateway.xyz/docs/terms-of-service',
+  sdk: 'https://docs.mygateway.xyz/sdk/introduction',
 };
 
 module.exports = documentationRoutes;
