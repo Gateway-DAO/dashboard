@@ -96,8 +96,10 @@
 }
 
 .mockup_item {
+  border-radius: 58px;
   height: 100%;
   left: 0;
+  overflow: hidden;
   position: absolute;
   top: 0;
   width: 100%;
@@ -115,6 +117,14 @@
   position: absolute;
   top: 0;
   width: 100%;
+}
+
+.video {
+  width: 100%;
+  left: calc(50% + 0.5px);
+  transform: translate(-50%, -50%);
+  height: 101%;
+  top: 50%;
 }
 
 .mockup_vector {
