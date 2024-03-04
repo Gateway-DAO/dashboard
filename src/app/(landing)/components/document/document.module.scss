@@ -1,0 +1,49 @@
+.element {
+  background-color: #212121;
+  padding-top: 130px;
+  padding-bottom: 130px;
+
+  h1 {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 60px;
+    line-height: 120%;
+  }
+
+  p,
+  li {
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 180%;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  a {
+    color: #fff;
+  }
+
+  ol {
+    counter-reset: item;
+    margin-bottom: 30px;
+
+    li {
+      display: block;
+
+      &:before {
+        content: counters(item, '.') ' ';
+        counter-increment: item;
+        padding-right: 10px;
+        font-weight: 700;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

@@ -45,7 +45,12 @@ export const linksList: { title: string; href: string; target: string }[] = [
     target: '_self',
   },
   {
-    title: 'Privacy',
+    title: 'Privacy Policy',
+    href: `/privacy-policy`,
+    target: '_blank',
+  },
+  {
+    title: 'Terms of Service',
     href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
     target: '_blank',
   },
