@@ -15,11 +15,11 @@ import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-
 const data = [
   {
     title: 'Secure Your Data',
-    videoUrl: '/videos/mockupvideo.webm',
+    videoUrl: '/videos/issuance.webm',
   },
   {
     title: 'Share Your Data',
-    videoUrl: '/videos/mockupvideo.webm',
+    videoUrl: '/videos/request.webm',
   },
 ]
 
