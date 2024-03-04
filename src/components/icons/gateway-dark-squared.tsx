@@ -1,6 +1,6 @@
 import { SvgIcon, SvgIconProps } from '@mui/material';
 
-export default function GatewayDarkBanner(props: SvgIconProps) {
+export default function GatewayDarkSquaredIcon(props: SvgIconProps) {
   return (
     <SvgIcon
       viewBox="0 0 48 48"

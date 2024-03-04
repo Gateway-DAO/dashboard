@@ -9,9 +9,9 @@ export const transaction = {
   earning: 'Earning',
   cards: {
     pdas: 'PDAs issued',
-    issuers: 'Unique issuers',
+    data_contributors: 'Unique Data Contributors',
     data_requests: 'Data requests created',
-    fees: 'Fees generated for issuers',
+    fees: 'Fees generated for Data Contributors',
   },
   last_transactions: 'Last transactions',
   home_table: {
@@ -27,8 +27,8 @@ export const transaction = {
 export const transaction_detail = {
   transaction_id: 'Transaction ID',
   action: 'Action',
-  pda_id: 'Private Data Asset ID',
-  issuer: 'Issuer',
+  pda_id: 'Personal Data Asset ID',
+  data_contributor: 'Data Contributor',
   signed_by: 'Signed by',
   data_model_id: 'Data model ID',
   created_at: 'Created at',

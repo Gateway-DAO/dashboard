@@ -18,7 +18,7 @@ type Props = {
 export default function DataModelContent({ dataModel }: Props) {
   const stats = [
     {
-      label: 'Unique issuers',
+      label: 'Unique Data Contributors',
       value: dataModel.uniqueIssuersCount,
     },
     {

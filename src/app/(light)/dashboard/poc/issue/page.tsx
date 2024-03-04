@@ -52,7 +52,7 @@ export default function POCIssueHome() {
       router.push(data?.session?.url);
       // window.open(
       //   data?.session?.url,
-      //   'Issue a Private Data Asset',
+      //   'Issue a Personal Data Asset',
       //   'height=800,width=460,toolbar=no,directories=no,status=no,linemenubar=no,scrollbars=no,resizable=no,modal=yes'
       // );
     },

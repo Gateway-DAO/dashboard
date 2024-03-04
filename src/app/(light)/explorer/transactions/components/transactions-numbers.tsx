@@ -37,7 +37,7 @@ export default function TransactionsNumbers() {
         value={data?.pdasIssued as number}
       />
       <NumberCard
-        label={transaction.cards.issuers}
+        label={transaction.cards.data_contributors}
         isLoading={isLoading}
         value={data?.uniqueIssuers as number}
       />

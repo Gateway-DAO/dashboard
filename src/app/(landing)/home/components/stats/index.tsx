@@ -127,16 +127,20 @@ export default function Stats() {
       <Wrapper>
         <SectionLabel
           className={styles.label}
-          variant='white'
-          text='The data driven pioneers'
+          variant="white"
+          text="The data driven pioneers"
         />
 
         <h2 className={styles.title}>
           Join the Gateway Network and build the data economy with us.
         </h2>
 
-        <a className={styles.link} href='https://sandbox.mygateway.xyz/' target='_blank'>
-          <Button variant='contained' className={styles.button}>
+        <a
+          className={styles.link}
+          href="https://sandbox.mygateway.xyz/"
+          target="_blank"
+        >
+          <Button variant="contained" className={styles.button}>
             Build Now
           </Button>
         </a>

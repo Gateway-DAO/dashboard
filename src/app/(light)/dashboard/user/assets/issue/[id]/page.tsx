@@ -8,7 +8,7 @@ import { apiPublic } from '@/services/protocol/api';
 import { PageProps } from '@/types/next';
 
 export const metadata: Metadata = {
-  title: 'Issue a Private Data Asset - Gateway Network',
+  title: 'Issue a Personal Data Asset - Gateway Network',
 };
 
 export default async function IssueDataAsset({

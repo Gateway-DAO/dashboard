@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation';
 
 import routes from '@/constants/routes';
 import { Organization, OrganizationRole } from '@/services/protocol/types';
+import { getOrg } from '@/utils/currentOrg';
 import { PartialDeep } from 'type-fest';
 
 type UseOrganizationTruthyResponse = {
@@ -33,16 +34,13 @@ export default function useOrganization():
   const pathname = usePathname();
   const isOrg = pathname?.includes(routes.dashboard.org.root);
   const pathnameOrg = isOrg ? pathname?.split('/')[3] : undefined;
-  const access = session?.user?.accesses?.find(
-    (access: any) => access.organization?.gatewayId === pathnameOrg
-  );
-  const organization = access?.organization;
+  const { access, organization } = getOrg(session, pathnameOrg ?? null);
 
   const canEdit =
     access?.role === OrganizationRole.Admin ||
     access?.role === OrganizationRole.Owner;
 
-  if (isOrg && pathnameOrg && organization) {
+  if (isOrg && pathnameOrg && access && organization) {
     return {
       isOrg,
       pathnameOrg,
