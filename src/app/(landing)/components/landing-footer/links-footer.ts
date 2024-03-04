@@ -51,7 +51,7 @@ export const linksList: { title: string; href: string; target: string }[] = [
   },
   {
     title: 'Terms of Service',
-    href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
+    href: `/terms-of-service`,
     target: '_blank',
   },
   {
