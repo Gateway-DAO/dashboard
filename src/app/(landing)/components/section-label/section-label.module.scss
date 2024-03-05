@@ -1,0 +1,20 @@
+.element {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+
+  @media (max-width: 969px) {
+    font-size: 1.2rem;
+    margin-bottom: 1.6rem;
+  }
+
+  &--white {
+    color: #FFFFFF;
+  }
+
+  &--purple {
+    color: #771AC9;
+  }
+}

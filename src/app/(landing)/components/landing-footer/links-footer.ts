@@ -35,16 +35,6 @@ export const linksSocial = [
 
 export const linksList: { title: string; href: string; target: string }[] = [
   {
-    title: 'Learn',
-    href: routes.learn,
-    target: '_self',
-  },
-  {
-    title: 'Build',
-    href: routes.build,
-    target: '_self',
-  },
-  {
     title: 'Explorer',
     href: routes.explorer.root,
     target: '_self',
@@ -55,16 +45,13 @@ export const linksList: { title: string; href: string; target: string }[] = [
     target: '_self',
   },
   {
-    title: currentEnv === 'production' ? 'Sandbox' : 'MainNet',
-    href:
-      currentEnv === 'production'
-        ? externalLinks.gateway_sandbox
-        : externalLinks.gateway,
+    title: 'Privacy Policy',
+    href: `/privacy-policy`,
     target: '_blank',
   },
   {
-    title: 'Privacy',
-    href: `${DOCS_BASE_URL}docs/privacy-security-standards`,
+    title: 'Terms of Service',
+    href: `/terms-of-service`,
     target: '_blank',
   },
   {

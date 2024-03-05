@@ -1,10 +1,6 @@
 .element {
-  background-color: #212121;
-  padding-bottom: 140px;
-
-  @media (max-width: 1024px) {
-    padding-bottom: 64px;
-  }
+  background-color: #771AC9;
+  padding-bottom: 24px;
 }
 
 .wrapper {
@@ -61,7 +57,7 @@
 .logo_container,
 .name_container {
   display: flex;
-  opacity: 0.4;
+  opacity: 0.8;
   margin-bottom: 35px;
   transition: opacity 0.8s ease;
   width: 25%;
