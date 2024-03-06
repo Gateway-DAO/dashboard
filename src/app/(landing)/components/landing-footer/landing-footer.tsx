@@ -62,7 +62,7 @@ export default function LandingFooter({ variant }: Props) {
                   <a
                     className={styles.links_link}
                     href="https://mygateway.typeform.com/to/glphnWOS"
-                    target='_blank'
+                    target='_self'
                   >
                     Contact
                   </a>
