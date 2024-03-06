@@ -23,7 +23,7 @@ const logos = [
     src: '/images/logo-figment.png',
   },
   {
-    href: 'https://spartan-token.com/',
+    href: 'https://www.spartangroup.io/',
     src: '/images/logo-spartan.png',
   },
   {

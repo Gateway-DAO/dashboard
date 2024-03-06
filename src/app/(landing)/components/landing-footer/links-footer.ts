@@ -37,22 +37,22 @@ export const linksList: { title: string; href: string; target: string }[] = [
   {
     title: 'Explorer',
     href: routes.explorer.root,
-    target: '_self',
+    target: '_blank',
   },
   {
     title: 'Dashboard',
     href: routes.auth,
-    target: '_self',
+    target: '_blank',
   },
   {
     title: 'Privacy Policy',
     href: `/privacy-policy`,
-    target: '_blank',
+    target: '_self',
   },
   {
     title: 'Terms of Service',
     href: `/terms-of-service`,
-    target: '_blank',
+    target: '_self',
   },
   {
     title: 'Brand Kit',
