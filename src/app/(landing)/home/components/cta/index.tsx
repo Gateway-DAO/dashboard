@@ -89,7 +89,7 @@ export default function Cta() {
           <h2 className={styles.title}>
             <span className={styles.title_line}>
               <span ref={(ref) => (titleLineRef.current[0] = ref)}>
-                Built the User Sovereign
+                Build the User Sovereign
               </span>
             </span>
             <span className={styles.title_line}>
