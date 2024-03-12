@@ -25,7 +25,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const proof = await getProof(params.id);
   return {
-    title: `Data Proof ${proof?.id} - Gateway Network`,
+    title: `Shared Data ${proof?.id} - Gateway Network`,
   };
 }
 
