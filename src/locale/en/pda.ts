@@ -53,7 +53,7 @@ export const pda = {
 export const pdas = {
   empty: 'No data assets yet',
   load_more: 'load more',
-  my_data_assets: 'Data Assets',
+  my_data_assets: 'My Data',
   data_asset: 'Data asset',
   recipient: 'Recipient',
   status: 'Status',

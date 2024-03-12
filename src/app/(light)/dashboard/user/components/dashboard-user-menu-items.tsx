@@ -21,7 +21,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     navbar: true,
   },
   {
-    name: 'Data Assets',
+    name: 'My Data',
     href: routes.dashboard.user.receivedAssets,
     activeHrefs: [
       routes.dashboard.user.receivedAssets,
@@ -45,7 +45,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     hide: !isSandbox,
   },
   {
-    name: 'Data Proofs',
+    name: 'Shared Data',
     href: routes.dashboard.user.receivedProofs,
     activeHrefs: [
       routes.dashboard.user.receivedProofs,
