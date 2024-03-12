@@ -1,6 +1,7 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
+      NEXT_PUBLIC_BFF_API_SERVER: string;
       NEXT_PUBLIC_API_ENDPOINT: string;
       NEXT_PUBLIC_API_KEY: string;
       NEXT_PUBLIC_API_ENV:

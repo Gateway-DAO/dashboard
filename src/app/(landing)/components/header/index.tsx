@@ -16,8 +16,8 @@ import { useLenis } from '@studio-freight/react-lenis';
 
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
+import NewLoginButton from '../new-login/button';
 import styles from './header.module.scss';
-import GTWLink from '@/components/gtw-link';
 
 export default function Header() {
   const path = usePathname();
@@ -72,14 +72,15 @@ export default function Header() {
             </Link>
 
             <div className={styles.mobile_buttons}>
-              <GTWLink href="/login">
+              {/* <GTWLink href="/login">
                 <Button
                   variant="contained"
                   className={styles.mobile_button_head_dashboard}
                 >
                   Enter the Gateway
                 </Button>
-              </GTWLink>
+              </GTWLink> */}
+              <NewLoginButton />
               <BurgerButton
                 className={styles.mobile_burger}
                 active={burgerActive}
@@ -95,10 +96,14 @@ export default function Header() {
             </Link>
 
             <div className={styles.links}>
-              <a className={styles.link} href="https://docs.mygateway.xyz" target='_blank'>
+              <a
+                className={styles.link}
+                href="https://docs.mygateway.xyz"
+                target="_blank"
+              >
                 <Button variant="text">Docs</Button>
               </a>
-              <a className={styles.link} href="/explorer" target='_blank'>
+              <a className={styles.link} href="/explorer" target="_blank">
                 <Button variant="text">Explorer</Button>
               </a>
               <a
@@ -108,7 +113,7 @@ export default function Header() {
                     ? externalLinks.gateway_sandbox
                     : externalLinks.gateway
                 }
-                target='_blank'
+                target="_blank"
               >
                 <Button variant="text">
                   {currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}
@@ -117,15 +122,7 @@ export default function Header() {
             </div>
 
             <div className={styles.buttons_container}>
-
-              <Link href="/login">
-                <Button
-                  variant="contained"
-                  className={styles.button_contained}
-                >
-                  Enter the Gateway
-                </Button>
-              </Link>
+              <NewLoginButton />
             </div>
           </>
         )}
@@ -143,7 +140,7 @@ export default function Header() {
             className={styles.mobile_link}
             href="https://docs.mygateway.xyz"
             onClick={() => setBurgerActive(false)}
-            target='_blank'
+            target="_blank"
           >
             <Button variant="text">
               <span>Docs</span>
@@ -154,7 +151,7 @@ export default function Header() {
             className={styles.mobile_link}
             href="/explorer"
             onClick={() => setBurgerActive(false)}
-            target='_blank'
+            target="_blank"
           >
             <Button variant="text">
               <span>Explorer</span>
@@ -169,12 +166,10 @@ export default function Header() {
                 : externalLinks.gateway
             }
             onClick={() => setBurgerActive(false)}
-            target='_blank'
+            target="_blank"
           >
             <Button variant="text">
-              <span>
-                {currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}
-              </span>
+              <span>{currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
             </Button>
           </a>
