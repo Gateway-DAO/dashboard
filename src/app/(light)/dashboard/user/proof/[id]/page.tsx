@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
@@ -7,6 +8,7 @@ import routes from '@/constants/routes';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { getPrivateApi } from '@/services/protocol/api';
 import { Proof } from '@/services/protocol/types';
+import { isSandbox } from '@/utils/env';
 
 import ProofItem from './components/proof-item';
 
@@ -36,6 +38,10 @@ export default async function ProofPage({
 }: {
   params: { id: string };
 }) {
+  if (!isSandbox) {
+    redirect(routes.dashboard.user.home);
+  }
+
   const session = await getGtwServerSession();
   const userId = session?.user.id;
   const proof = await getProof(params.id);

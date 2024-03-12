@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { Session } from 'next-auth';
+import { redirect } from 'next/navigation';
 
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
@@ -22,6 +23,7 @@ import {
 import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
 import { PageProps } from '@/types/next';
 import { getSessionOrg } from '@/utils/currentOrg';
+import { isSandbox } from '@/utils/env';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import { PartialDeep } from 'type-fest';
@@ -85,6 +87,9 @@ export async function generateMetadata({
 export default async function DashboardUserDataRequest({
   params: { id, username },
 }: PageProps<{ id: string; username?: string }>) {
+  if (!isSandbox) {
+    redirect(routes.dashboard.user.home);
+  }
   const session = (await getGtwServerSession()) as Session;
   const userId = session.user.id;
   const dataRequest = await getDataRequest(id);
