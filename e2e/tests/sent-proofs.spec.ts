@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
 
-test.describe('Sent Data proofs', async () => {
+test.describe('Sent Shared Datas', async () => {
   let sharedPage: Page;
   test.beforeAll(async ({ browser }) => {
     const context = await browser.newContext();

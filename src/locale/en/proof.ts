@@ -13,16 +13,16 @@ export const proof = {
   share: {
     data_shared_with: 'Shared with',
     data_shared_by: 'Shared by',
-    data_proof_id: 'Data Proof ID',
+    data_proof_id: 'Shared data ID',
     data_asset_shared: 'Data asset shared',
   },
 };
 
 export const proofs = {
-  empty: 'No data proofs yet',
-  data_proofs: 'Data proofs',
+  empty: 'No shared datas yet',
+  data_proofs: 'Shared Data',
   data_proofs_subtitle:
-    'These are the copies of data proofs that you have sent and that have been sent to you',
+    'These are the copies of shared datas that you have sent and that have been sent to you',
   owner: 'Owners',
   verifier: 'Verifier',
   sender: 'Senders',
@@ -30,14 +30,14 @@ export const proofs = {
   request_template_id: 'Request template ID',
   share_date: 'Share date',
   data_amount: 'Data amount',
-  received_proofs: 'Data Proofs Received',
+  received_proofs: 'Received Shared Datas',
   received_proofs_subtitle:
     'These are the copies of data assets that have been sent to you',
 };
 
 export const helperContent = {
-  title: 'Share your data with Data Proofs',
-  desc: 'Data Proofs facilitate data exchange in a secure, user-consented, and privacy preserving manner. Proofs can be shared to Verifiers or anyone you want to have access to your information.',
+  title: 'Share your data',
+  desc: 'Shared Datas facilitate data exchange in a secure, user-consented, and privacy preserving manner. Proofs can be shared to Verifiers or anyone you want to have access to your information.',
   btnText: 'Learn how',
   btnLink: documentationRoutes.proof,
 };

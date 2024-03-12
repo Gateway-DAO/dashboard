@@ -58,7 +58,7 @@ export default function RequestCard({
     mutationFn: (data: Create_Proof_From_RequestMutationVariables) => {
       return privateApi?.create_proof_from_request(data);
     },
-    onMutate: () => setLoadingText('Data Proof is being processed...'),
+    onMutate: () => setLoadingText('Shared Data is being processed...'),
     onSuccess: () => {
       sendEvent('accept_request');
       router.refresh();

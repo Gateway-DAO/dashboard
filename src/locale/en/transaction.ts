@@ -55,7 +55,7 @@ export const financial_transaction_actions = {
   out: {
     request_cost: 'Request cost',
     withdraw: 'Money withdraw',
-    proof_share: 'Data proof sharing',
+    proof_share: 'Private Data sharing',
     pda_issuance: 'PDA issuance cost',
     pda_update: 'PDA update cost',
     pda_status_change: 'PDA status change cost',
