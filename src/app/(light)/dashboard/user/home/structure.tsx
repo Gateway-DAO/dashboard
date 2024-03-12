@@ -2,9 +2,8 @@
 
 import { Metadata } from 'next';
 
-import routes from '@/constants/routes';
 import { home } from '@/locale/en/home';
-import { currentEnv } from '@/utils/env';
+import { isSandbox } from '@/utils/env';
 
 import HomeBanner from '../../components/home/home-banner';
 import HomeCard from '../../components/home/home-card';
@@ -16,15 +15,11 @@ export const metadata: Metadata = {
 };
 
 export default function HomeStructure({ username }: { username: string }) {
-  const banner =
-    currentEnv === 'testnet'
-      ? home.sandbox_user_banner
-      : home.testnet_user_banner;
+  const banner = isSandbox
+    ? home.sandbox_user_banner
+    : home.testnet_user_banner;
 
-  const cards =
-    currentEnv === 'testnet'
-      ? home.sandbox_user_cards
-      : home.testnet_user_cards;
+  const cards = isSandbox ? home.sandbox_user_cards : home.testnet_user_cards;
   return (
     <HomeTemplate
       username={username}
