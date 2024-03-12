@@ -13,7 +13,7 @@ export const proof = {
   share: {
     data_shared_with: 'Shared with',
     data_shared_by: 'Shared by',
-    data_proof_id: 'Shared data ID',
+    data_proof_id: 'Shared Data ID',
     data_asset_shared: 'Data asset shared',
   },
 };
