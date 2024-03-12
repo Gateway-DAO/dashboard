@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { PropsWithChildren } from 'react';
 
 import HelpContentCard from '@/components/help-content-card/help-content-card';
@@ -10,10 +11,14 @@ import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
+import { isSandbox } from '@/utils/env';
 
 import { Box } from '@mui/material';
 
 export default function DataModelsLayout({ children }: PropsWithChildren) {
+  if (!isSandbox) {
+    redirect(routes.dashboard.user.home);
+  }
   return (
     <Box sx={{ py: 2 }}>
       <TitleLayout
