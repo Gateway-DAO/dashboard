@@ -6,26 +6,29 @@ import ModalRight from '@/components/modal/modal-right/modal-right';
 import { Socket, io } from 'socket.io-client';
 
 import InitialStep from './steps/initial/initial-step';
+import MigrationStep from './steps/migration/migration';
 import { QrStep } from './steps/qr/qr-step';
-import { MigrationStep } from './types';
+import { MigrationModalStep } from './types';
 
 type Props = {
-  step: MigrationStep;
-  setStep: (step: MigrationStep) => void;
+  step: MigrationModalStep;
+  setStep: (step: MigrationModalStep) => void;
 };
 
 export default function MigrationModal({ step, setStep }: Props) {
   const [sessionId, setSessionId] = useState<string | undefined>();
+  const [migrationQueue, setMigrationQueue] = useState<string[]>([]);
   const socketRef = useRef<Socket | null>(null);
 
   const onClose = () => {
-    if (step === 'migration') {
-      return;
-    }
+    // if (step === 'migration') {
+    //   return;
+    // }
     if (socketRef.current?.connected) {
       socketRef.current.disconnect();
     }
     setStep('closed');
+    setMigrationQueue([]);
   };
 
   const onStartMigration = () => {
@@ -35,8 +38,9 @@ export default function MigrationModal({ step, setStep }: Props) {
       const id = socketRef.current!.id;
       setSessionId(id);
     });
-    socketRef.current.on('migration', () => {
+    socketRef.current.on('migration', (message) => {
       setStep('migration');
+      setMigrationQueue((prev) => [...prev, message]);
     });
   };
 
@@ -55,6 +59,7 @@ export default function MigrationModal({ step, setStep }: Props) {
         <InitialStep onAccept={onStartMigration} onClose={onClose} />
       )}
       {step === 'qr' && <QrStep sessionId={sessionId} onClose={onClose} />}
+      {step === 'migration' && <MigrationStep queue={migrationQueue} />}
     </ModalRight>
   );
 }

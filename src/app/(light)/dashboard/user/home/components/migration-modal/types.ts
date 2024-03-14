@@ -1,1 +1,6 @@
-export type MigrationStep = 'start' | 'qr' | 'migration' | 'result' | 'closed';
+export type MigrationModalStep =
+  | 'start'
+  | 'qr'
+  | 'migration'
+  | 'result'
+  | 'closed';

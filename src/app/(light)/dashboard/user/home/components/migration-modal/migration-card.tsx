@@ -7,10 +7,10 @@ import DataMigrationIcon from '@/components/icons/data-migration';
 import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 
 import MigrationModal from './migration-modal';
-import { MigrationStep } from './types';
+import { MigrationModalStep } from './types';
 
 export default function MigrationCard() {
-  const [step, setStep] = useState<MigrationStep>('closed');
+  const [step, setStep] = useState<MigrationModalStep>('closed');
 
   const onOpen = () => {
     if (step !== 'closed') return;
