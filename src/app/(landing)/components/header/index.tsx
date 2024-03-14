@@ -9,6 +9,7 @@ import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import GTWLink from '@/components/gtw-link';
 import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
 import { currentEnv } from '@/utils/env';
@@ -16,7 +17,6 @@ import { useLenis } from '@studio-freight/react-lenis';
 
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
-import NewLoginButton from '../new-login/button';
 import styles from './header.module.scss';
 
 export default function Header() {
@@ -72,15 +72,14 @@ export default function Header() {
             </Link>
 
             <div className={styles.mobile_buttons}>
-              {/* <GTWLink href="/login">
+              <GTWLink href="/login">
                 <Button
                   variant="contained"
                   className={styles.mobile_button_head_dashboard}
                 >
                   Enter the Gateway
                 </Button>
-              </GTWLink> */}
-              <NewLoginButton />
+              </GTWLink>
               <BurgerButton
                 className={styles.mobile_burger}
                 active={burgerActive}
@@ -122,7 +121,11 @@ export default function Header() {
             </div>
 
             <div className={styles.buttons_container}>
-              <NewLoginButton />
+              <Link href="/login">
+                <Button variant="contained" className={styles.button_contained}>
+                  Enter the Gateway
+                </Button>
+              </Link>
             </div>
           </>
         )}
