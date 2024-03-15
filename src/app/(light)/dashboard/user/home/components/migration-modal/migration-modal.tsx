@@ -20,6 +20,14 @@ export default function MigrationModal({ step, setStep }: Props) {
   const [migrationQueue, setMigrationQueue] = useState<string[]>([]);
   const socketRef = useRef<Socket | null>(null);
 
+  const onBack = () => {
+    if (socketRef.current?.connected) {
+      socketRef.current.disconnect();
+    }
+    setStep('start');
+    setMigrationQueue([]);
+  };
+
   const onClose = () => {
     // if (step === 'migration') {
     //   return;
@@ -58,7 +66,9 @@ export default function MigrationModal({ step, setStep }: Props) {
       {step === 'start' && (
         <InitialStep onAccept={onStartMigration} onClose={onClose} />
       )}
-      {step === 'qr' && <QrStep sessionId={sessionId} onClose={onClose} />}
+      {step === 'qr' && (
+        <QrStep sessionId={sessionId} onClose={onClose} onBack={onBack} />
+      )}
       {step === 'migration' && <MigrationStep queue={migrationQueue} />}
     </ModalRight>
   );
