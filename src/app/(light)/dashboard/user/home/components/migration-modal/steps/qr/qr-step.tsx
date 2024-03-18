@@ -28,7 +28,7 @@ type Props = {
   onClose: () => void;
 };
 
-export function QrStep({ sessionId, onBack, onClose }: Props) {
+export default function QrStep({ sessionId, onBack, onClose }: Props) {
   const [downloadModal, toggleDownloadModal] = useToggle(false);
 
   return (

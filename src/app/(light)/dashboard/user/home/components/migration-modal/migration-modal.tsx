@@ -5,50 +5,62 @@ import { useEffect, useRef, useState } from 'react';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import { Socket, io } from 'socket.io-client';
 
+import { MigrationTarget, useMigrationModal } from './state';
 import InitialStep from './steps/initial/initial-step';
-import MigrationStep from './steps/migration/migration';
-import { QrStep } from './steps/qr/qr-step';
-import { MigrationModalStep } from './types';
+import MigrationProgressStep from './steps/migration-progress/migration-progress';
+import QrStep from './steps/qr/qr-step';
 
-type Props = {
-  step: MigrationModalStep;
-  setStep: (step: MigrationModalStep) => void;
-};
-
-export default function MigrationModal({ step, setStep }: Props) {
+export default function MigrationModal() {
+  const {
+    state,
+    onOpenQR,
+    onCloseModal,
+    onOpenModal,
+    onMigrationStarted,
+    onMigrationFinished,
+  } = useMigrationModal();
   const [sessionId, setSessionId] = useState<string | undefined>();
-  const [migrationQueue, setMigrationQueue] = useState<string[]>([]);
   const socketRef = useRef<Socket | null>(null);
 
   const onBack = () => {
     if (socketRef.current?.connected) {
       socketRef.current.disconnect();
     }
-    setStep('start');
-    setMigrationQueue([]);
+    onOpenModal();
   };
 
   const onClose = () => {
-    // if (step === 'migration') {
-    //   return;
-    // }
     if (socketRef.current?.connected) {
       socketRef.current.disconnect();
     }
-    setStep('closed');
-    setMigrationQueue([]);
+    onCloseModal();
   };
 
   const onStartMigration = () => {
-    setStep('qr');
+    onOpenQR();
     socketRef.current = io(process.env.NEXT_PUBLIC_BFF_API_SERVER);
     socketRef.current.on('connect', () => {
+      console.log('connected', socketRef.current?.id);
       const id = socketRef.current!.id;
       setSessionId(id);
     });
     socketRef.current.on('migration', (message) => {
-      setStep('migration');
-      setMigrationQueue((prev) => [...prev, message]);
+      try {
+        const data = JSON.parse(message) as {
+          status: 'started' | 'finished';
+          target: MigrationTarget;
+        };
+
+        if (data.status === 'started') {
+          onMigrationStarted(data.target);
+        } else if (data.status === 'finished') {
+          onMigrationFinished();
+        } else {
+          console.log(data);
+        }
+      } catch {
+        console.error(`error on parse ${message}`);
+      }
     });
   };
 
@@ -62,14 +74,21 @@ export default function MigrationModal({ step, setStep }: Props) {
   }, [socketRef]);
 
   return (
-    <ModalRight open={step !== 'closed'} onClose={onClose}>
-      {step === 'start' && (
+    <ModalRight open={state.status !== 'closed'} onClose={onClose}>
+      {state.status === 'start' && (
         <InitialStep onAccept={onStartMigration} onClose={onClose} />
       )}
-      {step === 'qr' && (
+      {state.status === 'qr' && (
         <QrStep sessionId={sessionId} onClose={onClose} onBack={onBack} />
       )}
-      {step === 'migration' && <MigrationStep queue={migrationQueue} />}
+      {(state.status === 'started-migration' ||
+        state.status === 'finished-migration') && (
+        <MigrationProgressStep
+          isSuccess={state.status === 'finished-migration'}
+          target={state.target!}
+          onClose={onClose}
+        />
+      )}
     </ModalRight>
   );
 }

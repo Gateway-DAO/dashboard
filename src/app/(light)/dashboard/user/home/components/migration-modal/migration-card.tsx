@@ -1,21 +1,15 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
 
 import DataMigrationIcon from '@/components/icons/data-migration';
 
 import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 
 import MigrationModal from './migration-modal';
-import { MigrationModalStep } from './types';
+import { MigrationModalProvider, useMigrationModal } from './state';
 
-export default function MigrationCard() {
-  const [step, setStep] = useState<MigrationModalStep>('closed');
-
-  const onOpen = () => {
-    if (step !== 'closed') return;
-    setStep('start');
-  };
+function MigrationCardContent() {
+  const { onOpenModal } = useMigrationModal();
 
   return (
     <>
@@ -70,13 +64,21 @@ export default function MigrationCard() {
             variant="contained"
             size="small"
             sx={{ alignSelf: 'flex-start', mt: 'auto' }}
-            onClick={onOpen}
+            onClick={onOpenModal}
           >
             Migrate Now
           </Button>
         </Stack>
       </Paper>
-      <MigrationModal step={step} setStep={setStep} />
+      <MigrationModal />
     </>
+  );
+}
+
+export default function MigrationCard() {
+  return (
+    <MigrationModalProvider>
+      <MigrationCardContent />
+    </MigrationModalProvider>
   );
 }
