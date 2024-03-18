@@ -1,9 +1,13 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMemo } from 'react';
 
 import ModalTitle from '@/components/modal/modal-header/modal-header';
 import externalLinks from '@/constants/externalLinks';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { useToggle } from '@react-hookz/web';
+import { useQuery } from '@tanstack/react-query';
 import QRCode from 'react-qr-code';
 
 import { ArrowBackIosOutlined, QrCodeOutlined } from '@mui/icons-material';
@@ -31,6 +35,27 @@ type Props = {
 export default function QrStep({ sessionId, onBack, onClose }: Props) {
   const [downloadModal, toggleDownloadModal] = useToggle(false);
 
+  const { session } = useGtwSession();
+
+  const { data } = useQuery({
+    queryKey: ['migration-token', session?.token, sessionId],
+    queryFn: async (): Promise<{ token: string }> => {
+      const res = await fetch('/api/get-migration-data');
+      return res.json();
+    },
+    enabled: !!sessionId,
+  });
+
+  const qrData = useMemo(
+    () =>
+      JSON.stringify({
+        type: 'migration',
+        jwt: data?.token,
+        sessionId,
+      }),
+    [sessionId, data?.token]
+  );
+
   return (
     <>
       <ModalTitle onClose={onClose}>
@@ -45,13 +70,13 @@ export default function QrStep({ sessionId, onBack, onClose }: Props) {
       <Box
         mt={2}
         p={2}
-        width={232}
+        maxWidth={250}
         bgcolor="grey.50"
         borderRadius={1}
         border={1}
         borderColor="divider"
       >
-        {sessionId ? (
+        {!!(sessionId && data?.token) ? (
           <QRCode
             size={256}
             style={{
@@ -59,7 +84,7 @@ export default function QrStep({ sessionId, onBack, onClose }: Props) {
               maxWidth: '100%',
               width: '100%',
             }}
-            value={sessionId}
+            value={qrData}
             viewBox={`0 0 256 256`}
           />
         ) : (
