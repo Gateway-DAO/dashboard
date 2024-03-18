@@ -33,7 +33,7 @@ export default function QrStep({ sessionId, onBack, onClose }: Props) {
 
   return (
     <>
-      <ModalTitle onClose={onBack}>
+      <ModalTitle onClose={onClose}>
         <IconButton
           aria-label="close"
           sx={{ backgroundColor: 'action.hover' }}
