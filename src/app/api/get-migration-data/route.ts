@@ -28,7 +28,7 @@ export async function GET() {
       protocol_id: parsedToken.protocol_id,
     };
 
-    const token = jwt.sign(meaningnfulData, process.env.JWT_TOKEN);
+    const token = jwt.sign(meaningnfulData, process.env.JWT_SECRET);
 
     return NextResponse.json({ token });
   } catch (error) {

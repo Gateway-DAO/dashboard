@@ -13,7 +13,7 @@ declare global {
       NEXTAUTH_SECRET: string;
       SECURE_API_KEY: string;
       VERCEL_ENV: 'production' | 'preview' | 'development';
-      JWT_TOKEN: string;
+      JWT_SECRET: string;
     }
   }
 
