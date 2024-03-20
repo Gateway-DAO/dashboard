@@ -11,7 +11,7 @@ import ProofsReceivedTable from './components/proofs-received-table';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Received Data Proofs - Gateway Network',
+    title: 'Shared Data - Gateway Network',
   };
 }
 

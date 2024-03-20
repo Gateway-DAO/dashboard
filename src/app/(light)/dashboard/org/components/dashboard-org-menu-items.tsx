@@ -40,7 +40,7 @@ export const dashboardOrgMenuItems = (
     navbar: true,
   },
   {
-    name: 'Received Data Proofs',
+    name: 'Shared Data',
     href: routes.dashboard.org.receivedProofs(username),
     activeHrefs: [routes.dashboard.org.receivedProofs(username)],
     icon: DataProofOutlinedIcon,

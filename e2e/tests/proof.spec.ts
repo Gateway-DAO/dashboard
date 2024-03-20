@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
 
-test.describe('Data proof', async () => {
+test.describe('Shared Data', async () => {
   let sharedPage: Page;
   let name: string;
   test.beforeAll(async ({ browser }) => {

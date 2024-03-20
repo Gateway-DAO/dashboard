@@ -20,6 +20,7 @@ type Props = {
   activeIcon?: FC<SvgIconProps>;
   navbar?: boolean;
   externalLink?: boolean;
+  hide?: boolean;
 };
 
 export type GTWMenuItemSettings = Props & {

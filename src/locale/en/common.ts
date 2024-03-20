@@ -41,7 +41,7 @@ export const common = {
     reject: 'Reject',
     save: 'Save',
     cancel: 'Cancel',
-    check_data_proof: 'Check data proof',
+    check_data_proof: 'Check shared data',
     share_now: 'Share now',
     share_a_copy: 'Share a copy',
     revoke_access: 'Revoke access',
