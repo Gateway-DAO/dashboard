@@ -50,7 +50,7 @@ export default function QrStep({ sessionId, onBack, onClose }: Props) {
     () =>
       JSON.stringify({
         type: 'migration',
-        jwt: data?.token,
+        jwtV2: data?.token,
         sessionId,
       }),
     [sessionId, data?.token]

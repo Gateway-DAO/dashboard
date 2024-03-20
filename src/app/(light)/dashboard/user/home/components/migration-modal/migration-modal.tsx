@@ -39,11 +39,13 @@ export default function MigrationModal() {
   const onStartMigration = () => {
     onOpenQR();
     socketRef.current = io(process.env.NEXT_PUBLIC_BFF_API_SERVER);
+
     socketRef.current.on('connect', () => {
       console.log('connected', socketRef.current?.id);
       const id = socketRef.current!.id;
       setSessionId(id);
     });
+
     socketRef.current.on('migration', (message) => {
       try {
         const data = JSON.parse(message) as {
