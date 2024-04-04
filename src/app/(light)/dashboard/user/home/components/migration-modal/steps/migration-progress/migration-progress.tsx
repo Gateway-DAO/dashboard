@@ -38,6 +38,7 @@ export default function MigrationProgressStep({
   onClose,
 }: Props) {
   const { session } = useGtwSession();
+
   return (
     <>
       <ModalTitle onClose={onClose}>
@@ -96,7 +97,7 @@ export default function MigrationProgressStep({
           gap={2}
         >
           <Stack direction="row" gap={2}>
-            <GTWAvatar src={target.image} name={target.username} />
+            <GTWAvatar src={target?.image} name={target.username} />
             <Stack>
               <Typography variant="caption">To</Typography>
               <Typography fontWeight="bold">@{target.username}</Typography>

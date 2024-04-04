@@ -35,6 +35,7 @@ type MigrationModalPayload =
     }
   | {
       status: 'finished-migration';
+      target?: MigrationTarget;
     }
   | {
       status: 'error';
@@ -58,7 +59,10 @@ export const migrationModalReducer = (
     case 'started-migration':
       return { status: 'started-migration', target: payload.target };
     case 'finished-migration':
-      return { status: 'finished-migration', target: state.target };
+      return {
+        status: 'finished-migration',
+        target: payload.target ?? state.target,
+      };
     case 'error':
       return { status: 'error' };
   }
@@ -70,7 +74,7 @@ type MigrationModalContext = {
   onOpenModal: () => void;
   onOpenQR: () => void;
   onMigrationStarted: (target: MigrationTarget) => void;
-  onMigrationFinished: () => void;
+  onMigrationFinished: (target?: MigrationTarget) => void;
   onError: () => void;
 };
 
@@ -94,7 +98,8 @@ export function MigrationModalProvider({ children }: PropsWithChildren) {
       onOpenQR: () => dispatch({ status: 'qr' }),
       onMigrationStarted: (target: MigrationTarget) =>
         dispatch({ status: 'started-migration', target }),
-      onMigrationFinished: () => dispatch({ status: 'finished-migration' }),
+      onMigrationFinished: (target?: MigrationTarget) =>
+        dispatch({ status: 'finished-migration', target }),
       onError: () => dispatch({ status: 'error' }),
     }),
     []

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import ModalRight from '@/components/modal/modal-right/modal-right';
+import { useGtwSession } from '@/context/gtw-session-provider';
 import { Socket, io } from 'socket.io-client';
 
 import { MigrationTarget, useMigrationModal } from './state';
@@ -19,8 +20,49 @@ export default function MigrationModal() {
     onMigrationStarted,
     onMigrationFinished,
   } = useMigrationModal();
-  const [sessionId, setSessionId] = useState<string | undefined>();
+  const { session } = useGtwSession();
+  const [socketSessionId, setSocketSessionId] = useState<string | undefined>();
   const socketRef = useRef<Socket | null>(null);
+
+  const initializeSocket = () => {
+    socketRef.current = io(process.env.NEXT_PUBLIC_BFF_API_SERVER, {
+      extraHeaders: {
+        authorization: `Bearer ${session?.token}`,
+      },
+    });
+
+    socketRef.current.on('connect', () => {
+      const sessionId = socketRef.current?.id;
+      console.log(`[socket ${sessionId}] connected`);
+      setSocketSessionId(sessionId);
+    });
+    socketRef.current.on('disconnect', (e) => {
+      console.log(`[socket] disconnected`);
+      setSocketSessionId(undefined);
+    });
+
+    socketRef.current.on('migration', (message) => {
+      try {
+        const data = JSON.parse(message) as {
+          status: 'pending' | 'finished';
+          target: MigrationTarget;
+        };
+
+        switch (data.status) {
+          case 'pending':
+            onMigrationStarted(data.target);
+            break;
+          case 'finished':
+            onMigrationFinished();
+            break;
+          default:
+            console.log(data);
+        }
+      } catch {
+        console.error(`error on parse ${message}`);
+      }
+    });
+  };
 
   const onBack = () => {
     if (socketRef.current?.connected) {
@@ -38,36 +80,14 @@ export default function MigrationModal() {
 
   const onStartMigration = () => {
     onOpenQR();
-    socketRef.current = io(process.env.NEXT_PUBLIC_BFF_API_SERVER);
-
-    socketRef.current.on('connect', () => {
-      console.log('connected', socketRef.current?.id);
-      const id = socketRef.current!.id;
-      setSessionId(id);
-    });
-
-    socketRef.current.on('migration', (message) => {
-      try {
-        const data = JSON.parse(message) as {
-          status: 'started' | 'finished';
-          target: MigrationTarget;
-        };
-
-        if (data.status === 'started') {
-          onMigrationStarted(data.target);
-        } else if (data.status === 'finished') {
-          onMigrationFinished();
-        } else {
-          console.log(data);
-        }
-      } catch {
-        console.error(`error on parse ${message}`);
-      }
-    });
+    if (!socketRef.current) {
+      initializeSocket();
+    } else {
+      socketRef.current.connect();
+    }
   };
 
   useEffect(() => {
-    // We just disconnect the socket when the component is unmounted (ie.: Route change), to avoid new sessions being generated
     return () => {
       if (socketRef.current?.connected) {
         socketRef.current.disconnect();
@@ -81,7 +101,7 @@ export default function MigrationModal() {
         <InitialStep onAccept={onStartMigration} onClose={onClose} />
       )}
       {state.status === 'qr' && (
-        <QrStep sessionId={sessionId} onClose={onClose} onBack={onBack} />
+        <QrStep sessionId={socketSessionId} onClose={onClose} onBack={onBack} />
       )}
       {(state.status === 'started-migration' ||
         state.status === 'finished-migration') && (

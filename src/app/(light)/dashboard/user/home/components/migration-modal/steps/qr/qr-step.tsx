@@ -35,10 +35,8 @@ type Props = {
 export default function QrStep({ sessionId, onBack, onClose }: Props) {
   const [downloadModal, toggleDownloadModal] = useToggle(false);
 
-  const { session } = useGtwSession();
-
   const { data } = useQuery({
-    queryKey: ['migration-token', session?.token, sessionId],
+    queryKey: ['migration-token', sessionId],
     queryFn: async (): Promise<{ token: string }> => {
       const res = await fetch('/api/get-migration-data');
       return res.json();
@@ -46,15 +44,19 @@ export default function QrStep({ sessionId, onBack, onClose }: Props) {
     enabled: !!sessionId,
   });
 
-  const qrData = useMemo(
-    () =>
-      JSON.stringify({
-        type: 'migration',
-        jwtV2: data?.token,
+  const qrData = useMemo(() => {
+    if (process.env.NODE_ENV !== 'production' && sessionId && data?.token)
+      console.log('Migration POST data', {
+        authorization: `Bearer ${data?.token}`,
         sessionId,
-      }),
-    [sessionId, data?.token]
-  );
+      });
+
+    return JSON.stringify({
+      type: 'migration',
+      jwtV2: data?.token,
+      sessionId,
+    });
+  }, [sessionId, data?.token]);
 
   return (
     <>
