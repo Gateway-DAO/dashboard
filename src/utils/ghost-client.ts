@@ -21,3 +21,16 @@ export async function getPosts() {
       throw new Error(err);
     });
 }
+
+export async function getSinglePost(postSlug: string) {
+  return await api.posts
+    .read(
+      {
+        slug: postSlug,
+      },
+      { include: ['tags', 'authors'] }
+    )
+    .catch((err) => {
+      console.error(err);
+    });
+}
