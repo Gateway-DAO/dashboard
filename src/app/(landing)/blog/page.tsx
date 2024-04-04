@@ -5,14 +5,15 @@ import Header from '../components/header';
 import LandingFooter from '../components/landing-footer/landing-footer';
 import Cta from '../home/components/cta';
 import Investors from '../home/components/investors';
-import FeaturedBlogPosts from './components/featured';
+import LatestBlogPosts from './components/latest-blog-posts';
 import { brandColors } from '@/theme/config/brand';
 
 export default function Blog() {
   return (
-    <HeaderContextProvider>
+    <HeaderContextProvider initialVariant="dark">
       <Header />
-      <FeaturedBlogPosts />
+
+      <LatestBlogPosts />
       <Cta />
       <Investors />
       <LandingFooter variant="dark" />
