@@ -1,13 +1,13 @@
-import { brandColors } from '@/theme/config/brand';
-import { Container, Stack, Typography, Button } from '@mui/material';
-import { ChevronRight } from '@mui/icons-material';
-import { Box } from '@mui/system';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+import { brandColors } from '@/theme/config/brand';
+
+import { ChevronRight } from '@mui/icons-material';
+import { Container, Stack, Typography, Button } from '@mui/material';
+import { Box } from '@mui/system';
+
 export default function LatestBlogPosts() {
-  const router = useRouter();
   const posts = [
     {
       id: '660e3d44024fd40001ffbb04',
@@ -140,4 +140,3 @@ export default function LatestBlogPosts() {
     </Container>
   );
 }
-
