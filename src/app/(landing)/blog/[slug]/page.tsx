@@ -8,7 +8,7 @@ import {
 import { format } from 'date-fns';
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Avatar, Link as MUILink } from '@mui/material';
+import { Avatar, Divider, Link as MUILink } from '@mui/material';
 import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
 
 // export async function generateStaticParams() {
@@ -32,26 +32,24 @@ export default async function Read({ params }: { params: { slug: string } }) {
         >
           <Stack minWidth={850} alignSelf={'center'}>
             {getPost?.primary_tag ? (
-              <Link href={`/tags/${getPost?.primary_tag.slug}`}>
-                <Breadcrumbs
-                  separator={<NavigateNextIcon fontSize="small" />}
-                  aria-label="breadcrumb"
-                >
-                  {[
-                    <MUILink
-                      underline="hover"
-                      key="1"
-                      color="inherit"
-                      href="/blog"
-                    >
-                      Blog
-                    </MUILink>,
-                    <Typography key="3" color="text.primary">
-                      {getPost?.primary_tag.name}
-                    </Typography>,
-                  ]}
-                </Breadcrumbs>
-              </Link>
+              <Breadcrumbs
+                separator={<NavigateNextIcon fontSize="small" />}
+                aria-label="breadcrumb"
+              >
+                {[
+                  <MUILink
+                    underline="none"
+                    key="1"
+                    color="inherit"
+                    href="/blog"
+                  >
+                    Blog
+                  </MUILink>,
+                  <Typography key="3" color="text.primary">
+                    {getPost?.primary_tag.name}
+                  </Typography>,
+                ]}
+              </Breadcrumbs>
             ) : (
               ''
             )}
@@ -118,6 +116,34 @@ export default async function Read({ params }: { params: { slug: string } }) {
             <Box
               dangerouslySetInnerHTML={{ __html: getPost?.html as string }}
             ></Box>
+            <Stack mt={3} component={'aside'}>
+              <Stack mb={3}>
+                <Typography gutterBottom>Share this post</Typography>
+              </Stack>
+              <Divider />
+              <Stack
+                marginTop={3}
+                alignSelf={'flex-start'}
+                flexDirection={'row'}
+                alignContent={'center'}
+              >
+                <Avatar
+                  alt={getPost?.primary_author?.name || 'Gateway'}
+                  src={
+                    getPost?.primary_author?.profile_image ||
+                    '/images/default-user.svg'
+                  }
+                />
+                <Stack ml={2}>
+                  <Typography variant="subtitle2">
+                    {getPost?.primary_author?.name}
+                  </Typography>
+                  <Typography variant="body2">
+                    {getPost?.primary_author?.bio || ''}
+                  </Typography>
+                </Stack>
+              </Stack>
+            </Stack>
           </Stack>
         </Stack>
       </Container>
