@@ -18,6 +18,7 @@ const nextConfig = {
       'i.postimg.cc',
       'cdn.shopify.com',
       'static.ghost.org',
+      'images.unsplash.com'
     ],
   },
   async redirects() {
