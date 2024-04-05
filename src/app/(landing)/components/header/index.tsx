@@ -95,10 +95,17 @@ export default function Header() {
             </Link>
 
             <div className={styles.links}>
-              <a className={styles.link} href="https://docs.mygateway.xyz" target='_blank'>
+              <a
+                className={styles.link}
+                href="https://docs.mygateway.xyz"
+                target="_blank"
+              >
                 <Button variant="text">Docs</Button>
               </a>
-              <a className={styles.link} href="/explorer" target='_blank'>
+              <a className={styles.link} href="/blog" target="_blank">
+                <Button variant="text">Blog</Button>
+              </a>
+              <a className={styles.link} href="/explorer" target="_blank">
                 <Button variant="text">Explorer</Button>
               </a>
               <a
@@ -108,7 +115,7 @@ export default function Header() {
                     ? externalLinks.gateway_sandbox
                     : externalLinks.gateway
                 }
-                target='_blank'
+                target="_blank"
               >
                 <Button variant="text">
                   {currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}
@@ -117,12 +124,8 @@ export default function Header() {
             </div>
 
             <div className={styles.buttons_container}>
-
               <Link href="/login">
-                <Button
-                  variant="contained"
-                  className={styles.button_contained}
-                >
+                <Button variant="contained" className={styles.button_contained}>
                   Enter the Gateway
                 </Button>
               </Link>
@@ -143,7 +146,7 @@ export default function Header() {
             className={styles.mobile_link}
             href="https://docs.mygateway.xyz"
             onClick={() => setBurgerActive(false)}
-            target='_blank'
+            target="_blank"
           >
             <Button variant="text">
               <span>Docs</span>
@@ -154,7 +157,7 @@ export default function Header() {
             className={styles.mobile_link}
             href="/explorer"
             onClick={() => setBurgerActive(false)}
-            target='_blank'
+            target="_blank"
           >
             <Button variant="text">
               <span>Explorer</span>
@@ -169,12 +172,10 @@ export default function Header() {
                 : externalLinks.gateway
             }
             onClick={() => setBurgerActive(false)}
-            target='_blank'
+            target="_blank"
           >
             <Button variant="text">
-              <span>
-                {currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}
-              </span>
+              <span>{currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
             </Button>
           </a>
