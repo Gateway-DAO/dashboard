@@ -21,7 +21,7 @@ export default function BlogCard({
 }: Blog) {
   console.log(title, feature_image, primary_tag, excerpt, slug);
   return (
-    <Stack component={Card} direction={'column'} display={'flex'}>
+    <Stack direction={'column'} display={'flex'}>
       <Image
         src={feature_image}
         alt={title}
@@ -58,6 +58,7 @@ export default function BlogCard({
         lineHeight={'24px'}
         color={'#000'}
         sx={{ mt: 1 }}
+        height={'15%'}
       >
         {excerpt.length > 90 ? excerpt.substring(0, 250) + '...' : excerpt}
       </Typography>
@@ -67,6 +68,7 @@ export default function BlogCard({
           textDecoration: 'none',
           color: '#771AC9',
           marginTop: 20,
+
         }}
       >
         <Stack direction={'row'}>

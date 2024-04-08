@@ -7,7 +7,7 @@ import Investors from '../home/components/investors';
 
 export default function Blog({ children }: { children: React.ReactNode }) {
   return (
-    <HeaderContextProvider initialVariant="dark">
+    <HeaderContextProvider initialVariant="light">
       <Header />
       {children}
       <Cta />

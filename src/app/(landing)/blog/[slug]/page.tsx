@@ -5,6 +5,7 @@ import {
   getSinglePost,
   getPosts,
 } from '@/services/server-functions/ghost-client';
+import { brandColors } from '@/theme/config/brand';
 import { format } from 'date-fns';
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -12,6 +13,7 @@ import { Avatar, Button, Divider, Link as MUILink } from '@mui/material';
 import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
 
 import BlogCard from '../components/blog-card';
+import '../cards.css';
 
 // export async function generateStaticParams() {
 //   const posts = await getPosts()
@@ -160,12 +162,12 @@ export default async function Read({ params }: { params: { slug: string } }) {
           </Button>
         </Stack>
         <Stack
-          direction={'row'}
+          direction={{ xs: 'column', md: 'row' }}
           columnGap={4}
           mt={3}
           display="grid"
           sx={{
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
           }}
         >
           {latestPost.map((post) => {
