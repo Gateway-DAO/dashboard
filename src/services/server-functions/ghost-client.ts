@@ -9,7 +9,7 @@ const api = new GhostContentAPI({
 export async function getPosts(limit: number) {
   return await api.posts
     .browse({
-      include: ['tags', 'authors'],
+      include: ['tags'],
       limit: limit,
     })
     .catch((err) => {
@@ -32,6 +32,7 @@ export async function getTagPosts(tagSlug: string) {
     .browse({
       filter: `tag:${tagSlug}`,
       include: ['tags', 'authors'],
+      limit: 20,
     })
     .catch((err) => {
       throw new Error(err);

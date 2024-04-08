@@ -8,8 +8,10 @@ import {
 import { format } from 'date-fns';
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Avatar, Divider, Link as MUILink } from '@mui/material';
+import { Avatar, Button, Divider, Link as MUILink } from '@mui/material';
 import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
+
+import BlogCard from '../components/blog-card';
 
 // export async function generateStaticParams() {
 //   const posts = await getPosts()
@@ -20,6 +22,7 @@ import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
 
 export default async function Read({ params }: { params: { slug: string } }) {
   const getPost = await getSinglePost(params.slug);
+  const latestPost = await getPosts(2);
 
   console.log(getPost);
 
@@ -73,13 +76,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
               flexDirection={'row'}
               alignContent={'center'}
             >
-              <Avatar
-                alt={getPost?.primary_author?.name || 'Gateway'}
-                src={
-                  getPost?.primary_author?.profile_image ||
-                  '/images/default-user.svg'
-                }
-              />
+              <Avatar alt={'Gateway'} src={'/images/default-user.svg'} />
               <Stack ml={2}>
                 <Typography variant="subtitle2">
                   {getPost?.primary_author?.name}
@@ -147,6 +144,44 @@ export default async function Read({ params }: { params: { slug: string } }) {
           </Stack>
         </Stack>
       </Container>
+      <Stack component={'aside'} mx={20}>
+        <Typography variant="h4">Trending</Typography>
+        <Stack
+          direction={'row'}
+          mt={3}
+          display={'flex'}
+          justifyContent={'space-between'}
+        >
+          <Typography alignSelf={'self-end'}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.{' '}
+          </Typography>
+          <Button variant="outlined" size="large">
+            View all
+          </Button>
+        </Stack>
+        <Stack
+          direction={'row'}
+          columnGap={4}
+          mt={3}
+          display="grid"
+          sx={{
+            gridTemplateColumns: 'repeat(2, 1fr)',
+          }}
+        >
+          {latestPost.map((post) => {
+            return (
+              <BlogCard
+                excerpt={post.excerpt as string}
+                feature_image={post.feature_image as string}
+                primary_tag={post.primary_tag?.name as string}
+                title={post.title as string}
+                key={post?.id}
+                slug={post.slug}
+              />
+            );
+          })}
+        </Stack>
+      </Stack>
     </Container>
   );
 }
