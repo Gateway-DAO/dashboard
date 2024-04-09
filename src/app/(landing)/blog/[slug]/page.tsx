@@ -6,7 +6,7 @@ import {
   getPosts,
 } from '@/services/server-functions/ghost-client';
 import { brandColors } from '@/theme/config/brand';
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Avatar, Button, Divider, Link as MUILink } from '@mui/material';
@@ -22,6 +22,14 @@ import '../cards.css';
 //   }));
 // }
 
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat('en-US', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+}
+
 export default async function Read({ params }: { params: { slug: string } }) {
   const getPost = await getSinglePost(params.slug);
   const latestPost = await getPosts(2);
@@ -29,8 +37,17 @@ export default async function Read({ params }: { params: { slug: string } }) {
   console.log(getPost);
 
   return (
-    <Container component={'main'}>
-      <Container component={'article'} sx={{ mt: 15, py: 5 }}>
+    <Container
+      component={Stack}
+      sx={{
+        display: 'flex',
+        py: 6,
+        justifyContent: 'center',
+        alignItems: 'center',
+        bgcolor: brandColors.primaryLighter,
+      }}
+    >
+      <Container component={'article'} sx={{ mt: 15, py: 5, width: '78.7%' }}>
         <Stack
           component={'header'}
           sx={{ display: 'flex', alignItems: 'center' }}
@@ -38,7 +55,12 @@ export default async function Read({ params }: { params: { slug: string } }) {
           <Stack minWidth={850} alignSelf={'center'}>
             {getPost?.primary_tag ? (
               <Breadcrumbs
-                separator={<NavigateNextIcon fontSize="small" />}
+                separator={
+                  <NavigateNextIcon
+                    fontSize="small"
+                    sx={{ color: '#000000' }}
+                  />
+                }
                 aria-label="breadcrumb"
               >
                 {[
@@ -47,10 +69,11 @@ export default async function Read({ params }: { params: { slug: string } }) {
                     key="1"
                     color="inherit"
                     href="/blog"
+                    sx={{ color: '#000000' }}
                   >
                     Blog
                   </MUILink>,
-                  <Typography key="3" color="text.primary">
+                  <Typography key="3" sx={{ color: '#000000' }}>
                     {getPost?.primary_tag.name}
                   </Typography>,
                 ]}
@@ -58,10 +81,21 @@ export default async function Read({ params }: { params: { slug: string } }) {
             ) : (
               ''
             )}
-            <Typography component={'title'} mt={1} variant="h2" gutterBottom>
+            <Typography
+              component={'title'}
+              mt={1}
+              variant="h2"
+              sx={{ color: '#000000' }}
+              gutterBottom
+            >
               {getPost?.title}
             </Typography>
-            <Typography mt={1} variant="h4" gutterBottom>
+            <Typography
+              mt={1}
+              variant="h4"
+              sx={{ color: '#000000' }}
+              gutterBottom
+            >
               {getPost?.excerpt}
             </Typography>
           </Stack>
@@ -80,15 +114,12 @@ export default async function Read({ params }: { params: { slug: string } }) {
             >
               <Avatar alt={'Gateway'} src={'/images/default-user.svg'} />
               <Stack ml={2}>
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" sx={{ color: '#000000' }}>
                   {getPost?.primary_author?.name}
                 </Typography>
-                <Typography variant="body2">
-                  {format(
-                    new Date(getPost?.published_at as string),
-                    'dd MMMM, yyyy'
-                  )}{' '}
-                  . {getPost?.reading_time} Min Read
+                <Typography variant="body2" sx={{ color: '#000000' }}>
+                  {formatDate(new Date(getPost?.published_at as string))}.{' '}
+                  {getPost?.reading_time} Min Read
                 </Typography>
               </Stack>
             </Stack>
@@ -117,7 +148,9 @@ export default async function Read({ params }: { params: { slug: string } }) {
             ></Box>
             <Stack mt={3} component={'aside'}>
               <Stack mb={3}>
-                <Typography gutterBottom>Share this post</Typography>
+                <Typography gutterBottom sx={{ color: '#000000' }}>
+                  Share this post
+                </Typography>
               </Stack>
               <Divider />
               <Stack
@@ -134,10 +167,10 @@ export default async function Read({ params }: { params: { slug: string } }) {
                   }
                 />
                 <Stack ml={2}>
-                  <Typography variant="subtitle2">
+                  <Typography variant="subtitle2" sx={{ color: '#000000' }}>
                     {getPost?.primary_author?.name}
                   </Typography>
-                  <Typography variant="body2">
+                  <Typography variant="body2" sx={{ color: '#000000' }}>
                     {getPost?.primary_author?.bio || ''}
                   </Typography>
                 </Stack>
@@ -147,17 +180,19 @@ export default async function Read({ params }: { params: { slug: string } }) {
         </Stack>
       </Container>
       <Stack component={'aside'} mx={20}>
-        <Typography variant="h4">Trending</Typography>
+        <Typography variant="h4" sx={{ color: '#000000' }}>
+          Trending
+        </Typography>
         <Stack
           direction={'row'}
           mt={3}
           display={'flex'}
           justifyContent={'space-between'}
         >
-          <Typography alignSelf={'self-end'}>
+          <Typography alignSelf={'self-end'} sx={{ color: '#000000' }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.{' '}
           </Typography>
-          <Button variant="outlined" size="large">
+          <Button variant="outlined" size="large" sx={{ color: '#000000' }}>
             View all
           </Button>
         </Stack>
