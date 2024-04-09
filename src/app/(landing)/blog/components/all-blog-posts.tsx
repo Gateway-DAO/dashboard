@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import { Container, Stack, Box, Typography, Button } from '@mui/material';
-import { getPosts } from '@/services/server-functions/ghost-client';
+import { Container, Stack, Typography, Button, Box } from '@mui/material';
+import { getPosts, getAllTags } from '@/services/server-functions/ghost-client';
 import { brandColors } from '@/theme/config/brand';
 import BlogCard from './blog-card';
-import HeroPost from './hero-post';
 
-export default async function LatestBlogPosts() {
-  const posts = await getPosts(5);
-  posts.shift();
+export default async function AllBlogPosts() {
+  const posts = await getPosts(20);
+  const tags = await getAllTags();
+
   return (
     <Container
       component={Stack}
@@ -19,33 +19,47 @@ export default async function LatestBlogPosts() {
         bgcolor: brandColors.primaryLighter,
       }}
     >
-      <HeroPost />
       <Stack
-        sx={{ mt: 5, mb: 5, width: '78.7%' }}
-        direction={'row'}
+        sx={{ mt: 10, width: '78.7%' }}
+        direction={'column'}
         justifyContent={'space-between'}
       >
+        <Stack direction={'row'} sx={{ mb: 4 }}>
+          {tags.map((tag, index) => (
+            <Button
+              key={index}
+              variant="text"
+              size="medium"
+              component={Link}
+              href={`/blog/all/${tag.name}`}
+              sx={{
+                width: '10%',
+                mt: 1,
+                mr: 2,
+                '&:hover': {
+                  backgroundColor: '#fff',
+                },
+                bgcolor: '#fff',
+              }}
+            >
+              {tag.name}
+            </Button>
+          ))}
+        </Stack>
         <Typography variant="h5" sx={{ color: '#000000' }}>
-          Latest posts
+          All posts
         </Typography>
-        <Button
-          variant="outlined"
-          sx={{ border: 1, borderColor: '#000000', color: '#000000' }}
-          component={Link}
-          href="/blog/all"
-        >
-          View All
-        </Button>
       </Stack>
       <Box
         sx={{
+          mt: 5,
           width: '78.7%',
           gap: 4,
           display: 'grid',
           gridTemplateColumns: {
             xs: '1fr',
             md: 'repeat(2, 1fr)',
-            lg: 'repeat(2, 1fr)',
+            lg: `repeat(${2}, 1fr)`,
           },
         }}
       >

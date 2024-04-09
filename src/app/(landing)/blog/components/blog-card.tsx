@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
-
+import Image from 'next/image';
+import { Stack, Typography, Button } from '@mui/material';
 import { ChevronRight } from '@mui/icons-material';
-import { Stack, Typography, Button, Box, Card } from '@mui/material';
 
 type Blog = {
   title: string;
@@ -19,9 +18,8 @@ export default function BlogCard({
   excerpt,
   slug,
 }: Blog) {
-  console.log(title, feature_image, primary_tag, excerpt, slug);
   return (
-    <Stack direction={'column'} display={'flex'}>
+    <Stack direction={'column'}>
       <Image
         src={feature_image}
         alt={title}
@@ -58,9 +56,8 @@ export default function BlogCard({
         lineHeight={'24px'}
         color={'#000'}
         sx={{ mt: 1 }}
-        height={'15%'}
       >
-        {excerpt.length > 90 ? excerpt.substring(0, 250) + '...' : excerpt}
+        {excerpt}
       </Typography>
       <Link
         href={`/blog/${slug}`}
@@ -68,7 +65,6 @@ export default function BlogCard({
           textDecoration: 'none',
           color: '#771AC9',
           marginTop: 20,
-
         }}
       >
         <Stack direction={'row'}>

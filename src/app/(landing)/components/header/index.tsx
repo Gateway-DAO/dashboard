@@ -100,6 +100,11 @@ export default function Header() {
                 href="https://docs.mygateway.xyz"
                 target="_blank"
               >
+              <a
+                className={styles.link}
+                href="https://docs.mygateway.xyz"
+                target="_blank"
+              >
                 <Button variant="text">Docs</Button>
               </a>
               <a className={styles.link} href="/blog">
