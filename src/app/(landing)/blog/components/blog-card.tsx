@@ -18,7 +18,6 @@ export default function BlogCard({
   excerpt,
   slug,
 }: Blog) {
-  console.log(title, feature_image, primary_tag, excerpt, slug);
   return (
     <Stack direction={'column'}>
       <Image
