@@ -48,13 +48,11 @@ export default function QrStep({ sessionId, onBack, onClose }: Props) {
     if (process.env.NODE_ENV !== 'production' && sessionId && data?.token)
       console.log('Migration POST data', {
         authorization: `Bearer ${data?.token}`,
-        sessionId,
       });
 
     return JSON.stringify({
       type: 'migration',
       jwtV2: data?.token,
-      sessionId,
     });
   }, [sessionId, data?.token]);
 
