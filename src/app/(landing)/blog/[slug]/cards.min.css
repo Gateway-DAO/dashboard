@@ -6,13 +6,17 @@
 }
 
 .kg-image-card img {
-  max-width: 100%; /* Example maximum width */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  aspect-ratio: 16/9;
 }
 
 .feature-img {
-  max-width: 80%; /* Example maximum width */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 80%;
+  height: auto;
+  object-fit: contain;
+  aspect-ratio: 3/2;
 }
 
 .kg-image-card figcaption {

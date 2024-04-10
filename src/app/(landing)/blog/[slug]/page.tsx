@@ -1,17 +1,16 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import {
   getSinglePost,
   getPosts,
 } from '@/services/server-functions/ghost-client';
-import { brandColors } from '@/theme/config/brand';
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Avatar, Button, Divider, Link as MUILink } from '@mui/material';
 import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
 
 import BlogCard from '../components/blog-card';
+
 import './cards.min.css';
 
 function formatDate(date: Date) {
@@ -39,22 +38,12 @@ export default async function Read({ params }: { params: { slug: string } }) {
   console.log(getPost);
 
   return (
-    <Container
-      component={Stack}
-      sx={{
-        display: 'flex',
-        py: 6,
-        justifyContent: 'center',
-        alignItems: 'center',
-        bgcolor: '#fff',
-      }}
-    >
+    <Container component={'main'} sx={{ py: 1 }}>
       <Container
         component={'article'}
         sx={{
           mt: 15,
           py: 5,
-          bgcolor: '#fff',
         }}
       >
         <Stack component={'header'} sx={{ display: 'flex' }}>
@@ -168,7 +157,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
           </Stack>
         </Stack>
       </Container>
-      <Stack component={'aside'} mx={{ xs: 1, md: 12, width: '78.7%' }}>
+      <Stack component={'aside'} mx={{ xs: 1, md: 12 }}>
         <Typography variant="h4">Trending</Typography>
         <Stack
           direction={{ xs: 'column', md: 'row' }}
@@ -190,7 +179,10 @@ export default async function Read({ params }: { params: { slug: string } }) {
           mt={3}
           display="grid"
           sx={{
-            gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
+            gridTemplateColumns: {
+              xs: 'repeat(1, 1fr)',
+              md: 'repeat(2, 1fr)',
+            },
           }}
         >
           {latestPost.map((post) => {
