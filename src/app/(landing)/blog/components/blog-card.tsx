@@ -1,7 +1,8 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import { Stack, Typography, Button } from '@mui/material';
+import Link from 'next/link';
+
 import { ChevronRight } from '@mui/icons-material';
+import { Stack, Typography, Button } from '@mui/material';
 
 type Blog = {
   title: string;
@@ -21,6 +22,10 @@ export default function BlogCard({
   return (
     <Stack direction={'column'}>
       <Image
+        style={{
+          aspectRatio: '16/9',
+          objectFit: 'cover',
+        }}
         src={feature_image}
         alt={title}
         width={560}
