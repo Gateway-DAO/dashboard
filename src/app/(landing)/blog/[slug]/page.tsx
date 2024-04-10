@@ -46,7 +46,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
         py: 6,
         justifyContent: 'center',
         alignItems: 'center',
-        bgcolor: brandColors.primaryLighter,
+        bgcolor: '#fff',
       }}
     >
       <Container
@@ -54,7 +54,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
         sx={{
           mt: 15,
           py: 5,
-          bgcolor: brandColors.primaryLighter,
+          bgcolor: '#fff',
         }}
       >
         <Stack component={'header'} sx={{ display: 'flex' }}>
