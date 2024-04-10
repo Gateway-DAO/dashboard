@@ -1,3 +1,52 @@
+.kg-image-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px; /* Example padding */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example box shadow */
+}
+
+.kg-image-card img {
+  max-width: 100%; /* Example maximum width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.feature-img {
+  max-width: 80%; /* Example maximum width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.kg-image-card figcaption {
+  font-style: italic;
+  margin-top: 8px;
+  color: #888;
+  text-align: center;
+}
+
+.kg-embed-card {
+  border: 1px solid #ccc; /* Example border */
+  border-radius: 8px; /* Example border radius */
+  padding: 20px; /* Example padding */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example box shadow */
+  background-color: #f9f9f9; /* Example background color */
+  margin-bottom: 20px; /* Example margin bottom */
+}
+
+.kg-embed-card iframe {
+  width: 100%;
+  height: 'auto';
+}
+
+.kg-embed-card .kg-embed-card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.kg-embed-card .kg-embed-card-description {
+  font-size: 14px;
+  color: #666;
+}
+
 .kg-audio-card,
 .kg-audio-card * {
   box-sizing: border-box;

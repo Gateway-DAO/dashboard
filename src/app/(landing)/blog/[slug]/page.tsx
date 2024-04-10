@@ -6,29 +6,14 @@ import {
   getPosts,
 } from '@/services/server-functions/ghost-client';
 import { brandColors } from '@/theme/config/brand';
-// import { format } from 'date-fns';
+import { format } from 'date-fns';
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Avatar, Button, Divider, Link as MUILink } from '@mui/material';
 import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
 
 import BlogCard from '../components/blog-card';
-import '../cards.css';
-
-// export async function generateStaticParams() {
-//   const posts = await getPosts()
-//   return posts.map((post) => ({
-//     slug: post.slug,
-//   }));
-// }
-
-function formatDate(date: Date) {
-  return new Intl.DateTimeFormat('en-US', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  }).format(date);
-}
+import './cards.min.css';
 
 export default async function Read({ params }: { params: { slug: string } }) {
   const getPost = await getSinglePost(params.slug);
@@ -37,30 +22,16 @@ export default async function Read({ params }: { params: { slug: string } }) {
   console.log(getPost);
 
   return (
-    <Container
-      component={Stack}
-      sx={{
-        display: 'flex',
-        py: 6,
-        justifyContent: 'center',
-        alignItems: 'center',
-        bgcolor: brandColors.primaryLighter,
-      }}
-    >
-      <Container component={'article'} sx={{ mt: 15, py: 5, width: '78.7%' }}>
-        <Stack
-          component={'header'}
-          sx={{ display: 'flex', alignItems: 'center' }}
-        >
-          <Stack minWidth={850} alignSelf={'center'}>
+    <Container component={'main'}>
+      <Container
+        component={'article'}
+        sx={{ mt: 15, py: 5, bgcolor: brandColors.primaryLighter }}
+      >
+        <Stack component={'header'} sx={{ display: 'flex' }}>
+          <Stack mx={{ xs: 2, md: 26 }}>
             {getPost?.primary_tag ? (
               <Breadcrumbs
-                separator={
-                  <NavigateNextIcon
-                    fontSize="small"
-                    sx={{ color: '#000000' }}
-                  />
-                }
+                separator={<NavigateNextIcon fontSize="small" />}
                 aria-label="breadcrumb"
               >
                 {[
@@ -69,11 +40,10 @@ export default async function Read({ params }: { params: { slug: string } }) {
                     key="1"
                     color="inherit"
                     href="/blog"
-                    sx={{ color: '#000000' }}
                   >
                     Blog
                   </MUILink>,
-                  <Typography key="3" sx={{ color: '#000000' }}>
+                  <Typography key="3" color="text.primary">
                     {getPost?.primary_tag.name}
                   </Typography>,
                 ]}
@@ -81,54 +51,42 @@ export default async function Read({ params }: { params: { slug: string } }) {
             ) : (
               ''
             )}
-            <Typography
-              component={'title'}
-              mt={1}
-              variant="h2"
-              sx={{ color: '#000000' }}
-              gutterBottom
-            >
+            <Typography mt={1} variant="h3" gutterBottom>
               {getPost?.title}
             </Typography>
-            <Typography
-              mt={1}
-              variant="h4"
-              sx={{ color: '#000000' }}
-              gutterBottom
-            >
+            <Typography mt={1} variant="body1" fontSize={30} gutterBottom>
               {getPost?.excerpt}
             </Typography>
-          </Stack>
-          <Stack
-            mt={3}
-            display={'flex'}
-            justifyContent={'space-between'}
-            flexDirection={'row'}
-            alignSelf={'center'}
-          >
             <Stack
-              alignSelf={'flex-start'}
-              minWidth={850}
+              mt={3}
+              display={'flex'}
+              justifyContent={'space-between'}
               flexDirection={'row'}
-              alignContent={'center'}
             >
-              <Avatar alt={'Gateway'} src={'/images/default-user.svg'} />
-              <Stack ml={2}>
-                <Typography variant="subtitle2" sx={{ color: '#000000' }}>
-                  {getPost?.primary_author?.name}
-                </Typography>
-                <Typography variant="body2" sx={{ color: '#000000' }}>
-                  {formatDate(new Date(getPost?.published_at as string))}.{' '}
-                  {getPost?.reading_time} Min Read
-                </Typography>
+              <Stack alignSelf={'flex-start'} flexDirection={'row'}>
+                <Avatar alt={'Gateway'} src={'/images/default-user.svg'} />
+                <Stack ml={2}>
+                  <Typography variant="subtitle2">
+                    {getPost?.primary_author?.name}
+                  </Typography>
+                  <Typography variant="body2">
+                    {format(
+                      new Date(getPost?.published_at as string),
+                      'dd MMMM, yyyy'
+                    )}{' '}
+                    . {getPost?.reading_time} Min Read
+                  </Typography>
+                </Stack>
               </Stack>
             </Stack>
           </Stack>
+
           <Stack component={'figure'} mt={8}>
             <Image
               style={{ alignSelf: 'center' }}
               width={1000}
-              height={250}
+              height={100}
+              className="feature-img"
               src={getPost?.feature_image || ''}
               alt={getPost?.feature_image_alt || 'No image found'}
             />
@@ -142,18 +100,18 @@ export default async function Read({ params }: { params: { slug: string } }) {
               }}
             ></Stack>
           </Stack>
-          <Stack maxWidth={850} overflow={'hidden'} alignSelf={'center'}>
+          <Stack mx={{ xs: 2, md: 26 }}>
             <Box
               dangerouslySetInnerHTML={{ __html: getPost?.html as string }}
             ></Box>
             <Stack mt={3} component={'aside'}>
               <Stack mb={3}>
-                <Typography gutterBottom sx={{ color: '#000000' }}>
-                  Share this post
-                </Typography>
+                <Typography gutterBottom>Share this post</Typography>
               </Stack>
               <Divider />
               <Stack
+                direction={{ xs: 'column', md: 'row' }}
+                alignItems={{ xs: 'center', md: 'flex-start' }}
                 marginTop={3}
                 alignSelf={'flex-start'}
                 flexDirection={'row'}
@@ -166,11 +124,15 @@ export default async function Read({ params }: { params: { slug: string } }) {
                     '/images/default-user.svg'
                   }
                 />
-                <Stack ml={2}>
-                  <Typography variant="subtitle2" sx={{ color: '#000000' }}>
+                <Stack
+                  ml={{ xs: 0, md: 2 }}
+                  mt={{ xs: 1, md: 0 }}
+                  textAlign={{ xs: 'center', md: 'left' }}
+                >
+                  <Typography variant="subtitle2">
                     {getPost?.primary_author?.name}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: '#000000' }}>
+                  <Typography variant="body2">
                     {getPost?.primary_author?.bio || ''}
                   </Typography>
                 </Stack>
@@ -179,20 +141,19 @@ export default async function Read({ params }: { params: { slug: string } }) {
           </Stack>
         </Stack>
       </Container>
-      <Stack component={'aside'} mx={20}>
-        <Typography variant="h4" sx={{ color: '#000000' }}>
-          Trending
-        </Typography>
+      <Stack component={'aside'} mx={{ xs: 1, md: 12 }}>
+        <Typography variant="h4">Trending</Typography>
         <Stack
-          direction={'row'}
+          direction={{ xs: 'column', md: 'row' }}
           mt={3}
           display={'flex'}
           justifyContent={'space-between'}
+          rowGap={2}
         >
-          <Typography alignSelf={'self-end'} sx={{ color: '#000000' }}>
+          <Typography alignSelf={{ xs: 'flex-start', md: 'self-end' }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.{' '}
           </Typography>
-          <Button variant="outlined" size="large" sx={{ color: '#000000' }}>
+          <Button variant="outlined" size={'medium'}>
             View all
           </Button>
         </Stack>

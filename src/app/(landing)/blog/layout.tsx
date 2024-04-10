@@ -9,6 +9,7 @@ export default function Blog({ children }: { children: React.ReactNode }) {
   return (
     <HeaderContextProvider initialVariant="dark">
       <Header />
+      
       {children}
       <Cta />
       <Investors />
