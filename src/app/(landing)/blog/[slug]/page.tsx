@@ -73,7 +73,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
             <Typography mt={1} fontWeight={700} variant="h3" gutterBottom>
               {getPost?.title}
             </Typography>
-            <Typography mt={1} variant="h6"  fontWeight={400} gutterBottom>
+            <Typography mt={1} variant="h6" fontWeight={400} gutterBottom>
               {getPost?.excerpt}
             </Typography>
             <Stack
@@ -176,6 +176,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
         </Stack>
         <Stack
           direction={{ xs: 'column', md: 'row' }}
+          rowGap={4}
           columnGap={4}
           mt={3}
           display="grid"
