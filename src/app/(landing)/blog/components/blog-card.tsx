@@ -62,7 +62,7 @@ export default function BlogCard({
         color={'#000'}
         sx={{ mt: 1 }}
       >
-        {excerpt}
+        {excerpt.length > 90 ? excerpt.substring(0, 150) + '...' : excerpt}
       </Typography>
       <Link
         href={`/blog/${slug}`}

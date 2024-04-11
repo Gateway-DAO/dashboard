@@ -1,10 +1,13 @@
-import { Container, Stack, Typography, Button, Box } from '@mui/material';
+import Link from 'next/link';
+
 import {
   getAllTags,
   getTagPosts,
 } from '@/services/server-functions/ghost-client';
 import { brandColors } from '@/theme/config/brand';
-import Link from 'next/link';
+
+import { Container, Stack, Typography, Button, Box } from '@mui/material';
+
 import BlogCard from '../../components/blog-card';
 
 export default async function AllBlogPosts({

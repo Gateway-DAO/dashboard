@@ -1,10 +1,15 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import { Button, Typography, Stack } from '@mui/material';
+import Link from 'next/link';
+
 import { getPosts } from '@/services/server-functions/ghost-client';
+
+import { Button, Typography, Stack } from '@mui/material';
 
 export default async function HeroPost() {
   const posts = await getPosts(1);
+
+  const excerpt = posts[0]?.excerpt;
+  const title = posts[0].title;
   return (
     <Link
       href={`/blog/${posts[0].slug}`}
@@ -16,10 +21,14 @@ export default async function HeroPost() {
       }}
     >
       <Stack direction={{ xs: 'column', md: 'row' }}>
-        <Stack sx={{ width: { md: '63.5%' } }}>
+        <Stack alignSelf={'center'}>
           <Image
             src={posts[0].feature_image as string}
             alt={posts[0].title as string}
+            style={{
+              aspectRatio: '5/3',
+              objectFit: 'cover',
+            }}
             width={560}
             height={295}
             layout="responsive"
@@ -27,37 +36,41 @@ export default async function HeroPost() {
         </Stack>
 
         <Stack direction={'column'} sx={{ ml: { md: 8 } }}>
-          <Button
-            variant="text"
-            size="medium"
-            sx={{
-              width: '20%',
-              mt: 2,
-              '&:hover': {
-                backgroundColor: '#fff',
-              },
-              bgcolor: '#fff',
-            }}
-          >
-            {posts[0].primary_tag?.name}
-          </Button>
+          <div>
+            <Button
+              variant="text"
+              size="medium"
+              sx={{
+                width: '20%',
+                mt: 2,
+                '&:hover': {
+                  backgroundColor: '#fff',
+                },
+                bgcolor: '#fff',
+              }}
+            >
+              {posts[0].primary_tag?.name}
+            </Button>
+          </div>
           <Typography
+            variant="h4"
             fontWeight={700}
-            fontSize={'45px'}
-            lineHeight={'52px'}
             color={'#000'}
             sx={{ mt: 1.5 }}
           >
-            {posts[0].title}
+            {title && title.length > 50
+              ? title.substring(0, 60) + '...'
+              : title}
           </Typography>
           <Typography
             fontWeight={400}
-            fontSize={'24px'}
-            lineHeight={'32px'}
+            variant="h6"
             color={'#000'}
             sx={{ mt: 1 }}
           >
-            {posts[0].excerpt}
+            {excerpt && excerpt.length > 90
+              ? excerpt.substring(0, 150) + '...'
+              : excerpt}
           </Typography>
         </Stack>
       </Stack>

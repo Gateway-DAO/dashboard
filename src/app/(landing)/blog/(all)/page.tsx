@@ -1,9 +1,11 @@
 import Link from 'next/link';
-import { Container, Stack, Box, Typography, Button } from '@mui/material';
+
 import { getPosts } from '@/services/server-functions/ghost-client';
-import { brandColors } from '@/theme/config/brand';
-import BlogCard from './blog-card';
-import HeroPost from './hero-post';
+
+import { Container, Stack, Box, Typography, Button } from '@mui/material';
+
+import BlogCard from '../components/blog-card';
+import HeroPost from '../components/hero-post';
 
 export default async function LatestBlogPosts() {
   const posts = await getPosts(5);
@@ -16,7 +18,6 @@ export default async function LatestBlogPosts() {
         py: 6,
         justifyContent: 'center',
         alignItems: 'center',
-        bgcolor: brandColors.primaryLighter,
       }}
     >
       <HeroPost />

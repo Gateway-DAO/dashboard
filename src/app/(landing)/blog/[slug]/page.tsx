@@ -38,16 +38,16 @@ export default async function Read({ params }: { params: { slug: string } }) {
   console.log(getPost);
 
   return (
-    <Container component={'main'} sx={{ py: 1 }}>
+    <Container component={'main'} sx={{ py: 5 }}>
       <Container
         component={'article'}
         sx={{
-          mt: 15,
+          mt: { xs: 2, md: 8 },
           py: 5,
         }}
       >
         <Stack component={'header'} sx={{ display: 'flex' }}>
-          <Stack mx={{ xs: 2, md: 26 }}>
+          <Stack mx={{ xs: 0, md: 26 }}>
             {getPost?.primary_tag ? (
               <Breadcrumbs
                 separator={<NavigateNextIcon fontSize="small" />}
@@ -70,10 +70,10 @@ export default async function Read({ params }: { params: { slug: string } }) {
             ) : (
               ''
             )}
-            <Typography mt={1} variant="h3" gutterBottom>
+            <Typography mt={1} fontWeight={700} variant="h3" gutterBottom>
               {getPost?.title}
             </Typography>
-            <Typography mt={1} variant="body1" fontSize={30} gutterBottom>
+            <Typography mt={1} variant="h6"  fontWeight={400} gutterBottom>
               {getPost?.excerpt}
             </Typography>
             <Stack
@@ -100,9 +100,10 @@ export default async function Read({ params }: { params: { slug: string } }) {
           <Stack component={'figure'} mt={8}>
             <Image
               style={{ alignSelf: 'center' }}
-              width={1000}
-              height={100}
+              width={1152}
+              height={200}
               className="feature-img"
+              layout="responsive"
               src={getPost?.feature_image || ''}
               alt={getPost?.feature_image_alt || 'No image found'}
             />
@@ -116,7 +117,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
               }}
             ></Stack>
           </Stack>
-          <Stack mx={{ xs: 2, md: 26 }}>
+          <Stack mx={{ xs: 0, md: 26 }}>
             <Box
               dangerouslySetInnerHTML={{ __html: getPost?.html as string }}
             ></Box>
@@ -129,7 +130,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
                 direction={{ xs: 'column', md: 'row' }}
                 alignItems={{ xs: 'center', md: 'flex-start' }}
                 marginTop={3}
-                alignSelf={'flex-start'}
+                justifySelf={'center'}
                 flexDirection={'row'}
                 alignContent={'center'}
               >
