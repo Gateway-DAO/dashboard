@@ -1,3 +1,8 @@
+* {
+  font-family: 'Plus Jakarta Sans';
+  font-size: 1rem;
+}
+
 .kg-image-card {
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -27,29 +32,21 @@
   text-align: center;
 }
 
-.kg-embed-card iframe {
-  width: 100%;
-  align-self: center;
-  height: 'auto';
-}
-
 .kg-embed-card {
+  padding: 2;
   display: flex;
-  align-items: center;
+  align-content: center;
   justify-content: center;
-  border: 1px solid #ccc;
+
   border-radius: 8px;
-  padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
   margin-bottom: 20px;
 }
 
-.twitter-tweet {
-  position: relative;
-  width: 100%;
-
-  overflow: hidden;
+.kg-embed-card iframe {
+  display: flex;
+  height: 100%;
 }
 
 pre code {
