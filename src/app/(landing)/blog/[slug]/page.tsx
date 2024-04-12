@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 
 import {
@@ -29,6 +30,53 @@ function formatDate(date: Date) {
   }
 
   return `${day} ${month} ${year}`;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const metaData = await getSinglePost(params.slug);
+  if (!metaData) {
+    return {
+      title: 'Not Found',
+      description: '',
+      keywords: [],
+      openGraph: {
+        title: 'Not Found',
+        description: '',
+        url: '',
+        images: [{ url: '/images/default-user.svg' }],
+        type: 'website',
+      },
+    };
+  }
+
+  const tags = metaData.tags
+    ? metaData?.tags.map((item) => item.name)
+    : ['gateway blogs'];
+
+  return {
+    title: metaData.title,
+    description: metaData.excerpt,
+    keywords: tags as [string],
+    openGraph: {
+      title: metaData.title,
+      description: metaData.excerpt,
+      url: metaData.url,
+      images: [
+        {
+          url: metaData.feature_image || '/images/default-user.svg',
+        },
+      ],
+      type: 'website',
+    },
+    authors:
+      metaData?.authors?.map((author) => {
+        return { name: author.name };
+      }) || null,
+  };
 }
 
 export default async function Read({ params }: { params: { slug: string } }) {
