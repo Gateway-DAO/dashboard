@@ -1,11 +1,26 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 
-import { getPosts } from '@/services/server-functions/ghost-client';
+import {
+  getNavigation,
+  getPosts,
+} from '@/services/server-functions/ghost-client';
 
 import { Container, Stack, Box, Typography, Button } from '@mui/material';
 
 import BlogCard from '../components/blog-card';
 import HeroPost from '../components/hero-post';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const Metadata = await getNavigation();
+
+  console.log(Metadata);
+  return {
+    title: Metadata.title,
+    description: Metadata.description,
+    keywords: ['mygateway', 'gateway labs', 'mygateway blogs'],
+  };
+}
 
 export default async function LatestBlogPosts() {
   const posts = await getPosts(5);

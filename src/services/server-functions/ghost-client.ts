@@ -6,6 +6,10 @@ const api = new GhostContentAPI({
   version: 'v5.0',
 });
 
+export async function getNavigation() {
+  return await api.settings.browse();
+}
+
 export async function getPosts(limit: number) {
   return await api.posts
     .browse({
