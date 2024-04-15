@@ -11,8 +11,7 @@ import { Avatar, Button, Divider, Link as MUILink } from '@mui/material';
 import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
 
 import BlogCard from '../components/blog-card';
-
-
+import { ShareButtonFn } from '../components/share-card';
 import './cards.min.css';
 
 function formatDate(date: Date) {
@@ -143,6 +142,10 @@ export default async function Read({ params }: { params: { slug: string } }) {
                   </Typography>
                 </Stack>
               </Stack>
+              <ShareButtonFn
+                title={getPost?.title}
+                description={getPost?.excerpt}
+              />
             </Stack>
           </Stack>
 
@@ -171,10 +174,19 @@ export default async function Read({ params }: { params: { slug: string } }) {
               dangerouslySetInnerHTML={{ __html: getPost?.html as string }}
             ></Box>
             <Stack mt={3} component={'aside'}>
-              <Stack mb={3}>
-                <Typography gutterBottom>Share this post</Typography>
+              <Stack
+                mb={3}
+                direction="row"
+                justifyContent={'space-between'}
+                alignItems={'center'}
+              >
+                <Typography>Share this post</Typography>
+                <ShareButtonFn
+                  title={getPost?.title}
+                  description={getPost?.excerpt}
+                />
               </Stack>
-              <Divider />
+              <Divider sx={{ border: 1 }} />
               <Stack
                 direction={{ xs: 'column', md: 'row' }}
                 alignItems={{ xs: 'center', md: 'flex-start' }}
