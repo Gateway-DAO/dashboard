@@ -1,6 +1,6 @@
 'use client';
 
-import { Children, useRef } from 'react';
+import { useRef } from 'react';
 
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 

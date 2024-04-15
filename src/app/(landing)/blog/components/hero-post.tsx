@@ -37,26 +37,28 @@ export default async function HeroPost() {
 
         <Stack direction={'column'} sx={{ ml: { md: 8 } }}>
           <div>
-            <Button
-              variant="text"
-              size="medium"
-              sx={{
-                width: '20%',
-                mt: 2,
-                '&:hover': {
-                  backgroundColor: '#fff',
-                },
-                bgcolor: '#fff',
-              }}
-            >
-              {posts[0].primary_tag?.name}
-            </Button>
+            {posts[0].primary_tag?.name !== undefined && (
+              <Button
+                variant="text"
+                size="medium"
+                sx={{
+                  width: '20%',
+                  mt: 2,
+                  '&:hover': {
+                    backgroundColor: '#fff',
+                  },
+                  bgcolor: '#fff',
+                }}
+              >
+                {posts[0].primary_tag?.name}
+              </Button>
+            )}
           </div>
           <Typography
             variant="h4"
             fontWeight={700}
             color={'#000'}
-            sx={{ mt: 1.5 }}
+            sx={{ mt: posts[0].primary_tag?.name === undefined ? 3 : 1.5 }}
           >
             {title && title.length > 50
               ? title.substring(0, 60) + '...'

@@ -83,8 +83,6 @@ export default async function Read({ params }: { params: { slug: string } }) {
   const getPost = await getSinglePost(params.slug);
   const latestPost = await getPosts(2);
 
-  console.log(getPost);
-
   return (
     <Container component={'main'} sx={{ py: 5 }}>
       <Container
@@ -231,7 +229,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
           <Typography alignSelf={{ xs: 'flex-start', md: 'self-end' }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.{' '}
           </Typography>
-          <Button variant="outlined" size={'medium'}>
+          <Button variant="outlined" size={'medium'} href={`/blog/all`}>
             View all
           </Button>
         </Stack>
@@ -248,18 +246,16 @@ export default async function Read({ params }: { params: { slug: string } }) {
             },
           }}
         >
-          {latestPost.map((post) => {
-            return (
-              <BlogCard
-                excerpt={post.excerpt as string}
-                feature_image={post.feature_image as string}
-                primary_tag={post.primary_tag?.name as string}
-                title={post.title as string}
-                key={post?.id}
-                slug={post.slug}
-              />
-            );
-          })}
+          {latestPost.map((post, index) => (
+            <BlogCard
+              excerpt={post.excerpt as string}
+              feature_image={post.feature_image as string}
+              primary_tag={post.primary_tag?.name as string}
+              title={post.title as string}
+              key={index}
+              slug={post.slug}
+            />
+          ))}
         </Stack>
       </Stack>
     </Container>

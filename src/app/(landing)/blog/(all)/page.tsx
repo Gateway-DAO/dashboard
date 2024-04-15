@@ -14,7 +14,6 @@ import HeroPost from '../components/hero-post';
 export async function generateMetadata(): Promise<Metadata> {
   const Metadata = await getNavigation();
 
-  console.log(Metadata);
   return {
     title: Metadata.title,
     description: Metadata.description,

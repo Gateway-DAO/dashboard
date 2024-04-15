@@ -32,26 +32,29 @@ export default function BlogCard({
         height={300}
         layout="responsive"
       />
-      <Button
-        variant="text"
-        size="medium"
-        sx={{
-          width: primary_tag?.length < 5 ? '10%' : '20%',
-          mt: 2,
-          '&:hover': {
-            backgroundColor: '#fff',
-          },
-          bgcolor: '#fff',
-        }}
-      >
-        {primary_tag}
-      </Button>
+      {primary_tag !== undefined && (
+        <Button
+          variant="text"
+          size="medium"
+          sx={{
+            width: primary_tag?.length < 5 ? '10%' : '20%',
+            mt: 2,
+            '&:hover': {
+              backgroundColor: '#fff',
+            },
+            bgcolor: '#fff',
+          }}
+        >
+          {primary_tag}
+        </Button>
+      )}
+
       <Typography
         fontWeight={700}
         fontSize={'22px'}
         lineHeight={'28px'}
         color={'#000'}
-        sx={{ mt: 1.5 }}
+        sx={{ mt: primary_tag === undefined ? 8 : 1.5 }}
       >
         {title}
       </Typography>

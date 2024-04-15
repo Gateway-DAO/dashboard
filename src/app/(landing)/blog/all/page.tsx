@@ -1,11 +1,25 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 
-import { getPosts, getAllTags } from '@/services/server-functions/ghost-client';
-import { brandColors } from '@/theme/config/brand';
+import {
+  getPosts,
+  getAllTags,
+  getNavigation,
+} from '@/services/server-functions/ghost-client';
 
 import { Container, Stack, Typography, Button, Box } from '@mui/material';
 
 import BlogCard from '../components/blog-card';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const Metadata = await getNavigation();
+
+  return {
+    title: Metadata.title,
+    description: Metadata.description,
+    keywords: ['mygateway', 'gateway labs', 'mygateway blogs'],
+  };
+}
 
 export default async function AllBlogPosts() {
   const posts = await getPosts(20);
