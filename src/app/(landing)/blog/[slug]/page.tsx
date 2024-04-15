@@ -12,6 +12,7 @@ import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
 
 import BlogCard from '../components/blog-card';
 
+
 import './cards.min.css';
 
 function formatDate(date: Date) {
