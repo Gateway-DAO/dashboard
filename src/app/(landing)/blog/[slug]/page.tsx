@@ -29,7 +29,7 @@ function formatDate(date: Date) {
     if (part.type === 'year') year = part.value;
   }
 
-  return `${day} ${month} ${year}`;
+  return `${month} ${day}, ${year}`;
 }
 
 export async function generateMetadata({
@@ -185,34 +185,6 @@ export default async function Read({ params }: { params: { slug: string } }) {
                 />
               </Stack>
               <Divider sx={{ border: 1 }} />
-              <Stack
-                direction={{ xs: 'column', md: 'row' }}
-                alignItems={{ xs: 'center', md: 'flex-start' }}
-                marginTop={3}
-                justifySelf={'center'}
-                flexDirection={'row'}
-                alignContent={'center'}
-              >
-                <Avatar
-                  alt={getPost?.primary_author?.name || 'Gateway'}
-                  src={
-                    getPost?.primary_author?.profile_image ||
-                    '/images/default-user.svg'
-                  }
-                />
-                <Stack
-                  ml={{ xs: 0, md: 2 }}
-                  mt={{ xs: 1, md: 0 }}
-                  textAlign={{ xs: 'center', md: 'left' }}
-                >
-                  <Typography variant="subtitle2">
-                    {getPost?.primary_author?.name}
-                  </Typography>
-                  <Typography variant="body2">
-                    {getPost?.primary_author?.bio || ''}
-                  </Typography>
-                </Stack>
-              </Stack>
             </Stack>
           </Stack>
         </Stack>

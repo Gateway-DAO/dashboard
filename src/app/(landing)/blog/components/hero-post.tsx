@@ -21,16 +21,16 @@ export default async function HeroPost() {
       }}
     >
       <Stack direction={{ xs: 'column', md: 'row' }}>
-        <Stack alignSelf={'center'}>
+        <Stack alignSelf={'center'} sx={{ width: { md: '130%' } }}>
           <Image
             src={posts[0].feature_image as string}
             alt={posts[0].title as string}
             style={{
-              aspectRatio: '5/3',
+              aspectRatio: '16/9',
               objectFit: 'cover',
             }}
             width={560}
-            height={295}
+            height={300}
             layout="responsive"
           />
         </Stack>

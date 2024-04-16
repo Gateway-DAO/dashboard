@@ -29,7 +29,6 @@ export function objectToParams(object: {
 
 const tweetLink = (props: SocialProps) =>
   `https://twitter.com/intent/tweet${objectToParams({
-    text: props.description,
     url: props.url,
   })}`;
 
@@ -39,7 +38,6 @@ const redditLink = (props: SocialProps) =>
 const facebookLink = (props: SocialProps) =>
   `https://www.facebook.com/sharer/sharer.php${objectToParams({
     u: props.url,
-    quote: props.title,
   })}`;
 
 export function ShareButtonFn({
@@ -62,7 +60,6 @@ export function ShareButtonFn({
 
   return (
     <Stack direction={'row'}>
-      {' '}
       <IconButton component="a" href={tweetLink(data)} target="_blank">
         <Twitter color="primary" />
       </IconButton>
