@@ -13,7 +13,6 @@ export default function Error({
 }) {
   return (
     <Box margin={10}>
-      {' '}
       <DefaultError />
     </Box>
   );

@@ -189,10 +189,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
                 alignItems={'center'}
               >
                 <Typography>Share this post</Typography>
-                <ShareButtonFn
-                  title={getPost?.title}
-                  description={getPost?.excerpt}
-                />
+                <ShareButtonFn title={getPost?.title} />
               </Stack>
               <Divider sx={{ border: 1 }} />
             </Stack>

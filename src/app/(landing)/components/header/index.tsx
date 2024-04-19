@@ -155,6 +155,17 @@ export default function Header() {
           </a>
           <a
             className={styles.mobile_link}
+            href="/blog"
+            onClick={() => setBurgerActive(false)}
+            target="_blank"
+          >
+            <Button variant="text">
+              <span>Blog</span>
+              <ArrowRight2 className={styles.mobile_link_arrow} />
+            </Button>
+          </a>
+          <a
+            className={styles.mobile_link}
             href="/explorer"
             onClick={() => setBurgerActive(false)}
             target="_blank"

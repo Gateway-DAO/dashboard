@@ -7,7 +7,9 @@ const api = new GhostContentAPI({
 });
 
 export async function getNavigation() {
-  return await api.settings.browse();
+  return await api.settings.browse().catch((err) => {
+    throw new Error(err);
+  });
 }
 
 export async function getPosts(limit: number) {
@@ -52,6 +54,6 @@ export async function getSinglePost(postSlug: string) {
       { include: ['tags', 'authors'] }
     )
     .catch((err) => {
-      console.error(err);
+      throw new Error(err);
     });
 }
