@@ -88,7 +88,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
       <Container
         component={'article'}
         sx={{
-          mt: { xs: 2, md: 8 },
+          mt: { xs: 0, md: 8 },
           py: 5,
         }}
       >
@@ -126,10 +126,16 @@ export default async function Read({ params }: { params: { slug: string } }) {
               mt={3}
               display={'flex'}
               justifyContent={'space-between'}
-              flexDirection={'row'}
+              flexDirection={{ xs: 'column', md: 'row' }}
             >
               <Stack alignSelf={'flex-start'} flexDirection={'row'}>
-                <Avatar alt={'Gateway'} src={'/images/default-user.svg'} />
+                <Avatar
+                  alt={'Gateway'}
+                  src={
+                    getPost?.primary_author?.profile_image ??
+                    '/images/default-user.svg'
+                  }
+                />
                 <Stack ml={2}>
                   <Typography variant="subtitle2">
                     {getPost?.primary_author?.name}
@@ -140,23 +146,27 @@ export default async function Read({ params }: { params: { slug: string } }) {
                   </Typography>
                 </Stack>
               </Stack>
-              <ShareButtonFn
-                title={getPost?.title}
-                description={getPost?.excerpt}
-              />
+              <Stack mt={{ md: 0, xs: 2 }} alignSelf={'center'}>
+                <ShareButtonFn title={getPost?.title} />
+              </Stack>
             </Stack>
           </Stack>
 
           <Stack component={'figure'} mt={8}>
-            <Image
-              style={{ alignSelf: 'center' }}
-              width={1152}
-              height={200}
-              className="feature-img"
-              layout="responsive"
-              src={getPost?.feature_image || ''}
-              alt={getPost?.feature_image_alt || 'No image found'}
-            />
+            <Box alignSelf={'center'}>
+              <Image
+                style={{
+                  objectFit: 'cover',
+                  aspectRatio: '16/9',
+                }}
+                width={1152}
+                height={200}
+                className="feature-img"
+                layout="responsive"
+                src={getPost?.feature_image || ''}
+                alt={getPost?.feature_image_alt || 'No image found'}
+              />
+            </Box>
             <Stack
               alignSelf={'center'}
               marginTop={1}
@@ -190,7 +200,6 @@ export default async function Read({ params }: { params: { slug: string } }) {
         </Stack>
       </Container>
       <Stack component={'aside'} mx={{ xs: 1, md: 12 }}>
-        <Typography variant="h4">Trending</Typography>
         <Stack
           direction={{ xs: 'column', md: 'row' }}
           mt={3}
@@ -198,9 +207,8 @@ export default async function Read({ params }: { params: { slug: string } }) {
           justifyContent={'space-between'}
           rowGap={2}
         >
-          <Typography alignSelf={{ xs: 'flex-start', md: 'self-end' }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.{' '}
-          </Typography>
+          <Typography variant="h4">Trending</Typography>
+
           <Button variant="outlined" size={'medium'} href={`/blog/all`}>
             View all
           </Button>

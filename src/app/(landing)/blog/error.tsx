@@ -2,6 +2,8 @@
 
 import DefaultError from '@/components/default-error/default-error';
 
+import { Box } from '@mui/material';
+
 export default function Error({
   error,
   reset,
@@ -9,5 +11,10 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  return <DefaultError />;
+  return (
+    <Box margin={10}>
+      {' '}
+      <DefaultError />
+    </Box>
+  );
 }

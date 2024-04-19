@@ -39,7 +39,7 @@
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.2",
     "@irys/sdk": "^0.0.3",
-    "@mui/icons-material": "^5.14.12",
+    "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.14.12",
     "@mui/material-nextjs": "^5.15.7",
     "@mui/system": "^5.14.12",

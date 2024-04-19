@@ -49,8 +49,8 @@ html {
 
 .kg-image-card {
   border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px; /* Example padding */
+  border-radius: 2px;
+  padding: 2px; /* Example padding */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example box shadow */
   align-content: center;
 }
@@ -58,7 +58,7 @@ html {
 .kg-image-card .kg-image {
   max-width: 100%;
   height: auto;
-  object-fit: contain;
+  object-fit: cover;
   aspect-ratio: 3/2;
 }
 
@@ -71,21 +71,21 @@ html {
 
 .kg-image-card figcaption {
   font-style: italic;
-  margin-top: 8px;
+  margin-top: 2px;
   color: #888;
   text-align: center;
 }
 
 .kg-embed-card {
-  padding: 2;
+  padding: 1;
   display: flex;
   align-content: center;
   justify-content: center;
 
-  border-radius: 8px;
+  border-radius: 1px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
 }
 
 .kg-embed-card iframe {
@@ -267,8 +267,9 @@ h6 {
   font-size: 2.2rem;
 }
 
-/* Buttons
-/* ---------------------------------------------------------- */
+figcaption {
+  font-size: 0.8rem;
+}
 
 /* Buttons
 /* ---------------------------------------------------------- */
