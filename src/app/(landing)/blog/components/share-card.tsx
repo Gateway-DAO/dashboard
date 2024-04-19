@@ -36,7 +36,7 @@ const tweetLink = (props: SocialProps) =>
 const redditLink = (props: SocialProps) =>
   `https://reddit.com/submit${objectToParams(props)}`;
 
-const linkdlinLink = (props: SocialProps) =>
+const linkedinLink = (props: SocialProps) =>
   `http://www.linkedin.com/shareArticle${objectToParams({
     mini: true,
     url: props?.url,
@@ -97,7 +97,7 @@ export function ShareButtonFn({
       </IconButton>
       <IconButton
         component="a"
-        href={linkdlinLink(data)}
+        href={linkedinLink(data)}
         sx={{ backgroundColor: '#F9F0FF' }}
         target="_blank"
       >
