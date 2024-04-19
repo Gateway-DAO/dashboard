@@ -88,7 +88,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
       <Container
         component={'article'}
         sx={{
-          mt: { xs: 0, md: 8 },
+          mt: { xs: 2, md: 8 },
           py: 5,
         }}
       >
@@ -118,9 +118,6 @@ export default async function Read({ params }: { params: { slug: string } }) {
             )}
             <Typography mt={1} fontWeight={700} variant="h3" gutterBottom>
               {getPost?.title}
-            </Typography>
-            <Typography mt={1} variant="h6" fontWeight={400} gutterBottom>
-              {getPost?.excerpt}
             </Typography>
             <Stack
               mt={3}
@@ -156,13 +153,12 @@ export default async function Read({ params }: { params: { slug: string } }) {
             <Box alignSelf={'center'}>
               <Image
                 style={{
-                  objectFit: 'cover',
+                  objectFit: 'contain',
                   aspectRatio: '16/9',
                 }}
                 width={1152}
                 height={200}
                 className="feature-img"
-                layout="responsive"
                 src={getPost?.feature_image || ''}
                 alt={getPost?.feature_image_alt || 'No image found'}
               />
