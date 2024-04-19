@@ -18,7 +18,7 @@ export const pda = {
   shared_with: {
     shared_with: 'Shared with',
     verifier: 'Verifier',
-    data_proof_id: 'Data proof ID',
+    data_proof_id: 'Shared Data ID',
   },
   activities: {
     issued: 'PDA issued',
@@ -53,7 +53,7 @@ export const pda = {
 export const pdas = {
   empty: 'No data assets yet',
   load_more: 'load more',
-  my_data_assets: 'Data Assets',
+  my_data_assets: 'My Data',
   data_asset: 'Data asset',
   recipient: 'Recipient',
   status: 'Status',

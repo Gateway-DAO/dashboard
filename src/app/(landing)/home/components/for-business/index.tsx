@@ -97,7 +97,7 @@ export default function ForBusiness() {
                 {item.text}
               </p>
 
-              <a className={styles.link} href={item.href}></a>
+              <a className={styles.link} href={item.href} target='_blank'></a>
             </div>
           ))}
         </div>

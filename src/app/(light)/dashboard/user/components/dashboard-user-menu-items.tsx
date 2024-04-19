@@ -5,6 +5,7 @@ import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
 import DataRequestTemplateOutlinedIcon from '@/components/icons/data-request-template-outlined';
 import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
 import routes from '@/constants/routes';
+import { isSandbox } from '@/utils/env';
 
 import { ExploreOutlined, HomeOutlined } from '@mui/icons-material';
 
@@ -20,7 +21,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     navbar: true,
   },
   {
-    name: 'Data Assets',
+    name: 'My Data',
     href: routes.dashboard.user.receivedAssets,
     activeHrefs: [
       routes.dashboard.user.receivedAssets,
@@ -41,9 +42,10 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     ],
     icon: DataRequestOutlinedIcon,
     navbar: true,
+    hide: !isSandbox,
   },
   {
-    name: 'Data Proofs',
+    name: 'Shared Data',
     href: routes.dashboard.user.receivedProofs,
     activeHrefs: [
       routes.dashboard.user.receivedProofs,
@@ -51,12 +53,14 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboard.user.proof(''),
     ],
     icon: DataProofOutlinedIcon,
+    hide: !isSandbox,
   },
   {
     name: 'Data Models',
     href: routes.dashboard.user.myDataModels,
     activeHrefs: [routes.dashboard.user.myDataModels],
     icon: DataModelOutlinedIcon,
+    hide: !isSandbox,
   },
   {
     name: 'Request Templates',
@@ -66,6 +70,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboard.user.networkRequestTemplates,
     ],
     icon: DataRequestTemplateOutlinedIcon,
+    hide: !isSandbox,
   },
   {
     name: 'Explorer',
@@ -74,6 +79,6 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     icon: ExploreOutlined,
     externalLink: true,
   },
-];
+].filter((item) => !item.hide);
 
 export default dashboardUserMenuItems;

@@ -5,7 +5,7 @@ import { PropsWithChildren, ReactNode } from 'react';
 
 import { sandboxAlert } from '@/locale/en/alert-messages';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
-import { currentEnv } from '@/utils/env';
+import { isSandbox } from '@/utils/env';
 
 import { Box, Chip, Tooltip } from '@mui/material';
 import { Stack } from '@mui/system';
@@ -26,7 +26,6 @@ export default function DashboardLayout({
   secondMenuItems,
   mobileMenuItems,
 }: PropsWithChildren<Props>) {
-  const testnet = currentEnv === 'testnet';
   const pathname = usePathname();
   const isNotWalletPage = !pathname.includes('wallet');
 
@@ -48,7 +47,7 @@ export default function DashboardLayout({
           }}
         >
           <Logo />
-          {testnet && (
+          {isSandbox && (
             <Tooltip title={sandboxAlert.tooltip} placement="right" arrow>
               <Chip
                 color="warning"
@@ -80,7 +79,7 @@ export default function DashboardLayout({
           overflow: 'hidden',
         }}
       >
-        {testnet && isNotWalletPage && <SandboxAlert />}
+        {isSandbox && isNotWalletPage && <SandboxAlert />}
         {children}
       </Box>
       {mobileMenuItems}

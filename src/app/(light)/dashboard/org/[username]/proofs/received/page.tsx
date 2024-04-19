@@ -13,7 +13,7 @@ import OrganizationProofsReceivedTable from './components/org-proofs-received-ta
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Received Data Proofs - Gateway Network',
+    title: 'Shared Data with the Org - Gateway Network',
   };
 }
 

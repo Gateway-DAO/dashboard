@@ -20,7 +20,7 @@ export default function WalletHero(): JSX.Element {
     useWalletStore((state) => state);
   const [showAlert, toggleAlert] = useState(false);
   const storageKey = 'testnet-wallet-disclaimer';
-  const testnet = currentEnv === 'testnet' || 'development';
+  const testnet = currentEnv === 'testnet' || currentEnv === 'development';
   const { isLoading, myWallet } = useMyWallet();
 
   let hasSeenTestnetDisclaimer: string | null;

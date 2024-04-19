@@ -57,7 +57,7 @@ export const home = {
     {
       icon: DataAssetIcon,
       heading: 'Manage',
-      title: 'Check Your Data Proofs',
+      title: 'Check Your Shared Datas',
       subtitle:
         'Review what data assets you have shared, to who, and if you want to remove access.',
       btn_text: 'View All',
