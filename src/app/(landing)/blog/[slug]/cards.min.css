@@ -50,16 +50,20 @@ html {
 .kg-image-card {
   border: 1px solid #ccc;
   border-radius: 2px;
-  padding: 2px; /* Example padding */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example box shadow */
+  padding: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-content: center;
 }
 
 .kg-image-card .kg-image {
   max-width: 100%;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
   aspect-ratio: 3/2;
+  align-self: center;
 }
 
 .feature-img {
