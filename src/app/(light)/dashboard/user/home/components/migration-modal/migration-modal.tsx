@@ -6,6 +6,8 @@ import ModalRight from '@/components/modal/modal-right/modal-right';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { Socket, io } from 'socket.io-client';
 
+import { Box } from '@mui/material';
+
 import { MigrationTarget, useMigrationModal } from './state';
 import InitialStep from './steps/initial/initial-step';
 import MigrationProgressStep from './steps/migration-progress/migration-progress';
@@ -97,20 +99,26 @@ export default function MigrationModal() {
 
   return (
     <ModalRight open={state.status !== 'closed'} onClose={onClose}>
-      {state.status === 'start' && (
-        <InitialStep onAccept={onStartMigration} onClose={onClose} />
-      )}
-      {state.status === 'qr' && (
-        <QrStep sessionId={socketSessionId} onClose={onClose} onBack={onBack} />
-      )}
-      {(state.status === 'started-migration' ||
-        state.status === 'finished-migration') && (
-        <MigrationProgressStep
-          isSuccess={state.status === 'finished-migration'}
-          target={state.target!}
-          onClose={onClose}
-        />
-      )}
+      <Box pb={4}>
+        {state.status === 'start' && (
+          <InitialStep onAccept={onStartMigration} onClose={onClose} />
+        )}
+        {state.status === 'qr' && (
+          <QrStep
+            sessionId={socketSessionId}
+            onClose={onClose}
+            onBack={onBack}
+          />
+        )}
+        {(state.status === 'started-migration' ||
+          state.status === 'finished-migration') && (
+          <MigrationProgressStep
+            isSuccess={state.status === 'finished-migration'}
+            target={state.target!}
+            onClose={onClose}
+          />
+        )}
+      </Box>
     </ModalRight>
   );
 }
