@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
+import { currentEnv } from '@/utils/env';
 import DOMPurify from 'isomorphic-dompurify';
 
 import Main from './components/Main';
@@ -21,6 +22,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const env = currentEnv;
+  const isTesnetOrProd = env === 'testnet' || env === 'production';
+  const hotjarScript = DOMPurify.sanitize(`
+  (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:3399024,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+  })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  `);
+
   const gaLandingScript = DOMPurify.sanitize(`
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -30,6 +44,15 @@ export default function RootLayout({
 `);
   return (
     <html lang="en" className="lenis lenis-smooth">
+      {isTesnetOrProd && (
+        <Script
+          id="hotjar"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: hotjarScript,
+          }}
+        />
+      )}
       {/* <!-- Google tag (gtag.js) --> */}
       {process.env.NEXT_PUBLIC_GTM_TAG && (
         <>
