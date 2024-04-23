@@ -1,5 +1,5 @@
+export const dynamic = 'force-static';
 export const revalidate = 1200;
-
 
 import { Metadata } from 'next';
 import Image from 'next/image';
