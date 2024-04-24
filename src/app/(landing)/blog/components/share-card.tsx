@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import { AiOutlineLink } from 'react-icons/ai';
 import { BiLogoLinkedinSquare } from 'react-icons/bi';
 
@@ -49,17 +47,16 @@ const linkedinLink = (props: SocialProps) =>
 
 export function ShareButtonFn({
   title = 'myGateway_xyz',
-  url,
+  url = window?.location?.href,
   description = 'check out this latest blog from gateway',
 }: SocialProps) {
-  const [surl, setSURL] = useState(url ?? window?.location?.href);
-  const data = { title, surl, description };
+  const data = { title, url, description };
   const onShare = () => {
     try {
       if (navigator?.share && navigator.canShare(data)) {
         navigator.share(data);
       } else {
-        navigator.clipboard.writeText(data.surl);
+        navigator.clipboard.writeText(data.url);
       }
     } catch (e) {
       console.error(e);
