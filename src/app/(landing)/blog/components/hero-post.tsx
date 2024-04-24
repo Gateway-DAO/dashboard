@@ -28,6 +28,7 @@ export default async function HeroPost() {
             style={{
               aspectRatio: '16/9',
               objectFit: 'cover',
+              borderRadius: '8px',
             }}
             width={560}
             height={300}
