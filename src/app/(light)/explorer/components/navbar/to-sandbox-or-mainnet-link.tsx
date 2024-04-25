@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 
 import externalLinks from '@/constants/externalLinks';
 import { common } from '@/locale/en/common';
-import { currentEnv } from '@/utils/env';
+import { currentEnv, isSandbox } from '@/utils/env';
 
 import { Button } from '@mui/material';
 
@@ -25,7 +25,7 @@ export default function ToSandboxOrMainnetLink() {
           variant="outlined"
           href={`${externalLinks.gateway}${pathname}`}
         >
-          {common.general.mainnet}
+          {isSandbox ? common.general.testnet : common.general.mainnet}
         </Button>
       )}
     </>
