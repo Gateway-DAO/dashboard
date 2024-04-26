@@ -25,7 +25,7 @@ export default function ToSandboxOrMainnetLink() {
           variant="outlined"
           href={`${externalLinks.gateway}${pathname}`}
         >
-          {isSandbox ? common.general.testnet : common.general.mainnet}
+          {isSandbox ? common.general.sandbox : common.general.testnet}
         </Button>
       )}
     </>
