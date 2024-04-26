@@ -39,84 +39,81 @@ export default function Cta() {
   const wordsRef = useRef<HTMLSpanElement[]>([]);
   const titleLineRef = useRef<HTMLSpanElement[] | null[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
+  /*
+    useEffect(() => {
+      if (!textRef.current || !buttonRef.current) return;
 
-  useEffect(() => {
-    if (!textRef.current || !buttonRef.current) return;
+      const spans = splitElementByBrTag(textRef.current);
+      spans.forEach((span) => {
+        const word = spliWordsBySpan(span);
+        wordsRef.current.push(...word);
+      });
 
-    const spans = splitElementByBrTag(textRef.current);
-    spans.forEach((span) => {
-      const word = spliWordsBySpan(span);
-      wordsRef.current.push(...word);
-    });
-
-    gsap.set(titleLineRef.current, { yPercent: 100 });
-    gsap.set([buttonRef.current, wordsRef.current], { autoAlpha: 0 });
-  }, []);
-
-  const handleInview = (inView: boolean) => {
-    if (!titleLineRef?.current?.length || !wordsRef?.current?.length || !buttonRef.current) return;
-    gsap.killTweensOf([
-      titleLineRef.current,
-      wordsRef.current,
-      buttonRef.current,
-    ]);
-    if (inView) {
-      const tl = gsap.timeline();
-      tl.to(titleLineRef.current, {
-        yPercent: 0,
-        duration: 1.5,
-        stagger: 0.25,
-        ease: 'power3.out',
-      })
-        .to(
-          wordsRef.current,
-          { autoAlpha: 1, duration: 1, stagger: 0.03 },
-          '-=1.3'
-        )
-        .to(buttonRef.current, { autoAlpha: 1, duration: 1 }, 1.8);
-    } else {
       gsap.set(titleLineRef.current, { yPercent: 100 });
       gsap.set([buttonRef.current, wordsRef.current], { autoAlpha: 0 });
-    }
-  };
+    }, []);
+
+    const handleInview = (inView: boolean) => {
+      if (!titleLineRef?.current?.length || !wordsRef?.current?.length || !buttonRef.current) return;
+      gsap.killTweensOf([
+        titleLineRef.current,
+        wordsRef.current,
+        buttonRef.current,
+      ]);
+      if (inView) {
+        const tl = gsap.timeline();
+        tl.to(titleLineRef.current, {
+          yPercent: 0,
+          duration: 1.5,
+          stagger: 0.25,
+          ease: 'power3.out',
+        })
+          .to(
+            wordsRef.current,
+            { autoAlpha: 1, duration: 1, stagger: 0.03 },
+            '-=1.3'
+          )
+          .to(buttonRef.current, { autoAlpha: 1, duration: 1 }, 1.8);
+      } else {
+        gsap.set(titleLineRef.current, { yPercent: 100 });
+        gsap.set([buttonRef.current, wordsRef.current], { autoAlpha: 0 });
+      }
+    }; */
 
   useHeaderVariantDetection(sectionRef, 'light');
 
   return (
     <section className={styles.element} ref={sectionRef}>
       <Wrapper>
-        <InView onChange={handleInview}>
-          <h2 className={styles.title}>
-            <span className={styles.title_line}>
-              <span ref={(ref) => (titleLineRef.current[0] = ref)}>
-                Build the User Sovereign
-              </span>
+        <h2 className={styles.title}>
+          <span className={styles.title_line}>
+            <span ref={(ref) => (titleLineRef.current[0] = ref)}>
+              Build the User Sovereign
             </span>
-            <span className={styles.title_line}>
-              <span ref={(ref) => (titleLineRef.current[1] = ref)}>
-                Web with us
-              </span>
+          </span>
+          <span className={styles.title_line}>
+            <span ref={(ref) => (titleLineRef.current[1] = ref)}>
+              Web with us
             </span>
-          </h2>
-          <p className={styles.text} ref={textRef}>
-            Unlock the full potential of user autonomy and consent in your app or <br/>
-            service with Gateway’s middleware to drive your business goals.
-          </p>
+          </span>
+        </h2>
+        <p className={styles.text} ref={textRef}>
+          Unlock the full potential of user autonomy and consent in your app or <br />
+          service with Gateway’s middleware to drive your business goals.
+        </p>
 
-          <div className={styles.buttons} ref={buttonRef}>
-            <a className={styles.button_link} href='https://sandbox.mygateway.xyz/' target='_blank'>
-              <Button className={joinClasses(styles.button, styles['button--contained'])} variant='contained'>
-                Start now
-              </Button>
-            </a>
-            <a className={styles.button_link} href='https://sandbox.mygateway.xyz/' target='_blank'>
-              <Button className={styles.button} variant='text'>
-                Get in Touch
-              </Button>
-            </a>
-          </div>
-
-        </InView>
+        <div className={styles.buttons} ref={buttonRef}>
+          <a className={styles.button_link} href='https://sandbox.mygateway.xyz/' target='_blank'>
+            <Button className={joinClasses(styles.button, styles['button--contained'])} variant='contained'>
+              Start now
+            </Button>
+          </a>
+          <a className={styles.button_link} href='https://sandbox.mygateway.xyz/' target='_blank'>
+            <Button className={styles.button} variant='text'>
+              Get in Touch
+            </Button>
+          </a>
+        </div>
       </Wrapper>
     </section>
   )
