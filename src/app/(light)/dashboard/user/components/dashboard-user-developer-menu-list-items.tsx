@@ -33,7 +33,7 @@ export default function DashboardUserDeveloperMenuListItems() {
       ))}
 
       <GTWMenuItem
-        name={isSandbox ? common.general.testnet : common.general.mainnet}
+        name={isSandbox ? common.general.sandbox : common.general.testnet}
         href={`${externalLinks.gateway}${activePath}`}
         icon={MainnetOutlined}
         externalLink={true}

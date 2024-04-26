@@ -114,7 +114,7 @@ export default function Header() {
                 target="_blank"
               >
                 <Button variant="text">
-                  {isSandbox ? 'Testnet' : 'Mainnet'}
+                  {isSandbox ? 'Sandbox' : 'Testnet'}
                 </Button>
               </a>
             </div>
@@ -180,7 +180,7 @@ export default function Header() {
             target="_blank"
           >
             <Button variant="text">
-              <span>{isSandbox ? 'Testnet' : 'Mainnet'}</span>
+              <span>{isSandbox ? 'Sandbox' : 'Testnet'}</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
             </Button>
           </a>
