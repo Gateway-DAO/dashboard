@@ -107,14 +107,14 @@ export default function Header() {
               <a
                 className={styles.link}
                 href={
-                  isSandbox === true
+                  isSandbox
                     ? externalLinks.gateway_sandbox
                     : externalLinks.gateway
                 }
                 target="_blank"
               >
                 <Button variant="text">
-                  {isSandbox === true ? 'Sandbox' : 'Mainnet'}
+                  {isSandbox ? 'Testnet' : 'Mainnet'}
                 </Button>
               </a>
             </div>
@@ -174,15 +174,13 @@ export default function Header() {
           <a
             className={styles.mobile_link}
             href={
-              isSandbox === true
-                ? externalLinks.gateway_sandbox
-                : externalLinks.gateway
+              isSandbox ? externalLinks.gateway_sandbox : externalLinks.gateway
             }
             onClick={() => setBurgerActive(false)}
             target="_blank"
           >
             <Button variant="text">
-              <span>{isSandbox === true ? 'Sandbox' : 'Mainnet'}</span>
+              <span>{isSandbox ? 'Testnet' : 'Mainnet'}</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
             </Button>
           </a>
