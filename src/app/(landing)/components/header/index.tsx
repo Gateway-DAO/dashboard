@@ -1,4 +1,3 @@
-import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import Link from '@/app/(landing)/components/Link';
@@ -10,8 +9,7 @@ import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import externalLinks from '@/constants/externalLinks';
-import routes from '@/constants/routes';
-import { currentEnv } from '@/utils/env';
+import { isSandbox } from '@/utils/env';
 import { useLenis } from '@studio-freight/react-lenis';
 
 import Button from '../button';
@@ -20,7 +18,6 @@ import styles from './header.module.scss';
 import GTWLink from '@/components/gtw-link';
 
 export default function Header() {
-  const path = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const { variant, setVariant } = useHeaderContext();
   const { isMobile, isTablet } = useMobileDetect();
@@ -32,7 +29,6 @@ export default function Header() {
   const previousVariant = useRef<'light' | 'dark' | null>(null);
   // eslint-disable-next-line testing-library/render-result-naming-convention
   const isFirstRender = useIsFirstRender();
-  const isLearnPage = path === routes.learn;
 
   const lenis = useLenis(({ direction, scroll }) => {
     if (direction === 1 && scroll > 0) {
@@ -95,34 +91,37 @@ export default function Header() {
             </Link>
 
             <div className={styles.links}>
-              <a className={styles.link} href="https://docs.mygateway.xyz" target='_blank'>
+              <a
+                className={styles.link}
+                href="https://docs.mygateway.xyz"
+                target="_blank"
+              >
                 <Button variant="text">Docs</Button>
               </a>
-              <a className={styles.link} href="/explorer" target='_blank'>
+              <a className={styles.link} href="/blog">
+                <Button variant="text">Blog</Button>
+              </a>
+              <a className={styles.link} href="/explorer" target="_blank">
                 <Button variant="text">Explorer</Button>
               </a>
               <a
                 className={styles.link}
                 href={
-                  currentEnv === 'production'
+                  isSandbox
                     ? externalLinks.gateway_sandbox
                     : externalLinks.gateway
                 }
-                target='_blank'
+                target="_blank"
               >
                 <Button variant="text">
-                  {currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}
+                  {isSandbox ? 'Sandbox' : 'Testnet'}
                 </Button>
               </a>
             </div>
 
             <div className={styles.buttons_container}>
-
               <Link href="/login">
-                <Button
-                  variant="contained"
-                  className={styles.button_contained}
-                >
+                <Button variant="contained" className={styles.button_contained}>
                   Enter the Gateway
                 </Button>
               </Link>
@@ -143,7 +142,7 @@ export default function Header() {
             className={styles.mobile_link}
             href="https://docs.mygateway.xyz"
             onClick={() => setBurgerActive(false)}
-            target='_blank'
+            target="_blank"
           >
             <Button variant="text">
               <span>Docs</span>
@@ -152,9 +151,20 @@ export default function Header() {
           </a>
           <a
             className={styles.mobile_link}
+            href="/blog"
+            onClick={() => setBurgerActive(false)}
+            target="_blank"
+          >
+            <Button variant="text">
+              <span>Blog</span>
+              <ArrowRight2 className={styles.mobile_link_arrow} />
+            </Button>
+          </a>
+          <a
+            className={styles.mobile_link}
             href="/explorer"
             onClick={() => setBurgerActive(false)}
-            target='_blank'
+            target="_blank"
           >
             <Button variant="text">
               <span>Explorer</span>
@@ -164,17 +174,13 @@ export default function Header() {
           <a
             className={styles.mobile_link}
             href={
-              currentEnv === 'production'
-                ? externalLinks.gateway_sandbox
-                : externalLinks.gateway
+              isSandbox ? externalLinks.gateway_sandbox : externalLinks.gateway
             }
             onClick={() => setBurgerActive(false)}
-            target='_blank'
+            target="_blank"
           >
             <Button variant="text">
-              <span>
-                {currentEnv === 'production' ? 'Sandbox' : 'Mainnet'}
-              </span>
+              <span>{isSandbox ? 'Sandbox' : 'Testnet'}</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
             </Button>
           </a>

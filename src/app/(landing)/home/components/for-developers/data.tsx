@@ -27,7 +27,7 @@ const data = [
 const gateway = new Gateway({
   url: "https://protocol.mygateway.xyz/graphql",
   apiKey: process.env.API_KEY || "YOUR_API_KEY", // keep these protected in env files
-  token: process.env.TOKEN || "Bearer YOUR_TOKEN", // keep these protected in env files
+  token: process.env.TOKEN || "YOUR_TOKEN", // keep these protected in env files
 });
 
 let pda = {
@@ -64,7 +64,7 @@ console.log(createPDA);`
 const gateway = new Gateway({
   url: "https://protocol.mygateway.xyz/graphql",
   apiKey: process.env.API_KEY || "YOUR_API_KEY", // keep these protected in env files
-  token: process.env.TOKEN || "Bearer YOUR_TOKEN", // keep these protected in env files
+  token: process.env.TOKEN || "YOUR_TOKEN", // keep these protected in env files
 });
 
 let pda = {
