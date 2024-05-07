@@ -53,8 +53,18 @@ export default function RootLayout({
         />
       )}
       {/* <!-- Google tag (gtag.js) --> */}
+      {isTesnetOrProd && (
+        <Script
+          id="hotjar"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: hotjarScript,
+          }}
+        />
+      )}
       {process.env.NEXT_PUBLIC_GTM_TAG && (
         <>
+
           <Script
             strategy="afterInteractive"
             id="ga-landing"

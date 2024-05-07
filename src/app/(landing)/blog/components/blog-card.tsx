@@ -32,6 +32,7 @@ export default function BlogCard({
           style={{
             aspectRatio: '16/9',
             objectFit: 'cover',
+            borderRadius: '8px',
           }}
           src={feature_image}
           alt={title}
