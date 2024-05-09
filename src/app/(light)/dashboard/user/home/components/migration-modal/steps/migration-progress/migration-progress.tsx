@@ -3,60 +3,61 @@ import FromToVerticalIcon from '@/components/icons/from-to-vertical';
 import ModalTitle from '@/components/modal/modal-header/modal-header';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
+import { migration, error_status } from '@/locale/en/migration';
 
-import { CheckOutlined, MoreHorizOutlined } from '@mui/icons-material';
+import { CheckOutlined, CloseOutlined, MoreHorizOutlined } from '@mui/icons-material';
 import { Avatar, Button, Chip, Stack, Typography } from '@mui/material';
 
-import { MigrationTarget } from '../../state';
+import { MigrationStatus, MigrationTarget } from '../../types';
+
 
 type Props = {
   target: MigrationTarget;
-  isSuccess: boolean;
+  status: MigrationStatus;
+  error?: string;
   onClose: () => void;
-};
-
-const copy = {
-  title: {
-    success: 'Data migrated successfully',
-    migrating: 'Data migration is in progress',
-  },
-  body: {
-    success:
-      "The data migration was completed successfully and your it's available in you Gateway Wallet app.",
-    migrating:
-      'The migration will be completed soon. When the migration completes, your data will appear in your Gateway Wallet app.',
-  },
-  labels: {
-    old_protocol: 'Old protocol',
-    new_protocol: 'New protocol',
-  },
+  onReset?: () => void;
 };
 
 export default function MigrationProgressStep({
   target,
-  isSuccess,
+  error,
+  status,
   onClose,
+  onReset
 }: Props) {
   const { session } = useGtwSession();
+
+  let IconStatus: JSX.Element;
+  let title: string = migration.title.pending;
+  let subtitle: string = migration.body.pending;
+  switch (status) {
+    case "finished":
+      IconStatus = <Avatar sx={{ bgcolor: 'success.main' }}><CheckOutlined sx={{ color: 'action.active' }} /></Avatar>;
+      title = migration.title.finished;
+      subtitle = migration.body.finished;
+      break;
+    case "error":
+      IconStatus = <Avatar sx={{ bgcolor: 'error.main' }}><CloseOutlined sx={{ color: 'action.active' }} /></Avatar>;
+      title = migration.title.error;
+      subtitle = `${migration.body.error} ${error_status[error ?? error_status.INTERNAL_SERVER_ERROR]}`
+      break;
+    default:
+      IconStatus = <Avatar sx={{ bgcolor: 'secondary.main' }}><MoreHorizOutlined sx={{ color: 'action.active' }} /></Avatar>;
+      break;
+  }
+
 
   return (
     <>
       <ModalTitle onClose={onClose}>
-        {isSuccess ? (
-          <Avatar sx={{ bgcolor: 'success.main' }}>
-            <CheckOutlined sx={{ color: 'action.active' }} />
-          </Avatar>
-        ) : (
-          <Avatar sx={{ bgcolor: 'secondary.main' }}>
-            <MoreHorizOutlined sx={{ color: 'action.active' }} />
-          </Avatar>
-        )}
+        {IconStatus}
       </ModalTitle>
       <Typography variant="h4" mt={5.5}>
-        {isSuccess ? copy.title.success : copy.title.migrating}
+        {title}
       </Typography>
       <Typography mt={2}>
-        {isSuccess ? copy.body.success : copy.body.migrating}
+        {subtitle}
       </Typography>
       <Stack
         mt={4}
@@ -87,7 +88,7 @@ export default function MigrationProgressStep({
               </Typography>
             </Stack>
           </Stack>
-          <Chip label={copy.labels.old_protocol} size="small" />
+          <Chip label={migration.labels.old_protocol} size="small" />
         </Stack>
         <FromToVerticalIcon />
         <Stack
@@ -103,9 +104,12 @@ export default function MigrationProgressStep({
               <Typography fontWeight="bold">@{target.username}</Typography>
             </Stack>
           </Stack>
-          <Chip label={copy.labels.new_protocol} size="small" color="primary" />
+          <Chip label={migration.labels.new_protocol} size="small" color="primary" />
         </Stack>
       </Stack>
+      {<Button variant="contained" color="primary" fullWidth onClick={onReset} sx={{ mb: 1.5 }}>
+        {common.actions.try_again}
+      </Button>}
       <Button variant="outlined" color="primary" fullWidth onClick={onClose}>
         {common.actions.done}
       </Button>

@@ -6,40 +6,42 @@ import {
   useReducer,
 } from 'react';
 
-export type MigrationTarget = { username: string; image?: string };
+import { MigrationTarget, MigrationStatus } from './types';
+
 
 export type MigrationModalState = {
   status:
-    | 'closed'
-    | 'start'
-    | 'qr'
-    | 'started-migration'
-    | 'finished-migration'
-    | 'error';
+  | 'closed'
+  | 'start'
+  | 'qr'
+  | MigrationStatus;
   target?: MigrationTarget;
+  error?: string;
 };
 
 type MigrationModalPayload =
   | {
-      status: 'closed';
-    }
+    status: 'closed';
+  }
   | {
-      status: 'start';
-    }
+    status: 'start';
+  }
   | {
-      status: 'qr';
-    }
+    status: 'qr';
+  }
   | {
-      status: 'started-migration';
-      target: MigrationTarget;
-    }
+    status: 'pending';
+    target: MigrationTarget;
+  }
   | {
-      status: 'finished-migration';
-      target?: MigrationTarget;
-    }
+    status: 'finished';
+    target?: MigrationTarget;
+  }
   | {
-      status: 'error';
-    };
+    status: 'error';
+    target?: MigrationTarget;
+    error?: string;
+  };
 
 const initialState: MigrationModalState = {
   status: 'closed',
@@ -56,15 +58,15 @@ export const migrationModalReducer = (
       return { status: 'start' };
     case 'qr':
       return { status: 'qr' };
-    case 'started-migration':
-      return { status: 'started-migration', target: payload.target };
-    case 'finished-migration':
+    case 'pending':
+      return { status: 'pending', target: payload.target };
+    case 'finished':
       return {
-        status: 'finished-migration',
+        status: 'finished',
         target: payload.target ?? state.target,
       };
     case 'error':
-      return { status: 'error' };
+      return { status: 'error', target: payload.target ?? state.target, error: payload.error };
   }
 };
 
@@ -75,17 +77,17 @@ type MigrationModalContext = {
   onOpenQR: () => void;
   onMigrationStarted: (target: MigrationTarget) => void;
   onMigrationFinished: (target?: MigrationTarget) => void;
-  onError: () => void;
+  onMigrationError: (error: string) => void;
 };
 
 const MigrationModalContext = createContext<MigrationModalContext>({
   state: initialState,
-  onCloseModal: () => {},
-  onOpenModal: () => {},
-  onOpenQR: () => {},
-  onMigrationStarted: () => {},
-  onMigrationFinished: () => {},
-  onError: () => {},
+  onCloseModal: () => { },
+  onOpenModal: () => { },
+  onOpenQR: () => { },
+  onMigrationStarted: () => { },
+  onMigrationFinished: () => { },
+  onMigrationError: (error: string) => { },
 });
 
 export function MigrationModalProvider({ children }: PropsWithChildren) {
@@ -97,10 +99,10 @@ export function MigrationModalProvider({ children }: PropsWithChildren) {
       onOpenModal: () => dispatch({ status: 'start' }),
       onOpenQR: () => dispatch({ status: 'qr' }),
       onMigrationStarted: (target: MigrationTarget) =>
-        dispatch({ status: 'started-migration', target }),
+        dispatch({ status: 'pending', target }),
       onMigrationFinished: (target?: MigrationTarget) =>
-        dispatch({ status: 'finished-migration', target }),
-      onError: () => dispatch({ status: 'error' }),
+        dispatch({ status: 'finished', target }),
+      onMigrationError: (error: string) => dispatch({ status: 'error', error }),
     }),
     []
   );
