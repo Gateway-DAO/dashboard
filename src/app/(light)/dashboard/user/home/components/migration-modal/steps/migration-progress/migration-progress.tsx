@@ -5,11 +5,17 @@ import { useGtwSession } from '@/context/gtw-session-provider';
 import { common } from '@/locale/en/common';
 import { migration, error_status } from '@/locale/en/migration';
 
-import { CheckOutlined, CloseOutlined, MoreHorizOutlined } from '@mui/icons-material';
-import { Avatar, Button, Chip, Stack, Typography } from '@mui/material';
+import { CheckOutlined, CloseOutlined } from '@mui/icons-material';
+import {
+  Avatar,
+  Button,
+  Chip,
+  CircularProgress,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 import { MigrationStatus, MigrationTarget } from '../../types';
-
 
 type Props = {
   target: MigrationTarget;
@@ -24,41 +30,48 @@ export default function MigrationProgressStep({
   error,
   status,
   onClose,
-  onReset
+  onReset,
 }: Props) {
   const { session } = useGtwSession();
 
   let IconStatus: JSX.Element;
   let title: string = migration.title.pending;
   let subtitle: string = migration.body.pending;
+  let closeButton: string = common.actions.close;
   switch (status) {
-    case "finished":
-      IconStatus = <Avatar sx={{ bgcolor: 'success.main' }}><CheckOutlined sx={{ color: 'action.active' }} /></Avatar>;
+    case 'finished':
+      IconStatus = (
+        <Avatar sx={{ bgcolor: 'success.main' }}>
+          <CheckOutlined sx={{ color: 'action.active' }} />
+        </Avatar>
+      );
       title = migration.title.finished;
       subtitle = migration.body.finished;
+      closeButton = common.actions.done;
       break;
-    case "error":
-      IconStatus = <Avatar sx={{ bgcolor: 'error.main' }}><CloseOutlined sx={{ color: 'action.active' }} /></Avatar>;
+    case 'error':
+      IconStatus = (
+        <Avatar sx={{ bgcolor: 'error.main' }}>
+          <CloseOutlined sx={{ color: 'action.active' }} />
+        </Avatar>
+      );
       title = migration.title.error;
-      subtitle = `${migration.body.error} ${error_status[error ?? error_status.INTERNAL_SERVER_ERROR]}`
+      subtitle = `${migration.body.error} ${
+        error_status[error ?? error_status.INTERNAL_SERVER_ERROR]
+      }`;
       break;
     default:
-      IconStatus = <Avatar sx={{ bgcolor: 'secondary.main' }}><MoreHorizOutlined sx={{ color: 'action.active' }} /></Avatar>;
+      IconStatus = <CircularProgress size={38} />;
       break;
   }
 
-
   return (
     <>
-      <ModalTitle onClose={onClose}>
-        {IconStatus}
-      </ModalTitle>
+      <ModalTitle onClose={onClose}>{IconStatus}</ModalTitle>
       <Typography variant="h4" mt={5.5}>
         {title}
       </Typography>
-      <Typography mt={2}>
-        {subtitle}
-      </Typography>
+      <Typography mt={2}>{subtitle}</Typography>
       <Stack
         mt={4}
         mb={5}
@@ -104,14 +117,26 @@ export default function MigrationProgressStep({
               <Typography fontWeight="bold">@{target.username}</Typography>
             </Stack>
           </Stack>
-          <Chip label={migration.labels.new_protocol} size="small" color="primary" />
+          <Chip
+            label={migration.labels.new_protocol}
+            size="small"
+            color="primary"
+          />
         </Stack>
       </Stack>
-      {<Button variant="contained" color="primary" fullWidth onClick={onReset} sx={{ mb: 1.5 }}>
-        {common.actions.try_again}
-      </Button>}
+      {status === 'error' && (
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          onClick={onReset}
+          sx={{ mb: 1.5 }}
+        >
+          {common.actions.try_again}
+        </Button>
+      )}
       <Button variant="outlined" color="primary" fullWidth onClick={onClose}>
-        {common.actions.done}
+        {closeButton}
       </Button>
     </>
   );

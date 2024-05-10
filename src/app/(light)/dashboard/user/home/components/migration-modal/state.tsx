@@ -6,42 +6,37 @@ import {
   useReducer,
 } from 'react';
 
-import { MigrationTarget, MigrationStatus } from './types';
-
+import { MigrationTarget, MigrationStatus, MigrationEvent } from './types';
 
 export type MigrationModalState = {
-  status:
-  | 'closed'
-  | 'start'
-  | 'qr'
-  | MigrationStatus;
+  status: 'closed' | 'start' | 'qr' | MigrationStatus;
   target?: MigrationTarget;
   error?: string;
 };
 
 type MigrationModalPayload =
   | {
-    status: 'closed';
-  }
+      status: 'closed';
+    }
   | {
-    status: 'start';
-  }
+      status: 'start';
+    }
   | {
-    status: 'qr';
-  }
+      status: 'qr';
+    }
   | {
-    status: 'pending';
-    target: MigrationTarget;
-  }
+      status: 'pending';
+      target: MigrationTarget;
+    }
   | {
-    status: 'finished';
-    target?: MigrationTarget;
-  }
+      status: 'finished';
+      target?: MigrationTarget;
+    }
   | {
-    status: 'error';
-    target?: MigrationTarget;
-    error?: string;
-  };
+      status: 'error';
+      target?: MigrationTarget;
+      error?: string;
+    };
 
 const initialState: MigrationModalState = {
   status: 'closed',
@@ -63,10 +58,24 @@ export const migrationModalReducer = (
     case 'finished':
       return {
         status: 'finished',
-        target: payload.target ?? state.target,
+        target: state.target
+          ? {
+              ...state.target,
+              ...payload.target,
+            }
+          : payload.target,
       };
     case 'error':
-      return { status: 'error', target: payload.target ?? state.target, error: payload.error };
+      return {
+        status: 'error',
+        target: state.target
+          ? {
+              ...state.target,
+              ...payload.target,
+            }
+          : payload.target,
+        error: payload.error,
+      };
   }
 };
 
@@ -75,19 +84,15 @@ type MigrationModalContext = {
   onCloseModal: () => void;
   onOpenModal: () => void;
   onOpenQR: () => void;
-  onMigrationStarted: (target: MigrationTarget) => void;
-  onMigrationFinished: (target?: MigrationTarget) => void;
-  onMigrationError: (error: string) => void;
+  onMigrationEvent: (event: MigrationEvent) => void;
 };
 
 const MigrationModalContext = createContext<MigrationModalContext>({
   state: initialState,
-  onCloseModal: () => { },
-  onOpenModal: () => { },
-  onOpenQR: () => { },
-  onMigrationStarted: () => { },
-  onMigrationFinished: () => { },
-  onMigrationError: (error: string) => { },
+  onCloseModal: () => {},
+  onOpenModal: () => {},
+  onOpenQR: () => {},
+  onMigrationEvent: (event: MigrationEvent) => {},
 });
 
 export function MigrationModalProvider({ children }: PropsWithChildren) {
@@ -98,11 +103,7 @@ export function MigrationModalProvider({ children }: PropsWithChildren) {
       onCloseModal: () => dispatch({ status: 'closed' }),
       onOpenModal: () => dispatch({ status: 'start' }),
       onOpenQR: () => dispatch({ status: 'qr' }),
-      onMigrationStarted: (target: MigrationTarget) =>
-        dispatch({ status: 'pending', target }),
-      onMigrationFinished: (target?: MigrationTarget) =>
-        dispatch({ status: 'finished', target }),
-      onMigrationError: (error: string) => dispatch({ status: 'error', error }),
+      onMigrationEvent: (event: MigrationEvent) => dispatch(event),
     }),
     []
   );

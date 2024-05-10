@@ -15,15 +15,8 @@ import QrStep from './steps/qr/qr-step';
 import { MigrationEvent } from './types';
 
 export default function MigrationModal() {
-  const {
-    state,
-    onCloseModal,
-    onOpenModal,
-    onOpenQR,
-    onMigrationStarted,
-    onMigrationFinished,
-    onMigrationError,
-  } = useMigrationModal();
+  const { state, onCloseModal, onOpenModal, onOpenQR, onMigrationEvent } =
+    useMigrationModal();
   const { session } = useGtwSession();
   const [socketSessionId, setSocketSessionId] = useState<string | undefined>();
   const socketRef = useRef<Socket | null>(null);
@@ -48,20 +41,7 @@ export default function MigrationModal() {
     socketRef.current.on('migration', (message) => {
       try {
         const data: MigrationEvent = JSON.parse(message);
-
-        switch (data.status) {
-          case 'pending':
-            onMigrationStarted(data.target);
-            break;
-          case 'finished':
-            onMigrationFinished();
-            break;
-          case 'error':
-            onMigrationError(data.error!);
-            break;
-          default:
-            console.log(data);
-        }
+        onMigrationEvent(data);
       } catch {
         console.error(`error on parse ${message}`);
       }
@@ -113,15 +93,16 @@ export default function MigrationModal() {
           />
         )}
         {(state.status === 'pending' ||
-          state.status === 'finished' || state.status === "error") && (
-            <MigrationProgressStep
-              status={state.status}
-              error={state.error}
-              target={state.target!}
-              onClose={onClose}
-              onReset={onOpenQR}
-            />
-          )}
+          state.status === 'finished' ||
+          state.status === 'error') && (
+          <MigrationProgressStep
+            status={state.status}
+            error={state.error}
+            target={state.target!}
+            onClose={onClose}
+            onReset={onOpenQR}
+          />
+        )}
       </Box>
     </ModalRight>
   );
