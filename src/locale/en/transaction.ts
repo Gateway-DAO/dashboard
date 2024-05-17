@@ -8,10 +8,10 @@ export const transaction = {
   type: 'Type',
   earning: 'Earning',
   cards: {
-    pdas: 'PDAs issued',
+    txs_count: 'Tx Count',
     data_contributors: 'Unique Data Contributors',
-    data_requests: 'Data requests created',
-    fees: 'Fees generated for Data Contributors',
+    pda_count: 'Number of Files Stored ',
+    did_count: 'DIDs Created',
   },
   last_transactions: 'Last transactions',
   home_table: {
