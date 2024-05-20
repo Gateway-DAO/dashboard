@@ -7,6 +7,7 @@ import { migration, error_status } from '@/locale/en/migration';
 
 import { CheckOutlined, CloseOutlined } from '@mui/icons-material';
 import {
+  Alert,
   Avatar,
   Button,
   Chip,
@@ -56,9 +57,7 @@ export default function MigrationProgressStep({
         </Avatar>
       );
       title = migration.title.error;
-      subtitle = `${migration.body.error} ${
-        error_status[error ?? error_status.INTERNAL_SERVER_ERROR]
-      }`;
+      subtitle = migration.body.error;
       break;
     default:
       IconStatus = <CircularProgress size={38} />;
@@ -71,7 +70,12 @@ export default function MigrationProgressStep({
       <Typography variant="h4" mt={5.5}>
         {title}
       </Typography>
-      <Typography mt={2}>{subtitle}</Typography>
+      {status !== 'error' && <Typography mt={2}>{subtitle}</Typography>}
+      {status === 'error' && (
+        <Alert severity="error" sx={{ mt: 2 }}>
+          {error_status[error ?? error_status.INTERNAL_SERVER_ERROR]}
+        </Alert>
+      )}
       <Stack
         mt={4}
         mb={5}
@@ -120,7 +124,11 @@ export default function MigrationProgressStep({
           <Chip
             label={migration.labels.new_protocol}
             size="small"
-            color="primary"
+            color={
+              status === 'error' && error === 'USER_ALREADY_HAS_TARGET'
+                ? 'error'
+                : 'primary'
+            }
           />
         </Stack>
       </Stack>
