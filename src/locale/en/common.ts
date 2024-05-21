@@ -31,6 +31,7 @@ export const common = {
     review: 'Review',
     sandbox: 'Sandbox',
     mainnet: 'MainNet',
+    testnet: 'TestNet',
   },
   chain: {
     EVM: 'Ethereum',

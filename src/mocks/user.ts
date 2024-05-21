@@ -1,6 +1,6 @@
 import { Role, User } from '@/services/protocol/types';
 
-export const user_default: User = {
+export const user_default: Partial<User> = {
   id: 'a1030d23-c237-4047-8090-89ba1aac16cf',
   gatewayId: 'joaquim',
   profilePicture: null,
@@ -14,7 +14,6 @@ export const user_default: User = {
   dataModelsExtraCredits: 0,
   dataRequestTemplates: [],
   deletedAt: null,
-  idV3: '...',
   email: null,
   gatewayIdLastupdate: null,
   gatewayIdUpdatedAt: null,

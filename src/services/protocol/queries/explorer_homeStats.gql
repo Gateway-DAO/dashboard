@@ -4,5 +4,9 @@ query explorer_home_stats {
     dataRequests
     uniqueIssuers
     totalEarnings
+    totalUsers
+  }
+  getTransactionsExplorerStats {
+    totalTransactions
   }
 }

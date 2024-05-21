@@ -6,7 +6,7 @@ import MainnetOutlined from '@/components/icons/mainnet-outlined';
 import GTWMenuItem from '@/components/menu-item/menu-item';
 import externalLinks from '@/constants/externalLinks';
 import { common } from '@/locale/en/common';
-import { currentEnv } from '@/utils/env';
+import { currentEnv, isSandbox } from '@/utils/env';
 
 import { Typography } from '@mui/material';
 
@@ -33,7 +33,7 @@ export default function DashboardUserDeveloperMenuListItems() {
       ))}
 
       <GTWMenuItem
-        name="MainNet"
+        name={isSandbox ? common.general.sandbox : common.general.testnet}
         href={`${externalLinks.gateway}${activePath}`}
         icon={MainnetOutlined}
         externalLink={true}
