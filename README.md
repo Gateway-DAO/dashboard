@@ -1,6 +1,6 @@
 ![Gateway Network - Web3 Private Data Protocol](/public/social.png)
 
-<a href="https://github.com/Gateway-DAO/network/stargazers"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Gateway-DAO/network?style=flat-square"></a>
+<a href="https://github.com/Gateway-DAO/network-ui/stargazers"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Gateway-DAO/network-ui?style=flat-square"></a>
 <a href="https://discord.gg/tgt3KjcHGs"><img alt="Discord" src="https://img.shields.io/discord/898513755456036925?style=flat-square&label=discord"></a>
 
 # 🚪 Gateway Network - Source code

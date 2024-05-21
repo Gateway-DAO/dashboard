@@ -179,6 +179,9 @@ importers:
       react-intersection-observer:
         specifier: ^9.5.2
         version: 9.5.2(react@18.2.0)
+      react-qr-code:
+        specifier: ^2.0.12
+        version: 2.0.13(react@18.2.0)
       react-slick:
         specifier: ^0.29.0
         version: 0.29.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -194,6 +197,9 @@ importers:
       slick-carousel:
         specifier: ^1.8.1
         version: 1.8.1(jquery@3.7.1)
+      socket.io-client:
+        specifier: ^4.7.4
+        version: 4.7.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       title-case:
         specifier: ^4.1.2
         version: 4.1.2
@@ -10961,6 +10967,15 @@ packages:
     hasBin: true
     peerDependencies:
       react: 18.2.0
+
+  react-qr-code@2.0.13:
+    resolution: {integrity: sha512-mq2fpTSlYLwnLsbSjJRwxggFcxzmksfm7pCMe3cnzRinJSaR8Iy9/lzhsfaLEQL7UlRbucl9KZgKTOdzM5QY0w==}
+    peerDependencies:
+      react: ^16.x || ^17.x || ^18.x || ^19.x
+      react-native-svg: '*'
+    peerDependenciesMeta:
+      react-native-svg:
+        optional: true
 
   react-qr-reader@2.2.1:
     resolution: {integrity: sha512-EL5JEj53u2yAOgtpAKAVBzD/SiKWn0Bl7AZy6ZrSf1lub7xHwtaXe6XSx36Wbhl1VMGmvmrwYMRwO1aSCT2fwA==}
@@ -28620,6 +28635,12 @@ snapshots:
       - encoding
       - supports-color
       - utf-8-validate
+
+  react-qr-code@2.0.13(react@18.2.0):
+    dependencies:
+      prop-types: 15.8.1
+      qr.js: 0.0.0
+      react: 18.2.0
 
   react-qr-reader@2.2.1(react-dom@16.13.1(react@16.13.1))(react@16.13.1):
     dependencies:

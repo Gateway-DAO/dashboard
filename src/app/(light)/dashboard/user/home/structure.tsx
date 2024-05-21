@@ -9,6 +9,7 @@ import HomeBanner from '../../components/home/home-banner';
 import HomeCard from '../../components/home/home-card';
 import HomeInstructionCard from '../../components/home/home-instruction-card';
 import HomeTemplate from '../../components/home/home-template';
+import MigrationCard from './components/migration-modal/migration-card';
 
 export const metadata: Metadata = {
   title: `The Private Data Asset Network  - Gateway Network`,
@@ -24,9 +25,14 @@ export default function HomeStructure({ username }: { username: string }) {
     <HomeTemplate
       username={username}
       banner={<HomeBanner {...banner} />}
-      cards={cards.map((details, index: number) => (
-        <HomeCard {...details} key={index} />
-      ))}
+      cards={
+        <>
+          {cards.map((details, index: number) => (
+            <HomeCard {...details} key={index} />
+          ))}
+          {!isSandbox && <MigrationCard />}
+        </>
+      }
       instructions={home.instrunction_banner.map((details, index: number) => (
         <HomeInstructionCard
           title={details.title}

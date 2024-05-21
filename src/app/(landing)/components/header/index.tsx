@@ -8,6 +8,7 @@ import { useHeaderContext } from '@/app/(landing)/contexts/header-context';
 import { useIsFirstRender } from '@/app/(landing)/hooks/use-is-first-render';
 import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
+import GTWLink from '@/components/gtw-link';
 import externalLinks from '@/constants/externalLinks';
 import { isSandbox } from '@/utils/env';
 import { useLenis } from '@studio-freight/react-lenis';
@@ -15,7 +16,6 @@ import { useLenis } from '@studio-freight/react-lenis';
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
 import styles from './header.module.scss';
-import GTWLink from '@/components/gtw-link';
 
 export default function Header() {
   const navRef = useRef<HTMLElement>(null);
