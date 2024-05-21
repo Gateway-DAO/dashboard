@@ -12,13 +12,15 @@ export default function ToSandboxOrMainnetLink() {
   return (
     <>
       {currentEnv === 'production' ? (
-        <Button
-          component={Link}
-          variant="outlined"
-          href={`${externalLinks.gateway_sandbox}${pathname}`}
-        >
-          {common.general.sandbox}
-        </Button>
+        <>
+          {/* <Button
+            component={Link}
+            variant="outlined"
+            href={`${externalLinks.gateway_sandbox}${pathname}`}
+          >
+            {common.general.sandbox}
+          </Button> */}
+        </>
       ) : (
         <Button
           component={Link}
