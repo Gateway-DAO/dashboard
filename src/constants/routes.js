@@ -3,7 +3,8 @@ const dashboardOrg = '/dashboard/org';
 const explorer = '/explorer';
 const routes = {
   home: '/',
-  auth: '/login',
+  login: '/login',
+  signUp: '/sign-up',
   learn: '/learn',
   build: '/build',
   dashboard: {

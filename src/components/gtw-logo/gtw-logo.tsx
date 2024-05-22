@@ -6,9 +6,10 @@ import GatewaySquaredIcon from '../icons/gateway-squared';
 
 type Props = {
   theme?: 'light' | 'dark';
+  isHeader?: boolean;
 };
 
-export default function GTWLogo({ theme = 'light' }: Props) {
+export default function GTWLogo({ theme = 'light', isHeader = true }: Props) {
   return (
     <>
       <GatewaySquaredIcon
@@ -20,7 +21,7 @@ export default function GTWLogo({ theme = 'light' }: Props) {
         }
       />
       <Typography
-        component="h1"
+        {...(isHeader && { component: 'h1' })}
         ml={1}
         color={theme === 'light' ? 'common.black' : 'common.white'}
         fontWeight="bold"

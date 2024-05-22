@@ -45,6 +45,6 @@ export const nextAuthConfig: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: routes.auth,
+    signIn: routes.login,
   },
 };

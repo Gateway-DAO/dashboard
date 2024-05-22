@@ -16,7 +16,7 @@ const typography: TypographyOptions = {
     fontWeight: 'normal',
   },
   h2: {
-    fontWeight: 'normal',
+    fontWeight: 'lighter',
   },
   h3: {
     fontWeight: 'normal',

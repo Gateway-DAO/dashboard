@@ -117,3 +117,16 @@ export const auth = {
     },
   },
 };
+
+export const newAuth = {
+  login: {
+    title: 'Scan to login',
+    description:
+      'Tap the Scan icon on Gateway Wallet app to scan the QR code below.',
+  },
+  signUp: {
+    title: 'Download the Gateway Wallet to sign up',
+    description:
+      'Scan the QR code to download the app, create your Gateway ID and then log in to the dashboard.',
+  },
+};

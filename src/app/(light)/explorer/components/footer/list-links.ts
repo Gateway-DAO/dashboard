@@ -54,7 +54,7 @@ export const listLinks = [
   },
   {
     title: 'Dashboard',
-    href: routes.auth,
+    href: routes.login,
   },
   {
     title: currentEnv === 'production' ? 'Sandbox' : 'MainNet',

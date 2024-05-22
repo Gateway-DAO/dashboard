@@ -7,7 +7,7 @@ const authenticatedMiddleware = withAuth({
     authorized: ({ token }) => !!token,
   },
   pages: {
-    signIn: routes.auth,
+    signIn: routes.login,
   },
 });
 

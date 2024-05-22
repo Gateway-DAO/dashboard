@@ -14,7 +14,7 @@ export function ConnectNow() {
         alignItems: 'flex-start',
       }}
     >
-      <Link passHref href={routes.auth}>
+      <Link passHref href={routes.login}>
         <LoadingButton variant="outlined">
           {common.actions.connect_now}
         </LoadingButton>

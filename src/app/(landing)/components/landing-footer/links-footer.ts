@@ -41,7 +41,7 @@ export const linksList: { title: string; href: string; target: string }[] = [
   },
   {
     title: 'Dashboard',
-    href: routes.auth,
+    href: routes.login,
     target: '_blank',
   },
   {
