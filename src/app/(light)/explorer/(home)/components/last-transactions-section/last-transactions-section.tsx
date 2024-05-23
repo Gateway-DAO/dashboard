@@ -17,8 +17,8 @@ export default function LastTransactionsSection() {
     queryFn: () => apiPublic.explorer_home_stats(),
     select: (data: Explorer_Home_StatsQuery) => {
       return {
+        transactionsCount: data.transactionsCount,
         ...data.getExplorerStats,
-        ...data.getTransactionsExplorerStats,
       };
     },
   });
@@ -41,7 +41,7 @@ export default function LastTransactionsSection() {
           <NumberCard
             dark
             label={transaction.cards.txs_count}
-            value={data?.totalTransactions as number}
+            value={data?.transactionsCount as number}
             isLoading={isLoading}
           />
           <NumberCard
