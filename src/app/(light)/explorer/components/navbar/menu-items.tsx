@@ -14,7 +14,7 @@ export const explorerMenuItems: GTWMenuItemSettings[] = [
     activeHrefs: [routes.explorer.transactions],
   },
   {
-    name: 'Data models',
+    name: 'Structured Data',
     href: routes.explorer.dataModels,
     activeHrefs: [
       routes.explorer.dataModels,
@@ -23,7 +23,7 @@ export const explorerMenuItems: GTWMenuItemSettings[] = [
     ],
   },
   {
-    name: 'Data request templates',
+    name: 'Request Data',
     href: routes.explorer.requestTemplates,
     activeHrefs: [
       routes.explorer.requestTemplates,
