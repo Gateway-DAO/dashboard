@@ -3,9 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo } from 'react';
 
+import GtwQRCode from '@/components/gtw-qr/gtw-qr-code';
+import LoadingQRCode from '@/components/gtw-qr/loading-qr-code';
 import ModalTitle from '@/components/modal/modal-header/modal-header';
 import externalLinks from '@/constants/externalLinks';
-import { useGtwSession } from '@/context/gtw-session-provider';
 import { useToggle } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
 import QRCode from 'react-qr-code';
@@ -23,8 +24,6 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-
-import LoadingQRCode from './loading-qr-code';
 
 type Props = {
   sessionId: string | undefined;
@@ -77,16 +76,7 @@ export default function QrStep({ sessionId, onBack, onClose }: Props) {
         borderColor="divider"
       >
         {!!(sessionId && data?.token) ? (
-          <QRCode
-            size={256}
-            style={{
-              height: 'auto',
-              maxWidth: '100%',
-              width: '100%',
-            }}
-            value={qrData}
-            viewBox={`0 0 256 256`}
-          />
+          <GtwQRCode size={256} value={qrData} />
         ) : (
           <LoadingQRCode />
         )}

@@ -6,7 +6,5 @@ query explorer_home_stats {
     totalEarnings
     totalUsers
   }
-  getTransactionsExplorerStats {
-    totalTransactions
-  }
+  transactionsCount
 }

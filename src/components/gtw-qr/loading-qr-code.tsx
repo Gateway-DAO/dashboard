@@ -1,9 +1,11 @@
 'use client';
-import QRCode from 'react-qr-code';
+import { QRCodeProps } from 'react-qr-code';
 
 import { Box, CircularProgress } from '@mui/material';
 
-export default function LoadingQRCode() {
+import GtwQRCode from './gtw-qr-code';
+
+export default function LoadingQRCode({ size }: Pick<QRCodeProps, 'size'>) {
   return (
     <Box position="relative">
       <Box
@@ -35,16 +37,7 @@ export default function LoadingQRCode() {
           opacity: 0.5,
         }}
       >
-        <QRCode
-          size={256}
-          style={{
-            height: 'auto',
-            maxWidth: '100%',
-            width: '100%',
-          }}
-          value={''}
-          viewBox={`0 0 256 256`}
-        />
+        <GtwQRCode size={size} value={''} />
       </Box>
     </Box>
   );
