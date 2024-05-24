@@ -1,5 +1,3 @@
-import { ReactElement } from 'react';
-
 export const auth = {
   menu: {
     gatewayId: 'Manage Gateway ID',
@@ -130,5 +128,10 @@ export const newAuth = {
     title: 'Download the Gateway Wallet to sign up',
     description:
       'Scan the QR code to download the app, create your Gateway ID and then log in to the dashboard.',
+  },
+  download: {
+    title: 'Download the Gateway Wallet',
+    description:
+      'Download the app from an app store and take ownership of your data.',
   },
 };

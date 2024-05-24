@@ -12,7 +12,7 @@ export default function LoginQrCode() {
     if (socketRef.current) {
       socketRef.current.disconnect();
     }
-    console.log(`${process.env.NEXT_PUBLIC_BFF_API_SERVER}login`);
+
     socketRef.current = io(`${process.env.NEXT_PUBLIC_BFF_API_SERVER}login`, {
       extraHeaders: {
         'connection-type': 'login',
