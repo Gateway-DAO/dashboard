@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { CardSummary } from '@/app/(light)/login/components/card-summary';
+import { CardSummary } from '@/app/(light)/old-login/components/card-summary';
 import Loading from '@/components/loadings/loading/loading';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import { errorMessages } from '@/locale/en/errors';
