@@ -20,7 +20,7 @@ export const explorer_home = {
       target: '_self',
     },
     {
-      title: 'Request Data"',
+      title: 'Request Data',
       description:
         "Leverage data in your user's Encrypted Data Vaults (EDVs) in a secure and private manner.",
       link_text: 'Check it out',
