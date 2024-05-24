@@ -79,6 +79,7 @@ const routes = {
     requestTemplatePlayground: (requestTemplateId) =>
       `${explorer}/request-templates/${requestTemplateId}/playground`,
   },
+  appStore: '/api/wallet-download',
 };
 
 module.exports = routes;

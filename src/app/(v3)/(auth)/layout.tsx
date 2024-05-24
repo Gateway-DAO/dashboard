@@ -18,7 +18,12 @@ export default function AuthLayout({ children }: PropsWithChildren) {
             xs: 3,
             md: 4,
           },
-          gap: 116 / 8,
+          gap: {
+            xs: 0,
+            md: 4,
+            lg: 10,
+            xl: 116 / 8,
+          },
           minHeight: '100%',
           maxWidth: 1920,
           mx: 'auto',

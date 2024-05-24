@@ -78,7 +78,7 @@ export default function QrStep({ sessionId, onBack, onClose }: Props) {
         {!!(sessionId && data?.token) ? (
           <GtwQRCode size={256} value={qrData} />
         ) : (
-          <LoadingQRCode />
+          <LoadingQRCode size={256} />
         )}
       </Box>
       <Typography mt={5} variant="h4">

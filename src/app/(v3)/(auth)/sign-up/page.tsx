@@ -1,13 +1,15 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import GTWLogo from '@/components/gtw-logo/gtw-logo';
+import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
 import { newAuth } from '@/locale/en/auth';
-import QRCode from 'react-qr-code';
 
 import { Box, Stack, Typography, Link as MuiLink } from '@mui/material';
 
 import AuthContentBox from '../components/auth-content-box';
+import SignUpQrCode from './sign-up-qr-code';
 
 export default function SignUpPage() {
   return (
@@ -20,9 +22,44 @@ export default function SignUpPage() {
           {newAuth.signUp.title}
         </Typography>
         <Typography mb={5}>{newAuth.signUp.description}</Typography>
-        <Box p={2} display="inline-block">
-          <QRCode value="https://gateway.io/auth/login" size={380 - 38} />
+        <Box
+          p={2}
+          border="1px solid"
+          borderColor="divider"
+          display="inline-block"
+          borderRadius={1.5}
+          mb={2}
+        >
+          <SignUpQrCode />
         </Box>
+        <Stack direction="row" gap={2}>
+          <Link
+            href={externalLinks.gateway_wallet_ios}
+            style={{
+              display: 'inherit',
+            }}
+          >
+            <Image
+              width={162.12}
+              height={59}
+              src="/images/app-store.svg"
+              alt="App Store"
+            />
+          </Link>
+          <Link
+            href={externalLinks.gateway_wallet_android}
+            style={{
+              display: 'inherit',
+            }}
+          >
+            <Image
+              width={158.3}
+              height={59}
+              src="/images/play-store.svg"
+              alt="App Store"
+            />
+          </Link>
+        </Stack>
       </AuthContentBox>
       <AuthContentBox component={Typography}>
         Already have a Gateway ID?{' '}

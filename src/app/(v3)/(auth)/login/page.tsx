@@ -6,11 +6,12 @@ import GTWLogo from '@/components/gtw-logo/gtw-logo';
 import ScanIcon from '@/components/icons/scan';
 import routes from '@/constants/routes';
 import { newAuth } from '@/locale/en/auth';
-import QRCode from 'react-qr-code';
+import stringReplace from 'react-string-replace';
 
 import { Box, Stack, Typography, Link as MuiLink } from '@mui/material';
 
 import AuthContentBox from '../components/auth-content-box';
+import LoginQrCode from './login-qr-code';
 
 export default function LoginPage() {
   return (
@@ -23,10 +24,19 @@ export default function LoginPage() {
           {newAuth.login.title}
         </Typography>
         <Typography mb={5}>
-          {newAuth.login.description} <ScanIcon sx={{ verticalAlign: 'sub' }} />
+          {stringReplace(newAuth.login.description, /(\$\d)/g, (match) => (
+            <ScanIcon sx={{ verticalAlign: 'sub' }} key={match} />
+          ))}
         </Typography>
-        <Box p={2} display="inline-block">
-          <QRCode value="https://gateway.io/auth/login" size={380 - 38} />
+        <Box
+          p={2}
+          border="1px solid"
+          borderColor="divider"
+          display="inline-block"
+          borderRadius={1.5}
+          width={380}
+        >
+          <LoginQrCode />
         </Box>
       </AuthContentBox>
       <AuthContentBox component={Typography}>
