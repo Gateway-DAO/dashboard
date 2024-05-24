@@ -22,11 +22,15 @@ export default function MigrationModal() {
   const socketRef = useRef<Socket | null>(null);
 
   const initializeSocket = useCallback(() => {
-    socketRef.current = io(process.env.NEXT_PUBLIC_BFF_API_SERVER, {
-      extraHeaders: {
-        authorization: `Bearer ${session?.token}`,
-      },
-    });
+    socketRef.current = io(
+      `${process.env.NEXT_PUBLIC_BFF_API_SERVER}migration`,
+      {
+        extraHeaders: {
+          authorization: `Bearer ${session?.token}`,
+          'connection-type': 'migration',
+        },
+      }
+    );
 
     socketRef.current.on('connect', () => {
       const sessionId = socketRef.current?.id;
