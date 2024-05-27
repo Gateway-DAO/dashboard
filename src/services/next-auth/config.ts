@@ -6,11 +6,10 @@ import jwt from 'jsonwebtoken';
 
 import getMe from './libs/get-me';
 import refreshToken from './libs/refresh-token';
-import credentialEmail from './providers/credential-email';
-import credentialWallet from './providers/credential-wallet';
+import credentialJwt from './providers/credential-jwt';
 
 export const nextAuthConfig: NextAuthOptions = {
-  providers: [credentialEmail, credentialWallet],
+  providers: [credentialJwt],
   session: {
     strategy: 'jwt',
   },
