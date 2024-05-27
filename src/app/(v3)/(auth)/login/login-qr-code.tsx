@@ -24,20 +24,25 @@ export default function LoginQrCode() {
       socketRef.current.disconnect();
     }
 
-    socketRef.current = io(`${process.env.NEXT_PUBLIC_BFF_API_SERVER}login`, {
+    socketRef.current = io(`${process.env.NEXT_PUBLIC_BFF_API_SERVER}user`, {
       extraHeaders: {
         'connection-type': 'login',
       },
     });
 
-    socketRef.current.on('create-pub', (event) => {
+    socketRef.current.on('create-pub', (publicKey: string) => {
       const sessionId = socketRef.current?.id;
       console.log(`[socket ${sessionId}] connected`);
       if (process.env.NODE_ENV !== 'production') {
-        console.log({ type: 'login', sessionId, ...event });
+        console.log({ type: 'login', sessionId, publicKey });
       }
-      setQrCodeData(JSON.stringify({ type: 'login', sessionId, ...event }));
+      setQrCodeData(JSON.stringify({ type: 'login', sessionId, publicKey }));
     });
+
+    socketRef.current.on('login', (event) => {
+      console.log(`[socket] login`, event);
+    });
+
     socketRef.current.on('disconnect', (e) => {
       console.log(`[socket] disconnected`);
       setQrCodeData(undefined);
