@@ -8,7 +8,9 @@ import { Socket, io } from 'socket.io-client';
 
 import { useTheme } from '@mui/system';
 
-export default function LoginQrCode() {
+import { V3MockToken } from './mock';
+
+export default function UpdateQrCode() {
   const socketRef = useRef<Socket | null>(null);
   const [qrCodeData, setQrCodeData] = useState<string | undefined>();
   const theme = useTheme();
@@ -26,7 +28,8 @@ export default function LoginQrCode() {
 
     socketRef.current = io(`${process.env.NEXT_PUBLIC_BFF_API_SERVER}user`, {
       extraHeaders: {
-        'connection-type': 'login',
+        'connection-type': 'update',
+        Authorization: `Bearer ${V3MockToken}`,
       },
     });
 
@@ -34,13 +37,13 @@ export default function LoginQrCode() {
       const sessionId = socketRef.current?.id;
       console.log(`[socket ${sessionId}] connected`);
       if (process.env.NODE_ENV !== 'production') {
-        console.log({ type: 'login', sessionId, publicKey });
+        console.log({ type: 'update', sessionId, publicKey });
       }
-      setQrCodeData(JSON.stringify({ type: 'login', sessionId, publicKey }));
+      setQrCodeData(JSON.stringify({ type: 'update', sessionId, publicKey }));
     });
 
-    socketRef.current.on('login', (event) => {
-      console.log(`[socket] login`, event);
+    socketRef.current.on('update', (event) => {
+      console.log(`[socket] update`, event);
     });
 
     socketRef.current.on('disconnect', (e) => {
