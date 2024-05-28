@@ -3,11 +3,17 @@ import DataOutlinedIcon from '@/components/icons/data-outlined';
 import DataProofOutlinedIcon from '@/components/icons/data-proof-outlined';
 import DataRequestOutlinedIcon from '@/components/icons/data-request-outlined';
 import DataRequestTemplateOutlinedIcon from '@/components/icons/data-request-template-outlined';
+import SharedWithIcon from '@/components/icons/shared-with';
 import { GTWMenuItemSettings } from '@/components/menu-item/menu-item';
 import routes from '@/constants/routes';
 import { isSandbox } from '@/utils/env';
 
-import { ExploreOutlined, HomeOutlined } from '@mui/icons-material';
+import {
+  ExploreOutlined,
+  HistoryOutlined,
+  HomeOutlined,
+  Inventory2Outlined,
+} from '@mui/icons-material';
 
 /**
  * List all menu items of the user dashboard
@@ -31,6 +37,36 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
       routes.dashboard.user.asset(''),
     ],
     icon: DataOutlinedIcon,
+    navbar: true,
+  },
+  {
+    name: 'Shared With me',
+    href: routes.dashboard.user.requests,
+    activeHrefs: [
+      routes.dashboard.user.requests,
+      routes.dashboard.user.request(''),
+    ],
+    icon: SharedWithIcon,
+    navbar: true,
+  },
+  {
+    name: 'Archived data',
+    href: routes.dashboard.user.requests,
+    activeHrefs: [
+      routes.dashboard.user.requests,
+      routes.dashboard.user.request(''),
+    ],
+    icon: Inventory2Outlined,
+    navbar: true,
+  },
+  {
+    name: 'Activity',
+    href: routes.dashboard.user.requests,
+    activeHrefs: [
+      routes.dashboard.user.requests,
+      routes.dashboard.user.request(''),
+    ],
+    icon: HistoryOutlined,
     navbar: true,
   },
   {
