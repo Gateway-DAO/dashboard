@@ -5,24 +5,18 @@ import { PropsWithChildren } from 'react';
 import { OrganizationRole } from '@/services/protocol/types';
 
 export const session: Session = {
-  protocol_id: '12345',
-  refresh_token: '12345',
   token: '12345',
+  privateKey: '12345',
   user: {
     id: '12345',
-    displayName: 'Carl Terry',
-    email: 'carl@terry.com',
-    profilePicture: null,
-    gatewayId: 'carl',
-    authentications: null,
-    gatewayIdLastupdate: null,
+    username: 'carl',
+    usernameLastUpdated: null,
     accesses: [
       {
         organization: {
-          id: '12345',
+          did: '12345',
           name: 'gateway',
           image: '',
-          gatewayId: 'gateway',
           usernameUpdatedAt: '',
           verified: true,
         },

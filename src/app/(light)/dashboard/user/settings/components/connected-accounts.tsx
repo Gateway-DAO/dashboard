@@ -1,53 +1,31 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import dynamic from 'next/dynamic';
-import { useMemo } from 'react';
 
 import Loading from '@/components/loadings/loading/loading';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import { mutations } from '@/constants/queries';
 import { useGtwSession } from '@/context/gtw-session-provider';
-import { PoktProvider } from '@/context/pokt-provider';
-import WalletConnectionProvider from '@/context/wallet-connection-provider';
 import { useDisconnectAlias } from '@/hooks/use-disconnect-alias';
 import { errorMessages } from '@/locale/en/errors';
 import { settings } from '@/locale/en/settings';
-import { AuthType, Exact } from '@/services/protocol/types';
-import { NEGATIVE_CONTAINER_PX } from '@/theme/config/style-tokens';
+import { Exact } from '@/services/protocol/types';
 import { useToggle } from '@react-hookz/web/cjs/useToggle';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
-import { Box, Divider, Typography } from '@mui/material';
-import { Stack } from '@mui/system';
+import { Box, Typography } from '@mui/material';
 
 import AddEmail from './account-sections/add-email/add-email';
 import { DeactivateGatewayId } from './account-sections/deactivate-gateway-id';
-import EmailsSection from './account-sections/emails-section';
-import WalletsSection from './account-sections/wallets-section';
-
-const EvmProvider = dynamic(
-  () => import('../../../../../../context/evm-provider/evm-provider'),
-  {
-    ssr: false,
-  }
-);
-const SolanaProvider = dynamic(
-  () => import('../../../../../../context/solana-provider'),
-  {
-    ssr: false,
-  }
-);
 
 export default function ConnectedAccounts() {
   const { privateApi } = useGtwSession();
-  const { data: session, update, status } = useSession();
+  const { update } = useSession();
   const { enqueueSnackbar } = useSnackbar();
   const [modalAddEmail, setModalAddEmail] = useToggle(false);
   const {
-    handleDisconnectAlias,
     deactivateGatewayId,
     closeModal,
     modalDeactivateGatewayId,
@@ -73,21 +51,6 @@ export default function ConnectedAccounts() {
     onSuccess: update,
   });
 
-  const wallets = useMemo(() => {
-    return (
-      session?.user.authentications?.filter(
-        (a) => a.type === AuthType.Wallet
-      ) ?? []
-    );
-  }, [session]);
-
-  const emails = useMemo(() => {
-    return (
-      session?.user.authentications?.filter((a) => a.type === AuthType.Email) ??
-      []
-    );
-  }, [session]);
-
   return (
     <>
       {isLoading ||
@@ -105,45 +68,6 @@ export default function ConnectedAccounts() {
         <Typography variant="body1" color="text.secondary">
           {settings.connected_accounts.description}
         </Typography>
-        <Stack divider={<Divider sx={{ mx: NEGATIVE_CONTAINER_PX }} />}>
-          <EmailsSection
-            emails={emails}
-            userEmail={session?.user?.email as string}
-            onAddEmail={setModalAddEmail}
-            onUpdateNotificationEmail={(address) =>
-              updateNotificationEmail.mutate({ email: address })
-            }
-            onDisconnect={(address) =>
-              handleDisconnectAlias({ type: AuthType.Email, address })
-            }
-            isLoading={status === 'loading'}
-          />
-          <EvmProvider>
-            <SolanaProvider>
-              <PoktProvider>
-                <WalletConnectionProvider>
-                  <WalletsSection
-                    wallets={wallets}
-                    onDisconnect={(address, chain) =>
-                      handleDisconnectAlias({
-                        type: AuthType.Wallet,
-                        address,
-                        chain,
-                      })
-                    }
-                    isLoading={status === 'loading'}
-                  />
-                </WalletConnectionProvider>
-              </PoktProvider>
-            </SolanaProvider>
-          </EvmProvider>
-
-          {/* <SocialsSection
-            onDisconnect={(type) =>
-              handleDisconnectAlias({ type: type as AuthType })
-            }
-          /> */}
-        </Stack>
         <ModalRight
           open={modalDeactivateGatewayId || modalAddEmail}
           onClose={() => {

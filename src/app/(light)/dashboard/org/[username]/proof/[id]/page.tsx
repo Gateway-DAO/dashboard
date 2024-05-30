@@ -41,7 +41,7 @@ export default async function OrgProofPage({
     <>
       <TopBarContainer>
         <BackButton
-          href={routes.dashboard.org.receivedProofs(organization?.gatewayId)}
+          href={routes.dashboard.org.receivedProofs(organization?.did)}
         />
       </TopBarContainer>
       <ProofItem proof={proof as Proof} />

@@ -53,7 +53,7 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
   const accessess = isOrg
     ? user.accesses?.filter(
         ({ organization: accessOrganization }) =>
-          accessOrganization.id !== organization.id
+          accessOrganization.did !== organization.id
       )
     : user.accesses;
 
@@ -69,18 +69,18 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
     <>
       {accessess?.map(({ organization }) => (
         <MenuItemLink
-          href={routes.dashboard.org.home(organization.gatewayId)}
-          key={organization.id}
+          href={routes.dashboard.org.home(organization.did)}
+          key={organization.did}
           onClick={onClose}
         >
           <ListItemIcon>
             <GTWAvatar
               src={organization.image ?? null}
-              name={organization.image ? organization.name : organization.id}
+              name={organization.image ? organization.name : organization.did}
               hasBorder={!!organization.image}
             />
           </ListItemIcon>
-          <ListItemText secondary={`@${organization.gatewayId}`}>
+          <ListItemText secondary={`@${organization.did}`}>
             {organization.name}
           </ListItemText>
           <Chip

@@ -19,16 +19,16 @@ export default function Username() {
   const { data: session, update } = useSession();
   const { privateApi } = useGtwSession();
 
-  const initialUsername = session!.user.gatewayId!;
+  const initialUsername = session!.user.username!;
 
   const diffUpdateDays = useMemo(() => {
     if (!session) return 0;
-    if (!session.user.gatewayIdLastupdate) return 31;
-    const lastUpdate = dayjs(session.user.gatewayIdLastupdate);
+    if (!session.user.usernameLastUpdated) return 31;
+    const lastUpdate = dayjs(session.user.usernameLastUpdated);
     const now = dayjs();
     const diff = now.diff(lastUpdate, 'day');
     return diff;
-  }, [session?.user.gatewayIdLastupdate]);
+  }, [session?.user.usernameLastUpdated]);
 
   const canUpdateUsername = diffUpdateDays > 30;
 

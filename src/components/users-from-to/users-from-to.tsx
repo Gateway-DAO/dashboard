@@ -41,7 +41,7 @@ export default function UsersFromTo({
           label={fromLabel}
           picture={from.image}
           name={limitCharsCentered(from.name as string, 15)}
-          id={`from-${from.gatewayId}`}
+          id={`from-${from.username}`}
           userId={from.id}
           onClick={() => setTooltipIssuer(true)}
           verified={from?.verified as boolean}
@@ -52,7 +52,7 @@ export default function UsersFromTo({
             userId={from.id}
             name={from.name as string}
             picture={from.image as string}
-            username={from.gatewayId as string}
+            username={from.username as string}
             issuance_date={from?.createdAt as string}
             onClose={() => setTooltipIssuer(false)}
             isOrganization={from.isOrganization as boolean}
@@ -81,7 +81,7 @@ export default function UsersFromTo({
           name={limitCharsCentered(to.name as string, 15)}
           alignRight={isVertical ? false : true}
           userId={to.id as string}
-          id={`to-${to.gatewayId}`}
+          id={`to-${to.username}`}
           onClick={() => setTooltipRecipient(true)}
           active={tooltipRecipient}
         />
@@ -89,7 +89,7 @@ export default function UsersFromTo({
           <TooltipUser
             userId={to.id as string}
             name={to.name as string}
-            username={to.gatewayId}
+            username={to.username}
             picture={to.image as string}
             issuance_date={to.createdAt as string}
             right={isVertical ? false : true}

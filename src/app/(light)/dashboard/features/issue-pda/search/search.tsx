@@ -78,7 +78,7 @@ export default function DataModelsSearch() {
       search,
       organization,
       organization?.gatewayId,
-      session.user.gatewayId,
+      session.user.username,
     ],
     queryFn: ({ pageParam = 0 }) =>
       apiPublic.data_models_list_to_issue({
@@ -97,7 +97,7 @@ export default function DataModelsSearch() {
               type: IdentifierType.GatewayId,
               value: (organization
                 ? organization.gatewayId
-                : session.user.gatewayId) as string,
+                : session.user.username) as string,
             },
           ],
           // issuedCount:

@@ -5,7 +5,7 @@ import { limitCharsCentered } from './string';
 
 export type GatewayProfile = {
   id: string;
-  gatewayId: string;
+  username: string;
   name?: string | null;
   image?: string | null;
   verified?: boolean | null;
@@ -19,7 +19,7 @@ export default function getOrganizationOrUserData(
       User,
       'id' | 'gatewayId' | 'displayName' | 'profilePicture' | 'createdAt'
     >
-  >,
+  > & { username?: string | null },
   organization?:
     | PartialDeep<
         Pick<
@@ -33,7 +33,7 @@ export default function getOrganizationOrUserData(
   if (organization) {
     return {
       id: organization.id!,
-      gatewayId: organization.gatewayId! ?? limitCharsCentered(user.id!, 10),
+      username: organization.gatewayId! ?? limitCharsCentered(user.id!, 10),
       name:
         organization.name ??
         organization.gatewayId ??
@@ -47,9 +47,13 @@ export default function getOrganizationOrUserData(
 
   return {
     id: user.id!,
-    gatewayId: user.gatewayId! ?? limitCharsCentered(user.id!, 10),
+    username:
+      user.username ?? user.gatewayId! ?? limitCharsCentered(user.id!, 10),
     name:
-      user.displayName ?? user.gatewayId ?? limitCharsCentered(user.id!, 10),
+      user.displayName ??
+      user.username ??
+      user.gatewayId ??
+      limitCharsCentered(user.id!, 10),
     image: user.profilePicture,
     createdAt: user.createdAt,
     isOrganization: false,

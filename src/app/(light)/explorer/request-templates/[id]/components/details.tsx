@@ -46,14 +46,14 @@ export default function DataModelDetails({ requestTemplate }: Props) {
         <CardCellContainer direction="row" alignItems="center" gap={2}>
           <GTWAvatar
             src={createdBy.image}
-            name={createdBy.name ?? createdBy.gatewayId}
+            name={createdBy.name ?? createdBy.username}
           />
           <Stack direction="column">
             <Typography variant="caption" color="text.secondary">
               {common.general.created_by}
             </Typography>
             <Typography>
-              <b>{createdBy.name ?? createdBy.gatewayId}</b>
+              <b>{createdBy.name ?? createdBy.username}</b>
             </Typography>
           </Stack>
         </CardCellContainer>

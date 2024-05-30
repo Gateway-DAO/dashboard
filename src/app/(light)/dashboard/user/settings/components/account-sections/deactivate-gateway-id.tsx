@@ -46,7 +46,7 @@ export function DeactivateGatewayId({ onCancel, onConfirm, isLoading }: Props) {
               {settings.connected_accounts.modal_confirm_delete.text2}
             </Typography>
             <Typography>
-              <strong>@{session.user.gatewayId}</strong>{' '}
+              <strong>@{session.user.username}</strong>{' '}
               {settings.connected_accounts.modal_confirm_delete.text3}
             </Typography>
           </Stack>

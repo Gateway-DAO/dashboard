@@ -93,15 +93,11 @@ export default function MigrationProgressStep({
           gap={2}
         >
           <Stack direction="row" gap={2}>
-            <GTWAvatar
-              src={session.user.profilePicture}
-              name={session.protocol_id}
-              alt={session.user.displayName ?? session.user.gatewayId}
-            />
+            <GTWAvatar name={session.user.id} alt={session.user.username} />
             <Stack>
               <Typography variant="caption">From</Typography>
               <Typography fontWeight="bold">
-                @{session.user.gatewayId}
+                @{session.user.username}
               </Typography>
             </Stack>
           </Stack>

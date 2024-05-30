@@ -23,7 +23,7 @@ export default function DataCard({
   bottom,
   ...props
 }: Props & CardProps) {
-  const { image, name, gatewayId } = profile;
+  const { image, name, username: gatewayId } = profile;
 
   return (
     <Card variant="outlined" {...props}>

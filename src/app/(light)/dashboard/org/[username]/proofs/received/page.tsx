@@ -26,12 +26,12 @@ export default async function OrganizationReceivedProofsPage(props: any) {
     await privateApi.received_proofs_by_org({
       take: 5,
       skip: 0,
-      organizationId: organization?.id as string,
+      organizationId: organization?.did as string,
     })
   )?.receivedProofs as PartialDeep<Proof>[];
   const count = (
     await privateApi.countReceivedProofsByOrg({
-      organizationId: organization?.id as string,
+      organizationId: organization?.did as string,
     })
   ).receivedProofsCount;
 

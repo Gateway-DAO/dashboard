@@ -12,7 +12,7 @@ import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { pda } from '@/locale/en/pda';
 import { apiPublic } from '@/services/protocol/api';
-import { User, UserIdentifierType } from '@/services/protocol/types';
+import { UserIdentifierType } from '@/services/protocol/types';
 import { PdaClaim } from '@/services/protocol/types';
 import { getClaimTitle } from '@/utils/get-claim-type';
 import getOrganizationOrUserData from '@/utils/get-organization-or-user-data';
@@ -58,7 +58,7 @@ export default function PreviewContent({
 
   if (!data) return null;
 
-  const from = getOrganizationOrUserData(session.user as User, organization);
+  const from = getOrganizationOrUserData(session.user, organization);
   const to = getOrganizationOrUserData(
     !!userData
       ? userData

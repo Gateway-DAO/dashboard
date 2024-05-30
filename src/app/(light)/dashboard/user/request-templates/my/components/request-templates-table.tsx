@@ -89,7 +89,7 @@ export default function RequestTemplatesTable({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       'my-data-request-templates',
-      session?.user?.gatewayId,
+      session?.user?.username,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 5,
     ],
@@ -97,7 +97,7 @@ export default function RequestTemplatesTable({
       privateApi?.dataRequestTemplatesByUser({
         user: {
           type: UserIdentifierType.GatewayId,
-          value: session?.user?.gatewayId as string,
+          value: session?.user?.username as string,
         },
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,

@@ -25,7 +25,7 @@ export default function DisplayName() {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const initialDisplayName = session?.user.displayName ?? '';
+  const initialDisplayName = '';
 
   const {
     register,
