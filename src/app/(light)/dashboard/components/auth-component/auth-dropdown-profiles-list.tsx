@@ -103,10 +103,10 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
           onClick={onClose}
         >
           <ListItemIcon>
-            <GTWAvatar name={user.id} src={user.profilePicture} />
+            <GTWAvatar name={user.id} />
           </ListItemIcon>
-          <ListItemText secondary={`@${user.gatewayId}`}>
-            {user.gatewayId}
+          <ListItemText secondary={`@${user.username}`}>
+            {user.username}
           </ListItemText>
         </MenuItemLink>
       )}

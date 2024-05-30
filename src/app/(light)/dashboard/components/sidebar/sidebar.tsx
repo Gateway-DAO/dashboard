@@ -57,9 +57,6 @@ export default function Sidebar({
           menuItems={menuItems}
           secondMenuItems={secondMenuItems}
         />
-        <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
-          <WalletWidget id="wallet-button" />
-        </Box>
 
         <AuthComponent id="profile-button" controlId="profile-menu" />
       </Stack>

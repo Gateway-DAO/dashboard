@@ -19,6 +19,7 @@ type Props = {
 
 export default function AuthComponent({ id, controlId }: Props) {
   const { data: session, status } = useSession();
+  console.log(session, status);
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
   const { isOrg, organization } = useOrganization();
 
@@ -68,9 +69,9 @@ export default function AuthComponent({ id, controlId }: Props) {
         ) : (
           <UserOrgInfo
             id={user.id!}
-            image={user.profilePicture}
-            name={user.displayName!}
-            gatewayId={user.gatewayId!}
+            image={null}
+            name={null}
+            gatewayId={user.username!}
           />
         )}
 

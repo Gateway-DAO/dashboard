@@ -15,7 +15,6 @@ import {
 
 import WalletWidget from '../../features/wallet/wallet-widget/wallet-widget';
 import AuthDropdownCurrent from './auth-dropdown-current';
-import AuthDropdownProfilesList from './auth-dropdown-profiles-list';
 
 type Props = {
   onClose: () => void;
@@ -35,7 +34,6 @@ export default function AuthDropdown({ onClose }: Props) {
         <WalletWidget id="wallet-button" />
       </Box>
       <Divider sx={{ my: 1 }} />
-      <AuthDropdownProfilesList onClose={onClose} />
       <MenuItem onClick={onSignOut}>
         <ListItemIcon>
           <LogoutOutlined />

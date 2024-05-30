@@ -1,8 +1,6 @@
-import { SessionUser } from '@/types/user';
+import { api } from '../../protocol-v3/api';
 
-import { api } from '../../protocol/api';
-
-export default async function getMe(token: string): Promise<SessionUser> {
+export default async function getMe(token: string) {
   try {
     const res = await api(token).me();
     const { error } = (res as any) ?? {};
