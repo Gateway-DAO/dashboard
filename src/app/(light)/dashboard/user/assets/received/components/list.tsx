@@ -6,39 +6,113 @@ import { useGtwSession } from '@/context/gtw-session-provider';
 import { Received_PdasQuery } from '@/services/protocol/types';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { Stack } from '@mui/material';
-
+import { Stack, Typography } from '@mui/material';
+import DataOutlinedIcon from '@/components/icons/data-outlined';
 import PDAsList from '../../components/pdas-list';
 import PDAsListContainer from '../../components/pdas-list-container';
+import {
+  DataGrid,
+  GridActionsCellItem,
+  GridColDef,
+  GridRowParams,
+} from '@mui/x-data-grid';
+import { DATE_FORMAT } from '@/constants/date';
+import { pdaTableColumnNames } from '@/locale/en/pda';
+import dayjs from 'dayjs';
+import DownloadIcon from '@mui/icons-material/Download';
+import IosShareIcon from '@mui/icons-material/IosShare';
+import ArchiveIcon from '@mui/icons-material/Archive';
 
 type Props = {
-  pdas: Received_PdasQuery['myPDAs'];
+  pdas: any;
 };
+
+const columns: GridColDef[] = [
+  {
+    field: 'name',
+    headerName: pdaTableColumnNames.name,
+    flex: 1,
+    renderCell: (params) => (
+      <Stack direction={'row'} justifyContent={'space-between'}>
+        {params.row.structured ? <></> : <DataOutlinedIcon />}
+        <Typography
+          variant="body1"
+          sx={{ mx: 2 }}
+          onClick={() => console.log(params)}
+        >
+          {params.row.structured
+            ? params.row.dataAsset?.title
+            : params.row.fileName}
+        </Typography>
+      </Stack>
+    ),
+  },
+  {
+    field: 'uploaded by',
+    headerName: pdaTableColumnNames.uploadedBy,
+    flex: 1,
+    renderCell: (params) => (
+      <Typography variant="body1" sx={{ mx: 2 }}>
+        {params.row.issuer.username}
+      </Typography>
+    ),
+  },
+  {
+    field: 'sharing',
+    flex: 1,
+    headerName: pdaTableColumnNames.sharing,
+    renderCell: (params) => (
+      <Typography variant="body1" fontWeight={700}>
+        -
+      </Typography>
+    ),
+  },
+  {
+    field: 'issuanceDate',
+    headerName: pdaTableColumnNames.lastModified,
+    flex: 1,
+    valueFormatter: (params) =>
+      params.value ? dayjs(params.value).format(DATE_FORMAT) : '',
+  },
+  {
+    field: 'action',
+    type: 'actions',
+    getActions: (params) => [
+      <GridActionsCellItem label="Share" icon={<IosShareIcon />} showInMenu />,
+      <GridActionsCellItem
+        label="Download"
+        icon={<DownloadIcon />}
+        showInMenu
+      />,
+      <GridActionsCellItem label="Archive" icon={<ArchiveIcon />} showInMenu />,
+    ],
+  },
+];
 
 export default function ReceivedPDAsList({ pdas: initialPdas }: Props) {
   const { privateApi } = useGtwSession();
 
-  const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    useInfiniteQuery({
-      queryKey: ['pdas', privateApi],
-      queryFn: async ({ pageParam }) => {
-        return (await privateApi!.received_pdas({ take: 6, skip: pageParam }))
-          ?.myPDAs;
-      },
-      getNextPageParam: (lastPage, pages) =>
-        lastPage && lastPage.length < 6 ? undefined : pages.length * 6,
-      initialData: {
-        pageParams: [0],
-        pages: [initialPdas],
-      },
-    });
+  // const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
+  //   useInfiniteQuery({
+  //     queryKey: ['pdas', privateApi],
+  //     queryFn: async ({ pageParam }) => {
+  //       return (await privateApi!.received_pdas({ take: 6, skip: pageParam }))
+  //         ?.myPDAs;
+  //     },
+  //     getNextPageParam: (lastPage, pages) =>
+  //       lastPage && lastPage.length < 6 ? undefined : pages.length * 6,
+  //     initialData: {
+  //       pageParams: [0],
+  //       pages: [initialPdas],
+  //     },
+  //   });
 
-  const pdas = data?.pages.flat().filter(Boolean);
+  // const pdas = data?.pages.flat().filter(Boolean);
 
   return (
     <>
       <Stack gap={1}>
-        <PDAsList pdas={pdas ?? []} />
+        {/* <PDAsList pdas={pdas ?? []} />
         {privateApi && hasNextPage && (
           <InfiniteLoadMore
             isLoading={isFetchingNextPage}
@@ -50,7 +124,18 @@ export default function ReceivedPDAsList({ pdas: initialPdas }: Props) {
               <PdaCardSkeleton />
             </PDAsListContainer>
           </InfiniteLoadMore>
-        )}
+        )} */}
+        <DataGrid
+          rows={initialPdas}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 10 },
+            },
+          }}
+          pageSizeOptions={[5, 10]}
+          checkboxSelection
+        />
       </Stack>
     </>
   );

@@ -53,7 +53,7 @@ export const pda = {
 export const pdas = {
   empty: 'No data assets yet',
   load_more: 'load more',
-  my_data_assets: 'My Data',
+  my_data_assets: 'My data vault',
   data_asset: 'Data asset',
   recipient: 'Recipient',
   status: 'Status',
@@ -62,6 +62,7 @@ export const pdas = {
   data_assets_subtitle:
     'These are the personal data assets you have earned and created.',
   issue_a_pda: 'Issue a PDA',
+  upload_file: 'Upload file',
 };
 export const orgPdas = {
   empty: 'No Issuances yet',
@@ -139,4 +140,11 @@ export const issuePdaForm = {
     datetime: 'Date Time in UTC timezone',
     time: 'Time in UTC timezone',
   },
+};
+
+export const pdaTableColumnNames = {
+  name: 'Name',
+  uploadedBy: 'Uploaded By',
+  sharing: 'Sharing',
+  lastModified: 'Last Modified',
 };

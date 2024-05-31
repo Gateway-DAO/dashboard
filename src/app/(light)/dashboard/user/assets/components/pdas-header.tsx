@@ -20,13 +20,7 @@ type Props = {
 export default function PdasHeader({ children }: Props) {
   return (
     <>
-      <TitleLayout
-        title={pdas.my_data_assets}
-        subtitle={pdas.data_assets_subtitle}
-        titleId="title-assets"
-      >
-        {children && children}
-      </TitleLayout>
+
 
       <Box
         sx={{
