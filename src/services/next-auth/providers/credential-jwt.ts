@@ -18,9 +18,13 @@ const credentialJwt = CredentialsProvider({
     if (!credentials?.token || !credentials?.privateKey) {
       return null;
     }
+    const { token, privateKey } = credentials;
     //TODO: Temporary solution to validate the token during login
-    await getMe(credentials.token);
-    return credentials;
+    await getMe(token);
+    return {
+      token,
+      privateKey,
+    };
   },
 });
 
