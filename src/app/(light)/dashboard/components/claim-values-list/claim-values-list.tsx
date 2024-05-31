@@ -7,14 +7,12 @@ import { Stack, Typography, Divider, Card } from '@mui/material';
 import ClaimView from './claim-view';
 
 type Props = {
-  title: string;
   data: PdaClaim[] | undefined;
 };
 
-export default function ClaimValuesList({ title, data }: Props) {
+export default function ClaimValuesList({ data }: Props) {
   return (
-    <Stack sx={{ ...WIDTH_CENTERED }}>
-      <Typography sx={{ fontWeight: 700, mb: 3 }}>{title}</Typography>
+    <Stack sx={{ ...WIDTH_CENTERED, mt: 2 }}>
       <Stack
         component={Card}
         variant="outlined"

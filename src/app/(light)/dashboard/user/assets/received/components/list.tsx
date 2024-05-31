@@ -22,6 +22,13 @@ import dayjs from 'dayjs';
 import DownloadIcon from '@mui/icons-material/Download';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import ArchiveIcon from '@mui/icons-material/Archive';
+import {
+  defaultGridConfiguration,
+  defaultGridCustomization,
+  gridWithoutNegativeMargin,
+} from '@/components/data-grid/grid-default';
+import { useRouter } from 'next-nprogress-bar';
+import routes from '@/constants/routes';
 
 type Props = {
   pdas: any;
@@ -91,6 +98,7 @@ const columns: GridColDef[] = [
 
 export default function ReceivedPDAsList({ pdas: initialPdas }: Props) {
   const { privateApi } = useGtwSession();
+  const router = useRouter();
 
   // const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
   //   useInfiniteQuery({
@@ -126,6 +134,7 @@ export default function ReceivedPDAsList({ pdas: initialPdas }: Props) {
           </InfiniteLoadMore>
         )} */}
         <DataGrid
+          {...defaultGridConfiguration}
           rows={initialPdas}
           columns={columns}
           initialState={{
@@ -133,8 +142,12 @@ export default function ReceivedPDAsList({ pdas: initialPdas }: Props) {
               paginationModel: { page: 0, pageSize: 10 },
             },
           }}
+          onRowClick={(params: GridRowParams) => {
+            router.push(`/dashboard/v3/asset/${params.id}`);
+          }}
           pageSizeOptions={[5, 10]}
           checkboxSelection
+          sx={gridWithoutNegativeMargin}
         />
       </Stack>
     </>

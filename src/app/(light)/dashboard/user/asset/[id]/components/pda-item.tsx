@@ -14,80 +14,101 @@ import {
 import { useToggle } from '@react-hookz/web';
 import { PartialDeep } from 'type-fest';
 
-import { Divider, IconButton, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Card,
+  Divider,
+  IconButton,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from '@mui/material';
 
 import IssuerPDAActions from './issuer-pda-actions';
 import ModalImage from './modal-image';
 import PdaCardInfo from './pda-card-info';
 import ShareCopy from './share-copy/share-copy';
 import SharedWithCard from './shared-with-card';
+import GTWTab from '@/components/tabs/gtw-tab';
+import GTWTabs from '@/components/tabs/gtw-tabs-links';
+import routes from '@/constants/routes';
+import { common } from '@mui/material/colors';
+import { useState } from 'react';
+import CopyButton from '@/components/copy-button/copy-button';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDA'] | null>;
+  pda: any;
   isProofPda?: boolean;
 };
 
-export default function PDAItem({ pda, isProofPda = false }: Props) {
-  const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <>
-      <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
-        <Stack direction="row" alignItems="center">
-          <Typography
-            variant="body2"
-            sx={{
-              color: 'text.secondary',
-              fontWeight: 600,
-              textDecoration: 'none',
-            }}
-          >
-            ID
-          </Typography>
-          <CopyTextButton text={pda?.id as string} limit={12} size={14} />
-        </Stack>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+export default function PDAItem({ pda, isProofPda = false }: Props) {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Stack direction={'row'} justifyContent={'space-between'}>
+      <Stack direction={'column'} sx={{ ...WIDTH_CENTERED, my: 2, mt: -1.1 }}>
         <Stack
-          direction="row"
-          justifyContent="space-between"
-          gap={5}
-          alignItems="center"
+          direction="column"
+          component={Card}
+          variant="outlined"
+          gap={8}
+          sx={{ bgcolor: '#E5DFEA' }}
+          alignItems="start"
         >
           <Typography
-            variant="h3"
+            variant="body2"
             id="pda-title"
-            sx={{ fontSize: { xs: 24, md: 48 }, my: 2, fontWeight: 400 }}
+            sx={{ fontSize: 16, my: 2, mx: 4, fontWeight: 700 }}
+          >
+            {pda?.issuer?.username}
+          </Typography>
+          <Typography
+            variant="body2"
+            id="pda-title"
+            sx={{ fontSize: { xs: 20, md: 34 }, mx: 4, my: 2, fontWeight: 400 }}
           >
             {pda?.dataAsset?.title}
           </Typography>
-          {pda?.dataAsset?.image && (
-            <>
-              <IconButton onClick={toggleShowImagePDAModal}>
-                <img
-                  src={pda?.dataAsset?.image ?? ''}
-                  alt={pda?.dataAsset?.title ?? ''}
-                  width={96}
-                  height={96}
-                  style={{ borderRadius: 16 }}
-                />
-              </IconButton>
-              <ModalImage
-                open={showImagePDAModal}
-                handleClose={toggleShowImagePDAModal}
-                handleOpen={() => console.log('open')}
-                image={pda?.dataAsset?.image}
-                swipeableDrawer
-              />
-            </>
-          )}
         </Stack>
         <Tags tags={pda?.dataAsset?.dataModel?.tags as string[]} />
         <Typography sx={{ mb: 3 }}>{pda?.dataAsset?.description}</Typography>
-        <PdaCardInfo pda={pda} isProofPda={isProofPda} />
+        {/* <PdaCardInfo pda={pda} isProofPda={isProofPda} /> */}
         {!isProofPda && (
           <>
-            <SharedWithCard pda={pda} />
+            {/* <SharedWithCard pda={pda} />
             <ShareCopy pda={pda} />
-            <IssuerPDAActions pda={pda} />
+            <IssuerPDAActions pda={pda} /> */}
             {/* Activies backloged 09/02 */}
             {/* <Activities
               activities={pda.activities}
@@ -101,20 +122,39 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
             /> */}
           </>
         )}
+        <ClaimValuesList data={pda?.dataAsset?.claimArray} />
       </Stack>
-      <Divider
+      <Box
         sx={{
-          mb: 5,
-          mt: 2,
-          mx: NEGATIVE_CONTAINER_PX,
-          px: CONTAINER_PX,
+          borderLeft: 1,
+          mx: 12,
+          px: 5,
         }}
-      />
-
-      <ClaimValuesList
-        title={pdaLocale.claim}
-        data={pda?.dataAsset?.claimArray}
-      />
-    </>
+      >
+        <Tabs value={value} onChange={handleChange}>
+          <Tab label="Details" />
+          <Tab label="Sharing" />
+          <Tab label="Activity" />
+        </Tabs>
+        <CustomTabPanel value={value} index={0}>
+          <Typography variant="body2">Uploaded By</Typography>
+          <Stack direction={'row'}>
+            <Typography variant="body2">{pda.issuer.username}</Typography>
+            <CopyButton variant="outlined" text={pda.issuer.did} />
+          </Stack>
+          <Typography variant="body2">Owner</Typography>
+          <Stack direction={'row'}>
+            <Typography variant="body2">{pda.owner.username}</Typography>
+            <CopyButton variant="outlined" text={pda.owner.did} />
+          </Stack>
+          <Typography variant="body2">Created At</Typography>
+          <Typography variant="body2">{pda.issuer.username}</Typography>
+          <Typography variant="body2">Last Modified</Typography>
+          <Typography variant="body2">{pda.issuer.username}</Typography>
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}></CustomTabPanel>
+        <CustomTabPanel value={value} index={2}></CustomTabPanel>
+      </Box>
+    </Stack>
   );
 }

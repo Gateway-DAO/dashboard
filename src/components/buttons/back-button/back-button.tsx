@@ -4,13 +4,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { IconButton } from '@mui/material';
+import { IconButton, SxProps, Theme } from '@mui/material';
 
 type Props = {
   href?: string;
+  sx?: SxProps<Theme>;
 };
 
-export default function BackButton({ href }: Props) {
+export default function BackButton({ href, sx }: Props) {
   const router = useRouter();
 
   return (
@@ -23,7 +24,7 @@ export default function BackButton({ href }: Props) {
         : {
             onClick: router.back,
           })}
-      sx={{ backgroundColor: 'action.selected' }}
+      sx={{ backgroundColor: 'action.selected', ...sx }}
     >
       <ChevronLeftIcon sx={{ color: 'text.secondary' }} />
     </IconButton>
