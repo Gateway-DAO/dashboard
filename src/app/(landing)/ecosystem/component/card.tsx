@@ -21,7 +21,7 @@ export const Card = (props: Props) => {
     <Stack component={Paper}>
       <CardContent>
         <Image
-          src={'/images/default-user.svg'}
+          src={`/ecosystem-card-images/${props.img}.png`}
           height={30}
           width={100}
           alt="logo.png"
