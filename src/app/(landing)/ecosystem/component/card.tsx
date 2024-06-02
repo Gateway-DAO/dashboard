@@ -22,9 +22,13 @@ export const Card = (props: Props) => {
       <CardContent>
         <Image
           src={`/ecosystem-card-images/${props.img}.png`}
+          style={{
+
+            objectFit: 'contain',
+          }}
           height={30}
           width={100}
-          alt="logo.png"
+          alt={`/ecosystem-card-images/${props.img}.png`}
         />
         <Box marginTop={10}>
           <Typography variant="subtitle1" gutterBottom>
