@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 
 import { currentEnv } from '@/utils/env';
-import DOMPurify from 'isomorphic-dompurify';
+import sanitizeHtml from 'sanitize-html';
 
 import Main from './components/Main';
 import SetSizes from './components/set-sizes';
@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   const env = currentEnv;
   const isTesnetOrProd = env === 'testnet' || env === 'production';
-  const hotjarScript = DOMPurify.sanitize(`
+  const hotjarScript = sanitizeHtml(`
   (function(h,o,t,j,a,r){
       h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
       h._hjSettings={hjid:3399024,hjsv:6};
@@ -34,7 +34,7 @@ export default function RootLayout({
       a.appendChild(r);
   })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
   `);
-  const gaLandingScript = DOMPurify.sanitize(`
+  const gaLandingScript = sanitizeHtml(`
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
