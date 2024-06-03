@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import {
   Box,
@@ -14,16 +15,24 @@ type Props = {
   name: string;
   description: string;
   tags: string[];
+  url: string;
 };
 
 export const Card = (props: Props) => {
   return (
-    <Stack component={Paper}>
-      <CardContent>
+    <Stack
+      component={Paper}
+      sx={{ ':hover': { boxShadow: '6px 8px 20px rgba(119, 26, 201, 0.1)' } }}
+    >
+      <CardContent
+        component={Link}
+        href={props.url}
+        target="_blank"
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
         <Image
           src={`/ecosystem-card-images/${props.img}.png`}
           style={{
-
             objectFit: 'contain',
           }}
           height={30}
@@ -37,7 +46,7 @@ export const Card = (props: Props) => {
           <Typography variant="body1" gutterBottom>
             {props.description}
           </Typography>
-          <Stack direction="row" gap={2} mt={2}>
+          <Stack direction="row" gap={1} mt={2}>
             {props.tags.map((tag) => (
               <Chip key={tag} label={tag} variant="outlined" />
             ))}

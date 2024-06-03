@@ -4,7 +4,8 @@ export const cards = [
     name: 'Solana Foundation',
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
-    tags: ['Networks'],
+    tags: ['Networks', 'AI'],
+    url: '',
   },
   {
     logo: 'pokt_network',
@@ -12,6 +13,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Networks'],
+    url: 'https://pokt.network/',
   },
   {
     logo: 'brx_finance',
@@ -19,6 +21,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Networks'],
+    url: 'https://www.brx.finance/',
   },
   {
     logo: 'seda',
@@ -26,6 +29,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Networks'],
+    url: 'https://www.seda.xyz/',
   },
   {
     logo: 'plume_network',
@@ -33,6 +37,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Networks'],
+    url: 'https://www.plumenetwork.xyz/',
   },
   {
     logo: 'cred_protocol',
@@ -40,6 +45,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['FinTech'],
+    url: 'https://www.credprotocol.com/',
   },
   {
     logo: 'spherepay',
@@ -47,6 +53,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['FinTech'],
+    url: 'https://spherepay.co/',
   },
   {
     logo: 'twine',
@@ -54,6 +61,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['FinTech'],
+    url: 'https://twinecommerce.com/',
   },
   {
     logo: 'dydx',
@@ -61,6 +69,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['DeFi'],
+    url: 'https://dydx.exchange/',
   },
   {
     logo: 'li.fi',
@@ -68,6 +77,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['DeFi'],
+    url: 'https://li.fi/',
   },
   {
     logo: 'goldfinch',
@@ -75,6 +85,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['DeFi'],
+    url: 'https://www.goldfinch.finance/',
   },
   {
     logo: 'aave',
@@ -82,6 +93,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['DeFi'],
+    url: 'https://aave.com/',
   },
   {
     logo: 'swing.xyz',
@@ -89,6 +101,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['DeFi'],
+    url: 'https://swing.xyz/',
   },
   {
     logo: 'guild',
@@ -96,6 +109,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Gating'],
+    url: 'https://guild.xyz/',
   },
   {
     logo: 'access',
@@ -103,6 +117,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Gating'],
+    url: 'https://www.accessprotocol.co/',
   },
   {
     logo: 'blackbird',
@@ -110,6 +125,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Consumer'],
+    url: 'https://www.blackbird.xyz/',
   },
   {
     logo: 'wonderverse',
@@ -117,6 +133,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Consumer'],
+    url: 'https://wonderverse.com/',
   },
   {
     logo: 'sumsub',
@@ -124,6 +141,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Humanhood/KYC'],
+    url: 'https://sumsub.com/',
   },
   {
     logo: 'humanode',
@@ -131,6 +149,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Humanhood/KYC'],
+    url: 'https://humanode.io/',
   },
   {
     logo: 'albus_protocol',
@@ -138,6 +157,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Humanhood/KYC'],
+    url: 'https://albus.finance/',
   },
   {
     logo: 'dimo',
@@ -145,6 +165,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['DePIN'],
+    url: 'https://dimo.zone/',
   },
   {
     logo: 'hivemapper',
@@ -152,6 +173,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['DePIN'],
+    url: 'https://hivemapper.com/explorer',
   },
   {
     logo: 'snapshot',
@@ -159,6 +181,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Governance'],
+    url: 'https://snapshot.org/',
   },
   {
     logo: 'odyssey',
@@ -166,6 +189,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Education'],
+    url: 'https://www.tryodyssey.xyz/',
   },
   {
     logo: 'atoma_network',
@@ -173,6 +197,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['AI'],
+    url: 'https://www.atoma.network/',
   },
   {
     logo: 'shiza',
@@ -180,6 +205,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['AI'],
+    url: 'https://shiza.ai/',
   },
   {
     logo: 'fleek_network',
@@ -187,6 +213,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Compute'],
+    url: 'https://fleek.network/',
   },
   {
     logo: 'zama',
@@ -194,6 +221,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Compute'],
+    url: 'https://www.zama.ai/',
   },
   {
     logo: 'irys',
@@ -201,6 +229,7 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Compute'],
+    url: 'https://irys.xyz/',
   },
   {
     logo: 'arweave',
@@ -208,5 +237,6 @@ export const cards = [
     description:
       'Encrypted order book that enables building of a private perpetual DEX.',
     tags: ['Compute'],
+    url: 'https://arweave.app/',
   },
 ];

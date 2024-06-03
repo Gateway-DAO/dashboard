@@ -1,9 +1,10 @@
 'use client';
 import { useRef, useState } from 'react';
 
+import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 
-import { Box, Chip, Container, Stack, Typography } from '@mui/material';
+import { Box, Button, Chip, Container, Stack, Typography } from '@mui/material';
 
 import { Card } from './component/card';
 import { cards } from './data';
@@ -43,73 +44,67 @@ export default function EcosystemPage() {
   return (
     <>
       <section className={styles.element} ref={sectionRef}>
-        <Container
-          component={Stack}
-          sx={{
-            display: 'flex',
-            py: 6,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Typography
-            variant="h1"
-            maxWidth={{ xs: '100%', md: '65%' }}
-            alignSelf={'flex-start'}
-            marginLeft={{ xs: 0, md: 21 }}
-            marginTop={20}
-            fontWeight={300}
-            color={'#000000DE'}
-          >
+        <Wrapper className={styles.wrapper}>
+          <h1 className={styles.title}>
             Discover the Thriving{' '}
-            <Typography variant="inherit" color={'primary.main'}>
-              Gateway Network
-            </Typography>
-          </Typography>
-        </Container>
+            <span className={styles.highlight}>Gateway Network</span>
+          </h1>
+        </Wrapper>
       </section>
       <section className={styles.cards} ref={cardRef}>
-        <Stack maxWidth={'60vw'} margin={'auto'} py={5}>
+        <Wrapper className={styles.wrapper}>
           <Typography variant="body1" gutterBottom>
             Filter :
           </Typography>
           <Stack direction={'row'} flexWrap={'wrap'} gap={2.2} columnGap={1}>
             {categories.map((categorie) => (
-              <Chip
+              <Button
                 key={categorie}
-                color={selectedCategorie == categorie ? 'primary' : 'default'}
+                sx={{
+                  ...(selectedCategorie != categorie
+                    ? {
+                        background: 'primary',
+                        color: '#00000061',
+                        borderColor: ' #0000001F',
+                      }
+                    : {}),
+                }}
                 onClick={() => setSelectedCategorie(categorie)}
-                label={categorie}
                 size={'medium'}
-                variant="filled"
-              />
+                variant={
+                  selectedCategorie == categorie ? 'contained' : 'outlined'
+                }
+              >
+                {categorie}
+              </Button>
             ))}
           </Stack>
-        </Stack>
-        <Box
-          sx={{
-            maxWidth: '60vw',
-            margin: 'auto',
-            py: 5,
-            gap: 4,
-            display: 'grid',
-            gridTemplateColumns: {
-              xs: '1fr',
-              md: 'repeat(3, 1fr)',
-              lg: `repeat(${3}, 1fr)`,
-            },
-          }}
-        >
-          {filteredCards.map((card) => (
-            <Card
-              key={card.name}
-              img={card.logo}
-              description={card.description}
-              name={card.name}
-              tags={card.tags}
-            ></Card>
-          ))}
-        </Box>
+
+          <Box
+            sx={{
+              margin: 'auto',
+              py: 5,
+              gap: 4,
+              display: 'grid',
+              gridTemplateColumns: {
+                xs: '1fr',
+                md: 'repeat(3, 1fr)',
+                lg: `repeat(${3}, 1fr)`,
+              },
+            }}
+          >
+            {filteredCards.map((card) => (
+              <Card
+                key={card.name}
+                img={card.logo}
+                description={card.description}
+                name={card.name}
+                tags={card.tags}
+                url={card.url}
+              ></Card>
+            ))}
+          </Box>
+        </Wrapper>
       </section>
     </>
   );
