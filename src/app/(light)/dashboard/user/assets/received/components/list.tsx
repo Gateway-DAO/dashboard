@@ -29,6 +29,7 @@ import {
 } from '@/components/data-grid/grid-default';
 import { useRouter } from 'next-nprogress-bar';
 import routes from '@/constants/routes';
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 
 type Props = {
   pdas: any;
@@ -38,7 +39,7 @@ const columns: GridColDef[] = [
   {
     field: 'name',
     headerName: pdaTableColumnNames.name,
-    flex: 1,
+    flex: 2,
     renderCell: (params) => (
       <Stack direction={'row'} justifyContent={'space-between'}>
         {params.row.structured ? <></> : <DataOutlinedIcon />}
@@ -59,14 +60,19 @@ const columns: GridColDef[] = [
     headerName: pdaTableColumnNames.uploadedBy,
     flex: 1,
     renderCell: (params) => (
-      <Typography variant="body1" sx={{ mx: 2 }}>
-        {params.row.issuer.username}
-      </Typography>
+      <Stack direction={'row'}>
+        <GTWAvatar
+          name={params.row.issuer.username}
+          alt={params.row.issuer.username}
+        />
+        <Typography variant="body1" sx={{ mx: 2, mt: 1 }}>
+          {params.row.issuer.username}
+        </Typography>
+      </Stack>
     ),
   },
   {
     field: 'sharing',
-    flex: 1,
     headerName: pdaTableColumnNames.sharing,
     renderCell: (params) => (
       <Typography variant="body1" fontWeight={700}>

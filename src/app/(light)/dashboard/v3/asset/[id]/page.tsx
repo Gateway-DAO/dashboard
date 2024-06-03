@@ -1,3 +1,5 @@
+'use client';
+
 import { Metadata } from 'next';
 
 import BackButton from '@/components/buttons/back-button/back-button';
@@ -6,6 +8,9 @@ import routes from '@/constants/routes';
 import { getPDA } from '@/services/server-functions/pda';
 import { getSessionOrg } from '@/utils/currentOrg';
 import PDAItem from '../../../user/asset/[id]/components/pda-item';
+import { Stack, Box } from '@mui/material';
+import PDADetails from '../../../user/asset/[id]/components/pda-details';
+import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
 // export async function generateMetadata({
 //   params,
@@ -50,9 +55,25 @@ const findPda = (id: string) => {
           {
             tier: 'hello',
           },
+          {
+            tier: 'hello',
+          },
+          {
+            tier: 'hello',
+          },
+          {
+            tier: 'hello',
+          },
+          {
+            tier: 'hello',
+          },
         ],
         title: 'test',
       },
+      sharing: [
+        { username: 'statefarm', did: 'statefarm' },
+        { username: 'harrison', did: 'harrison' },
+      ],
     },
     {
       id: 5856991978496,
@@ -282,7 +303,7 @@ export default async function PDAPage({
   const org: any = undefined;
 
   return (
-    <>
+    <Stack>
       <TopBarContainer>
         <BackButton
           href={
@@ -290,10 +311,50 @@ export default async function PDAPage({
               ? routes.dashboard.org.issuedAssets(org?.gatewayId)
               : routes.dashboard.user.receivedAssets
           }
-          sx={{ mt: -2, mb: 5 }}
+          sx={{ mt: -2, mb: 5, ml: 2 }}
         />
       </TopBarContainer>
-      <PDAItem pda={pda} />
-    </>
+
+      <Stack
+        component={'aside'}
+        sx={(theme) => ({
+          boxSizing: 'border-box',
+          pt: 10,
+          pb: 2,
+          px: CONTAINER_PX,
+          [theme.breakpoints.down('lg')]: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+          },
+          [theme.breakpoints.up('lg')]: {
+            borderRight: '1px solid',
+            borderColor: 'divider',
+            maxWidth:650,
+            width: '100%',
+            px: 2.5,
+            position: 'fixed',
+            height: '100%',
+            boxSizing: 'border-box',
+          },
+        })}
+      >
+        <PDAItem pda={pda} />
+      </Stack>
+      <Box
+        width="100%"
+        sx={{
+          px: CONTAINER_PX,
+
+          ml: {
+            xs: 0,
+            lg: '600px',
+          },
+          overflow: 'hidden',
+        }}
+      >
+        <PDADetails pda={pda} />
+      </Box>
+    </Stack>
   );
 }

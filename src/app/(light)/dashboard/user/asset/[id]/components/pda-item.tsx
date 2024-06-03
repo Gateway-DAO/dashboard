@@ -25,59 +25,18 @@ import {
   Typography,
 } from '@mui/material';
 
-import IssuerPDAActions from './issuer-pda-actions';
-import ModalImage from './modal-image';
-import PdaCardInfo from './pda-card-info';
-import ShareCopy from './share-copy/share-copy';
-import SharedWithCard from './shared-with-card';
-import GTWTab from '@/components/tabs/gtw-tab';
-import GTWTabs from '@/components/tabs/gtw-tabs-links';
-import routes from '@/constants/routes';
-import { common } from '@mui/material/colors';
-import { useState } from 'react';
-import CopyButton from '@/components/copy-button/copy-button';
-
 type Props = {
   pda: any;
   isProofPda?: boolean;
 };
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
 export default function PDAItem({ pda, isProofPda = false }: Props) {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
   return (
-    <Stack direction={'row'} justifyContent={'space-between'}>
-      <Stack direction={'column'} sx={{ ...WIDTH_CENTERED, my: 2, mt: -1.1 }}>
+    <>
+      <Stack
+        direction={'column'}
+        sx={{ ...WIDTH_CENTERED, my: 2, mt: -1.1, mr: 40 }}
+      >
         <Stack
           direction="column"
           component={Card}
@@ -124,37 +83,6 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
         )}
         <ClaimValuesList data={pda?.dataAsset?.claimArray} />
       </Stack>
-      <Box
-        sx={{
-          borderLeft: 1,
-          mx: 12,
-          px: 5,
-        }}
-      >
-        <Tabs value={value} onChange={handleChange}>
-          <Tab label="Details" />
-          <Tab label="Sharing" />
-          <Tab label="Activity" />
-        </Tabs>
-        <CustomTabPanel value={value} index={0}>
-          <Typography variant="body2">Uploaded By</Typography>
-          <Stack direction={'row'}>
-            <Typography variant="body2">{pda.issuer.username}</Typography>
-            <CopyButton variant="outlined" text={pda.issuer.did} />
-          </Stack>
-          <Typography variant="body2">Owner</Typography>
-          <Stack direction={'row'}>
-            <Typography variant="body2">{pda.owner.username}</Typography>
-            <CopyButton variant="outlined" text={pda.owner.did} />
-          </Stack>
-          <Typography variant="body2">Created At</Typography>
-          <Typography variant="body2">{pda.issuer.username}</Typography>
-          <Typography variant="body2">Last Modified</Typography>
-          <Typography variant="body2">{pda.issuer.username}</Typography>
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}></CustomTabPanel>
-        <CustomTabPanel value={value} index={2}></CustomTabPanel>
-      </Box>
-    </Stack>
+    </>
   );
 }

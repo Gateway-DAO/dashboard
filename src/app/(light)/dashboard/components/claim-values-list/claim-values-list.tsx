@@ -19,9 +19,11 @@ export default function ClaimValuesList({ data }: Props) {
         sx={{
           mb: 2,
           width: '100%',
+          height: '75%',
+          overflowY: 'scroll',
         }}
       >
-        <Stack divider={<Divider />}>
+        <Stack divider={<Divider />} sx={{}}>
           {data?.map((fieldData: any, index: number) => (
             <Stack key={index} direction="row" justifyContent="space-between">
               <CardCell
