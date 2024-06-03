@@ -53,7 +53,7 @@ export default function EcosystemPage() {
       </section>
       <section className={styles.cards} ref={cardRef}>
         <Wrapper className={styles.wrapper}>
-          <Typography variant="body1" gutterBottom>
+          <Typography variant="body1" mb={2}>
             Filter :
           </Typography>
           <Stack direction={'row'} flexWrap={'wrap'} gap={2.2} columnGap={1}>
