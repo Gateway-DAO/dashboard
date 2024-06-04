@@ -57,13 +57,13 @@ export default function LoginQrCode() {
       },
     });
 
-    socketRef.current.on('create-pub', (publicKey: string) => {
+    socketRef.current.on('create-pub', () => {
       const sessionId = socketRef.current?.id;
       console.log(`[socket ${sessionId}] connected`);
       if (process.env.NODE_ENV !== 'production') {
-        console.log({ type: 'login', sessionId, publicKey });
+        console.log({ type: 'login', sessionId });
       }
-      setQrCodeData(JSON.stringify({ type: 'login', sessionId, publicKey }));
+      setQrCodeData(JSON.stringify({ type: 'login', sessionId }));
     });
 
     socketRef.current.on('login', async (event: LoginSessionV3) => {
