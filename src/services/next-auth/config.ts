@@ -26,6 +26,7 @@ export const nextAuthConfig: NextAuthOptions = {
         user,
         token: token.token,
         privateKey: token.privateKey,
+        data: token.data,
       } as any;
     },
   },

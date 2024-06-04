@@ -15,6 +15,7 @@ export default async function getMe(token: string) {
 
     return res.me;
   } catch (error: any) {
+    console.error('Error on get me', error);
     throw error;
   }
 }
