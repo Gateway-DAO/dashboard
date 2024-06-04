@@ -2,7 +2,6 @@ query me {
   me {
     id
     username
-    usernameLastUpdated
     accesses {
       role
       organization {

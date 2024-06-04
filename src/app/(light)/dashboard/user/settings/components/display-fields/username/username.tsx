@@ -21,14 +21,16 @@ export default function Username() {
 
   const initialUsername = session!.user.username!;
 
-  const diffUpdateDays = useMemo(() => {
-    if (!session) return 0;
-    if (!session.user.usernameLastUpdated) return 31;
-    const lastUpdate = dayjs(session.user.usernameLastUpdated);
-    const now = dayjs();
-    const diff = now.diff(lastUpdate, 'day');
-    return diff;
-  }, [session?.user.usernameLastUpdated]);
+  // const diffUpdateDays = useMemo(() => {
+  //   if (!session) return 0;
+  //   if (!session.user.usernameLastUpdated) return 31;
+  //   const lastUpdate = dayjs(session.user.usernameLastUpdated);
+  //   const now = dayjs();
+  //   const diff = now.diff(lastUpdate, 'day');
+  //   return diff;
+  // }, [session?.user.usernameLastUpdated]);
+
+  const diffUpdateDays = 0;
 
   const canUpdateUsername = diffUpdateDays > 30;
 
