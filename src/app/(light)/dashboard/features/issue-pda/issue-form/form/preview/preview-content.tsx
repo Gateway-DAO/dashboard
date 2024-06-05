@@ -165,7 +165,7 @@ export default function PreviewContent({
         {claims.length > 0 && (
           <>
             <Divider sx={{ mx: -3, my: 4 }} />
-            <ClaimValuesList title="Claims" data={claims} />
+            <ClaimValuesList data={claims} />
           </>
         )}
       </Box>
