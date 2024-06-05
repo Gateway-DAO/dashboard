@@ -29,10 +29,6 @@ export default function EcosystemPage() {
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedCategorie, setSelectedCategorie] = useState<string[]>(['All']);
 
-  useEffect(() => {
-    console.log('Component re-rendered');
-  }, [selectedCategorie]);
-
   const cardRef = useRef<HTMLElement>(null);
   const filteredCards = cards.filter((card) => {
     if (selectedCategorie.includes('All')) {
