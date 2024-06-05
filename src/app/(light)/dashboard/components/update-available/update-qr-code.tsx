@@ -9,9 +9,10 @@ import { Socket, io } from 'socket.io-client';
 
 type Props = {
   isOpen: boolean;
+  onClose: () => void;
 };
 
-export default function UpdateQrCode({ isOpen }: Props) {
+export default function UpdateQrCode({ isOpen, onClose }: Props) {
   const socketRef = useRef<Socket | null>(null);
   const session = useSession();
   const [qrCodeData, setQrCodeData] = useState<string | undefined>();
@@ -64,13 +65,17 @@ export default function UpdateQrCode({ isOpen }: Props) {
       if (res.error) {
         throw res.error;
       }
+      //TODO: Fix performance
+      onClose();
+      socketRef.current?.disconnect();
+      setIsMounted(false);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    if (isOpen && !isMounted) {
+    if (isOpen && (!isMounted || !socketRef.current?.connected)) {
       setIsMounted(true);
       initializeSocket();
     }

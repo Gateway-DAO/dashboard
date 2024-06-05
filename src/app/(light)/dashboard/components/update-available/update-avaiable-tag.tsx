@@ -36,7 +36,7 @@ export default function UpdateAvaiableTag() {
       </Button>
       <ModalRight open={isOpen} onClose={toggleOpen}>
         <ModalTitle onClose={toggleOpen} />
-        <UpdateQrCode isOpen={isOpen} />
+        <UpdateQrCode isOpen={isOpen} onClose={toggleOpen} />
       </ModalRight>
     </>
   );
