@@ -1,10 +1,10 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
 
-import { Box, Button, Chip, Container, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 
 import { Card } from './component/card';
 import { cards } from './data';
@@ -27,16 +27,41 @@ const categories = [
 
 export default function EcosystemPage() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [selectedCategorie, setSelectedCategorie] = useState('All');
+  const [selectedCategorie, setSelectedCategorie] = useState<string[]>(['All']);
+
+  useEffect(() => {
+    console.log('Component re-rendered');
+  }, [selectedCategorie]);
 
   const cardRef = useRef<HTMLElement>(null);
   const filteredCards = cards.filter((card) => {
-    if (selectedCategorie == 'All') {
+    if (selectedCategorie.includes('All')) {
       return true;
     }
-    return card.tags.includes(selectedCategorie);
+    return selectedCategorie.some((ele) => card.tags.includes(ele));
   });
 
+  if (selectedCategorie.length == 0) {
+    setSelectedCategorie(['All']);
+  }
+
+  function checkAddORRemoveElement(newElement: string) {
+    if (newElement == 'All') {
+      setSelectedCategorie(['All']);
+      return;
+    }
+    if (selectedCategorie.includes(newElement)) {
+      const filteredElements = selectedCategorie.filter(
+        (ele) => ele != newElement
+      );
+      setSelectedCategorie([...filteredElements]);
+    } else {
+      const uniqueSet = new Set(selectedCategorie);
+      uniqueSet.delete('All');
+
+      setSelectedCategorie([...uniqueSet, newElement]);
+    }
+  }
   useHeaderVariantDetection(sectionRef, 'dark');
 
   useHeaderVariantDetection(cardRef, 'dark');
@@ -61,7 +86,7 @@ export default function EcosystemPage() {
               <Button
                 key={categorie}
                 sx={{
-                  ...(selectedCategorie != categorie
+                  ...(!selectedCategorie.includes(categorie)
                     ? {
                         background: 'primary',
                         color: '#00000061',
@@ -69,10 +94,12 @@ export default function EcosystemPage() {
                       }
                     : {}),
                 }}
-                onClick={() => setSelectedCategorie(categorie)}
+                onClick={() => checkAddORRemoveElement(categorie)}
                 size={'medium'}
                 variant={
-                  selectedCategorie == categorie ? 'contained' : 'outlined'
+                  selectedCategorie.includes(categorie)
+                    ? 'contained'
+                    : 'outlined'
                 }
               >
                 {categorie}
