@@ -24,6 +24,7 @@ import {
   Tabs,
   Typography,
 } from '@mui/material';
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 
 type Props = {
   pda: any;
@@ -35,7 +36,7 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
     <>
       <Stack
         direction={'column'}
-        sx={{ ...WIDTH_CENTERED, my: 2, mt: -1.1, mr: 40 }}
+        sx={{ ...WIDTH_CENTERED, my: 2, mt: -5, mr: 40 }}
       >
         <Stack
           direction="column"
@@ -45,13 +46,22 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
           sx={{ bgcolor: '#E5DFEA' }}
           alignItems="start"
         >
-          <Typography
-            variant="body2"
-            id="pda-title"
-            sx={{ fontSize: 16, my: 2, mx: 4, fontWeight: 700 }}
-          >
-            {pda?.issuer?.username}
-          </Typography>
+          <Stack direction={'row'}>
+            <Box sx={{ mt: 1.5, ml: 3.5 }}>
+              <GTWAvatar
+                name={pda?.issuer?.username}
+                alt={pda?.issuer?.username}
+                size={30}
+              />
+            </Box>
+            <Typography
+              variant="body2"
+              id="pda-title"
+              sx={{ fontSize: 16, my: 2, mx: 2, fontWeight: 700 }}
+            >
+              {pda?.issuer?.username}
+            </Typography>
+          </Stack>
           <Typography
             variant="body2"
             id="pda-title"

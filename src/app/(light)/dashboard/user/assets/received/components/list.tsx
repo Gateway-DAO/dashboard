@@ -91,13 +91,24 @@ const columns: GridColDef[] = [
     field: 'action',
     type: 'actions',
     getActions: (params) => [
-      <GridActionsCellItem label="Share" icon={<IosShareIcon />} showInMenu />,
+      <GridActionsCellItem
+        key={1}
+        label="Share"
+        icon={<IosShareIcon />}
+        showInMenu
+      />,
       <GridActionsCellItem
         label="Download"
+        key={2}
         icon={<DownloadIcon />}
         showInMenu
       />,
-      <GridActionsCellItem label="Archive" icon={<ArchiveIcon />} showInMenu />,
+      <GridActionsCellItem
+        key={3}
+        label="Archive"
+        icon={<ArchiveIcon />}
+        showInMenu
+      />,
     ],
   },
 ];

@@ -38,11 +38,11 @@ const findPda = (id: string) => {
       structured: true,
       issuer: {
         username: 'joao',
-        did: 'test',
+        did: 'did:joao',
       },
       owner: {
         username: 'sid',
-        did: 'sid',
+        did: 'did:mygateway:sid',
       },
       dataAsset: {
         claimArray: [
@@ -311,7 +311,7 @@ export default async function PDAPage({
               ? routes.dashboard.org.issuedAssets(org?.gatewayId)
               : routes.dashboard.user.receivedAssets
           }
-          sx={{ mt: -2, mb: 5, ml: 2 }}
+          sx={{ mt: -5, mb: 5, ml: 2 }}
         />
       </TopBarContainer>
 
@@ -330,7 +330,7 @@ export default async function PDAPage({
           [theme.breakpoints.up('lg')]: {
             borderRight: '1px solid',
             borderColor: 'divider',
-            maxWidth:650,
+            maxWidth: 650,
             width: '100%',
             px: 2.5,
             position: 'fixed',
@@ -351,6 +351,7 @@ export default async function PDAPage({
             lg: '600px',
           },
           overflow: 'hidden',
+          mt: -3,
         }}
       >
         <PDADetails pda={pda} />

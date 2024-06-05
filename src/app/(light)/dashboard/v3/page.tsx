@@ -1,3 +1,5 @@
+'use client';
+
 import routes from '@/constants/routes';
 import { getPrivateApi } from '@/services/protocol/api';
 import { Button, Typography } from '@mui/material';
