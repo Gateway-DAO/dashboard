@@ -124,9 +124,13 @@ export default function LoginQrCode() {
 
   return (
     <>
-      {/* <button onClick={onPrintScreen}>Print</button> */}
       {qrCodeData ? (
-        <GtwQRCode value={qrCodeData} ref={qrRef} />
+        <>
+          <GtwQRCode value={qrCodeData} ref={qrRef} />
+          {process.env.NODE_ENV === 'development' && (
+            <button onClick={onPrintScreen}>Print</button>
+          )}
+        </>
       ) : (
         <LoadingQRCode />
       )}

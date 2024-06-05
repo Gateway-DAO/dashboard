@@ -3,11 +3,10 @@ import { PropsWithChildren, ReactNode } from 'react';
 
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
-import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
-import WalletWidget from '../../features/wallet/wallet-widget/wallet-widget';
 import AuthComponent from '../auth-component/auth-component';
+import UpdateAvaiableTag from '../update-available/update-avaiable-tag';
 import MenuContainer from './menu-container';
 
 type Props = {
@@ -57,8 +56,10 @@ export default function Sidebar({
           menuItems={menuItems}
           secondMenuItems={secondMenuItems}
         />
-
-        <AuthComponent id="profile-button" controlId="profile-menu" />
+        <Stack gap={1} sx={{ width: '100%' }}>
+          <UpdateAvaiableTag />
+          <AuthComponent id="profile-button" controlId="profile-menu" />
+        </Stack>
       </Stack>
     </Stack>
   );

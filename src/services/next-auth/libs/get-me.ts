@@ -13,7 +13,7 @@ export default async function getMe(token: string) {
       throw new Error("Couldn't login");
     }
 
-    return res.me;
+    return res;
   } catch (error: any) {
     console.error('Error on get me', error);
     throw error;

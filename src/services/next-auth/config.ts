@@ -20,13 +20,12 @@ export const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      const user = await getMe(token.token);
+      const { me: user, ...data } = await getMe(token.token);
       return {
         ...session,
+        ...token,
+        ...data,
         user,
-        token: token.token,
-        privateKey: token.privateKey,
-        data: token.data,
       } as any;
     },
   },

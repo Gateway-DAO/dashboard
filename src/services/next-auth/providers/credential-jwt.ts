@@ -22,9 +22,9 @@ const credentialJwt = CredentialsProvider({
     //TODO: Temporary solution to validate the token during login
     const data = await getDecryptedData(token, privateKey);
     return {
+      ...data,
       token,
       privateKey,
-      data,
     };
   },
 });

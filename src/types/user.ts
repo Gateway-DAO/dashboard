@@ -8,12 +8,12 @@ export type SessionToken = Login_DataFragment & {
   skipEmail?: boolean;
 };
 
-export type LoginSessionV3 = {
+export type LoginSessionV3 = DecryptedData & {
   privateKey: string;
   token: string;
-  data: DecryptedData;
 };
 
-export type SessionV3 = LoginSessionV3 & {
-  user: MeQuery['me'];
-};
+export type SessionV3 = LoginSessionV3 &
+  Omit<MeQuery, 'me'> & {
+    user: MeQuery['me'];
+  };

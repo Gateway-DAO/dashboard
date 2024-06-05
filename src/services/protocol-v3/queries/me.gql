@@ -13,4 +13,6 @@ query me {
       }
     }
   }
+  myPDACount
+  myActivitiesCount
 }
