@@ -31,13 +31,13 @@ export const Card = (props: Props) => {
         style={{ textDecoration: 'none', color: 'inherit' }}
       >
         <Image
-          src={`/ecosystem-card-images/${props.img}.png`}
+          src={`/ecosystem-card-images/${props.img}.svg`}
           style={{
             objectFit: 'contain',
           }}
           height={30}
           width={100}
-          alt={`/ecosystem-card-images/${props.img}.png`}
+          alt={`/ecosystem-card-images/${props.img}.svg`}
         />
         <Box marginTop={10}>
           <Typography variant="subtitle1" gutterBottom>
