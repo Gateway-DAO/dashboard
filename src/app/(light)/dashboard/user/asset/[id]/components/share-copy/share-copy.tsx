@@ -111,7 +111,7 @@ export default function ShareCopy({ pda }: Props) {
 
   const isOwner = useMemo(
     () =>
-      session.user.gatewayId === pda?.dataAsset?.owner?.gatewayId &&
+      session.user.username === pda?.dataAsset?.owner?.gatewayId &&
       !organization,
     [pda, session]
   );

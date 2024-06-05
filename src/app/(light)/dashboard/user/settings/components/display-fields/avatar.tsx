@@ -42,8 +42,7 @@ export default function Avatar() {
       <AvatarPicker
         name="profilePicture"
         id={session!.user.id!}
-        username={session!.user.gatewayId!}
-        value={session!.user.profilePicture}
+        username={session!.user.username!}
         onChange={onSubmit}
         isLoading={uploadImage.isLoading}
       />

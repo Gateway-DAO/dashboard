@@ -1,11 +1,9 @@
 import { NextAuthOptions } from 'next-auth';
 
 import routes from '@/constants/routes';
-import { SessionToken } from '@/types/user';
-import jwt from 'jsonwebtoken';
+import { LoginSessionV3 } from '@/types/user';
 
 import getMe from './libs/get-me';
-import refreshToken from './libs/refresh-token';
 import credentialJwt from './providers/credential-jwt';
 
 export const nextAuthConfig: NextAuthOptions = {
@@ -14,33 +12,21 @@ export const nextAuthConfig: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, user, trigger, session }) {
+    async jwt({ token, user }) {
       // We're retrieving the token from the provider
       if (user) {
-        token = user as SessionToken;
-      }
-
-      if (trigger === 'update' && session) {
-        // Defines if the user has skipped the add email step during the login
-        token.skipEmail = session.skipEmail;
-      }
-
-      const parsedToken = jwt.decode(token.token, { json: true });
-
-      if (parsedToken!.exp! < Date.now() / 1000) {
-        const refreshedToken = await refreshToken(token);
-        return refreshedToken;
+        token = user as LoginSessionV3;
       }
       return token;
     },
     async session({ session, token }) {
-      const user = await getMe(token.token);
+      const { me: user, ...data } = await getMe(token.token);
       return {
         ...session,
-        ...(token.error && { error: token.error }),
-        ...(token ?? {}),
+        ...token,
+        ...data,
         user,
-      };
+      } as any;
     },
   },
   pages: {

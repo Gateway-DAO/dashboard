@@ -18,7 +18,7 @@ export async function GET() {
 
     const parsedToken = jwt.decode(session.token, {
       json: true,
-    }) as SessionToken | null;
+    }) as any;
 
     if (!parsedToken) {
       throw new Error('Error on decoding token');

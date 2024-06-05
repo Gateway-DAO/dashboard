@@ -22,7 +22,7 @@ export default async function DashboardUserDataRequestTemplatesPage() {
       await privateApi.dataRequestTemplatesByUser({
         user: {
           type: UserIdentifierType.GatewayId,
-          value: session.user.gatewayId as string,
+          value: session.user.username as string,
         },
         skip: 0,
         take: 5,
@@ -32,7 +32,7 @@ export default async function DashboardUserDataRequestTemplatesPage() {
     await privateApi.dataRequestTemplatesByUserCount({
       user: {
         type: UserIdentifierType.GatewayId,
-        value: session.user.gatewayId as string,
+        value: session.user.username as string,
       },
     })
   ).dataRequestTemplatesCount;

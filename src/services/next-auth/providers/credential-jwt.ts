@@ -1,21 +1,30 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 
+import getDecryptedData from '../libs/get-decrypted-data';
+
 const credentialJwt = CredentialsProvider({
   id: 'credential-jwt',
   credentials: {
-    jwt: {
-      label: 'jwt',
+    token: {
+      label: 'token',
+      type: 'text',
+    },
+    privateKey: {
+      label: 'privateKey',
       type: 'text',
     },
   },
-  authorize(credentials) {
-    if (!credentials?.jwt) {
+  async authorize(credentials) {
+    if (!credentials?.token || !credentials?.privateKey) {
       return null;
     }
+    const { token, privateKey } = credentials;
+    //TODO: Temporary solution to validate the token during login
+    const data = await getDecryptedData(token, privateKey);
     return {
-      protocol_id: '1234',
-      refresh_token: '1234',
-      token: credentials.jwt,
+      ...data,
+      token,
+      privateKey,
     };
   },
 });

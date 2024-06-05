@@ -26,18 +26,7 @@ export default function ClaimYourFirstPda() {
   const sessionProps: GenerateIssueBody = {
     origin: window.location.origin,
     claim: {
-      avatar: session.user.profilePicture ?? '',
-      name: session.user.displayName ?? '',
-      username: session.user.gatewayId ?? '',
-      email: session.user.email ?? '',
-      evmWallet: getWalletFromAuthenticationsByChain(
-        session?.user?.authentications,
-        Chain.Evm
-      ),
-      solanaWallet: getWalletFromAuthenticationsByChain(
-        session?.user?.authentications,
-        Chain.Sol
-      ),
+      username: session.user.username ?? '',
     },
   };
 

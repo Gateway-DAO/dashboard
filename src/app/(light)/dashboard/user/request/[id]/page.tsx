@@ -103,7 +103,7 @@ export default async function DashboardUserDataRequest({
   if (
     userId !== dataRequest?.owner?.id &&
     userId !== dataRequest?.verifier?.id &&
-    organization?.id !== dataRequest?.verifierOrganization?.id
+    organization?.did !== dataRequest?.verifierOrganization?.id
   ) {
     return <PermissionError />;
   }
@@ -137,8 +137,8 @@ export default async function DashboardUserDataRequest({
       <TopBarContainer>
         <BackButton
           href={
-            !!organization?.id
-              ? routes.dashboard.org.requests(organization?.gatewayId)
+            !!organization?.did
+              ? routes.dashboard.org.requests(organization?.did)
               : routes.dashboard.user.requests
           }
         />

@@ -29,13 +29,13 @@ export default function IssuerPDAActions({ pda }: Props) {
         ? session?.user?.accesses?.find(
             (access) =>
               pda?.dataAsset?.organization?.gatewayId ===
-              access?.organization?.gatewayId
+              access?.organization?.did
           )
-        : session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId ||
+        : session.user.username === pda?.dataAsset?.issuer?.gatewayId ||
           session?.user?.accesses?.find(
             (access) =>
               pda?.dataAsset?.organization?.gatewayId ===
-              access?.organization?.gatewayId
+              access?.organization?.did
           ),
     [pda, session, displayingAsOrg]
   );

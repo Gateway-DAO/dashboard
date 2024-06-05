@@ -16,7 +16,7 @@ export default async function Home({
   const session = (await getGtwServerSession()) as Session;
   return (
     <HomeStructure
-      username={session?.user?.displayName ?? session?.user?.gatewayId ?? ''}
+      username={session?.user?.username ?? ''}
       organization={username}
     />
   );

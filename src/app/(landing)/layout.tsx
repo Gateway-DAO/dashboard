@@ -64,7 +64,6 @@ export default function RootLayout({
       )}
       {process.env.NEXT_PUBLIC_GTM_TAG && (
         <>
-
           <Script
             strategy="afterInteractive"
             id="ga-landing"

@@ -12,16 +12,10 @@ import { Card, Typography } from '@mui/material';
 export default function POCIssueHome() {
   const { session } = useGtwSession();
   const router = useRouter();
-  const auths = session.user.authentications;
-  const wallets = auths?.filter((item) => item.type === 'WALLET') ?? [];
-  const emails = auths?.filter((item) => item.type === 'EMAIL') ?? [];
   const params = {
     key: '5263b875-a216-473b-b4da-d674313c6642',
     issuer: 'visajames',
-    owner:
-      wallets[0]?.data?.address ??
-      emails[0]?.data?.address ??
-      'tullio%40mygateway.xyz',
+    owner: 'tullio%40mygateway.xyz',
     dataModel: 'f3c2009a-4388-4613-ad4a-43f611c78c31',
     claim: {
       topArtists: ['Bruno Mars'],
@@ -69,7 +63,7 @@ export default function POCIssueHome() {
     <Card sx={{ p: 2, m: 3, alignSelf: 'center', width: 400 }}>
       <Typography variant="caption">ENJOY ALL BENEFITS</Typography>
       <Typography variant="h6" mb={1}>
-        Hi {session.user.displayName ?? session.user.gatewayId}!
+        Hi {session.user.username}!
       </Typography>
       <Typography mb={2}>
         Share and Unlock Experiences with our partners today.

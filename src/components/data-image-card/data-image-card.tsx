@@ -24,7 +24,7 @@ export default function DataImageCard({
   image,
   ...props
 }: Props & CardProps) {
-  const { image: avatar, name, gatewayId } = profile;
+  const { image: avatar, name, username: gatewayId } = profile;
 
   return (
     <Card variant="outlined" sx={{ height: 500, p: 0 }} {...props}>

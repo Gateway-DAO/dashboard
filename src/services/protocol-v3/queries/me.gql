@@ -2,5 +2,17 @@ query me {
   me {
     id
     username
+    accesses {
+      role
+      organization {
+        image
+        name
+        did
+        usernameUpdatedAt
+        verified
+      }
+    }
   }
+  myPDACount
+  myActivitiesCount
 }

@@ -47,7 +47,7 @@ export default function SharedWithCard({ pda }: Props) {
         ? organization.gatewayId === pda?.dataAsset?.organization?.gatewayId
         : verifierIsOrg
         ? false
-        : session.user.gatewayId === pda?.dataAsset?.issuer?.gatewayId,
+        : session.user.username === pda?.dataAsset?.issuer?.gatewayId,
     [pda, session]
   );
 

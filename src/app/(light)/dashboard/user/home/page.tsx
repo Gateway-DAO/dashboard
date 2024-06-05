@@ -11,9 +11,5 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const session = (await getGtwServerSession()) as Session;
-  return (
-    <HomeStructure
-      username={session?.user?.displayName ?? session?.user?.gatewayId ?? ''}
-    />
-  );
+  return <HomeStructure username={session?.user?.username ?? ''} />;
 }

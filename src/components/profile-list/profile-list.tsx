@@ -41,13 +41,13 @@ export default function ProfileList({ profiles, ...props }: Props) {
           >
             <GTWAvatar
               src={profile.image}
-              name={profile.name ?? profile.gatewayId}
+              name={profile.name ?? profile.username}
               size={32}
             />
           </ListItemAvatar>
           <ListItemText
-            primary={profile.name ?? `@${profile.gatewayId}`}
-            secondary={profile.name ? `@${profile.gatewayId}` : undefined}
+            primary={profile.name ?? `@${profile.username}`}
+            secondary={profile.name ? `@${profile.username}` : undefined}
             sx={{
               display: 'flex',
               flexDirection: 'row',

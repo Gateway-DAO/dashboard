@@ -105,7 +105,7 @@ export default function DataModelsTable({
       privateApi?.dataModelsByUser({
         user: {
           type: UserIdentifierType.GatewayId,
-          value: session.user.gatewayId as string,
+          value: session.user.username as string,
         },
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,

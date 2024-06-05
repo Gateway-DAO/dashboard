@@ -1,9 +1,15 @@
+import { forwardRef } from 'react';
+
 import QRCode, { QRCodeProps } from 'react-qr-code';
 
-export default function GtwQRCode(props: Omit<QRCodeProps, 'ref'>) {
+const GtwQRCode = forwardRef(function GtwQRCode(
+  props: Omit<QRCodeProps, 'ref'>,
+  ref: any
+) {
   return (
     <QRCode
       {...props}
+      ref={ref}
       viewBox="0 0 256 256"
       style={{
         height: 'auto',
@@ -12,4 +18,6 @@ export default function GtwQRCode(props: Omit<QRCodeProps, 'ref'>) {
       }}
     />
   );
-}
+});
+
+export default GtwQRCode;

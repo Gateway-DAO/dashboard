@@ -49,10 +49,7 @@ export function useDisconnectAlias() {
   });
 
   const handleDisconnectAlias = ({ type, address, chain }: Alias) => {
-    if (
-      (type === AuthType.Wallet || type === AuthType.Email) &&
-      session?.user?.authentications?.length === 1
-    ) {
+    if (type === AuthType.Wallet || type === AuthType.Email) {
       router.push(`#deactivate-gateway-id`, { scroll: false });
       setModalDeactivateGatewayId(true);
       setDataToDisconnect({ type, address, chain });

@@ -1,20 +1,10 @@
 'use client';
 import { useSession } from 'next-auth/react';
-import Link from 'next/link';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import routes from '@/constants/routes';
 import useOrganization from '@/hooks/use-organization';
-import { auth } from '@/locale/en/auth';
 
-import {
-  Button,
-  Chip,
-  MenuItem,
-  Stack,
-  Typography,
-  alpha,
-} from '@mui/material';
+import { Chip, MenuItem, Stack, Typography, alpha } from '@mui/material';
 
 type Props = {
   onClose: () => void;
@@ -24,12 +14,10 @@ export default function AuthDropdownCurrent({ onClose }: Props) {
   const { isOrg, organization, pathnameOrg } = useOrganization();
   const { data: session } = useSession();
 
-  const profileImage = isOrg
-    ? organization?.image
-    : session?.user?.profilePicture;
-  const username = organization?.gatewayId ?? session?.user?.gatewayId;
-  const hasName = !!session?.user?.displayName || !!organization?.name;
-  let name = session?.user?.displayName ?? `@${session?.user?.gatewayId}`;
+  const profileImage = isOrg ? organization?.image : undefined;
+  const username = organization?.gatewayId ?? session?.user?.username;
+  const hasName = !!organization?.name;
+  let name = `@${session?.user?.username}`;
 
   if (isOrg) {
     name = organization?.name ?? `@${organization?.gatewayId}`;
@@ -78,20 +66,6 @@ export default function AuthDropdownCurrent({ onClose }: Props) {
             />
           )}
         </Stack>
-        <Button
-          component={Link}
-          onClick={onClose}
-          href={
-            isOrg
-              ? routes.dashboard.org.settings(pathnameOrg)
-              : routes.dashboard.user.settings
-          }
-          fullWidth
-          variant="outlined"
-          size="small"
-        >
-          {auth.menu.gatewayId}
-        </Button>
       </Stack>
     </MenuItem>
   );
