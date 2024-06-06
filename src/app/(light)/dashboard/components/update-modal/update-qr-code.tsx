@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import GtwQRCode from '@/components/gtw-qr/gtw-qr-code';
 import LoadingQRCode from '@/components/gtw-qr/loading-qr-code';
 import { LoginSessionV3 } from '@/types/user';
+import { onSaveSVG } from '@/utils/save-svg';
 import { Socket, io } from 'socket.io-client';
 
 type Props = {
@@ -17,6 +18,7 @@ export default function UpdateQrCode({ isOpen, onClose }: Props) {
   const session = useSession();
   const [qrCodeData, setQrCodeData] = useState<string | undefined>();
   const [isMounted, setIsMounted] = useState(false);
+  const qrRef = useRef<SVGElement>(null);
 
   const initializeSocket = useCallback(() => {
     if (socketRef.current) {
@@ -83,7 +85,10 @@ export default function UpdateQrCode({ isOpen, onClose }: Props) {
     <>
       {qrCodeData ? (
         <>
-          <GtwQRCode value={qrCodeData} />
+          <GtwQRCode value={qrCodeData} ref={qrRef} />
+          {process.env.NODE_ENV === 'development' && (
+            <button onClick={() => onSaveSVG(qrRef.current)}>Print</button>
+          )}
         </>
       ) : (
         <LoadingQRCode />

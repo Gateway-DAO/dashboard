@@ -3,7 +3,7 @@ import { NextAuthOptions } from 'next-auth';
 import routes from '@/constants/routes';
 import { LoginSessionV3 } from '@/types/user';
 
-import { hasDecryptedData } from './libs/get-decrypted-data';
+import getDecryptedData from './libs/get-decrypted-data';
 import getMe from './libs/get-me';
 import credentialJwt from './providers/credential-jwt';
 
@@ -25,10 +25,12 @@ export const nextAuthConfig: NextAuthOptions = {
     },
     async session({ session, token }) {
       const { me: user, ...protocolV3Data } = await getMe(token.token);
+      const data = await getDecryptedData(token.token, token.privateKey);
       return {
         ...session,
         ...token,
         ...protocolV3Data,
+        ...data,
         user,
       } as any;
     },

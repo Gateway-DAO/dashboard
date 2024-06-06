@@ -1,3 +1,5 @@
+'use client';
+
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';
@@ -9,11 +11,7 @@ import { Box } from '@mui/system';
 
 import PDAsList from './components/pdas-list/pdas-list';
 
-export default async function DashboardV3() {
-  const session = await getGtwServerSession();
-  if (!session) return null;
-  const { pdas } = session;
-
+export default function DashboardV3() {
   return (
     <>
       <TitleLayout title={pdasLocales.my_data_assets} titleId="title-assets">
@@ -28,16 +26,7 @@ export default async function DashboardV3() {
       </TitleLayout>
 
       <Box sx={{ pt: 5 }}>
-        {pdas && pdas.length > 0 && <PDAsList pdas={pdas} />}
-        {pdas && pdas.length === 0 && (
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ textAlign: 'center', width: '100%' }}
-          >
-            {pdasLocales.empty}
-          </Typography>
-        )}
+        <PDAsList />
       </Box>
     </>
   );

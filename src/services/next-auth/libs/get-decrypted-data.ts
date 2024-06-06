@@ -15,6 +15,10 @@ export default async function getDecryptedData(
         'x-private-key': privateKey,
       },
       method: 'GET',
+      cache: 'force-cache',
+      next: {
+        revalidate: 60 * 60,
+      },
     });
 
     if (!res.ok) {
