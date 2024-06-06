@@ -23,8 +23,6 @@ export default function UpdateQrCode({ isOpen, onClose }: Props) {
       socketRef.current.disconnect();
     }
 
-    console.log(session.data?.token);
-
     socketRef.current = io(`${process.env.NEXT_PUBLIC_BFF_API_SERVER}user`, {
       extraHeaders: {
         Authorization: `Bearer ${session.data?.token}`,

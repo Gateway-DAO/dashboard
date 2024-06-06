@@ -1,8 +1,9 @@
 query pdas {
-  PDAs {
+  myPDAs {
     id
-    activity {
-      id
+    issuer {
+      did
+      username
     }
     fileName
     issuanceDate

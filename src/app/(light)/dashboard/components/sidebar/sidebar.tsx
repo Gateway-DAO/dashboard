@@ -6,7 +6,6 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { Stack } from '@mui/system';
 
 import AuthComponent from '../auth-component/auth-component';
-import UpdateAvaiableTag from '../update-available/update-avaiable-tag';
 import MenuContainer from './menu-container';
 
 type Props = {
@@ -57,7 +56,6 @@ export default function Sidebar({
           secondMenuItems={secondMenuItems}
         />
         <Stack gap={1} sx={{ width: '100%' }}>
-          <UpdateAvaiableTag />
           <AuthComponent id="profile-button" controlId="profile-menu" />
         </Stack>
       </Stack>
