@@ -6,6 +6,7 @@ import { useEffect, useCallback, useRef, useState } from 'react';
 import GtwQRCode from '@/components/gtw-qr/gtw-qr-code';
 import LoadingQRCode from '@/components/gtw-qr/loading-qr-code';
 import { LoginSessionV3 } from '@/types/user';
+import { onSaveSVG } from '@/utils/save-svg';
 import { useMediaQuery } from '@react-hookz/web';
 import { Socket, io } from 'socket.io-client';
 
@@ -25,35 +26,6 @@ export default function LoginQrCode() {
   );
 
   const qrRef = useRef<SVGElement>(null);
-
-  const onPrintScreen = async () => {
-    if (!qrRef.current) return;
-    const svgElement = qrRef.current;
-    const svgData = new XMLSerializer().serializeToString(svgElement);
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d')!;
-    const img = new Image();
-    const svgBlob = new Blob([svgData], {
-      type: 'image/svg+xml;charset=utf-8',
-    });
-    const url = URL.createObjectURL(svgBlob);
-
-    img.onload = function () {
-      canvas.width = 256;
-      canvas.height = 256;
-      ctx.drawImage(img, 0, 0, 256, 256);
-      const pngData = canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = pngData;
-      a.download = 'image.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    };
-
-    img.src = url;
-  };
 
   const login = async (token: string, privateKey: string) => {
     try {
@@ -128,7 +100,7 @@ export default function LoginQrCode() {
         <>
           <GtwQRCode value={qrCodeData} ref={qrRef} />
           {process.env.NODE_ENV === 'development' && (
-            <button onClick={onPrintScreen}>Print</button>
+            <button onClick={() => onSaveSVG(qrRef.current)}>Print</button>
           )}
         </>
       ) : (
