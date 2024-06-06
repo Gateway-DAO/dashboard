@@ -17,9 +17,10 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { errorMessages } from '@/locale/en/errors';
 import { useSnackbar } from 'notistack';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import { DATE_FORMAT } from '@/constants/date';
+import { DATE_FORMAT, MONTH_DAY_FORMAT } from '@/constants/date';
 import dayjs from 'dayjs';
 import { ChevronRightOutlined } from '@mui/icons-material';
+import Tags from '@/components/tags/tags';
 
 type Props = {
   pda: any;
@@ -162,6 +163,39 @@ export default function PDADetails({ pda, isProofPda = false }: Props) {
           </Typography>
         </Box>
         <Divider />
+        {!pda.structured && (
+          <>
+            <Box sx={{ ml: 4, mt: 2 }}>
+              <Typography variant="caption" fontWeight={400} fontSize={12}>
+                Type
+              </Typography>
+              <Typography variant="body2" sx={{ mt: 1, mb: 1.5 }}>
+                {pda.mimeType}
+              </Typography>
+            </Box>
+            <Divider />
+            <Box sx={{ ml: 4, mt: 2 }}>
+              <Typography variant="caption" fontWeight={400} fontSize={12}>
+                Size
+              </Typography>
+              <Typography variant="body2" sx={{ mt: 1, mb: 1.5 }}>
+                {pda.size}
+              </Typography>
+            </Box>
+            <Divider />
+          </>
+        )}
+        <Box sx={{ ml: 4, mt: 2 }}>
+          <Typography
+            variant="caption"
+            fontWeight={400}
+            fontSize={12}
+            sx={{ mb: 1.5 }}
+          >
+            Tags
+          </Typography>
+          <Tags tags={pda?.tags as string[]} />
+        </Box>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <Box sx={{ ml: 4, mt: 2 }}>
@@ -194,7 +228,44 @@ export default function PDADetails({ pda, isProofPda = false }: Props) {
         </Box>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <Typography variant="body2">Uploaded By</Typography>
+        <Box sx={{ ml: 4, mt: 2 }}>
+          {pda.activity.map((activity: any) => {
+            return (
+              <>
+                <Stack
+                  direction={'row'}
+                  justifyContent={'space-between'}
+                  sx={{ mt: 1, mb: 2, width: '47%' }}
+                >
+                  <Stack direction={'row'}>
+                    <GTWAvatar name={activity.title} size={45} />
+                    <Stack>
+                      <Typography
+                        variant="body1"
+                        fontWeight={400}
+                        sx={{ mx: 1.5 }}
+                      >
+                        {activity.title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        fontSize={14}
+                        fontWeight={400}
+                        sx={{ mt: 0.5, mx: 1.5 }}
+                      >
+                        {dayjs(activity.date).format(MONTH_DAY_FORMAT)}
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                  <IconButton>
+                    <ChevronRightOutlined />
+                  </IconButton>
+                </Stack>
+                <Divider />
+              </>
+            );
+          })}
+        </Box>
       </CustomTabPanel>
     </Box>
   );

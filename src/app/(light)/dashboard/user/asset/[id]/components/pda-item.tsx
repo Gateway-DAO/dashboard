@@ -2,8 +2,7 @@
 'use client';
 
 import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
-import CopyTextButton from '@/components/copy-text-button/copy-text-button';
-import Tags from '@/components/tags/tags';
+
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
 import {
@@ -25,6 +24,7 @@ import {
   Typography,
 } from '@mui/material';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import Image from 'next/image';
 
 type Props = {
   pda: any;
@@ -38,60 +38,68 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
         direction={'column'}
         sx={{ ...WIDTH_CENTERED, my: 2, mt: -5, mr: 40 }}
       >
-        <Stack
-          direction="column"
-          component={Card}
-          variant="outlined"
-          gap={8}
-          sx={{ bgcolor: '#E5DFEA' }}
-          alignItems="start"
-        >
-          <Stack direction={'row'}>
-            <Box sx={{ mt: 1.5, ml: 3.5 }}>
-              <GTWAvatar
-                name={pda?.issuer?.username}
-                alt={pda?.issuer?.username}
-                size={30}
-              />
-            </Box>
-            <Typography
-              variant="body2"
-              id="pda-title"
-              sx={{ fontSize: 16, my: 2, mx: 2, fontWeight: 700 }}
-            >
-              {pda?.issuer?.username}
-            </Typography>
-          </Stack>
-          <Typography
-            variant="body2"
-            id="pda-title"
-            sx={{ fontSize: { xs: 20, md: 34 }, mx: 4, my: 2, fontWeight: 400 }}
-          >
-            {pda?.dataAsset?.title}
-          </Typography>
-        </Stack>
-        <Tags tags={pda?.dataAsset?.dataModel?.tags as string[]} />
-        <Typography sx={{ mb: 3 }}>{pda?.dataAsset?.description}</Typography>
-        {/* <PdaCardInfo pda={pda} isProofPda={isProofPda} /> */}
-        {!isProofPda && (
+        {pda.structured ? (
           <>
-            {/* <SharedWithCard pda={pda} />
-            <ShareCopy pda={pda} />
-            <IssuerPDAActions pda={pda} /> */}
-            {/* Activies backloged 09/02 */}
-            {/* <Activities
-              activities={pda.activities}
-              activitiesTextsType={{
-                Issued: pdaLocale.activities.issued,
-                Revoked: pdaLocale.activities.revoked,
-                Suspended: pdaLocale.activities.suspended,
-                Reactivated: pdaLocale.activities.reactivated,
-                Updated: pdaLocale.activities.updated,
-              }}
-            /> */}
+            <Stack
+              direction="column"
+              component={Card}
+              variant="outlined"
+              gap={8}
+              sx={{ bgcolor: '#E5DFEA' }}
+              alignItems="start"
+            >
+              <Stack direction={'row'}>
+                <Box sx={{ mt: 1.5, ml: 3.5 }}>
+                  <GTWAvatar
+                    name={pda?.issuer?.username}
+                    alt={pda?.issuer?.username}
+                    size={30}
+                  />
+                </Box>
+                <Typography
+                  variant="body2"
+                  id="pda-title"
+                  sx={{ fontSize: 16, my: 2, mx: 2, fontWeight: 700 }}
+                >
+                  {pda?.issuer?.username}
+                </Typography>
+              </Stack>
+              <Typography
+                variant="body2"
+                id="pda-title"
+                sx={{
+                  fontSize: { xs: 20, md: 34 },
+                  mx: 4,
+                  my: 2,
+                  fontWeight: 400,
+                }}
+              >
+                {pda?.dataAsset?.title}
+              </Typography>
+            </Stack>
+            <ClaimValuesList data={pda?.dataAsset?.claimArray} />
+          </>
+        ) : (
+          <>
+            <Stack
+              direction="column"
+              gap={8}
+              alignItems="start"
+            >
+              <Image
+                style={{
+                  objectFit: 'contain',
+                  aspectRatio: '16/9',
+                }}
+                width={570}
+                height={550}
+                className="feature-img"
+                src={'/images/static-file.png'}
+                alt={'static-file-image'}
+              />
+            </Stack>
           </>
         )}
-        <ClaimValuesList data={pda?.dataAsset?.claimArray} />
       </Stack>
     </>
   );
