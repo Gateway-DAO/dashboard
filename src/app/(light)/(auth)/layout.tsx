@@ -4,12 +4,12 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
 import { Box, Stack } from '@mui/material';
 
-import { style } from './style';
+import { GlobalStyle } from './style';
 
 export default function AuthLayout({ children }: PropsWithChildren) {
   return (
     <>
-      {style}
+      <GlobalStyle />
       <Stack
         direction="row"
         sx={{

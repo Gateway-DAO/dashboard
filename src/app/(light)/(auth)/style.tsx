@@ -1,7 +1,7 @@
 'use client';
 import { GlobalStyles } from '@mui/material';
 
-export const style = (
+export const GlobalStyle = () => (
   <GlobalStyles
     styles={(theme) => ({
       [theme.breakpoints.up('md')]: {
