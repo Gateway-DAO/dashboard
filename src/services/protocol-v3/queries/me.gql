@@ -14,5 +14,4 @@ query me {
     }
   }
   myPDACount
-  myActivitiesCount
 }

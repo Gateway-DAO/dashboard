@@ -1,6 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 import getDecryptedData from '../libs/get-decrypted-data';
+import getMe from '../libs/get-me';
 
 const credentialJwt = CredentialsProvider({
   id: 'credential-jwt',
@@ -20,9 +21,12 @@ const credentialJwt = CredentialsProvider({
     }
     const { token, privateKey } = credentials;
     //TODO: Temporary solution to validate the token during login
+    const { me: user, ...protocolV3Data } = await getMe(token);
     const data = await getDecryptedData(token, privateKey);
     return {
+      ...protocolV3Data,
       ...data,
+      user,
       token,
       privateKey,
     };
