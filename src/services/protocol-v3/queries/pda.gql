@@ -1,0 +1,12 @@
+query pdas {
+  PDAs {
+    id
+    activity {
+      id
+    }
+    fileName
+    issuanceDate
+    mimeType
+    structured
+  }
+}

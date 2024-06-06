@@ -16,7 +16,6 @@ export default function LoginQrCode() {
   const socketRef = useRef<Socket | null>(null);
   const [qrCodeData, setQrCodeData] = useState<string | undefined>();
   const theme = useTheme();
-  const session = useSession();
   const router = useRouter();
   const isDesktop = useMediaQuery(
     theme.breakpoints.up('md').replace('@media ', ''),

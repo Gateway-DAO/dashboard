@@ -2,8 +2,7 @@
 'use client';
 
 import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
-import CopyTextButton from '@/components/copy-text-button/copy-text-button';
-import Tags from '@/components/tags/tags';
+
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
 import {
@@ -14,107 +13,94 @@ import {
 import { useToggle } from '@react-hookz/web';
 import { PartialDeep } from 'type-fest';
 
-import { Divider, IconButton, Stack, Typography } from '@mui/material';
-
-import IssuerPDAActions from './issuer-pda-actions';
-import ModalImage from './modal-image';
-import PdaCardInfo from './pda-card-info';
-import ShareCopy from './share-copy/share-copy';
-import SharedWithCard from './shared-with-card';
+import {
+  Box,
+  Card,
+  Divider,
+  IconButton,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from '@mui/material';
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import Image from 'next/image';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDA'] | null>;
+  pda: any;
   isProofPda?: boolean;
 };
 
 export default function PDAItem({ pda, isProofPda = false }: Props) {
-  const [showImagePDAModal, toggleShowImagePDAModal] = useToggle(false);
-
   return (
     <>
-      <Stack sx={{ ...WIDTH_CENTERED, my: 2 }}>
-        <Stack direction="row" alignItems="center">
-          <Typography
-            variant="body2"
-            sx={{
-              color: 'text.secondary',
-              fontWeight: 600,
-              textDecoration: 'none',
-            }}
-          >
-            ID
-          </Typography>
-          <CopyTextButton text={pda?.id as string} limit={12} size={14} />
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          gap={5}
-          alignItems="center"
-        >
-          <Typography
-            variant="h3"
-            id="pda-title"
-            sx={{ fontSize: { xs: 24, md: 48 }, my: 2, fontWeight: 400 }}
-          >
-            {pda?.dataAsset?.title}
-          </Typography>
-          {pda?.dataAsset?.image && (
-            <>
-              <IconButton onClick={toggleShowImagePDAModal}>
-                <img
-                  src={pda?.dataAsset?.image ?? ''}
-                  alt={pda?.dataAsset?.title ?? ''}
-                  width={96}
-                  height={96}
-                  style={{ borderRadius: 16 }}
-                />
-              </IconButton>
-              <ModalImage
-                open={showImagePDAModal}
-                handleClose={toggleShowImagePDAModal}
-                handleOpen={() => console.log('open')}
-                image={pda?.dataAsset?.image}
-                swipeableDrawer
-              />
-            </>
-          )}
-        </Stack>
-        <Tags tags={pda?.dataAsset?.dataModel?.tags as string[]} />
-        <Typography sx={{ mb: 3 }}>{pda?.dataAsset?.description}</Typography>
-        <PdaCardInfo pda={pda} isProofPda={isProofPda} />
-        {!isProofPda && (
+      <Stack
+        direction={'column'}
+        sx={{ ...WIDTH_CENTERED, my: 2, mt: -5, mr: 40 }}
+      >
+        {pda.structured ? (
           <>
-            <SharedWithCard pda={pda} />
-            <ShareCopy pda={pda} />
-            <IssuerPDAActions pda={pda} />
-            {/* Activies backloged 09/02 */}
-            {/* <Activities
-              activities={pda.activities}
-              activitiesTextsType={{
-                Issued: pdaLocale.activities.issued,
-                Revoked: pdaLocale.activities.revoked,
-                Suspended: pdaLocale.activities.suspended,
-                Reactivated: pdaLocale.activities.reactivated,
-                Updated: pdaLocale.activities.updated,
-              }}
-            /> */}
+            <Stack
+              direction="column"
+              component={Card}
+              variant="outlined"
+              gap={8}
+              sx={{ bgcolor: '#E5DFEA' }}
+              alignItems="start"
+            >
+              <Stack direction={'row'}>
+                <Box sx={{ mt: 1.5, ml: 3.5 }}>
+                  <GTWAvatar
+                    name={pda?.issuer?.username}
+                    alt={pda?.issuer?.username}
+                    size={30}
+                  />
+                </Box>
+                <Typography
+                  variant="body2"
+                  id="pda-title"
+                  sx={{ fontSize: 16, my: 2, mx: 2, fontWeight: 700 }}
+                >
+                  {pda?.issuer?.username}
+                </Typography>
+              </Stack>
+              <Typography
+                variant="body2"
+                id="pda-title"
+                sx={{
+                  fontSize: { xs: 20, md: 34 },
+                  mx: 4,
+                  my: 2,
+                  fontWeight: 400,
+                }}
+              >
+                {pda?.dataAsset?.title}
+              </Typography>
+            </Stack>
+            <ClaimValuesList data={pda?.dataAsset?.claimArray} />
+          </>
+        ) : (
+          <>
+            <Stack
+              direction="column"
+              gap={8}
+              alignItems="start"
+            >
+              <Image
+                style={{
+                  objectFit: 'contain',
+                  aspectRatio: '16/9',
+                }}
+                width={570}
+                height={550}
+                className="feature-img"
+                src={'/images/static-file.png'}
+                alt={'static-file-image'}
+              />
+            </Stack>
           </>
         )}
       </Stack>
-      <Divider
-        sx={{
-          mb: 5,
-          mt: 2,
-          mx: NEGATIVE_CONTAINER_PX,
-          px: CONTAINER_PX,
-        }}
-      />
-
-      <ClaimValuesList
-        title={pdaLocale.claim}
-        data={pda?.dataAsset?.claimArray}
-      />
     </>
   );
 }
