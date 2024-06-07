@@ -11,6 +11,7 @@ export const nextAuthConfig: NextAuthOptions = {
   providers: [credentialJwt],
   session: {
     strategy: 'jwt',
+    maxAge: 60 * 60, // 1 hour
   },
   jwt: {
     maxAge: 60 * 60, // 1 hour
