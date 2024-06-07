@@ -1,6 +1,6 @@
 'use client';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { signIn, signOut } from 'next-auth/react';
+import { useRouter } from 'next-nprogress-bar';
 import { useEffect, useCallback, useRef, useState } from 'react';
 
 import GtwQRCode from '@/components/gtw-qr/gtw-qr-code';
