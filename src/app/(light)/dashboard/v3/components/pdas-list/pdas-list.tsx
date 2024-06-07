@@ -74,7 +74,6 @@ export default function PDAsList() {
           toggleOpen();
         }}
         pageSizeOptions={[5, 10]}
-        checkboxSelection
         sx={gridWithoutNegativeMargin}
       />
       {!isLoading && !pdas.length && (

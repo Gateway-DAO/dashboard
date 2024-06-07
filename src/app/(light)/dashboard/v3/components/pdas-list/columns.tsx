@@ -9,7 +9,11 @@ import dayjs from 'dayjs';
 
 import DownloadIcon from '@mui/icons-material/Download';
 import { Stack, Typography } from '@mui/material';
-import { GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
+import {
+  GridActionsCellItem,
+  GridColDef,
+  renderActionsCell,
+} from '@mui/x-data-grid';
 
 export const columns: GridColDef<PrivateDataAsset>[] = [
   {
@@ -74,6 +78,11 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
   {
     field: 'action',
     type: 'actions',
+    renderCell(params) {
+      if (params.row.structured) return null;
+
+      return renderActionsCell(params);
+    },
     getActions: () => [
       // <GridActionsCellItem
       //   key={1}
