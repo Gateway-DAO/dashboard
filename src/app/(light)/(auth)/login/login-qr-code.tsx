@@ -8,8 +8,16 @@ import LoadingQRCode from '@/components/gtw-qr/loading-qr-code';
 import { LoginSessionV3 } from '@/types/user';
 import { onSaveSVG } from '@/utils/save-svg';
 import { useMediaQuery } from '@react-hookz/web';
+import { useMutation } from '@tanstack/react-query';
 import { Socket, io } from 'socket.io-client';
 
+import { CheckCircle } from '@mui/icons-material';
+import {
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  Typography,
+} from '@mui/material';
 import { useTheme } from '@mui/system';
 
 export default function LoginQrCode() {
@@ -26,27 +34,36 @@ export default function LoginQrCode() {
 
   const qrRef = useRef<SVGElement>(null);
 
-  const login = async (token: string, privateKey: string) => {
-    try {
-      const res = await signIn('credential-jwt', {
-        token,
-        privateKey,
-        redirect: false,
-      });
+  const login = useMutation({
+    mutationKey: ['login'],
+    mutationFn: async ({
+      token,
+      privateKey,
+    }: {
+      token: string;
+      privateKey: string;
+    }) => {
+      try {
+        const res = await signIn('credential-jwt', {
+          token,
+          privateKey,
+          redirect: false,
+        });
 
-      if (!res) {
-        throw new Error("Couldn't login");
+        if (!res) {
+          throw new Error("Couldn't login");
+        }
+
+        if (res.error) {
+          throw res.error;
+        }
+
+        router.push('/dashboard/v3');
+      } catch (e) {
+        console.log(e);
       }
-
-      if (res.error) {
-        throw res.error;
-      }
-
-      router.push('/dashboard/v3');
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    },
+  });
 
   const initializeSocket = useCallback(() => {
     if (socketRef.current) {
@@ -68,7 +85,7 @@ export default function LoginQrCode() {
     socketRef.current.on('login', async (event: LoginSessionV3) => {
       console.log(`[socket] login`, event);
       const { token, privateKey } = event;
-      login(token, privateKey);
+      login.mutate({ token, privateKey });
     });
 
     socketRef.current.on('disconnect', (e) => {
@@ -76,16 +93,6 @@ export default function LoginQrCode() {
       setQrCodeData(undefined);
     });
   }, []);
-
-  const onSignOut = async () => {
-    try {
-      await signOut({
-        redirect: false,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   useEffect(() => {
     if (isDesktop) {
@@ -105,6 +112,28 @@ export default function LoginQrCode() {
       ) : (
         <LoadingQRCode />
       )}
+      <Dialog open={login.isLoading || login.isSuccess} fullWidth maxWidth="xs">
+        {login.isLoading && (
+          <>
+            <DialogTitle>
+              <CircularProgress color="primary" size={18} /> Logging in...
+            </DialogTitle>
+            <Typography variant="body2" px={3} pb={3} pt={1}>
+              Getting your session ready
+            </Typography>
+          </>
+        )}
+        {login.isSuccess && (
+          <>
+            <DialogTitle>
+              <CheckCircle color="success" fontSize="small" /> Logged in
+            </DialogTitle>
+            <Typography variant="body2" px={3} pb={3} pt={1}>
+              You'll enter shortly
+            </Typography>
+          </>
+        )}
+      </Dialog>
     </>
   );
 }

@@ -22,8 +22,8 @@ export default function LoadingQRCode({ size }: Pick<QRCodeProps, 'size'>) {
             backgroundColor: 'white',
             p: 1,
             borderRadius: '100%',
-            width: 64,
-            height: 64,
+            width: 88,
+            height: 88,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -34,7 +34,7 @@ export default function LoadingQRCode({ size }: Pick<QRCodeProps, 'size'>) {
       </Box>
       <Box
         sx={{
-          opacity: 0.5,
+          opacity: 0.25,
         }}
       >
         <GtwQRCode size={size} value={''} />
