@@ -150,12 +150,11 @@ export default function ShareCopy({ pda }: Props) {
                     component="h3"
                     fontSize={34}
                     id="share-a-copy-title"
+                    sx={{ mb: 6 }}
                   >
                     {pdaLocale.share.share_a_copy_with}
                   </Typography>
-                  <Typography sx={{ mb: 6 }}>
-                    {pdaLocale.share.share_a_copy_description}
-                  </Typography>
+
                   <ShareCopyFormField />
                   <LoadingButton
                     variant="contained"

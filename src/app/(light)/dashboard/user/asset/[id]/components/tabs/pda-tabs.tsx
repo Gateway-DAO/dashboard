@@ -1,8 +1,9 @@
-import { Tabs, Tab, Typography, Divider } from '@mui/material';
-import { Box } from '@mui/system';
+import { Tabs, Tab, Typography, Divider, Box, Stack } from '@mui/material';
 import { useState } from 'react';
 import PDASharingTab from './pda-sharing-tab';
 import PDADetailsTab from './pda-details-tab';
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { ContentCopy } from '@mui/icons-material';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -47,15 +48,62 @@ export function RowText({ title }: { title: string }) {
   );
 }
 
+export function RowSecondaryText({ text }: { text: string }) {
+  return (
+    <Typography variant="body2" sx={{ mt: 1, mb: 1.5 }}>
+      {text}
+    </Typography>
+  );
+}
+
+export function UserDetails({
+  username,
+  did,
+  copy,
+}: {
+  username: string;
+  did: string;
+  copy: (text: string) => Promise<void>;
+}) {
+  return (
+    <Stack direction={'row'} sx={{ mt: 1, mb: 2 }}>
+      <GTWAvatar name={username} size={45} />
+      <Stack
+        direction={'column'}
+        onClick={() => copy(did)}
+        sx={{ mx: 2, mt: 1 }}
+      >
+        <Typography variant="subtitle1" sx={{ mt: -1, mx: 1 }}>
+          {username}
+        </Typography>
+        <Stack direction={'row'} sx={{ mt: -0.5 }}>
+          <Typography variant="caption" fontWeight={400} fontSize={12}>
+            {did}
+          </Typography>
+          <ContentCopy
+            sx={{
+              fontSize: 16,
+              color: 'text.disabled',
+              mt: 0.5,
+              mx: 1.2,
+              cursor: 'pointer',
+            }}
+          />
+        </Stack>
+      </Stack>
+    </Stack>
+  );
+}
+
 export default function PDATabs({ pda }: { pda: any }) {
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const handleChange = (event: React.SyntheticEvent, newTab: number) => {
+    setValue(newTab);
   };
 
   return (
-    <Box>
+    <>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -70,6 +118,6 @@ export default function PDATabs({ pda }: { pda: any }) {
       <CustomTabPanel value={value} index={1}>
         <PDASharingTab pda={pda} />
       </CustomTabPanel>
-    </Box>
+    </>
   );
 }
