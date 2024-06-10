@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import Wrapper from '@/app/(landing)/components/wrapper';
 import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
@@ -7,7 +7,7 @@ import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-
 import { Box, Button, Stack, Typography } from '@mui/material';
 
 import { Card } from './component/card';
-import { cards } from './data';
+import cards from './data.json';
 import styles from './hero.module.scss';
 
 const categories = [
