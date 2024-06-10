@@ -44,7 +44,7 @@ export const common = {
     cancel: 'Cancel',
     check_data_proof: 'Check shared data',
     share_now: 'Share now',
-    share_a_copy: 'Share a copy',
+    share_a_copy: 'Share',
     revoke_access: 'Revoke access',
     hide_activity: 'Hide Activity',
     show_activity: 'See Activity',
