@@ -35,7 +35,7 @@ import ShareCopyFormField from './share-copy-form-fields';
 import ShareCopyFormSuccessfully from './share-copy-form-successfully';
 
 type Props = {
-  pda: PartialDeep<PdaQuery['PDA'] | null>;
+  pda: any;
 };
 
 export default function ShareCopy({ pda }: Props) {
@@ -111,14 +111,14 @@ export default function ShareCopy({ pda }: Props) {
 
   const isOwner = useMemo(
     () =>
-      session.user.username === pda?.dataAsset?.owner?.gatewayId &&
+      session?.user?.username === pda?.dataAsset?.owner?.gatewayId &&
       !organization,
     [pda, session]
   );
 
   return (
     <>
-      {isOwner && pda?.status === PdaStatus.Valid && (
+      {isOwner && (
         <>
           <Button
             variant="contained"
@@ -156,9 +156,7 @@ export default function ShareCopy({ pda }: Props) {
                   <Typography sx={{ mb: 6 }}>
                     {pdaLocale.share.share_a_copy_description}
                   </Typography>
-                  <ShareCopyFormField
-                    cost={pda.dataAsset?.dataModel?.consumptionPrice ?? 0}
-                  />
+                  <ShareCopyFormField />
                   <LoadingButton
                     variant="contained"
                     type="submit"

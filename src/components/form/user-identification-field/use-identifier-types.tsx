@@ -30,18 +30,6 @@ export const useIdentifierTypes = () => {
         />
       ),
     },
-    {
-      value: IdentifierType.Evm,
-      name: common.identifier.types.evm_wallet,
-      icon: <FaEthereum color={theme.palette.text.secondary} fontSize="22" />,
-    },
-    {
-      value: IdentifierType.Solana,
-      name: common.identifier.types.solana_wallet,
-      icon: (
-        <TbCurrencySolana color={theme.palette.text.secondary} fontSize="22" />
-      ),
-    },
   ];
   return identifierTypes;
 };

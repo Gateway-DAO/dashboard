@@ -8,8 +8,8 @@ import routes from '@/constants/routes';
 import { getPDA } from '@/services/server-functions/pda';
 import { getSessionOrg } from '@/utils/currentOrg';
 import PDAItem from '../../../user/asset/[id]/components/pda-item';
-import { Stack, Box } from '@mui/material';
-import PDADetails from '../../../user/asset/[id]/components/pda-details';
+import { Stack, Box, Button } from '@mui/material';
+import PDAMetaDataDetails from '../../../user/asset/[id]/components/pda-meta-data-details';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
 // export async function generateMetadata({
@@ -167,7 +167,6 @@ export default async function PDAPage({
         width="100%"
         sx={{
           px: CONTAINER_PX,
-
           ml: {
             xs: 0,
             lg: '600px',
@@ -176,7 +175,7 @@ export default async function PDAPage({
           mt: -3,
         }}
       >
-        <PDADetails pda={pda} />
+        <PDAMetaDataDetails pda={pda} />
       </Box>
     </Stack>
   );

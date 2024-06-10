@@ -26,29 +26,6 @@ const identifierValueSchema: ZodType<zod.infer<typeof fallbackSchema>> =
       type: zod.literal(UserIdentifierType.Email),
       value: value.email(),
     }),
-    zod.object({
-      type: zod.literal(UserIdentifierType.Evm),
-      value: value.regex(RegExp(ethRegex), {
-        message: 'Invalid EVM Wallet',
-      }),
-    }),
-    zod.object({
-      type: zod.literal(UserIdentifierType.Solana),
-      value: zod
-        .string()
-        .min(33, 'Invalid Solana Wallet')
-        .refine(
-          async (wallet: string) => {
-            try {
-              const publicKey = new PublicKey(wallet);
-              return PublicKey.isOnCurve(publicKey.toBytes());
-            } catch {
-              return false;
-            }
-          },
-          { message: 'Invalid Solana Wallet' }
-        ),
-    }),
   ]);
 
 export type IdentifierValueSchema = zod.infer<typeof identifierValueSchema>;
