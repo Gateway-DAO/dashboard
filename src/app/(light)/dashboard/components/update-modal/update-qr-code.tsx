@@ -6,7 +6,15 @@ import GtwQRCode from '@/components/gtw-qr/gtw-qr-code';
 import LoadingQRCode from '@/components/gtw-qr/loading-qr-code';
 import { LoginSessionV3 } from '@/types/user';
 import { onSaveSVG } from '@/utils/save-svg';
+import { useMutation } from '@tanstack/react-query';
 import { Socket, io } from 'socket.io-client';
+
+import {
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  Typography,
+} from '@mui/material';
 
 type Props = {
   isOpen: boolean;
@@ -19,6 +27,39 @@ export default function UpdateQrCode({ isOpen, onClose }: Props) {
   const [qrCodeData, setQrCodeData] = useState<string | undefined>();
   const [isMounted, setIsMounted] = useState(false);
   const qrRef = useRef<SVGElement>(null);
+
+  const update = useMutation({
+    mutationKey: ['update'],
+    mutationFn: async ({
+      token,
+      privateKey,
+    }: {
+      token: string;
+      privateKey: string;
+    }) => {
+      try {
+        const res = await signIn('credential-jwt', {
+          token,
+          privateKey,
+          redirect: false,
+        });
+
+        if (!res) {
+          throw new Error("Couldn't update");
+        }
+
+        if (res.error) {
+          throw res.error;
+        }
+        //TODO: Fix performance
+        onClose();
+        socketRef.current?.disconnect();
+        setIsMounted(false);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  });
 
   const initializeSocket = useCallback(() => {
     if (socketRef.current) {
@@ -41,7 +82,7 @@ export default function UpdateQrCode({ isOpen, onClose }: Props) {
     socketRef.current.on('update', async (event: LoginSessionV3) => {
       console.log(`[socket] update`, event);
       const { token, privateKey } = event;
-      update(token, privateKey);
+      update.mutate({ token, privateKey });
     });
 
     socketRef.current.on('disconnect', (e) => {
@@ -49,30 +90,6 @@ export default function UpdateQrCode({ isOpen, onClose }: Props) {
       setQrCodeData(undefined);
     });
   }, []);
-
-  const update = async (token: string, privateKey: string) => {
-    try {
-      const res = await signIn('credential-jwt', {
-        token,
-        privateKey,
-        redirect: false,
-      });
-
-      if (!res) {
-        throw new Error("Couldn't update");
-      }
-
-      if (res.error) {
-        throw res.error;
-      }
-      //TODO: Fix performance
-      onClose();
-      socketRef.current?.disconnect();
-      setIsMounted(false);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   useEffect(() => {
     if (isOpen && (!isMounted || !socketRef.current?.connected)) {
@@ -93,6 +110,14 @@ export default function UpdateQrCode({ isOpen, onClose }: Props) {
       ) : (
         <LoadingQRCode />
       )}
+      <Dialog open={update.isLoading} fullWidth maxWidth="xs">
+        <DialogTitle>
+          <CircularProgress color="primary" size={18} /> Updating...
+        </DialogTitle>
+        <Typography variant="body2" px={3} pb={3} pt={1}>
+          Getting your new data
+        </Typography>
+      </Dialog>
     </>
   );
 }
