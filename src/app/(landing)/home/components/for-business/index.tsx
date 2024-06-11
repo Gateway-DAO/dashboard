@@ -65,7 +65,7 @@ export default function ForBusiness() {
 
           <p className={joinClasses(styles.item_text, styles['item_text--white'])}>
             Gateway enables teams to give their users control over personal <br/>
-            data, allowing secure requests and sharing across the world.
+            data, allowing secure requests and sharing across the web.
           </p>
 
           <div className={styles.buttons}>
