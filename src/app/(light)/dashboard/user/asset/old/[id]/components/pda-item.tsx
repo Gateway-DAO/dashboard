@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
+import Image from 'next/image';
 
+import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
+import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { pda as pdaLocale } from '@/locale/en/pda';
 import { PdaQuery } from '@/services/protocol/types';
 import {
@@ -23,8 +25,6 @@ import {
   Tabs,
   Typography,
 } from '@mui/material';
-import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import Image from 'next/image';
 
 type Props = {
   pda: any;
@@ -81,11 +81,7 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
           </>
         ) : (
           <>
-            <Stack
-              direction="column"
-              gap={8}
-              alignItems="start"
-            >
+            <Stack direction="column" gap={8} alignItems="start">
               <Image
                 style={{
                   objectFit: 'contain',

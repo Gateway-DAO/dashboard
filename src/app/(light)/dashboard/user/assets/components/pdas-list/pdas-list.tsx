@@ -8,6 +8,7 @@ import {
   defaultGridConfiguration,
   gridWithoutNegativeMargin,
 } from '@/components/data-grid/grid-default';
+import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';
 import { api } from '@/services/protocol-v3/api';
 import { PrivateDataAsset } from '@/services/protocol-v3/types';
@@ -18,7 +19,7 @@ import { Typography } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 
-import UpdateModal from '../../../components/update-modal/update-modal';
+import UpdateModal from '../../../../components/update-modal/update-modal';
 import { columns } from './columns';
 
 export default function PDAsList() {
@@ -66,10 +67,10 @@ export default function PDAsList() {
           if (!isUpdate) {
             // if middle click open new tab
             if (event.button === 1) {
-              return window.open(`/dashboard/v3/asset/${params.id}`);
+              return window.open(routes.dashboard.user.asset(params.id));
             }
 
-            return router.push(`/dashboard/v3/asset/${params.id}`);
+            return router.push(routes.dashboard.user.asset(params.id));
           }
           toggleOpen();
         }}

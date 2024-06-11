@@ -28,10 +28,9 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
   },
   {
     name: 'My Data',
-    href: routes.dashboard.user.receivedAssets,
+    href: routes.dashboard.user.myAssets,
     activeHrefs: [
-      routes.dashboard.user.receivedAssets,
-      routes.dashboard.user.issuedAssets,
+      routes.dashboard.user.myAssets,
       routes.dashboard.user.issue,
       routes.dashboard.user.issuePda(''),
       routes.dashboard.user.asset(''),
@@ -40,7 +39,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     navbar: true,
   },
   {
-    name: 'Shared With me',
+    name: 'Shared with me',
     href: routes.dashboard.user.requests,
     activeHrefs: [
       routes.dashboard.user.requests,

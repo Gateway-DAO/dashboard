@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import PDAPage from '@/app/(light)/dashboard/user/asset/[id]/page';
+import PDAPage from '@/app/(light)/dashboard/user/asset/old/[id]/page';
 import { getPDA } from '@/services/server-functions/pda';
 
 export async function generateMetadata({

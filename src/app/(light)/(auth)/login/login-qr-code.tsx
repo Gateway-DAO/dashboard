@@ -5,6 +5,7 @@ import { useEffect, useCallback, useRef, useState } from 'react';
 
 import GtwQRCode from '@/components/gtw-qr/gtw-qr-code';
 import LoadingQRCode from '@/components/gtw-qr/loading-qr-code';
+import routes from '@/constants/routes';
 import { LoginSessionV3 } from '@/types/user';
 import { onSaveSVG } from '@/utils/save-svg';
 import { useMediaQuery } from '@react-hookz/web';
@@ -58,7 +59,7 @@ export default function LoginQrCode() {
           throw res.error;
         }
 
-        router.push('/dashboard/v3');
+        router.push(routes.dashboard.user.myAssets);
       } catch (e) {
         console.log(e);
       }

@@ -55,7 +55,7 @@ export default function LoginPage() {
         }}
       >
         <AuthContentBox component={Typography}>
-          Don't have a Gateway ID?{' '}
+          Don't have a Gateway ID?
           <MuiLink component={Link} href={routes.signUp}>
             Sign up
           </MuiLink>

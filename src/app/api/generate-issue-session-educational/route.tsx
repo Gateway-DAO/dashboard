@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     const params = {
       widgetKey: process.env.WIDGET_KEY,
       dataModelId: process.env.DATA_MODEL_EDUCATIONAL,
-      callbackUrl: body.origin + routes.dashboard.user.receivedAssets,
+      callbackUrl: body.origin + routes.dashboard.user.myAssets,
       claim: body.claim,
     };
 

@@ -3,10 +3,9 @@
 import TitleLayout from '@/components/title-layout/title-layout';
 import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';
-import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 
 import AddIcon from '@mui/icons-material/Add';
-import { Button, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 
 import PDAsList from './components/pdas-list/pdas-list';

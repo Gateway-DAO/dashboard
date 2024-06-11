@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import '@testing-library/jest-dom';
-import ShareCopyFormField from '../asset/[id]/components/share-copy/share-copy-form-fields';
+import ShareCopyFormField from '../asset/old/[id]/components/share-copy/share-copy-form-fields';
 
 describe('Dashboard User Home', () => {
   test.skip('renders a heading', () => {
