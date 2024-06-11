@@ -21,8 +21,13 @@ type Props = {
 export const Card = (props: Props) => {
   return (
     <Stack
-      component={Paper}
-      sx={{ ':hover': { boxShadow: '6px -4px 10px rgba(119, 26, 201, 0.1)' } }}
+      sx={{
+        ':hover': { boxShadow: '6px 8px 20px rgba(119, 26, 201, 0.1)' },
+        borderRadius: '16px',
+        padding: '1px',
+        border: '1px solid rgba(0, 0, 0, 0.12)',
+        background: '#fff',
+      }}
     >
       <CardContent
         component={Link}
@@ -40,10 +45,8 @@ export const Card = (props: Props) => {
           alt={`/ecosystem-card-images/${props.img}.svg`}
         />
         <Box marginTop={10}>
-          <Typography variant="subtitle1" gutterBottom>
-            {props.name}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
+          <Typography variant="subtitle1">{props.name}</Typography>
+          <Typography variant="body1" fontWeight={300}>
             {props.description}
           </Typography>
           <Stack direction="row" gap={1} mt={2}>
