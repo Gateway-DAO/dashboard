@@ -550,7 +550,7 @@ video player */
   width: 80px;
 }
 
-@media (max-width: 300px) {
+@media (max-width: 400px) {
   .kg-video-volume-slider {
     display: none;
   }
