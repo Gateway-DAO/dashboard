@@ -121,10 +121,6 @@ export default function ShareCopy({ pda }: Props) {
       <Button
         variant="contained"
         size="large"
-        fullWidth
-        sx={{
-          mb: 2,
-        }}
         onClick={() => {
           router.push('#share-copy');
           setOpenShareCopy(true);

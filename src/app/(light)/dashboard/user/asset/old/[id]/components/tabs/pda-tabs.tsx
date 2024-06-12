@@ -48,7 +48,17 @@ export function IndividualDetailRow({
   children: React.ReactNode;
 }) {
   return (
-    <Stack direction="column" gap={1} sx={{ px: 4, py: 2 }}>
+    <Stack
+      direction="column"
+      gap={1}
+      sx={{
+        px: {
+          xs: 2,
+          lg: 4,
+        },
+        py: 2,
+      }}
+    >
       {children}
     </Stack>
   );

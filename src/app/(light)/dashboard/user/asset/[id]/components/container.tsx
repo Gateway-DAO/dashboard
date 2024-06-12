@@ -13,12 +13,22 @@ import { Stack } from '@mui/material';
 export function PageContainer({ children }: PropsWithChildren) {
   return (
     <Stack
-      direction="row"
+      direction={{
+        xs: 'column',
+        lg: 'row',
+      }}
       mr={NEGATIVE_CONTAINER_PX}
       alignItems="stretch"
       minHeight="100%"
       sx={(theme) => ({
-        mt: NEGATIVE_CONTAINER_PT,
+        mt: {
+          xs: 0,
+          lg: NEGATIVE_CONTAINER_PT.lg,
+        },
+        mr: {
+          xs: 0,
+          lg: NEGATIVE_CONTAINER_PX.lg,
+        },
         height: {
           xs: `calc(100% + ${theme.spacing(
             CONTAINER_PT.xs + CONTAINER_PB.xs

@@ -29,7 +29,13 @@ type Props = {
 export default function PDADetailPage({ pda, org, dataModel }: Props) {
   return (
     <PageContainer>
-      <Box flex="1" pr={CONTAINER_PX} pb={2}>
+      <Box
+        flex="1"
+        pr={{
+          lg: CONTAINER_PX.lg,
+        }}
+        pb={2}
+      >
         <TopBarContainer>
           <BackButton
             href={
@@ -74,7 +80,18 @@ export default function PDADetailPage({ pda, org, dataModel }: Props) {
       <Box
         sx={{
           flex: 1,
-          maxWidth: 400,
+          maxWidth: {
+            xs: WIDTH_CENTERED.maxWidth,
+            lg: 400,
+          },
+          mx: {
+            xs: 'auto',
+            lg: 0,
+          },
+          width: {
+            xs: '100%',
+            lg: 'auto',
+          },
           pt: CONTAINER_PT,
         }}
       >
