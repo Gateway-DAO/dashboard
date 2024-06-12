@@ -1,16 +1,26 @@
 import Tags from '@/components/tags/tags';
 import { DATE_FORMAT } from '@/constants/date';
+import { errorMessages } from '@/locale/en/errors';
+import { DataModelQuery, PrivateDataAsset } from '@/services/protocol-v3/types';
 import dayjs from 'dayjs';
+import { useSnackbar } from 'notistack';
+
+import { Divider } from '@mui/material';
+import { Stack } from '@mui/system';
+
 import {
   IndividualDetailRow,
   RowSecondaryText,
   RowText,
   UserDetails,
 } from './pda-tabs';
-import { errorMessages } from '@/locale/en/errors';
-import { useSnackbar } from 'notistack';
 
-export default function PDADetailsTab({ pda }: any) {
+type Props = {
+  pda: PrivateDataAsset;
+  dataModel: DataModelQuery['dataModel'];
+};
+
+export default function PDADetailsTab({ pda, dataModel }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const copy = async (text: string) => {
@@ -23,14 +33,10 @@ export default function PDADetailsTab({ pda }: any) {
   };
 
   return (
-    <>
+    <Stack pt={3} divider={<Divider />}>
       <IndividualDetailRow>
         <RowText title="Uploaded By" />
-        <UserDetails
-          did={pda.issuer.did}
-          username={pda.issuer.username}
-          copy={copy}
-        />
+        <UserDetails did={pda.issuer.did} copy={copy} />
       </IndividualDetailRow>
       <IndividualDetailRow>
         <RowText title="Owner" />
@@ -53,18 +59,20 @@ export default function PDADetailsTab({ pda }: any) {
         <>
           <IndividualDetailRow>
             <RowText title="Type" />
-            <RowSecondaryText text={pda.mimeType} />
+            <RowSecondaryText text={pda.mimeType!} />
           </IndividualDetailRow>
           <IndividualDetailRow>
             <RowText title="Size" />
-            <RowSecondaryText text={pda.size} />
+            <RowSecondaryText text={pda.size ? pda.size.toString() : ''} />
           </IndividualDetailRow>
         </>
       )}
-      <IndividualDetailRow>
-        <RowText title="Tags" />
-        <Tags tags={pda?.tags as string[]} />
-      </IndividualDetailRow>
-    </>
+      {pda?.tags.length && (
+        <IndividualDetailRow>
+          <RowText title="Tags" />
+          <Tags tags={pda?.tags} />
+        </IndividualDetailRow>
+      )}
+    </Stack>
   );
 }

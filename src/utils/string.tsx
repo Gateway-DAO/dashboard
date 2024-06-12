@@ -19,3 +19,18 @@ export const limitCharsCentered = (str: string, characters: number) => {
   }
   return str;
 };
+
+export const limitCharsOffset = (
+  str: string,
+  leftChards: number,
+  rightChars: number
+) => {
+  if (!str) return '';
+  if (str.length > leftChards + rightChars) {
+    return (
+      str.substring(0, leftChards) +
+      '...' +
+      str.substring(str.length - rightChars, str.length)
+    );
+  }
+};

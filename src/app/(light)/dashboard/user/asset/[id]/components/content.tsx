@@ -1,4 +1,5 @@
-'use client';
+import Image from 'next/image';
+
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
 import routes from '@/constants/routes';
@@ -7,18 +8,13 @@ import {
   Organization,
   DataModelQuery,
 } from '@/services/protocol-v3/types';
-import {
-  CONTAINER_PB,
-  CONTAINER_PT,
-  CONTAINER_PX,
-  NEGATIVE_CONTAINER_PT,
-  NEGATIVE_CONTAINER_PX,
-} from '@/theme/config/style-tokens';
+import { CONTAINER_PX, WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Stack, Box, Divider } from '@mui/material';
 
 import PDAMetaDataDetails from '../../old/[id]/components/pda-meta-data-details';
-import PDADetail from './pda-detail';
+import { PageContainer } from './container';
+import StructuredDetail from './pda-types/structured-detail';
 
 type Props = {
   pda: PrivateDataAsset;
@@ -28,23 +24,7 @@ type Props = {
 
 export default function PDADetailPage({ pda, org, dataModel }: Props) {
   return (
-    <Stack
-      direction="row"
-      mr={NEGATIVE_CONTAINER_PX}
-      alignItems="stretch"
-      minHeight="100%"
-      sx={(theme) => ({
-        mt: NEGATIVE_CONTAINER_PT,
-        height: {
-          xs: `calc(100% + ${theme.spacing(
-            CONTAINER_PT.xs + CONTAINER_PB.xs
-          )})`,
-          lg: `calc(100% + ${theme.spacing(
-            CONTAINER_PT.lg + CONTAINER_PB.lg
-          )})`,
-        },
-      })}
-    >
+    <PageContainer>
       <Box flex="1" pr={CONTAINER_PX} pb={2}>
         <TopBarContainer>
           <BackButton
@@ -63,7 +43,27 @@ export default function PDADetailPage({ pda, org, dataModel }: Props) {
             height: '100%',
           }}
         >
-          <PDADetail pda={pda} dataModel={dataModel} />
+          <Stack direction={'column'} sx={WIDTH_CENTERED}>
+            {pda.structured ? (
+              <StructuredDetail pda={pda} dataModel={dataModel} />
+            ) : (
+              <>
+                <Stack direction="column" gap={8} alignItems="start">
+                  <Image
+                    style={{
+                      objectFit: 'contain',
+                      aspectRatio: '16/9',
+                    }}
+                    width={570}
+                    height={550}
+                    className="feature-img"
+                    src={'/images/static-file.png'}
+                    alt={'static-file-image'}
+                  />
+                </Stack>
+              </>
+            )}
+          </Stack>
         </Stack>
       </Box>
       <Divider orientation="vertical" flexItem />
@@ -74,8 +74,8 @@ export default function PDADetailPage({ pda, org, dataModel }: Props) {
           maxWidth: 400,
         }}
       >
-        <PDAMetaDataDetails pda={pda} />
+        <PDAMetaDataDetails pda={pda} dataModel={dataModel} />
       </Box>
-    </Stack>
+    </PageContainer>
   );
 }

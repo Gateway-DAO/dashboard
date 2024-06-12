@@ -1,7 +1,7 @@
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 import { api } from '@/services/protocol-v3/api';
 
-import PDADetailPage from './components/pda-detail-page';
+import PDADetailPage from './components/content';
 
 export default async function PDAPage({
   params,

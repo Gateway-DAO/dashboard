@@ -1,9 +1,24 @@
-import { Tabs, Tab, Typography, Divider, Box, Stack } from '@mui/material';
 import { useState } from 'react';
-import PDASharingTab from './pda-sharing-tab';
-import PDADetailsTab from './pda-details-tab';
+
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { DataModelQuery, PrivateDataAsset } from '@/services/protocol-v3/types';
+import { limitCharsCentered, limitCharsOffset } from '@/utils/string';
+
 import { ContentCopy } from '@mui/icons-material';
+import {
+  Tabs,
+  Tab,
+  Typography,
+  Divider,
+  Box,
+  Stack,
+  Button,
+  IconButton,
+} from '@mui/material';
+import { spacing } from '@mui/system';
+
+import PDADetailsTab from './pda-details-tab';
+import PDASharingTab from './pda-sharing-tab';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -32,12 +47,7 @@ export function IndividualDetailRow({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <Box sx={{ ml: 4, mt: 2 }}>{children}</Box>
-      <Divider />
-    </>
-  );
+  return <Box sx={{ px: 4, py: 2 }}>{children}</Box>;
 }
 
 export function RowText({ title }: { title: string }) {
@@ -61,41 +71,81 @@ export function UserDetails({
   did,
   copy,
 }: {
-  username: string;
+  username?: string | null;
   did: string;
   copy: (text: string) => Promise<void>;
 }) {
   return (
-    <Stack direction={'row'} sx={{ mt: 1, mb: 2 }}>
-      <GTWAvatar name={username} size={45} />
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyItems="flex-start"
+      borderRadius={0}
+    >
+      <GTWAvatar name={did} alt={username ?? did} size={45} />
       <Stack
-        direction={'column'}
-        onClick={() => copy(did)}
-        sx={{ mx: 2, mt: 1 }}
+        component="span"
+        direction={!!username ? 'column' : 'row'}
+        alignItems={!!username ? 'flex-start' : 'center'}
+        pl={2}
+        width="100%"
+        gap={!!username ? 0 : 1.2}
       >
-        <Typography variant="subtitle1" sx={{ mt: -1, mx: 1 }}>
-          {username}
+        <Typography component="span" variant="subtitle1" color="text.primary">
+          {username ?? limitCharsOffset(did, 15, 5)}
         </Typography>
-        <Stack direction={'row'} sx={{ mt: -0.5 }}>
-          <Typography variant="caption" fontWeight={400} fontSize={12}>
-            {did}
-          </Typography>
-          <ContentCopy
-            sx={{
-              fontSize: 16,
-              color: 'text.disabled',
-              mt: 0.5,
-              mx: 1.2,
-              cursor: 'pointer',
-            }}
-          />
-        </Stack>
+        {!!username ? (
+          <Stack
+            component="span"
+            direction="row"
+            alignItems="center"
+            lineHeight={1}
+            justifyContent="flex-start"
+            gap={1.2}
+            sx={{ mt: -1 }}
+          >
+            <Typography
+              component="span"
+              variant="caption"
+              fontWeight={400}
+              fontSize={12}
+              color="text.secondary"
+              lineHeight={1}
+              textOverflow="ellipsis"
+              overflow="hidden"
+            >
+              {limitCharsOffset(did, 19, 5)}
+            </Typography>
+            <IconButton onClick={() => copy(did)}>
+              <ContentCopy
+                sx={{
+                  fontSize: 16,
+                  color: 'text.disabled',
+                }}
+              />
+            </IconButton>
+          </Stack>
+        ) : (
+          <IconButton onClick={() => copy(did)}>
+            <ContentCopy
+              sx={{
+                fontSize: 16,
+                color: 'text.disabled',
+              }}
+            />
+          </IconButton>
+        )}
       </Stack>
     </Stack>
   );
 }
 
-export default function PDATabs({ pda }: { pda: any }) {
+type Props = {
+  pda: PrivateDataAsset;
+  dataModel: DataModelQuery['dataModel'];
+};
+
+export default function PDATabs({ pda, dataModel }: Props) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newTab: number) => {
@@ -107,13 +157,13 @@ export default function PDATabs({ pda }: { pda: any }) {
       <Tabs
         value={value}
         onChange={handleChange}
-        sx={{ borderBottom: 1, width: '100%', maxWidth: '500px' }}
+        sx={{ borderBottom: 1, width: '100%', borderColor: 'divider' }}
       >
         <Tab key={1} label="Details" sx={{ ml: 3.5 }} />
         <Tab key={2} label="Sharing" />
       </Tabs>
       <CustomTabPanel value={value} index={0}>
-        <PDADetailsTab pda={pda} />
+        <PDADetailsTab pda={pda} dataModel={dataModel} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <PDASharingTab pda={pda} />
