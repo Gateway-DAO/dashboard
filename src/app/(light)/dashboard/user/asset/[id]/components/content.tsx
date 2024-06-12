@@ -8,7 +8,11 @@ import {
   Organization,
   DataModelQuery,
 } from '@/services/protocol-v3/types';
-import { CONTAINER_PX, WIDTH_CENTERED } from '@/theme/config/style-tokens';
+import {
+  CONTAINER_PT,
+  CONTAINER_PX,
+  WIDTH_CENTERED,
+} from '@/theme/config/style-tokens';
 
 import { Stack, Box, Divider } from '@mui/material';
 
@@ -43,7 +47,7 @@ export default function PDADetailPage({ pda, org, dataModel }: Props) {
             height: '100%',
           }}
         >
-          <Stack direction={'column'} sx={WIDTH_CENTERED}>
+          <Stack direction={'column'}>
             {pda.structured ? (
               <StructuredDetail pda={pda} dataModel={dataModel} />
             ) : (
@@ -69,9 +73,9 @@ export default function PDADetailPage({ pda, org, dataModel }: Props) {
       <Divider orientation="vertical" flexItem />
       <Box
         sx={{
-          mt: 3,
           flex: 1,
           maxWidth: 400,
+          pt: CONTAINER_PT,
         }}
       >
         <PDAMetaDataDetails pda={pda} dataModel={dataModel} />

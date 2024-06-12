@@ -10,11 +10,11 @@ type BreakpointsValues = Required<
   Pick<BreakpointsValue<number>, 'xs' | 'md' | 'lg'>
 >;
 
-export const WIDTH_CENTERED: SxProps = {
+export const WIDTH_CENTERED = {
   maxWidth: 550,
   width: '100%',
   mx: 'auto',
-};
+} satisfies SxProps;
 
 export const CONTAINER_PX: BreakpointsValues = {
   xs: 3,

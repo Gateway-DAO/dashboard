@@ -36,7 +36,11 @@ export default function PDADetailsTab({ pda, dataModel }: Props) {
     <Stack pt={3} divider={<Divider />}>
       <IndividualDetailRow>
         <RowText title="Uploaded By" />
-        <UserDetails did={pda.issuer.did} copy={copy} />
+        <UserDetails
+          did={pda.issuer.did}
+          username={pda.issuer.username}
+          copy={copy}
+        />
       </IndividualDetailRow>
       <IndividualDetailRow>
         <RowText title="Owner" />

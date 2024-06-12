@@ -1,9 +1,10 @@
 import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import { DataModelQuery, PrivateDataAsset } from '@/services/protocol-v3/types';
+import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { claimToArray } from '@/utils/data-model';
 
-import { Box, Card, Stack, Typography } from '@mui/material';
+import { Card, Stack, Typography } from '@mui/material';
 type Props = {
   pda: PrivateDataAsset;
   dataModel: DataModelQuery['dataModel'];
@@ -12,27 +13,26 @@ type Props = {
 export default function StructuredDetail({ dataModel, pda }: Props) {
   const claimArray = claimToArray(pda.dataAsset?.claim, dataModel.schema);
   return (
-    <>
+    <Stack gap={2} sx={WIDTH_CENTERED}>
       <Stack
         direction="column"
         component={Card}
         variant="outlined"
-        gap={8}
+        gap={19.75}
         sx={{ bgcolor: '#E5DFEA' }}
         alignItems="start"
+        p={2}
       >
-        <Stack direction={'row'}>
-          <Box sx={{ mt: 1.5, ml: 3.5 }}>
-            <GTWAvatar
-              name={pda?.issuer?.did}
-              alt={pda?.issuer?.username ?? pda?.issuer?.did}
-              size={30}
-            />
-          </Box>
+        <Stack direction={'row'} alignItems="center" gap={2}>
+          <GTWAvatar
+            name={pda?.issuer?.did}
+            alt={pda?.issuer?.username ?? pda?.issuer?.did}
+            size={30}
+          />
           <Typography
             variant="body2"
             id="pda-title"
-            sx={{ fontSize: 16, my: 2, mx: 2, fontWeight: 700 }}
+            sx={{ fontSize: 16, fontWeight: 700 }}
           >
             {pda?.issuer?.username ?? pda?.issuer?.did}
           </Typography>
@@ -42,8 +42,6 @@ export default function StructuredDetail({ dataModel, pda }: Props) {
           id="pda-title"
           sx={{
             fontSize: { xs: 20, md: 34 },
-            mx: 4,
-            my: 2,
             fontWeight: 400,
           }}
         >
@@ -51,6 +49,6 @@ export default function StructuredDetail({ dataModel, pda }: Props) {
         </Typography>
       </Stack>
       <ClaimValuesList data={claimArray} />
-    </>
+    </Stack>
   );
 }

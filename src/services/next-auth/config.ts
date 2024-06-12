@@ -25,15 +25,20 @@ export const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      const { me: user, ...protocolV3Data } = await getMe(token.token);
-      const data = await getDecryptedData(token.token, token.privateKey);
-      return {
-        ...session,
-        ...token,
-        ...protocolV3Data,
-        ...data,
-        user,
-      } as any;
+      try {
+        const { me: user, ...protocolV3Data } = await getMe(token.token);
+        const data = await getDecryptedData(token.token, token.privateKey);
+        return {
+          ...session,
+          ...token,
+          ...protocolV3Data,
+          ...data,
+          user,
+        } as any;
+      } catch (e) {
+        console.error('Error on get session', e);
+        throw e;
+      }
     },
   },
   pages: {

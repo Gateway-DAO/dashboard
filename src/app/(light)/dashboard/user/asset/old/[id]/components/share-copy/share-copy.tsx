@@ -13,6 +13,7 @@ import useOrganization from '@/hooks/use-organization';
 import { common } from '@/locale/en/common';
 import { errorMessages } from '@/locale/en/errors';
 import { pda as pdaLocale } from '@/locale/en/pda';
+import { PrivateDataAsset } from '@/services/protocol-v3/types';
 import {
   Create_ProofMutationVariables,
   IdentifierType,
@@ -34,7 +35,7 @@ import ShareCopyFormField from './share-copy-form-fields';
 import ShareCopyFormSuccessfully from './share-copy-form-successfully';
 
 type Props = {
-  pda: any;
+  pda: PrivateDataAsset;
 };
 
 export default function ShareCopy({ pda }: Props) {
@@ -109,9 +110,7 @@ export default function ShareCopy({ pda }: Props) {
   };
 
   const isOwner = useMemo(
-    () =>
-      session?.user?.username === pda?.dataAsset?.owner?.gatewayId &&
-      !organization,
+    () => session?.user?.did === pda?.owner.did && !organization,
     [pda, session]
   );
 

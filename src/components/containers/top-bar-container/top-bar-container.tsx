@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import { CONTAINER_PT } from '@/theme/config/style-tokens';
+
 import { Stack } from '@mui/material';
 
 type Props = {
@@ -15,10 +17,10 @@ export default function TopBarContainer({ children }: Props) {
       gap={1}
       sx={{
         display: 'flex',
-        pt: 2,
         flexGrow: {
           md: 0.5,
         },
+        pt: CONTAINER_PT,
       }}
     >
       {children}

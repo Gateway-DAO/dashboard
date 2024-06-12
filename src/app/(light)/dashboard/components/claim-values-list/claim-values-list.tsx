@@ -12,7 +12,7 @@ type Props = {
 
 export default function ClaimValuesList({ data }: Props) {
   return (
-    <Stack sx={{ ...WIDTH_CENTERED, mt: 2 }}>
+    <Stack>
       <Stack
         component={Card}
         variant="outlined"
