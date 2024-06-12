@@ -13,7 +13,9 @@ export default async function PDAPage({
     return null;
   }
   const pda = session.pdas.find((pda) => pda.id === parseInt(params.id, 10));
+
   const org: any = undefined;
+
   if (!pda?.activity?.id) {
     return null;
   }
@@ -34,5 +36,14 @@ export default async function PDAPage({
     return null;
   }
 
-  return <PDADetailPage pda={pda} org={org} dataModel={dataModel.dataModel} />;
+  const isOwner = pda.owner.did === session.user.did;
+
+  return (
+    <PDADetailPage
+      isOwner={isOwner}
+      pda={pda}
+      org={org}
+      dataModel={dataModel.dataModel}
+    />
+  );
 }

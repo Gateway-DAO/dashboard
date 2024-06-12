@@ -12,9 +12,10 @@ type Props = {
   pda: PrivateDataAsset;
   dataModel: DataModelQuery['dataModel'];
   isProofPda?: boolean;
+  isOwner: boolean;
 };
 
-export default function PDAMetaDataDetails({ pda, dataModel }: Props) {
+export default function PDAMetaDataDetails({ pda, dataModel, isOwner }: Props) {
   return (
     <Stack
       direction={{
@@ -37,10 +38,10 @@ export default function PDAMetaDataDetails({ pda, dataModel }: Props) {
           md: 0,
         }}
       >
-        <ShareCopy pda={pda} />
+        {isOwner ? <ShareCopy pda={pda} /> : <Box sx={{ height: 40 }} />}
       </Box>
       <Box>
-        <PDATabs pda={pda} dataModel={dataModel} />
+        <PDATabs pda={pda} dataModel={dataModel} isOwner={isOwner} />
       </Box>
     </Stack>
   );

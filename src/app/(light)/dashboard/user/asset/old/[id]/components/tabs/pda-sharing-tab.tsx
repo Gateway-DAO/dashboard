@@ -1,38 +1,44 @@
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { PrivateDataAsset } from '@/services/protocol-v3/types';
+
 import { ChevronRightOutlined } from '@mui/icons-material';
-import { Typography, IconButton, Divider } from '@mui/material';
-import { Stack } from '@mui/system';
+import { Divider, IconButton, Stack, Typography } from '@mui/material';
+
 import { IndividualDetailRow } from './pda-tabs';
 
-export default function PDASharingTab({ pda }: { pda: any }) {
+export default function PDASharingTab({ pda }: { pda: PrivateDataAsset }) {
   return (
     <IndividualDetailRow>
-      {pda.sharing.map((user: any) => {
-        return (
-          <>
+      <Stack divider={<Divider />}>
+        {pda.proofs.map((proof) => {
+          return (
             <Stack
               direction={'row'}
               justifyContent={'space-between'}
-              sx={{ mt: 1, mb: 2, width: '47%' }}
+              sx={{ mt: 1, mb: 2 }}
+              key={proof.id}
             >
               <Stack direction={'row'}>
-                <GTWAvatar name={user.did} size={45} />
+                <GTWAvatar
+                  name={proof.owner.did}
+                  alt={proof.owner.username ?? proof.owner.did}
+                  size={45}
+                />
                 <Typography
                   variant="body1"
                   fontWeight={400}
                   sx={{ mt: 1, mx: 3 }}
                 >
-                  {user.username}
+                  {proof.owner.username ?? proof.owner.did}
                 </Typography>
               </Stack>
               <IconButton>
                 <ChevronRightOutlined />
               </IconButton>
             </Stack>
-            <Divider />
-          </>
-        );
-      })}
+          );
+        })}
+      </Stack>
     </IndividualDetailRow>
   );
 }

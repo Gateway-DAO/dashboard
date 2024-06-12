@@ -24,9 +24,10 @@ type Props = {
   pda: PrivateDataAsset;
   org: Organization;
   dataModel: DataModelQuery['dataModel'];
+  isOwner: boolean;
 };
 
-export default function PDADetailPage({ pda, org, dataModel }: Props) {
+export default function PDADetailPage({ pda, org, dataModel, isOwner }: Props) {
   return (
     <PageContainer>
       <Box
@@ -95,7 +96,7 @@ export default function PDADetailPage({ pda, org, dataModel }: Props) {
           pt: CONTAINER_PT,
         }}
       >
-        <PDAMetaDataDetails pda={pda} dataModel={dataModel} />
+        <PDAMetaDataDetails pda={pda} dataModel={dataModel} isOwner={isOwner} />
       </Box>
     </PageContainer>
   );

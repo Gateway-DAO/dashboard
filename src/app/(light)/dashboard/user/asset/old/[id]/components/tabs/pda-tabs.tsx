@@ -157,6 +157,7 @@ export function UserDetails({
 type Props = {
   pda: PrivateDataAsset;
   dataModel: DataModelQuery['dataModel'];
+  isOwner: boolean;
 };
 
 export default function PDATabs({ pda, dataModel }: Props) {

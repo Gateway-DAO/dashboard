@@ -19,7 +19,6 @@ type Props = {
 
 export default function AuthComponent({ id, controlId }: Props) {
   const { data: session, status } = useSession();
-  console.log(session, status);
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
   const { isOrg, organization } = useOrganization();
 
