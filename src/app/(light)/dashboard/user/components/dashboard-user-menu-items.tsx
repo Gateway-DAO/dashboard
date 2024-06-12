@@ -11,7 +11,6 @@ import { isSandbox } from '@/utils/env';
 import {
   ExploreOutlined,
   HistoryOutlined,
-  HomeOutlined,
   Inventory2Outlined,
 } from '@mui/icons-material';
 
@@ -19,13 +18,6 @@ import {
  * List all menu items of the user dashboard
  */
 export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
-  {
-    name: 'Home',
-    href: routes.dashboard.user.home,
-    activeHrefs: [routes.dashboard.user.home],
-    icon: HomeOutlined,
-    navbar: true,
-  },
   {
     name: 'My Data',
     href: routes.dashboard.user.myAssets,
@@ -40,10 +32,10 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
   },
   {
     name: 'Shared with me',
-    href: routes.dashboard.user.requests,
+    href: routes.dashboard.user.shared,
     activeHrefs: [
-      routes.dashboard.user.requests,
-      routes.dashboard.user.request(''),
+      routes.dashboard.user.shared,
+      routes.dashboard.user.sharedData(''),
     ],
     icon: SharedWithIcon,
     navbar: true,
@@ -85,7 +77,7 @@ export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
     activeHrefs: [
       routes.dashboard.user.receivedProofs,
       routes.dashboard.user.sentProofs,
-      routes.dashboard.user.proof(''),
+      routes.dashboard.user.sharedData(''),
     ],
     icon: DataProofOutlinedIcon,
     hide: !isSandbox,

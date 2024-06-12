@@ -213,7 +213,7 @@ export default function RequestCard({
               <Stack direction="row" gap={1} sx={{ mt: 3 }}>
                 <Button
                   component={Link}
-                  href={routes.dashboard.user.proof(proofId ?? '')}
+                  href={routes.dashboard.user.sharedData(proofId ?? '')}
                   variant="contained"
                   color="primary"
                 >

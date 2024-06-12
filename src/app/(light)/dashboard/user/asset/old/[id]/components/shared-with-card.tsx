@@ -113,7 +113,7 @@ export default function SharedWithCard({ pda }: Props) {
                                 organization.gatewayId,
                                 proof.id
                               )
-                            : routes.dashboard.user.proof(proof.id)
+                            : routes.dashboard.user.sharedData(proof.id)
                         )
                       }
                     >

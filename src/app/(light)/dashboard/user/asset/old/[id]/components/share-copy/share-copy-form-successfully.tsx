@@ -75,7 +75,7 @@ export default function ShareCopyFormSuccessfully({ id }: Props) {
             variant="contained"
             id="share-pda-button-check-now"
             sx={{ mb: 1.5 }}
-            onClick={() => router.push(routes.dashboard.user.proof(id))}
+            onClick={() => router.push(routes.dashboard.user.sharedData(id))}
           >
             {common.actions.check_now}
           </Button>
@@ -85,7 +85,9 @@ export default function ShareCopyFormSuccessfully({ id }: Props) {
             sx={{ mb: 3 }}
             onClick={() =>
               copy(
-                `${window.location.origin}${routes.dashboard.user.proof(id)}`
+                `${window.location.origin}${routes.dashboard.user.sharedData(
+                  id
+                )}`
               )
             }
           >

@@ -94,7 +94,7 @@ export default function RequestCardVerfierView({
                         organization?.gatewayId,
                         proofId ?? ''
                       )
-                    : routes.dashboard.user.proof(proofId ?? '')
+                    : routes.dashboard.user.sharedData(proofId ?? '')
                 }
                 variant="contained"
                 color="primary"

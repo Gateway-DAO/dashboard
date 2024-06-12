@@ -27,8 +27,8 @@ const routes = {
         `${dashboardOrg}/${organization}/data-models/my`,
       networkDataModels: (organization) =>
         `${dashboardOrg}/${organization}/data-models/network`,
-      receivedProofs: (organization) =>
-        `${dashboardOrg}/${organization}/proofs/received`,
+      receivedShared: (organization) =>
+        `${dashboardOrg}/${organization}/shared/received`,
       settings: (organization) => `${dashboardOrg}/${organization}/settings`,
       developerAccess: (organization) =>
         `${dashboardOrg}/${organization}/developer-access`,
@@ -42,11 +42,11 @@ const routes = {
       issue: `${dashboardUser}/assets/issue`,
       issuePda: (id) => `${dashboardUser}/assets/issue/${id}`,
       asset: (pdaId) => `${dashboardUser}/asset/${pdaId}`,
-      myAssets: `${dashboardUser}/assets/`,
-      proofs: `${dashboardUser}/proofs`,
-      proof: (proofId) => `${dashboardUser}/proof/${proofId}`,
-      sentProofs: `${dashboardUser}/proofs/sent`,
-      receivedProofs: `${dashboardUser}/proofs/received`,
+      myAssets: `${dashboardUser}/assets`,
+      shared: `${dashboardUser}/shared`,
+      sharedData: (proofId) => `${dashboardUser}/shared/${proofId}`,
+      sentShared: `${dashboardUser}/shared/sent`,
+      receivedShared: `${dashboardUser}/shared/received`,
       request: (requestId) => `${dashboardUser}/request/${requestId}`,
       requests: `${dashboardUser}/requests`,
       myRequestTemplates: `${dashboardUser}/request-templates/my`,
