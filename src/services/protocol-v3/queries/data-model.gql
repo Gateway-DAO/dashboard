@@ -1,0 +1,5 @@
+query dataModel($id: String!) {
+  dataModel(id: $id) {
+    schema
+  }
+}

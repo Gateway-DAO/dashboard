@@ -1,13 +1,13 @@
 import CardCell from '@/components/card-cell/card-cell';
-import { PdaClaim } from '@/services/protocol/types';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
+import { ClaimArray } from '@/utils/data-model';
 
-import { Stack, Typography, Divider, Card } from '@mui/material';
+import { Stack, Divider, Card } from '@mui/material';
 
 import ClaimView from './claim-view';
 
 type Props = {
-  data: PdaClaim[] | undefined;
+  data: ClaimArray;
 };
 
 export default function ClaimValuesList({ data }: Props) {
@@ -17,10 +17,7 @@ export default function ClaimValuesList({ data }: Props) {
         component={Card}
         variant="outlined"
         sx={{
-          mb: 2,
           width: '100%',
-          height: '75%',
-          overflowY: 'scroll',
         }}
       >
         <Stack divider={<Divider />} sx={{}}>

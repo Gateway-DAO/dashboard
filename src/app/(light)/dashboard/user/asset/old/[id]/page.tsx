@@ -6,7 +6,7 @@ import routes from '@/constants/routes';
 import { getPDA } from '@/services/server-functions/pda';
 import { getSessionOrg } from '@/utils/currentOrg';
 
-import PDAItem from './components/pda-item';
+import PDADetail from '../../[id]/components/pda-detail';
 
 export async function generateMetadata({
   params,
@@ -39,7 +39,7 @@ export default async function PDAPage({
           }
         />
       </TopBarContainer>
-      <PDAItem pda={pda} />
+      <PDADetail pda={pda} />
     </>
   );
 }

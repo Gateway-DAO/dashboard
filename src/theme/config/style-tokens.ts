@@ -26,3 +26,22 @@ export const NEGATIVE_CONTAINER_PX: BreakpointsValues = {
   md: -4,
   lg: -6,
 };
+
+export const CONTAINER_PT = {
+  xs: 2,
+  lg: 5,
+};
+
+export const CONTAINER_PB = {
+  xs: 10,
+  lg: 4,
+};
+export const NEGATIVE_CONTAINER_PT = {
+  xs: -2,
+  lg: -5,
+};
+
+export const NEGATIVE_CONTAINER_PB = {
+  xs: -10,
+  lg: -4,
+};

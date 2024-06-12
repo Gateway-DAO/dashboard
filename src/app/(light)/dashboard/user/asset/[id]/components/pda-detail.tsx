@@ -5,39 +5,24 @@ import Image from 'next/image';
 
 import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import { pda as pdaLocale } from '@/locale/en/pda';
-import { PdaQuery } from '@/services/protocol/types';
-import {
-  CONTAINER_PX,
-  NEGATIVE_CONTAINER_PX,
-  WIDTH_CENTERED,
-} from '@/theme/config/style-tokens';
-import { useToggle } from '@react-hookz/web';
-import { PartialDeep } from 'type-fest';
+import { DataModelQuery, PrivateDataAsset } from '@/services/protocol-v3/types';
+import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
+import { claimToArray } from '@/utils/data-model';
 
-import {
-  Box,
-  Card,
-  Divider,
-  IconButton,
-  Stack,
-  Tab,
-  Tabs,
-  Typography,
-} from '@mui/material';
+import { Box, Card, Stack, Typography } from '@mui/material';
 
 type Props = {
-  pda: any;
+  pda: PrivateDataAsset;
   isProofPda?: boolean;
+  dataModel: DataModelQuery['dataModel'];
 };
 
-export default function PDAItem({ pda, isProofPda = false }: Props) {
+export default function PDADetail({ pda, dataModel }: Props) {
+  console.log(pda, dataModel);
+  const claimArray = claimToArray(pda.dataAsset?.claim, dataModel.schema);
   return (
     <>
-      <Stack
-        direction={'column'}
-        sx={{ ...WIDTH_CENTERED, my: 2, mt: -5, mr: 40 }}
-      >
+      <Stack direction={'column'} sx={WIDTH_CENTERED}>
         {pda.structured ? (
           <>
             <Stack
@@ -51,8 +36,8 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
               <Stack direction={'row'}>
                 <Box sx={{ mt: 1.5, ml: 3.5 }}>
                   <GTWAvatar
-                    name={pda?.issuer?.username}
-                    alt={pda?.issuer?.username}
+                    name={pda?.issuer?.did}
+                    alt={pda?.issuer?.username ?? pda?.issuer?.did}
                     size={30}
                   />
                 </Box>
@@ -61,7 +46,7 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
                   id="pda-title"
                   sx={{ fontSize: 16, my: 2, mx: 2, fontWeight: 700 }}
                 >
-                  {pda?.issuer?.username}
+                  {pda?.issuer?.username ?? pda?.issuer?.did}
                 </Typography>
               </Stack>
               <Typography
@@ -77,7 +62,7 @@ export default function PDAItem({ pda, isProofPda = false }: Props) {
                 {pda?.dataAsset?.title}
               </Typography>
             </Stack>
-            <ClaimValuesList data={pda?.dataAsset?.claimArray} />
+            <ClaimValuesList data={claimArray} />
           </>
         ) : (
           <>

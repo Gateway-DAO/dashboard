@@ -25,7 +25,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { FieldValues, useForm } from 'react-hook-form';
 import { FormProvider } from 'react-hook-form';
-import { PartialDeep } from 'type-fest/source/partial-deep';
 
 import { Stack, Typography } from '@mui/material';
 import { Button } from '@mui/material';
@@ -116,64 +115,62 @@ export default function ShareCopy({ pda }: Props) {
     [pda, session]
   );
 
+  if (!isOwner) return null;
+
   return (
     <>
-      {isOwner && (
-        <>
-          <Button
-            variant="contained"
-            size="large"
-            fullWidth
-            sx={{
-              mb: 2,
-            }}
-            onClick={() => {
-              router.push('#share-copy');
-              setOpenShareCopy(true);
-            }}
-            id="share-a-copy"
-          >
-            {common.actions.share_a_copy}
-          </Button>
-          <ModalRight open={openShareCopy} onClose={toggleModal}>
-            <ModalHeader onClose={toggleModal} />
-            {pdaIssued ? (
-              <ShareCopyFormSuccessfully id={pdaIssued} />
-            ) : (
-              <FormProvider {...methods}>
-                <Stack
-                  component="form"
-                  id="share-copy-form"
-                  onSubmit={methods.handleSubmit(handleMutation)}
-                >
-                  <Typography
-                    component="h3"
-                    fontSize={34}
-                    id="share-a-copy-title"
-                    sx={{ mb: 6 }}
-                  >
-                    {pdaLocale.share.share_a_copy_with}
-                  </Typography>
+      <Button
+        variant="contained"
+        size="large"
+        fullWidth
+        sx={{
+          mb: 2,
+        }}
+        onClick={() => {
+          router.push('#share-copy');
+          setOpenShareCopy(true);
+        }}
+        id="share-a-copy"
+      >
+        {common.actions.share_a_copy}
+      </Button>
+      <ModalRight open={openShareCopy} onClose={toggleModal}>
+        <ModalHeader onClose={toggleModal} />
+        {pdaIssued ? (
+          <ShareCopyFormSuccessfully id={pdaIssued} />
+        ) : (
+          <FormProvider {...methods}>
+            <Stack
+              component="form"
+              id="share-copy-form"
+              onSubmit={methods.handleSubmit(handleMutation)}
+            >
+              <Typography
+                component="h3"
+                fontSize={34}
+                id="share-a-copy-title"
+                sx={{ mb: 6 }}
+              >
+                {pdaLocale.share.share_a_copy_with}
+              </Typography>
 
-                  <ShareCopyFormField />
-                  <LoadingButton
-                    variant="contained"
-                    type="submit"
-                    sx={{
-                      mt: 3,
-                    }}
-                    id="share-copy-action"
-                    disabled={!methods.formState.isValid}
-                    isLoading={createProof?.isLoading}
-                  >
-                    {common.actions.share_now}
-                  </LoadingButton>
-                </Stack>
-              </FormProvider>
-            )}
-          </ModalRight>
-        </>
-      )}
+              <ShareCopyFormField />
+              <LoadingButton
+                variant="contained"
+                type="submit"
+                sx={{
+                  mt: 3,
+                }}
+                id="share-copy-action"
+                disabled={!methods.formState.isValid}
+                isLoading={createProof?.isLoading}
+              >
+                {common.actions.share_now}
+              </LoadingButton>
+            </Stack>
+          </FormProvider>
+        )}
+      </ModalRight>
     </>
   );
 }

@@ -10,7 +10,7 @@ type Props = {
   isProofPda?: boolean;
 };
 
-export default function PDAMetaDataDetails({ pda, isProofPda = false }: Props) {
+export default function PDAMetaDataDetails({ pda }: Props) {
   return (
     <Stack direction={'column'}>
       <Box sx={{ width: '10%', mx: '30%' }}>

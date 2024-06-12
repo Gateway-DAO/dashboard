@@ -1,0 +1,55 @@
+query activity($id: String!) {
+  activity(id: $id) {
+    id
+    action
+    read
+    source {
+      ... on User {
+        did
+        username
+      }
+      ... on Organization {
+        did
+        orgname
+        name
+        image
+      }
+    }
+    target {
+      ... on User {
+        did
+        username
+      }
+      ... on Organization {
+        did
+        orgname
+        name
+        image
+      }
+    }
+    createdAt
+    metadata {
+      ... on PDAMetadata {
+        issuer
+        pda
+        status
+        signedBy
+        expirationDate
+        dataModel
+      }
+      ... on RequestMetadata {
+        verifier
+        owner
+        request
+        dataRequestStatus: status
+      }
+      ... on ProofMetadata {
+        verifier
+        owner
+        proof
+        proofRequest: request
+        proofStatus: status
+      }
+    }
+  }
+}

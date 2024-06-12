@@ -4,7 +4,11 @@ import { usePathname } from 'next/navigation';
 import { PropsWithChildren, ReactNode } from 'react';
 
 import { sandboxAlert } from '@/locale/en/alert-messages';
-import { CONTAINER_PX } from '@/theme/config/style-tokens';
+import {
+  CONTAINER_PB,
+  CONTAINER_PT,
+  CONTAINER_PX,
+} from '@/theme/config/style-tokens';
 import { isSandbox } from '@/utils/env';
 
 import { Box, Chip, Tooltip } from '@mui/material';
@@ -63,14 +67,8 @@ export default function DashboardLayout({
         width="100%"
         sx={{
           px: CONTAINER_PX,
-          pt: {
-            xs: 2,
-            lg: 5,
-          },
-          pb: {
-            xs: 10,
-            lg: 4,
-          },
+          pt: CONTAINER_PT,
+          pb: CONTAINER_PB,
           ml: {
             xs: 0,
             lg: '300px',
