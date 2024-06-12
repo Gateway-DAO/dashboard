@@ -43,10 +43,7 @@ export default function LastTransactionsTable() {
       <CardCellContainer mb={1}>
         <Box display="flex">
           <Typography flex={3}>{transaction.home_table.columns.id}</Typography>
-          <Typography flex={1}>
-            {transaction.home_table.columns.action}
-          </Typography>
-          <Typography flex={1}>
+          <Typography flex={0.8}>
             {transaction.home_table.columns.date}
           </Typography>
         </Box>
@@ -68,9 +65,6 @@ export default function LastTransactionsTable() {
                   <Typography flex={3}>
                     <Skeleton />
                   </Typography>
-                  <Box flex={1}>
-                    <Skeleton />
-                  </Box>
                   <Typography flex={1}>
                     <Skeleton />
                   </Typography>
@@ -94,12 +88,7 @@ export default function LastTransactionsTable() {
                   }}
                 >
                   <Typography flex={3}>{transaction.id}</Typography>
-                  <Box flex={1}>
-                    <Chip
-                      label={<ActionDetail action={transaction.action} />}
-                    />
-                  </Box>
-                  <Typography flex={1}>
+                  <Typography flex={0.8}>
                     {dayjs(transaction.createdAt).format(DATE_FORMAT)}
                   </Typography>
                 </Box>
