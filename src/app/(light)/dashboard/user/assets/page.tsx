@@ -10,7 +10,7 @@ import { Box } from '@mui/system';
 
 import PDAsList from './components/pdas-list/pdas-list';
 
-export default function DashboardV3() {
+export default function AssetsPage() {
   return (
     <>
       <TitleLayout title={pdasLocales.my_data_assets} titleId="title-assets">

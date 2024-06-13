@@ -3,7 +3,6 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import { DATE_FORMAT } from '@/constants/date';
 import { pdaTableColumnNames } from '@/locale/en/pda';
-import { PrivateDataAsset } from '@/services/protocol-v3/types';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
@@ -15,27 +14,27 @@ import {
   renderActionsCell,
 } from '@mui/x-data-grid';
 
-export const columns: GridColDef<PrivateDataAsset>[] = [
+import { ListPrivateDataAsset } from './types';
+
+export const columns: GridColDef<ListPrivateDataAsset>[] = [
   {
     field: 'name',
     headerName: pdaTableColumnNames.name,
     flex: 2,
     renderCell: (params) => {
       let name = '****';
-      if (params.row.structured && params.row.dataAsset?.title) {
-        name = params.row.dataAsset.title;
-      } else if (params.row.fileName) {
-        name = params.row.fileName;
+      if (!params.row.new) {
+        if (params.row.structured && params.row.dataAsset?.title) {
+          name = params.row.dataAsset.title;
+        } else if (params.row.fileName) {
+          name = params.row.fileName;
+        }
       }
 
       return (
         <Stack direction={'row'} justifyContent={'space-between'}>
           <DataOutlinedIcon color="primary" />
-          <Typography
-            variant="body1"
-            sx={{ mx: 2 }}
-            onClick={() => console.log(params)}
-          >
+          <Typography variant="body1" sx={{ mx: 2 }}>
             {name}
           </Typography>
         </Stack>
@@ -79,7 +78,7 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
     field: 'action',
     type: 'actions',
     renderCell(params) {
-      if (params.row.structured) return null;
+      if (params.row.structured || params.row.new) return null;
 
       return renderActionsCell(params);
     },

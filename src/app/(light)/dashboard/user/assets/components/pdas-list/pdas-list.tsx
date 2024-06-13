@@ -11,7 +11,6 @@ import {
 import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';
 import { api } from '@/services/protocol-v3/api';
-import { PrivateDataAsset } from '@/services/protocol-v3/types';
 import { useToggle } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
 
@@ -21,6 +20,7 @@ import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 
 import UpdateModal from '../../../../components/update-modal/update-modal';
 import { columns } from './columns';
+import { ListPrivateDataAsset } from './types';
 
 export default function PDAsList() {
   const { data: sessionData, status } = useSession();
@@ -35,13 +35,23 @@ export default function PDAsList() {
     enabled: !!sessionData?.token,
   });
 
-  const pdas = useMemo(() => {
+  const pdas: ListPrivateDataAsset[] = useMemo(() => {
     if (!sessionData?.pdas) return [];
-    const newPdas =
-      data?.myPDAs.filter(
-        (pda) =>
-          !sessionData.pdas.find((initialPda) => initialPda.id === pda.id)
-      ) ?? [];
+    const newPdas: ListPrivateDataAsset[] = [];
+
+    for (const pda of data?.myPDAs ?? []) {
+      const hasPda = sessionData.pdas.find(
+        (initialPda) => initialPda.id === pda.id
+      );
+      if (hasPda) {
+        continue;
+      }
+      newPdas.push({
+        ...pda,
+        new: true,
+      } as ListPrivateDataAsset);
+    }
+
     return [...newPdas, ...sessionData.pdas];
   }, [data]);
 
@@ -61,9 +71,10 @@ export default function PDAsList() {
         slots={{
           loadingOverlay: LinearProgress,
         }}
+        paginationMode="client"
         loading={isLoading}
-        onRowClick={(params: GridRowParams<PrivateDataAsset>, event) => {
-          const isUpdate = !(params.row.dataAsset || params.row.fileName);
+        onRowClick={(params: GridRowParams<ListPrivateDataAsset>, event) => {
+          const isUpdate = params.row.new;
           if (!isUpdate) {
             // if middle click open new tab
             if (event.button === 1) {
