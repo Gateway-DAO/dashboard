@@ -1,21 +1,12 @@
+'use client';
 import { useState } from 'react';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import { DataModelQuery, PrivateDataAsset } from '@/services/protocol-v3/types';
-import { limitCharsCentered, limitCharsOffset } from '@/utils/string';
+import { PrivateDataAsset } from '@/services/protocol-v3/types';
+import { limitCharsOffset } from '@/utils/string';
 
 import { ContentCopy } from '@mui/icons-material';
-import {
-  Tabs,
-  Tab,
-  Typography,
-  Divider,
-  Box,
-  Stack,
-  Button,
-  IconButton,
-} from '@mui/material';
-import { spacing } from '@mui/system';
+import { Tabs, Tab, Typography, Stack, IconButton } from '@mui/material';
 
 import PDADetailsTab from './pda-details-tab';
 import PDASharingTab from './pda-sharing-tab';
@@ -53,7 +44,7 @@ export function IndividualDetailRow({
       gap={1}
       sx={{
         px: {
-          xs: 2,
+          xs: 0,
           lg: 4,
         },
         py: 2,
@@ -156,11 +147,10 @@ export function UserDetails({
 
 type Props = {
   pda: PrivateDataAsset;
-  dataModel: DataModelQuery['dataModel'];
   isOwner: boolean;
 };
 
-export default function PDATabs({ pda, dataModel }: Props) {
+export default function PDATabs({ pda }: Props) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newTab: number) => {
@@ -174,11 +164,11 @@ export default function PDATabs({ pda, dataModel }: Props) {
         onChange={handleChange}
         sx={{ borderBottom: 1, width: '100%', borderColor: 'divider' }}
       >
-        <Tab key={1} label="Details" sx={{ ml: 3.5 }} />
+        <Tab key={1} label="Details" />
         <Tab key={2} label="Sharing" />
       </Tabs>
       <CustomTabPanel value={value} index={0}>
-        <PDADetailsTab pda={pda} dataModel={dataModel} />
+        <PDADetailsTab pda={pda} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <PDASharingTab pda={pda} />

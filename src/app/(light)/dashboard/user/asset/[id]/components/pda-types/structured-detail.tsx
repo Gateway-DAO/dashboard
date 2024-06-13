@@ -1,17 +1,44 @@
 import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
-import { DataModelQuery, PrivateDataAsset } from '@/services/protocol-v3/types';
+import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
+import { api } from '@/services/protocol-v3/api';
+import { PrivateDataAsset } from '@/services/protocol-v3/types';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { claimToArray } from '@/utils/data-model';
 
 import { Card, Stack, Typography } from '@mui/material';
 type Props = {
   pda: PrivateDataAsset;
-  dataModel: DataModelQuery['dataModel'];
 };
 
-export default function StructuredDetail({ dataModel, pda }: Props) {
-  const claimArray = claimToArray(pda.dataAsset?.claim, dataModel.schema);
+export default async function StructuredDetail({ pda }: Props) {
+  const session = await getGtwServerSession();
+
+  if (!session || !pda.activity) {
+    return null;
+  }
+
+  const activity = await api(session.token).activity({ id: pda.activity.id });
+
+  if (
+    !('dataModel' in activity?.activity?.metadata) ||
+    !activity.activity.metadata.dataModel
+  ) {
+    return null;
+  }
+
+  const dataModel = await api(session.token).dataModel({
+    id: activity.activity.metadata.dataModel,
+  });
+
+  if (!dataModel?.dataModel) {
+    return null;
+  }
+  const claimArray = claimToArray(
+    pda.dataAsset?.claim,
+    dataModel.dataModel.schema
+  );
+
   return (
     <Stack gap={2} sx={WIDTH_CENTERED}>
       <Stack

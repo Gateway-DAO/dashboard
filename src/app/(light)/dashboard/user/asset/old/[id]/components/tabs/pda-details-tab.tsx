@@ -17,10 +17,9 @@ import {
 
 type Props = {
   pda: PrivateDataAsset;
-  dataModel: DataModelQuery['dataModel'];
 };
 
-export default function PDADetailsTab({ pda, dataModel }: Props) {
+export default function PDADetailsTab({ pda }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const copy = async (text: string) => {

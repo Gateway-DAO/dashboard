@@ -16,34 +16,11 @@ export default async function PDAPage({
 
   const org: any = undefined;
 
-  if (!pda?.activity?.id) {
-    return null;
-  }
-  const activity = await api(session.token).activity({ id: pda.activity.id });
-
-  if (
-    !('dataModel' in activity?.activity?.metadata) ||
-    !activity.activity.metadata.dataModel
-  ) {
-    return null;
-  }
-
-  const dataModel = await api(session.token).dataModel({
-    id: activity.activity.metadata.dataModel,
-  });
-
-  if (!dataModel?.dataModel) {
+  if (!pda) {
     return null;
   }
 
   const isOwner = pda.owner.did === session.user.did;
 
-  return (
-    <PDADetailPage
-      isOwner={isOwner}
-      pda={pda}
-      org={org}
-      dataModel={dataModel.dataModel}
-    />
-  );
+  return <PDADetailPage isOwner={isOwner} pda={pda} org={org} />;
 }

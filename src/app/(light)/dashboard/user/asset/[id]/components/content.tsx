@@ -23,11 +23,10 @@ import StructuredDetail from './pda-types/structured-detail';
 type Props = {
   pda: PrivateDataAsset;
   org: Organization;
-  dataModel: DataModelQuery['dataModel'];
   isOwner: boolean;
 };
 
-export default function PDADetailPage({ pda, org, dataModel, isOwner }: Props) {
+export default function PDADetailPage({ pda, org, isOwner }: Props) {
   return (
     <PageContainer>
       <Box
@@ -56,23 +55,21 @@ export default function PDADetailPage({ pda, org, dataModel, isOwner }: Props) {
         >
           <Stack direction={'column'}>
             {pda.structured ? (
-              <StructuredDetail pda={pda} dataModel={dataModel} />
+              <StructuredDetail pda={pda} />
             ) : (
-              <>
-                <Stack direction="column" gap={8} alignItems="start">
-                  <Image
-                    style={{
-                      objectFit: 'contain',
-                      aspectRatio: '16/9',
-                    }}
-                    width={570}
-                    height={550}
-                    className="feature-img"
-                    src={'/images/static-file.png'}
-                    alt={'static-file-image'}
-                  />
-                </Stack>
-              </>
+              <Stack direction="column" gap={8} alignItems="start">
+                <Image
+                  style={{
+                    objectFit: 'contain',
+                    aspectRatio: '16/9',
+                  }}
+                  width={570}
+                  height={550}
+                  className="feature-img"
+                  src={'/images/static-file.png'}
+                  alt={'static-file-image'}
+                />
+              </Stack>
             )}
           </Stack>
         </Stack>
@@ -96,7 +93,7 @@ export default function PDADetailPage({ pda, org, dataModel, isOwner }: Props) {
           pt: CONTAINER_PT,
         }}
       >
-        <PDAMetaDataDetails pda={pda} dataModel={dataModel} isOwner={isOwner} />
+        <PDAMetaDataDetails pda={pda} isOwner={isOwner} />
       </Box>
     </PageContainer>
   );
