@@ -1,0 +1,14 @@
+query shared {
+  receivedProofs {
+    id
+    owner {
+      did
+    }
+    verifier {
+      did
+    }
+    data {
+      id
+    }
+  }
+}
