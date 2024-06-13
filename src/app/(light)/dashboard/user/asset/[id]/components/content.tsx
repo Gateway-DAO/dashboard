@@ -16,8 +16,8 @@ import {
 
 import { Stack, Box, Divider } from '@mui/material';
 
-import PDAMetaDataDetails from '../../old/[id]/components/pda-meta-data-details';
 import { PageContainer } from './container';
+import PDAMetaDataDetails from './pda-meta-data-details';
 import StructuredDetail from './pda-types/structured-detail';
 
 type Props = {
