@@ -1,19 +1,15 @@
 import Tags from '@/components/tags/tags';
 import { DATE_FORMAT } from '@/constants/date';
 import { errorMessages } from '@/locale/en/errors';
-import { DataModelQuery, PrivateDataAsset } from '@/services/protocol-v3/types';
+import { PrivateDataAsset } from '@/services/protocol-v3/types';
 import dayjs from 'dayjs';
 import { useSnackbar } from 'notistack';
 
+import { Stack } from '@mui/material';
 import { Divider } from '@mui/material';
-import { Stack } from '@mui/system';
 
-import {
-  IndividualDetailRow,
-  RowSecondaryText,
-  RowText,
-  UserDetails,
-} from './pda-tabs';
+import { IndividualDetailRow, RowSecondaryText, RowText } from './components';
+import { UserDetails } from './components';
 
 type Props = {
   pda: PrivateDataAsset;

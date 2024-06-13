@@ -4,7 +4,7 @@ import { PrivateDataAsset } from '@/services/protocol-v3/types';
 import { ChevronRightOutlined } from '@mui/icons-material';
 import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
-import { IndividualDetailRow } from './pda-tabs';
+import { IndividualDetailRow } from './components';
 
 export default function PDASharingTab({ pda }: { pda: PrivateDataAsset }) {
   return (

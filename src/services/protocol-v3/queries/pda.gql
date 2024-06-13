@@ -9,5 +9,6 @@ query pdas {
     issuanceDate
     mimeType
     structured
+    url
   }
 }
