@@ -1,5 +1,5 @@
 'use client';
-import { signIn, signOut } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useEffect, useCallback, useRef, useState } from 'react';
 
@@ -12,8 +12,9 @@ import { useMediaQuery } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 import { Socket, io } from 'socket.io-client';
 
-import { CheckCircle } from '@mui/icons-material';
+import { CheckCircle, Error as ErrorIcon } from '@mui/icons-material';
 import {
+  Button,
   CircularProgress,
   Dialog,
   DialogTitle,
@@ -59,9 +60,16 @@ export default function LoginQrCode() {
           throw res.error;
         }
 
+        const session = await getSession();
+
+        if (!session) {
+          throw new Error('Error during login, please contact Gateway');
+        }
+
         router.push(routes.dashboard.user.myAssets);
       } catch (e) {
         console.log(e);
+        throw e;
       }
     },
   });
@@ -101,6 +109,11 @@ export default function LoginQrCode() {
     }
   }, [isDesktop, initializeSocket]);
 
+  const onTryAgain = () => {
+    login.reset();
+    initializeSocket();
+  };
+
   return (
     <>
       {qrCodeData ? (
@@ -113,7 +126,11 @@ export default function LoginQrCode() {
       ) : (
         <LoadingQRCode />
       )}
-      <Dialog open={login.isLoading || login.isSuccess} fullWidth maxWidth="xs">
+      <Dialog
+        open={login.isLoading || login.isSuccess || login.isError}
+        fullWidth
+        maxWidth="xs"
+      >
         {login.isLoading && (
           <>
             <DialogTitle>
@@ -132,6 +149,23 @@ export default function LoginQrCode() {
             <Typography variant="body2" px={3} pb={3} pt={1}>
               You'll enter shortly
             </Typography>
+          </>
+        )}
+        {login.isError && (
+          <>
+            <DialogTitle>
+              <ErrorIcon color="error" fontSize="small" /> Error
+            </DialogTitle>
+            <Typography variant="body2" px={3} pb={3} pt={1}>
+              {(login.error as Error)?.message || 'An error occurred'}
+            </Typography>
+            <Button
+              onClick={onTryAgain}
+              variant="contained"
+              sx={{ mt: 1, mx: 2, mb: 2, alignSelf: 'flex-start' }}
+            >
+              Try again
+            </Button>
           </>
         )}
       </Dialog>
