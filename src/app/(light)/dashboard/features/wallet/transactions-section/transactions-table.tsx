@@ -82,7 +82,7 @@ export default function TransactionsTable() {
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       queries.my_transactions_count,
-      organization ? organization.id : session?.user.id,
+      organization ? organization.id : session?.user.did,
     ],
     queryFn: () =>
       privateApi?.my_transactions_count({
@@ -96,7 +96,7 @@ export default function TransactionsTable() {
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
     queryKey: [
       queries.my_transactions,
-      organization ? organization.id : session?.user.id,
+      organization ? organization.id : session?.user.did,
       paginationModel ? paginationModel.page : 0,
       paginationModel ? paginationModel.pageSize : 10,
     ],

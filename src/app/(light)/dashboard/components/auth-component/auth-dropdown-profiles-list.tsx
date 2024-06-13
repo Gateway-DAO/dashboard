@@ -99,11 +99,11 @@ export default function AuthDropdownProfilesList({ onClose }: Props) {
       {isOrg && (
         <MenuItemLink
           href={routes.dashboard.user.home}
-          key={user.id}
+          key={user.did}
           onClick={onClose}
         >
           <ListItemIcon>
-            <GTWAvatar name={user.id} />
+            <GTWAvatar name={user.did} />
           </ListItemIcon>
           <ListItemText secondary={`@${user.username}`}>
             {user.username}
