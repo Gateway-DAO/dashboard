@@ -3,6 +3,7 @@ query me {
     id
     did
     username
+    totalFileSize
     accesses {
       role
       organization {

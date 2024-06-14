@@ -6,6 +6,7 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { Stack } from '@mui/system';
 
 import AuthComponent from '../auth-component/auth-component';
+import StorageWidget from '../storage-widget/storage-widget';
 import MenuContainer from './menu-container';
 
 type Props = {
@@ -56,6 +57,7 @@ export default function Sidebar({
           secondMenuItems={secondMenuItems}
         />
         <Stack gap={1} sx={{ width: '100%' }}>
+          <StorageWidget />
           <AuthComponent id="profile-button" controlId="profile-menu" />
         </Stack>
       </Stack>
