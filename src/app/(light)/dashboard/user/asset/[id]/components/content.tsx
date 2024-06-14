@@ -1,13 +1,7 @@
-import Image from 'next/image';
-
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
 import routes from '@/constants/routes';
-import {
-  PrivateDataAsset,
-  Organization,
-  DataModelQuery,
-} from '@/services/protocol-v3/types';
+import { PrivateDataAsset, Organization } from '@/services/protocol-v3/types';
 import {
   CONTAINER_PT,
   CONTAINER_PX,
@@ -16,8 +10,9 @@ import {
 
 import { Stack, Box, Divider } from '@mui/material';
 
-import { PageContainer } from './container';
+import PageContainer from './container';
 import PDAMetaDataDetails from './pda-meta-data-details';
+import FileDetail from './pda-types/file-detail';
 import StructuredDetail from './pda-types/structured-detail';
 
 type Props = {
@@ -48,29 +43,16 @@ export default function PDADetailPage({ pda, org, isOwner }: Props) {
 
         <Stack
           sx={{
-            pt: 10,
+            pt: {
+              xs: 4,
+              lg: 10,
+            },
             width: '100%',
             height: '100%',
           }}
         >
           <Stack direction={'column'}>
-            {pda.structured ? (
-              <StructuredDetail pda={pda} />
-            ) : (
-              <Stack direction="column" gap={8} alignItems="start">
-                <Image
-                  style={{
-                    objectFit: 'contain',
-                    aspectRatio: '16/9',
-                  }}
-                  width={570}
-                  height={550}
-                  className="feature-img"
-                  src={'/images/static-file.png'}
-                  alt={'static-file-image'}
-                />
-              </Stack>
-            )}
+            {pda.structured ? <StructuredDetail pda={pda} /> : <FileDetail />}
           </Stack>
         </Stack>
       </Box>

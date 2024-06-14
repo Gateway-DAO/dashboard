@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import PDAPage from '@/app/(light)/dashboard/user/asset/old/[id]/page';
 import { getPDA } from '@/services/server-functions/pda';
 
 export async function generateMetadata({
@@ -20,5 +19,5 @@ export default function PDAOrgPage({
 }: {
   params: { id: string; username: string };
 }) {
-  return <PDAPage params={params} />;
+  return <></>;
 }

@@ -55,7 +55,7 @@ export default async function ProofPage({
   return (
     <>
       <TopBarContainer>
-        <BackButton href={routes.dashboard.user.receivedProofs} />
+        <BackButton href={routes.dashboard.user.receivedShared} />
       </TopBarContainer>
       <ProofItem proof={proof as Proof} isOwner={isOwner} />
     </>

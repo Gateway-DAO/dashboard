@@ -1,5 +1,4 @@
 'use client';
-import PDAItem from '@/app/(light)/dashboard/user/asset/[id]/components/pda-item';
 import DefaultError from '@/components/default-error/default-error';
 import { errorMessages } from '@/locale/en/errors';
 import { DecryptedProofPda } from '@/services/protocol/types';
@@ -25,5 +24,5 @@ export default function PDADetail({ pdas, id }: Props) {
     );
   }
 
-  return <PDAItem pda={PDAPattern} isProofPda={true} />;
+  return <></>;
 }

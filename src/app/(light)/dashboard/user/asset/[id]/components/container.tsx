@@ -10,7 +10,7 @@ import {
 
 import { Stack } from '@mui/material';
 
-export function PageContainer({ children }: PropsWithChildren) {
+export default function PageContainer({ children }: PropsWithChildren) {
   return (
     <Stack
       direction={{

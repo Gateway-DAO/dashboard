@@ -27,8 +27,8 @@ const routes = {
         `${dashboardOrg}/${organization}/data-models/my`,
       networkDataModels: (organization) =>
         `${dashboardOrg}/${organization}/data-models/network`,
-      receivedShared: (organization) =>
-        `${dashboardOrg}/${organization}/shared/received`,
+      receivedProofs: (organization) =>
+        `${dashboardOrg}/${organization}/proofs/received`,
       settings: (organization) => `${dashboardOrg}/${organization}/settings`,
       developerAccess: (organization) =>
         `${dashboardOrg}/${organization}/developer-access`,

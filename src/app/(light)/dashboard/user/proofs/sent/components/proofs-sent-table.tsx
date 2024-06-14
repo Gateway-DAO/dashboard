@@ -156,7 +156,7 @@ export default function ProofsSentTable({
       rowCount={count}
       sx={defaultGridCustomization}
       onRowClick={(value) => {
-        router.push(routes.dashboard.user.proof(value?.id));
+        router.push(routes.dashboard.user.sharedData(value?.id));
       }}
     />
   );
