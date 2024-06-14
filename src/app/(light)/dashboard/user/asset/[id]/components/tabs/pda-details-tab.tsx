@@ -2,6 +2,7 @@ import Tags from '@/components/tags/tags';
 import { DATE_FORMAT } from '@/constants/date';
 import { errorMessages } from '@/locale/en/errors';
 import { PrivateDataAsset } from '@/services/protocol-v3/types';
+import { formatBytes } from '@/utils/bytes';
 import dayjs from 'dayjs';
 import { useSnackbar } from 'notistack';
 
@@ -62,7 +63,7 @@ export default function PDADetailsTab({ pda }: Props) {
           </IndividualDetailRow>
           <IndividualDetailRow>
             <RowText title="Size" />
-            <RowSecondaryText text={pda.size ? pda.size.toString() : ''} />
+            <RowSecondaryText text={pda.size ? formatBytes(pda.size) : ''} />
           </IndividualDetailRow>
         </>
       )}
