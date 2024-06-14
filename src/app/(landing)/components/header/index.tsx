@@ -120,9 +120,14 @@ export default function Header() {
             </div>
 
             <div className={styles.buttons_container}>
-              <Link href="/login">
+              <Link href="/login" className={styles['element--dark']}>
                 <Button variant="contained" className={styles.button_contained}>
-                  Enter the Gateway
+                  Login
+                </Button>
+              </Link>
+              <Link href="/sign-up">
+                <Button variant="contained" className={styles.button_contained}>
+                  Sign up
                 </Button>
               </Link>
             </div>
