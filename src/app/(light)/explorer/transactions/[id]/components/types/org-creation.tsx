@@ -1,6 +1,6 @@
 import { DATE_FORMAT } from '@/constants/date';
 import { transaction_detail } from '@/locale/en/transaction';
-import { Transaction_DetailQuery } from '@/services/protocol/types';
+import { ActivityQuery } from '@/services/protocol-v3/types';
 import dayjs from 'dayjs';
 
 import { Stack, Divider } from '@mui/material';
@@ -11,7 +11,7 @@ import UserColumn from '../user-column';
 export default function OrgCreation({
   data,
 }: {
-  data: Transaction_DetailQuery['transaction'];
+  data: ActivityQuery['activity'];
 }) {
   return (
     <Stack

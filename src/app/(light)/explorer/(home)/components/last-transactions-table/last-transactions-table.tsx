@@ -15,14 +15,11 @@ import {
   Card,
   Typography,
   Divider,
-  Chip,
   Button,
   Stack,
   Box,
   Skeleton,
 } from '@mui/material';
-
-import ActionDetail from '../../../components/transactions/action-detail';
 
 export default function LastTransactionsTable() {
   const { data: transactions, isLoading } = useQuery({

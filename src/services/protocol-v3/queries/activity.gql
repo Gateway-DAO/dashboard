@@ -54,6 +54,14 @@ query activity($id: String!) {
   }
 }
 
+query explorer_transactions($skip: Int, $take: Int) {
+  activities(filter: { skip: $skip, take: $take }) {
+    id
+    action
+    createdAt
+  }
+}
+
 query last_transactions {
   activities(filter: { skip: 0, take: 10 }) {
     id

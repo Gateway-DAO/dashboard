@@ -1,7 +1,7 @@
 'use client';
 import { CardCellContainer } from '@/components/card-cell/card-cell';
 import { explorerQueries } from '@/constants/queries';
-import { apiPublic } from '@/services/protocol/api';
+import { apiPublic } from '@/services/protocol-v3/api';
 import { numberToMoneyString } from '@/utils/money';
 import { useQuery } from '@tanstack/react-query';
 
