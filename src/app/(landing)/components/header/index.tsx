@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import { useEffect, useRef, useState } from 'react';
 
 import Link from '@/app/(landing)/components/Link';
@@ -10,14 +11,18 @@ import useMobileDetect from '@/app/(landing)/hooks/use-mobile.detect';
 import { joinClasses } from '@/app/(landing)/utils/function';
 import GTWLink from '@/components/gtw-link';
 import externalLinks from '@/constants/externalLinks';
+import routes from '@/constants/routes';
 import { isSandbox } from '@/utils/env';
 import { useLenis } from '@studio-freight/react-lenis';
+
+import { Box, CircularProgress } from '@mui/material';
 
 import Button from '../button';
 import ArrowRight2 from '../icons/arrow-right-2';
 import styles from './header.module.scss';
 
 export default function Header() {
+  const session = useSession();
   const navRef = useRef<HTMLElement>(null);
   const { variant, setVariant } = useHeaderContext();
   const { isMobile, isTablet } = useMobileDetect();
@@ -68,7 +73,13 @@ export default function Header() {
             </Link>
 
             <div className={styles.mobile_buttons}>
-              <GTWLink href="/login">
+              <GTWLink
+                href={
+                  session.status === 'authenticated'
+                    ? routes.dashboard.user.home
+                    : routes.login
+                }
+              >
                 <Button
                   variant="contained"
                   className={styles.mobile_button_head_dashboard}
@@ -120,16 +131,51 @@ export default function Header() {
             </div>
 
             <div className={styles.buttons_container}>
-              <Link href="/login" className={styles['element--dark']}>
-                <Button variant="contained" className={styles.button_contained}>
-                  Login
+              {session.status === 'loading' && (
+                <Button
+                  variant="contained"
+                  className={`${styles.button_contained} ${styles.loading}`}
+                  disabled
+                >
+                  <Box
+                    sx={{
+                      transform: 'scale(0.75) translateY(2px)',
+                    }}
+                  >
+                    <CircularProgress size={26} />
+                  </Box>
                 </Button>
-              </Link>
-              <Link href="/sign-up">
-                <Button variant="contained" className={styles.button_contained}>
-                  Sign up
-                </Button>
-              </Link>
+              )}
+              {session.status === 'authenticated' && (
+                <Link href={routes.dashboard.user.home}>
+                  <Button
+                    variant="contained"
+                    className={styles.button_contained}
+                  >
+                    Open dashboard
+                  </Button>
+                </Link>
+              )}
+              {session.status === 'unauthenticated' && (
+                <>
+                  <Link href="/login" className={styles['element--dark']}>
+                    <Button
+                      variant="contained"
+                      className={styles.button_contained}
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/sign-up">
+                    <Button
+                      variant="contained"
+                      className={styles.button_contained}
+                    >
+                      Sign up
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </>
         )}

@@ -1,5 +1,6 @@
 'use client';
 
+import { SessionProvider } from 'next-auth/react';
 import { AppProgressBar } from 'next-nprogress-bar';
 import { PropsWithChildren } from 'react';
 
@@ -14,8 +15,9 @@ export default function ClientProviders({ children }: PropsWithChildren) {
         options={{ showSpinner: false }}
         shallowRouting
       />
-
-      {children}
+      <SessionProvider refetchOnWindowFocus refetchInterval={5000}>
+        {children}
+      </SessionProvider>
     </ReactLenis>
   );
 }

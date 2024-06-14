@@ -133,6 +133,10 @@
       background-color: #53128c;
     }
   }
+  &.loading {
+    opacity: 0.3;
+    display: flex;
+  }
 }
 
 .mobile_buttons {

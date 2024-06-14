@@ -1,6 +1,6 @@
-'use client';
-
+import { getSession } from 'next-auth/react';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 import GTWLogo from '@/components/gtw-logo/gtw-logo';
 import ScanIcon from '@/components/icons/scan';
@@ -14,7 +14,13 @@ import AuthContentBox from '../components/auth-content-box';
 import MobileDownloadApp from '../components/mobile-download';
 import LoginQrCode from './login-qr-code';
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const session = await getSession();
+
+  if (session) {
+    return redirect(routes.dashboard.user.home);
+  }
+
   return (
     <>
       <AuthContentBox>
