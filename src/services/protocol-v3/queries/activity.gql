@@ -53,3 +53,11 @@ query activity($id: String!) {
     }
   }
 }
+
+query last_transactions {
+  activities(filter: { skip: 0, take: 10 }) {
+    id
+    action
+    createdAt
+  }
+}

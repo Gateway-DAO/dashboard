@@ -39,17 +39,9 @@ const columns: GridColDef<any>[] = [
     ),
   },
   {
-    field: 'action',
-    headerName: transaction.type,
-    flex: 1,
-    renderCell: (params) => (
-      <Chip label={<ActionDetail action={params.value} />} />
-    ),
-  },
-  {
     field: 'createdAt',
     headerName: transaction.date,
-    flex: 1.5,
+    flex: 0.5,
     valueFormatter: (params) =>
       params.value ? dayjs(params.value).format(DATE_FORMAT) : '',
   },

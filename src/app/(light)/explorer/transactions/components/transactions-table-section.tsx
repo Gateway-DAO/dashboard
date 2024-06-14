@@ -59,9 +59,6 @@ export default function TransactionsTableSection() {
                 <Typography flex={3}>
                   <Skeleton />
                 </Typography>
-                <Box flex={1}>
-                  <Skeleton />
-                </Box>
                 <Typography flex={1}>
                   <Skeleton />
                 </Typography>

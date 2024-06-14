@@ -1,41 +1,33 @@
 import { transaction_actions } from '@/locale/en/transaction';
-import { TransactionAction } from '@/services/protocol/types';
+import { ActivityAction } from '@/services/protocol-v3/types';
 
-export default function ActionDetail({
-  action,
-}: {
-  action: TransactionAction;
-}) {
+export default function ActionDetail({ action }: { action: ActivityAction }) {
   const getDetail = (): string => {
     switch (action) {
-      case TransactionAction.UserCreate:
+      case ActivityAction.UserCreate:
         return transaction_actions.user_create;
-      case TransactionAction.PdaIssuance:
+      case ActivityAction.PdaIssuance:
         return transaction_actions.pda_issuance;
-      case TransactionAction.PdaUpdate:
+      case ActivityAction.PdaUpdate:
         return transaction_actions.pda_update;
-      case TransactionAction.PdaStatusChange:
+      case ActivityAction.PdaStatusChange:
         return transaction_actions.pda_status_change;
-      case TransactionAction.DatamodelCreate:
+      case ActivityAction.DatamodelCreate:
         return transaction_actions.data_model;
-      case TransactionAction.OrganizationCreate:
+      case ActivityAction.OrganizationCreate:
         return transaction_actions.org_create;
-      case TransactionAction.OrganizationUpdate:
+      case ActivityAction.OrganizationUpdate:
         return transaction_actions.org_update;
-      case TransactionAction.ProofCreate:
+      case ActivityAction.ProofCreate:
         return transaction_actions.proof_create;
-      case TransactionAction.ProofStatusChange:
+      case ActivityAction.ProofStatusChange:
         return transaction_actions.proof_status_change;
-      case TransactionAction.RequestCreate:
+      case ActivityAction.RequestCreate:
         return transaction_actions.request_create;
-      case TransactionAction.RequestStatusChange:
+      case ActivityAction.RequestStatusChange:
         return transaction_actions.request_status_change;
-      case TransactionAction.RequestTemplateCreate:
+      case ActivityAction.RequestTemplateCreate:
         return transaction_actions.request_template;
-      case TransactionAction.MoneyDeposit:
-        return transaction_actions.money_deposit;
-      case TransactionAction.IssuerEarnings:
-        return transaction_actions.issuers_earnings;
       default:
         return action;
     }

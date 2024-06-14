@@ -4,7 +4,7 @@ export const transaction = {
   amount: 'Amount',
   detail: 'Detail',
   transaction_id: 'Transaction ID',
-  date: 'Date',
+  date: 'Created At',
   type: 'Type',
   earning: 'Earning',
   cards: {
@@ -21,7 +21,7 @@ export const transaction = {
     columns: {
       id: 'Txn ID',
       action: 'Action',
-      date: 'Date',
+      date: 'Created At',
     },
     view_more: 'View all transactions',
   },
