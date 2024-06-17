@@ -11,6 +11,7 @@ const externalLinks = {
   join_testnet: 'https://mygateway.typeform.com/to/glphnWOS',
   gateway_wallet_android: 'https://www.youtube.com/watch?v=BbeeuzU5Qc8',
   gateway_wallet_ios: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+  increase_storage: 'https://mygateway.typeform.com/to/PDsttJNv',
 };
 
 module.exports = externalLinks;
