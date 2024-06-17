@@ -31,7 +31,7 @@ export default function DataModelCreation({
       }
     >
       <CardRow title={transaction_detail.data_model_id}>
-        {metadata.dataModel}
+        {metadata.dataModelId}
         <ExternalLink
           iconSxProps={{ fontSize: 20, color: 'text.primary' }}
           href={routes.explorer.dataModel(metadata.dataModel as string)}

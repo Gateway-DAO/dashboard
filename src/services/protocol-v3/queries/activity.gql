@@ -49,6 +49,27 @@ query activity($id: String!) {
         proof
         proofRequest: request
         proofStatus: status
+        __typename
+      }
+
+      ... on DataModelMetadata {
+        creator
+        dataModelId: dataModel
+        signedBy
+        __typename
+      }
+
+      ... on UserMetadata {
+        user
+        __typename
+      }
+
+      ... on OrganizationMetadata {
+        organization
+        users
+        usersAdmin
+        verified
+        __typename
       }
     }
   }
