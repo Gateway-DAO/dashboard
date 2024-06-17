@@ -16,8 +16,6 @@ export default function ProofCreation({
 }) {
   const metadata: any = data.metadata;
 
-  console.log(metadata);
-
   return (
     <Stack
       sx={{

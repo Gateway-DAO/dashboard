@@ -41,18 +41,6 @@ export default function TransactionDetails({ id }: Props) {
     select: (data) => data.activity,
   });
 
-  // const { data: transactionData } = useQuery({
-  //   queryKey: [explorerQueries.transaction_arweave, data?.arweaveUrl],
-  //   queryFn: async () => {
-  //     const response = await fetch(data?.arweaveUrl as string);
-  //     if (!response.ok) {
-  //       throw new Error('Network error to get arweave data');
-  //     }
-
-  //     return response.json();
-  //   },
-  //   enabled: !!data?.arweaveUrl,
-  // });
 
   const displayDetails = (data: ActivityQuery['activity']) => {
     switch (data.action) {
@@ -68,14 +56,14 @@ export default function TransactionDetails({ id }: Props) {
         return <PDA data={data} />;
       case ActivityAction.PdaStatusChange:
         return <PDA data={data} />;
-      // case ActivityAction.RequestCreate:
-      //   return <RequestCreation data={data} />;
-      // case ActivityAction.RequestStatusChange:
-      //   return <RequestCreation data={data} />;
+      case ActivityAction.RequestCreate:
+        return <RequestCreation data={data} />;
+      case ActivityAction.RequestStatusChange:
+        return <RequestCreation data={data} />;
       // case ActivityAction.RequestTemplateCreate:
       //   return <RequestTemplateCreation data={data} />;
-      // case ActivityAction.DatamodelCreate:
-      //   return <DataModelCreation data={data} />;
+      case ActivityAction.DatamodelCreate:
+        return <DataModelCreation data={data} />;
       case ActivityAction.ProofCreate:
         return <ProofCreation data={data} />;
       case ActivityAction.ProofStatusChange:

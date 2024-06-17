@@ -3,8 +3,7 @@ import RequestStatusChip from '@/components/requests/request-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { transaction_detail } from '@/locale/en/transaction';
-import { Transaction_DetailQuery } from '@/services/protocol/types';
-import { numberToMoneyString } from '@/utils/money';
+import { ActivityQuery } from '@/services/protocol-v3/types';
 import dayjs from 'dayjs';
 
 import { Divider, Stack } from '@mui/material';
@@ -15,7 +14,7 @@ import UserColumn from '../user-column';
 export default function RequestCreation({
   data,
 }: {
-  data: Transaction_DetailQuery['transaction'];
+  data: ActivityQuery['activity'];
 }) {
   const metadata: any = data.metadata;
   return (
@@ -36,32 +35,19 @@ export default function RequestCreation({
         {metadata?.request}
       </CardRow>
       <CardRow title={transaction_detail.owner}>
-        <UserColumn isLoading={false} user={data.to} />
+        <UserColumn isLoading={false} did={metadata.owner} />
       </CardRow>
       <CardRow title={transaction_detail.verifier}>
-        <UserColumn isLoading={false} user={data.from} />
-      </CardRow>
-      <CardRow title={transaction_detail.request_template}>
-        {metadata?.requestTemplate}
-
-        <ExternalLink
-          iconSxProps={{ fontSize: 20, color: 'text.primary' }}
-          href={routes.explorer.requestTemplate(
-            metadata.requestTemplate as string
-          )}
-          text=""
-        />
+        <UserColumn isLoading={false} did={metadata.verifier} />
       </CardRow>
       <CardRow title={transaction_detail.created_at}>
         {dayjs(data?.createdAt).format(DATE_FORMAT)}
       </CardRow>
-      {data.cost && (
-        <CardRow title={transaction_detail.cost}>
-          {numberToMoneyString(data.cost as number)}
-        </CardRow>
-      )}
       <CardRow title={transaction_detail.status}>
-        <RequestStatusChip variant="filled" status={metadata.status} />
+        <RequestStatusChip
+          variant="filled"
+          status={metadata.dataRequestStatus}
+        />
       </CardRow>
     </Stack>
   );
