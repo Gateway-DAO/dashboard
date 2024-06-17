@@ -57,7 +57,6 @@ export default function TransactionDetails({ id }: Props) {
   const displayDetails = (data: ActivityQuery['activity']) => {
     switch (data.action) {
       case ActivityAction.UserCreate:
-        console.log('hello');
         return <UserCreation data={data} />;
       case ActivityAction.OrganizationCreate:
         return <OrgCreation data={data} />;
@@ -79,8 +78,8 @@ export default function TransactionDetails({ id }: Props) {
       //   return <DataModelCreation data={data} />;
       case ActivityAction.ProofCreate:
         return <ProofCreation data={data} />;
-      // case ActivityAction.ProofStatusChange:
-      //   return <ProofCreation data={data} />;
+      case ActivityAction.ProofStatusChange:
+        return <ProofCreation data={data} />;
     }
   };
 

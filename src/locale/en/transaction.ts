@@ -44,6 +44,7 @@ export const transaction_detail = {
   target: 'Target',
   verified: 'Verification',
   request_template: 'Request Template ID',
+  issuer: 'Issuer',
   creator: 'Creator',
   data_models: 'Data Models',
   proof_id: 'Proof ID',

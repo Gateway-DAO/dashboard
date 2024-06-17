@@ -3,8 +3,7 @@ import { TextStatusChip } from '@/components/text-status-chip/text-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { transaction_detail } from '@/locale/en/transaction';
-import { ActivityQuery } from '@/services/protocol-v3/types';
-import { numberToMoneyString } from '@/utils/money';
+import { ActivityQuery, PdaStatus } from '@/services/protocol-v3/types';
 import dayjs from 'dayjs';
 
 import { Divider, Stack } from '@mui/material';
@@ -29,9 +28,10 @@ export default function PDA({ data }: { data: ActivityQuery['activity'] }) {
       }
     >
       <CardRow title={transaction_detail.pda_id}>{metadata.pda}</CardRow>
-      <CardRow title={transaction_detail.data_contributor}>
-        <UserColumn isLoading={false} did={data.source?.did as string} />
+      <CardRow title={transaction_detail.issuer}>
+        <UserColumn isLoading={false} did={metadata?.issuer as string} />
       </CardRow>
+
       <CardRow title={transaction_detail.data_model_id}>
         {metadata.dataModel}
         <ExternalLink
@@ -40,8 +40,20 @@ export default function PDA({ data }: { data: ActivityQuery['activity'] }) {
           text=""
         />
       </CardRow>
-      <CardRow title={transaction_detail.created_at}>
-        {dayjs(data?.createdAt).format(DATE_FORMAT)}
+      <CardRow title={transaction_detail.expiration}>
+        {metadata.expirationDate
+          ? dayjs(metadata.expirationDate).format(DATE_FORMAT)
+          : 'Indeterminate'}
+      </CardRow>
+      <CardRow title={transaction_detail.signed_by}>
+        <UserColumn isLoading={false} did={metadata?.signedBy as string} />
+      </CardRow>
+      <CardRow title={transaction_detail.status}>
+        <TextStatusChip
+          variant="filled"
+          status={metadata.status as PdaStatus}
+          size="small"
+        />
       </CardRow>
     </Stack>
   );
