@@ -107,25 +107,18 @@ export default function TransactionDetails({ id }: Props) {
               <Typography variant="body1">
                 {isLoading ? <Skeleton variant="text" width={400} /> : id}
               </Typography>
-              {/* {data && (
-                <ExternalLink
-                  iconSxProps={{ fontSize: 20, color: 'text.primary' }}
-                  href={data?.arweaveUrl as string}
-                  text=""
-                />
-              )} */}
             </CardRow>
-            {/* <CardRow title={transaction_detail.action}>
+            <CardRow title={transaction_detail.action}>
               {isLoading ? (
                 <Skeleton width={100} />
               ) : (
                 <Chip
                   label={
-                    <ActionDetail action={data?.action as TransactionAction} />
+                    <ActionDetail action={data?.action as ActivityAction} />
                   }
                 />
               )}
-            </CardRow> */}
+            </CardRow>
             {data && displayDetails(data)}
           </Stack>
         </Box>

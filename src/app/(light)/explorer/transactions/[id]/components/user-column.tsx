@@ -9,7 +9,7 @@ export default function UserColumn({ did, isLoading = true }: UserColum) {
   return (
     <Stack direction="row" gap={1.5} alignItems="center">
       <Box>
-        <Typography variant="subtitle1">
+        <Typography variant="body1">
           {isLoading ? <Skeleton width={200} /> : did}
         </Typography>
       </Box>
