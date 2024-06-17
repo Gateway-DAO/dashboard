@@ -33,11 +33,11 @@ export default function ProofCreation({
       }
     >
       <CardRow title={transaction_detail.proof_id}>{metadata.proof}</CardRow>
-      <CardRow title={transaction_detail.source}>
-        <UserColumn isLoading={false} did={data.source?.did as string} />
+      <CardRow title={transaction_detail.owner}>
+        <UserColumn isLoading={false} did={metadata.owner as string} />
       </CardRow>
-      <CardRow title={transaction_detail.target}>
-        <UserColumn isLoading={false} did={data.target?.did as string} />
+      <CardRow title={transaction_detail.verifier}>
+        <UserColumn isLoading={false} did={metadata.verifier as string} />
       </CardRow>
       {metadata?.proofRequest && (
         <CardRow title={transaction_detail.request_id}>
