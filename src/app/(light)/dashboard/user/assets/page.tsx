@@ -1,29 +1,30 @@
 'use client';
 
 import TitleLayout from '@/components/title-layout/title-layout';
-import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';
 
-import AddIcon from '@mui/icons-material/Add';
-import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 
 import PDAsList from './components/pdas-list/pdas-list';
+import FilePicker from '@/components/form/file-picker/file-picker';
+import { useSession } from 'next-auth/react';
+import { useState } from 'react';
 
 export default function AssetsPage() {
+  const session = useSession();
+  const [error, setError] = useState({ title: '', description: '' });
+  const [onFileUpload, setOnFileUpload] = useState<Blob[]>();
+
   return (
     <>
       <TitleLayout title={pdasLocales.my_data_assets} titleId="title-assets">
-        <Button
-          variant="contained"
-          size="large"
-          startIcon={<AddIcon />}
-          href={routes.dashboard.user.issue}
-        >
-          {pdasLocales.upload_file}
-        </Button>
+        <FilePicker
+          currentUserStorage={1000}
+          onError={setError}
+          onFileUpload={setOnFileUpload}
+        />
       </TitleLayout>
-
+      {error.title.length > 0 && <p>{error.title}</p>}
       <Box sx={{ pt: 5 }}>
         <PDAsList />
       </Box>
