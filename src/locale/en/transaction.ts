@@ -37,7 +37,7 @@ export const transaction_detail = {
   created_at: 'Created at',
   cost: 'Cost',
   status: 'Status',
-  transaction_data: 'Transaction data',
+  transaction_data: 'Metadata',
   gateway_id: 'Gateway ID',
   request_id: 'Request ID',
   owner: 'Owner',

@@ -54,8 +54,6 @@ export default function TransactionDetails({ id }: Props) {
   //   enabled: !!data?.arweaveUrl,
   // });
 
-  console.log(data);
-
   const displayDetails = (data: ActivityQuery['activity']) => {
     switch (data.action) {
       case ActivityAction.UserCreate:
@@ -79,8 +77,8 @@ export default function TransactionDetails({ id }: Props) {
       //   return <RequestTemplateCreation data={data} />;
       // case ActivityAction.DatamodelCreate:
       //   return <DataModelCreation data={data} />;
-      // case ActivityAction.ProofCreate:
-      //   return <ProofCreation data={data} />;
+      case ActivityAction.ProofCreate:
+        return <ProofCreation data={data} />;
       // case ActivityAction.ProofStatusChange:
       //   return <ProofCreation data={data} />;
     }
@@ -132,9 +130,9 @@ export default function TransactionDetails({ id }: Props) {
           </Stack>
         </Box>
       </Container>
-      {/* {transactionData && (
-        <TransactionData data={JSON.stringify(transactionData)} />
-      )} */}
+      {data?.metadata && (
+        <TransactionData data={JSON.stringify(data.metadata)} />
+      )}
     </>
   );
 }
