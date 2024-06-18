@@ -12,11 +12,19 @@ import { useState } from 'react';
 import { useToggle } from '@react-hookz/web';
 import UploadModal from './components/upload-modal/upload-modal';
 
+export type FileType = {
+  file: Blob;
+  error: boolean;
+  pending: boolean;
+  uploading: boolean;
+  done: boolean;
+};
+
 export default function AssetsPage() {
   const session = useSession();
   const [isOpen, toggle] = useToggle();
   const [error, setError] = useState({ title: '', description: '' });
-  const [onFileUpload, setOnFileUpload] = useState<Blob[]>([]);
+  const [onFileUpload, setOnFileUpload] = useState<FileType[]>([]);
 
   return (
     <>

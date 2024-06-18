@@ -5,6 +5,7 @@ import { pdas as pdasLocales } from '@/locale/en/pda';
 import AddIcon from '@mui/icons-material/Add';
 import { readUploadedFile } from './utils';
 import { NextState } from '@react-hookz/web/cjs/util/resolveHookState';
+import { FileType } from '@/app/(light)/dashboard/user/assets/page';
 
 type FileErrorProps = {
   title: string;
@@ -13,7 +14,7 @@ type FileErrorProps = {
 
 type Props = {
   currentUserStorage: number;
-  onFileUpload: (files: Blob[]) => void;
+  onFileUpload: (files: FileType[]) => void;
   onError: (error: FileErrorProps) => void;
   toggle: (nextState?: NextState<boolean> | BaseSyntheticEvent) => void;
 };
