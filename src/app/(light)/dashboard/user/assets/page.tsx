@@ -9,11 +9,14 @@ import PDAsList from './components/pdas-list/pdas-list';
 import FilePicker from '@/components/form/file-picker/file-picker';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
+import { useToggle } from '@react-hookz/web';
+import UploadModal from './components/upload-modal/upload-modal';
 
 export default function AssetsPage() {
   const session = useSession();
+  const [isOpen, toggle] = useToggle();
   const [error, setError] = useState({ title: '', description: '' });
-  const [onFileUpload, setOnFileUpload] = useState<Blob[]>();
+  const [onFileUpload, setOnFileUpload] = useState<Blob[]>([]);
 
   return (
     <>
@@ -22,9 +25,16 @@ export default function AssetsPage() {
           currentUserStorage={1000}
           onError={setError}
           onFileUpload={setOnFileUpload}
+          toggle={toggle}
         />
       </TitleLayout>
-      {error.title.length > 0 && <p>{error.title}</p>}
+      <UploadModal
+        isOpen={isOpen}
+        toggle={toggle}
+        files={onFileUpload}
+        error={error}
+        onFileUpload={setOnFileUpload}
+      />
       <Box sx={{ pt: 5 }}>
         <PDAsList />
       </Box>

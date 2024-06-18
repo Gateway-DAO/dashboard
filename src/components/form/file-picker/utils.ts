@@ -7,23 +7,26 @@ export const readUploadedFile = (
   files: FileList | File[],
   currentUserStorage: number
 ) => {
-  const reader = new FileReader();
   const file = files[0];
-  return new Promise<{ files: Blob[] }>((resolve, reject) => {
+  return new Promise<{ files: Blob[]; title: string; description: string }>(
+    (resolve, reject) => {
     if (file.size > MAX_FILE_UPLOAD_SIZE)
-      reject({
+      resolve({
         title: 'Limit Excedded',
         description:
           'For now, only files up to 30 MB are allowed to be uploaded.',
+        files: [file],
       });
 
-    if (file.size + currentUserStorage >= MAX_FILE_USER_STORAGE)
-      reject({
-        title: 'Insufficient Storage',
-        description: `You don't have enough storage to upload.`,
-      });
-    console.log('s');
+      if (file.size + currentUserStorage >= MAX_FILE_USER_STORAGE)
+        resolve({
+          title: 'Insufficient Storage',
+          description: `You don't have enough storage to upload.`,
+          files: [file],
+        });
+      console.log('s');
 
-    resolve({ files: [file] });
-  });
+      resolve({ files: [file], title: '', description: '' });
+    }
+  );
 };

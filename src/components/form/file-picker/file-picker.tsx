@@ -1,9 +1,10 @@
-import { ChangeEvent, forwardRef, Ref } from 'react';
+import { BaseSyntheticEvent, ChangeEvent, forwardRef, Ref } from 'react';
 
 import { Button } from '@mui/material';
 import { pdas as pdasLocales } from '@/locale/en/pda';
 import AddIcon from '@mui/icons-material/Add';
 import { readUploadedFile } from './utils';
+import { NextState } from '@react-hookz/web/cjs/util/resolveHookState';
 
 type FileErrorProps = {
   title: string;
@@ -14,22 +15,24 @@ type Props = {
   currentUserStorage: number;
   onFileUpload: (files: Blob[]) => void;
   onError: (error: FileErrorProps) => void;
+  toggle: (nextState?: NextState<boolean> | BaseSyntheticEvent) => void;
 };
 
 function FilePickerField(
-  { currentUserStorage, onError, onFileUpload }: Props,
+  { currentUserStorage, onError, onFileUpload, toggle }: Props,
   ref: Ref<HTMLInputElement>
 ) {
   const onReadFile = async (uploadedFiles: File[] | FileList) => {
     try {
-      const { files } = await readUploadedFile(
+      const { files, title, description } = await readUploadedFile(
         uploadedFiles,
         currentUserStorage
       );
+      toggle(true);
       onFileUpload(files);
+      if (title.length > 0) onError({ description, title });
     } catch (e: any) {
       console.error(e);
-      onError(e);
     }
   };
 
