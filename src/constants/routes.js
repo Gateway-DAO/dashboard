@@ -45,8 +45,6 @@ const routes = {
       myAssets: `${dashboardUser}/assets`,
       shared: `${dashboardUser}/shared`,
       sharedData: (proofId) => `${dashboardUser}/shared/${proofId}`,
-      sentShared: `${dashboardUser}/shared/sent`,
-      receivedShared: `${dashboardUser}/shared/received`,
       request: (requestId) => `${dashboardUser}/request/${requestId}`,
       requests: `${dashboardUser}/requests`,
       myRequestTemplates: `${dashboardUser}/request-templates/my`,

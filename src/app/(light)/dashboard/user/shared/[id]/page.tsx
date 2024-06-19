@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import routes from '@/constants/routes';
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
 
-import PDADetailPage from './components/content';
+import PDADetailPage from '../../asset/[id]/components/content';
 
 export async function generateMetadata({
   params,
@@ -15,13 +15,17 @@ export async function generateMetadata({
   if (!session) {
     return redirect(routes.login);
   }
-  const pda = session.shared.find((pda) => pda.id === parseInt(params.id, 10));
+  const pda = session.pdas.find((pda) => pda.id === parseInt(params.id, 10));
   return {
     title: `${pda?.fileName ?? pda?.dataAsset?.title} - Gateway Network`,
   };
 }
 
-export default async function PDAPage({ params }: { params: { id: string } }) {
+export default async function SharedPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const session = await getGtwServerSession();
   if (!session) {
     return redirect(routes.login);
@@ -31,21 +35,17 @@ export default async function PDAPage({ params }: { params: { id: string } }) {
   const org: any = undefined;
 
   if (!pda) {
-    return redirect(routes.dashboard.user.myAssets);
+    return redirect(routes.dashboard.user.shared);
   }
 
   const isOwner = pda.owner.did === session.user.did;
 
   return (
     <PDADetailPage
+      backHref={routes.dashboard.user.shared}
       isOwner={isOwner}
-      pda={pda}
       org={org}
-      backHref={
-        !!org
-          ? routes.dashboard.org.issuedAssets(org?.did)
-          : routes.dashboard.user.myAssets
-      }
+      pda={pda}
     />
   );
 }

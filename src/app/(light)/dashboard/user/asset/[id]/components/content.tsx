@@ -18,10 +18,11 @@ import StructuredDetail from './pda-types/structured-detail';
 type Props = {
   pda: PrivateDataAsset;
   org: Organization;
+  backHref: string;
   isOwner: boolean;
 };
 
-export default function PDADetailPage({ pda, org, isOwner }: Props) {
+export default function PDADetailPage({ pda, org, isOwner, backHref }: Props) {
   return (
     <PageContainer>
       <Box
@@ -32,13 +33,7 @@ export default function PDADetailPage({ pda, org, isOwner }: Props) {
         pb={2}
       >
         <TopBarContainer>
-          <BackButton
-            href={
-              !!org
-                ? routes.dashboard.org.issuedAssets(org?.did)
-                : routes.dashboard.user.myAssets
-            }
-          />
+          <BackButton href={backHref} />
         </TopBarContainer>
 
         <Stack
