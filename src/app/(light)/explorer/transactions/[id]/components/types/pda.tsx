@@ -32,14 +32,16 @@ export default function PDA({ data }: { data: ActivityQuery['activity'] }) {
         <UserColumn isLoading={false} did={metadata?.issuer as string} />
       </CardRow>
 
-      <CardRow title={transaction_detail.data_model_id}>
-        {metadata.dataModel}
-        <ExternalLink
-          iconSxProps={{ fontSize: 20, color: 'text.primary' }}
-          href={routes.explorer.dataModel(metadata.dataModel) as string}
-          text=""
-        />
-      </CardRow>
+      {metadata?.dataModel && (
+        <CardRow title={transaction_detail.data_model_id}>
+          {metadata.dataModel}
+          <ExternalLink
+            iconSxProps={{ fontSize: 20, color: 'text.primary' }}
+            href={routes.explorer.dataModel(metadata.dataModel) as string}
+            text=""
+          />
+        </CardRow>
+      )}
       <CardRow title={transaction_detail.expiration}>
         {metadata.expirationDate
           ? dayjs(metadata.expirationDate).format(DATE_FORMAT)

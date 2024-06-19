@@ -60,8 +60,6 @@ export default function TransactionDetails({ id }: Props) {
         return <RequestCreation data={data} />;
       case ActivityAction.RequestStatusChange:
         return <RequestCreation data={data} />;
-      // case ActivityAction.RequestTemplateCreate:
-      //   return <RequestTemplateCreation data={data} />;
       case ActivityAction.DatamodelCreate:
         return <DataModelCreation data={data} />;
       case ActivityAction.ProofCreate:

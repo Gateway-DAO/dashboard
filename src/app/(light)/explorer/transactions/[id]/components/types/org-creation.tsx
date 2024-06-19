@@ -13,6 +13,8 @@ export default function OrgCreation({
 }: {
   data: ActivityQuery['activity'];
 }) {
+  const metadata: any = data.metadata;
+
   return (
     <Stack
       sx={{
@@ -28,11 +30,11 @@ export default function OrgCreation({
       }
     >
       <CardRow title={transaction_detail.gateway_id}>
-        <UserColumn isLoading={false} user={data.to} />
+        <UserColumn isLoading={false} did={metadata.organization} />
       </CardRow>
-      {/* <CardRow title={transaction_detail.verified}>
-        {data.from?.verified ? 'Verified' : 'Not verified'}
-      </CardRow> */}
+      <CardRow title={transaction_detail.verified}>
+        {metadata?.verified ? 'Verified' : 'Not verified'}
+      </CardRow>
       <CardRow title={transaction_detail.created_at}>
         {dayjs(data?.createdAt).format(DATE_FORMAT)}
       </CardRow>
