@@ -1,6 +1,5 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import getDecryptedData from '../libs/get-decrypted-data';
 import getMe from '../libs/get-me';
 
 const credentialJwt = CredentialsProvider({
@@ -27,6 +26,10 @@ const credentialJwt = CredentialsProvider({
       user,
       token,
       privateKey,
+      injectData: {
+        pdas: [],
+        shared: [],
+      },
     };
   },
 });
