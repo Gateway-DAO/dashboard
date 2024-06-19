@@ -1,5 +1,4 @@
 import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
-import { api } from '@/services/protocol-v3/api';
 
 import PDADetailPage from './components/content';
 
