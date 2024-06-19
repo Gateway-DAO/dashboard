@@ -7,7 +7,8 @@ import {
   CONTAINER_PX,
   NEGATIVE_CONTAINER_PX,
 } from '@/theme/config/style-tokens';
-import { CodeBlock, dracula } from 'react-code-blocks';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 import {
   Box,
@@ -82,15 +83,15 @@ export default function TabsStructure({
         }
     }`;
   const codeCreateRequestProps = {
-    text: mutation,
-    theme: dracula,
+    children: mutation,
+    style: dracula,
     language: 'graphql',
   };
 
   const detailsTemplateProps = {
-    theme: dracula,
+    style: dracula,
     language: 'graphql',
-    text: `data: {
+    children: `data: {
       dataRequestTemplate: {
         id: "${data?.id}",
         name: "${data?.name}",
@@ -146,11 +147,11 @@ export default function TabsStructure({
         {isLoading ? (
           <Skeleton width="100%" height={300} />
         ) : (
-          <CodeBlock {...codeCreateRequestProps} />
+          <SyntaxHighlighter {...codeCreateRequestProps} />
         )}
       </CustomTabPanel>
       <CustomTabPanel value={currentTab} index={1}>
-        <CodeBlock {...detailsTemplateProps} />
+        <SyntaxHighlighter {...detailsTemplateProps} />
       </CustomTabPanel>
     </Stack>
   );
