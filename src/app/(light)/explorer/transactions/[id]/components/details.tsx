@@ -27,7 +27,6 @@ import OrgCreation from './types/org-creation';
 import PDA from './types/pda';
 import ProofCreation from './types/proof-creation';
 import RequestCreation from './types/request-creation';
-import RequestTemplateCreation from './types/request-template-creation';
 import UserCreation from './types/user-creation';
 
 type Props = {
