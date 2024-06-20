@@ -2,8 +2,7 @@ import ExternalLink from '@/components/external-link/external-link';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { transaction_detail } from '@/locale/en/transaction';
-import { Transaction_DetailQuery } from '@/services/protocol/types';
-import { numberToMoneyString } from '@/utils/money';
+import { ActivityQuery } from '@/services/protocol-v3/types';
 import dayjs from 'dayjs';
 
 import { Divider, Stack } from '@mui/material';
@@ -14,7 +13,7 @@ import UserColumn from '../user-column';
 export default function DataModelCreation({
   data,
 }: {
-  data: Transaction_DetailQuery['transaction'];
+  data: ActivityQuery['activity'];
 }) {
   const metadata: any = data.metadata;
   return (
@@ -32,7 +31,7 @@ export default function DataModelCreation({
       }
     >
       <CardRow title={transaction_detail.data_model_id}>
-        {metadata.dataModel}
+        {metadata.dataModelId}
         <ExternalLink
           iconSxProps={{ fontSize: 20, color: 'text.primary' }}
           href={routes.explorer.dataModel(metadata.dataModel as string)}
@@ -40,16 +39,13 @@ export default function DataModelCreation({
         />
       </CardRow>
       <CardRow title={transaction_detail.creator}>
-        <UserColumn isLoading={false} user={data.from} />
+        <UserColumn isLoading={false} did={metadata.creator} />
       </CardRow>
       <CardRow title={transaction_detail.signed_by}>
-        <UserColumn isLoading={false} user={{ id: metadata.signedBy }} />
+        <UserColumn isLoading={false} did={metadata.signedBy} />
       </CardRow>
       <CardRow title={transaction_detail.created_at}>
         {dayjs(data.createdAt).format(DATE_FORMAT)}
-      </CardRow>
-      <CardRow title={transaction_detail.cost}>
-        {numberToMoneyString(data.cost as number)}
       </CardRow>
     </Stack>
   );
