@@ -2,6 +2,7 @@ import { PrivateDataAsset } from '@/services/protocol-v3/types';
 
 export type DecryptedData = {
   pdas: PrivateDataAsset[];
+  shared: PrivateDataAsset[];
 };
 
 export default async function getDecryptedData(

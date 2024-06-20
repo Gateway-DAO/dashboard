@@ -15,6 +15,7 @@ type UserV3Data = Omit<MeQuery, 'me'> & {
 export type LoginSessionV3 = {
   privateKey: string;
   token: string;
+  injectData: DecryptedData;
 } & UserV3Data;
 
 export type SessionV3 = LoginSessionV3 & DecryptedData;

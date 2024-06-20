@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useMemo } from 'react';
 
+import UtilsSocketSessionId from '@/app/(light)/dashboard/components/utils/socket-session-id';
 import {
   defaultGridConfiguration,
   gridWithoutNegativeMargin,
@@ -11,6 +12,8 @@ import {
 import routes from '@/constants/routes';
 import { pdas as pdasLocales } from '@/locale/en/pda';
 import { api } from '@/services/protocol-v3/api';
+import { PrivateDataAsset } from '@/services/protocol-v3/types';
+import { SessionUpdate } from '@/types/session';
 import { useToggle } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
 
@@ -23,9 +26,10 @@ import { columns } from './columns';
 import { ListPrivateDataAsset } from './types';
 
 export default function PDAsList() {
-  const { data: sessionData, status } = useSession();
+  const { data: sessionData, status, update } = useSession();
   const router = useRouter();
   const [isOpen, toggleOpen] = useToggle(false);
+
   const { data, isLoading: isFetchingLatestPdas } = useQuery({
     queryKey: ['pdas', sessionData],
     queryFn: async () => {
@@ -59,6 +63,16 @@ export default function PDAsList() {
 
   return (
     <>
+      {/* <UtilsSocketSessionId
+        event="upload"
+        connectionType="upload"
+        eventMethod={(pda: PrivateDataAsset) => {
+          update({
+            type: 'pdas',
+            pdas: [pda],
+          } satisfies SessionUpdate);
+        }}
+      /> */}
       <DataGrid
         {...defaultGridConfiguration}
         rows={pdas}

@@ -1,9 +1,12 @@
 'use client';
+import Image from 'next/image';
+
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import { DATE_FORMAT } from '@/constants/date';
 import { pdaTableColumnNames } from '@/locale/en/pda';
 import { PrivateDataAsset } from '@/services/protocol-v3/types';
+import { FileType, getFileTypeByMime, getIconFile } from '@/utils/pda';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 
@@ -28,9 +31,16 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
         name = params.row.fileName;
       }
 
+      const fileType = getFileTypeByMime(params.row);
+      const icon = getIconFile(fileType);
+
       return (
         <Stack direction={'row'} justifyContent={'space-between'}>
-          <DataOutlinedIcon color="primary" />
+          {fileType === FileType.pda ? (
+            <DataOutlinedIcon color="primary" />
+          ) : (
+            <Image src={icon} alt={`${fileType} icon`} width={24} height={24} />
+          )}
           <Typography variant="body1" sx={{ mx: 2 }}>
             {name}
           </Typography>

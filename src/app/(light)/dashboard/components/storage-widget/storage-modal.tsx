@@ -1,5 +1,8 @@
+import Link from 'next/link';
+
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
+import externalLinks from '@/constants/externalLinks';
 
 import LaunchIcon from '@mui/icons-material/Launch';
 import { Button, Typography } from '@mui/material';
@@ -22,6 +25,9 @@ export default function StorageModal({ isOpen, toggle }: Props) {
         us?
       </Typography>
       <Button
+        component={Link}
+        href={externalLinks.increase_storage}
+        target="_blank"
         variant="contained"
         color="primary"
         onClick={toggle}
