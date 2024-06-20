@@ -1,0 +1,4 @@
+export const MAX_FILE_UPLOAD_SIZE = 30 * 1024 * 1024;  // 30 MB
+
+
+export const MAX_FILE_USER_STORAGE = 2147483648 / 2;

@@ -15,8 +15,7 @@ import {
 } from '@mui/material';
 
 import StorageModal from './storage-modal';
-
-const MAX_STORAGE = 2147483648 / 2;
+import { MAX_FILE_USER_STORAGE } from '@/constants/file-upload';
 
 export default function StorageWidget() {
   const [isOpen, toggle] = useToggle();
@@ -44,7 +43,9 @@ export default function StorageWidget() {
             <CircularProgress
               {...(session.status === 'authenticated' && {
                 variant: 'determinate',
-                value: (session.data.user.totalFileSize / MAX_STORAGE) * 100,
+                value:
+                  (session.data.user.totalFileSize / MAX_FILE_USER_STORAGE) *
+                  100,
               })}
               sx={{
                 position: 'absolute',
@@ -84,7 +85,7 @@ export default function StorageWidget() {
                   opacity: 0.45,
                 }}
               >
-                / {formatBytes(MAX_STORAGE)}
+                / {formatBytes(MAX_FILE_USER_STORAGE)}
               </Typography>
             </Typography>
           </Stack>
