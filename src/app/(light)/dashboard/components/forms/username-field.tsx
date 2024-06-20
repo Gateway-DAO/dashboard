@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
-import { AvailabilityState } from '@/hooks/use-debounced-username-avaibility';
+import { HasUserState } from '@/hooks/use-debounced-username-avaibility';
 import { common } from '@/locale/en/common';
 import { usernameSchema } from '@/schemas/profile';
 import { Control, useController } from 'react-hook-form';
@@ -20,7 +20,7 @@ type Props = {
   initialUsername: string;
   helperText: string;
   isLoading: boolean;
-  avaibility: AvailabilityState;
+  avaibility: HasUserState;
   canUpdateUsername: boolean;
   onCancel: () => void;
   onSameUsername: () => void;

@@ -1,14 +1,18 @@
+import { ChangeEvent, ChangeEventHandler } from 'react';
+
 import { common } from '@/locale/en/common';
 import { IdentifierValueSchema } from '@/schemas/identifier-value';
-import { UserIdentifierType } from '@/services/protocol/types';
+import { UserIdentifierType } from '@/services/protocol-v3/types';
 import { Control, useController } from 'react-hook-form';
 
 import {
   FormControl,
   FormHelperText,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   Stack,
   SxProps,
   TextField,
@@ -20,6 +24,7 @@ import { useIdentifierTypes } from './use-identifier-types';
 type Props = {
   control: Control<any>;
   error?: boolean;
+  helperText?: string;
   clearErrors?: () => void;
   sx?: SxProps;
   // Maps to react-hook-form names
@@ -33,28 +38,38 @@ type Props = {
   };
   disabled?: boolean;
   onSubmit?: (data: IdentifierValueSchema) => void;
+  addressEndAdorment?: JSX.Element;
+  onChangeType?: (event: SelectChangeEvent<string>) => void;
+  onChangeAddress?: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    type: UserIdentifierType
+  ) => void;
 };
 
 export default function UserIdentityField({
   control,
   error,
   clearErrors,
+  helperText,
   sx,
   names,
   defaultValues,
   disabled = false,
+  addressEndAdorment: endAdornment,
+  onChangeType,
+  onChangeAddress,
 }: Props) {
   const identifierTypes = useIdentifierTypes();
 
-  const typeField = useController({
+  const typeField = useController<IdentifierValueSchema>({
     control,
-    name: names?.type ?? 'type',
-    defaultValue: defaultValues?.type ?? UserIdentifierType.GatewayId,
+    name: (names?.type as 'type') ?? 'type',
+    defaultValue: defaultValues?.type ?? UserIdentifierType.Username,
   });
 
-  const addressField = useController({
+  const addressField = useController<IdentifierValueSchema>({
     control,
-    name: names?.value ?? 'value',
+    name: (names?.value as 'value') ?? 'value',
     defaultValue: defaultValues?.value ?? '',
   });
 
@@ -67,11 +82,12 @@ export default function UserIdentityField({
           error={!!typeField.fieldState.error || !!error}
           id="field-identifier-type"
           sx={{ mb: { xs: 1, md: 0 } }}
-          inputProps={{ defaultValue: UserIdentifierType.GatewayId }}
+          inputProps={{ defaultValue: UserIdentifierType.Username }}
           {...typeField.field}
           onChange={(event) => {
             typeField.field.onChange(event);
             addressField.field.onChange('');
+            onChangeType?.(event);
             clearErrors?.();
           }}
           disabled={disabled}
@@ -83,7 +99,6 @@ export default function UserIdentityField({
               sx={{ width: '100%', py: 2 }}
             >
               <Stack direction="row" alignItems="center" gap={1}>
-                {type.icon}
                 <Typography sx={{ display: 'block', color: 'text.secondary' }}>
                   {type?.name}
                 </Typography>
@@ -101,13 +116,13 @@ export default function UserIdentityField({
         required
         id="field-address"
         {...addressField.field}
+        onChange={(event) => {
+          addressField.field.onChange(event);
+          onChangeAddress?.(event, typeField.field.value as UserIdentifierType);
+        }}
         error={!!addressField.fieldState.error || !!error}
-        helperText={addressField.fieldState.error?.message}
-        type={
-          addressField.field.value === UserIdentifierType.Email
-            ? 'email'
-            : 'text'
-        }
+        helperText={addressField.fieldState.error?.message || helperText}
+        type="text"
         inputMode={
           addressField.field.value === UserIdentifierType.Email
             ? 'email'
@@ -115,6 +130,15 @@ export default function UserIdentityField({
         }
         sx={{ flexGrow: 1 }}
         disabled={disabled}
+        InputProps={{
+          startAdornment: typeField.field.value ===
+            UserIdentifierType.Username && (
+            <InputAdornment position="start">@</InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">{endAdornment}</InputAdornment>
+          ),
+        }}
       />
     </Stack>
   );

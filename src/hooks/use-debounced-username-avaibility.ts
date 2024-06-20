@@ -1,52 +1,60 @@
 import { useState } from 'react';
 
-import { getClientPrivateApi } from '@/services/protocol/api';
+import { IdentifierValueSchema } from '@/schemas/identifier-value';
+import { apiPublic } from '@/services/protocol-v3/api';
 import { useDebouncedCallback } from '@react-hookz/web';
 import { useMutation } from '@tanstack/react-query';
 
-export type AvailabilityState = 'idle' | 'loading' | 'success' | 'invalid';
+export enum HasUserState {
+  Idle,
+  Loading,
+  Found,
+  NotFound,
+}
 
-export default function useDebouncedUsernameAvailability() {
-  const [availability, setAvailability] = useState<AvailabilityState>('idle');
+export default function useDebouncedHasUser() {
+  const [hasUserState, setFindUserState] = useState<HasUserState>(
+    HasUserState.Idle
+  );
 
   const checkAvailability = useMutation({
-    mutationKey: ['check-avaibility'],
-    mutationFn: async (username: string) => {
-      const { checkUsernameAvailability } = await (
-        await getClientPrivateApi()
-      ).check_username_avaibility({ username });
-      return checkUsernameAvailability;
+    mutationKey: ['has-user'],
+    mutationFn: async (identifier: IdentifierValueSchema) => {
+      const { user } = await apiPublic.find_user({ input: identifier });
+      return !!user;
     },
     onSuccess: (valid) => {
-      if (availability !== 'idle') {
-        setAvailability(valid ? 'success' : 'invalid');
+      if (hasUserState !== HasUserState.Idle) {
+        setFindUserState(valid ? HasUserState.Found : HasUserState.NotFound);
       }
     },
     onError: () => {
-      if (availability !== 'idle') {
-        setAvailability('invalid');
+      if (hasUserState !== HasUserState.Idle) {
+        setFindUserState(HasUserState.NotFound);
       }
     },
   });
 
-  const onCheckAvailability = useDebouncedCallback(
+  const onCheckUser = useDebouncedCallback(
     checkAvailability.mutate,
     [checkAvailability.mutate],
     1000
   );
 
-  const onStartCheckAvailability = () => {
-    setAvailability('loading');
+  const onStartFindUser = () => {
+    setFindUserState(HasUserState.Loading);
   };
 
-  const onResetAvailability = () => {
-    setAvailability('idle');
+  const onResetFindUser = () => {
+    setFindUserState(HasUserState.Idle);
   };
 
   return {
-    availability,
-    onStartCheckAvailability,
-    onCheckAvailability,
-    onResetAvailability,
+    hasUserState,
+    onCheckUser: (identifier: IdentifierValueSchema) => {
+      onStartFindUser();
+      onCheckUser(identifier);
+    },
+    onResetFindUser,
   };
 }

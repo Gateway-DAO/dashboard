@@ -10,10 +10,12 @@ export const pda = {
   share: {
     share_a_copy_with: 'Share this data',
     share_a_copy_description: 'Fill a Gateway ID, email or wallet',
+    share_now: 'Share now',
     sharing_cost: 'Proof sharing cost',
     sharing_cost_helper: 'For now Gateway is covering sharing costs',
     free: 'Free',
     successfully_title: 'Copy shared successfully',
+    user_doesnt_exist: 'User does not exist',
   },
   shared_with: {
     shared_with: 'Shared with',

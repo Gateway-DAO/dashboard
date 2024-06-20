@@ -99,6 +99,7 @@ export const common = {
     types: {
       gateway_id: 'Gateway ID',
       email: 'Email',
+      did: 'DID',
       evm_wallet: 'EVM Wallet',
       solana_wallet: 'Solana Wallet',
     },

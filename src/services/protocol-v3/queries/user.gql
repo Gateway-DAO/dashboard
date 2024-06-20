@@ -1,0 +1,33 @@
+query me {
+  me {
+    id
+    did
+    username
+    totalFileSize
+    accesses {
+      role
+      organization {
+        image
+        name
+        did
+        usernameUpdatedAt
+        verified
+      }
+    }
+  }
+  myPDACount
+}
+
+query check_username_availability($username: String!) {
+  checkUsernameAvailability(username: $username)
+}
+query check_did_availability($did: String!) {
+  checkDIDAvailability(did: $did)
+}
+
+query find_user($input: UserIdentificationInput!) {
+  user(input: $input) {
+    did
+    username
+  }
+}
