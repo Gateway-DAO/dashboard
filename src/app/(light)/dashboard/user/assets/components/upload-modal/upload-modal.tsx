@@ -94,7 +94,7 @@ export default function UploadModal({
 
   async function uploadingFiles() {
     setUploadingStarted(true);
-    let updatingFilesState = files.map((file) => {
+    const updatingFilesState = files.map((file) => {
       file.pending = true;
       return file;
     });
