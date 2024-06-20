@@ -1,5 +1,5 @@
 import { proof } from '@/locale/en/proof';
-import { PdaStatus, ProofStatus } from '@/services/protocol/types';
+import { PdaStatus, ProofStatus } from '@/services/protocol-v3/types';
 
 import { Chip, ChipProps } from '@mui/material';
 

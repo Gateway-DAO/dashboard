@@ -1,7 +1,7 @@
 'use client';
 import { CardCellContainer } from '@/components/card-cell/card-cell';
 import { explorerQueries } from '@/constants/queries';
-import { apiPublic } from '@/services/protocol/api';
+import { apiPublic } from '@/services/protocol-v3/api';
 import { numberToMoneyString } from '@/utils/money';
 import { useQuery } from '@tanstack/react-query';
 
@@ -20,7 +20,7 @@ export default function TransactionsTableSection() {
   const { data: transactions, isLoading } = useQuery({
     queryKey: [explorerQueries.transactions, 0, 20],
     queryFn: () => apiPublic.explorer_transactions({ skip: 0, take: 20 }),
-    select: (data) => data.transactions,
+    select: (data) => data.activities,
   });
 
   const { data: numbers } = useQuery({
@@ -59,9 +59,6 @@ export default function TransactionsTableSection() {
                 <Typography flex={3}>
                   <Skeleton />
                 </Typography>
-                <Box flex={1}>
-                  <Skeleton />
-                </Box>
                 <Typography flex={1}>
                   <Skeleton />
                 </Typography>
@@ -72,7 +69,7 @@ export default function TransactionsTableSection() {
       ) : (
         <TransactionsTable
           initialData={transactions ?? []}
-          totalCount={numbers?.totalTransactions as number}
+          totalCount={numbers?.totalActivities as number}
         />
       )}
     </Stack>

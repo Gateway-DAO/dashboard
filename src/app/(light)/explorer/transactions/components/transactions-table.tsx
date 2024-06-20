@@ -11,19 +11,18 @@ import { DATE_FORMAT } from '@/constants/date';
 import { explorerQueries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { transaction } from '@/locale/en/transaction';
-import { apiPublic } from '@/services/protocol/api';
-import { Explorer_TransactionsQuery } from '@/services/protocol/types';
+import { apiPublic } from '@/services/protocol-v3/api';
+import { Explorer_TransactionsQuery } from '@/services/protocol-v3/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
-import { Chip, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
-import ActionDetail from '../../components/transactions/action-detail';
 import Search from './search';
 
 type Props = {
-  initialData: Explorer_TransactionsQuery['transactions'];
+  initialData: Explorer_TransactionsQuery['activities'];
   totalCount: number;
 };
 
@@ -39,17 +38,9 @@ const columns: GridColDef<any>[] = [
     ),
   },
   {
-    field: 'action',
-    headerName: transaction.type,
-    flex: 1,
-    renderCell: (params) => (
-      <Chip label={<ActionDetail action={params.value} />} />
-    ),
-  },
-  {
     field: 'createdAt',
     headerName: transaction.date,
-    flex: 1.5,
+    flex: 0.5,
     valueFormatter: (params) =>
       params.value ? dayjs(params.value).format(DATE_FORMAT) : '',
   },
@@ -75,7 +66,7 @@ export default function TransactionsTable({ initialData, totalCount }: Props) {
         skip: paginationModel.page * paginationModel.pageSize,
         take: paginationModel.pageSize,
       }),
-    select: (data: Explorer_TransactionsQuery) => data.transactions,
+    select: (data: Explorer_TransactionsQuery) => data.activities,
   });
 
   const setNewPage = ({ page }: { page: number }) => {

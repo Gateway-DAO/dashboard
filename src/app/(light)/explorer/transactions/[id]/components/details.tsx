@@ -4,11 +4,8 @@ import React from 'react';
 import ExternalLink from '@/components/external-link/external-link';
 import { explorerQueries } from '@/constants/queries';
 import { transaction_detail } from '@/locale/en/transaction';
-import { apiPublic } from '@/services/protocol/api';
-import {
-  TransactionAction,
-  Transaction_DetailQuery,
-} from '@/services/protocol/types';
+import { apiPublic } from '@/services/protocol-v3/api';
+import { ActivityAction, ActivityQuery } from '@/services/protocol-v3/types';
 import { useQuery } from '@tanstack/react-query';
 
 import {
@@ -30,7 +27,6 @@ import OrgCreation from './types/org-creation';
 import PDA from './types/pda';
 import ProofCreation from './types/proof-creation';
 import RequestCreation from './types/request-creation';
-import RequestTemplateCreation from './types/request-template-creation';
 import UserCreation from './types/user-creation';
 
 type Props = {
@@ -40,48 +36,34 @@ type Props = {
 export default function TransactionDetails({ id }: Props) {
   const { data, isLoading } = useQuery({
     queryKey: [explorerQueries.transaction, id],
-    queryFn: () => apiPublic.transaction_detail({ id }),
-    select: (data) => data.transaction,
+    queryFn: () => apiPublic.activity({ id }),
+    select: (data) => data.activity,
   });
 
-  const { data: transactionData } = useQuery({
-    queryKey: [explorerQueries.transaction_arweave, data?.arweaveUrl],
-    queryFn: async () => {
-      const response = await fetch(data?.arweaveUrl as string);
-      if (!response.ok) {
-        throw new Error('Network error to get arweave data');
-      }
 
-      return response.json();
-    },
-    enabled: !!data?.arweaveUrl,
-  });
-
-  const displayDetails = (data: Transaction_DetailQuery['transaction']) => {
+  const displayDetails = (data: ActivityQuery['activity']) => {
     switch (data.action) {
-      case TransactionAction.UserCreate:
+      case ActivityAction.UserCreate:
         return <UserCreation data={data} />;
-      case TransactionAction.OrganizationCreate:
+      case ActivityAction.OrganizationCreate:
         return <OrgCreation data={data} />;
-      case TransactionAction.OrganizationUpdate:
+      case ActivityAction.OrganizationUpdate:
         return <OrgCreation data={data} />;
-      case TransactionAction.PdaIssuance:
+      case ActivityAction.PdaIssuance:
         return <PDA data={data} />;
-      case TransactionAction.PdaUpdate:
+      case ActivityAction.PdaUpdate:
         return <PDA data={data} />;
-      case TransactionAction.PdaStatusChange:
+      case ActivityAction.PdaStatusChange:
         return <PDA data={data} />;
-      case TransactionAction.RequestCreate:
+      case ActivityAction.RequestCreate:
         return <RequestCreation data={data} />;
-      case TransactionAction.RequestStatusChange:
+      case ActivityAction.RequestStatusChange:
         return <RequestCreation data={data} />;
-      case TransactionAction.RequestTemplateCreate:
-        return <RequestTemplateCreation data={data} />;
-      case TransactionAction.DatamodelCreate:
+      case ActivityAction.DatamodelCreate:
         return <DataModelCreation data={data} />;
-      case TransactionAction.ProofCreate:
+      case ActivityAction.ProofCreate:
         return <ProofCreation data={data} />;
-      case TransactionAction.ProofStatusChange:
+      case ActivityAction.ProofStatusChange:
         return <ProofCreation data={data} />;
     }
   };
@@ -109,13 +91,6 @@ export default function TransactionDetails({ id }: Props) {
               <Typography variant="body1">
                 {isLoading ? <Skeleton variant="text" width={400} /> : id}
               </Typography>
-              {data && (
-                <ExternalLink
-                  iconSxProps={{ fontSize: 20, color: 'text.primary' }}
-                  href={data?.arweaveUrl as string}
-                  text=""
-                />
-              )}
             </CardRow>
             <CardRow title={transaction_detail.action}>
               {isLoading ? (
@@ -123,7 +98,7 @@ export default function TransactionDetails({ id }: Props) {
               ) : (
                 <Chip
                   label={
-                    <ActionDetail action={data?.action as TransactionAction} />
+                    <ActionDetail action={data?.action as ActivityAction} />
                   }
                 />
               )}
@@ -132,8 +107,8 @@ export default function TransactionDetails({ id }: Props) {
           </Stack>
         </Box>
       </Container>
-      {transactionData && (
-        <TransactionData data={JSON.stringify(transactionData)} />
+      {data?.metadata && (
+        <TransactionData data={JSON.stringify(data.metadata)} />
       )}
     </>
   );
