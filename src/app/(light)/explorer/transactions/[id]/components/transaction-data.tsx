@@ -5,7 +5,8 @@ import { TableCellContainer } from '@/components/containers/table-cell-container
 import CopyButton from '@/components/copy-button/copy-button';
 import { transaction_detail } from '@/locale/en/transaction';
 import { useToggle } from '@react-hookz/web';
-import { CodeBlock, dracula } from 'react-code-blocks';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import {
@@ -23,12 +24,6 @@ export default function TransactionData({ data }: { data: string }) {
   const [displayData, toggleData] = useToggle(false);
 
   const result = JSON.stringify(JSON.parse(data), null, 2);
-
-  const codeResultArweaveProps = {
-    text: result,
-    theme: dracula,
-    language: 'json',
-  };
 
   return (
     <Container sx={{ pb: 4 }}>
@@ -67,7 +62,9 @@ export default function TransactionData({ data }: { data: string }) {
               </Stack>
               <Collapse in={displayData}>
                 <Box pt={2}>
-                  <CodeBlock {...codeResultArweaveProps} />
+                  <SyntaxHighlighter language="json" style={dracula}>
+                    {result}
+                  </SyntaxHighlighter>
                 </Box>
               </Collapse>
             </CardCellContainer>

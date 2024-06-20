@@ -6,8 +6,8 @@ import { DATE_FORMAT } from '@/constants/date';
 import { explorerQueries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { transaction } from '@/locale/en/transaction';
-import { apiPublic } from '@/services/protocol/api';
-import { Last_TransactionsQuery } from '@/services/protocol/types';
+import { apiPublic } from '@/services/protocol-v3/api';
+import { Last_TransactionsQuery } from '@/services/protocol-v3/types';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
@@ -15,20 +15,17 @@ import {
   Card,
   Typography,
   Divider,
-  Chip,
   Button,
   Stack,
   Box,
   Skeleton,
 } from '@mui/material';
 
-import ActionDetail from '../../../components/transactions/action-detail';
-
 export default function LastTransactionsTable() {
   const { data: transactions, isLoading } = useQuery({
     queryKey: [explorerQueries.last_transactions],
     queryFn: () => apiPublic.last_transactions(),
-    select: (data: Last_TransactionsQuery) => data.transactions,
+    select: (data: Last_TransactionsQuery) => data.activities,
   });
   return (
     <Stack
@@ -43,10 +40,7 @@ export default function LastTransactionsTable() {
       <CardCellContainer mb={1}>
         <Box display="flex">
           <Typography flex={3}>{transaction.home_table.columns.id}</Typography>
-          <Typography flex={1}>
-            {transaction.home_table.columns.action}
-          </Typography>
-          <Typography flex={1}>
+          <Typography flex={0.8}>
             {transaction.home_table.columns.date}
           </Typography>
         </Box>
@@ -68,9 +62,6 @@ export default function LastTransactionsTable() {
                   <Typography flex={3}>
                     <Skeleton />
                   </Typography>
-                  <Box flex={1}>
-                    <Skeleton />
-                  </Box>
                   <Typography flex={1}>
                     <Skeleton />
                   </Typography>
@@ -94,12 +85,7 @@ export default function LastTransactionsTable() {
                   }}
                 >
                   <Typography flex={3}>{transaction.id}</Typography>
-                  <Box flex={1}>
-                    <Chip
-                      label={<ActionDetail action={transaction.action} />}
-                    />
-                  </Box>
-                  <Typography flex={1}>
+                  <Typography flex={0.8}>
                     {dayjs(transaction.createdAt).format(DATE_FORMAT)}
                   </Typography>
                 </Box>

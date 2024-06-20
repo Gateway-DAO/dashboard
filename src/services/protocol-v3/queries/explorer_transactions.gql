@@ -1,0 +1,10 @@
+query explorer_transactions_stats {
+ getTransactionsExplorerStats {
+    pdasIssued
+    dataRequests
+    uniqueIssuers
+    totalEarnings
+   	totalActivities
+    totalUsers
+  }
+}

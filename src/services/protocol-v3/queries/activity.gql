@@ -50,6 +50,39 @@ query activity($id: String!) {
         proofRequest: request
         proofStatus: status
       }
+
+      ... on DataModelMetadata {
+        creator
+        dataModelId: dataModel
+        signedBy
+      }
+
+      ... on UserMetadata {
+        user
+      }
+
+      ... on OrganizationMetadata {
+        organization
+        users
+        usersAdmin
+        verified
+      }
     }
+  }
+}
+
+query explorer_transactions($skip: Int, $take: Int) {
+  activities(filter: { skip: $skip, take: $take }) {
+    id
+    action
+    createdAt
+  }
+}
+
+query last_transactions {
+  activities(filter: { skip: 0, take: 10 }) {
+    id
+    action
+    createdAt
   }
 }
