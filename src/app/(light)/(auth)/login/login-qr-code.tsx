@@ -36,6 +36,7 @@ export default function LoginQrCode() {
   );
 
   const qrRef = useRef<SVGElement>(null);
+  const socketTimeoutRef = useRef<NodeJS.Timer | null>(null);
 
   const login = useMutation({
     mutationKey: ['login'],
@@ -107,7 +108,15 @@ export default function LoginQrCode() {
   useEffect(() => {
     if (isDesktop) {
       initializeSocket();
+      socketTimeoutRef.current = setInterval(() => {
+        initializeSocket();
+      }, 5 * 60 * 1000);
     }
+    return () => {
+      if (socketTimeoutRef.current) {
+        clearInterval(socketTimeoutRef.current);
+      }
+    };
   }, [isDesktop, initializeSocket]);
 
   const onTryAgain = () => {

@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import GTWLogo from '@/components/gtw-logo/gtw-logo';
 import routes from '@/constants/routes';
 import { newAuth } from '@/locale/en/auth';
-import { common_elements } from '@/locale/en/common_elements';
+import { common_elements } from '@/locale/en/common-elements';
 
 import { Box, Stack, Typography, Link as MuiLink } from '@mui/material';
 

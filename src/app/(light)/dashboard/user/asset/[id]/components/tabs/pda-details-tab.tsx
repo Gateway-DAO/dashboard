@@ -1,3 +1,4 @@
+import UserData from '@/app/(light)/dashboard/components/user-data/user-data';
 import Tags from '@/components/tags/tags';
 import { DATE_FORMAT } from '@/constants/date';
 import { errorMessages } from '@/locale/en/errors';
@@ -10,41 +11,21 @@ import { Stack } from '@mui/material';
 import { Divider } from '@mui/material';
 
 import { IndividualDetailRow, RowSecondaryText, RowText } from './components';
-import { UserDetails } from './components';
 
 type Props = {
   pda: PrivateDataAsset;
 };
 
 export default function PDADetailsTab({ pda }: Props) {
-  const { enqueueSnackbar } = useSnackbar();
-
-  const copy = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      enqueueSnackbar('Copied Successfully!');
-    } catch (err) {
-      enqueueSnackbar(errorMessages.UNEXPECTED_ERROR, { variant: 'error' });
-    }
-  };
-
   return (
     <Stack pt={3} divider={<Divider />}>
       <IndividualDetailRow>
         <RowText title="Uploaded By" />
-        <UserDetails
-          did={pda.issuer.did}
-          username={pda.issuer.username}
-          copy={copy}
-        />
+        <UserData did={pda.issuer.did} username={pda.issuer.username} />
       </IndividualDetailRow>
       <IndividualDetailRow>
         <RowText title="Owner" />
-        <UserDetails
-          did={pda.owner.did}
-          username={pda.owner.username}
-          copy={copy}
-        />
+        <UserData did={pda.owner.did} username={pda.owner.username} />
       </IndividualDetailRow>
       <IndividualDetailRow>
         <RowText title="Created At" />
