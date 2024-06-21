@@ -1,4 +1,4 @@
-import { usernameRegex } from '@/constants/username';
+import { usernameRegex } from '@/constants/identity';
 import { auth } from '@/locale/en/auth';
 import zod from 'zod';
 
