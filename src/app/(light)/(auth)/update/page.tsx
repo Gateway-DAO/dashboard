@@ -14,16 +14,7 @@ export default function UpdatePage() {
       <Typography variant="h2" component="h1" mb={2}>
         Update
       </Typography>
-      <Box
-        p={2}
-        border="1px solid"
-        borderColor="divider"
-        display="inline-block"
-        borderRadius={1.5}
-        mb={2}
-      >
-        <UpdateQrCode />
-      </Box>
+      <UpdateQrCode />
     </AuthContentBox>
   );
 }

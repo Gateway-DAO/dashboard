@@ -2,6 +2,7 @@
 import { useEffect, useCallback, useRef, useState } from 'react';
 
 import GtwQRCode from '@/components/gtw-qr/gtw-qr-code';
+import GtwQrCodeContainer from '@/components/gtw-qr/gtw-qr-code-container';
 import LoadingQRCode from '@/components/gtw-qr/loading-qr-code';
 import { useMediaQuery } from '@react-hookz/web';
 import { Socket, io } from 'socket.io-client';
@@ -59,6 +60,8 @@ export default function UpdateQrCode() {
   }, [isDesktop, initializeSocket]);
 
   return (
-    <>{qrCodeData ? <GtwQRCode value={qrCodeData} /> : <LoadingQRCode />}</>
+    <GtwQrCodeContainer>
+      {qrCodeData ? <GtwQRCode value={qrCodeData} /> : <LoadingQRCode />}
+    </GtwQrCodeContainer>
   );
 }

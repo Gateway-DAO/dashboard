@@ -3,10 +3,9 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import GTWLogo from '@/components/gtw-logo/gtw-logo';
-import ScanIcon from '@/components/icons/scan';
 import routes from '@/constants/routes';
 import { newAuth } from '@/locale/en/auth';
-import stringReplace from 'react-string-replace';
+import { common_elements } from '@/locale/en/common_elements';
 
 import { Box, Stack, Typography, Link as MuiLink } from '@mui/material';
 
@@ -36,21 +35,8 @@ export default async function LoginPage() {
           <Typography variant="h2" component="h1" mb={2}>
             {newAuth.login.title}
           </Typography>
-          <Typography mb={5}>
-            {stringReplace(newAuth.login.description, /(\$\d)/g, (match) => (
-              <ScanIcon sx={{ verticalAlign: 'sub' }} key={match} />
-            ))}
-          </Typography>
-          <Box
-            p={2}
-            border="1px solid"
-            borderColor="divider"
-            display="inline-block"
-            borderRadius={1.5}
-            width={380}
-          >
-            <LoginQrCode />
-          </Box>
+          <Typography mb={5}>{common_elements.scan_message}</Typography>
+          <LoginQrCode />
         </Box>
         <MobileDownloadApp />
       </AuthContentBox>

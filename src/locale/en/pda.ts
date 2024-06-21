@@ -14,7 +14,7 @@ export const pda = {
     sharing_cost: 'Proof sharing cost',
     sharing_cost_helper: 'For now Gateway is covering sharing costs',
     free: 'Free',
-    successfully_title: 'Copy shared successfully',
+    successfully_title: 'Data shared successfully',
     user_doesnt_exist: 'User does not exist',
   },
   shared_with: {

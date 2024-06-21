@@ -1,4 +1,4 @@
-import { ChangeEvent, ChangeEventHandler } from 'react';
+import { ChangeEvent } from 'react';
 
 import { common } from '@/locale/en/common';
 import { IdentifierValueSchema } from '@/schemas/identifier-value';

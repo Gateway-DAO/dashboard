@@ -121,8 +121,6 @@ export const auth = {
 export const newAuth = {
   login: {
     title: 'Scan to login',
-    description:
-      'Tap the $1 Scan icon on Gateway Wallet app to scan the QR code below.',
   },
   signUp: {
     title: 'Download the Gateway Wallet to sign up',

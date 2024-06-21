@@ -101,12 +101,7 @@ export default function UpdateQrCode({ isOpen, onClose }: Props) {
   return (
     <>
       {qrCodeData ? (
-        <>
-          <GtwQRCode value={qrCodeData} ref={qrRef} />
-          {process.env.NODE_ENV === 'development' && (
-            <button onClick={() => onSaveSVG(qrRef.current)}>Print</button>
-          )}
-        </>
+        <GtwQRCode value={qrCodeData} ref={qrRef} />
       ) : (
         <LoadingQRCode />
       )}

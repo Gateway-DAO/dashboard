@@ -4,6 +4,7 @@ import { useRouter } from 'next-nprogress-bar';
 import { useEffect, useCallback, useRef, useState } from 'react';
 
 import GtwQRCode from '@/components/gtw-qr/gtw-qr-code';
+import GtwQrCodeContainer from '@/components/gtw-qr/gtw-qr-code-container';
 import LoadingQRCode from '@/components/gtw-qr/loading-qr-code';
 import routes from '@/constants/routes';
 import { LoginSessionV3 } from '@/types/user';
@@ -116,16 +117,13 @@ export default function LoginQrCode() {
 
   return (
     <>
-      {qrCodeData ? (
-        <>
+      <GtwQrCodeContainer>
+        {qrCodeData ? (
           <GtwQRCode value={qrCodeData} ref={qrRef} />
-          {process.env.NODE_ENV === 'development' && (
-            <button onClick={() => onSaveSVG(qrRef.current)}>Print</button>
-          )}
-        </>
-      ) : (
-        <LoadingQRCode />
-      )}
+        ) : (
+          <LoadingQRCode />
+        )}
+      </GtwQrCodeContainer>
       <Dialog
         open={login.isLoading || login.isSuccess || login.isError}
         fullWidth
