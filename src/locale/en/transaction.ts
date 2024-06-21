@@ -32,7 +32,7 @@ export const transaction_detail = {
   action: 'Action',
   pda_id: 'Personal Data Asset ID',
   data_contributor: 'Data Contributor',
-  signed_by: 'Signed by',
+  signed_by: 'Signature',
   data_model_id: 'Data model ID',
   created_at: 'Created at',
   cost: 'Cost',

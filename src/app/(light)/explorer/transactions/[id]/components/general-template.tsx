@@ -3,16 +3,17 @@ import { transaction_detail } from '@/locale/en/transaction';
 import { ActivityQuery } from '@/services/protocol-v3/types';
 import dayjs from 'dayjs';
 
-import { Stack, Divider } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
 
-import CardRow from '../card-row';
-import UserColumn from '../user-column';
+import CardRow from './card-row';
+import UserColumn from './user-column';
 
-export default function UserCreation({
+export default function TransactionTemplate({
   data,
 }: {
   data: ActivityQuery['activity'];
 }) {
+  const metadata: any = data.metadata;
   return (
     <Stack
       sx={{
@@ -27,12 +28,22 @@ export default function UserCreation({
         />
       }
     >
-      <CardRow title={transaction_detail.gateway_id}>
+      <CardRow title={transaction_detail.source}>
         <UserColumn isLoading={false} did={data.source?.did as string} />
       </CardRow>
+      {data.target?.did && (
+        <CardRow title={transaction_detail.target}>
+          <UserColumn isLoading={false} did={data.target?.did as string} />
+        </CardRow>
+      )}
       <CardRow title={transaction_detail.created_at}>
         {dayjs(data?.createdAt).format(DATE_FORMAT)}
       </CardRow>
+      {metadata.signature || metadata.signedBy && (
+        <CardRow title={transaction_detail.signed_by}>
+          <UserColumn isLoading={false} did={metadata?.signedBy as string} />
+        </CardRow>
+      )}
     </Stack>
   );
 }

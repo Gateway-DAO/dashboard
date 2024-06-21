@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 
-import ExternalLink from '@/components/external-link/external-link';
 import { explorerQueries } from '@/constants/queries';
 import { transaction_detail } from '@/locale/en/transaction';
 import { apiPublic } from '@/services/protocol-v3/api';
@@ -21,13 +20,8 @@ import {
 
 import ActionDetail from '../../../components/transactions/action-detail';
 import CardRow from './card-row';
+import TransactionTemplate from './general-template';
 import TransactionData from './transaction-data';
-import DataModelCreation from './types/data-model-creation';
-import OrgCreation from './types/org-creation';
-import PDA from './types/pda';
-import ProofCreation from './types/proof-creation';
-import RequestCreation from './types/request-creation';
-import UserCreation from './types/user-creation';
 
 type Props = {
   id: string;
@@ -39,34 +33,6 @@ export default function TransactionDetails({ id }: Props) {
     queryFn: () => apiPublic.activity({ id }),
     select: (data) => data.activity,
   });
-
-
-  const displayDetails = (data: ActivityQuery['activity']) => {
-    switch (data.action) {
-      case ActivityAction.UserCreate:
-        return <UserCreation data={data} />;
-      case ActivityAction.OrganizationCreate:
-        return <OrgCreation data={data} />;
-      case ActivityAction.OrganizationUpdate:
-        return <OrgCreation data={data} />;
-      case ActivityAction.PdaIssuance:
-        return <PDA data={data} />;
-      case ActivityAction.PdaUpdate:
-        return <PDA data={data} />;
-      case ActivityAction.PdaStatusChange:
-        return <PDA data={data} />;
-      case ActivityAction.RequestCreate:
-        return <RequestCreation data={data} />;
-      case ActivityAction.RequestStatusChange:
-        return <RequestCreation data={data} />;
-      case ActivityAction.DatamodelCreate:
-        return <DataModelCreation data={data} />;
-      case ActivityAction.ProofCreate:
-        return <ProofCreation data={data} />;
-      case ActivityAction.ProofStatusChange:
-        return <ProofCreation data={data} />;
-    }
-  };
 
   return (
     <>
@@ -103,7 +69,7 @@ export default function TransactionDetails({ id }: Props) {
                 />
               )}
             </CardRow>
-            {data && displayDetails(data)}
+            {data && <TransactionTemplate data={data} />}
           </Stack>
         </Box>
       </Container>
