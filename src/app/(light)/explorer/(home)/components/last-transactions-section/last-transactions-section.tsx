@@ -17,7 +17,7 @@ export default function LastTransactionsSection() {
     queryFn: () => apiPublic.explorer_home_stats(),
     select: (data: Explorer_Home_StatsQuery) => {
       return {
-        transactionsCount: data.transactionsCount,
+        transactionsCount: data.getExplorerStats.totalTransactions,
         ...data.getExplorerStats,
       };
     },

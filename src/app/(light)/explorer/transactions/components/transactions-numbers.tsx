@@ -4,10 +4,7 @@ import NumberCard from '@/components/number-card/number-card';
 import { explorerQueries } from '@/constants/queries';
 import { transaction } from '@/locale/en/transaction';
 import { apiPublic } from '@/services/protocol/api';
-import {
-  Explorer_Home_StatsQuery,
-  Explorer_Transactions_StatsQuery,
-} from '@/services/protocol/types';
+import { Explorer_Home_StatsQuery } from '@/services/protocol/types';
 import { useQuery } from '@tanstack/react-query';
 
 import { Stack } from '@mui/material';
@@ -18,8 +15,8 @@ export default function TransactionsNumbers() {
     queryFn: () => apiPublic.explorer_home_stats(),
     select: (data: Explorer_Home_StatsQuery) => {
       return {
-        transactionsCount: data.transactionsCount,
         ...data.getExplorerStats,
+        transactionsCount: data.getExplorerStats.totalTransactions,
       };
     },
   });
