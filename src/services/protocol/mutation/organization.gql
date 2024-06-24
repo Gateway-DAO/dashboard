@@ -5,64 +5,6 @@ mutation update_org_image($id: String!, $image: String!) {
   }
 }
 
-mutation update_org_display_name($id: String!, $name: String!) {
-  updateOrganization(input: { id: $id, name: $name }) {
-    id
-    name
-  }
-}
-
-mutation update_org_username($id: String!, $username: String!) {
-  updateOrganization(input: { id: $id, username: $username }) {
-    id
-    gatewayId
-  }
-}
-
-mutation update_org_user_role(
-  $id: String!
-  $userId: String!
-  $role: OrganizationRole!
-) {
-  changeMemberRole(
-    input: {
-      organization: { type: ORG_ID, value: $id }
-      user: { type: USER_ID, value: $userId }
-      role: $role
-    }
-  ) {
-    id
-    role
-  }
-}
-
-mutation remove_org_user($id: String!, $userId: String!) {
-  removeMemberFromOrganization(
-    input: {
-      organization: { type: ORG_ID, value: $id }
-      user: { type: USER_ID, value: $userId }
-    }
-  )
-}
-
-mutation add_org_user(
-  $id: String!
-  $type: UserIdentifierType!
-  $value: String!
-  $role: OrganizationRole!
-) {
-  addMemberToOrganization(
-    input: {
-      organization: { type: ORG_ID, value: $id }
-      user: { type: $type, value: $value }
-      role: $role
-    }
-  ) {
-    id
-    role
-  }
-}
-
 mutation create_org(
   $name: String!
   $username: String!
