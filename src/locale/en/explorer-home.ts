@@ -12,17 +12,17 @@ export const explorer_home = {
       target: '_self',
     },
     {
-      title: 'Explore Data Models',
+      title: 'Upload Data',
       description:
-        'Each PDA issued using a data model adheres to a standardized structure of claims, making these frameworks exceptionally reusable for various related scenarios.',
+        "Store data to your users' Encrypted Data Vaults (EDVs) to enable ownership and portability of information. The data can be structured or unstructured.",
       link_text: 'Check it out',
       link: routes.explorer.dataModels,
       target: '_self',
     },
     {
-      title: 'Explore Data Request Templates',
+      title: 'Request Data',
       description:
-        'Data Request Templates serve as the foundational blueprint for each Data Request, ensuring a uniform structure and standardized format for each inquiry.',
+        "Leverage data in your user's Encrypted Data Vaults (EDVs) in a secure and private manner.",
       link_text: 'Check it out',
       link: routes.explorer.requestTemplates,
       target: '_self',

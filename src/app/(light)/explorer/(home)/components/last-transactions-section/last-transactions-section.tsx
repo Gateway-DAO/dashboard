@@ -5,7 +5,6 @@ import { explorerQueries } from '@/constants/queries';
 import { transaction } from '@/locale/en/transaction';
 import { apiPublic } from '@/services/protocol/api';
 import { Explorer_Home_StatsQuery } from '@/services/protocol/types';
-import { numberToMoneyString } from '@/utils/money';
 import { useQuery } from '@tanstack/react-query';
 
 import { Box, Container, Stack, Typography } from '@mui/material';
@@ -18,8 +17,8 @@ export default function LastTransactionsSection() {
     queryFn: () => apiPublic.explorer_home_stats(),
     select: (data: Explorer_Home_StatsQuery) => {
       return {
+        transactionsCount: data.getExplorerStats.totalTransactions,
         ...data.getExplorerStats,
-        totalEarnings: numberToMoneyString(data.getExplorerStats.totalEarnings),
       };
     },
   });
@@ -41,8 +40,8 @@ export default function LastTransactionsSection() {
         >
           <NumberCard
             dark
-            label={transaction.cards.pdas}
-            value={data?.pdasIssued as number}
+            label={transaction.cards.txs_count}
+            value={data?.transactionsCount as number}
             isLoading={isLoading}
           />
           <NumberCard
@@ -53,14 +52,14 @@ export default function LastTransactionsSection() {
           />
           <NumberCard
             dark
-            label={transaction.cards.data_requests}
-            value={data?.dataRequests as number}
+            label={transaction.cards.pda_count}
+            value={data?.pdasIssued as number}
             isLoading={isLoading}
           />
           <NumberCard
             dark
-            label={transaction.cards.fees}
-            value={data?.totalEarnings as string}
+            label={transaction.cards.did_count}
+            value={data?.totalUsers as number}
             isLoading={isLoading}
           />
         </Stack>

@@ -42,10 +42,7 @@ export default function DataModelCard({
               gridTemplateColumns: '1fr 0.8fr',
             }}
           >
-            <Typography variant="subtitle2" fontWeight="400">
-              <b>{numberToMoneyString(dataModel?.consumptionPrice ?? 0)}</b>{' '}
-              {dataModelCard.consumption}
-            </Typography>
+            <Typography variant="subtitle2" fontWeight="400"></Typography>
 
             <Typography
               variant="subtitle2"

@@ -14,7 +14,7 @@ import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
 
 import BlogCard from '../components/blog-card';
 import { ShareButtonFn } from '../components/share-card';
-import './cards.min.css';
+import { RenderBlog } from './component/render-blog';
 
 function formatDate(date: Date) {
   const parts = new Intl.DateTimeFormat('en-GB', {
@@ -176,9 +176,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
             ></Stack>
           </Stack>
           <Stack mx={{ xs: 0, md: 26 }}>
-            <Box
-              dangerouslySetInnerHTML={{ __html: getPost?.html as string }}
-            ></Box>
+            <RenderBlog renderHtml={getPost?.html as string} />
             <Stack mt={3} component={'aside'}>
               <Stack
                 mb={3}
