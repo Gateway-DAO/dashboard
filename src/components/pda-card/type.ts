@@ -1,4 +1,4 @@
-import { PdaStatus } from '@/services/protocol/types';
+import { PdaStatus } from '@/services/protocol-v3/types';
 
 export type PdaCardProps = {
   id: string;

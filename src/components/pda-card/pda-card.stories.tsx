@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { PdaStatus } from '../../services/protocol/types';
+import { PdaStatus } from '../../services/protocol-v3/types';
 import PDACard from './pda-card';
 
 const meta: Meta<typeof PDACard> = {

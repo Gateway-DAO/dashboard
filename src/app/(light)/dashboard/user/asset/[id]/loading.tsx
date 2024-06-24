@@ -4,8 +4,8 @@ import { CONTAINER_PX, WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Box, Divider, Stack } from '@mui/material';
 
-import PDASkeleton from '../old/[id]/components/pda-skeleton';
 import PageContainer from './components/container';
+import PDASkeleton from './components/pda-skeleton';
 
 export default function LoadingPDAPage() {
   return (

@@ -1,4 +1,4 @@
-import { PdaStatus } from '@/services/protocol/types';
+import { PdaStatus } from '@/services/protocol-v3/types';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Box } from '@mui/material';
