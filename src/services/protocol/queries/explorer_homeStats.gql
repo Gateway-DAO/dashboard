@@ -5,6 +5,7 @@ query explorer_home_stats {
     uniqueIssuers
     totalEarnings
     totalUsers
+    totalTransactions
   }
   transactionsCount
 }

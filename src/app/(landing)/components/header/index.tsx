@@ -112,6 +112,9 @@ export default function Header() {
               <a className={styles.link} href="/blog">
                 <Button variant="text">Blog</Button>
               </a>
+              <a className={styles.link} href="/ecosystem">
+                <Button variant="text">Ecosystem</Button>
+              </a>
               <a className={styles.link} href="/explorer" target="_blank">
                 <Button variant="text">Explorer</Button>
               </a>
@@ -208,6 +211,17 @@ export default function Header() {
           >
             <Button variant="text">
               <span>Blog</span>
+              <ArrowRight2 className={styles.mobile_link_arrow} />
+            </Button>
+          </a>
+          <a
+            className={styles.mobile_link}
+            href="/ecosystem"
+            onClick={() => setBurgerActive(false)}
+            target="_blank"
+          >
+            <Button variant="text">
+              <span>Ecosystem</span>
               <ArrowRight2 className={styles.mobile_link_arrow} />
             </Button>
           </a>
