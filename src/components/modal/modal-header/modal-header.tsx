@@ -17,6 +17,7 @@ export default function ModalTitle({ onClose, children }: Props) {
         flexDirection: 'row',
         justifyContent: children ? 'space-between' : 'flex-end',
         width: '100%',
+        alignItems: 'flex-start',
       }}
     >
       {children}

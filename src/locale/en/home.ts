@@ -54,16 +54,6 @@ export const home = {
       link: routes.dashboard.user.issue,
       target: '_self',
     },
-    {
-      icon: DataAssetIcon,
-      heading: 'Manage',
-      title: 'Check Your Shared Datas',
-      subtitle:
-        'Review what data assets you have shared, to who, and if you want to remove access.',
-      btn_text: 'View All',
-      link: routes.dashboard.user.receivedProofs,
-      target: '_self',
-    },
   ] satisfies HomeCardProps[],
   sandbox_user_banner: {
     icon: GatewaySquaredLightIcon,
