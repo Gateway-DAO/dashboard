@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 
 import GtwQRCode from '@/components/gtw-qr/gtw-qr-code';
 import LoadingQRCode from '@/components/gtw-qr/loading-qr-code';
@@ -33,6 +33,7 @@ type Props = {
 
 export default function QrStep({ sessionId, onBack, onClose }: Props) {
   const [downloadModal, toggleDownloadModal] = useToggle(false);
+  const svgRef = useRef<SVGElement | null>(null);
 
   const { data } = useQuery({
     queryKey: ['migration-token', sessionId],
@@ -76,7 +77,7 @@ export default function QrStep({ sessionId, onBack, onClose }: Props) {
         borderColor="divider"
       >
         {!!(sessionId && data?.token) ? (
-          <GtwQRCode size={256} value={qrData} />
+          <GtwQRCode size={256} value={qrData} ref={svgRef} />
         ) : (
           <LoadingQRCode />
         )}
