@@ -1,9 +1,4 @@
-import { useSession } from 'next-auth/react';
-import { usePathname } from 'next/navigation';
-
-import routes from '@/constants/routes';
 import { Organization, OrganizationRole } from '@/services/protocol/types';
-import { getOrg } from '@/utils/currentOrg';
 import { PartialDeep } from 'type-fest';
 
 type UseOrganizationTruthyResponse = {
@@ -30,26 +25,6 @@ type UseOrganizationFalsyResponse = {
 export default function useOrganization():
   | UseOrganizationTruthyResponse
   | UseOrganizationFalsyResponse {
-  const { data: session } = useSession();
-  const pathname = usePathname();
-  const isOrg = pathname?.includes(routes.dashboard.org.root);
-  const pathnameOrg = isOrg ? pathname?.split('/')[3] : undefined;
-  const { access, organization } = getOrg(session, pathnameOrg ?? null);
-
-  const canEdit =
-    access?.role === OrganizationRole.Admin ||
-    access?.role === OrganizationRole.Owner;
-
-  if (isOrg && pathnameOrg && access && organization) {
-    return {
-      isOrg,
-      pathnameOrg,
-      organization,
-      canEdit,
-      role: access?.role,
-    };
-  }
-
   return {
     isOrg: false,
     pathnameOrg: undefined,
