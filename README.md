@@ -25,13 +25,7 @@ pnpm i
 
 3. Create the env file. Ask about it to your manager
 
-4. Generate the typings
-
-```sh
-pnpm generate
-```
-
-5. Start the development server
+4. Start the development server
 
 ```sh
 pnpm dev
