@@ -3,7 +3,6 @@
 import { useSession } from 'next-auth/react';
 
 import { useMenu } from '@/hooks/use-menu';
-import useOrganization from '@/hooks/use-organization';
 
 import { MoreHorizOutlined } from '@mui/icons-material';
 import { ButtonBase, Menu, alpha } from '@mui/material';
@@ -20,13 +19,15 @@ type Props = {
 export default function AuthComponent({ id, controlId }: Props) {
   const { data: session, status } = useSession();
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
-  const { isOrg, organization } = useOrganization();
 
   if (status === 'loading' || !session) {
     return <AuthComponentSkeleton />;
   }
 
-  const { user } = session;
+  const did = '';
+  const username = '';
+  const name = '';
+  const image = '';
 
   return (
     <>
@@ -58,21 +59,7 @@ export default function AuthComponent({ id, controlId }: Props) {
         })}
         onClick={onOpen}
       >
-        {isOrg ? (
-          <UserOrgInfo
-            id={organization.id!}
-            image={organization.image!}
-            name={organization.name!}
-            gatewayId={organization.gatewayId!}
-          />
-        ) : (
-          <UserOrgInfo
-            id={user.id!}
-            image={user.profilePicture}
-            name={user.displayName!}
-            gatewayId={user.gatewayId!}
-          />
-        )}
+        <UserOrgInfo id={did} image={image} name={name} gatewayId={username} />
 
         <MoreHorizOutlined
           sx={{

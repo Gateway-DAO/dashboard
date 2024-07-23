@@ -1,5 +1,3 @@
-import { Chain } from '@/services/protocol/types';
-
 export const common = {
   general: {
     gateway: 'Gateway',
@@ -33,10 +31,6 @@ export const common = {
     mainnet: 'MainNet',
     testnet: 'TestNet',
   },
-  chain: {
-    EVM: 'Ethereum',
-    SOL: 'Solana',
-  } as Record<Chain, string>,
   actions: {
     accept: 'Accept',
     reject: 'Reject',

@@ -7,37 +7,8 @@ const routes = {
   learn: '/learn',
   build: '/build',
   dashboard: {
-    org: {
-      asset: (org, pdaId) => `${dashboardOrg}/${org}/asset/${pdaId}`,
-      issue: (org) => `${dashboardOrg}/${org}/assets/issue`,
-      issuePda: (org, id) => `${dashboardOrg}/${org}/assets/issue/${id}`,
-      proof: (org, proofId) => `${dashboardOrg}/${org}/proof/${proofId}`,
-      request: (org, requestId) =>
-        `${dashboardOrg}/${org}/request/${requestId}`,
-      home: (organization) => `${dashboardOrg}/${organization}/home`,
-      issuedAssets: (organization) =>
-        `${dashboardOrg}/${organization}/assets/issued`,
-      requests: (organization) => `${dashboardOrg}/${organization}/requests`,
-      myRequestTemplates: (organization) =>
-        `${dashboardOrg}/${organization}/request-templates/my`,
-      networkRequestTemplates: (organization) =>
-        `${dashboardOrg}/${organization}/request-templates/network`,
-      myDataModels: (organization) =>
-        `${dashboardOrg}/${organization}/data-models/my`,
-      networkDataModels: (organization) =>
-        `${dashboardOrg}/${organization}/data-models/network`,
-      receivedProofs: (organization) =>
-        `${dashboardOrg}/${organization}/proofs/received`,
-      settings: (organization) => `${dashboardOrg}/${organization}/settings`,
-      developerAccess: (organization) =>
-        `${dashboardOrg}/${organization}/developer-access`,
-      playground: (organization) =>
-        `${dashboardOrg}/${organization}/playground`,
-      wallet: (organization) => `${dashboardOrg}/${organization}/wallet`,
-      root: dashboardOrg,
-    },
     user: {
-      home: `${dashboardUser}/home`,
+      home: `${dashboardUser}/`,
       issue: `${dashboardUser}/assets/issue`,
       issuePda: (id) => `${dashboardUser}/assets/issue/${id}`,
       asset: (pdaId) => `${dashboardUser}/asset/${pdaId}`,

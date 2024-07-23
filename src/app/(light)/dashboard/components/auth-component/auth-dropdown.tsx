@@ -13,7 +13,6 @@ import {
   MenuItem,
 } from '@mui/material';
 
-import WalletWidget from '../../features/wallet/wallet-widget/wallet-widget';
 import AuthDropdownCurrent from './auth-dropdown-current';
 import AuthDropdownProfilesList from './auth-dropdown-profiles-list';
 
@@ -31,9 +30,6 @@ export default function AuthDropdown({ onClose }: Props) {
   return (
     <>
       <AuthDropdownCurrent onClose={onClose} />
-      <Box sx={{ display: { xs: 'block', lg: 'none' }, px: 2, pt: 1 }}>
-        <WalletWidget id="wallet-button" />
-      </Box>
       <Divider sx={{ my: 1 }} />
       <AuthDropdownProfilesList onClose={onClose} />
       <MenuItem onClick={onSignOut}>

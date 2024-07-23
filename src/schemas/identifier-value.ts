@@ -1,9 +1,13 @@
 import { usernameRegex } from '@/constants/username';
-import { ethRegex } from '@/constants/wallet';
 import { auth } from '@/locale/en/auth';
-import { UserIdentifierType } from '@/services/protocol/types';
 import { PublicKey } from '@solana/web3.js';
 import zod, { ZodType } from 'zod';
+
+export enum UserIdentifierType {
+  GatewayId = 'GatewayId',
+  Email = 'Email',
+  Solana = 'Solana',
+}
 
 const fallbackSchema = zod.object({
   type: zod.nativeEnum(UserIdentifierType),
@@ -25,12 +29,6 @@ const identifierValueSchema: ZodType<zod.infer<typeof fallbackSchema>> =
     zod.object({
       type: zod.literal(UserIdentifierType.Email),
       value: value.email(),
-    }),
-    zod.object({
-      type: zod.literal(UserIdentifierType.Evm),
-      value: value.regex(RegExp(ethRegex), {
-        message: 'Invalid EVM Wallet',
-      }),
     }),
     zod.object({
       type: zod.literal(UserIdentifierType.Solana),

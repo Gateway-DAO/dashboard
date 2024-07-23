@@ -1,6 +1,0 @@
-mutation reject_request($requestId: String!) {
-  rejectDataRequest(requestId: $requestId) {
-    id
-    status
-  }
-}

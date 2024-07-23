@@ -1,17 +1,21 @@
-import { Session } from 'next-auth';
+import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
-import { GtwSessionProvider } from '@/context/gtw-session-provider';
-import { getGtwServerSession } from '@/services/next-auth/get-gtw-server-session';
+import DashboardLayout from './components/dashboard-layout';
+import DashboardUserDeveloperMenuListItems from './components/dashboard-developer-menu-list-items';
+import DashboardUserMenuListItems from './components/dashboard-menu-list-items';
 
-import HelpMenu from './components/help-menu/help-menu';
+export const metadata: Metadata = {
+  title: `The Private Data Asset Network  - Gateway Network`,
+};
 
-export default async function DashboardLayout({ children }: PropsWithChildren) {
-  const session = (await getGtwServerSession()) as Session;
+export default function DashboardUserLayout({ children }: PropsWithChildren) {
   return (
-    <GtwSessionProvider session={session}>
+    <DashboardLayout
+      menuItems={<DashboardUserMenuListItems />}
+      secondMenuItems={<DashboardUserDeveloperMenuListItems />}
+    >
       {children}
-      <HelpMenu />
-    </GtwSessionProvider>
+    </DashboardLayout>
   );
 }

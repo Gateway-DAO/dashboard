@@ -1,9 +1,0 @@
-query explorer_transactions_stats {
-  getTransactionsExplorerStats {
-    totalTransactions
-    pdasIssued
-    dataRequests
-    uniqueIssuers
-    totalEarnings
-  }
-}
