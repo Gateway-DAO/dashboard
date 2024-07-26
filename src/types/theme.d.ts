@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ButtonPropsColorOverrides, ButtonClasses } from '@mui/material';
-import { Palette, PalleteOptions } from '@mui/material/styles';
-
+import {
+  ButtonPropsColorOverrides,
+  ButtonClasses,
+  Palette,
+  PalleteOptions,
+  IconButtonPropsColorOverrides,
+} from '@mui/material';
 declare module '@mui/material' {
   interface Palette {
     white: Palette['primary'];
@@ -11,6 +15,9 @@ declare module '@mui/material' {
     white?: PaletteOptions['primary'];
   }
   interface ButtonPropsColorOverrides {
+    white: true;
+  }
+  interface IconButtonPropsColorOverrides {
     white: true;
   }
   interface ButtonClasses {

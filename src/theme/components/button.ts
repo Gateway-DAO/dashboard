@@ -5,7 +5,7 @@ export const MuiButton: Extract<Theme['components'], object>['MuiButton'] = {
     disableElevation: true,
   },
   styleOverrides: {
-    root: ({ theme, ownerState }) => ({
+    root: ({ theme }) => ({
       textTransform: 'unset',
       borderRadius: theme.spacing(5),
       fontWeight: 'bold',

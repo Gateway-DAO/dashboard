@@ -1,16 +1,13 @@
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Container,
   Grid,
   Button,
   Card,
   CardContent,
-  Stack,
 } from '@mui/material';
 
-import Nav from './components/nav';
+import Nav from './components/nav/nav';
 
 export default function IndexPage() {
   return (
@@ -26,7 +23,7 @@ export default function IndexPage() {
               color="textPrimary"
               gutterBottom
             >
-              The Decentralized Private Computer
+              The
             </Typography>
             <Typography
               variant="h5"

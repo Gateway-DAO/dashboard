@@ -43,6 +43,7 @@
     "@mui/material": "^5.14.12",
     "@mui/material-nextjs": "^5.15.7",
     "@mui/system": "^5.14.12",
+    "@mui/utils": "^5.16.5",
     "@mui/x-data-grid": "^6.16.1",
     "@mui/x-date-pickers": "^6.18.4",
     "@prisma/client": "5.1.1",
