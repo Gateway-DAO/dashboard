@@ -5,7 +5,7 @@ export const MuiButton: Extract<Theme['components'], object>['MuiButton'] = {
     disableElevation: true,
   },
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme, ownerState }) => ({
       textTransform: 'unset',
       borderRadius: theme.spacing(5),
       fontWeight: 'bold',
@@ -24,6 +24,9 @@ export const MuiButton: Extract<Theme['components'], object>['MuiButton'] = {
     }),
     outlinedSuccess: ({ theme }) => ({
       color: theme.palette.success.dark,
+    }),
+    containedWhite: ({ theme }) => ({
+      color: theme.palette.primary.main,
     }),
   },
 };

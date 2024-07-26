@@ -1,15 +1,9 @@
-import './styles/global.scss';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
 import { currentEnv } from '@/utils/env';
 import sanitizeHtml from 'sanitize-html';
 
-import Main from './components/Main';
-import SetSizes from './components/set-sizes';
 import Providers from './providers';
 
 export const metadata: Metadata = {
@@ -101,11 +95,7 @@ amplitude.init('36683c62d8db3f0ff467212f18302fef');
         }}
       />
       <body>
-        <Main>
-          <Providers>{children}</Providers>
-        </Main>
-
-        <SetSizes />
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

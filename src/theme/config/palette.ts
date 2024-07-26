@@ -1,4 +1,4 @@
-import { PaletteOptions } from '@mui/material';
+import { PaletteOptions } from '@mui/material/styles';
 
 import { brandColors } from './brand';
 export const lightPalette: PaletteOptions = {
@@ -22,6 +22,9 @@ export const lightPalette: PaletteOptions = {
   },
   success: {
     main: brandColors.success,
+  },
+  white: {
+    main: '#fff',
   },
   background: {
     default: '#F6F4FA',
@@ -48,6 +51,9 @@ export const darkPalette: PaletteOptions = {
   },
   success: {
     main: brandColors.success,
+  },
+  white: {
+    main: '#fff',
   },
   background: {
     default: '#212121',
