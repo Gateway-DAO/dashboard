@@ -41,11 +41,16 @@ export default function HamburgerMenu({ isOpen, onClose }: Props) {
             height: '100%',
             paddingTop: 64 / 8,
             justifyContent: 'space-between',
+            backgroundColor: '#1e1e1e',
+            color: 'white!important',
           },
         }}
       >
         <span />
-        <Stack direction="column" divider={<Divider />}>
+        <Stack
+          direction="column"
+          divider={<Divider sx={{ borderColor: 'rgba(255,255,255,0.2)' }} />}
+        >
           {links.map((link) => (
             <Button
               component={Link}

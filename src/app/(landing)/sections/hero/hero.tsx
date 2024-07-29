@@ -26,6 +26,7 @@ export default function Hero() {
           position: 'relative',
           zIndex: 1,
           pt: 16,
+          color: 'white!important',
         }}
         maxWidth="xl"
       >
@@ -33,7 +34,6 @@ export default function Hero() {
           component="h1"
           variant="h1"
           align="left"
-          color="textPrimary"
           sx={{
             typography: {
               xs: 'h2',
@@ -46,6 +46,7 @@ export default function Hero() {
               lg: 900,
             },
             mb: 1,
+            color: 'inherit',
           }}
           gutterBottom
         >
@@ -53,7 +54,6 @@ export default function Hero() {
         </Typography>
         <Typography
           variant="h6"
-          color="textPrimary"
           paragraph
           sx={{
             typography: {
@@ -66,6 +66,7 @@ export default function Hero() {
               md: 564,
             },
             mb: 4,
+            color: 'inherit',
           }}
         >
           Gateway is an integrated protocol to encrypt, store, manage, and
@@ -96,6 +97,7 @@ export default function Hero() {
             opacity: 0.7,
             fontWeight: 'lighter',
             pb: 5,
+            color: 'inherit',
           }}
         >
           Trusted by

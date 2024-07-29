@@ -4,7 +4,6 @@ import Link from 'next/link';
 
 import Marquee from 'react-fast-marquee';
 
-import { AltRoute } from '@mui/icons-material';
 import { Box } from '@mui/material';
 
 const logos = [
@@ -72,6 +71,7 @@ export default function HeroSlider() {
             },
           }}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={`/images/${logo.src}`} alt={logo.alt} />
         </Box>
       ))}

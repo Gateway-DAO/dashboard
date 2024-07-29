@@ -7,6 +7,7 @@ export const lightPalette: PaletteOptions = {
     main: brandColors.primary,
     light: brandColors.primaryLight,
     50: brandColors.primaryLighter,
+    '100': '#F0E6FC',
   },
   secondary: {
     main: brandColors.secondary,
