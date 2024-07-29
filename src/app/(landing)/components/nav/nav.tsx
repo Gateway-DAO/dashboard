@@ -14,6 +14,7 @@ import {
   Stack,
   Typography,
   IconButton,
+  Container,
 } from '@mui/material';
 
 import HamburgerMenu from './hamburger-menu';
@@ -71,7 +72,10 @@ export default function Nav() {
           zIndex: 1300,
         }}
       >
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Container
+          component={Toolbar}
+          sx={{ display: 'flex', justifyContent: 'space-between' }}
+        >
           <Stack direction="row" gap={2}>
             <Stack direction="row" gap={1} alignItems="center">
               <GatewaySquaredIcon
@@ -153,7 +157,7 @@ export default function Nav() {
           >
             {!isMenuOpen ? <MenuIcon /> : <CloseIcon />}
           </IconButton>
-        </Toolbar>
+        </Container>
       </AppBar>
       <HamburgerMenu isOpen={isMenuOpen} onClose={toggleMenu(false)} />
     </>

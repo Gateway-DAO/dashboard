@@ -5,46 +5,18 @@ import {
   Button,
   Card,
   CardContent,
+  Stack,
 } from '@mui/material';
 
+import Hero from './components/hero/hero';
 import Nav from './components/nav/nav';
 
 export default function IndexPage() {
   return (
     <>
       <Nav />
-      <main>
-        <div>
-          <Container maxWidth="sm" sx={{ height: '400vh' }}>
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterBottom
-            >
-              The
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="textSecondary"
-              paragraph
-            >
-              Convergence will make it possible to encrypt, store, and compute
-              data in your hands.
-            </Typography>
-            <div>
-              <Grid container spacing={2} justifyContent="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Learn More
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
-          </Container>
-        </div>
+      <Stack>
+        <Hero />
         <Container>
           <Grid container spacing={4}>
             <Grid item xs={12} sm={6} md={4}>
@@ -68,7 +40,7 @@ export default function IndexPage() {
             </Grid>
           </Grid>
         </Container>
-      </main>
+      </Stack>
       <footer>
         <Container maxWidth="lg">
           <Typography variant="h6" align="center" gutterBottom>
