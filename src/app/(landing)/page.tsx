@@ -1,11 +1,4 @@
-import {
-  Typography,
-  Container,
-  Grid,
-  Card,
-  CardContent,
-  Stack,
-} from '@mui/material';
+import { Typography, Container, Stack } from '@mui/material';
 
 import Nav from './components/nav/nav';
 import About from './sections/about/about';

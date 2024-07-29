@@ -1,23 +1,8 @@
 'use client';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
-
-import { GatewaySquaredIcon } from '@/components/icons';
-import { common } from '@/locale/en/common';
 
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
-import CloseIcon from '@mui/icons-material/Close';
-import MenuIcon from '@mui/icons-material/Menu';
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  Stack,
-  Typography,
-  IconButton,
-  Drawer,
-  Divider,
-} from '@mui/material';
+import { Button, Stack, Typography, Drawer, Divider } from '@mui/material';
 import { unstable_getScrollbarSize as getScrollbarSize } from '@mui/utils';
 
 import { links } from './links';
