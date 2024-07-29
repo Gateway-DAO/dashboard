@@ -36,14 +36,14 @@ export default function Hero() {
           align="left"
           sx={{
             typography: {
-              xs: 'h2',
-              sm: 'h1',
+              xs: 'h3',
+              md: 'h1',
             },
             fontWeight: 'lighter!important',
             maxWidth: {
               xs: 400,
-              sm: 800,
-              lg: 900,
+              sm: 500,
+              md: 800,
             },
             mb: 1,
             color: 'inherit',

@@ -36,7 +36,7 @@ export default function RootLayout({
   })(window,document,'script','dataLayer','GTM-N32L27DH');
 `);
   return (
-    <html lang="en" className="lenis lenis-smooth">
+    <html lang="en">
       {isTesnetOrProd && (
         <Script
           id="hotjar"

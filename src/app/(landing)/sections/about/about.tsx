@@ -1,26 +1,110 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
-import { Box, Container, Stack } from '@mui/material';
+import NavigationImage from 'public/images/navigation.jpg';
+
+import { Box, Button, Card, Container, Stack, Typography } from '@mui/material';
 
 export default function About() {
   return (
-    <Box component="section">
+    <Box
+      component="section"
+      sx={{
+        pt: 11,
+        pb: 15,
+      }}
+    >
       <Stack
         component={Container}
         direction={{
           xs: 'column',
           md: 'row',
         }}
-        gap={4}
+        gap={2}
       >
-        <Box
+        <Stack
+          component={Card}
+          elevation={0}
           sx={{
             backgroundColor: 'primary.100',
+            flex: 1,
+            border: 1,
+            borderColor: 'divider',
+            p: 4,
+            justifyContent: 'space-between',
+            gap: {
+              xs: 4,
+              md: 26,
+            },
           }}
         >
-          About
-        </Box>
-        <span>Our Team</span>
+          <Stack gap={1}>
+            <Typography variant="subtitle1" color="primary.main">
+              For Business: Give Data Utility
+            </Typography>
+            <Typography
+              component="h2"
+              variant="h3"
+              sx={{
+                typography: {
+                  xs: 'h5',
+                  sm: 'h4',
+                  md: 'h3',
+                },
+              }}
+            >
+              Encrypt, store, and power user-controlled data sharing with
+              Gateway
+            </Typography>
+            <Typography variant="body1">
+              A private and powerful computer for sensitive information.
+            </Typography>
+          </Stack>
+          <Button
+            component={Link}
+            href="#"
+            size="large"
+            variant="contained"
+            sx={{ alignSelf: 'flex-start' }}
+          >
+            Start building
+          </Button>
+        </Stack>
+        <Card
+          elevation={0}
+          sx={{
+            backgroundColor: 'primary.100',
+            flex: {
+              xs: 'auto',
+              md: 1,
+            },
+            border: 1,
+            borderColor: 'divider',
+            position: 'relative',
+            height: {
+              xs: '100%',
+              md: 'auto',
+            },
+            aspectRatio: {
+              xs: 327 / 306,
+              md: 'unset',
+            },
+          }}
+        >
+          <Image
+            src={NavigationImage}
+            alt="A worker working on a futuristic navigation system"
+            placeholder="blur"
+            quality={100}
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center bottom',
+            }}
+          />
+        </Card>
       </Stack>
     </Box>
   );
