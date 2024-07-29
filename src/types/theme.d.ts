@@ -5,6 +5,7 @@ import {
   Palette,
   PalleteOptions,
   IconButtonPropsColorOverrides,
+  DividerPropsVariantOverrides,
 } from '@mui/material';
 declare module '@mui/material' {
   interface Palette {
@@ -16,6 +17,9 @@ declare module '@mui/material' {
   }
   interface ButtonPropsColorOverrides {
     white: true;
+  }
+  interface DividerPropsVariantOverrides {
+    light: true;
   }
   interface IconButtonPropsColorOverrides {
     white: true;

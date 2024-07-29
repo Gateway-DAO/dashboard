@@ -43,7 +43,7 @@ export default function About() {
           }}
         >
           <Stack gap={1}>
-            <Typography variant="subtitle1" color="primary.main">
+            <Typography component="h3" variant="subtitle1" color="primary.main">
               For Business: Give Data Utility
             </Typography>
             <Typography
@@ -116,7 +116,7 @@ export default function About() {
           },
         }}
       >
-        <AboutCards />
+        {/* <AboutCards /> */}
       </Container>
     </Box>
   );
