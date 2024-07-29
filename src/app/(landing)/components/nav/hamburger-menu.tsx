@@ -13,7 +13,8 @@ type Props = {
 };
 
 export default function HamburgerMenu({ isOpen, onClose }: Props) {
-  const scrollBarSize = getScrollbarSize(window.document);
+  const scrollBarSize =
+    typeof window !== 'undefined' ? getScrollbarSize(window.document) : 0;
   return (
     <>
       <Drawer
