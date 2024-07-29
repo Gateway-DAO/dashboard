@@ -6,6 +6,8 @@ import NavigationImage from 'public/images/navigation.jpg';
 
 import { Box, Button, Card, Container, Stack, Typography } from '@mui/material';
 
+import AboutCards from './about-cards';
+
 export default function About() {
   return (
     <Box
@@ -19,18 +21,19 @@ export default function About() {
         component={Container}
         direction={{
           xs: 'column',
-          md: 'row',
+          sm: 'row',
         }}
         gap={2}
       >
         <Stack
           component={Card}
-          elevation={0}
+          variant="outlined"
           sx={{
             backgroundColor: 'primary.100',
-            flex: 1,
-            border: 1,
-            borderColor: 'divider',
+            width: {
+              xs: 'unset',
+              sm: '50%',
+            },
             p: 4,
             justifyContent: 'space-between',
             gap: {
@@ -72,23 +75,22 @@ export default function About() {
           </Button>
         </Stack>
         <Card
-          elevation={0}
+          variant="outlined"
           sx={{
             backgroundColor: 'primary.100',
-            flex: {
-              xs: 'auto',
-              md: 1,
+            width: {
+              xs: 'unset',
+              sm: '50%',
             },
-            border: 1,
-            borderColor: 'divider',
+
             position: 'relative',
             height: {
               xs: '100%',
-              md: 'auto',
+              sm: 'auto',
             },
             aspectRatio: {
               xs: 327 / 306,
-              md: 'unset',
+              sm: 'unset',
             },
           }}
         >
@@ -101,11 +103,21 @@ export default function About() {
             sizes="100vw"
             style={{
               objectFit: 'cover',
-              objectPosition: 'center bottom',
+              objectPosition: '35% 55%',
             }}
           />
         </Card>
       </Stack>
+      <Container
+        sx={{
+          px: {
+            xs: 0,
+            md: 3,
+          },
+        }}
+      >
+        <AboutCards />
+      </Container>
     </Box>
   );
 }
