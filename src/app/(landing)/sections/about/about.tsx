@@ -109,13 +109,14 @@ export default function About() {
       </Stack>
       <Container
         sx={{
+          pt: 2,
           px: {
             xs: 0,
             md: 3,
           },
         }}
       >
-        {/* <AboutCards /> */}
+        <AboutCards />
       </Container>
     </Box>
   );

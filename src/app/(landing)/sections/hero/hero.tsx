@@ -14,7 +14,7 @@ export default function Hero() {
       sx={{
         position: 'relative',
         backgroundColor: 'primary.main',
-        pt: 7,
+        pt: 8,
         pb: {
           xs: 5.5,
           sm: 9.75,
