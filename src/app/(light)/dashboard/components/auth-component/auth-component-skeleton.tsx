@@ -6,10 +6,7 @@ export default function AuthComponentSkeleton() {
       sx={(theme) => ({
         backgroundColor: {
           xs: 'transparent',
-          lg: alpha(
-            theme.palette.primary.main,
-            theme.palette.action.focusOpacity
-          ),
+          lg: 'primary.light',
         },
         borderRadius: theme.shape.borderRadius / 16, //Strange issue with MUI
         p: 2,

@@ -1,11 +1,8 @@
-const dashboardUser = '/dashboard/user';
-const dashboardOrg = '/dashboard/org';
+const dashboardUser = '/dashboard';
 const explorer = '/explorer';
 const routes = {
   home: '/',
   auth: '/login',
-  learn: '/learn',
-  build: '/build',
   dashboard: {
     user: {
       home: `${dashboardUser}/`,

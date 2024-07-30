@@ -5,7 +5,7 @@ import * as components from './components';
 import { lightPalette, darkPalette } from './config/palette';
 import typography from './config/typography';
 
-export const lightTheme = createTheme({
+export const theme = createTheme({
   palette: lightPalette,
   typography,
   shape: {
@@ -16,15 +16,4 @@ export const lightTheme = createTheme({
   },
 });
 
-export const darkTheme = createTheme({
-  palette: darkPalette,
-  typography,
-  shape: {
-    borderRadius: 16,
-  },
-  components: {
-    ...components,
-  },
-});
-
-export type GatewayTheme = typeof lightTheme;
+export type GatewayTheme = typeof theme;
