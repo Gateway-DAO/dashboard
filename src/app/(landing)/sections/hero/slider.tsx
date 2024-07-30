@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 import Marquee from 'react-fast-marquee';
@@ -11,57 +12,75 @@ const logos = [
     href: 'https://li.fi/',
     src: 'lifi.svg',
     alt: 'Li.Fi',
+    width: 104,
+    height: 40,
   },
   {
     href: 'https://dimo.zone/',
     src: 'dimo.svg',
     alt: 'Dimo',
-  },
-  {
-    href: 'https://www.pokt.network/',
-    src: 'pokt.svg',
-    alt: 'Pokt Network',
+    width: 109,
+    height: 30,
   },
   {
     href: 'https://www.plumenetwork.xyz/',
     src: 'plume.svg',
     alt: 'Plume Network',
+    width: 157,
+    height: 45,
   },
   {
-    href: 'https://spherepay.co/',
-    src: 'sphere.svg',
-    alt: 'Sphere',
+    href: 'https://www.atoma.network/',
+    src: 'atoma.svg',
+    alt: 'Atoma Network',
+    width: 113,
+    height: 41,
   },
   {
-    href: 'https://www.accessprotocol.co/',
-    src: 'access.svg',
-    alt: 'Access Protocol',
+    href: 'https://www.heurist.ai/',
+    src: 'heurist.svg',
+    alt: 'Heurist',
+    width: 134,
+    height: 37,
   },
   {
-    href: 'https://commonwealth.im/',
-    src: 'commonwealth.svg',
-    alt: 'Common',
+    href: 'https://zama.ai/',
+    src: 'zama.svg',
+    alt: 'Zama',
+    width: 130,
+    height: 26,
   },
   {
-    href: 'https://piggylet.com/',
-    src: 'piggylet.svg',
-    alt: 'Piggylet',
+    href: '#',
+    src: 'shiza.png',
+    alt: 'Shiza',
+    width: 140,
+    height: 35,
   },
   {
-    href: 'https://www.tryodyssey.xyz/en/explore',
-    src: 'odyssey.svg',
-    alt: 'Odyssey',
+    href: '#',
+    src: 'camp.svg',
+    alt: 'Camp',
+    width: 111,
+    height: 30,
+  },
+  {
+    href: '#',
+    src: 'blackbird.svg',
+    alt: 'Blackbird',
+    width: 192,
+    height: 31,
   },
 ];
 
 export default function HeroSlider() {
   return (
     <Marquee autoFill>
-      {logos.map((logo, index) => (
+      {logos.map(({ href, src, alt, ...props }) => (
         <Box
           component={Link}
-          key={index}
-          href={logo.href}
+          key={src}
+          href={href}
           target="_blank"
           sx={{
             mr: {
@@ -71,8 +90,7 @@ export default function HeroSlider() {
             },
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`/images/${logo.src}`} alt={logo.alt} />
+          <Image src={`/images/${src}`} alt={alt} {...props} />
         </Box>
       ))}
     </Marquee>

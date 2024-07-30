@@ -103,7 +103,9 @@ export default function Hero() {
           Trusted by
         </Typography>
       </Container>
-      <HeroSlider />
+      <Box sx={{ minHeight: 47 }}>
+        <HeroSlider />
+      </Box>
       <Box
         sx={{
           height: '100%',
@@ -111,8 +113,6 @@ export default function Hero() {
           overflow: 'hidden',
           position: 'absolute',
           inset: 0,
-          opacity: 0.1,
-          mixBlendMode: 'hard-light',
           pointerEvents: 'none',
         }}
       >
