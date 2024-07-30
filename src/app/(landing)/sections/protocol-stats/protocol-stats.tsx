@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Box, Container, Divider, Stack, Typography } from '@mui/material';
 
 const statProps = {
@@ -97,13 +95,30 @@ export default function ProtocolStats() {
               9,603,193
             </Typography>
           </Stack>
-          <Stack {...statProps}>
+          <Stack
+            {...statProps}
+            sx={{
+              ...statProps.sx,
+              width: {
+                xs: '100%',
+                md: '60%',
+              },
+            }}
+          >
             <Typography>Files Stored</Typography>
             <Typography color="primary.main" variant="h5">
               9,603,193
             </Typography>
           </Stack>
-          <Stack gap={2}>
+          <Stack
+            gap={2}
+            sx={{
+              width: {
+                xs: '100%',
+                md: '45%',
+              },
+            }}
+          >
             <Stack {...statProps}>
               <Typography>Users Empowered</Typography>
               <Typography color="primary.main" variant="h5">
