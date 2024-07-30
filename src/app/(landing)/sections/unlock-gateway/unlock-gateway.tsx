@@ -1,18 +1,6 @@
-import React from 'react';
+import { Box, Container, Stack, Typography } from '@mui/material';
 
-import { Box, Container, Divider, Stack, Typography } from '@mui/material';
-
-const items = [
-  'Lending History',
-  'Consumer Preferences',
-  'Personhood',
-  'Browsing History',
-  'Gamer Score',
-  'Social Reputation',
-  'Work Experience',
-  'Attestations',
-  'Education',
-];
+import AnimatedList from './animated-list';
 
 export default function UnlockGateway() {
   return (
@@ -57,25 +45,7 @@ export default function UnlockGateway() {
         </Typography>
       </Box>
       <Box>
-        {items.map((item, index) => (
-          <Typography
-            key={item}
-            variant="h3"
-            color="inherit"
-            fontWeight="lighter"
-            sx={{
-              opacity: (items.length - 1 - index) / (items.length - 1),
-              transition: 'opacity 0.1s',
-              typography: {
-                xs: 'h5',
-                sm: 'h4',
-                md: 'h3',
-              },
-            }}
-          >
-            {item}
-          </Typography>
-        ))}
+        <AnimatedList />
       </Box>
     </Stack>
   );
