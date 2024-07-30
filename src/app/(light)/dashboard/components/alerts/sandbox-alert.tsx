@@ -2,9 +2,6 @@
 
 import { useState } from 'react';
 
-import { sandboxAlert } from '@/locale/en/alert-messages';
-import { common } from '@/locale/en/common';
-
 import { Button, Typography, AlertTitle, Alert } from '@mui/material';
 
 export default function SandboxAlert() {
@@ -34,12 +31,14 @@ export default function SandboxAlert() {
               toggleAlert(false);
             }}
           >
-            {common.actions.close}
+            Close
           </Button>
         }
       >
-        <AlertTitle>{sandboxAlert.title}</AlertTitle>
-        <Typography variant="body2">{sandboxAlert.description}</Typography>
+        <AlertTitle>You are on the Gateway Sandbox</AlertTitle>
+        <Typography variant="body2">
+          The data is temporary and will be gone in 60 days.
+        </Typography>
       </Alert>
     )
   );

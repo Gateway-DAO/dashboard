@@ -3,14 +3,13 @@
 import { usePathname } from 'next/navigation';
 
 import MainnetOutlined from '@/components/icons/mainnet-outlined';
-import GTWMenuItem from './menu-item';
 import externalLinks from '@/constants/externalLinks';
-import { common } from '@/locale/en/common';
 import { currentEnv, isSandbox } from '@/utils/env';
 
 import { Typography } from '@mui/material';
 
 import { dashboardDevelopersMenuItems } from './dashboard-developer-menu-items';
+import GTWMenuItem from './menu-item';
 
 export default function DashboardUserDeveloperMenuListItems() {
   const activePath = usePathname();
@@ -22,8 +21,9 @@ export default function DashboardUserDeveloperMenuListItems() {
   return (
     <>
       <Typography variant="caption" sx={{ px: 3.5, mb: 2, display: 'block' }}>
-        {common.general.developers}
+        Developers
       </Typography>
+
       {dashboardDevelopersMenuItems.map(({ activeHrefs, ...item }) => (
         <GTWMenuItem
           key={item.name}
@@ -33,7 +33,7 @@ export default function DashboardUserDeveloperMenuListItems() {
       ))}
 
       <GTWMenuItem
-        name={isSandbox ? common.general.sandbox : common.general.testnet}
+        name={isSandbox ? 'Sandbox' : 'TestNet'}
         href={`${externalLinks.gateway}${activePath}`}
         icon={MainnetOutlined}
         externalLink={true}

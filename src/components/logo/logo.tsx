@@ -1,5 +1,3 @@
-import { common } from '@/locale/en/common';
-
 import { Typography } from '@mui/material';
 
 import GatewaySquaredIcon from '../icons/gateway-squared';
@@ -25,7 +23,7 @@ export default function Logo({ theme = 'light' }: Props) {
         color={theme === 'light' ? 'common.black' : 'common.white'}
         fontWeight="bold"
       >
-        {common.general.gateway}
+        Gateway
       </Typography>
     </>
   );

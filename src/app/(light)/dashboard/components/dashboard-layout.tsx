@@ -3,6 +3,8 @@
 import { usePathname } from 'next/navigation';
 import { PropsWithChildren, ReactNode } from 'react';
 
+import Logo from '@/components/logo/logo';
+import LogoContainer from '@/components/logo/logo-container';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { isSandbox } from '@/utils/env';
 
@@ -10,10 +12,7 @@ import { Box, Chip, Tooltip } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import SandboxAlert from './alerts/sandbox-alert';
-import Logo from '@/components/logo/logo';
-import LogoContainer from '@/components/logo/logo-container';
 import Sidebar from './sidebar/sidebar';
-import { sandboxAlert } from '@/locale/en/alert-messages';
 
 type Props = {
   menuItems: ReactNode;
@@ -49,7 +48,11 @@ export default function DashboardLayout({
             <Logo />
           </LogoContainer>
           {isSandbox && (
-            <Tooltip title={sandboxAlert.tooltip} placement="right" arrow>
+            <Tooltip
+              title="You are on the Gateway Sandbox. The data is temporary and will expire in 60 days."
+              placement="right"
+              arrow
+            >
               <Chip
                 color="warning"
                 size="small"
