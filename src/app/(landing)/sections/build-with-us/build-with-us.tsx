@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import CTAImage from 'public/images/cta.png';
 
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
 export default function BuildWithUs() {
   return (
@@ -13,14 +13,24 @@ export default function BuildWithUs() {
         position: 'relative',
       }}
     >
-      <Container
+      <Stack
+        component={Container}
         sx={{
+          display: 'flex',
           position: 'relative',
           zIndex: 1,
           color: 'white!important',
           alignItems: {
             xs: 'flex-start',
             md: 'center',
+          },
+          pt: {
+            xs: 6,
+            md: 15,
+          },
+          pb: {
+            xs: 35.25,
+            md: 74,
           },
         }}
       >
@@ -36,6 +46,14 @@ export default function BuildWithUs() {
             fontWeight: 'lighter!important',
             mb: 1,
             color: 'inherit',
+            textAlign: {
+              xs: 'left',
+              md: 'center',
+            },
+            maxWidth: {
+              sm: 'unset',
+              md: 664,
+            },
           }}
           gutterBottom
         >
@@ -66,7 +84,7 @@ export default function BuildWithUs() {
         >
           Read Documentation
         </Button>
-      </Container>
+      </Stack>
       <Box
         sx={{
           height: '100%',
