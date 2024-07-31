@@ -23,7 +23,7 @@ export default function AuthDropdownCurrent({ onClose }: Props) {
   const username = '';
   const hasName = true;
   const did = '';
-  let name = '';
+  const name = '';
 
   return (
     <MenuItem

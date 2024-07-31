@@ -4,15 +4,12 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useMemo, useState } from 'react';
 
-import {
-  defaultGridConfiguration,
-  defaultGridCustomization,
-} from '@/components/data-grid/grid-default';
+import { defaultGridCustomization } from '@/components/data-grid/grid-default';
 import routes from '@/constants/routes';
 import {
   mockPrivateDataAssets,
   PrivateDataAsset,
-} from '@/services/server/types';
+} from '@/services/server/mock-types';
 import { useQuery } from '@tanstack/react-query';
 
 import LinearProgress from '@mui/material/LinearProgress';

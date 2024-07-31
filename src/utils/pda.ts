@@ -1,4 +1,4 @@
-import { PrivateDataAsset } from '@/services/server/types';
+import { PrivateDataAsset } from '@/services/server/mock-types';
 
 export enum FileType {
   pda,
