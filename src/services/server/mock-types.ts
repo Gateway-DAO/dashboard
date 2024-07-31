@@ -38,6 +38,7 @@ export const mockPrivateDataAssets: PrivateDataAsset[] = [
     proofs: [],
     createdBy: { did: 'user1', username: 'John', image: 'user1.jpg' },
     expirationDate: '2024-12-31',
+    updatedAt: '2024-12-31',
     size: 1024,
   },
   {
@@ -48,6 +49,7 @@ export const mockPrivateDataAssets: PrivateDataAsset[] = [
     proofs: [],
     createdBy: { did: 'user2', username: 'Jane', image: 'user2.jpg' },
     expirationDate: '2024-10-30',
+    updatedAt: '2024-10-30',
     size: 2048,
   },
   {
@@ -58,5 +60,6 @@ export const mockPrivateDataAssets: PrivateDataAsset[] = [
     proofs: [],
     createdBy: { did: 'user3', username: 'Alice', image: 'user3.jpg' },
     expirationDate: '2024-12-31',
+    updatedAt: '2024-12-31',
   },
 ];

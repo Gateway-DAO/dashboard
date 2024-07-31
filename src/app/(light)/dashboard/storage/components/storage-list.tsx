@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { defaultGridCustomization } from '@/components/data-grid/grid-default';
 import routes from '@/constants/routes';
