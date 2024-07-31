@@ -1,5 +1,6 @@
 import { Typography, Container, Stack, Divider, Box } from '@mui/material';
 
+import Footer from './components/footer/footer';
 import Nav from './components/nav/nav';
 import About from './sections/about/about';
 import BlogSection from './sections/blog/blog';
@@ -33,21 +34,7 @@ export default function IndexPage() {
         <BlogSection />
         <BuildWithUs />
       </Stack>
-      <footer>
-        <Container maxWidth="lg">
-          <Typography variant="h6" align="center" gutterBottom>
-            Build the User Sovereign Web with us
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            color="textSecondary"
-            component="p"
-          >
-            The Decentralized Private Computer is growing a new data economy.
-          </Typography>
-        </Container>
-      </footer>
+      <Footer />
     </>
   );
 }

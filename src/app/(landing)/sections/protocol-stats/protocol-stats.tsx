@@ -55,7 +55,7 @@ export default function ProtocolStats() {
         <Typography
           variant="h3"
           sx={{
-            color: 'white!important',
+            color: 'white.main',
             mb: 6,
             typography: {
               xs: 'h5',

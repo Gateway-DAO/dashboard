@@ -26,7 +26,7 @@ export default function Hero() {
           position: 'relative',
           zIndex: 1,
           pt: 16,
-          color: 'white!important',
+          color: 'white.main',
         }}
       >
         <Typography

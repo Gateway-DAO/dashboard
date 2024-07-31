@@ -19,7 +19,7 @@ export default function BuildWithUs() {
           display: 'flex',
           position: 'relative',
           zIndex: 1,
-          color: 'white!important',
+          color: 'white.main',
           alignItems: {
             xs: 'flex-start',
             md: 'center',

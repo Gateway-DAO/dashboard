@@ -133,7 +133,7 @@ export function MissionImage() {
         backgroundColor: 'primary.light',
         width: 437,
         height: 437,
-        transition: 'top 0.15s ease',
+        transition: 'top .25s ease-out',
         overflow: 'hidden',
         opacity: 0.6,
         display: {

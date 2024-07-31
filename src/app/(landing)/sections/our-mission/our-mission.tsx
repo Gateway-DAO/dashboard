@@ -20,7 +20,7 @@ export default function OurMission() {
           xs: 6,
           md: 15,
         },
-        color: 'white!important',
+        color: 'white.main',
       }}
       gap={3}
     >
