@@ -5,7 +5,7 @@ import HeroImage from 'public/images/hero.png';
 
 import { Box, Button, Container, Typography } from '@mui/material';
 
-import HeroSlider from './slider';
+import HeroClientsSlider from './clients-slider';
 
 export default function Hero() {
   return (
@@ -103,7 +103,7 @@ export default function Hero() {
         </Typography>
       </Container>
       <Box sx={{ minHeight: 47 }}>
-        <HeroSlider />
+        <HeroClientsSlider />
       </Box>
       <Box
         sx={{

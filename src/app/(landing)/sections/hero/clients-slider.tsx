@@ -73,7 +73,7 @@ const logos = [
   },
 ];
 
-export default function HeroSlider() {
+export default function HeroClientsSlider() {
   return (
     <Marquee autoFill>
       {logos.map(({ href, src, alt, ...props }) => (
@@ -90,7 +90,7 @@ export default function HeroSlider() {
             },
           }}
         >
-          <Image src={`/images/${src}`} alt={alt} {...props} />
+          <Image src={`/images/clients/${src}`} alt={alt} {...props} />
         </Box>
       ))}
     </Marquee>
