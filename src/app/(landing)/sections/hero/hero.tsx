@@ -28,7 +28,6 @@ export default function Hero() {
           pt: 16,
           color: 'white!important',
         }}
-        maxWidth="xl"
       >
         <Typography
           component="h1"
