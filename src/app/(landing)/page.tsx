@@ -2,6 +2,7 @@ import { Typography, Container, Stack, Divider, Box } from '@mui/material';
 
 import Nav from './components/nav/nav';
 import About from './sections/about/about';
+import BlogSection from './sections/blog/blog';
 import BuildWithUs from './sections/build-with-us/build-with-us';
 import Hero from './sections/hero/hero';
 import OurMission from './sections/our-mission/our-mission';
@@ -29,6 +30,7 @@ export default function IndexPage() {
           <Divider variant="light" />
           <ProtocolStats />
         </Box>
+        <BlogSection />
         <BuildWithUs />
       </Stack>
       <footer>

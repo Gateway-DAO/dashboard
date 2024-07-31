@@ -47,10 +47,10 @@ const linkedinLink = (props: SocialProps) =>
 
 export function ShareButtonFn({
   title = 'myGateway_xyz',
-  url = window?.location?.href,
+  url,
   description = 'check out this latest blog from gateway',
 }: SocialProps) {
-  const data = { title, url, description };
+  const data = { title, url: url ?? window?.location?.href, description };
   const onShare = () => {
     try {
       if (navigator?.share && navigator.canShare(data)) {
