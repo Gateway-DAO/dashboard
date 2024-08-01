@@ -25,7 +25,7 @@ export default function HamburgerMenu({ isOpen, onClose }: Props) {
           sx: {
             width: '100%',
             height: '100%',
-            paddingTop: 64 / 8,
+            paddingTop: 108 / 8,
             justifyContent: 'space-between',
             backgroundColor: '#1e1e1e',
             color: 'white.main',

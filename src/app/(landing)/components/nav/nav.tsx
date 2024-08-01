@@ -66,9 +66,9 @@ export default function Nav() {
       >
         <Container
           component={Toolbar}
-          sx={{ display: 'flex', justifyContent: 'space-between' }}
+          sx={{ display: 'flex', justifyContent: 'space-between', py: 4 }}
         >
-          <Stack direction="row" gap={2}>
+          <Stack direction="row" gap={7}>
             <Stack direction="row" gap={1} alignItems="center">
               <GatewaySquaredThemedIcon
                 sx={{
@@ -91,10 +91,10 @@ export default function Nav() {
             </Stack>
             <Stack
               direction="row"
-              gap={2}
+              gap={1}
               display={{
                 xs: 'none',
-                md: 'flex',
+                lg: 'flex',
               }}
             >
               {links.map((link) => (
@@ -103,6 +103,7 @@ export default function Nav() {
                   key={link.label}
                   href={link.href}
                   color="inherit"
+                  variant="text"
                 >
                   {link.label}
                 </Button>
@@ -114,7 +115,7 @@ export default function Nav() {
             gap={1}
             display={{
               xs: 'none',
-              md: 'flex',
+              lg: 'flex',
             }}
           >
             <Button color={isScrolled ? 'primary' : 'white'} variant="outlined">
@@ -132,7 +133,7 @@ export default function Nav() {
             sx={{
               display: {
                 xs: 'flex',
-                md: 'none',
+                lg: 'none',
               },
             }}
             onClick={toggleMenu(!isMenuOpen)}
