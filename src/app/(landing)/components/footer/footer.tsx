@@ -1,5 +1,6 @@
 import { Container, Stack } from '@mui/material';
 
+import FooterContent from './content';
 import Investors from './investors';
 
 export default function Footer() {
@@ -28,6 +29,7 @@ export default function Footer() {
         }}
       >
         <Investors />
+        <FooterContent />
       </Stack>
     </Stack>
   );
