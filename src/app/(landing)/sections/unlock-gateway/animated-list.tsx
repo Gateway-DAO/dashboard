@@ -31,7 +31,7 @@ export default function AnimatedList() {
         const updatedList = [...prevList.slice(1), createItem(firstItem.name)];
         return updatedList;
       });
-    }, 3000);
+    }, 1500);
 
     return () => clearInterval(interval);
   }, []);
