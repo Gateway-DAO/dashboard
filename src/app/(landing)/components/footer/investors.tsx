@@ -1,9 +1,51 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
+import SixthMan from 'public/images/investors/logo-6th-man.png';
+import Figment from 'public/images/investors/logo-figment.png';
+import HannaGrey from 'public/images/investors/logo-hanna-grey.png';
+import ReciprocalVentures from 'public/images/investors/logo-reciprocal-ventures.png';
+import RedbeardVentures from 'public/images/investors/logo-redbeard-ventures.png';
+import Spartan from 'public/images/investors/logo-spartan.png';
+import Visary from 'public/images/investors/logo-visary.png';
+
 import { Box, Divider, Stack, Typography } from '@mui/material';
 
-const investors = [
+const logos = [
   {
-    id: '',
-    name: 'Reciprocal Ventures',
+    alt: 'Reciprocal Ventures',
+    href: 'https://www.recvc.com/',
+    src: ReciprocalVentures,
+  },
+  {
+    alt: 'Hanna Grey',
+    href: 'https://www.hannahgrey.com/',
+    src: HannaGrey,
+  },
+  {
+    alt: 'Redbeard Ventures',
+    href: 'https://redbeard.ventures/',
+    src: RedbeardVentures,
+  },
+  {
+    alt: 'Figment',
+    href: 'https://www.figmentcapital.io/',
+    src: Figment,
+  },
+  {
+    alt: 'Spartan',
+    href: 'https://www.spartangroup.io/',
+    src: Spartan,
+  },
+  {
+    alt: '6th Man',
+    href: 'https://6thman.ventures/',
+    src: SixthMan,
+  },
+  {
+    alt: 'Visary',
+    href: 'https://visary.capital/',
+    src: Visary,
   },
 ];
 
@@ -27,7 +69,7 @@ export default function Investors() {
     >
       <Stack
         sx={{
-          p: 3,
+          p: 4,
           pb: 6,
           color: 'white.main',
         }}
@@ -38,11 +80,30 @@ export default function Investors() {
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '40px 132px',
+            gridTemplateColumns: {
+              xs: 'repeat(1, 1fr)',
+              sm: 'repeat(2, 1fr)',
+              md: 'repeat(3, 1fr)',
+              lg: 'repeat(4, 1fr)',
+            },
+            gap: 4,
           }}
         >
-          <Typography color="inherit">Investor Relations</Typography>
+          {logos.map((logo) => (
+            <Stack
+              key={logo.alt}
+              component={Link}
+              sx={{
+                position: 'relative',
+                height: 96,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              href={logo.href}
+            >
+              <Image src={logo.src} alt={logo.alt} />
+            </Stack>
+          ))}
         </Box>
       </Stack>
       <Divider sx={{ borderColor: 'rgba(255,255,255,0.2)' }} />
@@ -50,10 +111,15 @@ export default function Investors() {
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '40px 132px',
-          px: 3,
-          py: 4,
+          gridTemplateColumns: {
+            xs: 'repeat(1, 1fr)',
+            sm: 'repeat(2, 1fr)',
+            md: 'repeat(3, 1fr)',
+            lg: 'repeat(4, 1fr)',
+          },
+          gap: 4,
+          px: 4,
+          py: 6,
           color: 'white.main',
         }}
       >

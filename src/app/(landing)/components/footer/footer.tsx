@@ -4,13 +4,14 @@ import Investors from './investors';
 
 export default function Footer() {
   return (
-    <Container
+    <Stack
       component="footer"
       sx={{
         backgroundColor: 'primary.main',
       }}
     >
       <Stack
+        component={Container}
         sx={{
           pt: {
             xs: 6,
@@ -28,6 +29,6 @@ export default function Footer() {
       >
         <Investors />
       </Stack>
-    </Container>
+    </Stack>
   );
 }
