@@ -7,7 +7,7 @@ import {
   WIDTH_CENTERED,
 } from '@/theme/config/style-tokens';
 
-import { Stack, Box, Divider } from '@mui/material';
+import { Stack, Box, Divider, Button } from '@mui/material';
 
 import PageContainer from './container';
 import PDAMetaDataDetails from './pda-meta-data-details';
@@ -33,13 +33,13 @@ export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
       >
         <TopBarContainer>
           <BackButton href={backHref} />
+          <Button variant='contained'>Open data asset</Button>
         </TopBarContainer>
 
         <Stack
           sx={{
             pt: {
               xs: 4,
-              lg: 10,
             },
             width: '100%',
             height: '100%',

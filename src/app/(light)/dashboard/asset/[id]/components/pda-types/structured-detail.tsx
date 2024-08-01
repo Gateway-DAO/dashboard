@@ -5,6 +5,7 @@ import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { claimToArray } from '@/utils/data-model';
 
 import { Card, Stack, Typography } from '@mui/material';
+import MetaDataDetails from './meta-data-details';
 
 type Props = {
   pda: PrivateDataAsset;
@@ -53,36 +54,23 @@ export default async function StructuredDetail({ pda }: Props) {
         component={Card}
         variant="outlined"
         gap={19.75}
-        sx={{ bgcolor: '#E5DFEA' }}
-        alignItems="start"
+        sx={{ bgcolor: '#EDE3F6', height: '168px' }}
+        justifyContent={'end'}
         p={2}
       >
-        <Stack direction={'row'} alignItems="center" gap={2}>
-          <GTWAvatar
-            name={pda?.owner?.did}
-            alt={pda?.owner?.username ?? pda?.owner?.did}
-            size={30}
-          />
-          <Typography
-            variant="body2"
-            id="pda-title"
-            sx={{ fontSize: 16, fontWeight: 700 }}
-          >
-            {pda?.createdBy?.username ?? pda?.createdBy?.did}
-          </Typography>
-        </Stack>
         <Typography
           variant="body2"
           id="pda-title"
           sx={{
             fontSize: { xs: 20, md: 34 },
             fontWeight: 400,
+            color: '#53128C',
           }}
         >
           {pda?.dataAsset?.title}
         </Typography>
       </Stack>
-      <ClaimValuesList data={claimArray} />
+      <MetaDataDetails data={claimArray} />
     </Stack>
   );
 }

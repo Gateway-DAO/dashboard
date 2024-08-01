@@ -78,5 +78,6 @@ export const mockPrivateDataAssets: PrivateDataAsset[] = [
     updatedAt: new Date('2024-10-30'),
     createdAt: new Date(),
     tags: ['asset', 'non-file'],
+    url: 'http://www.google.com',
   },
 ];

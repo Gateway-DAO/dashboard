@@ -38,23 +38,7 @@ export default function PDAMetaDataDetails({ pda, isOwner }: Props) {
         }}
         gap={2}
       >
-        {isOwner ? (
-          <>
-            {pda.url && (
-              <IconButton
-                href={pda.url}
-                target="_blank"
-                sx={{ backgroundColor: '#00000014' }}
-              >
-                <FileDownload />
-              </IconButton>
-            )}
-
-            {/* <ShareCopy pda={pda} /> */}
-          </>
-        ) : (
-          <Box sx={{ height: 40 }} />
-        )}
+        <Box sx={{ height: 40 }} />
       </Stack>
       <Box>
         <PDATabs pda={pda} isOwner={isOwner} />

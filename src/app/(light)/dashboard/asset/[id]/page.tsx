@@ -37,7 +37,6 @@ export default async function PDAPage({ params }: { params: { id: string } }) {
     <PDADetailPage
       isOwner={isOwner}
       pda={pda}
-      org={org}
       backHref={routes.dashboard.user.home}
     />
   );
