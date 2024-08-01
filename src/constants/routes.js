@@ -6,6 +6,8 @@ const routes = {
   auth: '/login',
   learn: '/learn',
   build: '/build',
+  blog: '/blog',
+  ecosystem: '/ecosystem',
   dashboard: {
     org: {
       asset: (org, pdaId) => `${dashboardOrg}/${org}/asset/${pdaId}`,

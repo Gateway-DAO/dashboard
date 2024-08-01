@@ -1,19 +1,23 @@
 'use client';
+
+import documentationRoutes from '@/constants/documentationRoutes';
+import routes from '@/constants/routes';
+
 export const links = [
   {
     label: 'Docs',
-    href: '#',
+    href: documentationRoutes.home,
   },
   {
     label: 'Blog',
-    href: '#',
+    href: routes.blog,
   },
   {
     label: 'Ecosystem',
-    href: '#',
+    href: routes.ecosystem,
   },
   {
     label: 'Explorer',
-    href: '#',
+    href: routes.explorer,
   },
 ];
