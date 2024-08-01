@@ -9,11 +9,20 @@ import {
   useState,
 } from 'react';
 
-import Control from 'public/images/missions/control.png';
+import ControlImage from 'public/images/missions/control.png';
+import CubeImage from 'public/images/missions/cube.png';
+import PrivacyImage from 'public/images/missions/privacy.png';
 
 import { Box, Stack } from '@mui/material';
 
 import { missions } from './missons';
+
+// Which image to show for each mission
+const imageByMissionId: Record<ActiveItem['id'], StaticImageData> = {
+  control: ControlImage,
+  privacy: PrivacyImage,
+  blocks: CubeImage,
+};
 
 type ActiveItem = {
   id: (typeof missions)[number]['id'];
@@ -89,13 +98,6 @@ const topByMissionId: Record<ActiveItem['id'], number> = {
   control: 50,
   privacy: 218,
   blocks: 218,
-};
-
-// Which image to show for each mission
-const imageByMissionId: Record<ActiveItem['id'], StaticImageData> = {
-  control: Control,
-  privacy: Control,
-  blocks: Control,
 };
 
 export function MissionImage() {
