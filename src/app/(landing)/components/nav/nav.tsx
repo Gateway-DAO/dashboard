@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
-import { GatewaySquaredIcon } from '@/components/icons';
+import GatewaySquaredThemedIcon from '@/components/icons/gateway-squared-themed';
 import { common } from '@/locale/en/common';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -20,40 +20,32 @@ import {
 import HamburgerMenu from './hamburger-menu';
 import { links } from './links';
 
-const lightPink = '#E6D5FA';
-const darkPink = '#771AC9';
-
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return window.scrollY > 50;
-    }
-    return false;
-  });
+  const [scrolled, setScrolled] = useState(false);
   const lastScrolledState = useRef<boolean | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = (state: boolean) => () => {
-    if (!state) {
-      setScrolled(lastScrolledState.current || false);
-    }
-    setIsMenuOpen(state);
-  };
+  const toggleMenu = useCallback(
+    (state: boolean) => () => {
+      if (!state) {
+        setScrolled(lastScrolledState.current || false);
+      }
+      setIsMenuOpen(state);
+    },
+    []
+  );
+
+  const onScroll = useCallback(() => {
+    const isScrolled = window.scrollY > 50;
+    lastScrolledState.current = isScrolled;
+    setScrolled(isScrolled);
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      let isScrolled = false;
-      if (window.scrollY > 50) {
-        isScrolled = true;
-      } else {
-        isScrolled = false;
-      }
-      lastScrolledState.current = isScrolled;
-      setScrolled(isScrolled);
-    };
+    onScroll();
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
@@ -78,22 +70,12 @@ export default function Nav() {
         >
           <Stack direction="row" gap={2}>
             <Stack direction="row" gap={1} alignItems="center">
-              <GatewaySquaredIcon
+              <GatewaySquaredThemedIcon
                 sx={{
                   width: 40,
                   height: 40,
-                  path: {
-                    transition: 'fill 0.25s',
-                  },
                 }}
-                shapeProps={{
-                  fill: isScrolled ? lightPink : darkPink,
-                }}
-                backgroundProps={{
-                  fill: isScrolled ? darkPink : lightPink,
-                  fillOpacity: 1,
-                }}
-                suppressHydrationWarning
+                theme={isScrolled ? 'light' : 'dark'}
               />
               <Typography
                 component="h1"
