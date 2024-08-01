@@ -18,6 +18,6 @@ export const links = [
   },
   {
     label: 'Explorer',
-    href: routes.explorer,
+    href: routes.explorer.root,
   },
 ];
