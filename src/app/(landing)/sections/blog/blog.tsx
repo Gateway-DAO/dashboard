@@ -46,7 +46,11 @@ function BlogCard({
             mb: 3,
           }}
         >
-          <Image src={feature_image!} alt={feature_image_alt!} fill />
+          <Image
+            src={feature_image!}
+            alt={feature_image_alt || title || 'blog post image'}
+            fill
+          />
         </Box>
         <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 1 }}>
           {title}
