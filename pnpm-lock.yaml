@@ -110,6 +110,9 @@ importers:
       sanitize-html:
         specifier: ^2.13.0
         version: 2.13.0
+      title-case:
+        specifier: ^4.3.1
+        version: 4.3.1
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -6327,6 +6330,9 @@ packages:
   tiny-secp256k1@1.1.6:
     resolution: {integrity: sha512-FmqJZGduTyvsr2cF3375fqGHUovSwDi/QytexX1Se4BPuPZpTE5Ftp5fg+EFSuEf3lhZqgCRjEG3ydUQ/aNiwA==}
     engines: {node: '>=6.0.0'}
+
+  title-case@4.3.1:
+    resolution: {integrity: sha512-VnPxQ+/j0X2FZ4ceGq1oLruTLjtN5Ul4sam5ypd4mDZLm1eHwkwip1gLxqhON/j4qyTlUlfPKslE/t4NPSlxhg==}
 
   tmp-promise@3.0.3:
     resolution: {integrity: sha512-RwM7MoPojPxsOBYnyd2hy0bxtIlVrihNs9pj5SUvY8Zz1sQcQG2tG1hSr8PDxfgEB8RNKDhqbIlroIarSNDNsQ==}
@@ -14873,6 +14879,8 @@ snapshots:
       create-hmac: 1.1.7
       elliptic: 6.5.6
       nan: 2.20.0
+
+  title-case@4.3.1: {}
 
   tmp-promise@3.0.3:
     dependencies:

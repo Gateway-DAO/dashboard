@@ -1,5 +1,5 @@
-import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
+import BackButton from '@/components/buttons/back-button';
 import { CONTAINER_PX, WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Box, Divider, Stack } from '@mui/material';
