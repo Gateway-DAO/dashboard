@@ -1,26 +1,67 @@
 'use client';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
-import { Box } from '@mui/material';
+import { Box, Chip, Stack } from '@mui/material';
 
 import InternalContent from '../components/internal/internal-content';
 import InternalHeader from '../components/internal/internal-header';
 import Nav from '../components/nav/nav';
-import { clients, ClientTag } from './content';
+import ClientCard from './components/card';
+import clients from './data.json';
 
 export default function Ecosystem() {
-  const [selectedTag, setSelectedTag] = useState<'all' | ClientTag>('all');
+  const [selectedTag, setSelectedTag] = useState<'All' | string>('All');
 
   const selectedClients =
-    selectedTag === 'all'
+    selectedTag === 'All'
       ? clients
-      : clients.filter((client) => client.tag === selectedTag);
+      : clients.filter((client) => client.tags.includes(selectedTag));
+
+  const tags = useMemo(() => {
+    const tags = new Set<string>(['All']);
+    clients.forEach((client) => {
+      client.tags.forEach((tag) => tags.add(tag));
+    });
+    return Array.from(tags);
+  }, []);
 
   return (
     <>
       <Nav color="black" />
-      <InternalHeader>Discover the Thriving Gateway Network</InternalHeader>
+      <InternalHeader>Discover the Thriv ing Gateway Network</InternalHeader>
       <InternalContent>
+        <Stack
+          direction="row"
+          gap={1}
+          sx={{
+            flexWrap: 'nowrap',
+            overflowX: 'auto',
+            mx: {
+              xs: -3,
+              sm: -6,
+              lg: 0,
+            },
+            px: {
+              xs: 3,
+              sm: 6,
+              lg: 0,
+            },
+            mb: {
+              xs: 4,
+              md: 6,
+            },
+          }}
+        >
+          {tags.map((tag) => (
+            <Chip
+              key={tag}
+              label={tag}
+              color={tag === selectedTag ? 'primary' : 'default'}
+              onClick={() => setSelectedTag(tag)}
+            />
+          ))}
+        </Stack>
+
         <Box
           sx={{
             display: 'grid',
@@ -32,7 +73,9 @@ export default function Ecosystem() {
             },
           }}
         >
-          {/* {selectedClients.map((client) => (<C)} */}
+          {selectedClients.map((client) => (
+            <ClientCard key={client.name} {...client} />
+          ))}
         </Box>
       </InternalContent>
     </>
