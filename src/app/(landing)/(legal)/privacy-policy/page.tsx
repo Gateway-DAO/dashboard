@@ -1,15 +1,27 @@
+import { Typography } from '@mui/material';
+
+import InternalContent from '../../components/internal/internal-content';
+import InternalHeader from '../../components/internal/internal-header';
+
 export default function PrivacyPolicy() {
   return (
     <>
-      <>
-        <h1>Privacy Policy</h1>
-        <p>Effective Date: January 1, 2024</p>
+      <InternalHeader
+        slot={
+          <Typography sx={{ mt: 2 }} fontStyle="italic">
+            Effective Date: January 1, 2024
+          </Typography>
+        }
+      >
+        Privacy Policy
+      </InternalHeader>
+      <InternalContent>
         <p>
           This Privacy Policy describes how Gateway DAO, Inc. (“Gateway”, “us”,
           or “we”) collects, uses, shares, and protects personal information
           when you interact with our website and mobile application services or
           content, features, and functionality (collectively, “Services”) and
-          communicate with us regarding the Services. 
+          communicate with us regarding the Services.
         </p>
         <p>
           Please note that this Privacy Policy does not apply to non-Gateway
@@ -27,37 +39,37 @@ export default function PrivacyPolicy() {
         <ul>
           <li>
             Directly from you, when you provide the information to us or
-            otherwise interact with us:  
+            otherwise interact with us:
             <ul>
               <li>
                 Account information, including your name, email address, and
-                selected password if you create an account with us. 
+                selected password if you create an account with us.
               </li>
 
               <li>
                 Contact information and any other information you choose to
                 include when you communicate with us via email, mail, phone or
-                other channels. 
+                other channels.
               </li>
 
               <li>
                 Survey information in response to questions we may send you
                 through the Services, including for feedback and research
-                purposes. 
+                purposes.
               </li>
 
               <li>
                 Wallet information, including your wallet address, if you choose
-                to connect it to your Gateway account. 
+                to connect it to your Gateway account.
               </li>
             </ul>
             Some of this information (e.g., survey information) may be collected
-            by external parties on our behalf. 
+            by external parties on our behalf.
           </li>
 
           <li>
             Automatically from you via cookies and similar technologies as
-            described in the next section.  
+            described in the next section.
           </li>
 
           <li>
@@ -66,7 +78,7 @@ export default function PrivacyPolicy() {
             direct companies to store your private data assets using Gateway
             technology so that you can manage those assets using the Services.
             However, Gateway only has access to your private data assets if you
-            share the access key(s) with us.  
+            share the access key(s) with us.
           </li>
 
           <li>
@@ -74,7 +86,7 @@ export default function PrivacyPolicy() {
             transactions or events, transaction IDs, digital signatures,
             transaction description, and wallet addresses. Please note some of
             this information may be provided by you directly during the login
-            process.  
+            process.
           </li>
         </ul>
 
@@ -93,17 +105,17 @@ export default function PrivacyPolicy() {
             Device information, including the IP address and other details of
             the device you use to connect with our Services, such as device type
             and unique device identifier, operating system, browser type, mobile
-            network information, and the device's telephone number. 
+            network information, and the device's telephone number.
           </li>
           <li>
             Location information where you choose to provide our Services with
-            access to information about your device’s location. 
+            access to information about your device’s location.
           </li>
           <li>
             Usage details about your interaction with our Services, such as the
             date, time, and length of visits, and specific pages or content
             accessed during the visits, search terms, frequency of the visits,
-            referring website addresses. 
+            referring website addresses.
           </li>
         </ul>
 
@@ -121,14 +133,14 @@ export default function PrivacyPolicy() {
           <a href="https://tools.google.com/dlpage/gaoptout">
             https://tools.google.com/dlpage/gaoptout
           </a>
-          . 
+          .
         </p>
 
         <p>
           Please note we also use cookies set by other third-party partners. You
           may be able to opt out tracking by cookies or control how information
           collected by cookies is used via a number of means, as described in
-          Your Privacy Options. 
+          Your Privacy Options.
         </p>
 
         <p>
@@ -142,7 +154,7 @@ export default function PrivacyPolicy() {
         <ul>
           <li>
             Provide our Services to you, create and maintain your account,
-            manage transactions, and provide other important notices. 
+            manage transactions, and provide other important notices.
           </li>
           <li>
             Respond to your requests, questions, and comments, and provide
@@ -150,18 +162,18 @@ export default function PrivacyPolicy() {
           </li>
           <li>
             Maintain and improve the Services, diagnose or fix technology
-            problems, and monitor the performance of the Services. 
+            problems, and monitor the performance of the Services.
           </li>
           <li>
             Comply with legal requirements and industry standards, comply with
             law enforcement or other legal requests, enforce our Terms, resolve
             disputes, defend against legal claims or other demands, and protect
-            the rights of Gateway, you, or others. 
+            the rights of Gateway, you, or others.
           </li>
           <li>
             Detect, investigate, and prevent activities that may violate our
             policies or be fraudulent or illegal, verify your identity, and
-            engage in risk management activities. 
+            engage in risk management activities.
           </li>
         </ul>
 
@@ -193,14 +205,14 @@ export default function PrivacyPolicy() {
             Policy does not apply to the handling of your personal data by
             recipients of your private data assets. Please review the privacy
             policies of those recipients (as likely set forth on their websites)
-            directly to understand their privacy practices. 
+            directly to understand their privacy practices.
           </li>
           <li>
             With service providers we believe need the information to perform a
             technology, business, or other professional function for us, such as
             IT services, maintenance and hosting of our Services, payment
             processors, accounting, auditing, and tax services, and other
-            professional services. 
+            professional services.
           </li>
           <li>
             With analytics partners who collect information via cookies or
@@ -211,7 +223,7 @@ export default function PrivacyPolicy() {
           <li>
             With affiliates and other entities in our corporate family to
             provide the Services and for purposes consistent with this Privacy
-            Policy. 
+            Policy.
           </li>
           <li>
             In the event of a corporate event, we reserve the right to transfer
@@ -245,7 +257,7 @@ export default function PrivacyPolicy() {
           devices, and databases we operate or that are operated on our behalf.
           If you use our Services outside of the United States, you understand
           that we may collect, process, and store your personal information in
-          the United States and other countries. 
+          the United States and other countries.
         </p>
 
         <p>
@@ -260,24 +272,24 @@ export default function PrivacyPolicy() {
         <ul>
           <li>
             <i>Account information:</i> Please visit your Gateway account to
-            view and update certain information associated with your account.  
+            view and update certain information associated with your account.
           </li>
           <li>
             Cookies: You can modify your browser setting to disable or reject
             cookies across the internet; but if you do so, some features of our
             Services may not function properly or be available. Please note you
             will need to set the preferences of each device you use to visit our
-            Services. 
+            Services.
           </li>
           <li>
             Do Not Track: Your browser or device may include “Do Not Track”
             functionality; please note that we do not respond to such signals at
-            this time. 
+            this time.
           </li>
           <li>
             Email marketing: If at any time you no longer wish to receive
             marketing communications from us, you can click the unsubscribe link
-            at the bottom of any email from us. 
+            at the bottom of any email from us.
           </li>
         </ul>
 
@@ -290,7 +302,7 @@ export default function PrivacyPolicy() {
           children. If we have inadvertently collected the information of a
           child, a parent or guardian of that child may contact us at
           support@mygateway.xyz  to request that we delete the information from
-          our records or otherwise cease the use of that information.  
+          our records or otherwise cease the use of that information.
         </p>
 
         <p>
@@ -311,9 +323,9 @@ export default function PrivacyPolicy() {
 
         <p>
           For questions about our privacy practices, contact us at{' '}
-          <a href="mailto:support@mygateway.xyz">support@mygateway.xyz</a>. 
+          <a href="mailto:support@mygateway.xyz">support@mygateway.xyz</a>.
         </p>
-      </>
+      </InternalContent>
     </>
   );
 }

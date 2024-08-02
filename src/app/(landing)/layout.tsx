@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { currentEnv } from '@/utils/env';
 import sanitizeHtml from 'sanitize-html';
 
+import Footer from './components/footer/footer';
 import Providers from './providers';
 
 export const metadata: Metadata = {
@@ -95,7 +96,10 @@ amplitude.init('36683c62d8db3f0ff467212f18302fef');
         }}
       />
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

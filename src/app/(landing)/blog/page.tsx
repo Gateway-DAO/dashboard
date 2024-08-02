@@ -10,8 +10,8 @@ import {
 
 import { Container, Stack, Box, Typography, Button } from '@mui/material';
 
-import BlogCard from '../components/blog-card';
-import HeroPost from '../components/hero-post';
+import BlogCard from './components/blog-card';
+import HeroPost from './components/hero-post';
 
 export async function generateMetadata(): Promise<Metadata> {
   const Metadata = await getNavigation();

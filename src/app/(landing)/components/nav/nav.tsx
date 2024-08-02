@@ -17,12 +17,39 @@ import {
   Typography,
   IconButton,
   Container,
+  IconButtonOwnProps,
+  ButtonOwnProps,
 } from '@mui/material';
 
 import HamburgerMenu from './hamburger-menu';
 import { links } from './links';
 
-export default function Nav() {
+type Props = {
+  color?: 'white' | 'black';
+};
+
+const translateColor: Record<NonNullable<Props['color']>, string> = {
+  white: '#fff',
+  black: '#000',
+};
+
+const buttonTranslateColor: Record<
+  NonNullable<Props['color']>,
+  IconButtonOwnProps['color'] | ButtonOwnProps['color']
+> = {
+  white: 'white',
+  black: 'primary',
+};
+
+const logoTranslateColor: Record<
+  NonNullable<Props['color']>,
+  NonNullable<Parameters<typeof GatewaySquaredThemedIcon>[0]['theme']>
+> = {
+  white: 'dark',
+  black: 'light',
+};
+
+export default function Nav({ color = 'white' }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const lastScrolledState = useRef<boolean | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,7 +87,11 @@ export default function Nav() {
         component="nav"
         sx={{
           background: isScrolled ? '#fff' : 'transparent',
-          color: isScrolled ? '#000' : '#fff',
+          color: isScrolled
+            ? '#000'
+            : isMenuOpen
+            ? '#fff'
+            : translateColor[color],
           transitionProperty: 'background',
           transitionDuration: '0.25s',
           zIndex: 1300,
@@ -71,13 +102,23 @@ export default function Nav() {
           sx={{ display: 'flex', justifyContent: 'space-between', py: 4 }}
         >
           <Stack direction="row" gap={7}>
-            <Stack direction="row" gap={1} alignItems="center">
+            <Stack
+              component={Link}
+              href="/"
+              sx={{
+                gap: 1,
+                alignItems: 'center',
+                flexDirection: 'row',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
               <GatewaySquaredThemedIcon
                 sx={{
                   width: 40,
                   height: 40,
                 }}
-                theme={isScrolled ? 'light' : 'dark'}
+                theme={isScrolled ? 'light' : logoTranslateColor[color]}
               />
               <Typography
                 component="h1"
@@ -86,6 +127,7 @@ export default function Nav() {
                 fontWeight="bold"
                 sx={{
                   transition: 'color 0.25s',
+                  textDecoration: 'none',
                 }}
               >
                 {common.general.gateway}
@@ -124,7 +166,11 @@ export default function Nav() {
             <Button
               component={Link}
               href={routes.auth}
-              color={isScrolled ? 'primary' : 'white'}
+              color={
+                isScrolled
+                  ? 'primary'
+                  : (buttonTranslateColor[color] as ButtonOwnProps['color'])
+              }
               variant="outlined"
             >
               Open dashboard
@@ -133,14 +179,22 @@ export default function Nav() {
               component={Link}
               href={documentationRoutes.home}
               target="_blank"
-              color={isScrolled ? 'primary' : 'white'}
+              color={
+                isScrolled
+                  ? 'primary'
+                  : (buttonTranslateColor[color] as ButtonOwnProps['color'])
+              }
               variant="contained"
             >
               Read documentation
             </Button>
           </Stack>
           <IconButton
-            color={isScrolled ? 'primary' : 'white'}
+            color={
+              isScrolled
+                ? 'primary'
+                : (buttonTranslateColor[color] as IconButtonOwnProps['color'])
+            }
             sx={{
               display: {
                 xs: 'flex',

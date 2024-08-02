@@ -34,7 +34,6 @@ export default function IndexPage() {
         <BlogSection />
         <BuildWithUs />
       </Stack>
-      <Footer />
     </>
   );
 }
