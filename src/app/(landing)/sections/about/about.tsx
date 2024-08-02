@@ -134,7 +134,7 @@ export default function About() {
           pt: 2,
           px: {
             xs: 0,
-            md: 3,
+            lg: 6,
           },
         }}
       >

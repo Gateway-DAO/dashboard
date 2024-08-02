@@ -1,10 +1,11 @@
 'use client';
 
-import useValueByBreakpoint from '@/hooks/use-value-by-breakpoint';
-import Slider from 'react-slick';
+import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './styles.css';
 
 import { Card, Typography } from '@mui/material';
 
@@ -40,8 +41,6 @@ function AboutCard({
   icon: Icon,
   title,
   text,
-  isFirst,
-  isLast,
 }: (typeof cards)[0] & { isFirst?: boolean; isLast?: boolean }) {
   return (
     <Card
@@ -54,20 +53,10 @@ function AboutCard({
         },
         minHeight: 316,
         height: '100%',
-        ml: {
-          xs: 2,
-          sm: 3,
-          md: !isFirst ? 1 : 0,
-        },
         width: {
-          xs: 'unset',
-          sm: 'calc(100% - 32px)',
-          md: 'unset',
-        },
-        mr: {
-          xs: 2,
-          sm: 0,
-          md: !isLast ? 1 : 0,
+          xs: 'calc(100% - (5 * 16px))',
+          md: 'calc(100% - (9 * 16px))',
+          lg: 'unset',
         },
       }}
     >
@@ -85,29 +74,48 @@ function AboutCard({
 }
 
 export default function AboutCards() {
-  const slidesToShow = useValueByBreakpoint({
-    xs: 1,
-    sm: 3,
-    md: 4,
-  });
-
-  const isInfinite = useValueByBreakpoint({
-    xs: true,
-    sm: false,
-  });
-
   return (
     <>
-      <Slider dots slidesToShow={slidesToShow} infinite={isInfinite}>
+      <Swiper
+        pagination={{
+          enabled: true,
+        }}
+        slidesPerView={1}
+        spaceBetween={18}
+        slidesOffsetBefore={24}
+        slidesOffsetAfter={-24}
+        modules={[Pagination]}
+        breakpoints={{
+          900: {
+            slidesPerView: 2,
+            spaceBetween: -76,
+            slidesOffsetBefore: 48,
+            slidesOffsetAfter: -48,
+            pagination: {
+              enabled: true,
+            },
+          },
+          1200: {
+            slidesPerView: 4,
+            spaceBetween: 16,
+            slidesOffsetBefore: 0,
+            slidesOffsetAfter: 0,
+            pagination: {
+              enabled: false,
+            },
+          },
+        }}
+      >
         {cards.map((card, index) => (
-          <AboutCard
-            key={index}
-            {...card}
-            isFirst={index === 0}
-            isLast={index === cards.length - 1}
-          />
+          <SwiperSlide key={index}>
+            <AboutCard
+              {...card}
+              isFirst={index === 0}
+              isLast={index === cards.length - 1}
+            />
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
     </>
   );
 }
