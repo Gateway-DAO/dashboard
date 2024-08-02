@@ -1,13 +1,21 @@
+import CopyData from '@/app/(light)/dashboard/components/copy/copy';
 import CardCell from '@/components/card-cell/card-cell';
-import { ClaimArray } from '@/utils/data-model';
+import Tags from '@/components/tags/tags';
+import { DATE_FORMAT } from '@/constants/date';
+import { PrivateDataAsset } from '@/services/server/mock-types';
+import { formatBytes } from '@/utils/bytes';
+import { formatDateDifference } from '@/utils/date';
+import { limitCharsOffset } from '@/utils/string';
+import { ContentCopy } from '@mui/icons-material';
 
-import { Stack, Divider, Card } from '@mui/material';
+import { Stack, Divider, Card, Typography, IconButton } from '@mui/material';
+import dayjs from 'dayjs';
 
 type Props = {
-  data: ClaimArray;
+  pda: PrivateDataAsset;
 };
 
-export default function MetaDataDetails({ data }: Props) {
+export default function MetaDataDetails({ pda }: Props) {
   return (
     <Stack>
       <Stack
@@ -20,15 +28,24 @@ export default function MetaDataDetails({ data }: Props) {
         <Stack divider={<Divider />} sx={{}}>
           <Stack direction="row" justifyContent="space-between">
             <CardCell label={'Last Modified'} margin={false} py={3}>
-              <span>test</span>
+              <span>{dayjs(pda.updatedAt).format(DATE_FORMAT)}</span>
             </CardCell>
             <Divider orientation="vertical" flexItem />
             <CardCell label={'Expiration'} margin={false} py={3}>
-              <span>test</span>
+              <Stack direction={'row'} justifyContent={'space-between'}>
+                <span>{formatDateDifference(pda.expirationDate)}</span>
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ mt: 0.3 }}
+                >
+                  {dayjs(pda.expirationDate).format(DATE_FORMAT)}
+                </Typography>
+              </Stack>
             </CardCell>
           </Stack>
           <CardCell label={'Created At'} margin={false} py={3}>
-            <span>test</span>
+            <span>{dayjs(pda.createdAt).format(DATE_FORMAT)}</span>
           </CardCell>
         </Stack>
       </Stack>
@@ -43,24 +60,26 @@ export default function MetaDataDetails({ data }: Props) {
         <Stack divider={<Divider />} sx={{}}>
           <Stack direction="row" justifyContent="space-between">
             <CardCell label={'Size'} margin={false} py={3}>
-              <span>test</span>
+              <span>{formatBytes(pda.size)}</span>
             </CardCell>
             <Divider orientation="vertical" flexItem />
             <CardCell label={'Type'} margin={false} py={3}>
-              <span>test</span>
+              <span>
+                {pda.structured ? 'Strucured Data' : 'Unstructured Data'}
+              </span>
             </CardCell>
           </Stack>
           <Stack direction="row" justifyContent="space-between">
             <CardCell label={'Tags'} margin={false} py={3}>
-              <span>test</span>
+              <span>{pda?.tags.length && <Tags tags={pda?.tags} />}</span>
             </CardCell>
             <Divider orientation="vertical" flexItem />
             <CardCell label={'Data model ID'} margin={false} py={3}>
-              <span>test</span>
+              <CopyData text={pda.dataModel?.id || ''} />
             </CardCell>
           </Stack>
           <CardCell label={'Data asset ID'} margin={false} py={3}>
-            <span>test</span>
+            <CopyData text={String(pda.id)} />
           </CardCell>
         </Stack>
       </Stack>

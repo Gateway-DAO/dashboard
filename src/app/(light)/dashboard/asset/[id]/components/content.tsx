@@ -11,7 +11,6 @@ import { Stack, Box, Divider, Button } from '@mui/material';
 
 import PageContainer from './container';
 import PDAMetaDataDetails from './pda-meta-data-details';
-import FileDetail from './pda-types/file-detail';
 import StructuredDetail from './pda-types/structured-detail';
 import { PrivateDataAsset } from '@/services/server/mock-types';
 
@@ -20,6 +19,10 @@ type Props = {
   backHref: string;
   isOwner: boolean;
 };
+
+// left side bar
+// json file
+// clean code
 
 export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
   return (
@@ -33,7 +36,9 @@ export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
       >
         <TopBarContainer>
           <BackButton href={backHref} />
-          <Button variant='contained'>Open data asset</Button>
+          <Button variant="contained" sx={{ mr: 10 }}>
+            Open data asset
+          </Button>
         </TopBarContainer>
 
         <Stack
@@ -45,9 +50,7 @@ export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
             height: '100%',
           }}
         >
-          <Stack direction={'column'}>
-            {pda.structured ? <StructuredDetail pda={pda} /> : <FileDetail />}
-          </Stack>
+          <Stack direction={'column'}>{<StructuredDetail pda={pda} />}</Stack>
         </Stack>
       </Box>
       <Divider orientation="vertical" flexItem />
