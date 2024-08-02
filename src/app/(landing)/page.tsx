@@ -1,6 +1,5 @@
-import { Typography, Container, Stack, Divider, Box } from '@mui/material';
+import { Stack, Divider, Box } from '@mui/material';
 
-import Footer from './components/footer/footer';
 import Nav from './components/nav/nav';
 import About from './sections/about/about';
 import BlogSection from './sections/blog/blog';
