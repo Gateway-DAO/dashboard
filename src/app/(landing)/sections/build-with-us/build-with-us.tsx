@@ -71,6 +71,10 @@ export default function BuildWithUs() {
             },
             mb: 4,
             color: 'inherit',
+            textAlign: {
+              xs: 'left',
+              md: 'center',
+            },
           }}
         >
           Unlock the full potential of user autonomy and consent in your app or
