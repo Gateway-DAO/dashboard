@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import documentationRoutes from '@/constants/documentationRoutes';
+
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
 import ArtificialInteligence from './icons/artificial-inteligence';
@@ -74,7 +76,8 @@ export default function UseCases() {
       </Stack>
       <Button
         component={Link}
-        href="#"
+        href={documentationRoutes.useCases}
+        target="_blank"
         size="large"
         variant="outlined"
         color="secondary"

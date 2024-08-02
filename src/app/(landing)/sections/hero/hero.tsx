@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import documentationRoutes from '@/constants/documentationRoutes';
 import HeroImage from 'public/images/hero.png';
 
 import { Box, Button, Container, Typography } from '@mui/material';
@@ -73,7 +74,8 @@ export default function Hero() {
         </Typography>
         <Button
           component={Link}
-          href="#"
+          href={documentationRoutes.home}
+          target="_blank"
           variant="contained"
           color="white"
           size="large"

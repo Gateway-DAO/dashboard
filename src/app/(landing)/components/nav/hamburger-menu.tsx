@@ -1,6 +1,8 @@
 'use client';
 import Link from 'next/link';
 
+import routes from '@/constants/routes';
+
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import { Button, Stack, Typography, Drawer, Divider } from '@mui/material';
 import { unstable_getScrollbarSize as getScrollbarSize } from '@mui/utils';
@@ -64,10 +66,9 @@ export default function HamburgerMenu({ isOpen, onClose }: Props) {
         </Stack>
         <Button
           component={Link}
-          href="#"
+          href={routes.auth}
           variant="outlined"
           color="white"
-          onClick={onClose}
           size="large"
           sx={{
             mx: 3,

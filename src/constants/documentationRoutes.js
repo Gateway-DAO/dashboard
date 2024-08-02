@@ -13,6 +13,7 @@ const documentationRoutes = {
   startVerifying: 'https://docs.mygateway.xyz/docs/start-verifying',
   termsOfService: 'https://docs.mygateway.xyz/docs/terms-of-service',
   sdk: 'https://docs.mygateway.xyz/sdk/introduction',
+  useCases: 'https://docs.mygateway.xyz/usecases/introduction',
 };
 
 module.exports = documentationRoutes;

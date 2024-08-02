@@ -7,6 +7,7 @@ export const links = [
   {
     label: 'Docs',
     href: documentationRoutes.home,
+    target: '_blank',
   },
   {
     label: 'Blog',

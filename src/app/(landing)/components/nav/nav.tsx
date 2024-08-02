@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 import GatewaySquaredThemedIcon from '@/components/icons/gateway-squared-themed';
+import documentationRoutes from '@/constants/documentationRoutes';
+import routes from '@/constants/routes';
 import { common } from '@/locale/en/common';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -102,6 +104,7 @@ export default function Nav() {
                   component={Link}
                   key={link.label}
                   href={link.href}
+                  target={link.target}
                   color="inherit"
                   variant="text"
                 >
@@ -118,10 +121,18 @@ export default function Nav() {
               lg: 'flex',
             }}
           >
-            <Button color={isScrolled ? 'primary' : 'white'} variant="outlined">
+            <Button
+              component={Link}
+              href={routes.auth}
+              color={isScrolled ? 'primary' : 'white'}
+              variant="outlined"
+            >
               Open dashboard
             </Button>
             <Button
+              component={Link}
+              href={documentationRoutes.home}
+              target="_blank"
               color={isScrolled ? 'primary' : 'white'}
               variant="contained"
             >

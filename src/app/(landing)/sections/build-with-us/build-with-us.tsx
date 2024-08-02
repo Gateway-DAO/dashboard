@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import documentationRoutes from '@/constants/documentationRoutes';
 import CTAImage from 'public/images/cta.png';
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
@@ -77,7 +78,8 @@ export default function BuildWithUs() {
         </Typography>
         <Button
           component={Link}
-          href="#"
+          href={documentationRoutes.home}
+          target="_blank"
           variant="contained"
           color="white"
           size="large"

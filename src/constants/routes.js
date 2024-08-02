@@ -8,6 +8,8 @@ const routes = {
   build: '/build',
   blog: '/blog',
   ecosystem: '/ecosystem',
+  termsOfService: '/terms-of-service',
+  privacyPolicy: '/privacy-policy',
   dashboard: {
     org: {
       asset: (org, pdaId) => `${dashboardOrg}/${org}/asset/${pdaId}`,

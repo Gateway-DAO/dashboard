@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import documentationRoutes from '@/constants/documentationRoutes';
 import NavigationImage from 'public/images/navigation.jpg';
 
 import {
@@ -45,7 +46,8 @@ export default function About() {
         >
           <CardActionArea
             component={Link}
-            href="#"
+            href={documentationRoutes.home}
+            target="_blank"
             sx={{
               display: 'flex',
               flexDirection: 'column',
