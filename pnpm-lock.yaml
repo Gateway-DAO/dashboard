@@ -1524,6 +1524,16 @@ packages:
       '@types/react':
         optional: true
 
+  '@mui/utils@5.16.6':
+    resolution: {integrity: sha512-tWiQqlhxAt3KENNiSRL+DIn9H5xNVK6Jjf70x3PnfQPz1MPBdh7yyIcAyVBT9xiw7hP3SomRhPR7hzBMBCjqEA==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
   '@mui/x-data-grid@7.11.0':
     resolution: {integrity: sha512-dXaIw3Noxc4d6xenS7J+zMPORG9ptkTW7B81P6QFovILSEuI/qebQhijy/IkqRvcCsuZYLL3nA89bp+EDI503Q==}
     engines: {node: '>=14.0.0'}
@@ -8514,7 +8524,7 @@ snapshots:
       '@babel/runtime': 7.24.8
       '@floating-ui/react-dom': 2.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mui/types': 7.2.15(@types/react@18.3.3)
-      '@mui/utils': 5.16.4(@types/react@18.3.3)(react@18.3.1)
+      '@mui/utils': 5.16.6(@types/react@18.3.3)(react@18.3.1)
       '@popperjs/core': 2.11.8
       clsx: 2.1.1
       prop-types: 15.8.1
@@ -8607,6 +8617,18 @@ snapshots:
   '@mui/utils@5.16.4(@types/react@18.3.3)(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.24.8
+      '@types/prop-types': 15.7.12
+      clsx: 2.1.1
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-is: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.3
+
+  '@mui/utils@5.16.6(@types/react@18.3.3)(react@18.3.1)':
+    dependencies:
+      '@babel/runtime': 7.24.8
+      '@mui/types': 7.2.15(@types/react@18.3.3)
       '@types/prop-types': 15.7.12
       clsx: 2.1.1
       prop-types: 15.8.1
