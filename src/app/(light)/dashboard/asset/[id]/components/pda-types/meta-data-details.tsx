@@ -5,10 +5,8 @@ import { DATE_FORMAT } from '@/constants/date';
 import { PrivateDataAsset } from '@/services/server/mock-types';
 import { formatBytes } from '@/utils/bytes';
 import { formatDateDifference } from '@/utils/date';
-import { limitCharsOffset } from '@/utils/string';
-import { ContentCopy } from '@mui/icons-material';
 
-import { Stack, Divider, Card, Typography, IconButton } from '@mui/material';
+import { Stack, Divider, Card, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 
 type Props = {

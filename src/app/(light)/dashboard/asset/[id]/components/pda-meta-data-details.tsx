@@ -1,9 +1,7 @@
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 
-import { FileDownload } from '@mui/icons-material';
-import { Stack, Box, IconButton } from '@mui/material';
+import { Stack, Box } from '@mui/material';
 
-// import ShareCopy from './share-copy/share-copy';
 import PDATabs from './tabs/pda-tabs';
 import { PrivateDataAsset } from '@/services/server/mock-types';
 
