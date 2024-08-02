@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 
 import { Stack } from '@mui/material';
 
-import { EditConnectedWallet } from './edit-profile-card/edit-connected-wallet';
+import { EditConnectedWallet } from './edit-connected-wallet';
 import { EditProfileCard } from './edit-profile-card/edit-profile-card';
 
 export default function DisplayComponents() {

@@ -1,9 +1,10 @@
-import EditIcon from '@mui/icons-material/Edit';
-import { Avatar, Badge, IconButton, Paper, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 
+import EditAvatar from './components/edit-avatar/edit-avatar';
 import { EditMetaInfo } from './components/edit-meta-info';
 
 export function EditProfileCard() {
+  const onSubmit = async (profilePicture: Blob) => {};
   return (
     <>
       <Stack
@@ -13,22 +14,7 @@ export function EditProfileCard() {
         padding={2}
         borderRadius={1.2}
       >
-        <Badge
-          overlap="circular"
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-          badgeContent={
-            <IconButton size="small">
-              <EditIcon fontSize="small" />
-            </IconButton>
-          }
-        >
-          <Avatar
-            sx={{ width: 60, height: 60 }}
-            alt="Edit Picture"
-            src="avatar.png"
-          />
-        </Badge>
-
+        <EditAvatar name="profile-picture" id="pfp" onChange={onSubmit} />
         <EditMetaInfo />
       </Stack>
     </>

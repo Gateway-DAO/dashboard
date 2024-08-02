@@ -7,7 +7,6 @@ export function EditMetaInfo() {
       direction={'row'}
       justifyContent={'space-between'}
       alignItems={'center'}
-      mt={4}
     >
       <Stack>
         <Typography variant="h5" color={'primary.dark'}>
