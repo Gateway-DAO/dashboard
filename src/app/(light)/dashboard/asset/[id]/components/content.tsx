@@ -27,7 +27,7 @@ export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
 
   // this code will change once will have api
   const { isLoading, isSuccess, data, refetch } = useQuery({
-    queryKey: ['decrypting-data-asset'],
+    queryKey: ['decrypting-data-asset', pda],
     queryFn: async (): Promise<void> => {
       if (pda.structured) {
         const mockData = JSON.stringify({ message: 'This is mock data.' });
