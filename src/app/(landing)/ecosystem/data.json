@@ -108,24 +108,6 @@
     "url": "https://aave.com/"
   },
   {
-    "logo": "swing.xyz",
-    "name": "Swing.xyz",
-    "description": "Swing is building cross-chain crypto liquidity and bridge aggregation infrastructure for the internet. Learn more about the future of web3 cross-chain crypto liquidity.",
-    "tags": [
-      "DeFi"
-    ],
-    "url": "https://swing.xyz/"
-  },
-  {
-    "logo": "guild",
-    "name": "Guild",
-    "description": "Automated membership management for the platforms your community already uses.",
-    "tags": [
-      "Gating"
-    ],
-    "url": "https://guild.xyz/"
-  },
-  {
     "logo": "access",
     "name": "Access",
     "description": "Publish written content. Mint NFTs. Build communities on Discord & Telegram. All under a single subscription.",
@@ -153,15 +135,6 @@
     "url": "https://wonderverse.com/"
   },
   {
-    "logo": "sumsub",
-    "name": "Sumsub",
-    "description": "Sumsub - Identity verification platform to secure the whole user journey ✔️Verify users, businesses or transactions, all while managing cases and deterring fraud ✔️ Highest pass rates ✔️2500+ clients ✔️Book a free demo now!",
-    "tags": [
-      "Humanhood/KYC"
-    ],
-    "url": "https://sumsub.com/"
-  },
-  {
     "logo": "humanode",
     "name": "Humanode",
     "description": "Humanode is the first crypto-biometric network where One human = One node that brings sybil resistance and innovative governance models to the crypto industry using private biometric technology.",
@@ -169,15 +142,6 @@
       "Humanhood/KYC"
     ],
     "url": "https://humanode.io/"
-  },
-  {
-    "logo": "albus_protocol",
-    "name": "Albus Protocol",
-    "description": "Albus Protocol is a regulation-compliant DeFi framework for public blockchains.",
-    "tags": [
-      "Humanhood/KYC"
-    ],
-    "url": "https://albus.finance/"
   },
   {
     "logo": "dimo",
