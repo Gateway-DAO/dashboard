@@ -138,13 +138,13 @@ function ProtocolStatsContent({
             <Stack {...statProps}>
               <Typography>Users Empowered</Typography>
               <Typography color="primary.main" variant="h5">
-                {totalUsers ?? <Skeleton />}
+                {totalUsers?.toLocaleString() ?? <Skeleton />}
               </Typography>
             </Stack>
             <Stack {...statProps}>
               <Typography>Data Contributors</Typography>
               <Typography color="primary.main" variant="h5">
-                {uniqueIssuers ?? <Skeleton />}
+                {uniqueIssuers?.toLocaleString() ?? <Skeleton />}
               </Typography>
             </Stack>
           </Stack>
