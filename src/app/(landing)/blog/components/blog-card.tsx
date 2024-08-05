@@ -1,16 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ChevronRight } from '@mui/icons-material';
-import { Stack, Typography, Button } from '@mui/material';
+import { PostOrPage } from '@tryghost/content-api';
+import DefaultImage from 'public/social.png';
 
-type Blog = {
-  title: string;
-  feature_image: string;
-  primary_tag: string;
-  excerpt: string;
-  slug: string;
-};
+import { ChevronRight } from '@mui/icons-material';
+import { Stack, Typography, Button, CardActionArea } from '@mui/material';
 
 export default function BlogCard({
   title,
@@ -18,7 +13,8 @@ export default function BlogCard({
   primary_tag,
   excerpt,
   slug,
-}: Blog) {
+  feature_image_alt,
+}: PostOrPage) {
   return (
     <Stack direction={'column'}>
       <Link
@@ -34,18 +30,18 @@ export default function BlogCard({
             objectFit: 'cover',
             borderRadius: '8px',
           }}
-          src={feature_image}
-          alt={title}
+          src={feature_image || DefaultImage}
+          alt={feature_image_alt || title || 'blog post image'}
           width={560}
           height={300}
           layout="responsive"
         />
-        {primary_tag !== undefined && (
+        {!!primary_tag?.name && (
           <Button
             variant="text"
             size="medium"
             sx={{
-              width: primary_tag?.length < 5 ? '10%' : '20%',
+              width: primary_tag.name.length < 5 ? '10%' : '20%',
               mt: 2,
               '&:hover': {
                 backgroundColor: '#fff',
@@ -53,7 +49,7 @@ export default function BlogCard({
               bgcolor: '#fff',
             }}
           >
-            {primary_tag}
+            {primary_tag.name}
           </Button>
         )}
 
@@ -66,15 +62,17 @@ export default function BlogCard({
         >
           {title}
         </Typography>
-        <Typography
-          fontWeight={500}
-          fontSize={'16px'}
-          lineHeight={'24px'}
-          color={'#000'}
-          sx={{ mt: 1 }}
-        >
-          {excerpt.length > 90 ? excerpt.substring(0, 150) + '...' : excerpt}
-        </Typography>
+        {excerpt && (
+          <Typography
+            fontWeight={500}
+            fontSize={'16px'}
+            lineHeight={'24px'}
+            color={'#000'}
+            sx={{ mt: 1 }}
+          >
+            {excerpt.length > 90 ? excerpt.substring(0, 150) + '...' : excerpt}
+          </Typography>
+        )}
 
         <Stack direction={'row'}>
           <Typography>Read more</Typography>

@@ -1,5 +1,5 @@
 'use client';
-import { createTheme } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 import * as components from './components';
 import { lightPalette, darkPalette } from './config/palette';

@@ -1,18 +1,14 @@
-'use client';
-import Header from '../components/header';
-import LandingFooter from '../components/landing-footer/landing-footer';
-import { HeaderContextProvider } from '../contexts/header-context';
-import Cta from '../home/components/cta';
-import Investors from '../home/components/investors';
+import { PropsWithChildren } from 'react';
 
-export default function Blog({ children }: { children: React.ReactNode }) {
+import { Container } from '@mui/material';
+
+import Nav from '../components/nav/nav';
+
+export default function BlogLayout({ children }: PropsWithChildren) {
   return (
-    <HeaderContextProvider initialVariant="dark">
-      <Header />
+    <>
+      <Nav color="black" />
       {children}
-      <Cta />
-      <Investors />
-      <LandingFooter variant="dark" />
-    </HeaderContextProvider>
+    </>
   );
 }

@@ -1,0 +1,8 @@
+query home {
+  getExplorerStats {
+    totalTransactions
+    pdasIssued
+    totalUsers
+    uniqueIssuers
+  }
+}

@@ -1,134 +1,83 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 
-import Wrapper from '@/app/(landing)/components/wrapper';
-import useHeaderVariantDetection from '@/app/(landing)/hooks/use-header-variant-detection';
+import { Box, Chip, Stack } from '@mui/material';
 
-import { Box, Button, Stack, Typography } from '@mui/material';
+import InternalContent from '../components/internal/internal-content';
+import InternalHeader from '../components/internal/internal-header';
+import Nav from '../components/nav/nav';
+import ClientCard from './components/card';
+import clients from './data.json';
 
-import { Card } from './component/card';
-import cards from './data.json';
-import styles from './hero.module.scss';
+export default function Ecosystem() {
+  const [selectedTag, setSelectedTag] = useState<'All' | string>('All');
 
-const categories = [
-  'All',
-  'Networks',
-  'AI',
-  'DeFi',
-  'DePIN',
-  'Fintech',
-  'Gating',
-  'Consumer',
-  'Humanhood/KYC',
-  'Governance',
-  'Education',
-  'Compute',
-];
+  const selectedClients =
+    selectedTag === 'All'
+      ? clients
+      : clients.filter((client) => client.tags.includes(selectedTag));
 
-export default function EcosystemPage() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [selectedCategorie, setSelectedCategorie] = useState<string[]>(['All']);
-
-  const cardRef = useRef<HTMLElement>(null);
-  const filteredCards = cards.filter((card) => {
-    if (selectedCategorie.includes('All')) {
-      return true;
-    }
-    return selectedCategorie.some((ele) => card.tags.includes(ele));
-  });
-
-  if (selectedCategorie.length == 0) {
-    setSelectedCategorie(['All']);
-  }
-
-  function checkAddORRemoveElement(newElement: string) {
-    if (newElement == 'All') {
-      setSelectedCategorie(['All']);
-      return;
-    }
-    if (selectedCategorie.includes(newElement)) {
-      const filteredElements = selectedCategorie.filter(
-        (ele) => ele != newElement
-      );
-      setSelectedCategorie([...filteredElements]);
-    } else {
-      const uniqueSet = new Set(selectedCategorie);
-      uniqueSet.delete('All');
-
-      setSelectedCategorie([...uniqueSet, newElement]);
-    }
-  }
-  useHeaderVariantDetection(sectionRef, 'dark');
-
-  useHeaderVariantDetection(cardRef, 'dark');
+  const tags = useMemo(() => {
+    const tags = new Set<string>(['All']);
+    clients.forEach((client) => {
+      client.tags.forEach((tag) => tags.add(tag));
+    });
+    return Array.from(tags);
+  }, []);
 
   return (
     <>
-      <section className={styles.element} ref={sectionRef}>
-        <Wrapper className={styles.wrapper}>
-          <h1 className={styles.title}>
-            Discover the Thriving{' '}
-            <span className={styles.highlight}>Gateway Network</span>
-          </h1>
-        </Wrapper>
-      </section>
-      <section className={styles.cards} ref={cardRef}>
-        <Wrapper className={styles.wrapper}>
-          <Typography variant="body1" mb={2}>
-            Filter :
-          </Typography>
-          <Stack direction={'row'} flexWrap={'wrap'} gap={2.2} columnGap={1}>
-            {categories.map((categorie) => (
-              <Button
-                key={categorie}
-                sx={{
-                  ...(!selectedCategorie.includes(categorie)
-                    ? {
-                        background: 'primary',
-                        color: '#00000061',
-                        borderColor: ' #0000001F',
-                      }
-                    : {}),
-                }}
-                onClick={() => checkAddORRemoveElement(categorie)}
-                size={'medium'}
-                variant={
-                  selectedCategorie.includes(categorie)
-                    ? 'contained'
-                    : 'outlined'
-                }
-              >
-                {categorie}
-              </Button>
-            ))}
-          </Stack>
+      <Nav color="black" />
+      <InternalHeader>Discover the Thriv ing Gateway Network</InternalHeader>
+      <InternalContent>
+        <Stack
+          direction="row"
+          gap={1}
+          sx={{
+            flexWrap: 'nowrap',
+            overflowX: 'auto',
+            mx: {
+              xs: -3,
+              sm: -6,
+              lg: 0,
+            },
+            px: {
+              xs: 3,
+              sm: 6,
+              lg: 0,
+            },
+            mb: {
+              xs: 4,
+              md: 6,
+            },
+          }}
+        >
+          {tags.map((tag) => (
+            <Chip
+              key={tag}
+              label={tag}
+              color={tag === selectedTag ? 'primary' : 'default'}
+              onClick={() => setSelectedTag(tag)}
+            />
+          ))}
+        </Stack>
 
-          <Box
-            sx={{
-              margin: 'auto',
-              py: 5,
-              gap: 4,
-              display: 'grid',
-              gridTemplateColumns: {
-                xs: '1fr',
-                md: 'repeat(3, 1fr)',
-                lg: `repeat(${3}, 1fr)`,
-              },
-            }}
-          >
-            {filteredCards.map((card) => (
-              <Card
-                key={card.name}
-                img={card.logo}
-                description={card.description}
-                name={card.name}
-                tags={card.tags}
-                url={card.url}
-              ></Card>
-            ))}
-          </Box>
-        </Wrapper>
-      </section>
+        <Box
+          sx={{
+            display: 'grid',
+            gap: 2,
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: '1fr 1fr',
+              md: '1fr 1fr 1fr',
+            },
+          }}
+        >
+          {selectedClients.map((client) => (
+            <ClientCard key={client.name} {...client} />
+          ))}
+        </Box>
+      </InternalContent>
     </>
   );
 }

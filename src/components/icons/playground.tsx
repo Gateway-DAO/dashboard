@@ -10,9 +10,9 @@ export default function PlaygroundIcon(props: SvgIconProps) {
     >
       <path
         fill="#771AC9"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M5.752 3A5.085 5.085 0 0 0 .667 8.085V32.2a5.085 5.085 0 0 0 5.085 5.086h29.83a5.085 5.085 0 0 0 5.085-5.086V8.085A5.085 5.085 0 0 0 35.58 3H5.752Zm.629 6.667a2.857 2.857 0 0 0-2.857 2.857V31.57A2.857 2.857 0 0 0 6.38 34.43h28.572a2.857 2.857 0 0 0 2.857-2.858V12.524a2.857 2.857 0 0 0-2.858-2.857H6.381Z"
-        clip-rule="evenodd"
+        clipRule="evenodd"
       />
       <path
         fill="#F5B5FF"

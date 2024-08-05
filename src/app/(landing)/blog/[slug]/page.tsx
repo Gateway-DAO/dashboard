@@ -7,6 +7,7 @@ import {
   getSinglePost,
   getPosts,
 } from '@/services/server-functions/ghost-client';
+import DefaultImage from 'public/social.png';
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Avatar, Button, Divider, Link as MUILink } from '@mui/material';
@@ -161,8 +162,12 @@ export default async function Read({ params }: { params: { slug: string } }) {
                 width={1152}
                 height={200}
                 className="feature-img"
-                src={getPost?.feature_image || ''}
-                alt={getPost?.feature_image_alt || 'No image found'}
+                src={getPost?.feature_image || DefaultImage}
+                alt={
+                  getPost?.feature_image_alt ||
+                  getPost?.title ||
+                  'Blog post image'
+                }
               />
             </Box>
             <Stack
@@ -220,14 +225,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
           }}
         >
           {latestPost.map((post, index) => (
-            <BlogCard
-              excerpt={post.excerpt as string}
-              feature_image={post.feature_image as string}
-              primary_tag={post.primary_tag?.name as string}
-              title={post.title as string}
-              key={index}
-              slug={post.slug}
-            />
+            <BlogCard key={index} {...post} />
           ))}
         </Stack>
       </Stack>

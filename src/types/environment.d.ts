@@ -1,6 +1,7 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
+      NEXT_PUBLIC_BFF_API_SERVER: string;
       NEXT_PUBLIC_API_ENDPOINT: string;
       NEXT_PUBLIC_API_KEY: string;
       NEXT_PUBLIC_API_ENV:
@@ -12,6 +13,7 @@ declare global {
       NEXTAUTH_SECRET: string;
       SECURE_API_KEY: string;
       VERCEL_ENV: 'production' | 'preview' | 'development';
+      JWT_SECRET: string;
     }
   }
 

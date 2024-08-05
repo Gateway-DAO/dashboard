@@ -9,6 +9,9 @@ const externalLinks = {
   gateway: 'https://mygateway.xyz',
   gateway_sandbox: 'https://sandbox.mygateway.xyz',
   join_testnet: 'https://mygateway.typeform.com/to/glphnWOS',
+  gateway_wallet_android:
+    'https://play.google.com/store/apps/details?id=mygateway.xyz.gatekeeper',
+  gateway_wallet_ios: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
 };
 
 module.exports = externalLinks;

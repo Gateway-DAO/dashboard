@@ -1,15 +1,10 @@
-import './styles/global.scss';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
 import { currentEnv } from '@/utils/env';
-import DOMPurify from 'isomorphic-dompurify';
+import sanitizeHtml from 'sanitize-html';
 
-import Main from './components/Main';
-import SetSizes from './components/set-sizes';
+import Footer from './components/footer/footer';
 import Providers from './providers';
 
 export const metadata: Metadata = {
@@ -24,7 +19,7 @@ export default function RootLayout({
 }) {
   const env = currentEnv;
   const isTesnetOrProd = env === 'testnet' || env === 'production';
-  const hotjarScript = DOMPurify.sanitize(`
+  const hotjarScript = sanitizeHtml(`
   (function(h,o,t,j,a,r){
       h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
       h._hjSettings={hjid:3399024,hjsv:6};
@@ -34,7 +29,7 @@ export default function RootLayout({
       a.appendChild(r);
   })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
   `);
-  const gaLandingScript = DOMPurify.sanitize(`
+  const gaLandingScript = sanitizeHtml(`
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -42,7 +37,7 @@ export default function RootLayout({
   })(window,document,'script','dataLayer','GTM-N32L27DH');
 `);
   return (
-    <html lang="en" className="lenis lenis-smooth">
+    <html lang="en">
       {isTesnetOrProd && (
         <Script
           id="hotjar"
@@ -64,7 +59,6 @@ export default function RootLayout({
       )}
       {process.env.NEXT_PUBLIC_GTM_TAG && (
         <>
-
           <Script
             strategy="afterInteractive"
             id="ga-landing"
@@ -102,11 +96,10 @@ amplitude.init('36683c62d8db3f0ff467212f18302fef');
         }}
       />
       <body>
-        <Main>
-          <Providers>{children}</Providers>
-        </Main>
-
-        <SetSizes />
+        <Providers>
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
