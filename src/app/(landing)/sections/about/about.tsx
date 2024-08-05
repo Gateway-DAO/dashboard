@@ -52,11 +52,11 @@ export default function About() {
               display: 'flex',
               flexDirection: 'column',
               p: 4,
-              justifyContent: 'space-between',
-              gap: {
+              pb: {
                 xs: 4,
-                md: 26,
+                md: 42.25,
               },
+              gap: 4,
             }}
           >
             <Stack gap={1}>
@@ -65,7 +65,7 @@ export default function About() {
                 variant="subtitle1"
                 color="primary.main"
               >
-                For Business: Give Data Utility
+                For Business
               </Typography>
               <Typography
                 component="h2"
@@ -78,11 +78,12 @@ export default function About() {
                   },
                 }}
               >
-                Encrypt, store, and power user-controlled data sharing with
-                Gateway
+                Give Data Utility
               </Typography>
               <Typography variant="body1">
-                A private and powerful computer for sensitive information.
+                Encrypt, store, and enable user-controlled data sharing with
+                Gateway. A private and powerful computer for sensitive
+                information.
               </Typography>
             </Stack>
             <Button
