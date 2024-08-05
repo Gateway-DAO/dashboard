@@ -1,6 +1,5 @@
 'use client';
 
-import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import routes from '@/constants/routes';
@@ -17,13 +16,5 @@ export default async function PDAPage({ params }: { params: { id: string } }) {
     return redirect(routes.dashboard.user.home);
   }
 
-  const isOwner = true;
-
-  return (
-    <PDADetailPage
-      isOwner={isOwner}
-      pda={pda}
-      backHref={routes.dashboard.user.home}
-    />
-  );
+  return <PDADetailPage pda={pda} backHref={routes.dashboard.user.home} />;
 }

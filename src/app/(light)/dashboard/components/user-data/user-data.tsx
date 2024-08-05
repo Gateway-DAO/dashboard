@@ -10,9 +10,11 @@ import { Typography, Stack } from '@mui/material';
 export default function UserData({
   username,
   did,
+  access,
 }: {
   username?: string | null;
   did: string;
+  access: string;
 }) {
   const { enqueueSnackbar } = useSnackbar();
 
@@ -58,13 +60,12 @@ export default function UserData({
               component="span"
               variant="caption"
               fontWeight={400}
-              fontSize={12}
               color="text.secondary"
               lineHeight={1}
               textOverflow="ellipsis"
               overflow="hidden"
             >
-              {limitCharsOffset(did, 19, 5)}
+              {limitCharsOffset(did, 3, 4)}
             </Typography>
             <IconButton onClick={() => copy(did)}>
               <ContentCopy
@@ -74,6 +75,9 @@ export default function UserData({
                 }}
               />
             </IconButton>
+            <Typography variant="caption" color="text.secondary">
+              {access}
+            </Typography>
           </Stack>
         ) : (
           <IconButton onClick={() => copy(did)}>
