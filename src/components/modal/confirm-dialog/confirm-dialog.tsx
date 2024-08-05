@@ -5,6 +5,8 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
+import { Breakpoint } from '@mui/material';
+import { maxWidth } from '@mui/system';
 
 type ConfirmDialogProps = {
   title: string;
@@ -14,6 +16,7 @@ type ConfirmDialogProps = {
   onConfirm: () => void;
   positiveAnswer: string;
   negativeAnswer: string;
+  maxWidth?: false | Breakpoint | undefined;
 };
 
 const ConfirmDialog = (props: ConfirmDialogProps) => {
@@ -25,13 +28,15 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
     onConfirm,
     positiveAnswer = 'Yes',
     negativeAnswer = 'No',
+    maxWidth = 'sm',
   } = props;
   return (
     <Dialog
       open={open}
       onClose={() => setOpen(false)}
       aria-labelledby="confirm-dialog"
-      maxWidth="xs"
+      maxWidth={maxWidth}
+      fullWidth
     >
       <DialogTitle
         id="confirm-dialog-title"
