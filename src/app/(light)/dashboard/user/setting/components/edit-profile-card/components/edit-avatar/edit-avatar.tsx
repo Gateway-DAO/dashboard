@@ -48,9 +48,9 @@ function EditAvatarField(
     inputRef.current?.click();
   };
 
-  const onReset = () => {
-    onChange('');
-  };
+  // const onReset = () => {
+  //   onChange('');
+  // };
 
   // const onCrop = (image: string) => {
   //   onChange(image);
