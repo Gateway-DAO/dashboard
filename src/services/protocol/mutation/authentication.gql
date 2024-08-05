@@ -6,7 +6,6 @@ mutation get_nonce($wallet: String!, $chain: Chain) {
 
 mutation create_email_nonce($email: String!) {
   createEmailNonce(input: { email: $email }) {
-    code
     email
   }
 }
