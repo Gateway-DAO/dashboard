@@ -44,13 +44,6 @@ const logos = [
     height: 37,
   },
   {
-    href: 'https://zama.ai/',
-    src: 'zama.svg',
-    alt: 'Zama',
-    width: 130,
-    height: 26,
-  },
-  {
     href: 'https://shiza.ai/',
     src: 'shiza.png',
     alt: 'Shiza',

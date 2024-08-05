@@ -243,15 +243,6 @@
     "url": "https://fleek.network/"
   },
   {
-    "logo": "zama",
-    "name": "ZAMA",
-    "description": "Zama is an open source cryptography company that builds state-of-the-art Fully Homomorphic Encryption (FHE) solutions for blockchain and AI.",
-    "tags": [
-      "Compute"
-    ],
-    "url": "https://www.zama.ai/"
-  },
-  {
     "logo": "irys",
     "name": "Irys",
     "description": "Irys is the first L1 programmable datachain, bringing together data storage and execution for a simpler and more efficient development process. Built for scalability, Irys supports both temporary and permanent data, ensuring reliable and flexible data management. With a clear pricing model and EVM compatibility, Irys offers a solid and affordable platform for creating dynamic, data-driven applications. Irys bridges the gap between temporary and permanent data, ensuring efficient and verifiable onchain interactions. Our mission is to lead the transition to a fully onchain, data-driven future, setting a new standard for web services and empowering innovation at every step.",
