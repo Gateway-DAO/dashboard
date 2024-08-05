@@ -13,7 +13,7 @@ import PDAMetaDataDetails from './pda-meta-data-details';
 import StructuredDetail from './pda-types/structured-detail';
 import { PrivateDataAsset } from '@/services/server/mock-types';
 import { useSnackbar } from 'notistack';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { LoadingButton } from '@/components/buttons/loading-button';
 
 type Props = {
@@ -26,20 +26,15 @@ export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   // this code will change once will have api
-  const { isLoading, isSuccess, data, refetch } = useQuery({
-    queryKey: ['decrypting-data-asset', pda],
-    queryFn: async (): Promise<void> => {
+  const { isSuccess, data, mutateAsync, isPending } = useMutation({
+    mutationKey: ['decrypting-data-asset', pda],
+    mutationFn: async (): Promise<void> => {
       if (pda.structured) {
         const mockData = JSON.stringify({ message: 'This is mock data.' });
         const blob = new Blob([mockData], { type: 'text/plain' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `${pda.fileName}.txt`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
       } else {
         setTimeout(() => {
           window.open(
@@ -50,7 +45,9 @@ export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
         }, 1000);
       }
     },
-    enabled: false,
+    onError: (error, variables, context) => {
+      enqueueSnackbar('Something went wrong!');
+    },
   });
 
   return (
@@ -67,10 +64,10 @@ export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
           <LoadingButton
             variant="contained"
             onClick={() => {
-              refetch();
+              mutateAsync();
             }}
             sx={{ mr: 10 }}
-            isLoading={isLoading}
+            isLoading={isPending}
           >
             Open data asset
           </LoadingButton>

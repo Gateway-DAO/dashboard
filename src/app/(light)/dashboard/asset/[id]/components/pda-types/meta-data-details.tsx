@@ -30,13 +30,13 @@ export default function MetaDataDetails({ pda }: Props) {
             </CardCell>
             <Divider orientation="vertical" flexItem />
             <CardCell label={'Expiration'} margin={false} py={3}>
-              <Stack direction={'row'} justifyContent={'space-between'}>
+              <Stack
+                direction={'row'}
+                justifyContent={'space-between'}
+                alignItems="baseline"
+              >
                 <span>{formatDateDifference(pda.expirationDate)}</span>
-                <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  sx={{ mt: 0.3 }}
-                >
+                <Typography variant="caption" color="text.secondary">
                   {dayjs(pda.expirationDate).format(DATE_FORMAT)}
                 </Typography>
               </Stack>

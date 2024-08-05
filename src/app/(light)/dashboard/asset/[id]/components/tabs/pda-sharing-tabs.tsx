@@ -4,8 +4,9 @@ import { ChevronRightOutlined } from '@mui/icons-material';
 import { Divider, IconButton, Stack, Typography } from '@mui/material';
 
 import { IndividualDetailRow } from './components';
+import { PrivateDataAsset } from '@/services/server/mock-types';
 
-export default function PDASharingTab({ pda }: { pda: any }) {
+export default function PDASharingTab({ pda }: { pda: PrivateDataAsset }) {
   return (
     <IndividualDetailRow>
       <Stack divider={<Divider />}>
