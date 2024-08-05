@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { getPosts } from '@/services/server-functions/ghost-client';
+import DefaultImage from 'public/social.png';
 
 import { Button, Typography, Stack } from '@mui/material';
 
@@ -23,8 +24,12 @@ export default async function HeroPost() {
       <Stack direction={{ xs: 'column', md: 'row' }}>
         <Stack alignSelf={'center'} sx={{ width: { md: '130%' } }}>
           <Image
-            src={posts[0].feature_image as string}
-            alt={posts[0].title as string}
+            src={(posts[0].feature_image as string) || DefaultImage}
+            alt={
+              posts[0].feature_image_alt ||
+              (posts[0].title as string) ||
+              'blog post image'
+            }
             style={{
               aspectRatio: '16/9',
               objectFit: 'cover',

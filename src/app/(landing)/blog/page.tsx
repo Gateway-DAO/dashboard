@@ -67,14 +67,7 @@ export default async function LatestBlogPosts() {
         }}
       >
         {posts.map((post, index) => (
-          <BlogCard
-            excerpt={post.excerpt as string}
-            feature_image={post.feature_image as string}
-            primary_tag={post.primary_tag?.name as string}
-            title={post.title as string}
-            key={index}
-            slug={post.slug}
-          />
+          <BlogCard key={index} {...post} />
         ))}
       </Box>
     </Container>

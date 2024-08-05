@@ -5,6 +5,7 @@ import routes from '@/constants/routes';
 import { getPosts } from '@/services/server-functions/ghost-client';
 import { PostOrPage } from '@tryghost/content-api';
 import dayjs from 'dayjs';
+import DefaultImage from 'public/social.png';
 
 import {
   Box,
@@ -44,10 +45,12 @@ function BlogCard({
             aspectRatio: 373 / 211,
             backgroundColor: 'primary.main',
             mb: 3,
+            borderRadius: '8px',
+            overflow: 'hidden',
           }}
         >
           <Image
-            src={feature_image!}
+            src={feature_image ?? DefaultImage}
             alt={feature_image_alt || title || 'blog post image'}
             fill
           />
