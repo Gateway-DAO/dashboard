@@ -1,4 +1,8 @@
-import { Box, Container, Divider, Stack, Typography } from '@mui/material';
+import { Suspense } from 'react';
+
+import { apiPublic } from '@/services/protocol/api';
+
+import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
 
 const statProps = {
   justifyContent: 'space-between',
@@ -10,7 +14,19 @@ const statProps = {
   },
 };
 
-export default function ProtocolStats() {
+type Props = {
+  totalTransactions?: number;
+  pdasIssued?: number;
+  totalUsers?: number;
+  uniqueIssuers?: number;
+};
+
+function ProtocolStatsContent({
+  totalTransactions,
+  pdasIssued,
+  totalUsers,
+  uniqueIssuers,
+}: Props) {
   return (
     <Stack
       component={Container}
@@ -92,7 +108,7 @@ export default function ProtocolStats() {
                 },
               }}
             >
-              9,603,193
+              {totalTransactions ?? <Skeleton />}
             </Typography>
           </Stack>
           <Stack
@@ -107,7 +123,7 @@ export default function ProtocolStats() {
           >
             <Typography>Files Stored</Typography>
             <Typography color="primary.main" variant="h5">
-              9,603,193
+              {pdasIssued ?? <Skeleton />}
             </Typography>
           </Stack>
           <Stack
@@ -122,18 +138,31 @@ export default function ProtocolStats() {
             <Stack {...statProps}>
               <Typography>Users Empowered</Typography>
               <Typography color="primary.main" variant="h5">
-                9,603,193
+                {totalUsers ?? <Skeleton />}
               </Typography>
             </Stack>
             <Stack {...statProps}>
               <Typography>Data Contributors</Typography>
               <Typography color="primary.main" variant="h5">
-                9,603,193
+                {uniqueIssuers ?? <Skeleton />}
               </Typography>
             </Stack>
           </Stack>
         </Stack>
       </Box>
     </Stack>
+  );
+}
+
+async function ProtocolStatsContainer() {
+  const res = await apiPublic.home();
+  return <ProtocolStatsContent {...res?.getExplorerStats} />;
+}
+
+export default function ProtocolStats() {
+  return (
+    <Suspense fallback={<ProtocolStatsContent />}>
+      {<ProtocolStatsContainer />}
+    </Suspense>
   );
 }
