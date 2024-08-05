@@ -18,15 +18,6 @@
     "url": "https://pokt.network/"
   },
   {
-    "logo": "brx_finance",
-    "name": "BRX Finance",
-    "description": "Pioneering the seamless fusion of TradFi and DeFi",
-    "tags": [
-      "Networks"
-    ],
-    "url": "https://www.brx.finance/"
-  },
-  {
     "logo": "seda",
     "name": "SEDA",
     "description": "SEDA is a standard for modular data transport and querying. Any data type, for all Networks.",
@@ -61,15 +52,6 @@
       "FinTech"
     ],
     "url": "https://spherepay.co/"
-  },
-  {
-    "logo": "twine",
-    "name": "Twine",
-    "description": "Twine is the commerce orchestration platform for organizations of any size",
-    "tags": [
-      "FinTech"
-    ],
-    "url": "https://twinecommerce.com/"
   },
   {
     "logo": "dydx",
