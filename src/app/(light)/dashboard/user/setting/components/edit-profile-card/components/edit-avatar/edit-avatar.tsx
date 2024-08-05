@@ -62,7 +62,9 @@ function EditAvatarField(
       return;
     }
     onReadFile(event.target.files);
-    inputRef.current.value = '';
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
   };
 
   const onCrop = (image: Blob) => {
