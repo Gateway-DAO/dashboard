@@ -15,6 +15,7 @@ import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
 
 import BlogCard from '../components/blog-card';
 import { ShareButtonFn } from '../components/share-card';
+import { blogMetadata } from '../utils';
 import { RenderBlog } from './component/render-blog';
 
 function formatDate(date: Date) {
@@ -61,16 +62,18 @@ export async function generateMetadata({
     : ['gateway blogs'];
 
   return {
-    title: metaData.title,
+    ...blogMetadata,
+    title: `${metaData.title} | Gateway Blog`,
     description: metaData.excerpt,
     keywords: tags as [string],
     openGraph: {
+      ...blogMetadata.openGraph,
       title: metaData.title,
       description: metaData.excerpt,
       url: metaData.url,
       images: [
         {
-          url: metaData.feature_image || '/images/default-user.svg',
+          url: metaData.feature_image || '/social.png',
         },
       ],
       type: 'website',
@@ -79,6 +82,16 @@ export async function generateMetadata({
       metaData?.authors?.map((author) => {
         return { name: author.name };
       }) || null,
+    twitter: {
+      ...blogMetadata.twitter,
+      title: metaData.title,
+      description: metaData.excerpt,
+      images: [
+        {
+          url: metaData.feature_image || '/social.png',
+        },
+      ],
+    },
   };
 }
 
