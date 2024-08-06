@@ -30,6 +30,11 @@ export default function PDADetailPage({ pda, backHref }: Props) {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
+        link.download = `${pda.fileName}.txt`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
       } else {
         setTimeout(() => {
           window.open(

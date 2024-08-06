@@ -63,7 +63,7 @@ export default function MetaDataDetails({ pda }: Props) {
             <Divider orientation="vertical" flexItem />
             <CardCell label={'Type'} margin={false} py={3}>
               <span>
-                {pda.structured ? 'Strucured Data' : 'Unstructured Data'}
+                {pda.structured ? 'Structured Data' : 'Unstructured Data'}
               </span>
             </CardCell>
           </Stack>

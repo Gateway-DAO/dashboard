@@ -1,5 +1,5 @@
 export type PrivateDataAsset = {
-  id: number;
+  id: string;
   proofs: Array<any>;
   access: Array<{ did: string; username: string; access: string }>;
   expirationDate: Date;
@@ -19,14 +19,14 @@ export type PrivateDataAsset = {
 
 export const mockPrivateDataAssets: PrivateDataAsset[] = [
   {
-    id: 1,
+    id: '4fff1352-2480-4fce-8b34-c095f4d9463a',
     mimeType: 'image/jpeg',
     proofs: [],
     structured: false,
     fileName: 'image1.jpg',
     access: [
       {
-        did: 'did:28e178ef-1d35-43bc-bad8-c28668c18488',
+        did: 'did:4fff1352-2480-4fce-8b34-c095f4d9463a',
         username: 'John',
         access: 'Can view, update and delete',
       },
@@ -37,9 +37,10 @@ export const mockPrivateDataAssets: PrivateDataAsset[] = [
     createdAt: new Date(),
     tags: ['asset', 'file'],
     url: '',
+    dataModel: { id: '4fff1352-2480-4fce-8b34-c095f4d9463a', schema: {} },
   },
   {
-    id: 2,
+    id: '4fff1352-2480-4fce-8b34-c095f4d94631',
     mimeType: 'application/pdf',
     structured: false,
     proofs: [],
@@ -57,11 +58,11 @@ export const mockPrivateDataAssets: PrivateDataAsset[] = [
     size: 2048,
     tags: ['asset', 'doc'],
     url: '',
+    dataModel: { id: '4fff1352-2480-4fce-8b34-c095f4d9463a', schema: {} },
   },
   {
-    id: 3,
+    id: '4fff1352-2480-4fce-8b34-c095f4d94632',
     structured: true,
-    dataModel: { id: 'model1', schema: {} },
     access: [
       {
         did: 'did:5e938e33-a062-4da5-8ed1-d6038eb7d574',
@@ -83,5 +84,6 @@ export const mockPrivateDataAssets: PrivateDataAsset[] = [
     fileName: 'credit score',
     mimeType: 'txt',
     proofs: [],
+    dataModel: { id: '4fff1352-2480-4fce-8b34-c095f4d9463a', schema: {} },
   },
 ];

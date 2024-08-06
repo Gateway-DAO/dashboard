@@ -45,6 +45,7 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
   {
     field: 'access',
     headerName: 'Who has access',
+    width: 150,
     renderCell: (params) => (
       <Typography>{params.row.proofs.length || '-'}</Typography>
     ),
