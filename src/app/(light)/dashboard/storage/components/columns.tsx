@@ -26,7 +26,7 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
     headerName: 'Name',
     flex: 2,
     renderCell: (params) => {
-      const name = params.row.fileName ?? params.row?.dataAsset?.title ?? '';
+      const name = params.row.fileName ?? params.row?.fileName ?? '';
       const fileType = getFileTypeByPda(params.row);
       const icon = getIconFile(fileType);
 

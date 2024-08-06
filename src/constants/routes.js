@@ -5,7 +5,7 @@ const routes = {
   auth: '/login',
   dashboard: {
     user: {
-      home: `${dashboardUser}/`,
+      home: `${dashboardUser}/storage`,
       issue: `${dashboardUser}/assets/issue`,
       issuePda: (id) => `${dashboardUser}/assets/issue/${id}`,
       asset: (pdaId) => `${dashboardUser}/asset/${pdaId}`,

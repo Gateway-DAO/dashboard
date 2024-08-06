@@ -2,9 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import MainnetOutlined from '@/components/icons/mainnet-outlined';
-import externalLinks from '@/constants/externalLinks';
-import { currentEnv, isSandbox } from '@/utils/env';
+import { currentEnv } from '@/utils/env';
 
 import { Typography } from '@mui/material';
 
@@ -24,20 +22,34 @@ export default function DashboardUserDeveloperMenuListItems() {
         Developers
       </Typography>
 
-      {dashboardDevelopersMenuItems.map(({ activeHrefs, ...item }) => (
-        <GTWMenuItem
-          key={item.name}
-          active={activeHrefs.some((path) => activePath.includes(path))}
-          {...item}
-        />
-      ))}
+      {dashboardDevelopersMenuItems.map(
+        ({ activeHrefs, ...item }, index) =>
+          index <= 1 && (
+            <GTWMenuItem
+              key={item.name}
+              active={activeHrefs.some((path) => activePath.includes(path))}
+              {...item}
+            />
+          )
+      )}
 
-      <GTWMenuItem
-        name={isSandbox ? 'Sandbox' : 'TestNet'}
-        href={`${externalLinks.gateway}${activePath}`}
-        icon={MainnetOutlined}
-        externalLink={true}
-      />
+      <Typography
+        variant="caption"
+        sx={{ px: 3.5, mt: 2, mb: 2, display: 'block' }}
+      >
+        Other Tools
+      </Typography>
+
+      {dashboardDevelopersMenuItems.map(
+        ({ activeHrefs, ...item }, index) =>
+          index === 2 && (
+            <GTWMenuItem
+              key={item.name}
+              active={activeHrefs.some((path) => activePath.includes(path))}
+              {...item}
+            />
+          )
+      )}
     </>
   );
 }
