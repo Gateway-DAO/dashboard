@@ -108,7 +108,7 @@ function ProtocolStatsContent({
                 },
               }}
             >
-              {totalTransactions ?? <Skeleton />}
+              {totalTransactions?.toLocaleString('en-US') ?? <Skeleton />}
             </Typography>
           </Stack>
           <Stack
@@ -123,7 +123,7 @@ function ProtocolStatsContent({
           >
             <Typography>Files Stored</Typography>
             <Typography color="primary.main" variant="h5">
-              {pdasIssued ?? <Skeleton />}
+              {pdasIssued?.toLocaleString('en-US') ?? <Skeleton />}
             </Typography>
           </Stack>
           <Stack
@@ -138,13 +138,13 @@ function ProtocolStatsContent({
             <Stack {...statProps}>
               <Typography>Users Empowered</Typography>
               <Typography color="primary.main" variant="h5">
-                {totalUsers?.toLocaleString() ?? <Skeleton />}
+                {totalUsers?.toLocaleString('en-US') ?? <Skeleton />}
               </Typography>
             </Stack>
             <Stack {...statProps}>
               <Typography>Data Contributors</Typography>
               <Typography color="primary.main" variant="h5">
-                {uniqueIssuers?.toLocaleString() ?? <Skeleton />}
+                {uniqueIssuers?.toLocaleString('en-US') ?? <Skeleton />}
               </Typography>
             </Stack>
           </Stack>

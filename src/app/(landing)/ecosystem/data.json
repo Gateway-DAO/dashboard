@@ -1,6 +1,6 @@
 [
   {
-    "logo": "solana_foundation",
+    "logo": "solana_foundation.svg",
     "name": "Solana Foundation",
     "description": "The Solana Foundation is a non-profit foundation based in Zug, Switzerland, dedicated to the decentralization, adoption, and security of the Solana ecosystem.",
     "tags": [
@@ -9,7 +9,7 @@
     "url": "https://solana.org/"
   },
   {
-    "logo": "pokt_network",
+    "logo": "pokt_network.svg",
     "name": "POKT Network",
     "description": "Web3's decentralised RPC. With POKT Network, app can build on top of cost-effective, scalable, and resilient Web3 infrastructure that is DePIN.",
     "tags": [
@@ -18,7 +18,7 @@
     "url": "https://pokt.network/"
   },
   {
-    "logo": "seda",
+    "logo": "seda.svg",
     "name": "SEDA",
     "description": "SEDA is a standard for modular data transport and querying. Any data type, for all Networks.",
     "tags": [
@@ -27,7 +27,7 @@
     "url": "https://www.seda.xyz/"
   },
   {
-    "logo": "plume_network",
+    "logo": "plume_network.svg",
     "name": "Plume Network",
     "description": "Plume is the first modular L2 blockchain for RWAs that simplifies onchain asset deployment while fostering a composable ecosystem through DeFi applications",
     "tags": [
@@ -36,7 +36,7 @@
     "url": "https://www.plumenetwork.xyz/"
   },
   {
-    "logo": "cred_protocol",
+    "logo": "cred_protocol.svg",
     "name": "Cred Protocol",
     "description": "Cred Protocol provides credit reporting and analytics for onchain activity.",
     "tags": [
@@ -45,7 +45,7 @@
     "url": "https://www.credprotocol.com/"
   },
   {
-    "logo": "spherepay",
+    "logo": "spherepay.svg",
     "name": "SpherePay",
     "description": "Modern money movement for businesses. Upgrade your financial stack and automate your back-office. One platform for all of your payments at OTC rates.",
     "tags": [
@@ -54,7 +54,7 @@
     "url": "https://spherepay.co/"
   },
   {
-    "logo": "dydx",
+    "logo": "dydx.svg",
     "name": "DYDX",
     "description": "Trade Perpetuals on the most powerful open trading platform, backed by @a16z, @polychain, and @paradigm.",
     "tags": [
@@ -63,7 +63,7 @@
     "url": "https://dydx.exchange/"
   },
   {
-    "logo": "li.fi",
+    "logo": "li.fi.svg",
     "name": "LI.FI",
     "description": "Advanced Bridge & DEX Aggregation - Drive multichain strategies with cross-chain data messaging and get users from everywhere.",
     "tags": [
@@ -72,7 +72,7 @@
     "url": "https://li.fi/"
   },
   {
-    "logo": "goldfinch",
+    "logo": "goldfinch.svg",
     "name": "Goldfinch",
     "description": "Invest USDC for real yields, from real businesses. Goldfinch's stablecoin returns come from lending to successful credit funds and fintechs in emerging markets, with loans fully collateralized off-chain by real-world assets. Goldfinch offers crypto lenders access to successful emerging market debt deals which have been historically inaccessible outside of exclusive networks, while expanding access to cost-efficient crypto financing that doesn't require crypto collateral.",
     "tags": [
@@ -81,7 +81,7 @@
     "url": "https://www.goldfinch.finance/"
   },
   {
-    "logo": "aave",
+    "logo": "aave.svg",
     "name": "AAVE",
     "description": "Aave is an Open Source Protocol to create Non-Custodial Liquidity Markets to earn interest on supplying and borrowing assets with a variable or stable interest rate. The protocol is designed for easy integration into your products and services.",
     "tags": [
@@ -90,7 +90,7 @@
     "url": "https://aave.com/"
   },
   {
-    "logo": "access",
+    "logo": "access.svg",
     "name": "Access",
     "description": "Publish written content. Mint NFTs. Build communities on Discord & Telegram. All under a single subscription.",
     "tags": [
@@ -99,7 +99,7 @@
     "url": "https://www.accessprotocol.co/"
   },
   {
-    "logo": "blackbird",
+    "logo": "blackbird.svg",
     "name": "Blackbird",
     "description": "Be a regular everywhere. Get the app that lets you earn status, perks, and points at world-class restaurants.",
     "tags": [
@@ -108,7 +108,7 @@
     "url": "https://www.blackbird.xyz/"
   },
   {
-    "logo": "wonderverse",
+    "logo": "wonderverse.svg",
     "name": "Wonderverse",
     "description": "The #1 Discord bot for premium communities. Onboard, engage, and monetize your community with our end-to-end community engagement bot.",
     "tags": [
@@ -117,7 +117,7 @@
     "url": "https://wonderverse.com/"
   },
   {
-    "logo": "humanode",
+    "logo": "humanode.svg",
     "name": "Humanode",
     "description": "Humanode is the first crypto-biometric network where One human = One node that brings sybil resistance and innovative governance models to the crypto industry using private biometric technology.",
     "tags": [
@@ -126,7 +126,7 @@
     "url": "https://humanode.io/"
   },
   {
-    "logo": "dimo",
+    "logo": "dimo.svg",
     "name": "DIMO",
     "description": "DIMO helps drivers get more from their cars. Gain insights into vehicle health and performance and get rewarded for helping to build the future of…",
     "tags": [
@@ -135,7 +135,7 @@
     "url": "https://dimo.zone/"
   },
   {
-    "logo": "hivemapper",
+    "logo": "hivemapper.svg",
     "name": "Hivemapper",
     "description": "Explore the Hivemapper Network's global coverage.",
     "tags": [
@@ -144,7 +144,7 @@
     "url": "https://hivemapper.com/explorer"
   },
   {
-    "logo": "snapshot",
+    "logo": "snapshot.svg",
     "name": "Snapshot",
     "description": "Snapshot is an off-chain voting platform that allows DAOs, DeFi protocols, or NFT communities to participate in the decentralized governance easily and without gas fees",
     "tags": [
@@ -153,7 +153,7 @@
     "url": "https://snapshot.org/"
   },
   {
-    "logo": "odyssey",
+    "logo": "odyssey.svg",
     "name": "Odyssey",
     "description": "Odyssey is a platform allowing users to explore the great products across the new era of the web. Complete quizzes, verify activities, and follow your favorite communities. Odyssey is powered by Gateway's Private Data Protocol.",
     "tags": [
@@ -162,7 +162,7 @@
     "url": "https://www.tryodyssey.xyz/"
   },
   {
-    "logo": "atoma_network",
+    "logo": "atoma_network.svg",
     "name": "Atoma Network",
     "description": "Generated by create next app",
     "tags": [
@@ -171,7 +171,7 @@
     "url": "https://www.atoma.network/"
   },
   {
-    "logo": "shiza",
+    "logo": "shiza.svg",
     "name": "SHIZA",
     "description": "INTERCONNECTED INTELLECT",
     "tags": [
@@ -180,30 +180,90 @@
     "url": "https://shiza.ai/"
   },
   {
-    "logo": "fleek_network",
-    "name": "Fleek Network",
-    "description": "Fleek Network is a decentralized, open-source, edge platform and protocol upon which edge services can be built, run, and orchestrated.",
+    "logo": "camp.svg",
+    "name": "Camp",
+    "url": "https://www.campnetwork.xyz/",
+    "description": "Camp Network is the user identity layer across blockchains. Camp aggregates online user data, enabling users to own and monetize their identity while helping teams better understand user behavior.",
     "tags": [
-      "Compute"
-    ],
-    "url": "https://fleek.network/"
+      "Identity",
+      "Entertainement"
+    ]
   },
   {
-    "logo": "irys",
-    "name": "Irys",
-    "description": "Irys is the first L1 programmable datachain, bringing together data storage and execution for a simpler and more efficient development process. Built for scalability, Irys supports both temporary and permanent data, ensuring reliable and flexible data management. With a clear pricing model and EVM compatibility, Irys offers a solid and affordable platform for creating dynamic, data-driven applications. Irys bridges the gap between temporary and permanent data, ensuring efficient and verifiable onchain interactions. Our mission is to lead the transition to a fully onchain, data-driven future, setting a new standard for web services and empowering innovation at every step.",
+    "logo": "sphere_one.png",
+    "name": "Sphere One",
+    "url": "https://sphereone.xyz/",
+    "description": "Build your own Next-Gen AI Tools",
     "tags": [
-      "Compute"
-    ],
-    "url": "https://irys.xyz/"
+      "AI"
+    ]
   },
   {
-    "logo": "arweave",
-    "name": "Arweave",
-    "description": "The Arweave web wallet lets you deploy permanent data from the browser, connect your accounts securely to decentralized applications, and navigate the weave",
+    "logo": "heurist.svg",
+    "name": "Heurist",
+    "url": "https://www.heurist.ai/",
+    "description": "Heurist is a Layer 2 blockchain protocol for decentralized AI model hosting and inference.",
     "tags": [
-      "Compute"
-    ],
-    "url": "https://arweave.app/"
+      "AI",
+      "Inference"
+    ]
+  },
+  {
+    "logo": "mentaport.png",
+    "name": "MentaPort",
+    "url": "https://www.mentaport.com/",
+    "description": "Combating deepfakes and protecting copyrighted content with its immutable certificates and innovative embedded watermark technology for seamless content validation and copyright.",
+    "tags": [
+      "IP",
+      "AI"
+    ]
+  },
+  {
+    "logo": "inference.svg",
+    "name": "Inference Labs",
+    "url": "https://inferencelabs.com/",
+    "description": "AI hyperscale on decentralized networks. Inference will dominate future Internet traffic. Just as HTTPS/TLS secures websites, Inference Labs ensures AI security with equivalent protocols and solutions.",
+    "tags": [
+      "AI",
+      "Inference"
+    ]
+  },
+  {
+    "logo": "define.png",
+    "name": "Define Protocol",
+    "url": "https://www.define.tech/",
+    "description": "Define identity and reputation protocol is a decentralized web3 system to verifying and sharing your credentials in a privacy-preserving manner.",
+    "tags": [
+      "Identity",
+      "Social"
+    ]
+  },
+  {
+    "logo": "henry.svg",
+    "name": "Henry Social",
+    "url": "https://www.henry.social/",
+    "description": "Earn Instant Cashback on your Favorite Brands",
+    "tags": [
+      "Social"
+    ]
+  },
+  {
+    "logo": "layer3.svg",
+    "name": "Layer3",
+    "url": "https://www.layer3.xyz/",
+    "description": "Modular distribution and identity infrastructure for the omnichain future.",
+    "tags": [
+      "Identity",
+      "Reputation"
+    ]
+  },
+  {
+    "logo": "jumper.svg",
+    "name": "Jumper",
+    "url": "https://jumper.exchange/",
+    "description": "Jumper is Crypto’s Everything Exchange, enabling seamless swap and bridge transactions across 25 blockchains. By aggregating all of DeFi liquidity, Jumper ensures the best routes for any token transaction.",
+    "tags": [
+      "DeFi"
+    ]
   }
 ]
