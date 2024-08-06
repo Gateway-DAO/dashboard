@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import GTWLink from '@/components/gtw-link';
@@ -10,7 +11,7 @@ import { SiSubstack } from 'react-icons/si';
 
 import { Box, IconButton, Paper, Stack, Typography } from '@mui/material';
 
-import EmailSubscription from './email-subscription';
+const EmailSubscription = dynamic(() => import('./email-subscription'));
 
 const socialLinks = [
   {
