@@ -22,8 +22,8 @@ export default function AccessDetails({ pda }: Props) {
         <Typography variant="subtitle1">Who has access</Typography>
       </IndividualDetailRow>
       <Stack pt={1} divider={<Divider />}>
-        {pda.access.map((user) => (
-          <IndividualDetailRow>
+        {pda.access.map((user, index) => (
+          <IndividualDetailRow key={index}>
             <UserData
               did={user.did}
               username={user.username}
