@@ -10,6 +10,8 @@ import { SiSubstack } from 'react-icons/si';
 
 import { Box, IconButton, Paper, Stack, Typography } from '@mui/material';
 
+import EmailSubscription from './email-subscription';
+
 const socialLinks = [
   {
     name: 'Twitter',
@@ -171,6 +173,7 @@ export default function FooterContent() {
             ))}
           </Box>
         </Box>
+        <EmailSubscription />
       </Stack>
     </Stack>
   );
