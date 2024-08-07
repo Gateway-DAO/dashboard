@@ -63,6 +63,15 @@
     "url": "https://dydx.exchange/"
   },
   {
+    "logo": "helius.svg",
+    "name": "Helius",
+    "description": "High-performance Solana RPCs. Enhance your apps with speedy Solana RPC nodes, optimized for reliability and backed by 24/7 support.",
+    "tags": [
+      "DeFi"
+    ],
+    "url": "https://www.helius.dev/"
+  },
+  {
     "logo": "li.fi.svg",
     "name": "LI.FI",
     "description": "LI.FI aggregates advanced Bridge & DEX Aggregation for cross-chain data messaging and multichain strategies.",
