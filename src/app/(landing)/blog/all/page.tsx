@@ -3,25 +3,26 @@ export const dynamic = 'force-dynamic';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
-import {
-  getPosts,
-  getAllTags,
-  getNavigation,
-} from '@/services/server-functions/ghost-client';
+import { getPosts, getAllTags } from '@/services/server-functions/ghost-client';
 
 import { Container, Stack, Typography, Button, Box } from '@mui/material';
 
 import BlogCard from '../components/blog-card';
+import { blogMetadata } from '../utils';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const Metadata = await getNavigation();
-
-  return {
-    title: Metadata.title,
-    description: Metadata.description,
-    keywords: ['mygateway', 'gateway labs', 'mygateway blogs'],
-  };
-}
+export const metadata: Metadata = {
+  ...blogMetadata,
+  title: 'All Posts | Gateway Blog',
+  openGraph: {
+    ...blogMetadata.openGraph,
+    title: 'All Posts | Gateway Blog',
+    url: 'https://mygateway.xyz/blog/all',
+  },
+  twitter: {
+    ...blogMetadata.twitter,
+    title: 'All Posts | Gateway Blog',
+  },
+};
 
 export default async function AllBlogPosts() {
   const posts = await getPosts(20);

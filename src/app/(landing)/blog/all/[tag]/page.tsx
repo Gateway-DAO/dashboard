@@ -11,14 +11,25 @@ import { brandColors } from '@/theme/config/brand';
 import { Container, Stack, Typography, Button, Box } from '@mui/material';
 
 import BlogCard from '../../components/blog-card';
+import { blogMetadata } from '../../utils';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const Metadata = await getNavigation();
-
+export async function generateMetadata({
+  params,
+}: {
+  params: { tag: string };
+}): Promise<Metadata> {
   return {
-    title: Metadata.title,
-    description: Metadata.description,
-    keywords: ['mygateway', 'gateway labs', 'mygateway blogs'],
+    ...blogMetadata,
+    title: `${params.tag} | Gateway Blog`,
+    openGraph: {
+      ...blogMetadata.openGraph,
+      title: `${params.tag} | Gateway Blog`,
+      url: `https://mygateway.xyz/blog/all/${params.tag}`,
+    },
+    twitter: {
+      ...blogMetadata.twitter,
+      title: `${params.tag} | Gateway Blog`,
+    },
   };
 }
 

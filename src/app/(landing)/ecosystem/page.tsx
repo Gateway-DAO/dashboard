@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 
+import { defaultMetatag } from '@/constants/metatags';
+
 import InternalContent from '../components/internal/internal-content';
 import InternalHeader from '../components/internal/internal-header';
 import Nav from '../components/nav/nav';
@@ -7,16 +9,18 @@ import clients from './data.json';
 import ClientsSection from './sections/clients';
 
 export const metadata: Metadata = {
+  ...defaultMetatag,
   title: 'Gateway Ecosystem',
   description:
     'Gateway: Empowering a privacy-first, decentralized data ecosystem that revolutionizes data ownership, security, and control.',
-  keywords:
-    'Gateway, Gateway Ecosystem, Decentralized data network, Privacy-focused, Secure data storage, User-controlled data, Data ownership, Digital oil, Dataverse, Identity-based applications, Data ecosystem',
+  keywords: ['Gateway Ecosystem', ...defaultMetatag.keywords],
   openGraph: {
+    ...defaultMetatag.openGraph,
     title: 'Gateway Ecosystem',
     url: 'https://mygateway.xyz/ecosystem',
   },
   twitter: {
+    ...defaultMetatag.twitter,
     title: 'Gateway Ecosystem',
     card: 'summary',
   },

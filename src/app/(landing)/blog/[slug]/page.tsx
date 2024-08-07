@@ -57,15 +57,14 @@ export async function generateMetadata({
     };
   }
 
-  const tags = metaData.tags
-    ? metaData?.tags.map((item) => item.name)
-    : ['gateway blogs'];
+  const tags =
+    metaData?.tags?.filter((item) => item.name).map((item) => item.name) ?? [];
 
   return {
     ...blogMetadata,
     title: `${metaData.title} | Gateway Blog`,
     description: metaData.excerpt,
-    keywords: tags as [string],
+    keywords: [...(tags as string[]), ...blogMetadata.keywords],
     openGraph: {
       ...blogMetadata.openGraph,
       title: metaData.title,
