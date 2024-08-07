@@ -106,7 +106,7 @@ export default function BuildWithUs() {
           placeholder="blur"
           quality={100}
           fill
-          sizes="100vw"
+          sizes="(max-width: 768px) 1000px, 100vw"
           style={{
             objectFit: 'cover',
             objectPosition: 'center bottom',
