@@ -5,13 +5,12 @@ import {
   Box,
   Card,
   CardActionArea,
-  CardContent,
   Chip,
   Stack,
   Typography,
 } from '@mui/material';
 
-import clients from '../data.json';
+import { Client } from '../type';
 
 export default function ClientCard({
   logo,
@@ -19,7 +18,7 @@ export default function ClientCard({
   description,
   tags,
   url,
-}: (typeof clients)[0]) {
+}: Client) {
   return (
     <Card variant="outlined">
       <CardActionArea
