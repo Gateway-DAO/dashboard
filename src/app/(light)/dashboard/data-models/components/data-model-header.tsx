@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import GTWTab from '@/components/tabs/gtw-tab';
 import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
@@ -8,7 +10,11 @@ import {
 
 import { Box } from '@mui/material';
 
-export function DataModelHeader() {
+type Props = {
+  children?: ReactNode;
+};
+
+export function DataModelHeader({ children }: Props) {
   return (
     <>
       <TitleLayout
@@ -17,7 +23,9 @@ export function DataModelHeader() {
         subtitle={
           'These are the data model you have created and all on the network'
         }
-      />
+      >
+        {children && children}
+      </TitleLayout>
 
       <Box
         sx={{
