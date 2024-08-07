@@ -1,6 +1,6 @@
 'use client';
 import { Metadata } from 'next';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { Box, Chip, Stack } from '@mui/material';
 
@@ -18,42 +18,41 @@ export const metadata: Metadata = {
     'Gateway, Gateway Ecosystem, Decentralized data network, Privacy-focused, Secure data storage, User-controlled data, Data ownership, Digital oil, Dataverse, Identity-based applications, Data ecosystem',
   openGraph: {
     title: 'Gateway Ecosystem',
-    description:
-      'Gateway: Empowering a privacy-first, decentralized data ecosystem that revolutionizes data ownership, security, and control.',
-    type: 'website',
-    locale: 'en_US',
     url: 'https://mygateway.xyz/ecosystem',
-    siteName: 'Gateway Protocol',
-    images: [
-      {
-        url: 'https://mygateway.xyz/social.png',
-      },
-    ],
   },
   twitter: {
     title: 'Gateway Ecosystem',
     card: 'summary',
-    site: '@Gateway_xyz',
-    description:
-      'Gateway: Empowering a privacy-first, decentralized data ecosystem that revolutionizes data ownership, security, and control.',
-    images: [{ url: 'https://mygateway.xyz/social.png' }],
   },
 };
 
 export default function Ecosystem() {
-  const [selectedTag, setSelectedTag] = useState<'All' | string>('All');
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const selectedClients =
-    selectedTag === 'All'
-      ? clients
-      : clients.filter((client) => client.tags.includes(selectedTag));
+  const selectedClients = !selectedTags.length
+    ? clients
+    : clients.filter((client) =>
+        client.tags.some((tag) => selectedTags.includes(tag))
+      );
 
   const tags = useMemo(() => {
-    const tags = new Set<string>(['All']);
+    const tags = new Set<string>();
     clients.forEach((client) => {
       client.tags.forEach((tag) => tags.add(tag));
     });
     return Array.from(tags);
+  }, []);
+
+  const onSelectedTag = useCallback((tag: string) => {
+    setSelectedTags((tags) => {
+      if (!tags) {
+        return [tag];
+      }
+      if (tags.includes(tag)) {
+        return tags.filter((t) => t !== tag);
+      }
+      return [...tags, tag];
+    });
   }, []);
 
   return (
@@ -83,12 +82,17 @@ export default function Ecosystem() {
             },
           }}
         >
+          <Chip
+            label="All"
+            color={!selectedTags.length ? 'primary' : 'default'}
+            onClick={() => setSelectedTags([])}
+          />
           {tags.map((tag) => (
             <Chip
               key={tag}
               label={tag}
-              color={tag === selectedTag ? 'primary' : 'default'}
-              onClick={() => setSelectedTag(tag)}
+              color={selectedTags?.includes(tag) ? 'primary' : 'default'}
+              onClick={() => onSelectedTag(tag)}
             />
           ))}
         </Stack>
