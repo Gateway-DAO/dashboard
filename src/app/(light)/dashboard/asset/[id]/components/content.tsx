@@ -1,15 +1,11 @@
 import BackButton from '@/components/buttons/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
-import {
-  CONTAINER_PT,
-  CONTAINER_PX,
-  WIDTH_CENTERED,
-} from '@/theme/config/style-tokens';
+import { CONTAINER_PX, WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Stack, Box, Divider } from '@mui/material';
 
 import PageContainer from './container';
-import PDAMetaDataDetails from './pda-meta-data-details';
+import AccessDetails from './access/access-details';
 import StructuredDetail from './pda-types/structured-detail';
 import { PrivateDataAsset } from '@/services/server/mock-types';
 import { useSnackbar } from 'notistack';
@@ -19,10 +15,9 @@ import { LoadingButton } from '@/components/buttons/loading-button';
 type Props = {
   pda: PrivateDataAsset;
   backHref: string;
-  isOwner: boolean;
 };
 
-export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
+export default function PDADetailPage({ pda, backHref }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   // this code will change once will have api
@@ -35,6 +30,11 @@ export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
+        link.download = `${pda.fileName}.txt`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
       } else {
         setTimeout(() => {
           window.open(
@@ -101,10 +101,10 @@ export default function PDADetailPage({ pda, isOwner, backHref }: Props) {
             xs: '100%',
             lg: 'auto',
           },
-          pt: CONTAINER_PT,
+          pt: { lg: 3, xs: 2 },
         }}
       >
-        <PDAMetaDataDetails pda={pda} isOwner={isOwner} />
+        <AccessDetails pda={pda} />
       </Box>
     </PageContainer>
   );

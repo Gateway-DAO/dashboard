@@ -23,21 +23,10 @@ export default function CopyData({ text }: { text: string }) {
       lineHeight={1}
       justifyContent="flex-start"
     >
-      <span>{text}</span>
+      {limitCharsOffset(text, 4, 4)}
 
-      <Typography
-        component="span"
-        variant="caption"
-        fontWeight={400}
-        fontSize={12}
-        color="text.secondary"
-        lineHeight={1}
-        textOverflow="ellipsis"
-        overflow="hidden"
-      >
-        {limitCharsOffset(String(text), 19, 5)}
-      </Typography>
-      <IconButton onClick={() => copy(String(text))}>
+
+      <IconButton onClick={() => copy(text)}>
         <ContentCopy
           sx={{
             fontSize: 16,

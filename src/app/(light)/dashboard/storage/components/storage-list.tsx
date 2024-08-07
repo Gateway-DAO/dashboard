@@ -84,6 +84,8 @@ export default function StorageList() {
         onPaginationModelChange={setPaginationModel}
         sx={defaultGridCustomization}
         rowCount={data?.totalPDAs ?? 0}
+        disableColumnSorting
+        disableColumnMenu
       />
     </>
   );
