@@ -1,14 +1,34 @@
 import { useState } from 'react';
 
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
+import { useSnackbar } from 'notistack';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { InputAdornment, Stack, TextField } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  InputAdornment,
+  Stack,
+  TextField,
+} from '@mui/material';
 import { Button, Typography } from '@mui/material';
 
 import EditAvatar from './components/edit-avatar/edit-avatar';
 
 export function EditProfileCard() {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const copy = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      enqueueSnackbar('Text Copied Successfully');
+    } catch (err) {
+      enqueueSnackbar(
+        `There was an unexpected error, please, contact Gateway or try again.`,
+        { variant: 'error' }
+      );
+    }
+  };
   const [isEditUsernameDialog, setEditUsernameDialog] =
     useState<boolean>(false);
   const onSubmit = async (profilePicture: Blob) => {};
@@ -31,9 +51,18 @@ export function EditProfileCard() {
             <Typography variant="h5" color={'primary.dark'}>
               acme
             </Typography>
-            <Typography variant="caption" color={'primary.dark'}>
-              did:gatewayid:0x02...626d6 <ContentCopyIcon fontSize="small" />
-            </Typography>
+            <Stack
+              component={Typography}
+              variant="caption"
+              color={'primary.dark'}
+              direction={'row'}
+              columnGap={1}
+              alignItems={'center'}
+              onClick={() => copy('did:gatewayid:0x02...626d6n')}
+            >
+              did:gatewayid:0x02...626d6n
+              <ContentCopyIcon fontSize="inherit" />
+            </Stack>
           </Stack>
           <Stack>
             <Button
