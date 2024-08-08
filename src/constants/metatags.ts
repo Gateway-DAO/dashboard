@@ -1,7 +1,9 @@
+const description =
+  'Gateway: The Decentralized Private Computer. An integrated protocol to encrypt, store, manage, and compute private data. Experience a private and powerful solution for sensitive information.';
+
 export const defaultMetatag = {
   title: 'Gateway Protocol',
-  description:
-    'Gateway: Empowering a privacy-first, decentralized data ecosystem that revolutionizes data ownership, security, and control.',
+  description,
   keywords: [
     'Gateway',
     'decentralized data',
@@ -16,8 +18,7 @@ export const defaultMetatag = {
   ],
   openGraph: {
     title: 'Gateway Protocol',
-    description:
-      'Gateway: Empowering a privacy-first, decentralized data ecosystem that revolutionizes data ownership, security, and control.',
+    description,
     type: 'website',
     locale: 'en_US',
     url: 'https://mygateway.xyz/',
@@ -32,8 +33,7 @@ export const defaultMetatag = {
     title: 'Gateway Protocol',
     card: 'summary_large_image',
     site: '@Gateway_xyz',
-    description:
-      'Gateway: Empowering a privacy-first, decentralized data ecosystem that revolutionizes data ownership, security, and control.',
+    description,
     images: [{ url: 'https://mygateway.xyz/social.png' }],
   },
 };
