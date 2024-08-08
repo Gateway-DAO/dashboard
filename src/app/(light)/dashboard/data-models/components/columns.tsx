@@ -7,7 +7,7 @@ import { GridColDef } from '@mui/x-data-grid';
 export const columns: GridColDef<any>[] = [
   {
     field: 'title',
-    flex: 4,
+    flex: 1.5,
     headerName: 'Title',
     renderCell: (params) => (
       <Typography variant="body1" fontWeight={700}>
@@ -16,7 +16,13 @@ export const columns: GridColDef<any>[] = [
     ),
   },
   {
-    field: 'data-model-id',
+    field: 'dataModelId',
+    headerName: 'Data model ID',
+    flex: 2,
+    renderCell: (params) => <Typography>{params.value}</Typography>,
+  },
+  {
+    field: 'dataAssests',
     headerName: 'Data model ID',
     flex: 1,
     renderCell: (params) => <Typography>{params.value}</Typography>,
