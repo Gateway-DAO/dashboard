@@ -1,87 +1,87 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getPosts } from '@/services/server-functions/ghost-client';
+import { PostOrPage } from '@tryghost/content-api';
+import dayjs from 'dayjs';
 import DefaultImage from 'public/social.png';
+import { titleCase } from 'title-case';
 
-import { Button, Typography, Stack } from '@mui/material';
+import { Link as MuiLink, Typography, Stack, Box, Chip } from '@mui/material';
 
-export default async function HeroPost() {
-  const posts = await getPosts(1);
-
-  const excerpt = posts[0]?.excerpt;
-  const title = posts[0].title;
+export default function HeroPost({
+  slug,
+  primary_tag,
+  feature_image,
+  feature_image_alt,
+  title,
+  created_at,
+}: PostOrPage) {
   return (
-    <Link
-      href={`/blog/${posts[0].slug}`}
-      style={{
+    <Stack
+      component={Link}
+      href={`/blog/${slug}`}
+      sx={{
+        gap: 5,
         textDecoration: 'none',
-        color: '#771AC9',
-        width: '78.7%',
-        marginTop: 100,
+        color: 'text.primary',
+      }}
+      direction={{
+        xs: 'column-reverse',
+        lg: 'row',
       }}
     >
-      <Stack direction={{ xs: 'column', md: 'row' }}>
-        <Stack alignSelf={'center'} sx={{ width: { md: '130%' } }}>
-          <Image
-            src={(posts[0].feature_image as string) || DefaultImage}
-            alt={
-              posts[0].feature_image_alt ||
-              (posts[0].title as string) ||
-              'blog post image'
-            }
-            style={{
-              aspectRatio: '16/9',
-              objectFit: 'cover',
-              borderRadius: '8px',
-            }}
-            width={560}
-            height={300}
-            layout="responsive"
+      <Stack alignItems="flex-start">
+        {!!primary_tag?.name && (
+          <Chip
+            variant="outlined"
+            label={titleCase(primary_tag.name)}
+            sx={{ mb: 1 }}
           />
-        </Stack>
-
-        <Stack direction={'column'} sx={{ ml: { md: 8 } }}>
-          <div>
-            {posts[0].primary_tag?.name !== undefined && (
-              <Button
-                variant="text"
-                size="medium"
-                sx={{
-                  width: '20%',
-                  mt: 2,
-                  '&:hover': {
-                    backgroundColor: '#fff',
-                  },
-                  bgcolor: '#fff',
-                }}
-              >
-                {posts[0].primary_tag?.name}
-              </Button>
-            )}
-          </div>
-          <Typography
-            variant="h4"
-            fontWeight={700}
-            color={'#000'}
-            sx={{ mt: posts[0].primary_tag?.name === undefined ? 3 : 1.5 }}
-          >
-            {title && title.length > 50
-              ? title.substring(0, 60) + '...'
-              : title}
-          </Typography>
-          <Typography
-            fontWeight={400}
-            variant="h6"
-            color={'#000'}
-            sx={{ mt: 1 }}
-          >
-            {excerpt && excerpt.length > 90
-              ? excerpt.substring(0, 150) + '...'
-              : excerpt}
-          </Typography>
-        </Stack>
+        )}
+        <Typography
+          component={MuiLink}
+          underline="hover"
+          variant="h2"
+          color="text.primary"
+          sx={{
+            mb: 1,
+            typography: {
+              xs: 'h4',
+              lg: 'h2',
+            },
+            fontWeight: 'lighter!important',
+          }}
+        >
+          {title}
+        </Typography>
+        <Typography variant="caption" color="text.secondary">
+          {dayjs(created_at).format('MMM DD, YYYY')}
+        </Typography>
       </Stack>
-    </Link>
+      <Box
+        sx={{
+          height: '100%',
+          width: '100%',
+          overflow: 'hidden',
+          position: 'relative',
+          inset: 0,
+          aspectRatio: 777 / 433,
+          borderRadius: 1,
+        }}
+      >
+        <Image
+          src={(feature_image as string) || DefaultImage}
+          alt={feature_image_alt || (title as string) || 'blog post image'}
+          placeholder="empty"
+          quality={100}
+          fill
+          sizes="(max-width: 768px) 1000px, 100vw"
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center bottom',
+          }}
+        />
+      </Box>
+    </Stack>
   );
 }

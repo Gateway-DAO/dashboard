@@ -1,76 +1,18 @@
-import Image from 'next/image';
 import { Suspense } from 'react';
 
-import routes from '@/constants/routes';
 import { getPosts } from '@/services/server-functions/ghost-client';
-import { PostOrPage } from '@tryghost/content-api';
-import dayjs from 'dayjs';
-import DefaultImage from 'public/social.png';
 
-import {
-  Box,
-  Card,
-  CardActionArea,
-  Container,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { Link } from '@mui/material';
+import { Box, Container, Stack, Typography } from '@mui/material';
 
-function BlogCard({
-  feature_image,
-  feature_image_alt,
-  title,
-  created_at,
-  slug,
-}: PostOrPage) {
-  return (
-    <Card
-      variant="outlined"
-      sx={{
-        flex: 1,
-      }}
-    >
-      <CardActionArea
-        component={Link}
-        href={`/blog/${slug}`}
-        sx={{
-          p: 3,
-        }}
-      >
-        <Box
-          sx={{
-            position: 'relative',
-            inset: 0,
-            aspectRatio: 373 / 211,
-            backgroundColor: 'primary.main',
-            mb: 3,
-            borderRadius: '8px',
-            overflow: 'hidden',
-          }}
-        >
-          <Image
-            src={feature_image ?? DefaultImage}
-            alt={feature_image_alt || title || 'blog post image'}
-            fill
-          />
-        </Box>
-        <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 1 }}>
-          {title}
-        </Typography>
-        <Typography variant="caption">
-          {dayjs(created_at).format('MMM DD, YYYY')}
-        </Typography>
-      </CardActionArea>
-    </Card>
-  );
-}
+import BlogCard from '../../components/blog-card/blog-card';
 
 async function BlogPosts() {
   try {
     const posts = await getPosts(3);
 
-    return posts.map((post) => <BlogCard key={post.id} {...post} />);
+    return posts.map((post) => (
+      <BlogCard key={post.id} {...post} primary_tag={null} />
+    ));
   } catch (e) {
     return <Box>Error Loading blog posts</Box>;
   }

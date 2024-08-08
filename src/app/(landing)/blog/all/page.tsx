@@ -7,7 +7,7 @@ import { getPosts, getAllTags } from '@/services/server-functions/ghost-client';
 
 import { Container, Stack, Typography, Button, Box } from '@mui/material';
 
-import BlogCard from '../components/blog-card';
+import BlogCard from '../../components/blog-card/blog-card';
 import { blogMetadata } from '../utils';
 
 export const metadata: Metadata = {

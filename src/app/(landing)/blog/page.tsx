@@ -3,59 +3,56 @@ export const dynamic = 'force-dynamic';
 import Link from 'next/link';
 
 import { getPosts } from '@/services/server-functions/ghost-client';
+import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
 
-import { Container, Stack, Box, Typography, Button } from '@mui/material';
+import {
+  Container,
+  Stack,
+  Box,
+  Typography,
+  Button,
+  Divider,
+} from '@mui/material';
 
-import BlogCard from './components/blog-card';
+import BlogCard from '../components/blog-card/blog-card';
 import HeroPost from './components/hero-post';
 
 export default async function LatestBlogPosts() {
-  const posts = await getPosts(5);
-  posts.shift();
+  const [firstPost, ...initialPosts] = await getPosts(10);
+
   return (
-    <Container
-      component={Stack}
-      sx={{
-        display: 'flex',
-        py: 6,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <HeroPost />
-      <Stack
-        sx={{ mt: 5, mb: 5, width: '78.7%' }}
-        direction={'row'}
-        justifyContent={'space-between'}
-      >
-        <Typography variant="h5" sx={{ color: '#000000' }}>
-          Latest posts
-        </Typography>
-        <Button
-          variant="outlined"
-          sx={{ border: 1, borderColor: '#000000', color: '#000000' }}
-          component={Link}
-          href="/blog/all"
-        >
-          View All
-        </Button>
-      </Stack>
-      <Box
+    <>
+      <Container
         sx={{
-          width: '78.7%',
-          gap: 4,
-          display: 'grid',
-          gridTemplateColumns: {
-            xs: '1fr',
-            md: 'repeat(2, 1fr)',
-            lg: 'repeat(2, 1fr)',
-          },
+          ...LANDING_NAVBAR_HEIGHT,
+          pb: 10,
         }}
       >
-        {posts.map((post, index) => (
-          <BlogCard key={index} {...post} />
-        ))}
-      </Box>
-    </Container>
+        <Box
+          sx={{
+            mt: 4,
+            mb: 7,
+          }}
+        >
+          <HeroPost {...firstPost} />
+        </Box>
+        <Divider />
+        <Box
+          sx={{
+            gap: 4,
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              md: 'repeat(2, 1fr)',
+              lg: 'repeat(3, 1fr)',
+            },
+          }}
+        >
+          {initialPosts.map((post, index) => (
+            <BlogCard key={index} {...post} />
+          ))}
+        </Box>
+      </Container>
+    </>
   );
 }
