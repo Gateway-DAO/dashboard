@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import documentationRoutes from '@/constants/documentationRoutes';
+import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
 import HeroImage from 'public/images/hero.png';
 
 import { Box, Button, Container, Typography } from '@mui/material';
@@ -15,7 +16,7 @@ export default function Hero() {
       sx={{
         position: 'relative',
         backgroundColor: 'primary.main',
-        pt: 8,
+        ...LANDING_NAVBAR_HEIGHT,
         pb: {
           xs: 5.5,
           sm: 9.75,

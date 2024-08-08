@@ -10,7 +10,7 @@ import { brandColors } from '@/theme/config/brand';
 
 import { Container, Stack, Typography, Button, Box } from '@mui/material';
 
-import BlogCard from '../../components/blog-card';
+import BlogCard from '../../../components/blog-card/blog-card';
 import { blogMetadata } from '../../utils';
 
 export async function generateMetadata({

@@ -1,4 +1,4 @@
-import { SxProps } from '@mui/system';
+import { SxProps, SystemStyleObject } from '@mui/system';
 
 import { BreakpointsValue } from '../types';
 
@@ -21,8 +21,13 @@ export const CONTAINER_PX: BreakpointsValues = {
   md: 4,
   lg: 6,
 };
+
 export const NEGATIVE_CONTAINER_PX: BreakpointsValues = {
   xs: -3,
   md: -4,
   lg: -6,
+};
+
+export const LANDING_NAVBAR_HEIGHT: SxProps = {
+  pt: 13,
 };

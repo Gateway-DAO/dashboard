@@ -13,7 +13,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Avatar, Button, Divider, Link as MUILink } from '@mui/material';
 import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
 
-import BlogCard from '../components/blog-card';
+import BlogCard from '../../components/blog-card/blog-card';
 import { ShareButtonFn } from '../components/share-card';
 import { blogMetadata } from '../utils';
 import { RenderBlog } from './component/render-blog';

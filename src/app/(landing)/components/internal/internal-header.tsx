@@ -1,5 +1,7 @@
 import { PropsWithChildren, ReactNode } from 'react';
 
+import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
+
 import { Container, Stack, Typography } from '@mui/material';
 import { Box } from '@mui/material';
 
@@ -12,7 +14,7 @@ export default function InternalHeader({
       component="header"
       sx={{
         backgroundColor: 'primary.100',
-        pt: 8,
+        ...LANDING_NAVBAR_HEIGHT,
       }}
     >
       <Stack
