@@ -42,8 +42,6 @@ const mutation = `mutation createPDA { createPDA(
 }
 }`;
 
-
-
 export function DataModelDialog({ open, onClose, dataModelId }: Props) {
   return (
     <ModalRight open={open} onClose={onClose}>
@@ -65,7 +63,7 @@ export function DataModelDialog({ open, onClose, dataModelId }: Props) {
             model.
           </Typography>
         </Stack>
-        <CopyButton text="test" variant="contained" />
+        <CopyButton text={mutation} variant="contained" />
 
         <SyntaxHighlighter
           language="graphql"

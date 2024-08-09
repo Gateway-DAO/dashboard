@@ -24,7 +24,8 @@ type DataModel = {
 
 export default function DataModelList() {
   const { data: sessionData, status } = useSession();
-  const [isDataModelDialog, setDataModelDialog] = useState<boolean>(true);
+  const [isDataModelDialog, setDataModelDialog] = useState<boolean>(false);
+  const [selectedDataModel, setSelectedDataModel] = useState<DataModelType>();
   const router = useRouter();
 
   const [paginationModel, setPaginationModel] = useState({
@@ -73,7 +74,8 @@ export default function DataModelList() {
         columns={columns}
         paginationMode="server"
         onRowClick={(params: GridRowParams<DataModelType>, event) => {
-          //TODO: open the side dialog with current row details
+          setDataModelDialog(true);
+          setSelectedDataModel(params.row);
         }}
         pageSizeOptions={[5, 10, 15]}
         paginationModel={paginationModel}
@@ -84,7 +86,7 @@ export default function DataModelList() {
       <DataModelDialog
         open={isDataModelDialog}
         onClose={() => setDataModelDialog(false)}
-        dataModelId={data?.dataModels[0].dataModelId as string}
+        dataModelId={selectedDataModel?.dataModelId as string}
       />
     </>
   );
