@@ -7,7 +7,7 @@ import DisplayComponents from './components/display-components';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Mangae Gateway ID - Gateway Network',
+    title: 'Gateway ID - Gateway',
   };
 }
 

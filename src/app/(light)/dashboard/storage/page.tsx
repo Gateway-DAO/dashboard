@@ -2,10 +2,14 @@ import React from 'react';
 
 import { formatBytes } from '@/utils/bytes';
 
-import { Box, Paper, Stack, Typography } from '@mui/material';
+import { Box, Container, Paper, Stack, Typography } from '@mui/material';
 
-import Empty from './components/empty';
 import StorageList from './components/storage-list';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Storage - Gateway',
+};
 
 export default function Storage() {
   return (
@@ -46,7 +50,7 @@ export default function Storage() {
           </Typography>
         </Stack>
       </Stack>
-      <Box mt={4}>
+      <Box>
         <StorageList />
       </Box>
     </>

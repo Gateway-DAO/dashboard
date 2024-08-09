@@ -31,7 +31,7 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
       const icon = getIconFile(fileType);
 
       return (
-        <Stack direction={'row'} gap={1} alignItems="center">
+        <Stack direction={'row'} gap={1} alignItems="end">
           {fileType === FileType.pda ? (
             <DataOutlinedIcon color="primary" />
           ) : (
