@@ -14,6 +14,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 
 import { columns } from './columns';
+import { DataModelDialog } from './data-model-dialog';
 import Empty from './empty';
 
 type DataModel = {
@@ -23,6 +24,7 @@ type DataModel = {
 
 export default function DataModelList() {
   const { data: sessionData, status } = useSession();
+  const [isDataModelDialog, setDataModelDialog] = useState<boolean>(true);
   const router = useRouter();
 
   const [paginationModel, setPaginationModel] = useState({
@@ -78,6 +80,11 @@ export default function DataModelList() {
         onPaginationModelChange={setPaginationModel}
         sx={{ ...defaultGridCustomization }}
         rowCount={data?.totalDataModels ?? 0}
+      />
+      <DataModelDialog
+        open={isDataModelDialog}
+        onClose={() => setDataModelDialog(false)}
+        dataModelId={data?.dataModels[0].dataModelId as string}
       />
     </>
   );

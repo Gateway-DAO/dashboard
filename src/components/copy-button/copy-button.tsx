@@ -1,5 +1,4 @@
 'use client';
-
 import { useSnackbar } from 'notistack';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -33,7 +32,7 @@ export default function CopyButton({
       onClick={() => copy(text)}
       startIcon={<ContentCopyIcon />}
       variant="text"
-      size='medium'
+      size="medium"
       {...props}
     >
       {customButtonText ?? 'Copy'}
