@@ -1,11 +1,10 @@
-import { NextApiRequest } from 'next';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 import { BLOG_PAGE_SIZE } from '@/app/(landing)/blog/constants';
 import { getPosts } from '@/services/server-functions/ghost-client';
 
-export async function GET(req: NextApiRequest) {
-  const url = new URL(req.url!);
+export async function GET(req: NextRequest) {
+  const url = new URL(req.url);
   const searchParams = new URLSearchParams(url.search);
   const tag = searchParams.get('tag') ?? undefined;
   const ignoreId = searchParams.get('ignoreId') ?? undefined;
