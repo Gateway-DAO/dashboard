@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import DefaultImage from 'public/social.png';
 import { titleCase } from 'title-case';
 
-import { Link as MuiLink, Typography, Stack, Box, Chip } from '@mui/material';
+import { Typography, Stack, Box, Chip } from '@mui/material';
 
 export default function HeroPost({
   slug,

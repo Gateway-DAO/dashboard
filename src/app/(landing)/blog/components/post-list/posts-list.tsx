@@ -1,34 +1,21 @@
 'use client';
 
 import BlogCard from '@/app/(landing)/components/blog-card/blog-card';
-import BlogCardLoading from '@/app/(landing)/components/blog-card/blog-card-loading';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { PostsOrPages } from '@tryghost/content-api';
 import { useQueryState } from 'nuqs';
 
 import { Box, Button } from '@mui/material';
 
+import { PostsLoadingList } from './posts-loading-list';
+
 type Props = {
-  initialPosts: PostsOrPages;
-  initialMeta: PostsOrPages['meta'];
   ignoreId: string;
 };
 
 type Page = { posts: PostsOrPages; meta: PostsOrPages['meta'] };
 
-const LoadingLine = () => (
-  <>
-    <BlogCardLoading />
-    <BlogCardLoading />
-    <BlogCardLoading />
-  </>
-);
-
-export default function PostsList({
-  initialPosts,
-  initialMeta,
-  ignoreId,
-}: Props) {
+export default function PostsList({ ignoreId }: Props) {
   const [tag] = useQueryState('tag');
 
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } =
@@ -50,10 +37,6 @@ export default function PostsList({
         const res = await fetch(url);
         return res.json();
       },
-      initialData: {
-        pages: [{ posts: initialPosts, meta: initialMeta }],
-        pageParams: [tag],
-      },
       getNextPageParam: (lastPage) => {
         if (lastPage?.meta?.pagination.next) {
           return lastPage.meta.pagination.next;
@@ -69,7 +52,7 @@ export default function PostsList({
     <>
       <Box
         sx={{
-          gap: 4,
+          gap: 2,
           display: 'grid',
           gridTemplateColumns: {
             xs: '1fr',
@@ -79,13 +62,13 @@ export default function PostsList({
         }}
       >
         {isInitialLoading ? (
-          <LoadingLine />
+          <PostsLoadingList />
         ) : (
           pages?.map((page) =>
             page.posts.map((post) => <BlogCard key={post.id} {...post} />)
           )
         )}
-        {isFetchingNextPage && <LoadingLine />}
+        {isFetchingNextPage && <PostsLoadingList />}
       </Box>
       {hasNextPage && !isFetchingNextPage && (
         <Button
