@@ -6,6 +6,8 @@ import { currentEnv } from '@/utils/env';
 import { Analytics } from '@vercel/analytics/react';
 import sanitizeHtml from 'sanitize-html';
 
+import Providers from './providers';
+
 export const metadata: Metadata = defaultMetatag;
 
 export default function RootLayout({
@@ -92,7 +94,7 @@ amplitude.init('36683c62d8db3f0ff467212f18302fef');
         }}
       />
       <body>
-        {children}
+        <Providers>{children}</Providers>
         <Analytics />
       </body>
     </html>

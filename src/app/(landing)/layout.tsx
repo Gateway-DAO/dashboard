@@ -1,5 +1,4 @@
 import Footer from './components/footer/footer';
-import Providers from './providers';
 
 export default function RootLayout({
   children,
@@ -7,9 +6,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Providers>
+    <>
       {children}
       <Footer />
-    </Providers>
+    </>
   );
 }

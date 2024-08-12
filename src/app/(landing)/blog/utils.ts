@@ -1,5 +1,3 @@
-import { Metadata } from 'next';
-
 import { defaultMetatag } from '@/constants/metatags';
 
 export const blogMetadata = {
