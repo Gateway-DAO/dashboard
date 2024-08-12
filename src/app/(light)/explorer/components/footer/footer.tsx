@@ -46,7 +46,7 @@ export default function ExplorerFooter() {
         }}
       >
         <Stack direction="column" gap={3} flexGrow={1}>
-          <Typography>© 2023 Gateway Inc. All rights reserved.</Typography>
+          <Typography>© 2024 Gateway Inc. All rights reserved.</Typography>
           <Stack
             component="ul"
             direction="row"

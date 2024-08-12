@@ -7,6 +7,5 @@ export const allowedRedirectDomains = [
   'twitter.com',
   'discord.gg',
   'linkedin.com',
-  'mygateway.substack.com',
   'github.com',
 ];

@@ -3,7 +3,6 @@ import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
 import { currentEnv } from '@/utils/env';
 import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
-import { SiSubstack } from 'react-icons/si';
 
 import { LinkedIn } from '@mui/icons-material';
 
@@ -22,11 +21,6 @@ export const socialsLinks = [
     icon: LinkedIn,
     href: externalLinks.gateway_linkedin,
     name: 'LinkedIn',
-  },
-  {
-    icon: SiSubstack,
-    href: externalLinks.gateway_substack,
-    name: 'Substack',
   },
   {
     icon: FaGithub,

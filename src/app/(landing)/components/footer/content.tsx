@@ -7,7 +7,6 @@ import documentationRoutes from '@/constants/documentationRoutes';
 import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
 import { FaDiscord, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { SiSubstack } from 'react-icons/si';
 
 import { Box, IconButton, Paper, Stack, Typography } from '@mui/material';
 
@@ -28,11 +27,6 @@ const socialLinks = [
     name: 'LinkedIn',
     href: externalLinks.gateway_linkedin,
     icon: FaLinkedin,
-  },
-  {
-    name: 'Substack',
-    href: externalLinks.gateway_substack,
-    icon: SiSubstack,
   },
   {
     name: 'GitHub',
@@ -122,7 +116,7 @@ export default function FooterContent() {
           }}
         >
           <Typography variant="body2">
-            © 2023 Gateway Inc. All rights reserved.
+            © 2024 Gateway Inc. All rights reserved.
           </Typography>
           <Stack direction="row" gap={1}>
             {socialLinks.map((link) => (

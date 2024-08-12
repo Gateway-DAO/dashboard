@@ -3,7 +3,6 @@ const externalLinks = {
   gateway_twitter: 'https://twitter.com/gateway_xyz',
   gateway_discord: 'https://discord.gg/tgt3KjcHGs',
   gateway_linkedin: 'https://www.linkedin.com/company/mygateway/',
-  gateway_substack: 'https://mygateway.substack.com/',
   gateway_github: 'https://github.com/Gateway-DAO',
   gateway_brandkit: 'https://live.standards.site/gateway',
   gateway: 'https://mygateway.xyz',
