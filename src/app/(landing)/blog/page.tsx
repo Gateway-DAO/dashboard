@@ -4,7 +4,7 @@ import { getAllTags, getPosts } from '@/services/server-functions/ghost-client';
 import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
 import { PageWithSearchParams } from '@/types/next';
 
-import { Container, Box, Divider } from '@mui/material';
+import { Container, Box, Divider, Stack } from '@mui/material';
 
 import HeroPost from './components/hero-post';
 import PostsList from './components/post-list/posts-list';
@@ -18,12 +18,15 @@ export default async function LatestBlogPosts({
   const initialPosts = await getPosts(BLOG_PAGE_SIZE, {
     page: 0,
     tag: searchParams?.tag,
+    ignoreIds: [firstPost.id],
   });
+
   const tags = await getAllTags();
 
   return (
     <>
-      <Container
+      <Stack
+        component={Container}
         sx={{
           ...LANDING_NAVBAR_HEIGHT,
           pb: 10,
@@ -31,18 +34,28 @@ export default async function LatestBlogPosts({
       >
         <Box
           sx={{
-            py: 4,
+            pt: 4,
           }}
         >
           <HeroPost {...firstPost} />
         </Box>
-        <Divider sx={{ my: 3 }} />
-        <TagList tags={tags} />
-        <PostsList
-          initialPosts={initialPosts}
-          initialMeta={initialPosts.meta}
+        <Divider
+          sx={{
+            my: {
+              xs: 6,
+              md: 7,
+            },
+          }}
         />
-      </Container>
+        <TagList tags={tags} />
+        <Stack gap={5}>
+          <PostsList
+            initialPosts={initialPosts}
+            initialMeta={initialPosts.meta}
+            ignoreId={firstPost.id}
+          />
+        </Stack>
+      </Stack>
     </>
   );
 }

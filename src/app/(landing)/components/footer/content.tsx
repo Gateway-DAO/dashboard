@@ -174,7 +174,7 @@ export default function FooterContent() {
             ))}
           </Box>
         </Box>
-        <EmailSubscription />
+        {process.env.NODE_ENV !== 'development' && <EmailSubscription />}
       </Stack>
     </Stack>
   );

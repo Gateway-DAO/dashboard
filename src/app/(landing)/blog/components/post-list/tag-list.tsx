@@ -13,7 +13,28 @@ export default function TagList({ tags }: Props) {
   const [selectedTag, setTag] = useQueryState('tag');
 
   return (
-    <Stack direction="row" gap={2}>
+    <Stack
+      direction="row"
+      gap={1}
+      sx={{
+        flexWrap: 'nowrap',
+        overflowX: 'auto',
+        mx: {
+          xs: -3,
+          md: -6,
+          lg: 0,
+        },
+        px: {
+          xs: 3,
+          md: 6,
+          lg: 0,
+        },
+        mb: {
+          xs: 4,
+          md: 6,
+        },
+      }}
+    >
       <Chip
         label="All"
         variant={!selectedTag ? 'filled' : 'outlined'}

@@ -7,6 +7,7 @@ import {
   getSinglePost,
   getPosts,
 } from '@/services/server-functions/ghost-client';
+import { PostOrPage } from '@tryghost/content-api';
 import DefaultImage from 'public/social.png';
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -96,6 +97,11 @@ export async function generateMetadata({
 
 export default async function Read({ params }: { params: { slug: string } }) {
   const getPost = await getSinglePost(params.slug);
+  const latestPosts: PostOrPage[] = await getPosts(3, {
+    ignoreIds: [getPost.id],
+    page: 3,
+    tag: getPost.primary_tag?.id,
+  });
   const latestPost = await getPosts(2);
 
   return (
