@@ -39,10 +39,9 @@ export default function HeroPost({
           />
         )}
         <Typography
-          component={MuiLink}
-          underline="hover"
           variant="h2"
           color="text.primary"
+          component="span"
           sx={{
             mb: 1,
             typography: {
@@ -50,6 +49,9 @@ export default function HeroPost({
               lg: 'h2',
             },
             fontWeight: 'lighter!important',
+            ':hover': {
+              textDecoration: 'underline',
+            },
           }}
         >
           {title}
@@ -61,12 +63,16 @@ export default function HeroPost({
       <Box
         sx={{
           height: '100%',
-          width: '100%',
           overflow: 'hidden',
           position: 'relative',
           inset: 0,
           aspectRatio: 777 / 433,
           borderRadius: 1,
+          flexShrink: 0,
+          width: {
+            xs: '100%',
+            lg: 777,
+          },
         }}
       >
         <Image

@@ -1,24 +1,25 @@
 export const dynamic = 'force-dynamic';
 
-import Link from 'next/link';
-
-import { getPosts } from '@/services/server-functions/ghost-client';
+import { getAllTags, getPosts } from '@/services/server-functions/ghost-client';
 import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
+import { PageWithSearchParams } from '@/types/next';
 
-import {
-  Container,
-  Stack,
-  Box,
-  Typography,
-  Button,
-  Divider,
-} from '@mui/material';
+import { Container, Box, Divider } from '@mui/material';
 
-import BlogCard from '../components/blog-card/blog-card';
 import HeroPost from './components/hero-post';
+import PostsList from './components/post-list/posts-list';
+import TagList from './components/post-list/tag-list';
+import { BLOG_PAGE_SIZE } from './constants';
 
-export default async function LatestBlogPosts() {
-  const [firstPost, ...initialPosts] = await getPosts(10);
+export default async function LatestBlogPosts({
+  searchParams,
+}: PageWithSearchParams<{ tag?: string }>) {
+  const [firstPost] = await getPosts(1);
+  const initialPosts = await getPosts(BLOG_PAGE_SIZE, {
+    page: 0,
+    tag: searchParams?.tag,
+  });
+  const tags = await getAllTags();
 
   return (
     <>
@@ -30,28 +31,17 @@ export default async function LatestBlogPosts() {
       >
         <Box
           sx={{
-            mt: 4,
-            mb: 7,
+            py: 4,
           }}
         >
           <HeroPost {...firstPost} />
         </Box>
-        <Divider />
-        <Box
-          sx={{
-            gap: 4,
-            display: 'grid',
-            gridTemplateColumns: {
-              xs: '1fr',
-              md: 'repeat(2, 1fr)',
-              lg: 'repeat(3, 1fr)',
-            },
-          }}
-        >
-          {initialPosts.map((post, index) => (
-            <BlogCard key={index} {...post} />
-          ))}
-        </Box>
+        <Divider sx={{ my: 3 }} />
+        <TagList tags={tags} />
+        <PostsList
+          initialPosts={initialPosts}
+          initialMeta={initialPosts.meta}
+        />
       </Container>
     </>
   );

@@ -12,33 +12,28 @@ export async function getNavigation() {
   });
 }
 
-export async function getPosts(limit: number) {
-  return await api.posts
-    .browse({
-      include: ['tags'],
-      limit: limit,
-    })
-    .catch((err) => {
-      throw new Error(err);
-    });
+export async function getPosts(
+  limit: number,
+  {
+    page,
+    tag,
+  }: {
+    page?: number;
+    tag?: string;
+  } = {}
+) {
+  return api.posts.browse({
+    include: ['tags'],
+    limit,
+    ...(page && { page: page }),
+    ...(tag && { filter: `tag:${tag}` }),
+  });
 }
 
 export async function getAllTags() {
   return await api.tags
     .browse({
       limit: 'all',
-    })
-    .catch((err) => {
-      throw new Error(err);
-    });
-}
-
-export async function getTagPosts(tagSlug: string) {
-  return await api.posts
-    .browse({
-      filter: `tag:${tagSlug}`,
-      include: ['tags', 'authors'],
-      limit: 20,
     })
     .catch((err) => {
       throw new Error(err);
