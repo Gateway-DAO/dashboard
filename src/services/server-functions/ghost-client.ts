@@ -17,16 +17,25 @@ export async function getPosts(
   {
     page,
     tag,
+    ignoreIds,
   }: {
     page?: number;
+    ignoreIds?: string[];
     tag?: string;
   } = {}
 ) {
+  const filter = [
+    ...(ignoreIds ? ignoreIds.map((id) => `id:-${id}`) : []),
+    ...(tag ? [`tag:${tag}`] : []),
+  ].join('+');
+
   return api.posts.browse({
     include: ['tags'],
     limit,
     ...(page && { page: page }),
-    ...(tag && { filter: `tag:${tag}` }),
+    ...(filter.length && {
+      filter,
+    }),
   });
 }
 
