@@ -204,23 +204,23 @@ export default async function Read({ params }: { params: { slug: string } }) {
               },
               mb: 0,
               mt: 8,
-              '& img': {
+            }}
+          >
+            <Box
+              alignSelf="center"
+              position="relative"
+              width="100%"
+              sx={{
+                aspectRatio: '16 / 9',
                 borderRadius: {
                   xs: 0,
                   lg: 1,
                 },
-              },
-            }}
-          >
-            <Box alignSelf="center">
+                overflow: 'hidden',
+              }}
+            >
               <Image
-                style={{
-                  objectFit: 'contain',
-                  aspectRatio: '16/9',
-                }}
-                width={1152}
-                height={200}
-                className="feature-img"
+                fill={true}
                 src={feature_image || DefaultImage}
                 alt={feature_image_alt || title || 'Blog post image'}
               />
