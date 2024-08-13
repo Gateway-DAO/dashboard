@@ -3,7 +3,6 @@ export const revalidate = 1200;
 import { Metadata } from 'next';
 import Image from 'next/image';
 
-import routes from '@/constants/routes';
 import {
   getSinglePost,
   getPosts,
@@ -13,7 +12,7 @@ import { PostOrPage } from '@tryghost/content-api';
 import DefaultImage from 'public/social.png';
 import { titleCase } from 'title-case';
 
-import { Avatar, Button, Divider } from '@mui/material';
+import { Avatar } from '@mui/material';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import { Chip } from '@mui/material';
 
@@ -141,7 +140,12 @@ export default async function Read({ params }: { params: { slug: string } }) {
           },
         }}
       >
-        <Stack component="header" alignSelf="center" maxWidth={662}>
+        <Stack
+          component="header"
+          alignSelf="center"
+          maxWidth={662}
+          width="100%"
+        >
           {!!primary_tag?.name && (
             <Chip
               variant="outlined"
@@ -232,7 +236,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
               }}
             ></Stack>
           </Stack>
-          <Box sx={{ maxWidth: 664, alignSelf: 'center' }}>
+          <Box sx={{ maxWidth: 664, alignSelf: 'center', mt: 8 }}>
             <RenderBlog renderHtml={html as string} />
           </Box>
         </Stack>
