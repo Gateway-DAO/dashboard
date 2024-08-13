@@ -14,6 +14,7 @@ import {
 
 export default function AuthenticationToken() {
   const [isVisible, toggleVisible] = useToggle(false);
+
   const TOKEN =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ullamcorper sapien sed mi bibendum imperdiet. Duis maximus tincidunt ullamcorper. Nam viverra dolor eget justo consequat semper. Integer quis aliquam odio. Nam scelerisque bibendum quam ac fermentum. Curabitur eu laoreet dui, a cursus felis. Morbi neque nisi, tincidunt nec pellentesque quis, consequat ut purus. Pellentesque ultrices quam dignissim ligula rhoncus, ut.';
 

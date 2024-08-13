@@ -4,11 +4,9 @@ import TitleLayout from '@/components/title-layout/title-layout';
 
 import DeveloperPortal from './components/developer-portal';
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: 'Get Started - Gateway Network',
-  };
-}
+export const metadata: Metadata = {
+  title: 'API - Gateway',
+};
 
 export default async function DeveloperAccessPage() {
   return (

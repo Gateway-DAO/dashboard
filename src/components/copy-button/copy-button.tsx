@@ -32,10 +32,11 @@ export default function CopyButton({
     <Button
       onClick={() => copy(text)}
       startIcon={<ContentCopyIcon />}
-      variant="outlined"
+      variant="text"
+      size='medium'
       {...props}
     >
-      {customButtonText ?? 'copy'}
+      {customButtonText ?? 'Copy'}
     </Button>
   );
 }

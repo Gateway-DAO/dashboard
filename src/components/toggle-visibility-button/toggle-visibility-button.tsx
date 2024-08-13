@@ -18,10 +18,11 @@ export default function ToggleVisibilityButton({
     <Button
       onClick={onToggle}
       startIcon={isVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
-      variant="outlined"
+      variant="text"
+      size='medium'
       {...props}
     >
-      {isVisible ? 'hide' : 'show'}
+      {isVisible ? 'Hide' : 'Show'}
     </Button>
   );
 }
