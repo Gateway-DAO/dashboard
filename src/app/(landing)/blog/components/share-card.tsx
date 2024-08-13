@@ -1,11 +1,13 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { AiOutlineLink } from 'react-icons/ai';
 import { BiLogoLinkedinSquare } from 'react-icons/bi';
+import { FaReddit } from 'react-icons/fa';
 
-import RedditIcon from '@mui/icons-material/Reddit';
+import LinkIcon from '@mui/icons-material/Link';
 import XIcon from '@mui/icons-material/X';
 import { IconButton, Stack, Icon } from '@mui/material';
 
@@ -73,45 +75,32 @@ export default function ShareButtonFn({
 
   return (
     <Stack direction={'row'} columnGap={1}>
-      <IconButton
-        component="a"
-        onClick={onShare}
-        sx={{ backgroundColor: '#F9F0FF' }}
-        target="_blank"
-      >
-        <Icon color="primary">
-          <AiOutlineLink />
-        </Icon>
+      <IconButton onClick={onShare} sx={{ backgroundColor: 'primary.100' }}>
+        <LinkIcon color="primary" />
       </IconButton>
       <IconButton
-        component="a"
+        component={Link}
         href={tweetLink(data)}
         target="_blank"
-        sx={{ backgroundColor: '#F9F0FF' }}
+        sx={{ backgroundColor: 'primary.100' }}
       >
-        <Icon color="primary">
-          <XIcon />
-        </Icon>
+        <XIcon color="primary" />
       </IconButton>
       <IconButton
-        component="a"
+        component={Link}
         href={redditLink(data)}
         target="_blank"
-        sx={{ backgroundColor: '#F9F0FF' }}
+        sx={{ backgroundColor: 'primary.100', color: 'primary.main' }}
       >
-        <Icon color="primary">
-          <RedditIcon />
-        </Icon>
+        <FaReddit fill="currentColor" />
       </IconButton>
       <IconButton
-        component="a"
+        component={Link}
         href={linkedinLink(data)}
-        sx={{ backgroundColor: '#F9F0FF' }}
         target="_blank"
+        sx={{ backgroundColor: 'primary.100', color: 'primary.main' }}
       >
-        <Icon color="primary">
-          <BiLogoLinkedinSquare />
-        </Icon>
+        <BiLogoLinkedinSquare fill="currentColor" />
       </IconButton>
     </Stack>
   );
