@@ -13,16 +13,16 @@ const typography: TypographyOptions = {
     fontFamily: `${plus_jakarta_sans.style.fontFamily}, sans-serif`,
   },
   h1: {
-    fontWeight: 'normal',
+    fontWeight: 'lighter',
   },
   h2: {
-    fontWeight: 'normal',
+    fontWeight: 'lighter',
   },
   h3: {
-    fontWeight: 'normal',
+    fontWeight: 'lighter',
   },
   h4: {
-    fontWeight: 'normal',
+    fontWeight: 'lighter',
   },
   h5: {
     fontWeight: 'normal',

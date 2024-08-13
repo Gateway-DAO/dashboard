@@ -3,19 +3,22 @@ export const revalidate = 1200;
 import { Metadata } from 'next';
 import Image from 'next/image';
 
+import routes from '@/constants/routes';
 import {
   getSinglePost,
   getPosts,
 } from '@/services/server-functions/ghost-client';
+import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
 import { PostOrPage } from '@tryghost/content-api';
 import DefaultImage from 'public/social.png';
+import { titleCase } from 'title-case';
 
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Avatar, Button, Divider, Link as MUILink } from '@mui/material';
-import { Box, Breadcrumbs, Container, Stack, Typography } from '@mui/material';
+import { Avatar, Button, Divider } from '@mui/material';
+import { Box, Container, Stack, Typography } from '@mui/material';
+import { Chip } from '@mui/material';
 
 import BlogCard from '../../components/blog-card/blog-card';
-import { ShareButtonFn } from '../components/share-card';
+import ShareButtonFn from '../components/share-card';
 import { blogMetadata } from '../utils';
 import { RenderBlog } from './component/render-blog';
 
@@ -96,82 +99,116 @@ export async function generateMetadata({
 }
 
 export default async function Read({ params }: { params: { slug: string } }) {
-  const getPost = await getSinglePost(params.slug);
+  const {
+    id,
+    title,
+    primary_tag,
+    primary_author,
+    published_at,
+    reading_time,
+    feature_image,
+    feature_image_alt,
+    feature_image_caption,
+    html,
+  } = await getSinglePost(params.slug);
+  // Fetch latest posts from same tag
   const latestPosts: PostOrPage[] = await getPosts(3, {
-    ignoreIds: [getPost.id],
-    page: 3,
-    tag: getPost.primary_tag?.id,
+    ignoreIds: [id],
+    tag: primary_tag?.slug,
   });
-  const latestPost = await getPosts(2);
+  // Fetch more latests posts if tag has less than 3 posts
+  if (latestPosts.length < 3) {
+    const posts = await getPosts(3 - latestPosts.length, {
+      ignoreIds: [id, ...latestPosts.map((post) => post.id)],
+    });
+    posts.forEach((post) => {
+      latestPosts.push(post);
+    });
+  }
 
   return (
-    <Container component={'main'} sx={{ py: 5 }}>
-      <Container
-        component={'article'}
+    <Container
+      component="article"
+      sx={{
+        ...LANDING_NAVBAR_HEIGHT,
+      }}
+    >
+      <Stack
         sx={{
-          mt: { xs: 2, md: 8 },
-          py: 5,
+          pt: {
+            xs: 0,
+            md: 7,
+          },
         }}
       >
-        <Stack component={'header'} sx={{ display: 'flex' }}>
-          <Stack mx={{ xs: 0, md: 26 }}>
-            {getPost?.primary_tag ? (
-              <Breadcrumbs
-                separator={<NavigateNextIcon fontSize="small" />}
-                aria-label="breadcrumb"
-              >
-                {[
-                  <MUILink
-                    underline="none"
-                    key="1"
-                    color="inherit"
-                    href="/blog"
-                  >
-                    Blog
-                  </MUILink>,
-                  <Typography key="3" color="text.primary">
-                    {getPost?.primary_tag.name}
-                  </Typography>,
-                ]}
-              </Breadcrumbs>
-            ) : (
-              ''
-            )}
-            <Typography mt={1} fontWeight={700} variant="h3" gutterBottom>
-              {getPost?.title}
-            </Typography>
-            <Stack
-              mt={3}
-              display={'flex'}
-              justifyContent={'space-between'}
-              flexDirection={{ xs: 'column', md: 'row' }}
-            >
-              <Stack alignSelf={'flex-start'} flexDirection={'row'}>
-                <Avatar
-                  alt={'Gateway'}
-                  src={
-                    getPost?.primary_author?.profile_image ??
-                    '/images/default-user.svg'
-                  }
-                />
-                <Stack ml={2}>
-                  <Typography variant="subtitle2">
-                    {getPost?.primary_author?.name}
-                  </Typography>
-                  <Typography variant="body2">
-                    {formatDate(new Date(getPost?.published_at as string))}.{' '}
-                    {getPost?.reading_time} Min Read
-                  </Typography>
-                </Stack>
-              </Stack>
-              <Stack mt={{ md: 0, xs: 2 }} alignSelf={'center'}>
-                <ShareButtonFn title={getPost?.title} />
+        <Stack component="header" alignSelf="center" maxWidth={662}>
+          {!!primary_tag?.name && (
+            <Chip
+              variant="outlined"
+              label={titleCase(primary_tag.name)}
+              sx={{ alignSelf: 'flex-start', mb: 1 }}
+            />
+          )}
+          <Typography
+            sx={{
+              typography: {
+                xs: 'h4',
+                md: 'h2',
+              },
+            }}
+            gutterBottom
+          >
+            {title}
+          </Typography>
+          <Stack
+            mt={3}
+            display="flex"
+            justifyContent="space-between"
+            flexDirection={{ xs: 'column', md: 'row' }}
+          >
+            <Stack alignSelf="flex-start" flexDirection="row">
+              <Avatar
+                alt="Gateway"
+                src={
+                  primary_author?.profile_image ?? '/images/default-user.svg'
+                }
+              />
+              <Stack ml={2}>
+                <Typography variant="subtitle2">
+                  {primary_author?.name}
+                </Typography>
+                <Typography variant="body2">
+                  {formatDate(new Date(published_at as string))}. {reading_time}{' '}
+                  Min Read
+                </Typography>
               </Stack>
             </Stack>
+            <Stack mt={{ md: 0, xs: 2 }} alignSelf="center">
+              <ShareButtonFn title={title} />
+            </Stack>
           </Stack>
+        </Stack>
 
-          <Stack component={'figure'} mt={8}>
-            <Box alignSelf={'center'}>
+        <Stack component="main">
+          <Stack
+            component="figure"
+            sx={{
+              mx: {
+                xs: -3,
+                md: -6,
+                lg: 0,
+              },
+              mb: 0,
+              mt: 8,
+              '& img': {
+                borderRadius: {
+                  xs: 0,
+                  lg: 1,
+                },
+              },
+            }}
+          >
+            <Box alignSelf="center">
               <Image
                 style={{
                   objectFit: 'contain',
@@ -180,70 +217,58 @@ export default async function Read({ params }: { params: { slug: string } }) {
                 width={1152}
                 height={200}
                 className="feature-img"
-                src={getPost?.feature_image || DefaultImage}
-                alt={
-                  getPost?.feature_image_alt ||
-                  getPost?.title ||
-                  'Blog post image'
-                }
+                src={feature_image || DefaultImage}
+                alt={feature_image_alt || title || 'Blog post image'}
               />
             </Box>
             <Stack
-              alignSelf={'center'}
-              marginTop={1}
-              direction={'row'}
-              component={'figcaption'}
+              alignSelf="center"
+              marginTop={2}
+              color={'text.secondary'}
+              direction="row"
+              component="figcaption"
               dangerouslySetInnerHTML={{
-                __html: getPost?.feature_image_caption as string,
+                __html: feature_image_caption as string,
               }}
             ></Stack>
           </Stack>
-          <Stack mx={{ xs: 0, md: 26 }}>
-            <RenderBlog renderHtml={getPost?.html as string} />
-            <Stack mt={3} component={'aside'}>
-              <Stack
-                mb={3}
-                direction="row"
-                justifyContent={'space-between'}
-                alignItems={'center'}
-              >
-                <Typography>Share this post</Typography>
-                <ShareButtonFn title={getPost?.title} />
-              </Stack>
-              <Divider sx={{ border: 1 }} />
-            </Stack>
-          </Stack>
+          <Box sx={{ maxWidth: 664, alignSelf: 'center' }}>
+            <RenderBlog renderHtml={html as string} />
+          </Box>
         </Stack>
-      </Container>
-      <Stack component={'aside'} mx={{ xs: 1, md: 12 }}>
-        <Stack
-          direction={{ xs: 'column', md: 'row' }}
-          mt={3}
-          display={'flex'}
-          justifyContent={'space-between'}
-          rowGap={2}
+      </Stack>
+      <Stack
+        component="footer"
+        mt={7}
+        pb={{
+          xs: 4,
+          md: 15,
+        }}
+      >
+        <Typography
+          sx={{
+            typography: {
+              xs: 'h4',
+              md: 'h3',
+            },
+          }}
         >
-          <Typography variant="h4">Trending</Typography>
-
-          <Button variant="outlined" size={'medium'} href={`/blog/all`}>
-            View all
-          </Button>
-        </Stack>
+          Read more
+        </Typography>
         <Stack
-          direction={{ xs: 'column', md: 'row' }}
-          rowGap={4}
-          columnGap={4}
-          mt={3}
+          gap={3}
+          mt={6}
           display="grid"
           sx={{
             gridTemplateColumns: {
               xs: 'repeat(1, 1fr)',
               md: 'repeat(2, 1fr)',
+              lg: 'repeat(3, 1fr)',
             },
           }}
         >
-          {latestPost.map((post, index) => (
-            <BlogCard key={index} {...post} />
+          {latestPosts.map((post) => (
+            <BlogCard key={post.id} {...post} />
           ))}
         </Stack>
       </Stack>
