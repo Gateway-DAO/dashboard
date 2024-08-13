@@ -4,6 +4,8 @@ import { apiPublic } from '@/services/protocol/api';
 
 import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
 
+import AnimatedCounter from './animated-counter';
+
 const statProps = {
   justifyContent: 'space-between',
   sx: {
@@ -108,7 +110,11 @@ function ProtocolStatsContent({
                 },
               }}
             >
-              {totalTransactions?.toLocaleString('en-US') ?? <Skeleton />}
+              {totalTransactions ? (
+                <AnimatedCounter from={0} to={totalTransactions} />
+              ) : (
+                <Skeleton />
+              )}
             </Typography>
           </Stack>
           <Stack
@@ -123,7 +129,15 @@ function ProtocolStatsContent({
           >
             <Typography>Files Stored</Typography>
             <Typography color="primary.main" variant="h5">
-              {pdasIssued?.toLocaleString('en-US') ?? <Skeleton />}
+              {pdasIssued ? (
+                <AnimatedCounter
+                  from={0}
+                  to={pdasIssued}
+                  options={{ duration: 1.5 }}
+                />
+              ) : (
+                <Skeleton />
+              )}
             </Typography>
           </Stack>
           <Stack
@@ -138,13 +152,29 @@ function ProtocolStatsContent({
             <Stack {...statProps}>
               <Typography>Users Empowered</Typography>
               <Typography color="primary.main" variant="h5">
-                {totalUsers?.toLocaleString('en-US') ?? <Skeleton />}
+                {totalUsers ? (
+                  <AnimatedCounter
+                    from={0}
+                    to={totalUsers}
+                    options={{ duration: 2 }}
+                  />
+                ) : (
+                  <Skeleton />
+                )}
               </Typography>
             </Stack>
             <Stack {...statProps}>
               <Typography>Data Contributors</Typography>
               <Typography color="primary.main" variant="h5">
-                {uniqueIssuers?.toLocaleString('en-US') ?? <Skeleton />}
+                {uniqueIssuers ? (
+                  <AnimatedCounter
+                    from={0}
+                    to={uniqueIssuers}
+                    options={{ duration: 2.5 }}
+                  />
+                ) : (
+                  <Skeleton />
+                )}
               </Typography>
             </Stack>
           </Stack>
