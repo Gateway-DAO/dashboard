@@ -20,24 +20,24 @@ export const defaultGridCustomization: GatewaySxProps = {
   border: 'none',
   mb: 4,
   borderRadius: 0,
-  // '& .MuiDataGrid-cell:focus': {
-  //   outline: 'none',
-  // },
-  // '& .MuiDataGrid-footerContainer': {
-  //   paddingRight: CONTAINER_PX,
-  // },
-  // '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
-  //   border: 'none',
-  // },
-  // '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child': {
-  //   paddingLeft: CONTAINER_PX,
-  // },
-  // '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child': {
-  //   paddingRight: CONTAINER_PX,
-  // },
-  // '.MuiDataGrid-row': {
-  //   cursor: 'pointer',
-  // },
+  '& .MuiDataGrid-cell:focus': {
+    outline: 'none',
+  },
+  '& .MuiDataGrid-footerContainer': {
+    paddingRight: CONTAINER_PX,
+  },
+  '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
+    border: 'none',
+  },
+  '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child': {
+    paddingLeft: CONTAINER_PX,
+  },
+  '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child': {
+    paddingRight: CONTAINER_PX,
+  },
+  '.MuiDataGrid-row': {
+    cursor: 'pointer',
+  },
 };
 
 export const gridWithoutNegativeMargin: GatewaySxProps = {

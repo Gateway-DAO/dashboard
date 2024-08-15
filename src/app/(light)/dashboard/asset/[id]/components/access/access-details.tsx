@@ -1,4 +1,4 @@
-import { Stack, Divider, Typography } from '@mui/material';
+import { Stack, Divider, Typography, List, ListItem } from '@mui/material';
 
 import { PrivateDataAsset } from '@/services/server/mock-types';
 import UserData from '../../../../components/user-data/user-data';
@@ -22,15 +22,33 @@ export default function AccessDetails({ pda }: Props) {
         <Typography variant="subtitle1">Who has access</Typography>
       </IndividualDetailRow>
       <Stack pt={1} divider={<Divider />}>
-        {pda.access.map((user, index) => (
-          <IndividualDetailRow key={index}>
-            <UserData
-              did={user.did}
-              username={user.username}
-              access={user.access}
-            />
-          </IndividualDetailRow>
-        ))}
+        <List>
+          {pda.access.map((user, index) => (
+            <>
+              <ListItem key={index}>
+                <Stack
+                  direction={'row'}
+                  justifyContent={"space-between"}
+                  gap={1}
+                  sx={{
+                    px: {
+                      xs: 0,
+                      lg: 2,
+                    },
+                  }}
+                >
+                  <UserData
+                    did={user.did}
+                    username={user.username}
+                    access={user.access}
+                  />
+
+                </Stack>
+              </ListItem>
+              {index < pda.access.length - 1 && <Divider />}
+            </>
+          ))}
+        </List>
       </Stack>
     </Stack>
   );

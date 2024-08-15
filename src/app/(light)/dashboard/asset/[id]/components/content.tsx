@@ -66,7 +66,7 @@ export default function PDADetailPage({ pda, backHref }: Props) {
             onClick={() => {
               mutateAsync();
             }}
-            sx={{ mr: 10 }}
+            sx={{ mr: 7 }}
             isLoading={isPending}
           >
             Open data asset
@@ -91,7 +91,7 @@ export default function PDADetailPage({ pda, backHref }: Props) {
           flex: 1,
           maxWidth: {
             xs: WIDTH_CENTERED.maxWidth,
-            lg: 400,
+            lg: 450,
           },
           mx: {
             xs: 'auto',

@@ -22,7 +22,7 @@ const routes = {
       myDataModels: `${dashboardUser}/data-models/my`,
       networkDataModels: `${dashboardUser}/data-models/network`,
       settings: `${dashboardUser}/settings`,
-      developerAccess: `${dashboardUser}/developer-access`,
+      developerAccess: `${dashboardUser}/api`,
       playground: `${dashboardUser}/playground`,
       wallet: `${dashboardUser}/wallet`,
     },

@@ -31,7 +31,7 @@ export default function UserData({
     <Stack
       direction="row"
       alignItems="center"
-      justifyItems="flex-start"
+      justifyContent={'space-between'}
       borderRadius={0}
     >
       <GTWAvatar name={did} alt={username ?? did} size={45} />
@@ -75,7 +75,11 @@ export default function UserData({
                 }}
               />
             </IconButton>
-            <Typography variant="caption" color="text.secondary">
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{ mt: -3.5, ml: 5 }}
+            >
               {access}
             </Typography>
           </Stack>

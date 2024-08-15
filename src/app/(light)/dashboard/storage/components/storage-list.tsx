@@ -4,7 +4,10 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 
-import { defaultGridCustomization } from '@/components/data-grid/grid-default';
+import {
+  defaultGridConfiguration,
+  defaultGridCustomization,
+} from '@/components/data-grid/grid-default';
 import routes from '@/constants/routes';
 import {
   mockPrivateDataAssets,
@@ -17,6 +20,7 @@ import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 
 import { columns } from './columns';
 import Empty from './empty';
+import { Container, Stack } from '@mui/material';
 
 type UserStorage = {
   totalPDAs: number;
@@ -67,7 +71,7 @@ export default function StorageList() {
         />
       )}
       <DataGrid
-        // {...defaultGridConfiguration}
+        {...defaultGridConfiguration}
         rows={data?.pdas ?? []}
         loading={!data?.pdas}
         columns={columns}
@@ -84,8 +88,6 @@ export default function StorageList() {
         onPaginationModelChange={setPaginationModel}
         sx={defaultGridCustomization}
         rowCount={data?.totalPDAs ?? 0}
-        disableColumnSorting
-        disableColumnMenu
       />
     </>
   );

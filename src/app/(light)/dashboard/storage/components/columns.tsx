@@ -31,7 +31,7 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
       const icon = getIconFile(fileType);
 
       return (
-        <Stack direction={'row'} gap={1} alignItems="center">
+        <Stack direction={'row'} gap={1} alignItems="end">
           {fileType === FileType.pda ? (
             <DataOutlinedIcon color="primary" />
           ) : (
@@ -53,6 +53,8 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
   {
     field: 'size',
     headerName: 'Size',
+    width: 150,
+
     renderCell: (params) => (
       <Typography>{formatBytes(params.row.size ?? 0)}</Typography>
     ),
@@ -60,6 +62,8 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
   {
     field: 'expiration',
     headerName: 'Expiration',
+    width: 150,
+
     renderCell: (params) => (
       <Typography>{formatDateDifference(params.row.expirationDate)}</Typography>
     ),
