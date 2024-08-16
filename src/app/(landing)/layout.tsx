@@ -1,4 +1,5 @@
 import Footer from '@/components/footer/footer';
+import FooterInvestors from '@/components/footer/investors';
 
 export default function RootLayout({
   children,
@@ -8,7 +9,7 @@ export default function RootLayout({
   return (
     <>
       {children}
-      <Footer />
+      <Footer slot={<FooterInvestors />} />
     </>
   );
 }
