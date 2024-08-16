@@ -1,19 +1,11 @@
 export const revalidate = 1200;
 
-import Image from 'next/image';
-
 import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
-import DefaultImage from 'public/social.png';
-import { titleCase } from 'title-case';
 
-import { Avatar, Button, Divider, Skeleton } from '@mui/material';
+import { Skeleton } from '@mui/material';
 import { Box, Container, Stack, Typography } from '@mui/material';
-import { Chip } from '@mui/material';
 
-import BlogCard from '../../components/blog-card/blog-card';
 import { PostsLoadingList } from '../components/post-list/posts-loading-list';
-import ShareButtonFn from '../components/share-card';
-import { RenderBlog } from './component/render-blog';
 
 export default function BlogPostLoading() {
   return (

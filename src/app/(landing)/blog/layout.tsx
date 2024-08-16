@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
-import Nav from '../components/nav/nav';
+import Nav from '@/components/nav/nav';
+
 import { blogMetadata } from './utils';
 
 export const metadata: Metadata = blogMetadata;

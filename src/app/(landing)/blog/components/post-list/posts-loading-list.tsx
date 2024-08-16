@@ -1,5 +1,5 @@
 'use client';
-import BlogCardLoading from '@/app/(landing)/components/blog-card/blog-card-loading';
+import BlogCardLoading from '@/components/blog-card/blog-card-loading';
 
 export const PostsLoadingList = () => (
   <>

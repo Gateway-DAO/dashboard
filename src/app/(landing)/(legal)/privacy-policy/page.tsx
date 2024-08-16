@@ -1,7 +1,7 @@
-import { Typography } from '@mui/material';
+import InternalContent from '@/components/internal/internal-content';
+import InternalHeader from '@/components/internal/internal-header';
 
-import InternalContent from '../../components/internal/internal-content';
-import InternalHeader from '../../components/internal/internal-header';
+import { Typography } from '@mui/material';
 
 export default function PrivacyPolicy() {
   return (

@@ -1,6 +1,6 @@
 'use client';
 
-import BlogCard from '@/app/(landing)/components/blog-card/blog-card';
+import BlogCard from '@/components/blog-card/blog-card';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { PostsOrPages } from '@tryghost/content-api';
 import { useQueryState } from 'nuqs';
