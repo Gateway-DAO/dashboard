@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import ProofItem from '@/app/(light)/dashboard/user/proof/[id]/components/proof-item';
+import ProofItem from '@/app/dashboard/user/proof/[id]/components/proof-item';
 import BackButton from '@/components/buttons/back-button/back-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
 import routes from '@/constants/routes';

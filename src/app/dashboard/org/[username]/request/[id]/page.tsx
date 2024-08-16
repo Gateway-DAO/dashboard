@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import DashboardUserDataRequest, {
   getDataRequest,
-} from '@/app/(light)/dashboard/user/request/[id]/page';
+} from '@/app/dashboard/user/request/[id]/page';
 
 export async function generateMetadata({
   params,

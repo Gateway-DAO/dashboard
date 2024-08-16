@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
+import ClaimValuesList from '@/app/dashboard/components/claim-values-list/claim-values-list';
 import CopyTextButton from '@/components/copy-text-button/copy-text-button';
 import Tags from '@/components/tags/tags';
 import { pda as pdaLocale } from '@/locale/en/pda';

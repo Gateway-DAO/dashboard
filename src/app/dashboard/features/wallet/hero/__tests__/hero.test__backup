@@ -1,6 +1,6 @@
 import { SessionProvider } from 'next-auth/react';
 
-import { useWalletStore } from '@/app/(light)/dashboard/stores/wallet.store';
+import { useWalletStore } from '@/app/dashboard/stores/wallet.store';
 import { session } from '@/mocks/session';
 import { ThemeProvider } from '@/theme';
 import { userEvent } from '@storybook/testing-library';

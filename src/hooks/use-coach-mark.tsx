@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useCoachMarkStore } from '@/app/(light)/dashboard/stores/coach-mark.store';
+import { useCoachMarkStore } from '@/app/dashboard/stores/coach-mark.store';
 import { useToggle } from '@react-hookz/web';
 
 type Props = {

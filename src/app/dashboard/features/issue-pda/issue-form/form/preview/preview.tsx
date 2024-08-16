@@ -1,7 +1,7 @@
 'use client';
 import { useParams, useRouter } from 'next/navigation';
 
-import IssuanceSuccess from '@/app/(light)/dashboard/features/issue-pda/success/success';
+import IssuanceSuccess from '@/app/dashboard/features/issue-pda/success/success';
 import ModalTitle from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import routes from '@/constants/routes';

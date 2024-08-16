@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 
-import UsernameField from '@/app/(light)/dashboard/components/forms/username-field';
+import UsernameField from '@/app/dashboard/components/forms/username-field';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';
 import { settings } from '@/locale/en/settings';

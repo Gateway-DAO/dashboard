@@ -1,8 +1,8 @@
 'use client';
 import { useRouter } from 'next-nprogress-bar';
 
-import ProofCardInfo from '@/app/(light)/dashboard/user/proof/[id]/components/proof-card-info';
-import ProofCardTitle from '@/app/(light)/dashboard/user/proof/[id]/components/proof-card-title';
+import ProofCardInfo from '@/app/dashboard/user/proof/[id]/components/proof-card-info';
+import ProofCardTitle from '@/app/dashboard/user/proof/[id]/components/proof-card-title';
 import { queries } from '@/constants/queries';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
