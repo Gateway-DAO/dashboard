@@ -29,17 +29,14 @@ import EmailsSection from './account-sections/emails-section';
 import WalletsSection from './account-sections/wallets-section';
 
 const EvmProvider = dynamic(
-  () => import('../../../../../../context/evm-provider/evm-provider'),
+  () => import('@/context/evm-provider/evm-provider'),
   {
     ssr: false,
   }
 );
-const SolanaProvider = dynamic(
-  () => import('../../../../../../context/solana-provider'),
-  {
-    ssr: false,
-  }
-);
+const SolanaProvider = dynamic(() => import('@/context/solana-provider'), {
+  ssr: false,
+});
 
 export default function ConnectedAccounts() {
   const { privateApi } = useGtwSession();
