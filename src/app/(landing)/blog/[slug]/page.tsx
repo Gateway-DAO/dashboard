@@ -3,6 +3,7 @@ export const revalidate = 1200;
 import { Metadata } from 'next';
 import Image from 'next/image';
 
+import BlogCard from '@/components/blog-card/blog-card';
 import {
   getSinglePost,
   getPosts,
@@ -16,7 +17,6 @@ import { Avatar } from '@mui/material';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import { Chip } from '@mui/material';
 
-import BlogCard from '../../components/blog-card/blog-card';
 import ShareButtonFn from '../components/share-card';
 import { blogMetadata } from '../utils';
 import { RenderBlog } from './component/render-blog';

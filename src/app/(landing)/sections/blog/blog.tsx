@@ -4,7 +4,7 @@ import { getPosts } from '@/services/server-functions/ghost-client';
 
 import { Box, Container, Stack, Typography } from '@mui/material';
 
-import BlogCard from '../../components/blog-card/blog-card';
+import BlogCard from '../../../../components/blog-card/blog-card';
 
 async function BlogPosts() {
   try {

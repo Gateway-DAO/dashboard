@@ -1,14 +1,21 @@
+import { ReactNode } from 'react';
+
 import { Container, Stack } from '@mui/material';
 
 import FooterContent from './content';
 import Investors from './investors';
 
-export default function Footer() {
+type Props = {
+  color?: 'primary' | 'transparent';
+  slot?: ReactNode;
+};
+
+export default function Footer({ color = 'primary', slot }: Props) {
   return (
     <Stack
       component="footer"
       sx={{
-        backgroundColor: 'primary.main',
+        backgroundColor: color === 'primary' ? 'primary.main' : undefined,
       }}
     >
       <Stack
@@ -28,7 +35,7 @@ export default function Footer() {
           },
         }}
       >
-        <Investors />
+        {slot}
         <FooterContent />
       </Stack>
     </Stack>

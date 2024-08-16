@@ -1,6 +1,7 @@
+import Nav from '@/components/nav/nav';
+
 import { Stack, Divider, Box } from '@mui/material';
 
-import Nav from './components/nav/nav';
 import About from './sections/about/about';
 import BlogSection from './sections/blog/blog';
 import BuildWithUs from './sections/build-with-us/build-with-us';
