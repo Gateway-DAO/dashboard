@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 
-import { useLoginStepState } from '@/app/(light)/login/providers/step-provider/step-provider';
+import { useLoginStepState } from '@/app/login/providers/step-provider/step-provider';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import { auth } from '@/locale/en/auth';
 import { common } from '@/locale/en/common';

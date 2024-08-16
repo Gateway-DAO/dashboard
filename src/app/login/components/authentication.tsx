@@ -3,7 +3,7 @@
 import { signOut } from 'next-auth/react';
 import { redirect, useSearchParams } from 'next/navigation';
 
-import { useLoginStepState } from '@/app/(light)/login/providers/step-provider/step-provider';
+import { useLoginStepState } from '@/app/login/providers/step-provider/step-provider';
 import routes from '@/constants/routes';
 
 import AuthenticationLayout from './authentication-layout';
