@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import InstructionGuideHowToIssue from '@/app/(light)/dashboard/components/cards/instruction-guide-how-to-issue';
+import InstructionGuideHowToIssue from '@/app/dashboard/components/cards/instruction-guide-how-to-issue';
 import { pdas as pdasLocales } from '@/locale/en/pda';
 import { getPrivateApi } from '@/services/protocol/api';
 

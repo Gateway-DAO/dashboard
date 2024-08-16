@@ -1,5 +1,5 @@
 'use client';
-import ClaimValuesList from '@/app/(light)/dashboard/components/claim-values-list/claim-values-list';
+import ClaimValuesList from '@/app/dashboard/components/claim-values-list/claim-values-list';
 import { LoadingButton } from '@/components/buttons/loading-button/loading-button';
 import CardCell from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';

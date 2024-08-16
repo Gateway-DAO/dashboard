@@ -1,7 +1,7 @@
 import {
   HomeBannerProps,
   HomeCardProps,
-} from '@/app/(light)/dashboard/components/home/types';
+} from '@/app/dashboard/components/home/types';
 import {
   DataModelsBoxIcon,
   DataSquaredIcon,

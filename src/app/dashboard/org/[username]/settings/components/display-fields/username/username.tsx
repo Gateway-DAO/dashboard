@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
-import UsernameField from '@/app/(light)/dashboard/components/forms/username-field';
+import UsernameField from '@/app/dashboard/components/forms/username-field';
 import routes from '@/constants/routes';
 import { useGtwSession } from '@/context/gtw-session-provider';
 import useDebouncedUsernameAvailability from '@/hooks/use-debounced-username-avaibility';

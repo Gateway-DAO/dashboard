@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import ModalDetail from '@/app/(light)/dashboard/user/data-models/components/modal-detail';
+import ModalDetail from '@/app/dashboard/user/data-models/components/modal-detail';
 import {
   defaultGridConfiguration,
   defaultGridCustomization,

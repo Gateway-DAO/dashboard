@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import RequestTemplatesTable from '@/app/(light)/dashboard/user/request-templates/network/components/request-templates-table';
+import RequestTemplatesTable from '@/app/dashboard/user/request-templates/network/components/request-templates-table';
 import { requestTemplates } from '@/locale/en/request-template';
 import { getPrivateApi } from '@/services/protocol/api';
 
