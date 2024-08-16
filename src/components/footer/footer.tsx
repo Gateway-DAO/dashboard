@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import { Container, Stack } from '@mui/material';
 
 import FooterContent from './content';
-import Investors from './investors';
 
 type Props = {
   color?: 'primary' | 'transparent';

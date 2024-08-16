@@ -58,7 +58,7 @@ const investorsNames = [
   'Ryan Li',
 ];
 
-export default function Investors() {
+export default function FooterInvestors() {
   return (
     <Stack
       sx={{

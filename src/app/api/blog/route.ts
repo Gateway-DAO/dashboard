@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { BLOG_PAGE_SIZE } from '@/app/(landing)/blog/constants';
+import { BLOG_PAGE_SIZE } from '@/app/blog/constants';
 import { getPosts } from '@/services/server-functions/ghost-client';
 
 export async function GET(req: NextRequest) {
