@@ -1,11 +1,11 @@
 import { PropsWithChildren } from 'react';
 
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 
-import { GlobalStyles } from './global-styles';
 import DevTheme from './dev';
+import { GlobalStyles } from './global-styles';
 import { theme } from './theme';
 
 export function ThemeProvider({ children }: PropsWithChildren) {

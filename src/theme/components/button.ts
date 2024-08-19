@@ -25,5 +25,8 @@ export const MuiButton: Extract<Theme['components'], object>['MuiButton'] = {
     outlinedSuccess: ({ theme }) => ({
       color: theme.palette.success.dark,
     }),
+    containedWhite: ({ theme }) => ({
+      color: theme.palette.primary.main,
+    }),
   },
 };

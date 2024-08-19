@@ -2,7 +2,7 @@
 import { createTheme } from '@mui/material/styles';
 
 import * as components from './components';
-import { lightPalette, darkPalette } from './config/palette';
+import { lightPalette } from './config/palette';
 import typography from './config/typography';
 
 export const theme = createTheme({
