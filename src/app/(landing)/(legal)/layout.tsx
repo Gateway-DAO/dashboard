@@ -1,11 +1,11 @@
 import { PropsWithChildren } from 'react';
 
-import Nav from '@/components/nav/nav';
+import MainNavbar from '../../components/main-navbar';
 
 export default function LegalLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <Nav color="black" />
+      <MainNavbar color="black" />
       {children}
     </>
   );

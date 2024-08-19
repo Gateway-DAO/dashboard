@@ -4,7 +4,7 @@ import { defaultMetatag } from '@/constants/metatags';
 
 import InternalContent from '../../../components/internal/internal-content';
 import InternalHeader from '../../../components/internal/internal-header';
-import Nav from '../../../components/nav/nav';
+import MainNavbar from '../../components/main-navbar';
 import clients from './data.json';
 import ClientsSection from './sections/clients';
 
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 export default function Ecosystem() {
   return (
     <>
-      <Nav color="black" />
+      <MainNavbar color="black" />
       <InternalHeader>Discover the Thriv ing Gateway Network</InternalHeader>
       <InternalContent>
         <ClientsSection clients={clients} />

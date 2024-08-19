@@ -1,12 +1,8 @@
 'use client';
 import Link from 'next/link';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, ReactNode } from 'react';
 
-import GatewaySquaredThemedIcon from '@/components/icons/gateway-squared-themed';
-import documentationRoutes from '@/constants/documentationRoutes';
-import routes from '@/constants/routes';
-import { common } from '@/locale/en/common';
-
+import { OpenInNew } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
@@ -14,42 +10,33 @@ import {
   Toolbar,
   Button,
   Stack,
-  Typography,
   IconButton,
   Container,
   IconButtonOwnProps,
   ButtonOwnProps,
 } from '@mui/material';
 
+import { NavContext } from './context';
 import HamburgerMenu from './hamburger-menu';
-import { links } from './links';
+import { buttonTranslateColor, NavLink, translateColor } from './types';
 
 type Props = {
+  compact?: boolean;
+  logo?: ReactNode;
   color?: 'white' | 'black';
+  links: NavLink[];
+  buttons: NavLink[];
+  hamburgerButtons: NavLink[];
 };
 
-const translateColor: Record<NonNullable<Props['color']>, string> = {
-  white: '#fff',
-  black: '#000',
-};
-
-const buttonTranslateColor: Record<
-  NonNullable<Props['color']>,
-  IconButtonOwnProps['color'] | ButtonOwnProps['color']
-> = {
-  white: 'white',
-  black: 'primary',
-};
-
-const logoTranslateColor: Record<
-  NonNullable<Props['color']>,
-  NonNullable<Parameters<typeof GatewaySquaredThemedIcon>[0]['theme']>
-> = {
-  white: 'dark',
-  black: 'light',
-};
-
-export default function Nav({ color = 'white' }: Props) {
+export default function Nav({
+  compact,
+  color = 'white',
+  logo,
+  links,
+  buttons,
+  hamburgerButtons,
+}: Props) {
   const [scrolled, setScrolled] = useState(false);
   const lastScrolledState = useRef<boolean | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -81,7 +68,12 @@ export default function Nav({ color = 'white' }: Props) {
   const isScrolled = scrolled && !isMenuOpen;
 
   return (
-    <>
+    <NavContext.Provider
+      value={{
+        isScrolled,
+        color,
+      }}
+    >
       <AppBar
         elevation={0}
         component="nav"
@@ -101,38 +93,8 @@ export default function Nav({ color = 'white' }: Props) {
           component={Toolbar}
           sx={{ display: 'flex', justifyContent: 'space-between', py: 4 }}
         >
-          <Stack direction="row" gap={7}>
-            <Stack
-              component={Link}
-              href="/"
-              sx={{
-                gap: 1,
-                alignItems: 'center',
-                flexDirection: 'row',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              <GatewaySquaredThemedIcon
-                sx={{
-                  width: 40,
-                  height: 40,
-                }}
-                theme={isScrolled ? 'light' : logoTranslateColor[color]}
-              />
-              <Typography
-                component="h1"
-                ml={1}
-                color="inherit"
-                fontWeight="bold"
-                sx={{
-                  transition: 'color 0.25s',
-                  textDecoration: 'none',
-                }}
-              >
-                {common.general.gateway}
-              </Typography>
-            </Stack>
+          <Stack direction="row" gap={compact ? 3 : 7}>
+            {logo}
             <Stack
               direction="row"
               gap={1}
@@ -151,6 +113,7 @@ export default function Nav({ color = 'white' }: Props) {
                   variant="text"
                 >
                   {link.label}
+                  {link.externalIcon && <OpenInNew sx={{ ml: 1 }} />}
                 </Button>
               ))}
             </Stack>
@@ -163,35 +126,28 @@ export default function Nav({ color = 'white' }: Props) {
               lg: 'flex',
             }}
           >
-            <Button
-              component={Link}
-              href={routes.auth}
-              color={
-                isScrolled
-                  ? 'primary'
-                  : (buttonTranslateColor[color] as ButtonOwnProps['color'])
-              }
-              variant="outlined"
-            >
-              Open dashboard
-            </Button>
-            <Button
-              component={Link}
-              href={documentationRoutes.home}
-              target="_blank"
-              color={
-                isScrolled
-                  ? 'primary'
-                  : (buttonTranslateColor[color] as ButtonOwnProps['color'])
-              }
-              variant="contained"
-            >
-              Read documentation
-            </Button>
+            {buttons.map((button) => (
+              <Button
+                component={Link}
+                key={button.label}
+                href={button.href}
+                target={button.target}
+                color={
+                  isScrolled
+                    ? 'primary'
+                    : (buttonTranslateColor[color] as ButtonOwnProps['color'])
+                }
+                variant={button.variant}
+              >
+                {button.label}
+              </Button>
+            ))}
           </Stack>
           <IconButton
             color={
-              isScrolled
+              isMenuOpen
+                ? 'white'
+                : isScrolled
                 ? 'primary'
                 : (buttonTranslateColor[color] as IconButtonOwnProps['color'])
             }
@@ -207,7 +163,12 @@ export default function Nav({ color = 'white' }: Props) {
           </IconButton>
         </Container>
       </AppBar>
-      <HamburgerMenu isOpen={isMenuOpen} onClose={toggleMenu(false)} />
-    </>
+      <HamburgerMenu
+        isOpen={isMenuOpen}
+        onClose={toggleMenu(false)}
+        links={links}
+        buttons={hamburgerButtons}
+      />
+    </NavContext.Provider>
   );
 }

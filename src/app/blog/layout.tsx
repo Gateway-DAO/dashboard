@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic';
 import { PropsWithChildren } from 'react';
 
 import Footer from '@/components/footer/footer';
-import Nav from '@/components/nav/nav';
 
+import MainNavbar from '../components/main-navbar';
 import { blogMetadata } from './utils';
 
 export const metadata: Metadata = blogMetadata;
@@ -15,7 +15,7 @@ const FooterSubscription = dynamic(
 export default function BlogLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <Nav color="black" />
+      <MainNavbar />
       {children}
       <Footer slot={<FooterSubscription />} />
     </>

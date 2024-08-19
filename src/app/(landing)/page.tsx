@@ -1,7 +1,6 @@
-import Nav from '@/components/nav/nav';
-
 import { Stack, Divider, Box } from '@mui/material';
 
+import MainNavbar from '../components/main-navbar';
 import About from './sections/about/about';
 import BlogSection from './sections/blog/blog';
 import BuildWithUs from './sections/build-with-us/build-with-us';
@@ -14,7 +13,7 @@ import UseCases from './sections/use-cases/use-cases';
 export default function IndexPage() {
   return (
     <>
-      <Nav />
+      <MainNavbar />
       <Stack component="main">
         <Hero />
         <About />
