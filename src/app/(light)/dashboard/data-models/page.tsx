@@ -20,14 +20,8 @@ export default function DataModelPage() {
   return (
     <>
       <DataModelHeader />
-      <Box
-        sx={{
-          pt: 5,
-          ml : 5
-        }}
-      >
-        <DataModelList />
-      </Box>
+
+      <DataModelList />
     </>
   );
 }

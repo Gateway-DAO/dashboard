@@ -7,6 +7,7 @@ import { useState } from 'react';
 import {
   defaultGridConfiguration,
   defaultGridCustomization,
+  gridWithoutNegativeMargin,
 } from '@/components/data-grid/grid-default';
 import routes from '@/constants/routes';
 import {
@@ -86,7 +87,7 @@ export default function StorageList() {
         pageSizeOptions={[5, 10, 15]}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
-        sx={defaultGridCustomization}
+        sx={gridWithoutNegativeMargin}
         rowCount={data?.totalPDAs ?? 0}
       />
     </>

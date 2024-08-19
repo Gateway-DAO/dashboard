@@ -4,7 +4,10 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 
-import { defaultGridCustomization } from '@/components/data-grid/grid-default';
+import {
+  defaultGridCustomization,
+  gridWithoutNegativeMargin,
+} from '@/components/data-grid/grid-default';
 import { defaultGridConfiguration } from '@/components/data-grid/grid-default';
 import routes from '@/constants/routes';
 import { DataModelType, mockDataModels } from '@/services/server/mock-types';
@@ -80,7 +83,7 @@ export default function DataModelList() {
         pageSizeOptions={[5, 10, 15]}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
-        sx={{ ...defaultGridCustomization }}
+        sx={{ marginTop: 3, ...gridWithoutNegativeMargin }}
         rowCount={data?.totalDataModels ?? 0}
       />
       <DataModelDialog
