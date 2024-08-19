@@ -7,13 +7,14 @@ import { Box } from '@mui/material';
 
 export default function InternalHeader({
   children,
+  color,
   slot,
-}: PropsWithChildren<{ slot?: ReactNode }>) {
+}: PropsWithChildren<{ slot?: ReactNode; color?: 'primary' | 'transparent' }>) {
   return (
     <Box
       component="header"
       sx={{
-        backgroundColor: 'primary.100',
+        backgroundColor: color === 'primary' ? 'primary.100' : undefined,
         ...LANDING_NAVBAR_HEIGHT,
       }}
     >
