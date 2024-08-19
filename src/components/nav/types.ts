@@ -28,7 +28,8 @@ export const logoTranslateColor: Record<
 
 export type NavLink = {
   label: string;
-  href: string;
+  href?: string;
+  onClick?: () => void;
   target?: string;
   externalIcon?: boolean;
   variant?: ButtonProps['variant'];

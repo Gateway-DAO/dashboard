@@ -105,10 +105,13 @@ export default function Nav({
             >
               {links.map((link) => (
                 <Button
-                  component={Link}
                   key={link.label}
-                  href={link.href}
-                  target={link.target}
+                  {...(link.href && {
+                    component: Link,
+                    href: link.href,
+                    target: link.target,
+                  })}
+                  {...(link.onClick && { onClick: link.onClick })}
                   color="inherit"
                   variant="text"
                 >
@@ -128,10 +131,13 @@ export default function Nav({
           >
             {buttons.map((button) => (
               <Button
-                component={Link}
                 key={button.label}
-                href={button.href}
-                target={button.target}
+                {...(button.href && {
+                  component: Link,
+                  href: button.href,
+                  target: button.target,
+                })}
+                {...(button.onClick && { onClick: button.onClick })}
                 color={
                   isScrolled
                     ? 'primary'

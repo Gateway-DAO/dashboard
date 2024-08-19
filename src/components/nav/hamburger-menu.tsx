@@ -68,11 +68,17 @@ export default function HamburgerMenu({
 
             return (
               <Button
-                component={Link}
                 key={link.label}
-                href={link.href}
+                {...(link.href && {
+                  component: Link,
+                  href: link.href,
+                  target: link.target,
+                })}
+                onClick={() => {
+                  onClose();
+                  link.onClick && link.onClick();
+                }}
                 color="inherit"
-                onClick={onClose}
                 sx={{
                   borderRadius: 0,
                   py: 2,
@@ -106,8 +112,15 @@ export default function HamburgerMenu({
           {buttons.map((button) => (
             <Button
               key={button.label}
-              component={Link}
-              href={button.href}
+              {...(button.href && {
+                component: Link,
+                href: button.href,
+                target: button.target,
+              })}
+              onClick={() => {
+                onClose();
+                button.onClick && button.onClick();
+              }}
               variant={button.variant}
               color={button.color ?? 'white'}
               size="large"
