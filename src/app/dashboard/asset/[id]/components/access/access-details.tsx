@@ -1,4 +1,4 @@
-import { PrivateDataAsset } from '@/services/server/mock-types';
+import { PrivateDataAsset } from '@/services/api/mock-types';
 
 import { Stack, Divider, Typography, List, ListItem } from '@mui/material';
 

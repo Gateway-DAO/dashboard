@@ -2,7 +2,7 @@ import CopyData from '@/app/dashboard/components/copy/copy';
 import CardCell from '@/components/card-cell/card-cell';
 import Tags from '@/components/tags/tags';
 import { DATE_FORMAT } from '@/constants/date';
-import { PrivateDataAsset } from '@/services/server/mock-types';
+import { PrivateDataAsset } from '@/services/api/mock-types';
 import { formatBytes } from '@/utils/bytes';
 import { formatDateDifference } from '@/utils/date';
 import dayjs from 'dayjs';

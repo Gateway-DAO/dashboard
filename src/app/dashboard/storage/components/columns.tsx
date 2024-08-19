@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import { DATE_FORMAT } from '@/constants/date';
-import { PrivateDataAsset } from '@/services/server/mock-types';
+import { PrivateDataAsset } from '@/services/api/mock-types';
 import { formatBytes } from '@/utils/bytes';
 import { formatDateDifference } from '@/utils/date';
 import { FileType, getFileTypeByPda, getIconFile } from '@/utils/pda';

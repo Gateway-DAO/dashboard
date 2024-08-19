@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { gridWithoutNegativeMargin } from '@/components/data-grid/grid-default';
 import { defaultGridConfiguration } from '@/components/data-grid/grid-default';
-import { DataModelType, mockDataModels } from '@/services/server/mock-types';
+import { DataModelType, mockDataModels } from '@/services/api/mock-types';
 import { useQuery } from '@tanstack/react-query';
 
 import LinearProgress from '@mui/material/LinearProgress';

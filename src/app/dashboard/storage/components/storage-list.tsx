@@ -11,7 +11,7 @@ import routes from '@/constants/routes';
 import {
   mockPrivateDataAssets,
   PrivateDataAsset,
-} from '@/services/server/mock-types';
+} from '@/services/api/mock-types';
 import { useQuery } from '@tanstack/react-query';
 
 import LinearProgress from '@mui/material/LinearProgress';
