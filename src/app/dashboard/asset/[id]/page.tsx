@@ -3,11 +3,11 @@
 import { redirect } from 'next/navigation';
 
 import routes from '@/constants/routes';
-
-import PDADetailPage from './components/content';
 import { mockPrivateDataAssets } from '@/services/server/mock-types';
 
-export default async function PDAPage({ params }: { params: { id: string } }) {
+import PDADetailPage from './components/content';
+
+export default function PDAPage({ params }: { params: { id: string } }) {
   const pda = mockPrivateDataAssets.find((pda) => pda.id === params.id);
 
   if (!pda) {

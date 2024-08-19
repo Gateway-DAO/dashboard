@@ -1,4 +1,4 @@
-import { ChangeEvent, Ref, forwardRef, useRef, useState } from 'react';
+import { ChangeEvent, forwardRef, useRef, useState } from 'react';
 
 import CropImage from '@/components/crop-image/crop-image';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
@@ -21,10 +21,7 @@ type Props = {
   onChange: (image: Blob) => void;
 };
 
-function EditAvatarField(
-  { name, alt, value, onChange, isLoading, id }: Props,
-  ref: Ref<HTMLInputElement>
-) {
+function EditAvatarField({ onChange }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [cropableImage, setCropableImage] = useState<string>();

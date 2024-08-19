@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
-import DashboardLayout from './components/dashboard-layout';
 import DashboardUserDeveloperMenuListItems from './components/dashboard-developer-menu-list-items';
+import DashboardLayout from './components/dashboard-layout';
 import DashboardUserMenuListItems from './components/dashboard-menu-list-items';
 
 export const metadata: Metadata = {

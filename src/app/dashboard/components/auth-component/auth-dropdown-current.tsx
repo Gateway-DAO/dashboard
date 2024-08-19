@@ -5,14 +5,7 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import routes from '@/constants/routes';
 import { auth } from '@/locale/en/auth';
 
-import {
-  Button,
-  Chip,
-  MenuItem,
-  Stack,
-  Typography,
-  alpha,
-} from '@mui/material';
+import { Button, MenuItem, Stack, Typography } from '@mui/material';
 
 type Props = {
   onClose: () => void;

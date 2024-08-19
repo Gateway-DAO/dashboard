@@ -4,13 +4,7 @@ import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
 import { useSnackbar } from 'notistack';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import {
-  Box,
-  IconButton,
-  InputAdornment,
-  Stack,
-  TextField,
-} from '@mui/material';
+import { InputAdornment, Stack, TextField } from '@mui/material';
 import { Button, Typography } from '@mui/material';
 
 import EditAvatar from './components/edit-avatar/edit-avatar';
@@ -31,7 +25,9 @@ export function EditProfileCard() {
   };
   const [isEditUsernameDialog, setEditUsernameDialog] =
     useState<boolean>(false);
-  const onSubmit = async (profilePicture: Blob) => {};
+  const onSubmit = async (profilePicture: Blob) => {
+    console.log(profilePicture);
+  };
   return (
     <>
       <Stack

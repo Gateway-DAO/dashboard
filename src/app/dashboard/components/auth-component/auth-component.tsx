@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useMenu } from '@/hooks/use-menu';
 
 import { MoreHorizOutlined } from '@mui/icons-material';
-import { ButtonBase, Menu, alpha } from '@mui/material';
+import { ButtonBase, Menu } from '@mui/material';
 
 import AuthComponentSkeleton from './auth-component-skeleton';
 import AuthDropdown from './auth-dropdown';

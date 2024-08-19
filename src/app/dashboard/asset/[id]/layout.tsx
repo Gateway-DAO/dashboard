@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
-import PDAPage from './page';
+
 import { mockPrivateDataAssets } from '@/services/server/mock-types';
+
+import PDAPage from './page';
 
 export async function generateMetadata({
   params,

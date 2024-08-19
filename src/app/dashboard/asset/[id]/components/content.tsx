@@ -1,16 +1,16 @@
 import BackButton from '@/components/buttons/back-button';
+import { LoadingButton } from '@/components/buttons/loading-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
+import { PrivateDataAsset } from '@/services/server/mock-types';
 import { CONTAINER_PX, WIDTH_CENTERED } from '@/theme/config/style-tokens';
+import { useMutation } from '@tanstack/react-query';
+import { useSnackbar } from 'notistack';
 
 import { Stack, Box, Divider } from '@mui/material';
 
-import PageContainer from './container';
 import AccessDetails from './access/access-details';
+import PageContainer from './container';
 import StructuredDetail from './pda-types/structured-detail';
-import { PrivateDataAsset } from '@/services/server/mock-types';
-import { useSnackbar } from 'notistack';
-import { useMutation } from '@tanstack/react-query';
-import { LoadingButton } from '@/components/buttons/loading-button';
 
 type Props = {
   pda: PrivateDataAsset;
@@ -21,7 +21,7 @@ export default function PDADetailPage({ pda, backHref }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   // this code will change once will have api
-  const { isSuccess, data, mutateAsync, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: ['decrypting-data-asset', pda],
     mutationFn: async (): Promise<void> => {
       if (pda.structured) {
@@ -45,7 +45,7 @@ export default function PDADetailPage({ pda, backHref }: Props) {
         }, 1000);
       }
     },
-    onError: (error, variables, context) => {
+    onError: () => {
       enqueueSnackbar('Something went wrong!');
     },
   });

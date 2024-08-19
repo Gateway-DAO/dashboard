@@ -1,8 +1,9 @@
+import { PrivateDataAsset } from '@/services/server/mock-types';
+
 import { Stack, Divider, Typography, List, ListItem } from '@mui/material';
 
-import { PrivateDataAsset } from '@/services/server/mock-types';
 import UserData from '../../../../components/user-data/user-data';
-import { IndividualDetailRow, RowText } from './components';
+import { IndividualDetailRow } from './components';
 
 type Props = {
   pda: PrivateDataAsset;
@@ -28,7 +29,7 @@ export default function AccessDetails({ pda }: Props) {
               <ListItem key={index}>
                 <Stack
                   direction={'row'}
-                  justifyContent={"space-between"}
+                  justifyContent={'space-between'}
                   gap={1}
                   sx={{
                     px: {
@@ -42,7 +43,6 @@ export default function AccessDetails({ pda }: Props) {
                     username={user.username}
                     access={user.access}
                   />
-
                 </Stack>
               </ListItem>
               {index < pda.access.length - 1 && <Divider />}

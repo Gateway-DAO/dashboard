@@ -1,5 +1,3 @@
-import CodeBlocksOutlinedIcon from '@/components/icons/code-blocks-outlined';
-import { GTWMenuItemSettings } from './menu-item';
 import documentationRoutes from '@/constants/documentationRoutes';
 import routes from '@/constants/routes';
 
@@ -8,6 +6,8 @@ import {
   ExploreOutlined,
   MenuBookOutlined,
 } from '@mui/icons-material';
+
+import { GTWMenuItemSettings } from './menu-item';
 
 export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
   {

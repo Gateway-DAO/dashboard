@@ -1,11 +1,11 @@
+import { Metadata } from 'next';
 import React from 'react';
 
 import { formatBytes } from '@/utils/bytes';
 
-import { Box, Container, Paper, Stack, Typography } from '@mui/material';
+import { Box, Paper, Stack, Typography } from '@mui/material';
 
 import StorageList from './components/storage-list';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Storage - Gateway',

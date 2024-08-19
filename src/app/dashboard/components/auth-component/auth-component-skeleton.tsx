@@ -1,4 +1,4 @@
-import { Box, Skeleton, alpha } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 
 export default function AuthComponentSkeleton() {
   return (

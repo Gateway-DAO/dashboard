@@ -1,12 +1,10 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 
 import {
   defaultGridConfiguration,
-  defaultGridCustomization,
   gridWithoutNegativeMargin,
 } from '@/components/data-grid/grid-default';
 import routes from '@/constants/routes';
@@ -21,7 +19,6 @@ import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 
 import { columns } from './columns';
 import Empty from './empty';
-import { Container, Stack } from '@mui/material';
 
 type UserStorage = {
   totalPDAs: number;
@@ -29,7 +26,6 @@ type UserStorage = {
 };
 
 export default function StorageList() {
-  const { data: sessionData, status } = useSession();
   const router = useRouter();
 
   const [paginationModel, setPaginationModel] = useState({

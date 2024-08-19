@@ -1,7 +1,8 @@
 import DataModelOutlinedIcon from '@/components/icons/data-model-outlined';
 import StorageIcon from '@/components/icons/storage';
-import { GTWMenuItemSettings } from './menu-item';
 import routes from '@/constants/routes';
+
+import { GTWMenuItemSettings } from './menu-item';
 
 /**
  * List all menu items of the user dashboard

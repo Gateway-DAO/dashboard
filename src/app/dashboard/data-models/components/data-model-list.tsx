@@ -1,15 +1,9 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 
-import {
-  defaultGridCustomization,
-  gridWithoutNegativeMargin,
-} from '@/components/data-grid/grid-default';
+import { gridWithoutNegativeMargin } from '@/components/data-grid/grid-default';
 import { defaultGridConfiguration } from '@/components/data-grid/grid-default';
-import routes from '@/constants/routes';
 import { DataModelType, mockDataModels } from '@/services/server/mock-types';
 import { useQuery } from '@tanstack/react-query';
 
@@ -26,10 +20,8 @@ type DataModel = {
 };
 
 export default function DataModelList() {
-  const { data: sessionData, status } = useSession();
   const [isDataModelDialog, setDataModelDialog] = useState<boolean>(false);
   const [selectedDataModel, setSelectedDataModel] = useState<DataModelType>();
-  const router = useRouter();
 
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 10,
@@ -76,7 +68,7 @@ export default function DataModelList() {
         loading={!data?.dataModels}
         columns={columns}
         paginationMode="server"
-        onRowClick={(params: GridRowParams<DataModelType>, event) => {
+        onRowClick={(params: GridRowParams<DataModelType>) => {
           setDataModelDialog(true);
           setSelectedDataModel(params.row);
         }}

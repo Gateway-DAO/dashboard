@@ -6,7 +6,6 @@ import {
   DialogTitle,
 } from '@mui/material';
 import { Breakpoint } from '@mui/material';
-import { maxWidth } from '@mui/system';
 
 type ConfirmDialogProps = {
   title: string;

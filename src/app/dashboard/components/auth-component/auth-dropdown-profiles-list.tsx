@@ -7,7 +7,7 @@ type Props = {
   onClose: () => void;
 };
 
-export default function AuthDropdownProfilesList({ onClose }: Props) {
+export default function AuthDropdownProfilesList({}: Props) {
   const { data: session } = useSession();
 
   if (!session) return null;

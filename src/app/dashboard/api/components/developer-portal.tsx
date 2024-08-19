@@ -1,6 +1,8 @@
 'use client';
 
 import CopyButton from '@/components/copy-button/copy-button';
+import ToggleVisibilityButton from '@/components/toggle-visibility-button/toggle-visibility-button';
+import { useToggle } from '@react-hookz/web';
 
 import {
   Card,
@@ -11,8 +13,7 @@ import {
 } from '@mui/material';
 
 import AuthenticationTokenSection from './authentication-token';
-import { useToggle } from '@react-hookz/web';
-import ToggleVisibilityButton from '@/components/toggle-visibility-button/toggle-visibility-button';
+
 
 export default function DeveloperPortal() {
   const [isVisible, toggleVisible] = useToggle(false);

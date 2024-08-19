@@ -2,6 +2,7 @@ import { PrivateDataAsset } from '@/services/server/mock-types';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Card, Stack, Typography } from '@mui/material';
+
 import MetaDataDetails from './meta-data-details';
 
 type Props = {

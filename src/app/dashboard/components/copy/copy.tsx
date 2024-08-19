@@ -1,7 +1,8 @@
 import { limitCharsOffset } from '@/utils/string';
-import { ContentCopy } from '@mui/icons-material';
-import { IconButton, Stack, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
+
+import { ContentCopy } from '@mui/icons-material';
+import { IconButton, Stack } from '@mui/material';
 
 export default function CopyData({ text }: { text: string }) {
   const { enqueueSnackbar } = useSnackbar();
@@ -24,7 +25,6 @@ export default function CopyData({ text }: { text: string }) {
       justifyContent="flex-start"
     >
       {limitCharsOffset(text, 4, 4)}
-
 
       <IconButton onClick={() => copy(text)}>
         <ContentCopy
