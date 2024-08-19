@@ -41,9 +41,13 @@ export const defaultGridCustomization: GatewaySxProps = {
 };
 
 export const gridWithoutNegativeMargin: GatewaySxProps = {
-  border: 'none',
   mb: 4,
+  border: 'none',
   borderRadius: 0,
+  '& .MuiDataGrid-cell': {
+    alignContent: 'center',
+  },
+
   '& .MuiDataGrid-cell:focus': {
     outline: 'none',
   },

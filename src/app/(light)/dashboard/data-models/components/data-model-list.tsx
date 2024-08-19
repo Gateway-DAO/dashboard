@@ -5,31 +5,30 @@ import { useRouter } from 'next-nprogress-bar';
 import { useState } from 'react';
 
 import {
-  defaultGridConfiguration,
   defaultGridCustomization,
   gridWithoutNegativeMargin,
 } from '@/components/data-grid/grid-default';
+import { defaultGridConfiguration } from '@/components/data-grid/grid-default';
 import routes from '@/constants/routes';
-import {
-  mockPrivateDataAssets,
-  PrivateDataAsset,
-} from '@/services/server/mock-types';
+import { DataModelType, mockDataModels } from '@/services/server/mock-types';
 import { useQuery } from '@tanstack/react-query';
 
 import LinearProgress from '@mui/material/LinearProgress';
 import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 
 import { columns } from './columns';
+import { DataModelDialog } from './data-model-dialog';
 import Empty from './empty';
-import { Container, Stack } from '@mui/material';
 
-type UserStorage = {
-  totalPDAs: number;
-  pdas: PrivateDataAsset[];
+type DataModel = {
+  totalDataModels: number;
+  dataModels: DataModelType[];
 };
 
-export default function StorageList() {
+export default function DataModelList() {
   const { data: sessionData, status } = useSession();
+  const [isDataModelDialog, setDataModelDialog] = useState<boolean>(false);
+  const [selectedDataModel, setSelectedDataModel] = useState<DataModelType>();
   const router = useRouter();
 
   const [paginationModel, setPaginationModel] = useState({
@@ -39,12 +38,12 @@ export default function StorageList() {
 
   const { isLoading, isSuccess, data } = useQuery({
     queryKey: ['storage'],
-    queryFn: async (): Promise<UserStorage> => {
-      const mockPromise = new Promise<UserStorage>((resolve) => {
+    queryFn: async (): Promise<DataModel> => {
+      const mockPromise = new Promise<DataModel>((resolve) => {
         setTimeout(() => {
           resolve({
-            totalPDAs: mockPrivateDataAssets.length,
-            pdas: mockPrivateDataAssets,
+            totalDataModels: mockDataModels.length,
+            dataModels: mockDataModels,
           });
         }, 1000);
       });
@@ -52,7 +51,7 @@ export default function StorageList() {
     },
   });
 
-  if (isSuccess && !data?.pdas?.length) {
+  if (isSuccess && !data?.dataModels?.length) {
     return <Empty />;
   }
 
@@ -73,22 +72,24 @@ export default function StorageList() {
       )}
       <DataGrid
         {...defaultGridConfiguration}
-        rows={data?.pdas ?? []}
-        loading={!data?.pdas}
+        rows={data?.dataModels ?? []}
+        loading={!data?.dataModels}
         columns={columns}
         paginationMode="server"
-        onRowClick={(params: GridRowParams<PrivateDataAsset>, event) => {
-          // if middle click open new tab
-          if (event.button === 1) {
-            return window.open(routes.dashboard.user.asset(params.id));
-          }
-          return router.push(routes.dashboard.user.asset(params.id));
+        onRowClick={(params: GridRowParams<DataModelType>, event) => {
+          setDataModelDialog(true);
+          setSelectedDataModel(params.row);
         }}
         pageSizeOptions={[5, 10, 15]}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
-        sx={gridWithoutNegativeMargin}
-        rowCount={data?.totalPDAs ?? 0}
+        sx={{ marginTop: 3, ...gridWithoutNegativeMargin }}
+        rowCount={data?.totalDataModels ?? 0}
+      />
+      <DataModelDialog
+        open={isDataModelDialog}
+        onClose={() => setDataModelDialog(false)}
+        dataModelId={selectedDataModel?.dataModelId as string}
       />
     </>
   );

@@ -17,6 +17,49 @@ export type PrivateDataAsset = {
   mimeType: string;
 };
 
+export type DataModelType = {
+  id: number;
+  dataModelId: string;
+  title: string;
+  description: string;
+  updatedAt: Date;
+  createdAt: Date;
+  dataAssests: number;
+};
+
+export const mockDataModels: DataModelType[] = [
+  {
+    id: 1112121,
+    title: 'Hello Gateway',
+    description:
+      'Welcome to Gateway, the new way to your data. This is an introductory data model used to provide developers a chance to help understand how the protocol and network works.',
+    dataAssests: 10,
+    dataModelId: '6cfd080c-58c0-4c28-b34a-dc0bd11b2ec6',
+    updatedAt: new Date('2024-10-30'),
+    createdAt: new Date(),
+  },
+  {
+    id: 1112122,
+    title: 'Hello Gateway world',
+    description:
+      'Welcome to Gateway, the new way to your data. This is an introductory data model used to provide developers a chance to help understand how the protocol and network works.',
+    dataAssests: 10,
+    dataModelId: '6cfd080c-58c0-4c28-b34a-dc0bd11b2ec6',
+    updatedAt: new Date('2024-10-28'),
+    createdAt: new Date(),
+  },
+  {
+    id: 1112123,
+    title: 'Hello world',
+    description:
+      'Welcome to Gateway, the new way to your data. This is an introductory data model used to provide developers a chance to help understand how the protocol and network works.',
+    dataAssests: 10,
+    dataModelId: '6cfd080c-58c0-4c28-b34a-dc0bd11b2ec6',
+    updatedAt: new Date('2024-10-31'),
+    createdAt: new Date(),
+  },
+];
+
 export const mockPrivateDataAssets: PrivateDataAsset[] = [
   {
     id: '4fff1352-2480-4fce-8b34-c095f4d9463a',
