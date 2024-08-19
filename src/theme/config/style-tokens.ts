@@ -21,6 +21,7 @@ export const CONTAINER_PX: BreakpointsValues = {
   md: 4,
   lg: 6,
 };
+
 export const NEGATIVE_CONTAINER_PX: BreakpointsValues = {
   xs: -3,
   md: -4,
@@ -44,4 +45,8 @@ export const NEGATIVE_CONTAINER_PT = {
 export const NEGATIVE_CONTAINER_PB = {
   xs: -10,
   lg: -4,
+};
+
+export const LANDING_NAVBAR_HEIGHT: SxProps = {
+  pt: 13,
 };
