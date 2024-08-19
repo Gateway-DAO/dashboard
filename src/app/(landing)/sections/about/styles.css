@@ -1,0 +1,15 @@
+:root {
+  --swiper-theme-color: #771ac9;
+}
+
+.swiper-pagination {
+  position: unset;
+}
+.swiper-pagination-bullet {
+  transition: 0.15s ease-in-out;
+  transition-property: width, border-radius;
+}
+.swiper-pagination-bullet-active {
+  width: 16px;
+  border-radius: 10px;
+}

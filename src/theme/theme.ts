@@ -2,11 +2,11 @@
 import { createTheme } from '@mui/material/styles';
 
 import * as components from './components';
-import { lightPalette } from './config/palette';
+import { palette } from './config/palette';
 import typography from './config/typography';
 
 export const theme = createTheme({
-  palette: lightPalette,
+  palette,
   typography,
   shape: {
     borderRadius: 16,
