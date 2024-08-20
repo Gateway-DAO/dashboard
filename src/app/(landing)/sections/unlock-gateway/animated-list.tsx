@@ -27,7 +27,7 @@ export default function AnimatedList() {
     const interval = setInterval(() => {
       // Move the first item to the end of the list
       setList((prevList) => {
-        const firstItem = prevList[0];
+        const firstItem = prevList[0]!;
         const updatedList = [...prevList.slice(1), createItem(firstItem.name)];
         return updatedList;
       });
