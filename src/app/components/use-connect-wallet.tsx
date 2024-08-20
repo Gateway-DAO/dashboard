@@ -122,8 +122,7 @@ export default function useConnectWallet({
       if (SING_CANCEL_ERRORS.includes(error?.name)) {
         statesHandler?.onPending?.();
       } else {
-        const { message } = getErrorMessage(error);
-        statesHandler?.onError?.(message);
+        statesHandler?.onError?.((error as Error).message);
       }
       onDisconnectWallets();
     }

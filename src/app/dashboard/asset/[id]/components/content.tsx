@@ -1,7 +1,7 @@
 import BackButton from '@/components/buttons/back-button';
 import { LoadingButton } from '@/components/buttons/loading-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
-import { PrivateDataAsset } from '@/services/api/mock-types';
+import { PrivateDataAsset } from '@/services/api/models';
 import { CONTAINER_PX, WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';

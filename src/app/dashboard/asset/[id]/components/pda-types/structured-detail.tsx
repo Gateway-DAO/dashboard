@@ -1,4 +1,4 @@
-import { PrivateDataAsset } from '@/services/api/mock-types';
+import { PrivateDataAsset } from '@/services/api/models';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Card, Stack, Typography } from '@mui/material';

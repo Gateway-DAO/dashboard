@@ -2,6 +2,8 @@ import { signIn } from 'next-auth/react';
 
 import WalletConnectModal from '@/components/wallet-modal/wallet-connect-modal';
 import WalletLoadingModal from '@/components/wallet-modal/wallet-loading-modal';
+import { api } from '@/services/api/api';
+import { clientApi } from '@/services/api/client';
 import { useWalletConnectionStep } from '@/services/wallets/wallet-connection-provider';
 import { Network } from '@/types/web3';
 
@@ -20,8 +22,16 @@ export default function AuthenticationWalletModals({
   const connectionStep = useWalletConnectionStep();
   const onHandleStep = useLoginStepHandler();
   const { onConnect, onDisconnectWallets } = useConnectWallet({
-    async onGetNonce(wallet, network) {
-      return '';
+    async onGetNonce() {
+      const { response, data, error } = await api.GET('/auth/message');
+      console.log({ response, data, error });
+      if (error || !data?.message) {
+        throw new Error('Could not get nonce', { cause: error });
+      }
+
+      console.log(data.message);
+
+      return data.message;
     },
     async onSignedMessage({ signature, wallet, publicKey }) {
       const res = await signIn('credential-wallet', {
