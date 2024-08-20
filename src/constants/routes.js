@@ -23,7 +23,7 @@ const routes = {
       requests: `${dashboardUser}/requests`,
       myRequestTemplates: `${dashboardUser}/request-templates/my`,
       networkRequestTemplates: `${dashboardUser}/request-templates/network`,
-      myDataModels: `${dashboardUser}/data-models/`,
+      myDataModels: `${dashboardUser}/data-models`,
       networkDataModels: `${dashboardUser}/data-models/network`,
       settings: `${dashboardUser}/settings`,
       developerAccess: `${dashboardUser}/api`,
