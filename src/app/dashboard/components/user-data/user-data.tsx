@@ -46,43 +46,47 @@ export default function UserData({
         <Typography component="span" variant="subtitle1" color="text.primary">
           {username ?? limitCharsOffset(did, 15, 5)}
         </Typography>
+
         {!!username ? (
-          <Stack
-            component="span"
-            direction="row"
-            alignItems="center"
-            lineHeight={1}
-            justifyContent="flex-start"
-            gap={0.75}
-            sx={{ mt: -1 }}
-          >
-            <Typography
+          <>
+            <Stack
               component="span"
-              variant="caption"
-              fontWeight={400}
-              color="text.secondary"
+              direction="row"
+              alignItems="center"
               lineHeight={1}
-              textOverflow="ellipsis"
-              overflow="hidden"
+              justifyContent="flex-start"
+              gap={0.75}
+              sx={{ mt: -1 }}
             >
-              {limitCharsOffset(did, 3, 4)}
-            </Typography>
-            <IconButton onClick={() => copy(did)}>
-              <ContentCopy
-                sx={{
-                  fontSize: 16,
-                  color: 'text.disabled',
-                }}
-              />
-            </IconButton>
-            <Typography
-              variant="caption"
-              color="text.secondary"
-              sx={{ mt: -3.5, ml: 5 }}
-            >
-              {access}
-            </Typography>
-          </Stack>
+              <Typography
+                component="span"
+                variant="caption"
+                fontWeight={400}
+                color="text.secondary"
+                lineHeight={1}
+                textOverflow="ellipsis"
+                overflow="hidden"
+              >
+                {limitCharsOffset(did, 3, 4)}
+              </Typography>
+              <IconButton onClick={() => copy(did)}>
+                <ContentCopy
+                  sx={{
+                    fontSize: 16,
+                    color: 'text.disabled',
+                  }}
+                />
+              </IconButton>
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                align="right"
+                sx={{ mt: -3.5, ml: access.length < 20 ? 12.5 : 5 }}
+              >
+                {access}
+              </Typography>
+            </Stack>
+          </>
         ) : (
           <IconButton onClick={() => copy(did)}>
             <ContentCopy

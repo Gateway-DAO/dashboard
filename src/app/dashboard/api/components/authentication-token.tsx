@@ -31,10 +31,10 @@ export default function AuthenticationToken() {
             <ToggleVisibilityButton
               isVisible={isVisible}
               onToggle={toggleVisible}
-              size="small"
+              size="medium"
               sx={{ mr: 1 }}
             />
-            <CopyButton text={TOKEN} size="small" />
+            <CopyButton text={TOKEN} size="medium" />
           </>
         }
       />

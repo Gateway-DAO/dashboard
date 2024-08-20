@@ -19,7 +19,7 @@ export default function DashboardUserMenuListItems() {
 
   return (
     <>
-      <Typography variant="caption" sx={{ px: 3.5, mb: 2, display: 'block' }}>
+      <Typography variant="caption" sx={{ px: 3.5, mb: 1, display: 'block' }}>
         Manage Data
       </Typography>
 

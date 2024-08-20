@@ -67,6 +67,10 @@ export default function GTWMenuItem({
           },
           ...(active && {
             color: 'black',
+            backgroundColor: 'primary.light',
+            border: 1,
+            borderRadius: '16px',
+            borderColor: 'primary.light',
             svg: {
               color: 'primary.main',
             },
