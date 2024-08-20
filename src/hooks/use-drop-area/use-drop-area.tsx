@@ -56,7 +56,7 @@ const createProcess =
       return;
     }
 
-    if (dataTransfer.items && dataTransfer.items.length) {
+    if (dataTransfer.items?.[0]) {
       dataTransfer.items[0].getAsString((text) => {
         if (mounted) {
           (options.onText || noop)(text, event as DragEvent);

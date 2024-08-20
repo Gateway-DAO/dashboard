@@ -5,6 +5,9 @@ export const readImageFile = (files: FileList | File[]) => {
 
   return new Promise<{ image: string; file: Blob; isGif: boolean }>(
     (resolve, reject) => {
+      if (!file) {
+        return reject('No file selected');
+      }
       if (!imageTypes.includes(file.type)) {
         return reject('Only JPG,PNG,GIF,SVG are allowed');
       }

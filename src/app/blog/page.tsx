@@ -1,13 +1,13 @@
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
-import { getAllTags, getPosts } from "@/services/ghost";
-import { LANDING_NAVBAR_HEIGHT } from "@/theme/config/style-tokens";
+import { getAllTags, getPosts } from '@/services/ghost';
+import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
 
-import { Container, Box, Divider, Stack } from "@mui/material";
+import { Container, Box, Divider, Stack } from '@mui/material';
 
-import HeroPost from "./components/hero-post";
-import PostsList from "./components/post-list/posts-list";
-import TagList from "./components/post-list/tag-list";
+import HeroPost from './components/hero-post';
+import PostsList from './components/post-list/posts-list';
+import TagList from './components/post-list/tag-list';
 
 export default async function LatestBlogPosts() {
   const [firstPost] = await getPosts(1);
@@ -28,7 +28,7 @@ export default async function LatestBlogPosts() {
             pt: 4,
           }}
         >
-          <HeroPost {...firstPost} />
+          <HeroPost {...firstPost!} />
         </Box>
         <Divider
           sx={{
@@ -40,7 +40,7 @@ export default async function LatestBlogPosts() {
         />
         <TagList tags={tags} />
         <Stack gap={5}>
-          <PostsList ignoreId={firstPost.id} />
+          <PostsList ignoreId={firstPost!.id} />
         </Stack>
       </Stack>
     </>

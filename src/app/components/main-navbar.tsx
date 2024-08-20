@@ -1,6 +1,6 @@
 'use client';
 
-import { ComponentProps, useState } from 'react';
+import { ComponentProps, Suspense, useState } from 'react';
 
 import NavLogo from '@/components/nav/logo';
 import Nav from '@/components/nav/nav';
@@ -57,12 +57,14 @@ export default function MainNavbar({ color }: Props) {
         buttons={[primaryButton, secondaryButton]}
         hamburgerButtons={[primaryButton]}
       />
-      <WalletConnectionProvider>
-        <AuthenticationWalletModals
-          isOpen={isModalWaleltOpen}
-          onCancel={() => setIsModalWaleltOpen(false)}
-        />
-      </WalletConnectionProvider>
+      <Suspense fallback={null}>
+        <WalletConnectionProvider>
+          <AuthenticationWalletModals
+            isOpen={isModalWaleltOpen}
+            onCancel={() => setIsModalWaleltOpen(false)}
+          />
+        </WalletConnectionProvider>
+      </Suspense>
     </>
   );
 }
