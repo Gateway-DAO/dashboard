@@ -112,7 +112,7 @@ export const auth = {
       description: "You're now logged in",
     },
     error: {
-      title: 'Error verifying signature',
+      title: 'Something went wrong',
       description: "Please try again or contact support if it doesn't work.",
     },
   },
