@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { gridWithoutNegativeMargin } from '@/components/data-grid/grid-default';
+import { defaultGridCustomization } from '@/components/data-grid/grid-default';
 import { defaultGridConfiguration } from '@/components/data-grid/grid-default';
 import { DataModelType, mockDataModels } from '@/services/api/mock-types';
 import { useQuery } from '@tanstack/react-query';
@@ -75,7 +75,7 @@ export default function DataModelList() {
         pageSizeOptions={[5, 10, 15]}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
-        sx={{ marginTop: 3, ...gridWithoutNegativeMargin }}
+        sx={{ marginTop: 3, ...defaultGridCustomization }}
         rowCount={data?.totalDataModels ?? 0}
       />
       <DataModelDialog
