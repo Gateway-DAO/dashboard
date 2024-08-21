@@ -5,7 +5,7 @@ export const MuiButton: Extract<Theme['components'], object>['MuiButton'] = {
     disableElevation: true,
   },
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme, size }) => ({
       textTransform: 'unset',
       borderRadius: theme.spacing(5),
       fontWeight: 'bold',
@@ -27,6 +27,10 @@ export const MuiButton: Extract<Theme['components'], object>['MuiButton'] = {
     }),
     containedWhite: ({ theme }) => ({
       color: theme.palette.primary.main,
+    }),
+    sizeLarge: ({ theme }) => ({
+      paddingTop: theme.spacing(1.9),
+      paddingBottom: theme.spacing(1.9),
     }),
   },
 };

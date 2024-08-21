@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { PropsWithChildren, ReactNode } from 'react';
 
 import Logo from '@/components/logo/logo';
-import LogoContainer from '@/components/logo/logo-container';
+import routes from '@/constants/routes';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { isSandbox } from '@/utils/env';
 
@@ -44,9 +44,7 @@ export default function DashboardLayout({
             justifyContent: 'space-between',
           }}
         >
-          <LogoContainer>
-            <Logo />
-          </LogoContainer>
+          <Logo href={routes.dashboard.user.home} />
           {isSandbox && (
             <Tooltip
               title="You are on the Gateway Sandbox. The data is temporary and will expire in 60 days."

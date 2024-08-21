@@ -1,30 +1,52 @@
-import { Typography } from '@mui/material';
+import Link from 'next/link';
+import { PropsWithChildren } from 'react';
 
-import GatewaySquaredIcon from '../icons/gateway-squared';
+import { Stack, Typography } from '@mui/material';
+
+import GatewaySquaredThemedIcon from '../icons/gateway-squared-themed';
 
 type Props = {
   theme?: 'light' | 'dark';
+  href: string;
 };
 
-export default function Logo({ theme = 'light' }: Props) {
+export default function Logo({
+  theme = 'light',
+  children,
+  href,
+}: PropsWithChildren<Props>) {
   return (
-    <>
-      <GatewaySquaredIcon
-        sx={{ fontSize: 40 }}
-        backgroundProps={
-          theme === 'light'
-            ? { color: 'inherit' }
-            : { color: '#E6D5FA', fillOpacity: 1 }
-        }
+    <Stack
+      component={Link}
+      href={href}
+      sx={{
+        gap: 1,
+        alignItems: 'center',
+        flexDirection: 'row',
+        color: 'inherit',
+        textDecoration: 'none',
+      }}
+    >
+      <GatewaySquaredThemedIcon
+        sx={{
+          width: 40,
+          height: 40,
+        }}
+        theme={theme}
       />
       <Typography
         component="h1"
         ml={1}
-        color={theme === 'light' ? 'common.black' : 'common.white'}
+        color="inherit"
         fontWeight="bold"
+        sx={{
+          transition: 'color 0.25s',
+          textDecoration: 'none',
+        }}
       >
         Gateway
       </Typography>
-    </>
+      {children}
+    </Stack>
   );
 }

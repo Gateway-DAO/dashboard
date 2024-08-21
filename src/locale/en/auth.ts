@@ -1,6 +1,9 @@
 import { WalletLoadingStep } from '@/services/wallets/wallet-connection-provider';
 
 export const auth = {
+  rules: {
+    create_username: 'Use only letters, numbers and the “_” symbol',
+  },
   menu: {
     gatewayId: 'Manage Gateway ID',
     disconnect: 'Disconnect',
@@ -55,7 +58,6 @@ export const auth = {
       subtitle:
         'Gateway ID constitutes a user or an organization on the Gateway Protocol. Additionally, it serves as a powerful solution that serves as a way of aggregating your other identities into a single identifier. ',
       create_username: 'Create your username',
-      create_username_rules: 'Use only letters, numbers and the “_” symbol',
       create_display_name: 'How do you want to be called?',
       create_display_name_rules:
         'Fill up your first and last name or choose any name you would like to be called',
