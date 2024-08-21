@@ -2,6 +2,8 @@ import InternalHeader from '@/components/internal/internal-header';
 
 import { Box, Button, Typography } from '@mui/material';
 
+import FeaturedDataModels from './components/featured-data-models';
+
 export default function DataModel() {
   return (
     <>
@@ -37,6 +39,7 @@ export default function DataModel() {
       >
         Data models
       </InternalHeader>
+      <FeaturedDataModels />
     </>
   );
 }
