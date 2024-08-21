@@ -1,14 +1,15 @@
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next-nprogress-bar';
+import { useSearchParams } from 'next/navigation';
 
 import WalletConnectModal from '@/components/wallet-modal/wallet-connect-modal';
 import WalletLoadingModal from '@/components/wallet-modal/wallet-loading-modal';
+import routes from '@/constants/routes';
 import { api } from '@/services/api/api';
-import { clientApi } from '@/services/api/client';
 import { useWalletConnectionStep } from '@/services/wallets/wallet-connection-provider';
 import { Network } from '@/types/web3';
 
-import useLoginStepHandler from './step-provider/use-login-step-handler';
-import useConnectWallet from './use-connect-wallet';
+import useConnectWallet from '../../services/wallets/use-connect-wallet';
 
 type Props = {
   isOpen: boolean;
@@ -19,47 +20,59 @@ export default function AuthenticationWalletModals({
   isOpen,
   onCancel,
 }: Props) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { onSignup, onSuccess } = useWalletConnectionStep();
   const connectionStep = useWalletConnectionStep();
-  const onHandleStep = useLoginStepHandler();
+
   const { onConnect, onDisconnectWallets } = useConnectWallet({
     async onGetNonce() {
-      const { response, data, error } = await api.GET('/auth/message');
-      console.log({ response, data, error });
+      const { data, error } = await api.GET('/auth/message');
+      console.log({ data, error });
+
       if (error || !data?.message) {
         throw new Error('Could not get nonce', { cause: error });
       }
 
-      console.log(data.message);
-
       return data.message;
     },
-    async onSignedMessage({ signature, wallet, publicKey }) {
+    async onSignedMessage({ signature, wallet_address, message }) {
       const res = await signIn('credential-wallet', {
         redirect: false,
-        wallet,
+        wallet_address,
         signature,
-        publicKey,
+        message,
       });
+      const callbackUrl = searchParams.get('callbackUrl');
 
-      if (!res || (res && !res.ok)) {
-        throw new Error('Could not login');
+      if (res?.error || !res?.ok || !res) {
+        if (res?.error === 'this account does not exist') {
+          // add searchParams to "routes.new" url if callbackUrl is not null
+          const redirectSearchParams = new URLSearchParams();
+          redirectSearchParams.append('signature', signature);
+          redirectSearchParams.append('message', message);
+          if (callbackUrl) {
+            redirectSearchParams.append('callbackUrl', callbackUrl);
+          }
+          onSignup();
+
+          return router.replace(
+            `${routes.new}?${redirectSearchParams.toString()}`
+          );
+        }
+
+        throw new Error(res?.error ?? 'Could not login');
       }
 
-      if (res.error) {
-        throw new Error(res.error);
-      }
-      await onHandleStep();
+      onSuccess();
+      router.push(callbackUrl ?? routes.dashboard.user.home);
     },
     statesHandler: connectionStep,
   });
 
-  const onConnectWallet = (
-    address: string,
-    network: Network,
-    publicKey?: string
-  ) => {
+  const onConnectWallet = (address: string, network: Network) => {
     onCancel();
-    onConnect(address, network, publicKey);
+    onConnect(address, network);
   };
 
   return (

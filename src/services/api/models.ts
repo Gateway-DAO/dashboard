@@ -1,4 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-types */
+
+import { components } from './types';
+
+export type Account = components['schemas']['model.Account'];
+export type AuthResponse = Required<
+  components['schemas']['model.AuthResponse']
+>;
+
 export type PrivateDataAsset = {
   id: string;
   proofs: Array<any>;

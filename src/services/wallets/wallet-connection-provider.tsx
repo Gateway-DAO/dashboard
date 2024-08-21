@@ -9,6 +9,7 @@ export type WalletLoadingStep =
   | 'signing'
   | 'loading'
   | 'success'
+  | 'signup'
   | 'error';
 
 type State = {
@@ -21,6 +22,7 @@ export type WalletConnectionStateHandlers = {
   onSigning: () => void;
   onLoading: () => void;
   onSuccess: () => void;
+  onSignup: () => void;
   onError: (error: string) => void;
 };
 
@@ -32,6 +34,7 @@ const WalletConnectionContext = createContext<Context>({
   onSigning: () => {},
   onLoading: () => {},
   onSuccess: () => {},
+  onSignup: () => {},
   onError: () => {},
 });
 
@@ -53,9 +56,15 @@ export default function WalletConnectionProvider({
   const onLoading = () => {
     setStep({ step: 'loading' });
   };
+
   const onSuccess = () => {
     setStep({ step: 'success' });
   };
+
+  const onSignup = () => {
+    setStep({ step: 'signup' });
+  };
+
   const onError = (newError: string) => {
     setStep({ step: 'error', error: newError });
   };
@@ -72,6 +81,7 @@ export default function WalletConnectionProvider({
             onLoading,
             onSuccess,
             onError,
+            onSignup,
           }}
         >
           {children}

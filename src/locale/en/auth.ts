@@ -1,3 +1,5 @@
+import { WalletLoadingStep } from '@/services/wallets/wallet-connection-provider';
+
 export const auth = {
   menu: {
     gatewayId: 'Manage Gateway ID',
@@ -115,5 +117,12 @@ export const auth = {
       title: 'Something went wrong',
       description: "Please try again or contact support if it doesn't work.",
     },
-  },
+    signup: {
+      title: 'New user',
+      description: "Let's create a new account",
+    },
+  } satisfies Record<
+    Exclude<WalletLoadingStep, 'pending'>,
+    { title: string; description: string }
+  >,
 };

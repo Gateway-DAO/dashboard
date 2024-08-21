@@ -1,6 +1,6 @@
 'use client';
 
-import { getErrorMessage } from '@/locale/en/errors';
+import useDisconnectWallets from '@/services/wallets/use-disconnect-wallets';
 import { WalletConnectionStateHandlers } from '@/services/wallets/wallet-connection-provider';
 import { Network } from '@/types/web3';
 import { useWallet } from '@solana/wallet-adapter-react';
@@ -8,12 +8,10 @@ import { useMutation } from '@tanstack/react-query';
 import bs58 from 'bs58';
 import { useSignMessage } from 'wagmi';
 
-import useDisconnectWallets from './use-disconnect-wallets';
-
 type OnSignedMessage = {
+  message: string;
   signature: string;
-  wallet: string;
-  publicKey?: string;
+  wallet_address: string;
   network: Network;
 };
 
@@ -97,11 +95,7 @@ export default function useConnectWallet({
     onError: onDisconnectWallets,
   });
 
-  const onConnect = async (
-    wallet: string,
-    network: Network,
-    publicKey?: string
-  ) => {
+  const onConnect = async (wallet: string, network: Network) => {
     try {
       statesHandler?.onSigning?.();
       const nonce = await getNonce({
@@ -113,11 +107,12 @@ export default function useConnectWallet({
         network,
       });
       statesHandler?.onLoading?.();
-      await connectWallet({ signature, wallet, publicKey, network: network });
-      resetNonce();
-      resetSignature();
-      resetWallet();
-      statesHandler?.onSuccess?.();
+      await connectWallet({
+        signature,
+        wallet_address: wallet,
+        message: nonce,
+        network: network,
+      });
     } catch (error: any) {
       if (SING_CANCEL_ERRORS.includes(error?.name)) {
         statesHandler?.onPending?.();
@@ -125,6 +120,10 @@ export default function useConnectWallet({
         statesHandler?.onError?.((error as Error).message);
       }
       onDisconnectWallets();
+    } finally {
+      resetNonce();
+      resetSignature();
+      resetWallet();
     }
   };
 

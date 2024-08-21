@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { ComponentProps, Suspense, useState } from 'react';
 
 import NavLogo from '@/components/nav/logo';
@@ -48,6 +49,8 @@ export default function MainNavbar({ color }: Props) {
     variant: 'outlined',
     onClick: () => setIsModalWaleltOpen(true),
   };
+  const session = useSession();
+
   return (
     <>
       <Nav
