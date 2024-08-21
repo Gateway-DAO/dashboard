@@ -12,14 +12,7 @@ export type GatewayProfile = {
   isOrganization: boolean;
 };
 
-export default function getOrganizationOrUserData(
-  user: PartialDeep<
-    Pick<
-      User,
-      'id' | 'gatewayId' | 'displayName' | 'profilePicture' | 'createdAt'
-    >
-  >
-): GatewayProfile {
+export default function getOrganizationOrUserData(user: any): GatewayProfile {
   return {
     id: user.id!,
     gatewayId: user.gatewayId! ?? limitCharsCentered(user.id!, 10),

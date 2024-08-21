@@ -41,18 +41,24 @@ export default function FeaturedSection({
           {title}
         </Typography>
         {viewMore && (
-          <Button variant="text" href={viewMore.href}>
+          <Button
+            variant="text"
+            sx={{ display: { xs: 'none', lg: 'block' } }}
+            href={viewMore.href}
+          >
             {viewMore.label}
           </Button>
         )}
       </Box>
+
       <Box
         sx={{
           gap: 2,
           display: 'grid',
+          overflowX: 'auto',
+          gridAutoFlow: 'column',
           gridTemplateColumns: {
-            xs: '1fr',
-            md: 'repeat(2, 1fr)',
+            xs: 'repeat(auto-fill, minmax(1fr, auto))', // Auto-fill columns in the x direction on small screens            md: 'repeat(2, 1fr)',
             lg: `repeat(${columns}, 1fr)`,
           },
         }}
@@ -60,12 +66,21 @@ export default function FeaturedSection({
         {isLoading && (
           <>
             {Array.from(Array(columns).keys()).map((_item, index) => (
-              <DataImageCardLoading key={index} />
+              <DataImageCardLoading key={index}  />
             ))}
           </>
         )}
         {children}
       </Box>
+      {viewMore && (
+        <Button
+          variant="text"
+          sx={{ display: { lg: 'none' }, alignItems: 'start' }}
+          href={viewMore.href}
+        >
+          {viewMore.label}
+        </Button>
+      )}
     </SectionContainer>
   );
 }

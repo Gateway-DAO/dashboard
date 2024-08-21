@@ -7,14 +7,14 @@ import { NavLink } from '@/components/nav/types';
 import documentationRoutes from '@/constants/documentationRoutes';
 import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
-import { currentEnv, isSandbox } from '@/utils/env';
+import { isSandbox } from '@/utils/env';
 
 import { Chip } from '@mui/material';
 
 const links: NavLink[] = [
   { label: 'Transactions', href: routes.explorer.transactions },
-  { label: 'Structured Data', href: routes.explorer.dataModels },
-  { label: 'Request Data', href: routes.explorer.requestTemplates },
+  { label: 'Data Models', href: routes.explorer.dataModels },
+  { label: 'Sign Message', href: routes.explorer.requestTemplates },
   {
     label: 'Docs',
     href: documentationRoutes.home,
@@ -38,37 +38,23 @@ export default function ExplorerNavbar() {
     href: `${externalLinks.gateway}${pathname}`,
   };
 
-  const buttons =
-    currentEnv === 'production'
-      ? [openDashboardButton]
-      : [sandboxButton, openDashboardButton];
-
   return (
     <Nav
       compact
       logo={
         <NavLogo>
-          {currentEnv === 'production' ? (
-            <Chip
-              size="small"
-              color="primary"
-              label="Explorer"
-              sx={{ ml: 1, fontWeight: 700 }}
-            />
-          ) : (
-            <Chip
-              size="small"
-              color="warning"
-              label="Sandbox Explorer"
-              sx={{ ml: 1, fontWeight: 700 }}
-            />
-          )}
+          <Chip
+            size="small"
+            color="primary"
+            label="Explorer"
+            sx={{ ml: 1, fontWeight: 700 }}
+          />
         </NavLogo>
       }
       color="black"
       links={links}
-      buttons={buttons}
-      hamburgerButtons={buttons}
+      buttons={[openDashboardButton]}
+      hamburgerButtons={[openDashboardButton]}
     />
   );
 }

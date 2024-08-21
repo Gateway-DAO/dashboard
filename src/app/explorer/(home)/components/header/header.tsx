@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 import DataModelsBoxIcon from '@/components/icons/data-models-box';
-import HomeDataRequestTemplatesIcon from '@/components/icons/data-request-template-box';
 import HomeTransactionIcon from '@/components/icons/home-transaction';
 
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -15,7 +14,6 @@ import {
   Theme,
   Typography,
 } from '@mui/material';
-import InternalHeader from '@/components/internal/internal-header';
 import routes from '@/constants/routes';
 
 const GetIcon = ({ index, sx }: { index: number; sx: SxProps<Theme> }) => {
@@ -23,7 +21,6 @@ const GetIcon = ({ index, sx }: { index: number; sx: SxProps<Theme> }) => {
     <>
       {index === 0 && <HomeTransactionIcon sx={sx} />}
       {index === 1 && <DataModelsBoxIcon sx={sx} />}
-      {index === 2 && <HomeDataRequestTemplatesIcon sx={sx} />}
     </>
   );
 };
@@ -39,7 +36,7 @@ export default function Header() {
       target: '_self',
     },
     {
-      title: 'Upload Data',
+      title: 'Explore Data Models',
       description:
         'Structured data assets are arranged in Data Models. Each data uploaded using a data model adheres to a standardized structure.',
       link_text: 'Discover Data Models',
@@ -49,20 +46,25 @@ export default function Header() {
   ];
 
   return (
-    <InternalHeader>
+    <Box
+      sx={{
+        pt: 21,
+        pb: 6,
+      }}
+    >
       <Container>
         <Typography
-          variant="h2"
-          fontWeight={300}
+          variant={'h4'}
+          fontWeight={{ xs: 400, lg: 300 }}
           sx={{
-            maxWidth: { xs: '95%', lg: '60%' },
+            maxWidth: { xs: '85%', lg: '30%' },
           }}
         >
           Explore transactions and interact with the protocol
         </Typography>
-        <Box
+        <Stack
           sx={{
-            display: 'flex',
+            direction: 'row',
             justifyContent: 'space-between',
             gap: 2,
             flexDirection: 'row',
@@ -80,8 +82,7 @@ export default function Header() {
               sx={{
                 padding: 2,
                 paddingLeft: 2,
-                width: '100%',
-                minWidth: '282px',
+                width: { lg: '100%' },
                 marginTop: 2,
                 mr: 1,
                 textDecoration: 'none',
@@ -89,23 +90,30 @@ export default function Header() {
               }}
             >
               <Stack
-                sx={{ height: '100%' }}
+                sx={{
+                  height: { xs: '330px', lg: '100%' },
+                  width: { xs: '300px', lg: '100%' },
+                }}
                 flexDirection="column"
-                justifyContent="space-between"
+                justifyContent={{ xs: 'none', lg: 'space-between' }}
                 alignItems="flex-start"
               >
                 <GetIcon
                   index={index}
-                  sx={{ width: 'auto', height: 80, mb: 2 }}
+                  sx={{ width: 'auto', height: 80, mb: { xs: 0, lg: 2 } }}
                 />
                 <Box>
-                  <Typography mt={2} variant="h5" gutterBottom>
+                  <Typography
+                    sx={{ mt: { xs: 10, lg: 2 } }}
+                    variant="h5"
+                    gutterBottom
+                  >
                     {details.title}
                   </Typography>
                   <Typography variant="body2" gutterBottom sx={{ mb: 2 }}>
                     {details.description}
                   </Typography>
-                  <Button variant="text">
+                  <Button variant="text" sx={{ mt: { xs: 1, lg: 0 } }}>
                     {details.link_text}
                     {details.target === '_blank' && (
                       <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
@@ -115,8 +123,8 @@ export default function Header() {
               </Stack>
             </Paper>
           ))}
-        </Box>
+        </Stack>
       </Container>
-    </InternalHeader>
+    </Box>
   );
 }

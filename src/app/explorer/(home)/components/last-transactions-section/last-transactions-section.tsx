@@ -1,7 +1,6 @@
 'use client';
 
 import NumberCard from '@/components/number-card/number-card';
-import { transaction } from '@/locale/en/transaction';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -36,7 +35,7 @@ export default function LastTransactionsSection() {
       }}
     >
       <Stack component={Container} maxWidth="xl">
-        <Typography variant="h5">{transaction.last_transactions}</Typography>
+        <Typography variant="h5">Last transactions</Typography>
         <Stack
           sx={{ flexDirection: { xs: 'column', lg: 'row' } }}
           gap={2}
@@ -44,25 +43,25 @@ export default function LastTransactionsSection() {
         >
           <NumberCard
             dark
-            label={transaction.cards.txs_count}
+            label="Transactions"
             value={data?.transactionsCount as number}
             isLoading={isLoading}
           />
           <NumberCard
             dark
-            label={transaction.cards.data_contributors}
+            label="Data contributers"
             value={data?.uniqueIssuers as number}
             isLoading={isLoading}
           />
           <NumberCard
             dark
-            label={transaction.cards.pda_count}
+            label="Data assets"
             value={data?.pdasIssued as number}
             isLoading={isLoading}
           />
           <NumberCard
             dark
-            label={transaction.cards.did_count}
+            label="DIDs created"
             value={data?.totalUsers as number}
             isLoading={isLoading}
           />

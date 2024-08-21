@@ -5,7 +5,7 @@ import DataCard from '@/components/data-card/data-card';
 import { PartialDeep } from 'type-fest';
 
 import { Typography, CardProps, Box } from '@mui/material';
-import { DataModelType } from '@/services/api/mock-types';
+import { DataModelType, mockUser } from '@/services/api/mock-types';
 import routes from '@/constants/routes';
 import getOrganizationOrUserData from '@/utils/get-organization-or-use-data';
 
@@ -21,14 +21,13 @@ export default function DataModelCard({
   children,
   ...props
 }: Props & CardProps) {
-  const profile = getOrganizationOrUserData();
-
   return (
     <DataCard
       title={dataModel!.title!}
       description={dataModel!.description!}
       href={withLink ? routes.explorer.dataModel(dataModel!.id) : undefined}
-      profile={profile}
+      profile={mockUser}
+      sx={{ minWidth: 300 }}
       bottom={
         <>
           <Box
@@ -38,22 +37,15 @@ export default function DataModelCard({
               gridTemplateColumns: '1fr 0.8fr',
             }}
           >
-            <Typography variant="subtitle2" fontWeight="400"></Typography>
-
-            <Typography
-              variant="subtitle2"
-              fontWeight="400"
-              alignSelf="flex-end"
-              justifySelf="flex-end"
-            >
+            <Typography variant="subtitle2" fontWeight="400" justifySelf="left">
               <b>
-                {dataModel?.pdasIssuedCount
-                  ? dataModel.pdasIssuedCount.toLocaleString('en-US', {
+                {dataModel?.dataAssests
+                  ? dataModel.dataAssests.toLocaleString('en-US', {
                       notation: 'compact',
                     })
                   : 0}
               </b>{' '}
-              {dataModelCard.issuances(dataModel?.pdasIssuedCount ?? 0)}
+              data assets
             </Typography>
           </Box>
           {children}

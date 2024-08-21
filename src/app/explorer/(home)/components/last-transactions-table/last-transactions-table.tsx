@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { CardCellContainer } from '@/components/card-cell/card-cell';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
-import { transaction } from '@/locale/en/transaction';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
@@ -32,7 +31,7 @@ export default function LastTransactionsTable() {
       return mockPromise;
     },
   });
-  
+
   return (
     <Stack
       component={Card}
@@ -45,13 +44,8 @@ export default function LastTransactionsTable() {
     >
       <CardCellContainer mb={1}>
         <Box display="flex">
-          <Typography flex={3}>{transaction.home_table.columns.id}</Typography>
-          <Typography flex={1}>
-            {transaction.home_table.columns.action}
-          </Typography>
-          <Typography flex={1}>
-            {transaction.home_table.columns.date}
-          </Typography>
+          <Typography flex={3}>Transaction ID</Typography>
+          <Typography sx={{ mr: { xs: 10, lg: 20 } }}>Date</Typography>
         </Box>
       </CardCellContainer>
       <Stack
@@ -71,10 +65,8 @@ export default function LastTransactionsTable() {
                   <Typography flex={3}>
                     <Skeleton />
                   </Typography>
-                  <Box flex={1}>
-                    <Skeleton />
-                  </Box>
-                  <Typography flex={1}>
+
+                  <Typography sx={{ mr: 20 }}>
                     <Skeleton />
                   </Typography>
                 </Box>
@@ -98,11 +90,25 @@ export default function LastTransactionsTable() {
                     },
                   }}
                 >
-                  <Typography flex={3}>
+                  <Typography
+                    flex={3}
+                    variant="body1"
+                    gutterBottom={false}
+                    sx={{
+                      width: { xs: '112px' },
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
                     {transaction.solanaTransactionId}
                   </Typography>
 
-                  <Typography flex={1}>
+                  <Typography
+                    sx={{ mr: { lg: 3 }, width: { xs: '183px' } }}
+                    variant="body1"
+                    gutterBottom={false}
+                  >
                     {dayjs(transaction.createdAt).format(DATE_FORMAT)}
                   </Typography>
                 </Box>
@@ -113,7 +119,7 @@ export default function LastTransactionsTable() {
 
         <CardCellContainer alignItems="flex-start">
           <Button variant="text" href={routes.explorer.transactions}>
-            {transaction.home_table.view_more}
+            View all transactions
           </Button>
         </CardCellContainer>
       </Stack>

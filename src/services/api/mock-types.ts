@@ -151,6 +151,8 @@ export const mockPrivateDataAssets: PrivateDataAsset[] = [
   },
 ];
 
+export const mockUser = { id: '1', gatewayId: 'test', isOrganization: false };
+
 export const mockExplorerHomeStats: ExplorerHomeStats = {
   pdasIssued: 1000,
   totalUsers: 1000,
