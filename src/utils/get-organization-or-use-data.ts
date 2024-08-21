@@ -1,5 +1,3 @@
-import { PartialDeep } from 'type-fest';
-
 import { limitCharsCentered } from './string';
 
 export type GatewayProfile = {

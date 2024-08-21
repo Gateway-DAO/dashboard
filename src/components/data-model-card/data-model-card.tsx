@@ -7,7 +7,6 @@ import { PartialDeep } from 'type-fest';
 import { Typography, CardProps, Box } from '@mui/material';
 import { DataModelType, mockUser } from '@/services/api/mock-types';
 import routes from '@/constants/routes';
-import getOrganizationOrUserData from '@/utils/get-organization-or-use-data';
 
 type Props = {
   withLink?: boolean;

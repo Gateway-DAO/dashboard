@@ -5,9 +5,7 @@ import NavLogo from '@/components/nav/logo';
 import Nav from '@/components/nav/nav';
 import { NavLink } from '@/components/nav/types';
 import documentationRoutes from '@/constants/documentationRoutes';
-import externalLinks from '@/constants/externalLinks';
 import routes from '@/constants/routes';
-import { isSandbox } from '@/utils/env';
 
 import { Chip } from '@mui/material';
 
@@ -32,11 +30,6 @@ const openDashboardButton: NavLink = {
 
 export default function ExplorerNavbar() {
   const pathname = usePathname();
-  const sandboxButton: NavLink = {
-    label: isSandbox ? 'Sandbox' : 'Testnet',
-    variant: 'outlined',
-    href: `${externalLinks.gateway}${pathname}`,
-  };
 
   return (
     <Nav

@@ -58,7 +58,8 @@ export default function FeaturedSection({
           overflowX: 'auto',
           gridAutoFlow: 'column',
           gridTemplateColumns: {
-            xs: 'repeat(auto-fill, minmax(1fr, auto))', // Auto-fill columns in the x direction on small screens            md: 'repeat(2, 1fr)',
+            xs: 'repeat(auto-fill, minmax(1fr, auto))',
+            md: 'repeat(2, 1fr)',
             lg: `repeat(${columns}, 1fr)`,
           },
         }}
@@ -66,7 +67,7 @@ export default function FeaturedSection({
         {isLoading && (
           <>
             {Array.from(Array(columns).keys()).map((_item, index) => (
-              <DataImageCardLoading key={index}  />
+              <DataImageCardLoading key={index} />
             ))}
           </>
         )}
