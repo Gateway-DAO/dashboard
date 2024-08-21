@@ -21,7 +21,8 @@
     "build:dev:windows": "set __NEXT_TEST_MODE=true&& next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "tsx ./scripts/generate-openapi.ts"
+    "generate": "tsx ./scripts/generate-openapi.ts",
+    "skott": "npx skott --displayMode=webapp --trackThirdPartyDependencies --ignorePattern=\"test/**/*\""
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",

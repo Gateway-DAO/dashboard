@@ -29,12 +29,25 @@ export const defaultGridCustomization: GatewaySxProps = {
   '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
     border: 'none',
   },
-  '& .MuiDataGrid-columnHeader:first-child, & .MuiDataGrid-cell:first-child': {
-    paddingLeft: CONTAINER_PX,
+  '.MuiDataGrid-cell': {
+    alignContent: 'center',
   },
-  '& .MuiDataGrid-columnHeader:last-child, & .MuiDataGrid-cell:last-child': {
-    paddingRight: CONTAINER_PX,
-  },
+  '& .MuiDataGrid-columnHeader[aria-colindex="1"], & .MuiDataGrid-cell[aria-colindex="1"]':
+    {
+      paddingLeft: {
+        xs: CONTAINER_PX.xs + 10 / 8,
+        md: CONTAINER_PX.md + 10 / 8,
+        lg: CONTAINER_PX.lg + 10 / 8,
+      },
+    },
+  '& .MuiDataGrid-columnHeader--last, & .MuiDataGrid-row .MuiDataGrid-cell:last-child':
+    {
+      paddingRight: {
+        xs: CONTAINER_PX.xs + 10 / 8,
+        md: CONTAINER_PX.md + 10 / 8,
+        lg: CONTAINER_PX.lg + 10 / 8,
+      },
+    },
   '.MuiDataGrid-row': {
     cursor: 'pointer',
   },

@@ -22,7 +22,6 @@ async function generate() {
 
   const ast = await openapiTS(convertedString, {
     enum: true,
-    pathParamsAsTypes: true,
   });
   const types = astToString(ast);
 
