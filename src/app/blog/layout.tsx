@@ -15,7 +15,7 @@ const FooterSubscription = dynamic(
 export default function BlogLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <MainNavbar />
+      <MainNavbar color="black" />
       {children}
       <Footer slot={<FooterSubscription />} />
     </>

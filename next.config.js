@@ -19,7 +19,7 @@ const nextConfig = {
       'cdn.shopify.com',
       'static.ghost.org',
       'images.unsplash.com',
-      'gateway-1.ghost.io',
+      'guardians.gateway.tech',
     ],
   },
   async redirects() {
