@@ -1,6 +1,6 @@
 import InternalHeader from '@/components/internal/internal-header';
 
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Divider, Typography } from '@mui/material';
 
 import FeaturedDataModels from './components/featured-data-models';
 
@@ -15,7 +15,7 @@ export default function DataModel() {
               variant="body1"
               mt={2}
               color="text.secondary"
-              width="50%"
+              width={{ xs: '100%', md: '50%' }}
               gutterBottom
             >
               Structured data assets are arranged in Data Models. Each data
@@ -40,6 +40,7 @@ export default function DataModel() {
         Data models
       </InternalHeader>
       <FeaturedDataModels />
+      <Divider />
     </>
   );
 }
