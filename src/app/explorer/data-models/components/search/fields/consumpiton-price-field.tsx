@@ -3,7 +3,6 @@
 import RangeField, {
   RangeFieldProps,
 } from '@/components/form/range-field/range-field';
-import { explorerDataModels } from '@/locale/en/datamodel';
 
 import { InputAdornment } from '@mui/material';
 
