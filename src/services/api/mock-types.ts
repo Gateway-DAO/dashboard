@@ -1,4 +1,19 @@
 /* eslint-disable @typescript-eslint/ban-types */
+
+export type Scalars = {
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+  Date: any;
+  DateTime: any;
+  DateTimeISO: any;
+  JSON: any;
+  StringSchema: any;
+};
+export type Maybe<T> = T | null;
+
 export type PrivateDataAsset = {
   id: string;
   proofs: Array<any>;
@@ -26,6 +41,7 @@ export type DataModelType = {
   updatedAt: Date;
   createdAt: Date;
   dataAssests: number;
+  consumptionPrice: Maybe<Scalars['Float']>;
 };
 
 export type ExplorerHomeStats = {
@@ -47,6 +63,24 @@ export type Transaction = {
   createdAt: Date;
 };
 
+export type DataModelsMetadataType = {
+  tags: string[];
+  consumptionPrice: {
+    min: number;
+    max: number;
+  };
+  issuedCount: number;
+};
+
+export const mockDataModelsMetadata: DataModelsMetadataType = {
+  tags: ['defi', 'innovation', 'ai', 'blockchain'],
+  consumptionPrice: {
+    min: 30,
+    max: 60,
+  },
+  issuedCount: 50,
+};
+
 export const mockDataModels: DataModelType[] = [
   {
     id: 1112121,
@@ -57,6 +91,7 @@ export const mockDataModels: DataModelType[] = [
     dataModelId: '6cfd080c-58c0-4c28-b34a-dc0bd11b2ec6',
     updatedAt: new Date('2024-10-30'),
     createdAt: new Date(),
+    consumptionPrice: 40,
   },
   {
     id: 1112122,
@@ -67,6 +102,7 @@ export const mockDataModels: DataModelType[] = [
     dataModelId: '6cfd080c-58c0-4c28-b34a-dc0bd11b2ec6',
     updatedAt: new Date('2024-10-28'),
     createdAt: new Date(),
+    consumptionPrice: 60,
   },
   {
     id: 1112123,
@@ -77,6 +113,7 @@ export const mockDataModels: DataModelType[] = [
     dataModelId: '6cfd080c-58c0-4c28-b34a-dc0bd11b2ec6',
     updatedAt: new Date('2024-10-31'),
     createdAt: new Date(),
+    consumptionPrice: 30,
   },
 ];
 

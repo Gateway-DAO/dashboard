@@ -43,6 +43,8 @@ export default function DataModelList() {
     },
   });
 
+  
+
   if (isSuccess && !data?.dataModels?.length) {
     return <Empty />;
   }
