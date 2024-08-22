@@ -11,7 +11,7 @@ function print_help {
 
 # Script Arguments
 # ----------------
-PROJECT="network-ui"
+PROJECT="dashboard-next"
 REQUIRED_CLI=(
     aws
     jq
