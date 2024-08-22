@@ -15,9 +15,10 @@ import {
   DataModelsMetadataType,
 } from '@/services/api/mock-types';
 import { useDebouncedState } from '@react-hookz/web';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 // import AmountOfIssuancesField from './fields/amount-of-issuances-field';
+
 import ConsumpitonPriceField from './fields/consumpiton-price-field';
 
 const sortOptions: SortByOption<any>[] = [
@@ -78,15 +79,25 @@ export default function DataModelsExplorerSearch() {
   const consumptionPrice = metadata.data?.consumptionPrice;
 
   const dataModelsQuery = useQuery({
-    queryKey: ['data-models'],
-    queryFn: () => async (): Promise<DataModelType[]> => {
+    queryKey: [
+      'data-models',
+      selectedTags,
+      selectedConsumptionPrice,
+      selectedConsumptionPrice[0],
+      selectedConsumptionPrice[1],
+      selectedAmountOfIssuances,
+      selectedAmountOfIssuances[0],
+      selectedAmountOfIssuances[1],
+      selectedSort?.value,
+      search,
+    ],
+    queryFn: async (): Promise<DataModelType[]> => {
       const mockPromise = new Promise<DataModelType[]>((resolve) => {
         setTimeout(() => {
-          resolve({
-            ...mockDataModels,
-          });
+          resolve(mockDataModels);
         }, 1000);
       });
+
       return mockPromise;
     },
   });
@@ -136,21 +147,21 @@ export default function DataModelsExplorerSearch() {
 
   return (
     <SearchSection
-      title={explorerDataModels.listTitle}
-      emptyText={explorerDataModels.empty}
+      title={'All data models'}
+      emptyText={'No data models found'}
       errorMessage="Error on searching for data models"
-      isEmpty={dataModelsQuery.isSuccess && dataModels.length === 0}
+      isEmpty={dataModelsQuery.isSuccess && dataModelsQuery.data.length === 0}
       isError={dataModelsQuery.isError}
       isLoading={dataModelsQuery.isLoading}
-      isFetchingMore={dataModelsQuery.isFetchingNextPage}
-      hasMore={dataModelsQuery.hasNextPage}
+      isFetchingMore={false}
+      hasMore={false}
       onSearch={setSearch}
-      fetchMore={() => dataModelsQuery.fetchNextPage()}
+      fetchMore={() => console.log('next page')}
       filters={filters}
       cards={
         dataModelsQuery.isSuccess &&
-        dataModels.length > 0 &&
-        dataModels.map((dataModel) => (
+        dataModelsQuery.data.length > 0 &&
+        dataModelsQuery.data.map((dataModel) => (
           <DataModelCard dataModel={dataModel} key={dataModel.id} />
         ))
       }

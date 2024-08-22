@@ -3,6 +3,7 @@ import InternalHeader from '@/components/internal/internal-header';
 import { Box, Button, Divider, Typography } from '@mui/material';
 
 import FeaturedDataModels from './components/featured-data-models';
+import DataModelsExplorerSearch from './components/search/search';
 
 export default function DataModel() {
   return (
@@ -41,6 +42,7 @@ export default function DataModel() {
       </InternalHeader>
       <FeaturedDataModels />
       <Divider />
+      <DataModelsExplorerSearch />
     </>
   );
 }
