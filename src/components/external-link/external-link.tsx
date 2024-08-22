@@ -51,7 +51,7 @@ export default function ExternalLink({
             color: 'text.disabled',
             fontSize: 'body2.fontSize',
             position: 'relative',
-            top: 2,
+            top: 3.5,
             left: 8,
             ...(size === 'big' && {
               fontSize: 20,

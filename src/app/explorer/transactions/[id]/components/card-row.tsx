@@ -13,7 +13,11 @@ export default function CardRow({
   return (
     <TableCellContainer>
       <CardCellContainer>
-        <Stack direction="row" alignItems="flex-start" pb={1}>
+        <Stack
+          direction={{ xs: 'column', lg: 'row' }}
+          alignItems="flex-start"
+          pb={1}
+        >
           <Typography variant="subtitle1" flex={1}>
             {title}
           </Typography>

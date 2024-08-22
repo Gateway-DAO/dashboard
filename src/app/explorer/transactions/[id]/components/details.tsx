@@ -3,12 +3,7 @@ import React from 'react';
 
 import ExternalLink from '@/components/external-link/external-link';
 import { explorerQueries } from '@/constants/queries';
-import { transaction_detail } from '@/locale/en/transaction';
-import { apiPublic } from '@/services/protocol/api';
-import {
-  TransactionAction,
-  Transaction_DetailQuery,
-} from '@/services/protocol/types';
+
 import { useQuery } from '@tanstack/react-query';
 
 import {
@@ -22,16 +17,16 @@ import {
   Typography,
 } from '@mui/material';
 
-import ActionDetail from '../../../components/transactions/action-detail';
 import CardRow from './card-row';
 import TransactionData from './transaction-data';
-import DataModelCreation from './types/data-model-creation';
-import OrgCreation from './types/org-creation';
 import PDA from './types/pda';
-import ProofCreation from './types/proof-creation';
-import RequestCreation from './types/request-creation';
-import RequestTemplateCreation from './types/request-template-creation';
-import UserCreation from './types/user-creation';
+import ActionDetail from '@/app/explorer/components/transaction/action-detail';
+import {
+  mockTransactionType,
+  Transaction,
+  mockTransactions,
+  mockMetaData,
+} from '@/services/api/mock-types';
 
 type Props = {
   id: string;
@@ -40,50 +35,37 @@ type Props = {
 export default function TransactionDetails({ id }: Props) {
   const { data, isLoading } = useQuery({
     queryKey: [explorerQueries.transaction, id],
-    queryFn: () => apiPublic.transaction_detail({ id }),
-    select: (data) => data.transaction,
+    queryFn: async (): Promise<Transaction> => {
+      const mockPromise = new Promise<Transaction>((resolve) => {
+        const t = mockTransactions.find((t) => t.solanaTransactionId === id);
+        resolve({
+          createdAt: t!.createdAt,
+          fee: t!.fee,
+          signature: t!.signature,
+          solanaTransactionId: t!.solanaTransactionId,
+          source: t!.source,
+          transactionId: t!.transactionId,
+        });
+      });
+      return mockPromise;
+    },
   });
 
   const { data: transactionData } = useQuery({
-    queryKey: [explorerQueries.transaction_arweave, data?.arweaveUrl],
-    queryFn: async () => {
-      const response = await fetch(data?.arweaveUrl as string);
-      if (!response.ok) {
-        throw new Error('Network error to get arweave data');
-      }
-
-      return response.json();
+    queryKey: [explorerQueries.transaction_arweave],
+    queryFn: async (): Promise<typeof mockMetaData> => {
+      const mockPromise = new Promise<typeof mockMetaData>((resolve) => {
+        setTimeout(() => {
+          resolve(mockMetaData);
+        }, 1000);
+      });
+      return mockPromise;
     },
-    enabled: !!data?.arweaveUrl,
   });
 
-  const displayDetails = (data: Transaction_DetailQuery['transaction']) => {
-    switch (data.action) {
-      case TransactionAction.UserCreate:
-        return <UserCreation data={data} />;
-      case TransactionAction.OrganizationCreate:
-        return <OrgCreation data={data} />;
-      case TransactionAction.OrganizationUpdate:
-        return <OrgCreation data={data} />;
-      case TransactionAction.PdaIssuance:
-        return <PDA data={data} />;
-      case TransactionAction.PdaUpdate:
-        return <PDA data={data} />;
-      case TransactionAction.PdaStatusChange:
-        return <PDA data={data} />;
-      case TransactionAction.RequestCreate:
-        return <RequestCreation data={data} />;
-      case TransactionAction.RequestStatusChange:
-        return <RequestCreation data={data} />;
-      case TransactionAction.RequestTemplateCreate:
-        return <RequestTemplateCreation data={data} />;
-      case TransactionAction.DatamodelCreate:
-        return <DataModelCreation data={data} />;
-      case TransactionAction.ProofCreate:
-        return <ProofCreation data={data} />;
-      case TransactionAction.ProofStatusChange:
-        return <ProofCreation data={data} />;
-    }
+  // this will also refactor in future depending on cases
+  const displayDetails = (data: any) => {
+    return <PDA data={data} />;
   };
 
   return (
@@ -105,35 +87,20 @@ export default function TransactionDetails({ id }: Props) {
               />
             }
           >
-            <CardRow title={transaction_detail.transaction_id}>
-              <Typography variant="body1">
-                {isLoading ? <Skeleton variant="text" width={400} /> : id}
-              </Typography>
-              {data && (
-                <ExternalLink
-                  iconSxProps={{ fontSize: 20, color: 'text.primary' }}
-                  href={data?.arweaveUrl as string}
-                  text=""
-                />
-              )}
-            </CardRow>
-            <CardRow title={transaction_detail.action}>
-              {isLoading ? (
-                <Skeleton width={100} />
-              ) : (
-                <Chip
-                  label={
-                    <ActionDetail action={data?.action as TransactionAction} />
-                  }
-                />
-              )}
-            </CardRow>
             {data && displayDetails(data)}
           </Stack>
         </Box>
       </Container>
       {transactionData && (
         <TransactionData data={JSON.stringify(transactionData)} />
+      )}
+      {data && (
+        <ExternalLink
+          iconSxProps={{ fontSize: 20, color: 'primary.main' }}
+          href={data?.transactionId as string}
+          text="View on Solscan"
+          textSxProps={{ color: 'primary.main', ml: 7 }}
+        />
       )}
     </>
   );

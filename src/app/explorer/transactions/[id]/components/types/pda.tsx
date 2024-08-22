@@ -1,23 +1,13 @@
-import ExternalLink from '@/components/external-link/external-link';
-import { TextStatusChip } from '@/components/text-status-chip/text-status-chip';
 import { DATE_FORMAT } from '@/constants/date';
-import routes from '@/constants/routes';
-import { transaction_detail } from '@/locale/en/transaction';
-import { Transaction_DetailQuery } from '@/services/protocol/types';
-import { numberToMoneyString } from '@/utils/money';
 import dayjs from 'dayjs';
 
-import { Divider, Stack } from '@mui/material';
+import { Divider, Stack, Typography } from '@mui/material';
 
 import CardRow from '../card-row';
-import UserColumn from '../user-column';
+import { Transaction } from '@/services/api/mock-types';
+import CopyData from '../copy-data';
 
-export default function PDA({
-  data,
-}: {
-  data: Transaction_DetailQuery['transaction'];
-}) {
-  const metadata: any = data.metadata;
+export default function PDA({ data }: { data: Transaction }) {
   return (
     <Stack
       sx={{
@@ -32,40 +22,27 @@ export default function PDA({
         />
       }
     >
-      <CardRow title={transaction_detail.pda_id}>{metadata.pda}</CardRow>
-      <CardRow title={transaction_detail.data_contributor}>
-        <UserColumn isLoading={false} user={data.from} />
+      <CardRow title="Transaction ID">
+        <CopyData text={data.transactionId} showWholeString={true} />
       </CardRow>
-      {data.from?.__typename === 'Organization' && (
-        <CardRow title={transaction_detail.signed_by}>
-          <UserColumn isLoading={false} user={{ id: metadata.signedBy }} />
-        </CardRow>
-      )}
-      <CardRow title={transaction_detail.data_model_id}>
-        {metadata.dataModel}
-        <ExternalLink
-          iconSxProps={{ fontSize: 20, color: 'text.primary' }}
-          href={routes.explorer.dataModel(metadata.dataModel) as string}
-          text=""
-        />
+      <CardRow title="Solana txn ID">
+        <CopyData text={data.solanaTransactionId} />
       </CardRow>
-      <CardRow title={transaction_detail.created_at}>
-        {dayjs(data?.createdAt).format(DATE_FORMAT)}
+      <CardRow title="Source">
+        <CopyData text={data.solanaTransactionId} />
       </CardRow>
-      <CardRow title={transaction_detail.cost}>
-        {numberToMoneyString(data?.cost ?? 0)}
+      <CardRow title="Signature">
+        <CopyData text={data.signature} />
       </CardRow>
-      <CardRow title={transaction_detail.expiration}>
-        {metadata.expirationDate
-          ? dayjs(metadata.expirationDate).format(DATE_FORMAT)
-          : 'Indeterminate'}
+      <CardRow title="Fee">
+        <Stack direction={'row'}>
+          <Typography>{data?.fee.solana}</Typography>
+          <Typography>{data?.fee.gateway}</Typography>
+        </Stack>
       </CardRow>
-      <CardRow title={transaction_detail.status}>
-        <TextStatusChip
-          variant="filled"
-          status={metadata.pdaStatus}
-          size="small"
-        />
+
+      <CardRow title="Created At">
+        {dayjs(data.createdAt).format(DATE_FORMAT)}
       </CardRow>
     </Stack>
   );
