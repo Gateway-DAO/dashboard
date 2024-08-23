@@ -55,7 +55,7 @@ export default function AuthenticationWalletModals({
           }
           onSignup();
 
-          return router.replace(
+          return router.push(
             `${routes.new}?${redirectSearchParams.toString()}`
           );
         }

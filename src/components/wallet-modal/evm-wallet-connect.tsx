@@ -6,9 +6,7 @@ import { Network } from '@/types/web3';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useToggle } from '@react-hookz/web';
 import { FaEthereum } from 'react-icons/fa';
-import { useAccount, useDisconnect } from 'wagmi';
-
-import { Typography } from '@mui/material';
+import { useAccount } from 'wagmi';
 
 import WalletModalButton from './wallet-modal-button';
 
@@ -18,7 +16,9 @@ type Props = {
 
 export default function EvmWalletConnect({ onConnect }: Props) {
   const [hadOpenedModal, toggleOpenedModal] = useToggle();
+
   const { address } = useAccount();
+
   useEffect(() => {
     if (hadOpenedModal && address) {
       onConnect(address, Network.Evm);

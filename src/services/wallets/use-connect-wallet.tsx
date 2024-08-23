@@ -44,7 +44,8 @@ export default function useConnectWallet({
     return bs58.encode(signature as Uint8Array);
   };
 
-  const onDisconnectWallets = useDisconnectWallets();
+  const { onDisconnectWallets, onDisconnectEvm, onDisconnectSolana } =
+    useDisconnectWallets();
 
   const {
     mutateAsync: getNonce,
@@ -96,6 +97,18 @@ export default function useConnectWallet({
   });
 
   const onConnect = async (wallet: string, network: Network) => {
+    try {
+      switch (network) {
+        case Network.Evm:
+          await onDisconnectSolana();
+          break;
+        case Network.Sol:
+          await onDisconnectEvm();
+          break;
+        default:
+          break;
+      }
+    } catch {}
     try {
       statesHandler?.onSigning?.();
       const nonce = await getNonce({

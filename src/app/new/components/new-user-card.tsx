@@ -1,3 +1,6 @@
+import { useSession } from 'next-auth/react';
+
+import { limitCharsOffset } from '@/utils/string';
 import { useSnackbar } from 'notistack';
 
 import { ContentCopy } from '@mui/icons-material';
@@ -11,14 +14,14 @@ import {
 } from '@mui/material';
 
 import NewUserIcon from './new-user-icon';
-import { useSession } from 'next-auth/react';
-import { limitCharsOffset } from '@/utils/string';
 
 // TODO: Unify Copy Buttons
 
 export default function NewUserCard() {
   const { enqueueSnackbar } = useSnackbar();
   const { data } = useSession();
+
+  const did = data?.user.did ?? '';
 
   const copy = async (text: string) => {
     try {
@@ -56,11 +59,11 @@ export default function NewUserCard() {
               <Typography
                 variant="body2"
                 color="primary.dark"
-                onClick={() => copy(data.user.did)}
+                onClick={() => copy(did)}
               >
-                {limitCharsOffset(data.user.did, 18, 4)}
+                {limitCharsOffset(did, 18, 4)}
               </Typography>
-              <IconButton onClick={() => copy(data.user.did)}>
+              <IconButton onClick={() => copy(did)}>
                 <ContentCopy
                   sx={{
                     fontSize: 16,

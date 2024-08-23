@@ -8,5 +8,9 @@ export default function useDisconnectWallets() {
     await Promise.allSettled([solanaDisconnect(), evmDisconnect()]);
   };
 
-  return onDisconnectWallets;
+  return {
+    onDisconnectWallets,
+    onDisconnectSolana: solanaDisconnect,
+    onDisconnectEvm: evmDisconnect,
+  };
 }
