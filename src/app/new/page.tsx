@@ -47,7 +47,9 @@ export default function NewUserPage({
         }}
       >
         <Card
+          component={Stack}
           elevation={0}
+          gap={9.75}
           sx={{ p: 3, maxWidth: 610, bgcolor: 'white.main', height: '100%' }}
         >
           <Logo href={routes.home} />

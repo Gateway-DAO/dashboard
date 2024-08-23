@@ -12,6 +12,7 @@ import {
 
 import NewUserIcon from './new-user-icon';
 import { useSession } from 'next-auth/react';
+import { limitCharsOffset } from '@/utils/string';
 
 // TODO: Unify Copy Buttons
 
@@ -57,7 +58,7 @@ export default function NewUserCard() {
                 color="primary.dark"
                 onClick={() => copy(data.user.did)}
               >
-                {data.user.did}
+                {limitCharsOffset(data.user.did, 18, 4)}
               </Typography>
               <IconButton onClick={() => copy(data.user.did)}>
                 <ContentCopy

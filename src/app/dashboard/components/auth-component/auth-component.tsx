@@ -24,11 +24,6 @@ export default function AuthComponent({ id, controlId }: Props) {
     return <AuthComponentSkeleton />;
   }
 
-  const did = '';
-  const username = '';
-  const name = '';
-  const image = '';
-
   return (
     <>
       <ButtonBase
@@ -56,7 +51,12 @@ export default function AuthComponent({ id, controlId }: Props) {
         })}
         onClick={onOpen}
       >
-        <UserOrgInfo id={did} image={image} name={name} gatewayId={username} />
+        <UserOrgInfo
+          id={session.user.did}
+          image=""
+          name={session.user.username}
+          gatewayId={session.user.username}
+        />
 
         <MoreHorizOutlined
           sx={{

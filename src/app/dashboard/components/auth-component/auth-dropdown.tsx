@@ -9,16 +9,17 @@ import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material';
 
 import AuthDropdownCurrent from './auth-dropdown-current';
 import AuthDropdownProfilesList from './auth-dropdown-profiles-list';
+import routes from '@/constants/routes';
 
 type Props = {
   onClose: () => void;
 };
 
 export default function AuthDropdown({ onClose }: Props) {
-  const router = useRouter();
   const onSignOut = async () => {
-    await signOut();
-    router.push('/');
+    await signOut({
+      callbackUrl: routes.home,
+    });
   };
 
   return (
