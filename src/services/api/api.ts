@@ -8,8 +8,6 @@ type PathsWithoutParameters = {
   };
 };
 
-// create another type called pathsWithoutAuth, which removes {[path]: {[post/get/put/delete/pacth]: {parameters}}} from path type
-
 export const api = createFetchClient<PathsWithoutParameters>({
   baseUrl: process.env.NEXT_PUBLIC_API_URL,
 });
