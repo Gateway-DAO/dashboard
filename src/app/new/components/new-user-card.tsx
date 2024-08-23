@@ -16,10 +16,8 @@ import { useSession } from 'next-auth/react';
 // TODO: Unify Copy Buttons
 
 export default function NewUserCard() {
-  const did = 'did:web:gateway.acme';
   const { enqueueSnackbar } = useSnackbar();
-  // const { data } = useSession();
-  const isLoading = false;
+  const { data } = useSession();
 
   const copy = async (text: string) => {
     try {
@@ -48,20 +46,20 @@ export default function NewUserCard() {
         </Typography>
         <Box>
           <Typography variant="h4" fontWeight="regular" color="primary.dark">
-            {isLoading ? <Skeleton variant="text" /> : 'acaaaaaaaaaaaa'}
+            {!data ? <Skeleton variant="text" /> : data.user.username}
           </Typography>
-          {isLoading ? (
+          {!data ? (
             <Skeleton variant="text" width={200} />
           ) : (
             <Stack direction="row" gap={0.5} alignItems="center">
               <Typography
                 variant="body2"
                 color="primary.dark"
-                onClick={() => copy(did)}
+                onClick={() => copy(data.user.did)}
               >
-                {did}
+                {data.user.did}
               </Typography>
-              <IconButton onClick={() => copy(did)}>
+              <IconButton onClick={() => copy(data.user.did)}>
                 <ContentCopy
                   sx={{
                     fontSize: 16,

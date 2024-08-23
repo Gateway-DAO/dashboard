@@ -101,7 +101,6 @@ export default function UsernameForm({ message, signature }: Props) {
           startAdornment: <InputAdornment position="start">@</InputAdornment>,
         }}
       />
-      <NewUserCard />
       <LoadingButton
         type="submit"
         isLoading={isPending}

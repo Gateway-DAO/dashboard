@@ -2,7 +2,6 @@ import { NextAuthOptions } from 'next-auth';
 
 import routes from '@/constants/routes';
 
-import { AuthResponse } from '../api/models';
 import getMe from './libs/get-me';
 import newUserCredential from './providers/new-user';
 import walletCredentials from './providers/wallet';
@@ -17,7 +16,7 @@ export const nextAuthConfig: NextAuthOptions = {
       console.log({ user, token, ...props });
       // We're retrieving the token from the provider
       if (user) {
-        token = user as AuthResponse;
+        token.token = user.token;
       }
 
       // TODO: Implement refresh token

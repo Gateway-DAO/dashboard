@@ -1,10 +1,10 @@
 import { api } from '@/services/api/api';
-import { AuthResponse } from '@/services/api/models';
+import { TokenResponse } from '@/services/api/models';
 import { components } from '@/services/api/types';
 
 export default async function loginWallet(
   body: components['schemas']['model.AuthRequest']
-): Promise<AuthResponse> {
+): Promise<TokenResponse> {
   try {
     const { error, data } = await api.POST('/auth', {
       body,
@@ -23,7 +23,7 @@ export default async function loginWallet(
       throw new Error("Couldn't login");
     }
 
-    return data as AuthResponse;
+    return data as TokenResponse;
   } catch (error: any) {
     throw error;
   }

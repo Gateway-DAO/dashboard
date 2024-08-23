@@ -1,9 +1,9 @@
 import { authApi } from '@/services/api/api';
-import { AuthResponse } from '@/services/api/models';
+import { TokenResponse } from '@/services/api/models';
 
 export default async function refreshToken(
   token: string
-) /* : Promise<AuthResponse> */ {
+): Promise<TokenResponse> {
   try {
     const { data, error } = await authApi(token).GET('/auth/refresh-token');
 
@@ -15,7 +15,7 @@ export default async function refreshToken(
       throw new Error("Couldn't login");
     }
 
-    return data;
+    return data as TokenResponse;
   } catch (error: any) {
     throw error;
   }
