@@ -23,7 +23,7 @@ const identifierValueSchema: ZodType<zod.infer<typeof fallbackSchema>> =
     zod.object({
       type: zod.literal(UserIdentifierType.GatewayId),
       value: value.regex(RegExp(usernameRegex), {
-        message: auth.steps.choose_gateway_id.create_username_rules,
+        message: auth.rules.create_username,
       }),
     }),
     zod.object({
