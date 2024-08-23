@@ -13,7 +13,7 @@ export default async function getMe(token: string): Promise<Account> {
       throw new Error("Couldn't login");
     }
 
-    return data;
+    return data as Account;
   } catch (error: any) {
     throw error;
   }

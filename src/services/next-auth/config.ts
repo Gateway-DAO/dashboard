@@ -2,33 +2,29 @@ import { NextAuthOptions } from 'next-auth';
 
 import routes from '@/constants/routes';
 
-import getMe from './libs/get-me';
+import { Account } from '../api/models';
 import newUserCredential from './providers/new-user';
 import walletCredentials from './providers/wallet';
 
 export const nextAuthConfig: NextAuthOptions = {
+  debug: true,
   providers: [walletCredentials, newUserCredential],
   session: {
     strategy: 'jwt',
+    maxAge: 24 * 60 * 60,
   },
   callbacks: {
-    async jwt({ token, user, ...props }) {
-      console.log({ user, token, ...props });
-      // We're retrieving the token from the provider
+    async jwt({ token, user }) {
       if (user) {
-        token.token = user.token;
+        token.user = user as Account;
+        token.token = (user as any).token;
       }
-
-      // TODO: Implement refresh token
-
       return token;
     },
     async session({ session, token }) {
-      const user = await getMe(token.token);
-      return {
-        ...session,
-        user,
-      };
+      session.user = token.user as Account;
+      session.token = token.token;
+      return session;
     },
   },
   pages: {

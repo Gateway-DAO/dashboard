@@ -28,7 +28,6 @@ export default function AuthenticationWalletModals({
   const { onConnect, onDisconnectWallets } = useConnectWallet({
     async onGetNonce() {
       const { data, error } = await api.GET('/auth/message');
-      console.log({ data, error });
 
       if (error || !data?.message) {
         throw new Error('Could not get nonce', { cause: error });

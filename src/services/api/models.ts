@@ -2,9 +2,8 @@
 
 import { components } from './types';
 
-export type Account = Required<
-  components['schemas']['model.MyAccountResponse']
->;
+export type Account = components['schemas']['model.MyAccountResponse'];
+
 export type TokenResponse = Required<
   components['schemas']['model.TokenResponse']
 >;

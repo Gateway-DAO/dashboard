@@ -1,4 +1,5 @@
 'use client';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
@@ -6,7 +7,6 @@ import routes from '@/constants/routes';
 import { auth } from '@/locale/en/auth';
 
 import { Button, MenuItem, Stack, Typography } from '@mui/material';
-import { useSession } from 'next-auth/react';
 
 type Props = {
   onClose: () => void;

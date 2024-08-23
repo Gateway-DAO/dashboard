@@ -44,12 +44,15 @@ const secondaryButton: NavLink = {
 
 export default function MainNavbar({ color }: Props) {
   const [isModalWaleltOpen, setIsModalWaleltOpen] = useState(false);
+  const session = useSession();
+
   const primaryButton: NavLink = {
     label: 'Open dashboard',
     variant: 'outlined',
-    onClick: () => setIsModalWaleltOpen(true),
+    ...(session.status === 'authenticated'
+      ? { href: routes.dashboard.user.home }
+      : { onClick: () => setIsModalWaleltOpen(true) }),
   };
-  const session = useSession();
 
   return (
     <>

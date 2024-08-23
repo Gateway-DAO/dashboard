@@ -4,7 +4,7 @@ import CredentialsProvider, {
 
 import { components } from '@/services/api/types';
 
-import loginWallet from '../libs/login-wallet';
+import getMe from '../libs/get-me';
 import newUser from '../libs/new-user';
 
 const newUserCredential = CredentialsProvider<
@@ -45,7 +45,15 @@ const newUserCredential = CredentialsProvider<
     ) {
       throw new Error('Missing new user credentials');
     }
-    return newUser(credentials);
+    const { token } = await newUser(credentials);
+    if (!token) {
+      throw new Error('Can`t generate token');
+    }
+    const user = await getMe(token);
+    return {
+      ...user,
+      token,
+    };
   },
 });
 

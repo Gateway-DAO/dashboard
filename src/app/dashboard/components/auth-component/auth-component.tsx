@@ -57,7 +57,7 @@ export default function AuthComponent({ id, controlId }: Props) {
           id={session.user.did}
           image=""
           name={session.user.username}
-          gatewayId={session.user.username}
+          gatewayId={session.user.username ?? session.user.did!}
         />
 
         <MoreHorizOutlined
