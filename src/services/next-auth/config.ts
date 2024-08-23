@@ -1,20 +1,20 @@
 import { NextAuthOptions } from 'next-auth';
 
 import routes from '@/constants/routes';
-import jwt from 'jsonwebtoken';
 
 import { AuthResponse } from '../api/models';
 import getMe from './libs/get-me';
-import credentialWallet from './providers/credential-wallet';
+import newUserCredential from './providers/new-user';
+import walletCredentials from './providers/wallet';
 
 export const nextAuthConfig: NextAuthOptions = {
-  providers: [credentialWallet],
+  providers: [walletCredentials, newUserCredential],
   session: {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, user }) {
-      user;
+    async jwt({ token, user, ...props }) {
+      console.log({ user, token, ...props });
       // We're retrieving the token from the provider
       if (user) {
         token = user as AuthResponse;

@@ -5,11 +5,15 @@ import CredentialsProvider, {
 import { components } from '@/services/api/types';
 
 import loginWallet from '../libs/login-wallet';
+import newUser from '../libs/new-user';
 
-const credentialWallet = CredentialsProvider<
-  Record<keyof components['schemas']['model.AuthRequest'], CredentialInput>
+const newUserCredential = CredentialsProvider<
+  Record<
+    keyof components['schemas']['model.AccountCreateRequest'],
+    CredentialInput
+  >
 >({
-  id: 'credential-wallet',
+  id: 'new-user',
   credentials: {
     wallet_address: {
       label: 'wallet',
@@ -26,17 +30,23 @@ const credentialWallet = CredentialsProvider<
       type: 'text',
       placeholder: 'message',
     },
+    username: {
+      label: 'username',
+      type: 'text',
+      placeholder: 'username',
+    },
   },
   async authorize(credentials) {
     if (
       !credentials?.signature ||
       !credentials?.wallet_address ||
-      !credentials?.message
+      !credentials?.message ||
+      !credentials?.username
     ) {
-      throw new Error('Missing credentials');
+      throw new Error('Missing new user credentials');
     }
-    return loginWallet(credentials);
+    return newUser(credentials);
   },
 });
 
-export default credentialWallet;
+export default newUserCredential;

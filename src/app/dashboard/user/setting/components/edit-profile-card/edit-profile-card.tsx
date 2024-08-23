@@ -10,6 +10,8 @@ import { Button, Typography } from '@mui/material';
 
 import EditAvatar from './components/edit-avatar/edit-avatar';
 
+// TODO: Unify Copy Buttons
+
 export function EditProfileCard() {
   const { enqueueSnackbar } = useSnackbar();
 

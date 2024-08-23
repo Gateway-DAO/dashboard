@@ -35,32 +35,33 @@ export default function NewUserPage({
           zIndex: -1,
         }}
       />
-      <Container sx={{ py: 6, height: '100%' }}>
+      <Box
+        sx={{
+          py: 6,
+          px: {
+            xs: 3,
+            md: 5,
+            lg: 6,
+          },
+          height: '100%',
+        }}
+      >
         <Card
           elevation={0}
           sx={{ p: 3, maxWidth: 610, bgcolor: 'white.main', height: '100%' }}
         >
           <Logo href={routes.home} />
-          <Stack gap={5} mt={9.75}>
-            <Box>
-              <Typography variant="h2" mb={2}>
-                Create your Gateway ID
-              </Typography>
-              <Typography variant="body1">
-                The Gateway ID represents your identity. It consists of a
-                username and a DID.
-              </Typography>
-            </Box>
-            <EvmProvider>
-              <SolanaProvider>
-                <Stack gap={5}>
-                  <UsernameForm />
-                </Stack>
-              </SolanaProvider>
-            </EvmProvider>
-          </Stack>
+
+          <EvmProvider>
+            <SolanaProvider>
+              <UsernameForm
+                message={searchParams.message}
+                signature={searchParams.signature}
+              />
+            </SolanaProvider>
+          </EvmProvider>
         </Card>
-      </Container>
+      </Box>
     </>
   );
 }

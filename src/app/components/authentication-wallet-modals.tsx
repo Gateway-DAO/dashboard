@@ -37,7 +37,7 @@ export default function AuthenticationWalletModals({
       return data.message;
     },
     async onSignedMessage({ signature, wallet_address, message }) {
-      const res = await signIn('credential-wallet', {
+      const res = await signIn('authenticate-wallet', {
         redirect: false,
         wallet_address,
         signature,
