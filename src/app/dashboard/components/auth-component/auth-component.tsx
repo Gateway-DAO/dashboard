@@ -17,7 +17,9 @@ type Props = {
 };
 
 export default function AuthComponent({ id, controlId }: Props) {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession({
+    required: true,
+  });
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
 
   if (status === 'loading' || !session) {
