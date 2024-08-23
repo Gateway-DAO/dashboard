@@ -1,12 +1,12 @@
-const dashboardUser = "/dashboard";
-const explorer = "/explorer";
+const dashboardUser = '/dashboard';
+const explorer = '/explorer';
 const routes = {
-  home: "/",
-  auth: "/login",
-  blog: "/blog",
-  ecosystem: "/ecosystem",
-  termsOfService: "/terms-of-service",
-  privacyPolicy: "/privacy-policy",
+  home: '/',
+  auth: '/login',
+  blog: '/blog',
+  ecosystem: '/ecosystem',
+  termsOfService: '/terms-of-service',
+  privacyPolicy: '/privacy-policy',
   dashboard: {
     user: {
       home: `${dashboardUser}/storage`,
@@ -30,13 +30,14 @@ const routes = {
       playground: `${dashboardUser}/playground`,
       wallet: `${dashboardUser}/wallet`,
     },
-    createOrg: "/create-org",
+    createOrg: '/create-org',
   },
   explorer: {
     root: explorer,
     transactions: `${explorer}/transactions`,
     transaction: (transactionId) => `${explorer}/transactions/${transactionId}`,
     dataModels: `${explorer}/data-models`,
+    signMessage: `${explorer}/sign-message`,
     dataModel: (dataModelId) => `${explorer}/data-models/${dataModelId}`,
     dataModelIssuers: (dataModelId) =>
       `${explorer}/data-models/${dataModelId}/issuers`,
