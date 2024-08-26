@@ -8,6 +8,13 @@ type PathsWithoutParameters = {
   };
 };
 
+export const createAuthHeader = (token?: string) =>
+  token
+    ? {
+        Authorization: `Bearer ${token}`,
+      }
+    : {};
+
 export const api = createFetchClient<PathsWithoutParameters>({
   baseUrl: process.env.NEXT_PUBLIC_API_URL,
 });
@@ -17,6 +24,6 @@ export const authApi = (token: string) =>
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
     mode: 'no-cors',
     headers: {
-      Authorization: `Bearer ${token}`,
+      ...createAuthHeader(token),
     },
   });

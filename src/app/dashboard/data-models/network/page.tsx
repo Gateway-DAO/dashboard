@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import MyDataModels from './components/my-data-models';
+import NetworkDataModels from './components/network-data-models';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -9,5 +9,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function DataModelPage() {
-  return <MyDataModels />;
+  return <NetworkDataModels />;
 }

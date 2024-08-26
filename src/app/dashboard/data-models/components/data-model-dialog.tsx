@@ -2,14 +2,15 @@ import CopyBox from '@/components/copy-box/copy-box';
 import CopyButton from '@/components/copy-button/copy-button';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
+import { DataModel } from '@/services/api/models';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 import { Stack, Typography } from '@mui/material';
 
 type Props = {
-  dataModelId: string;
   open: boolean;
+  dataModel?: DataModel;
   onClose: () => void;
 };
 
@@ -42,7 +43,7 @@ const mutation = `mutation createPDA { createPDA(
 }
 }`;
 
-export function DataModelDialog({ open, onClose, dataModelId }: Props) {
+export function DataModelDialog({ open, onClose, dataModel }: Props) {
   return (
     <ModalRight open={open} onClose={onClose}>
       <ModalHeader onClose={onClose} />
@@ -55,7 +56,9 @@ export function DataModelDialog({ open, onClose, dataModelId }: Props) {
           data model used to provide developers a chance to help understand how
           the protocol and network works.
         </Typography>
-        <CopyBox title="Data model ID" value={dataModelId} />
+        {dataModel && (
+          <CopyBox title="Data model ID" value={dataModel.id.toString()} />
+        )}
         <Stack>
           <Typography variant="subtitle1">Create Structured Data</Typography>
           <Typography variant="body1">

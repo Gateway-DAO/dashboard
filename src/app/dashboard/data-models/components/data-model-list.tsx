@@ -4,8 +4,7 @@ import { useState } from 'react';
 
 import { defaultGridCustomization } from '@/components/data-grid/grid-default';
 import { defaultGridConfiguration } from '@/components/data-grid/grid-default';
-import { DataModelType, mockDataModels } from '@/services/api/models';
-import { useQuery } from '@tanstack/react-query';
+import { DataModel } from '@/services/api/models';
 
 import LinearProgress from '@mui/material/LinearProgress';
 import { DataGrid, GridRowParams } from '@mui/x-data-grid';
@@ -14,36 +13,24 @@ import { columns } from './columns';
 import { DataModelDialog } from './data-model-dialog';
 import Empty from './empty';
 
-type DataModel = {
-  totalDataModels: number;
-  dataModels: DataModelType[];
+type Props = {
+  isLoading: boolean;
+  isSuccess: boolean;
+  data?: DataModel[];
 };
 
-export default function DataModelList() {
-  const [isDataModelDialog, setDataModelDialog] = useState<boolean>(false);
-  const [selectedDataModel, setSelectedDataModel] = useState<DataModelType>();
+export default function DataModelList({ isLoading, isSuccess, data }: Props) {
+  const [dataModelDialog, setDataModelDialog] = useState<{
+    isOpen: boolean;
+    dataModel?: DataModel;
+  }>({ isOpen: false });
 
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 10,
     page: 0,
   });
 
-  const { isLoading, isSuccess, data } = useQuery({
-    queryKey: ['storage'],
-    queryFn: async (): Promise<DataModel> => {
-      const mockPromise = new Promise<DataModel>((resolve) => {
-        setTimeout(() => {
-          resolve({
-            totalDataModels: mockDataModels.length,
-            dataModels: mockDataModels,
-          });
-        }, 1000);
-      });
-      return mockPromise;
-    },
-  });
-
-  if (isSuccess && !data?.dataModels?.length) {
+  if (isSuccess && !data?.length) {
     return <Empty />;
   }
 
@@ -64,24 +51,23 @@ export default function DataModelList() {
       )}
       <DataGrid
         {...defaultGridConfiguration}
-        rows={data?.dataModels ?? []}
-        loading={!data?.dataModels}
+        rows={data ?? []}
+        loading={!data}
         columns={columns}
         paginationMode="server"
-        onRowClick={(params: GridRowParams<DataModelType>) => {
-          setDataModelDialog(true);
-          setSelectedDataModel(params.row);
+        onRowClick={(params: GridRowParams<DataModel>) => {
+          setDataModelDialog({ isOpen: true, dataModel: params.row });
         }}
         pageSizeOptions={[5, 10, 15]}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
         sx={{ marginTop: 3, ...defaultGridCustomization }}
-        rowCount={data?.totalDataModels ?? 0}
+        rowCount={data?.length ?? 0}
       />
       <DataModelDialog
-        open={isDataModelDialog}
-        onClose={() => setDataModelDialog(false)}
-        dataModelId={selectedDataModel?.dataModelId as string}
+        open={dataModelDialog.isOpen}
+        dataModel={dataModelDialog.dataModel}
+        onClose={() => setDataModelDialog((old) => ({ ...old, isOpen: false }))}
       />
     </>
   );

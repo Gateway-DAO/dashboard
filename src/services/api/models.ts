@@ -7,6 +7,7 @@ export type Account = components['schemas']['model.MyAccountResponse'];
 export type TokenResponse = Required<
   components['schemas']['model.TokenResponse']
 >;
+export type DataModel = Required<components['schemas']['model.DataModelDoc']>;
 
 export type PrivateDataAsset = {
   id: string;
