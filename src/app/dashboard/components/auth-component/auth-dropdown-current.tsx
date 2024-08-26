@@ -43,7 +43,7 @@ export default function AuthDropdownCurrent({ onClose }: Props) {
         <Button
           component={Link}
           onClick={onClose}
-          href={routes.dashboard.user.settings}
+          href={routes.dashboard.settings}
           fullWidth
           variant="outlined"
           size="small"

@@ -12,8 +12,8 @@ import { GTWMenuItemSettings } from './menu-item';
 export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
   {
     name: 'API',
-    href: routes.dashboard.user.developerAccess,
-    activeHrefs: [routes.dashboard.user.developerAccess],
+    href: routes.dashboard.developerAccess,
+    activeHrefs: [routes.dashboard.developerAccess],
     icon: CodeOutlined,
   },
   {

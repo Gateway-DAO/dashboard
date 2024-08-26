@@ -64,7 +64,7 @@ export default function AuthenticationWalletModals({
       }
 
       onSuccess();
-      router.push(callbackUrl ?? routes.dashboard.user.home);
+      router.push(callbackUrl ?? routes.dashboard.home);
     },
     statesHandler: connectionStep,
   });

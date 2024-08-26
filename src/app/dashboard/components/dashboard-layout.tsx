@@ -44,7 +44,7 @@ export default function DashboardLayout({
             justifyContent: 'space-between',
           }}
         >
-          <Logo href={routes.dashboard.user.home} />
+          <Logo href={routes.dashboard.home} />
           {isSandbox && (
             <Tooltip
               title="You are on the Gateway Sandbox. The data is temporary and will expire in 60 days."
