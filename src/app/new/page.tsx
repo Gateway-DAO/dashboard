@@ -7,7 +7,7 @@ import EvmProvider from '@/services/wallets/evm-provider/evm-provider';
 import SolanaProvider from '@/services/wallets/solana-provider';
 import { PageWithSearchParams } from '@/types/next';
 
-import { Box, Card, Container, Stack, Typography } from '@mui/material';
+import { Box, Card, Stack } from '@mui/material';
 
 import UsernameForm from './components/username-form';
 
