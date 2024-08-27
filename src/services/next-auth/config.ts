@@ -3,11 +3,11 @@ import { NextAuthOptions } from 'next-auth';
 import routes from '@/constants/routes';
 
 import { Account } from '../api/models';
+import getMe from './libs/get-me';
 import newUserCredential from './providers/new-user';
 import walletCredentials from './providers/wallet';
 
 export const nextAuthConfig: NextAuthOptions = {
-  debug: true,
   providers: [walletCredentials, newUserCredential],
   session: {
     strategy: 'jwt',
@@ -22,7 +22,8 @@ export const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      session.user = token.user as Account;
+      const user = await getMe(token.token);
+      session.user = user;
       session.token = token.token;
       return session;
     },
