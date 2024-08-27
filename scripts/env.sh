@@ -11,7 +11,7 @@ function print_help {
 
 # Script Arguments
 # ----------------
-PROJECT="dashboad-next"
+PROJECT="dashboard-next"
 REQUIRED_CLI=(
     aws
     jq

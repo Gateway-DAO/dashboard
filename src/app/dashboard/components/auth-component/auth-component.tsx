@@ -17,17 +17,14 @@ type Props = {
 };
 
 export default function AuthComponent({ id, controlId }: Props) {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession({
+    required: true,
+  });
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
 
   if (status === 'loading' || !session) {
     return <AuthComponentSkeleton />;
   }
-
-  const did = '';
-  const username = '';
-  const name = '';
-  const image = '';
 
   return (
     <>
@@ -56,7 +53,12 @@ export default function AuthComponent({ id, controlId }: Props) {
         })}
         onClick={onOpen}
       >
-        <UserOrgInfo id={did} image={image} name={name} gatewayId={username} />
+        <UserOrgInfo
+          id={session.user.did}
+          image=""
+          name={session.user.username}
+          gatewayId={session.user.username ?? session.user.did!}
+        />
 
         <MoreHorizOutlined
           sx={{

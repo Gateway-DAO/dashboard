@@ -8,10 +8,7 @@ export const usernameSchema = zod.preprocess(
     .string({ required_error: 'Code is required' })
     .min(2, "Username can't be less than 2 characters")
     .max(15)
-    .refine(
-      (value) => usernameRegex.test(value),
-      auth.steps.choose_gateway_id.create_username_rules
-    )
+    .refine((value) => usernameRegex.test(value), auth.rules.create_username)
 );
 
 export const displayNameSchema = zod.preprocess((value) => {

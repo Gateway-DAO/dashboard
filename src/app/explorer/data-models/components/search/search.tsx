@@ -13,7 +13,7 @@ import {
   mockDataModels,
   mockDataModelsMetadata,
   DataModelsMetadataType,
-} from '@/services/api/mock-types';
+} from '@/services/api/models';
 import { useDebouncedState } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
 

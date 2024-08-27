@@ -2,8 +2,7 @@
 
 import DataModelCard from '@/components/data-model-card/data-model-card';
 import FeaturedSection from '@/components/featured-sections/featured-sections';
-import routes from '@/constants/routes';
-import { DataModelType, mockDataModels } from '@/services/api/mock-types';
+import { DataModelType, mockDataModels } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
 export default function FeaturedDataModels() {

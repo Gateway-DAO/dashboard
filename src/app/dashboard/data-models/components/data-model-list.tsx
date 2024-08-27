@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { defaultGridCustomization } from '@/components/data-grid/grid-default';
 import { defaultGridConfiguration } from '@/components/data-grid/grid-default';
-import { DataModelType, mockDataModels } from '@/services/api/mock-types';
+import { DataModelType, mockDataModels } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
 import LinearProgress from '@mui/material/LinearProgress';

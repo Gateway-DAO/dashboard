@@ -10,6 +10,8 @@ type Props = {
   sucessMessage?: string;
 };
 
+// TODO: Unify Copy Buttons
+
 export default function CopyButton({
   text,
   customButtonText,

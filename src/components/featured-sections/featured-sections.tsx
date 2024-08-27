@@ -4,9 +4,8 @@ import { PropsWithChildren } from 'react';
 
 import { Box, Button, Typography } from '@mui/material';
 
-import { SectionContainer } from '../section-container/section-container';
-
 import DataImageCardLoading from '../data-image-card/data-image-card-loading';
+import { SectionContainer } from '../section-container/section-container';
 
 type Props = {
   title: string;

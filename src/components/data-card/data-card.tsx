@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { GatewayProfile } from '@/utils/get-organization-or-use-data';
 
 import { Stack, Card, Typography, CardProps } from '@mui/material';
 
 import CardContainer from './data-card-container';
-import { GatewayProfile } from '@/utils/get-organization-or-use-data';
 
 type Props = {
   href?: string;
