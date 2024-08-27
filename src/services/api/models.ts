@@ -7,6 +7,19 @@ export type Account = components['schemas']['model.MyAccountResponse'];
 export type TokenResponse = Required<
   components['schemas']['model.TokenResponse']
 >;
+export type Scalars = {
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+  Date: any;
+  DateTime: any;
+  DateTimeISO: any;
+  JSON: any;
+  StringSchema: any;
+};
+export type Maybe<T> = T | null;
 
 export type PrivateDataAsset = {
   id: string;
@@ -35,6 +48,44 @@ export type DataModelType = {
   updatedAt: Date;
   createdAt: Date;
   dataAssests: number;
+  consumptionPrice: Maybe<Scalars['Float']>;
+};
+
+export type ExplorerHomeStats = {
+  transactionsCount: number;
+  uniqueIssuers: number;
+  pdasIssued: number;
+  totalUsers: number;
+};
+
+export type Transaction = {
+  solanaTransactionId: string;
+  transactionId: string;
+  source: string;
+  signature: string;
+  fee: {
+    solana: string;
+    gateway: string;
+  };
+  createdAt: Date;
+};
+
+export type DataModelsMetadataType = {
+  tags: string[];
+  consumptionPrice: {
+    min: number;
+    max: number;
+  };
+  issuedCount: number;
+};
+
+export const mockDataModelsMetadata: DataModelsMetadataType = {
+  tags: ['defi', 'innovation', 'ai', 'blockchain'],
+  consumptionPrice: {
+    min: 30,
+    max: 60,
+  },
+  issuedCount: 50,
 };
 
 export const mockDataModels: DataModelType[] = [
@@ -47,6 +98,7 @@ export const mockDataModels: DataModelType[] = [
     dataModelId: '6cfd080c-58c0-4c28-b34a-dc0bd11b2ec6',
     updatedAt: new Date('2024-10-30'),
     createdAt: new Date(),
+    consumptionPrice: 40,
   },
   {
     id: 1112122,
@@ -57,6 +109,7 @@ export const mockDataModels: DataModelType[] = [
     dataModelId: '6cfd080c-58c0-4c28-b34a-dc0bd11b2ec6',
     updatedAt: new Date('2024-10-28'),
     createdAt: new Date(),
+    consumptionPrice: 60,
   },
   {
     id: 1112123,
@@ -67,6 +120,7 @@ export const mockDataModels: DataModelType[] = [
     dataModelId: '6cfd080c-58c0-4c28-b34a-dc0bd11b2ec6',
     updatedAt: new Date('2024-10-31'),
     createdAt: new Date(),
+    consumptionPrice: 30,
   },
 ];
 
@@ -138,5 +192,171 @@ export const mockPrivateDataAssets: PrivateDataAsset[] = [
     mimeType: 'txt',
     proofs: [],
     dataModel: { id: '4fff1352-2480-4fce-8b34-c095f4d9463a', schema: {} },
+  },
+];
+
+export const mockUser = { id: '1', gatewayId: 'test', isOrganization: false };
+
+export const mockExplorerHomeStats: ExplorerHomeStats = {
+  pdasIssued: 1000,
+  totalUsers: 1000,
+  transactionsCount: 100,
+  uniqueIssuers: 10,
+};
+
+export const mockTransactions: Transaction[] = [
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  },
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  },
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  },
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  },
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  },
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  },
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  },
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  },
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  },
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  },
+  {
+    solanaTransactionId:
+      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
+    createdAt: new Date(),
+    fee: {
+      gateway: '0.05',
+      solana: '0.05',
+    },
+    signature:
+      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    source:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
   },
 ];
