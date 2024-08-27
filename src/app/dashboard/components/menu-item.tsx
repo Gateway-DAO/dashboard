@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemButtonProps,
+  Stack,
   SvgIconProps,
   Typography,
 } from '@mui/material';
@@ -38,7 +39,7 @@ export default function GTWMenuItem({
   ...props
 }: Props & ListItemButtonProps) {
   return (
-    <ListItem sx={{ p: 0 }}>
+    <ListItem disablePadding>
       <ListItemButton
         component={Link}
         href={href}
@@ -47,50 +48,57 @@ export default function GTWMenuItem({
         {...props}
         sx={{
           color: 'text.secondary',
-          display: 'flex',
-          alignItems: 'center',
-          direction: 'row',
-          gap: 2,
           pl: {
-            xs: CONTAINER_PX.xs + 0.5,
-            md: CONTAINER_PX.md + 0.5,
-            lg: 3,
+            xs: CONTAINER_PX.xs - 0.5,
+            md: CONTAINER_PX.md - 0.5,
+            lg: 2,
           },
-          pr: 2.5,
+          pr: 1.5,
+          py: 0,
           ':hover': {
             svg: {
               color: 'primary.main',
             },
             span: {
-              color: 'black',
-            },
-          },
-          ...(active && {
-            color: 'black',
-            backgroundColor: 'primary.light',
-            border: 1,
-            borderRadius: '16px',
-            borderColor: 'primary.light',
-            svg: {
               color: 'primary.main',
             },
-          }),
+          },
+
           ...props.sx,
         }}
       >
-        {active && ActiveIcon ? (
-          <ActiveIcon sx={{ fontSize: 32 }} />
-        ) : (
-          Icon && <Icon sx={{ fontSize: 32 }} />
-        )}
-        <Typography
-          component={'span'}
-          variant="subtitle1"
-          sx={{ fontSize: '1rem', flexGrow: 1 }}
+        <Stack
+          direction="row"
+          gap={2}
+          alignItems="center"
+          sx={{
+            width: '100%',
+            p: 1,
+
+            ...(active && {
+              color: 'primary.main',
+              backgroundColor: 'primary.light',
+              borderRadius: '16px',
+              svg: {
+                color: 'primary.main',
+              },
+            }),
+          }}
         >
-          {name}
-        </Typography>
-        {externalLink && <OpenInNew sx={{ ml: 2, mr: 1 }} />}
+          {active && ActiveIcon ? (
+            <ActiveIcon sx={{ fontSize: 32 }} />
+          ) : (
+            Icon && <Icon sx={{ fontSize: 32 }} />
+          )}
+          <Typography
+            component={'span'}
+            variant="subtitle1"
+            sx={{ fontSize: '1rem', flexGrow: 1 }}
+          >
+            {name}
+          </Typography>
+          {externalLink && <OpenInNew sx={{ ml: 2, mr: 1 }} />}
+        </Stack>
       </ListItemButton>
     </ListItem>
   );
