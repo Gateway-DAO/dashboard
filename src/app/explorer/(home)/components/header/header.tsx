@@ -2,6 +2,8 @@ import Link from 'next/link';
 
 import DataModelsBoxIcon from '@/components/icons/data-models-box';
 import HomeTransactionIcon from '@/components/icons/home-transaction';
+import InternalHeader from '@/components/internal/internal-header';
+import routes from '@/constants/routes';
 
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {
@@ -13,8 +15,6 @@ import {
   Theme,
   Typography,
 } from '@mui/material';
-import routes from '@/constants/routes';
-import InternalHeader from '@/components/internal/internal-header';
 
 const GetIcon = ({ index, sx }: { index: number; sx: SxProps<Theme> }) => {
   return (
