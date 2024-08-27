@@ -1,6 +1,5 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { PropsWithChildren, ReactNode } from 'react';
 
 import Logo from '@/components/logo/logo';
@@ -11,7 +10,6 @@ import { isSandbox } from '@/utils/env';
 import { Box, Chip, Tooltip } from '@mui/material';
 import { Stack } from '@mui/system';
 
-import SandboxAlert from './alerts/sandbox-alert';
 import Sidebar from './sidebar/sidebar';
 
 type Props = {
@@ -24,9 +22,6 @@ export default function DashboardLayout({
   menuItems,
   secondMenuItems,
 }: PropsWithChildren<Props>) {
-  const pathname = usePathname();
-  const isNotWalletPage = !pathname.includes('wallet');
-
   return (
     <Stack
       direction={{
@@ -81,7 +76,6 @@ export default function DashboardLayout({
           overflow: 'hidden',
         }}
       >
-        {isSandbox && isNotWalletPage && <SandboxAlert />}
         {children}
       </Box>
     </Stack>
