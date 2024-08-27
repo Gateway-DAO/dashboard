@@ -5,7 +5,7 @@ import { Box, Button, Divider, Typography } from '@mui/material';
 import FeaturedDataModels from './components/featured-data-models';
 import DataModelsExplorerSearch from './components/search/search';
 
-export default function DataModel() {
+export default function DataModelHomePage() {
   return (
     <>
       <InternalHeader
