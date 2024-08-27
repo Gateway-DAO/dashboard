@@ -1,7 +1,5 @@
 'use client';
 
-import { useToggle } from '@react-hookz/web';
-
 import { Stack } from '@mui/material';
 
 import AuthenticationTokenSection from './authentication-token';
