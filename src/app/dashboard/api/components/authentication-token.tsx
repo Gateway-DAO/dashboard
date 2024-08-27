@@ -1,4 +1,6 @@
 'use client';
+import { useSession } from 'next-auth/react';
+
 import CopyButton from '@/components/copy-button/copy-button';
 import ToggleVisibilityButton from '@/components/toggle-visibility-button/toggle-visibility-button';
 import { useToggle } from '@react-hookz/web';
@@ -14,9 +16,7 @@ import {
 
 export default function AuthenticationToken() {
   const [isVisible, toggleVisible] = useToggle(false);
-
-  const TOKEN =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ullamcorper sapien sed mi bibendum imperdiet. Duis maximus tincidunt ullamcorper. Nam viverra dolor eget justo consequat semper. Integer quis aliquam odio. Nam scelerisque bibendum quam ac fermentum. Curabitur eu laoreet dui, a cursus felis. Morbi neque nisi, tincidunt nec pellentesque quis, consequat ut purus. Pellentesque ultrices quam dignissim ligula rhoncus, ut.';
+  const { data } = useSession({ required: true });
 
   return (
     <Card sx={{ width: '100%' }} variant="outlined">
@@ -33,14 +33,19 @@ export default function AuthenticationToken() {
               onToggle={toggleVisible}
               size="medium"
               sx={{ mr: 1 }}
+              disabled={!data?.token}
             />
-            <CopyButton text={TOKEN} size="medium" />
+            <CopyButton
+              text={data?.token}
+              size="medium"
+              disabled={!data?.token}
+            />
           </>
         }
       />
       <CardContent>
         <Typography sx={{ mb: 2, wordBreak: 'break-all' }}>
-          {isVisible ? TOKEN : '••••'}
+          {isVisible ? data?.token : '••••'}
         </Typography>
         <Alert color="warning" icon={<Warning />}>
           By sharing your authentication token, you assume all responsibility
