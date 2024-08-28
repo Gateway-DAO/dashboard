@@ -4,10 +4,10 @@ import { useState } from 'react';
 
 import { defaultGridCustomization } from '@/components/data-grid/grid-default';
 import { defaultGridConfiguration } from '@/components/data-grid/grid-default';
-import { DataModel } from '@/services/api/models';
+import { DataModel, PaginatedResponse } from '@/services/api/models';
 
 import LinearProgress from '@mui/material/LinearProgress';
-import { DataGrid, GridRowParams } from '@mui/x-data-grid';
+import { DataGrid, GridPaginationModel, GridRowParams } from '@mui/x-data-grid';
 
 import { columns } from './columns';
 import { DataModelDialog } from './data-model-dialog';
@@ -16,21 +16,39 @@ import Empty from './empty';
 type Props = {
   isLoading: boolean;
   isSuccess: boolean;
-  data?: DataModel[];
+  dataModels: DataModel[];
+  totalLoadedPages: number;
+  hasNextPage: boolean;
+  totalRows: number;
+  fetchNextPage: () => void;
 };
 
-export default function DataModelList({ isLoading, isSuccess, data }: Props) {
+export default function DataModelList({
+  isLoading,
+  isSuccess,
+  dataModels,
+  totalRows,
+  totalLoadedPages,
+  hasNextPage,
+  fetchNextPage,
+}: Props) {
   const [dataModelDialog, setDataModelDialog] = useState<{
     isOpen: boolean;
     dataModel?: DataModel;
   }>({ isOpen: false });
 
-  const [paginationModel, setPaginationModel] = useState({
-    pageSize: 10,
+  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
+    pageSize: 10,
   });
+  const handlePaginationModelChange = (newModel: GridPaginationModel) => {
+    setPaginationModel(newModel);
+    if (newModel.page + 1 > totalLoadedPages && hasNextPage) {
+      fetchNextPage();
+    }
+  };
 
-  if (isSuccess && !data?.length) {
+  if (isSuccess && !dataModels?.length) {
     return <Empty />;
   }
 
@@ -51,18 +69,24 @@ export default function DataModelList({ isLoading, isSuccess, data }: Props) {
       )}
       <DataGrid
         {...defaultGridConfiguration}
-        rows={data ?? []}
-        loading={!data}
+        rows={dataModels}
         columns={columns}
-        paginationMode="server"
+        paginationModel={paginationModel}
+        onPaginationModelChange={handlePaginationModelChange}
+        pageSizeOptions={[10, 15, 20]}
+        rowCount={totalRows}
+        loading={isLoading}
         onRowClick={(params: GridRowParams<DataModel>) => {
           setDataModelDialog({ isOpen: true, dataModel: params.row });
         }}
-        pageSizeOptions={[5, 10, 15]}
-        paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
+            },
+          },
+        }}
         sx={{ marginTop: 3, ...defaultGridCustomization }}
-        rowCount={data?.length ?? 0}
       />
       <DataModelDialog
         open={dataModelDialog.isOpen}

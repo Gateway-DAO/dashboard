@@ -69,7 +69,6 @@ export default function StorageList() {
         rows={data?.pdas ?? []}
         loading={!data?.pdas}
         columns={columns}
-        paginationMode="server"
         onRowClick={(params: GridRowParams<PrivateDataAsset>, event) => {
           // if middle click open new tab
           if (event.button === 1) {

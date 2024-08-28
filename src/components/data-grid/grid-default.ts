@@ -11,7 +11,6 @@ export const defaultGridConfiguration: Partial<DataGridProps> = {
   disableColumnMenu: true,
   disableColumnSelector: true,
   disableRowSelectionOnClick: true,
-  paginationMode: 'server',
   autoHeight: true,
 };
 

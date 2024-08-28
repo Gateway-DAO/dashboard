@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
+import { DeepRequired } from 'react-hook-form';
+
 import { components } from './types';
 
 export type Account = components['schemas']['model.MyAccountResponse'];
@@ -7,7 +9,11 @@ export type Account = components['schemas']['model.MyAccountResponse'];
 export type TokenResponse = Required<
   components['schemas']['model.TokenResponse']
 >;
-export type DataModel = Required<components['schemas']['model.DataModelDoc']>;
+export type DataModel = components['schemas']['model.DataModel'];
+
+export type PaginatedResponse<T = any> = DeepRequired<
+  Omit<components['schemas']['helper.PaginatedResponse'], 'data'>
+> & { data?: T };
 
 export type Scalars = {
   ID: string;

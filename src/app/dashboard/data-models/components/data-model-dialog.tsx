@@ -24,7 +24,7 @@ export function DataModelDialog({ open, onClose, dataModel }: Props) {
         {dataModel?.description && (
           <Typography variant="body1">{dataModel.description}</Typography>
         )}
-        {dataModel && (
+        {dataModel?.id && (
           <CopyBox title="Data model ID" value={dataModel.id.toString()} />
         )}
         <Stack
