@@ -51,7 +51,7 @@ export default function WalletLoadingModal({
         {(step === 'signing' || step === 'loading') && (
           <CircularProgress size={32} />
         )}
-        {step === 'success' && (
+        {(step === 'success' || step === 'signup') && (
           <Avatar
             sx={{
               backgroundColor: 'success.main',
@@ -88,16 +88,15 @@ export default function WalletLoadingModal({
         </Typography>
       </DialogTitle>
       <DialogContent>
-        {isError ||
-          (step === 'success' && (
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            ></Box>
-          ))}
+        {(isError || step === 'success') && (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          ></Box>
+        )}
         <DialogContentText id="wallet-loading-modal-description" sx={{ mt: 2 }}>
           {locale?.description}
           {error && (

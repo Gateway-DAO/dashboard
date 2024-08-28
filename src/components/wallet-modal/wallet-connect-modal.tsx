@@ -49,7 +49,7 @@ export default function WalletConnectModal({
           >
             {isOpen && (
               <>
-                <EvmWalletConnect onConnect={onConnect} onClose={onCancel} />
+                <EvmWalletConnect onConnect={onConnect} />
                 <SolanaWalletConnect onConnect={onConnect} />
               </>
             )}

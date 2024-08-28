@@ -1,12 +1,11 @@
 import { ReactNode } from 'react';
 
 import DataCard from '@/components/data-card/data-card';
-
+import routes from '@/constants/routes';
+import { DataModelType, mockUser } from '@/services/api/models';
 import { PartialDeep } from 'type-fest';
 
 import { Typography, CardProps, Box } from '@mui/material';
-import { DataModelType, mockUser } from '@/services/api/mock-types';
-import routes from '@/constants/routes';
 
 type Props = {
   withLink?: boolean;
