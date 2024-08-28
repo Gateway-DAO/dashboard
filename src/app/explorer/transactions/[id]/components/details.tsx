@@ -26,7 +26,7 @@ import {
   Transaction,
   mockTransactions,
   mockMetaData,
-} from '@/services/api/mock-types';
+} from '@/services/api/models';
 
 type Props = {
   id: string;

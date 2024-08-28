@@ -1,5 +1,5 @@
 import { transaction_actions } from '@/locale/en/transaction';
-import { mockTransactionType } from '@/services/api/mock-types';
+import { mockTransactionType } from '@/services/api/models';
 
 export default function ActionDetail({ action }: { action: mockTransactionType }) {
   const getDetail = (): string => {
