@@ -6,23 +6,11 @@ import { explorerQueries } from '@/constants/queries';
 
 import { useQuery } from '@tanstack/react-query';
 
-import {
-  Box,
-  Card,
-  Chip,
-  Container,
-  Divider,
-  Skeleton,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Card, Container, Divider, Stack } from '@mui/material';
 
-import CardRow from './card-row';
 import TransactionData from './transaction-data';
 import PDA from './types/pda';
-import ActionDetail from '@/app/explorer/components/transaction/action-detail';
 import {
-  mockTransactionType,
   Transaction,
   mockTransactions,
   mockMetaData,

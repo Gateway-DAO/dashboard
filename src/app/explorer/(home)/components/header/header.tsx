@@ -50,7 +50,7 @@ export default function Header() {
       <InternalHeader
         slot={
           <Typography
-            variant={{ xs: 'h4', lg: 'h2' }}
+            variant="h2"
             fontWeight={{ xs: 400, lg: 300 }}
             fontSize={{ xs: '34px', lg: '60px' }}
             sx={{
