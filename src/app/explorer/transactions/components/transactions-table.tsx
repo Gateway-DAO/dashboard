@@ -16,7 +16,7 @@ import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
 import Search from './search';
-import { mockTransactions, Transaction } from '@/services/api/mock-types';
+import { mockTransactions, Transaction } from '@/services/api/models';
 
 type Props = {
   initialData: Transaction[];

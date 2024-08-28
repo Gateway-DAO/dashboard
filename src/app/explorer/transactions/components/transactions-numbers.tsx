@@ -7,7 +7,7 @@ import { Stack } from '@mui/material';
 import {
   ExplorerHomeStats,
   mockExplorerHomeStats,
-} from '@/services/api/mock-types';
+} from '@/services/api/models';
 
 export default function TransactionsNumbers() {
   const { data, isLoading } = useQuery({

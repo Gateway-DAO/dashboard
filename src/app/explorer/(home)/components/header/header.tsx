@@ -50,10 +50,12 @@ export default function Header() {
       <InternalHeader
         slot={
           <Typography
-            variant={'h4'}
+            variant={{ xs: 'h4', lg: 'h2' }}
             fontWeight={{ xs: 400, lg: 300 }}
+            fontSize={{ xs: '34px', lg: '60px' }}
             sx={{
-              maxWidth: { xs: '85%', lg: '30%' },
+              maxWidth: { xs: '85%', lg: '60%' },
+              ml: { xs: 2, lg: 0 },
             }}
           >
             Explore transactions and interact with the protocol
