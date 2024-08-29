@@ -32,7 +32,7 @@ export default function ExplorerNavbar() {
     label: 'Open dashboard',
     variant: 'outlined',
     ...(session.status === 'authenticated'
-      ? { href: routes.dashboard.user.home }
+      ? { href: routes.dashboard.home }
       : { onClick: () => setIsModalWaleltOpen(true) }),
   };
   return (
