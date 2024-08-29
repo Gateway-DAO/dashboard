@@ -2,12 +2,10 @@
 
 import { useState } from 'react';
 
-import { defaultGridCustomization } from '@/components/data-grid/grid-default';
-import { defaultGridConfiguration } from '@/components/data-grid/grid-default';
+import ServerPaginatedDataGrid from '@/components/data-grid/server-paginated-data-grid';
 import { DataModel } from '@/services/api/models';
 
-import LinearProgress from '@mui/material/LinearProgress';
-import { DataGrid, GridPaginationModel, GridRowParams } from '@mui/x-data-grid';
+import { GridPaginationModel, GridRowParams } from '@mui/x-data-grid';
 
 import { columns } from './columns';
 import { DataModelDialog } from './data-model-dialog';
@@ -41,32 +39,16 @@ export default function DataModelList({
 
   return (
     <>
-      {isLoading && (
-        <LinearProgress
-          sx={{
-            position: 'fixed',
-            top: 0,
-            left: {
-              xs: 0,
-              lg: '300px',
-            },
-            width: '100%',
-          }}
-        />
-      )}
-      <DataGrid
-        {...defaultGridConfiguration}
+      <ServerPaginatedDataGrid
         rows={dataModels}
         columns={columns}
         paginationModel={paginationModel}
         onPaginationModelChange={onChangePage}
-        pageSizeOptions={[10, 15, 20]}
         rowCount={totalRows}
         loading={isLoading}
         onRowClick={(params: GridRowParams<DataModel>) => {
           setDataModelDialog({ isOpen: true, dataModel: params.row });
         }}
-        sx={{ marginTop: 3, ...defaultGridCustomization }}
       />
       <DataModelDialog
         open={dataModelDialog.isOpen}
