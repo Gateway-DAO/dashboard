@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 
 import TransactionsTable from './transactions-table';
-import { mockTransactions, Transaction } from '@/services/api/mock-types';
+import { mockTransactions, Transaction } from '@/services/api/models';
 
 export default function TransactionsTableSection() {
   const { data: transactions, isLoading } = useQuery({

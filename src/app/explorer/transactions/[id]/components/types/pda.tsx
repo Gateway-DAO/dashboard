@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { Divider, Stack, Typography } from '@mui/material';
 
 import CardRow from '../card-row';
-import { Transaction } from '@/services/api/mock-types';
+import { Transaction } from '@/services/api/models';
 import CopyData from '../copy-data';
 
 export default function PDA({ data }: { data: Transaction }) {

@@ -17,16 +17,15 @@ import {
   Typography,
 } from '@mui/material';
 
-import CardRow from './card-row';
 import TransactionData from './transaction-data';
 import PDA from './types/pda';
-import ActionDetail from '@/app/explorer/components/transaction/action-detail';
+
 import {
   mockTransactionType,
   Transaction,
   mockTransactions,
   mockMetaData,
-} from '@/services/api/mock-types';
+} from '@/services/api/models';
 
 type Props = {
   id: string;
