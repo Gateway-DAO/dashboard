@@ -13,7 +13,7 @@ export type DataModel = components['schemas']['model.DataModel'];
 
 export type PaginatedResponse<T = any> = DeepRequired<
   Omit<components['schemas']['helper.PaginatedResponse'], 'data'>
-> & { data?: T };
+> & { data?: T[] };
 
 export type Scalars = {
   ID: string;

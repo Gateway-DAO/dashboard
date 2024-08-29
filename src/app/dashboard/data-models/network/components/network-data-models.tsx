@@ -1,62 +1,66 @@
 'use client';
 
+import { useMemo, useRef, useState } from 'react';
+
 import { api } from '@/services/api/api';
 import { DataModel, PaginatedResponse } from '@/services/api/models';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+
+import { GridPaginationModel } from '@mui/x-data-grid';
 
 import DataModelList from '../../components/data-model-list';
 
 export default function NetworkDataModels() {
-  const { data, hasNextPage, fetchNextPage, isFetching, isSuccess } =
-    useInfiniteQuery({
-      queryKey: ['network-data-models'],
-      queryFn: async ({ pageParam = 1 }) => {
-        console.log(pageParam);
-        const { data, error } = await api.GET('/data-models', {
-          params: {
-            query: {
-              page: pageParam as number,
-              page_size: 10,
-            },
+  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
+    page: 0,
+    pageSize: 10,
+  });
+
+  const { data, isFetching, isSuccess } = useQuery({
+    queryKey: [
+      'network-data-models',
+      paginationModel.pageSize,
+      paginationModel.page,
+    ],
+    queryFn: async () => {
+      const { data, error } = await api.GET('/data-models', {
+        params: {
+          query: {
+            page: paginationModel.page + 1,
+            page_size: paginationModel.pageSize,
           },
-        });
+        },
+      });
 
-        if (error) {
-          throw new Error(error);
-        }
+      if (error) {
+        throw new Error(error);
+      }
 
-        if (!data) {
-          throw new Error('No data');
-        }
+      if (!data) {
+        throw new Error('No data');
+      }
 
-        return data as PaginatedResponse<DataModel[]>;
-      },
-      getNextPageParam: (lastPage) => {
-        const { current_page, total_pages } = lastPage.meta;
-        return current_page + 1 <= total_pages ? current_page + 1 : null;
-      },
-      getPreviousPageParam: (firstPage) => {
-        const { current_page } = firstPage.meta;
-        return current_page - 1 >= 0 ? current_page - 1 : null;
-      },
-      initialPageParam: 1,
-    });
+      return data as PaginatedResponse<DataModel>;
+    },
+  });
 
-  const dataModels =
-    (data?.pages.flatMap((page) => page.data) as DataModel[]) ?? [];
-  const totalRows = data?.pages[0]?.meta.total_items ?? 0;
+  const rowCountRef = useRef(data?.meta?.total_items || 0);
+
+  const rowCount = useMemo(() => {
+    if (data?.meta?.total_items !== undefined) {
+      rowCountRef.current = data.meta.total_items;
+    }
+    return rowCountRef.current;
+  }, [data?.meta?.total_items]);
 
   return (
-    <>
-      <DataModelList
-        dataModels={dataModels}
-        totalLoadedPages={data?.pages.length ?? 0}
-        hasNextPage={hasNextPage}
-        totalRows={totalRows}
-        isSuccess={isSuccess}
-        isLoading={isFetching}
-        fetchNextPage={fetchNextPage}
-      />
-    </>
+    <DataModelList
+      dataModels={data?.data ?? []}
+      totalRows={rowCount}
+      isSuccess={isSuccess}
+      isLoading={isFetching}
+      paginationModel={paginationModel}
+      onChangePage={setPaginationModel}
+    />
   );
 }
