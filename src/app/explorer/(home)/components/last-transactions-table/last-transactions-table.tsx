@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { CardCellContainer } from '@/components/card-cell/card-cell';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
+import { Transaction, mockTransactions } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
@@ -16,7 +17,6 @@ import {
   Box,
   Skeleton,
 } from '@mui/material';
-import { Transaction, mockTransactions } from '@/services/api/mock-types';
 
 export default function LastTransactionsTable() {
   const { data: transactions, isLoading } = useQuery({

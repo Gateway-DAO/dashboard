@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { ComponentProps, Suspense, useState } from 'react';
 
 import NavLogo from '@/components/nav/logo';
@@ -43,11 +44,16 @@ const secondaryButton: NavLink = {
 
 export default function MainNavbar({ color }: Props) {
   const [isModalWaleltOpen, setIsModalWaleltOpen] = useState(false);
+  const session = useSession();
+
   const primaryButton: NavLink = {
     label: 'Open dashboard',
     variant: 'outlined',
-    onClick: () => setIsModalWaleltOpen(true),
+    ...(session.status === 'authenticated'
+      ? { href: routes.dashboard.user.home }
+      : { onClick: () => setIsModalWaleltOpen(true) }),
   };
+
   return (
     <>
       <Nav

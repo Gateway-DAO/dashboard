@@ -1,7 +1,7 @@
 'use client';
 import { signOut } from 'next-auth/react';
-import { useRouter } from 'next-nprogress-bar';
 
+import routes from '@/constants/routes';
 import { auth } from '@/locale/en/auth';
 
 import { LogoutOutlined } from '@mui/icons-material';
@@ -15,10 +15,10 @@ type Props = {
 };
 
 export default function AuthDropdown({ onClose }: Props) {
-  const router = useRouter();
   const onSignOut = async () => {
-    await signOut();
-    router.push('/');
+    await signOut({
+      callbackUrl: routes.home,
+    });
   };
 
   return (

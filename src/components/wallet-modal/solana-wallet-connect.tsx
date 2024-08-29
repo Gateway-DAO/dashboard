@@ -1,11 +1,11 @@
 'use client';
-import { useEffect } from 'react';
 
 import SolanaIcon from '@/components/icons/solana';
 import { Network } from '@/types/web3';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
+import useConnectHandler from './use-connect-handler';
 import WalletModalButton from './wallet-modal-button';
 
 type Props = {
@@ -13,16 +13,17 @@ type Props = {
 };
 
 export default function SolanaWalletConnect({ onConnect }: Props) {
-  const { setVisible } = useWalletModal();
-  const { publicKey } = useWallet();
+  const { setVisible, visible } = useWalletModal();
+  const { publicKey, disconnect } = useWallet();
 
   const address = publicKey?.toString();
 
-  useEffect(() => {
-    if (address) {
-      onConnect(address, Network.Sol);
-    }
-  }, [address]);
+  useConnectHandler({
+    address,
+    visible,
+    onConnect: () => onConnect(address ?? '', Network.Sol),
+    disconnect,
+  });
 
   return (
     <WalletModalButton

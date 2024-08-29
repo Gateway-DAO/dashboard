@@ -2,7 +2,7 @@ const dashboardUser = '/dashboard';
 const explorer = '/explorer';
 const routes = {
   home: '/',
-  auth: '/login',
+  new: '/new',
   blog: '/blog',
   ecosystem: '/ecosystem',
   termsOfService: '/terms-of-service',

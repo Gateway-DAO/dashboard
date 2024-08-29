@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
+import { auth } from '@/locale/en/auth';
 import { useSnackbar } from 'notistack';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -8,6 +9,8 @@ import { InputAdornment, Stack, TextField } from '@mui/material';
 import { Button, Typography } from '@mui/material';
 
 import EditAvatar from './components/edit-avatar/edit-avatar';
+
+// TODO: Unify Copy Buttons
 
 export function EditProfileCard() {
   const { enqueueSnackbar } = useSnackbar();
@@ -88,9 +91,7 @@ export function EditProfileCard() {
           InputProps={{
             startAdornment: <InputAdornment position="start">@</InputAdornment>,
           }}
-          helperText={
-            'Use only lowercase letters, numbers, and the “_” symbol.'
-          }
+          helperText={auth.rules.create_username}
         />
       </ConfirmDialog>
     </>

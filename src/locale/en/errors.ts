@@ -69,10 +69,7 @@ export const parseErrorObject = (
  * @returns { code: ErrorMessage, message: string }
  */
 export const getErrorMessage = (error: any): ErrorObject => {
-  const code = getCodeFromError(error?.response?.errors?.[0]);
+  const code = getCodeFromError(error?.message);
 
-  return parseErrorObject(code, error?.response?.errors?.[0]);
+  return parseErrorObject(code, error?.message);
 };
-
-export const getErrorsMessages = (error: any): ErrorCode[] =>
-  error?.response?.errors?.map(getCodeFromError) ?? ['UNEXPECTED_ERROR'];

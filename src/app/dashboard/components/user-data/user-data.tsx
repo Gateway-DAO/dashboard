@@ -7,6 +7,8 @@ import { ContentCopy } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { Typography, Stack } from '@mui/material';
 
+// TODO: Unify Copy Buttons
+
 export default function UserData({
   username,
   did,
