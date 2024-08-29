@@ -57,7 +57,6 @@ export default function ServerPaginatedDataGrid({
         onRowClick={onRowClick}
         sx={{ marginTop: 3, ...defaultGridCustomization }}
       />
-      ;
     </>
   );
 }
