@@ -204,14 +204,31 @@ export const mockExplorerHomeStats: ExplorerHomeStats = {
   uniqueIssuers: 10,
 };
 
+export enum mockTransactionType {
+  PdaIssuance,
+}
+
+export const mockMetaData = {
+  metadata: {
+    pda: '6cfd080c-58c0-4c28-b34a-dc0bd11b2ec6',
+    status: 'ACTIVE',
+    issuer:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    signedBy:
+      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+    expirationDate: '2023-12-31T00:00:00.000Z',
+    dataModel: 'DataModel123',
+  },
+};
+
 export const mockTransactions: Transaction[] = [
   {
     solanaTransactionId:
       '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
     createdAt: new Date(),
     fee: {
-      gateway: '0.05',
-      solana: '0.05',
+      gateway: '0.5 OWN',
+      solana: '0.05 SOL',
     },
     signature:
       '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
@@ -224,134 +241,8 @@ export const mockTransactions: Transaction[] = [
       '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
     createdAt: new Date(),
     fee: {
-      gateway: '0.05',
-      solana: '0.05',
-    },
-    signature:
-      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    source:
-      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
-  },
-  {
-    solanaTransactionId:
-      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
-    createdAt: new Date(),
-    fee: {
-      gateway: '0.05',
-      solana: '0.05',
-    },
-    signature:
-      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    source:
-      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
-  },
-  {
-    solanaTransactionId:
-      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
-    createdAt: new Date(),
-    fee: {
-      gateway: '0.05',
-      solana: '0.05',
-    },
-    signature:
-      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    source:
-      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
-  },
-  {
-    solanaTransactionId:
-      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
-    createdAt: new Date(),
-    fee: {
-      gateway: '0.05',
-      solana: '0.05',
-    },
-    signature:
-      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    source:
-      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
-  },
-  {
-    solanaTransactionId:
-      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
-    createdAt: new Date(),
-    fee: {
-      gateway: '0.05',
-      solana: '0.05',
-    },
-    signature:
-      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    source:
-      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
-  },
-  {
-    solanaTransactionId:
-      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
-    createdAt: new Date(),
-    fee: {
-      gateway: '0.05',
-      solana: '0.05',
-    },
-    signature:
-      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    source:
-      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
-  },
-  {
-    solanaTransactionId:
-      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
-    createdAt: new Date(),
-    fee: {
-      gateway: '0.05',
-      solana: '0.05',
-    },
-    signature:
-      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    source:
-      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
-  },
-  {
-    solanaTransactionId:
-      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
-    createdAt: new Date(),
-    fee: {
-      gateway: '0.05',
-      solana: '0.05',
-    },
-    signature:
-      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    source:
-      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
-  },
-  {
-    solanaTransactionId:
-      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
-    createdAt: new Date(),
-    fee: {
-      gateway: '0.05',
-      solana: '0.05',
-    },
-    signature:
-      '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    source:
-      'did:gatewayid:0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
-    transactionId: '4fff1352-2480-4fce-8b34-c095f4d9463a',
-  },
-  {
-    solanaTransactionId:
-      '5PHairtiFxFGydbtN4sR41zXzQ5gKiJ89ANyLFoWPPVhjFq4AcDfgCaHgJrDi8j3hfMsBNJAgJ3NyUo8ztH1AN2n',
-    createdAt: new Date(),
-    fee: {
-      gateway: '0.05',
-      solana: '0.05',
+      gateway: '0.5 OWN',
+      solana: '0.05 SOL',
     },
     signature:
       '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
