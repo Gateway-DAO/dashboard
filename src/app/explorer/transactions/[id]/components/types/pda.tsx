@@ -11,7 +11,6 @@ export default function PDA({ data }: { data: Transaction }) {
   return (
     <Stack
       sx={{
-        mb: 3,
         overflow: 'visible',
       }}
       divider={

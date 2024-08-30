@@ -20,6 +20,11 @@ type Props = {
   id: string;
 };
 
+// this will also refactor in future depending on cases
+const DisplayDetails = (data: any) => {
+  return <PDA data={data} />;
+};
+
 export default function TransactionDetails({ id }: Props) {
   const { data, isLoading } = useQuery({
     queryKey: [explorerQueries.transaction, id],
@@ -51,11 +56,6 @@ export default function TransactionDetails({ id }: Props) {
     },
   });
 
-  // this will also refactor in future depending on cases
-  const displayDetails = (data: any) => {
-    return <PDA data={data} />;
-  };
-
   return (
     <>
       <Container sx={{ pb: 4 }}>
@@ -75,7 +75,7 @@ export default function TransactionDetails({ id }: Props) {
               />
             }
           >
-            {data && displayDetails(data)}
+            {data && DisplayDetails(data)}
           </Stack>
         </Box>
       </Container>
