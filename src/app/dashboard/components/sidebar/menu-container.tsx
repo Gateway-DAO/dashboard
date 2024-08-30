@@ -36,30 +36,30 @@ export default function MenuContainer({
         },
       }}
     >
-      <Menu
-        menuItems={menuItems}
+      <Stack
         sx={{
           mt: 5,
-          mx: -2.5,
           display: { xs: 'none', lg: 'block' },
           '@media screen and (max-height: 900px) and (min-width: 1200px)': {
             mt: 2,
           },
         }}
-      />
+      >
+        {menuItems}
+      </Stack>
       {secondMenuItems && (
-        <Menu
-          menuItems={secondMenuItems}
+        <Stack
           sx={{
             mt: 5,
-            mx: -2.5,
             display: { xs: 'none', lg: 'block' },
             flexGrow: 1,
             '@media screen and (max-height: 900px) and (min-width: 700px)': {
               mt: 2,
             },
           }}
-        />
+        >
+          {secondMenuItems}
+        </Stack>
       )}
     </Stack>
   );

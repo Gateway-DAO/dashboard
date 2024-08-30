@@ -26,7 +26,7 @@ export default function Storage() {
           elevation={0}
           justifyContent="space-between"
           gap={1}
-          sx={{ p: 2, backgroundColor: 'primary.light', flex: 1 }}
+          sx={{ p: 2, backgroundColor: 'primary.100', flex: 1 }}
         >
           <Typography variant="caption" color="primary.dark">
             Data assets
@@ -40,7 +40,7 @@ export default function Storage() {
           elevation={0}
           justifyContent="space-between"
           gap={1}
-          sx={{ p: 2, backgroundColor: 'primary.light', flex: 1 }}
+          sx={{ p: 2, backgroundColor: 'primary.100', flex: 1 }}
         >
           <Typography variant="caption" color="primary.dark">
             Data storage
