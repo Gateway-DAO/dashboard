@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import WalletConnectModal from '@/components/wallet-modal/wallet-connect-modal';
 import WalletLoadingModal from '@/components/wallet-modal/wallet-loading-modal';
 import routes from '@/constants/routes';
+import { errorMessages } from '@/locale/en/errors';
 import { api } from '@/services/api/api';
 import { useWalletConnectionStep } from '@/services/wallets/wallet-connection-provider';
 import { Network } from '@/types/web3';
@@ -44,8 +45,8 @@ export default function AuthenticationWalletModals({
       });
       const callbackUrl = searchParams.get('callbackUrl');
 
-      if (res?.error || !res?.ok || !res) {
-        if (res?.error === 'this account does not exist') {
+      if ((res?.error && res.error !== 'SessionRequired') || !res?.ok || !res) {
+        if (res?.error === errorMessages.UNKNOWN_USER) {
           // add searchParams to "routes.new" url if callbackUrl is not null
           const redirectSearchParams = new URLSearchParams();
           redirectSearchParams.append('signature', signature);
@@ -64,7 +65,7 @@ export default function AuthenticationWalletModals({
       }
 
       onSuccess();
-      router.push(callbackUrl ?? routes.dashboard.user.home);
+      router.push(callbackUrl ?? routes.dashboard.home);
     },
     statesHandler: connectionStep,
   });

@@ -5,7 +5,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Button, ButtonProps } from '@mui/material';
 
 type Props = {
-  text: string;
+  text?: string;
   customButtonText?: string;
   sucessMessage?: string;
 };
@@ -31,7 +31,7 @@ export default function CopyButton({
 
   return (
     <Button
-      onClick={() => copy(text)}
+      onClick={text ? () => copy(text) : undefined}
       startIcon={<ContentCopyIcon />}
       variant="outlined"
       size="medium"

@@ -73,9 +73,9 @@ export default function StorageList() {
         onRowClick={(params: GridRowParams<PrivateDataAsset>, event) => {
           // if middle click open new tab
           if (event.button === 1) {
-            return window.open(routes.dashboard.user.asset(params.id));
+            return window.open(routes.dashboard.asset(params.id));
           }
-          return router.push(routes.dashboard.user.asset(params.id));
+          return router.push(routes.dashboard.asset(params.id));
         }}
         pageSizeOptions={[5, 10, 15]}
         paginationModel={paginationModel}

@@ -11,8 +11,8 @@ export default function PDAPage({ params }: { params: { id: string } }) {
   const pda = mockPrivateDataAssets.find((pda) => pda.id === params.id);
 
   if (!pda) {
-    return redirect(routes.dashboard.user.home);
+    return redirect(routes.dashboard.home);
   }
 
-  return <PDADetailPage pda={pda} backHref={routes.dashboard.user.home} />;
+  return <PDADetailPage pda={pda} backHref={routes.dashboard.home} />;
 }
