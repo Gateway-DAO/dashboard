@@ -4,6 +4,7 @@ import { Box, Container, Stack, Typography } from '@mui/material';
 
 import TransactionsNumbers from './components/transactions-numbers';
 import TransactionsTableSection from './components/transactions-table-section';
+import InternalHeader from '@/components/internal/internal-header';
 
 export const metadata: Metadata = {
   title: `Gateway Transactions`,
@@ -13,11 +14,14 @@ export const metadata: Metadata = {
 export default function TransactionPage() {
   return (
     <>
+      <InternalHeader
+        color="primary"
+        slot={<Typography variant="h2">Transactions</Typography>}
+      ></InternalHeader>
       <Box
         sx={{
-          pt: 21,
           pb: 6,
-          bgcolor: 'primary.light',
+          bgcolor: 'primary.100',
         }}
       >
         <Stack
@@ -25,7 +29,6 @@ export default function TransactionPage() {
           maxWidth="xl"
           justifyContent="space-between"
         >
-          <Typography variant="h2">Transactions</Typography>
           <TransactionsNumbers />
         </Stack>
       </Box>

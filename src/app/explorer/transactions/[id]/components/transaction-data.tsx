@@ -4,7 +4,7 @@ import { CardCellContainer } from '@/components/card-cell/card-cell';
 import { TableCellContainer } from '@/components/containers/table-cell-container/table-cell-container';
 
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 import {
   Box,
@@ -45,8 +45,21 @@ export default function TransactionData({ data }: { data: string }) {
               >
                 <Typography variant="subtitle1">Metadata</Typography>
               </Stack>
-              <Box pt={2}>
-                <SyntaxHighlighter language="json" style={dracula}>
+              <Box
+                pt={2}
+                sx={{
+                  'code, code span': {
+                    fontFamily: 'monospace',
+                  },
+                }}
+              >
+                <SyntaxHighlighter
+                  language="json"
+                  style={vs2015}
+                  customStyle={{
+                    borderRadius: 12,
+                  }}
+                >
                   {result}
                 </SyntaxHighlighter>
               </Box>

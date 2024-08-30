@@ -6,22 +6,12 @@ import { explorerQueries } from '@/constants/queries';
 
 import { useQuery } from '@tanstack/react-query';
 
-import {
-  Box,
-  Card,
-  Chip,
-  Container,
-  Divider,
-  Skeleton,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Card, Container, Divider, Stack } from '@mui/material';
 
 import TransactionData from './transaction-data';
 import PDA from './types/pda';
 
 import {
-  mockTransactionType,
   Transaction,
   mockTransactions,
   mockMetaData,
@@ -29,6 +19,11 @@ import {
 
 type Props = {
   id: string;
+};
+
+// this will also refactor in future depending on cases
+const DisplayDetails = (data: any) => {
+  return <PDA data={data} />;
 };
 
 export default function TransactionDetails({ id }: Props) {
@@ -62,11 +57,6 @@ export default function TransactionDetails({ id }: Props) {
     },
   });
 
-  // this will also refactor in future depending on cases
-  const displayDetails = (data: any) => {
-    return <PDA data={data} />;
-  };
-
   return (
     <>
       <Container sx={{ pb: 4 }}>
@@ -86,7 +76,7 @@ export default function TransactionDetails({ id }: Props) {
               />
             }
           >
-            {data && displayDetails(data)}
+            {data && DisplayDetails(data)}
           </Stack>
         </Box>
       </Container>
