@@ -1,10 +1,8 @@
 'use client';
 
 import NumberCard from '@/components/number-card/number-card';
-import {
-  mockExplorerHomeStats,
-  ExplorerHomeStats,
-} from '@/services/api/models';
+import { mockExplorerHomeStats } from '@/services/api/mocks';
+import { ExplorerHomeStats } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
 import { Box, Container, Stack, Typography } from '@mui/material';

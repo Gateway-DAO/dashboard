@@ -8,12 +8,8 @@ import SortByField, {
 } from '@/components/search-filters/sort-by-field';
 import TagsField from '@/components/search-filters/tags-field';
 import SearchSection from '@/components/search-section/search-section';
-import {
-  DataModelType,
-  mockDataModels,
-  mockDataModelsMetadata,
-  DataModelsMetadataType,
-} from '@/services/api/models';
+import { mockDataModels, mockDataModelsMetadata } from '@/services/api/mocks';
+import { DataModel, DataModelsMetadataType } from '@/services/api/models';
 import { useDebouncedState } from '@react-hookz/web';
 import { useQuery } from '@tanstack/react-query';
 
@@ -52,7 +48,7 @@ const sortOptions: SortByOption<any>[] = [
 
 export default function DataModelsExplorerSearch() {
   const [search, setSearch] = useDebouncedState('', 500);
-  const [selectedSort, setSort] = useState<SortByOption<DataModelType>>();
+  const [selectedSort, setSort] = useState<SortByOption<DataModel>>();
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedConsumptionPrice, setSelectedConsumptionPrice] = useState<
     number[]
@@ -91,8 +87,8 @@ export default function DataModelsExplorerSearch() {
       selectedSort?.value,
       search,
     ],
-    queryFn: async (): Promise<DataModelType[]> => {
-      const mockPromise = new Promise<DataModelType[]>((resolve) => {
+    queryFn: async (): Promise<DataModel[]> => {
+      const mockPromise = new Promise<DataModel[]>((resolve) => {
         setTimeout(() => {
           resolve(mockDataModels);
         }, 1000);

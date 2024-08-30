@@ -47,15 +47,14 @@ export default function GTWMenuItem({
         underline={'none'}
         {...props}
         sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
           color: 'text.secondary',
-          pl: {
-            xs: CONTAINER_PX.xs - 0.5,
-            md: CONTAINER_PX.md - 0.5,
-            lg: 2,
-          },
-          pr: 1.5,
-          py: 0,
-          ':hover': {
+          p: 1,
+          borderRadius: 1,
+          gap: 2,
+          ':hover, :focus': {
             svg: {
               color: 'primary.main',
             },
@@ -63,42 +62,25 @@ export default function GTWMenuItem({
               color: 'primary.main',
             },
           },
-
+          ...(active && {
+            color: 'primary.dark',
+            backgroundColor: 'primary.100',
+            svg: {
+              color: 'primary.dark',
+            },
+          }),
           ...props.sx,
         }}
       >
-        <Stack
-          direction="row"
-          gap={2}
-          alignItems="center"
-          sx={{
-            width: '100%',
-            p: 1,
-
-            ...(active && {
-              color: 'primary.main',
-              backgroundColor: 'primary.light',
-              borderRadius: '16px',
-              svg: {
-                color: 'primary.main',
-              },
-            }),
-          }}
-        >
-          {active && ActiveIcon ? (
-            <ActiveIcon sx={{ fontSize: 32 }} />
-          ) : (
-            Icon && <Icon sx={{ fontSize: 32 }} />
-          )}
-          <Typography
-            component={'span'}
-            variant="subtitle1"
-            sx={{ fontSize: '1rem', flexGrow: 1 }}
-          >
-            {name}
-          </Typography>
-          {externalLink && <OpenInNew sx={{ ml: 2, mr: 1 }} />}
-        </Stack>
+        {active && ActiveIcon ? (
+          <ActiveIcon sx={{ fontSize: 24 }} />
+        ) : (
+          Icon && <Icon sx={{ fontSize: 24 }} />
+        )}
+        <Typography component={'span'} variant="subtitle1" sx={{ flexGrow: 1 }}>
+          {name}
+        </Typography>
+        {externalLink && <OpenInNew sx={{ ml: 2, mr: 1 }} />}
       </ListItemButton>
     </ListItem>
   );

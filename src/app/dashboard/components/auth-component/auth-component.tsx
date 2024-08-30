@@ -36,7 +36,7 @@ export default function AuthComponent({ id, controlId }: Props) {
         sx={(theme) => ({
           backgroundColor: {
             xs: 'transparent',
-            lg: 'primary.light',
+            lg: 'primary.100',
           },
           borderRadius: theme.shape.borderRadius / 16, //Strange issue with MUI
           justifyContent: 'space-between',

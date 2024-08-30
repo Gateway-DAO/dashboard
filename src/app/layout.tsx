@@ -2,19 +2,14 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
+import { defaultMetatag } from '@/constants/metatags';
 import { currentEnv } from '@/utils/env';
 import { Analytics } from '@vercel/analytics/react';
 import sanitizeHtml from 'sanitize-html';
 
 import Providers from './providers';
 
-export const metadata: Metadata = {
-  title: 'Gateway Network',
-  description: 'Gateway Network - A new concept about web3',
-  openGraph: {
-    images: ['/social.png'],
-  },
-};
+export const metadata: Metadata = defaultMetatag;
 
 const env = currentEnv;
 const isTesnetOrProd = env === 'testnet' || env === 'production';
