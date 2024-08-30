@@ -10,6 +10,7 @@ export type TokenResponse = Required<
   components['schemas']['model.TokenResponse']
 >;
 export type DataModel = components['schemas']['model.DataModel'];
+export type PublicDataAsset = components['schemas']['model.PublicDataAsset'];
 
 export type PaginatedResponse<T = any> = DeepRequired<
   Omit<components['schemas']['helper.PaginatedResponse'], 'data'>

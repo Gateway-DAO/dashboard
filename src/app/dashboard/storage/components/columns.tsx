@@ -1,12 +1,10 @@
 'use client';
-import Image from 'next/image';
 
 import DataOutlinedIcon from '@/components/icons/data-outlined';
 import { DATE_FORMAT } from '@/constants/date';
-import { PrivateDataAsset } from '@/services/api/models';
+import { PublicDataAsset } from '@/services/api/models';
 import { formatBytes } from '@/utils/bytes';
 import { formatDateDifference } from '@/utils/date';
-import { FileType, getFileTypeByPda, getIconFile } from '@/utils/pda';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
@@ -20,23 +18,19 @@ dayjs.extend(utc);
 dayjs.extend(advancedFormat);
 dayjs.extend(duration);
 
-export const columns: GridColDef<PrivateDataAsset>[] = [
+export const columns: GridColDef<PublicDataAsset>[] = [
   {
     field: 'name',
     headerName: 'Name',
     flex: 2,
     renderCell: (params) => {
-      const name = params.row.fileName ?? params.row?.fileName ?? '';
-      const fileType = getFileTypeByPda(params.row);
-      const icon = getIconFile(fileType);
+      const name = params.row.name ?? '';
+      // const fileType = getFileTypeByPda(params.row?.type);
+      // const icon = getIconFile(fileType);
 
       return (
         <Stack direction={'row'} gap={1} alignItems="end">
-          {fileType === FileType.pda ? (
-            <DataOutlinedIcon color="primary" />
-          ) : (
-            <Image src={icon} alt={`${fileType} icon`} width={24} height={24} />
-          )}
+          <DataOutlinedIcon color="primary" />
           <Typography sx={{ mx: 2 }}>{limitCharsCentered(name, 30)}</Typography>
         </Stack>
       );
@@ -47,7 +41,7 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
     headerName: 'Who has access',
     width: 150,
     renderCell: (params) => (
-      <Typography>{params.row.proofs.length || '-'}</Typography>
+      <Typography>{params.row.roles?.length || '-'}</Typography>
     ),
   },
   {
@@ -65,7 +59,9 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
     width: 150,
 
     renderCell: (params) => (
-      <Typography>{formatDateDifference(params.row.expirationDate)}</Typography>
+      <Typography>
+        {formatDateDifference(params.row.expiration_date)}
+      </Typography>
     ),
   },
   {
@@ -74,7 +70,9 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
     flex: 1,
     renderCell: (params) => (
       <Typography>
-        {params.value ? dayjs(params.value).format(DATE_FORMAT) : ''}
+        {params.row.updated_at
+          ? dayjs(params.row.updated_at).format(DATE_FORMAT)
+          : ''}
       </Typography>
     ),
   },
