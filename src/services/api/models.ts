@@ -4,30 +4,16 @@ import { DeepRequired } from 'react-hook-form';
 
 import { components } from './types';
 
+export type PaginatedResponse<T = any> = DeepRequired<
+  Omit<components['schemas']['helper.PaginatedResponse'], 'data'>
+> & { data?: T[] };
+
 export type Account = components['schemas']['model.MyAccountResponse'];
 
 export type TokenResponse = Required<
   components['schemas']['model.TokenResponse']
 >;
 export type DataModel = components['schemas']['model.DataModel'];
-
-export type PaginatedResponse<T = any> = DeepRequired<
-  Omit<components['schemas']['helper.PaginatedResponse'], 'data'>
-> & { data?: T[] };
-
-export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  Date: any;
-  DateTime: any;
-  DateTimeISO: any;
-  JSON: any;
-  StringSchema: any;
-};
-export type Maybe<T> = T | null;
 
 export type PrivateDataAsset = {
   id: string;
