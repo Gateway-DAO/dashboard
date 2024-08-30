@@ -20,9 +20,8 @@ export default function DataModelCard({
   children,
   ...props
 }: Props & CardProps) {
-  //TODO: Implement to get stats of data model
-  const dataAssets = 10;
-
+  // TODO: implement data assets
+  const data_assets = 10;
   return (
     <DataCard
       title={dataModel!.title!}
@@ -41,7 +40,7 @@ export default function DataModelCard({
           >
             <Typography variant="subtitle2" fontWeight="400" justifySelf="left">
               <b>
-                {dataAssets.toLocaleString('en-US', {
+                {data_assets.toLocaleString('en-US', {
                   notation: 'compact',
                 })}
               </b>{' '}
