@@ -1,7 +1,7 @@
 import BackButton from '@/components/buttons/back-button';
 import { LoadingButton } from '@/components/buttons/loading-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
-import { PrivateDataAsset } from '@/services/api/models';
+import { PublicDataAsset } from '@/services/api/models';
 import { CONTAINER_PX, WIDTH_CENTERED } from '@/theme/config/style-tokens';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
@@ -13,7 +13,7 @@ import PageContainer from './container';
 import StructuredDetail from './pda-types/structured-detail';
 
 type Props = {
-  pda: PrivateDataAsset;
+  pda: PublicDataAsset;
   backHref: string;
 };
 
@@ -24,13 +24,13 @@ export default function PDADetailPage({ pda, backHref }: Props) {
   const { mutateAsync, isPending } = useMutation({
     mutationKey: ['decrypting-data-asset', pda],
     mutationFn: async (): Promise<void> => {
-      if (pda.structured) {
+      if (pda.type === 'structured') {
         const mockData = JSON.stringify({ message: 'This is mock data.' });
         const blob = new Blob([mockData], { type: 'text/plain' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `${pda.fileName}.txt`;
+        link.download = `${pda.fid}.txt`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

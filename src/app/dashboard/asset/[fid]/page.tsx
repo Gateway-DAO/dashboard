@@ -3,12 +3,13 @@
 import { redirect } from 'next/navigation';
 
 import routes from '@/constants/routes';
-import { mockPrivateDataAssets } from '@/services/api/models';
+import { mockPublicDataAssets } from '@/services/api/mocks';
+import { PageWithParams } from '@/types/next';
 
 import PDADetailPage from './components/content';
 
-export default function PDAPage({ params }: { params: { id: string } }) {
-  const pda = mockPrivateDataAssets.find((pda) => pda.id === params.id);
+export default function PDAPage({ params }: PageWithParams<{ fid: string }>) {
+  const pda = mockPublicDataAssets.find((pda) => pda.fid === params.fid);
 
   if (!pda) {
     return redirect(routes.dashboard.home);

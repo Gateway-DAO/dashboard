@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import { mockPrivateDataAssets } from '@/services/api/models';
+import { mockPublicDataAssets } from '@/services/api/mocks';
 
 import PDAPage from './page';
 
@@ -9,9 +9,9 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const pda = mockPrivateDataAssets.find((pda) => pda.id === params.id);
+  const pda = mockPublicDataAssets.find((pda) => pda.fid === params.id);
   return {
-    title: `${pda?.fileName} - Gateway`,
+    title: `${pda?.name} - Gateway`,
   };
 }
 

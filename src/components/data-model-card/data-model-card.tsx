@@ -2,14 +2,15 @@ import { ReactNode } from 'react';
 
 import DataCard from '@/components/data-card/data-card';
 import routes from '@/constants/routes';
-import { DataModelType, mockUser } from '@/services/api/models';
+import { mockAccount } from '@/services/api/mocks';
+import { DataModel } from '@/services/api/models';
 import { PartialDeep } from 'type-fest';
 
 import { Typography, CardProps, Box } from '@mui/material';
 
 type Props = {
   withLink?: boolean;
-  dataModel?: PartialDeep<DataModelType>;
+  dataModel?: PartialDeep<DataModel>;
   children?: ReactNode;
 };
 
@@ -24,7 +25,7 @@ export default function DataModelCard({
       title={dataModel!.title!}
       description={dataModel!.description!}
       href={withLink ? routes.explorer.dataModel(dataModel!.id) : undefined}
-      profile={mockUser}
+      profile={mockAccount}
       sx={{ minWidth: 300 }}
       bottom={
         <>

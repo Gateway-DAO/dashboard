@@ -1,4 +1,4 @@
-import { PrivateDataAsset } from '@/services/api/models';
+import { PublicDataAsset } from '@/services/api/models';
 
 export enum FileType {
   pda,
@@ -10,30 +10,30 @@ export enum FileType {
   other,
 }
 
-export const getFileTypeByMimeType = (mimeType: string) => {
-  if (mimeType.includes('audio')) {
-    return FileType.audio;
-  } else if (mimeType.includes('image')) {
-    return FileType.image;
-  } else if (mimeType.includes('video')) {
-    return FileType.video;
-  } else if (mimeType.includes('pdf')) {
-    return FileType.pdf;
-  } else if (mimeType.includes('document') || mimeType.includes('doc')) {
+export const getFileTypeByMimeType = (type: PublicDataAsset['type']) => {
+  if (type?.includes('audio')) {
+    return FileType?.audio;
+  } else if (type?.includes('image')) {
+    return FileType?.image;
+  } else if (type?.includes('video')) {
+    return FileType?.video;
+  } else if (type?.includes('pdf')) {
+    return FileType?.pdf;
+  } else if (type?.includes('document') || type?.includes('doc')) {
     return FileType.document;
   } else {
     return FileType.other;
   }
 };
 
-export const getFileTypeByPda = (pda: PrivateDataAsset) => {
-  if (pda.structured || !pda.mimeType) {
+export const getFileTypeByPda = (pda: PublicDataAsset) => {
+  const { type } = pda;
+
+  if (type === 'structured') {
     return FileType.pda;
   }
 
-  const { mimeType } = pda;
-
-  return getFileTypeByMimeType(mimeType);
+  return getFileTypeByMimeType(type);
 };
 
 export const getIconFile = (file: FileType) => {

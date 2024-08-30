@@ -25,9 +25,7 @@ export const columns: GridColDef<PublicDataAsset>[] = [
     flex: 2,
     renderCell: (params) => {
       const name = params.row.name ?? '';
-      // const fileType = getFileTypeByPda(params.row?.type);
-      // const icon = getIconFile(fileType);
-
+      // TODO: implement file type icon
       return (
         <Stack direction={'row'} gap={1} alignItems="end">
           <DataOutlinedIcon color="primary" />
@@ -65,7 +63,7 @@ export const columns: GridColDef<PublicDataAsset>[] = [
     ),
   },
   {
-    field: 'updatedAt',
+    field: 'updated_at',
     headerName: 'Last modified',
     flex: 1,
     renderCell: (params) => (
