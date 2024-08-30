@@ -2,21 +2,33 @@ import createFetchClient from 'openapi-fetch';
 
 import type { paths } from './types';
 
-type PathsWithoutParameters = {
-  [K in keyof paths]: {
-    [M in keyof paths[K]]: Omit<paths[K][M], 'parameters'>;
-  };
+type RemoveHeaderParams<T> = {
+  [K in keyof T]: T[K] extends {
+    parameters: infer P;
+  }
+    ? {
+        parameters: P extends {
+          header: any;
+        }
+          ? Omit<P, 'header'> & { header?: never }
+          : P;
+      } & Omit<T[K], 'parameters'>
+    : T[K];
 };
 
-export const api = createFetchClient<PathsWithoutParameters>({
+type RemoveHeaderParamsFromPaths = {
+  [K in keyof paths]: RemoveHeaderParams<paths[K]>;
+};
+export const createAuthHeader = (token?: string) => ({
+  Authorization: `Bearer ${token}`,
+});
+
+export const api = createFetchClient<paths>({
   baseUrl: process.env.NEXT_PUBLIC_API_URL,
 });
 
 export const authApi = (token: string) =>
-  createFetchClient<PathsWithoutParameters>({
+  createFetchClient<RemoveHeaderParamsFromPaths>({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
-    mode: 'no-cors',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    headers: createAuthHeader(token),
   });

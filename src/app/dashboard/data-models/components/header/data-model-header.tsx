@@ -1,7 +1,5 @@
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 
-import GTWTab from '@/components/tabs/gtw-tab';
-import GTWTabs from '@/components/tabs/gtw-tabs-links';
 import TitleLayout from '@/components/title-layout/title-layout';
 import {
   CONTAINER_PX,
@@ -9,6 +7,8 @@ import {
 } from '@/theme/config/style-tokens';
 
 import { Box } from '@mui/material';
+
+import { ConnectedTabs, Tabs } from './tabs';
 
 type Props = {
   children?: ReactNode;
@@ -35,10 +35,9 @@ export function DataModelHeader({ children }: Props) {
           px: CONTAINER_PX,
         }}
       >
-        <GTWTabs>
-          <GTWTab label={'Created'} href={'#'} />
-          <GTWTab label={'Network'} href={'#'} />
-        </GTWTabs>
+        <Suspense fallback={<Tabs />}>
+          <ConnectedTabs />
+        </Suspense>
       </Box>
     </>
   );
