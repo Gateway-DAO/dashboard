@@ -1,13 +1,11 @@
 'use client';
 
 import NumberCard from '@/components/number-card/number-card';
+import { mockExplorerHomeStats } from '@/services/api/mocks';
+import { ExplorerHomeStats } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
 import { Stack } from '@mui/material';
-import {
-  ExplorerHomeStats,
-  mockExplorerHomeStats,
-} from '@/services/api/models';
 
 export default function TransactionsNumbers() {
   const { data, isLoading } = useQuery({

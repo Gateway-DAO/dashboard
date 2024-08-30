@@ -1,7 +1,11 @@
 import { transaction_actions } from '@/locale/en/transaction';
-import { mockTransactionType } from '@/services/api/models';
+import { mockTransactionType } from '@/services/api/mocks';
 
-export default function ActionDetail({ action }: { action: mockTransactionType }) {
+export default function ActionDetail({
+  action,
+}: {
+  action: mockTransactionType;
+}) {
   const getDetail = (): string => {
     switch (action) {
       case mockTransactionType.PdaIssuance:

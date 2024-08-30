@@ -8,7 +8,8 @@ import {
   defaultGridCustomization,
 } from '@/components/data-grid/grid-default';
 import routes from '@/constants/routes';
-import { mockPrivateDataAssets, PrivateDataAsset } from '@/services/api/models';
+import { mockPrivateDataAssets } from '@/services/api/mocks';
+import { PrivateDataAsset } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
 import LinearProgress from '@mui/material/LinearProgress';

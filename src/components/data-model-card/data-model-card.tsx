@@ -2,14 +2,15 @@ import { ReactNode } from 'react';
 
 import DataCard from '@/components/data-card/data-card';
 import routes from '@/constants/routes';
-import { DataModelType, mockUser } from '@/services/api/models';
+import { mockUser } from '@/services/api/mocks';
+import { DataModel } from '@/services/api/models';
 import { PartialDeep } from 'type-fest';
 
 import { Typography, CardProps, Box } from '@mui/material';
 
 type Props = {
   withLink?: boolean;
-  dataModel?: PartialDeep<DataModelType>;
+  dataModel?: PartialDeep<DataModel>;
   children?: ReactNode;
 };
 
@@ -19,6 +20,9 @@ export default function DataModelCard({
   children,
   ...props
 }: Props & CardProps) {
+  //TODO: Implement to get stats of data model
+  const dataAssets = 10;
+
   return (
     <DataCard
       title={dataModel!.title!}
@@ -37,11 +41,9 @@ export default function DataModelCard({
           >
             <Typography variant="subtitle2" fontWeight="400" justifySelf="left">
               <b>
-                {dataModel?.dataAssests
-                  ? dataModel.dataAssests.toLocaleString('en-US', {
-                      notation: 'compact',
-                    })
-                  : 0}
+                {dataAssets.toLocaleString('en-US', {
+                  notation: 'compact',
+                })}
               </b>{' '}
               data assets
             </Typography>

@@ -9,6 +9,8 @@ import {
 } from '@/components/data-grid/grid-default';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
+import { mockTransactions } from '@/services/api/mocks';
+import { Transaction } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
@@ -16,7 +18,6 @@ import { Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 
 import Search from './search';
-import { mockTransactions, Transaction } from '@/services/api/models';
 
 type Props = {
   initialData: Transaction[];

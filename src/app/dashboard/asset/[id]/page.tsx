@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 
 import routes from '@/constants/routes';
-import { mockPrivateDataAssets } from '@/services/api/models';
+import { mockPrivateDataAssets } from '@/services/api/mocks';
 
 import PDADetailPage from './components/content';
 

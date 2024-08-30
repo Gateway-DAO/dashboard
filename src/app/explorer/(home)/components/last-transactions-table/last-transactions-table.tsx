@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { CardCellContainer } from '@/components/card-cell/card-cell';
 import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
-import { Transaction, mockTransactions } from '@/services/api/models';
+import { mockTransactions } from '@/services/api/mocks';
+import { Transaction } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 

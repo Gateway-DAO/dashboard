@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import { mockPrivateDataAssets } from '@/services/api/models';
+import { mockPrivateDataAssets } from '@/services/api/mocks';
 
 import PDAPage from './page';
 
