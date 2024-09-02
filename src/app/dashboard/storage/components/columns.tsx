@@ -1,10 +1,10 @@
 'use client';
 
-import DataOutlinedIcon from '@/components/icons/data-outlined';
 import { DATE_FORMAT } from '@/constants/date';
 import { PublicDataAsset } from '@/services/api/models';
 import { formatBytes } from '@/utils/bytes';
 import { formatDateDifference } from '@/utils/date';
+import { getFileTypeByMimeType, getIconFile } from '@/utils/pda';
 import { limitCharsCentered } from '@/utils/string';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
@@ -25,10 +25,13 @@ export const columns: GridColDef<PublicDataAsset>[] = [
     flex: 2,
     renderCell: (params) => {
       const name = params.row.name ?? '';
+      const fileType = getFileTypeByMimeType(params.row!.type);
+      const Icon = getIconFile(fileType);
+
       // TODO: implement file type icon
       return (
         <Stack direction={'row'} gap={1} alignItems="end">
-          <DataOutlinedIcon color="primary" />
+          <Icon color="primary" />
           <Typography sx={{ mx: 2 }}>{limitCharsCentered(name, 30)}</Typography>
         </Stack>
       );

@@ -100,7 +100,6 @@ const mockPublicDataAsset: PublicDataAsset = {
   name: 'Data Asset Example 0 Jason',
   type: 'structured',
   tags: ['Finance', 'IT'],
-  issuer: mockAccount,
   created_at: '2024-08-28T16:57:05.075541-03:00',
   updated_at: '2024-08-28T16:57:05.075541-03:00',
   expiration_date: '2024-12-31T00:00:00.000Z',

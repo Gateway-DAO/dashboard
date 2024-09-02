@@ -51,6 +51,11 @@ export default function StorageList() {
         throw new Error('No data');
       }
 
+      data.data = data.data?.map((item: PublicDataAsset) => ({
+        ...item,
+        id: item.fid,
+      }));
+
       return data as PaginatedResponse<PublicDataAsset>;
     },
     enabled: !!session?.token,
