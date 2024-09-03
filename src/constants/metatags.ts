@@ -2,7 +2,10 @@ const description =
   'Gateway: The Decentralized Private Computer. An integrated protocol to encrypt, store, manage, and compute private data. Experience a private and powerful solution for sensitive information.';
 
 export const defaultMetatag = {
-  title: 'Gateway Protocol',
+  title: {
+    template: '%s | Gateway Protocol',
+    default: 'Gateway Protocol',
+  },
   description,
   keywords: [
     'Gateway',

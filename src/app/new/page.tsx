@@ -50,7 +50,13 @@ export default function NewUserPage({
           component={Stack}
           elevation={0}
           gap={9.75}
-          sx={{ p: 3, maxWidth: 610, bgcolor: 'white.main', height: '100%' }}
+          sx={{
+            p: 3,
+            maxWidth: 610,
+            bgcolor: 'white.main',
+            height: '100%',
+            overflowY: 'auto',
+          }}
         >
           <Logo href={routes.home} />
 
