@@ -10,11 +10,22 @@ import { PageWithParams } from '@/types/next';
 
 import PDADetailPage from './components/content';
 
-type Props = PageWithParams<{ fid: string }>;
+type Props = PageWithParams<{ id: string }>;
 
-export async function generateMetadata({
-  params: { fid },
-}: Props): Promise<Metadata> {
+const getPDA = async (id: string, token: string) => {
+  const intId = parseInt(id, 10);
+
+  const { data, error } = await authApi(token).GET('/data-assets/{id}', {
+    params: { path: { id: intId } },
+  });
+  if (!data || !!error) {
+    return null;
+  }
+
+  return data;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Obter a sessão do usuário
   const session = await getServerComponentSession();
 
@@ -25,28 +36,34 @@ export async function generateMetadata({
     };
   }
 
+  const pda = await getPDA(params.id, session.token);
+  console.log(pda);
+
+  if (!pda) {
+    return {
+      title: 'Data Asset',
+    };
+  }
+
   return {
-    title: mockPublicDataAsset.name,
+    title: pda.name,
   };
 }
 
 export default async function PDAPage({ params }: Props) {
-  // decode the fid from the URL
+  // decode the id from the URL
   const session = await getServerComponentSession();
 
   if (!session) {
     return redirect(routes.home);
   }
-  // const fid = decodeURIComponent(params.fid);
-  // const obj = await authApi(session.token).GET('/data-assets/{id}', {
-  //   params: { path: { id: 88068846996422656 } },
-  // });
+  const pda = await getPDA(params.id, session.token);
 
-  // if (!data) {
-  //   return redirect(routes.dashboard.home);
-  // }
+  console.log(pda);
 
-  return (
-    <PDADetailPage pda={mockPublicDataAsset} backHref={routes.dashboard.home} />
-  );
+  if (!pda) {
+    return redirect(routes.dashboard.home);
+  }
+
+  return <PDADetailPage pda={pda} backHref={routes.dashboard.home} />;
 }
