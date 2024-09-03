@@ -5,22 +5,15 @@ import CopyButton from '@/components/copy-button/copy-button';
 import ToggleVisibilityButton from '@/components/toggle-visibility-button/toggle-visibility-button';
 import { useToggle } from '@react-hookz/web';
 
-import { Warning } from '@mui/icons-material';
-import {
-  Alert,
-  Card,
-  CardContent,
-  CardHeader,
-  Typography,
-} from '@mui/material';
+import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 
-export default function AuthenticationToken({ token }: { token: string }) {
+export default function DID({ did }: { did: string }) {
   const [isVisible, toggleVisible] = useToggle(false);
 
   return (
     <Card sx={{ width: '100%' }} variant="outlined">
       <CardHeader
-        title={'Authentication Token'}
+        title="Account DID"
         titleTypographyProps={{
           variant: 'subtitle1',
           fontWeight: 'bold',
@@ -33,19 +26,14 @@ export default function AuthenticationToken({ token }: { token: string }) {
               size="medium"
               sx={{ mr: 1 }}
             />
-            <CopyButton text={token} size="medium" />
+            <CopyButton text={did} size="medium" />
           </>
         }
       />
       <CardContent>
         <Typography sx={{ mb: 2, wordBreak: 'break-all' }}>
-          {isVisible ? token : '••••'}
+          {isVisible ? did : '••••'}
         </Typography>
-        <Alert color="warning" icon={<Warning />}>
-          By sharing your authentication token, you assume all responsibility
-          for any actions performed using your token, whether authorized or
-          unauthorized.
-        </Alert>
       </CardContent>
     </Card>
   );
