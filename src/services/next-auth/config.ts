@@ -1,4 +1,4 @@
-import { NextAuthOptions } from 'next-auth';
+import { getServerSession, NextAuthOptions } from 'next-auth';
 
 import routes from '@/constants/routes';
 
@@ -32,3 +32,8 @@ export const nextAuthConfig: NextAuthOptions = {
     signIn: routes.home,
   },
 };
+
+export async function getServerComponentSession() {
+  const session = await getServerSession(nextAuthConfig);
+  return session;
+}

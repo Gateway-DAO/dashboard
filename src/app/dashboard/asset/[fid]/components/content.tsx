@@ -1,3 +1,4 @@
+'use client';
 import BackButton from '@/components/buttons/back-button';
 import { LoadingButton } from '@/components/buttons/loading-button';
 import TopBarContainer from '@/components/containers/top-bar-container/top-bar-container';
