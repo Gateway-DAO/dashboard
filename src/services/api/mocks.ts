@@ -94,7 +94,7 @@ export const mockDataModels: DataModel[] = [
   },
 ];
 
-const mockPublicDataAsset: PublicDataAsset = {
+export const mockPublicDataAsset: PublicDataAsset = {
   fid: '4fff1352-2480-4fce-8b34-c095f4d9463a',
   data_model_id: mockDataModel.id,
   name: 'Data Asset Example 0 Jason',
