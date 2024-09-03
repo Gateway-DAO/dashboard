@@ -51,11 +51,6 @@ export default function StorageList() {
         throw new Error('No data');
       }
 
-      data.data = data.data?.map((item: PublicDataAsset) => ({
-        ...item,
-        id: item.fid,
-      }));
-
       return data as PaginatedResponse<PublicDataAsset>;
     },
     enabled: !!session?.token,
@@ -80,11 +75,7 @@ export default function StorageList() {
         rows={data?.data ?? []}
         loading={isFetching}
         columns={columns}
-        onRowClick={(params: GridRowParams<PublicDataAsset>, event) => {
-          // if middle click open new tab
-          if (event.button === 1) {
-            return window.open(routes.dashboard.asset(params.id));
-          }
+        onRowClick={(params: GridRowParams<PublicDataAsset>) => {
           return router.push(routes.dashboard.asset(params.id));
         }}
         paginationModel={paginationModel}

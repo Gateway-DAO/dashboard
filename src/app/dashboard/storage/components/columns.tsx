@@ -1,6 +1,9 @@
 'use client';
 
+import Link from 'next/link';
+
 import { DATE_FORMAT } from '@/constants/date';
+import routes from '@/constants/routes';
 import { PublicDataAsset } from '@/services/api/models';
 import { formatBytes } from '@/utils/bytes';
 import { formatDateDifference } from '@/utils/date';
@@ -11,7 +14,7 @@ import advancedFormat from 'dayjs/plugin/advancedFormat';
 import duration from 'dayjs/plugin/duration';
 import utc from 'dayjs/plugin/utc';
 
-import { Stack, Typography } from '@mui/material';
+import { Typography, Link as MuiLink } from '@mui/material';
 import { GridColDef } from '@mui/x-data-grid';
 
 dayjs.extend(utc);
@@ -30,10 +33,23 @@ export const columns: GridColDef<PublicDataAsset>[] = [
 
       // TODO: implement file type icon
       return (
-        <Stack direction={'row'} gap={1} alignItems="end">
+        <MuiLink
+          component={Link}
+          href={routes.dashboard.asset(params.row.id!)}
+          alignItems="end"
+          underline="hover"
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 1,
+            alignItems: 'center',
+          }}
+        >
           <Icon color="primary" />
-          <Typography sx={{ mx: 2 }}>{limitCharsCentered(name, 30)}</Typography>
-        </Stack>
+          <Typography component="span" variant="body1" sx={{ color: 'black' }}>
+            {limitCharsCentered(name, 30)}
+          </Typography>
+        </MuiLink>
       );
     },
   },
