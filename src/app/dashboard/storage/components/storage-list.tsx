@@ -6,7 +6,7 @@ import { useMemo, useRef, useState } from 'react';
 
 import ServerPaginatedDataGrid from '@/components/data-grid/server-paginated-data-grid';
 import routes from '@/constants/routes';
-import { api, createAuthHeader } from '@/services/api/api';
+import { api, getAuthHeader } from '@/services/api/api';
 import { PaginatedResponse, PublicDataAsset } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
@@ -34,7 +34,7 @@ export default function StorageList() {
     ],
     queryFn: async () => {
       const { data, error } = await api.GET('/data-assets/me', {
-        headers: createAuthHeader(session?.token),
+        headers: getAuthHeader(session?.token),
         params: {
           query: {
             page: paginationModel.page + 1,
