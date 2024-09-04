@@ -25,24 +25,28 @@ export default function MetaDataDetails({ pda }: Props) {
       >
         <Stack divider={<Divider />} sx={{}}>
           <Stack direction="row" justifyContent="space-between">
-            <CardCell label={'Last Modified'} margin={false} py={3}>
+            <CardCell label="Last Modified" margin={false} py={3}>
               <span>{dayjs(pda.updated_at).format(DATE_FORMAT)}</span>
             </CardCell>
             <Divider orientation="vertical" flexItem />
-            <CardCell label={'Expiration'} margin={false} py={3}>
+            <CardCell label="Expiration" margin={false} py={3}>
               <Stack
-                direction={'row'}
-                justifyContent={'space-between'}
+                direction="row"
+                justifyContent="space-between"
                 alignItems="baseline"
               >
                 <span>{formatDateDifference(pda.expiration_date)}</span>
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ ml: 1 }}
+                >
                   {dayjs(pda.expiration_date).format(DATE_FORMAT)}
                 </Typography>
               </Stack>
             </CardCell>
           </Stack>
-          <CardCell label={'Created At'} margin={false} py={3}>
+          <CardCell label="Created At" margin={false} py={3}>
             <span>{dayjs(pda.created_at).format(DATE_FORMAT)}</span>
           </CardCell>
         </Stack>
@@ -57,24 +61,24 @@ export default function MetaDataDetails({ pda }: Props) {
       >
         <Stack divider={<Divider />}>
           <Stack direction="row" justifyContent="space-between">
-            <CardCell label={'Size'} margin={false} py={3}>
+            <CardCell label="Size" margin={false} py={3}>
               <span>{formatBytes(pda.size ?? 0)}</span>
             </CardCell>
             <Divider orientation="vertical" flexItem />
-            <CardCell label={'Type'} margin={false} py={3}>
+            <CardCell label="Type" margin={false} py={3}>
               <span>{pda.type}</span>
             </CardCell>
           </Stack>
           <Stack direction="row" justifyContent="space-between">
-            <CardCell label={'Tags'} margin={false} py={3}>
+            <CardCell label="Tags" margin={false} py={3}>
               <span>{pda?.tags?.length && <Tags tags={pda?.tags} />}</span>
             </CardCell>
             <Divider orientation="vertical" flexItem />
-            <CardCell label={'Data model ID'} margin={false} py={3}>
+            <CardCell label="Data model ID" margin={false} py={3}>
               <CopyData text={pda.data_model_id?.toString() || ''} />
             </CardCell>
           </Stack>
-          <CardCell label={'Data asset ID'} margin={false} py={3}>
+          <CardCell label="Data asset ID" margin={false} py={3}>
             <CopyData text={pda.fid ?? ''} />
           </CardCell>
         </Stack>

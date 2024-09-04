@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import React from 'react';
 
+import { authApi } from '@/services/api/api';
+import { getServerComponentSession } from '@/services/next-auth/config';
 import { formatBytes } from '@/utils/bytes';
 
 import { Box, Paper, Stack, Typography } from '@mui/material';
@@ -11,7 +13,13 @@ export const metadata: Metadata = {
   title: 'Storage - Gateway',
 };
 
-export default function Storage() {
+export default async function Storage() {
+  const session = await getServerComponentSession();
+  if (session?.token) {
+    const { data } = await authApi(session.token).GET('/data-assets/me');
+    console.log(data);
+  }
+
   return (
     <>
       <Typography variant="h3" mb={1}>

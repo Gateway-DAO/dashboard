@@ -37,7 +37,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const pda = await getPDA(params.id, session.token);
-  console.log(pda);
 
   if (!pda) {
     return {
@@ -51,15 +50,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PDAPage({ params }: Props) {
-  // decode the id from the URL
   const session = await getServerComponentSession();
 
   if (!session) {
     return redirect(routes.home);
   }
   const pda = await getPDA(params.id, session.token);
-
-  console.log(pda);
 
   if (!pda) {
     return redirect(routes.dashboard.home);
