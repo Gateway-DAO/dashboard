@@ -23,7 +23,7 @@ export default function MetaDataDetails({ pda }: Props) {
           width: '100%',
         }}
       >
-        <Stack divider={<Divider />} sx={{}}>
+        <Stack divider={<Divider />}>
           <Stack direction="row" justifyContent="space-between">
             <CardCell label="Last Modified" margin={false} py={3}>
               <span>{dayjs(pda.updated_at).format(DATE_FORMAT)}</span>

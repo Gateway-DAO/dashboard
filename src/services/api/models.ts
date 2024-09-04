@@ -18,6 +18,15 @@ export type DataModel = components['schemas']['model.DataModel'];
 
 export type PublicDataAsset = components['schemas']['model.PublicDataAsset'];
 
+export type PublicDataAssetType = 'Structured Data' | `${string}/${string}`;
+
+// COnvert to enum
+
+export enum PublicDataAssetTypeEnum {
+  StructuredData = 'Structured Data',
+  UnstructedData = 'Other',
+}
+
 export type ExplorerHomeStats = {
   transactionsCount: number;
   uniqueIssuers: number;

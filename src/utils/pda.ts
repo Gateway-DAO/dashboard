@@ -6,7 +6,10 @@ import ImageIcon from '@/components/icons/pda/image';
 import PDFIcon from '@/components/icons/pda/pdf';
 import StructuredIcon from '@/components/icons/pda/structured';
 import VideoIcon from '@/components/icons/pda/video';
-import { PublicDataAsset } from '@/services/api/models';
+import {
+  PublicDataAsset,
+  PublicDataAssetTypeEnum,
+} from '@/services/api/models';
 
 import { SvgIconProps } from '@mui/material';
 
@@ -20,7 +23,7 @@ export enum FileType {
 }
 
 export const getFileTypeByMimeType = (type: PublicDataAsset['type']) => {
-  if (type === 'Structured Data') {
+  if (type === PublicDataAssetTypeEnum.StructuredData) {
     return FileType.structured;
   } else if (type?.includes('image')) {
     return FileType?.image;
