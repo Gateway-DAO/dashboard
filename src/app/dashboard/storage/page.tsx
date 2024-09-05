@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 
 export default async function Storage() {
   const session = await getServerComponentSession();
-  if (session?.token) {
-    const { data } = await authApi(session.token).GET('/data-assets/me');
-    console.log(data);
+  if (!session?.token) {
+    return null;
   }
+  const { data } = await authApi(session.token).GET('/data-assets/me');
 
   return (
     <>
@@ -40,7 +40,7 @@ export default async function Storage() {
             Data assets
           </Typography>
           <Typography variant="h5" color="primary.dark">
-            0
+            {data?.meta?.total_items ?? 0}
           </Typography>
         </Stack>
         <Stack
