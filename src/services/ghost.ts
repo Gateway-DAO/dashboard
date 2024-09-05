@@ -4,6 +4,33 @@ const api = new GhostContentAPI({
   url: process.env.GHOST_URL as string,
   key: process.env.GHOST_KEY as string,
   version: 'v5.0',
+  makeRequest: async ({ url, method, params, headers }) => {
+    const apiUrl = new URL(url);
+
+    const { filter, ...urlParams } = params;
+
+    Object.keys(urlParams)
+      .filter((key) => key !== 'filter')
+      .map((key) =>
+        apiUrl.searchParams.set(
+          key,
+          encodeURIComponent([].concat(params[key]).join(','))
+        )
+      );
+    let stringApiURL = apiUrl.toString();
+
+    if (filter) {
+      stringApiURL += `&filter=${filter}`;
+    }
+
+    try {
+      const response = await fetch(stringApiURL, { method, headers });
+      const data = await response.json();
+      return { data };
+    } catch (error) {
+      console.error(error);
+    }
+  },
 });
 
 export async function getNavigation() {

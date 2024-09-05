@@ -1,10 +1,14 @@
+import { Metadata } from 'next';
+
 import InternalHeader from '@/components/internal/internal-header';
 
-import { Box, Button, Divider, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
-import FeaturedDataModels from './components/featured-data-models';
 import DataModelsList from './components/list';
-import DataModelsExplorerSearch from './components/search/search';
+
+export const metadata: Metadata = {
+  title: 'Data Models',
+};
 
 export default function DataModelHomePage() {
   return (
@@ -41,10 +45,6 @@ export default function DataModelHomePage() {
       >
         Data models
       </InternalHeader>
-      {/* <FeaturedDataModels />
-      <Divider /> */}
-      {/* <DataModelsExplorerSearch />
-       */}
       <DataModelsList />
     </>
   );
