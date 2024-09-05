@@ -11,9 +11,8 @@ import {
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
-const downloadTxt = (data: any, filename: string) => {
+const downloadPDA = (file: Blob, filename: string) => {
   const element = document.createElement('a');
-  const file = new Blob([data], { type: 'text/plain' });
   element.href = URL.createObjectURL(file);
   element.download = filename;
   document.body.appendChild(element); // Required for this to work in FireFox
@@ -40,6 +39,8 @@ export default function DownloadPDA({
             id,
           },
         },
+        parseAs:
+          type === PublicDataAssetTypeEnum.StructuredData ? 'text' : 'blob',
       });
 
       if (error) {
@@ -55,9 +56,14 @@ export default function DownloadPDA({
 
   const onDownload = useCallback(async () => {
     const res = await mutateAsync();
-    if (type === PublicDataAssetTypeEnum.StructuredData) {
-      downloadTxt(JSON.stringify(res), `${name}.txt`);
-    }
+    const file =
+      type === PublicDataAssetTypeEnum.StructuredData
+        ? new Blob([res as string], { type: 'text/plain' })
+        : (res as Blob);
+    const fileName =
+      type === PublicDataAssetTypeEnum.StructuredData ? `${name}.txt` : name;
+
+    downloadPDA(file, fileName);
     console.log(res);
   }, [mutateAsync, type, name]);
 
