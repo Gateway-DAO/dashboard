@@ -3,6 +3,7 @@ import InternalHeader from '@/components/internal/internal-header';
 import { Box, Button, Divider, Typography } from '@mui/material';
 
 import FeaturedDataModels from './components/featured-data-models';
+import DataModelsList from './components/list';
 import DataModelsExplorerSearch from './components/search/search';
 
 export default function DataModelHomePage() {
@@ -40,9 +41,11 @@ export default function DataModelHomePage() {
       >
         Data models
       </InternalHeader>
-      <FeaturedDataModels />
-      <Divider />
-      <DataModelsExplorerSearch />
+      {/* <FeaturedDataModels />
+      <Divider /> */}
+      {/* <DataModelsExplorerSearch />
+       */}
+      <DataModelsList />
     </>
   );
 }
