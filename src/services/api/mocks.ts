@@ -1,10 +1,19 @@
 import {
   DataModelsMetadataType,
   DataModel,
-  PrivateDataAsset,
+  PublicDataAsset,
   ExplorerHomeStats,
   Transaction,
+  Account,
 } from './models';
+
+export const mockAccount: Account = {
+  created_at: '2024-08-27T21:23:45.7145Z',
+  updated_at: '2024-08-27T21:23:45.7145Z',
+  username: 'KboozEVM',
+  did: 'did:gatewayid:gateway:b1038ceb61a87874a38eed3ecad27de1affbd34b574711485297457f99be8772',
+  wallet_address: '0x7158d4BAD3bd698d87C64BDC8E055C8CA1A043aD',
+};
 
 export const mockDataModelsMetadata: DataModelsMetadataType = {
   tags: ['defi', 'innovation', 'ai', 'blockchain'],
@@ -14,7 +23,7 @@ export const mockDataModelsMetadata: DataModelsMetadataType = {
   },
   issuedCount: 50,
 };
-const baseDataModel: DataModel = {
+const mockDataModel: DataModel = {
   id: 87818337408516096,
   created_at: '2024-08-28T16:56:48.069732-03:00',
   updated_at: '2024-08-28T16:56:48.069732-03:00',
@@ -51,112 +60,65 @@ export const mockDataModels: DataModel[] = [
     id: 87818337408516096,
     created_at: '2024-08-28T16:56:48.069732-03:00',
     updated_at: '2024-08-28T16:56:48.069732-03:00',
-    ...baseDataModel,
+    ...mockDataModel,
   },
   {
     id: 87818361215385600,
     created_at: '2024-08-28T16:57:02.261564-03:00',
     updated_at: '2024-08-28T16:57:02.261564-03:00',
-    ...baseDataModel,
+    ...mockDataModel,
   },
   {
     id: 87818362238795776,
     created_at: '2024-08-28T16:57:02.862531-03:00',
     updated_at: '2024-08-28T16:57:02.862531-03:00',
-    ...baseDataModel,
+    ...mockDataModel,
   },
   {
     id: 87818363564195840,
     created_at: '2024-08-28T16:57:03.653842-03:00',
     updated_at: '2024-08-28T16:57:03.653842-03:00',
-    ...baseDataModel,
+    ...mockDataModel,
   },
   {
     id: 87818364721823744,
     created_at: '2024-08-28T16:57:04.348974-03:00',
     updated_at: '2024-08-28T16:57:04.348974-03:00',
-    ...baseDataModel,
+    ...mockDataModel,
   },
   {
     id: 87818365946560512,
     created_at: '2024-08-28T16:57:05.075541-03:00',
     updated_at: '2024-08-28T16:57:05.075541-03:00',
-    ...baseDataModel,
+    ...mockDataModel,
   },
 ];
 
-export const mockPrivateDataAssets: PrivateDataAsset[] = [
+export const mockPublicDataAsset: PublicDataAsset = {
+  fid: '4fff1352-2480-4fce-8b34-c095f4d9463a',
+  data_model_id: mockDataModel.id,
+  name: 'Data Asset Example 0 Jason',
+  type: 'structured',
+  tags: ['Finance', 'IT'],
+  created_at: '2024-08-28T16:57:05.075541-03:00',
+  updated_at: '2024-08-28T16:57:05.075541-03:00',
+  expiration_date: '2024-12-31T00:00:00.000Z',
+};
+
+export const mockPublicDataAssets: PublicDataAsset[] = [
   {
-    id: '4fff1352-2480-4fce-8b34-c095f4d9463a',
-    mimeType: 'image/jpeg',
-    proofs: [],
-    structured: false,
-    fileName: 'image1.jpg',
-    access: [
-      {
-        did: 'did:4fff1352-2480-4fce-8b34-c095f4d9463a',
-        username: 'John',
-        access: 'Can view, update and delete',
-      },
-    ],
-    expirationDate: new Date('2024-12-31'),
-    updatedAt: new Date('2024-12-31'),
-    size: 1024,
-    createdAt: new Date(),
-    tags: ['asset', 'file'],
-    url: '',
-    dataModel: { id: '4fff1352-2480-4fce-8b34-c095f4d9463a', schema: {} },
+    ...mockPublicDataAsset,
+    fid: '4fff1352-2480-4fce-8b34-c095f4d9463b',
   },
   {
-    id: '4fff1352-2480-4fce-8b34-c095f4d94631',
-    mimeType: 'application/pdf',
-    structured: false,
-    proofs: [],
-    access: [
-      {
-        did: 'did:4fff1352-2480-4fce-8b34-c095f4d9463a',
-        username: 'Jane',
-        access: 'Can view, update and delete',
-      },
-    ],
-    fileName: 'document.pdf',
-    expirationDate: new Date('2024-10-30'),
-    updatedAt: new Date('2024-10-30'),
-    createdAt: new Date(),
-    size: 2048,
-    tags: ['asset', 'doc'],
-    url: '',
-    dataModel: { id: '4fff1352-2480-4fce-8b34-c095f4d9463a', schema: {} },
+    ...mockPublicDataAsset,
+    fid: '4fff1352-2480-4fce-8b34-c095f4d9463c',
   },
   {
-    id: '4fff1352-2480-4fce-8b34-c095f4d94632',
-    structured: true,
-    access: [
-      {
-        did: 'did:5e938e33-a062-4da5-8ed1-d6038eb7d574',
-        username: 'Alice',
-        access: 'Can view, update and delete',
-      },
-      {
-        did: 'did:81123498-74e4-4aa7-bd5f-1890bbfb1ead',
-        username: 'Jane',
-        access: 'Can view and share',
-      },
-    ],
-    expirationDate: new Date('2024-10-30'),
-    updatedAt: new Date('2024-10-30'),
-    createdAt: new Date(),
-    tags: ['asset', 'non-file'],
-    url: 'http://www.google.com',
-    size: 1024,
-    fileName: 'credit score',
-    mimeType: 'txt',
-    proofs: [],
-    dataModel: { id: '4fff1352-2480-4fce-8b34-c095f4d9463a', schema: {} },
+    ...mockPublicDataAsset,
+    fid: '4fff1352-2480-4fce-8b34-c095f4d9463d',
   },
 ];
-
-export const mockUser = { id: '1', gatewayId: 'test', isOrganization: false };
 
 export const mockExplorerHomeStats: ExplorerHomeStats = {
   pdasIssued: 1000,

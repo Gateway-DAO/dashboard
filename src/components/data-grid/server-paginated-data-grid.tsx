@@ -4,6 +4,8 @@ import {
   GridPaginationModel,
   GridColDef,
   GridEventListener,
+  DataGridProps,
+  GridValidRowModel,
 } from '@mui/x-data-grid';
 
 import {
@@ -11,17 +13,9 @@ import {
   defaultGridCustomization,
 } from './grid-default';
 
-type Props = {
-  loading: boolean;
-  rows: any[];
-  columns: GridColDef<any>[];
-  rowCount: number;
-  paginationModel: GridPaginationModel;
-  onRowClick?: GridEventListener<'rowClick'>;
-  onPaginationModelChange: (newModel: GridPaginationModel) => void;
-};
-
-export default function ServerPaginatedDataGrid({
+export default function ServerPaginatedDataGrid<
+  Model extends GridValidRowModel = any
+>({
   loading,
   rows,
   columns,
@@ -29,7 +23,7 @@ export default function ServerPaginatedDataGrid({
   paginationModel,
   onRowClick,
   onPaginationModelChange,
-}: Props) {
+}: DataGridProps<Model>) {
   return (
     <>
       {loading && (

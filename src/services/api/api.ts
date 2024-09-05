@@ -19,7 +19,7 @@ type RemoveHeaderParams<T> = {
 type RemoveHeaderParamsFromPaths = {
   [K in keyof paths]: RemoveHeaderParams<paths[K]>;
 };
-export const createAuthHeader = (token?: string) => ({
+export const getAuthHeader = (token?: string) => ({
   Authorization: `Bearer ${token}`,
 });
 
@@ -30,5 +30,5 @@ export const api = createFetchClient<paths>({
 export const authApi = (token: string) =>
   createFetchClient<RemoveHeaderParamsFromPaths>({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
-    headers: createAuthHeader(token),
+    headers: getAuthHeader(token),
   });

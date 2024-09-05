@@ -1,4 +1,4 @@
-import { PrivateDataAsset } from '@/services/api/models';
+import { PublicDataAsset } from '@/services/api/models';
 import { WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Card, Stack, Typography } from '@mui/material';
@@ -6,7 +6,7 @@ import { Card, Stack, Typography } from '@mui/material';
 import MetaDataDetails from './meta-data-details';
 
 type Props = {
-  pda: PrivateDataAsset;
+  pda: PublicDataAsset;
 };
 
 export default async function StructuredDetail({ pda }: Props) {
@@ -30,7 +30,7 @@ export default async function StructuredDetail({ pda }: Props) {
             color: '#53128C',
           }}
         >
-          {pda.fileName}
+          {pda.name}
         </Typography>
       </Stack>
       <MetaDataDetails pda={pda} />

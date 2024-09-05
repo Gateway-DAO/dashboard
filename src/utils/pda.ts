@@ -1,71 +1,65 @@
-import { PrivateDataAsset } from '@/services/api/models';
+import { FunctionComponent } from 'react';
+
+import DocIcon from '@/components/icons/pda/doc';
+import GenericIcon from '@/components/icons/pda/generic';
+import ImageIcon from '@/components/icons/pda/image';
+import PDFIcon from '@/components/icons/pda/pdf';
+import StructuredIcon from '@/components/icons/pda/structured';
+import VideoIcon from '@/components/icons/pda/video';
+import {
+  PublicDataAsset,
+  PublicDataAssetTypeEnum,
+} from '@/services/api/models';
+
+import { SvgIconProps } from '@mui/material';
 
 export enum FileType {
-  pda,
+  structured,
   image,
   video,
-  audio,
   document,
   pdf,
   other,
 }
 
-export const getFileTypeByMimeType = (mimeType: string) => {
-  if (mimeType.includes('audio')) {
-    return FileType.audio;
-  } else if (mimeType.includes('image')) {
-    return FileType.image;
-  } else if (mimeType.includes('video')) {
-    return FileType.video;
-  } else if (mimeType.includes('pdf')) {
-    return FileType.pdf;
-  } else if (mimeType.includes('document') || mimeType.includes('doc')) {
+export const getFileTypeByMimeType = (type: PublicDataAsset['type']) => {
+  if (type === PublicDataAssetTypeEnum.StructuredData) {
+    return FileType.structured;
+  } else if (type?.includes('image')) {
+    return FileType?.image;
+  } else if (type?.includes('video')) {
+    return FileType?.video;
+  } else if (type?.includes('pdf')) {
+    return FileType?.pdf;
+  } else if (
+    type?.includes('officedocument.wordprocessingml') ||
+    type?.includes('msword') ||
+    type?.includes('opendocument.text') ||
+    type?.includes('text') ||
+    type?.includes('rtf')
+  ) {
     return FileType.document;
   } else {
     return FileType.other;
   }
 };
 
-export const getFileTypeByPda = (pda: PrivateDataAsset) => {
-  if (pda.structured || !pda.mimeType) {
-    return FileType.pda;
-  }
-
-  const { mimeType } = pda;
-
-  return getFileTypeByMimeType(mimeType);
-};
-
-export const getIconFile = (file: FileType) => {
+export const getIconFile = (
+  file: FileType
+): FunctionComponent<SvgIconProps> => {
   switch (file) {
-    case FileType.audio:
-      return '/images/icons/data_file_generic.svg';
     case FileType.document:
-      return '/images/icons/data_file_document.svg';
+      return DocIcon;
     case FileType.pdf:
-      return '/images/icons/data_file_pdf.svg';
+      return PDFIcon;
     case FileType.image:
-      return '/images/icons/data_file_image.svg';
-    case FileType.pda:
-      return '/images/icons/data_asset.svg';
+      return ImageIcon;
+    case FileType.structured:
+      return StructuredIcon;
     case FileType.video:
-      return '/images/icons/data_file_video.svg';
+      return VideoIcon;
     case FileType.other:
     default:
-      return '/images/icons/data_file_generic.svg';
-  }
-};
-
-export const getBgColorIconFile = (file: FileType) => {
-  switch (file) {
-    case FileType.pdf:
-    case FileType.image:
-    case FileType.video:
-      return '#E5393516';
-    case FileType.document:
-    case FileType.audio:
-    case FileType.other:
-    default:
-      return '#1E88E516';
+      return GenericIcon;
   }
 };

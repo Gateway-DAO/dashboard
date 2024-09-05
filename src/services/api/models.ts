@@ -13,26 +13,19 @@ export type Account = components['schemas']['model.MyAccountResponse'];
 export type TokenResponse = Required<
   components['schemas']['model.TokenResponse']
 >;
+
 export type DataModel = components['schemas']['model.DataModel'];
 
-export type PrivateDataAsset = {
-  id: string;
-  proofs: Array<any>;
-  access: Array<{ did: string; username: string; access: string }>;
-  expirationDate: Date;
-  structured: boolean;
-  updatedAt: Date;
-  createdAt: Date;
-  tags: string[];
-  size: number;
-  url: string;
-  dataModel?: {
-    id: string;
-    schema: {};
-  };
-  fileName: string;
-  mimeType: string;
-};
+export type PublicDataAsset = components['schemas']['model.PublicDataAsset'];
+
+export type PublicDataAssetType = 'Structured Data' | `${string}/${string}`;
+
+// COnvert to enum
+
+export enum PublicDataAssetTypeEnum {
+  StructuredData = 'Structured Data',
+  UnstructedData = 'Other',
+}
 
 export type ExplorerHomeStats = {
   transactionsCount: number;

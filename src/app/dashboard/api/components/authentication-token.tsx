@@ -14,9 +14,8 @@ import {
   Typography,
 } from '@mui/material';
 
-export default function AuthenticationToken() {
+export default function AuthenticationToken({ token }: { token: string }) {
   const [isVisible, toggleVisible] = useToggle(false);
-  const { data } = useSession({ required: true });
 
   return (
     <Card sx={{ width: '100%' }} variant="outlined">
@@ -33,19 +32,14 @@ export default function AuthenticationToken() {
               onToggle={toggleVisible}
               size="medium"
               sx={{ mr: 1 }}
-              disabled={!data?.token}
             />
-            <CopyButton
-              text={data?.token}
-              size="medium"
-              disabled={!data?.token}
-            />
+            <CopyButton text={token} size="medium" />
           </>
         }
       />
       <CardContent>
         <Typography sx={{ mb: 2, wordBreak: 'break-all' }}>
-          {isVisible ? data?.token : '••••'}
+          {isVisible ? token : '••••'}
         </Typography>
         <Alert color="warning" icon={<Warning />}>
           By sharing your authentication token, you assume all responsibility
