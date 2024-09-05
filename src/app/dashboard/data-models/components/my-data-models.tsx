@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useMemo, useRef, useState } from 'react';
 
 import { api } from '@/services/api/api';
-import { createAuthHeader } from '@/services/api/client';
+import { getAuthHeader } from '@/services/api/client';
 import { DataModel, PaginatedResponse } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
@@ -29,7 +29,7 @@ export default function MyDataModels() {
     ],
     queryFn: async () => {
       const { data, error } = await api.GET('/data-models/me', {
-        headers: createAuthHeader(session?.token),
+        headers: getAuthHeader(session?.token),
         params: {
           query: {
             page: paginationModel.page + 1,

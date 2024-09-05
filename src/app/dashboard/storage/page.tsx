@@ -43,7 +43,8 @@ export default async function Storage() {
             {data?.meta?.total_items ?? 0}
           </Typography>
         </Stack>
-        <Stack
+        <Box sx={{ flex: 1 }} />
+        {/* <Stack
           component={Paper}
           elevation={0}
           justifyContent="space-between"
@@ -56,7 +57,7 @@ export default async function Storage() {
           <Typography variant="h5" color="primary.dark">
             {formatBytes(2000)}
           </Typography>
-        </Stack>
+        </Stack> */}
       </Stack>
       <Box>
         <StorageList />
