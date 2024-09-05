@@ -69,15 +69,23 @@ export default function MetaDataDetails({ pda }: Props) {
               <span>{pda.type}</span>
             </CardCell>
           </Stack>
-          <Stack direction="row" justifyContent="space-between">
-            <CardCell label="Tags" margin={false} py={3}>
-              <span>{pda?.tags?.length && <Tags tags={pda?.tags} />}</span>
-            </CardCell>
-            <Divider orientation="vertical" flexItem />
-            <CardCell label="Data model ID" margin={false} py={3}>
-              <CopyData text={pda.data_model_id?.toString() || ''} />
-            </CardCell>
-          </Stack>
+          {(pda.tags?.length || pda.data_model_id) && (
+            <Stack direction="row" justifyContent="space-between">
+              {pda.tags?.length && (
+                <CardCell label="Tags" margin={false} py={3}>
+                  <span>{pda?.tags?.length && <Tags tags={pda?.tags} />}</span>
+                </CardCell>
+              )}
+              {pda.tags?.length && pda.data_model_id && (
+                <Divider orientation="vertical" flexItem />
+              )}
+              {pda.data_model_id && (
+                <CardCell label="Data model ID" margin={false} py={3}>
+                  <CopyData text={pda.data_model_id?.toString() || ''} />
+                </CardCell>
+              )}
+            </Stack>
+          )}
           <CardCell label="Data asset ID" margin={false} py={3}>
             <CopyData text={pda.fid ?? ''} />
           </CardCell>
