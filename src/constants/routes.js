@@ -8,9 +8,8 @@ const routes = {
   termsOfService: '/terms-of-service',
   privacyPolicy: '/privacy-policy',
   dashboard: {
-    home: `${dashboard}/storage`,
-    issue: `${dashboard}/assets/issue`,
-    asset: (pdaId) => `${dashboard}/asset/${pdaId}`,
+    storage: `${dashboard}/storage`,
+    storageAsset: (pdaId) => `${dashboard}/storage/${pdaId}`,
     myDataModels: `${dashboard}/data-models`,
     networkDataModels: `${dashboard}/data-models/network`,
     settings: `${dashboard}/settings`,

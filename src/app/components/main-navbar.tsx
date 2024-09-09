@@ -50,7 +50,7 @@ export default function MainNavbar({ color }: Props) {
     label: 'Open dashboard',
     variant: 'outlined',
     ...(session.status === 'authenticated'
-      ? { href: routes.dashboard.home }
+      ? { href: routes.dashboard.storage }
       : { onClick: () => setIsModalWaleltOpen(true) }),
   };
 

@@ -26,7 +26,7 @@ export const columns: GridColDef<PublicDataAsset>[] = [
       return (
         <MuiLink
           component={Link}
-          href={routes.dashboard.asset(params.row.id!)}
+          href={routes.dashboard.storageAsset(params.row.id!)}
           alignItems="end"
           underline="hover"
           sx={{

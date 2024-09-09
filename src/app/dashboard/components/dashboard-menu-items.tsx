@@ -10,8 +10,8 @@ import { GTWMenuItemSettings } from './menu-item';
 const dashboardUserMenuItems: GTWMenuItemSettings[] = [
   {
     name: 'Storage',
-    href: routes.dashboard.home,
-    activeHrefs: [routes.dashboard.home],
+    href: routes.dashboard.storage,
+    activeHrefs: [routes.dashboard.storage],
     icon: StorageIcon,
     navbar: true,
   },

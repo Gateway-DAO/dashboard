@@ -94,7 +94,7 @@ export default function StorageList() {
           loading={isFetching}
           columns={columns}
           onRowClick={(params: GridRowParams<PublicDataAsset>) => {
-            return router.push(routes.dashboard.asset(params.id));
+            return router.push(routes.dashboard.storageAsset(params.id));
           }}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}

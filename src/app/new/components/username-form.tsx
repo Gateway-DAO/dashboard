@@ -78,7 +78,7 @@ export default function UsernameForm({ message, signature }: Props) {
         <NewUserCard />
         <Button
           component={Link}
-          href={routes.dashboard.home}
+          href={routes.dashboard.storage}
           variant="contained"
           size="large"
         >

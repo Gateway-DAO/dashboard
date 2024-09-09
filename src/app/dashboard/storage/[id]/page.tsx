@@ -56,8 +56,8 @@ export default async function PDAPage({ params }: Props) {
   const pda = await getPDA(params.id, session.token);
 
   if (!pda) {
-    return redirect(routes.dashboard.home);
+    return redirect(routes.dashboard.storage);
   }
 
-  return <PDADetailPage pda={pda} backHref={routes.dashboard.home} />;
+  return <PDADetailPage pda={pda} backHref={routes.dashboard.storage} />;
 }
