@@ -1,17 +1,20 @@
 import { PropsWithChildren, ReactNode } from 'react';
 
-import { Box, Stack, StackProps, Typography } from '@mui/material';
+import { Box, BoxProps, Stack, StackProps, Typography } from '@mui/material';
+
+// TODO: Check usage
 
 type Props = {
   label: string;
   children: ReactNode;
   alignRight?: boolean;
-  margin?: boolean;
+  margin?: boolean; //TODO: Verify if makes sense
   px?: number;
   py?: number;
   pre?: boolean;
   disabled?: boolean;
-};
+  contentProps?: BoxProps;
+} & Omit<StackProps, 'margin'>;
 
 export function CardCellContainer({
   children,
@@ -52,16 +55,26 @@ export default function CardCell({
   px,
   disabled = false,
   pre = true,
+  sx,
+  contentProps,
 }: Props) {
   return (
-    <CardCellContainer alignRight={alignRight} margin={margin} py={py} px={px}>
+    <CardCellContainer
+      alignRight={alignRight}
+      margin={margin}
+      py={py}
+      px={px}
+      sx={sx}
+    >
       <Typography variant="caption" color="text.secondary">
         {label}
       </Typography>
       <Box
+        {...contentProps}
         sx={{
           whiteSpace: pre ? 'pre' : undefined,
           color: disabled ? 'text.disabled' : 'text.primary',
+          ...contentProps?.sx,
         }}
       >
         {children}

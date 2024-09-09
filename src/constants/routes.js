@@ -35,17 +35,7 @@ const routes = {
     transaction: (transactionId) => `${explorer}/transactions/${transactionId}`,
     dataModels: `${explorer}/data-models`,
     dataModel: (dataModelId) => `${explorer}/data-models/${dataModelId}`,
-    dataModelIssuers: (dataModelId) =>
-      `${explorer}/data-models/${dataModelId}/issuers`,
-    dataModelRequestTemplates: (dataModelId) =>
-      `${explorer}/data-models/${dataModelId}/request-templates`,
     requestTemplates: `${explorer}/request-templates`,
-    requestTemplate: (requestTemplateId) =>
-      `${explorer}/request-templates/${requestTemplateId}`,
-    requestTemplateVerifiers: (requestTemplateId) =>
-      `${explorer}/request-templates/${requestTemplateId}/verifiers`,
-    requestTemplatePlayground: (requestTemplateId) =>
-      `${explorer}/request-templates/${requestTemplateId}/playground`,
   },
 };
 
