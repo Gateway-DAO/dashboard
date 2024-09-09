@@ -44,7 +44,7 @@ export default function UserOrgInfo({ id, image, name, gatewayId }: Props) {
         </Typography>
         {hasName && (
           <Typography component="span" variant="caption" color="primary.main">
-            @{gatewayId}
+            {gatewayId}
           </Typography>
         )}
       </Stack>
