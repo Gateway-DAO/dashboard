@@ -11,8 +11,8 @@ export const defaultGridConfiguration: Partial<DataGridProps> = {
   disableColumnMenu: true,
   disableColumnSelector: true,
   disableRowSelectionOnClick: true,
-  paginationMode: 'server',
   autoHeight: true,
+  paginationMode: 'server',
 };
 
 export const defaultGridCustomization: GatewaySxProps = {

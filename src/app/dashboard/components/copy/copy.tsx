@@ -1,3 +1,4 @@
+'use client';
 import { limitCharsOffset } from '@/utils/string';
 import { useSnackbar } from 'notistack';
 

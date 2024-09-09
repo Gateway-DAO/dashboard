@@ -15,5 +15,3 @@ export const missions = [
     text: 'FHE-based computation  enables computer over fully encrypted data. This eliminates privacy issues and data leaks, while allowing new data apps and interactions.',
   },
 ] as const;
-
-export type MissionId = (typeof missions)[number]['id'];

@@ -1,4 +1,5 @@
 'use client';
+
 import CopyButton from '@/components/copy-button/copy-button';
 import ToggleVisibilityButton from '@/components/toggle-visibility-button/toggle-visibility-button';
 import { useToggle } from '@react-hookz/web';
@@ -12,11 +13,8 @@ import {
   Typography,
 } from '@mui/material';
 
-export default function AuthenticationToken() {
+export default function AuthenticationToken({ token }: { token: string }) {
   const [isVisible, toggleVisible] = useToggle(false);
-
-  const TOKEN =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ullamcorper sapien sed mi bibendum imperdiet. Duis maximus tincidunt ullamcorper. Nam viverra dolor eget justo consequat semper. Integer quis aliquam odio. Nam scelerisque bibendum quam ac fermentum. Curabitur eu laoreet dui, a cursus felis. Morbi neque nisi, tincidunt nec pellentesque quis, consequat ut purus. Pellentesque ultrices quam dignissim ligula rhoncus, ut.';
 
   return (
     <Card sx={{ width: '100%' }} variant="outlined">
@@ -34,13 +32,13 @@ export default function AuthenticationToken() {
               size="medium"
               sx={{ mr: 1 }}
             />
-            <CopyButton text={TOKEN} size="medium" />
+            <CopyButton text={token} size="medium" />
           </>
         }
       />
       <CardContent>
         <Typography sx={{ mb: 2, wordBreak: 'break-all' }}>
-          {isVisible ? TOKEN : '••••'}
+          {isVisible ? token : '••••'}
         </Typography>
         <Alert color="warning" icon={<Warning />}>
           By sharing your authentication token, you assume all responsibility

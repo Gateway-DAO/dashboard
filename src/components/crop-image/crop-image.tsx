@@ -19,7 +19,7 @@ import getCroppedImg from './utils';
 
 const EasyCropper = dynamic(() => import('react-easy-crop'), { ssr: false });
 
-export type Props = {
+type Props = {
   image: string;
   onSubmit: (image: Blob) => void;
   onClose: () => void;

@@ -3,23 +3,63 @@ const routes = require('./src/constants/routes');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'api.staging.mygateway.xyz',
-      'doepp2nssa64p.cloudfront.net',
-      'ddm747vh67170.cloudfront.net',
-      'd14yyawlqn6zgz.cloudfront.net',
-      'api.mygateway.xyz',
-      'node.mygateway.xyz',
-      'arweave.net',
-      'localhost',
-      'doepp2nssa64p.cloudfront.net',
-      'cdn.mygateway.xyz',
-      'staging.cdn.mygateway.xyz',
-      'i.postimg.cc',
-      'cdn.shopify.com',
-      'static.ghost.org',
-      'images.unsplash.com',
-      'gateway-1.ghost.io',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'api.staging.mygateway.xyz',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.cloudfront.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.mygateway.xyz',
+      },
+      {
+        protocol: 'https',
+        hostname: 'node.mygateway.xyz',
+      },
+      {
+        protocol: 'https',
+        hostname: 'arweave.net',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'https',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.mygateway.xyz',
+      },
+      {
+        protocol: 'https',
+        hostname: 'staging.cdn.mygateway.xyz',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.postimg.cc',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.shopify.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.ghost.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'gateway-1.ghost.io',
+      },
     ],
   },
   webpack: (config) => {

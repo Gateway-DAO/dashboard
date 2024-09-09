@@ -2,14 +2,15 @@ import { ReactNode } from 'react';
 
 import DataCard from '@/components/data-card/data-card';
 import routes from '@/constants/routes';
-import { DataModelType, mockUser } from '@/services/api/models';
+import { mockAccount } from '@/services/api/mocks';
+import { DataModel } from '@/services/api/models';
 import { PartialDeep } from 'type-fest';
 
 import { Typography, CardProps, Box } from '@mui/material';
 
 type Props = {
   withLink?: boolean;
-  dataModel?: PartialDeep<DataModelType>;
+  dataModel?: PartialDeep<DataModel>;
   children?: ReactNode;
 };
 
@@ -19,12 +20,14 @@ export default function DataModelCard({
   children,
   ...props
 }: Props & CardProps) {
+  // TODO: implement data assets
+  const data_assets = 10;
   return (
     <DataCard
       title={dataModel!.title!}
       description={dataModel!.description!}
       href={withLink ? routes.explorer.dataModel(dataModel!.id) : undefined}
-      profile={mockUser}
+      profile={mockAccount}
       sx={{ minWidth: 300 }}
       bottom={
         <>
@@ -37,11 +40,9 @@ export default function DataModelCard({
           >
             <Typography variant="subtitle2" fontWeight="400" justifySelf="left">
               <b>
-                {dataModel?.dataAssests
-                  ? dataModel.dataAssests.toLocaleString('en-US', {
-                      notation: 'compact',
-                    })
-                  : 0}
+                {data_assets.toLocaleString('en-US', {
+                  notation: 'compact',
+                })}
               </b>{' '}
               data assets
             </Typography>

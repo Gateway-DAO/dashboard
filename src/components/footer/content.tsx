@@ -55,7 +55,7 @@ const links = [
   },
   {
     name: 'Dashboard',
-    href: routes.dashboard.home,
+    href: routes.dashboard.storage,
   },
   {
     name: 'Privacy Policy',

@@ -1,14 +1,11 @@
 'use client';
 import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 
 import routes from '@/constants/routes';
-import { auth } from '@/locale/en/auth';
 
-import { LogoutOutlined } from '@mui/icons-material';
+import { LogoutOutlined, SettingsOutlined } from '@mui/icons-material';
 import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material';
-
-import AuthDropdownCurrent from './auth-dropdown-current';
-import AuthDropdownProfilesList from './auth-dropdown-profiles-list';
 
 type Props = {
   onClose: () => void;
@@ -23,14 +20,21 @@ export default function AuthDropdown({ onClose }: Props) {
 
   return (
     <>
-      <AuthDropdownCurrent onClose={onClose} />
-      <Divider sx={{ my: 1 }} />
-      <AuthDropdownProfilesList onClose={onClose} />
+      <MenuItem
+        component={Link}
+        href={routes.dashboard.settings}
+        onClick={onClose}
+      >
+        <ListItemIcon>
+          <SettingsOutlined />
+        </ListItemIcon>
+        <ListItemText>Settings</ListItemText>
+      </MenuItem>
       <MenuItem onClick={onSignOut}>
         <ListItemIcon>
           <LogoutOutlined />
         </ListItemIcon>
-        <ListItemText>{auth.menu.disconnect}</ListItemText>
+        <ListItemText>Disconnect</ListItemText>
       </MenuItem>
     </>
   );

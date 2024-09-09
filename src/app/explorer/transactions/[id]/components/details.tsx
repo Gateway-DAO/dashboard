@@ -3,19 +3,14 @@ import React from 'react';
 
 import ExternalLink from '@/components/external-link/external-link';
 import { explorerQueries } from '@/constants/queries';
-
+import { mockTransactions, mockMetaData } from '@/services/api/mocks';
+import { Transaction } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
 import { Box, Card, Container, Divider, Stack } from '@mui/material';
 
 import TransactionData from './transaction-data';
 import PDA from './types/pda';
-
-import {
-  Transaction,
-  mockTransactions,
-  mockMetaData,
-} from '@/services/api/models';
 
 type Props = {
   id: string;
@@ -27,7 +22,7 @@ const DisplayDetails = (data: any) => {
 };
 
 export default function TransactionDetails({ id }: Props) {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: [explorerQueries.transaction, id],
     queryFn: async (): Promise<Transaction> => {
       const mockPromise = new Promise<Transaction>((resolve) => {

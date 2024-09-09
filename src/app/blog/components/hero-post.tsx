@@ -1,13 +1,14 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { PostOrPage } from "@tryghost/content-api";
-import dayjs from "dayjs";
-import { titleCase } from "title-case";
+import { EXTENDED_MONTH_FORMAT } from '@/constants/date';
+import { PostOrPage } from '@tryghost/content-api';
+import dayjs from 'dayjs';
+import { titleCase } from 'title-case';
 
-import { Typography, Stack, Box, Chip } from "@mui/material";
+import { Typography, Stack, Box, Chip } from '@mui/material';
 
-import DefaultImage from "/public/social.png";
+import DefaultImage from '/public/social.png';
 
 export default function HeroPost({
   slug,
@@ -23,12 +24,12 @@ export default function HeroPost({
       href={`/blog/${slug}`}
       sx={{
         gap: 5,
-        textDecoration: "none",
-        color: "text.primary",
+        textDecoration: 'none',
+        color: 'text.primary',
       }}
       direction={{
-        xs: "column-reverse",
-        lg: "row",
+        xs: 'column-reverse',
+        lg: 'row',
       }}
     >
       <Stack alignItems="flex-start">
@@ -46,46 +47,46 @@ export default function HeroPost({
           sx={{
             mb: 1,
             typography: {
-              xs: "h4",
-              lg: "h2",
+              xs: 'h4',
+              lg: 'h2',
             },
-            fontWeight: "lighter!important",
-            ":hover": {
-              textDecoration: "underline",
+            fontWeight: 'lighter!important',
+            ':hover': {
+              textDecoration: 'underline',
             },
           }}
         >
           {title}
         </Typography>
         <Typography variant="caption" color="text.secondary">
-          {dayjs(created_at).format("MMM DD, YYYY")}
+          {dayjs(created_at).format(EXTENDED_MONTH_FORMAT)}
         </Typography>
       </Stack>
       <Box
         sx={{
-          height: "100%",
-          overflow: "hidden",
-          position: "relative",
+          height: '100%',
+          overflow: 'hidden',
+          position: 'relative',
           inset: 0,
           aspectRatio: 777 / 433,
           borderRadius: 1,
           flexShrink: 0,
           width: {
-            xs: "100%",
+            xs: '100%',
             lg: 777,
           },
         }}
       >
         <Image
           src={(feature_image as string) || DefaultImage}
-          alt={feature_image_alt || (title as string) || "blog post image"}
+          alt={feature_image_alt || (title as string) || 'blog post image'}
           placeholder="empty"
           quality={100}
           fill
           sizes="(max-width: 768px) 1000px, 100vw"
           style={{
-            objectFit: "cover",
-            objectPosition: "center bottom",
+            objectFit: 'cover',
+            objectPosition: 'center bottom',
           }}
         />
       </Box>

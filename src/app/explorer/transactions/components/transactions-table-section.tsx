@@ -1,5 +1,7 @@
 'use client';
 import { CardCellContainer } from '@/components/card-cell/card-cell';
+import { mockTransactions } from '@/services/api/mocks';
+import { Transaction } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
 import {
@@ -12,7 +14,6 @@ import {
 } from '@mui/material';
 
 import TransactionsTable from './transactions-table';
-import { mockTransactions, Transaction } from '@/services/api/models';
 
 export default function TransactionsTableSection() {
   const { data: transactions, isLoading } = useQuery({

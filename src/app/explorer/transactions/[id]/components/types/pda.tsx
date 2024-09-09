@@ -1,10 +1,9 @@
-import { DATE_FORMAT } from '@/constants/date';
-import dayjs from 'dayjs';
+import { Transaction } from '@/services/api/models';
+import { formatDate } from '@/utils/date';
 
 import { Divider, Stack, Typography } from '@mui/material';
 
 import CardRow from '../card-row';
-import { Transaction } from '@/services/api/models';
 import CopyData from '../copy-data';
 
 export default function PDA({ data }: { data: Transaction }) {
@@ -40,9 +39,7 @@ export default function PDA({ data }: { data: Transaction }) {
         </Stack>
       </CardRow>
 
-      <CardRow title="Created At">
-        {dayjs(data.createdAt).format(DATE_FORMAT)}
-      </CardRow>
+      <CardRow title="Created At">{formatDate(data.createdAt)}</CardRow>
     </Stack>
   );
 }

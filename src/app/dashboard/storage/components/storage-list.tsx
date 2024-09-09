@@ -1,26 +1,21 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next-nprogress-bar';
-import { useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
-import {
-  defaultGridConfiguration,
-  defaultGridCustomization,
-} from '@/components/data-grid/grid-default';
+import ServerPaginatedDataGrid from '@/components/data-grid/server-paginated-data-grid';
 import routes from '@/constants/routes';
-import { mockPrivateDataAssets, PrivateDataAsset } from '@/services/api/models';
+import { api, getAuthHeader } from '@/services/api/api';
+import { PaginatedResponse, PublicDataAsset } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
-import LinearProgress from '@mui/material/LinearProgress';
-import { DataGrid, GridRowParams } from '@mui/x-data-grid';
+import { Paper, Skeleton, Stack, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import { GridRowParams } from '@mui/x-data-grid';
 
 import { columns } from './columns';
 import Empty from './empty';
-
-type UserStorage = {
-  totalPDAs: number;
-  pdas: PrivateDataAsset[];
-};
 
 export default function StorageList() {
   const router = useRouter();
@@ -30,59 +25,82 @@ export default function StorageList() {
     page: 0,
   });
 
-  const { isLoading, isSuccess, data } = useQuery({
-    queryKey: ['storage'],
-    queryFn: async (): Promise<UserStorage> => {
-      const mockPromise = new Promise<UserStorage>((resolve) => {
-        setTimeout(() => {
-          resolve({
-            totalPDAs: mockPrivateDataAssets.length,
-            pdas: mockPrivateDataAssets,
-          });
-        }, 1000);
+  const { data: session } = useSession({ required: true });
+
+  const { data, isFetching, isSuccess } = useQuery({
+    queryKey: [
+      'my-data-models',
+      session?.token,
+      paginationModel.pageSize,
+      paginationModel.page,
+    ],
+    queryFn: async () => {
+      const { data, error } = await api.GET('/data-assets/me', {
+        headers: getAuthHeader(session?.token),
+        params: {
+          query: {
+            page: paginationModel.page + 1,
+            page_size: paginationModel.pageSize,
+          },
+        },
       });
-      return mockPromise;
+
+      if (error) {
+        throw new Error(error);
+      }
+
+      if (!data) {
+        throw new Error('No data');
+      }
+
+      return data as PaginatedResponse<PublicDataAsset>;
     },
+    enabled: !!session?.token,
   });
 
-  if (isSuccess && !data?.pdas?.length) {
-    return <Empty />;
-  }
+  const totalAssetsRef = useRef(data?.meta?.total_items);
+
+  const totalAssets = useMemo(() => {
+    if (data?.meta?.total_items !== undefined) {
+      totalAssetsRef.current = data.meta.total_items;
+    }
+    return totalAssetsRef.current;
+  }, [data?.meta?.total_items]);
 
   return (
     <>
-      {isLoading && (
-        <LinearProgress
-          sx={{
-            position: 'fixed',
-            top: 0,
-            left: {
-              xs: 0,
-              lg: '300px',
-            },
-            width: '100%',
+      <Stack gap={2} mt={2} direction="row">
+        <Stack
+          component={Paper}
+          elevation={0}
+          justifyContent="space-between"
+          gap={1}
+          sx={{ p: 2, backgroundColor: 'primary.100', flex: 1 }}
+        >
+          <Typography variant="caption" color="primary.dark">
+            Data assets
+          </Typography>
+          <Typography variant="h5" color="primary.dark">
+            {totalAssets ?? <Skeleton variant="text" width={64} />}
+          </Typography>
+        </Stack>
+        <Box sx={{ flex: 1 }} />
+      </Stack>
+      {isSuccess && !data?.data?.length ? (
+        <Empty />
+      ) : (
+        <ServerPaginatedDataGrid
+          rows={data?.data ?? []}
+          loading={isFetching}
+          columns={columns}
+          onRowClick={(params: GridRowParams<PublicDataAsset>) => {
+            return router.push(routes.dashboard.storageAsset(params.id));
           }}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={totalAssets}
         />
       )}
-      <DataGrid
-        {...defaultGridConfiguration}
-        rows={data?.pdas ?? []}
-        loading={!data?.pdas}
-        columns={columns}
-        paginationMode="server"
-        onRowClick={(params: GridRowParams<PrivateDataAsset>, event) => {
-          // if middle click open new tab
-          if (event.button === 1) {
-            return window.open(routes.dashboard.asset(params.id));
-          }
-          return router.push(routes.dashboard.asset(params.id));
-        }}
-        pageSizeOptions={[5, 10, 15]}
-        paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
-        sx={{ marginTop: 3, ...defaultGridCustomization }}
-        rowCount={data?.totalPDAs ?? 0}
-      />
     </>
   );
 }

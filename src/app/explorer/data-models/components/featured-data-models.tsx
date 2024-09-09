@@ -2,14 +2,15 @@
 
 import DataModelCard from '@/components/data-model-card/data-model-card';
 import FeaturedSection from '@/components/featured-sections/featured-sections';
-import { DataModelType, mockDataModels } from '@/services/api/models';
+import { mockDataModels } from '@/services/api/mocks';
+import { DataModel } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
 export default function FeaturedDataModels() {
   const dataModels = useQuery({
     queryKey: ['featured-data-models'],
-    queryFn: async (): Promise<DataModelType[]> => {
-      const mockPromise = new Promise<DataModelType[]>((resolve) => {
+    queryFn: async (): Promise<DataModel[]> => {
+      const mockPromise = new Promise<DataModel[]>((resolve) => {
         setTimeout(() => {
           resolve(mockDataModels);
         }, 1500);

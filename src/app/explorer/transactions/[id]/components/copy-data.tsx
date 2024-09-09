@@ -2,7 +2,7 @@ import { limitChars } from '@/utils/string';
 import { useSnackbar } from 'notistack';
 
 import { ContentCopy } from '@mui/icons-material';
-import { IconButton, Stack, useMediaQuery } from '@mui/material';
+import { IconButton, Stack } from '@mui/material';
 
 export default function CopyData({
   text,
@@ -11,7 +11,6 @@ export default function CopyData({
   text: string;
   showWholeString?: boolean;
 }) {
- 
   const { enqueueSnackbar } = useSnackbar();
 
   const copy = async (text: string) => {

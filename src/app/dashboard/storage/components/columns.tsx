@@ -1,44 +1,46 @@
 'use client';
-import Image from 'next/image';
 
-import DataOutlinedIcon from '@/components/icons/data-outlined';
-import { DATE_FORMAT } from '@/constants/date';
-import { PrivateDataAsset } from '@/services/api/models';
+import Link from 'next/link';
+
+import routes from '@/constants/routes';
+import { PublicDataAsset } from '@/services/api/models';
 import { formatBytes } from '@/utils/bytes';
-import { formatDateDifference } from '@/utils/date';
-import { FileType, getFileTypeByPda, getIconFile } from '@/utils/pda';
+import { formatDate, formatDateDifference } from '@/utils/date';
+import { getFileTypeByMimeType, getIconFile } from '@/utils/pda';
 import { limitCharsCentered } from '@/utils/string';
-import dayjs from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat';
-import duration from 'dayjs/plugin/duration';
-import utc from 'dayjs/plugin/utc';
 
-import { Stack, Typography } from '@mui/material';
+import { Typography, Link as MuiLink } from '@mui/material';
 import { GridColDef } from '@mui/x-data-grid';
 
-dayjs.extend(utc);
-dayjs.extend(advancedFormat);
-dayjs.extend(duration);
-
-export const columns: GridColDef<PrivateDataAsset>[] = [
+export const columns: GridColDef<PublicDataAsset>[] = [
   {
     field: 'name',
     headerName: 'Name',
     flex: 2,
     renderCell: (params) => {
-      const name = params.row.fileName ?? params.row?.fileName ?? '';
-      const fileType = getFileTypeByPda(params.row);
-      const icon = getIconFile(fileType);
+      const name = params.row.name ?? '';
+      const fileType = getFileTypeByMimeType(params.row!.type);
+      const Icon = getIconFile(fileType);
 
+      // TODO: implement file type icon
       return (
-        <Stack direction={'row'} gap={1} alignItems="end">
-          {fileType === FileType.pda ? (
-            <DataOutlinedIcon color="primary" />
-          ) : (
-            <Image src={icon} alt={`${fileType} icon`} width={24} height={24} />
-          )}
-          <Typography sx={{ mx: 2 }}>{limitCharsCentered(name, 30)}</Typography>
-        </Stack>
+        <MuiLink
+          component={Link}
+          href={routes.dashboard.storageAsset(params.row.id!)}
+          alignItems="end"
+          underline="hover"
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 1,
+            alignItems: 'center',
+          }}
+        >
+          <Icon color="primary" />
+          <Typography component="span" variant="body1" sx={{ color: 'black' }}>
+            {limitCharsCentered(name, 30)}
+          </Typography>
+        </MuiLink>
       );
     },
   },
@@ -47,7 +49,7 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
     headerName: 'Who has access',
     width: 150,
     renderCell: (params) => (
-      <Typography>{params.row.proofs.length || '-'}</Typography>
+      <Typography>{params.row.acl?.length || '-'}</Typography>
     ),
   },
   {
@@ -65,16 +67,18 @@ export const columns: GridColDef<PrivateDataAsset>[] = [
     width: 150,
 
     renderCell: (params) => (
-      <Typography>{formatDateDifference(params.row.expirationDate)}</Typography>
+      <Typography>
+        {formatDateDifference(params.row.expiration_date)}
+      </Typography>
     ),
   },
   {
-    field: 'updatedAt',
+    field: 'updated_at',
     headerName: 'Last modified',
     flex: 1,
     renderCell: (params) => (
       <Typography>
-        {params.value ? dayjs(params.value).format(DATE_FORMAT) : ''}
+        {params.row.updated_at ? formatDate(params.row.updated_at) : ''}
       </Typography>
     ),
   },

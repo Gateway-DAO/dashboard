@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 
 import { useMenu } from '@/hooks/use-menu';
+import { limitCharsOffset } from '@/utils/string';
 
 import { MoreHorizOutlined } from '@mui/icons-material';
 import { ButtonBase, Menu } from '@mui/material';
@@ -36,7 +37,7 @@ export default function AuthComponent({ id, controlId }: Props) {
         sx={(theme) => ({
           backgroundColor: {
             xs: 'transparent',
-            lg: 'primary.light',
+            lg: 'primary.100',
           },
           borderRadius: theme.shape.borderRadius / 16, //Strange issue with MUI
           justifyContent: 'space-between',
@@ -57,7 +58,7 @@ export default function AuthComponent({ id, controlId }: Props) {
           id={session.user.did}
           image=""
           name={session.user.username}
-          gatewayId={session.user.username ?? session.user.did!}
+          gatewayId={limitCharsOffset(session.user.did!, 10, 5)!}
         />
 
         <MoreHorizOutlined
