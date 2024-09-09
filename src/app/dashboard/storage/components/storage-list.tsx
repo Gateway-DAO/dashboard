@@ -10,6 +10,8 @@ import { api, getAuthHeader } from '@/services/api/api';
 import { PaginatedResponse, PublicDataAsset } from '@/services/api/models';
 import { useQuery } from '@tanstack/react-query';
 
+import { Paper, Skeleton, Stack, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { GridRowParams } from '@mui/x-data-grid';
 
 import { columns } from './columns';
@@ -56,32 +58,49 @@ export default function StorageList() {
     enabled: !!session?.token,
   });
 
-  const rowCountRef = useRef(data?.meta?.total_items || 0);
+  const totalAssetsRef = useRef(data?.meta?.total_items);
 
-  const rowCount = useMemo(() => {
+  const totalAssets = useMemo(() => {
     if (data?.meta?.total_items !== undefined) {
-      rowCountRef.current = data.meta.total_items;
+      totalAssetsRef.current = data.meta.total_items;
     }
-    return rowCountRef.current;
+    return totalAssetsRef.current;
   }, [data?.meta?.total_items]);
-
-  if (isSuccess && !data?.data?.length) {
-    return <Empty />;
-  }
 
   return (
     <>
-      <ServerPaginatedDataGrid
-        rows={data?.data ?? []}
-        loading={isFetching}
-        columns={columns}
-        onRowClick={(params: GridRowParams<PublicDataAsset>) => {
-          return router.push(routes.dashboard.asset(params.id));
-        }}
-        paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
-        rowCount={rowCount}
-      />
+      <Stack gap={2} mt={2} direction="row">
+        <Stack
+          component={Paper}
+          elevation={0}
+          justifyContent="space-between"
+          gap={1}
+          sx={{ p: 2, backgroundColor: 'primary.100', flex: 1 }}
+        >
+          <Typography variant="caption" color="primary.dark">
+            Data assets
+          </Typography>
+          <Typography variant="h5" color="primary.dark">
+            {totalAssets ?? <Skeleton variant="text" width={64} />}
+          </Typography>
+        </Stack>
+        <Box sx={{ flex: 1 }} />
+      </Stack>
+      {isSuccess && !data?.data?.length ? (
+        <Empty />
+      ) : (
+        <ServerPaginatedDataGrid
+          rows={data?.data ?? []}
+          loading={isFetching}
+          columns={columns}
+          onRowClick={(params: GridRowParams<PublicDataAsset>) => {
+            return router.push(routes.dashboard.asset(params.id));
+          }}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+          rowCount={totalAssets}
+        />
+      )}
     </>
   );
 }
