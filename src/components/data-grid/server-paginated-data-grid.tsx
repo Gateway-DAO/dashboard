@@ -39,6 +39,8 @@ export default function ServerPaginatedDataGrid<
         paginationModel={paginationModel}
         onPaginationModelChange={onPaginationModelChange}
         pageSizeOptions={[10, 15, 20]}
+        disableColumnFilter
+        disableColumnSorting
         rowCount={rowCount}
         loading={loading}
         onRowClick={onRowClick}
