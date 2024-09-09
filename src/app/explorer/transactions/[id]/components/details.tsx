@@ -22,7 +22,7 @@ const DisplayDetails = (data: any) => {
 };
 
 export default function TransactionDetails({ id }: Props) {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: [explorerQueries.transaction, id],
     queryFn: async (): Promise<Transaction> => {
       const mockPromise = new Promise<Transaction>((resolve) => {

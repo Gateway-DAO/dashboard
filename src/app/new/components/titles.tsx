@@ -18,8 +18,8 @@ export const UserCreatedTitle = () => (
       Your Gateway ID is ready
     </Typography>
     <Typography variant="body1">
-      Now you're part of our exclusive community dedicated to safeguarding and
-      maximizing the value of the data assets.
+      Now you&apos;re part of our exclusive community dedicated to safeguarding
+      and maximizing the value of the data assets.
     </Typography>
   </Box>
 );

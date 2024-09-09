@@ -3,8 +3,6 @@ import { PropsWithChildren, ReactNode } from 'react';
 
 import { Stack } from '@mui/system';
 
-import Menu from './menu';
-
 type Props = {
   menuItems: ReactNode;
   secondMenuItems?: ReactNode;

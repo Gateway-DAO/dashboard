@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-import { BiLogoLinkedinSquare } from "react-icons/bi";
-import { FaReddit } from "react-icons/fa";
+import { BiLogoLinkedinSquare } from 'react-icons/bi';
+import { FaReddit } from 'react-icons/fa';
 
-import LinkIcon from "@mui/icons-material/Link";
-import XIcon from "@mui/icons-material/X";
-import { IconButton, Stack } from "@mui/material";
+import LinkIcon from '@mui/icons-material/Link';
+import XIcon from '@mui/icons-material/X';
+import { IconButton, Stack } from '@mui/material';
 
 type SocialProps = {
   title?: string;
@@ -17,7 +17,7 @@ type SocialProps = {
   mini?: boolean;
 };
 
-export function objectToParams(object: {
+function objectToParams(object: {
   [key: string]: string | boolean | number | undefined | null;
 }) {
   const params = Object.entries(object)
@@ -27,7 +27,7 @@ export function objectToParams(object: {
         `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`
     );
 
-  return params.length > 0 ? `?${params.join("&")}` : "";
+  return params.length > 0 ? `?${params.join('&')}` : '';
 }
 
 const tweetLink = (props: SocialProps) =>
@@ -45,17 +45,17 @@ const linkedinLink = (props: SocialProps) =>
     url: props?.url,
     title: props?.title,
     summary: props?.description,
-    source: "mygateway.xyz",
+    source: 'mygateway.xyz',
   })}`;
 
 export default function ShareButtonFn({
-  title = "myGateway_xyz",
-  description = "check out this latest blog from Gateway",
+  title = 'myGateway_xyz',
+  description = 'check out this latest blog from Gateway',
 }: SocialProps) {
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
 
   useEffect(() => {
-    setUrl(window?.location?.href ?? "");
+    setUrl(window?.location?.href ?? '');
   }, []);
 
   const data = { title, url, description };
@@ -73,15 +73,15 @@ export default function ShareButtonFn({
   };
 
   return (
-    <Stack direction={"row"} columnGap={1}>
-      <IconButton onClick={onShare} sx={{ backgroundColor: "primary.100" }}>
+    <Stack direction={'row'} columnGap={1}>
+      <IconButton onClick={onShare} sx={{ backgroundColor: 'primary.100' }}>
         <LinkIcon color="primary" />
       </IconButton>
       <IconButton
         component={Link}
         href={tweetLink(data)}
         target="_blank"
-        sx={{ backgroundColor: "primary.100" }}
+        sx={{ backgroundColor: 'primary.100' }}
       >
         <XIcon color="primary" />
       </IconButton>
@@ -89,7 +89,7 @@ export default function ShareButtonFn({
         component={Link}
         href={redditLink(data)}
         target="_blank"
-        sx={{ backgroundColor: "primary.100", color: "primary.main" }}
+        sx={{ backgroundColor: 'primary.100', color: 'primary.main' }}
       >
         <FaReddit fill="currentColor" />
       </IconButton>
@@ -97,7 +97,7 @@ export default function ShareButtonFn({
         component={Link}
         href={linkedinLink(data)}
         target="_blank"
-        sx={{ backgroundColor: "primary.100", color: "primary.main" }}
+        sx={{ backgroundColor: 'primary.100', color: 'primary.main' }}
       >
         <BiLogoLinkedinSquare fill="currentColor" />
       </IconButton>

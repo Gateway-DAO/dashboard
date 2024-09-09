@@ -1,5 +1,4 @@
 'use client';
-import { useSession } from 'next-auth/react';
 
 import CopyButton from '@/components/copy-button/copy-button';
 import ToggleVisibilityButton from '@/components/toggle-visibility-button/toggle-visibility-button';

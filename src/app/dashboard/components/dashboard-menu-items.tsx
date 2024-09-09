@@ -7,7 +7,7 @@ import { GTWMenuItemSettings } from './menu-item';
 /**
  * List all menu items of the user dashboard
  */
-export const dashboardUserMenuItems: GTWMenuItemSettings[] = [
+const dashboardUserMenuItems: GTWMenuItemSettings[] = [
   {
     name: 'Storage',
     href: routes.dashboard.home,

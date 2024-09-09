@@ -1,14 +1,11 @@
 import Link from 'next/link';
 import { FC } from 'react';
 
-import { CONTAINER_PX } from '@/theme/config/style-tokens';
-
 import { OpenInNew } from '@mui/icons-material';
 import {
   ListItem,
   ListItemButton,
   ListItemButtonProps,
-  Stack,
   SvgIconProps,
   Typography,
 } from '@mui/material';

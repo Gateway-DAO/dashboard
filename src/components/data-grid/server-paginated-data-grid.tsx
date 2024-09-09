@@ -1,12 +1,5 @@
 import { LinearProgress } from '@mui/material';
-import {
-  DataGrid,
-  GridPaginationModel,
-  GridColDef,
-  GridEventListener,
-  DataGridProps,
-  GridValidRowModel,
-} from '@mui/x-data-grid';
+import { DataGrid, DataGridProps, GridValidRowModel } from '@mui/x-data-grid';
 
 import {
   defaultGridConfiguration,

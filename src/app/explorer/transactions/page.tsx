@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
 
+import InternalHeader from '@/components/internal/internal-header';
+
 import { Box, Container, Stack, Typography } from '@mui/material';
 
 import TransactionsNumbers from './components/transactions-numbers';
 import TransactionsTableSection from './components/transactions-table-section';
-import InternalHeader from '@/components/internal/internal-header';
 
 export const metadata: Metadata = {
   title: `Gateway Transactions`,

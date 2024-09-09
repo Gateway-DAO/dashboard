@@ -3,7 +3,6 @@ import React from 'react';
 
 import { authApi } from '@/services/api/api';
 import { getServerComponentSession } from '@/services/next-auth/config';
-import { formatBytes } from '@/utils/bytes';
 
 import { Box, Paper, Stack, Typography } from '@mui/material';
 

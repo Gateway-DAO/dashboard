@@ -1,10 +1,8 @@
 import { Metadata } from 'next';
-import { getSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
 import routes from '@/constants/routes';
 import { authApi } from '@/services/api/api';
-import { mockPublicDataAsset } from '@/services/api/mocks';
 import { getServerComponentSession } from '@/services/next-auth/config';
 import { PageWithParams } from '@/types/next';
 

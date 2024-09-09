@@ -1,13 +1,14 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { PostOrPage } from "@tryghost/content-api";
-import dayjs from "dayjs";
-import { titleCase } from "title-case";
+import { EXTENDED_MONTH_FORMAT } from '@/constants/date';
+import { PostOrPage } from '@tryghost/content-api';
+import dayjs from 'dayjs';
+import { titleCase } from 'title-case';
 
-import { Box, Card, CardActionArea, Chip, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, Chip, Typography } from '@mui/material';
 
-import DefaultImage from "/public/social.png";
+import DefaultImage from '/public/social.png';
 
 export default function BlogCard({
   feature_image,
@@ -28,28 +29,28 @@ export default function BlogCard({
         component={Link}
         href={`/blog/${slug}`}
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
           p: 3,
-          height: "100%",
+          height: '100%',
         }}
       >
         <Box
           sx={{
-            position: "relative",
+            position: 'relative',
             inset: 0,
             aspectRatio: 373 / 211,
-            width: "100%",
-            backgroundColor: "primary.main",
+            width: '100%',
+            backgroundColor: 'primary.main',
             mb: 3,
-            borderRadius: "8px",
-            overflow: "hidden",
+            borderRadius: '8px',
+            overflow: 'hidden',
           }}
         >
           <Image
             src={feature_image ?? DefaultImage}
-            alt={feature_image_alt || title || "blog post image"}
+            alt={feature_image_alt || title || 'blog post image'}
             fill
           />
         </Box>
@@ -69,7 +70,7 @@ export default function BlogCard({
           {title}
         </Typography>
         <Typography variant="caption" color="text.secondary">
-          {dayjs(created_at).format("MMM DD, YYYY")}
+          {dayjs(created_at).format(EXTENDED_MONTH_FORMAT)}
         </Typography>
       </CardActionArea>
     </Card>
