@@ -2,24 +2,15 @@
 
 import Link from 'next/link';
 
-import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { PublicDataAsset } from '@/services/api/models';
 import { formatBytes } from '@/utils/bytes';
-import { formatDateDifference } from '@/utils/date';
+import { formatDate, formatDateDifference } from '@/utils/date';
 import { getFileTypeByMimeType, getIconFile } from '@/utils/pda';
 import { limitCharsCentered } from '@/utils/string';
-import dayjs from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat';
-import duration from 'dayjs/plugin/duration';
-import utc from 'dayjs/plugin/utc';
 
 import { Typography, Link as MuiLink } from '@mui/material';
 import { GridColDef } from '@mui/x-data-grid';
-
-dayjs.extend(utc);
-dayjs.extend(advancedFormat);
-dayjs.extend(duration);
 
 export const columns: GridColDef<PublicDataAsset>[] = [
   {
@@ -87,9 +78,7 @@ export const columns: GridColDef<PublicDataAsset>[] = [
     flex: 1,
     renderCell: (params) => (
       <Typography>
-        {params.row.updated_at
-          ? dayjs(params.row.updated_at).format(DATE_FORMAT)
-          : ''}
+        {params.row.updated_at ? formatDate(params.row.updated_at) : ''}
       </Typography>
     ),
   },

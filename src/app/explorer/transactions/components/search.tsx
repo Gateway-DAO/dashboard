@@ -1,6 +1,6 @@
 'use client';
 
-import dayjs from 'dayjs';
+import { formatDate } from '@/utils/date';
 
 import { RefreshOutlined } from '@mui/icons-material';
 import { Box, Button, Stack, Typography } from '@mui/material';
@@ -23,7 +23,7 @@ export default function Search({ totalTransactions, refreshAction }: Props) {
           <Box>
             <Typography variant="subtitle1" color="text.secondary">
               {totalTransactions.toLocaleString()} transactions found at{' '}
-              {dayjs().format('DD/MM/YYYY, hh:mm a')}
+              {formatDate()}
             </Typography>
             <Typography variant="caption">
               Showing the last 20 records

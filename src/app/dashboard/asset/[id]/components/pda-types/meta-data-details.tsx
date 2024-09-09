@@ -1,11 +1,9 @@
 import CopyData from '@/app/dashboard/components/copy/copy';
 import CardCell from '@/components/card-cell/card-cell';
 import Tags from '@/components/tags/tags';
-import { DATE_FORMAT } from '@/constants/date';
 import { PublicDataAsset } from '@/services/api/models';
 import { formatBytes } from '@/utils/bytes';
-import { formatDateDifference } from '@/utils/date';
-import dayjs from 'dayjs';
+import { formatDate, formatDateDifference } from '@/utils/date';
 
 import { Stack, Divider, Card, Typography } from '@mui/material';
 
@@ -26,7 +24,7 @@ export default function MetaDataDetails({ pda }: Props) {
         <Stack divider={<Divider />}>
           <Stack direction="row" justifyContent="space-between">
             <CardCell label="Last Modified" margin={false} py={3}>
-              <span>{dayjs(pda.updated_at).format(DATE_FORMAT)}</span>
+              <span>{formatDate(pda.updated_at)}</span>
             </CardCell>
             <Divider orientation="vertical" flexItem />
             <CardCell label="Expiration" margin={false} py={3}>
@@ -41,13 +39,13 @@ export default function MetaDataDetails({ pda }: Props) {
                   color="text.secondary"
                   sx={{ ml: 1 }}
                 >
-                  {dayjs(pda.expiration_date).format(DATE_FORMAT)}
+                  {formatDate(pda.expiration_date)}
                 </Typography>
               </Stack>
             </CardCell>
           </Stack>
           <CardCell label="Created At" margin={false} py={3}>
-            <span>{dayjs(pda.created_at).format(DATE_FORMAT)}</span>
+            <span>{formatDate(pda.created_at)}</span>
           </CardCell>
         </Stack>
       </Stack>

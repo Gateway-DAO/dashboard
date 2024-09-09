@@ -1,9 +1,14 @@
+import { DATE_HOUR_FORMAT } from '@/constants/date';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
+
+export function formatDate(date?: dayjs.ConfigType) {
+  return dayjs(date).format(DATE_HOUR_FORMAT);
+}
 
 export function formatDateDifference(date: dayjs.ConfigType) {
   const now = dayjs();

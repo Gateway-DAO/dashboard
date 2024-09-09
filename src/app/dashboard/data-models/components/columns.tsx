@@ -1,6 +1,5 @@
-import { DATE_FORMAT } from '@/constants/date';
 import { DataModel } from '@/services/api/models';
-import dayjs from 'dayjs';
+import { formatDate } from '@/utils/date';
 
 import { Typography } from '@mui/material';
 import { GridColDef } from '@mui/x-data-grid';
@@ -33,9 +32,7 @@ export const columns: GridColDef<DataModel>[] = [
     headerName: 'Created At',
     flex: 1,
     renderCell: (params) => (
-      <Typography>
-        {params.value ? dayjs(params.value).format(DATE_FORMAT) : ''}
-      </Typography>
+      <Typography>{params.value ? formatDate(params.value) : ''}</Typography>
     ),
   },
 ];

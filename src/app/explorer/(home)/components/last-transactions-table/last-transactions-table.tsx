@@ -2,10 +2,11 @@
 import Link from 'next/link';
 
 import { CardCellContainer } from '@/components/card-cell/card-cell';
-import { DATE_FORMAT } from '@/constants/date';
+import { DATE_HOUR_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { mockTransactions } from '@/services/api/mocks';
 import { Transaction } from '@/services/api/models';
+import { formatDate } from '@/utils/date';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
@@ -110,7 +111,7 @@ export default function LastTransactionsTable() {
                     variant="body1"
                     gutterBottom={false}
                   >
-                    {dayjs(transaction.createdAt).format(DATE_FORMAT)}
+                    {formatDate(transaction.createdAt)}
                   </Typography>
                 </Box>
               </CardCellContainer>

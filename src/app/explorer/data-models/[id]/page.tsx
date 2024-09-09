@@ -2,11 +2,10 @@ import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import CardCell from '@/components/card-cell/card-cell';
-import { DATE_FORMAT } from '@/constants/date';
 import routes from '@/constants/routes';
 import { api } from '@/services/api/api';
 import { PageProps } from '@/types/next';
-import dayjs from 'dayjs';
+import { formatDate } from '@/utils/date';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
@@ -24,12 +23,12 @@ import ExplorerHeader from '../../components/header/header';
 import CopyData from './components/copy-data';
 
 export async function generateMetadata({
-  params,
+  params: { id },
 }: {
   params: { id: string };
 }): Promise<Metadata> {
   const { data, error } = await api.GET('/data-models/{id}', {
-    params: { path: { id: parseInt(params.id, 10) } },
+    params: { path: { id: parseInt(id, 10) } },
   });
 
   if (error) {
@@ -87,11 +86,11 @@ export default async function DataModelDetailPage({
             >
               <Stack direction="row" justifyContent="space-between">
                 <CardCell label="Creation Date" margin={false} py={3}>
-                  {dayjs(dataModel.created_at).format(DATE_FORMAT)}
+                  {formatDate(dataModel.created_at)}
                 </CardCell>
                 <Divider orientation="vertical" flexItem />
                 <CardCell label="Last update" margin={false} py={3}>
-                  {dayjs(dataModel.updated_at).format(DATE_FORMAT)}
+                  {formatDate(dataModel.updated_at)}
                 </CardCell>
               </Stack>
               <Divider orientation="horizontal" flexItem />
@@ -135,7 +134,6 @@ export default async function DataModelDetailPage({
                 }}
                 showLineNumbers
                 lineNumberStyle={{ opacity: 0.5 }}
-                // wrapLongLines
               >
                 {JSON.stringify(dataModel.schema, null, 4)}
               </SyntaxHighlighter>
