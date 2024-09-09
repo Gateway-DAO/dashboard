@@ -49,7 +49,7 @@ export const columns: GridColDef<PublicDataAsset>[] = [
     headerName: 'Who has access',
     width: 150,
     renderCell: (params) => (
-      <Typography>{params.row.roles?.length || '-'}</Typography>
+      <Typography>{params.row.acl?.length || '-'}</Typography>
     ),
   },
   {

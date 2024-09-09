@@ -17,6 +17,7 @@ export type TokenResponse = Required<
 export type DataModel = components['schemas']['model.DataModel'];
 
 export type PublicDataAsset = components['schemas']['model.PublicDataAsset'];
+export type PublicACL = components['schemas']['model.PublicACL'];
 
 export type PublicDataAssetType = 'Structured Data' | `${string}/${string}`;
 

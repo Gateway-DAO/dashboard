@@ -2,14 +2,14 @@ import { PublicDataAsset } from '@/services/api/models';
 
 import { Stack, Divider, Typography, List, ListItem } from '@mui/material';
 
-import UserData from './user-data';
+import Access from './access';
 
 type Props = {
   pda: PublicDataAsset;
   isProofPda?: boolean;
 };
 
-export default function AccessDetails({ pda }: Props) {
+export default function AccessesSidebar({ pda }: Props) {
   return (
     <Stack
       direction={{
@@ -32,12 +32,12 @@ export default function AccessDetails({ pda }: Props) {
       </Stack>
       <Stack pt={1} divider={<Divider />}>
         <List component={Stack} divider={<Divider />}>
-          {pda.roles?.map((user, index) => (
+          {pda.acl?.map((access) => (
             <ListItem
               component={Stack}
               direction="row"
               alignItems="center"
-              key={index}
+              key={access.solana_address}
               sx={{
                 px: {
                   xs: 0,
@@ -46,11 +46,7 @@ export default function AccessDetails({ pda }: Props) {
               }}
               gap={2}
             >
-              <UserData
-                did={user.wallet_address!}
-                username={user.wallet_address!}
-                role={user.role!}
-              />
+              <Access {...access} />
             </ListItem>
           ))}
         </List>

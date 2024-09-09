@@ -5,7 +5,7 @@ import { CONTAINER_PX, WIDTH_CENTERED } from '@/theme/config/style-tokens';
 
 import { Stack, Box, Divider } from '@mui/material';
 
-import AccessDetails from './access/access-details';
+import AccessesSidebar from './access/accesses-sidebar';
 import PageContainer from './container';
 import DownloadPDA from './download-pda';
 import StructuredDetail from './pda-types/structured-detail';
@@ -65,7 +65,7 @@ export default function PDADetailPage({ pda, backHref }: Props) {
           pt: { lg: 3, xs: 2 },
         }}
       >
-        <AccessDetails pda={pda} />
+        <AccessesSidebar pda={pda} />
       </Box>
     </PageContainer>
   );
