@@ -59,7 +59,6 @@ export default function DownloadPDA({
       type === PublicDataAssetTypeEnum.StructuredData ? `${name}.json` : name;
 
     downloadPDA(file, fileName);
-    console.log(file);
   }, [mutateAsync, type, name]);
 
   return (

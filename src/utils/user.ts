@@ -11,5 +11,6 @@ export function useMe(token?: string) {
       return data;
     },
     enabled: !!token,
+    throwOnError: true,
   });
 }
