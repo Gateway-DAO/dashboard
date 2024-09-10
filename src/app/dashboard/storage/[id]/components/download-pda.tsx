@@ -39,8 +39,7 @@ export default function DownloadPDA({
             id,
           },
         },
-        parseAs:
-          type === PublicDataAssetTypeEnum.StructuredData ? 'text' : 'blob',
+        parseAs: 'blob',
       });
 
       if (error) {
@@ -55,16 +54,12 @@ export default function DownloadPDA({
   });
 
   const onDownload = useCallback(async () => {
-    const res = await mutateAsync();
-    const file =
-      type === PublicDataAssetTypeEnum.StructuredData
-        ? new Blob([res as string], { type: 'text/plain' })
-        : (res as Blob);
+    const file = await mutateAsync();
     const fileName =
-      type === PublicDataAssetTypeEnum.StructuredData ? `${name}.txt` : name;
+      type === PublicDataAssetTypeEnum.StructuredData ? `${name}.json` : name;
 
     downloadPDA(file, fileName);
-    console.log(res);
+    console.log(file);
   }, [mutateAsync, type, name]);
 
   return (

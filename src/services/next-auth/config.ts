@@ -3,7 +3,6 @@ import { getServerSession, NextAuthOptions } from 'next-auth';
 import routes from '@/constants/routes';
 
 import { Account } from '../api/models';
-import getMe from './libs/get-me';
 import newUserCredential from './providers/new-user';
 import walletCredentials from './providers/wallet';
 
@@ -22,8 +21,6 @@ export const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      const user = await getMe(token.token);
-      session.user = user;
       session.token = token.token;
       return session;
     },
