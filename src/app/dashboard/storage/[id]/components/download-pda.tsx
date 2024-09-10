@@ -58,10 +58,10 @@ export default function DownloadPDA({
     const res = await mutateAsync();
     const file =
       type === PublicDataAssetTypeEnum.StructuredData
-        ? new Blob([res as string], { type: 'text/plain' })
+        ? new Blob([res as string], { type: 'application/json' })
         : (res as Blob);
     const fileName =
-      type === PublicDataAssetTypeEnum.StructuredData ? `${name}.txt` : name;
+      type === PublicDataAssetTypeEnum.StructuredData ? `${name}.json` : name;
 
     downloadPDA(file, fileName);
     console.log(res);
