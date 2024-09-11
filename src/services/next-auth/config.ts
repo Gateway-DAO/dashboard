@@ -22,6 +22,7 @@ export const nextAuthConfig: NextAuthOptions = {
     },
     async session({ session, token }) {
       session.token = token.token;
+      session.user = token.user;
       return session;
     },
   },
