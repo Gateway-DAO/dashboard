@@ -16,7 +16,7 @@ import { Chip } from '@mui/material';
 const links: NavLink[] = [
   { label: 'Transactions', href: routes.explorer.transactions },
   { label: 'Data Models', href: routes.explorer.dataModels },
-  { label: 'Sign Message', href: routes.explorer.requestTemplates },
+  { label: 'Sign Message', href: routes.explorer.signMessage },
   {
     label: 'Docs',
     href: documentationRoutes.home,

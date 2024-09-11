@@ -20,6 +20,7 @@ const routes = {
     transactions: `${explorer}/transactions`,
     transaction: (transactionId) => `${explorer}/transactions/${transactionId}`,
     dataModels: `${explorer}/data-models`,
+    signMessage: `${explorer}/sign-message`,
     dataModel: (dataModelId) => `${explorer}/data-models/${dataModelId}`,
     requestTemplates: `${explorer}/request-templates`,
   },

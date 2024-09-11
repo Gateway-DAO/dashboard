@@ -6,13 +6,13 @@ import {
   // darkTheme as DarkTheme,
   Theme,
 } from '@rainbow-me/rainbowkit';
-import { mainnet, polygon, optimism, arbitrum, base } from 'wagmi/chains';
+import { mainnet } from 'wagmi/chains';
 import '@rainbow-me/rainbowkit/styles.css';
 
 export const config = getDefaultConfig({
   appName: 'Gateway Network',
   projectId: 'YOUR_PROJECT_ID',
-  chains: [mainnet, polygon, optimism, arbitrum, base],
+  chains: [mainnet],
   ssr: true,
 });
 
