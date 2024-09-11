@@ -2,9 +2,12 @@ import { limitChars } from '@/utils/string';
 import { useSnackbar } from 'notistack';
 
 import { ContentCopy } from '@mui/icons-material';
-import { IconButton, Stack } from '@mui/material';
+import { IconButton, IconButtonProps, Stack } from '@mui/material';
 
-export default function SimpleCopyButton({ text }: { text: string }) {
+export default function SimpleCopyButton({
+  text,
+  ...props
+}: { text: string } & Omit<IconButtonProps, 'onClick'>) {
   const { enqueueSnackbar } = useSnackbar();
 
   const copy = async (text: string) => {
@@ -17,7 +20,7 @@ export default function SimpleCopyButton({ text }: { text: string }) {
   };
 
   return (
-    <IconButton onClick={() => copy(text)}>
+    <IconButton onClick={() => copy(text)} {...props}>
       <ContentCopy
         sx={{
           fontSize: 16,

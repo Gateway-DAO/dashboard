@@ -1,9 +1,10 @@
 'use client';
 
 import { Network } from '@/types/web3';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { limitCharsOffset } from '@/utils/string';
+import { ConnectButton, useConnectModal } from '@rainbow-me/rainbowkit';
 import { FaEthereum } from 'react-icons/fa';
-import { useAccount, useSignMessage } from 'wagmi';
+import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
 
 import { Button, Stack, Typography } from '@mui/material';
 
@@ -16,6 +17,8 @@ export default function EVMButton({
 }: SignButtonsProps) {
   const { signMessageAsync: signMessageEvm } = useSignMessage();
   const { address, isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
+  const { openConnectModal } = useConnectModal();
 
   const onSignEVM = async () => {
     try {
@@ -26,33 +29,55 @@ export default function EVMButton({
     }
   };
 
-  return (
-    <Stack>
-      <Typography>
-        <FaEthereum /> EVM
-      </Typography>
-      <Stack
-        direction="row"
-        gap={2}
-        sx={{
-          width: '100%',
-          'div, div > button': {
-            width: isConnected ? '100%' : undefined,
-          },
-        }}
+  if (!isConnected) {
+    return (
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={openConnectModal}
+        startIcon={<FaEthereum />}
+        size="large"
       >
-        <ConnectButton label="Sign in EVM" showBalance={false} />
-        {isConnected && (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={onSignEVM}
-            disabled={!isConnected}
-            sx={{ flexShrink: 0 }}
-          >
-            Sign message
-          </Button>
-        )}
+        Connect with Solana Wallet
+      </Button>
+    );
+  }
+
+  return (
+    <Stack
+      direction={{
+        lg: 'row',
+      }}
+      gap={2}
+      justifyContent="space-between"
+    >
+      <Stack component={Typography} direction="row" alignItems="center" gap={1}>
+        <FaEthereum /> {limitCharsOffset(address!, 4, 4)}
+      </Stack>
+      <Stack
+        direction={{
+          lg: 'row',
+        }}
+        gap={1}
+      >
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => disconnect()}
+          sx={{ flexShrink: 0 }}
+          size="large"
+        >
+          Disconnect
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={onSignEVM}
+          sx={{ flexShrink: 0 }}
+          size="large"
+        >
+          Sign message
+        </Button>
       </Stack>
     </Stack>
   );

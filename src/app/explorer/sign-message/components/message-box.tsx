@@ -62,6 +62,7 @@ export default function MessageBox() {
           component={Container}
           sx={{
             direction: { xs: 'column', lg: 'row' },
+            alignItems: { xs: 'normal', lg: 'flex-start' },
             justifyContent: { xs: 'normal', lg: 'space-between' },
             gap: 2,
             flexDirection: { xs: 'column', lg: 'row' },
@@ -71,15 +72,17 @@ export default function MessageBox() {
             variant="outlined"
             sx={{
               py: 3,
-              px: 2,
-              width: { lg: '100%' },
-              marginTop: 2,
-              mr: 1,
+              px: 3,
+              width: '100%',
             }}
           >
             <Stack
               flexDirection="column"
               justifyContent={{ xs: 'none', lg: 'space-between' }}
+              gap={{
+                xs: 6,
+                lg: 10,
+              }}
             >
               <TextField
                 label="Message"
@@ -93,7 +96,6 @@ export default function MessageBox() {
               <Stack
                 flexDirection={{ xs: 'column', lg: 'row' }}
                 sx={{
-                  mt: { xs: 3, lg: 9 },
                   width: '100%',
                   '> div': { width: '100%' },
                 }}
@@ -115,57 +117,60 @@ export default function MessageBox() {
           <Paper
             variant="outlined"
             sx={{
-              pt: 3,
+              py: 3,
               px: 2,
-              width: { lg: '100%' },
-              marginTop: 2,
-              mr: 1,
-              height: '304px',
+              width: '100%',
             }}
           >
-            <Stack direction="column">
-              <Stack direction={'column'} justifyContent={'space-between'}>
-                <Typography variant="caption" sx={{ mb: 1 }}>
-                  Network
-                </Typography>
+            <Stack
+              direction="column"
+              divider={<Divider sx={{ my: 2, mx: -2 }} />}
+            >
+              <Stack gap={2}>
+                <Typography variant="caption">Network</Typography>
                 <Typography variant="body1">
                   {!output.type ? '-' : output.type}
                 </Typography>
-                <Divider sx={{ mt: 1, mb: 2 }} />
               </Stack>
 
-              <Stack direction={'column'} justifyContent={'space-between'}>
-                <Typography variant="caption" sx={{ mb: 1 }}>
-                  Signature
-                </Typography>
-                <Stack direction={'row'}>
-                  <Typography variant="body1" flex={1}>
+              <Stack gap={2}>
+                <Typography variant="caption">Signature</Typography>
+                <Stack direction="row" justifyContent="space-between">
+                  <Typography
+                    variant="body1"
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                  >
                     {output.signature === ''
                       ? '-'
-                      : limitChars(output.signature, 61)}
+                      : limitChars(output.signature, 42)}
                   </Typography>
-
                   <SimpleCopyButton text={output.signature} />
                 </Stack>
-                <Divider sx={{ mt: 1, mb: 2 }} />
               </Stack>
-
-              <Stack direction={'column'} justifyContent={'space-between'}>
-                <Typography variant="caption" sx={{ mb: 1 }}>
-                  Address
-                </Typography>
-                <Stack direction={'row'}>
-                  <Typography variant="body1" flex={1}>
-                    {output.address === '' ? '-' : output.address}
+              <Stack gap={2}>
+                <Typography variant="caption">Address</Typography>
+                <Stack direction="row" justifyContent="space-between">
+                  <Typography
+                    variant="body1"
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                  >
+                    {output.address === ''
+                      ? '-'
+                      : limitChars(output.address, 42)}
                   </Typography>
-                  <SimpleCopyButton text={output.address} />
+                  <SimpleCopyButton
+                    text={output.address}
+                    sx={{ flexShrink: 0 }}
+                  />
                 </Stack>
-                <Divider sx={{ mt: 1, mb: 2 }} />
               </Stack>
               {output.error && (
-                <Typography variant="caption" sx={{ mb: 1 }}>
-                  Error:- {output.error}
-                </Typography>
+                <Stack gap={2}>
+                  <Typography variant="caption">Error</Typography>
+                  <Typography variant="body1">{output.error}</Typography>
+                </Stack>
               )}
             </Stack>
           </Paper>
