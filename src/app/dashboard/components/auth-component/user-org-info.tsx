@@ -22,23 +22,13 @@ export default function UserOrgInfo({ id, image, name, gatewayId }: Props) {
     >
       <Box
         sx={{
-          mr: {
-            lg: 1.5,
-          },
+          mr: 1.5,
           zIndex: 1,
         }}
       >
         <GTWAvatar src={image ?? undefined} name={id} alt={gatewayId} />
       </Box>
-      <Stack
-        direction="column"
-        sx={{
-          display: {
-            xs: 'none',
-            lg: 'flex',
-          },
-        }}
-      >
+      <Stack direction="column">
         <Typography component="span" variant="subtitle1" color="primary.dark">
           {hasName ? name : `@${gatewayId}`}
         </Typography>

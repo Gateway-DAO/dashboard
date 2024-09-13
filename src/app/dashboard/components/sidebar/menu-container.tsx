@@ -37,7 +37,6 @@ export default function MenuContainer({
       <Stack
         sx={{
           mt: 5,
-          display: { xs: 'none', lg: 'block' },
           '@media screen and (max-height: 900px) and (min-width: 1200px)': {
             mt: 2,
           },
@@ -49,7 +48,6 @@ export default function MenuContainer({
         <Stack
           sx={{
             mt: 5,
-            display: { xs: 'none', lg: 'block' },
             flexGrow: 1,
             '@media screen and (max-height: 900px) and (min-width: 700px)': {
               mt: 2,
