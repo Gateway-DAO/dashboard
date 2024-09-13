@@ -53,10 +53,10 @@ export default function GTWMenuItem({
           gap: 2,
           ':hover, :focus': {
             svg: {
-              color: 'primary.main',
+              color: 'primary.dark',
             },
             span: {
-              color: 'primary.main',
+              color: 'primary.dark',
             },
           },
           ...(active && {
