@@ -39,11 +39,11 @@ export default function UserOrgInfo({ id, image, name, gatewayId }: Props) {
           },
         }}
       >
-        <Typography component="span" variant="subtitle1" color="primary.main">
+        <Typography component="span" variant="subtitle1" color="primary.dark">
           {hasName ? name : `@${gatewayId}`}
         </Typography>
         {hasName && (
-          <Typography component="span" variant="caption" color="primary.main">
+          <Typography component="span" variant="caption" color="primary.dark">
             {gatewayId}
           </Typography>
         )}
