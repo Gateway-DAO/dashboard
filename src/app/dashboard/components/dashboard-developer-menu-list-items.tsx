@@ -18,7 +18,7 @@ export default function DashboardUserDeveloperMenuListItems() {
 
   return (
     <>
-      <Typography variant="caption" sx={{ display: 'block' }}>
+      <Typography variant="caption" sx={{ display: 'block', pl: 1 }}>
         Developers
       </Typography>
       <List
@@ -36,7 +36,7 @@ export default function DashboardUserDeveloperMenuListItems() {
             )
         )}
       </List>
-      <Typography variant="caption" sx={{ mt: 2, display: 'block' }}>
+      <Typography variant="caption" sx={{ mt: 2, display: 'block', pl: 1 }}>
         Other Tools
       </Typography>
       <List
