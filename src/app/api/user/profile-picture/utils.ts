@@ -1,7 +1,7 @@
 import { getStorageClient } from '@/services/gcp';
 import { getRedisClient } from '@/services/redis';
 
-export async function getSignedUrl(did: string) {
+export async function createSignedUrl(did: string) {
   // Initialize Google Cloud Storage client
   const storage = getStorageClient();
   const bucketName = process.env.GCP_BUCKET_NAME;
@@ -27,6 +27,21 @@ export async function getSignedUrl(did: string) {
 
     await redis.set(key, url, 'PX', ttl);
 
+    return url;
+  } catch (error) {
+    console.error(did, error);
+    return null;
+  } finally {
+    await redis.quit();
+  }
+}
+
+export async function popSignedUrl(did: string) {
+  const redis = await getRedisClient();
+  try {
+    const key = `pfp:${did}`;
+    const url = await redis.get(key);
+    await redis.del(key);
     return url;
   } catch (error) {
     console.error(did, error);
