@@ -19,11 +19,7 @@ type Props = {
 };
 
 export default function AuthComponent({ id, controlId }: Props) {
-  const { data: session } = useSession({
-    required: true,
-  });
-
-  const { data: user } = useMe(session?.token);
+  const { user } = useMe();
 
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
 

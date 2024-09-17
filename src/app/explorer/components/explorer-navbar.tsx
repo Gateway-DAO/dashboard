@@ -27,11 +27,11 @@ const links: NavLink[] = [
 
 export default function ExplorerNavbar() {
   const [isModalWaleltOpen, setIsModalWaleltOpen] = useState(false);
-  const session = useSession();
+  const { status } = useSession();
   const primaryButton: NavLink = {
     label: 'Open dashboard',
     variant: 'outlined',
-    ...(session.status === 'authenticated'
+    ...(status === 'authenticated'
       ? { href: routes.dashboard.storage }
       : { onClick: () => setIsModalWaleltOpen(true) }),
   };

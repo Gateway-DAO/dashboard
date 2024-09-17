@@ -33,7 +33,8 @@ export default async function getCroppedImg(
   imageSrc: string,
   pixelCrop: Area,
   rotation = 0,
-  flip = { horizontal: false, vertical: false }
+  flip = { horizontal: false, vertical: false },
+  maxSize = 200
 ): Promise<Blob> {
   const image = await createImage(imageSrc);
   const canvas = document.createElement('canvas');
@@ -77,8 +78,33 @@ export default async function getCroppedImg(
   // paste generated rotate image at the top left corner
   ctx.putImageData(data, 0, 0);
 
-  // As Base64 string
-  // return canvas.toDataURL('image/jpeg');
+  // Resize if larger than maxSizexmaxSize
+  if (canvas.width > maxSize || canvas.height > maxSize) {
+    const resizeCanvas = document.createElement('canvas');
+    const resizeCtx = resizeCanvas.getContext('2d')!;
+
+    // Set fixed size to maxSizexmaxSize
+    resizeCanvas.width = maxSize;
+    resizeCanvas.height = maxSize;
+
+    // Draw resized image
+    resizeCtx.drawImage(
+      canvas,
+      0,
+      0,
+      canvas.width,
+      canvas.height,
+      0,
+      0,
+      maxSize,
+      maxSize
+    );
+
+    // Replace the original canvas with the resized one
+    canvas.width = maxSize;
+    canvas.height = maxSize;
+    ctx.drawImage(resizeCanvas, 0, 0);
+  }
 
   // As a blob
   return new Promise((resolve, reject) => {

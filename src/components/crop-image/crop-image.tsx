@@ -10,9 +10,9 @@ import {
   Box,
   Button,
   DialogActions,
-  DialogTitle,
   Slider,
   Stack,
+  Typography,
 } from '@mui/material';
 
 import getCroppedImg from './utils';
@@ -49,7 +49,9 @@ export default function CropImage({ image, onSubmit, onClose }: Props) {
 
   return (
     <>
-      <DialogTitle>Edit Image</DialogTitle>
+      <Typography variant="h4" gutterBottom sx={{ mb: 6 }}>
+        Edit Profile Picture
+      </Typography>
       <Box
         sx={{
           width: '100%',

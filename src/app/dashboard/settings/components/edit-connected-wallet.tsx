@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
