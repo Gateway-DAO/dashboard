@@ -103,6 +103,11 @@ export const mockPublicDataAsset: PublicDataAsset = {
   created_at: '2024-08-28T16:57:05.075541-03:00',
   updated_at: '2024-08-28T16:57:05.075541-03:00',
   expiration_date: '2024-12-31T00:00:00.000Z',
+  created_by:
+    'did:gatewayid:gateway:e585176cf3a17740cf055d803f78aa45272b9e97c50ec1088105e63ed72293e5',
+  id: 87818365946560512,
+  size: 1000,
+  transaction_id: '',
 };
 
 export const mockPublicDataAssets: PublicDataAsset[] = [
