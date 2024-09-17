@@ -6,16 +6,18 @@ import CropImage from '@/components/crop-image/crop-image';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
+import { useMe } from '@/utils/user';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
 import EditIcon from '@mui/icons-material/Edit';
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 
 import UploadFileArea from './upload-file-area';
-import { getSignedUrl, readImageFile, saveProfilePicturew } from './utlis';
+import { getSignedUrl, readImageFile, saveProfilePicture } from './utlis';
 
 export default function EditAvatar() {
+  const buttonRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { data: session, update } = useSession();
 
@@ -25,7 +27,9 @@ export default function EditAvatar() {
 
   const onCloseModal = () => setCropableImage(undefined);
 
-  const { mutateAsync, isPending, isSuccess } = useMutation({
+  const me = useMe();
+
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: [session?.user?.did],
     mutationFn: async (blob: Blob) => {
       if (!session) {
@@ -46,14 +50,28 @@ export default function EditAvatar() {
         },
       });
 
-      const account = await saveProfilePicturew();
+      const account = await saveProfilePicture();
+      await me.refetch();
 
       return update(account);
     },
   });
 
-  const onChange = (blob: Blob) => {
-    mutateAsync(blob);
+  const onChange = async (blob: Blob) => {
+    try {
+      buttonRef.current?.blur();
+      inputRef.current?.blur();
+      await mutateAsync(blob);
+      enqueueSnackbar('Profile picture updated');
+    } catch (e) {
+      let errorMessage = 'Failed to update profile picture';
+      if (e instanceof Error) {
+        errorMessage = e.message;
+      } else if (typeof e === 'string') {
+        errorMessage = e;
+      }
+      enqueueSnackbar(errorMessage, { variant: 'error' });
+    }
   };
 
   const onReadFile = async (files: File[] | FileList) => {
@@ -99,7 +117,8 @@ export default function EditAvatar() {
       <Box
         role="button"
         tabIndex={0}
-        onClick={() => onFocus()}
+        ref={buttonRef}
+        onClick={onFocus}
         sx={{
           display: 'flex',
           flexDirection: 'row',
@@ -133,11 +152,24 @@ export default function EditAvatar() {
             display: 'flex',
             borderRadius: '100%',
             backgroundColor: 'primary.dark',
+            position: 'relative',
           }}
         >
+          {isPending && (
+            <CircularProgress
+              size={84}
+              sx={{
+                color: 'primary.light',
+                position: 'absolute',
+                zIndex: 1,
+                top: 3,
+                left: 3,
+              }}
+            />
+          )}
           <GTWAvatar
             size={90}
-            src={session?.user?.profile_picture}
+            src={me?.data?.profile_picture}
             name={session?.user?.did}
             alt="Profile Picture"
           />

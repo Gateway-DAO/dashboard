@@ -40,7 +40,7 @@ export const getSignedUrl = async () => {
   return signedUrl;
 };
 
-export const saveProfilePicturew = async () => {
+export const saveProfilePicture = async () => {
   const response = await fetch('/api/user/profile-picture', {
     method: 'PATCH',
   });

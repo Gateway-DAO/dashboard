@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 
+import { authApi } from '@/services/api/api';
 import { getServerComponentSession } from '@/services/next-auth/config';
 
 import { createSignedUrl, popSignedUrl } from './utils';
-import { authApi } from '@/services/api/api';
 
 export async function GET() {
   const session = await getServerComponentSession();
@@ -35,19 +35,15 @@ export async function PATCH() {
     return NextResponse.json('No signed URL found', { status: 404 });
   }
 
-  const { data, error } = await authApi(session.token).PATCH('/accounts/me', {
-    body: { profile_picture: signedUrl.split('?')[0] },
-  });
+  const profile_picture = new URL(signedUrl.split('?')[0]!);
 
-  console.log(
-    {
-      body: {
-        profile_picture: signedUrl.split('?')[0],
-      },
-    },
-    data,
-    error
-  );
+  const hash = Math.random().toString(36).substring(7);
+
+  profile_picture.searchParams.set('hash', hash);
+
+  const { data, error } = await authApi(session.token).PATCH('/accounts/me', {
+    body: { profile_picture: profile_picture.toString() },
+  });
 
   if (error) {
     return NextResponse.json(error, { status: 500 });

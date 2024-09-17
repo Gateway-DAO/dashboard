@@ -21,7 +21,7 @@ export const nextAuthConfig: NextAuthOptions = {
       if (trigger === 'update') {
         token.user = {
           ...token.user,
-          ...session.user,
+          ...session,
         };
       }
       return token;
