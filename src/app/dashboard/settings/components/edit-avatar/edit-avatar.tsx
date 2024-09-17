@@ -93,7 +93,7 @@ export default function EditAvatar() {
     }
   };
 
-  const onFocus = () => {
+  const onClick = () => {
     inputRef.current?.click();
   };
 
@@ -108,8 +108,8 @@ export default function EditAvatar() {
   };
 
   const onCrop = (image: Blob) => {
-    onChange(image);
     onCloseModal();
+    onChange(image);
   };
 
   return (
@@ -118,25 +118,21 @@ export default function EditAvatar() {
         role="button"
         tabIndex={0}
         ref={buttonRef}
-        onClick={onFocus}
+        onClick={onClick}
+        onKeyUp={(e) => {
+          if (e.key === 'Enter') {
+            onClick();
+          }
+        }}
         sx={{
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
           width: 'fit-content',
-          '.avater-container': {
-            'svg, img': {
-              transition: 'opacity 0.15s',
-            },
-          },
+
           ':hover, :focus': {
             outline: 'none',
             cursor: 'pointer',
-            '.avatar-container': {
-              'svg, img': {
-                opacity: 0.7,
-              },
-            },
             '.edit-avatar-button': {
               boxShadow: `0 0 0 15px rgba(0,0,0,.5) inset`,
               '.MuiSvgIcon-root': {
@@ -151,7 +147,6 @@ export default function EditAvatar() {
           sx={{
             display: 'flex',
             borderRadius: '100%',
-            backgroundColor: 'primary.dark',
             position: 'relative',
           }}
         >
@@ -159,7 +154,7 @@ export default function EditAvatar() {
             <CircularProgress
               size={84}
               sx={{
-                color: 'primary.light',
+                color: 'primary.main',
                 position: 'absolute',
                 zIndex: 1,
                 top: 3,
