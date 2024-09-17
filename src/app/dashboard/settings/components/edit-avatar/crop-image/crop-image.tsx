@@ -103,10 +103,10 @@ export default function CropImage({ image, onSubmit, onClose }: Props) {
         }}
       >
         <Button type="button" variant="contained" onClick={onCrop}>
-          crop
+          Crop
         </Button>
         <Button type="button" variant="outlined" onClick={onClose}>
-          cancel
+          Cancel
         </Button>
       </DialogActions>
     </>

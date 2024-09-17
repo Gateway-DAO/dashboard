@@ -2,7 +2,7 @@
 import { useSession } from 'next-auth/react';
 import { ChangeEvent, useRef, useState } from 'react';
 
-import CropImage from '@/components/crop-image/crop-image';
+import CropImage from '@/app/dashboard/settings/components/edit-avatar/crop-image/crop-image';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
