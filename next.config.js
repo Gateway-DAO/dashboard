@@ -20,6 +20,7 @@ const nextConfig = {
       'static.ghost.org',
       'images.unsplash.com',
       'guardians.gateway.tech',
+      'gateway-1.ghost.io',
     ],
   },
   async redirects() {
