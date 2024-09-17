@@ -2,14 +2,14 @@
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
-import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
 import useCopy from '@/hooks/use-copy';
-import { auth } from '@/locale/en/auth';
 import { limitCharsCentered } from '@/utils/string';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { InputAdornment, Skeleton, Stack, TextField } from '@mui/material';
+import { Skeleton, Stack } from '@mui/material';
 import { Button, Typography } from '@mui/material';
+
+import UsernameModal from './username-modal';
 
 export default function EditUsername() {
   const { data: session } = useSession();
@@ -51,27 +51,10 @@ export default function EditUsername() {
           </Button>
         </Stack>
       </Stack>
-      <ConfirmDialog
-        title="Edit username"
-        positiveAnswer="save"
-        negativeAnswer="cancel"
-        onConfirm={() => console.log('submitted')}
-        open={isEditUsernameDialog}
+      <UsernameModal
+        isOpen={isEditUsernameDialog}
         setOpen={setEditUsernameDialog}
-        maxWidth="sm"
-      >
-        <TextField
-          id="username"
-          label="Enter Username"
-          variant="outlined"
-          margin="dense"
-          fullWidth
-          InputProps={{
-            startAdornment: <InputAdornment position="start">@</InputAdornment>,
-          }}
-          helperText={auth.rules.create_username}
-        />
-      </ConfirmDialog>
+      ></UsernameModal>
     </>
   );
 }
