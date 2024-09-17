@@ -1,10 +1,8 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-
+import { useMe } from '@/hooks/use-me';
 import { useMenu } from '@/hooks/use-menu';
 import { limitCharsOffset } from '@/utils/string';
-import { useMe } from '@/utils/user';
 
 import { MoreHorizOutlined } from '@mui/icons-material';
 import { ButtonBase, Menu } from '@mui/material';
