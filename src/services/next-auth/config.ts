@@ -13,10 +13,16 @@ export const nextAuthConfig: NextAuthOptions = {
     maxAge: 24 * 60 * 60,
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.user = user as Account;
         token.token = (user as any).token;
+      }
+      if (trigger === 'update') {
+        token.user = {
+          ...token.user,
+          ...session.user,
+        };
       }
       return token;
     },

@@ -1,3 +1,5 @@
+import { Account } from '@/services/api/models';
+
 export const readImageFile = (files: FileList | File[]) => {
   const reader = new FileReader();
   const file = files[0];
@@ -11,7 +13,7 @@ export const readImageFile = (files: FileList | File[]) => {
       if (!imageTypes.includes(file.type)) {
         return reject('Only JPG,PNG,GIF,SVG are allowed');
       }
-      if (file.size > 5245329) {
+      if (file.size > 5245329 && file.type.includes('gif')) {
         return reject('File size should be less than 5 mb');
       }
       reader.onload = (event) => {
@@ -23,4 +25,30 @@ export const readImageFile = (files: FileList | File[]) => {
       reader.readAsDataURL(file);
     }
   );
+};
+
+export const getSignedUrl = async () => {
+  const response = await fetch('/api/user/profile-picture', {
+    method: 'GET',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const signedUrl: string = await response.json();
+  return signedUrl;
+};
+
+export const saveProfilePicturew = async () => {
+  const response = await fetch('/api/user/profile-picture', {
+    method: 'PATCH',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const newAccount: Account = await response.json();
+  return newAccount;
 };

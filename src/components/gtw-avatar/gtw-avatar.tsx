@@ -1,7 +1,7 @@
 import { brandColors } from '@/theme/config/brand';
 import BoringAvatar from 'boring-avatars';
 
-import { Avatar } from '@mui/material';
+import { Avatar, AvatarProps } from '@mui/material';
 
 type Props = {
   src?: string | undefined | null;
@@ -9,6 +9,7 @@ type Props = {
   alt?: string | undefined | null;
   size?: number;
   hasBorder?: boolean;
+  avatarProps?: AvatarProps;
 };
 
 const colors = [
@@ -19,7 +20,14 @@ const colors = [
   '#F5B5FF',
 ];
 
-export default function GTWAvatar({ src, name, alt, hasBorder, size }: Props) {
+export default function GTWAvatar({
+  src,
+  name,
+  alt,
+  hasBorder,
+  size,
+  avatarProps,
+}: Props) {
   if (!src) {
     return (
       <BoringAvatar
@@ -35,6 +43,7 @@ export default function GTWAvatar({ src, name, alt, hasBorder, size }: Props) {
     <Avatar
       src={src}
       alt={alt ?? name ?? 'Avatar'}
+      {...avatarProps}
       sx={{
         ...(hasBorder && {
           borderWidth: 1,
@@ -45,6 +54,7 @@ export default function GTWAvatar({ src, name, alt, hasBorder, size }: Props) {
           width: size,
           height: size,
         }),
+        ...avatarProps?.sx,
       }}
     >
       {alt ?? name}

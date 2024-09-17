@@ -6,38 +6,55 @@ import CropImage from '@/components/crop-image/crop-image';
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
-import useDropArea from '@/hooks/use-drop-area/use-drop-area';
-import { brandColors } from '@/theme/config/brand';
 import { useMutation } from '@tanstack/react-query';
+import { useSnackbar } from 'notistack';
 
 import EditIcon from '@mui/icons-material/Edit';
-import { Avatar, Box, IconButton } from '@mui/material';
+import { Box } from '@mui/material';
 
 import UploadFileArea from './upload-file-area';
-import { readImageFile } from './utlis';
+import { getSignedUrl, readImageFile, saveProfilePicturew } from './utlis';
 
 export default function EditAvatar() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
 
   const [cropableImage, setCropableImage] = useState<string>();
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const onCloseModal = () => setCropableImage(undefined);
 
-  const onChange = (file: Blob) => {};
-
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationKey: [session?.user?.did],
-    mutationFn: async () => {
-      const response = await fetch('/api/user/profile-picture', {
-        method: 'GET',
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
+    mutationFn: async (blob: Blob) => {
+      if (!session) {
+        throw new Error('No session');
       }
-      return response.json();
+
+      const signedUrl: string = await getSignedUrl();
+
+      const file = new File([blob], 'profile_picture', {
+        type: blob.type,
+      });
+
+      await fetch(signedUrl, {
+        method: 'PUT',
+        body: file,
+        headers: {
+          'Content-Type': file.type,
+        },
+      });
+
+      const account = await saveProfilePicturew();
+
+      return update(account);
     },
   });
+
+  const onChange = (blob: Blob) => {
+    mutateAsync(blob);
+  };
 
   const onReadFile = async (files: File[] | FileList) => {
     try {
@@ -48,7 +65,13 @@ export default function EditAvatar() {
       }
       setCropableImage(image);
     } catch (e) {
-      console.error(e);
+      let errorMessage = 'Failed to read file';
+      if (e instanceof Error) {
+        errorMessage = e.message;
+      } else if (typeof e === 'string') {
+        errorMessage = e;
+      }
+      enqueueSnackbar(errorMessage, { variant: 'error' });
     }
   };
 
@@ -82,11 +105,16 @@ export default function EditAvatar() {
           flexDirection: 'row',
           alignItems: 'center',
           width: 'fit-content',
+          '.avater-container': {
+            'svg, img': {
+              transition: 'opacity 0.15s',
+            },
+          },
           ':hover, :focus': {
             outline: 'none',
             cursor: 'pointer',
-            '.MuiAvatar-root': {
-              '.MuiAvatar-img': {
+            '.avatar-container': {
+              'svg, img': {
                 opacity: 0.7,
               },
             },
@@ -99,18 +127,21 @@ export default function EditAvatar() {
           },
         }}
       >
-        <Avatar
-          alt="Edit Picture"
-          src={'/social.png'}
+        <Box
+          className="avatar-container"
           sx={{
-            width: 90,
-            height: 90,
-            background: 'black',
-            '.MuiAvatar-img': {
-              transition: 'opacity 0.15s',
-            },
+            display: 'flex',
+            borderRadius: '100%',
+            backgroundColor: 'primary.dark',
           }}
-        />
+        >
+          <GTWAvatar
+            size={90}
+            src={session?.user?.profile_picture}
+            name={session?.user?.did}
+            alt="Profile Picture"
+          />
+        </Box>
         <Box
           className="edit-avatar-button"
           sx={{
@@ -159,7 +190,7 @@ export default function EditAvatar() {
           />
         )}
       </ModalRight>
-      <UploadFileArea onReadFile={onReadFile} />
+      {!isPending && <UploadFileArea onReadFile={onReadFile} />}
     </>
   );
 }
