@@ -19,8 +19,8 @@ export default async function SettingPage() {
     <>
       <TitleLayout
         titleId="settings-title"
-        title={'Gateway ID'}
-        subtitle={'Edit your Gateway ID and manage your connected wallet'}
+        title="Gateway ID"
+        subtitle="Edit your Gateway ID and manage your connected wallet"
       />
 
       <Stack spacing={3} alignItems="stretch">
@@ -34,7 +34,6 @@ export default async function SettingPage() {
           <EditAvatar />
           <EditUsername />
         </Stack>
-        <EditConnectedWallet />
       </Stack>
     </>
   );

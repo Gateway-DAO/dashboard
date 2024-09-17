@@ -64,7 +64,7 @@ export default function BlogPostLoading() {
               </Stack>
             </Stack>
             <Stack mt={{ md: 0, xs: 2 }} alignSelf="center">
-              <Stack direction={'row'} columnGap={1}>
+              <Stack direction="row" columnGap={1}>
                 <Skeleton variant="circular" width={40} height={40} />
                 <Skeleton variant="circular" width={40} height={40} />
                 <Skeleton variant="circular" width={40} height={40} />

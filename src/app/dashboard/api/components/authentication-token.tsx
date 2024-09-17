@@ -19,7 +19,7 @@ export default function AuthenticationToken({ token }: { token: string }) {
   return (
     <Card sx={{ width: '100%' }} variant="outlined">
       <CardHeader
-        title={'Authentication Token'}
+        title="Authentication Token"
         titleTypographyProps={{
           variant: 'subtitle1',
           fontWeight: 'bold',

@@ -34,7 +34,7 @@ export default function Access({ address, roles, solana_address }: PublicACL) {
       <Box>
         <GTWAvatar name={address} alt={solana_address ?? address} size={45} />
       </Box>
-      <Stack direction={'column'} alignItems={'flex-start'} width="100%">
+      <Stack direction="column" alignItems="flex-start" width="100%">
         <Typography component="span" variant="subtitle1" color="text.primary">
           {limitChars(solana_address!, 10) ?? limitCharsOffset(address!, 4, 5)}
         </Typography>

@@ -23,7 +23,7 @@ export default function LoadingPDAPage() {
               height: '100%',
             }}
           >
-            <Stack direction={'column'} sx={WIDTH_CENTERED}>
+            <Stack direction="column" sx={WIDTH_CENTERED}>
               <PDASkeleton />
             </Stack>
           </Stack>

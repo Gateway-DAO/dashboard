@@ -20,7 +20,7 @@ export default function AmountOfIssuancesField({
 
   return (
     <RangeField
-      label={'Amount of issuances'}
+      label="Amount of issuances"
       onClear={onClear}
       onApply={setAmountOfIssuances}
       value={selectedAmountOfIssuances}

@@ -33,7 +33,7 @@ export default function PDA({ data }: { data: Transaction }) {
         <CopyData text={data.signature} />
       </CardRow>
       <CardRow title="Fee">
-        <Stack direction={'row'}>
+        <Stack direction="row">
           <Typography>{data?.fee.solana}</Typography>
           <Typography>{data?.fee.gateway}</Typography>
         </Stack>

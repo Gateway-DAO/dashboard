@@ -43,7 +43,7 @@ export default function PDADetailPage({ pda, backHref }: Props) {
             height: '100%',
           }}
         >
-          <Stack direction={'column'}>{<StructuredDetail pda={pda} />}</Stack>
+          <Stack direction="column">{<StructuredDetail pda={pda} />}</Stack>
         </Stack>
       </Box>
       <Divider orientation="vertical" flexItem />

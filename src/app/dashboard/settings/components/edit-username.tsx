@@ -20,22 +20,18 @@ export default function EditUsername() {
 
   return (
     <>
-      <Stack
-        direction={'row'}
-        justifyContent={'space-between'}
-        alignItems={'center'}
-      >
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack>
-          <Typography variant="h5" color={'primary.dark'}>
+          <Typography variant="h5" color="primary.dark">
             {session?.user.username ?? <Skeleton variant="text" width={150} />}
           </Typography>
           <Stack
             component={Typography}
             variant="caption"
-            color={'primary.dark'}
-            direction={'row'}
+            color="primary.dark"
+            direction="row"
             columnGap={1}
-            alignItems={'center'}
+            alignItems="center"
             onClick={() => copy(session?.user.did)}
           >
             {session?.user.did ? (

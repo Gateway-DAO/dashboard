@@ -73,7 +73,7 @@ export default function ShareButtonFn({
   };
 
   return (
-    <Stack direction={'row'} columnGap={1}>
+    <Stack direction="row" columnGap={1}>
       <IconButton onClick={onShare} sx={{ backgroundColor: 'primary.100' }}>
         <LinkIcon color="primary" />
       </IconButton>

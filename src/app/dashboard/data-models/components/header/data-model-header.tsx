@@ -19,7 +19,7 @@ export function DataModelHeader({ children }: Props) {
     <>
       <TitleLayout
         titleId="data-model-title"
-        title={'Data Models'}
+        title="Data Models"
         subtitle={
           'These are the data model you have created and all on the network'
         }

@@ -41,7 +41,7 @@ export default function GTWMenuItem({
         component={Link}
         href={href}
         target={externalLink ? '_blank' : '_self'}
-        underline={'none'}
+        underline="none"
         {...props}
         sx={{
           display: 'flex',
@@ -74,7 +74,7 @@ export default function GTWMenuItem({
         ) : (
           Icon && <Icon sx={{ fontSize: 24 }} />
         )}
-        <Typography component={'span'} variant="subtitle1" sx={{ flexGrow: 1 }}>
+        <Typography component="span" variant="subtitle1" sx={{ flexGrow: 1 }}>
           {name}
         </Typography>
         {externalLink && <OpenInNew sx={{ ml: 2, mr: 1 }} />}

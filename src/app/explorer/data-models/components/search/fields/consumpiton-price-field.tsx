@@ -22,7 +22,7 @@ export default function ConsumpitonPriceField({
 
   return (
     <RangeField
-      label={'Consumption price'}
+      label="Consumption price"
       InputProps={{
         startAdornment: <InputAdornment position="start">$</InputAdornment>,
       }}

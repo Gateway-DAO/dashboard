@@ -20,7 +20,7 @@ export default function Sidebar({
 }: PropsWithChildren<Props>) {
   return (
     <Stack
-      component={'aside'}
+      component="aside"
       sx={(theme) => ({
         boxSizing: 'border-box',
         pt: 5,
