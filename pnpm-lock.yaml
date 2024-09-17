@@ -120,8 +120,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-easy-crop:
-        specifier: ^5.0.7
-        version: 5.0.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^5.0.8
+        version: 5.0.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-fast-marquee:
         specifier: ^1.6.5
         version: 1.6.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6051,8 +6051,8 @@ packages:
     peerDependencies:
       react: ^18.3.1
 
-  react-easy-crop@5.0.7:
-    resolution: {integrity: sha512-6d5IUt09M3HwdDGwrcjPVgfrOfYWAOku8sCTn/xU7b1vkEg+lExMLwW8UbR39L8ybQi0hJZTU57yprF9h5Q5Ig==}
+  react-easy-crop@5.0.8:
+    resolution: {integrity: sha512-KjulxXhR5iM7+ATN2sGCum/IyDxGw7xT0dFoGcqUP+ysaPU5Ka7gnrDa2tUHFHUoMNyPrVZ05QA+uvMgC5ym/g==}
     peerDependencies:
       react: '>=16.4.0'
       react-dom: '>=16.4.0'
@@ -12682,16 +12682,6 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-module-utils@2.8.1(@typescript-eslint/parser@7.17.0(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1):
-    dependencies:
-      debug: 3.2.7(supports-color@8.1.1)
-    optionalDependencies:
-      '@typescript-eslint/parser': 7.17.0(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.5.4)
-      eslint: 8.57.0(supports-color@8.1.1)
-      eslint-import-resolver-node: 0.3.9(supports-color@8.1.1)
-    transitivePeerDependencies:
-      - supports-color
-
   eslint-module-utils@2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-plugin-import@2.29.1)(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1))(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1):
     dependencies:
       debug: 3.2.7(supports-color@8.1.1)
@@ -12725,7 +12715,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.0(supports-color@8.1.1)
       eslint-import-resolver-node: 0.3.9(supports-color@8.1.1)
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.17.0(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-plugin-import@2.29.1)(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1))(eslint@8.57.0(supports-color@8.1.1))(supports-color@8.1.1)
       hasown: 2.0.2
       is-core-module: 2.15.0
       is-glob: 4.0.3
@@ -14950,7 +14940,7 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
-  react-easy-crop@5.0.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-easy-crop@5.0.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       normalize-wheel: 1.0.1
       react: 18.3.1
