@@ -24,7 +24,7 @@ export default function DownloadPDA({
   type,
   name,
 }: Required<Pick<PublicDataAsset, 'id' | 'type' | 'name'>>) {
-  const session = useSession();
+  const { data: session } = useSession();
   const { enqueueSnackbar } = useSnackbar();
 
   // this code will change once will have api
@@ -33,7 +33,7 @@ export default function DownloadPDA({
     mutationFn: async () => {
       if (!session) throw new Error('Session not found');
       const { data, error } = await api.GET('/data-assets/{id}/download', {
-        headers: getAuthHeader(session.data?.token),
+        headers: getAuthHeader(session?.token),
         params: {
           path: {
             id,
