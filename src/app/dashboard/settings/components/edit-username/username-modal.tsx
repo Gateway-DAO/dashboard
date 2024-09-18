@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import { LoadingButton } from '@/components/buttons/loading-button';
 import { usernameRegex } from '@/constants/username';
 import { useMe } from '@/hooks/use-me';
@@ -44,6 +46,7 @@ export default function UsernameModal({
     formState: { errors },
     handleSubmit,
     setError,
+    reset,
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -51,6 +54,10 @@ export default function UsernameModal({
       username: initialUsername,
     },
   });
+
+  useEffect(() => {
+    reset({ username: initialUsername });
+  }, [initialUsername]);
 
   const { mutateAsync, isPending } = clientApi.useMutation(
     'patch',
