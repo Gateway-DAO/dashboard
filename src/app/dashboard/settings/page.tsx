@@ -5,8 +5,7 @@ import TitleLayout from '@/components/title-layout/title-layout';
 import { Stack } from '@mui/material';
 
 import EditAvatar from './components/edit-avatar/edit-avatar';
-import { EditConnectedWallet } from './components/edit-connected-wallet';
-import EditUsername from './components/edit-username';
+import EditUsername from './components/edit-username/edit-username';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -30,6 +29,7 @@ export default async function SettingPage() {
           bgcolor="primary.light"
           padding={2}
           borderRadius={1.2}
+          gap={4}
         >
           <EditAvatar />
           <EditUsername />

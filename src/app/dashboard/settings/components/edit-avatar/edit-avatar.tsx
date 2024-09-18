@@ -7,6 +7,7 @@ import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
 import { useMe } from '@/hooks/use-me';
+import { handleError } from '@/utils/errors';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
@@ -63,14 +64,10 @@ export default function EditAvatar() {
       inputRef.current?.blur();
       await mutateAsync(blob);
       enqueueSnackbar('Profile picture updated');
-    } catch (e) {
-      let errorMessage = 'Failed to update profile picture';
-      if (e instanceof Error) {
-        errorMessage = e.message;
-      } else if (typeof e === 'string') {
-        errorMessage = e;
-      }
-      enqueueSnackbar(errorMessage, { variant: 'error' });
+    } catch (error) {
+      enqueueSnackbar(handleError(error, 'Failed to update profile picture'), {
+        variant: 'error',
+      });
     }
   };
 
@@ -82,14 +79,10 @@ export default function EditAvatar() {
         return;
       }
       setCropableImage(image);
-    } catch (e) {
-      let errorMessage = 'Failed to read file';
-      if (e instanceof Error) {
-        errorMessage = e.message;
-      } else if (typeof e === 'string') {
-        errorMessage = e;
-      }
-      enqueueSnackbar(errorMessage, { variant: 'error' });
+    } catch (error) {
+      enqueueSnackbar(handleError(error, 'Failed to update profile picture'), {
+        variant: 'error',
+      });
     }
   };
 
