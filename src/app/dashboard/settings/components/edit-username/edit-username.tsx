@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 import useCopy from '@/hooks/use-copy';
+import { useMe } from '@/hooks/use-me';
 import { limitCharsCentered } from '@/utils/string';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -14,16 +15,20 @@ import UsernameModal from './username-modal';
 export default function EditUsername() {
   const { data: session } = useSession();
 
-  const [isEditUsernameDialog, setEditUsernameDialog] =
-    useState<boolean>(false);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+
+  const onClose = () => setModalOpen(false);
+
   const copy = useCopy();
+
+  const { user, isPending } = useMe();
 
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack>
           <Typography variant="h5" color="primary.dark">
-            {session?.user.username ?? <Skeleton variant="text" width={150} />}
+            {user?.username ?? <Skeleton variant="text" width={150} />}
           </Typography>
           <Stack
             component={Typography}
@@ -42,19 +47,22 @@ export default function EditUsername() {
             <ContentCopyIcon fontSize="inherit" />
           </Stack>
         </Stack>
-        <Stack>
-          <Button
-            variant="outlined"
-            onClick={() => setEditUsernameDialog(true)}
-          >
-            Edit
-          </Button>
-        </Stack>
+        <Button
+          variant="outlined"
+          onClick={() => setModalOpen(true)}
+          disabled={isPending}
+        >
+          Edit
+        </Button>
       </Stack>
-      <UsernameModal
-        isOpen={isEditUsernameDialog}
-        setOpen={setEditUsernameDialog}
-      ></UsernameModal>
+      {!isPending && user && session?.token && (
+        <UsernameModal
+          isOpen={isModalOpen}
+          onClose={onClose}
+          initialUsername={user.username!}
+          token={session.token}
+        ></UsernameModal>
+      )}
     </>
   );
 }
