@@ -1,6 +1,6 @@
 'use client';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import useCopy from '@/hooks/use-copy';
 import { useMe } from '@/hooks/use-me';
@@ -61,6 +61,7 @@ export default function EditUsername() {
           onClose={onClose}
           initialUsername={user.username!}
           token={session.token}
+          lastUpdated={user.username_updated_at}
         ></UsernameModal>
       )}
     </>

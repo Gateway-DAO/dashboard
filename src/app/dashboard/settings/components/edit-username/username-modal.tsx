@@ -1,12 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useEffect, useMemo } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button';
 import { usernameRegex } from '@/constants/username';
 import { useMe } from '@/hooks/use-me';
 import { auth } from '@/locale/en/auth';
 import { clientApi, getAuthHeader } from '@/services/api/client';
+import { formatTimeUntilAvailable } from '@/utils/date';
 import { handleError } from '@/utils/errors';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -17,6 +19,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  DialogContentText,
   DialogTitle,
   InputAdornment,
   TextField,
@@ -27,6 +30,7 @@ type Props = {
   onClose: () => void;
   initialUsername: string;
   token: string;
+  lastUpdated?: string;
 };
 
 const formSchema = z.object({
@@ -40,7 +44,9 @@ export default function UsernameModal({
   onClose,
   initialUsername,
   token,
+  lastUpdated,
 }: Props) {
+  const { update } = useSession();
   const {
     register,
     formState: { errors },
@@ -68,15 +74,38 @@ export default function UsernameModal({
 
   const onSubmit = handleSubmit(async ({ username }) => {
     try {
-      await mutateAsync({ body: { username }, headers: getAuthHeader(token) });
-      await refetch();
+      const newUser = await mutateAsync({
+        body: { username },
+        headers: getAuthHeader(token),
+      });
       onClose();
+      await update(newUser);
+      await refetch();
     } catch (error) {
       setError('username', {
         message: handleError(error, 'Failed to update username'),
       });
     }
   });
+
+  const isAvailableToEdit = useMemo(() => {
+    if (!lastUpdated) return true;
+    const now = new Date();
+    const updatedAt = new Date(lastUpdated);
+    const diff = now.getTime() - updatedAt.getTime();
+    const diffInDays = diff / (1000 * 3600 * 24);
+    return diffInDays > 30;
+  }, [lastUpdated]);
+
+  const helperText = useMemo(() => {
+    if (!isAvailableToEdit) {
+      return `You can change your username ${formatTimeUntilAvailable(
+        lastUpdated,
+        30
+      )}`;
+    }
+    return errors?.username?.message ?? auth.rules.create_username;
+  }, [isAvailableToEdit, lastUpdated]);
 
   return (
     <Dialog
@@ -94,11 +123,14 @@ export default function UsernameModal({
           Edit username
         </DialogTitle>
         <DialogContent>
+          <DialogContentText sx={{ pb: 1 }}>
+            You can only change your username once every 30 days
+          </DialogContentText>
           <TextField
             id="username"
             label="Enter username"
             {...register('username')}
-            error={!!errors.username}
+            error={!!errors.username || !isAvailableToEdit}
             variant="outlined"
             margin="dense"
             fullWidth
@@ -107,7 +139,7 @@ export default function UsernameModal({
                 <InputAdornment position="start">@</InputAdornment>
               ),
             }}
-            helperText={errors?.username?.message ?? auth.rules.create_username}
+            helperText={helperText}
           />
         </DialogContent>
         <DialogActions
@@ -136,6 +168,7 @@ export default function UsernameModal({
               flexGrow: 1,
             }}
             id="confirm-dialog"
+            disabled={!isAvailableToEdit}
             isLoading={isPending}
           >
             Save
