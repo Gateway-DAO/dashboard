@@ -2,17 +2,30 @@
 
 import React, { ReactNode } from 'react';
 
-import { SnackbarProvider, closeSnackbar } from 'notistack';
+import {
+  MaterialDesignContent,
+  SnackbarProvider,
+  closeSnackbar,
+} from 'notistack';
 
 import CloseIcon from '@mui/icons-material/Close';
-import { useTheme } from '@mui/material';
+import { styled } from '@mui/material';
 
 type Props = {
   children: ReactNode;
 };
 
+const StyledMaterialDesignContent = styled(MaterialDesignContent)(() => ({
+  borderRadius: 2,
+  '&.notistack-MuiContent-default': {
+    backgroundColor: '#323232',
+  },
+  '&.notistack-MuiContent-error': {
+    backgroundColor: '#970C0C',
+  },
+}));
+
 const Notistack = ({ children }: Props) => {
-  const theme = useTheme();
   const notistackRef = React.useRef<SnackbarProvider>();
 
   return (
@@ -21,17 +34,18 @@ const Notistack = ({ children }: Props) => {
       variant="default"
       maxSnack={6}
       preventDuplicate={true}
+      Components={{
+        default: StyledMaterialDesignContent,
+        success: StyledMaterialDesignContent,
+        error: StyledMaterialDesignContent,
+        info: StyledMaterialDesignContent,
+        warning: StyledMaterialDesignContent,
+      }}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'center',
       }}
-      autoHideDuration={4000}
-      style={{
-        backgroundColor: '#323232',
-        color: theme.palette.common.white,
-        position: 'relative',
-        borderRadius: 2,
-      }}
+      autoHideDuration={8000}
       action={(snackbarId) => (
         <CloseIcon
           sx={{ cursor: 'pointer', width: 16, mr: 1 }}

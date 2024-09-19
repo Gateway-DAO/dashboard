@@ -20,7 +20,7 @@ export default function Sidebar({
 }: PropsWithChildren<Props>) {
   return (
     <Stack
-      component={'aside'}
+      component="aside"
       sx={{
         pt: 5,
         pb: 2,

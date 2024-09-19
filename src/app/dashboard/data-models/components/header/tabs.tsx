@@ -9,12 +9,12 @@ export function Tabs({ value }: { value?: string }) {
   return (
     <GTWTabs value={value}>
       <GTWTab
-        label={'Created'}
+        label="Created"
         href={routes.dashboard.myDataModels}
         value={routes.dashboard.myDataModels}
       />
       <GTWTab
-        label={'Network'}
+        label="Network"
         href={routes.dashboard.networkDataModels}
         value={routes.dashboard.networkDataModels}
       />

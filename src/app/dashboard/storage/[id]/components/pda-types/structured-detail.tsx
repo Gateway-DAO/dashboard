@@ -18,7 +18,7 @@ export default async function StructuredDetail({ pda }: Props) {
         variant="outlined"
         gap={19.75}
         sx={{ bgcolor: '#EDE3F6', height: '168px' }}
-        justifyContent={'end'}
+        justifyContent="end"
         p={2}
       >
         <Typography

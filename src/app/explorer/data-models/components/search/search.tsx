@@ -143,8 +143,8 @@ export default function DataModelsExplorerSearch() {
 
   return (
     <SearchSection
-      title={'All data models'}
-      emptyText={'No data models found'}
+      title="All data models"
+      emptyText="No data models found"
       errorMessage="Error on searching for data models"
       isEmpty={dataModelsQuery.isSuccess && dataModelsQuery.data.length === 0}
       isError={dataModelsQuery.isError}

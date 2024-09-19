@@ -8,7 +8,7 @@ type Props = {
 
 export default function Menu({ menuItems, ...props }: Props) {
   return (
-    <List component={'ul'} {...props}>
+    <List component="ul" {...props}>
       {menuItems}
     </List>
   );

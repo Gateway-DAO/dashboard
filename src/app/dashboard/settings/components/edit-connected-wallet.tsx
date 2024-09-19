@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 
 import ConfirmDialog from '@/components/modal/confirm-dialog/confirm-dialog';
@@ -16,14 +17,14 @@ export function EditConnectedWallet() {
       <Stack
         width={591}
         height="auto"
-        bgcolor={'white'}
+        bgcolor="white"
         padding={2}
         borderRadius={1.2}
       >
         <Stack
-          direction={'row'}
-          justifyContent={'space-between'}
-          alignItems={'center'}
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
           marginBottom={4}
         >
           <Stack>
