@@ -1,5 +1,5 @@
 'use client';
-import { PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
 
 import Logo from '@/components/logo/logo';
 import routes from '@/constants/routes';
@@ -20,7 +20,7 @@ const styles = {
   px: 2.5,
 };
 
-function MobileSidebar({ children }: PropsWithChildren) {
+function MobileSidebar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -51,7 +51,7 @@ function MobileSidebar({ children }: PropsWithChildren) {
         px={CONTAINER_PX}
         py={4}
       >
-        <Box sx={{ pl: 0.5 }}>
+        <Box>
           <Logo href={routes.dashboard.storage} />
         </Box>
         <IconButton
@@ -103,10 +103,10 @@ function MobileSidebar({ children }: PropsWithChildren) {
   );
 }
 
-export default function Sidebar({ children }: PropsWithChildren) {
+export default function Sidebar() {
   return (
     <>
-      <MobileSidebar>{children}</MobileSidebar>
+      <MobileSidebar />
       <Drawer
         variant="permanent"
         sx={{

@@ -1,17 +1,12 @@
 'use client';
 
-import { PropsWithChildren, ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
-import Logo from '@/components/logo/logo';
-import routes from '@/constants/routes';
 import { CONTAINER_PX } from '@/theme/config/style-tokens';
-import { isSandbox } from '@/utils/env';
 
-import { Box, Chip, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
-import AuthComponent from './auth-component/auth-component';
-import MenuContainer from './sidebar/menu-container';
 import Sidebar from './sidebar/sidebar';
 
 export default function DashboardLayout({ children }: PropsWithChildren) {
