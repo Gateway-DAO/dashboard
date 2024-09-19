@@ -1,9 +1,8 @@
 'use client';
 import { useSession } from 'next-auth/react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import useCopy from '@/hooks/use-copy';
-import { useMe } from '@/hooks/use-me';
 import { limitCharsCentered } from '@/utils/string';
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -21,14 +20,12 @@ export default function EditUsername() {
 
   const copy = useCopy();
 
-  const { user, isPending } = useMe();
-
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack>
           <Typography variant="h5" color="primary.dark">
-            {user?.username ?? <Skeleton variant="text" width={150} />}
+            {session?.user?.username ?? <Skeleton variant="text" width={150} />}
           </Typography>
           <Stack
             component={Typography}
@@ -50,18 +47,18 @@ export default function EditUsername() {
         <Button
           variant="outlined"
           onClick={() => setModalOpen(true)}
-          disabled={isPending}
+          disabled={!session}
         >
           Edit
         </Button>
       </Stack>
-      {!isPending && user && session?.token && (
+      {!!session?.user && !!session?.token && (
         <UsernameModal
           isOpen={isModalOpen}
           onClose={onClose}
-          initialUsername={user.username!}
+          initialUsername={session.user.username!}
           token={session.token}
-          lastUpdated={user.username_updated_at}
+          lastUpdated={session.user.username_updated_at}
         ></UsernameModal>
       )}
     </>

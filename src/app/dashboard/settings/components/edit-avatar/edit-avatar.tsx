@@ -6,7 +6,6 @@ import CropImage from '@/app/dashboard/settings/components/edit-avatar/crop-imag
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
 import ModalHeader from '@/components/modal/modal-header/modal-header';
 import ModalRight from '@/components/modal/modal-right/modal-right';
-import { useMe } from '@/hooks/use-me';
 import { handleError } from '@/utils/errors';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
@@ -27,8 +26,6 @@ export default function EditAvatar() {
   const { enqueueSnackbar } = useSnackbar();
 
   const onCloseModal = () => setCropableImage(undefined);
-
-  const me = useMe();
 
   const { mutateAsync, isPending } = useMutation({
     mutationKey: [session?.user?.did],
@@ -52,7 +49,6 @@ export default function EditAvatar() {
       });
 
       const account = await saveProfilePicture();
-      await me.refetch();
 
       return update(account);
     },
@@ -157,7 +153,7 @@ export default function EditAvatar() {
           )}
           <GTWAvatar
             size={90}
-            src={me?.data?.profile_picture}
+            src={session?.user?.profile_picture}
             name={session?.user?.did}
             alt="Profile Picture"
           />

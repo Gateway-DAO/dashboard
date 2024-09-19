@@ -5,7 +5,6 @@ import { useEffect, useMemo } from 'react';
 
 import { LoadingButton } from '@/components/buttons/loading-button';
 import { usernameRegex } from '@/constants/username';
-import { useMe } from '@/hooks/use-me';
 import { auth } from '@/locale/en/auth';
 import { clientApi, getAuthHeader } from '@/services/api/client';
 import { formatTimeUntilAvailable } from '@/utils/date';
@@ -70,8 +69,6 @@ export default function UsernameModal({
     '/accounts/me'
   );
 
-  const { refetch } = useMe();
-
   const onSubmit = handleSubmit(async ({ username }) => {
     try {
       const newUser = await mutateAsync({
@@ -80,7 +77,6 @@ export default function UsernameModal({
       });
       onClose();
       await update(newUser);
-      await refetch();
     } catch (error) {
       setError('username', {
         message: handleError(error, 'Failed to update username'),

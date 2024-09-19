@@ -1,6 +1,7 @@
 'use client';
 
-import { useMe } from '@/hooks/use-me';
+import { useSession } from 'next-auth/react';
+
 import { useMenu } from '@/hooks/use-menu';
 import { limitCharsOffset } from '@/utils/string';
 
@@ -17,11 +18,11 @@ type Props = {
 };
 
 export default function AuthComponent({ id, controlId }: Props) {
-  const { user } = useMe();
+  const { data: session } = useSession();
 
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
 
-  if (!user) {
+  if (!session?.user) {
     return <AuthComponentSkeleton />;
   }
 
@@ -53,10 +54,10 @@ export default function AuthComponent({ id, controlId }: Props) {
         onClick={onOpen}
       >
         <UserOrgInfo
-          id={user.did}
-          image={user.profile_picture}
-          name={user.username}
-          gatewayId={limitCharsOffset(user.did!, 10, 5)!}
+          id={session.user.did}
+          image={session.user.profile_picture}
+          name={session.user.username}
+          gatewayId={limitCharsOffset(session.user.did!, 10, 5)!}
         />
 
         <MoreHorizOutlined
