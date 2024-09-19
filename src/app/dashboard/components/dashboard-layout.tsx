@@ -8,6 +8,7 @@ import { Box } from '@mui/material';
 import { Stack } from '@mui/system';
 
 import Sidebar from './sidebar/sidebar';
+import { drawerWidth } from './sidebar/styles';
 
 export default function DashboardLayout({ children }: PropsWithChildren) {
   return (
@@ -34,9 +35,9 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
           },
           ml: {
             xs: 0,
-            lg: '300px',
+            lg: `${drawerWidth}px`,
           },
-          width: { xs: '100%', lg: 'calc(100% - 300px)' },
+          width: { xs: '100%', lg: `calc(100% - ${drawerWidth}px)` },
           overflow: 'hidden',
         }}
       >

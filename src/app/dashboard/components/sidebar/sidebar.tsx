@@ -11,8 +11,7 @@ import { GridMenuIcon } from '@mui/x-data-grid';
 
 import AuthComponent from '../auth-component/auth-component';
 import MenuContainer from './menu-container';
-const drawerWidth = 300;
-
+import { drawerWidth } from './styles';
 const styles = {
   background: '#F6F4FA',
   pt: 5,
