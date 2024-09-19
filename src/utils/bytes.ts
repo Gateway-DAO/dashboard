@@ -1,4 +1,4 @@
-const FORMATS = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB'] as const;
+const FORMATS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'] as const;
 
 export const formatBytes = (bytes: number) => {
   let i = 0;

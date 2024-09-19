@@ -8,6 +8,7 @@ import ServerPaginatedDataGrid from '@/components/data-grid/server-paginated-dat
 import routes from '@/constants/routes';
 import { api, getAuthHeader } from '@/services/api/api';
 import { PaginatedResponse, PublicDataAsset } from '@/services/api/models';
+import { formatBytes } from '@/utils/bytes';
 import { useQuery } from '@tanstack/react-query';
 
 import { Paper, Skeleton, Stack, Typography } from '@mui/material';
@@ -67,6 +68,14 @@ export default function StorageList() {
     return totalAssetsRef.current;
   }, [data?.meta?.total_items]);
 
+  const storageSize = useMemo(() => {
+    if (!session?.user) {
+      return undefined;
+    }
+
+    return formatBytes(session.user.storage_size ?? 0);
+  }, [session?.user?.storage_size]);
+
   return (
     <>
       <Stack gap={2} mt={2} direction="row">
@@ -84,7 +93,20 @@ export default function StorageList() {
             {totalAssets ?? <Skeleton variant="text" width={64} />}
           </Typography>
         </Stack>
-        <Box sx={{ flex: 1 }} />
+        <Stack
+          component={Paper}
+          elevation={0}
+          justifyContent="space-between"
+          gap={1}
+          sx={{ p: 2, backgroundColor: 'primary.100', flex: 1 }}
+        >
+          <Typography variant="caption" color="primary.dark">
+            Total storage
+          </Typography>
+          <Typography variant="h5" color="primary.dark">
+            {storageSize ?? <Skeleton variant="text" width={64} />}
+          </Typography>
+        </Stack>
       </Stack>
       {isSuccess && !data?.data?.length ? (
         <Empty />
