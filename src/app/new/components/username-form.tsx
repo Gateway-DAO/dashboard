@@ -7,9 +7,11 @@ import { LoadingButton } from '@/components/buttons/loading-button';
 import routes from '@/constants/routes';
 import { usernameRegex } from '@/constants/username';
 import { auth } from '@/locale/en/auth';
+import { handleError } from '@/utils/errors';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useMutation } from '@tanstack/react-query';
+import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 import { useAccount } from 'wagmi';
 import { z } from 'zod';
@@ -33,11 +35,13 @@ type FormSchema = z.infer<typeof formSchema>;
 export default function UsernameForm({ message, signature }: Props) {
   const { address: evmAddress } = useAccount();
   const { publicKey } = useWallet();
+  const { enqueueSnackbar } = useSnackbar();
 
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
+    setError,
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
@@ -47,14 +51,23 @@ export default function UsernameForm({ message, signature }: Props) {
 
   const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationKey: ['new-user', wallet_address, message, signature],
-    mutationFn: async ({ username }: FormSchema) =>
-      signIn('new-user', {
+    mutationFn: async ({ username }: FormSchema) => {
+      const res = await signIn('new-user', {
         redirect: false,
         wallet_address,
         signature,
         message,
         username,
-      }),
+      });
+
+      if (!res) {
+        throw new Error('Failed to create user');
+      }
+      if (res.error) {
+        throw new Error(res.error);
+      }
+      return res;
+    },
   });
 
   const onSubmit = useCallback(
@@ -65,7 +78,14 @@ export default function UsernameForm({ message, signature }: Props) {
 
         console.log(res);
       } catch (error) {
-        console.error(error);
+        const message = handleError(error, 'Failed to create user');
+
+        if (message.includes('username')) {
+          return setError('username', {
+            message,
+          });
+        }
+        return enqueueSnackbar(message, { variant: 'error' });
       }
     },
     [wallet_address]
@@ -96,7 +116,7 @@ export default function UsernameForm({ message, signature }: Props) {
         label="Enter username"
         {...register('username')}
         error={!!errors.username}
-        helperText={auth.rules.create_username}
+        helperText={errors?.username?.message ?? auth.rules.create_username}
         InputProps={{
           startAdornment: <InputAdornment position="start">@</InputAdornment>,
         }}
