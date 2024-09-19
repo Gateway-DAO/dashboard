@@ -8,10 +8,10 @@ import { LogoutOutlined, SettingsOutlined } from '@mui/icons-material';
 import { Divider, ListItemIcon, ListItemText, MenuItem } from '@mui/material';
 
 type Props = {
-  onClose: () => void;
+  onClick: () => void;
 };
 
-export default function AuthDropdown({ onClose }: Props) {
+export default function AuthDropdown({ onClick }: Props) {
   const onSignOut = async () => {
     await signOut({
       callbackUrl: routes.home,
@@ -23,7 +23,7 @@ export default function AuthDropdown({ onClose }: Props) {
       <MenuItem
         component={Link}
         href={routes.dashboard.settings}
-        onClick={onClose}
+        onClick={onClick}
       >
         <ListItemIcon>
           <SettingsOutlined />

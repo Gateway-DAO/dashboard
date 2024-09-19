@@ -1,17 +1,27 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import { PropsWithChildren, ReactNode } from 'react';
 
+import ExpirementOutlined from '@/components/icons/expirement-outlined';
+import externalLinks from '@/constants/externalLinks';
+import { currentEnv } from '@/utils/env';
+
+import { List, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
+import GTWMenuItem from '../menu-item';
+import { dashboardDevelopersMenuItems } from './dashboard-developer-menu-items';
+import dashboardUserMenuItems from './dashboard-menu-items';
+
 type Props = {
-  menuItems: ReactNode;
-  secondMenuItems?: ReactNode;
+  onCloseSidebar?: () => void;
 };
 
 export default function MenuContainer({
-  menuItems,
-  secondMenuItems,
+  onCloseSidebar,
 }: PropsWithChildren<Props>) {
+  const activePath = usePathname();
+
   return (
     <Stack
       sx={{
@@ -36,29 +46,79 @@ export default function MenuContainer({
     >
       <Stack
         sx={{
-          mt: 5,
-          display: { xs: 'none', lg: 'block' },
+          mt: {
+            xs: 0,
+            lg: 5,
+          },
           '@media screen and (max-height: 900px) and (min-width: 1200px)': {
             mt: 2,
           },
         }}
       >
-        {menuItems}
-      </Stack>
-      {secondMenuItems && (
-        <Stack
-          sx={{
-            mt: 5,
-            display: { xs: 'none', lg: 'block' },
-            flexGrow: 1,
-            '@media screen and (max-height: 900px) and (min-width: 700px)': {
-              mt: 2,
-            },
-          }}
+        <Typography variant="caption" sx={{ display: 'block', pl: 1 }}>
+          Manage Data
+        </Typography>
+        <List
+          component="ul"
+          sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}
         >
-          {secondMenuItems}
-        </Stack>
-      )}
+          {dashboardUserMenuItems.map(({ activeHrefs, ...item }) => (
+            <GTWMenuItem
+              key={item.name}
+              active={activeHrefs.some((path) => activePath.includes(path))}
+              {...item}
+              onClick={onCloseSidebar}
+            />
+          ))}
+          {currentEnv === 'production' && (
+            <GTWMenuItem
+              name="Sandbox"
+              href={`${externalLinks.gateway_sandbox}${activePath}`}
+              icon={ExpirementOutlined}
+              externalLink={true}
+              onClick={onCloseSidebar}
+            />
+          )}
+        </List>
+      </Stack>
+      <Typography variant="caption" sx={{ display: 'block', pl: 1 }}>
+        Developers
+      </Typography>
+      <List
+        component="ul"
+        sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}
+      >
+        {dashboardDevelopersMenuItems.map(
+          ({ activeHrefs, ...item }, index) =>
+            index <= 1 && (
+              <GTWMenuItem
+                key={item.name}
+                active={activeHrefs.some((path) => activePath.includes(path))}
+                {...item}
+                onClick={onCloseSidebar}
+              />
+            )
+        )}
+      </List>
+      <Typography variant="caption" sx={{ mt: 2, display: 'block', pl: 1 }}>
+        Other Tools
+      </Typography>
+      <List
+        component="ul"
+        sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}
+      >
+        {dashboardDevelopersMenuItems.map(
+          ({ activeHrefs, ...item }, index) =>
+            index === 2 && (
+              <GTWMenuItem
+                key={item.name}
+                active={activeHrefs.some((path) => activePath.includes(path))}
+                {...item}
+                onClick={onCloseSidebar}
+              />
+            )
+        )}
+      </List>
     </Stack>
   );
 }

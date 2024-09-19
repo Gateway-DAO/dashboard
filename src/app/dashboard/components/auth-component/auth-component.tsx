@@ -15,9 +15,14 @@ import UserOrgInfo from './user-org-info';
 type Props = {
   id: string;
   controlId: string;
+  onCloseSidebar?: () => void;
 };
 
-export default function AuthComponent({ id, controlId }: Props) {
+export default function AuthComponent({
+  id,
+  controlId,
+  onCloseSidebar,
+}: Props) {
   const { data: session } = useSession();
 
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
@@ -25,6 +30,11 @@ export default function AuthComponent({ id, controlId }: Props) {
   if (!session?.user) {
     return <AuthComponentSkeleton />;
   }
+
+  const onClick = () => {
+    onClose();
+    onCloseSidebar?.();
+  };
 
   return (
     <>
@@ -34,22 +44,12 @@ export default function AuthComponent({ id, controlId }: Props) {
         aria-haspopup="true"
         aria-expanded={isOpen ? 'true' : undefined}
         sx={(theme) => ({
-          backgroundColor: {
-            xs: 'transparent',
-            lg: 'primary.100',
-          },
+          backgroundColor: 'primary.100',
           borderRadius: theme.shape.borderRadius / 16, //Strange issue with MUI
           justifyContent: 'space-between',
           p: 2,
-          mr: {
-            xs: -2,
-            lg: 0,
-          },
           textAlign: 'left',
-          flexDirection: {
-            xs: 'row-reverse',
-            lg: 'row',
-          },
+          flexDirection: 'row',
         })}
         onClick={onOpen}
       >
@@ -63,30 +63,6 @@ export default function AuthComponent({ id, controlId }: Props) {
         <MoreHorizOutlined
           sx={{
             color: 'action.active',
-            backgroundColor: {
-              xs: 'white',
-              lg: 'transparent',
-            },
-            borderRadius: {
-              xs: '50%',
-              lg: 0,
-            },
-            borderColor: {
-              xs: 'divider',
-              lg: 'transparent',
-            },
-            borderWidth: {
-              xs: 1,
-              lg: 0,
-            },
-            borderStyle: {
-              xs: 'solid',
-              lg: 'none',
-            },
-            marginRight: {
-              xs: -1.5,
-              lg: 0,
-            },
             zIndex: 2,
           }}
         />
@@ -112,7 +88,7 @@ export default function AuthComponent({ id, controlId }: Props) {
           },
         }}
       >
-        <AuthDropdown onClose={onClose} />
+        <AuthDropdown onClick={onClick} />
       </Menu>
     </>
   );

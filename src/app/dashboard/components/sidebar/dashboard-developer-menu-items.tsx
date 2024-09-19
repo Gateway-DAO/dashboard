@@ -7,7 +7,7 @@ import {
   MenuBookOutlined,
 } from '@mui/icons-material';
 
-import { GTWMenuItemSettings } from './menu-item';
+import { GTWMenuItemSettings } from '../menu-item';
 
 export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
   {

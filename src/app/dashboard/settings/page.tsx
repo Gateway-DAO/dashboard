@@ -24,7 +24,7 @@ export default async function SettingPage() {
 
       <Stack spacing={3} alignItems="stretch">
         <Stack
-          width={591}
+          maxWidth={590}
           height="auto"
           bgcolor="primary.light"
           padding={2}
