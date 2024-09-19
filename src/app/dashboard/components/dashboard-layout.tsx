@@ -10,6 +10,8 @@ import { isSandbox } from '@/utils/env';
 import { Box, Chip, Tooltip } from '@mui/material';
 import { Stack } from '@mui/system';
 
+import AuthComponent from './auth-component/auth-component';
+import MenuContainer from './sidebar/menu-container';
 import Sidebar from './sidebar/sidebar';
 
 type Props = {
@@ -31,7 +33,7 @@ export default function DashboardLayout({
       alignItems="stretch"
       sx={{ minHeight: '100%' }}
     >
-      <Sidebar menuItems={menuItems} secondMenuItems={secondMenuItems}>
+      <Sidebar>
         <Box
           sx={{
             display: 'flex',
@@ -57,6 +59,19 @@ export default function DashboardLayout({
             </Tooltip>
           )}
         </Box>
+        <Stack
+          justifyContent="space-between"
+          flexDirection="column"
+          sx={{
+            height: 'calc(100% - 40px)',
+          }}
+        >
+          <MenuContainer
+            menuItems={menuItems}
+            secondMenuItems={secondMenuItems}
+          />
+          <AuthComponent id="profile-button" controlId="profile-menu" />
+        </Stack>
       </Sidebar>
       <Box
         width="100%"
