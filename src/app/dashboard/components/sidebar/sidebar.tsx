@@ -8,6 +8,9 @@ import { CONTAINER_PX } from '@/theme/config/style-tokens';
 import { Box, Drawer, IconButton } from '@mui/material';
 import { Stack } from '@mui/system';
 import { GridMenuIcon } from '@mui/x-data-grid';
+
+import AuthComponent from '../auth-component/auth-component';
+import MenuContainer from './menu-container';
 const drawerWidth = 300;
 
 const styles = {
@@ -17,7 +20,7 @@ const styles = {
   px: 2.5,
 };
 
-export default function Sidebar({ children }: PropsWithChildren) {
+function MobileSidebar({ children }: PropsWithChildren) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -35,6 +38,7 @@ export default function Sidebar({ children }: PropsWithChildren) {
       setMobileOpen(!mobileOpen);
     }
   };
+
   return (
     <>
       <Stack
@@ -43,9 +47,13 @@ export default function Sidebar({ children }: PropsWithChildren) {
           lg: 'none',
         }}
         direction="row"
+        justifyContent="space-between"
         px={CONTAINER_PX}
         py={4}
       >
+        <Box sx={{ pl: 0.5 }}>
+          <Logo href={routes.dashboard.storage} />
+        </Box>
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -54,9 +62,6 @@ export default function Sidebar({ children }: PropsWithChildren) {
         >
           <GridMenuIcon />
         </IconButton>
-        <Box sx={{ pl: 0.5 }}>
-          <Logo href={routes.dashboard.storage} />
-        </Box>
       </Stack>
       <Drawer
         variant="temporary"
@@ -66,6 +71,7 @@ export default function Sidebar({ children }: PropsWithChildren) {
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
+        anchor="right"
         sx={{
           display: { xs: 'block', lg: 'none' },
           '& .MuiBackdrop-root': {
@@ -78,8 +84,29 @@ export default function Sidebar({ children }: PropsWithChildren) {
           },
         }}
       >
-        {children}
+        <Stack
+          justifyContent="space-between"
+          flexDirection="column"
+          sx={{
+            height: 'calc(100% - 40px)',
+          }}
+        >
+          <MenuContainer onCloseSidebar={handleDrawerClose} />
+          <AuthComponent
+            id="profile-button"
+            controlId="profile-menu"
+            onCloseSidebar={handleDrawerClose}
+          />
+        </Stack>
       </Drawer>
+    </>
+  );
+}
+
+export default function Sidebar({ children }: PropsWithChildren) {
+  return (
+    <>
+      <MobileSidebar>{children}</MobileSidebar>
       <Drawer
         variant="permanent"
         sx={{
@@ -92,30 +119,20 @@ export default function Sidebar({ children }: PropsWithChildren) {
         }}
         open
       >
-        {children}
+        <Box sx={{ pl: 0.5 }}>
+          <Logo href={routes.dashboard.storage} />
+        </Box>
+        <Stack
+          justifyContent="space-between"
+          flexDirection="column"
+          sx={{
+            height: 'calc(100% - 40px)',
+          }}
+        >
+          <MenuContainer />
+          <AuthComponent id="profile-button" controlId="profile-menu" />
+        </Stack>
       </Drawer>
-      {/* <Stack
-        component="aside"
-        sx={{
-          pt: 5,
-          pb: 2,
-          borderRight: '1px solid',
-          borderColor: 'divider',
-          maxWidth: drawerWidth,
-          width: '100%',
-          px: 2.5,
-          position: 'fixed',
-          height: '100%',
-          boxSizing: 'border-box',
-
-          display: {
-            xs: isOpen ? 'flex' : 'none',
-            lg: 'flex',
-          },
-        }}
-      >
-        {children}
-      </Stack> */}
     </>
   );
 }

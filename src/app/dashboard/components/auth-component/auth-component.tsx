@@ -15,9 +15,14 @@ import UserOrgInfo from './user-org-info';
 type Props = {
   id: string;
   controlId: string;
+  onCloseSidebar?: () => void;
 };
 
-export default function AuthComponent({ id, controlId }: Props) {
+export default function AuthComponent({
+  id,
+  controlId,
+  onCloseSidebar,
+}: Props) {
   const { data: session } = useSession();
 
   const { isOpen, onOpen, onClose, element: anchorEl } = useMenu();
@@ -25,6 +30,11 @@ export default function AuthComponent({ id, controlId }: Props) {
   if (!session?.user) {
     return <AuthComponentSkeleton />;
   }
+
+  const onClick = () => {
+    onClose();
+    onCloseSidebar?.();
+  };
 
   return (
     <>
@@ -78,7 +88,7 @@ export default function AuthComponent({ id, controlId }: Props) {
           },
         }}
       >
-        <AuthDropdown onClose={onClose} />
+        <AuthDropdown onClick={onClick} />
       </Menu>
     </>
   );
