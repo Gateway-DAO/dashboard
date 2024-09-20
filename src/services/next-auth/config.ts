@@ -20,10 +20,16 @@ export const nextAuthConfig: NextAuthOptions = {
         token.token = (user as any).token;
       }
       if (trigger === 'update') {
-        token.user = {
-          ...token.user,
-          ...session,
-        };
+        if (session.user) {
+          token.user = {
+            ...token.user,
+            ...session.user,
+          };
+        }
+
+        if (process.env.NODE_ENV === 'development' && session.token) {
+          token.token = session.token;
+        }
       }
       return token;
     },

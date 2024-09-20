@@ -50,7 +50,7 @@ export default function EditAvatar() {
 
       const account = await saveProfilePicture();
 
-      return update(account);
+      return update({ user: account });
     },
   });
 

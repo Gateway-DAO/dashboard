@@ -76,7 +76,7 @@ export default function UsernameModal({
         headers: getAuthHeader(token),
       });
       onClose();
-      await update(newUser);
+      await update({ user: newUser });
     } catch (error) {
       setError('username', {
         message: handleError(error, 'Failed to update username'),

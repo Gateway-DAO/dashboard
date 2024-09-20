@@ -1,5 +1,3 @@
-const routes = require('./src/constants/routes');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -67,6 +65,17 @@ const nextConfig = {
     config.externals.push('pino-pretty', 'lokijs', 'encoding');
     return config;
   },
+  ...(process.env.NODE_ENV !== 'development' && {
+    redirects: async () => {
+      return [
+        {
+          source: '/dev',
+          destination: '/',
+          permanent: true,
+        },
+      ];
+    },
+  }),
 };
 
 module.exports = nextConfig;
