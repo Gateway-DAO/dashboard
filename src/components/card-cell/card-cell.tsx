@@ -56,6 +56,7 @@ export default function CardCell({
   disabled = false,
   pre = true,
   sx,
+  display,
   contentProps,
 }: Props) {
   return (
@@ -65,6 +66,7 @@ export default function CardCell({
       py={py}
       px={px}
       sx={sx}
+      display={display}
     >
       <Typography variant="caption" color="text.secondary">
         {label}
