@@ -29,6 +29,9 @@ export const defaultGridCustomization: GatewaySxProps = {
   '& .MuiDataGrid-columnHeaders, & .MuiDataGrid-footerContainer': {
     border: 'none',
   },
+  '& .MuiDataGrid-topContainer:after': {
+    display: 'none',
+  },
   '.MuiDataGrid-cell': {
     alignContent: 'center',
   },
