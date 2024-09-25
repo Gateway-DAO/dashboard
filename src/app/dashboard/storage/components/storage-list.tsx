@@ -36,7 +36,7 @@ export default function StorageList() {
       paginationModel.page,
     ],
     queryFn: async () => {
-      const { data, error } = await api.GET('/data-assets/me', {
+      const { data, error } = await api.GET('/data-assets/created', {
         headers: getAuthHeader(session?.token),
         params: {
           query: {
