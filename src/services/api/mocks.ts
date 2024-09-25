@@ -13,6 +13,8 @@ export const mockAccount: Account = {
   username: 'KboozEVM',
   did: 'did:gatewayid:gateway:b1038ceb61a87874a38eed3ecad27de1affbd34b574711485297457f99be8772',
   wallet_address: '0x7158d4BAD3bd698d87C64BDC8E055C8CA1A043aD',
+  storage_size: 1000,
+  username_updated_at: '2024-08-27T21:23:45.7145Z',
 };
 
 export const mockDataModelsMetadata: DataModelsMetadataType = {
@@ -57,40 +59,40 @@ const mockDataModel: DataModel = {
 
 export const mockDataModels: DataModel[] = [
   {
+    ...mockDataModel,
     id: 87818337408516096,
     created_at: '2024-08-28T16:56:48.069732-03:00',
     updated_at: '2024-08-28T16:56:48.069732-03:00',
-    ...mockDataModel,
   },
   {
+    ...mockDataModel,
     id: 87818361215385600,
     created_at: '2024-08-28T16:57:02.261564-03:00',
     updated_at: '2024-08-28T16:57:02.261564-03:00',
-    ...mockDataModel,
   },
   {
+    ...mockDataModel,
     id: 87818362238795776,
     created_at: '2024-08-28T16:57:02.862531-03:00',
     updated_at: '2024-08-28T16:57:02.862531-03:00',
-    ...mockDataModel,
   },
   {
+    ...mockDataModel,
     id: 87818363564195840,
     created_at: '2024-08-28T16:57:03.653842-03:00',
     updated_at: '2024-08-28T16:57:03.653842-03:00',
-    ...mockDataModel,
   },
   {
+    ...mockDataModel,
     id: 87818364721823744,
     created_at: '2024-08-28T16:57:04.348974-03:00',
     updated_at: '2024-08-28T16:57:04.348974-03:00',
-    ...mockDataModel,
   },
   {
+    ...mockDataModel,
     id: 87818365946560512,
     created_at: '2024-08-28T16:57:05.075541-03:00',
     updated_at: '2024-08-28T16:57:05.075541-03:00',
-    ...mockDataModel,
   },
 ];
 
@@ -108,6 +110,14 @@ export const mockPublicDataAsset: PublicDataAsset = {
   id: 87818365946560512,
   size: 1000,
   transaction_id: '',
+  acl: [
+    {
+      address: mockAccount.did,
+      solana_address: mockAccount.wallet_address,
+      data_asset_id: 87818365946560512,
+      roles: ['write'],
+    },
+  ],
 };
 
 export const mockPublicDataAssets: PublicDataAsset[] = [
