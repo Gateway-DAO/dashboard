@@ -14,21 +14,25 @@ declare module 'next-auth' {
   interface AdapterUser {
     user: Account;
     token: string;
+    wallet_address: string;
   }
 
   interface Session {
     user: Account;
     token: string;
+    wallet_address: string;
   }
 
   interface JWT {
     user: Account;
     token: string;
+    wallet_address: string;
   }
 }
 declare module 'next-auth/jwt' {
   interface JWT {
     user: Account;
     token: string;
+    wallet_address: string;
   }
 }

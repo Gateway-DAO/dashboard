@@ -7,6 +7,23 @@ import getMe from './libs/get-me';
 import newUserCredential from './providers/new-user';
 import walletCredentials from './providers/wallet';
 
+const parseToken = (
+  token: string
+): {
+  did: string;
+  wallet_address: string;
+  exp: string;
+} => {
+  const splittedToken = token.split('.')?.[1];
+  if (!splittedToken) {
+    throw new Error('Invalid token');
+  }
+  const decodedJwt = JSON.parse(
+    Buffer.from(token.split('.')?.[1] ?? '', 'base64').toString()
+  );
+  return decodedJwt;
+};
+
 export const nextAuthConfig: NextAuthOptions = {
   providers: [walletCredentials, newUserCredential],
   session: {
@@ -18,6 +35,8 @@ export const nextAuthConfig: NextAuthOptions = {
       if (user) {
         token.user = user as Account;
         token.token = (user as any).token;
+        const decodedJwt = parseToken(token.token);
+        token.wallet_address = decodedJwt.wallet_address;
       }
       if (trigger === 'update') {
         if (session.user) {
@@ -34,9 +53,9 @@ export const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      session.token = token.token;
       const user = await getMe(token.token);
       session.user = user;
+      session.wallet_address = token.wallet_address;
       return session;
     },
   },
