@@ -107,13 +107,13 @@ export default function UsernameModal({
     <Dialog
       open={isOpen}
       onClose={onClose}
-      aria-labelledby="confirm-dialog"
+      aria-labelledby="edit-username-modal"
       maxWidth="sm"
       fullWidth
     >
       <form onSubmit={onSubmit}>
         <DialogTitle
-          id="confirm-dialog-title"
+          id="edit-username-modal-title"
           sx={{ minWidth: { xs: 200, md: 400 } }}
         >
           Edit username
@@ -163,7 +163,7 @@ export default function UsernameModal({
             sx={{
               flexGrow: 1,
             }}
-            id="confirm-dialog"
+            id="edit-username-modal"
             disabled={!isAvailableToEdit}
             isLoading={isPending}
           >
