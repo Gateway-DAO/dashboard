@@ -5,6 +5,7 @@ import TitleLayout from '@/components/title-layout/title-layout';
 import { Stack } from '@mui/material';
 
 import EditAvatar from './components/edit-avatar/edit-avatar';
+import { EditConnectedWallet } from './components/edit-connected-wallet/edit-connected-wallet';
 import EditUsername from './components/edit-username/edit-username';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,7 +23,7 @@ export default async function SettingPage() {
         subtitle="Edit your Gateway ID and manage your connected wallet"
       />
 
-      <Stack spacing={3} alignItems="stretch">
+      <Stack gap={3} alignItems="stretch">
         <Stack
           maxWidth={590}
           height="auto"
@@ -34,6 +35,7 @@ export default async function SettingPage() {
           <EditAvatar />
           <EditUsername />
         </Stack>
+        <EditConnectedWallet />
       </Stack>
     </>
   );

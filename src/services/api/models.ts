@@ -21,6 +21,8 @@ export type PublicACL = components['schemas']['model.PublicACL'];
 
 export type PublicDataAssetType = 'Structured Data' | `${string}/${string}`;
 
+export type WalletAddress = components['schemas']['model.WalletAddress'];
+
 // COnvert to enum
 
 export enum PublicDataAssetTypeEnum {
