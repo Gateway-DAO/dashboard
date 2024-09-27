@@ -5,7 +5,7 @@ import documentationRoutes from '@/constants/documentationRoutes';
 import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
 import HeroImage from 'public/images/hero.png';
 
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
 import HeroClientsSlider from './clients-slider';
 
@@ -73,26 +73,52 @@ export default function Hero() {
           Gateway is an integrated protocol to encrypt, store, manage, and
           compute private data.
         </Typography>
-        <Button
-          component={Link}
-          href={documentationRoutes.home}
-          target="_blank"
-          variant="contained"
-          color="white"
-          size="large"
+        <Stack
+          direction={{
+            xs: 'column',
+            sm: 'row',
+          }}
+          gap={2}
           sx={{
-            width: {
-              xs: '100%',
-              sm: 'auto',
-            },
             mb: {
               xs: 5,
               sm: 9,
             },
           }}
         >
-          Read Documentation
-        </Button>
+          <Button
+            component={Link}
+            href={documentationRoutes.home}
+            target="_blank"
+            variant="contained"
+            color="white"
+            size="large"
+            sx={{
+              width: {
+                xs: '100%',
+                sm: 'auto',
+              },
+            }}
+          >
+            Read Documentation
+          </Button>
+          <Button
+            component={Link}
+            href="/blog/introducing-gateway-the-decentralized-private-computer"
+            target="_blank"
+            variant="outlined"
+            color="white"
+            size="large"
+            sx={{
+              width: {
+                xs: '100%',
+                sm: 'auto',
+              },
+            }}
+          >
+            Read Vision Paper
+          </Button>
+        </Stack>
         <Typography
           variant="body1"
           sx={{
