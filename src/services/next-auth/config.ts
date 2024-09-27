@@ -55,6 +55,7 @@ export const nextAuthConfig: NextAuthOptions = {
     async session({ session, token }) {
       const user = await getMe(token.token);
       session.user = user;
+      session.token = token.token;
       session.wallet_address = token.wallet_address;
       return session;
     },
