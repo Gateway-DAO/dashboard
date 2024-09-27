@@ -70,6 +70,7 @@ export default function UsernameModal({
   );
 
   const onSubmit = handleSubmit(async ({ username }) => {
+    if (isPending) return;
     try {
       const newUser = await mutateAsync({
         body: { username },

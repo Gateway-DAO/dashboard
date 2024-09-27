@@ -70,26 +70,21 @@ export default function UsernameForm({ message, signature }: Props) {
     },
   });
 
-  const onSubmit = useCallback(
-    async (data: FormSchema) => {
-      if (!wallet_address) return;
-      try {
-        const res = await mutateAsync(data);
+  const onSubmit = async (data: FormSchema) => {
+    if (!wallet_address || isPending) return;
+    try {
+      await mutateAsync(data);
+    } catch (error) {
+      const message = handleError(error, 'Failed to create user');
 
-        console.log(res);
-      } catch (error) {
-        const message = handleError(error, 'Failed to create user');
-
-        if (message.includes('username')) {
-          return setError('username', {
-            message,
-          });
-        }
-        return enqueueSnackbar(message, { variant: 'error' });
+      if (message.includes('username')) {
+        return setError('username', {
+          message,
+        });
       }
-    },
-    [wallet_address]
-  );
+      return enqueueSnackbar(message, { variant: 'error' });
+    }
+  };
 
   if (isSuccess) {
     return (
