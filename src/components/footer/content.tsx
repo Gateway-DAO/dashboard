@@ -51,7 +51,7 @@ const links = [
   },
   {
     name: 'Explorer',
-    href: routes.explorer.root,
+    href: routes.explorer.home,
   },
   {
     name: 'Dashboard',

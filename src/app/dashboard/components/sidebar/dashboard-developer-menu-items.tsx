@@ -25,7 +25,7 @@ export const dashboardDevelopersMenuItems: GTWMenuItemSettings[] = [
   },
   {
     name: 'Explorer',
-    href: routes.explorer.root,
+    href: routes.explorer.home,
     activeHrefs: [],
     icon: ExploreOutlined,
     externalLink: true,

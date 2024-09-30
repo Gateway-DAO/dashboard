@@ -8,6 +8,7 @@ const routes = {
   termsOfService: '/terms-of-service',
   privacyPolicy: '/privacy-policy',
   dashboard: {
+    home: dashboard,
     storage: `${dashboard}/storage`,
     storageAsset: (pdaId) => `${dashboard}/storage/${pdaId}`,
     myDataModels: `${dashboard}/data-models`,
@@ -16,7 +17,7 @@ const routes = {
     developerAccess: `${dashboard}/api`,
   },
   explorer: {
-    root: explorer,
+    home: explorer,
     transactions: `${explorer}/transactions`,
     transaction: (transactionId) => `${explorer}/transactions/${transactionId}`,
     dataModels: `${explorer}/data-models`,

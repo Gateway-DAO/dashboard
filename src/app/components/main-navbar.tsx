@@ -28,7 +28,7 @@ const links = [
   },
   {
     label: 'Explorer',
-    href: routes.explorer.root,
+    href: routes.explorer.home,
   },
 ];
 

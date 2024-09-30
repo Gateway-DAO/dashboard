@@ -40,7 +40,7 @@ export default function ExplorerNavbar() {
       <Nav
         compact
         logo={
-          <NavLogo>
+          <NavLogo href={routes.explorer.home}>
             <Chip
               size="small"
               color="primary"

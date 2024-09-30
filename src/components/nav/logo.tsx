@@ -7,12 +7,15 @@ import Logo from '../logo/logo';
 import { useNavContext } from './context';
 import { logoTranslateColor } from './types';
 
-export default function NavLogo({ children }: PropsWithChildren) {
+export default function NavLogo({
+  children,
+  href,
+}: PropsWithChildren<{ href?: string }>) {
   const { color, isScrolled } = useNavContext();
 
   return (
     <Logo
-      href={routes.home}
+      href={href ?? routes.home}
       theme={isScrolled ? 'light' : logoTranslateColor[color]}
     >
       {children}

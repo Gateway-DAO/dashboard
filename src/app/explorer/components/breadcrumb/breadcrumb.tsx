@@ -18,7 +18,7 @@ export default function ExplorerBreadcrumb({ paths }: Props) {
       <GTWLink
         underline="hover"
         variant="body1"
-        href={`${routes.explorer.root}/`}
+        href={routes.explorer.home}
         color="text.secondary"
       >
         Home
