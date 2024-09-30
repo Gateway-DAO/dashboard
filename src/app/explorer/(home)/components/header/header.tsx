@@ -9,6 +9,8 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {
   Box,
   Button,
+  Card,
+  Container,
   Paper,
   Stack,
   SxProps,
@@ -16,32 +18,25 @@ import {
   Typography,
 } from '@mui/material';
 
-const GetIcon = ({ index, sx }: { index: number; sx: SxProps<Theme> }) => {
-  return (
-    <>
-      {index === 0 && <HomeTransactionIcon sx={sx} />}
-      {index === 1 && <DataModelsBoxIcon sx={sx} />}
-    </>
-  );
-};
-
 export default function Header() {
-  const exploreHomeBanners = [
+  const banners = [
     {
       title: 'Check a transaction',
       description:
         'Transactions serve as a comprehensive audit trail, meticulously recording all activities performed at the protocol layer.',
       link_text: 'Verify transactions',
-      link: routes.explorer.transactions,
+      href: routes.explorer.transactions,
       target: '_self',
+      icon: HomeTransactionIcon,
     },
     {
       title: 'Explore Data Models',
       description:
         'Structured data assets are arranged in Data Models. Each data uploaded using a data model adheres to a standardized structure.',
       link_text: 'Discover Data Models',
-      link: routes.explorer.dataModels,
+      href: routes.explorer.dataModels,
       target: '_self',
+      icon: DataModelsBoxIcon,
     },
   ];
 
@@ -51,30 +46,60 @@ export default function Header() {
         slot={
           <Typography
             variant="h2"
-            fontWeight={{ xs: 400, lg: 300 }}
-            fontSize={{ xs: '34px', lg: '60px' }}
             sx={{
               maxWidth: { xs: '85%', lg: '60%' },
-              ml: { xs: 2, lg: 0 },
             }}
           >
             Explore transactions and interact with the protocol
           </Typography>
         }
       ></InternalHeader>
-      <Stack
-        sx={{
-          direction: 'row',
-          justifyContent: 'space-between',
-          gap: 2,
-          flexDirection: 'row',
-          overflow: 'auto',
-          mt: 2,
-          mb: 7,
-          mx: 5,
-        }}
-      >
-        {exploreHomeBanners.map((details, index) => (
+      <Container>
+        <Stack
+          direction="row"
+          sx={{
+            justifyContent: 'space-between',
+            gap: 2,
+            mt: 2,
+            mb: 7,
+          }}
+        >
+          {banners.map(
+            ({ title, description, link_text, href, target, icon: Icon }) => (
+              <Card
+                key={title}
+                component={Link}
+                href={href}
+                target={target}
+                variant="outlined"
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  p: 2,
+                  textDecoration: 'none',
+                  width: '100%',
+                }}
+              >
+                <Icon sx={{ width: 'auto', height: 80, mb: 2 }} />
+                <Box>
+                  <Typography variant="h5" gutterBottom>
+                    {title}
+                  </Typography>
+                  <Typography variant="body2" gutterBottom sx={{ mb: 2 }}>
+                    {description}
+                  </Typography>
+                  <Button variant="text">
+                    {link_text}
+                    {target === '_blank' && (
+                      <OpenInNewIcon sx={{ ml: 0.8, height: 18, width: 18 }} />
+                    )}
+                  </Button>
+                </Box>
+              </Card>
+            )
+          )}
+          {/* {exploreHomeBanners.map((details, index) => (
           <Paper
             component={Link}
             href={details.link}
@@ -84,11 +109,7 @@ export default function Header() {
             sx={{
               padding: 2,
               paddingLeft: 2,
-              width: { lg: '100%' },
-              marginTop: 2,
-              mr: 1,
               textDecoration: 'none',
-              '&:last-child': { mr: 0 },
             }}
           >
             <Stack
@@ -124,8 +145,9 @@ export default function Header() {
               </Box>
             </Stack>
           </Paper>
-        ))}
-      </Stack>
+        ))} */}
+        </Stack>
+      </Container>
     </>
   );
 }

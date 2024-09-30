@@ -29,7 +29,6 @@ export async function PATCH() {
   }
 
   const signedUrl = await popSignedUrl(session.user.did);
-  console.log(signedUrl);
 
   if (!signedUrl) {
     return NextResponse.json('No signed URL found', { status: 404 });
