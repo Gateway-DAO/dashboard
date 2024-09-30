@@ -1,22 +1,22 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import documentationRoutes from "@/constants/documentationRoutes";
-import { LANDING_NAVBAR_HEIGHT } from "@/theme/config/style-tokens";
+import documentationRoutes from '@/constants/documentationRoutes';
+import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
 
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
-import HeroClientsSlider from "./clients-slider";
+import HeroClientsSlider from './clients-slider';
 
-import HeroImage from "/public/images/hero.png";
+import HeroImage from '/public/images/hero.png';
 
 export default function Hero() {
   return (
     <Box
       component="header"
       sx={{
-        position: "relative",
-        backgroundColor: "primary.main",
+        position: 'relative',
+        backgroundColor: 'primary.main',
         ...LANDING_NAVBAR_HEIGHT,
         pb: {
           xs: 5.5,
@@ -26,10 +26,10 @@ export default function Hero() {
     >
       <Container
         sx={{
-          position: "relative",
+          position: 'relative',
           zIndex: 1,
           pt: 16,
-          color: "white.main",
+          color: 'white.main',
         }}
       >
         <Typography
@@ -38,17 +38,17 @@ export default function Hero() {
           align="left"
           sx={{
             typography: {
-              xs: "h3",
-              md: "h1",
+              xs: 'h3',
+              md: 'h1',
             },
-            fontWeight: "lighter!important",
+            fontWeight: 'lighter!important',
             maxWidth: {
               xs: 400,
               sm: 500,
               md: 800,
             },
             mb: 1,
-            color: "inherit",
+            color: 'inherit',
           }}
           gutterBottom
         >
@@ -59,48 +59,74 @@ export default function Hero() {
           paragraph
           sx={{
             typography: {
-              xs: "body1",
-              md: "h6",
+              xs: 'body1',
+              md: 'h6',
             },
-            fontWeight: "lighter!important",
+            fontWeight: 'lighter!important',
             maxWidth: {
               sm: 480,
               md: 564,
             },
             mb: 4,
-            color: "inherit",
+            color: 'inherit',
           }}
         >
           Gateway is an integrated protocol to encrypt, store, manage, and
           compute private data.
         </Typography>
-        <Button
-          component={Link}
-          href={documentationRoutes.home}
-          target="_blank"
-          variant="contained"
-          color="white"
-          size="large"
+        <Stack
+          direction={{
+            xs: 'column',
+            sm: 'row',
+          }}
+          gap={2}
           sx={{
-            width: {
-              xs: "100%",
-              sm: "auto",
-            },
             mb: {
               xs: 5,
               sm: 9,
             },
           }}
         >
-          Read Documentation
-        </Button>
+          <Button
+            component={Link}
+            href={documentationRoutes.home}
+            target="_blank"
+            variant="contained"
+            color="white"
+            size="large"
+            sx={{
+              width: {
+                xs: '100%',
+                sm: 'auto',
+              },
+            }}
+          >
+            Read Documentation
+          </Button>
+          <Button
+            component={Link}
+            href="/blog/introducing-gateway-the-decentralized-private-computer"
+            target="_blank"
+            variant="outlined"
+            color="white"
+            size="large"
+            sx={{
+              width: {
+                xs: '100%',
+                sm: 'auto',
+              },
+            }}
+          >
+            Read Vision Paper
+          </Button>
+        </Stack>
         <Typography
           variant="body1"
           sx={{
             opacity: 0.7,
-            fontWeight: "lighter",
+            fontWeight: 'lighter',
             pb: 5,
-            color: "inherit",
+            color: 'inherit',
           }}
         >
           Trusted by
@@ -111,12 +137,12 @@ export default function Hero() {
       </Box>
       <Box
         sx={{
-          height: "100%",
-          width: "100%",
-          overflow: "hidden",
-          position: "absolute",
+          height: '100%',
+          width: '100%',
+          overflow: 'hidden',
+          position: 'absolute',
           inset: 0,
-          pointerEvents: "none",
+          pointerEvents: 'none',
         }}
       >
         <Image
@@ -127,8 +153,8 @@ export default function Hero() {
           fill
           sizes="(max-width: 768px) 1000px, 100vw"
           style={{
-            objectFit: "cover",
-            objectPosition: "center bottom",
+            objectFit: 'cover',
+            objectPosition: 'center bottom',
           }}
         />
       </Box>
