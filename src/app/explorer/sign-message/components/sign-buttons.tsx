@@ -4,6 +4,7 @@ import { Divider, Stack } from '@mui/material';
 
 import EVMButton from './evm-button';
 import SolanaButton from './sol-button';
+import SuiButton from './sui-button';
 import { SignButtonsProps } from './types';
 
 export default function SignButtons(props: SignButtonsProps) {
@@ -16,6 +17,7 @@ export default function SignButtons(props: SignButtonsProps) {
     >
       <EVMButton {...props} />
       <SolanaButton {...props} />
+      <SuiButton {...props} />
     </Stack>
   );
 }
