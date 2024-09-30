@@ -2,7 +2,7 @@
 
 import { Network } from '@/types/web3';
 import { limitCharsOffset } from '@/utils/string';
-import { ConnectButton, useConnectModal } from '@rainbow-me/rainbowkit';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { FaEthereum } from 'react-icons/fa';
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
 
