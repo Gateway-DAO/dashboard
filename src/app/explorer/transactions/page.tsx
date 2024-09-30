@@ -8,7 +8,7 @@ import TransactionsNumbers from './components/transactions-numbers';
 import TransactionsTableSection from './components/transactions-table-section';
 
 export const metadata: Metadata = {
-  title: `Gateway Transactions`,
+  title: `Transactions`,
   description: `Discover user activities at a glance on our transaction page - from issuances and requests to verifications. Stay informed with real-time insights from Gateway Network.`,
 };
 

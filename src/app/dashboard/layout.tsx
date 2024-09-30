@@ -6,7 +6,7 @@ import DashboardErrorBoundary from './components/error';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Gateway Dashboard',
+    template: '%s - Gateway Dashboard',
     default: 'Gateway Dashboard',
   },
 };

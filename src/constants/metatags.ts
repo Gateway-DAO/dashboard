@@ -3,7 +3,7 @@ const description =
 
 export const defaultMetatag = {
   title: {
-    template: '%s | Gateway Protocol',
+    template: '%s - Gateway Protocol',
     default: 'Gateway Protocol',
   },
   description,

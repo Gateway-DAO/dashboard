@@ -1,8 +1,14 @@
-'use client';
+import { Metadata } from 'next';
 
 import InternalHeader from '@/components/internal/internal-header';
+
 import { Typography } from '@mui/material';
+
 import MessageBox from './components/message-box';
+
+export const metadata: Metadata = {
+  title: `Sign Message`,
+};
 
 export default function SignMessagePage() {
   return (

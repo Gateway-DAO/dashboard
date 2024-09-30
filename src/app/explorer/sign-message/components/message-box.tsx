@@ -1,3 +1,4 @@
+'use client';
 import { Suspense, useState } from 'react';
 
 import SimpleCopyButton from '@/components/simple-copy-button/simple-copy-button';

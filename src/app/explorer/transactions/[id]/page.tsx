@@ -5,16 +5,10 @@ import { PageProps } from '@/types/next';
 import TransactionDetails from './components/details';
 import TransactionHeader from './components/header';
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  return {
-    title: `Gateway Transactions - ${params.id}`,
-    description: `From issuances to verifications, get real-time insights from individual transactions.`,
-  };
-}
+export const metadata: Metadata = {
+  title: `Transaction Details`,
+  description: `From issuances to verifications, get real-time insights from individual transactions.`,
+};
 
 export default function TransactionPage({
   params: { id },

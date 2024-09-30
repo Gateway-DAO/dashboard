@@ -8,7 +8,7 @@ import ExplorerNavbar from './components/explorer-navbar';
 export const metadata: Metadata = {
   title: {
     default: 'Gateway Explorer',
-    template: '%s | Gateway Explorer',
+    template: '%s - Gateway Explorer',
   },
   description: `Explore transactions, data models, and request templates on our Gateway platform.`,
 };
