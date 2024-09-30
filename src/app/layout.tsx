@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 
 import { defaultMetatag } from '@/constants/metatags';
-import { currentEnv } from '@/utils/env';
 import { Analytics } from '@vercel/analytics/react';
 import sanitizeHtml from 'sanitize-html';
 
@@ -11,12 +10,11 @@ import Providers from './providers';
 
 export const metadata: Metadata = defaultMetatag;
 
-const env = currentEnv;
-const isTesnetOrProd = env === 'testnet' || env === 'production';
-
 const analytics: string[] = [];
 
-if (isTesnetOrProd) {
+const isProd = process.env.NODE_ENV === 'production';
+
+if (isProd) {
   const hotjarScript = sanitizeHtml(`
   (function(h,o,t,j,a,r){
       h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -27,6 +25,7 @@ if (isTesnetOrProd) {
       a.appendChild(r);
   })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
   `);
+
   const gtmScript = sanitizeHtml(`
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -50,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* <!-- Hotjar Tracking Code for Gateway Network --> */}
-      {isTesnetOrProd &&
+      {isProd &&
         analytics.map((script, index) => (
           <Script
             key={index}
@@ -63,7 +62,7 @@ export default function RootLayout({
 
       <body>
         <Providers>{children}</Providers>
-        {isTesnetOrProd && <Analytics />}
+        {isProd && <Analytics />}
       </body>
     </html>
   );
