@@ -38,7 +38,7 @@ export default function EVMButton({
         startIcon={<FaEthereum />}
         size="large"
       >
-        Connect with Solana Wallet
+        Connect with {Network.Evm} Wallet
       </Button>
     );
   }

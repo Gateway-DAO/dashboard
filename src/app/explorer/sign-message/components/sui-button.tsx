@@ -41,7 +41,7 @@ export default function SuiButton({
           startIcon={<SuiIcon />}
           size="large"
         >
-          Connect with SUI Wallet
+          Connect with {Network.Sui} Wallet
         </Button>
       </ConnectModal>
     );

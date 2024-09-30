@@ -2,7 +2,7 @@
 
 import SolanaIcon from '@/components/icons/solana';
 import { Network } from '@/types/web3';
-import { limitChars, limitCharsOffset } from '@/utils/string';
+import { limitCharsOffset } from '@/utils/string';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import bs58 from 'bs58';
@@ -43,7 +43,7 @@ export default function SolanaButton({
         startIcon={<SolanaIcon />}
         size="large"
       >
-        Connect with Solana Wallet
+        Connect with {Network.Sol} Wallet
       </Button>
     );
   }

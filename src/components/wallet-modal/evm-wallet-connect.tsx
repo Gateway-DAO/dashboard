@@ -56,7 +56,7 @@ export default function EvmWalletConnect({ onConnect }: Props) {
                 toggleOpenedModal();
               }}
             >
-              EVM
+              {Network.Evm}
             </WalletModalButton>
           </div>
         );

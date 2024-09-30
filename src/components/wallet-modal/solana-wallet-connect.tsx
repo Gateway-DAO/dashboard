@@ -20,7 +20,7 @@ export default function SolanaWalletConnect({ onConnect }: Props) {
       startIcon={<SolanaIcon sx={{ fontSize: '24' }} />}
       onClick={onOpenModal}
     >
-      Solana
+      {Network.Sol}
     </WalletModalButton>
   );
 }

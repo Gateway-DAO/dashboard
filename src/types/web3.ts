@@ -1,16 +1,5 @@
 export enum Network {
-  Evm = 'evm',
-  Sol = 'sol',
-  Sui = 'sui',
+  Evm = 'EVM',
+  Sol = 'Solana',
+  Sui = 'Sui',
 }
-
-export const fromNetwork = (network: Network) => {
-  switch (network) {
-    case Network.Evm:
-      return 'EVM';
-    case Network.Sol:
-      return 'Solana';
-    case Network.Sui:
-      return 'Sui';
-  }
-};

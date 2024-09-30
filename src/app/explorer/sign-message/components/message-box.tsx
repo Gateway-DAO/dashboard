@@ -4,7 +4,7 @@ import SimpleCopyButton from '@/components/simple-copy-button/simple-copy-button
 import EvmProvider from '@/services/wallets/evm-provider/evm-provider';
 import SolanaProvider from '@/services/wallets/solana-provider';
 import SuiProvider from '@/services/wallets/sui-provider';
-import { fromNetwork, Network } from '@/types/web3';
+import { Network } from '@/types/web3';
 import { limitChars } from '@/utils/string';
 
 import {
@@ -130,9 +130,7 @@ export default function MessageBox() {
             >
               <Stack gap={2}>
                 <Typography variant="caption">Network</Typography>
-                <Typography variant="body1">
-                  {!output.type ? '-' : fromNetwork(output.type)}
-                </Typography>
+                <Typography variant="body1">{output.type ?? '-'}</Typography>
               </Stack>
 
               <Stack gap={2}>
