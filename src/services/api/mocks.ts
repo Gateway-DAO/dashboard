@@ -12,9 +12,19 @@ export const mockAccount: Account = {
   updated_at: '2024-08-27T21:23:45.7145Z',
   username: 'KboozEVM',
   did: 'did:gatewayid:gateway:b1038ceb61a87874a38eed3ecad27de1affbd34b574711485297457f99be8772',
-  wallet_address: '0x7158d4BAD3bd698d87C64BDC8E055C8CA1A043aD',
   storage_size: 1000,
   username_updated_at: '2024-08-27T21:23:45.7145Z',
+  wallet_addresses: [
+    {
+      account_id: 1,
+      address:
+        '0x8a0ef21fc63f0ae2e6e6ac5106c41083d5e38fcd14351e7c148f6bd6fa982435',
+      chain: 'EVM',
+      created_at: '2024-08-27T21:23:45.7145Z',
+      updated_at: '2024-08-27T21:23:45.7145Z',
+      id: 1,
+    },
+  ],
 };
 
 export const mockDataModelsMetadata: DataModelsMetadataType = {
@@ -113,7 +123,7 @@ export const mockPublicDataAsset: PublicDataAsset = {
   acl: [
     {
       address: mockAccount.did,
-      solana_address: mockAccount.wallet_address,
+      solana_address: mockAccount.wallet_addresses[0]!.address,
       data_asset_id: 87818365946560512,
       roles: ['write'],
     },
