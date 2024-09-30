@@ -6,7 +6,7 @@ import { Typography } from '@mui/material';
 import StorageList from './components/storage-list';
 
 export const metadata: Metadata = {
-  title: 'Storage - Gateway',
+  title: 'Storage',
 };
 
 export default async function Storage() {

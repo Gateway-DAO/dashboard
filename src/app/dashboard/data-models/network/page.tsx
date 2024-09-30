@@ -4,7 +4,7 @@ import NetworkDataModels from './components/network-data-models';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Data Model - Gateway Network',
+    title: 'Network Data Models',
   };
 }
 

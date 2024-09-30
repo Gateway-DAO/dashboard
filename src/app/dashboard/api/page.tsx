@@ -11,7 +11,7 @@ import AuthenticationTokenSection from './components/authentication-token';
 import DID from './components/did';
 
 export const metadata: Metadata = {
-  title: 'API - Gateway',
+  title: 'API',
 };
 
 export default async function DeveloperAccessPage() {

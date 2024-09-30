@@ -10,7 +10,7 @@ import EditUsername from './components/edit-username/edit-username';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Gateway ID - Gateway',
+    title: 'Settings',
   };
 }
 
@@ -19,8 +19,8 @@ export default async function SettingPage() {
     <>
       <TitleLayout
         titleId="settings-title"
-        title="Gateway ID"
-        subtitle="Edit your Gateway ID and manage your connected wallet"
+        title="Settings"
+        subtitle="Edit your Gateway ID and manage your connected wallets"
       />
 
       <Stack gap={3} alignItems="stretch">
