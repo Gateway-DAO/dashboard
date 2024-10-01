@@ -3,7 +3,8 @@
 import useDisconnectWallets from '@/services/wallets/use-disconnect-wallets';
 import { WalletConnectionStateHandlers } from '@/services/wallets/wallet-connection-provider';
 import { Network } from '@/types/web3';
-import { useWallet } from '@solana/wallet-adapter-react';
+import { useWallet as useSolWallet } from '@solana/wallet-adapter-react';
+import { useWallet as useSuiWallet } from '@suiet/wallet-kit';
 import { useMutation } from '@tanstack/react-query';
 import bs58 from 'bs58';
 import { useSignMessage } from 'wagmi';
@@ -31,8 +32,9 @@ export default function useConnectWallet({
   onSignedMessage,
   statesHandler,
 }: Props) {
-  const { signMessage: signMessageSolana } = useWallet();
   const { signMessageAsync: signMessageEvm } = useSignMessage();
+  const { signMessage: signMessageSolana } = useSolWallet();
+  const { signPersonalMessage } = useSuiWallet();
 
   const onSigneMessageSolana = async (message: string) => {
     if (!signMessageSolana) {
@@ -44,8 +46,19 @@ export default function useConnectWallet({
     return bs58.encode(signature as Uint8Array);
   };
 
-  const { onDisconnectWallets, onDisconnectEvm, onDisconnectSolana } =
-    useDisconnectWallets();
+  const onSignMessageSui = async (message: string) => {
+    const { signature } = await signPersonalMessage({
+      message: new TextEncoder().encode(message),
+    });
+    return signature;
+  };
+
+  const {
+    onDisconnectWallets,
+    onDisconnectEvm,
+    onDisconnectSolana,
+    onDisconnectSui,
+  } = useDisconnectWallets();
 
   const {
     mutateAsync: getNonce,
@@ -80,6 +93,8 @@ export default function useConnectWallet({
           return signMessageEvm({ message: nonce });
         case Network.Sol:
           return onSigneMessageSolana(nonce);
+        case Network.Sui:
+          return onSignMessageSui(nonce);
         default:
           throw new Error('Invalid network');
       }
@@ -97,18 +112,6 @@ export default function useConnectWallet({
   });
 
   const onConnect = async (wallet: string, network: Network) => {
-    try {
-      switch (network) {
-        case Network.Evm:
-          await onDisconnectSolana();
-          break;
-        case Network.Sol:
-          await onDisconnectEvm();
-          break;
-        default:
-          break;
-      }
-    } catch {}
     try {
       statesHandler?.onSigning?.();
       const nonce = await getNonce({

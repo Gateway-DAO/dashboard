@@ -7,23 +7,24 @@ import { LoadingButton } from '@/components/buttons/loading-button';
 import routes from '@/constants/routes';
 import { usernameRegex } from '@/constants/username';
 import { auth } from '@/locale/en/auth';
+import { Network } from '@/types/web3';
 import { handleError } from '@/utils/errors';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { useMutation } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
-import { useAccount } from 'wagmi';
 import { z } from 'zod';
 
 import { Button, InputAdornment, Stack, TextField } from '@mui/material';
 
 import NewUserCard from './new-user-card';
 import { NewUserTitle, UserCreatedTitle } from './titles';
+import { useAddress } from './use-address';
 
 type Props = {
   message: string;
   signature: string;
+  network: Network;
 };
 
 const formSchema = z.object({
@@ -32,9 +33,7 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export default function UsernameForm({ message, signature }: Props) {
-  const { address: evmAddress } = useAccount();
-  const { publicKey } = useWallet();
+export default function UsernameForm({ message, signature, network }: Props) {
   const { enqueueSnackbar } = useSnackbar();
 
   const {
@@ -47,7 +46,7 @@ export default function UsernameForm({ message, signature }: Props) {
     mode: 'onChange',
   });
 
-  const wallet_address = evmAddress || publicKey?.toString();
+  const wallet_address = useAddress(network);
 
   const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationKey: ['new-user', wallet_address, message, signature],

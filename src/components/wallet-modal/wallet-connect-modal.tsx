@@ -14,6 +14,7 @@ import {
 
 import EvmWalletConnect from './evm-wallet-connect';
 import SolanaWalletConnect from './solana-wallet-connect';
+import SuiWalletConnect from './sui-wallet connect';
 
 type Props = {
   title: string;
@@ -51,6 +52,7 @@ export default function WalletConnectModal({
               <>
                 <EvmWalletConnect onConnect={onConnect} />
                 <SolanaWalletConnect onConnect={onConnect} />
+                <SuiWalletConnect onConnect={onConnect} />
               </>
             )}
           </Stack>

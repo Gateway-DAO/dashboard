@@ -36,7 +36,7 @@ export default function AuthenticationWalletModals({
 
       return data.message;
     },
-    async onSignedMessage({ signature, wallet_address, message }) {
+    async onSignedMessage({ signature, wallet_address, message, network }) {
       const res = await signIn('authenticate-wallet', {
         redirect: false,
         wallet_address,
@@ -51,6 +51,7 @@ export default function AuthenticationWalletModals({
           const redirectSearchParams = new URLSearchParams();
           redirectSearchParams.append('signature', signature);
           redirectSearchParams.append('message', message);
+          redirectSearchParams.append('network', network);
           if (callbackUrl) {
             redirectSearchParams.append('callbackUrl', callbackUrl);
           }

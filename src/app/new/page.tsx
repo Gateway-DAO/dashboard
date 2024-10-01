@@ -4,8 +4,10 @@ import { redirect } from 'next/navigation';
 import Logo from '@/components/logo/logo';
 import routes from '@/constants/routes';
 import EvmProvider from '@/services/wallets/evm-provider/evm-provider';
-import SolanaProvider from '@/services/wallets/solana-provider';
+import SolanaProvider from '@/services/wallets/solana-proivder/solana-provider';
+import SuiProvider from '@/services/wallets/sui-provider/sui-provider';
 import { PageWithSearchParams } from '@/types/next';
+import { Network } from '@/types/web3';
 
 import { Box, Card, Stack } from '@mui/material';
 
@@ -16,8 +18,13 @@ export default function NewUserPage({
 }: PageWithSearchParams<{
   message: string;
   signature: string;
+  network: string;
 }>) {
-  if (!searchParams?.message || !searchParams?.signature) {
+  if (
+    !searchParams?.message ||
+    !searchParams?.signature ||
+    !searchParams?.network
+  ) {
     redirect(routes.home);
   }
 
@@ -62,10 +69,13 @@ export default function NewUserPage({
 
           <EvmProvider>
             <SolanaProvider>
-              <UsernameForm
-                message={searchParams.message}
-                signature={searchParams.signature}
-              />
+              <SuiProvider>
+                <UsernameForm
+                  message={searchParams.message}
+                  signature={searchParams.signature}
+                  network={searchParams.network as Network}
+                />
+              </SuiProvider>
             </SolanaProvider>
           </EvmProvider>
         </Card>

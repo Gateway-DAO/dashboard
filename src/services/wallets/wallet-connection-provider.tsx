@@ -2,7 +2,8 @@
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
 import EvmProvider from './evm-provider/evm-provider';
-import SolanaProvider from './solana-provider';
+import SolanaProvider from './solana-proivder/solana-provider';
+import SuiProvider from './sui-provider/sui-provider';
 
 export type WalletLoadingStep =
   | 'pending'
@@ -72,20 +73,22 @@ export default function WalletConnectionProvider({
   return (
     <EvmProvider>
       <SolanaProvider>
-        <WalletConnectionContext.Provider
-          value={{
-            step,
-            error,
-            onPending,
-            onSigning,
-            onLoading,
-            onSuccess,
-            onError,
-            onSignup,
-          }}
-        >
-          {children}
-        </WalletConnectionContext.Provider>
+        <SuiProvider>
+          <WalletConnectionContext.Provider
+            value={{
+              step,
+              error,
+              onPending,
+              onSigning,
+              onLoading,
+              onSuccess,
+              onError,
+              onSignup,
+            }}
+          >
+            {children}
+          </WalletConnectionContext.Provider>
+        </SuiProvider>
       </SolanaProvider>
     </EvmProvider>
   );
