@@ -58,6 +58,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'gateway-1.ghost.io',
       },
+      {
+        protocol: 'https',
+        hostname: 'guardians.gateway.tech',
+      },
     ],
   },
   webpack: (config) => {
