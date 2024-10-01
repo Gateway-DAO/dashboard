@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Network } from '@/types/web3';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function EvmWalletConnect({ onConnect }: Props) {
-  const [hadOpenedModal, toggleOpenedModal] = useToggle();
+  const [hadOpenedModal, setOpenedModal] = useState(false);
 
   const { address } = useAccount();
 
@@ -33,32 +33,25 @@ export default function EvmWalletConnect({ onConnect }: Props) {
         const ready = mounted && authenticationStatus !== 'loading';
 
         return (
-          <div
-            style={{
-              width: '100%',
+          <WalletModalButton
+            id="connect-evm"
+            variant="contained"
+            startIcon={<FaEthereum fontSize="24" />}
+            onClick={async () => {
+              openConnectModal();
+              setOpenedModal(true);
             }}
             {...(!ready && {
               'aria-hidden': true,
               style: {
                 width: '100%',
-                opacity: 0,
                 pointerEvents: 'none',
                 userSelect: 'none',
               },
             })}
           >
-            <WalletModalButton
-              id="connect-evm"
-              variant="contained"
-              startIcon={<FaEthereum fontSize="24" />}
-              onClick={async () => {
-                openConnectModal();
-                toggleOpenedModal();
-              }}
-            >
-              {Network.Evm}
-            </WalletModalButton>
-          </div>
+            {Network.Evm}
+          </WalletModalButton>
         );
       }}
     </ConnectButton.Custom>
