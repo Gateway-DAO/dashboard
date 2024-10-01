@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { clientApi, getAuthHeader } from '@/services/api/client';
 import { handleError } from '@/utils/errors';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSnackbar } from 'notistack';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -52,6 +53,8 @@ export default function AddWalletModal({
     '/accounts/me/wallets'
   );
 
+  const { enqueueSnackbar } = useSnackbar();
+
   useEffect(() => {
     if (isOpen) {
       console.log('open');
@@ -79,6 +82,7 @@ export default function AddWalletModal({
       await update({
         user: account,
       });
+      enqueueSnackbar('Wallet added');
       onClose();
     } catch (error) {
       if ((error as any)?.error?.includes("can't be added")) {

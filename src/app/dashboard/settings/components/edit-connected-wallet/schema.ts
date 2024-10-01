@@ -1,7 +1,7 @@
 import { PublicKey } from '@solana/web3.js';
 import { z } from 'zod';
 
-// Função para validar endereço Solana
+// Solana Validation
 const isValidSolanaAddress = (address: string) => {
   try {
     const pubkey = new PublicKey(address);
@@ -11,16 +11,21 @@ const isValidSolanaAddress = (address: string) => {
   }
 };
 
-// Regex para validar endereços EVM (Ethereum)
+// Evm Validation
 const evmAddressRegex = /^0x[a-fA-F0-9]{40}$/;
 
-// Schema de validação Zod
+// Sui Validation
+const suiAddressRegex = /^0x[a-fA-F0-9]{64}$/;
+
 export const walletSchema = z
   .string()
   .refine(
-    (address) => evmAddressRegex.test(address) || isValidSolanaAddress(address),
+    (address) =>
+      evmAddressRegex.test(address) ||
+      suiAddressRegex.test(address) ||
+      isValidSolanaAddress(address),
     {
       message:
-        'Invalid wallet address. Please provide a valid Ethereum or Solana address.',
+        'Invalid wallet address. Please provide a valid Ethereum, Solana or Sui address.',
     }
   );

@@ -75,7 +75,7 @@ function RemovableWallet({
         >
           {children}
         </Box>
-        <IconButton onClick={onOpen}>
+        <IconButton onClick={onOpen} sx={{ alignSelf: 'center' }}>
           <MoreVert />
         </IconButton>
         <Menu
@@ -117,7 +117,9 @@ export default function Wallet({
 }: WalletAddress & Partial<{ removable: boolean }>) {
   const detail = (
     <Stack>
-      <Typography variant="body1">{address}</Typography>
+      <Typography variant="body1" sx={{ wordBreak: 'break-all' }}>
+        {address}
+      </Typography>
       <Typography variant="caption">{chain}</Typography>
     </Stack>
   );
