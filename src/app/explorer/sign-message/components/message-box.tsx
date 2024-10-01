@@ -3,8 +3,8 @@ import { Suspense, useState } from 'react';
 
 import SimpleCopyButton from '@/components/simple-copy-button/simple-copy-button';
 import EvmProvider from '@/services/wallets/evm-provider/evm-provider';
-import SolanaProvider from '@/services/wallets/solana-provider';
-import SuiProvider from '@/services/wallets/sui-provider';
+import SolanaProvider from '@/services/wallets/solana-proivder/solana-provider';
+import SuiProvider from '@/services/wallets/sui-provider/sui-provider';
 import { Network } from '@/types/web3';
 import { limitChars } from '@/utils/string';
 

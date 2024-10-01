@@ -1,0 +1,15 @@
+@keyframes wkit-dialog__overlay-blur {
+  0% {
+    backdrop-filter: blur(0);
+  }
+  100% {
+    backdrop-filter: blur(4px);
+  }
+}
+
+.wkit-dialog__overlay {
+  z-index: 2147483646;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.3);
+  animation: wkit-dialog__overlay-blur 0.3s ease;
+}

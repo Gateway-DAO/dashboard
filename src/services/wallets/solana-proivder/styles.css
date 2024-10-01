@@ -1,0 +1,14 @@
+.wallet-adapter-modal-overlay {
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.3);
+  animation: wallet-adapter-modal-overlay-blur 0.3s ease;
+}
+
+@keyframes wallet-adapter-modal-overlay-blur {
+  0% {
+    backdrop-filter: blur(0);
+  }
+  100% {
+    backdrop-filter: blur(4px);
+  }
+}
