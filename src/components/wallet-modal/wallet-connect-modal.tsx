@@ -43,7 +43,10 @@ export default function WalletConnectModal({
             Choose network
           </Typography>
           <Stack
-            direction="row"
+            direction={{
+              xs: 'column',
+              sm: 'row',
+            }}
             flex={1}
             gap={1}
             sx={{ zIndex: 10, position: 'relative' }}
