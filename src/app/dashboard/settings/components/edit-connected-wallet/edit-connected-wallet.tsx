@@ -67,13 +67,7 @@ export function EditConnectedWallet() {
                 session.wallet_address !== wallet.address &&
                 session.user.wallet_addresses.length > 1;
               return (
-                <Wallet
-                  key={wallet.id}
-                  {...wallet}
-                  onRemove={
-                    isRemovable ? (wallet) => console.log(wallet) : undefined
-                  }
-                />
+                <Wallet key={wallet.id} {...wallet} removable={isRemovable} />
               );
             })
           ) : (
