@@ -51,6 +51,10 @@
   border-radius: 16px;
 }
 
+.kg-image {
+  cursor: zoom-in;
+}
+
 .feature-img {
   max-width: 100%;
   height: auto;
