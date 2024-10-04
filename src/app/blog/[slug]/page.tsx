@@ -1,35 +1,37 @@
 export const revalidate = 1200;
 
-import { Metadata } from "next";
-import Image from "next/image";
+import { Metadata } from 'next';
+import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
-import BlogCard from "@/components/blog-card/blog-card";
-import { getSinglePost, getPosts } from "@/services/ghost";
-import { LANDING_NAVBAR_HEIGHT } from "@/theme/config/style-tokens";
-import { PostOrPage } from "@tryghost/content-api";
-import { titleCase } from "title-case";
+import BlogCard from '@/components/blog-card/blog-card';
+import routes from '@/constants/routes';
+import { getSinglePost, getPosts } from '@/services/ghost';
+import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
+import { PostOrPage } from '@tryghost/content-api';
+import { titleCase } from 'title-case';
 
-import { Box, Container, Stack, Typography, Chip, Avatar } from "@mui/material";
+import { Box, Container, Stack, Typography, Chip, Avatar } from '@mui/material';
 
-import ShareButtonFn from "../components/share-card";
-import { blogMetadata } from "../utils";
-import { RenderBlog } from "./component/render-blog";
+import ShareButtonFn from '../components/share-card';
+import { blogMetadata } from '../utils';
+import { RenderBlog } from './component/render-blog';
 
-import DefaultImage from "/public/social.png";
+import DefaultImage from '/public/social.png';
 
 function formatDate(date: Date) {
-  const parts = new Intl.DateTimeFormat("en-GB", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
   }).formatToParts(date);
 
   let day, month, year;
 
   for (const part of parts) {
-    if (part.type === "day") day = part.value;
-    if (part.type === "month") month = part.value;
-    if (part.type === "year") year = part.value;
+    if (part.type === 'day') day = part.value;
+    if (part.type === 'month') month = part.value;
+    if (part.type === 'year') year = part.value;
   }
 
   return `${month} ${day}, ${year}`;
@@ -43,15 +45,15 @@ export async function generateMetadata({
   const metaData = await getSinglePost(params.slug);
   if (!metaData) {
     return {
-      title: "Not Found",
-      description: "",
+      title: 'Not Found',
+      description: '',
       keywords: [],
       openGraph: {
-        title: "Not Found",
-        description: "",
-        url: "",
-        images: [{ url: "/images/default-user.svg" }],
-        type: "website",
+        title: 'Not Found',
+        description: '',
+        url: '',
+        images: [{ url: '/images/default-user.svg' }],
+        type: 'website',
       },
     };
   }
@@ -71,10 +73,10 @@ export async function generateMetadata({
       url: metaData.url,
       images: [
         {
-          url: metaData.feature_image || "/social.png",
+          url: metaData.feature_image || '/social.png',
         },
       ],
-      type: "website",
+      type: 'website',
     },
     authors:
       metaData?.authors?.map((author) => {
@@ -86,7 +88,7 @@ export async function generateMetadata({
       description: metaData.excerpt,
       images: [
         {
-          url: metaData.feature_image || "/social.png",
+          url: metaData.feature_image || '/social.png',
         },
       ],
     },
@@ -94,6 +96,10 @@ export async function generateMetadata({
 }
 
 export default async function Read({ params }: { params: { slug: string } }) {
+  const data = await getSinglePost(params.slug);
+  if (!data) {
+    redirect(routes.blog);
+  }
   const {
     id,
     title,
@@ -105,7 +111,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
     feature_image_alt,
     feature_image_caption,
     html,
-  } = await getSinglePost(params.slug);
+  } = data;
   // Fetch latest posts from same tag
   const latestPosts: PostOrPage[] = await getPosts(3, {
     ignoreIds: [id],
@@ -146,14 +152,14 @@ export default async function Read({ params }: { params: { slug: string } }) {
             <Chip
               variant="outlined"
               label={titleCase(primary_tag.name)}
-              sx={{ alignSelf: "flex-start", mb: 1 }}
+              sx={{ alignSelf: 'flex-start', mb: 1 }}
             />
           )}
           <Typography
             sx={{
               typography: {
-                xs: "h4",
-                md: "h2",
+                xs: 'h4',
+                md: 'h2',
               },
             }}
             gutterBottom
@@ -164,13 +170,13 @@ export default async function Read({ params }: { params: { slug: string } }) {
             mt={3}
             display="flex"
             justifyContent="space-between"
-            flexDirection={{ xs: "column", md: "row" }}
+            flexDirection={{ xs: 'column', md: 'row' }}
           >
             <Stack alignSelf="flex-start" flexDirection="row">
               <Avatar
                 alt="Gateway"
                 src={
-                  primary_author?.profile_image ?? "/images/default-user.svg"
+                  primary_author?.profile_image ?? '/images/default-user.svg'
                 }
               />
               <Stack ml={2}>
@@ -178,7 +184,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
                   {primary_author?.name}
                 </Typography>
                 <Typography variant="body2">
-                  {formatDate(new Date(published_at as string))}. {reading_time}{" "}
+                  {formatDate(new Date(published_at as string))}. {reading_time}{' '}
                   Min Read
                 </Typography>
               </Stack>
@@ -207,24 +213,24 @@ export default async function Read({ params }: { params: { slug: string } }) {
               position="relative"
               width="100%"
               sx={{
-                aspectRatio: "16 / 9",
+                aspectRatio: '16 / 9',
                 borderRadius: {
                   xs: 0,
                   lg: 1,
                 },
-                overflow: "hidden",
+                overflow: 'hidden',
               }}
             >
               <Image
                 fill={true}
                 src={feature_image || DefaultImage}
-                alt={feature_image_alt || title || "Blog post image"}
+                alt={feature_image_alt || title || 'Blog post image'}
               />
             </Box>
             <Stack
               alignSelf="center"
               marginTop={2}
-              color={"text.secondary"}
+              color={'text.secondary'}
               direction="row"
               component="figcaption"
               dangerouslySetInnerHTML={{
@@ -232,7 +238,7 @@ export default async function Read({ params }: { params: { slug: string } }) {
               }}
             ></Stack>
           </Stack>
-          <Box sx={{ maxWidth: 664, alignSelf: "center", mt: 8 }}>
+          <Box sx={{ maxWidth: 664, alignSelf: 'center', mt: 8 }}>
             <RenderBlog renderHtml={html as string} />
           </Box>
         </Stack>
@@ -248,8 +254,8 @@ export default async function Read({ params }: { params: { slug: string } }) {
         <Typography
           sx={{
             typography: {
-              xs: "h4",
-              md: "h3",
+              xs: 'h4',
+              md: 'h3',
             },
           }}
         >
@@ -261,9 +267,9 @@ export default async function Read({ params }: { params: { slug: string } }) {
           display="grid"
           sx={{
             gridTemplateColumns: {
-              xs: "repeat(1, 1fr)",
-              md: "repeat(2, 1fr)",
-              lg: "repeat(3, 1fr)",
+              xs: 'repeat(1, 1fr)',
+              md: 'repeat(2, 1fr)',
+              lg: 'repeat(3, 1fr)',
             },
           }}
         >
