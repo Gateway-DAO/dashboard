@@ -13,10 +13,10 @@ export const links = [
     label: 'Blog',
     href: routes.blog,
   },
-  {
-    label: 'Ecosystem',
-    href: routes.ecosystem,
-  },
+  // {
+  //   label: 'Ecosystem',
+  //   href: routes.ecosystem,
+  // },
   {
     label: 'Explorer',
     href: routes.explorer.root,

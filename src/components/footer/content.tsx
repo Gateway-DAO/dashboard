@@ -45,10 +45,10 @@ const links = [
     name: 'Blog',
     href: routes.blog,
   },
-  {
-    name: 'Ecosystem',
-    href: routes.ecosystem,
-  },
+  // {
+  //   name: 'Ecosystem',
+  //   href: routes.ecosystem,
+  // },
   {
     name: 'Explorer',
     href: routes.explorer.root,

@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 
 import { defaultMetatag } from '@/constants/metatags';
 
-import InternalContent from '../../../components/internal/internal-content';
-import InternalHeader from '../../../components/internal/internal-header';
-import MainNavbar from '../../components/main-navbar';
+import MainNavbar from '../../app/components/main-navbar';
+import InternalContent from '../../components/internal/internal-content';
+import InternalHeader from '../../components/internal/internal-header';
 import clients from './data.json';
 import ClientsSection from './sections/clients';
 
