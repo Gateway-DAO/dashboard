@@ -12,7 +12,6 @@ import { formatBytes } from '@/utils/bytes';
 import { useQuery } from '@tanstack/react-query';
 
 import { Paper, Skeleton, Stack, Typography } from '@mui/material';
-import { Box } from '@mui/system';
 import { GridRowParams } from '@mui/x-data-grid';
 
 import { columns } from './columns';
@@ -36,7 +35,7 @@ export default function StorageList() {
       paginationModel.page,
     ],
     queryFn: async () => {
-      const { data, error } = await api.GET('/data-assets/created', {
+      const { data, error } = await api.GET('/data-assets/me', {
         headers: getAuthHeader(session?.token),
         params: {
           query: {
