@@ -65,7 +65,7 @@ export default function PDADetailPage({ pda, backHref }: Props) {
           pt: { lg: 3, xs: 2 },
         }}
       >
-        <AccessesSidebar pda={pda} />
+        <AccessesSidebar acl={pda.acl} />
       </Box>
     </PageContainer>
   );

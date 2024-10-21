@@ -1,17 +1,36 @@
 'use client';
+import { useSession } from 'next-auth/react';
+
 import GTWAvatar from '@/components/gtw-avatar/gtw-avatar';
+import { authApi } from '@/services/api/api';
 import { PublicACL } from '@/services/api/models';
-import { limitChars, limitCharsOffset } from '@/utils/string';
+import { limitCharsOffset } from '@/utils/string';
+import { useQuery } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 
 import { ContentCopy } from '@mui/icons-material';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, ListItem, Skeleton } from '@mui/material';
 import { Typography, Stack } from '@mui/material';
+
+import AccessSkeleton from './access-skeleton';
 
 // TODO: Unify Copy Buttons
 
-export default function Access({ address, roles, solana_address }: PublicACL) {
+export default function Access({ roles, did }: PublicACL) {
   const { enqueueSnackbar } = useSnackbar();
+  const { data: session } = useSession();
+
+  const { isLoading, data: user } = useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: ['account', session?.token, did],
+    queryFn: async () => {
+      const { data } = await authApi(session!.token).GET('/accounts/{did}', {
+        params: { path: { did: did! } },
+      });
+      return data;
+    },
+    enabled: !!did && !!session?.token,
+  });
 
   const copy = async (text: string) => {
     try {
@@ -30,13 +49,35 @@ export default function Access({ address, roles, solana_address }: PublicACL) {
   }, '');
 
   return (
-    <>
+    <ListItem
+      component={Stack}
+      direction="row"
+      alignItems="center"
+      sx={{
+        px: {
+          xs: 0,
+          lg: 4,
+        },
+      }}
+      gap={2}
+    >
       <Box>
-        <GTWAvatar name={address} alt={solana_address ?? address} size={45} />
+        {isLoading ? (
+          <Skeleton variant="circular" width={45} height={45} />
+        ) : (
+          <GTWAvatar
+            name={did}
+            src={user?.profile_picture}
+            alt={user?.username}
+            size={45}
+          />
+        )}
       </Box>
       <Stack direction="column" alignItems="flex-start" width="100%">
         <Typography component="span" variant="subtitle1" color="text.primary">
-          {limitChars(solana_address!, 10) ?? limitCharsOffset(address!, 4, 5)}
+          {user?.username ?? (
+            <Skeleton variant="text" width={140} height={28} />
+          )}
         </Typography>
 
         <Stack
@@ -56,9 +97,9 @@ export default function Access({ address, roles, solana_address }: PublicACL) {
             textOverflow="ellipsis"
             overflow="hidden"
           >
-            {limitCharsOffset(address!, 4, 5)}
+            {limitCharsOffset(did!, 4, 5)}
           </Typography>
-          <IconButton onClick={() => copy(address!)}>
+          <IconButton onClick={() => copy(did!)}>
             <ContentCopy
               sx={{
                 fontSize: 16,
@@ -77,6 +118,6 @@ export default function Access({ address, roles, solana_address }: PublicACL) {
       >
         Can {rolesString}
       </Typography>
-    </>
+    </ListItem>
   );
 }

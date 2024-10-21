@@ -1,15 +1,15 @@
-import { PublicDataAsset } from '@/services/api/models';
+import { PublicACL } from '@/services/api/models';
 
-import { Stack, Divider, Typography, List, ListItem } from '@mui/material';
+import { Stack, Divider, Typography, List } from '@mui/material';
 
 import Access from './access';
+import AccessSkeleton from './access-skeleton';
 
 type Props = {
-  pda: PublicDataAsset;
-  isProofPda?: boolean;
+  acl?: PublicACL[];
 };
 
-export default function AccessesSidebar({ pda }: Props) {
+export default function AccessesSidebar({ acl }: Props) {
   return (
     <Stack
       direction={{
@@ -32,23 +32,8 @@ export default function AccessesSidebar({ pda }: Props) {
       </Stack>
       <Stack pt={1} divider={<Divider />}>
         <List component={Stack} divider={<Divider />}>
-          {pda.acl?.map((access) => (
-            <ListItem
-              component={Stack}
-              direction="row"
-              alignItems="center"
-              key={access.solana_address}
-              sx={{
-                px: {
-                  xs: 0,
-                  lg: 4,
-                },
-              }}
-              gap={2}
-            >
-              <Access {...access} />
-            </ListItem>
-          ))}
+          {acl?.map((access) => <Access key={access.did} {...access} />) ??
+            [1, 2, 3].map((key) => <AccessSkeleton key={key} />)}
         </List>
       </Stack>
     </Stack>

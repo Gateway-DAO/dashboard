@@ -8,16 +8,16 @@ export type PaginatedResponse<T = any> = DeepRequired<
   Omit<components['schemas']['helper.PaginatedResponse'], 'data'>
 > & { data?: T[] };
 
-export type Account = components['schemas']['model.MyAccountResponse'];
+export type Account = components['schemas']['dto.MyAccountResponse'];
 
 export type TokenResponse = Required<
-  components['schemas']['model.TokenResponse']
+  components['schemas']['dto.TokenResponse']
 >;
 
-export type DataModel = components['schemas']['model.DataModel'];
+export type DataModel = components['schemas']['dto.DataModelResponse'];
 
-export type PublicDataAsset = components['schemas']['model.PublicDataAsset'];
-export type PublicACL = components['schemas']['model.PublicACL'];
+export type PublicDataAsset = components['schemas']['dto.PublicDataAsset'];
+export type PublicACL = components['schemas']['dto.PublicACL'];
 
 export type PublicDataAssetType = 'Structured Data' | `${string}/${string}`;
 
