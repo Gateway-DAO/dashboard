@@ -38,10 +38,7 @@ export default function ExplorerNavbar() {
     href: `${externalLinks.gateway}${pathname}`,
   };
 
-  const buttons =
-    currentEnv === 'production'
-      ? [openDashboardButton]
-      : [sandboxButton, openDashboardButton];
+  const buttons = currentEnv === 'production' ? [] : [sandboxButton];
 
   return (
     <Nav

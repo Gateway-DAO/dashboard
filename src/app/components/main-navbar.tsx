@@ -28,11 +28,11 @@ const links = [
 
 type Props = Pick<ComponentProps<typeof Nav>, 'color'>;
 
-const primaryButton: NavLink = {
-  label: 'Open dashboard',
-  href: routes.auth,
-  variant: 'outlined',
-};
+// const primaryButton: NavLink = {
+//   label: 'Open dashboard',
+//   href: routes.auth,
+//   variant: 'outlined',
+// };
 const secondaryButton: NavLink = {
   label: 'Read documentation',
   href: documentationRoutes.home,
@@ -47,8 +47,8 @@ export default function MainNavbar({ color }: Props) {
       logo={<NavLogo />}
       color={color}
       links={links}
-      buttons={[primaryButton, secondaryButton]}
-      hamburgerButtons={[primaryButton]}
+      buttons={[secondaryButton]}
+      hamburgerButtons={[]}
     />
   );
 }

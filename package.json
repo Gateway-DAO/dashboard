@@ -17,6 +17,7 @@
     "env:save:prod": "./scripts/env.sh -s prod",
     "dev": "next dev -p 4400",
     "build": "next build",
+    "build:dev:windows": "set __NEXT_TEST_MODE=true&& next build",
     "start": "next start",
     "lint": "next lint",
     "preinstall": "sh ./tools/scripts/preinstall.sh",
