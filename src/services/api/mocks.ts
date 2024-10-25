@@ -41,8 +41,6 @@ const mockDataModel: DataModel = {
   updated_at: '2024-08-28T16:56:48.069732-03:00',
   title: 'Data Model Example 0 Jason',
   description: 'Lorem ipsum dolor sit amet',
-  created_by:
-    'did:gatewayid:gateway:e585176cf3a17740cf055d803f78aa45272b9e97c50ec1088105e63ed72293e5',
   tags: ['Finance', 'IT'],
   schema: {
     type: 'object',

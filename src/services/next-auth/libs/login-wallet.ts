@@ -1,9 +1,7 @@
 import { api } from '@/services/api/api';
-import { components } from '@/services/api/types';
+import { AuthRequest } from '@/services/api/models';
 
-export default async function loginWallet(
-  body: components['schemas']['model.AuthRequest']
-) {
+export default async function loginWallet(body: AuthRequest) {
   try {
     const { error, data } = await api.POST('/auth', {
       body,

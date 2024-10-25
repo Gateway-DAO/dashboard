@@ -1,9 +1,7 @@
 import { api } from '@/services/api/api';
-import { components } from '@/services/api/types';
+import { AccountCreateRequest } from '@/services/api/models';
 
-export default async function newUser(
-  body: components['schemas']['model.AccountCreateRequest']
-) {
+export default async function newUser(body: AccountCreateRequest) {
   try {
     const { error, data } = await api.POST('/accounts', {
       body,

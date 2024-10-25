@@ -2,13 +2,13 @@ import CredentialsProvider, {
   CredentialInput,
 } from 'next-auth/providers/credentials';
 
-import { components } from '@/services/api/types';
+import { AuthRequest } from '@/services/api/models';
 
 import getMe from '../libs/get-me';
 import loginWallet from '../libs/login-wallet';
 
 const walletCredentials = CredentialsProvider<
-  Record<keyof components['schemas']['model.AuthRequest'], CredentialInput>
+  Record<keyof AuthRequest, CredentialInput>
 >({
   id: 'authenticate-wallet',
   credentials: {

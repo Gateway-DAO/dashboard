@@ -21,6 +21,11 @@ export type PublicACL = components['schemas']['dto.PublicACL'];
 
 export type PublicDataAssetType = 'Structured Data' | `${string}/${string}`;
 
+export type AuthRequest = components['schemas']['dto.AuthRequest'];
+
+export type AccountCreateRequest =
+  components['schemas']['dto.AccountCreateRequest'];
+
 export type WalletAddress = components['schemas']['model.WalletAddress'];
 
 // COnvert to enum

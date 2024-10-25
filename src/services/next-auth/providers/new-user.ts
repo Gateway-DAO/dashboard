@@ -2,16 +2,13 @@ import CredentialsProvider, {
   CredentialInput,
 } from 'next-auth/providers/credentials';
 
-import { components } from '@/services/api/types';
+import { AccountCreateRequest } from '@/services/api/models';
 
 import getMe from '../libs/get-me';
 import newUser from '../libs/new-user';
 
 const newUserCredential = CredentialsProvider<
-  Record<
-    keyof components['schemas']['model.AccountCreateRequest'],
-    CredentialInput
-  >
+  Record<keyof AccountCreateRequest, CredentialInput>
 >({
   id: 'new-user',
   credentials: {
