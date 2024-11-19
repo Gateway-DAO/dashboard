@@ -122,7 +122,7 @@ export const mockPublicDataAsset: PublicDataAsset = {
     {
       address: mockAccount.did,
       solana_address: mockAccount.wallet_addresses[0]!.address,
-      data_asset_id: 87818365946560512,
+
       roles: ['write'],
     },
   ],
