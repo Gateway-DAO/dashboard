@@ -1,39 +1,39 @@
-"use client";
+'use client';
 
-import { Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "./styles.css";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './styles.css';
 
-import { Card, Typography } from "@mui/material";
+import { Card, Typography } from '@mui/material';
 
-import EncryptedDataVaults from "./icons/encrypted-data-vaults";
-import OnChainCoordination from "./icons/on-chain-coordination";
-import ProgrammaticAccessControl from "./icons/programmatic-access-control";
-import VerifiablePrivateCompute from "./icons/verifiable-private-compute";
+import EncryptedDataVaults from './icons/encrypted-data-vaults';
+import OnChainCoordination from './icons/on-chain-coordination';
+import ProgrammaticAccessControl from './icons/programmatic-access-control';
+import VerifiablePrivateCompute from './icons/verifiable-private-compute';
 
 const cards = [
   {
     icon: EncryptedDataVaults,
-    title: "Encrypted Data Vaults",
-    text: "Gateway's secure, decentralized, and privacy preserving storage network.",
-  },
-  {
-    icon: ProgrammaticAccessControl,
-    title: "Programmatic Access Control",
-    text: "We are enabling secure off-chain data requesting and sharing by leveraging proxy re-encryption tied to our",
-  },
-  {
-    icon: VerifiablePrivateCompute,
-    title: "Verifiable Private Compute",
-    text: "Gateway is the first FHE based computation network for enabling private data building blocks.",
+    title: 'Expanded Possibilities',
+    text: 'Write smart contracts that seamlessly mix private and public state.',
   },
   {
     icon: OnChainCoordination,
-    title: "On-Chain Coordination",
-    text: "A global data audit trail which verifies data interactions like storage, requests, shares, and compute.",
+    title: 'New Use Cases',
+    text: 'Build applications with actual competitive dynamics and hidden information.',
+  },
+  {
+    icon: VerifiablePrivateCompute,
+    title: 'Unlimited Potential',
+    text: 'Deploy solutions that would be impractical on current chains.',
+  },
+  {
+    icon: ProgrammaticAccessControl,
+    title: 'Maintain Simplicity',
+    text: 'Maintain simplicity-no complex cross-chain architectures or external privacy solutions.',
   },
 ];
 
@@ -52,12 +52,13 @@ function AboutCard({
           lg: 4,
         },
         minHeight: 316,
-        height: "100%",
+        height: '100%',
         width: {
-          xs: "calc(100% - (5 * 16px))",
-          md: "calc(100% - (9 * 16px))",
-          lg: "unset",
+          xs: 'calc(100% - (5 * 16px))',
+          md: 'calc(100% - (9 * 16px))',
+          lg: 'unset',
         },
+        bgcolor: '#EDE3F6',
       }}
     >
       <Icon

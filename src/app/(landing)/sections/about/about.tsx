@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import documentationRoutes from "@/constants/documentationRoutes";
+import documentationRoutes from '@/constants/documentationRoutes';
 
 import {
   Box,
@@ -11,11 +11,11 @@ import {
   Container,
   Stack,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 
-import AboutCards from "./about-cards";
+import AboutCards from './about-cards';
 
-import NavigationImage from "/public/images/navigation.jpg";
+import NavigationImage from '/public/images/navigation.jpg';
 
 export default function About() {
   return (
@@ -29,8 +29,8 @@ export default function About() {
       <Stack
         component={Container}
         direction={{
-          xs: "column",
-          sm: "row",
+          xs: 'column',
+          sm: 'row',
         }}
         gap={2}
       >
@@ -38,10 +38,10 @@ export default function About() {
           component={Card}
           variant="outlined"
           sx={{
-            backgroundColor: "primary.100",
+            backgroundColor: 'primary.100',
             width: {
-              xs: "unset",
-              sm: "50%",
+              xs: 'unset',
+              sm: '50%',
             },
           }}
         >
@@ -50,14 +50,15 @@ export default function About() {
             href={documentationRoutes.home}
             target="_blank"
             sx={{
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
               p: 4,
               pb: {
                 xs: 4,
                 md: 42.25,
               },
               gap: 4,
+              bgcolor: '#fff',
             }}
           >
             <Stack gap={1}>
@@ -66,32 +67,33 @@ export default function About() {
                 variant="subtitle1"
                 color="primary.main"
               >
-                For Business
+                For developers
               </Typography>
               <Typography
                 component="h2"
                 variant="h3"
                 sx={{
                   typography: {
-                    xs: "h5",
-                    sm: "h4",
-                    md: "h3",
+                    xs: 'h5',
+                    sm: 'h4',
+                    md: 'h3',
                   },
                 }}
               >
-                Give Data Utility
+                Why use Gateway?
               </Typography>
               <Typography variant="body1">
-                Encrypt, store, and enable user-controlled data sharing with
-                Gateway. A private and powerful computer for sensitive
-                information.
+                Gateway is the only Layer 1 blockchain offering native unified
+                state, eliminating the need for extra layers or co-processors.
+                With Gateway, developers get everything they need to build
+                powerful applications and unlock new use cases.
               </Typography>
             </Stack>
             <Button
               component="span"
               size="large"
               variant="contained"
-              sx={{ alignSelf: "flex-start" }}
+              sx={{ alignSelf: 'flex-start' }}
             >
               Start building
             </Button>
@@ -100,20 +102,20 @@ export default function About() {
         <Card
           variant="outlined"
           sx={{
-            backgroundColor: "primary.100",
+            backgroundColor: 'primary.100',
             width: {
-              xs: "unset",
-              sm: "50%",
+              xs: 'unset',
+              sm: '50%',
             },
 
-            position: "relative",
+            position: 'relative',
             height: {
-              xs: "100%",
-              sm: "auto",
+              xs: '100%',
+              sm: 'auto',
             },
             aspectRatio: {
               xs: 327 / 306,
-              sm: "unset",
+              sm: 'unset',
             },
           }}
         >
@@ -125,8 +127,8 @@ export default function About() {
             fill
             sizes="100vw"
             style={{
-              objectFit: "cover",
-              objectPosition: "35% 55%",
+              objectFit: 'cover',
+              objectPosition: '35% 55%',
             }}
           />
         </Card>
