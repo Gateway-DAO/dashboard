@@ -9,10 +9,10 @@ import './styles.css';
 
 import { Card, SvgIconProps, Typography } from '@mui/material';
 
-import EncryptedDataVaults from './icons/encrypted-data-vaults';
-import OnChainCoordination from './icons/on-chain-coordination';
-import ProgrammaticAccessControl from './icons/programmatic-access-control';
-import VerifiablePrivateCompute from './icons/verifiable-private-compute';
+import EncryptedOnChain from './icons/encrypted-on-chain';
+import EncryptedComposability from './icons/encrypted-composability';
+import PETMarketplace from './icons/pet-marketplace';
+import EVMCompatible from './icons/evm-compatilbe';
 
 type CardProp = {
   icon: (props: SvgIconProps) => JSX.Element;
@@ -20,30 +20,30 @@ type CardProp = {
   text: string;
 };
 
-const developerCards: CardProp[] = [
+const featuresCards: CardProp[] = [
   {
-    icon: EncryptedDataVaults,
-    title: 'Expanded Possibilities',
-    text: 'Write smart contracts that seamlessly mix private and public state.',
+    icon: EncryptedOnChain,
+    title: 'Encrypted on chain',
+    text: 'Store encrypted data on the blockchain to unlock innovative application possibilities.',
   },
   {
-    icon: OnChainCoordination,
-    title: 'New Use Cases',
-    text: 'Build applications with actual competitive dynamics and hidden information.',
+    icon: EncryptedComposability,
+    title: 'Encrypted composability',
+    text: 'Encrypted data stays encrypted as applications interact with full composability.',
   },
   {
-    icon: VerifiablePrivateCompute,
-    title: 'Unlimited Potential',
-    text: 'Deploy solutions that would be impractical on current chains.',
+    icon: PETMarketplace,
+    title: 'PET Marketplace',
+    text: 'An ecosystem where diverse privacy-enhancing technologies (PETs) seamlessly integrate as specialized co-processors.',
   },
   {
-    icon: ProgrammaticAccessControl,
-    title: 'Maintain Simplicity',
-    text: 'Maintain simplicity-no complex cross-chain architectures or external privacy solutions.',
+    icon: EVMCompatible,
+    title: 'EVM Compatible',
+    text: 'No language, or learning hurdle to begin building.',
   },
 ];
 
-function AboutCard({ icon: Icon, title, text }: CardProp) {
+function FeaturedCard({ icon: Icon, title, text }: CardProp) {
   return (
     <Card
       variant="outlined"
@@ -60,7 +60,7 @@ function AboutCard({ icon: Icon, title, text }: CardProp) {
           md: 'calc(100% - (9 * 16px))',
           lg: 'unset',
         },
-        bgcolor: '#EDE3F6',
+        bgcolor: '#E7FCFF',
       }}
     >
       <Icon
@@ -76,7 +76,7 @@ function AboutCard({ icon: Icon, title, text }: CardProp) {
   );
 }
 
-export default function AboutCards() {
+export default function FeaturedCards() {
   return (
     <>
       <Swiper
@@ -109,9 +109,9 @@ export default function AboutCards() {
           },
         }}
       >
-        {developerCards.map((card, index) => (
+        {featuresCards.map((card, index) => (
           <SwiperSlide key={index}>
-            <AboutCard {...card} />
+            <FeaturedCard {...card} />
           </SwiperSlide>
         ))}
       </Swiper>
