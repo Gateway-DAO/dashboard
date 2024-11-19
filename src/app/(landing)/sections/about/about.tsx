@@ -91,7 +91,7 @@ export default function About({ isFeatureSection }: Props) {
               </Typography>
               <Typography variant="body1">
                 {isFeatureSection
-                  ? 'Layer 1 blockchain revolutionizes development with programmable cryptography, enabling secure execution over encrypted and public state data. By allowing encrypted data to remain encrypted during composable interactions, Gateway unlocks innovative possibilities for applications.'
+                  ? `Gateway's Layer 1 blockchain revolutionizes development with programmable cryptography, enabling secure execution over encrypted and public state data. By allowing encrypted data to remain encrypted during composable interactions, Gateway unlocks innovative possibilities for applications.`
                   : 'Gateway is the only Layer 1 blockchain offering native unified state, eliminating the need for extra layers or co-processors. With Gateway, developers get everything they need to build powerful applications and unlock new use cases.'}
               </Typography>
             </Stack>
