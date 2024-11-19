@@ -7,14 +7,48 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import './styles.css';
 
-import { Card, Typography } from '@mui/material';
+import { Card, SvgIconProps, Typography } from '@mui/material';
 
 import EncryptedDataVaults from './icons/encrypted-data-vaults';
 import OnChainCoordination from './icons/on-chain-coordination';
 import ProgrammaticAccessControl from './icons/programmatic-access-control';
 import VerifiablePrivateCompute from './icons/verifiable-private-compute';
 
-const cards = [
+import EncryptedOnChain from './icons/encrypted-on-chain';
+import EncryptedComposability from './icons/encrypted-composability';
+import PETMarketplace from './icons/pet-marketplace';
+import EVMCompatible from './icons/evm-compatilbe';
+
+type CardProp = {
+  icon: (props: SvgIconProps) => JSX.Element;
+  title: string;
+  text: string;
+};
+
+const featuresCards: CardProp[] = [
+  {
+    icon: EncryptedOnChain,
+    title: 'Encrypted on chain',
+    text: 'Store encrypted data on the blockchain to unlock innovative application possibilities.',
+  },
+  {
+    icon: EncryptedComposability,
+    title: 'Encrypted composability',
+    text: 'Encrypted data stays encrypted as applications interact with full composability.',
+  },
+  {
+    icon: PETMarketplace,
+    title: 'PET Marketplace',
+    text: 'An ecosystem where diverse privacy-enhancing technologies (PETs) seamlessly integrate as specialized co-processors.',
+  },
+  {
+    icon: EVMCompatible,
+    title: 'EVM Compatible',
+    text: 'No language, or learning hurdle to begin building.',
+  },
+];
+
+const developerCards: CardProp[] = [
   {
     icon: EncryptedDataVaults,
     title: 'Expanded Possibilities',
@@ -41,7 +75,8 @@ function AboutCard({
   icon: Icon,
   title,
   text,
-}: (typeof cards)[0] & { isFirst?: boolean; isLast?: boolean }) {
+  isFeatureSection,
+}: CardProp & { isFeatureSection: boolean }) {
   return (
     <Card
       variant="outlined"
@@ -58,7 +93,7 @@ function AboutCard({
           md: 'calc(100% - (9 * 16px))',
           lg: 'unset',
         },
-        bgcolor: '#EDE3F6',
+        bgcolor: isFeatureSection ? '#E7FCFF' : '#EDE3F6',
       }}
     >
       <Icon
@@ -74,7 +109,11 @@ function AboutCard({
   );
 }
 
-export default function AboutCards() {
+export default function AboutCards({
+  isFeatureSection,
+}: {
+  isFeatureSection: boolean;
+}) {
   return (
     <>
       <Swiper
@@ -107,15 +146,17 @@ export default function AboutCards() {
           },
         }}
       >
-        {cards.map((card, index) => (
-          <SwiperSlide key={index}>
-            <AboutCard
-              {...card}
-              isFirst={index === 0}
-              isLast={index === cards.length - 1}
-            />
-          </SwiperSlide>
-        ))}
+        {isFeatureSection
+          ? featuresCards.map((card, index) => (
+              <SwiperSlide key={index}>
+                <AboutCard {...card} isFeatureSection={isFeatureSection} />
+              </SwiperSlide>
+            ))
+          : developerCards.map((card, index) => (
+              <SwiperSlide key={index}>
+                <AboutCard {...card} isFeatureSection={isFeatureSection} />
+              </SwiperSlide>
+            ))}
       </Swiper>
     </>
   );
