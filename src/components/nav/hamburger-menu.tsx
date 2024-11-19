@@ -2,8 +2,6 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 
-import routes from '@/constants/routes';
-
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Button, Stack, Typography, Drawer, Divider } from '@mui/material';

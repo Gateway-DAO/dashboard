@@ -5,7 +5,6 @@ import documentationRoutes from '@/constants/documentationRoutes';
 
 import {
   Box,
-  Button,
   Card,
   CardActionArea,
   Container,
@@ -13,11 +12,11 @@ import {
   Typography,
 } from '@mui/material';
 
-import AboutCards from './about-cards';
+import FeaturedCards from './featured-cards';
 
-import NavigationImage from '/public/images/navigation.jpg';
+import FeaturesImage from '/public/images/features.jpg';
 
-export default function About() {
+export default function Featured() {
   return (
     <Box
       component="section"
@@ -65,9 +64,9 @@ export default function About() {
               <Typography
                 component="h3"
                 variant="subtitle1"
-                color={'primary.main'}
+                color={'secondary.dark'}
               >
-                For developers
+                Key Features
               </Typography>
               <Typography
                 component="h2"
@@ -80,24 +79,16 @@ export default function About() {
                   },
                 }}
               >
-                Why use Gateway?
+                Gateway’s Unified State
               </Typography>
               <Typography variant="body1">
-                Gateway is the only Layer 1 blockchain offering native unified
-                state, eliminating the need for extra layers or co-processors.
-                With Gateway, developers get everything they need to build
-                powerful applications and unlock new use cases.
+                Gateway's Layer 1 blockchain revolutionizes development with
+                programmable cryptography, enabling secure execution over
+                encrypted and public state data. By allowing encrypted data to
+                remain encrypted during composable interactions, Gateway unlocks
+                innovative possibilities for applications.
               </Typography>
             </Stack>
-
-            <Button
-              component="span"
-              size="large"
-              variant="contained"
-              sx={{ alignSelf: 'flex-start' }}
-            >
-              Start building
-            </Button>
           </CardActionArea>
         </Stack>
         <Card
@@ -121,8 +112,8 @@ export default function About() {
           }}
         >
           <Image
-            src={NavigationImage}
-            alt="A worker working on a futuristic navigation system"
+            src={FeaturesImage}
+            alt={'GVMs on a futuristic planet'}
             placeholder="blur"
             quality={100}
             fill
@@ -143,7 +134,7 @@ export default function About() {
           },
         }}
       >
-        <AboutCards />
+        <FeaturedCards />
       </Container>
     </Box>
   );

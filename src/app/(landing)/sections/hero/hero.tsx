@@ -3,11 +3,12 @@ import Link from 'next/link';
 
 import documentationRoutes from '@/constants/documentationRoutes';
 import { LANDING_NAVBAR_HEIGHT } from '@/theme/config/style-tokens';
-import HeroImage from 'public/images/hero.png';
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 
 import HeroClientsSlider from './clients-slider';
+
+import HeroImage from '/public/images/hero.png';
 
 export default function Hero() {
   return (
@@ -44,14 +45,14 @@ export default function Hero() {
             maxWidth: {
               xs: 400,
               sm: 500,
-              md: 800,
+              md: 1200,
             },
             mb: 1,
             color: 'inherit',
           }}
           gutterBottom
         >
-          The Decentralized Private Computer
+          The first chain to unify public and encrypted state
         </Typography>
         <Typography
           variant="h6"
@@ -70,8 +71,9 @@ export default function Hero() {
             color: 'inherit',
           }}
         >
-          Gateway is an integrated protocol to encrypt, store, manage, and
-          compute private data.
+          Gateway’s layer 1 blockchain brings programmable cryptography to
+          developers. Unifying the execution of encrypted, sensitive data and
+          public state information.
         </Typography>
         <Stack
           direction={{
