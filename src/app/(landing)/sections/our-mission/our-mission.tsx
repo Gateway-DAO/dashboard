@@ -42,7 +42,7 @@ export default function OurMission() {
           }}
           fontWeight="lighter"
         >
-          Our Mission
+          Our Foundation
         </Typography>
       </Box>
       <ActiveContextProvider>
@@ -59,8 +59,8 @@ export default function OurMission() {
               },
             }}
           >
-            Build the foundation to the first data economy, where private data
-            becomes a powerful asset.
+            Gateway’s Virtual Machine: The Foundation of Programmable
+            Cryptography
           </Typography>
           <Stack
             gap={3}
