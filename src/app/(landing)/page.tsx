@@ -7,6 +7,7 @@ import BuildWithUs from './sections/build-with-us/build-with-us';
 import Hero from './sections/hero/hero';
 import OurMission from './sections/our-mission/our-mission';
 import UnlockGateway from './sections/unlock-gateway/unlock-gateway';
+import Featured from './sections/about/featured';
 
 export default function IndexPage() {
   return (
@@ -14,8 +15,8 @@ export default function IndexPage() {
       <MainNavbar />
       <Stack component="main">
         <Hero />
-        <About isFeatureSection={true} />
-        <About isFeatureSection={false} />
+        <Featured />
+        <About />
         <Box
           sx={{
             backgroundColor: '#212121',
