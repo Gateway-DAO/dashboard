@@ -10,6 +10,8 @@ import {
   useTheme,
   styled,
   Container,
+  Stack,
+  Tooltip,
 } from '@mui/material';
 
 interface OrbitItem {
@@ -77,6 +79,7 @@ const StyledSVGContainer = styled(Box)(({ theme }) => ({
   width: '100%',
 
   margin: '0 auto',
+  paddingBottom: 150,
   '& svg': {
     overflow: 'visible',
   },
@@ -95,25 +98,25 @@ const StyledSVGContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
+const calculatePosition = (index: number, total: number, radius: number) => {
+  const angle = (index * (360 / total) - 100) * (Math.PI / 180);
+  return {
+    x: Math.cos(angle) * radius,
+    y: Math.sin(angle) * radius,
+  };
+};
+
+// SVG dimensions
+const width = 800;
+const height = 600;
+const centerX = width / 2;
+const centerY = height / 2;
+const orbitRadius = 260;
+
 const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
   items = defaultItems,
 }) => {
   const theme = useTheme();
-
-  const calculatePosition = (index: number, total: number, radius: number) => {
-    const angle = (index * (360 / total) - 100) * (Math.PI / 180);
-    return {
-      x: Math.cos(angle) * radius,
-      y: Math.sin(angle) * radius,
-    };
-  };
-
-  // SVG dimensions
-  const width = 800;
-  const height = 600;
-  const centerX = width / 2;
-  const centerY = height / 2;
-  const orbitRadius = 260;
 
   return (
     <Container maxWidth="lg">
@@ -126,13 +129,40 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
             borderRadius: 2,
           }}
         >
+          <Stack
+            alignItems="center"
+            sx={{
+              mb: 10,
+            }}
+          >
+            <Typography
+              variant="h3"
+              align="center"
+              gutterBottom
+              fontWeight="500"
+            >
+              PETs marketplace
+            </Typography>
+            <Typography
+              align="center"
+              gutterBottom
+              maxWidth="sm"
+              sx={{ mb: 4 }}
+            >
+              Gateway enables dApps to route specialized privacy computations to
+              the most suitable Privacy Enhancing Technology.
+            </Typography>
+            <Button variant="outlined" color="primary" size="large">
+              Learn more
+            </Button>
+          </Stack>
           <StyledSVGContainer>
             <svg
               viewBox={`0 0 ${width} ${height}`}
               style={{ width: '100%', height: 'auto' }}
             >
               {/* Title and Description */}
-              <text
+              {/* <text
                 x={centerX}
                 y="5"
                 textAnchor="middle"
@@ -164,9 +194,20 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
                 }}
               >
                 computations to the most suitable Privacy Enhancing Technology.
-              </text>
+              </text> */}
 
               {/* Orbital Circles */}
+
+              <circle
+                cx={centerX}
+                cy={centerY}
+                r={orbitRadius * 2.5}
+                style={{
+                  fill: 'none',
+                  stroke: theme.palette.divider,
+                  strokeWidth: 1,
+                }}
+              />
 
               <circle
                 cx={centerX}
@@ -232,21 +273,6 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
                 </g>
               </g>
 
-              {/* Learn More Button */}
-              <g transform={`translate(${centerX}, 140)`}>
-                <foreignObject
-                  x="-60"
-                  y="-50"
-                  width="100"
-                  height="30"
-                  style={{ overflow: 'visible' }}
-                >
-                  <Button variant="outlined" color="primary" size="small">
-                    Learn more
-                  </Button>
-                </foreignObject>
-              </g>
-
               {/* Orbital Items */}
               {items.map((item, index) => {
                 const position = calculatePosition(
@@ -262,7 +288,33 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
                       centerY + position.y
                     })`}
                   >
-                    <circle
+                    <foreignObject
+                      style={{
+                        overflow: 'visible',
+                        transform: 'translate(-49px, -49px)',
+                      }}
+                    >
+                      <Tooltip title={item.description}>
+                        <Button
+                          sx={{
+                            backgroundColor: 'primary.light',
+                            cursor: 'pointer',
+                            color: 'primary.dark',
+                            fontWeight: '500',
+                            fontSize: 'subtitle2.fontSize',
+                            height: 96,
+                            width: 96,
+                            borderRadius: '100%',
+                            borderStyle: 'solid',
+                            borderColor: 'divider',
+                            borderWidth: 1,
+                          }}
+                        >
+                          {item.label}
+                        </Button>
+                      </Tooltip>
+                    </foreignObject>
+                    {/* <circle
                       r="30"
                       className="orbital-circle"
                       style={{
@@ -280,8 +332,8 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
                       }}
                     >
                       {item.label}
-                    </text>
-                    <text
+                    </text> */}
+                    {/* <text
                       textAnchor="middle"
                       y="50"
                       style={{
@@ -294,7 +346,7 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
                           {word}
                         </tspan>
                       ))}
-                    </text>
+                    </text> */}
                   </g>
                 );
               })}
