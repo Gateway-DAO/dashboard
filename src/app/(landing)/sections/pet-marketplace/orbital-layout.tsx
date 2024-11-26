@@ -12,7 +12,10 @@ import {
   Container,
   Stack,
   Tooltip,
+  useMediaQuery,
 } from '@mui/material';
+
+import { CustomLogo } from './custom-logo';
 
 interface OrbitItem {
   id: string;
@@ -24,23 +27,6 @@ interface OrbitItem {
 interface OrbitalLayoutProps {
   items?: OrbitItem[];
 }
-
-const CustomLogo: React.FC<{ color?: string }> = ({ color = '#F6F4FA' }) => (
-  <svg width="33" height="33" viewBox="-30 -30 66 66" fill="none">
-    <path
-      d="M32.6883 0C28.3956 0 24.1449 0.853563 20.179 2.51195C16.2131 4.17034 12.6096 6.60109 9.57418 9.66539C6.53879 12.7297 4.13099 16.3676 2.48825 20.3713C0.845507 24.375 0 28.6661 0 32.9997C0 37.3333 0.845508 41.6245 2.48825 45.6282C4.13099 49.6319 6.53879 53.2697 9.57418 56.334C12.6096 59.3983 16.2131 61.8291 20.179 63.4875C24.1449 65.1459 28.3956 65.9994 32.6883 65.9994L32.6883 0Z"
-      fill={color}
-    />
-    <path
-      d="M37.6702 0H39.8494C54.292 2.16187e-05 66 11.8196 66 26.3998L37.6702 0Z"
-      fill={color}
-    />
-    <path
-      d="M66 42.452V66H37.6702V42.452C37.6702 34.8019 44.012 28.6003 51.8351 28.6003C59.6581 28.6003 66 34.8019 66 42.452Z"
-      fill={color}
-    />
-  </svg>
-);
 
 const defaultItems: OrbitItem[] = [
   {
@@ -77,9 +63,14 @@ const defaultItems: OrbitItem[] = [
 
 const StyledSVGContainer = styled(Box)(({ theme }) => ({
   width: '100%',
-
   margin: '0 auto',
   paddingBottom: 150,
+  [theme.breakpoints.down('md')]: {
+    paddingBottom: 100,
+  },
+  [theme.breakpoints.down('sm')]: {
+    paddingBottom: 50,
+  },
   '& svg': {
     overflow: 'visible',
   },
@@ -106,37 +97,70 @@ const calculatePosition = (index: number, total: number, radius: number) => {
   };
 };
 
-// SVG dimensions
-const width = 800;
-const height = 600;
-const centerX = width / 2;
-const centerY = height / 2;
-const orbitRadius = 260;
+// Responsive dimensions
+const getDimensions = (isMobile: boolean, isTablet: boolean) => {
+  if (isMobile) {
+    return {
+      width: 400,
+      height: 400,
+      orbitRadius: 140,
+      buttonSize: 64,
+      logoSize: 30,
+      centerLogoSize: 25,
+    };
+  }
+  if (isTablet) {
+    return {
+      width: 600,
+      height: 500,
+      orbitRadius: 180,
+      buttonSize: 80,
+      logoSize: 35,
+      centerLogoSize: 25,
+    };
+  }
+  return {
+    width: 800,
+    height: 600,
+    orbitRadius: 260,
+    buttonSize: 96,
+    logoSize: 40,
+    centerLogoSize: 40,
+  };
+};
 
 const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
   items = defaultItems,
 }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+
+  const { width, height, orbitRadius, buttonSize, logoSize, centerLogoSize } =
+    getDimensions(isMobile, isTablet);
+
+  const centerX = width / 2;
+  const centerY = height / 2;
 
   return (
     <Container maxWidth="lg">
-      <Box sx={{ py: 4 }}>
+      <Box sx={{ py: { xs: 2, sm: 3, md: 4 } }}>
         <Paper
           elevation={0}
           sx={{
             bgcolor: 'background.default',
-            p: 4,
+            p: { xs: 2, sm: 3, md: 4 },
             borderRadius: 2,
           }}
         >
           <Stack
             alignItems="center"
             sx={{
-              mb: 10,
+              mb: { xs: 5, sm: 7, md: 10 },
             }}
           >
             <Typography
-              variant="h3"
+              variant={isMobile ? 'h4' : 'h3'}
               align="center"
               gutterBottom
               fontWeight="500"
@@ -147,12 +171,19 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
               align="center"
               gutterBottom
               maxWidth="sm"
-              sx={{ mb: 4 }}
+              sx={{
+                mb: 4,
+                fontSize: { xs: '0.875rem', sm: '1rem' },
+              }}
             >
               Gateway enables dApps to route specialized privacy computations to
               the most suitable Privacy Enhancing Technology.
             </Typography>
-            <Button variant="outlined" color="primary" size="large">
+            <Button
+              variant="outlined"
+              color="primary"
+              size={isMobile ? 'medium' : 'large'}
+            >
               Learn more
             </Button>
           </Stack>
@@ -161,115 +192,52 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
               viewBox={`0 0 ${width} ${height}`}
               style={{ width: '100%', height: 'auto' }}
             >
-              {/* Title and Description */}
-              {/* <text
-                x={centerX}
-                y="5"
-                textAnchor="middle"
-                style={{
-                  fontSize: theme.typography.h3.fontSize,
-                  fill: theme.palette.text.primary,
-                }}
-              >
-                PETs marketplace
-              </text>
-              <text
-                x={centerX}
-                y="45"
-                textAnchor="middle"
-                style={{
-                  fontSize: theme.typography.body2.fontSize,
-                  fill: theme.palette.text.secondary,
-                }}
-              >
-                Gateway enables dApps to route specialized privacy
-              </text>
-              <text
-                x={centerX}
-                y="65"
-                textAnchor="middle"
-                style={{
-                  fontSize: theme.typography.body2.fontSize,
-                  fill: theme.palette.text.secondary,
-                }}
-              >
-                computations to the most suitable Privacy Enhancing Technology.
-              </text> */}
-
               {/* Orbital Circles */}
-
-              <circle
-                cx={centerX}
-                cy={centerY}
-                r={orbitRadius * 2.5}
-                style={{
-                  fill: 'none',
-                  stroke: theme.palette.divider,
-                  strokeWidth: 1,
-                }}
-              />
-
-              <circle
-                cx={centerX}
-                cy={centerY}
-                r={orbitRadius * 2.0}
-                style={{
-                  fill: 'none',
-                  stroke: theme.palette.divider,
-                  strokeWidth: 1,
-                }}
-              />
-              <circle
-                cx={centerX}
-                cy={centerY}
-                r={orbitRadius * 1.5}
-                style={{
-                  fill: 'none',
-                  stroke: theme.palette.divider,
-                  strokeWidth: 1,
-                }}
-              />
-
-              <circle
-                cx={centerX}
-                cy={centerY}
-                r={orbitRadius}
-                style={{
-                  fill: 'none',
-                  stroke: theme.palette.divider,
-                  strokeWidth: 1,
-                }}
-              />
-              <circle
-                cx={centerX}
-                cy={centerY}
-                r={orbitRadius * 0.5}
-                style={{
-                  fill: 'none',
-                  stroke: theme.palette.divider,
-                  strokeWidth: 1,
-                }}
-              />
+              {[0.5, 1.0, 1.5, 2.0, 2.5].map((multiplier) => (
+                <circle
+                  display={multiplier >= 2.0 && isMobile ? 'none' : 'visible'}
+                  key={`orbit-${multiplier}`}
+                  cx={centerX}
+                  cy={centerY}
+                  r={orbitRadius * multiplier}
+                  style={{
+                    fill: 'none',
+                    stroke: theme.palette.divider,
+                    strokeWidth: 1,
+                  }}
+                />
+              ))}
 
               {/* Center Logo */}
               <g transform={`translate(${centerX}, ${centerY})`}>
                 <circle
-                  r="40"
+                  r={centerLogoSize}
                   style={{
                     fill: theme.palette.primary.main,
                     filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
                   }}
                 />
                 <g
-                  transform="translate(-33, -33)"
+                  transform={`translate(-${logoSize / 2}, -${logoSize / 2})`}
                   className="logo-group"
                   style={{
                     transition: theme.transitions.create(['transform'], {
                       duration: theme.transitions.duration.standard,
                     }),
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
                 >
-                  <CustomLogo color={theme.palette.common.white} />
+                  <CustomLogo
+                    size={{
+                      xs: 28,
+                      sm: 34,
+                      md: 38,
+                      lg: 40,
+                    }}
+                    color={theme.palette.common.white}
+                  />
                 </g>
               </g>
 
@@ -280,6 +248,8 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
                   items.length,
                   orbitRadius * item.orbit
                 );
+                const halfButtonSize = buttonSize / 2;
+
                 return (
                   <g
                     key={item.id}
@@ -291,7 +261,7 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
                     <foreignObject
                       style={{
                         overflow: 'visible',
-                        transform: 'translate(-49px, -49px)',
+                        transform: `translate(-${halfButtonSize}px, -${halfButtonSize}px)`,
                       }}
                     >
                       <Tooltip title={item.description}>
@@ -299,54 +269,31 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
                           sx={{
                             backgroundColor: 'primary.light',
                             cursor: 'pointer',
-                            color: 'primary.dark',
-                            fontWeight: '500',
-                            fontSize: 'subtitle2.fontSize',
-                            height: 96,
-                            width: 96,
+                            color: 'black',
+                            fontWeight: isMobile ? '500' : '800',
+                            fontSize: {
+                              xs: '0.75rem',
+                              sm: '0.875rem',
+                              md: theme.typography.subtitle2.fontSize,
+                            },
+                            height: buttonSize,
+                            width: buttonSize,
+                            minWidth: buttonSize,
+                            padding: 1,
                             borderRadius: '100%',
                             borderStyle: 'solid',
                             borderColor: 'divider',
                             borderWidth: 1,
+                            '&:hover': {
+                              backgroundColor: 'primary.light',
+                              transform: 'scale(1.1)',
+                            },
                           }}
                         >
                           {item.label}
                         </Button>
                       </Tooltip>
                     </foreignObject>
-                    {/* <circle
-                      r="30"
-                      className="orbital-circle"
-                      style={{
-                        fill: theme.palette.primary.light,
-                        cursor: 'pointer',
-                      }}
-                    />
-                    <text
-                      textAnchor="middle"
-                      dy=".3em"
-                      style={{
-                        fill: theme.palette.primary.dark,
-                        fontSize: theme.typography.subtitle2.fontSize,
-                        fontWeight: theme.typography.fontWeightMedium,
-                      }}
-                    >
-                      {item.label}
-                    </text> */}
-                    {/* <text
-                      textAnchor="middle"
-                      y="50"
-                      style={{
-                        fill: theme.palette.text.secondary,
-                        fontSize: theme.typography.caption.fontSize,
-                      }}
-                    >
-                      {item.description.split(' ').map((word, i, arr) => (
-                        <tspan key={i} x="0" dy={i === 0 ? 0 : '1.2em'}>
-                          {word}
-                        </tspan>
-                      ))}
-                    </text> */}
                   </g>
                 );
               })}
