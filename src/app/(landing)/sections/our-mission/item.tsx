@@ -9,19 +9,21 @@ import {
   useState,
 } from 'react';
 
-import ControlImage from 'public/images/missions/control.png';
-import CubeImage from 'public/images/missions/cube.png';
-import PrivacyImage from 'public/images/missions/privacy.png';
-
 import { Box, Stack } from '@mui/material';
 
 import { missions } from './missons';
 
+import ComputeImage from '/public/images/missions/compute.png';
+import ConfidentialityImage from '/public/images/missions/confidentiality.png';
+import ProcessingImage from '/public/images/missions/processing.png';
+import AccessImage from '/public/images/missions/access.png';
+
 // Which image to show for each mission
 const imageByMissionId: Record<ActiveItem['id'], StaticImageData> = {
-  control: ControlImage,
-  privacy: PrivacyImage,
-  blocks: CubeImage,
+  compute: ComputeImage,
+  confidentiality: ConfidentialityImage,
+  processing: ProcessingImage,
+  access: AccessImage,
 };
 
 type ActiveItem = {
@@ -34,7 +36,9 @@ const ActiveContext = createContext<{
   setActive: (active: ActiveItem) => void;
 }>({
   active: { id: missions[0].id },
-  setActive: () => {},
+  setActive: () => {
+    return;
+  },
 });
 
 export function ActiveContextProvider({ children }: PropsWithChildren) {
@@ -95,9 +99,10 @@ export function OurMissionItem({
 
 // Controls the position of the image
 const topByMissionId: Record<ActiveItem['id'], number> = {
-  control: 50,
-  privacy: 218,
-  blocks: 218,
+  compute: 50,
+  confidentiality: 218,
+  processing: 218,
+  access: 218,
 };
 
 export function MissionImage() {
@@ -157,6 +162,8 @@ export function MissionImage() {
             objectFit: 'cover',
             objectPosition: 'center',
             mixBlendMode: 'multiply',
+            width: '100%',
+            height: '100%',
           }}
         />
       </Box>
