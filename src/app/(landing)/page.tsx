@@ -8,6 +8,7 @@ import Hero from './sections/hero/hero';
 import OurMission from './sections/our-mission/our-mission';
 import UnlockGateway from './sections/unlock-gateway/unlock-gateway';
 import Featured from './sections/about/featured';
+import OrbitalLayout from './sections/pet-marketplace/orbital-layout';
 
 export default function IndexPage() {
   return (
@@ -17,6 +18,7 @@ export default function IndexPage() {
         <Hero />
         <Featured />
         <About />
+        <OrbitalLayout />
         <Box
           sx={{
             backgroundColor: '#212121',
