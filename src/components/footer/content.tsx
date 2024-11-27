@@ -116,7 +116,7 @@ export default function FooterContent() {
           }}
         >
           <Typography variant="body2">
-            © 2024 Gateway Inc. All rights reserved.
+            © {new Date().getFullYear()} Gateway Inc. All rights reserved.
           </Typography>
           <Stack direction="row" gap={1}>
             {socialLinks.map((link) => (
