@@ -176,13 +176,17 @@ const OrbitalLayout: React.FC<OrbitalLayoutProps> = ({
                 fontSize: { xs: '0.875rem', sm: '1rem' },
               }}
             >
-              Gateway enables dApps to route specialized privacy computations to
-              the most suitable Privacy Enhancing Technology.
+              A diverse set of privacy-enhancing technologies enabling
+              developers to build end to end applications without sacrificing
+              composability or ease of use.
             </Typography>
             <Button
               variant="outlined"
               color="primary"
               size={isMobile ? 'medium' : 'large'}
+              href="https://docs.gateway.tech/compute/garbled-circuits/overview"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Learn more
             </Button>
